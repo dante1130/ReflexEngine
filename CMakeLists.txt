@@ -20,7 +20,7 @@ file (GLOB SOURCE_FILES src/*.cpp)
 file (GLOB HEADER_FILES src/*.h)
 
 # Globs all the DLLS.
-file (GLOB DLLS ${CMAKE_PREFIX_PATH}/lib/x86/*.dll)
+file (GLOB DLLS ${CMAKE_PREFIX_PATH}/lib/x64/*.dll)
 
 # Copies the DLL to build path.
 file (COPY ${DLLS} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
