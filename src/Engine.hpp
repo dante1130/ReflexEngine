@@ -4,7 +4,7 @@
 #include <iostream>
 #include <glad/glad.h>
 
-// TODO: Singleton pattern
+// TODO: Singleton pattern, GLSL for shaders
 namespace ReflexEngine
 {
 	class Engine
