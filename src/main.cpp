@@ -1,3 +1,5 @@
+#define STB_IMAGE_IMPLEMENTATION
+
 #include <iostream>
 #include <cstring>
 #include <cmath>
@@ -14,6 +16,7 @@
 #include "Mesh.h"
 #include "Shader.h"
 #include "Camera.h"
+#include "Texture.h"
 
 static std::vector<Mesh> meshVec;
 static std::vector<Shader> shaderVec;
@@ -29,6 +32,8 @@ void CreateShaders();
 
 int main(int argc, char* argv[])
 {
+	
+
 	Camera camera(glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f, 5.0f, 0.2f);
 
 	Window mainWindow(1920, 1080);
@@ -40,6 +45,12 @@ int main(int argc, char* argv[])
 
 	CreateObjects();
 	CreateShaders();
+
+	Texture brickTexture("textures/brick.png");
+	brickTexture.LoadTexture();
+
+	Texture dirtTexture("textures/dirt.png");
+	dirtTexture.LoadTexture();
 
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0;
 
@@ -75,12 +86,14 @@ int main(int argc, char* argv[])
 		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -2.5f));
 		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 1.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		brickTexture.UseTexture();
 		meshVec[0].RenderMesh();
 
 		model = glm::mat4(1.0f);
 		model = glm::translate(model, glm::vec3(0.0f, 1.0f, -2.5f));
 		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 1.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		dirtTexture.UseTexture();
 		meshVec[1].RenderMesh();
 
 		glUseProgram(0);
@@ -101,20 +114,21 @@ void CreateObjects()
 	};
 
 	GLfloat vertices[] = {
-		-1.0f, -1.0f, 0.0f,
-		0.0f, -1.0f, 1.0f,
-		1.0f, -1.0f, 0.0f,
-		0.0f, 1.0f, 0.0f
+	//  x	   y	  z		u	  v
+		-1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, -1.0f, 1.0f, 0.5f, 0.0f,
+		1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+		0.0f, 1.0f, 0.0f, 0.5f, 1.0f
 	};
 
 	meshVec.reserve(2);
 
 	Mesh* mesh1 = new Mesh();
-	mesh1->CreateMesh(vertices, indices, 12, 12);
+	mesh1->CreateMesh(vertices, indices, 20, 12);
 	meshVec.push_back(*mesh1);
 
 	Mesh* mesh2 = new Mesh();
-	mesh2->CreateMesh(vertices, indices, 12, 12);
+	mesh2->CreateMesh(vertices, indices, 20, 12);
 	meshVec.push_back(*mesh2);
 }
 

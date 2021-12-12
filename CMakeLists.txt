@@ -51,10 +51,17 @@ add_custom_command(TARGET ReflexEngine PRE_BUILD
                     ${PROJECT_SOURCE_DIR}/src/shaders 
                     ${CMAKE_CURRENT_BINARY_DIR}/shaders)
 
+
+add_custom_command(TARGET ReflexEngine PRE_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy_directory
+                    ${PROJECT_SOURCE_DIR}/src/textures 
+                    ${CMAKE_CURRENT_BINARY_DIR}/textures)
+
 # Include dependencies.
 include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/glad/include)
 include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/glfw/include)
 include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/glm)
+include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/stb_image)
 
 # Link libraries.
 target_link_libraries (ReflexEngine PRIVATE glfw)
