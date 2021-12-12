@@ -4,13 +4,15 @@ cmake_minimum_required (VERSION 3.8)
 # Project declaration.
 project (ReflexEngine LANGUAGES CXX)
 
-# Clang sanitizer settings.
-set(SANITIZER_OS "Darwin,Linux")
-set(SANITIZER_FLAGS "-fsanitize=address,undefined,leak")
-
-# CMake files for finding libraries.
+# CMake path for libraries.
 set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 
+# Set to not build docs, tests and examples of GLFW.
+set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+
+# Add subdirectories of libraries.
 add_subdirectory(${CMAKE_PREFIX_PATH}/glm)
 add_subdirectory(${CMAKE_PREFIX_PATH}/glad)
 add_subdirectory(${CMAKE_PREFIX_PATH}/glfw)
@@ -37,14 +39,13 @@ target_compile_options(${PROJECT_NAME} PRIVATE
     $<$<CXX_COMPILER_ID:GNU>:-Wall -Wextra -Wpedantic -fdiagnostics-color=always>
     # Visual Studio
     $<$<CXX_COMPILER_ID:MSVC>:/W4>
-    # Enable the clang sanitizer.
-    $<$<AND:$<CONFIG:Debug>,$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:${SANITIZER_OS}>>:${SANITIZER_FLAGS}>
-)
-# Link against the clang sanitizer.
-target_link_options(${PROJECT_NAME} PRIVATE
-    $<$<AND:$<CONFIG:Debug>,$<CXX_COMPILER_ID:Clang>,$<PLATFORM_ID:${SANITIZER_OS}>>:${SANITIZER_FLAGS}>
 )
 
+# Enable AddressSanitizer.
+set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
+set (CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
+
+# Copy shaders to build path.
 add_custom_command(TARGET ReflexEngine PRE_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy_directory
                     ${PROJECT_SOURCE_DIR}/src/shaders 
