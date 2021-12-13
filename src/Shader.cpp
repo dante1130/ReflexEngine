@@ -1,8 +1,8 @@
-#include "Shader.h"
+#include "Shader.hpp"
 
 Shader::Shader()
 {
-	shaderID = 0;
+	m_shaderID = 0;
 	uniformModel = 0;
 	uniformProjection = 0;
 }
@@ -22,9 +22,29 @@ GLuint Shader::GetViewLocation() const
 	return uniformView;
 }
 
+GLuint Shader::GetAmbientIntensityLocation() const
+{
+	return uniformAmbientColor;
+}
+
+GLuint Shader::GetAmbientIntensityColor() const
+{
+	return uniformAmbientIntensity;
+}
+
+GLuint Shader::GetDiffuseIntensityLocation() const
+{
+	return uniformDiffuseIntensity;
+}
+
+GLuint Shader::GetDirectionLocation() const
+{
+	return uniformDirection;
+}
+
 void Shader::UseShader()
 {
-	glUseProgram(shaderID);
+	glUseProgram(m_shaderID);
 }
 
 void Shader::CompileCode(const char* vertexCode, const char* fragmentCode)
@@ -63,44 +83,46 @@ std::string Shader::ReadFile(const char* fileLocation)
 
 void Shader::CompileShader(const char* vertexCode, const char* fragmentCode)
 {
-	shaderID = glCreateProgram();
+	m_shaderID = glCreateProgram();
 
-	if (!shaderID)
+	if (!m_shaderID)
 	{
 		std::cout << "Error creating shader" << std::endl;
 		return;
 	}
 
-	AddShader(shaderID, vertexCode, GL_VERTEX_SHADER);
-	AddShader(shaderID, fragmentCode, GL_FRAGMENT_SHADER);
+	AddShader(m_shaderID, vertexCode, GL_VERTEX_SHADER);
+	AddShader(m_shaderID, fragmentCode, GL_FRAGMENT_SHADER);
 
 	GLint result = 0;
 	GLchar errLog[1024] = { 0 };
 
-	glLinkProgram(shaderID);
-	glGetProgramiv(shaderID, GL_LINK_STATUS, &result);
+	glLinkProgram(m_shaderID);
+	glGetProgramiv(m_shaderID, GL_LINK_STATUS, &result);
 	if (!result)
 	{
-		glGetProgramInfoLog(shaderID, sizeof(errLog), NULL, errLog);
+		glGetProgramInfoLog(m_shaderID, sizeof(errLog), NULL, errLog);
 		std::cout << "Error linking program: " << errLog << std::endl;
 		return;
 	}
 
-	glValidateProgram(shaderID);
-	glGetProgramiv(shaderID, GL_VALIDATE_STATUS, &result);
+	glValidateProgram(m_shaderID);
+	glGetProgramiv(m_shaderID, GL_VALIDATE_STATUS, &result);
 	if (!result)
 	{
-		glGetProgramInfoLog(shaderID, sizeof(errLog), NULL, errLog);
+		glGetProgramInfoLog(m_shaderID, sizeof(errLog), NULL, errLog);
 		std::cout << "Error validating program: " << errLog << std::endl;
 		return;
 	}
 
-	uniformModel = glGetUniformLocation(shaderID, "model");
-	uniformProjection = glGetUniformLocation(shaderID, "projection");
-	uniformView = glGetUniformLocation(shaderID, "view");
+	uniformModel = glGetUniformLocation(m_shaderID, "model");
+	uniformProjection = glGetUniformLocation(m_shaderID, "projection");
+	uniformView = glGetUniformLocation(m_shaderID, "view");
+	uniformAmbientColor = glGetUniformLocation(m_shaderID, "directionalLight.color");
+	uniformAmbientIntensity = glGetUniformLocation(m_shaderID, "directionalLight.ambientIntensity");
+	uniformDirection = glGetUniformLocation(m_shaderID, "directionalLight.direction");
+	uniformDiffuseIntensity = glGetUniformLocation(m_shaderID, "directionalLight.diffuseIntensity");
 }
-
-
 
 void Shader::AddShader(GLuint program, const char* shaderCode, GLenum shaderType)
 {
@@ -135,10 +157,10 @@ void Shader::ClearShader()
 {
 	std::cout << "Cleaned shader!" << std::endl;
 
-	if (shaderID != 0)
+	if (m_shaderID != 0)
 	{
-		glDeleteProgram(shaderID);
-		shaderID = 0;
+		glDeleteProgram(m_shaderID);
+		m_shaderID = 0;
 	}
 
 	uniformModel = 0;

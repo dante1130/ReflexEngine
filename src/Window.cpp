@@ -1,4 +1,4 @@
-#include "Window.h"
+#include "Window.hpp"
 
 Window::Window()
 	: m_mainWindow(nullptr), m_width(800), m_height(600), 

@@ -1,4 +1,4 @@
-#include "Texture.h"
+#include "Texture.hpp"
 
 Texture::Texture()
 	: m_textureID(0), m_width(0), m_height(0), m_bitDepth(0), m_fileLocation("")

@@ -21,7 +21,7 @@ add_subdirectory(${CMAKE_PREFIX_PATH}/glfw)
 file (GLOB SOURCE_FILES src/*.cpp)
 
 # Globs all the header files.
-file (GLOB HEADER_FILES src/*.h)
+file (GLOB HEADER_FILES src/*.hpp)
 
 # Adds the source and header files to build.
 add_executable (ReflexEngine ${HEADER_FILES} ${SOURCE_FILES})
