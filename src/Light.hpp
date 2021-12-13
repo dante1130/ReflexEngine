@@ -9,7 +9,7 @@ public:
 	Light();
 	Light(glm::vec3 color, GLfloat aIntensity, glm::vec3 direction, GLfloat dIntensity);
 
-	void UseLight(GLfloat ambientIntensityLoc, GLfloat ambientColorLoc, GLfloat directionLoc, GLfloat diffuseIntensityLoc);
+	void Light::UseLight(GLuint ambientColorLoc, GLuint ambientIntensityLoc, GLuint directionLoc, GLuint diffuseIntensityLoc);
 
 	~Light();
 

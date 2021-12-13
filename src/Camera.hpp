@@ -17,6 +17,8 @@ public:
 
 	glm::mat4 CalculateViewMatrix();
 
+	glm::vec3 GetCamPosition() const;
+
 	~Camera();
 
 private:

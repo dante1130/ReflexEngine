@@ -10,7 +10,7 @@ Light::Light(glm::vec3 color, GLfloat aIntensity, glm::vec3 direction, GLfloat d
 	m_direction(direction), m_diffuseIntensity(dIntensity)
 {}
 
-void Light::UseLight(GLfloat ambientIntensityLoc, GLfloat ambientColorLoc, GLfloat directionLoc, GLfloat diffuseIntensityLoc)
+void Light::UseLight(GLuint ambientColorLoc, GLuint ambientIntensityLoc, GLuint directionLoc, GLuint diffuseIntensityLoc)
 {
 	glUniform3f(ambientColorLoc, m_color.x, m_color.y, m_color.z);
 	glUniform1f(ambientIntensityLoc, m_ambientIntensity);

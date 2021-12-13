@@ -18,6 +18,7 @@
 #include "Camera.hpp"
 #include "Texture.hpp"
 #include "Light.hpp"
+#include "Material.hpp"
 
 static std::vector<Mesh> meshVec;
 static std::vector<Shader> shaderVec;
@@ -48,13 +49,20 @@ int main(int argc, char* argv[])
 	Texture dirtTexture("textures/dirt.png");
 	dirtTexture.LoadTexture();
 
-	Light mainLight(glm::vec3(1.0f), 0.2f, glm::vec3(2.0f, -1.0f, -2.0f), 1.0f);
+	Light mainLight(glm::vec3(1.0f), 0.2f, glm::vec3(2.0f, -1.0f, -2.0f), 0.5f);
+
+	Material shinyMaterial(32, 1.0f);
+	Material dullMaterial(4, 0.3f);
 
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0;
 
 	GLuint uniformAmbientIntensity = 0, uniformAmbientColor = 0;
 
 	GLuint uniformDiffuseIntensity = 0, uniformDirection = 0;
+
+	GLuint uniformEyePosition = 0;
+
+	GLuint uniformSpecularIntensity = 0, uniformShininess = 0;
 
 	GLfloat deltaTime = 0.0f;
 	GLfloat prevTime = 0.0f;
@@ -82,10 +90,17 @@ int main(int argc, char* argv[])
 		uniformModel = shaderVec[0].GetModelLocation();
 		uniformProjection = shaderVec[0].GetProjectionLocation();
 		uniformView = shaderVec[0].GetViewLocation();
+
 		uniformAmbientColor = shaderVec[0].GetAmbientIntensityColor();
 		uniformAmbientIntensity = shaderVec[0].GetAmbientIntensityLocation();
+
 		uniformDirection = shaderVec[0].GetDirectionLocation();
 		uniformDiffuseIntensity = shaderVec[0].GetDiffuseIntensityLocation();
+		uniformEyePosition = shaderVec[0].GetEyePositionLocation();
+
+		uniformShininess = shaderVec[0].GetShininessLocation();
+		uniformSpecularIntensity = shaderVec[0].GetSpecularIntensityLocation();
+		
 
 		mainLight.UseLight(uniformAmbientColor, uniformAmbientIntensity,
 						   uniformDirection, uniformDiffuseIntensity);
@@ -96,19 +111,23 @@ int main(int argc, char* argv[])
 		// Create view matrix mode
 		glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(camera.CalculateViewMatrix()));
 
+		glUniform3f(uniformEyePosition, camera.GetCamPosition().x,
+										camera.GetCamPosition().y,
+										camera.GetCamPosition().z);
+
 		// Creates identity matrix for model matrix mode
 		glm::mat4 model(1.0f);
 		model = glm::translate(model, glm::vec3(0.0f, 0.0f, -2.5f));
-		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 1.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		brickTexture.UseTexture();
+		shinyMaterial.UseMaterial(uniformShininess, uniformSpecularIntensity);
 		meshVec[0].RenderMesh();
 
 		model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(0.0f, 1.0f, -2.5f));
-		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 1.0f));
+		model = glm::translate(model, glm::vec3(0.0f, 2.5f, -2.5f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		dirtTexture.UseTexture();
+		dullMaterial.UseMaterial(uniformShininess, uniformSpecularIntensity);
 		meshVec[1].RenderMesh();
 
 		glUseProgram(0);
@@ -164,9 +183,9 @@ void CreateObjects()
 
 	GLfloat vertices[] = {
 	//  x	   y	  z		u	  v		nx	  ny	nz
-		-1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+		-1.0f, -1.0f, -0.6f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
 		0.0f, -1.0f, 1.0f, 0.5f, 0.0f, 0.0f, 0.0f, 0.0f,
-		1.0f, -1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+		1.0f, -1.0f, -0.6f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
 		0.0f, 1.0f, 0.0f, 0.5f, 1.0f, 0.0f, 0.0f, 0.0f
 	};
 

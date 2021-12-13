@@ -73,6 +73,11 @@ void Camera::Update()
 	m_up = glm::normalize(glm::cross(m_right, m_front));
 }
 
+glm::vec3 Camera::GetCamPosition() const
+{
+	return m_position;
+}
+
 Camera::~Camera()
 {
 
