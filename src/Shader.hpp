@@ -1,10 +1,17 @@
 #pragma once
 
 #include <iostream>
+#include <cstdio>
 #include <string>
 #include <fstream>
+#include <vector>
 
 #include <glad/glad.h>
+
+#include "Light.hpp"
+#include "DirectionalLight.hpp"
+#include "PointLight.hpp"
+#include "CommonValues.hpp"
 
 class Shader
 {
@@ -21,6 +28,9 @@ public:
 	GLuint GetDirectionLocation() const;
 	GLuint GetSpecularIntensityLocation() const;
 	GLuint GetShininessLocation() const;
+
+	void SetDirectionalLight(DirectionalLight& dLight);
+	void SetPointLights(PointLight* pLight, GLuint lightCount);
 
 	void UseShader();
 
@@ -40,11 +50,31 @@ private:
 
 	GLuint uniformEyePosition;
 		
-	GLuint uniformAmbientIntensity, uniformAmbientColor;
-
-	GLuint uniformDiffuseIntensity, uniformDirection;
-
 	GLuint uniformSpecularIntensity, uniformShininess;
+
+	struct
+	{
+		GLuint uniformColor;
+		GLuint uniformAmbientIntensity;
+		GLuint uniformDiffuseIntensity;
+		GLuint uniformDirection;
+	} uniformDirectionalLight;
+
+	struct UniformPointLight
+	{
+		GLuint uniformColor;
+		GLuint uniformAmbientIntensity;
+		GLuint uniformDiffuseIntensity;
+
+		GLuint uniformPosition;
+		GLuint uniformConstant;
+		GLuint uniformLinear;
+		GLuint uniformExponent;
+	} uniformPointLights[MAX_POINT_LIGHTS];
+
+	GLuint uniformPointLightCount;
+
+	int pointLightCount;
 
 	void AddShader(GLuint program, const char* shaderCode, GLenum shaderType);
 	void CompileShader(const char* vertexCode, const char* fragmentCode);
