@@ -17,6 +17,8 @@ AStar::AStar()
 
 std::vector<std::vector<DistanceNode>> AStar::findPath(int xStart, int yStart, int xEnd, int yEnd) throw (AStarExceptions)
 {
+	if (grid.empty()) { throw(GRID_UNINITIALISED); }
+
 	node start, end;
 	start.x = xStart;
 	start.y = yStart;
@@ -64,6 +66,9 @@ void AStar::printAstarException(int val)
 		break;
 	case MAX_DISTANCE_REACHED:
 		std::cout << "EXCEPTION: Max distance reached" << std::endl;
+		break;
+	case GRID_UNINITIALISED:
+		std::cout << "EXCEPTION: Grid is not initialised" << std::endl;
 		break;
 	default:
 		std::cout << "EXCEPTION: Undocumented exception (" << val << "): Check AStar.h for more detail" << std::endl;
