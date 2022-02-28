@@ -44,7 +44,7 @@ int Window::Init()
 	glfwWindowHint(GLFW_REFRESH_RATE, mode->refreshRate);
 
 	m_mainWindow = glfwCreateWindow(m_width, m_height, "ReflexBullet",
-									monitor, nullptr);
+									nullptr, nullptr);
 
 	if (!m_mainWindow)
 	{

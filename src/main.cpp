@@ -22,6 +22,7 @@
 #include "DirectionalLight.hpp"
 #include "PointLight.hpp"
 #include "Material.hpp"
+#include "SpotLight.hpp"
 
 static std::vector<Mesh> meshVec;
 static std::vector<Shader> shaderVec;
@@ -55,21 +56,38 @@ int main(int argc, char* argv[])
 	Texture plainTexture("textures/plain.png");
 	plainTexture.LoadTexture();
 
-	DirectionalLight mainLight(glm::vec3(1.0f), 0.0f, glm::vec3(0.0f, 0.0f, -1.0f), 0.3f);
+	DirectionalLight mainLight(glm::vec3(1.0f), 0.1f, glm::vec3(0.0f, 0.0f, -1.0f), 0.1f);
 
 	PointLight pointLights[MAX_POINT_LIGHTS];
+	SpotLight spotLights[MAX_SPOT_LIGHTS];
 
-	GLuint pointLightCount = 0;
+	GLuint pointLightCount = 0u;
+	GLuint spotLightCount = 0u;
 
-	pointLights[0] = PointLight(glm::vec3(0.0f, 0.0f, 1.0f), 0.1f, 1.0f, 
+	pointLights[0] = PointLight(glm::vec3(0.0f, 0.0f, 1.0f), 0.0f, 0.1f, 
 								glm::vec3(0.0f, 0.0f, 0.0f), 0.3f, 0.2f, 0.1f);
 
 	++pointLightCount;
 
-	pointLights[1] = PointLight(glm::vec3(0.0f, 1.0f, 0.0f), 0.1f, 1.0f,
+	pointLights[1] = PointLight(glm::vec3(0.0f, 1.0f, 0.0f), 0.0f, 0.1f,
 								glm::vec3(-4.0f, 2.0f, 0.0f), 0.3f, 0.1f, 0.1f);
 
 	++pointLightCount;
+
+	spotLights[0] = SpotLight(glm::vec3(1.0f, 1.0f, 1.0f), 0.0f, 2.0f,
+							  glm::vec3(0.0f, 0.0f, 0.0f), 
+							  glm::vec3(0.0f, -1.0f, 0.0f),
+							  1.0f, 0.0f, 0.0f, 20.0f);
+
+	++spotLightCount;
+
+	spotLights[1] = SpotLight(glm::vec3(1.0f, 1.0f, 1.0f), 0.0f, 1.0f,
+							  glm::vec3(0.0f, 0.0f, 0.0f),
+							  glm::vec3(-100.0f, -1.0f, 0.0f),
+							  1.0f, 0.0f, 0.0f, 20.0f);
+
+	++spotLightCount;
+
 
 	Material shinyMaterial(256, 4.0f);
 	Material dullMaterial(4, 0.3f);
@@ -112,8 +130,14 @@ int main(int argc, char* argv[])
 		uniformShininess = shaderVec[0].GetShininessLocation();
 		uniformSpecularIntensity = shaderVec[0].GetSpecularIntensityLocation();
 
+		glm::vec3 lowerLight = camera.GetCamPosition();
+		lowerLight.y -= 0.3f;
+
+		spotLights[0].SetFlash(lowerLight, camera.GetCamDirection());
+
 		shaderVec[0].SetDirectionalLight(mainLight);
 		shaderVec[0].SetPointLights(pointLights, pointLightCount);
+		shaderVec[0].SetSpotLights(spotLights, spotLightCount);
 
 		// Creates projection matrix mode
 		glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection));
@@ -132,7 +156,7 @@ int main(int argc, char* argv[])
 		brickTexture.UseTexture();
 		shinyMaterial.UseMaterial(uniformShininess, uniformSpecularIntensity);
 		meshVec[0].RenderMesh();
-
+		
 		model = glm::mat4(1.0f);
 		model = glm::translate(model, glm::vec3(0.0f, 4.0f, -2.5f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
@@ -159,9 +183,9 @@ void CalcAverageNormals(GLuint* indices, GLuint indicesCount, GLfloat* vertices,
 {
 	for (size_t i = 0; i < indicesCount; i += 3)
 	{
-		unsigned int in0 = indices[i] * vLength;
-		unsigned int in1 = indices[i + 1] * vLength;
-		unsigned int in2 = indices[i + 2] * vLength;
+		GLuint in0 = indices[i] * vLength;
+		GLuint in1 = indices[i + 1] * vLength;
+		GLuint in2 = indices[i + 2] * vLength;
 
 		glm::vec3 v1(vertices[in1] - vertices[in0], 
 					 vertices[in1 + 1] - vertices[in0 + 1], 
@@ -182,7 +206,7 @@ void CalcAverageNormals(GLuint* indices, GLuint indicesCount, GLfloat* vertices,
 
 	for (size_t i = 0; i < verticesCount / vLength; ++i)
 	{
-		unsigned int nOffset = i * vLength + normalOffset;
+		GLuint nOffset = i * vLength + normalOffset;
 		glm::vec3 vec(vertices[nOffset], vertices[nOffset + 1], vertices[nOffset + 2]);
 		vec = glm::normalize(vec);
 		vertices[nOffset] = vec.x; vertices[nOffset + 1] = vec.y; vertices[nOffset + 2] = vec.z;
