@@ -4,6 +4,8 @@ cmake_minimum_required (VERSION 3.8)
 # Project declaration.
 project (ReflexEngine LANGUAGES CXX)
 
+set(CMAKE_CXX_STANDARD 17)
+
 # CMake path for libraries.
 set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 
@@ -41,7 +43,16 @@ target_compile_options(${PROJECT_NAME} PRIVATE
     $<$<CXX_COMPILER_ID:MSVC>:/W4>
 )
 
-# Copy shaders to build path.
+add_custom_command(TARGET ReflexEngine PRE_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy_directory
+                    ${PROJECT_SOURCE_DIR}/dlls 
+                    ${CMAKE_CURRENT_BINARY_DIR})
+
+add_custom_command(TARGET ReflexEngine PRE_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy_directory
+                    ${PROJECT_SOURCE_DIR}/src/models 
+                    ${CMAKE_CURRENT_BINARY_DIR}/models)
+
 add_custom_command(TARGET ReflexEngine PRE_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy_directory
                     ${PROJECT_SOURCE_DIR}/src/shaders 
@@ -58,9 +69,10 @@ include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/glad/include)
 include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/glfw/include)
 include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/glm)
 include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/stb_image)
+include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/assimp/include)
 
 # Link libraries.
 target_link_libraries (ReflexEngine PRIVATE glfw)
 target_link_libraries (ReflexEngine PRIVATE glm)
 target_link_libraries (ReflexEngine PRIVATE glad)
-
+target_link_libraries (ReflexEngine PRIVATE ${CMAKE_PREFIX_PATH}/assimp/lib/assimp-vc143-mt.lib)

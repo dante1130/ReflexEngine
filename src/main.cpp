@@ -23,9 +23,10 @@
 #include "PointLight.hpp"
 #include "Material.hpp"
 #include "SpotLight.hpp"
+#include "Model.hpp"
 
-static std::vector<Mesh> meshVec;
-static std::vector<Shader> shaderVec;
+static std::vector<Mesh*> meshVec;
+static std::vector<Shader*> shaderVec;
 
 // Vertex Shader path
 static const char* vShader = "shaders/shader.vert";
@@ -38,6 +39,8 @@ void CalcAverageNormals(GLuint* indices, GLuint indicesCount,
 						GLuint vLength, GLuint normalOffset);
 void CreateObjects();
 void CreateShaders();
+void DeleteObjects();
+void DeleteShaders();
 
 int main(int argc, char* argv[])
 {
@@ -47,16 +50,19 @@ int main(int argc, char* argv[])
 
 	Camera camera(glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f, 5.0f, 0.2f);
 
+	Model xWing;
+	xWing.LoadModel("models/x-wing.obj");
+
 	Texture brickTexture("textures/brick.png");
-	brickTexture.LoadTexture();
+	brickTexture.LoadTextureA();
 
 	Texture dirtTexture("textures/dirt.png");
-	dirtTexture.LoadTexture();
+	dirtTexture.LoadTextureA();
 
 	Texture plainTexture("textures/plain.png");
-	plainTexture.LoadTexture();
+	plainTexture.LoadTextureA();
 
-	DirectionalLight mainLight(glm::vec3(1.0f), 0.1f, glm::vec3(0.0f, 0.0f, -1.0f), 0.1f);
+	DirectionalLight mainLight(glm::vec3(1.0f), 0.2f, glm::vec3(0.0f, 0.0f, -1.0f), 0.6f);
 
 	PointLight pointLights[MAX_POINT_LIGHTS];
 	SpotLight spotLights[MAX_SPOT_LIGHTS];
@@ -120,24 +126,24 @@ int main(int argc, char* argv[])
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		shaderVec[0].UseShader();
-		uniformModel = shaderVec[0].GetModelLocation();
-		uniformProjection = shaderVec[0].GetProjectionLocation();
-		uniformView = shaderVec[0].GetViewLocation();
+		shaderVec[0]->UseShader();
+		uniformModel = shaderVec[0]->GetModelLocation();
+		uniformProjection = shaderVec[0]->GetProjectionLocation();
+		uniformView = shaderVec[0]->GetViewLocation();
 
-		uniformEyePosition = shaderVec[0].GetEyePositionLocation();
+		uniformEyePosition = shaderVec[0]->GetEyePositionLocation();
 
-		uniformShininess = shaderVec[0].GetShininessLocation();
-		uniformSpecularIntensity = shaderVec[0].GetSpecularIntensityLocation();
+		uniformShininess = shaderVec[0]->GetShininessLocation();
+		uniformSpecularIntensity = shaderVec[0]->GetSpecularIntensityLocation();
 
 		glm::vec3 lowerLight = camera.GetCamPosition();
 		lowerLight.y -= 0.3f;
 
 		spotLights[0].SetFlash(lowerLight, camera.GetCamDirection());
 
-		shaderVec[0].SetDirectionalLight(mainLight);
-		shaderVec[0].SetPointLights(pointLights, pointLightCount);
-		shaderVec[0].SetSpotLights(spotLights, spotLightCount);
+		shaderVec[0]->SetDirectionalLight(mainLight);
+		shaderVec[0]->SetPointLights(pointLights, pointLightCount);
+		shaderVec[0]->SetSpotLights(spotLights, spotLightCount);
 
 		// Creates projection matrix mode
 		glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection));
@@ -155,26 +161,36 @@ int main(int argc, char* argv[])
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		brickTexture.UseTexture();
 		shinyMaterial.UseMaterial(uniformShininess, uniformSpecularIntensity);
-		meshVec[0].RenderMesh();
+		meshVec[0]->RenderMesh();
 		
 		model = glm::mat4(1.0f);
 		model = glm::translate(model, glm::vec3(0.0f, 4.0f, -2.5f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		dirtTexture.UseTexture();
 		dullMaterial.UseMaterial(uniformShininess, uniformSpecularIntensity);
-		meshVec[1].RenderMesh();
+		meshVec[1]->RenderMesh();
 
 		model = glm::mat4(1.0f);
 		model = glm::translate(model, glm::vec3(0.0f, -2.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		plainTexture.UseTexture();
 		shinyMaterial.UseMaterial(uniformShininess, uniformSpecularIntensity);
-		meshVec[2].RenderMesh();
+		meshVec[2]->RenderMesh();
+
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(-7.0f, 0.0f, 10.0f));
+		model = glm::scale(model, glm::vec3(0.006f, 0.006f, 0.006f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		shinyMaterial.UseMaterial(uniformShininess, uniformSpecularIntensity);
+		xWing.RenderModel();
 
 		glUseProgram(0);
 
 		mainWindow.SwapBuffers();
 	}
+
+	DeleteObjects();
+	DeleteShaders();
 
 	return 0;
 }
@@ -216,10 +232,10 @@ void CalcAverageNormals(GLuint* indices, GLuint indicesCount, GLfloat* vertices,
 void CreateObjects()
 {
 	GLuint indices[] = {
-		0, 3, 1,
-		1, 3, 2,
-		2, 3, 0,
-		0, 1, 2
+		0u, 3u, 1u,
+		1u, 3u, 2u,
+		2u, 3u, 0u,
+		0u, 1u, 2u
 	};
 
 	GLfloat vertices[] = {
@@ -231,8 +247,8 @@ void CreateObjects()
 	};
 
 	GLuint floorIndices[] = {
-		0, 2, 1,
-		1, 2, 3
+		0u, 2u, 1u,
+		1u, 2u, 3u
 	};
 
 	GLfloat floorVertices[] = {
@@ -242,26 +258,50 @@ void CreateObjects()
 		10.0f, 0.0f, 10.0f, 10.0f, 10.0f, 0.0f, -1.0f, 0.0f
 	};
 
-	CalcAverageNormals(indices, 12, vertices, 32, 8, 5);
+	CalcAverageNormals(indices, 12u, vertices, 32u, 8u, 5u);
 
 	meshVec.reserve(3);
 
 	Mesh* mesh1 = new Mesh();
-	mesh1->CreateMesh(vertices, indices, 32, 12);
-	meshVec.push_back(*mesh1);
+	mesh1->CreateMesh(vertices, indices, 32u, 12u);
+	meshVec.push_back(mesh1);
 
 	Mesh* mesh2 = new Mesh();
-	mesh2->CreateMesh(vertices, indices, 32, 12);
-	meshVec.push_back(*mesh2);
+	mesh2->CreateMesh(vertices, indices, 32u, 12u);
+	meshVec.push_back(mesh2);
 
 	Mesh* mesh3 = new Mesh();
-	mesh3->CreateMesh(floorVertices, floorIndices, 32, 6);
-	meshVec.push_back(*mesh3);
+	mesh3->CreateMesh(floorVertices, floorIndices, 32u, 6u);
+	meshVec.push_back(mesh3);
 }
 
 void CreateShaders()
 {
 	Shader* shader1 = new Shader();
 	shader1->CompileFile(vShader, fShader);
-	shaderVec.push_back(*shader1);
+	shaderVec.push_back(shader1);
+}
+
+void DeleteObjects()
+{
+	for (auto& obj : meshVec)
+	{
+		if (obj)
+		{
+			delete obj;
+			obj = nullptr;
+		}
+	}
+}
+
+void DeleteShaders()
+{
+	for (auto& shader : shaderVec)
+	{
+		if (shader)
+		{
+			delete shader;
+			shader = nullptr;
+		}
+	}
 }
