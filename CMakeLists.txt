@@ -4,7 +4,7 @@ cmake_minimum_required (VERSION 3.8)
 # Project declaration.
 project (ReflexEngine LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 14)
 
 # CMake path for libraries.
 set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
@@ -42,6 +42,10 @@ target_compile_options(${PROJECT_NAME} PRIVATE
     # Visual Studio
     $<$<CXX_COMPILER_ID:MSVC>:/W4>
 )
+
+# Enable AddressSanitizer.
+set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
+set (CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG} -fno-omit-frame-pointer -fsanitize=address")
 
 add_custom_command(TARGET ReflexEngine PRE_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy_directory

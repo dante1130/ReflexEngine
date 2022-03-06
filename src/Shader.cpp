@@ -1,7 +1,12 @@
 #include "Shader.hpp"
 
 Shader::Shader()
-	: m_shaderID(0), uniformModel(0), uniformProjection(0), pointLightCount(0), spotLightCount(0)
+	: m_shaderID(0u), uniformProjection(0u), uniformModel(0u),
+	uniformView(0u), uniformEyePosition(0u), uniformSpecularIntensity(0u),
+	uniformShininess(0u), uniformTexture(0u), 
+	uniformDirectionalLightTransform(0u), uniformDirectionalShadowMap(0u),
+	uniformSpotLightCount(0u), uniformPointLightCount(0u),
+	pointLightCount(0), spotLightCount(0)
 {}
 
 GLuint Shader::GetProjectionLocation() const
@@ -54,7 +59,7 @@ GLuint Shader::GetShininessLocation() const
 	return uniformShininess;
 }
 
-void Shader::SetDirectionalLight(DirectionalLight& dLight)
+void Shader::SetDirectionalLight(const DirectionalLight& dLight)
 {
 	dLight.UseLight(uniformDirectionalLight.uniformColor,
 					uniformDirectionalLight.uniformAmbientIntensity,
@@ -98,6 +103,21 @@ void Shader::SetSpotLights(SpotLight* sLight, GLuint lightCount)
 							uniformSpotLights[i].uniformExponent,
 							uniformSpotLights[i].uniformEdge);
 	}
+}
+
+void Shader::SetTexture(GLuint textureUnit)
+{
+	glUniform1i(uniformTexture, textureUnit);
+}
+
+void Shader::SetDirectionalShadowMap(GLuint textureUnit)
+{
+	glUniform1i(uniformDirectionalShadowMap, textureUnit);
+}
+
+void Shader::SetDirectionalLightTransform(const glm::mat4& lTransform)
+{
+	glUniformMatrix4fv(uniformDirectionalLightTransform, 1, GL_FALSE, glm::value_ptr(lTransform));
 }
 
 void Shader::UseShader()
@@ -249,6 +269,10 @@ void Shader::CompileShader(const char* vertexCode, const char* fragmentCode)
 		snprintf(locBuff, sizeof(locBuff), "spotLights[%d].edge", i);
 		uniformSpotLights[i].uniformEdge = glGetUniformLocation(m_shaderID, locBuff);
 	}
+
+	uniformTexture = glGetUniformLocation(m_shaderID, "theTexture");
+	uniformDirectionalLightTransform = glGetUniformLocation(m_shaderID, "directionalLightTransform");
+	uniformDirectionalShadowMap = glGetUniformLocation(m_shaderID, "directionalShadowMap");
 }
 
 void Shader::AddShader(GLuint program, const char* shaderCode, GLenum shaderType)

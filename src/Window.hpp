@@ -3,7 +3,7 @@
 #include <iostream>
 
 #include <glad/glad.h>
-#include <glfw/glfw3.h>
+#include <GLFW/glfw3.h>
 
 class Window
 {
@@ -16,8 +16,8 @@ public:
 	GLint GetBufferWidth() const;
 	GLint GetBufferHeight() const;
 
-	GLfloat GetXOffset();
-	GLfloat GetYOffset();
+	GLdouble GetXOffset();
+	GLdouble GetYOffset();
 
 	bool* GetKeys();
 
@@ -33,8 +33,8 @@ private:
 	GLint m_width, m_height;
 	GLint m_bufferWidth, m_bufferHeight;
 
-	GLfloat m_xPrev, m_yPrev;
-	GLfloat m_xOffset, m_yOffset;
+	GLdouble m_xPrev, m_yPrev;
+	GLdouble m_xOffset, m_yOffset;
 
 	bool m_isFirstMouse;
 

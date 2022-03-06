@@ -128,18 +128,18 @@ GLint Window::GetBufferHeight() const
 	return m_bufferHeight;
 }
 
-GLfloat Window::GetXOffset()
+GLdouble Window::GetXOffset()
 {
-	GLfloat offset = m_xOffset;
-	m_xOffset = 0.0f;
+	GLdouble offset = m_xOffset;
+	m_xOffset = 0.0;
 
 	return offset;
 }
 
-GLfloat Window::GetYOffset()
+GLdouble Window::GetYOffset()
 {
-	GLfloat offset = m_yOffset;
-	m_yOffset = 0.0f;
+	GLdouble offset = m_yOffset;
+	m_yOffset = 0.0;
 
 	return offset;
 }

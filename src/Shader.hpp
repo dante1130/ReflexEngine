@@ -8,6 +8,8 @@
 
 #include <glad/glad.h>
 
+#include <glm/gtc/type_ptr.hpp>
+
 #include "Light.hpp"
 #include "DirectionalLight.hpp"
 #include "PointLight.hpp"
@@ -30,9 +32,13 @@ public:
 	GLuint GetSpecularIntensityLocation() const;
 	GLuint GetShininessLocation() const;
 
-	void SetDirectionalLight(DirectionalLight& dLight);
+	void SetDirectionalLight(const DirectionalLight& dLight);
 	void SetPointLights(PointLight* pLight, GLuint lightCount);
 	void SetSpotLights(SpotLight* sLight, GLuint lightCount);
+	void SetTexture(GLuint textureUnit);
+	void SetDirectionalShadowMap(GLuint textureUnit);
+	void SetDirectionalLightTransform(const glm::mat4& lTransform);
+
 	void UseShader();
 
 	void CompileCode(const char* vertexCode, const char* fragmentCode);
@@ -52,6 +58,16 @@ private:
 	GLuint uniformEyePosition;
 		
 	GLuint uniformSpecularIntensity, uniformShininess;
+
+	GLuint uniformTexture;
+
+	GLuint uniformDirectionalLightTransform, uniformDirectionalShadowMap;
+
+	GLuint uniformSpotLightCount;
+	GLuint uniformPointLightCount;
+
+	int pointLightCount;
+	int spotLightCount;
 
 	struct
 	{
@@ -73,8 +89,6 @@ private:
 		GLuint uniformExponent;
 	} uniformPointLights[MAX_POINT_LIGHTS];
 
-	GLuint uniformPointLightCount;
-
 	struct
 	{
 		GLuint uniformColor;
@@ -89,11 +103,6 @@ private:
 		GLuint uniformDirection;
 		GLuint uniformEdge;
 	} uniformSpotLights[MAX_SPOT_LIGHTS];
-
-	GLuint uniformSpotLightCount;
-
-	int pointLightCount;
-	int spotLightCount;
 
 	void AddShader(GLuint program, const char* shaderCode, GLenum shaderType);
 	void CompileShader(const char* vertexCode, const char* fragmentCode);

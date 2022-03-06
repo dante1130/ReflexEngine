@@ -11,12 +11,12 @@ public:
 
 	void UseLight(GLuint ambientColorLoc, GLuint ambientIntensityLoc,
 		GLuint diffuseIntensityLoc, GLuint positionLoc, GLuint directionLoc,
-		GLuint constantLoc, GLuint linearLoc, GLuint exponentLoc, GLuint edgeLoc);
+		GLuint constantLoc, GLuint linearLoc, GLuint exponentLoc, GLuint edgeLoc) const;
 
 	void SetFlash(glm::vec3 pos, glm::vec3 dir);
 
 private:
 	glm::vec3 m_direction;
 
-	GLfloat m_edge, m_procEdge;
+	GLfloat m_procEdge;
 };

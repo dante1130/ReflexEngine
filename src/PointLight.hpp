@@ -11,7 +11,7 @@ public:
 
 	void UseLight(GLuint ambientColorLoc, GLuint ambientIntensityLoc, 
 				  GLuint diffuseIntensityLoc, GLuint positionLoc,
-				  GLuint constantLoc, GLuint linearLoc, GLuint exponentLoc);
+				  GLuint constantLoc, GLuint linearLoc, GLuint exponentLoc) const;
 
 	~PointLight();
 

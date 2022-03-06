@@ -2,12 +2,18 @@
 
 #include <glad/glad.h>
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
+#include "ShadowMap.hpp"
 
 class Light
 {
 public:
 	Light();
-	Light(glm::vec3 color, GLfloat aIntensity, GLfloat dIntensity);
+	Light(GLfloat shadowWidth, GLfloat shadowHeight,
+		  glm::vec3 color, GLfloat aIntensity, GLfloat dIntensity);
+
+	ShadowMap* GetShadowMap() const;
 
 	~Light();
 
@@ -18,4 +24,8 @@ protected:
 
 	// Diffuse lighting
 	GLfloat m_diffuseIntensity;
+
+	glm::mat4 m_lightProj;
+
+	ShadowMap* m_shadowMap;
 };
