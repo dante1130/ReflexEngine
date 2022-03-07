@@ -26,12 +26,11 @@
 #include "SpotLight.hpp"
 #include "Model.hpp"
 
-constexpr double pi = 3.14159265358979323846;
-
 static std::vector<Mesh*> meshVec;
 static std::vector<Shader*> shaderVec;
 
 static Shader* directionalShadowShader;
+static Shader* omniShadowShader;
 
 static Window mainWindow;
 
@@ -62,25 +61,67 @@ static GLuint uniformEyePosition = 0;
 
 static GLuint uniformSpecularIntensity = 0, uniformShininess = 0;
 
+static GLuint uniformOmniLightPos = 0, uniformFarPlane = 0;
+
 // Vertex Shader path
 static const char* vShader = "shaders/shader.vert";
 
 // Fragment Shader path
 static const char* fShader = "shaders/shader.frag";
 
+void Init();
 void CalcAverageNormals(GLuint* indices, GLuint indicesCount, 
 						GLfloat* vertices, GLuint verticesCount, 
 						GLuint vLength, GLuint normalOffset);
-GLfloat degreesToRadians(GLfloat degrees);
 void RenderScene();
 void RenderPass(glm::mat4 projectionMatrix, glm::mat4 viewMatrix);
 void DirectionalShadowMapPass(const DirectionalLight& light);
+void OmniShadowMapPass(const PointLight& light);
 void CreateObjects();
 void CreateShaders();
 void DeleteObjects();
 void DeleteShaders();
 
 int main(int argc, char* argv[])
+{
+	Init();
+
+	GLfloat deltaTime = 0.0f;
+	GLfloat prevTime = 0.0f;
+
+	while (!mainWindow.IsShouldClose())
+	{
+		GLfloat currTime = glfwGetTime();
+		deltaTime = currTime - prevTime;
+		prevTime = currTime;
+
+		glfwPollEvents();
+
+		camera.KeyControl(mainWindow.GetKeys(), deltaTime);
+		camera.MouseControl(mainWindow.GetXOffset(), mainWindow.GetYOffset());
+
+		DirectionalShadowMapPass(mainLight);
+
+		for (size_t i = 0; i < pointLightCount; ++i)
+			OmniShadowMapPass(pointLights[i]);
+
+		for (size_t i = 0; i < spotLightCount; ++i)
+			OmniShadowMapPass(spotLights[i]);
+
+		RenderPass(projection, camera.CalculateViewMatrix());
+		
+		glUseProgram(0);
+
+		mainWindow.SwapBuffers();
+	}
+
+	DeleteObjects();
+	DeleteShaders();
+
+	return 0;
+}
+
+void Init()
 {
 	mainWindow = Window(1920, 1080);
 	mainWindow.Init();
@@ -103,58 +144,35 @@ int main(int argc, char* argv[])
 
 	mainLight = DirectionalLight(2048, 2048, glm::vec3(1.0f), 0.2f, glm::vec3(0.0f, -15.0f, -10.0f), 0.6f);
 
-	pointLights[0] = PointLight(glm::vec3(0.0f, 0.0f, 1.0f), 0.0f, 0.1f,
-		glm::vec3(0.0f, 0.0f, 0.0f), 0.3f, 0.2f, 0.1f);
+	pointLights[0] = PointLight(1024, 1024, 0.01f, 100.0f, 
+								glm::vec3(0.0f, 0.0f, 1.0f), 0.0f, 0.1f,
+								glm::vec3(0.0f, 0.0f, 0.0f), 0.3f, 0.2f, 0.1f);
 
 	++pointLightCount;
 
-	pointLights[1] = PointLight(glm::vec3(0.0f, 1.0f, 0.0f), 0.0f, 0.1f,
-		glm::vec3(-4.0f, 2.0f, 0.0f), 0.3f, 0.1f, 0.1f);
+	pointLights[1] = PointLight(1024, 1024, 0.01f, 100.0f,
+								glm::vec3(0.0f, 1.0f, 0.0f), 0.0f, 0.1f,
+								glm::vec3(-4.0f, 2.0f, 0.0f), 0.3f, 0.1f, 0.1f);
 
 	++pointLightCount;
 
-	spotLights[0] = SpotLight(glm::vec3(1.0f, 1.0f, 1.0f), 0.0f, 2.0f,
-		glm::vec3(0.0f, 0.0f, 0.0f),
-		glm::vec3(0.0f, -1.0f, 0.0f),
-		1.0f, 0.0f, 0.0f, 20.0f);
+	spotLights[0] = SpotLight(1024, 1024, 0.01f, 100.0f,
+							  glm::vec3(1.0f, 1.0f, 1.0f), 0.0f, 2.0f,
+							  glm::vec3(0.0f, 0.0f, 0.0f),
+							  glm::vec3(0.0f, -1.0f, 0.0f),
+							  1.0f, 0.0f, 0.0f, 20.0f);
 
 	++spotLightCount;
 
-	spotLights[1] = SpotLight(glm::vec3(1.0f, 1.0f, 1.0f), 0.0f, 1.0f,
-		glm::vec3(0.0f, 0.0f, 0.0f),
-		glm::vec3(-100.0f, -1.0f, 0.0f),
-		1.0f, 0.0f, 0.0f, 20.0f);
+	spotLights[1] = SpotLight(1024, 1024, 0.01f, 100.0f,
+							  glm::vec3(1.0f, 1.0f, 1.0f), 0.0f, 1.0f,
+							  glm::vec3(0.0f, 0.0f, 0.0f),
+							  glm::vec3(-100.0f, -1.0f, 0.0f),
+							  1.0f, 0.0f, 0.0f, 20.0f);
 
 	++spotLightCount;
 
-	GLfloat deltaTime = 0.0f;
-	GLfloat prevTime = 0.0f;
-	
-	projection = glm::perspective(45.0f, static_cast<GLfloat>(mainWindow.GetBufferWidth()) / static_cast<GLfloat>(mainWindow.GetBufferHeight()), 0.1f, 100.0f);
-
-	while (!mainWindow.IsShouldClose())
-	{
-		GLfloat currTime = glfwGetTime();
-		deltaTime = currTime - prevTime;
-		prevTime = currTime;
-
-		glfwPollEvents();
-
-		camera.KeyControl(mainWindow.GetKeys(), deltaTime);
-		camera.MouseControl(mainWindow.GetXOffset(), mainWindow.GetYOffset());
-
-		DirectionalShadowMapPass(mainLight);
-		RenderPass(projection, camera.CalculateViewMatrix());
-		
-		glUseProgram(0);
-
-		mainWindow.SwapBuffers();
-	}
-
-	DeleteObjects();
-	DeleteShaders();
-
-	return 0;
+	projection = glm::perspective(glm::radians(60.0f), static_cast<GLfloat>(mainWindow.GetBufferWidth()) / static_cast<GLfloat>(mainWindow.GetBufferHeight()), 0.1f, 100.0f);
 }
 
 void RenderScene()
@@ -183,7 +201,7 @@ void RenderScene()
 
 	model = glm::mat4(1.0f);
 	model = glm::translate(model, glm::vec3(0.0f, -2.0f, 4.0f));
-	model = glm::rotate(model, degreesToRadians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 	model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
 	glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 	shinyMaterial.UseMaterial(uniformShininess, uniformSpecularIntensity);
@@ -254,6 +272,33 @@ void DirectionalShadowMapPass(const DirectionalLight& light)
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
+void OmniShadowMapPass(const PointLight& light)
+{
+	omniShadowShader->UseShader();
+
+	glViewport(0, 0, light.GetShadowMap()->GetShadowWidth(),
+					 light.GetShadowMap()->GetShadowHeight());
+
+	light.GetShadowMap()->Write();
+
+	glClear(GL_DEPTH_BUFFER_BIT);
+
+	uniformModel = omniShadowShader->GetModelLocation();
+	uniformOmniLightPos = omniShadowShader->GetOmniLightPosLocation();
+	uniformFarPlane = omniShadowShader->GetFarPlaneLocation();
+
+	glUniform3f(uniformOmniLightPos, light.GetPosition().x,
+									 light.GetPosition().y,
+									 light.GetPosition().z);
+	glUniform1f(uniformFarPlane, light.GetFarPlane());
+
+	omniShadowShader->SetLightMatrices(light.CalculateLightTransform());
+
+	RenderScene();
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
 void CalcAverageNormals(GLuint* indices, GLuint indicesCount, GLfloat* vertices, GLuint verticesCount, GLuint vLength, GLuint normalOffset)
 {
 	for (size_t i = 0; i < indicesCount; i += 3)
@@ -286,11 +331,6 @@ void CalcAverageNormals(GLuint* indices, GLuint indicesCount, GLfloat* vertices,
 		vec = glm::normalize(vec);
 		vertices[nOffset] = vec.x; vertices[nOffset + 1] = vec.y; vertices[nOffset + 2] = vec.z;
 	}
-}
-
-GLfloat degreesToRadians(GLfloat degrees)
-{
-	return degrees * pi / 180;
 }
 
 void CreateObjects()
@@ -346,7 +386,13 @@ void CreateShaders()
 	shaderVec.push_back(shader1);
 
 	directionalShadowShader = new Shader();
-	directionalShadowShader->CompileFile("shaders/directional_shadow_map.vert", "shaders/directional_shadow_map.frag");
+	directionalShadowShader->CompileFile("shaders/directional_shadow_map.vert", 
+										 "shaders/directional_shadow_map.frag");
+
+	omniShadowShader = new Shader();
+	omniShadowShader->CompileFile("shaders/omni_shadow_map.vert",
+								  "shaders/omni_shadow_map.geom",
+								  "shaders/omni_shadow_map.frag");
 }
 
 void DeleteObjects()
@@ -373,4 +419,5 @@ void DeleteShaders()
 	}
 
 	delete directionalShadowShader;
+	delete omniShadowShader;
 }

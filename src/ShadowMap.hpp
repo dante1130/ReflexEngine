@@ -18,7 +18,7 @@ public:
 	GLuint GetShadowWidth() const;
 	GLuint GetShadowHeight() const;
 
-	virtual ~ShadowMap();
+	~ShadowMap();
 
 protected:
 	GLuint m_fbo, m_shadowMap;
