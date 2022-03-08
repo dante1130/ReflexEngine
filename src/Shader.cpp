@@ -77,7 +77,7 @@ void Shader::SetDirectionalLight(const DirectionalLight& dLight)
 					uniformDirectionalLight.uniformDiffuseIntensity);
 }
 
-void Shader::SetPointLights(PointLight* pLight, GLuint lightCount)
+void Shader::SetPointLights(PointLight* pLight, GLuint lightCount, GLuint textureUnit, GLuint offset)
 {
 	if (lightCount > MAX_POINT_LIGHTS) lightCount = MAX_POINT_LIGHTS;
 
@@ -92,10 +92,15 @@ void Shader::SetPointLights(PointLight* pLight, GLuint lightCount)
 							uniformPointLights[i].uniformConstant,
 							uniformPointLights[i].uniformLinear,
 							uniformPointLights[i].uniformExponent);
+
+		pLight[i].GetShadowMap()->Read(GL_TEXTURE0 + textureUnit + i);
+		
+		glUniform1i(uniformOmniShadowMap[i + offset].shadowMap, textureUnit + i);
+		glUniform1f(uniformOmniShadowMap[i + offset].farPlane, pLight[i].GetFarPlane());
 	}
 }
 
-void Shader::SetSpotLights(SpotLight* sLight, GLuint lightCount)
+void Shader::SetSpotLights(SpotLight* sLight, GLuint lightCount, GLuint textureUnit, GLuint offset)
 {
 	if (lightCount > MAX_SPOT_LIGHTS) lightCount = MAX_SPOT_LIGHTS;
 
@@ -112,6 +117,11 @@ void Shader::SetSpotLights(SpotLight* sLight, GLuint lightCount)
 							uniformSpotLights[i].uniformLinear,
 							uniformSpotLights[i].uniformExponent,
 							uniformSpotLights[i].uniformEdge);
+
+		sLight[i].GetShadowMap()->Read(GL_TEXTURE0 + textureUnit + i);
+
+		glUniform1i(uniformOmniShadowMap[i + offset].shadowMap, textureUnit + i);
+		glUniform1f(uniformOmniShadowMap[i + offset].farPlane, sLight[i].GetFarPlane());
 	}
 }
 
@@ -221,6 +231,21 @@ void Shader::CompileShader(const char* vertexCode, const char* geometryCode,
 	CompileProgram();
 }
 
+void Shader::Validate()
+{
+	GLint result = 0;
+	GLchar errLog[1024] = { 0 };
+
+	glValidateProgram(m_shaderID);
+	glGetProgramiv(m_shaderID, GL_VALIDATE_STATUS, &result);
+	if (!result)
+	{
+		glGetProgramInfoLog(m_shaderID, sizeof(errLog), NULL, errLog);
+		std::cout << "Error validating program: " << errLog << std::endl;
+		return;
+	}
+}
+
 
 void Shader::CompileProgram()
 {
@@ -233,15 +258,6 @@ void Shader::CompileProgram()
 	{
 		glGetProgramInfoLog(m_shaderID, sizeof(errLog), NULL, errLog);
 		std::cout << "Error linking program: " << errLog << std::endl;
-		return;
-	}
-
-	glValidateProgram(m_shaderID);
-	glGetProgramiv(m_shaderID, GL_VALIDATE_STATUS, &result);
-	if (!result)
-	{
-		glGetProgramInfoLog(m_shaderID, sizeof(errLog), NULL, errLog);
-		std::cout << "Error validating program: " << errLog << std::endl;
 		return;
 	}
 
@@ -335,6 +351,17 @@ void Shader::CompileProgram()
 
 		snprintf(locBuff, sizeof(locBuff), "lightMatrices[%d]", i);
 		uniformLightMatrices[i] = glGetUniformLocation(m_shaderID, locBuff);
+	}
+
+	for (size_t i = 0; i < MAX_POINT_LIGHTS + MAX_SPOT_LIGHTS; ++i)
+	{
+		char locBuff[100] = { '\0' };
+
+		snprintf(locBuff, sizeof(locBuff), "omniShadowMaps[%d].shadowMap", i);
+		uniformOmniShadowMap[i].shadowMap = glGetUniformLocation(m_shaderID, locBuff);
+
+		snprintf(locBuff, sizeof(locBuff), "omniShadowMaps[%d].farPlane", i);
+		uniformOmniShadowMap[i].farPlane = glGetUniformLocation(m_shaderID, locBuff);
 	}
 }
 

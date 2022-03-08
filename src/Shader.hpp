@@ -35,8 +35,8 @@ public:
 	GLuint GetFarPlaneLocation() const;
 
 	void SetDirectionalLight(const DirectionalLight& dLight);
-	void SetPointLights(PointLight* pLight, GLuint lightCount);
-	void SetSpotLights(SpotLight* sLight, GLuint lightCount);
+	void SetPointLights(PointLight* pLight, GLuint lightCount, GLuint textureUnit, GLuint offset);
+	void SetSpotLights(SpotLight* sLight, GLuint lightCount, GLuint textureUnit, GLuint offset);
 	void SetTexture(GLuint textureUnit);
 	void SetDirectionalShadowMap(GLuint textureUnit);
 	void SetDirectionalLightTransform(const glm::mat4& lTransform);
@@ -48,6 +48,8 @@ public:
 	void CompileFile(const char* vertexPath, const char* fragmentPath);
 	void CompileFile(const char* vertexPath, const char* geometryPath,
 					 const char* fragmentPath);
+
+	void Validate();
 
 	std::string ReadFile(const char* fileLocation);
 
@@ -112,6 +114,12 @@ private:
 		GLuint uniformDirection;
 		GLuint uniformEdge;
 	} uniformSpotLights[MAX_SPOT_LIGHTS];
+
+	struct
+	{
+		GLuint shadowMap;
+		GLfloat farPlane;
+	} uniformOmniShadowMap[MAX_POINT_LIGHTS + MAX_SPOT_LIGHTS];
 
 	void AddShader(GLuint program, const char* shaderCode, GLenum shaderType);
 	void CompileShader(const char* vertexCode, const char* fragmentCode);

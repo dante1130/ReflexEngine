@@ -7,9 +7,9 @@ uniform float farPlane;
 
 void main()
 {
-	float distance = length(fragPos.xyz - lightPos);
+	float theDistance = length(fragPos.xyz - lightPos);
 
-	distance = distance / farPlane;
+	theDistance = theDistance / farPlane;
 
-	gl_FragDepth = distance;
+	gl_FragDepth = theDistance;
 }

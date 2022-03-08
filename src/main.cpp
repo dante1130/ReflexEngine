@@ -27,8 +27,8 @@
 #include "Model.hpp"
 
 static std::vector<Mesh*> meshVec;
-static std::vector<Shader*> shaderVec;
 
+static Shader* shader;
 static Shader* directionalShadowShader;
 static Shader* omniShadowShader;
 
@@ -62,12 +62,6 @@ static GLuint uniformEyePosition = 0;
 static GLuint uniformSpecularIntensity = 0, uniformShininess = 0;
 
 static GLuint uniformOmniLightPos = 0, uniformFarPlane = 0;
-
-// Vertex Shader path
-static const char* vShader = "shaders/shader.vert";
-
-// Fragment Shader path
-static const char* fShader = "shaders/shader.frag";
 
 void Init();
 void CalcAverageNormals(GLuint* indices, GLuint indicesCount, 
@@ -142,17 +136,17 @@ void Init()
 	plainTexture = Texture("textures/plain.png");
 	plainTexture.LoadTextureA();
 
-	mainLight = DirectionalLight(2048, 2048, glm::vec3(1.0f), 0.2f, glm::vec3(0.0f, -15.0f, -10.0f), 0.6f);
+	mainLight = DirectionalLight(2048, 2048, glm::vec3(1.0f), 0.0f, glm::vec3(0.0f, -15.0f, -10.0f), 0.1f);
 
 	pointLights[0] = PointLight(1024, 1024, 0.01f, 100.0f, 
-								glm::vec3(0.0f, 0.0f, 1.0f), 0.0f, 0.1f,
-								glm::vec3(0.0f, 0.0f, 0.0f), 0.3f, 0.2f, 0.1f);
+								glm::vec3(0.0f, 0.0f, 1.0f), 0.0f, 1.0f,
+								glm::vec3(1.0f, 2.0f, 0.0f), 0.3f, 1.0f, 1.0f);
 
 	++pointLightCount;
 
 	pointLights[1] = PointLight(1024, 1024, 0.01f, 100.0f,
-								glm::vec3(0.0f, 1.0f, 0.0f), 0.0f, 0.1f,
-								glm::vec3(-4.0f, 2.0f, 0.0f), 0.3f, 0.1f, 0.1f);
+								glm::vec3(0.0f, 1.0f, 0.0f), 0.0f, 1.0f,
+								glm::vec3(-4.0f, 3.0f, 0.0f), 0.3f, 1.0f, 1.0f);
 
 	++pointLightCount;
 
@@ -195,7 +189,7 @@ void RenderScene()
 	model = glm::mat4(1.0f);
 	model = glm::translate(model, glm::vec3(0.0f, -2.0f, 0.0f));
 	glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-	plainTexture.UseTexture();
+	dirtTexture.UseTexture();
 	shinyMaterial.UseMaterial(uniformShininess, uniformSpecularIntensity);
 	meshVec[2]->RenderMesh();
 
@@ -210,16 +204,16 @@ void RenderScene()
 
 void RenderPass(glm::mat4 projectionMatrix, glm::mat4 viewMatrix)
 {
-	shaderVec[0]->UseShader();
+	shader->UseShader();
 
-	uniformModel = shaderVec[0]->GetModelLocation();
-	uniformProjection = shaderVec[0]->GetProjectionLocation();
-	uniformView = shaderVec[0]->GetViewLocation();
+	uniformModel = shader->GetModelLocation();
+	uniformProjection = shader->GetProjectionLocation();
+	uniformView = shader->GetViewLocation();
 
-	uniformEyePosition = shaderVec[0]->GetEyePositionLocation();
+	uniformEyePosition = shader->GetEyePositionLocation();
 
-	uniformShininess = shaderVec[0]->GetShininessLocation();
-	uniformSpecularIntensity = shaderVec[0]->GetSpecularIntensityLocation();
+	uniformShininess = shader->GetShininessLocation();
+	uniformSpecularIntensity = shader->GetSpecularIntensityLocation();
 
 	glViewport(0, 0, 1920, 1080);
 
@@ -236,19 +230,21 @@ void RenderPass(glm::mat4 projectionMatrix, glm::mat4 viewMatrix)
 		camera.GetCamPosition().y,
 		camera.GetCamPosition().z);
 
-	shaderVec[0]->SetDirectionalLight(mainLight);
-	shaderVec[0]->SetPointLights(pointLights, pointLightCount);
-	shaderVec[0]->SetSpotLights(spotLights, spotLightCount);
-	shaderVec[0]->SetDirectionalLightTransform(mainLight.CalculateLightTransform());
+	shader->SetDirectionalLight(mainLight);
+	shader->SetPointLights(pointLights, pointLightCount, 3, 0);
+	shader->SetSpotLights(spotLights, spotLightCount, 3  + pointLightCount, pointLightCount);
+	shader->SetDirectionalLightTransform(mainLight.CalculateLightTransform());
 
-	mainLight.GetShadowMap()->Read(GL_TEXTURE1);
+	mainLight.GetShadowMap()->Read(GL_TEXTURE2);
 
-	shaderVec[0]->SetTexture(0);
-	shaderVec[0]->SetDirectionalShadowMap(1);
+	shader->SetTexture(1);
+	shader->SetDirectionalShadowMap(2);
 
 	glm::vec3 lowerLight = camera.GetCamPosition();
 	lowerLight.y -= 0.3f;
 	spotLights[0].SetFlash(lowerLight, camera.GetCamDirection());
+
+	shader->Validate();
 
 	RenderScene();
 }
@@ -266,6 +262,8 @@ void DirectionalShadowMapPass(const DirectionalLight& light)
 	
 	uniformModel = directionalShadowShader->GetModelLocation();
 	directionalShadowShader->SetDirectionalLightTransform(light.CalculateLightTransform());
+
+	directionalShadowShader->Validate();
 
 	RenderScene();
 
@@ -294,8 +292,10 @@ void OmniShadowMapPass(const PointLight& light)
 
 	omniShadowShader->SetLightMatrices(light.CalculateLightTransform());
 
-	RenderScene();
+	omniShadowShader->Validate();
 
+	RenderScene();
+	
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
@@ -381,9 +381,8 @@ void CreateObjects()
 
 void CreateShaders()
 {
-	Shader* shader1 = new Shader();
-	shader1->CompileFile(vShader, fShader);
-	shaderVec.push_back(shader1);
+	shader = new Shader();
+	shader->CompileFile("shaders/shader.vert", "shaders/shader.frag");
 
 	directionalShadowShader = new Shader();
 	directionalShadowShader->CompileFile("shaders/directional_shadow_map.vert", 
@@ -409,15 +408,7 @@ void DeleteObjects()
 
 void DeleteShaders()
 {
-	for (auto& shader : shaderVec)
-	{
-		if (shader)
-		{
-			delete shader;
-			shader = nullptr;
-		}
-	}
-
+	delete shader;
 	delete directionalShadowShader;
 	delete omniShadowShader;
 }
