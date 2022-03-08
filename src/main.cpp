@@ -25,6 +25,7 @@
 #include "Material.hpp"
 #include "SpotLight.hpp"
 #include "Model.hpp"
+#include "Skybox.hpp"
 
 static std::vector<Mesh*> meshVec;
 
@@ -52,6 +53,8 @@ static Texture plainTexture("textures/plain.png");
 
 static Material shinyMaterial(256, 4.0f);
 static Material dullMaterial(4, 0.3f);
+
+static Skybox skybox;
 
 static Model cat;
 
@@ -81,7 +84,7 @@ int main(int argc, char* argv[])
 	Init();
 
 	GLfloat deltaTime = 0.0f;
-	GLfloat prevTime = 0.0f;
+	GLfloat prevTime = glfwGetTime();
 
 	while (!mainWindow.IsShouldClose())
 	{
@@ -136,7 +139,8 @@ void Init()
 	plainTexture = Texture("textures/plain.png");
 	plainTexture.LoadTextureA();
 
-	mainLight = DirectionalLight(2048, 2048, glm::vec3(1.0f), 0.0f, glm::vec3(0.0f, -15.0f, -10.0f), 0.1f);
+	mainLight = DirectionalLight(2048, 2048, glm::vec3(1.0f, 0.53f, 0.3f), 0.1f, 
+								 glm::vec3(-10.0f, -12.0f, 18.5f), 0.9f);
 
 	pointLights[0] = PointLight(1024, 1024, 0.01f, 100.0f, 
 								glm::vec3(0.0f, 0.0f, 1.0f), 0.0f, 1.0f,
@@ -165,6 +169,16 @@ void Init()
 							  1.0f, 0.0f, 0.0f, 20.0f);
 
 	++spotLightCount;
+
+	std::vector<std::string> skyboxFaces;
+	skyboxFaces.push_back("textures/skyboxes/cupertin-lake/cupertin-lake_rt.tga");
+	skyboxFaces.push_back("textures/skyboxes/cupertin-lake/cupertin-lake_lf.tga");
+	skyboxFaces.push_back("textures/skyboxes/cupertin-lake/cupertin-lake_up.tga");
+	skyboxFaces.push_back("textures/skyboxes/cupertin-lake/cupertin-lake_dn.tga");
+	skyboxFaces.push_back("textures/skyboxes/cupertin-lake/cupertin-lake_bk.tga");
+	skyboxFaces.push_back("textures/skyboxes/cupertin-lake/cupertin-lake_ft.tga");
+
+	skybox = Skybox(skyboxFaces);
 
 	projection = glm::perspective(glm::radians(60.0f), static_cast<GLfloat>(mainWindow.GetBufferWidth()) / static_cast<GLfloat>(mainWindow.GetBufferHeight()), 0.1f, 100.0f);
 }
@@ -204,6 +218,13 @@ void RenderScene()
 
 void RenderPass(glm::mat4 projectionMatrix, glm::mat4 viewMatrix)
 {
+	glViewport(0, 0, 1920, 1080);
+
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	skybox.DrawSkybox(projectionMatrix, viewMatrix);
+
 	shader->UseShader();
 
 	uniformModel = shader->GetModelLocation();
@@ -214,11 +235,6 @@ void RenderPass(glm::mat4 projectionMatrix, glm::mat4 viewMatrix)
 
 	uniformShininess = shader->GetShininessLocation();
 	uniformSpecularIntensity = shader->GetSpecularIntensityLocation();
-
-	glViewport(0, 0, 1920, 1080);
-
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// Creates projection matrix mode
 	glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection));

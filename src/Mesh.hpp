@@ -7,7 +7,8 @@ class Mesh
 public:
 	Mesh();
 
-	void CreateMesh(GLfloat* vertices, GLuint* indices, GLuint noOfVerts, GLuint noOfIndices);
+	void CreateMesh(const GLfloat* vertices, const GLuint* indices, 
+					GLuint noOfVerts, GLuint noOfIndices);
 	void RenderMesh();
 	void ClearMesh();
 

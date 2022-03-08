@@ -5,7 +5,8 @@ Mesh::Mesh()
 	: VAO(0), VBO(0), IBO(0), indexCount(0)
 {}
 
-void Mesh::CreateMesh(GLfloat* vertices, GLuint* indices, GLuint noOfVerts, GLuint noOfIndices)
+void Mesh::CreateMesh(const GLfloat* vertices, const GLuint* indices, 
+					  GLuint noOfVerts, GLuint noOfIndices)
 {
 	indexCount = noOfIndices;
 
