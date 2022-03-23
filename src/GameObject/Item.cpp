@@ -24,7 +24,10 @@ void Item::draw() {
 	GLuint uniform_specular = shader->GetSpecularIntensityLocation();
 
 	glm::mat4 model(1.0f);
-	model = glm::translate(model, position);
+	model = glm::translate(model, glm::vec3(0.0f, -2.0f, 4.0f));
+	model =
+	    glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
 	glUniformMatrix4fv(uniform_model, 1, GL_FALSE, glm::value_ptr(model));
 	material_.UseMaterial(uniform_shininess, uniform_specular);
 	model_.RenderModel();
