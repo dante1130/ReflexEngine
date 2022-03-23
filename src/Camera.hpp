@@ -1,26 +1,25 @@
 #pragma once
 
 #include <glad/glad.h>
-#include <glm/glm.hpp>
-#include <glm/geometric.hpp>
-#include <glm/gtc/matrix_transform.hpp>
 #include <GLFW/glfw3.h>
 
-class Camera
-{
+#include <glm/geometric.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
+class Camera {
 public:
 	Camera();
-	Camera(glm::vec3 position, glm::vec3 up, GLfloat yaw, GLfloat pitch, GLfloat moveSpeed, GLfloat turnSpeed);
+	Camera(glm::vec3 position, glm::vec3 up, GLfloat yaw, GLfloat pitch,
+	       GLfloat moveSpeed, GLfloat turnSpeed);
 
-	void KeyControl(bool* keys, GLfloat deltaTime);
+	void KeyControl(const bool* keys, GLfloat deltaTime);
 	void MouseControl(GLfloat xOffset, GLfloat yOffset);
 
 	glm::mat4 CalculateViewMatrix();
 
 	glm::vec3 GetCamPosition() const;
 	glm::vec3 GetCamDirection() const;
-
-	~Camera();
 
 private:
 	glm::vec3 m_position;
@@ -31,7 +30,7 @@ private:
 
 	GLfloat m_yaw;
 	GLfloat m_pitch;
-	
+
 	GLfloat m_moveSpeed;
 	GLfloat m_turnSpeed;
 

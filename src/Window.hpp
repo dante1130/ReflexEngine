@@ -2,11 +2,9 @@
 
 #include <iostream>
 
-#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-class Window
-{
+class Window {
 public:
 	Window();
 	Window(GLint windowWidth, GLint windowHeight);
@@ -19,10 +17,10 @@ public:
 	GLdouble GetXOffset();
 	GLdouble GetYOffset();
 
-	bool* GetKeys();
+	const bool* GetKeys() const;
 
 	bool IsShouldClose() const;
-	
+
 	void SwapBuffers();
 
 	~Window();
@@ -41,6 +39,7 @@ private:
 	bool m_keys[1024];
 
 	void CreateCallbacks();
-	static void HandleKeys(GLFWwindow* window, int key, int code, int action, int mode);
+	static void HandleKeys(GLFWwindow* window, int key, int code, int action,
+	                       int mode);
 	static void HandleMouse(GLFWwindow* window, double xPos, double yPos);
 };

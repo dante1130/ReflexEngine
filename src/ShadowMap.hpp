@@ -4,8 +4,7 @@
 
 #include <glad/glad.h>
 
-class ShadowMap
-{
+class ShadowMap {
 public:
 	ShadowMap();
 
@@ -18,7 +17,7 @@ public:
 	GLuint GetShadowWidth() const;
 	GLuint GetShadowHeight() const;
 
-	~ShadowMap();
+	virtual ~ShadowMap();
 
 protected:
 	GLuint m_fbo, m_shadowMap;

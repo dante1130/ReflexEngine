@@ -1,11 +1,8 @@
 #include "OmniShadowMap.hpp"
 
-OmniShadowMap::OmniShadowMap()
-{
-}
+OmniShadowMap::OmniShadowMap() {}
 
-bool OmniShadowMap::Init(GLuint width, GLuint height)
-{
+bool OmniShadowMap::Init(GLuint width, GLuint height) {
 	m_shadowWidth = width;
 	m_shadowHeight = height;
 
@@ -14,13 +11,12 @@ bool OmniShadowMap::Init(GLuint width, GLuint height)
 	glGenTextures(1, &m_shadowMap);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, m_shadowMap);
 
-	for (size_t i = 0; i < 6; ++i) 
-	{
+	for (size_t i = 0; i < 6; ++i) {
 		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_DEPTH_COMPONENT,
-					 m_shadowWidth, m_shadowHeight, 0, GL_DEPTH_COMPONENT,
-					 GL_FLOAT, nullptr);
+		             m_shadowWidth, m_shadowHeight, 0, GL_DEPTH_COMPONENT,
+		             GL_FLOAT, nullptr);
 	}
-		
+
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -35,8 +31,7 @@ bool OmniShadowMap::Init(GLuint width, GLuint height)
 
 	GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 
-	if (status != GL_FRAMEBUFFER_COMPLETE)
-	{
+	if (status != GL_FRAMEBUFFER_COMPLETE) {
 		std::cout << "Framebuffer error: " << status << '\n';
 		return false;
 	}
@@ -46,17 +41,9 @@ bool OmniShadowMap::Init(GLuint width, GLuint height)
 	return true;
 }
 
-void OmniShadowMap::Write()
-{
-	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, m_fbo);
-}
+void OmniShadowMap::Write() { glBindFramebuffer(GL_DRAW_FRAMEBUFFER, m_fbo); }
 
-void OmniShadowMap::Read(GLenum textureUnit)
-{
+void OmniShadowMap::Read(GLenum textureUnit) {
 	glActiveTexture(textureUnit);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, m_shadowMap);
-}
-
-OmniShadowMap::~OmniShadowMap()
-{
 }

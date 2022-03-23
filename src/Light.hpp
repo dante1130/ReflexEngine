@@ -6,12 +6,11 @@
 
 #include "ShadowMap.hpp"
 
-class Light
-{
+class Light {
 public:
 	Light();
-	Light(GLfloat shadowWidth, GLfloat shadowHeight,
-		  glm::vec3 color, GLfloat aIntensity, GLfloat dIntensity);
+	Light(GLuint shadowWidth, GLuint shadowHeight, glm::vec3 color,
+	      GLfloat aIntensity, GLfloat dIntensity);
 
 	ShadowMap* GetShadowMap() const;
 

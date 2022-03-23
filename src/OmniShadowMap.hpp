@@ -2,18 +2,13 @@
 
 #include "ShadowMap.hpp"
 
-class OmniShadowMap : public ShadowMap
-{
+class OmniShadowMap : public ShadowMap {
 public:
 	OmniShadowMap();
 
-	bool Init(GLuint width, GLuint height);
+	bool Init(GLuint width, GLuint height) override;
 
-	void Write();
+	void Write() override;
 
-	void Read(GLenum textureUnit);
-
-	~OmniShadowMap();
-
-private:
+	void Read(GLenum textureUnit) override;
 };

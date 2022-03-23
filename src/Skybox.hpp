@@ -14,16 +14,13 @@
 #include "Mesh.hpp"
 #include "Shader.hpp"
 
-class Skybox
-{
+class Skybox {
 public:
 	Skybox();
 
 	Skybox(const std::vector<std::string>& faceLocations);
 
 	void DrawSkybox(glm::mat4 projectionMatrix, glm::mat4 viewMatrix);
-
-	~Skybox();
 
 private:
 	Mesh* m_skyMesh;
