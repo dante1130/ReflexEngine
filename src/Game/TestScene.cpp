@@ -1,4 +1,5 @@
 #include <functional>
+
 #include "ReflexEngine/ReflexEngine.hpp"
 #include "TestScene.hpp"
 
@@ -6,7 +7,7 @@ TestScene::TestScene() {}
 
 void TestScene::init() {
 	directional_light_ =
-	    DirectionalLight(2048, 2048, glm::vec3(1.0f, 0.53f, 0.3f), 0.1f,
+	    DirectionalLight(2048, 2048, glm::vec3(1.0f, 0.53f, 0.3f), 1.0f,
 	                     glm::vec3(-10.0f, -12.0f, 18.5f), 0.9f);
 
 	game_objects_.emplace_back(
@@ -29,6 +30,6 @@ void TestScene::draw() {
 	shader->SetDirectionalShadowMap(2);
 
 	for (auto& game_object : game_objects_) {
-		game_object->add_draw_call();
+		game_object->add_draw_call(shader);
 	}
 }

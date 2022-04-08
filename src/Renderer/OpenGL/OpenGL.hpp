@@ -9,7 +9,7 @@
 #include "Skybox.hpp"
 #include "../Renderer.hpp"
 
-using DrawCall = std::function<void()>;
+using DrawCall = std::function<void(std::shared_ptr<Shader>)>;
 
 class OpenGL : public Renderer {
 public:

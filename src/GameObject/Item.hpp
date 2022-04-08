@@ -16,9 +16,9 @@ public:
 
 	void update(float delta_time) override {}
 
-	void add_draw_call() override;
+	void add_draw_call(std::shared_ptr<Shader> shader) override;
 
-	void draw() override;
+	void draw(std::shared_ptr<Shader> shader) override;
 
 private:
 	Model model_ = {};

@@ -66,27 +66,23 @@ void OpenGL::draw() {
 
 	glm::mat4 view = camera_.CalculateViewMatrix();
 
-	auto shader = engine.renderer_.get_shader();
-
-	GLuint uniform_proj = shader->GetProjectionLocation();
-
-	GLuint uniform_view = shader->GetViewLocation();
-
 	// Creates projection matrix mode
-	glUniformMatrix4fv(uniform_proj, 1, GL_FALSE, glm::value_ptr(projection));
+	glUniformMatrix4fv(shader_->GetProjectionLocation(), 1, GL_FALSE,
+	                   glm::value_ptr(projection));
 
 	// Create view matrix mode
-	glUniformMatrix4fv(uniform_view, 1, GL_FALSE, glm::value_ptr(view));
+	glUniformMatrix4fv(shader_->GetViewLocation(), 1, GL_FALSE,
+	                   glm::value_ptr(view));
 
 	skybox_.DrawSkybox(projection, view);
 
+	shader_->UseShader();
+
 	for (const auto& draw_call : draw_calls_) {
-		draw_call();
+		draw_call(shader_);
 	}
 
-	shader->Validate();
-
-	engine.window_.SwapBuffers();
+	shader_->Validate();
 
 	draw_calls_.clear();
 }

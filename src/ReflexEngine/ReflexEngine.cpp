@@ -28,6 +28,8 @@ void ReflexEngine::run() {
 
 		engine.scenes_.top()->draw();
 		engine.renderer_.draw();
+
+		engine.window_.SwapBuffers();
 	}
 }
 
