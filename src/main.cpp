@@ -222,60 +222,6 @@ void RenderScene()
 	cat.RenderModel();
 }
 
-
-bool drawObject = false;
-float size = 1;
-float angle = 0;
-float colour[(int)4] = { 1, 1, 1, 1 };
-float xSize = 0, ySize = 0;
-bool val;
-
-void GuiTest()
-{
-
-	std::string text;
-
-	if (drawObject)
-	{
-		gui::setWindowPos(0, 0, gui::SET_WINDOW_CONSTRAINTS_WHEN_ACTIVATED);
-		gui::setWindowSize(400, 400, gui::SET_WINDOW_CONSTRAINTS_WHEN_ACTIVATED);
-		gui::begin("Second window");
-		if (gui::collapsingHeader("Collapsing header"))
-		{
-			gui::button("Hello");
-			gui::button("HELLO THERE", 250, 100);
-			char text5[50];
-			val = ImGui::InputText("Input text", text5, 50);
-			
-			if (val == true)
-			{
-				gui::button("YO");
-			}
-			gui::text(text5);
-			ImGuiStyle style;
-			
-		}
-		float frameTimes[] = { 44, 46.6, 23, 3, 1004 };
-		int sizeOfArray = 5;
-		gui::plotLines("Frame rate", frameTimes, sizeOfArray, 250, 250);
-		gui::progressBar(48);
-		gui::end();
-
-	}
-
-	gui::setWindowSize(300, 300, gui::SET_WINDOW_CONSTRAINTS_ON_EXECUTION);
-
-	gui::begin("Window. Very cool!");
-	gui::text("Hello there, this is very cool text indead");
-	gui::checkbox("Draw other window", &drawObject);
-	gui::sliderFloat("Size", &size, 0.1f, 1.0f);
-	gui::colourEdit4("Colour", colour);
-	gui::sliderAngle("Angle", &angle, -360.0f, 360.0f);
-	text = "Frame rate = " + std::to_string(gui::guiFrameRate()) + " (frame time = " + std::to_string(1000.0f / gui::guiFrameRate()) + ")";
-	gui::text(text);
-	gui::end();
-}
-
 void RenderPass(glm::mat4 projectionMatrix, glm::mat4 viewMatrix)
 {
 	glViewport(0, 0, 1920, 1080);
@@ -324,7 +270,6 @@ void RenderPass(glm::mat4 projectionMatrix, glm::mat4 viewMatrix)
 
 	shader->Validate();
 
-	GuiTest();
 	RenderScene();
 
 	gui::mainLoopEnd();
