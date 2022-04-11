@@ -26,6 +26,7 @@
 #include "SpotLight.hpp"
 #include "Model.hpp"
 #include "Skybox.hpp"
+#include "guiManager.h"
 
 static std::vector<Mesh*> meshVec;
 
@@ -82,6 +83,7 @@ void DeleteShaders();
 int main(int argc, char* argv[])
 {
 	Init();
+	
 
 	GLfloat deltaTime = 0.0f;
 	GLfloat prevTime = glfwGetTime();
