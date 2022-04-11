@@ -50,6 +50,19 @@ void OpenGL::init() {
 }
 
 void OpenGL::draw() {
+	render_pass();
+
+	directional_lights_.clear();
+	draw_calls_.clear();
+}
+
+void OpenGL::render_scene() {
+	for (const auto& draw_call : draw_calls_) {
+		draw_call(shader_);
+	}
+}
+
+void OpenGL::render_pass() {
 	auto& engine = ReflexEngine::get_instance();
 
 	GLint width = engine.window_.GetBufferWidth();
@@ -78,13 +91,23 @@ void OpenGL::draw() {
 
 	shader_->UseShader();
 
-	for (const auto& draw_call : draw_calls_) {
-		draw_call(shader_);
-	}
+	render_lights();
+
+	render_scene();
 
 	shader_->Validate();
+}
 
-	draw_calls_.clear();
+void OpenGL::render_lights() {
+	for (const auto& d_light : directional_lights_) {
+		shader_->SetDirectionalLight(d_light);
+		shader_->SetDirectionalLightTransform(
+		    d_light.CalculateLightTransform());
+		d_light.GetShadowMap()->Read(GL_TEXTURE2);
+	}
+
+	shader_->SetTexture(1);
+	shader_->SetDirectionalShadowMap(2);
 }
 
 void OpenGL::toggle_wireframe() {
@@ -98,11 +121,15 @@ void OpenGL::toggle_wireframe() {
 
 std::shared_ptr<Shader> OpenGL::get_shader() { return shader_; }
 
-void OpenGL::update_camera(Window& window, float delta_time) {
-	camera_.KeyControl(window.GetKeys(), delta_time);
-	camera_.MouseControl(window.GetXOffset(), window.GetYOffset());
+void OpenGL::add_directional_light(const DirectionalLight& light) {
+	directional_lights_.push_back(light);
 }
 
 void OpenGL::add_draw_call(const DrawCall& draw_call) {
 	draw_calls_.push_back(draw_call);
+}
+
+void OpenGL::update_camera(Window& window, float delta_time) {
+	camera_.KeyControl(window.GetKeys(), delta_time);
+	camera_.MouseControl(window.GetXOffset(), window.GetYOffset());
 }

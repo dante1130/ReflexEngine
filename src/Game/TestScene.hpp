@@ -19,7 +19,7 @@ public:
 
 	void update(float delta_time) override {}
 
-	void draw() override;
+	void add_draw_call() override;
 
 private:
 	DirectionalLight directional_light_ = {};

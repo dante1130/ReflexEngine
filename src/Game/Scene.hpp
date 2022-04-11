@@ -11,7 +11,7 @@ public:
 
 	virtual void update(float delta_time) = 0;
 
-	virtual void draw() = 0;
+	virtual void add_draw_call() = 0;
 
 	virtual ~Scene() = default;
 

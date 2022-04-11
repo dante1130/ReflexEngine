@@ -7,7 +7,7 @@ TestScene::TestScene() {}
 
 void TestScene::init() {
 	directional_light_ =
-	    DirectionalLight(2048, 2048, glm::vec3(1.0f, 0.53f, 0.3f), 1.0f,
+	    DirectionalLight(2048, 2048, glm::vec3(1.0f, 0.53f, 0.3f), 0.1f,
 	                     glm::vec3(-10.0f, -12.0f, 18.5f), 0.9f);
 
 	game_objects_.emplace_back(
@@ -16,20 +16,12 @@ void TestScene::init() {
 	game_objects_[0]->position = glm::vec3(0.0f, -2.0f, 4.0f);
 }
 
-void TestScene::draw() {
-	auto shader = ReflexEngine::get_instance().renderer_.get_shader();
+void TestScene::add_draw_call() {
+	auto& renderer = ReflexEngine::get_instance().renderer_;
 
-	shader->SetDirectionalLight(directional_light_);
-
-	shader->SetDirectionalLightTransform(
-	    directional_light_.CalculateLightTransform());
-
-	directional_light_.GetShadowMap()->Read(GL_TEXTURE2);
-
-	shader->SetTexture(1);
-	shader->SetDirectionalShadowMap(2);
+	renderer.add_directional_light(directional_light_);
 
 	for (auto& game_object : game_objects_) {
-		game_object->add_draw_call(shader);
+		game_object->add_draw_call();
 	}
 }

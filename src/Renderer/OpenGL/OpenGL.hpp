@@ -25,14 +25,26 @@ public:
 
 	void update_camera(Window& window, float delta_time);
 
+	void add_directional_light(const DirectionalLight& light);
+
 	void add_draw_call(const DrawCall& draw_call);
 
 private:
+	void render_scene();
+
+	void render_lights();
+
+	void render_pass();
+
+	void directional_shadow_pass(const DirectionalLight& light);
+
 	bool is_wireframe_ = true;
 
 	Camera camera_ = {};
 
 	Skybox skybox_ = {};
+
+	std::vector<DirectionalLight> directional_lights_;
 
 	std::vector<DrawCall> draw_calls_ = {};
 
