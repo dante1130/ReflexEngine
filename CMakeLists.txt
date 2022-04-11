@@ -18,6 +18,7 @@ set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 add_subdirectory(${CMAKE_PREFIX_PATH}/glm)
 add_subdirectory(${CMAKE_PREFIX_PATH}/glad)
 add_subdirectory(${CMAKE_PREFIX_PATH}/glfw)
+add_subdirectory(${CMAKE_PREFIX_PATH}/imgui)
 
 # Globs all the source files.
 file (GLOB SOURCE_FILES src/*.cpp)
@@ -26,7 +27,7 @@ file (GLOB SOURCE_FILES src/*.cpp)
 file (GLOB HEADER_FILES src/*.hpp)
 
 # Adds the source and header files to build.
-add_executable (ReflexEngine ${HEADER_FILES} ${SOURCE_FILES})
+add_executable (ReflexEngine ${HEADER_FILES} ${SOURCE_FILES} "src/guiManager.h" "src/guiManager.cpp")
 
 # Set compile flags.
 target_compile_options(${PROJECT_NAME} PRIVATE
@@ -70,9 +71,11 @@ include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/glfw/include)
 include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/glm)
 include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/stb_image)
 include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/assimp/include)
+include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/imgui)
 
 # Link libraries.
 target_link_libraries (ReflexEngine PRIVATE glfw)
 target_link_libraries (ReflexEngine PRIVATE glm)
 target_link_libraries (ReflexEngine PRIVATE glad)
 target_link_libraries (ReflexEngine PRIVATE ${CMAKE_PREFIX_PATH}/assimp/lib/assimp-vc143-mt.lib)
+target_link_libraries (ReflexEngine PRIVATE imgui)

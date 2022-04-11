@@ -13,6 +13,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "guiManager.h"
+
 #include "CommonValues.hpp"
 
 #include "Window.hpp"
@@ -95,7 +97,7 @@ int main(int argc, char* argv[])
 		glfwPollEvents();
 
 		camera.KeyControl(mainWindow.GetKeys(), deltaTime);
-		camera.MouseControl(mainWindow.GetXOffset(), mainWindow.GetYOffset());
+		//camera.MouseControl(mainWindow.GetXOffset(), mainWindow.GetYOffset());
 
 		DirectionalShadowMapPass(mainLight);
 
@@ -114,6 +116,8 @@ int main(int argc, char* argv[])
 
 	DeleteObjects();
 	DeleteShaders();
+
+	gui::shutdown();
 
 	return 0;
 }
@@ -181,6 +185,8 @@ void Init()
 	skybox = Skybox(skyboxFaces);
 
 	projection = glm::perspective(glm::radians(60.0f), static_cast<GLfloat>(mainWindow.GetBufferWidth()) / static_cast<GLfloat>(mainWindow.GetBufferHeight()), 0.1f, 100.0f);
+
+	gui::init(mainWindow.getWindow(), "#version 460");
 }
 
 void RenderScene()
@@ -222,6 +228,8 @@ void RenderPass(glm::mat4 projectionMatrix, glm::mat4 viewMatrix)
 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
+	gui::mainLoopStart();
 
 	skybox.DrawSkybox(projectionMatrix, viewMatrix);
 
@@ -263,6 +271,8 @@ void RenderPass(glm::mat4 projectionMatrix, glm::mat4 viewMatrix)
 	shader->Validate();
 
 	RenderScene();
+
+	gui::mainLoopEnd();
 }
 
 void DirectionalShadowMapPass(const DirectionalLight& light)
