@@ -50,9 +50,10 @@ void OpenGL::init() {
 }
 
 void OpenGL::draw() {
-	for (const auto& d_light : directional_lights_) {
-		directional_shadow_pass(d_light);
-	}
+	// Not working yet.
+	// for (const auto& d_light : directional_lights_) {
+	// 	directional_shadow_pass(d_light);
+	// }
 
 	render_pass();
 

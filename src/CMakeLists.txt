@@ -18,6 +18,8 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Texture.cpp
 	Window.cpp
 
+	guiManager.cpp
+
 	GameObject/GameObject.hpp
 	GameObject/Item.cpp
 

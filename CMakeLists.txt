@@ -20,9 +20,11 @@ add_executable (ReflexEngine)
 add_subdirectory(${CMAKE_PREFIX_PATH}/glm)
 add_subdirectory(${CMAKE_PREFIX_PATH}/glad)
 add_subdirectory(${CMAKE_PREFIX_PATH}/glfw)
+add_subdirectory(${CMAKE_PREFIX_PATH}/imgui)
+
 add_subdirectory(src)
 
-# Set compile flags
+
 target_compile_options(${PROJECT_NAME} PRIVATE
     # Clang
     $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>>:
@@ -53,9 +55,11 @@ include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/glfw/include)
 include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/glm)
 include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/stb_image)
 include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/assimp/include)
+include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/imgui)
 
 # Link libraries.
 target_link_libraries (ReflexEngine PRIVATE glfw)
 target_link_libraries (ReflexEngine PRIVATE glm)
 target_link_libraries (ReflexEngine PRIVATE glad)
 target_link_libraries (ReflexEngine PRIVATE ${CMAKE_PREFIX_PATH}/assimp/lib/assimp-vc143-mt.lib)
+target_link_libraries (ReflexEngine PRIVATE imgui)
