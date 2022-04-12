@@ -30,13 +30,13 @@ public:
 	void add_draw_call(const DrawCall& draw_call);
 
 private:
-	void render_scene();
+	void render_scene(std::shared_ptr<Shader> shader);
 
 	void render_lights();
 
 	void render_pass();
 
-	void directional_shadow_pass(const DirectionalLight& light);
+	void directional_shadow_pass(const DirectionalLight& d_light);
 
 	bool is_wireframe_ = true;
 

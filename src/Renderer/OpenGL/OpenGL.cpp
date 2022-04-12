@@ -50,15 +50,19 @@ void OpenGL::init() {
 }
 
 void OpenGL::draw() {
+	for (const auto& d_light : directional_lights_) {
+		directional_shadow_pass(d_light);
+	}
+
 	render_pass();
 
 	directional_lights_.clear();
 	draw_calls_.clear();
 }
 
-void OpenGL::render_scene() {
+void OpenGL::render_scene(std::shared_ptr<Shader> shader) {
 	for (const auto& draw_call : draw_calls_) {
-		draw_call(shader_);
+		draw_call(shader);
 	}
 }
 
@@ -93,9 +97,9 @@ void OpenGL::render_pass() {
 
 	render_lights();
 
-	render_scene();
-
 	shader_->Validate();
+
+	render_scene(shader_);
 }
 
 void OpenGL::render_lights() {
@@ -108,6 +112,25 @@ void OpenGL::render_lights() {
 
 	shader_->SetTexture(1);
 	shader_->SetDirectionalShadowMap(2);
+}
+
+void OpenGL::directional_shadow_pass(const DirectionalLight& d_light) {
+	directional_shadow_shader_->UseShader();
+
+	glViewport(0, 0, d_light.GetShadowMap()->GetShadowWidth(),
+	           d_light.GetShadowMap()->GetShadowHeight());
+
+	d_light.GetShadowMap()->Write();
+	glClear(GL_DEPTH_BUFFER_BIT);
+
+	directional_shadow_shader_->SetDirectionalLightTransform(
+	    d_light.CalculateLightTransform());
+
+	directional_shadow_shader_->Validate();
+
+	render_scene(shader_);
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 void OpenGL::toggle_wireframe() {
