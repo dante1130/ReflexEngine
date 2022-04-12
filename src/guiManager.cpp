@@ -41,12 +41,12 @@ void gui::setWindowSize(int xSize, int ySize, int constraint) {
 	ImGui::SetNextWindowSize(ImVec2(xSize, ySize), constraint);
 }
 
-void gui::text(const std::string text) { ImGui::Text(text.c_str()); }
+void gui::text(const std::string text) { gui::text(text.c_str()); }
 
 void gui::text(const char* text) { ImGui::Text(text); }
 
 void gui::checkbox(const std::string name, bool* option) {
-	ImGui::Checkbox(name.c_str(), option);
+	checkbox(name.c_str(), option);
 }
 
 void gui::checkbox(const char* name, bool* option) {
@@ -55,7 +55,7 @@ void gui::checkbox(const char* name, bool* option) {
 
 void gui::sliderFloat(const std::string name, float* value, float min,
                       float max) {
-	ImGui::SliderFloat(name.c_str(), value, min, max);
+	sliderFloat(name.c_str(), value, min, max);
 }
 
 void gui::sliderFloat(const char* name, float* value, float min, float max) {
