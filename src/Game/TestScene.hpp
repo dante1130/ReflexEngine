@@ -10,6 +10,7 @@
 #include "Material.hpp"
 #include "GameObject/Item.hpp"
 #include "DirectionalLight.hpp"
+#include "GameObject/Water.h"
 
 class TestScene : public Scene {
 public:
@@ -17,7 +18,7 @@ public:
 
 	void init() override;
 
-	void update(float delta_time) override {}
+	void update(float delta_time) override;
 
 	void add_draw_call() override;
 

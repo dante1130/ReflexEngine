@@ -26,6 +26,7 @@ void ReflexEngine::run() {
 
 		engine.renderer_.update_camera(engine.window_, delta_time);
 
+		engine.scenes_.top()->update(delta_time);
 		engine.scenes_.top()->add_draw_call();
 		engine.renderer_.draw();
 

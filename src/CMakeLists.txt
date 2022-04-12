@@ -22,6 +22,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 
 	GameObject/GameObject.hpp
 	GameObject/Item.cpp
+	GameObject/Water.cpp
 
 	Renderer/OpenGL/OpenGL.cpp
 
