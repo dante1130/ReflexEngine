@@ -1,6 +1,6 @@
 #version 460 core
 
-in vec4 vColor;
+in vec3 vColor;
 in vec2 texCoord;
 in vec3 normal;
 in vec3 fragPos;
@@ -51,6 +51,8 @@ struct Material
 	float specularIntensity;
 	float shininess;
 };
+
+uniform bool isUsingTexture;
 
 uniform int pointLightCount;
 uniform int spotLightCount;
@@ -239,5 +241,14 @@ void main()
 	finalColor += CalcPointLights();
 	finalColor += CalcSpotLights();
 
-	color = texture(theTexture, texCoord) * finalColor;
+	if (isUsingTexture)
+	{
+		finalColor *= texture(theTexture, texCoord);
+	}
+	else
+	{
+		finalColor += vec4(vColor, 1.0f);
+	}
+
+	color = finalColor;
 }

@@ -13,6 +13,7 @@ Shader::Shader()
       uniformDirectionalShadowMap(0u),
       uniformSpotLightCount(0u),
       uniformPointLightCount(0u),
+      uniformUsingTexture(0u),
       pointLightCount(0),
       spotLightCount(0) {}
 
@@ -49,6 +50,8 @@ GLuint Shader::GetShininessLocation() const { return uniformShininess; }
 GLuint Shader::GetOmniLightPosLocation() const { return uniformOmniLightPos; }
 
 GLuint Shader::GetFarPlaneLocation() const { return uniformFarPlane; }
+
+GLuint Shader::GetUsingTexture() const { return uniformUsingTexture; }
 
 void Shader::SetDirectionalLight(const DirectionalLight& dLight) {
 	dLight.UseLight(uniformDirectionalLight.uniformColor,
@@ -228,6 +231,8 @@ void Shader::CompileProgram() {
 	uniformView = glGetUniformLocation(m_shaderID, "view");
 
 	uniformEyePosition = glGetUniformLocation(m_shaderID, "eyePosition");
+
+	uniformUsingTexture = glGetUniformLocation(m_shaderID, "isUsingTexture");
 
 	uniformDirectionalLight.uniformColor =
 	    glGetUniformLocation(m_shaderID, "directionalLight.base.color");

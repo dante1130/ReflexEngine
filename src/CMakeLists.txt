@@ -17,18 +17,21 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Skybox.cpp
 	Texture.cpp
 	Window.cpp
+	Terrain.cpp
+	BruteForceTerrain.cpp
+	TexturedTerrain.cpp
 
 	guiManager.cpp
 
-	GameObject/GameObject.hpp
-	GameObject/Item.cpp
+	Model/GameObject/GameObject.hpp
+	Model/GameObject/Item.cpp
 
-	Renderer/OpenGL/OpenGL.cpp
+	View/Renderer/OpenGL/OpenGL.cpp
+
+	Controller/ReflexEngine/ReflexEngine.cpp
 
 	Game/Scene.hpp
 	Game/TestScene.cpp
-
-	ReflexEngine/ReflexEngine.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})

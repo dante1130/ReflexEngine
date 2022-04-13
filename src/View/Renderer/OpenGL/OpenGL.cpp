@@ -1,6 +1,6 @@
 #include "OpenGL.hpp"
 
-#include "ReflexEngine/ReflexEngine.hpp"
+#include "Controller/ReflexEngine/ReflexEngine.hpp"
 
 void OpenGL::init() {
 	auto& engine = ReflexEngine::get_instance();
@@ -129,7 +129,7 @@ void OpenGL::directional_shadow_pass(const DirectionalLight& d_light) {
 
 	directional_shadow_shader_->Validate();
 
-	render_scene(shader_);
+	render_scene(directional_shadow_shader_);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }

@@ -1,6 +1,6 @@
 #define STB_IMAGE_IMPLEMENTATION
 
-#include "ReflexEngine/ReflexEngine.hpp"
+#include "Controller/ReflexEngine/ReflexEngine.hpp"
 
 int main() {
 	ReflexEngine::run();
