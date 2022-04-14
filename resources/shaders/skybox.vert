@@ -1,14 +1,13 @@
-#version 460 core
+#version 410 core
 
-layout (location = 0) in vec3 pos;
+layout(location = 0) in vec3 pos;
 
 out vec3 texCoords;
 
 uniform mat4 projection;
 uniform mat4 view;
 
-void main()
-{
+void main() {
 	texCoords = pos;
 	gl_Position = projection * view * vec4(pos, 1.0);
 }
