@@ -33,6 +33,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	View/Renderer/OpenGL/OpenGL.cpp
 
 	Controller/ReflexEngine/ReflexEngine.cpp
+	Controller/TextureManager.cpp
 
 	Game/Scene.hpp
 	Game/TestScene.cpp

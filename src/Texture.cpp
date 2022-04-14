@@ -1,19 +1,24 @@
 #include "Texture.hpp"
 
 Texture::Texture()
-	: m_textureID(0), m_width(0), m_height(0), m_bitDepth(0), m_fileLocation("")
-{}
+    : m_textureID(0),
+      m_width(0),
+      m_height(0),
+      m_bitDepth(0),
+      m_fileLocation("") {}
 
 Texture::Texture(const char* fileLocation)
-	: m_textureID(0), m_width(0), m_height(0), m_bitDepth(0), m_fileLocation(fileLocation)
-{}
+    : m_textureID(0),
+      m_width(0),
+      m_height(0),
+      m_bitDepth(0),
+      m_fileLocation(fileLocation) {}
 
-bool Texture::LoadTexture()
-{
-	unsigned char* texData = stbi_load(m_fileLocation, &m_width, &m_height, &m_bitDepth, 0);
+bool Texture::LoadTexture() {
+	unsigned char* texData =
+	    stbi_load(m_fileLocation, &m_width, &m_height, &m_bitDepth, 0);
 
-	if (!texData)
-	{
+	if (!texData) {
 		std::cout << "Failed to load image " << m_fileLocation << std::endl;
 		return false;
 	}
@@ -26,7 +31,8 @@ bool Texture::LoadTexture()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_width, m_height, 0, GL_RGB, GL_UNSIGNED_BYTE, texData);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_width, m_height, 0, GL_RGB,
+	             GL_UNSIGNED_BYTE, texData);
 	glGenerateMipmap(GL_TEXTURE_2D);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -36,12 +42,11 @@ bool Texture::LoadTexture()
 	return true;
 }
 
-bool Texture::LoadTextureA()
-{
-	unsigned char* texData = stbi_load(m_fileLocation, &m_width, &m_height, &m_bitDepth, 0);
+bool Texture::LoadTextureA() {
+	unsigned char* texData =
+	    stbi_load(m_fileLocation, &m_width, &m_height, &m_bitDepth, 0);
 
-	if (!texData)
-	{
+	if (!texData) {
 		std::cout << "Failed to load image " << m_fileLocation << std::endl;
 		return false;
 	}
@@ -54,7 +59,8 @@ bool Texture::LoadTextureA()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_width, m_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_width, m_height, 0, GL_RGBA,
+	             GL_UNSIGNED_BYTE, texData);
 	glGenerateMipmap(GL_TEXTURE_2D);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -64,14 +70,12 @@ bool Texture::LoadTextureA()
 	return true;
 }
 
-void Texture::UseTexture()
-{
+void Texture::UseTexture() const {
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, m_textureID);
 }
 
-void Texture::ClearTexture()
-{
+void Texture::ClearTexture() {
 	glDeleteTextures(1, &m_textureID);
 
 	m_textureID = 0;
@@ -81,7 +85,4 @@ void Texture::ClearTexture()
 	m_fileLocation = "";
 }
 
-Texture::~Texture()
-{
-	ClearTexture();
-}
+Texture::~Texture() { ClearTexture(); }
