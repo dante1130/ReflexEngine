@@ -4,7 +4,7 @@ cmake_minimum_required (VERSION 3.19)
 # Project declaration.
 project (ReflexEngine LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 # CMake path for libraries.
 set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
@@ -21,6 +21,7 @@ add_subdirectory(${CMAKE_PREFIX_PATH}/glm)
 add_subdirectory(${CMAKE_PREFIX_PATH}/glad)
 add_subdirectory(${CMAKE_PREFIX_PATH}/glfw)
 add_subdirectory(${CMAKE_PREFIX_PATH}/imgui)
+add_subdirectory(${CMAKE_PREFIX_PATH}/lua)
 
 add_subdirectory(src)
 
@@ -63,3 +64,4 @@ target_link_libraries (ReflexEngine PRIVATE glm)
 target_link_libraries (ReflexEngine PRIVATE glad)
 target_link_libraries (ReflexEngine PRIVATE ${CMAKE_PREFIX_PATH}/assimp/lib/assimp-vc143-mt.lib)
 target_link_libraries (ReflexEngine PRIVATE imgui)
+target_link_libraries (ReflexEngine PRIVATE lua)
