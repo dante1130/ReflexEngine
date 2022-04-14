@@ -34,6 +34,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 
 	Controller/ReflexEngine/ReflexEngine.cpp
 	Controller/TextureManager.cpp
+	Controller/LuaManager.cpp
 
 	Game/Scene.hpp
 	Game/TestScene.cpp
