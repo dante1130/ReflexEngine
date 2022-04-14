@@ -21,7 +21,10 @@ target_sources(${PROJECT_NAME} PRIVATE
 	BruteForceTerrain.cpp
 	TexturedTerrain.cpp
 
+	GameAssetFactory.cpp
+
 	guiManager.cpp
+	
 
 	Model/GameObject/GameObject.hpp
 	Model/GameObject/Item.cpp

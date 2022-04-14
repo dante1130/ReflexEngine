@@ -2,6 +2,7 @@
 
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 #include "TestScene.hpp"
+#include "guiManager.hpp"
 
 TestScene::TestScene() {}
 
@@ -17,6 +18,8 @@ void TestScene::init() {
 
 	game_objects_[0]->position = glm::vec3(0.0f, -2.0f, 4.0f);
 	game_objects_[1]->position = glm::vec3(0.0f, -1.0f, 0.0f);
+
+	gui::init(ReflexEngine::get_instance().window_.getWindow(), "#version 410");
 }
 
 void TestScene::add_draw_call() {
