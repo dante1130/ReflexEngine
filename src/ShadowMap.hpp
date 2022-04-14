@@ -4,23 +4,65 @@
 
 #include <glad/glad.h>
 
-class ShadowMap
-{
+/**
+ * @class ShadowMap
+ * @brief A shadow map.
+ */
+class ShadowMap {
 public:
+	/**
+	 * @brief Construct a new Shadow Map object
+	 */
 	ShadowMap();
 
+	/**
+	 * @brief Generates the framebuffer for the shadow map.
+	 *
+	 * @param width
+	 * @param height
+	 * @return true
+	 * @return false
+	 */
 	virtual bool Init(GLuint width, GLuint height);
 
+	/**
+	 * @brief Binds the FBO of the shadow map.
+	 */
 	virtual void Write();
 
+	/**
+	 * @brief Enable the shadow map given a texture unit.
+	 *
+	 * @param textureUnit
+	 */
 	virtual void Read(GLenum textureUnit);
 
+	/**
+	 * @brief Get the Shadow Width
+	 *
+	 * @return GLuint
+	 */
 	GLuint GetShadowWidth() const;
+
+	/**
+	 * @brief Get the Shadow Height
+	 *
+	 * @return GLuint
+	 */
 	GLuint GetShadowHeight() const;
 
-	~ShadowMap();
+	/**
+	 * @brief Destroy the Shadow Map object
+	 */
+	virtual ~ShadowMap();
 
 protected:
-	GLuint m_fbo, m_shadowMap;
+	// The framebuffer object.
+	GLuint m_fbo;
+
+	// The shadow map.
+	GLuint m_shadowMap;
+
+	// Shadow dimensions.
 	GLuint m_shadowWidth, m_shadowHeight;
 };

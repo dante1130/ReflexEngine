@@ -16,9 +16,16 @@
 #include "SpotLight.hpp"
 #include "CommonValues.hpp"
 
-class Shader
-{
+/**
+ * @class Shader
+ * @brief A shader program
+ * @todo Refactor getters and setters.
+ */
+class Shader {
 public:
+	/**
+	 * @brief Construct a new Shader object
+	 */
 	Shader();
 
 	GLuint GetProjectionLocation() const;
@@ -33,37 +40,80 @@ public:
 	GLuint GetShininessLocation() const;
 	GLuint GetOmniLightPosLocation() const;
 	GLuint GetFarPlaneLocation() const;
+	GLuint GetUsingTexture() const;
 
 	void SetDirectionalLight(const DirectionalLight& dLight);
-	void SetPointLights(PointLight* pLight, GLuint lightCount, GLuint textureUnit, GLuint offset);
-	void SetSpotLights(SpotLight* sLight, GLuint lightCount, GLuint textureUnit, GLuint offset);
+	void SetPointLights(PointLight* pLight, GLuint lightCount,
+	                    GLuint textureUnit, GLuint offset);
+	void SetSpotLights(SpotLight* sLight, GLuint lightCount, GLuint textureUnit,
+	                   GLuint offset);
 	void SetTexture(GLuint textureUnit);
 	void SetDirectionalShadowMap(GLuint textureUnit);
 	void SetDirectionalLightTransform(const glm::mat4& lTransform);
 	void SetLightMatrices(std::vector<glm::mat4> lightmatrices);
 
-	void UseShader();
+	/**
+	 * @brief Use the current shader.
+	 */
+	void UseShader() const;
 
+	/**
+	 * @brief Compiles the shader code.
+	 *
+	 * @param vertexCode
+	 * @param fragmentCode
+	 */
 	void CompileCode(const char* vertexCode, const char* fragmentCode);
-	void CompileFile(const char* vertexPath, const char* fragmentPath);
-	void CompileFile(const char* vertexPath, const char* geometryPath,
-					 const char* fragmentPath);
 
+	/**
+	 * @brief Reads in a shader file and compiles the code.
+	 *
+	 * @param vertexPath
+	 * @param fragmentPath
+	 */
+	void CompileFile(const char* vertexPath, const char* fragmentPath);
+
+	/**
+	 * @brief Reads in a shader file and compiles the code.
+	 *
+	 * @param vertexPath
+	 * @param geometryPath
+	 * @param fragmentPath
+	 */
+	void CompileFile(const char* vertexPath, const char* geometryPath,
+	                 const char* fragmentPath);
+
+	/**
+	 * @brief Validates the shader.
+	 */
 	void Validate();
 
+	/**
+	 * @brief Read a shader file and return the code.
+	 *
+	 * @param fileLocation
+	 * @return std::string
+	 */
 	std::string ReadFile(const char* fileLocation);
 
+	/**
+	 * @brief Clears the shader.
+	 */
 	void ClearShader();
 
+	/**
+	 * @brief Destroy the Shader object
+	 */
 	~Shader();
 
 private:
+	/// The unique id of the shader.
 	GLuint m_shaderID;
-		
+
 	GLuint uniformProjection, uniformModel, uniformView;
 
 	GLuint uniformEyePosition;
-		
+
 	GLuint uniformSpecularIntensity, uniformShininess;
 
 	GLuint uniformTexture;
@@ -77,19 +127,19 @@ private:
 	GLuint uniformSpotLightCount;
 	GLuint uniformPointLightCount;
 
+	GLuint uniformUsingTexture;
+
 	int pointLightCount;
 	int spotLightCount;
 
-	struct
-	{
+	struct {
 		GLuint uniformColor;
 		GLuint uniformAmbientIntensity;
 		GLuint uniformDiffuseIntensity;
 		GLuint uniformDirection;
 	} uniformDirectionalLight;
 
-	struct
-	{
+	struct {
 		GLuint uniformColor;
 		GLuint uniformAmbientIntensity;
 		GLuint uniformDiffuseIntensity;
@@ -100,8 +150,7 @@ private:
 		GLuint uniformExponent;
 	} uniformPointLights[MAX_POINT_LIGHTS];
 
-	struct
-	{
+	struct {
 		GLuint uniformColor;
 		GLuint uniformAmbientIntensity;
 		GLuint uniformDiffuseIntensity;
@@ -115,16 +164,40 @@ private:
 		GLuint uniformEdge;
 	} uniformSpotLights[MAX_SPOT_LIGHTS];
 
-	struct
-	{
+	struct {
 		GLuint shadowMap;
 		GLfloat farPlane;
 	} uniformOmniShadowMap[MAX_POINT_LIGHTS + MAX_SPOT_LIGHTS];
 
+	/**
+	 * @brief Adds a new type of shader to the program.
+	 *
+	 * @param program
+	 * @param shaderCode
+	 * @param shaderType
+	 */
 	void AddShader(GLuint program, const char* shaderCode, GLenum shaderType);
-	void CompileShader(const char* vertexCode, const char* fragmentCode);
-	void CompileShader(const char* vertexCode, const char* geometryCode,
-					   const char* fragmentCode);
 
+	/**
+	 * @brief Compiles a vertex and fragment shader.
+	 *
+	 * @param vertexCode
+	 * @param fragmentCode
+	 */
+	void CompileShader(const char* vertexCode, const char* fragmentCode);
+
+	/**
+	 * @brief Compiles a vertex, geometry and fragment shader.
+	 *
+	 * @param vertexCode
+	 * @param geometryCode
+	 * @param fragmentCode
+	 */
+	void CompileShader(const char* vertexCode, const char* geometryCode,
+	                   const char* fragmentCode);
+
+	/**
+	 * @brief Compiles the shader program.
+	 */
 	void CompileProgram();
 };

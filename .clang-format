@@ -1,0 +1,9 @@
+# Format Style Options - Created with Clang Power Tools
+---
+AccessModifierOffset: -4
+BasedOnStyle: Google
+IndentWidth: 4
+SortIncludes: false
+TabWidth: 4
+UseTab: ForIndentation
+...

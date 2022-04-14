@@ -1,5 +1,5 @@
 ﻿# Minimum CMake version
-cmake_minimum_required (VERSION 3.8)
+cmake_minimum_required (VERSION 3.19)
 
 # Project declaration.
 project (ReflexEngine LANGUAGES CXX)
@@ -14,27 +14,22 @@ set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 
-# Add subdirectories of libraries.
+add_executable (ReflexEngine)
+
+# Add subdirectories.
 add_subdirectory(${CMAKE_PREFIX_PATH}/glm)
 add_subdirectory(${CMAKE_PREFIX_PATH}/glad)
 add_subdirectory(${CMAKE_PREFIX_PATH}/glfw)
 add_subdirectory(${CMAKE_PREFIX_PATH}/imgui)
 
-# Globs all the source files.
-file (GLOB SOURCE_FILES src/*.cpp)
+add_subdirectory(src)
 
-# Globs all the header files.
-file (GLOB HEADER_FILES src/*.hpp)
 
-# Adds the source and header files to build.
-add_executable (ReflexEngine ${HEADER_FILES} ${SOURCE_FILES} "src/guiManager.h" "src/guiManager.cpp")
-
-# Set compile flags.
 target_compile_options(${PROJECT_NAME} PRIVATE
     # Clang
     $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>>:
         -Weverything -fcolor-diagnostics
-        # Disable specific warnings.
+        # Turn off useless warnings
         -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-padded
         -Wno-deprecated-declarations -Wno-exit-time-destructors
         -Wno-switch-enum -Wno-weak-vtables -Wno-global-constructors>
@@ -44,26 +39,15 @@ target_compile_options(${PROJECT_NAME} PRIVATE
     $<$<CXX_COMPILER_ID:MSVC>:/W4>
 )
 
-add_custom_command(TARGET ReflexEngine PRE_BUILD
+add_custom_command(TARGET ReflexEngine POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy_directory
                     ${PROJECT_SOURCE_DIR}/dlls 
                     ${CMAKE_CURRENT_BINARY_DIR})
 
-add_custom_command(TARGET ReflexEngine PRE_BUILD
+add_custom_command(TARGET ReflexEngine POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy_directory
-                    ${PROJECT_SOURCE_DIR}/src/models 
-                    ${CMAKE_CURRENT_BINARY_DIR}/models)
-
-add_custom_command(TARGET ReflexEngine PRE_BUILD
-                   COMMAND ${CMAKE_COMMAND} -E copy_directory
-                    ${PROJECT_SOURCE_DIR}/src/shaders 
-                    ${CMAKE_CURRENT_BINARY_DIR}/shaders)
-
-
-add_custom_command(TARGET ReflexEngine PRE_BUILD
-                   COMMAND ${CMAKE_COMMAND} -E copy_directory
-                    ${PROJECT_SOURCE_DIR}/src/textures 
-                    ${CMAKE_CURRENT_BINARY_DIR}/textures)
+                    ${PROJECT_SOURCE_DIR}/resources 
+                    ${CMAKE_CURRENT_BINARY_DIR})
 
 # Include dependencies.
 include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/glad/include)
