@@ -43,7 +43,7 @@ public:
 	/**
 	 * @brief Enables the texture.
 	 */
-	void UseTexture();
+	void UseTexture() const;
 
 	/**
 	 * @brief Clears the texture.
