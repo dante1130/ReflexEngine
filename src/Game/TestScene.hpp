@@ -9,6 +9,7 @@
 #include "Texture.hpp"
 #include "Material.hpp"
 #include "Model/GameObject/Item.hpp"
+#include "Model/GameObject/Water.hpp"
 #include "DirectionalLight.hpp"
 
 /**
@@ -32,7 +33,7 @@ public:
 	 *
 	 * @param delta_time
 	 */
-	void update(float delta_time) override {}
+	void update(float delta_time) override;
 
 	/**
 	 * @brief Add draw calls to the renderer.

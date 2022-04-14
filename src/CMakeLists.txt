@@ -25,7 +25,8 @@ target_sources(${PROJECT_NAME} PRIVATE
 
 	Model/GameObject/GameObject.hpp
 	Model/GameObject/Item.cpp
-
+	Model/GameObject/Water.cpp
+	
 	View/Renderer/OpenGL/OpenGL.cpp
 
 	Controller/ReflexEngine/ReflexEngine.cpp
