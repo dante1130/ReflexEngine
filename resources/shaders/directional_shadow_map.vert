@@ -1,11 +1,10 @@
-#version 460 core
+#version 410 core
 
-layout (location = 0) in vec3 pos;
+layout(location = 0) in vec3 pos;
 
 uniform mat4 model;
 uniform mat4 directionalLightTransform;
 
-void main()
-{
+void main() {
 	gl_Position = directionalLightTransform * model * vec4(pos, 1.0);
 }
