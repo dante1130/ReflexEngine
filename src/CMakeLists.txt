@@ -35,6 +35,10 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/ReflexEngine/ReflexEngine.cpp
 	Controller/TextureManager.cpp
 	Controller/LuaManager.cpp
+	Controller/Physics.cpp
+	Controller/BodyRigidPhysics.cpp
+	Controller/Body.cpp
+	Controller/BodyRigid.cpp
 
 	Game/Scene.hpp
 	Game/TestScene.cpp

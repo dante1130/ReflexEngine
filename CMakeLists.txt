@@ -13,6 +13,10 @@ set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+set(RP3D_COMPILE_TESTBED OFF CACHE BOOL "" FORCE)
+set(RP3D_COMPILE_TEST OFF CACHE BOOL "" FORCE)
+set(RP3D_PROFILING_ENABLED OFF CACHE BOOL "" FORCE)
+set(RP3D_DOUBLE_PRECISION_ENABLED OFF CACHE BOOL "" FORCE)
 
 add_executable (ReflexEngine)
 
@@ -22,6 +26,7 @@ add_subdirectory(${CMAKE_PREFIX_PATH}/glad)
 add_subdirectory(${CMAKE_PREFIX_PATH}/glfw)
 add_subdirectory(${CMAKE_PREFIX_PATH}/imgui)
 add_subdirectory(${CMAKE_PREFIX_PATH}/lua)
+add_subdirectory(${CMAKE_PREFIX_PATH}/reactphysics3d)
 
 add_subdirectory(src)
 
@@ -57,6 +62,7 @@ include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/glm)
 include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/stb_image)
 include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/assimp/include)
 include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/imgui)
+include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/reactphysics3d)
 
 # Link libraries.
 target_link_libraries (ReflexEngine PRIVATE glfw)
@@ -65,3 +71,4 @@ target_link_libraries (ReflexEngine PRIVATE glad)
 target_link_libraries (ReflexEngine PRIVATE ${CMAKE_PREFIX_PATH}/assimp/lib/assimp-vc143-mt.lib)
 target_link_libraries (ReflexEngine PRIVATE imgui)
 target_link_libraries (ReflexEngine PRIVATE lua)
+target_link_libraries (ReflexEngine PRIVATE reactphysics3d)

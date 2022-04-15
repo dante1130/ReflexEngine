@@ -4,6 +4,8 @@
 #include "TestScene.hpp"
 #include "guiManager.hpp"
 #include "GameAssetFactory.hpp"
+#include "Controller/Body.hpp"
+#include "Controller/BodyRigid.hpp"
 
 TestScene::TestScene() {}
 
@@ -15,6 +17,32 @@ void TestScene::init() {
 	GameAssetFactory gaf;
 	game_objects_.emplace_back(gaf.create("scripts/Cat.lua"));
 	game_objects_.emplace_back(gaf.create("scripts/Water.lua"));
+
+	Body* b = new Body();
+	b->init();
+	game_objects_.emplace_back(b);
+
+	BodyRigid* rb = new BodyRigid();
+	rb->createBR(0, 25, 0);
+	rb->setType(2);
+	rb->enableGravity(true);
+	rb->addSphereCollider(glm::vec3(0, 0, 0), 1, 0.5, 0.5);
+	game_objects_.emplace_back(rb);
+
+	game_objects_.emplace_back(gaf.create("scripts/Cat.lua"));
+
+	rb = new BodyRigid();
+	rb->createBR(0, 0, 0);
+	rb->position = glm::vec3(0, 0, 0);
+	rb->setType(1);
+	rb->enableGravity(false);
+	rb->addSphereCollider(glm::vec3(0, 0, 0), 1, 0.5, 0.5);
+	game_objects_.emplace_back(rb);
+
+	b = new Body();
+	b->init();
+	b->setCreator(false);
+	game_objects_.emplace_back(b);
 
 	gui::init(ReflexEngine::get_instance().window_.getWindow(), "#version 410");
 }
@@ -30,7 +58,11 @@ void TestScene::add_draw_call() {
 }
 
 void TestScene::update(float delta_time) {
-	auto& renderer = ReflexEngine::get_instance().renderer_;
+	game_objects_[0]->position = game_objects_[3]->position;
+	game_objects_[0]->rotation = game_objects_[3]->rotation;
+	game_objects_[0]->angle = game_objects_[3]->angle;
+
+	game_objects_[4]->position = game_objects_[5]->position;
 
 	for (auto& game_object : game_objects_) {
 		game_object->update(delta_time);
