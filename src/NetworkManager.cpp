@@ -5,8 +5,12 @@ void network::SetupClient(std::string userName) {
 	RakNet::SocketDescriptor sd;
 	peer->Startup(1, &sd, 1);
 	isServer = false;
-	userName.append(": ");
-	name = userName;
+	if (userName !==NULL) {
+		userName.append(": ");
+		name = userName;
+	} else {
+		name = "Client: ";
+	}
 }
 
 bool network::ConnectClient(char* serverIP) { 
@@ -41,14 +45,14 @@ void network::MessageSend(char* inputMessage) {
 char* network::ReceiveMessage() {
 	for (packet = peer->Receive(); packet;
 		    peer->DeallocatePacket(packet), packet = peer->Receive()) {
-		return (HandleMessage(GetPacketIdentifier(packet)));
+		return (HandleMessage(packet));
 	}
 	
 }
 
-char* network::HandleMessage(unsigned char packetID) {
+char* network::HandleMessage(RakNet::Packet *packet) {
 	if (isServer) {
-		switch (packetID) {
+		switch (GetPacketIdentifier(packet)) {
 			case ID_REMOTE_DISCONNECTION_NOTIFICATION:
 				return ("Another client has disconnected\n");
 				break;
@@ -87,7 +91,6 @@ char* network::HandleMessage(unsigned char packetID) {
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				bsIn.Read(rs);
 				return (packet->data);
-				// bsIn.Reset();
 			} break;
 			default:
 				peer->Send(message, (const int)strlen(message) + 1,
@@ -97,7 +100,7 @@ char* network::HandleMessage(unsigned char packetID) {
 				break;
 		}
 	} else {
-		switch (packetID) {
+		switch (GetPacketIdentifier(packet)) {
 			case ID_REMOTE_DISCONNECTION_NOTIFICATION:
 				return ("Another client has disconnected\n");
 				break;
