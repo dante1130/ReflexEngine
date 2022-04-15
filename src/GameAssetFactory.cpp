@@ -11,9 +11,9 @@ GameObject* GameAssetFactory::create(std::string fileName) {
 		return loadItem(fileName);
 	} else if (type == "Water") {
 		return loadWater(fileName);
-	} else if (type == "Player") {
-		//
-		// return GameObjectLoader::player(fileName);
+	} else if (type == "Body") {
+		std::cout << " body " << std::endl;
+		return loadBody(fileName);
 	} else if (type == "NPC") {
 		//
 		// return GameObjectLoader::npc(fileName);
@@ -140,4 +140,20 @@ Water* GameAssetFactory::loadWater(std::string luaScript) {
 	water->setIntensity(intensity);
 
 	return water;
+}
+
+Body* GameAssetFactory::loadBody(std::string luaScript) {
+	sol::state& lua = LuaManager::get_instance().get_state();
+	lua.script_file(luaScript);
+
+	Body* body = new Body();
+
+	int val = lua["creator"];
+	if (val == 0) {
+		body->setCreator(false);
+	}
+
+	body->init();
+
+	return body;
 }

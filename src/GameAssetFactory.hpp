@@ -104,4 +104,14 @@ private:
 	 * @post	water stored
 	 */
 	Water* loadWater(std::string luaScript);
+
+	/**
+	 * @brief	Loads in a body object from a lua script
+	 * @param	luaScript	- The lua script to load the body data from
+	 * @return	*body		- Created body object
+	 *
+	 * @pre		body varaible exists
+	 * @post	body stored
+	 */
+	Body* loadBody(std::string luaScript);
 };

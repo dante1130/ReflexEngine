@@ -18,8 +18,6 @@ void BodyRigidPhysics::init(glm::vec3 pos, glm::vec3 rotation, float angle) {
 	                    pow(rotation.y, 2) * pow(sin(angle / 2), 2) +
 	                    pow(rotation.z, 2) * pow(sin(angle / 2), 2));
 
-	std::cout << x << " : " << y << " : " << z << " : " << w << std::endl;
-
 	o.setAllValues(x / normal, y / normal, z / normal, w / normal);
 	Transform t(position, o);
 	rb = Physics::getPhysicsWorld()->createRigidBody(t);

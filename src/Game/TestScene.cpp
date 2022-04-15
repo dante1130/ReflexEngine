@@ -17,10 +17,7 @@ void TestScene::init() {
 	GameAssetFactory gaf;
 	game_objects_.emplace_back(gaf.create("scripts/Cat.lua"));
 	game_objects_.emplace_back(gaf.create("scripts/Water.lua"));
-
-	Body* b = new Body();
-	b->init();
-	game_objects_.emplace_back(b);
+	game_objects_.emplace_back(gaf.create("scripts/creator.lua"));
 
 	BodyRigid* rb = new BodyRigid();
 	rb->rotation = glm::vec3(1, 0, 0);
@@ -41,10 +38,7 @@ void TestScene::init() {
 	rb->addSphereCollider(glm::vec3(0, 0, 0), 2, 0.5, 0.5);
 	game_objects_.emplace_back(rb);
 
-	b = new Body();
-	b->init();
-	b->setCreator(false);
-	game_objects_.emplace_back(b);
+	game_objects_.emplace_back(gaf.create("scripts/destroyer.lua"));
 
 	gui::init(ReflexEngine::get_instance().window_.getWindow(), "#version 410");
 }
