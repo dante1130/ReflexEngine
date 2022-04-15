@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Model/GameObject/GameObject.hpp"
-#include "Physics.hpp"
+#include "Controller/Physics.hpp"
 
 class Body : public GameObject {
 public:

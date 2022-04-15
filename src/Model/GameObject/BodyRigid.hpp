@@ -1,5 +1,5 @@
 #pragma once
-#include "BodyRigidPhysics.hpp"
+#include "Controller/BodyRigidPhysics.hpp"
 #include "Body.hpp"
 #include <glm/glm.hpp>
 
@@ -37,19 +37,19 @@ public:
 
 	/**
 	 * @brief	Creates rigid body.
-	 * @param	x	- x position
-	 * @param	y	- y position
-	 * @param	z	- z position
+	 * @param	pos			- Position of the body
+	 * @param	rotation	- axis of rotation of the body
+	 * @param	angle		- angle around axis of rotation
 	 * @reutrn	Void
 	 *
 	 * @pre		Physics world exists
 	 * @post	Rigid body initialised
 	 */
-	void createBR(float x, float y, float z);
+	void createBR(glm::vec3 pos, glm::vec3 rotation, float angle);
 
 	/**
 	 * @brief	Set type of rigid body
-	 * @param	type	- type of body. 1 = static, 2 = kinematic, 3 = dynamic
+	 * @param	type	- type of body. 0 = static, 1 = kinematic, 2 = dynamic
 	 * @return	Void
 	 *
 	 * @pre		Rigid body exists

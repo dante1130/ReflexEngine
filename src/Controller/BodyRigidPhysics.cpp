@@ -2,10 +2,25 @@
 
 BodyRigidPhysics::BodyRigidPhysics() {}
 
-void BodyRigidPhysics::init(glm::vec3 pos) {
+void BodyRigidPhysics::init(glm::vec3 pos, glm::vec3 rotation, float angle) {
 	Vector3 position(pos.x, pos.y, pos.z);
 	Quaternion o = Quaternion::identity();
-	o.setAllValues(0, 1, 0, 0);
+
+	angle = angle / (180 / PI_RP3D);
+
+	float x = rotation.x * sin(angle / 2);
+	float y = rotation.y * sin(angle / 2);
+	float z = rotation.z * sin(angle / 2);
+	float w = cos(angle / 2);
+
+	float normal = sqrt(pow(cos(angle / 2), 2) +
+	                    pow(rotation.x, 2) * pow(sin(angle / 2), 2) +
+	                    pow(rotation.y, 2) * pow(sin(angle / 2), 2) +
+	                    pow(rotation.z, 2) * pow(sin(angle / 2), 2));
+
+	std::cout << x << " : " << y << " : " << z << " : " << w << std::endl;
+
+	o.setAllValues(x / normal, y / normal, z / normal, w / normal);
 	Transform t(position, o);
 	rb = Physics::getPhysicsWorld()->createRigidBody(t);
 
@@ -89,6 +104,18 @@ BodyRigidPhysics::~BodyRigidPhysics() {
 
 void BodyRigidPhysics::addBoxCollider(glm::vec3 pos, glm::vec3 halfSize,
                                       float bounciness, float friction) {
+	if (bounciness < 0) {
+		bounciness = 0;
+	} else if (bounciness > 1) {
+		bounciness = 1;
+	}
+
+	if (friction < 0) {
+		friction = 0;
+	} else if (friction > 1) {
+		friction = 1;
+	}
+
 	BoxShape* boxShape = Physics::getPhysicsCommon().createBoxShape(
 	    Vector3(halfSize.x, halfSize.y, halfSize.z));
 
@@ -106,6 +133,18 @@ void BodyRigidPhysics::addBoxCollider(glm::vec3 pos, glm::vec3 halfSize,
 
 void BodyRigidPhysics::addSphereCollider(glm::vec3 pos, float radius,
                                          float bounciness, float friction) {
+	if (bounciness < 0) {
+		bounciness = 0;
+	} else if (bounciness > 1) {
+		bounciness = 1;
+	}
+
+	if (friction < 0) {
+		friction = 0;
+	} else if (friction > 1) {
+		friction = 1;
+	}
+
 	SphereShape* sphereShape =
 	    Physics::getPhysicsCommon().createSphereShape(radius);
 
@@ -124,6 +163,18 @@ void BodyRigidPhysics::addSphereCollider(glm::vec3 pos, float radius,
 void BodyRigidPhysics::addCapsuleCollider(glm::vec3 pos, float radius,
                                           float height, float bounciness,
                                           float friction) {
+	if (bounciness < 0) {
+		bounciness = 0;
+	} else if (bounciness > 1) {
+		bounciness = 1;
+	}
+
+	if (friction < 0) {
+		friction = 0;
+	} else if (friction > 1) {
+		friction = 1;
+	}
+
 	CapsuleShape* capsuleShape =
 	    Physics::getPhysicsCommon().createCapsuleShape(radius, height);
 

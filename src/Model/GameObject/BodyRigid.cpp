@@ -2,8 +2,8 @@
 
 void BodyRigid::init() {}
 
-void BodyRigid::createBR(float x, float y, float z) {
-	rb.init(glm::vec3(x, y, z));
+void BodyRigid::createBR(glm::vec3 pos, glm::vec3 rotation, float angle) {
+	rb.init(pos, rotation, angle);
 }
 
 void BodyRigid::setType(int type) { rb.setType(type); }

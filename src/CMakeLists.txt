@@ -29,7 +29,9 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Model/GameObject/GameObject.hpp
 	Model/GameObject/Item.cpp
 	Model/GameObject/Water.cpp
-	
+	Model/GameObject/Body.cpp
+	Model/GameObject/BodyRigid.cpp
+
 	View/Renderer/OpenGL/OpenGL.cpp
 
 	Controller/ReflexEngine/ReflexEngine.cpp
@@ -37,8 +39,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/LuaManager.cpp
 	Controller/Physics.cpp
 	Controller/BodyRigidPhysics.cpp
-	Controller/Body.cpp
-	Controller/BodyRigid.cpp
+	
 
 	Game/Scene.hpp
 	Game/TestScene.cpp

@@ -6,6 +6,8 @@
 #include "Model/GameObject/GameObject.hpp"
 #include "Model/GameObject/Item.hpp"
 #include "Model/GameObject/Water.hpp"
+#include "Model/GameObject/Body.hpp"
+#include "Model/GameObject/BodyRigid.hpp"
 
 class GameAssetFactory {
 public:

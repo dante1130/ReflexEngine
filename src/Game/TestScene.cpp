@@ -4,8 +4,8 @@
 #include "TestScene.hpp"
 #include "guiManager.hpp"
 #include "GameAssetFactory.hpp"
-#include "Controller/Body.hpp"
-#include "Controller/BodyRigid.hpp"
+#include "Model/GameObject/Body.hpp"
+#include "Model/GameObject/BodyRigid.hpp"
 
 TestScene::TestScene() {}
 
@@ -23,20 +23,22 @@ void TestScene::init() {
 	game_objects_.emplace_back(b);
 
 	BodyRigid* rb = new BodyRigid();
-	rb->createBR(0, 25, 0);
+	rb->rotation = glm::vec3(1, 0, 0);
+	rb->angle = -90;
+	rb->createBR(glm::vec3(0, 25, 0), rb->rotation, rb->angle);
 	rb->setType(2);
 	rb->enableGravity(true);
-	rb->addSphereCollider(glm::vec3(0, 0, 0), 1, 0.5, 0.5);
+	rb->addSphereCollider(glm::vec3(0, 0, 0), 2, 0.5, 0.5);
 	game_objects_.emplace_back(rb);
 
 	game_objects_.emplace_back(gaf.create("scripts/Cat.lua"));
 
 	rb = new BodyRigid();
-	rb->createBR(0, 0, 0);
+	rb->createBR(glm::vec3(0, 0, 0), rb->rotation, rb->angle);
 	rb->position = glm::vec3(0, 0, 0);
 	rb->setType(1);
 	rb->enableGravity(false);
-	rb->addSphereCollider(glm::vec3(0, 0, 0), 1, 0.5, 0.5);
+	rb->addSphereCollider(glm::vec3(0, 0, 0), 2, 0.5, 0.5);
 	game_objects_.emplace_back(rb);
 
 	b = new Body();

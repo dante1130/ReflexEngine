@@ -3,6 +3,7 @@
 #include <reactphysics3d/reactphysics3d.h>
 #include "Physics.hpp"
 #include <glm/glm.hpp>
+#include <math.h>
 
 class BodyRigidPhysics {
 public:
@@ -18,17 +19,19 @@ public:
 
 	/**
 	 * @brief	Creates rigid body.
-	 * @param	pos	- Position of the body
+	 * @param	pos			- Position of the body
+	 * @param	rotation	- axis of rotation of the body
+	 * @param	angle		- angle around axis of rotation
 	 * @reutrn	Void
 	 *
 	 * @pre		Physics world exists
 	 * @post	Rigid body initialised
 	 */
-	void init(glm::vec3 pos);
+	void init(glm::vec3 pos, glm::vec3 rotation, float angle);
 
 	/**
 	 * @brief	Set type of rigid body
-	 * @param	type	- type of body. 1 = static, 2 = kinematic, 3 = dynamic
+	 * @param	type	- type of body. 0 = static, 1 = kinematic, 2 = dynamic
 	 * @return	Void
 	 *
 	 * @pre		Rigid body exists
