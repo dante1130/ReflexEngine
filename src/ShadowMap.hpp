@@ -33,7 +33,7 @@ public:
 	/**
 	 * @brief Enable the shadow map given a texture unit.
 	 *
-	 * @param textureUnit
+	 * @param textureUnit The texture unit
 	 */
 	virtual void Read(GLenum textureUnit);
 

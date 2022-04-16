@@ -36,7 +36,9 @@ target_sources(${PROJECT_NAME} PRIVATE
 	View/Renderer/OpenGL/OpenGL.cpp
 
 	Controller/ReflexEngine/ReflexEngine.cpp
-	Controller/TextureManager.cpp
+	Controller/ResourceManager/ResourceManager.cpp
+	Controller/ResourceManager/TextureManager.cpp
+	Controller/ResourceManager/ModelManager.cpp
 	Controller/LuaManager.cpp
 	Controller/Physics.cpp
 	Controller/BodyRigidPhysics.cpp

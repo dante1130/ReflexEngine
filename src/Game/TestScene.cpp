@@ -15,7 +15,7 @@ void TestScene::init() {
 	sol::state& lua = LuaManager::get_instance().get_state();
 	MaterialLuaController::CreateLuaAccess();
 	lua.script_file("scripts/_Materials.lua");
-
+	//
 	lua.set_function("addGameObject", &TestScene::addGameObject, this);
 	lua.script_file("scripts/_MasterCreation.lua");
 	std::cout << "Number of objects loaded: " << game_objects_.size()

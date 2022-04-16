@@ -13,7 +13,7 @@
 #include "guiManager.hpp"
 #include "GameAssetFactory.hpp"
 #include "Controller/MaterialLuaController.hpp"
-#include "Controller/TextureManager.hpp"
+#include "Controller/ResourceManager/ResourceManager.hpp"
 
 /**
  * @class TestScene
