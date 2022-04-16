@@ -1,12 +1,10 @@
 #include "TextureManager.hpp"
 
-TextureManager::TextureManager() {}
-
 bool TextureManager::load_texture_rgb(const std::string& texture_name,
                                       const std::string& file_path) {
 	Texture* texture = new Texture(file_path.c_str());
 
-	if (texture->LoadTextureA()) {
+	if (texture->LoadTexture()) {
 		texture_hashmap[texture_name] = texture;
 		return true;
 	}
