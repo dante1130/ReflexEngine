@@ -1,20 +1,32 @@
-#include "Item.hpp"
+#include "PhysicsObject.hpp"
 
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 
-Item::Item(const std::string& model_path, GLfloat shininess,
-           GLfloat spec_intensity) {
+PhysicsObject::PhysicsObject() {}
+
+void PhysicsObject::initModel(const std::string& model_path, GLfloat shininess,
+                              GLfloat spec_intensity) {
 	model_.LoadModel(model_path);
 	material_ = Reflex::Material(shininess, spec_intensity);
 }
 
-void Item::add_draw_call() {
+void PhysicsObject::initRB(glm::vec3 pos, glm::vec3 rotation, float angle) {
+	rb.init(pos, rotation, angle);
+}
+
+void PhysicsObject::update(float delta_time) {
+	position = rb.getPosition();
+	rotation = rb.getRotation();
+	angle = rb.getAngle();
+}
+
+void PhysicsObject::add_draw_call() {
 	DrawCall draw_call = [=](std::shared_ptr<Shader> shader) { draw(shader); };
 
 	ReflexEngine::get_instance().renderer_.add_draw_call(draw_call);
 }
 
-void Item::draw(std::shared_ptr<Shader> shader) {
+void PhysicsObject::draw(std::shared_ptr<Shader> shader) {
 	auto default_shader = ReflexEngine::get_instance().renderer_.get_shader();
 
 	glm::mat4 model(1.0f);

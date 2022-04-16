@@ -52,5 +52,5 @@ private:
 	/// The model of the item.
 	Model model_ = {};
 	/// The material of the item.
-	Material material_ = {};
+	Reflex::Material material_ = {};
 };

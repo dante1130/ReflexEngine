@@ -16,7 +16,7 @@ public:
 		glm::vec3 rotation = {0.0f, 1.0f, 0.0f};
 		/// The scale of the game object.
 		glm::vec3 scale = {1.0f, 1.0f, 1.0f};
-		float angle = 0;
+		float angle = 0.01;
 	};
 
 	/**

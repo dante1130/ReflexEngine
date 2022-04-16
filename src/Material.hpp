@@ -7,6 +7,7 @@
  * @brief A material to apply to an object of how shiny and how intense the
  * specular lighting should be.
  */
+namespace Reflex {
 class Material {
 public:
 	/**
@@ -36,3 +37,4 @@ private:
 	/// The shininess.
 	GLfloat m_shininess;
 };
+}  // namespace Reflex

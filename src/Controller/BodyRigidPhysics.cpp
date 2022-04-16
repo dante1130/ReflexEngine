@@ -21,7 +21,6 @@ void BodyRigidPhysics::init(glm::vec3 pos, glm::vec3 rotation, float angle) {
 	o.setAllValues(x / normal, y / normal, z / normal, w / normal);
 	Transform t(position, o);
 	rb = Physics::getPhysicsWorld()->createRigidBody(t);
-
 	setType(2);
 
 	created = true;
@@ -60,9 +59,19 @@ void BodyRigidPhysics::addForce(glm::vec3 force) {
 	rb->applyLocalForceAtCenterOfMass(f);
 }
 
+void BodyRigidPhysics::setLinearVelocity(glm::vec3 velocity) {
+	Vector3 vel(velocity.x, velocity.y, velocity.z);
+	rb->setLinearVelocity(vel);
+}
+
 void BodyRigidPhysics::addTorque(glm::vec3 torque) {
 	Vector3 t(torque.x, torque.y, torque.z);
 	rb->applyLocalTorque(t);
+}
+
+void BodyRigidPhysics::setAngularVelocity(glm::vec3 velocity) {
+	Vector3 vel(velocity.x, velocity.y, velocity.z);
+	rb->setAngularVelocity(vel);
 }
 
 glm::vec3 BodyRigidPhysics::getPosition() {
@@ -90,6 +99,16 @@ float BodyRigidPhysics::getAngle() {
 	q.getRotationAngleAxis(angle, v);
 	angle = angle * 180 / PI_RP3D;
 	return angle;
+}
+
+glm::vec3 BodyRigidPhysics::getLinearVelocity() {
+	Vector3 v3 = rb->getLinearVelocity();
+	return glm::vec3(v3.x, v3.y, v3.z);
+}
+
+glm::vec3 BodyRigidPhysics::getAngularVelocity() {
+	Vector3 v3 = rb->getAngularVelocity();
+	return glm::vec3(v3.x, v3.y, v3.z);
 }
 
 BodyRigidPhysics::~BodyRigidPhysics() {

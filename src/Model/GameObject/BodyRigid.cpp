@@ -22,7 +22,15 @@ void BodyRigid::setIfBodyCanSleep(bool val) { rb.setIfBodyCanSleep(val); }
 
 void BodyRigid::addForce(glm::vec3 force) { rb.addForce(force); }
 
+void BodyRigid::setLinearVelocity(glm::vec3 velocity) {
+	rb.setLinearVelocity(velocity);
+}
+
 void BodyRigid::addTorque(glm::vec3 torque) { rb.addTorque(torque); }
+
+void BodyRigid::setAngularVelocity(glm::vec3 velocity) {
+	rb.setAngularVelocity(velocity);
+}
 
 void BodyRigid::update(float delta_time) {
 	position = rb.getPosition();
@@ -35,6 +43,10 @@ glm::vec3 BodyRigid::getPosition() { return rb.getPosition(); }
 glm::vec3 BodyRigid::getRotation() { return rb.getRotation(); }
 
 float BodyRigid::getAngle() { return rb.getAngle(); }
+
+glm::vec3 BodyRigid::getLinearVelocity() { return rb.getLinearVelocity(); }
+
+glm::vec3 BodyRigid::getAngularVelocity() { return rb.getAngularVelocity(); }
 
 BodyRigid::~BodyRigid() { rb.~BodyRigidPhysics(); }
 

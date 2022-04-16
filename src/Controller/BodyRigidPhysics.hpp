@@ -90,6 +90,16 @@ public:
 	void addForce(glm::vec3 force);
 
 	/**
+	 * @brief	set force to the object
+	 * @param	velocity	- velocity to set
+	 * @return	Void
+	 *
+	 * @pre		Rigid body exists
+	 * @post	Force added
+	 */
+	void setLinearVelocity(glm::vec3 velocity);
+
+	/**
 	 * @brief	Adds torque to the object
 	 * @param	torque	- Torque to add
 	 * @return	Void
@@ -98,6 +108,16 @@ public:
 	 * @post	Torque added
 	 */
 	void addTorque(glm::vec3 torque);
+
+	/**
+	 * @brief	set torque to the object
+	 * @param	velocity	- velocity to set
+	 * @return	Void
+	 *
+	 * @pre		Rigid body exists
+	 * @post	Torque added
+	 */
+	void setAngularVelocity(glm::vec3 velocity);
 
 	/**
 	 * @brief	Gets the position vector
@@ -128,6 +148,26 @@ public:
 	 * @post	Angle retrieved
 	 */
 	float getAngle();
+
+	/**
+	 * @brief	Gets the linear velocity of the rigid body
+	 * @param	No param
+	 * @return	glm::vec3	- linear velocity
+	 *
+	 * @pre		Rigid body exists
+	 * @post	linear velocity retrieved
+	 */
+	glm::vec3 getLinearVelocity();
+
+	/**
+	 * @brief	Gets the angular velocity of the rigid body
+	 * @param	No param
+	 * @return	glm::vec3	- angular velocity
+	 *
+	 * @pre		Rigid body exists
+	 * @post	angular velocity retrieved
+	 */
+	glm::vec3 getAngularVelocity();
 
 	/**
 	 * @brief	Adds a box ciller to a rigid body

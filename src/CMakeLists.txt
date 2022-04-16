@@ -31,6 +31,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Model/GameObject/Water.cpp
 	Model/GameObject/Body.cpp
 	Model/GameObject/BodyRigid.cpp
+	Model/GameObject/PhysicsObject.cpp
 
 	View/Renderer/OpenGL/OpenGL.cpp
 
