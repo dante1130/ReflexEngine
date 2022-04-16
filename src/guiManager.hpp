@@ -71,17 +71,6 @@ void shutdown();
 void begin(const std::string title);
 
 /**
- * @brief	Begins a window. Sandwich inside gui window methods between begin
- * and end.
- * @param	title	- The title of the window
- * @return	Void
- *
- * @pre		rui running
- * @post	window created
- */
-void begin(const char* title);
-
-/**
  * @brief	Ends the window. Sandwich inside gui window methods between begin
  * and end.
  * @param	No param
@@ -130,16 +119,6 @@ void setWindowSize(int xSize, int ySize, int constraint);
 void text(const std::string text);
 
 /**
- * @brief	Displays text in the gui window
- * @param	*text	- The text you want to display
- * @return	Void
- *
- * @pre		window created
- * @post	module added
- */
-void text(const char* text);
-
-/**
  * @brief	A checkbox which changes a boolean variable between true & false
  * @param	name	- The name of the value you are changing
  * @param	bool	- The boolean which is being changed
@@ -149,17 +128,6 @@ void text(const char* text);
  * @post	module added
  */
 void checkbox(const std::string name, bool* option);
-
-/**
- * @brief	A checkbox which changes a boolean variable between true & false
- * @param	*name	- The name of the value you are changing
- * @param	bool	- The boolean which is being changed
- * @return	Void
- *
- * @pre		window created
- * @post	module added
- */
-void checkbox(const char* name, bool* option);
 
 /**
  * @brief	A slider which changes a float variable between min & max
@@ -175,19 +143,6 @@ void checkbox(const char* name, bool* option);
 void sliderFloat(const std::string name, float* value, float min, float max);
 
 /**
- * @brief	A slider which changes a float variable between min & max
- * @param	*name	- The name of the value you are changing
- * @param	*value	- The value being changed
- * @param	min		- The minimum value of the value
- * @param	max		- The maximum value of the value
- * @return	Void
- *
- * @pre		window created
- * @post	module added
- */
-void sliderFloat(const char* name, float* value, float min, float max);
-
-/**
  * @brief	A slider which changes an integer variable between min & max
  * @param	name	- The name of the value you are changing
  * @param	*value	- The value being changed
@@ -199,19 +154,6 @@ void sliderFloat(const char* name, float* value, float min, float max);
  * @post	module added
  */
 void sliderInt(const std::string name, int* value, int min, int max);
-
-/**
- * @brief	A slider which changes an integer variable between min & max
- * @param	*name	- The name of the value you are changing
- * @param	*value	- The value being changed
- * @param	min		- The minimum value of the value
- * @param	max		- The maximum value of the value
- * @return	Void
- *
- * @pre		window created
- * @post	module added
- */
-void sliderInt(const char* name, int* value, int min, int max);
 
 /**
  * @brief	A slider which changes an angle variable between min & max
@@ -227,19 +169,6 @@ void sliderInt(const char* name, int* value, int min, int max);
 void sliderAngle(const std::string name, float* angle, float min, float max);
 
 /**
- * @brief	A slider which changes an angle variable between min & max
- * @param	*name	- The name of the value you are changing
- * @param	*angle	- The angle you want to change
- * @param	min		- The minimum angle
- * @param	max		- The maximum angle
- * @return	Void
- *
- * @pre		window created
- * @post	module added
- */
-void sliderAngle(const char* name, float* angle, float min, float max);
-
-/**
  * @brief	Can change values independently or use a colour picker
  * @param	name		- The name of the value you are changing
  * @param	colour[3]	- Float of 3 different variables
@@ -249,17 +178,6 @@ void sliderAngle(const char* name, float* angle, float min, float max);
  * @post	module added
  */
 void colourEdit3(const std::string name, float colour[3]);
-
-/**
- * @brief	Can change values independently or use a colour picker
- * @param	*name		- The name of the value you are changing
- * @param	colour[3]	- Float of 3 different variables
- * @return	Void
- *
- * @pre		window created
- * @post	module added
- */
-void colourEdit3(const char* name, float colour[3]);
 
 /**
  * @brief	Can change values independently or use a colour picker
@@ -273,17 +191,6 @@ void colourEdit3(const char* name, float colour[3]);
 void colourEdit4(const std::string name, float colour[4]);
 
 /**
- * @brief	Can change values independently or use a colour picker
- * @param	*name		- The name of the value you are changing
- * @param	colour[4]	- Float of 4 different variables
- * @return	Void
- *
- * @pre		window created
- * @post	module added
- */
-void colourEdit4(const char* name, float colour[4]);
-
-/**
  * @brief	Creates a button
  * @param	name	- The name of the button
  * @return	bool	- If it has been pressed
@@ -292,16 +199,6 @@ void colourEdit4(const char* name, float colour[4]);
  * @post	module added
  */
 bool button(const std::string name);
-
-/**
- * @brief	Creates a button
- * @param	*name	- The name of the button
- * @return	bool	- If it has been pressed
- *
- * @pre		window created
- * @post	module added
- */
-bool button(const char* name);
 
 /**
  * @brief	Creates a button
@@ -316,18 +213,6 @@ bool button(const char* name);
 bool button(const std::string name, float xSize, float ySize);
 
 /**
- * @brief	Creates a button
- * @param	*name	- The name of the button
- * @param	xSize	- The size of the button in the x direction
- * @param	ySize	- The size of the button in the y direction
- * @return	bool	- If it has been pressed
- *
- * @pre		window created
- * @post	module added
- */
-bool button(const char* name, float xSize, float ySize);
-
-/**
  * @brief	User can enter text into box and submit it with enter
  * @param	name	- The name of the input text
  * @param	*buffer	- Where to store the text input
@@ -340,18 +225,6 @@ bool button(const char* name, float xSize, float ySize);
 bool inputText(const std::string name, char* buffer, int size);
 
 /**
- * @brief	User can enter text into box and submit it with enter
- * @param	*name	- The name of the input text
- * @param	*buffer	- Where to store the text input
- * @param	size	- The size of the buffer
- * @return	bool	- If it contains a character
- *
- * @pre		window created
- * @post	module added
- */
-bool inputText(const char* name, char* buffer, int size);
-
-/**
  * @brief	Creates a collapsing header (essentially a checkbox)
  * @param	name	- The name of the collapsing header
  * @return	bool	- If it is open or closed
@@ -360,16 +233,6 @@ bool inputText(const char* name, char* buffer, int size);
  * @post	module added
  */
 bool collapsingHeader(const std::string name);
-
-/**
- * @brief	Creates a collapsing header (essentially a checkbox)
- * @param	*name	- The name of the collapsing header
- * @return	bool	- If it is open or closed
- *
- * @pre		window created
- * @post	module added
- */
-bool collapsingHeader(const char* name);
 
 /**
  * @brief	Creates a plot line
@@ -385,18 +248,6 @@ void plotLines(const std::string name, const float* values, int numOfEntries);
 
 /**
  * @brief	Creates a plot line
- * @param	*name			- The name to be displayed
- * @param	*values			- The list of values
- * @param	numOfEntries	- The number of values
- * @return	void
- *
- * @pre		window created
- * @post	module added
- */
-void plotLines(const char* name, const float* values, int numOfEntries);
-
-/**
- * @brief	Creates a plot line
  * @param	name			- The name to be displayed
  * @param	*values			- The list of values
  * @param	numOfEntries	- The number of values
@@ -408,21 +259,6 @@ void plotLines(const char* name, const float* values, int numOfEntries);
  * @post	module added
  */
 void plotLines(const std::string name, const float* values, int numOfEntries,
-               float xWindowSize, float yWindowSize);
-
-/**
- * @brief	Creates a plot line
- * @param	*name			- The name to be displayed
- * @param	*values			- The list of values
- * @param	numOfEntries	- The number of values
- * @param	xWindowSize		- Size of window in x direction
- * @param	yWindowSize		- Size of window in y direction
- * @return	void
- *
- * @pre		window created
- * @post	module added
- */
-void plotLines(const char* name, const float* values, int numOfEntries,
                float xWindowSize, float yWindowSize);
 
 /**
@@ -440,24 +276,6 @@ void plotLines(const char* name, const float* values, int numOfEntries,
  * @post	module added
  */
 void plotLines(const std::string name, const float* values, int numOfEntries,
-               float minVal, float maxVal, float xWindowSize,
-               float yWindowSize);
-
-/**
- * @brief	Creates a plot line
- * @param	*name			- The name to be displayed
- * @param	*values			- The list of values
- * @param	numOfEntries	- The number of values
- * @param	minVal			- The minimum value (where graph ends)
- * @param	maxVal			- The maximum value (where graph ends)
- * @param	xWindowSize		- Size of window in x direction
- * @param	yWindowSize		- Size of window in y direction
- * @return	void
- *
- * @pre		window created
- * @post	module added
- */
-void plotLines(const char* name, const float* values, int numOfEntries,
                float minVal, float maxVal, float xWindowSize,
                float yWindowSize);
 

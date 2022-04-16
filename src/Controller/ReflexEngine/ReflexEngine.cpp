@@ -1,6 +1,7 @@
 #include "ReflexEngine.hpp"
 
 #include "Game/TestScene.hpp"
+#include "guiManager.hpp"
 
 ReflexEngine::ReflexEngine() {
 	if (window_.Init() == 1) return;
@@ -25,13 +26,16 @@ void ReflexEngine::run() {
 		glfwPollEvents();
 
 		engine.renderer_.update_camera(engine.window_, delta_time);
+		gui::mainLoopStart();
 
 		engine.scenes_.top()->update(delta_time);
 		engine.scenes_.top()->add_draw_call();
 		engine.renderer_.draw();
 
+		gui::mainLoopEnd();
 		engine.window_.SwapBuffers();
 	}
+	gui::shutdown();
 }
 
 ReflexEngine& ReflexEngine::get_instance() {
