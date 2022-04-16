@@ -6,6 +6,7 @@
 #include <imgui_impl_opengl3.h>
 
 #include <string>
+#include <map>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -119,7 +120,8 @@ void setWindowSize(int xSize, int ySize, int constraint);
 void text(const std::string text);
 
 /**
- * @brief	A checkbox which changes a boolean variable between true & false
+ * @brief	A checkbox which changes a boolean variable between true & false.
+ * Not lua ready
  * @param	name	- The name of the value you are changing
  * @param	bool	- The boolean which is being changed
  * @return	Void
@@ -128,6 +130,18 @@ void text(const std::string text);
  * @post	module added
  */
 void checkbox(const std::string name, bool* option);
+
+/**
+ * @brief	A checkbox which changes a boolean variable between true & false.
+ * Lua ready
+ * @param	name	- The name of the value you are changing
+ * @param	state	- current state of checkbox
+ * @return	bool	- Current checkbox state
+ *
+ * @pre		window created
+ * @post	module added
+ */
+bool luaCheckBox(const std::string name, bool state);
 
 /**
  * @brief	A slider which changes a float variable between min & max
@@ -201,19 +215,19 @@ void colourEdit4(const std::string name, float colour[4]);
 bool button(const std::string name);
 
 /**
- * @brief	Creates a button
- * @param	name	- The name of the button
- * @param	xSize	- The size of the button in the x direction
- * @param	ySize	- The size of the button in the y direction
- * @return	bool	- If it has been pressed
+ * @brief	User can enter text into box and submit it with enter. Lua script
+ * ready
+ * @param	name		- The name of the input text
+ * @return	std::stirng	- String of the current buffer
  *
  * @pre		window created
  * @post	module added
  */
-bool button(const std::string name, float xSize, float ySize);
+std::string luaInputText(const std::string name);
 
 /**
- * @brief	User can enter text into box and submit it with enter
+ * @brief	User can enter text into box and submit it with enter. Not lua
+ * script ready
  * @param	name	- The name of the input text
  * @param	*buffer	- Where to store the text input
  * @param	size	- The size of the buffer

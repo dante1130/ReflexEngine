@@ -14,4 +14,5 @@ namespace guiLuaAccess {
  *
  */
 void exposeGui();
+
 }  // namespace guiLuaAccess

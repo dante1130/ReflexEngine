@@ -2,7 +2,7 @@
 
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 #include "TestScene.hpp"
-
+#include "guiManager.hpp"
 TestScene::TestScene() {}
 
 GameAssetFactory gaf;
@@ -22,6 +22,7 @@ void TestScene::init() {
 	          << std::endl;
 
 	gui::init(ReflexEngine::get_instance().window_.getWindow(), "#version 410");
+	guiLuaAccess::exposeGui();
 }
 
 void TestScene::addGameObject(std::string luaScript) {
@@ -40,6 +41,10 @@ void TestScene::add_draw_call() {
 }
 
 void TestScene::update(float delta_time) {
+	// gui::begin("IMPORTANT");
+	// gui::text("There once was a man named Daniel");
+	// gui::end();
+
 	for (auto& game_object : game_objects_) {
 		game_object->update(delta_time);
 	}
