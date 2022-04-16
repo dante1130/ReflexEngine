@@ -2,11 +2,6 @@
 
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 #include "TestScene.hpp"
-#include "guiManager.hpp"
-#include "GameAssetFactory.hpp"
-#include "Model/GameObject/Body.hpp"
-#include "Model/GameObject/BodyRigid.hpp"
-#include "Model/GameObject/PhysicsObject.hpp"
 
 TestScene::TestScene() {}
 
@@ -18,6 +13,9 @@ void TestScene::init() {
 	                     glm::vec3(-10.0f, -12.0f, 18.5f), 0.9f);
 
 	sol::state& lua = LuaManager::get_instance().get_state();
+	MaterialLuaController::CreateLuaAccess();
+	lua.script_file("scripts/_Materials.lua");
+
 	lua.set_function("addGameObject", &TestScene::addGameObject, TestScene());
 	lua.script_file("scripts/_MasterCreation.lua");
 	for (int count = 0; count < go.size(); count++) {

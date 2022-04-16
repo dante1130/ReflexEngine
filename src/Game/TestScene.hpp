@@ -8,9 +8,12 @@
 #include "Scene.hpp"
 #include "Texture.hpp"
 #include "Material.hpp"
-#include "Model/GameObject/Item.hpp"
-#include "Model/GameObject/Water.hpp"
+#include "Model/GameObject/GameObject.hpp"
 #include "DirectionalLight.hpp"
+#include "guiManager.hpp"
+#include "GameAssetFactory.hpp"
+#include "Controller/MaterialLuaController.hpp"
+#include "Controller/TextureManager.hpp"
 
 /**
  * @class TestScene

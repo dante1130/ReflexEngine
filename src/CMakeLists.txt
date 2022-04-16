@@ -40,6 +40,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/LuaManager.cpp
 	Controller/Physics.cpp
 	Controller/BodyRigidPhysics.cpp
+	Controller/MaterialLuaController.cpp
 	
 
 	Game/Scene.hpp
