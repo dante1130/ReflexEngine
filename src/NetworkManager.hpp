@@ -9,6 +9,8 @@
 #define SERVER_PORT 60000
 
 //TODO: adjust so can be written for the game asset factory
+//      Maybe has it so that all of this (minus GetPacketIdentifier and HandleMessage) can be accessed from Lua?
+//      So that anything gui-related written in Lua can easily access the NetworkManager.
 namespace network 
 {
 	char message[512];
@@ -23,9 +25,25 @@ namespace network
 	RakNet::RakPeerInterface *peer;
 
 	RakNet::Packet *packet;
-    ////METHOD NEEDED FOR NETWORK TO OPERATE FROM THE CLIENT////
+
+    ////METHOD NEEDED FOR NETWORK TO OPERATE////
     /**
      * @brief	Initialises Network
+     *
+     * @param	userName - The username that the client will be using. If this is
+     * null, a default name of "Client" will be used. Also sets isServer to
+     * "false".
+     *
+     * @return	Void
+     *
+     * @pre		Nonne
+     * @post	network instance initialised
+     */
+    void InitNetwork();
+
+    ////METHOD NEEDED FOR NETWORK TO OPERATE FROM THE CLIENT////
+    /**
+     * @brief	Initialises Network for client. Also handles client username
      *
      * @param	userName - The username that the client will be using. If this is null,
      * a default name of "Client" will be used. Also sets isServer to "false".
@@ -47,6 +65,7 @@ namespace network
      * @post	Attempts connection to provided server IP using the port number 60000
      */
 	bool ConnectClient(char *serverIP);
+
     ////METHOD NEEDED FOR NETWORK TO OPERATE FROM THE SERVER////
     /**
      * @brief	Initialises and begins a server session. Running on the network port number 60000. Also sets isServer to "true".
@@ -88,6 +107,7 @@ namespace network
      * @post	Returns the received message to another part of the game engine (notably the gui interface)
      */
 	char *ReceiveMessage();
+
     /**
      * @brief	Handles the message received and identifies it's message type.
      * @param	Raknet::Packet *packet - the packet of network data.
@@ -97,6 +117,7 @@ namespace network
      * @post	Returns the message based on the packet's ID
      */
 	char *HandleMessage(RakNet::Packet *packet);
+
     /**
      * @brief	Ends the current session.
      * @param	void
@@ -106,6 +127,7 @@ namespace network
      * @post	Ends either the connection to the server or the server itself (depending on the state of the isServer boolean)
      */
 	void DestroySession();
+
     /**
      * @brief	Gets the packet identifier and returns it.
      * @param	Raknet::Packet *packet - the packet of network data.

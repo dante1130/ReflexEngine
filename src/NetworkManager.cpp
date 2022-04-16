@@ -1,7 +1,10 @@
 #include "NetworkManager.hpp"
 
+void network::InitNetwork() { 
+	peer = RakNet::RakPeerInterface::GetInstance(); 
+}
+
 void network::SetupClient(std::string userName) {
-	peer = RakNet::RakPeerInterface::GetInstance();
 	RakNet::SocketDescriptor sd;
 	peer->Startup(1, &sd, 1);
 	isServer = false;
@@ -22,7 +25,6 @@ bool network::ConnectClient(char* serverIP) {
 }
 
 void network::SetupServer() {
-	peer = RakNet::RakPeerInterface::GetInstance();
 	RakNet::SocketDescriptor sd(SERVER_PORT, 0);
 	peer->Startup(MAX_CLIENTS, &sd, 1);
 	isServer = true;
