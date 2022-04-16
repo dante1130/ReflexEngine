@@ -29,12 +29,19 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Model/GameObject/GameObject.hpp
 	Model/GameObject/Item.cpp
 	Model/GameObject/Water.cpp
-	
+	Model/GameObject/Body.cpp
+	Model/GameObject/BodyRigid.cpp
+	Model/GameObject/PhysicsObject.cpp
+
 	View/Renderer/OpenGL/OpenGL.cpp
 
 	Controller/ReflexEngine/ReflexEngine.cpp
 	Controller/TextureManager.cpp
 	Controller/LuaManager.cpp
+	Controller/Physics.cpp
+	Controller/BodyRigidPhysics.cpp
+	Controller/MaterialLuaController.cpp
+	
 
 	Game/Scene.hpp
 	Game/TestScene.cpp

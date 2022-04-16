@@ -11,12 +11,12 @@ class GameObject {
 public:
 	struct {
 		/// The position of the game object.
-		glm::vec3 position = {0, 0, 0};
+		glm::vec3 position = {0.0f, 0.0f, 0.0f};
 		/// The rotation of the game object.
-		glm::vec3 rotation = {0, 1, 0};
+		glm::vec3 rotation = {0.0f, 1.0f, 0.0f};
 		/// The scale of the game object.
-		glm::vec3 scale = {1, 1, 1};
-		float angle = 0;
+		glm::vec3 scale = {1.0f, 1.0f, 1.0f};
+		float angle = 0.01;
 	};
 
 	/**

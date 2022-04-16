@@ -5,7 +5,7 @@
 Item::Item(const std::string& model_path, GLfloat shininess,
            GLfloat spec_intensity) {
 	model_.LoadModel(model_path);
-	material_ = Material(shininess, spec_intensity);
+	material_ = Reflex::Material(shininess, spec_intensity);
 }
 
 void Item::add_draw_call() {

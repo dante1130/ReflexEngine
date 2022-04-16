@@ -6,6 +6,9 @@
 #include "Model/GameObject/GameObject.hpp"
 #include "Model/GameObject/Item.hpp"
 #include "Model/GameObject/Water.hpp"
+#include "Model/GameObject/Body.hpp"
+#include "Model/GameObject/BodyRigid.hpp"
+#include "Model/GameObject/PhysicsObject.hpp"
 
 class GameAssetFactory {
 public:
@@ -102,4 +105,33 @@ private:
 	 * @post	water stored
 	 */
 	Water* loadWater(std::string luaScript);
+
+	/**
+	 * @brief	Loads in a body object from a lua script
+	 * @param	luaScript	- The lua script to load the body data from
+	 * @return	*body		- Created body object
+	 *
+	 * @pre		body varaible exists
+	 * @post	body stored
+	 */
+	Body* loadBody(std::string luaScript);
+
+	/**
+	 * @brief	Loads in a physics object object from a lua script
+	 * @param	luaScript	- The lua script to load the physics object data
+	 * from
+	 * @return	*body		- Created physics object object
+	 *
+	 * @pre		physics object varaible exists
+	 * @post	physics object stored
+	 */
+	PhysicsObject* loadPhysicsObject(std::string luaScript);
+
+	void loadExtraPhysicObjectSettings(PhysicsObject* po, sol::state& lua);
+
+	void loadBoxCollider(int count, PhysicsObject* po, sol::state& lua);
+
+	void loadSphereCollider(int count, PhysicsObject* po, sol::state& lua);
+
+	void loadCapsuleCollider(int count, PhysicsObject* po, sol::state& lua);
 };
