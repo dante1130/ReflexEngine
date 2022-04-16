@@ -5,7 +5,7 @@
 
 TestScene::TestScene() {}
 
-std::vector<std::shared_ptr<GameObject>> go;
+GameAssetFactory gaf;
 
 void TestScene::init() {
 	directional_light_ =
@@ -16,11 +16,8 @@ void TestScene::init() {
 	MaterialLuaController::CreateLuaAccess();
 	lua.script_file("scripts/_Materials.lua");
 
-	lua.set_function("addGameObject", &TestScene::addGameObject, TestScene());
+	lua.set_function("addGameObject", &TestScene::addGameObject, this);
 	lua.script_file("scripts/_MasterCreation.lua");
-	for (int count = 0; count < go.size(); count++) {
-		game_objects_.emplace_back(go[count]);
-	}
 	std::cout << "Number of objects loaded: " << game_objects_.size()
 	          << std::endl;
 
@@ -29,8 +26,7 @@ void TestScene::init() {
 
 void TestScene::addGameObject(std::string luaScript) {
 	std::cout << "adding game object: " << luaScript << std::endl;
-	GameAssetFactory gaf;
-	go.emplace_back(gaf.create(luaScript));
+	game_objects_.emplace_back(gaf.create(luaScript));
 }
 
 void TestScene::add_draw_call() {
