@@ -2,8 +2,8 @@
 #define NETWORKMANAGER_H
 
 #include <string>
-#include <raknet/RakPeerInterface.h>
-#include <raknet/MessageIdentifiers.h>
+#include <RakPeerInterface.h>
+#include <MessageIdentifiers.h>
 
 #define MAX_CLIENTS 6
 #define SERVER_PORT 60000
