@@ -9,6 +9,7 @@
 #include "Model/GameObject/Body.hpp"
 #include "Model/GameObject/BodyRigid.hpp"
 #include "Model/GameObject/PhysicsObject.hpp"
+#include "Model/GameObject/ScriptableObject.hpp"
 
 class GameAssetFactory {
 public:
@@ -134,4 +135,6 @@ private:
 	void loadSphereCollider(int count, PhysicsObject* po, sol::state& lua);
 
 	void loadCapsuleCollider(int count, PhysicsObject* po, sol::state& lua);
+
+	ScriptableObject* loadScriptableObject(std::string luaScript);
 };

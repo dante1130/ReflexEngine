@@ -4,17 +4,25 @@ GameObject* GameAssetFactory::create(std::string fileName) {
 	if (fileName.length() == 0 || isLuaScript(fileName) == false) {
 		return NULL;
 	}
-	// GetType(fileName);
+
 	std::string type = getObjectType(fileName);
 
 	if (type == "Item") {
 		return loadItem(fileName);
 	} else if (type == "Water") {
 		return loadWater(fileName);
+	} else if (type == "Player") {
+		//
+		// return GameObjectLoader::player(fileName);
+	} else if (type == "NPC") {
+		//
+		// return GameObjectLoader::npc(fileName);
 	} else if (type == "Body") {
 		return loadBody(fileName);
 	} else if (type == "PhysicsObject") {
 		return loadPhysicsObject(fileName);
+	} else if (type == "ScriptableObject") {
+		return loadScriptableObject(fileName);
 	} else {
 		return NULL;
 	}
@@ -40,7 +48,7 @@ std::string GameAssetFactory::getObjectType(std::string luaScript) {
 	lua.script_file(luaScript);
 
 	std::string type = "N/A";
-	type = lua["type"];
+	type = lua["baseObject"]["type"];
 
 	return type;
 }
@@ -48,9 +56,9 @@ std::string GameAssetFactory::getObjectType(std::string luaScript) {
 glm::vec3 GameAssetFactory::loadBasePos(sol::state& lua) {
 	glm::vec3 pos;
 
-	pos.x = lua["xPos"];
-	pos.y = lua["yPos"];
-	pos.z = lua["zPos"];
+	pos.x = lua["baseObject"]["xPos"];
+	pos.y = lua["baseObject"]["yPos"];
+	pos.z = lua["baseObject"]["zPos"];
 
 	return pos;
 }
@@ -58,15 +66,15 @@ glm::vec3 GameAssetFactory::loadBasePos(sol::state& lua) {
 glm::vec3 GameAssetFactory::loadBaseRotation(sol::state& lua) {
 	glm::vec3 rotation;
 
-	rotation.x = lua["xRotation"];
-	rotation.y = lua["yRotation"];
-	rotation.z = lua["zRotation"];
+	rotation.x = lua["baseObject"]["xRotation"];
+	rotation.y = lua["baseObject"]["yRotation"];
+	rotation.z = lua["baseObject"]["zRotation"];
 
 	return rotation;
 }
 
 float GameAssetFactory::loadBaseAngle(sol::state& lua) {
-	float angle = lua["angle"];
+	float angle = lua["baseObject"]["angle"];
 
 	return angle;
 }
@@ -74,9 +82,9 @@ float GameAssetFactory::loadBaseAngle(sol::state& lua) {
 glm::vec3 GameAssetFactory::loadBaseScale(sol::state& lua) {
 	glm::vec3 scale;
 
-	scale.x = lua["xScale"];
-	scale.y = lua["yScale"];
-	scale.z = lua["zScale"];
+	scale.x = lua["baseObject"]["xScale"];
+	scale.y = lua["baseObject"]["yScale"];
+	scale.z = lua["baseObject"]["zScale"];
 
 	return scale;
 }
@@ -85,9 +93,9 @@ Item* GameAssetFactory::loadItem(std::string luaScript) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file(luaScript);
 
-	std::string model_path = lua["model_path"];
-	float shininess = lua["shininess"];
-	float spec_intensity = lua["spec_intensity"];
+	std::string model_path = lua["item"]["model_path"];
+	float shininess = lua["item"]["shininess"];
+	float spec_intensity = lua["item"]["spec_intensity"];
 
 	Item* item = new Item(model_path, shininess, spec_intensity);
 
@@ -111,7 +119,7 @@ Water* GameAssetFactory::loadWater(std::string luaScript) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file(luaScript);
 
-	std::string filePath = lua["texturePath"];
+	std::string filePath = lua["water"]["texturePath"];
 	Water* water = new Water(filePath);
 
 	glm::vec3 pos, rotation, scale, offMult, intensity;
@@ -127,14 +135,14 @@ Water* GameAssetFactory::loadWater(std::string luaScript) {
 	water->rotation = rotation;
 	water->angle = angle;
 
-	offMult.x = lua["xMult"];
-	offMult.y = lua["yMult"];
-	offMult.z = lua["zMult"];
+	offMult.x = lua["water"]["xMult"];
+	offMult.y = lua["water"]["yMult"];
+	offMult.z = lua["water"]["zMult"];
 	water->setOffsetMult(offMult);
 
-	intensity.x = lua["xIntensity"];
-	intensity.y = lua["yIntensity"];
-	intensity.z = lua["zIntensity"];
+	intensity.x = lua["water"]["xIntensity"];
+	intensity.y = lua["water"]["yIntensity"];
+	intensity.z = lua["water"]["zIntensity"];
 	water->setIntensity(intensity);
 
 	return water;
@@ -146,7 +154,7 @@ Body* GameAssetFactory::loadBody(std::string luaScript) {
 
 	Body* body = new Body();
 
-	int val = lua["creator"];
+	int val = lua["baseObject"]["creator"];
 	if (val == 0) {
 		body->setCreator(false);
 	}
@@ -162,35 +170,27 @@ PhysicsObject* GameAssetFactory::loadPhysicsObject(std::string luaScript) {
 
 	PhysicsObject* po = new PhysicsObject();
 
-	glm::vec3 pos, rotation, scale, offMult, intensity;
-	float angle;
+	glm::vec3 offMult, intensity;
 
-	pos = loadBasePos(lua);
-	scale = loadBaseScale(lua);
-	rotation = loadBaseRotation(lua);
-	angle = loadBaseAngle(lua);
+	po->position = loadBasePos(lua);
+	po->scale = loadBaseScale(lua);
+	po->rotation = loadBaseRotation(lua);
+	po->angle = loadBaseAngle(lua);
 
-	po->position = pos;
-	po->scale = scale;
-	po->rotation = rotation;
-	po->angle = angle;
-
-	std::string model_path = lua["model_path"];
-	float shininess = lua["shininess"];
-	float spec_intensity = lua["spec_intensity"];
+	std::string model_path = lua["baseObject"]["model_path"];
+	float shininess = lua["baseObject"]["shininess"];
+	float spec_intensity = lua["baseObject"]["spec_intensity"];
 
 	po->initModel(model_path, shininess, spec_intensity);
-	po->initRB(pos, rotation, angle);
+	po->initRB(po->position, po->rotation, po->angle);
 	po->addSphereCollider(glm::vec3(0, 0, 0), 2, 0.5, 0.5);
-
 	loadExtraPhysicObjectSettings(po, lua);
 
-	int size = lua["numOfColliders"];
+	int size = lua["baseObject"]["numOfColliders"];
 	std::string colliderType = "Box";
 
 	for (int count = 1; count <= size; count++) {
-		colliderType = lua["colliderType" + std::to_string(count)];
-
+		colliderType = lua["collider" + std::to_string(count)]["colliderType"];
 		if (colliderType == "Box") {
 			loadBoxCollider(count, po, lua);
 		} else if (colliderType == "Sphere") {
@@ -205,84 +205,109 @@ PhysicsObject* GameAssetFactory::loadPhysicsObject(std::string luaScript) {
 
 void GameAssetFactory::loadBoxCollider(int count, PhysicsObject* po,
                                        sol::state& lua) {
-	std::string pos = "Pos" + std::to_string(count);
+	std::string collider = "collider" + std::to_string(count);
 	glm::vec3 posV;
-	posV.x = lua['x' + pos];
-	posV.y = lua['y' + pos];
-	posV.z = lua['z' + pos];
+	posV.x = lua[collider]["xPos"];
+	posV.y = lua[collider]["yPos"];
+	posV.z = lua[collider]["zPos"];
 
-	std::string box = "Box" + std::to_string(count);
 	glm::vec3 boxV;
-	boxV.x = lua['x' + box];
-	boxV.y = lua['y' + box];
-	boxV.z = lua['z' + box];
+	boxV.x = lua[collider]["xBox"];
+	boxV.y = lua[collider]["yBox"];
+	boxV.z = lua[collider]["zBox"];
 
-	float bounciness = lua["bounciness" + std::to_string(count)];
-	float friction = lua["friction" + std::to_string(count)];
+	float bounciness = lua[collider]["bounciness"];
+	float friction = lua[collider]["friction"];
 
 	po->addBoxCollider(posV, boxV, bounciness, friction);
 }
 
 void GameAssetFactory::loadSphereCollider(int count, PhysicsObject* po,
                                           sol::state& lua) {
-	std::string pos = "Pos" + std::to_string(count);
+	std::string collider = "collider" + std::to_string(count);
 	glm::vec3 posV;
-	posV.x = lua['x' + pos];
-	posV.y = lua['y' + pos];
-	posV.z = lua['z' + pos];
+	posV.x = lua[collider]["xPos"];
+	posV.y = lua[collider]["yPos"];
+	posV.z = lua[collider]["zPos"];
 
-	float radius = lua["radius" + std::to_string(count)];
+	float radius = lua[collider]["radius"];
 
-	float bounciness = lua["bounciness" + std::to_string(count)];
-	float friction = lua["friction" + std::to_string(count)];
+	float bounciness = lua[collider]["bounciness"];
+	float friction = lua[collider]["friction"];
 
 	po->addSphereCollider(posV, radius, bounciness, friction);
 }
 
 void GameAssetFactory::loadCapsuleCollider(int count, PhysicsObject* po,
                                            sol::state& lua) {
-	std::string pos = "Pos" + std::to_string(count);
+	std::string collider = "collider" + std::to_string(count);
 	glm::vec3 posV;
-	posV.x = lua['x' + pos];
-	posV.y = lua['y' + pos];
-	posV.z = lua['z' + pos];
+	posV.x = lua[collider]["xPos"];
+	posV.y = lua[collider]["yPos"];
+	posV.z = lua[collider]["zPos"];
 
-	float radius = lua["radius" + std::to_string(count)];
-	float height = lua["height" + std::to_string(count)];
+	float radius = lua[collider]["radius"];
+	float height = lua[collider]["height"];
 
-	float bounciness = lua["bounciness" + std::to_string(count)];
-	float friction = lua["friction" + std::to_string(count)];
+	float bounciness = lua[collider]["bounciness"];
+	float friction = lua[collider]["friction"];
 
 	po->addCapsuleCollider(posV, radius, height, bounciness, friction);
 }
 
 void GameAssetFactory::loadExtraPhysicObjectSettings(PhysicsObject* po,
                                                      sol::state& lua) {
-	int type = lua["rbType"];
+	int type = lua["baseObject"]["rbType"];
 	po->setType(type);
-	int grav = lua["gravity"];
+	int grav = lua["baseObject"]["gravity"];
 	if (grav == 0) {
 		po->enableGravity(false);
 	}
 
 	glm::vec3 force, torque;
-	force.x = lua["xForce"];
-	force.y = lua["yForce"];
-	force.z = lua["zForce"];
+	force.x = lua["baseObject"]["xForce"];
+	force.y = lua["baseObject"]["yForce"];
+	force.z = lua["baseObject"]["zForce"];
 	po->setLinearVelocity(force);
 
-	torque.x = lua["xTorque"];
-	torque.y = lua["yTorque"];
-	torque.z = lua["zTorque"];
+	torque.x = lua["baseObject"]["xTorque"];
+	torque.y = lua["baseObject"]["yTorque"];
+	torque.z = lua["baseObject"]["zTorque"];
 	po->setAngularVelocity(torque);
 
-	float linDamp = lua["linearDamping"];
+	float linDamp = lua["baseObject"]["linearDamping"];
 	po->setLinearVelocityDamping(linDamp);
-	float angDamp = lua["angularDamping"];
+	float angDamp = lua["baseObject"]["angularDamping"];
 	po->setAngularVelocityDamping(angDamp);
 
-	int sleep = lua["sleep"];
+	int sleep = lua["baseObject"]["sleep"];
 	if (sleep == 0) {
 		po->setIfBodyCanSleep(false);
 	}
+}
+
+ScriptableObject* GameAssetFactory::loadScriptableObject(
+    std::string luaScript) {
+	sol::state& lua = LuaManager::get_instance().get_state();
+	lua.script_file(luaScript);
+
+	glm::vec3 pos, scale, rotation;
+	float angle;
+
+	pos = loadBasePos(lua);
+	scale = loadBaseScale(lua);
+	rotation = loadBaseRotation(lua);
+	angle = loadBaseAngle(lua);
+
+	std::string script;
+	script = lua["script"];
+
+	ScriptableObject* so = new ScriptableObject(script);
+
+	so->position = pos;
+	so->scale = scale;
+	so->rotation = rotation;
+	so->angle = angle;
+
+	return so;
 }
