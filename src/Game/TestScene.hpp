@@ -29,6 +29,16 @@ public:
 	void init() override;
 
 	/**
+	 * @brief	Adds a game object
+	 * @param	No param
+	 * @return	Void
+	 *
+	 * @pre	Nothing
+	 * @post	Object adde
+	 */
+	void addGameObject(std::string luaScript) override;
+
+	/**
 	 * @brief The update loop.
 	 *
 	 * @param delta_time

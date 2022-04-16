@@ -1,2 +1,6 @@
-create("scripts/Cat.lua")
-create("scripts/Water.lua")
+addGameObject("scripts/creator.lua")
+addGameObject("scripts/Cat.lua")
+addGameObject("scripts/Water.lua")
+addGameObject("scripts/CatPhysics.lua")
+addGameObject("scripts/CatPhysics2.lua")
+addGameObject("scripts/destroyer.lua")

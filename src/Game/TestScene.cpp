@@ -10,20 +10,29 @@
 
 TestScene::TestScene() {}
 
+std::vector<std::shared_ptr<GameObject>> go;
+
 void TestScene::init() {
 	directional_light_ =
 	    DirectionalLight(2048, 2048, glm::vec3(1.0f, 0.53f, 0.3f), 1.0f,
 	                     glm::vec3(-10.0f, -12.0f, 18.5f), 0.9f);
 
-	GameAssetFactory gaf;
-	game_objects_.emplace_back(gaf.create("scripts/creator.lua"));
-	game_objects_.emplace_back(gaf.create("scripts/Cat.lua"));
-	game_objects_.emplace_back(gaf.create("scripts/Water.lua"));
-	game_objects_.emplace_back(gaf.create("scripts/CatPhysics.lua"));
-	game_objects_.emplace_back(gaf.create("scripts/CatPhysics2.lua"));
-	game_objects_.emplace_back(gaf.create("scripts/destroyer.lua"));
+	sol::state& lua = LuaManager::get_instance().get_state();
+	lua.set_function("addGameObject", &TestScene::addGameObject, TestScene());
+	lua.script_file("scripts/_MasterCreation.lua");
+	for (int count = 0; count < go.size(); count++) {
+		game_objects_.emplace_back(go[count]);
+	}
+	std::cout << "Number of objects loaded: " << game_objects_.size()
+	          << std::endl;
 
 	gui::init(ReflexEngine::get_instance().window_.getWindow(), "#version 410");
+}
+
+void TestScene::addGameObject(std::string luaScript) {
+	std::cout << "adding game object: " << luaScript << std::endl;
+	GameAssetFactory gaf;
+	go.emplace_back(gaf.create(luaScript));
 }
 
 void TestScene::add_draw_call() {

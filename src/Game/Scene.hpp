@@ -17,6 +17,16 @@ public:
 	virtual void init() = 0;
 
 	/**
+	 * @brief	Adds a game object
+	 * @param	No param
+	 * @return	Void
+	 *
+	 * @pre	Nothing
+	 * @post	Object adde
+	 */
+	virtual void addGameObject(std::string luaScript) = 0;
+
+	/**
 	 * @brief The update loop of the scene.
 	 *
 	 * @param delta_time
