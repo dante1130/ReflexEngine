@@ -27,12 +27,12 @@ public:
 	 *
 	 * @param fileName
 	 */
-	void LoadModel(const std::string& fileName);
+	bool LoadModel(const std::string& fileName);
 
 	/**
 	 * @brief Renders the model.
 	 */
-	void RenderModel();
+	void RenderModel() const;
 
 	/**
 	 * @brief Clears the model.

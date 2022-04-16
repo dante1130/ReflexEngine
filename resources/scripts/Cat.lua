@@ -1,7 +1,7 @@
 type = "Item"
 
-xPos = 0
-yPos = -2
+xPos = 15
+yPos = 2.5
 zPos = 4
 
 xRotation = 1

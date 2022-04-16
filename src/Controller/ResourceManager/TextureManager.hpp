@@ -14,7 +14,7 @@ public:
 	/**
 	 * @brief Construct a new Texture Manager object
 	 */
-	TextureManager();
+	TextureManager() = default;
 
 	/**
 	 * @brief Loads a texture without alpha to the texture manager.

@@ -2,7 +2,7 @@
 
 #include "LuaManager.hpp"
 
-#include "TextureManager.hpp"
+#include "ResourceManager/ResourceManager.hpp"
 //#include "ModelManager.hpp"
 
 namespace MaterialLuaController {
