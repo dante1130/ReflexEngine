@@ -23,15 +23,18 @@ Water::Water(Texture &text, glm::vec3 pos, glm::vec3 scale, glm::vec3 offMult) {
 }
 
 void Water::init() {
-	const float verts[] = {-10.0f, 0.0f,  -10.0f, 0.0f,   0.0f,   0.0f,  1.0f,
-	                       0.0f,   10.0f, 0.0f,   -10.0f, 100.0f, 0.0f,  0.0f,
-	                       1.0f,   0.0f,  -10.0f, 0.0f,   10.0f,  0.0f,  100.0f,
-	                       0.0f,   1.0f,  0.0f,   10.0f,  0.0f,   10.0f, 100.0f,
-	                       100.0f, 0.0f,  1.0f,   0.0f};
+	float verts[] = {-10.0f, 0.0f,  -10.0f, 0.0f,   0.0f,   0.0f,  -1.0f, 0.0f,
+							10.0f, 0.0f,   -10.0f, 100.0f, 0.0f,  0.0f, -1.0f,   0.0f,
+							-10.0f, 0.0f,   10.0f,  0.0f,  100.0f, 0.0f,   -1.0f,  0.0f, 
+							10.0f,  0.0f,   10.0f, 100.0f, 100.0f, 0.0f,  -1.0f,   0.0f};
 	const uint32_t order[6] = {0u, 2u, 1u, 1u, 2u, 3u};
 
 	m_mesh.CreateMesh(verts, order, 32, 6);
 
+	verts[6] = 1.0f;
+	verts[14] = 1.0f;
+	verts[22] = 1.0f;
+	verts[30] = 1.0f;
 	const uint32_t orderTwo[6] = {0u, 1u, 2u, 1u, 3u, 2u};
 	m_mesh_under.CreateMesh(verts, orderTwo, 32, 6);
 }
