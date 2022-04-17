@@ -45,6 +45,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/BodyRigidPhysics.cpp
 	Controller/MaterialLuaController.cpp
 	Controller/GuiLuaAccess.cpp
+	Controller/GenericFunctions.cpp
 
 	Game/Scene.hpp
 	Game/TestScene.cpp

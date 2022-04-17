@@ -9,8 +9,10 @@ GameObject* GameAssetFactory::create(std::string fileName) {
 
 	if (type == "Item") {
 		return loadItem(fileName);
+
 	} else if (type == "Water") {
 		return loadWater(fileName);
+
 	} else if (type == "Player") {
 		//
 		// return GameObjectLoader::player(fileName);
@@ -19,10 +21,13 @@ GameObject* GameAssetFactory::create(std::string fileName) {
 		// return GameObjectLoader::npc(fileName);
 	} else if (type == "Body") {
 		return loadBody(fileName);
+
 	} else if (type == "PhysicsObject") {
 		return loadPhysicsObject(fileName);
+
 	} else if (type == "ScriptableObject") {
 		return loadScriptableObject(fileName);
+
 	} else {
 		return NULL;
 	}

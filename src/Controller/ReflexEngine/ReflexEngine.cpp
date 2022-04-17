@@ -9,6 +9,7 @@ ReflexEngine::ReflexEngine() {
 
 void ReflexEngine::run() {
 	auto& engine = ReflexEngine::get_instance();
+	ResourceManager::get_instance();
 
 	engine.renderer_.init();
 

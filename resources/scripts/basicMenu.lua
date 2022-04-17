@@ -1,5 +1,5 @@
 gui_setWindowSize(250, 250, 2)
-gui_setWindowPos(600, 0, 2)
+gui_setWindowPos(0, 300, 2)
 gui_begin("IMPORTANT")
 gui_text("There once was a man named Daniel")
 

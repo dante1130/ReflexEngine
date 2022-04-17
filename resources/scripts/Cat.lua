@@ -1,8 +1,8 @@
 baseObject = {
 	type = "Item",
-	xPos = 0,
+	xPos = random_generator(-10, 20),
 	yPos = -2,
-	zPos = 4,
+	zPos = random_generator(-10, 20),
 	xRotation = 1,
 	yRotation = 0,
 	zRotation = 0,
