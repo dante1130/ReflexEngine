@@ -2,6 +2,7 @@
 
 #include "Game/TestScene.hpp"
 #include "guiManager.hpp"
+#include "Controller/GenericFunctions.h"
 
 ReflexEngine::ReflexEngine() {
 	if (window_.Init() == 1) return;
@@ -36,9 +37,15 @@ void ReflexEngine::run() {
 
 		gui::mainLoopStart();
 
-		engine.scenes_.top()->update(delta_time);
-		engine.scenes_.top()->add_draw_call();
-		engine.renderer_.draw();
+		if (GenericFunctions::getIfLoad() == true) {
+			engine.scenes_.top()->loadSavedGameObjects();
+		} else if (GenericFunctions::getIfSave() == true) {
+			engine.scenes_.top()->saveGameObjects();
+		} else {
+			engine.scenes_.top()->update(delta_time);
+			engine.scenes_.top()->add_draw_call();
+			engine.renderer_.draw();
+		}
 
 		gui::mainLoopEnd();
 

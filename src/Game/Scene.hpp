@@ -38,6 +38,10 @@ public:
 	 */
 	virtual void add_draw_call() = 0;
 
+	virtual void saveGameObjects() = 0;
+
+	virtual void loadSavedGameObjects() = 0;
+
 	/**
 	 * @brief Virtual destructor.
 	 */

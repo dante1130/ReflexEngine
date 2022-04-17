@@ -2,6 +2,7 @@
 #include "Controller/BodyRigidPhysics.hpp"
 #include "Body.hpp"
 #include <glm/glm.hpp>
+#include <vector>
 
 class BodyRigid : public Body {
 public:
@@ -263,9 +264,23 @@ public:
 	 */
 	~BodyRigid();
 
+	/**
+	 * @brief	Saves the object to lau file
+	 * @param	No param
+	 * @return	Void
+	 *
+	 * @pre		Object exists
+	 * @post	Object saved
+	 */
+	void saveObject() override {}
+
 protected:
 	/// <summary>
 	/// Facaded react rigid body
 	/// </summary>
 	BodyRigidPhysics rb;
+	int m_numOfColliders = 0;
+	std::vector<colliderData_sphere> m_sphere;
+	std::vector<colliderData_capsule> m_capsule;
+	std::vector<colliderData_box> m_box;
 };

@@ -86,3 +86,22 @@ void Water::setIntensity(glm::vec3 scale) {
 }
 
 void Water::setOffsetMult(glm::vec3 offMult) { m_offsetMult = offMult; }
+
+void Water::setTotalTime(float time) { m_time = time; }
+
+void Water::saveObject() {
+	ObjectSaving::openFile();
+	ObjectSaving::saveGameObject(position, rotation, scale, angle, "Water");
+	ObjectSaving::closeSctruct();
+	ObjectSaving::createStruct("water");
+	ObjectSaving::addValue("textureName", "water", false);
+	ObjectSaving::addValue("xMult", m_offsetMult.x, false);
+	ObjectSaving::addValue("yMult", m_offsetMult.y, false);
+	ObjectSaving::addValue("zMult", m_offsetMult.z, false);
+	ObjectSaving::addValue("xIntensity", m_intensity.x, false);
+	ObjectSaving::addValue("yIntensity", m_intensity.y, false);
+	ObjectSaving::addValue("zIntensity", m_intensity.z, false);
+	ObjectSaving::addValue("time", (float)m_time, true);
+	ObjectSaving::closeSctruct();
+	ObjectSaving::closeFile();
+}

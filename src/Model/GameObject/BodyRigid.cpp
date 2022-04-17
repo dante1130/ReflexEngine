@@ -53,14 +53,23 @@ BodyRigid::~BodyRigid() { rb.~BodyRigidPhysics(); }
 void BodyRigid::addBoxCollider(glm::vec3 pos, glm::vec3 halfSize,
                                float bounciness, float friction) {
 	rb.addBoxCollider(pos, halfSize, bounciness, friction);
+	colliderData_box cb(m_numOfColliders, halfSize.x, halfSize.y, halfSize.z);
+	m_box.push_back(cb);
+	m_numOfColliders++;
 }
 
 void BodyRigid::addSphereCollider(glm::vec3 pos, float radius, float bounciness,
                                   float friction) {
 	rb.addSphereCollider(pos, radius, bounciness, friction);
+	colliderData_sphere cb(m_numOfColliders, radius);
+	m_sphere.push_back(cb);
+	m_numOfColliders++;
 }
 
 void BodyRigid::addCapsuleCollider(glm::vec3 pos, float radius, float height,
                                    float bounciness, float friction) {
 	rb.addCapsuleCollider(pos, radius, height, bounciness, friction);
+	colliderData_capsule cb(m_numOfColliders, radius, height);
+	m_capsule.push_back(cb);
+	m_numOfColliders++;
 }

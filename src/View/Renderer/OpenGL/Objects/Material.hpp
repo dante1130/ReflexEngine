@@ -31,6 +31,26 @@ public:
 	 */
 	void UseMaterial(GLuint shininessLoc, GLuint specularIntensityLoc);
 
+	/**
+	 * @brief Returns the specular intensity
+	 * @param No param
+	 * @return	float	- specular intensity
+	 *
+	 * @pre	Object exists
+	 * @post intensity returned
+	 */
+	float getSpecIntensity();
+
+	/**
+	 * @brief Returns the shininess intensity
+	 * @param No param
+	 * @return	float	- shininess intensity
+	 *
+	 * @pre	Object exists
+	 * @post shininess returned
+	 */
+	float getShininess();
+
 private:
 	/// The specular intensity.
 	GLfloat m_specularIntensity;

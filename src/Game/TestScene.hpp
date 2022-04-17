@@ -57,6 +57,10 @@ public:
 	 */
 	void add_draw_call() override;
 
+	void saveGameObjects() override;
+
+	void loadSavedGameObjects() override;
+
 private:
 	/// A directional light.
 	DirectionalLight directional_light_ = {};

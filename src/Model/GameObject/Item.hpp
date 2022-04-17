@@ -7,6 +7,7 @@
 #include "View/Renderer/OpenGL/Objects/Model.hpp"
 #include "View/Renderer/OpenGL/Objects/Texture.hpp"
 #include "View/Renderer/OpenGL/Objects/Material.hpp"
+#include "Controller/ResourceManager/ObjectSaving.hpp"
 
 /**
  * @class Item
@@ -48,6 +49,16 @@ public:
 	 * @param shader
 	 */
 	void draw(std::shared_ptr<Shader> shader) override;
+
+	/**
+	 * @brief	Saves the object to lau file
+	 * @param	No param
+	 * @return	Void
+	 *
+	 * @pre		Object exists
+	 * @post	Object saved
+	 */
+	void saveObject() override;
 
 private:
 	/// The model of the item.

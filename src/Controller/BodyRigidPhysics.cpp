@@ -206,3 +206,36 @@ void BodyRigidPhysics::addCapsuleCollider(glm::vec3 pos, float radius,
 	mat.setBounciness(bounciness);
 	mat.setFrictionCoefficient(friction);
 }
+
+bool BodyRigidPhysics::getIfGravityActive() { return rb->isGravityEnabled(); }
+
+int BodyRigidPhysics::getRBType() { return (int)rb->getType(); }
+
+int BodyRigidPhysics::getNumberOfColliders() { return rb->getNbColliders(); }
+
+float BodyRigidPhysics::getLinearDamping() { return rb->getLinearDamping(); }
+
+float BodyRigidPhysics::getAngularDamping() { return rb->getAngularDamping(); }
+
+bool BodyRigidPhysics::getIfAllowedSleep() { return rb->isSleeping(); }
+
+int BodyRigidPhysics::getColliderType(int index) {
+	Collider* c = rb->getCollider(index);
+	return (int)c->getCollisionShape()->getName();
+}
+
+float BodyRigidPhysics::getBounciness(int index) {
+	Collider* c = rb->getCollider(index);
+	return c->getMaterial().getBounciness();
+}
+
+float BodyRigidPhysics::getFriction(int index) {
+	Collider* c = rb->getCollider(index);
+	return c->getMaterial().getBounciness();
+}
+
+glm::vec3 BodyRigidPhysics::getLocalColliderPos(int index) {
+	Collider* c = rb->getCollider(index);
+	Transform t = c->getLocalToBodyTransform();
+	return glm::vec3(t.getPosition().x, t.getPosition().y, t.getPosition().z);
+}
