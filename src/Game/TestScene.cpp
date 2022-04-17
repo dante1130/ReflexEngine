@@ -1,6 +1,7 @@
 #include <functional>
 
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
+#include "Controller/Input/InputManager.hpp"
 #include "TestScene.hpp"
 TestScene::TestScene() {}
 
@@ -23,7 +24,11 @@ void TestScene::init() {
 	lua.set_function("addGameObject", &TestScene::addGameObject, this);
 	lua.script_file("scripts/_MasterCreation.lua");
 
-	gui::init(ReflexEngine::get_instance().window_.getWindow(), "#version 410");
+	auto& input_manager = InputManager::get_instance();
+	input_manager.load_lua_bindings("scripts/controls.lua");
+
+	gui::init(ReflexEngine::get_instance().window_.get_window(),
+	          "#version 410");
 	guiLuaAccess::exposeGui();
 }
 
@@ -31,17 +36,26 @@ void TestScene::addGameObject(std::string luaScript) {
 	game_objects_.emplace_back(gaf.create(luaScript));
 }
 
-void TestScene::key_controls(const bool* keys, float delta_time) {
-	auto& renderer = ReflexEngine::get_instance().renderer_;
+void TestScene::key_controls(float delta_time) {
 	auto& camera = ReflexEngine::get_instance().camera_;
+	auto& input_manager = InputManager::get_instance();
 
-	if (keys[GLFW_KEY_W]) camera.move(CameraMovement::forward, delta_time);
-	if (keys[GLFW_KEY_S]) camera.move(CameraMovement::backward, delta_time);
-	if (keys[GLFW_KEY_A]) camera.move(CameraMovement::left, delta_time);
-	if (keys[GLFW_KEY_D]) camera.move(CameraMovement::right, delta_time);
+	if (input_manager.get_key_state(Input::quit))
+		ReflexEngine::get_instance().window_.set_should_close(true);
 
-	if (keys[GLFW_KEY_C]) renderer.toggle_wireframe();
-	if (keys[GLFW_KEY_Z]) camera.toggle_noclip();
+	if (input_manager.get_key_state(Input::move_forward))
+		camera.move(CameraMovement::forward, delta_time);
+	if (input_manager.get_key_state(Input::move_backward))
+		camera.move(CameraMovement::backward, delta_time);
+	if (input_manager.get_key_state(Input::move_left))
+		camera.move(CameraMovement::left, delta_time);
+	if (input_manager.get_key_state(Input::move_right))
+		camera.move(CameraMovement::right, delta_time);
+
+	if (input_manager.get_key_state(Input::toggle_wireframe))
+		ReflexEngine::get_instance().renderer_.toggle_wireframe();
+	if (input_manager.get_key_state(Input::toggle_noclip))
+		camera.toggle_noclip();
 }
 
 void TestScene::mouse_controls(float xpos, float ypos) {

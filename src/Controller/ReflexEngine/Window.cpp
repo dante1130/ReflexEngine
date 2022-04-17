@@ -1,5 +1,7 @@
 #include "Window.hpp"
 
+#include "Controller/Input/InputManager.hpp"
+
 Window::Window()
     : m_mainWindow(nullptr),
       m_width(0),
@@ -10,11 +12,7 @@ Window::Window()
       m_yPrev(0),
       m_xOffset(0),
       m_yOffset(0),
-      m_isFirstMouse(false)
-
-{
-	std::fill(m_keys, m_keys + 1024, false);
-}
+      m_isFirstMouse(false) {}
 
 Window::Window(int windowWidth, int windowHeight)
     : m_mainWindow(nullptr),
@@ -26,9 +24,7 @@ Window::Window(int windowWidth, int windowHeight)
       m_yPrev(0),
       m_xOffset(0),
       m_yOffset(0),
-      m_isFirstMouse(false) {
-	std::fill(m_keys, m_keys + 1024, false);
-}
+      m_isFirstMouse(false) {}
 
 int Window::Init() {
 	if (!glfwInit()) {
@@ -86,17 +82,9 @@ void Window::CreateCallbacks() {
 
 void Window::HandleKeys(GLFWwindow* window, int key, int code, int action,
                         int mode) {
-	Window* currWindow = static_cast<Window*>(glfwGetWindowUserPointer(window));
+	auto& input_manager = InputManager::get_instance();
 
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-		glfwSetWindowShouldClose(window, GL_TRUE);
-
-	if (key <= 0 && key >= 1024) return;
-
-	if (action == GLFW_PRESS)
-		currWindow->m_keys[key] = true;
-	else if (action == GLFW_RELEASE)
-		currWindow->m_keys[key] = false;
+	input_manager.read_keys(key, action);
 }
 
 void Window::HandleMouse(GLFWwindow* window, double xPos, double yPos) {
@@ -133,7 +121,9 @@ double Window::GetYOffset() {
 	return offset;
 }
 
-const bool* Window::GetKeys() const { return m_keys; }
+void Window::set_should_close(bool should_close) {
+	glfwSetWindowShouldClose(m_mainWindow, should_close);
+}
 
 bool Window::IsShouldClose() const {
 	return glfwWindowShouldClose(m_mainWindow);

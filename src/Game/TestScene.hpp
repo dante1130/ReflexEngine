@@ -48,7 +48,7 @@ public:
 	 *
 	 * @param keys
 	 */
-	void key_controls(const bool* keys, float delta_time) override;
+	void key_controls(float delta_time) override;
 
 	/**
 	 * @brief The function to specify controls for the mouse.

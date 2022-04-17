@@ -59,11 +59,11 @@ public:
 	double GetYOffset();
 
 	/**
-	 * @brief Get the current keys pressed.
+	 * @brief Set whether the window should close.
 	 *
-	 * @return const bool* - boolean array
+	 * @param should_close
 	 */
-	const bool* GetKeys() const;
+	void set_should_close(bool should_close);
 
 	/**
 	 * @brief Returns a boolean whether the window should close.
@@ -84,7 +84,7 @@ public:
 	 *
 	 * @return GLFWwindow*
 	 */
-	GLFWwindow* getWindow() { return m_mainWindow; }
+	GLFWwindow* get_window() { return m_mainWindow; }
 
 	/**
 	 * @brief Destroy the Window object
@@ -109,9 +109,6 @@ private:
 
 	/// Check whether if this is the first mouse move.
 	bool m_isFirstMouse;
-
-	/// Boolean array of keys pressed.
-	bool m_keys[1024];
 
 	/**
 	 * @brief Create callbacks for the keyboard and mouse events.
