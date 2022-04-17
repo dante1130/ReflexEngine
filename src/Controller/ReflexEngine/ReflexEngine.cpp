@@ -22,7 +22,7 @@ void ReflexEngine::run() {
 	float delta_time = 0.0f;
 	float prev_time = glfwGetTime();
 
-	glfwSetInputMode(ReflexEngine::get_instance().window_.getWindow(),
+	glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
 	                 GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
 	while (!engine.window_.IsShouldClose()) {
@@ -34,8 +34,7 @@ void ReflexEngine::run() {
 
 		gui::mainLoopStart();
 
-		engine.scenes_.top()->key_controls(engine.window_.GetKeys(),
-		                                   delta_time);
+		engine.scenes_.top()->key_controls(delta_time);
 		engine.scenes_.top()->mouse_controls(engine.window_.GetXOffset(),
 		                                     engine.window_.GetYOffset());
 

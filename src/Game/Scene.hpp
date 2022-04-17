@@ -31,7 +31,7 @@ public:
 	 *
 	 * @param keys
 	 */
-	virtual void key_controls(const bool* keys, float delta_time) = 0;
+	virtual void key_controls(float delta_time) = 0;
 
 	/**
 	 * @brief The function to specify controls for the mouse.

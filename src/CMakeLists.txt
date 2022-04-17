@@ -37,6 +37,8 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/ResourceManager/ResourceManager.cpp
 	Controller/ResourceManager/TextureManager.cpp
 	Controller/ResourceManager/ModelManager.cpp
+	Controller/Input/InputManager.cpp
+	Controller/Input/Input.hpp
 	Controller/LuaManager.cpp
 	Controller/Physics.cpp
 	Controller/BodyRigidPhysics.cpp
