@@ -53,7 +53,6 @@ bool gui::luaCheckBox(const std::string name, bool state) {
 
 	ImGui::Checkbox(name.c_str(), &checkBoxes[name]);
 	return checkBoxes[name];
-	;
 }
 
 void gui::sliderFloat(const std::string name, float* value, float min,
