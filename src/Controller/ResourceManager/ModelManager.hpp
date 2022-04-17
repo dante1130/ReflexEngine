@@ -3,13 +3,15 @@
 #include <unordered_map>
 
 #include "Model.hpp"
-
+#include "Controller/LuaManager.hpp"
 /**
  * @class ModelManager
  * @brief An encapsulated class for an unordered map of models.
  */
 class ModelManager {
 public:
+	void lua_access();
+
 	/**
 	 * @brief Construct a new Model Manager object
 	 */

@@ -48,7 +48,7 @@ void gui::checkbox(const std::string name, bool* option) {
 bool gui::luaCheckBox(const std::string name, bool state) {
 	static std::map<std::string, bool> checkBoxes;
 	if (checkBoxes.find(name) == checkBoxes.end()) {
-		checkBoxes.insert(std::pair<std::string, bool>(name, false));
+		checkBoxes.insert(std::pair<std::string, bool>(name, state));
 	}
 
 	ImGui::Checkbox(name.c_str(), &checkBoxes[name]);

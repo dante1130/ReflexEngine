@@ -13,11 +13,15 @@ void TestScene::init() {
 	                     glm::vec3(-10.0f, -12.0f, 18.5f), 0.9f);
 
 	sol::state& lua = LuaManager::get_instance().get_state();
-	MaterialLuaController::CreateLuaAccess();
-	TextureManager tm = ResourceManager::get_instance().get_texture_manager();
-	tm.luaAccess();
+	// MaterialLuaController::CreateLuaAccess();
+	TextureManager& tm = ResourceManager::get_instance().get_texture_manager();
+	ModelManager& mm = ResourceManager::get_instance().get_model_manager();
+	// mm.lua_access();
+	// tm.lua_access();
 	lua.script_file("scripts/_Materials.lua");
 	tm.get_texture("water");
+
+	mm.get_model("cat");
 
 	//
 

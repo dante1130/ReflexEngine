@@ -1,5 +1,11 @@
 #include "ModelManager.hpp"
 
+void ModelManager::lua_access() {
+	sol::state& lua = LuaManager::get_instance().get_state();
+
+	lua.set_function("loadModel", &ModelManager::load_model, this);
+}
+
 bool ModelManager::load_model(const std::string& model_name,
                               const std::string& file_name) {
 	Model* model = new Model();

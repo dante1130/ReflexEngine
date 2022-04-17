@@ -1,8 +1,11 @@
 #include "TextureManager.hpp"
 
-void TextureManager::luaAccess() {
+void TextureManager::lua_access() {
 	sol::state& lua = LuaManager::get_instance().get_state();
-	lua.set_function("loadTextRGB", &TextureManager::load_texture_rgb, this);
+
+	lua.set_function("loadTextureRGB", &TextureManager::load_texture_rgb, this);
+	lua.set_function("loadTextureRGBA", &TextureManager::load_texture_rgba,
+	                 this);
 }
 
 bool TextureManager::load_texture_rgb(const std::string& texture_name,
@@ -10,7 +13,11 @@ bool TextureManager::load_texture_rgb(const std::string& texture_name,
 	Texture* texture = new Texture(file_path.c_str());
 
 	if (texture->LoadTexture()) {
+		std::cout << "loading " << texture_name << " from " << file_path
+		          << std::endl;
 		texture_hashmap[texture_name] = texture;
+		std::cout << "Currently stored texture: " << texture_hashmap.size()
+		          << std::endl;
 		return true;
 	}
 

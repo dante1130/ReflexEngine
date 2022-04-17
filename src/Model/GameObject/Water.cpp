@@ -66,8 +66,8 @@ void Water::draw(std::shared_ptr<Shader> shader) {
 	                   glm::value_ptr(model));
 	glUniform1i(shader->GetUsingTexture(), true);
 	// m_texture.UseTexture();
-	TextureManager tm = ResourceManager::get_instance().get_texture_manager();
-	Texture t = tm.get_texture("water");
+	TextureManager &tm = ResourceManager::get_instance().get_texture_manager();
+	const Texture &t = tm.get_texture("water");
 	t.UseTexture();
 
 	m_mesh.RenderMesh();

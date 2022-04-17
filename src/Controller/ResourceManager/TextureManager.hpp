@@ -12,7 +12,7 @@
  */
 class TextureManager {
 public:
-	void luaAccess();
+	void lua_access();
 
 	/**
 	 * @brief Construct a new Texture Manager object
