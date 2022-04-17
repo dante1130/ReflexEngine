@@ -11,4 +11,7 @@ TextureManager& ResourceManager::get_texture_manager() {
 	return texture_manager_;
 }
 
-ResourceManager::ResourceManager() {}
+ResourceManager::ResourceManager() {
+	texture_manager_.lua_access();
+	model_manager_.lua_access();
+}

@@ -1,0 +1,10 @@
+gui_setWindowSize(300, 400, 1)
+gui_setWindowPos(0, 0, 1)
+gui_begin("Pause Menu")
+gui_text("--Game is currently paused--")
+gui_button("UNPAUSE")
+gui_button("SAVE")
+gui_button("LOAD")
+gui_button("EXIT")
+
+gui_end()

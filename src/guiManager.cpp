@@ -45,6 +45,16 @@ void gui::checkbox(const std::string name, bool* option) {
 	ImGui::Checkbox(name.c_str(), option);
 }
 
+bool gui::luaCheckBox(const std::string name, bool state) {
+	static std::map<std::string, bool> checkBoxes;
+	if (checkBoxes.find(name) == checkBoxes.end()) {
+		checkBoxes.insert(std::pair<std::string, bool>(name, state));
+	}
+
+	ImGui::Checkbox(name.c_str(), &checkBoxes[name]);
+	return checkBoxes[name];
+}
+
 void gui::sliderFloat(const std::string name, float* value, float min,
                       float max) {
 	ImGui::SliderFloat(name.c_str(), value, min, max);
@@ -71,8 +81,10 @@ float gui::guiFrameRate() { return ImGui::GetIO().Framerate; }
 
 bool gui::button(const std::string name) { return ImGui::Button(name.c_str()); }
 
-bool gui::button(const std::string name, float xSize, float ySize) {
-	return ImGui::Button(name.c_str(), ImVec2(xSize, ySize));
+std::string gui::luaInputText(const std::string name) {
+	char newBuffer[30] = {};
+	ImGui::InputText(name.c_str(), newBuffer, 30);
+	return newBuffer;
 }
 
 bool gui::inputText(const std::string name, char* buffer, int size) {

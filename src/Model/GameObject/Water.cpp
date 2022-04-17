@@ -1,6 +1,6 @@
 #include "Water.hpp"
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
-
+#include "Controller/ResourceManager/ResourceManager.hpp"
 Water::Water(std::string filePath) {
 	m_texture = Texture(filePath.c_str());
 	m_texture.LoadTexture();
@@ -65,7 +65,11 @@ void Water::draw(std::shared_ptr<Shader> shader) {
 	glUniformMatrix4fv(shader->GetModelLocation(), 1, GL_FALSE,
 	                   glm::value_ptr(model));
 	glUniform1i(shader->GetUsingTexture(), true);
-	m_texture.UseTexture();
+	// m_texture.UseTexture();
+	TextureManager &tm = ResourceManager::get_instance().get_texture_manager();
+	const Texture &t = tm.get_texture("water");
+	t.UseTexture();
+
 	m_mesh.RenderMesh();
 	m_mesh_under.RenderMesh();
 }

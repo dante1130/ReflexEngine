@@ -14,6 +14,7 @@
 #include "GameAssetFactory.hpp"
 #include "Controller/MaterialLuaController.hpp"
 #include "Controller/ResourceManager/ResourceManager.hpp"
+#include "Controller/GuiLuaAccess.hpp"
 
 /**
  * @class TestScene

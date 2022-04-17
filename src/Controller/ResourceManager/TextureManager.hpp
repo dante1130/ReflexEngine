@@ -3,6 +3,7 @@
 #include <unordered_map>
 
 #include "Texture.hpp"
+#include "Controller/LuaManager.hpp"
 
 /**
  * @class TextureManager
@@ -11,6 +12,8 @@
  */
 class TextureManager {
 public:
+	void lua_access();
+
 	/**
 	 * @brief Construct a new Texture Manager object
 	 */

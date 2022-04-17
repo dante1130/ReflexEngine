@@ -121,20 +121,65 @@ private:
 	 * @brief	Loads in a physics object object from a lua script
 	 * @param	luaScript	- The lua script to load the physics object data
 	 * from
-	 * @return	*body		- Created physics object object
+	 * @return	*PhysicsObject		- Created physics object object
 	 *
 	 * @pre		physics object varaible exists
 	 * @post	physics object stored
 	 */
 	PhysicsObject* loadPhysicsObject(std::string luaScript);
 
+	/**
+	 * @brief	Loads in extra physics object data from a lua script
+	 * @param	po	- physic object to store the data to
+	 * @param	lua	- Lua state
+	 * @return	Void
+	 *
+	 * @pre		extra physics data exists
+	 * @post	extra physics data stored
+	 */
 	void loadExtraPhysicObjectSettings(PhysicsObject* po, sol::state& lua);
 
+	/**
+	 * @brief	Loads in a box collider from a lua script
+	 * @param	po	- physic object to add the collider to
+	 * @param	lua	- Lua state
+	 * @return	Void
+	 *
+	 * @pre		box collider exists
+	 * @post	box collider added
+	 */
 	void loadBoxCollider(int count, PhysicsObject* po, sol::state& lua);
 
+	/**
+	 * @brief	Loads in a sphere collider from a lua script
+	 * @param	po	- physic object to add the collider to
+	 * @param	lua	- Lua state
+	 * @return	Void
+	 *
+	 * @pre		sphere collider exists
+	 * @post	sphere collider added
+	 */
 	void loadSphereCollider(int count, PhysicsObject* po, sol::state& lua);
 
+	/**
+	 * @brief	Loads in a capsule collider from a lua script
+	 * @param	po	- physic object to add the collider to
+	 * @param	lua	- Lua state
+	 * @return	Void
+	 *
+	 * @pre		capsule collider exists
+	 * @post	capsule collider added
+	 */
 	void loadCapsuleCollider(int count, PhysicsObject* po, sol::state& lua);
 
+	/**
+	 * @brief	Loads in a scriptable object object from a lua script
+	 * @param	luaScript	- The lua script to load the scriptale object data
+	 * from
+	 * @return	*ScriptableObject		- Created scriptable object object
+	 *
+	 * @pre		scriptable object object varaible exists
+	 * @post	scriptable object object stored
+	 */
 	ScriptableObject* loadScriptableObject(std::string luaScript);
 };
