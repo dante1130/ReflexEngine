@@ -47,16 +47,6 @@ public:
 	 */
 	std::shared_ptr<Shader> get_shader();
 
-	Camera& get_camera() { return camera_; }
-
-	/**
-	 * @brief Updates the camera's position and perspective.
-	 *
-	 * @param window
-	 * @param delta_time
-	 */
-	void update_camera(Window& window, float delta_time);
-
 	/**
 	 * @brief Adds a directional light to the renderer.
 	 *
@@ -112,9 +102,6 @@ private:
 
 	/// A boolean to toggle between wireframe and normal rendering.
 	bool is_wireframe_ = true;
-
-	/// The camera.
-	Camera camera_ = {};
 
 	/// The skybox.
 	Skybox skybox_ = {};

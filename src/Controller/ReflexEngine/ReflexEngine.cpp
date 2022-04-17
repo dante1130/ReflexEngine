@@ -10,6 +10,9 @@ ReflexEngine::ReflexEngine() {
 void ReflexEngine::run() {
 	auto& engine = ReflexEngine::get_instance();
 
+	engine.camera_ = Camera(glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 0.0f),
+	                        -90.0f, 0.0f, 5.0f, 0.2f);
+
 	engine.renderer_.init();
 
 	engine.scenes_.emplace(std::make_shared<TestScene>());
@@ -28,7 +31,8 @@ void ReflexEngine::run() {
 
 		glfwPollEvents();
 
-		engine.renderer_.update_camera(engine.window_, delta_time);
+		engine.update_camera(delta_time);
+
 		gui::mainLoopStart();
 
 		engine.scenes_.top()->update(delta_time);
@@ -36,9 +40,15 @@ void ReflexEngine::run() {
 		engine.renderer_.draw();
 
 		gui::mainLoopEnd();
+
 		engine.window_.SwapBuffers();
 	}
 	gui::shutdown();
+}
+
+void ReflexEngine::update_camera(float delta_time) {
+	camera_.KeyControl(window_.GetKeys(), delta_time);
+	camera_.MouseControl(window_.GetXOffset(), window_.GetYOffset());
 }
 
 ReflexEngine& ReflexEngine::get_instance() {

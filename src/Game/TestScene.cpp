@@ -49,7 +49,7 @@ void TestScene::add_draw_call() {
 }
 
 void TestScene::update(float delta_time) {
-	Camera& camera = ReflexEngine::get_instance().renderer_.get_camera();
+	const auto& camera = ReflexEngine::get_instance().camera_;
 
 	glm::vec3 lower_light = camera.GetCamPosition();
 	lower_light.y -= 0.3f;
