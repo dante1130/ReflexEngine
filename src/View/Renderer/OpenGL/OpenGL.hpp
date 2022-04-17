@@ -5,8 +5,8 @@
 
 #include "Window.hpp"
 #include "Camera.hpp"
-#include "Shader.hpp"
-#include "Skybox.hpp"
+#include "Objects/Shader.hpp"
+#include "Objects/Skybox.hpp"
 #include "CommonValues.hpp"
 #include "../Renderer.hpp"
 

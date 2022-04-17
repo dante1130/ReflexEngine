@@ -1,7 +1,7 @@
 #pragma once
 
 #include <glm/glm.hpp>
-#include "Shader.hpp"
+#include "View/Renderer/OpenGL/Objects/Shader.hpp"
 
 /**
  * @class GameObject

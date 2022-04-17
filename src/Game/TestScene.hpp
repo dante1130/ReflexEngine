@@ -6,11 +6,11 @@
 #include <glm/glm.hpp>
 
 #include "Scene.hpp"
-#include "Texture.hpp"
-#include "Material.hpp"
+#include "View/Renderer/OpenGL/Objects/Texture.hpp"
+#include "View/Renderer/OpenGL/Objects/Material.hpp"
 #include "Model/GameObject/GameObject.hpp"
-#include "DirectionalLight.hpp"
-#include "SpotLight.hpp"
+#include "View/Renderer/OpenGL/Objects/DirectionalLight.hpp"
+#include "View/Renderer/OpenGL/Objects/SpotLight.hpp"
 #include "guiManager.hpp"
 #include "GameAssetFactory.hpp"
 #include "Controller/MaterialLuaController.hpp"
