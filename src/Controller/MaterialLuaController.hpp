@@ -3,7 +3,7 @@
 #include "LuaManager.hpp"
 
 #include "ResourceManager/ResourceManager.hpp"
-//#include "ModelManager.hpp"
+#include "ResourceManager/ModelManager.hpp"
 
 namespace MaterialLuaController {
 /**
