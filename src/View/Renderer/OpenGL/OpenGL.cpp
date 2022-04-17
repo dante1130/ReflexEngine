@@ -50,14 +50,11 @@ void OpenGL::init() {
 }
 
 void OpenGL::draw() {
-	// Not working yet.
-	// for (const auto& d_light : directional_lights_) {
-	// 	directional_shadow_pass(d_light);
-	// }
-
 	render_pass();
 
 	directional_lights_.clear();
+	point_lights_.clear();
+	spot_lights_.clear();
 	draw_calls_.clear();
 }
 
@@ -108,8 +105,13 @@ void OpenGL::render_lights() {
 		shader_->SetDirectionalLight(d_light);
 		shader_->SetDirectionalLightTransform(
 		    d_light.CalculateLightTransform());
-		d_light.GetShadowMap()->Read(GL_TEXTURE2);
+		// d_light.GetShadowMap()->Read(GL_TEXTURE2);
 	}
+
+	shader_->SetPointLights(point_lights_.data(), point_lights_.size(), 3, 0);
+
+	shader_->SetSpotLights(spot_lights_.data(), spot_lights_.size(),
+	                       3 + point_lights_.size(), point_lights_.size());
 
 	shader_->SetTexture(1);
 	shader_->SetDirectionalShadowMap(2);
@@ -147,6 +149,14 @@ std::shared_ptr<Shader> OpenGL::get_shader() { return shader_; }
 
 void OpenGL::add_directional_light(const DirectionalLight& light) {
 	directional_lights_.push_back(light);
+}
+
+void OpenGL::add_point_light(const PointLight& light) {
+	if (point_lights_.size() < MAX_POINT_LIGHTS) point_lights_.push_back(light);
+}
+
+void OpenGL::add_spot_light(const SpotLight& light) {
+	if (spot_lights_.size() < MAX_SPOT_LIGHTS) spot_lights_.push_back(light);
 }
 
 void OpenGL::add_draw_call(const DrawCall& draw_call) {

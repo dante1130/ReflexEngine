@@ -10,6 +10,7 @@
 #include "Material.hpp"
 #include "Model/GameObject/GameObject.hpp"
 #include "DirectionalLight.hpp"
+#include "SpotLight.hpp"
 #include "guiManager.hpp"
 #include "GameAssetFactory.hpp"
 #include "Controller/MaterialLuaController.hpp"
@@ -57,4 +58,7 @@ public:
 private:
 	/// A directional light.
 	DirectionalLight directional_light_ = {};
+
+	/// Flashlight.
+	SpotLight flashlight_ = {};
 };

@@ -7,6 +7,7 @@
 #include "Camera.hpp"
 #include "Shader.hpp"
 #include "Skybox.hpp"
+#include "CommonValues.hpp"
 #include "../Renderer.hpp"
 
 // A drawcall represents a drawable object that is rendered to the screen, this
@@ -46,6 +47,8 @@ public:
 	 */
 	std::shared_ptr<Shader> get_shader();
 
+	Camera& get_camera() { return camera_; }
+
 	/**
 	 * @brief Updates the camera's position and perspective.
 	 *
@@ -60,6 +63,20 @@ public:
 	 * @param light
 	 */
 	void add_directional_light(const DirectionalLight& light);
+
+	/**
+	 * @brief Adds a point light to the renderer.
+	 *
+	 * @param light
+	 */
+	void add_point_light(const PointLight& light);
+
+	/**
+	 * @brief Adds a spot light to the renderer.
+	 *
+	 * @param light
+	 */
+	void add_spot_light(const SpotLight& light);
 
 	/**
 	 * @brief Adds a draw call to the renderer.
@@ -104,6 +121,12 @@ private:
 
 	/// A vector of directional lights.
 	std::vector<DirectionalLight> directional_lights_;
+
+	/// An vector of point lights.
+	std::vector<PointLight> point_lights_;
+
+	/// An vector of spot lights.
+	std::vector<SpotLight> spot_lights_;
 
 	/// A vector of draw calls.
 	std::vector<DrawCall> draw_calls_ = {};

@@ -1,4 +1,4 @@
 #pragma once
 
-const int MAX_POINT_LIGHTS = 3;
-const int MAX_SPOT_LIGHTS = 3;
+const size_t MAX_POINT_LIGHTS = 8;
+const size_t MAX_SPOT_LIGHTS = 8;

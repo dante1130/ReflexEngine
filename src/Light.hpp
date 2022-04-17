@@ -39,7 +39,7 @@ public:
 	/**
 	 * @brief Destructor.
 	 */
-	~Light();
+	virtual ~Light();
 
 protected:
 	// Ambient lighting
