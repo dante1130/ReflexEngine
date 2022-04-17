@@ -79,7 +79,9 @@ void gui::sliderAngle(const std::string name, float* angle, float min,
 
 float gui::guiFrameRate() { return ImGui::GetIO().Framerate; }
 
-bool gui::button(const std::string name) { return ImGui::Button(name.c_str()); }
+bool gui::button(const std::string name, int xSize, int ySize) {
+	return ImGui::Button(name.c_str(), ImVec2(xSize, ySize));
+}
 
 std::string gui::luaInputText(const std::string name) {
 	char newBuffer[30] = {};

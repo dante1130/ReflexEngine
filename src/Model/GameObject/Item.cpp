@@ -2,9 +2,9 @@
 
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 
-Item::Item(const std::string& model_path, GLfloat shininess,
+Item::Item(const std::string& modelName, GLfloat shininess,
            GLfloat spec_intensity) {
-	model_.LoadModel(model_path);
+	m_modelName = modelName;
 	material_ = Reflex::Material(shininess, spec_intensity);
 }
 
@@ -28,5 +28,6 @@ void Item::draw(std::shared_ptr<Shader> shader) {
 	glUniform1i(shader->GetUsingTexture(), true);
 	material_.UseMaterial(default_shader->GetShininessLocation(),
 	                      default_shader->GetSpecularIntensityLocation());
-	model_.RenderModel();
+	ModelManager& mm = ResourceManager::get_instance().get_model_manager();
+	mm.get_model(m_modelName).RenderModel();
 }

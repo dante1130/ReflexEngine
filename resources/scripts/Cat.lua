@@ -1,8 +1,8 @@
 baseObject = {
 	type = "Item",
-	xPos = 0,
+	xPos = random_generator(-10, 20),
 	yPos = -2,
-	zPos = 4,
+	zPos = random_generator(-10, 20),
 	xRotation = 1,
 	yRotation = 0,
 	zRotation = 0,
@@ -13,7 +13,7 @@ baseObject = {
 }
 
 item = {
-	model_path = "models/12221_Cat_v1_l3.obj",
+	modelName = "cat",
 	shininess = 256,
 	spec_intensity = 4
 }

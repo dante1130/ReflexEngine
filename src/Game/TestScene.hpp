@@ -16,6 +16,8 @@
 #include "Controller/MaterialLuaController.hpp"
 #include "Controller/ResourceManager/ResourceManager.hpp"
 #include "Controller/GuiLuaAccess.hpp"
+#include "guiManager.hpp"
+#include "Controller/GenericFunctions.h"
 
 /**
  * @class TestScene

@@ -9,8 +9,10 @@ GameObject* GameAssetFactory::create(std::string fileName) {
 
 	if (type == "Item") {
 		return loadItem(fileName);
+
 	} else if (type == "Water") {
 		return loadWater(fileName);
+
 	} else if (type == "Player") {
 		//
 		// return GameObjectLoader::player(fileName);
@@ -19,10 +21,13 @@ GameObject* GameAssetFactory::create(std::string fileName) {
 		// return GameObjectLoader::npc(fileName);
 	} else if (type == "Body") {
 		return loadBody(fileName);
+
 	} else if (type == "PhysicsObject") {
 		return loadPhysicsObject(fileName);
+
 	} else if (type == "ScriptableObject") {
 		return loadScriptableObject(fileName);
+
 	} else {
 		return NULL;
 	}
@@ -93,7 +98,7 @@ Item* GameAssetFactory::loadItem(std::string luaScript) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file(luaScript);
 
-	std::string model_path = lua["item"]["model_path"];
+	std::string model_path = lua["item"]["modelName"];
 	float shininess = lua["item"]["shininess"];
 	float spec_intensity = lua["item"]["spec_intensity"];
 
@@ -119,7 +124,7 @@ Water* GameAssetFactory::loadWater(std::string luaScript) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file(luaScript);
 
-	std::string filePath = lua["water"]["texturePath"];
+	std::string filePath = lua["water"]["textureName"];
 	Water* water = new Water(filePath);
 
 	glm::vec3 pos, rotation, scale, offMult, intensity;
@@ -177,7 +182,7 @@ PhysicsObject* GameAssetFactory::loadPhysicsObject(std::string luaScript) {
 	po->rotation = loadBaseRotation(lua);
 	po->angle = loadBaseAngle(lua);
 
-	std::string model_path = lua["baseObject"]["model_path"];
+	std::string model_path = lua["baseObject"]["modelName"];
 	float shininess = lua["baseObject"]["shininess"];
 	float spec_intensity = lua["baseObject"]["spec_intensity"];
 

@@ -3,6 +3,7 @@
 #include <string>
 
 #include "GameObject.hpp"
+#include "Controller/ResourceManager/ResourceManager.hpp"
 #include "View/Renderer/OpenGL/Objects/Model.hpp"
 #include "View/Renderer/OpenGL/Objects/Texture.hpp"
 #include "View/Renderer/OpenGL/Objects/Material.hpp"
@@ -21,7 +22,7 @@ public:
 	 * @param shininess
 	 * @param spec_intensity
 	 */
-	Item(const std::string& model_path, GLfloat shininess,
+	Item(const std::string& modelName, GLfloat shininess,
 	     GLfloat spec_intensity);
 
 	/**
@@ -50,7 +51,7 @@ public:
 
 private:
 	/// The model of the item.
-	Model model_ = {};
+	std::string m_modelName;
 	/// The material of the item.
 	Reflex::Material material_ = {};
 };

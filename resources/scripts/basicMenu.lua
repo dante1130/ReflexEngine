@@ -1,5 +1,5 @@
 gui_setWindowSize(250, 250, 2)
-gui_setWindowPos(600, 0, 2)
+gui_setWindowPos(0, 300, 2)
 gui_begin("IMPORTANT")
 gui_text("There once was a man named Daniel")
 
@@ -12,7 +12,7 @@ gui_progressBar(55)
 local frameRate = gui_guiFrameRate()
 gui_text("gui frame rate: " .. frameRate)
 
-local isPressed = gui_button("PRESS ME")
+local isPressed = gui_button("PRESS ME", 150, 20)
 if isPressed == true then
 	gui_text("WHY DID YOU PRESS ME?")
 end

@@ -2,7 +2,6 @@
 
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 #include "TestScene.hpp"
-#include "guiManager.hpp"
 TestScene::TestScene() {}
 
 GameAssetFactory gaf;
@@ -18,14 +17,9 @@ void TestScene::init() {
 	              glm::vec3(0.0f, -1.0f, 0.0f), 1.0f, 0.0f, 0.0f, 20.0f);
 
 	sol::state& lua = LuaManager::get_instance().get_state();
-	// MaterialLuaController::CreateLuaAccess();
-	TextureManager& tm = ResourceManager::get_instance().get_texture_manager();
-	ModelManager& mm = ResourceManager::get_instance().get_model_manager();
+	GenericFunctions::lua_access();
+
 	lua.script_file("scripts/_Materials.lua");
-	tm.get_texture("water");
-
-	mm.get_model("cat");
-
 	lua.set_function("addGameObject", &TestScene::addGameObject, this);
 	lua.script_file("scripts/_MasterCreation.lua");
 

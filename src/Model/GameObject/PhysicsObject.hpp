@@ -1,6 +1,7 @@
 #pragma once
 
 #include "BodyRigid.hpp"
+#include "Controller/ResourceManager/ResourceManager.hpp"
 #include "View/Renderer/OpenGL/Objects/Model.hpp"
 #include "View/Renderer/OpenGL/Objects/Texture.hpp"
 #include "View/Renderer/OpenGL/Objects/Material.hpp"
@@ -74,7 +75,8 @@ public:
 
 private:
 	/// The model of the item.
-	Model model_ = {};
+	// Model model_ = {};
+	std::string m_modelName;
 	/// The material of the item.
 	Reflex::Material material_ = {};
 };

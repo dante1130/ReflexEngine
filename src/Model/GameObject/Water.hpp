@@ -8,8 +8,6 @@
 
 class Water : public GameObject {
 public:
-	Water(std::string filePath);
-
 	/**
 	 * @brief	Constructor used to set a texture and leave rest as default
 	 * @param	&text	- The texture you want to add
@@ -17,7 +15,7 @@ public:
 	 * @pre		The texture has been created
 	 * @post	A water object will be ready
 	 */
-	Water(Texture &text);
+	Water(std::string &text);
 
 	/**
 	 * @brief	Constructor used to set a texture, pos, scale & offMult
@@ -32,7 +30,7 @@ public:
 	 * set
 	 * @post	A water object will be ready
 	 */
-	Water(Texture &text, glm::vec3 pos, glm::vec3 scale, glm::vec3 offMult);
+	Water(std::string &text, glm::vec3 pos, glm::vec3 scale, glm::vec3 offMult);
 
 	/**
 	 * @brief	Initialises the water
@@ -118,7 +116,7 @@ private:
 	/// <summary>
 	/// The texture of the water
 	/// </summary>
-	Texture m_texture;
+	std::string m_textureName;
 
 	/// <summary>
 	/// The mesh of the water
