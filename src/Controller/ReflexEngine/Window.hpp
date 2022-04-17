@@ -21,7 +21,7 @@ public:
 	 * @param windowWidth
 	 * @param windowHeight
 	 */
-	Window(GLint windowWidth, GLint windowHeight);
+	Window(int windowWidth, int windowHeight);
 
 	/**
 	 * @brief Initializes the window.
@@ -35,28 +35,28 @@ public:
 	 *
 	 * @return GLint
 	 */
-	GLint GetBufferWidth() const;
+	int GetBufferWidth() const;
 
 	/**
 	 * @brief Get the Buffer Height.
 	 *
 	 * @return GLint
 	 */
-	GLint GetBufferHeight() const;
+	int GetBufferHeight() const;
 
 	/**
 	 * @brief Get the mouse x offset.
 	 *
 	 * @return GLdouble
 	 */
-	GLdouble GetXOffset();
+	double GetXOffset();
 
 	/**
 	 * @brief Get the mouse y offset.
 	 *
 	 * @return GLdouble
 	 */
-	GLdouble GetYOffset();
+	double GetYOffset();
 
 	/**
 	 * @brief Get the current keys pressed.
@@ -80,7 +80,7 @@ public:
 	void SwapBuffers();
 
 	/**
-	 * @brief Returns a pointer to the window. (wtf?)
+	 * @brief Returns a pointer to the window.
 	 *
 	 * @return GLFWwindow*
 	 */
@@ -96,16 +96,16 @@ private:
 	GLFWwindow* m_mainWindow;
 
 	/// Dimensions of the window.
-	GLint m_width, m_height;
+	int m_width, m_height;
 
 	/// The buffer dimensions.
-	GLint m_bufferWidth, m_bufferHeight;
+	int m_bufferWidth, m_bufferHeight;
 
 	/// The previous mouse position.
-	GLdouble m_xPrev, m_yPrev;
+	double m_xPrev, m_yPrev;
 
 	/// The offset between the previous and the current mouse position.
-	GLdouble m_xOffset, m_yOffset;
+	double m_xOffset, m_yOffset;
 
 	/// Check whether if this is the first mouse move.
 	bool m_isFirstMouse;

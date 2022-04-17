@@ -32,12 +32,16 @@ void ReflexEngine::run() {
 
 		glfwPollEvents();
 
-		engine.update_camera(delta_time);
-
 		gui::mainLoopStart();
+
+		engine.scenes_.top()->key_controls(engine.window_.GetKeys(),
+		                                   delta_time);
+		engine.scenes_.top()->mouse_controls(engine.window_.GetXOffset(),
+		                                     engine.window_.GetYOffset());
 
 		engine.scenes_.top()->update(delta_time);
 		engine.scenes_.top()->add_draw_call();
+
 		engine.renderer_.draw();
 
 		gui::mainLoopEnd();
@@ -45,11 +49,6 @@ void ReflexEngine::run() {
 		engine.window_.SwapBuffers();
 	}
 	gui::shutdown();
-}
-
-void ReflexEngine::update_camera(float delta_time) {
-	camera_.KeyControl(window_.GetKeys(), delta_time);
-	camera_.MouseControl(window_.GetXOffset(), window_.GetYOffset());
 }
 
 ReflexEngine& ReflexEngine::get_instance() {

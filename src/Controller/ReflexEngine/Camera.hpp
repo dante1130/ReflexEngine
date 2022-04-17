@@ -1,11 +1,12 @@
 #pragma once
 
-#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 #include <glm/geometric.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+
+enum class CameraMovement { forward, backward, left, right };
 
 /**
  * @class Camera
@@ -28,45 +29,50 @@ public:
 	 * @param moveSpeed
 	 * @param turnSpeed
 	 */
-	Camera(glm::vec3 position, glm::vec3 up, GLfloat yaw, GLfloat pitch,
-	       GLfloat moveSpeed, GLfloat turnSpeed);
+	Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch,
+	       float moveSpeed, float turnSpeed);
 
 	/**
-	 * @brief The callback for the keyboard input.
-	 * @todo Refactor this to not handle keys.
-	 * @param keys
-	 * @param deltaTime
+	 * @brief Moves the camera position in the specified direction.
+	 *
+	 * @param direction
+	 * @param delta_time
 	 */
-	void KeyControl(const bool* keys, GLfloat deltaTime);
+	void move(CameraMovement direction, float delta_time);
 
 	/**
-	 * @brief The callback for mouse input.
+	 * @brief Moves the perspective by the offset in mouse position.
 	 *
 	 * @param xOffset
 	 * @param yOffset
 	 */
-	void MouseControl(GLfloat xOffset, GLfloat yOffset);
+	void mouse_move(float xOffset, float yOffset);
 
 	/**
 	 * @brief Returns the view matrix.
 	 *
 	 * @return glm::mat4
 	 */
-	glm::mat4 CalculateViewMatrix();
+	glm::mat4 calc_view_matrix();
 
 	/**
 	 * @brief Gets a Vector3 of the camera's position.
 	 *
 	 * @return glm::vec3
 	 */
-	glm::vec3 GetCamPosition() const;
+	glm::vec3 get_position() const;
 
 	/**
 	 * @brief Gets a Vector3 of the camera's position.
 	 *
 	 * @return glm::vec3
 	 */
-	glm::vec3 GetCamDirection() const;
+	glm::vec3 get_direction() const;
+
+	/**
+	 * @brief Toggles noclip on and off.
+	 */
+	void toggle_noclip();
 
 private:
 	/// The camera's position.
@@ -81,14 +87,16 @@ private:
 	glm::vec3 m_upWorld;
 
 	/// The camera's yaw.
-	GLfloat m_yaw;
+	float m_yaw;
 	/// The camera's pitch.
-	GLfloat m_pitch;
+	float m_pitch;
 
 	/// The camera's movement speed.
-	GLfloat m_moveSpeed;
+	float m_moveSpeed;
 	/// The camera's turn speed. (sensitivity)
-	GLfloat m_turnSpeed;
+	float m_turnSpeed;
+
+	bool is_noclip_ = false;
 
 	/**
 	 * @brief Updates the camera.
