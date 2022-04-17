@@ -279,8 +279,24 @@ protected:
 	/// Facaded react rigid body
 	/// </summary>
 	BodyRigidPhysics rb;
+
+	/// <summary>
+	/// The number of colliders in the rb
+	/// </summary>
 	int m_numOfColliders = 0;
+
+	/// <summary>
+	/// List of sphere colliders. Used for storing data to file
+	/// </summary>
 	std::vector<colliderData_sphere> m_sphere;
+
+	/// <summary>
+	/// List of capsule colliders. Used for storing data to file
+	/// </summary>
 	std::vector<colliderData_capsule> m_capsule;
+
+	/// <summary>
+	/// List of capsule colliders. Used for storing data to file
+	/// </summary>
 	std::vector<colliderData_box> m_box;
 };

@@ -35,6 +35,9 @@ void ReflexEngine::run() {
 
 		gui::mainLoopStart();
 
+		if (GenericFunctions::getIfPaused()) {
+			delta_time = 0.0000000001;
+		}
 		if (GenericFunctions::getIfLoad() == true) {
 			engine.scenes_.top()->loadSavedGameObjects();
 		} else if (GenericFunctions::getIfSave() == true) {
@@ -43,7 +46,6 @@ void ReflexEngine::run() {
 			engine.scenes_.top()->update(delta_time);
 			engine.scenes_.top()->add_draw_call();
 			engine.renderer_.draw();
-      
 		}
 		engine.scenes_.top()->key_controls(delta_time);
 		engine.scenes_.top()->mouse_controls(engine.window_.GetXOffset(),

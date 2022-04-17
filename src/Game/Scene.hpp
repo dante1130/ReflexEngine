@@ -53,8 +53,24 @@ public:
 	 */
 	virtual void add_draw_call() = 0;
 
+	/**
+	 * @brief	Saves game objects
+	 * @param	No param
+	 * @return	Void
+	 *
+	 * @pre		Game objects exists
+	 * @post	Game objects saved
+	 */
 	virtual void saveGameObjects() = 0;
 
+	/**
+	 * @brief	loads game objects
+	 * @param	No param
+	 * @return	Void
+	 *
+	 * @pre		Game objects exists in files
+	 * @post	Game objects added
+	 */
 	virtual void loadSavedGameObjects() = 0;
 
 	/**

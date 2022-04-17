@@ -3,7 +3,6 @@
 #include "BodyRigid.hpp"
 #include "Controller/ResourceManager/ResourceManager.hpp"
 #include "View/Renderer/OpenGL/Objects/Model.hpp"
-#include "View/Renderer/OpenGL/Objects/Texture.hpp"
 #include "View/Renderer/OpenGL/Objects/Material.hpp"
 #include "Controller/ResourceManager/ObjectSaving.hpp"
 
@@ -91,11 +90,44 @@ private:
 	/// The material of the item.
 	Reflex::Material material_ = {};
 
+	/**
+	 * @brief	Saves the sphere collider of rb
+	 * @param	index	- Which collider to save
+	 * @return	Void
+	 *
+	 * @pre		Collider exists
+	 * @post	Collider stored
+	 */
 	void saveSphereCollider(int index);
 
+	/**
+	 * @brief	Saves the capsule collider of rb
+	 * @param	index	- Which collider to save
+	 * @return	Void
+	 *
+	 * @pre		Collider exists
+	 * @post	Collider stored
+	 */
 	void saveCapsuleCollider(int index);
 
+	/**
+	 * @brief	Saves the box collider of rb
+	 * @param	index	- Which collider to save
+	 * @return	Void
+	 *
+	 * @pre		Collider exists
+	 * @post	Collider stored
+	 */
 	void saveBoxCollider(int index);
 
+	/**
+	 * @brief	Saves the collider of rb
+	 * @param	index	- Which collider to save
+	 * @param	type	- The type of collider
+	 * @return	Void
+	 *
+	 * @pre		Collider exists
+	 * @post	Collider stored
+	 */
 	void saveCollider(int index, int type);
 };

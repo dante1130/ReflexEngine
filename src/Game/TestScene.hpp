@@ -11,8 +11,6 @@
 #include "View/Renderer/OpenGL/Objects/SpotLight.hpp"
 #include "guiManager.hpp"
 #include "GameAssetFactory.hpp"
-#include "Controller/MaterialLuaController.hpp"
-#include "Controller/ResourceManager/ResourceManager.hpp"
 #include "Controller/GuiLuaAccess.hpp"
 #include "guiManager.hpp"
 #include "Controller/GenericFunctions.h"
@@ -70,8 +68,24 @@ public:
 	 */
 	void add_draw_call() override;
 
+	/**
+	 * @brief	Saves game objects
+	 * @param	No param
+	 * @return	Void
+	 *
+	 * @pre		Game objects exists
+	 * @post	Game objects saved
+	 */
 	void saveGameObjects() override;
 
+	/**
+	 * @brief	loads game objects
+	 * @param	No param
+	 * @return	Void
+	 *
+	 * @pre		Game objects exists in files
+	 * @post	Game objects added to scene
+	 */
 	void loadSavedGameObjects() override;
 
 private:
