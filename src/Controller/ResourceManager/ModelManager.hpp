@@ -2,7 +2,7 @@
 
 #include <unordered_map>
 
-#include "Model.hpp"
+#include "View/Renderer/OpenGL/Objects/Model.hpp"
 #include "Controller/LuaManager.hpp"
 /**
  * @class ModelManager
