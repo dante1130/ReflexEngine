@@ -15,6 +15,9 @@ public:
 	/// Window class.
 	Window window_ = {};
 
+	/// The camera.
+	Camera camera_ = {};
+
 	/// The renderer of the engine.
 	OpenGL renderer_ = {};
 
@@ -25,6 +28,13 @@ public:
 	 * @brief Runs the engine.
 	 */
 	static void run();
+
+	/**
+	 * @brief Updates the camera's position and perspective.
+	 *
+	 * @param delta_time
+	 */
+	void update_camera(float delta_time);
 
 	/**
 	 * @brief Get an instance of the engine.

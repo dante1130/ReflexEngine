@@ -2,7 +2,7 @@
 
 #include <unordered_map>
 
-#include "Texture.hpp"
+#include "View/Renderer/OpenGL/Objects/Texture.hpp"
 #include "Controller/LuaManager.hpp"
 
 /**

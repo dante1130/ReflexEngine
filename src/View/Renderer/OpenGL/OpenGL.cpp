@@ -28,9 +28,6 @@ void OpenGL::init() {
 	                                 "shaders/omni_shadow_map.geom",
 	                                 "shaders/omni_shadow_map.frag");
 
-	camera_ = Camera(glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f,
-	                 5.0f, 0.2f);
-
 	std::vector<std::string> skyboxFaces;
 
 	skyboxFaces.push_back(
@@ -50,14 +47,11 @@ void OpenGL::init() {
 }
 
 void OpenGL::draw() {
-	// Not working yet.
-	// for (const auto& d_light : directional_lights_) {
-	// 	directional_shadow_pass(d_light);
-	// }
-
 	render_pass();
 
 	directional_lights_.clear();
+	point_lights_.clear();
+	spot_lights_.clear();
 	draw_calls_.clear();
 }
 
@@ -82,7 +76,7 @@ void OpenGL::render_pass() {
 	    glm::radians(60.0f),
 	    static_cast<float>(width) / static_cast<float>(height), 0.1f, 100.0f);
 
-	glm::mat4 view = camera_.CalculateViewMatrix();
+	glm::mat4 view = engine.camera_.CalculateViewMatrix();
 
 	// Creates projection matrix mode
 	glUniformMatrix4fv(shader_->GetProjectionLocation(), 1, GL_FALSE,
@@ -108,8 +102,13 @@ void OpenGL::render_lights() {
 		shader_->SetDirectionalLight(d_light);
 		shader_->SetDirectionalLightTransform(
 		    d_light.CalculateLightTransform());
-		d_light.GetShadowMap()->Read(GL_TEXTURE2);
+		// d_light.GetShadowMap()->Read(GL_TEXTURE2);
 	}
+
+	shader_->SetPointLights(point_lights_.data(), point_lights_.size(), 3, 0);
+
+	shader_->SetSpotLights(spot_lights_.data(), spot_lights_.size(),
+	                       3 + point_lights_.size(), point_lights_.size());
 
 	shader_->SetTexture(1);
 	shader_->SetDirectionalShadowMap(2);
@@ -149,11 +148,14 @@ void OpenGL::add_directional_light(const DirectionalLight& light) {
 	directional_lights_.push_back(light);
 }
 
-void OpenGL::add_draw_call(const DrawCall& draw_call) {
-	draw_calls_.push_back(draw_call);
+void OpenGL::add_point_light(const PointLight& light) {
+	if (point_lights_.size() < MAX_POINT_LIGHTS) point_lights_.push_back(light);
 }
 
-void OpenGL::update_camera(Window& window, float delta_time) {
-	camera_.KeyControl(window.GetKeys(), delta_time);
-	camera_.MouseControl(window.GetXOffset(), window.GetYOffset());
+void OpenGL::add_spot_light(const SpotLight& light) {
+	if (spot_lights_.size() < MAX_SPOT_LIGHTS) spot_lights_.push_back(light);
+}
+
+void OpenGL::add_draw_call(const DrawCall& draw_call) {
+	draw_calls_.push_back(draw_call);
 }
