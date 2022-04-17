@@ -1,6 +1,7 @@
 #include <functional>
 
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
+#include "Controller/Input/InputManager.hpp"
 #include "TestScene.hpp"
 TestScene::TestScene() {}
 
@@ -22,13 +23,45 @@ void TestScene::init() {
 	lua.set_function("addGameObject", &TestScene::addGameObject, this);
 	lua.script_file("scripts/_MasterCreation.lua");
 
-	gui::init(ReflexEngine::get_instance().window_.getWindow(), "#version 410");
+	auto& input_manager = InputManager::get_instance();
+	input_manager.load_lua_bindings("scripts/controls.lua");
+
+	gui::init(ReflexEngine::get_instance().window_.get_window(),
+	          "#version 410");
 	guiLuaAccess::exposeGui();
 }
 
 void TestScene::addGameObject(std::string luaScript) {
 	std::cout << luaScript << std::endl;
 	game_objects_.emplace_back(gaf.create(luaScript));
+}
+
+void TestScene::key_controls(float delta_time) {
+	auto& camera = ReflexEngine::get_instance().camera_;
+	auto& input_manager = InputManager::get_instance();
+
+	if (input_manager.get_key_state(Input::quit))
+		ReflexEngine::get_instance().window_.set_should_close(true);
+
+	if (input_manager.get_key_state(Input::move_forward))
+		camera.move(CameraMovement::forward, delta_time);
+	if (input_manager.get_key_state(Input::move_backward))
+		camera.move(CameraMovement::backward, delta_time);
+	if (input_manager.get_key_state(Input::move_left))
+		camera.move(CameraMovement::left, delta_time);
+	if (input_manager.get_key_state(Input::move_right))
+		camera.move(CameraMovement::right, delta_time);
+
+	if (input_manager.get_key_state(Input::toggle_wireframe))
+		ReflexEngine::get_instance().renderer_.toggle_wireframe();
+	if (input_manager.get_key_state(Input::toggle_noclip))
+		camera.toggle_noclip();
+}
+
+void TestScene::mouse_controls(float xpos, float ypos) {
+	auto& camera = ReflexEngine::get_instance().camera_;
+
+	camera.mouse_move(xpos, ypos);
 }
 
 void TestScene::add_draw_call() {
@@ -45,10 +78,10 @@ void TestScene::add_draw_call() {
 void TestScene::update(float delta_time) {
 	const auto& camera = ReflexEngine::get_instance().camera_;
 
-	glm::vec3 lower_light = camera.GetCamPosition();
+	glm::vec3 lower_light = camera.get_position();
 	lower_light.y -= 0.3f;
 
-	glm::vec3 cam_direction = camera.GetCamDirection();
+	glm::vec3 cam_direction = camera.get_direction();
 
 	flashlight_.SetFlash(lower_light, cam_direction);
 

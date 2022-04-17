@@ -4,6 +4,7 @@
 
 #include "Game/Scene.hpp"
 #include "View/Renderer/OpenGL/OpenGL.hpp"
+#include "Camera.hpp"
 #include "Window.hpp"
 
 /**

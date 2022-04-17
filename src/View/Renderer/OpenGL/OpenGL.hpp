@@ -3,8 +3,6 @@
 #include <glad/glad.h>
 #include <functional>
 
-#include "Window.hpp"
-#include "Camera.hpp"
 #include "Objects/Shader.hpp"
 #include "Objects/Skybox.hpp"
 #include "CommonValues.hpp"
@@ -101,7 +99,7 @@ private:
 	void directional_shadow_pass(const DirectionalLight& d_light);
 
 	/// A boolean to toggle between wireframe and normal rendering.
-	bool is_wireframe_ = true;
+	bool is_wireframe_ = false;
 
 	/// The skybox.
 	Skybox skybox_ = {};
