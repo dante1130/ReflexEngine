@@ -16,8 +16,6 @@ bool TextureManager::load_texture_rgb(const std::string& texture_name,
 		std::cout << "loading " << texture_name << " from " << file_path
 		          << std::endl;
 		texture_hashmap[texture_name] = texture;
-		std::cout << "Currently stored texture: " << texture_hashmap.size()
-		          << std::endl;
 		return true;
 	}
 
@@ -39,7 +37,6 @@ bool TextureManager::load_texture_rgba(const std::string& texture_name,
 const Texture& TextureManager::get_texture(
     const std::string& texture_name) const {
 	// Returns a reference instead of the pointer.
-	std::cout << "number of textures = " << texture_hashmap.size() << std::endl;
 	return *texture_hashmap.at(texture_name);
 }
 

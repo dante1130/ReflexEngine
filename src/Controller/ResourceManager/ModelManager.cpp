@@ -11,6 +11,8 @@ bool ModelManager::load_model(const std::string& model_name,
 	Model* model = new Model();
 
 	if (model->LoadModel(file_name)) {
+		std::cout << "loading " << model_name << " from " << file_name
+		          << std::endl;
 		model_hashmap[model_name] = model;
 		return true;
 	}
