@@ -1,5 +1,5 @@
 ﻿# Minimum CMake version
-cmake_minimum_required (VERSION 3.19)
+cmake_minimum_required (VERSION 3.17)
 
 # Project declaration.
 project (ReflexEngine LANGUAGES CXX)
@@ -27,6 +27,7 @@ add_subdirectory(${CMAKE_PREFIX_PATH}/glfw)
 add_subdirectory(${CMAKE_PREFIX_PATH}/imgui)
 add_subdirectory(${CMAKE_PREFIX_PATH}/lua)
 add_subdirectory(${CMAKE_PREFIX_PATH}/reactphysics3d)
+add_subdirectory(${CMAKE_PREFIX_PATH}/raknet)
 
 add_subdirectory(src)
 
@@ -63,6 +64,7 @@ include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/stb_image)
 include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/assimp/include)
 include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/imgui)
 include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/reactphysics3d)
+include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/raknet)
 
 # Link libraries.
 target_link_libraries (ReflexEngine PRIVATE glfw)
@@ -72,3 +74,4 @@ target_link_libraries (ReflexEngine PRIVATE ${CMAKE_PREFIX_PATH}/assimp/lib/assi
 target_link_libraries (ReflexEngine PRIVATE imgui)
 target_link_libraries (ReflexEngine PRIVATE lua)
 target_link_libraries (ReflexEngine PRIVATE reactphysics3d)
+target_link_libraries (ReflexEngine PRIVATE raknet)
