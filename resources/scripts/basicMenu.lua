@@ -12,7 +12,7 @@ gui_progressBar(55)
 local frameRate = gui_guiFrameRate()
 gui_text("gui frame rate: " .. frameRate)
 
-local isPressed = gui_button("PRESS ME")
+local isPressed = gui_button("PRESS ME", 150, 20)
 if isPressed == true then
 	gui_text("WHY DID YOU PRESS ME?")
 end

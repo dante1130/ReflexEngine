@@ -1,24 +1,20 @@
 #include "Water.hpp"
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 #include "Controller/ResourceManager/ResourceManager.hpp"
-Water::Water(std::string filePath) {
-	m_texture = Texture(filePath.c_str());
-	m_texture.LoadTexture();
+
+Water::Water(std::string &text) {
+	m_textureName = text;
 	init();
 }
 
-Water::Water(Texture &text) {
-	m_texture = text;
-	init();
-}
-
-Water::Water(Texture &text, glm::vec3 pos, glm::vec3 scale, glm::vec3 offMult) {
+Water::Water(std::string &text, glm::vec3 pos, glm::vec3 scale,
+             glm::vec3 offMult) {
 	m_time = 0;
 	position = pos;
 	setIntensity(scale);
 	m_offsetMult = offMult;
 
-	m_texture = text;
+	m_textureName = text;
 	init();
 }
 
@@ -67,7 +63,7 @@ void Water::draw(std::shared_ptr<Shader> shader) {
 	glUniform1i(shader->GetUsingTexture(), true);
 	// m_texture.UseTexture();
 	TextureManager &tm = ResourceManager::get_instance().get_texture_manager();
-	const Texture &t = tm.get_texture("water");
+	const Texture &t = tm.get_texture(m_textureName);
 	t.UseTexture();
 
 	m_mesh.RenderMesh();

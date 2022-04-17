@@ -4,6 +4,7 @@
 #include "Model.hpp"
 #include "Texture.hpp"
 #include "Material.hpp"
+#include "Controller/ResourceManager/ResourceManager.hpp"
 
 class PhysicsObject : public BodyRigid {
 public:
@@ -74,7 +75,8 @@ public:
 
 private:
 	/// The model of the item.
-	Model model_ = {};
+	// Model model_ = {};
+	std::string m_modelName;
 	/// The material of the item.
 	Reflex::Material material_ = {};
 };

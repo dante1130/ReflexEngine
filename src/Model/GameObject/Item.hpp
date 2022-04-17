@@ -6,6 +6,7 @@
 #include "Model.hpp"
 #include "Texture.hpp"
 #include "Material.hpp"
+#include "Controller/ResourceManager/ResourceManager.hpp"
 
 /**
  * @class Item
@@ -21,7 +22,7 @@ public:
 	 * @param shininess
 	 * @param spec_intensity
 	 */
-	Item(const std::string& model_path, GLfloat shininess,
+	Item(const std::string& modelName, GLfloat shininess,
 	     GLfloat spec_intensity);
 
 	/**
@@ -50,7 +51,7 @@ public:
 
 private:
 	/// The model of the item.
-	Model model_ = {};
+	std::string m_modelName;
 	/// The material of the item.
 	Reflex::Material material_ = {};
 };

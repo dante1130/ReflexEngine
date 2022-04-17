@@ -212,7 +212,7 @@ void colourEdit4(const std::string name, float colour[4]);
  * @pre		window created
  * @post	module added
  */
-bool button(const std::string name);
+bool button(const std::string name, int xSize, int ySize);
 
 /**
  * @brief	User can enter text into box and submit it with enter. Lua script

@@ -14,7 +14,7 @@ baseObject = {
 }
 
 water = {
-	texturePath = "textures/water.png",
+	textureName = "water",
 	xMult = 1.1,
 	yMult = 1.2,
 	zMult = 1.7,

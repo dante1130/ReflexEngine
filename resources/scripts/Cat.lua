@@ -13,7 +13,7 @@ baseObject = {
 }
 
 item = {
-	model_path = "models/12221_Cat_v1_l3.obj",
+	modelName = "cat",
 	shininess = 256,
 	spec_intensity = 4
 }
