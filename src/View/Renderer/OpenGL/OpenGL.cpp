@@ -76,7 +76,7 @@ void OpenGL::render_pass() {
 	    glm::radians(60.0f),
 	    static_cast<float>(width) / static_cast<float>(height), 0.1f, 100.0f);
 
-	glm::mat4 view = engine.camera_.CalculateViewMatrix();
+	glm::mat4 view = engine.camera_.calc_view_matrix();
 
 	// Creates projection matrix mode
 	glUniformMatrix4fv(shader_->GetProjectionLocation(), 1, GL_FALSE,

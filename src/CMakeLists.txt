@@ -3,8 +3,6 @@ target_sources(${PROJECT_NAME} PRIVATE
 
 	AStar.cpp
 	AStarInterface.cpp
-	Camera.cpp
-	Window.cpp
 	Terrain.cpp
 	BruteForceTerrain.cpp
 	TexturedTerrain.cpp
@@ -34,6 +32,8 @@ target_sources(${PROJECT_NAME} PRIVATE
 	View/Renderer/OpenGL/Objects/Texture.cpp
 
 	Controller/ReflexEngine/ReflexEngine.cpp
+	Controller/ReflexEngine/Window.cpp
+	Controller/ReflexEngine/Camera.cpp
 	Controller/ResourceManager/ResourceManager.cpp
 	Controller/ResourceManager/TextureManager.cpp
 	Controller/ResourceManager/ModelManager.cpp

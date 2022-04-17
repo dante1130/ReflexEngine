@@ -6,8 +6,6 @@
 #include <glm/glm.hpp>
 
 #include "Scene.hpp"
-#include "View/Renderer/OpenGL/Objects/Texture.hpp"
-#include "View/Renderer/OpenGL/Objects/Material.hpp"
 #include "Model/GameObject/GameObject.hpp"
 #include "View/Renderer/OpenGL/Objects/DirectionalLight.hpp"
 #include "View/Renderer/OpenGL/Objects/SpotLight.hpp"
@@ -44,6 +42,21 @@ public:
 	 * @post	Object adde
 	 */
 	void addGameObject(std::string luaScript) override;
+
+	/**
+	 * @brief The function to specify controls for the keyboard.
+	 *
+	 * @param keys
+	 */
+	void key_controls(const bool* keys, float delta_time) override;
+
+	/**
+	 * @brief The function to specify controls for the mouse.
+	 *
+	 * @param xpos
+	 * @param ypos
+	 */
+	void mouse_controls(float xpos, float ypos) override;
 
 	/**
 	 * @brief The update loop.

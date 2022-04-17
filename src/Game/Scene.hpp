@@ -27,6 +27,21 @@ public:
 	virtual void addGameObject(std::string luaScript) = 0;
 
 	/**
+	 * @brief The function to specify controls for the keyboard.
+	 *
+	 * @param keys
+	 */
+	virtual void key_controls(const bool* keys, float delta_time) = 0;
+
+	/**
+	 * @brief The function to specify controls for the mouse.
+	 *
+	 * @param xpos
+	 * @param ypos
+	 */
+	virtual void mouse_controls(float xpos, float ypos) = 0;
+
+	/**
 	 * @brief The update loop of the scene.
 	 *
 	 * @param delta_time
