@@ -3,10 +3,10 @@
 #include <string>
 
 #include "GameObject.hpp"
-#include "Model.hpp"
-#include "Texture.hpp"
-#include "Material.hpp"
 #include "Controller/ResourceManager/ResourceManager.hpp"
+#include "View/Renderer/OpenGL/Objects/Model.hpp"
+#include "View/Renderer/OpenGL/Objects/Texture.hpp"
+#include "View/Renderer/OpenGL/Objects/Material.hpp"
 
 /**
  * @class Item

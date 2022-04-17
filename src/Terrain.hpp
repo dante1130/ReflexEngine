@@ -4,9 +4,9 @@
 #include <glm/glm.hpp>
 #include <glad/glad.h>
 
-#include "Mesh.hpp"
-#include "Texture.hpp"
-#include "Shader.hpp"
+#include "View/Renderer/OpenGL/Objects/Mesh.hpp"
+#include "View/Renderer/OpenGL/Objects/Texture.hpp"
+#include "View/Renderer/OpenGL/Objects/Shader.hpp"
 
 /**
  * @class Base terrain class.

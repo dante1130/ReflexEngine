@@ -4,27 +4,12 @@ target_sources(${PROJECT_NAME} PRIVATE
 	AStar.cpp
 	AStarInterface.cpp
 	Camera.cpp
-	Light.cpp
-	DirectionalLight.cpp
-	PointLight.cpp
-	SpotLight.cpp
-	Material.cpp
-	Mesh.cpp
-	Model.cpp
-	Shader.cpp
-	ShadowMap.cpp
-	OmniShadowMap.cpp
-	Skybox.cpp
-	Texture.cpp
 	Window.cpp
 	Terrain.cpp
 	BruteForceTerrain.cpp
 	TexturedTerrain.cpp
-
 	GameAssetFactory.cpp
-
 	guiManager.cpp
-	
 
 	Model/GameObject/GameObject.hpp
 	Model/GameObject/Item.cpp
@@ -35,6 +20,18 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Model/GameObject/ScriptableObject.cpp
 	
 	View/Renderer/OpenGL/OpenGL.cpp
+	View/Renderer/OpenGL/Objects/Light.cpp
+	View/Renderer/OpenGL/Objects/DirectionalLight.cpp
+	View/Renderer/OpenGL/Objects/PointLight.cpp
+	View/Renderer/OpenGL/Objects/SpotLight.cpp
+	View/Renderer/OpenGL/Objects/Material.cpp
+	View/Renderer/OpenGL/Objects/Mesh.cpp
+	View/Renderer/OpenGL/Objects/Model.cpp
+	View/Renderer/OpenGL/Objects/Shader.cpp
+	View/Renderer/OpenGL/Objects/ShadowMap.cpp
+	View/Renderer/OpenGL/Objects/OmniShadowMap.cpp
+	View/Renderer/OpenGL/Objects/Skybox.cpp
+	View/Renderer/OpenGL/Objects/Texture.cpp
 
 	Controller/ReflexEngine/ReflexEngine.cpp
 	Controller/ResourceManager/ResourceManager.cpp

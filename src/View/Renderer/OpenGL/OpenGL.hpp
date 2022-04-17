@@ -5,8 +5,9 @@
 
 #include "Window.hpp"
 #include "Camera.hpp"
-#include "Shader.hpp"
-#include "Skybox.hpp"
+#include "Objects/Shader.hpp"
+#include "Objects/Skybox.hpp"
+#include "CommonValues.hpp"
 #include "../Renderer.hpp"
 
 // A drawcall represents a drawable object that is rendered to the screen, this
@@ -47,19 +48,25 @@ public:
 	std::shared_ptr<Shader> get_shader();
 
 	/**
-	 * @brief Updates the camera's position and perspective.
-	 *
-	 * @param window
-	 * @param delta_time
-	 */
-	void update_camera(Window& window, float delta_time);
-
-	/**
 	 * @brief Adds a directional light to the renderer.
 	 *
 	 * @param light
 	 */
 	void add_directional_light(const DirectionalLight& light);
+
+	/**
+	 * @brief Adds a point light to the renderer.
+	 *
+	 * @param light
+	 */
+	void add_point_light(const PointLight& light);
+
+	/**
+	 * @brief Adds a spot light to the renderer.
+	 *
+	 * @param light
+	 */
+	void add_spot_light(const SpotLight& light);
 
 	/**
 	 * @brief Adds a draw call to the renderer.
@@ -96,14 +103,17 @@ private:
 	/// A boolean to toggle between wireframe and normal rendering.
 	bool is_wireframe_ = true;
 
-	/// The camera.
-	Camera camera_ = {};
-
 	/// The skybox.
 	Skybox skybox_ = {};
 
 	/// A vector of directional lights.
 	std::vector<DirectionalLight> directional_lights_;
+
+	/// An vector of point lights.
+	std::vector<PointLight> point_lights_;
+
+	/// An vector of spot lights.
+	std::vector<SpotLight> spot_lights_;
 
 	/// A vector of draw calls.
 	std::vector<DrawCall> draw_calls_ = {};

@@ -3,8 +3,8 @@
 #include <math.h>
 #include <glm.hpp>
 #include "GameObject.hpp"
-#include "Texture.hpp"
-#include "Mesh.hpp"
+#include "View/Renderer/OpenGL/Objects/Texture.hpp"
+#include "View/Renderer/OpenGL/Objects/Mesh.hpp"
 
 class Water : public GameObject {
 public:
