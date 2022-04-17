@@ -2,6 +2,7 @@
 
 #include "Model/GameObject/GameObject.hpp"
 #include "Controller/Physics.hpp"
+#include "Controller/ResourceManager/ObjectSaving.hpp"
 
 class Body : public GameObject {
 public:
@@ -76,6 +77,16 @@ public:
 	 * @post	Body object destroyed
 	 */
 	void physicsWorldDestroyer();
+
+	/**
+	 * @brief	Saves the object to lau file
+	 * @param	No param
+	 * @return	Void
+	 *
+	 * @pre		Object exists
+	 * @post	Object saved
+	 */
+	void saveObject() override;
 
 	/**
 	 * @brief	Destructor

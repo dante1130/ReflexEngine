@@ -5,6 +5,41 @@
 #include <glm/glm.hpp>
 #include <math.h>
 
+struct colliderData {
+	int m_colliderStored = 0;
+};
+
+struct colliderData_sphere : public colliderData {
+	float m_radius = 0;
+
+	colliderData_sphere(int num, float rad) {
+		m_colliderStored = num;
+		m_radius = rad;
+	}
+};
+
+struct colliderData_capsule : public colliderData {
+	float m_radius = 0;
+	float m_height = 0;
+
+	colliderData_capsule(int num, float rad, float hei) {
+		m_colliderStored = num;
+		m_radius = rad;
+		m_height = hei;
+	}
+};
+
+struct colliderData_box : public colliderData {
+	glm::vec3 m_size = {};
+
+	colliderData_box(int num, float x, float y, float z) {
+		m_colliderStored = num;
+		m_size.x = x;
+		m_size.y = y;
+		m_size.z = z;
+	}
+};
+
 class BodyRigidPhysics {
 public:
 	/**
@@ -225,6 +260,17 @@ public:
 	 */
 	void addHeightFieldShape(glm::vec3 pos, float bounciness,
 	                         float friction) = delete;
+
+	bool getIfGravityActive();
+	int getRBType();
+	int getNumberOfColliders();
+	float getLinearDamping();
+	float getAngularDamping();
+	bool getIfAllowedSleep();
+	int getColliderType(int index);
+	float getBounciness(int index);
+	float getFriction(int index);
+	glm::vec3 getLocalColliderPos(int index);
 
 	/**
 	 * @brief	Destructor

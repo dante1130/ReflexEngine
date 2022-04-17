@@ -150,6 +150,9 @@ Water* GameAssetFactory::loadWater(std::string luaScript) {
 	intensity.z = lua["water"]["zIntensity"];
 	water->setIntensity(intensity);
 
+	float time = lua["water"]["time"];
+	water->setTotalTime(time);
+
 	return water;
 }
 

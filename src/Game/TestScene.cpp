@@ -6,7 +6,6 @@
 TestScene::TestScene() {}
 
 GameAssetFactory gaf;
-
 void TestScene::init() {
 	directional_light_ =
 	    DirectionalLight(2048, 2048, glm::vec3(1.0f, 0.53f, 0.3f), 0.2f,
@@ -33,6 +32,7 @@ void TestScene::init() {
 }
 
 void TestScene::addGameObject(std::string luaScript) {
+	std::cout << luaScript << std::endl;
 	game_objects_.emplace_back(gaf.create(luaScript));
 }
 
@@ -88,4 +88,26 @@ void TestScene::update(float delta_time) {
 	for (auto& game_object : game_objects_) {
 		game_object->update(delta_time);
 	}
+}
+
+void TestScene::saveGameObjects() {
+	for (auto& game_object : game_objects_) {
+		game_object->saveObject();
+	}
+	GenericFunctions::setIfSave(false);
+	std::cout << "done saving" << std::endl;
+	ObjectSaving::setFreshSave();
+	return;
+}
+
+void TestScene::loadSavedGameObjects() {
+	game_objects_.clear();
+
+	sol::state& lua = LuaManager::get_instance().get_state();
+	lua.script_file("scripts/save/_MasterCreation.lua");
+	std::cout << "Number of game objects loaded after save: "
+	          << game_objects_.size() << std::endl;
+
+	GenericFunctions::setIfLoad(false);
+	return;
 }

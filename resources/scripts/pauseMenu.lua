@@ -16,11 +16,11 @@ if unpause then
 end
 
 if save then
-	--Call save method
+	save_game(true)
 end
 
 if load then
-	--Call load method
+	load_game(true)
 end
 
 if exit then

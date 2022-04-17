@@ -10,3 +10,6 @@ void Reflex::Material::UseMaterial(GLuint shininessLoc,
 	glUniform1f(specularIntensityLoc, m_specularIntensity);
 	glUniform1f(shininessLoc, m_shininess);
 }
+
+float Reflex::Material::getSpecIntensity() { return m_specularIntensity; }
+float Reflex::Material::getShininess() { return m_shininess; }

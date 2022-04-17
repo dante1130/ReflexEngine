@@ -31,3 +31,16 @@ void Item::draw(std::shared_ptr<Shader> shader) {
 	ModelManager& mm = ResourceManager::get_instance().get_model_manager();
 	mm.get_model(m_modelName).RenderModel();
 }
+
+void Item::saveObject() {
+	ObjectSaving::openFile();
+	ObjectSaving::saveGameObject(position, rotation, scale, angle, "Item");
+	ObjectSaving::closeSctruct();
+	ObjectSaving::createStruct("item");
+	ObjectSaving::addValue("modelName", "cat", false);
+	ObjectSaving::addValue("shininess", material_.getShininess(), false);
+	ObjectSaving::addValue("spec_intensity", material_.getSpecIntensity(),
+	                       true);
+	ObjectSaving::closeSctruct();
+	ObjectSaving::closeFile();
+}

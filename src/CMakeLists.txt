@@ -45,6 +45,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/MaterialLuaController.cpp
 	Controller/GuiLuaAccess.cpp
 	Controller/GenericFunctions.cpp
+	Controller/ResourceManager/ObjectSaving.cpp
 
 	Game/Scene.hpp
 	Game/TestScene.cpp

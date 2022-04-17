@@ -2,6 +2,7 @@
 
 #include "GameObject.hpp"
 #include "Controller/LuaManager.hpp"
+#include "Controller/ResourceManager/ObjectSaving.hpp"
 
 class ScriptableObject : public GameObject {
 public:
@@ -54,6 +55,16 @@ public:
 	 * @post	Nothing
 	 */
 	void draw(std::shared_ptr<Shader> shader) {}
+
+	/**
+	 * @brief	Saves the object to lau file
+	 * @param	No param
+	 * @return	Void
+	 *
+	 * @pre		Object exists
+	 * @post	Object saved
+	 */
+	void saveObject() override;
 
 	/**
 	 * @brief	Destructor

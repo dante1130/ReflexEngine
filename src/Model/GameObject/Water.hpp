@@ -5,6 +5,7 @@
 #include "GameObject.hpp"
 #include "View/Renderer/OpenGL/Objects/Texture.hpp"
 #include "View/Renderer/OpenGL/Objects/Mesh.hpp"
+#include "Controller/ResourceManager/ObjectSaving.hpp"
 
 class Water : public GameObject {
 public:
@@ -91,6 +92,18 @@ public:
 	 * @post	Offset of water movement set
 	 */
 	void setOffsetMult(glm::vec3 offMult);
+
+	void setTotalTime(float time);
+
+	/**
+	 * @brief	Saves the object to lau file
+	 * @param	No param
+	 * @return	Void
+	 *
+	 * @pre		Object exists
+	 * @post	Object saved
+	 */
+	void saveObject() override;
 
 private:
 	/// <summary>

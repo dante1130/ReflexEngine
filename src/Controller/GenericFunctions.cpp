@@ -20,6 +20,8 @@ void GenericFunctions::lua_access() {
 	sol::state& lua = LuaManager::get_instance().get_state();
 
 	lua.set_function("random_generator", &GenericFunctions::get_random);
+	lua.set_function("save_game", &GenericFunctions::setIfSave);
+	lua.set_function("load_game", &GenericFunctions::setIfLoad);
 }
 
 int GenericFunctions::get_random(int min, int max) {
@@ -28,3 +30,11 @@ int GenericFunctions::get_random(int min, int max) {
 	}
 	return rand() % max + min;
 }
+
+bool shouldSave = false;
+bool shouldLoad = false;
+
+bool GenericFunctions::getIfSave() { return shouldSave; }
+void GenericFunctions::setIfSave(bool val) { shouldSave = val; }
+bool GenericFunctions::getIfLoad() { return shouldLoad; }
+void GenericFunctions::setIfLoad(bool val) { shouldLoad = val; }

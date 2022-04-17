@@ -20,5 +20,6 @@ water = {
 	zMult = 1.7,
 	xIntensity = 5,
 	yIntensity = 10,
-	zIntensity = 5
+	zIntensity = 5,
+	time = 0
 }

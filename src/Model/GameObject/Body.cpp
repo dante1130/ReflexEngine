@@ -28,6 +28,15 @@ void Body::physicsDebugger() {
 	Physics::setDebuggerValues(16, true);
 }
 
-Body::~Body() { physicsWorldDestroyer(); }
-
 void Body::setCreator(bool val) { creator = val; }
+
+void Body::saveObject() {
+	ObjectSaving::openFile();
+	ObjectSaving::saveGameObject(position, rotation, scale, angle, "Body");
+	ObjectSaving::addComma();
+	ObjectSaving::addValue("creator", creator, true);
+	ObjectSaving::closeSctruct();
+	ObjectSaving::closeFile();
+}
+
+Body::~Body() { physicsWorldDestroyer(); }

@@ -9,5 +9,9 @@ void lua_access();
 
 void init_random(int seed, bool useSeed);
 int get_random(int min, int max);
+bool getIfSave();
+void setIfSave(bool val);
+bool getIfLoad();
+void setIfLoad(bool val);
 
 };  // namespace GenericFunctions
