@@ -18,7 +18,6 @@ void ReflexEngine::run() {
 	float delta_time = 0.0f;
 	float prev_time = glfwGetTime();
 
-	Window w;
 	glfwSetInputMode(ReflexEngine::get_instance().window_.getWindow(),
 	                 GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
