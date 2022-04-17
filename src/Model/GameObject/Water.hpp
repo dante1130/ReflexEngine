@@ -116,7 +116,6 @@ private:
 	/// <summary>
 	/// The texture of the water
 	/// </summary>
-	Texture m_texture;
 	std::string m_textureName;
 
 	/// <summary>
