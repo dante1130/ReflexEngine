@@ -2,10 +2,11 @@
 
 #include "TextureManager.hpp"
 #include "ModelManager.hpp"
+#include "MaterialManager.hpp"
 
 /**
  * @class A singleton class for containing other asset managers; models,
- * textures, etc.
+ * textures, and materials.
  *
  */
 class ResourceManager {
@@ -31,6 +32,13 @@ public:
 	 */
 	TextureManager& get_texture_manager();
 
+	/**
+	 * @brief Get the material manager.
+	 *
+	 * @return MaterialManager&
+	 */
+	MaterialManager& get_material_manager();
+
 	// These are deleted as a singleton pattern is used.
 	ResourceManager(ResourceManager& other) = delete;
 	ResourceManager(const ResourceManager& other) = delete;
@@ -41,8 +49,11 @@ private:
 	/// The texture manager.
 	TextureManager texture_manager_;
 
-	/// The model manager
+	/// The model manager.
 	ModelManager model_manager_;
+
+	/// The material manager.
+	MaterialManager material_manager_;
 
 	/**
 	 * @brief Construct a new Resource Manager object

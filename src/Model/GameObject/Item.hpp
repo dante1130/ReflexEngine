@@ -16,15 +16,12 @@
 class Item : public GameObject {
 public:
 	/**
-	 * @brief Construct a new Item object with a model_path, shininess, and
-	 * specular intensity.
+	 * @brief Construct a new Item object with a model name and a texture name.
 	 *
-	 * @param model_path
-	 * @param shininess
-	 * @param spec_intensity
+	 * @param model_name
+	 * @param texture_name
 	 */
-	Item(const std::string& modelName, GLfloat shininess,
-	     GLfloat spec_intensity);
+	Item(const std::string& model_name, const std::string& texture_name);
 
 	/**
 	 * @brief Initializes the item with a model, a texture, and a material.
@@ -58,11 +55,11 @@ public:
 	 * @pre		Object exists
 	 * @post	Object saved
 	 */
-	void saveObject() override;
+	void save_object() override;
 
 private:
 	/// The model of the item.
-	std::string m_modelName;
+	std::string model_name_;
 	/// The material of the item.
-	Reflex::Material material_ = {};
+	std::string material_name_;
 };

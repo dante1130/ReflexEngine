@@ -2,34 +2,27 @@
 
 GameObject* GameAssetFactory::create(std::string fileName) {
 	if (fileName.length() == 0 || isLuaScript(fileName) == false) {
-		return NULL;
+		return nullptr;
 	}
 
 	std::string type = getObjectType(fileName);
 
 	if (type == "Item") {
 		return loadItem(fileName);
-
 	} else if (type == "Water") {
 		return loadWater(fileName);
-
 	} else if (type == "Player") {
-		//
 		// return GameObjectLoader::player(fileName);
 	} else if (type == "NPC") {
-		//
 		// return GameObjectLoader::npc(fileName);
 	} else if (type == "Body") {
 		return loadBody(fileName);
-
 	} else if (type == "PhysicsObject") {
 		return loadPhysicsObject(fileName);
-
 	} else if (type == "ScriptableObject") {
 		return loadScriptableObject(fileName);
-
 	} else {
-		return NULL;
+		return nullptr;
 	}
 }
 
@@ -98,11 +91,10 @@ Item* GameAssetFactory::loadItem(std::string luaScript) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file(luaScript);
 
-	std::string model_path = lua["item"]["modelName"];
-	float shininess = lua["item"]["shininess"];
-	float spec_intensity = lua["item"]["spec_intensity"];
+	std::string model_name = lua["item"]["modelName"];
+	std::string material_name = lua["item"]["material_name"];
 
-	Item* item = new Item(model_path, shininess, spec_intensity);
+	Item* item = new Item(model_name, material_name);
 
 	glm::vec3 pos, rotation, scale;
 	float angle;
@@ -185,11 +177,10 @@ PhysicsObject* GameAssetFactory::loadPhysicsObject(std::string luaScript) {
 	po->rotation = loadBaseRotation(lua);
 	po->angle = loadBaseAngle(lua);
 
-	std::string model_path = lua["baseObject"]["modelName"];
-	float shininess = lua["baseObject"]["shininess"];
-	float spec_intensity = lua["baseObject"]["spec_intensity"];
+	std::string model_name = lua["baseObject"]["modelName"];
+	std::string material_name = lua["baseObject"]["material_name"];
 
-	po->initModel(model_path, shininess, spec_intensity);
+	po->initModel(model_name, material_name);
 	po->initRB(po->position, po->rotation, po->angle);
 	po->addSphereCollider(glm::vec3(0, 0, 0), 2, 0.5, 0.5);
 	loadExtraPhysicObjectSettings(po, lua);

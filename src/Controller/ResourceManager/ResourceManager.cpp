@@ -11,7 +11,12 @@ TextureManager& ResourceManager::get_texture_manager() {
 	return texture_manager_;
 }
 
+MaterialManager& ResourceManager::get_material_manager() {
+	return material_manager_;
+}
+
 ResourceManager::ResourceManager() {
 	texture_manager_.lua_access();
 	model_manager_.lua_access();
+	material_manager_.lua_access();
 }

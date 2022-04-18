@@ -17,6 +17,10 @@ void ReflexEngine::run() {
 
 	engine.renderer_.init();
 
+	gui::init(ReflexEngine::get_instance().window_.get_window(),
+	          "#version 410");
+	guiLuaAccess::exposeGui();
+
 	engine.scenes_.emplace(std::make_shared<TestScene>());
 	engine.scenes_.top()->init();
 
@@ -35,18 +39,18 @@ void ReflexEngine::run() {
 
 		gui::mainLoopStart();
 
-		if (GenericFunctions::getIfPaused()) {
-			delta_time = 0.0000000001;
-		}
-		if (GenericFunctions::getIfLoad() == true) {
+		if (GenericFunctions::getIfPaused()) delta_time = 0.0000000001;
+
+		if (GenericFunctions::getIfLoad()) {
 			engine.scenes_.top()->loadSavedGameObjects();
-		} else if (GenericFunctions::getIfSave() == true) {
+		} else if (GenericFunctions::getIfSave()) {
 			engine.scenes_.top()->saveGameObjects();
 		} else {
 			engine.scenes_.top()->update(delta_time);
 			engine.scenes_.top()->add_draw_call();
 			engine.renderer_.draw();
 		}
+
 		engine.scenes_.top()->key_controls(delta_time);
 		engine.scenes_.top()->mouse_controls(engine.window_.GetXOffset(),
 		                                     engine.window_.GetYOffset());

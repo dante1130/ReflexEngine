@@ -4,6 +4,7 @@
 
 #include "View/Renderer/OpenGL/Objects/Model.hpp"
 #include "Controller/LuaManager.hpp"
+
 /**
  * @class ModelManager
  * @brief An encapsulated class for an unordered map of models.

@@ -8,11 +8,11 @@ void ScriptableObject::update(float delta_time) {
 	lua.script_file(scriptPath);
 }
 
-void ScriptableObject::saveObject() {
+void ScriptableObject::save_object() {
 	ObjectSaving::openFile();
 	ObjectSaving::saveGameObject(position, rotation, scale, angle,
 	                             "ScriptableObject");
-	ObjectSaving::closeSctruct();
+	ObjectSaving::closeStruct();
 	ObjectSaving::addValue("script", scriptPath, true);
 	ObjectSaving::closeFile();
 }

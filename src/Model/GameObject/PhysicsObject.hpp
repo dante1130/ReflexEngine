@@ -16,20 +16,18 @@ public:
 	 * @pre	Nothing
 	 * @post	Object created
 	 */
-	PhysicsObject();
+	PhysicsObject() = default;
 
 	/**
 	 * @brief	Initialised the model
-	 * @param	model_path		- path to model
-	 * @param	shininess		- shininess
-	 * @param	spec_intensity	- specual intensity
-	 * @return	No return
+	 * @param	model_name		name of model
+	 * @param	material_name	name of material
 	 *
 	 * @pre		Object exists
 	 * @post	model initialised
 	 */
-	void initModel(const std::string& model_path, GLfloat shininess,
-	               GLfloat spec_intensity);
+	void initModel(const std::string& model_name,
+	               const std::string& material_name);
 
 	/**
 	 * @brief	Initialised the rigid body
@@ -81,14 +79,13 @@ public:
 	 * @pre		Object exists
 	 * @post	Object saved
 	 */
-	void saveObject() override;
+	void save_object() override;
 
 private:
 	/// The model of the item.
-	// Model model_ = {};
-	std::string m_modelName;
+	std::string model_name_;
 	/// The material of the item.
-	Reflex::Material material_ = {};
+	std::string material_name_;
 
 	/**
 	 * @brief	Saves the sphere collider of rb

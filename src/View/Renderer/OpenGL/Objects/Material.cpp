@@ -6,7 +6,7 @@ Reflex::Material::Material(GLfloat shine, GLfloat sIntensity)
     : m_specularIntensity(sIntensity), m_shininess(shine) {}
 
 void Reflex::Material::UseMaterial(GLuint shininessLoc,
-                                   GLuint specularIntensityLoc) {
+                                   GLuint specularIntensityLoc) const {
 	glUniform1f(specularIntensityLoc, m_specularIntensity);
 	glUniform1f(shininessLoc, m_shininess);
 }

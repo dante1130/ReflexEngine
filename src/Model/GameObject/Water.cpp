@@ -89,12 +89,12 @@ void Water::setOffsetMult(glm::vec3 offMult) { m_offsetMult = offMult; }
 
 void Water::setTotalTime(float time) { m_time = time; }
 
-void Water::saveObject() {
+void Water::save_object() {
 	ObjectSaving::openFile();
 	ObjectSaving::saveGameObject(position, rotation, scale, angle, "Water");
-	ObjectSaving::closeSctruct();
+	ObjectSaving::closeStruct();
 	ObjectSaving::createStruct("water");
-	ObjectSaving::addValue("textureName", "water", false);
+	ObjectSaving::addValue("textureName", m_textureName, false);
 	ObjectSaving::addValue("xMult", m_offsetMult.x, false);
 	ObjectSaving::addValue("yMult", m_offsetMult.y, false);
 	ObjectSaving::addValue("zMult", m_offsetMult.z, false);
@@ -102,6 +102,6 @@ void Water::saveObject() {
 	ObjectSaving::addValue("yIntensity", m_intensity.y, false);
 	ObjectSaving::addValue("zIntensity", m_intensity.z, false);
 	ObjectSaving::addValue("time", (float)m_time, true);
-	ObjectSaving::closeSctruct();
+	ObjectSaving::closeStruct();
 	ObjectSaving::closeFile();
 }

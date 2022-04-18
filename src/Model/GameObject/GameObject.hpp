@@ -44,14 +44,12 @@ public:
 	virtual void draw(std::shared_ptr<Shader> shader) = 0;
 
 	/**
-	 * @brief	Saves the object to lau file
-	 * @param	No param
-	 * @return	Void
+	 * @brief	Saves the object to lua file
 	 *
 	 * @pre		Object exists
 	 * @post	Object saved
 	 */
-	virtual void saveObject() = 0;
+	virtual void save_object() = 0;
 
 	/**
 	 * @brief Virtual destructor.

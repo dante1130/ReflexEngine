@@ -67,7 +67,7 @@ void ObjectSaving::createStruct(std::string structName) {
 	outfile << structName << " = {\n";
 }
 
-void ObjectSaving::closeSctruct() { outfile << "}\n\n"; }
+void ObjectSaving::closeStruct() { outfile << "}\n\n"; }
 
 void ObjectSaving::closeFile() { outfile.close(); }
 

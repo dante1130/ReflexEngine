@@ -37,16 +37,16 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/ResourceManager/ResourceManager.cpp
 	Controller/ResourceManager/TextureManager.cpp
 	Controller/ResourceManager/ModelManager.cpp
+	Controller/ResourceManager/MaterialManager.cpp
+	Controller/ResourceManager/ObjectSaving.cpp
 	Controller/Input/InputManager.cpp
 	Controller/Input/Input.hpp
 	Controller/LuaManager.cpp
 	Controller/Physics.cpp
 	Controller/BodyRigidPhysics.cpp
-	Controller/MaterialLuaController.cpp
 	Controller/GuiLuaAccess.cpp
 	Controller/GenericFunctions.cpp
-	Controller/ResourceManager/ObjectSaving.cpp
-
+	
 	Game/Scene.hpp
 	Game/TestScene.cpp
 )
