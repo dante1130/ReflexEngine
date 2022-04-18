@@ -112,7 +112,7 @@ void PhysicsObject::saveCollider(int index, int type) {
 
 void PhysicsObject::save_object() {
 	ObjectSaving::openFile();
-	ObjectSaving::saveGameObject(position, rotation, scale, angle,
+	ObjectSaving::saveGameObject(position, rotation, scale, angle + 0.01,
 	                             "PhysicsObject");
 	ObjectSaving::addComma();
 	ObjectSaving::addValue("modelName", model_name_, false);
