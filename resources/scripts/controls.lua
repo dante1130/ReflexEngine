@@ -9,5 +9,6 @@ Bindings = {
 	shoot = "mouse1",
 	toggle_wireframe = "k",
 	toggle_noclip = "z",
-	pause_game = "escape"
+	pause_game = "escape",
+	help_menu = "m"
 }

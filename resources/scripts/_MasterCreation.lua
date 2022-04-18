@@ -11,6 +11,6 @@ addGameObject("scripts/CatPhysics.lua")
 addGameObject("scripts/CatPhysics2.lua")
 addGameObject("scripts/guiBasic.lua")
 addGameObject("scripts/pauseMenuSetup.lua")
-
+addGameObject("scripts/helpMenuSetup.lua")
 
 addGameObject("scripts/destroyer.lua")

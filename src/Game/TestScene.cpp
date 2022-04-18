@@ -59,6 +59,10 @@ void TestScene::key_controls(float delta_time) {
 
 	if (input_manager.get_key_state(Input::pause_game))
 		GenericFunctions::setIfPaused(!GenericFunctions::getIfPaused());
+
+	if (input_manager.get_key_state(Input::help_menu))
+		GenericFunctions::setifHelpMenuActive(
+		    !GenericFunctions::getIfHelpMenuActive());
 }
 
 void TestScene::mouse_controls(float xpos, float ypos) {

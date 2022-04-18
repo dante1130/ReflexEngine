@@ -15,5 +15,6 @@ enum class Input {
 	shoot,
 	toggle_wireframe,
 	toggle_noclip,
-	pause_game
+	pause_game,
+	help_menu
 };

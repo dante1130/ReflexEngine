@@ -108,4 +108,8 @@ void setIfPaused(bool val);
  */
 void exitEngine();
 
+void setifHelpMenuActive(bool val);
+
+bool getIfHelpMenuActive();
+
 };  // namespace GenericFunctions

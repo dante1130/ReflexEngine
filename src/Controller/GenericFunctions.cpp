@@ -7,6 +7,7 @@ int m_seed = 0;
 bool shouldSave = false;
 bool shouldLoad = false;
 bool paused = false;
+bool helpMenu = false;
 
 void GenericFunctions::init_random(int seed, bool useSeed) {
 	m_useSeed = useSeed;
@@ -29,6 +30,8 @@ void GenericFunctions::lua_access() {
 	lua.set_function("set_pause_game", &GenericFunctions::setIfPaused);
 	lua.set_function("get_pause_game", &GenericFunctions::getIfPaused);
 	lua.set_function("exit_game", &GenericFunctions::exitEngine);
+	lua.set_function("set_help_menu", &GenericFunctions::setifHelpMenuActive);
+	lua.set_function("get_help_menu", &GenericFunctions::getIfHelpMenuActive);
 }
 
 int GenericFunctions::get_random(int min, int max) {
@@ -53,3 +56,7 @@ void GenericFunctions::setIfPaused(bool val) { paused = val; }
 void GenericFunctions::exitEngine() {
 	ReflexEngine::get_instance().window_.set_should_close(true);
 }
+
+void GenericFunctions::setifHelpMenuActive(bool val) { helpMenu = val; }
+
+bool GenericFunctions::getIfHelpMenuActive() { return helpMenu; }
