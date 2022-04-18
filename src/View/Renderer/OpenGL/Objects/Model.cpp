@@ -77,35 +77,35 @@ void Model::LoadMesh(aiMesh* mesh, const aiScene* scene) {
 
 	Mesh* newMesh = new Mesh();
 	newMesh->CreateMesh(&vertices[0], &indices[0], vertices.size(),
-	                    indices.size());
+	                    indices.size()); 
 
 	m_meshVec.push_back(newMesh);
-	m_meshToTex.push_back(mesh->mMaterialIndex);
+	m_meshToTex.push_back(mesh->mMaterialIndex); 
 }
 
 void Model::LoadMaterials(const aiScene* scene) {
 	m_textureVec.resize(scene->mNumMaterials);
 
 	for (size_t i = 0; i < scene->mNumMaterials; ++i) {
-		aiMaterial* material = scene->mMaterials[i];
+		aiMaterial* material = scene->mMaterials[i]; 
 
 		m_textureVec[i] = nullptr;
 
 		if (material->GetTextureCount(aiTextureType_DIFFUSE)) {
-			aiString path;
+			aiString path; 
 
 			if (material->GetTexture(aiTextureType_DIFFUSE, 0, &path) ==
 			    AI_SUCCESS) {
 				int idx = std::string(path.data).rfind("\\");
-				std::string fileName = std::string(path.data).substr(idx + 1);
+				std::string fileName = std::string(path.data).substr(idx + 1); 
 
-				std::string texPath = std::string("Textures/") + fileName;
+				std::string texPath = std::string("Textures/") + fileName; 
 				m_textureVec[i] = new Texture(texPath.c_str());
 
 				if (!m_textureVec[i]->LoadTexture()) {
-					std::cout << "Failed to load texture at " << texPath;
+					std::cout << "Failed to load texture at " << texPath; 
 					delete m_textureVec[i];
-					m_textureVec[i] = nullptr;
+					m_textureVec[i] = nullptr; 
 				}
 			}
 		}

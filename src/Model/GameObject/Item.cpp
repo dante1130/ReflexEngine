@@ -9,7 +9,7 @@ Item::Item(const std::string& model_name, const std::string& texture_name) {
 
 void Item::add_draw_call() {
 	DrawCall draw_call = [=](std::shared_ptr<Shader> shader) { draw(shader); };
-
+	//
 	ReflexEngine::get_instance().renderer_.add_draw_call(draw_call);
 }
 
