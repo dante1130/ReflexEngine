@@ -88,6 +88,26 @@ public:
 	 */
 	void loadSavedGameObjects() override;
 
+	/**
+	 * @brief	Adds new game objects during run time
+	 * @param	No param
+	 * @return	Void
+	 *
+	 * @pre		Added game objects stored in list
+	 * @post	Game objects loaded and stored
+	 */
+	void add_new_game_objects();
+
+	/**
+	 * @brief	Deleted game objects which are considered finished
+	 * @param	No param
+	 * @return	Void
+	 *
+	 * @pre		Game objects exists
+	 * @post	Removed bad game objects
+	 */
+	void garbage_collection();
+
 private:
 	/// A directional light.
 	DirectionalLight directional_light_ = {};
