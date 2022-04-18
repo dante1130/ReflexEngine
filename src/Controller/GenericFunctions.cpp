@@ -7,6 +7,10 @@ int m_seed = 0;
 bool shouldSave = false;
 bool shouldLoad = false;
 bool paused = false;
+bool helpMenu = false;
+bool shouldShoot;
+float lastShot = 0;
+float shot_delay = 0;
 
 void GenericFunctions::init_random(int seed, bool useSeed) {
 	m_useSeed = useSeed;
@@ -29,6 +33,21 @@ void GenericFunctions::lua_access() {
 	lua.set_function("set_pause_game", &GenericFunctions::setIfPaused);
 	lua.set_function("get_pause_game", &GenericFunctions::getIfPaused);
 	lua.set_function("exit_game", &GenericFunctions::exitEngine);
+	lua.set_function("set_help_menu", &GenericFunctions::setifHelpMenuActive);
+	lua.set_function("get_help_menu", &GenericFunctions::getIfHelpMenuActive);
+	lua.set_function("camera_pos_x", &GenericFunctions::luaCamPosX);
+	lua.set_function("camera_pos_y", &GenericFunctions::luaCamPosY);
+	lua.set_function("camera_pos_z", &GenericFunctions::luaCamPosZ);
+	lua.set_function("camera_look_x", &GenericFunctions::luaCamLookX);
+	lua.set_function("camera_look_y", &GenericFunctions::luaCamLookY);
+	lua.set_function("camera_look_z", &GenericFunctions::luaCamLookZ);
+
+	lua.set_function("set_last_shot", &GenericFunctions::setLastShot);
+	lua.set_function("set_shot_delay", &GenericFunctions::setShotDelay);
+	lua.set_function("set_if_should_shoot",
+	                 &GenericFunctions::setIfShouldShoot);
+	lua.set_function("get_if_should_shoot",
+	                 &GenericFunctions::getIfShouldShoot);
 }
 
 int GenericFunctions::get_random(int min, int max) {
@@ -53,3 +72,42 @@ void GenericFunctions::setIfPaused(bool val) { paused = val; }
 void GenericFunctions::exitEngine() {
 	ReflexEngine::get_instance().window_.set_should_close(true);
 }
+
+void GenericFunctions::setifHelpMenuActive(bool val) { helpMenu = val; }
+
+bool GenericFunctions::getIfHelpMenuActive() { return helpMenu; }
+
+float GenericFunctions::luaCamPosX() {
+	return ReflexEngine::get_instance().camera_.get_position().x;
+}
+float GenericFunctions::luaCamPosY() {
+	return ReflexEngine::get_instance().camera_.get_position().y;
+}
+float GenericFunctions::luaCamPosZ() {
+	return ReflexEngine::get_instance().camera_.get_position().z;
+}
+
+float GenericFunctions::luaCamLookX() {
+	std::cout << ReflexEngine::get_instance().camera_.get_direction().x << " : "
+	          << ReflexEngine::get_instance().camera_.get_direction().y << " : "
+	          << ReflexEngine::get_instance().camera_.get_direction().z
+	          << std::endl;
+	return ReflexEngine::get_instance().camera_.get_direction().x;
+}
+float GenericFunctions::luaCamLookY() {
+	return ReflexEngine::get_instance().camera_.get_direction().y;
+}
+float GenericFunctions::luaCamLookZ() {
+	return ReflexEngine::get_instance().camera_.get_direction().z;
+}
+
+void GenericFunctions::setLastShot() { lastShot = glfwGetTime(); }
+void GenericFunctions::setShotDelay(float delay) { shot_delay = delay; }
+void GenericFunctions::setIfShouldShoot(bool val) {
+	if (lastShot < glfwGetTime() - shot_delay) {
+		shouldShoot = val;
+	} else if (val == false) {
+		shouldShoot = val;
+	}
+}
+bool GenericFunctions::getIfShouldShoot() { return shouldShoot; }

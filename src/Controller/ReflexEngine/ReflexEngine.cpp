@@ -45,15 +45,18 @@ void ReflexEngine::run() {
 			engine.scenes_.top()->loadSavedGameObjects();
 		} else if (GenericFunctions::getIfSave()) {
 			engine.scenes_.top()->saveGameObjects();
+
 		} else {
 			engine.scenes_.top()->update(delta_time);
 			engine.scenes_.top()->add_draw_call();
 			engine.renderer_.draw();
-		}
 
-		engine.scenes_.top()->key_controls(delta_time);
-		engine.scenes_.top()->mouse_controls(engine.window_.GetXOffset(),
-		                                     engine.window_.GetYOffset());
+			if (GenericFunctions::getIfPaused() == false) {
+				engine.scenes_.top()->mouse_controls(
+				    engine.window_.GetXOffset(), engine.window_.GetYOffset());
+			}
+			engine.scenes_.top()->key_controls(delta_time);
+		}
 
 		gui::mainLoopEnd();
 

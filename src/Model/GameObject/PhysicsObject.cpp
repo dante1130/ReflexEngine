@@ -114,6 +114,7 @@ void PhysicsObject::save_object() {
 	ObjectSaving::openFile();
 	ObjectSaving::saveGameObject(position, rotation, scale, angle,
 	                             "PhysicsObject");
+	//
 	ObjectSaving::addComma();
 	ObjectSaving::addValue("modelName", model_name_, false);
 	ObjectSaving::addValue("material_name", material_name_, false);

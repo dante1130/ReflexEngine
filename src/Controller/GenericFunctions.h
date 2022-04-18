@@ -4,6 +4,7 @@
 #include "LuaManager.hpp"
 #include <time.h>
 #include <random>
+#include "Controller/ReflexEngine/Camera.hpp"
 
 namespace GenericFunctions {
 /**
@@ -107,5 +108,126 @@ void setIfPaused(bool val);
  * @post	Exits engine
  */
 void exitEngine();
+
+/**
+ * @brief	Sets if the game should show the help menu
+ * @param	val	- set true to show help menu
+ * @return	Void
+ *
+ * @pre		Nothing
+ * @post	sets value
+ */
+void setifHelpMenuActive(bool val);
+
+/**
+ * @brief	gets if the game should show the help menu
+ * @param	No param
+ * @return	bool	- True if should show help menu
+ *
+ * @pre		Nothing
+ * @post	gets value
+ */
+bool getIfHelpMenuActive();
+
+/**
+ * @brief	gets camera x position
+ * @param	No param
+ * @return	float	- x position
+ *
+ * @pre		Nothing
+ * @post	gets value
+ */
+float luaCamPosX();
+
+/**
+ * @brief	gets camera y position
+ * @param	No param
+ * @return	float	- y position
+ *
+ * @pre		Nothing
+ * @post	gets value
+ */
+float luaCamPosY();
+
+/**
+ * @brief	gets camera z position
+ * @param	No param
+ * @return	float	- z position
+ *
+ * @pre		Nothing
+ * @post	gets value
+ */
+float luaCamPosZ();
+
+/**
+ * @brief	gets camera x look
+ * @param	No param
+ * @return	float	- x look
+ *
+ * @pre		Nothing
+ * @post	gets value
+ */
+float luaCamLookX();
+
+/**
+ * @brief	gets camera y look
+ * @param	No param
+ * @return	float	- y look
+ *
+ * @pre		Nothing
+ * @post	gets value
+ */
+float luaCamLookY();
+
+/**
+ * @brief	gets camera z look
+ * @param	No param
+ * @return	float	- z look
+ *
+ * @pre		Nothing
+ * @post	gets value
+ */
+float luaCamLookZ();
+
+/**
+ * @brief	Sets when the last shoot was fired (time of this function being
+ * called)
+ * @param	No param
+ * @return	Void
+ *
+ * @pre		Nothing
+ * @post	sets last shoot
+ */
+void setLastShot();
+
+/**
+ * @brief	Sets delay between shots
+ * @param	delay	- The delay between shots
+ * @return	void
+ *
+ * @pre		Nothing
+ * @post	sets delay
+ */
+void setShotDelay(float delay);
+
+/**
+ * @brief	Sets if the player should shoot
+ * @param	bool	- True if the player should shoot
+ * @return	float	- z look
+ *
+ * @pre		Nothing
+ * @post	gets value
+ */
+void setIfShouldShoot(bool val);
+
+/**
+ * @brief	Gets if the player should shoot
+ * @param	No param
+ * @return	bool	- true if should shoot
+ *
+ * @pre		Nothing
+ * @post	gets value
+ */
+bool getIfShouldShoot();
 
 };  // namespace GenericFunctions

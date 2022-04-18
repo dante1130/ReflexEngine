@@ -1,0 +1,39 @@
+baseObject = {
+	type = "PhysicsObject",
+	xPos = camera_pos_x(),
+	yPos = camera_pos_y(),
+	zPos = camera_pos_z(),
+	xRotation = camera_look_x(),
+	yRotation = camera_look_y(),
+	zRotation = camera_look_z(),
+	angle = 0.01,
+	xScale = 0.03,
+	yScale = 0.03,
+	zScale = 0.03,
+	modelName = "cat",
+	material_name = "shiny",
+	rbType = 2,
+	gravity = 1,
+	xForce = camera_look_x() * 50,
+	yForce = camera_look_y() * 50,
+	zForce = camera_look_z() * 50,
+	xTorque = 0,
+	yTorque = 0,
+	zTorque = 0,
+	linearDamping = 0.1,
+	angularDamping = 0.1,
+	sleep = 1,
+	numOfColliders = 1
+}
+
+collider1 = {
+	colliderType = "Box",
+	xPos = 0,
+	yPos = 0,
+	zPos = 0,
+	xBox = 1,
+	yBox = 1,
+	zBox = 1,
+	bounciness = 0.5,
+	friction = 0.5
+}
