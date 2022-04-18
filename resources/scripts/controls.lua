@@ -6,8 +6,9 @@ Bindings = {
 	move_right = "d",
 	sprint = "lshift",
 	crouch = "lctrl",
-	shoot = "mouse1",
+	shoot = "q",
 	toggle_wireframe = "k",
 	toggle_noclip = "z",
-	pause_game = "escape"
+	pause_game = "escape",
+	help_menu = "m"
 }

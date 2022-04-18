@@ -31,9 +31,19 @@ void TestScene::init() {
 	guiLuaAccess::exposeGui();
 }
 
+std::vector<std::string> to_add;
+
+void addGameObjectDuringRun(std::string luaScript) {
+	to_add.push_back(luaScript);
+}
+
 void TestScene::addGameObject(std::string luaScript) {
-	std::cout << luaScript << std::endl;
-	game_objects_.emplace_back(gaf.create(luaScript));
+	if (glfwGetTime() > (double)0.5) {
+		addGameObjectDuringRun(luaScript);
+	} else {
+		std::cout << luaScript << std::endl;
+		game_objects_.emplace_back(gaf.create(luaScript));
+	}
 }
 
 void TestScene::key_controls(float delta_time) {
@@ -59,6 +69,14 @@ void TestScene::key_controls(float delta_time) {
 
 	if (input_manager.get_key_state(Input::pause_game))
 		GenericFunctions::setIfPaused(!GenericFunctions::getIfPaused());
+
+	if (input_manager.get_key_state(Input::help_menu))
+		GenericFunctions::setifHelpMenuActive(
+		    !GenericFunctions::getIfHelpMenuActive());
+
+	if (input_manager.get_key_state(Input::shoot)) {
+		GenericFunctions::setIfShouldShoot(true);
+	}
 }
 
 void TestScene::mouse_controls(float xpos, float ypos) {
@@ -79,6 +97,9 @@ void TestScene::add_draw_call() {
 }
 
 void TestScene::update(float delta_time) {
+	garbage_collection();
+	add_new_game_objects();
+
 	const auto& camera = ReflexEngine::get_instance().camera_;
 
 	glm::vec3 lower_light = camera.get_position();
@@ -113,4 +134,20 @@ void TestScene::loadSavedGameObjects() {
 
 	GenericFunctions::setIfLoad(false);
 	return;
+}
+
+void TestScene::garbage_collection() {
+	for (int count = 0; count < game_objects_.size(); count++) {
+		if (game_objects_[count]->position.y < -1000) {
+			game_objects_.erase(game_objects_.begin() + count);
+		}
+	}
+}
+
+void TestScene::add_new_game_objects() {
+	for (int count = 0; count < to_add.size(); count++) {
+		std::cout << "Adding during runtime = " << to_add[count] << std::endl;
+		game_objects_.emplace_back(gaf.create(to_add[count]));
+	}
+	to_add.clear();
 }
