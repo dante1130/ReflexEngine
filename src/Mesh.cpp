@@ -37,7 +37,7 @@ void Mesh::CreateMesh(const GLfloat* vertices, const GLuint* indices,
 	glBindVertexArray(0);
 }
 
-void Mesh::CreateColorMesh(GLfloat* vertices, GLuint* indices, GLuint noOfVerts,
+void Mesh::CreateColorMesh(const GLfloat* vertices, const GLuint* indices, GLuint noOfVerts,
                            GLuint noOfIndices) {
 	indexCount = noOfIndices;
 

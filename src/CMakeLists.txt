@@ -3,6 +3,8 @@ target_sources(${PROJECT_NAME} PRIVATE
 
 	AStar.cpp
 	AStarInterface.cpp
+	BTT.cpp
+	BttController.cpp
 	Camera.cpp
 	Light.cpp
 	DirectionalLight.cpp

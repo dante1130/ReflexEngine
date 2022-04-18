@@ -36,7 +36,7 @@ public:
 	 * @param noOfVerts
 	 * @param noOfIndices
 	 */
-	void CreateColorMesh(GLfloat* vertices, GLuint* indices, GLuint noOfVerts,
+	void CreateColorMesh(const GLfloat* vertices, const GLuint* indices, GLuint noOfVerts,
 	                     GLuint noOfIndices);
 
 	/**

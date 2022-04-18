@@ -1,4 +1,5 @@
 #include "Camera.hpp"
+#include <iostream>
 
 Camera::Camera()
     : m_position(0.0f),
@@ -48,6 +49,11 @@ void Camera::KeyControl(const bool* keys, GLfloat deltaTime) {
 
 	if (keys[GLFW_KEY_D]) {
 		m_position += m_right * velocity;
+	}
+
+	if (keys[GLFW_KEY_0]) {
+		std::cout << "Pos: x: " << m_position.x << " y:" << m_position.y << " z:"
+		          << m_position.z << std::endl;
 	}
 }
 
