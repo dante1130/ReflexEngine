@@ -103,7 +103,7 @@ void createStruct(std::string structName);
  * @pre     file is open
  * @post    end of struct added
  */
-void closeSctruct();
+void closeStruct();
 
 /**
  * @brief   Closes the file

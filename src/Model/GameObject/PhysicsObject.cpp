@@ -2,13 +2,10 @@
 
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 
-PhysicsObject::PhysicsObject() {}
-
-void PhysicsObject::initModel(const std::string& model_path, GLfloat shininess,
-                              GLfloat spec_intensity) {
-	// model_.LoadModel(model_path);
-	m_modelName = model_path;
-	material_ = Reflex::Material(shininess, spec_intensity);
+void PhysicsObject::initModel(const std::string& model_name,
+                              const std::string& material_name) {
+	model_name_ = model_name;
+	material_name_ = material_name;
 }
 
 void PhysicsObject::initRB(glm::vec3 pos, glm::vec3 rotation, float angle) {
@@ -39,10 +36,14 @@ void PhysicsObject::draw(std::shared_ptr<Shader> shader) {
 	glUniformMatrix4fv(shader->GetModelLocation(), 1, GL_FALSE,
 	                   glm::value_ptr(model));
 	glUniform1i(shader->GetUsingTexture(), true);
-	material_.UseMaterial(default_shader->GetShininessLocation(),
-	                      default_shader->GetSpecularIntensityLocation());
-	ModelManager& mm = ResourceManager::get_instance().get_model_manager();
-	mm.get_model(m_modelName).RenderModel();
+
+	auto& material_m = ResourceManager::get_instance().get_material_manager();
+	material_m.get_material(material_name_)
+	    .UseMaterial(default_shader->GetShininessLocation(),
+	                 default_shader->GetSpecularIntensityLocation());
+
+	auto& model_m = ResourceManager::get_instance().get_model_manager();
+	model_m.get_model(model_name_).RenderModel();
 }
 
 void PhysicsObject::saveSphereCollider(int index) {
@@ -109,15 +110,13 @@ void PhysicsObject::saveCollider(int index, int type) {
 	ObjectSaving::addValue("friction", rb.getFriction(index), true);
 }
 
-void PhysicsObject::saveObject() {
+void PhysicsObject::save_object() {
 	ObjectSaving::openFile();
 	ObjectSaving::saveGameObject(position, rotation, scale, angle,
 	                             "PhysicsObject");
 	ObjectSaving::addComma();
-	ObjectSaving::addValue("modelName", "cat", false);
-	ObjectSaving::addValue("shininess", material_.getShininess(), false);
-	ObjectSaving::addValue("spec_intensity", material_.getSpecIntensity(),
-	                       false);
+	ObjectSaving::addValue("modelName", model_name_, false);
+	ObjectSaving::addValue("material_name", material_name_, false);
 	ObjectSaving::addValue("rbType", rb.getRBType(), false);
 	ObjectSaving::addValue("gravity", (int)rb.getIfGravityActive(), false);
 	ObjectSaving::addValue("xForce", rb.getLinearVelocity().x, false);
@@ -131,13 +130,13 @@ void PhysicsObject::saveObject() {
 	ObjectSaving::addValue("sleep", (int)rb.getIfAllowedSleep(), false);
 	ObjectSaving::addValue("numOfColliders", rb.getNumberOfColliders() - 1,
 	                       true);
-	ObjectSaving::closeSctruct();
+	ObjectSaving::closeStruct();
 
 	for (int count = 1; count < rb.getNumberOfColliders(); count++) {
 		int type = rb.getColliderType(count);
 		ObjectSaving::createStruct("collider" + std::to_string(count));
 		saveCollider(count, type);
-		ObjectSaving::closeSctruct();
+		ObjectSaving::closeStruct();
 	}
 
 	ObjectSaving::closeFile();

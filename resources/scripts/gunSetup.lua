@@ -14,4 +14,4 @@ baseObject = {
 
 script = "scripts/shootGun.lua"
 
-set_shot_delay(1)
+set_shot_delay(0.05)

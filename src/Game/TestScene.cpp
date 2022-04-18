@@ -23,12 +23,7 @@ void TestScene::init() {
 	lua.set_function("addGameObject", &TestScene::addGameObject, this);
 	lua.script_file("scripts/_MasterCreation.lua");
 
-	auto& input_manager = InputManager::get_instance();
-	input_manager.load_lua_bindings("scripts/controls.lua");
-
-	gui::init(ReflexEngine::get_instance().window_.get_window(),
-	          "#version 410");
-	guiLuaAccess::exposeGui();
+	InputManager::get_instance().load_lua_bindings("scripts/controls.lua");
 }
 
 std::vector<std::string> to_add;
@@ -61,7 +56,7 @@ void TestScene::key_controls(float delta_time) {
 		camera.move(CameraMovement::left, delta_time);
 	if (input_manager.get_key_state(Input::move_right))
 		camera.move(CameraMovement::right, delta_time);
-
+	//
 	if (input_manager.get_key_state(Input::toggle_wireframe))
 		ReflexEngine::get_instance().renderer_.toggle_wireframe();
 	if (input_manager.get_key_state(Input::toggle_noclip))
@@ -116,7 +111,7 @@ void TestScene::update(float delta_time) {
 
 void TestScene::saveGameObjects() {
 	for (auto& game_object : game_objects_) {
-		game_object->saveObject();
+		game_object->save_object();
 	}
 	GenericFunctions::setIfSave(false);
 	std::cout << "done saving" << std::endl;

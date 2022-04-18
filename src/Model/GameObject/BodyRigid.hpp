@@ -272,7 +272,7 @@ public:
 	 * @pre		Object exists
 	 * @post	Object saved
 	 */
-	void saveObject() override {}
+	void save_object() override {}
 
 protected:
 	/// <summary>

@@ -30,12 +30,12 @@ void Body::physicsDebugger() {
 
 void Body::setCreator(bool val) { creator = val; }
 
-void Body::saveObject() {
+void Body::save_object() {
 	ObjectSaving::openFile();
 	ObjectSaving::saveGameObject(position, rotation, scale, angle, "Body");
 	ObjectSaving::addComma();
 	ObjectSaving::addValue("creator", creator, true);
-	ObjectSaving::closeSctruct();
+	ObjectSaving::closeStruct();
 	ObjectSaving::closeFile();
 }
 

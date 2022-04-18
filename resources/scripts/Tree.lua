@@ -14,6 +14,5 @@ baseObject = {
 
 item = {
 	modelName = "tree",
-	shininess = 0,
-	spec_intensity = 0
+	material_name = "shiny"
 }

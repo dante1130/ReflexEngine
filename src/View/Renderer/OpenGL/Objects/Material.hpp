@@ -29,7 +29,7 @@ public:
 	 * @param shininessLoc
 	 * @param specularIntensityLoc
 	 */
-	void UseMaterial(GLuint shininessLoc, GLuint specularIntensityLoc);
+	void UseMaterial(GLuint shininessLoc, GLuint specularIntensityLoc) const;
 
 	/**
 	 * @brief Returns the specular intensity
