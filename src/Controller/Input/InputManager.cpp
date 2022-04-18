@@ -69,6 +69,7 @@ void InputManager::init_action_map() {
 	action_map["shoot"] = Input::shoot;
 	action_map["toggle_wireframe"] = Input::toggle_wireframe;
 	action_map["toggle_noclip"] = Input::toggle_noclip;
+	action_map["pause_game"] = Input::pause_game;
 }
 
 InputManager::InputManager() {

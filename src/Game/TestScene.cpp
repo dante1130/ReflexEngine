@@ -56,6 +56,9 @@ void TestScene::key_controls(float delta_time) {
 		ReflexEngine::get_instance().renderer_.toggle_wireframe();
 	if (input_manager.get_key_state(Input::toggle_noclip))
 		camera.toggle_noclip();
+
+	if (input_manager.get_key_state(Input::pause_game))
+		GenericFunctions::setIfPaused(!GenericFunctions::getIfPaused());
 }
 
 void TestScene::mouse_controls(float xpos, float ypos) {

@@ -261,15 +261,104 @@ public:
 	void addHeightFieldShape(glm::vec3 pos, float bounciness,
 	                         float friction) = delete;
 
+	/**
+	 * @brief	Gets if gravity is allowed in the rb (rigid body)
+	 * @param	No param
+	 * @return	bool	- True if gravity is allowed on rb
+	 *
+	 * @pre		rb exists
+	 * @post	if gravity allowed retrieved
+	 */
 	bool getIfGravityActive();
+
+	/**
+	 * @brief	Retrieves the rigid body type
+	 * @param	No param
+	 * @return	int	- The type of rigid body
+	 *
+	 * @pre		rb exists
+	 * @post	rigid body type retrieved
+	 */
 	int getRBType();
+
+	/**
+	 * @brief	Gets the number of colliders attached to the rigid body
+	 * @param	No param
+	 * @return	int	- Number of colliders
+	 *
+	 * @pre		rb & colliders exist
+	 * @post	Collider number retrieved
+	 */
 	int getNumberOfColliders();
+
+	/**
+	 * @brief	Gets the linear damping value of the object
+	 * @param	No param
+	 * @return	float	- the linear damping value
+	 *
+	 * @pre		rb exists
+	 * @post	linear damping retrieved
+	 */
 	float getLinearDamping();
+
+	/**
+	 * @brief	Gets the angular damping value of the object
+	 * @param	No param
+	 * @return	float	- The angular damping value
+	 *
+	 * @pre		rb exists
+	 * @post	angular damping retrieved
+	 */
 	float getAngularDamping();
+
+	/**
+	 * @brief	Gets it the object can go to sleep (performce improvement)
+	 * @param	No param
+	 * @return	bool	- true if object can go to sleep
+	 *
+	 * @pre		rb exists
+	 * @post	allowed to sleep retrieved
+	 */
 	bool getIfAllowedSleep();
+
+	/**
+	 * @brief	Gets the type of collider (sphere, box, capsule)
+	 * @param	index	- The index of the collider in question
+	 * @return	int		- the colliders type
+	 *
+	 * @pre		collider & rb exist
+	 * @post	collider type retrieved
+	 */
 	int getColliderType(int index);
+
+	/**
+	 * @brief	Gets a collders bounciness value
+	 * @param	index	- The index of the collider in question
+	 * @return	float	- The bounciness of the collider
+	 *
+	 * @pre		collider & rb exist
+	 * @post	collider bounciness retrieved
+	 */
 	float getBounciness(int index);
+
+	/**
+	 * @brief	Gets a colliders friction value
+	 * @param	index	- The index of the collider in question
+	 * @return	float	- The friction of the collider
+	 *
+	 * @pre		collider & rb exist
+	 * @post	Friction value returned
+	 */
 	float getFriction(int index);
+
+	/**
+	 * @brief	Gets the local position of the collider attached to the rb
+	 * @param	index		- The index of the collider in question
+	 * @return	glm::vec3	- The position of the collider in relation to the rb
+	 *
+	 * @pre		Collider & rb exist
+	 * @post	Local coordinates returned
+	 */
 	glm::vec3 getLocalColliderPos(int index);
 
 	/**
