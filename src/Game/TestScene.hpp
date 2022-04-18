@@ -12,8 +12,8 @@
 #include "guiManager.hpp"
 #include "GameAssetFactory.hpp"
 #include "Controller/GuiLuaAccess.hpp"
-#include "guiManager.hpp"
-#include "Controller/GenericFunctions.h"
+#include "guiManager.hpp" 
+#include "Controller/GenericFunctions.h" 
 
 /**
  * @class TestScene

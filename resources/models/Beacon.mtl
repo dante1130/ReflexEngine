@@ -1,0 +1,63 @@
+# Max2Mtl Version 4.0 Mar 10th, 2001
+#
+newmtl 08_-_Default
+Ka  0.2 0.2 0.2
+Kd  0.2 0.2 0.2
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  1.3
+illum 2
+#
+newmtl 10_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+map_Kd WALKER.JPG
+#
+newmtl 09_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+map_Kd LGTGRAY1.JPG
+#
+newmtl 12_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+map_Kd TUTSHNGL.JPG
+#
+newmtl 13_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+map_Kd OLDWOOD.JPG
+#
+newmtl 11_-_Default
+Ka  0.2 0.2 0.2
+Kd  0.2 0.2 0.2
+Ks  0.9 0.9 0.9
+d  0.7
+Ns  10.1
+illum 2
+#
+newmtl 14_-_Default
+Ka  0.0 0.0 0.0
+Kd  0.0 0.0 0.0
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  7.0
+illum 2
+#
+# EOF
