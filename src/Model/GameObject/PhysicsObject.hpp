@@ -10,8 +10,6 @@ class PhysicsObject : public BodyRigid {
 public:
 	/**
 	 * @brief	Default constructor for physics object
-	 * @param	No param
-	 * @return	No return
 	 *
 	 * @pre	Nothing
 	 * @post	Object created
@@ -34,7 +32,6 @@ public:
 	 * @param	pos			- position of the rigid body
 	 * @param	rotation	- axis of rotation of the rigid body
 	 * @param	angle		- Rotation around axis of rotation of rigid body
-	 * @return	No return
 	 *
 	 * @pre		Object exists
 	 * @post	rigid body initialised
@@ -44,7 +41,6 @@ public:
 	/**
 	 * @brief	Updates the object
 	 * @param	delta_time	- Time since last frame
-	 * @return	No return
 	 *
 	 * @pre		rigid body initialised
 	 * @post	Object updated
@@ -53,8 +49,6 @@ public:
 
 	/**
 	 * @brief	Adds draw call of object
-	 * @param	No param
-	 * @return	No return
 	 *
 	 * @pre		Model initialised
 	 * @post	Draw call added
@@ -64,7 +58,6 @@ public:
 	/**
 	 * @brief	Draws the object
 	 * @param	shader	- The shader
-	 * @return	No return
 	 *
 	 * @pre		Model initialised
 	 * @post	Model drawn
@@ -73,8 +66,6 @@ public:
 
 	/**
 	 * @brief	Saves the object to lau file
-	 * @param	No param
-	 * @return	Void
 	 *
 	 * @pre		Object exists
 	 * @post	Object saved
@@ -90,7 +81,6 @@ private:
 	/**
 	 * @brief	Saves the sphere collider of rb
 	 * @param	index	- Which collider to save
-	 * @return	Void
 	 *
 	 * @pre		Collider exists
 	 * @post	Collider stored
@@ -100,7 +90,6 @@ private:
 	/**
 	 * @brief	Saves the capsule collider of rb
 	 * @param	index	- Which collider to save
-	 * @return	Void
 	 *
 	 * @pre		Collider exists
 	 * @post	Collider stored
@@ -110,7 +99,6 @@ private:
 	/**
 	 * @brief	Saves the box collider of rb
 	 * @param	index	- Which collider to save
-	 * @return	Void
 	 *
 	 * @pre		Collider exists
 	 * @post	Collider stored
@@ -121,7 +109,6 @@ private:
 	 * @brief	Saves the collider of rb
 	 * @param	index	- Which collider to save
 	 * @param	type	- The type of collider
-	 * @return	Void
 	 *
 	 * @pre		Collider exists
 	 * @post	Collider stored

@@ -19,8 +19,6 @@ namespace gui {
  * @param	openglVersion	- String of opengl version. I.e., OpenGL 4.6 uses
  * "#version 460", check imGUI documentation if unsure
  *
- * @return	Void
- *
  * @pre		GLFW window & correct opengl version
  * @post	gui initialised
  */
@@ -29,8 +27,6 @@ void init(GLFWwindow* window, std::string openglVersion);
 /**
  * @brief	Does per frame initialise for gui. Should be placed after glClear &
  * glClearColor in the main loop
- * @param	No param
- * @return	Void
  *
  * @pre		Init has been run for the window
  * @post	start gui frame
@@ -39,8 +35,6 @@ void mainLoopStart();
 
 /**
  * @brief	Renders gui. Should be placed at the end of the main loop
- * @param	No param
- * @return	Void
  *
  * @pre		mainLoopStart has been run
  * @post	ends gui frame
@@ -49,8 +43,6 @@ void mainLoopEnd();
 
 /**
  * @brief	Shuts down gui
- * @param	No param
- * @return	Void
  *
  * @pre		gui running
  * @post	gui stopped
@@ -64,7 +56,6 @@ void shutdown();
  * @brief	Begins a window. Sandwich inside gui window methods between begin
  * and end.
  * @param	title	- The title of the window
- * @return	Void
  *
  * @pre		rui running
  * @post	window created
@@ -74,8 +65,6 @@ void begin(const std::string title);
 /**
  * @brief	Ends the window. Sandwich inside gui window methods between begin
  * and end.
- * @param	No param
- * @return	Void
  *
  * @pre		window created
  * @post	window ended
@@ -87,7 +76,6 @@ void end();
  * @param	xPos		- x position of the window
  * @param	yPos		- y position of the window
  * @param	constraint	- The constraint of the window
- * @return	Void
  *
  * @pre		window created
  * @post	window position adjusted
@@ -99,7 +87,6 @@ void setWindowPos(int xPos, int yPos, int constraint);
  * @param	xSize		- x size of the window
  * @param	ySize		- y size of the window
  * @param	constraint	- The constraint of the window
- * @return	Void
  *
  * @pre		window created
  * @post	window size adjusted
@@ -112,7 +99,6 @@ void setWindowSize(int xSize, int ySize, int constraint);
 /**
  * @brief	Displays text in the gui window
  * @param	text	- The text you want to display
- * @return	Void
  *
  * @pre		window created
  * @post	module added
@@ -124,7 +110,6 @@ void text(const std::string text);
  * Not lua ready
  * @param	name	- The name of the value you are changing
  * @param	bool	- The boolean which is being changed
- * @return	Void
  *
  * @pre		window created
  * @post	module added
@@ -149,7 +134,6 @@ bool luaCheckBox(const std::string name, bool state);
  * @param	*value	- The value being changed
  * @param	min		- The minimum value of the value
  * @param	max		- The maximum value of the value
- * @return	Void
  *
  * @pre		window created
  * @post	module added
@@ -162,7 +146,6 @@ void sliderFloat(const std::string name, float* value, float min, float max);
  * @param	*value	- The value being changed
  * @param	min		- The minimum value of the value
  * @param	max		- The maximum value of the value
- * @return	Void
  *
  * @pre		window created
  * @post	module added
@@ -175,7 +158,6 @@ void sliderInt(const std::string name, int* value, int min, int max);
  * @param	*angle	- The angle you want to change
  * @param	min		- The minimum angle
  * @param	max		- The maximum angle
- * @return	Void
  *
  * @pre		window created
  * @post	module added
@@ -186,7 +168,6 @@ void sliderAngle(const std::string name, float* angle, float min, float max);
  * @brief	Can change values independently or use a colour picker
  * @param	name		- The name of the value you are changing
  * @param	colour[3]	- Float of 3 different variables
- * @return	Void
  *
  * @pre		window created
  * @post	module added
@@ -197,7 +178,6 @@ void colourEdit3(const std::string name, float colour[3]);
  * @brief	Can change values independently or use a colour picker
  * @param	name		- The name of the value you are changing
  * @param	colour[4]	- Float of 4 different variables
- * @return	Void
  *
  * @pre		window created
  * @post	module added
@@ -253,7 +233,6 @@ bool collapsingHeader(const std::string name);
  * @param	name			- The name to be displayed
  * @param	*values			- The list of values
  * @param	numOfEntries	- The number of values
- * @return	void
  *
  * @pre		window created
  * @post	module added
@@ -267,7 +246,6 @@ void plotLines(const std::string name, const float* values, int numOfEntries);
  * @param	numOfEntries	- The number of values
  * @param	xWindowSize		- Size of window in x direction
  * @param	yWindowSize		- Size of window in y direction
- * @return	void
  *
  * @pre		window created
  * @post	module added
@@ -284,7 +262,6 @@ void plotLines(const std::string name, const float* values, int numOfEntries,
  * @param	maxVal			- The maximum value (where graph ends)
  * @param	xWindowSize		- Size of window in x direction
  * @param	yWindowSize		- Size of window in y direction
- * @return	void
  *
  * @pre		window created
  * @post	module added
@@ -296,7 +273,6 @@ void plotLines(const std::string name, const float* values, int numOfEntries,
 /**
  * @brief	Create a progress bar
  * @param	percentage	- The percentage (0 - 100)
- * @return	void
  *
  * @pre		window created
  * @post	module added

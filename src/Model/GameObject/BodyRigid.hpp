@@ -8,8 +8,6 @@ class BodyRigid : public Body {
 public:
 	/**
 	 * @brief	Basic initialiser for engine to call. Does nothing
-	 * @param	No param
-	 * @reutrn	Void
 	 *
 	 * @pre	Nothing
 	 * @post	Nothing
@@ -18,8 +16,6 @@ public:
 
 	/**
 	 * @brief	Draw call for engine to call. Does nothing
-	 * @param	No param
-	 * @reutrn	Void
 	 *
 	 * @pre		Nothing
 	 * @post	Nothing
@@ -28,8 +24,6 @@ public:
 
 	/**
 	 * @brief	Draws object. Does nothing
-	 * @param	No param
-	 * @reutrn	Void
 	 *
 	 * @pre		Nothing
 	 * @post	Nothing
@@ -41,19 +35,24 @@ public:
 	 * @param	pos			- Position of the body
 	 * @param	rotation	- axis of rotation of the body
 	 * @param	angle		- angle around axis of rotation
-	 * @reutrn	Void
 	 *
 	 * @pre		Physics world exists
 	 * @post	Rigid body initialised
 	 */
 	void createBR(glm::vec3 pos, glm::vec3 rotation, float angle);
 
+	/**
+	 * @brief	Sets the position of the rigid body
+	 * @param	pos	- The position of the rigid body
+	 *
+	 * @pre		Rigid body exists
+	 * @post		Rigid body updated
+	 */
 	void set_position(glm::vec3 pos);
 
 	/**
 	 * @brief	Set type of rigid body
 	 * @param	type	- type of body. 0 = static, 1 = kinematic, 2 = dynamic
-	 * @return	Void
 	 *
 	 * @pre		Rigid body exists
 	 * @post	Type set
@@ -63,7 +62,6 @@ public:
 	/**
 	 * @brief	Set if you want gravity
 	 * @param	val	- True = allow gravity
-	 * @return	Void
 	 *
 	 * @pre		Rigid body exists
 	 * @post	Gravity set
@@ -73,7 +71,6 @@ public:
 	/**
 	 * @brief	Movement dampining
 	 * @param	val	- higher value increaes velocity dampining
-	 * @return	Void
 	 *
 	 * @pre		Rigid body exists
 	 * @post	linear dampining set
@@ -83,7 +80,6 @@ public:
 	/**
 	 * @brief	Rotation dampining
 	 * @param	val	- higher value increaes rotation dampining
-	 * @return	Void
 	 *
 	 * @pre		Rigid body exists
 	 * @post	angular dampining set
@@ -93,7 +89,6 @@ public:
 	/**
 	 * @brief	Sets if the body can go to sleep
 	 * @param	val	- true = body can go to sleep if inactive
-	 * @return	Void
 	 *
 	 * @pre		Rigid body exists
 	 * @post	Rigid body can sleep
@@ -103,7 +98,6 @@ public:
 	/**
 	 * @brief	Adds force to the object
 	 * @param	force	- Force to add
-	 * @return	Void
 	 *
 	 * @pre		Rigid body exists
 	 * @post	Force added
@@ -113,7 +107,6 @@ public:
 	/**
 	 * @brief	set force to the object
 	 * @param	velocity	- velocity to set
-	 * @return	Void
 	 *
 	 * @pre		Rigid body exists
 	 * @post	Force added
@@ -123,7 +116,6 @@ public:
 	/**
 	 * @brief	Adds torque to the object
 	 * @param	torque	- Torque to add
-	 * @return	Void
 	 *
 	 * @pre		Rigid body exists
 	 * @post	Torque added
@@ -133,7 +125,6 @@ public:
 	/**
 	 * @brief	set torque to the object
 	 * @param	velocity	- velocity to set
-	 * @return	Void
 	 *
 	 * @pre		Rigid body exists
 	 * @post	Torque added
@@ -143,7 +134,6 @@ public:
 	/**
 	 * @brief	Updates the object
 	 * @param	delta_time	- Time between last frame
-	 * @return	Void
 	 *
 	 * @pre		Rigid body exists
 	 * @post	Rigid body updated
@@ -152,7 +142,6 @@ public:
 
 	/**
 	 * @brief	Gets the position vector
-	 * @param	No param
 	 * @return	glm::vec3	- The position of the rigid body
 	 *
 	 * @pre		Rigid body exists
@@ -162,7 +151,6 @@ public:
 
 	/**
 	 * @brief	Gets the axis of rotation vector of the rigid body
-	 * @param	No param
 	 * @return	glm::vec3	- The axis of rotation vector
 	 *
 	 * @pre		Rigid body exists
@@ -172,7 +160,6 @@ public:
 
 	/**
 	 * @brief	Gets the angle around the axis of rotation of the rigid body
-	 * @param	No param
 	 * @return	float	- Angle around axis of rotation
 	 *
 	 * @pre		Rigid body exists
@@ -182,7 +169,6 @@ public:
 
 	/**
 	 * @brief	Gets the linear velocity of the rigid body
-	 * @param	No param
 	 * @return	glm::vec3	- linear velocity
 	 *
 	 * @pre		Rigid body exists
@@ -192,7 +178,6 @@ public:
 
 	/**
 	 * @brief	Gets the angular velocity of the rigid body
-	 * @param	No param
 	 * @return	glm::vec3	- angular velocity
 	 *
 	 * @pre		Rigid body exists
@@ -206,7 +191,6 @@ public:
 	 * @param	halfSize	- The size of each size if it were halved
 	 * @param	bounciness	- The bounciness of the collision box
 	 * @param	friction	- The friction of the collision box
-	 * @return	Void
 	 *
 	 * @pre		Rigid body exists
 	 * @post	Box collider added
@@ -220,7 +204,6 @@ public:
 	 * @param	radius		- The radius of the sphere
 	 * @param	bounciness	- The bounciness of the collision box
 	 * @param	friction	- The friction of the collision box
-	 * @return	Void
 	 *
 	 * @pre		Rigid body exists
 	 * @post	Sphere collider added
@@ -235,7 +218,6 @@ public:
 	 * @param	height		- The height of the capsule
 	 * @param	bounciness	- The bounciness of the collision box
 	 * @param	friction	- The friction of the collision box
-	 * @return	Void
 	 *
 	 * @pre		Rigid body exists
 	 * @post	Capsule collider added
@@ -249,7 +231,6 @@ public:
 	 * @param	pos			- The local position of the collision box
 	 * @param	bounciness	- The bounciness of the collision box
 	 * @param	friction	- The friction of the collision box
-	 * @return	Void
 	 *
 	 * @pre		Rigid body exists
 	 * @post	Height field added
@@ -258,8 +239,6 @@ public:
 
 	/**
 	 * @brief	Destructor
-	 * @param	No param
-	 * @return	Void
 	 *
 	 * @pre	Object was created
 	 * @post	Object deleted
@@ -268,8 +247,6 @@ public:
 
 	/**
 	 * @brief	Saves the object to lau file
-	 * @param	No param
-	 * @return	Void
 	 *
 	 * @pre		Object exists
 	 * @post	Object saved

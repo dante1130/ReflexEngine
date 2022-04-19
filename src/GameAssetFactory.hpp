@@ -135,7 +135,6 @@ private:
 	 * @brief	Loads in extra physics object data from a lua script
 	 * @param	po	- physic object to store the data to
 	 * @param	lua	- Lua state
-	 * @return	Void
 	 *
 	 * @pre		extra physics data exists
 	 * @post	extra physics data stored
@@ -146,7 +145,6 @@ private:
 	 * @brief	Loads in a box collider from a lua script
 	 * @param	po	- physic object to add the collider to
 	 * @param	lua	- Lua state
-	 * @return	Void
 	 *
 	 * @pre		box collider exists
 	 * @post	box collider added
@@ -157,7 +155,6 @@ private:
 	 * @brief	Loads in a sphere collider from a lua script
 	 * @param	po	- physic object to add the collider to
 	 * @param	lua	- Lua state
-	 * @return	Void
 	 *
 	 * @pre		sphere collider exists
 	 * @post	sphere collider added
@@ -168,7 +165,6 @@ private:
 	 * @brief	Loads in a capsule collider from a lua script
 	 * @param	po	- physic object to add the collider to
 	 * @param	lua	- Lua state
-	 * @return	Void
 	 *
 	 * @pre		capsule collider exists
 	 * @post	capsule collider added
