@@ -12,7 +12,7 @@ GameObject* GameAssetFactory::create(std::string fileName) {
 	} else if (type == "Water") {
 		return loadWater(fileName);
 	} else if (type == "Player") {
-		// return GameObjectLoader::player(fileName);
+		return load_player(fileName);
 	} else if (type == "NPC") {
 		// return GameObjectLoader::npc(fileName);
 	} else if (type == "Body") {
@@ -164,6 +164,52 @@ Body* GameAssetFactory::loadBody(std::string luaScript) {
 	return body;
 }
 
+Player* GameAssetFactory::load_player(std::string lua_script) {
+	sol::state& lua = LuaManager::get_instance().get_state();
+	lua.script_file(lua_script);
+
+	Player* player = new Player();
+
+	glm::vec3 pos, rotation, scale;
+	float angle;
+
+	pos = loadBasePos(lua);
+	scale = loadBaseScale(lua);
+	rotation = loadBaseRotation(lua);
+	angle = loadBaseAngle(lua);
+
+	player->position = pos;
+	player->scale = scale;
+	player->rotation = rotation;
+	player->angle = angle;
+
+	player->createBR(player->position, player->rotation, player->angle);
+
+	player->set_move_speed(lua["baseObject"]["move_speed"]);
+
+	std::string collider = "collider1";
+	glm::vec3 posV;
+	posV.x = lua[collider]["xPos"];
+	posV.y = lua[collider]["yPos"];
+	posV.z = lua[collider]["zPos"];
+
+	float radius = lua[collider]["radius"];
+	float height = lua[collider]["height"];
+
+	player->set_height(height);
+	player->set_collider_radius(radius);
+
+	float bounciness = lua[collider]["bounciness"];
+	float friction = lua[collider]["friction"];
+
+	player->setType(2);
+	player->enableGravity(false);
+
+	player->addCapsuleCollider(posV, radius, height, bounciness, friction);
+
+	return player;
+}
+
 PhysicsObject* GameAssetFactory::loadPhysicsObject(std::string luaScript) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file(luaScript);
@@ -182,7 +228,6 @@ PhysicsObject* GameAssetFactory::loadPhysicsObject(std::string luaScript) {
 
 	po->initModel(model_name, material_name);
 	po->initRB(po->position, po->rotation, po->angle);
-	po->addSphereCollider(glm::vec3(0, 0, 0), 2, 0.5, 0.5);
 	loadExtraPhysicObjectSettings(po, lua);
 
 	int size = lua["baseObject"]["numOfColliders"];

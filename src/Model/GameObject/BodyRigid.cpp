@@ -6,6 +6,8 @@ void BodyRigid::createBR(glm::vec3 pos, glm::vec3 rotation, float angle) {
 	rb.init(pos, rotation, angle);
 }
 
+void BodyRigid::set_position(glm::vec3 pos) { rb.set_position(pos); }
+
 void BodyRigid::setType(int type) { rb.setType(type); }
 
 void BodyRigid::enableGravity(bool val) { rb.enableGravity(val); }

@@ -48,6 +48,8 @@ public:
 	 */
 	void createBR(glm::vec3 pos, glm::vec3 rotation, float angle);
 
+	void set_position(glm::vec3 pos);
+
 	/**
 	 * @brief	Set type of rigid body
 	 * @param	type	- type of body. 0 = static, 1 = kinematic, 2 = dynamic

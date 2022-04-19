@@ -128,11 +128,10 @@ void PhysicsObject::save_object() {
 	ObjectSaving::addValue("linearDamping", rb.getLinearDamping(), false);
 	ObjectSaving::addValue("angularDamping", rb.getAngularDamping(), false);
 	ObjectSaving::addValue("sleep", (int)rb.getIfAllowedSleep(), false);
-	ObjectSaving::addValue("numOfColliders", rb.getNumberOfColliders() - 1,
-	                       true);
+	ObjectSaving::addValue("numOfColliders", rb.getNumberOfColliders(), true);
 	ObjectSaving::closeStruct();
 
-	for (int count = 1; count < rb.getNumberOfColliders(); count++) {
+	for (int count = 0; count < rb.getNumberOfColliders(); count++) {
 		int type = rb.getColliderType(count);
 		ObjectSaving::createStruct("collider" + std::to_string(count));
 		saveCollider(count, type);

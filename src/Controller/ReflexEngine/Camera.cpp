@@ -1,5 +1,7 @@
 #include "Camera.hpp"
 
+#include <iostream>
+
 Camera::Camera()
     : m_position(0.0f),
       m_front(glm::vec3(0.0f, 0.0f, -1.0f)),
@@ -29,7 +31,7 @@ Camera::Camera(glm::vec3 position, glm::vec3 up, GLfloat yaw, GLfloat pitch,
 	Update();
 }
 
-void Camera::move(CameraMovement direction, GLfloat delta_time) {
+void Camera::move(Movement movement, GLfloat delta_time) {
 	GLfloat velocity = m_moveSpeed * delta_time;
 
 	glm::vec3 front;
@@ -43,20 +45,54 @@ void Camera::move(CameraMovement direction, GLfloat delta_time) {
 		right = glm::normalize(glm::vec3(m_right.x, 0.0f, m_right.z));
 	}
 
-	switch (direction) {
-		case CameraMovement::forward:
+	switch (movement) {
+		case Movement::forward:
 			m_position += front * velocity;
 			break;
-		case CameraMovement::backward:
+		case Movement::backward:
 			m_position -= front * velocity;
 			break;
-		case CameraMovement::left:
+		case Movement::left:
 			m_position -= right * velocity;
 			break;
-		case CameraMovement::right:
+		case Movement::right:
 			m_position += right * velocity;
 			break;
 	}
+}
+
+void Camera::calculate_direction(Movement movement) {
+	glm::vec3 front;
+	glm::vec3 right;
+
+	if (is_noclip_) {
+		front = m_front;
+		right = m_right;
+	} else {
+		front = glm::normalize(glm::vec3(m_front.x, 0.0f, m_front.z));
+		right = glm::normalize(glm::vec3(m_right.x, 0.0f, m_right.z));
+	}
+
+	switch (movement) {
+		case Movement::forward:
+			direction_ += front;
+			break;
+		case Movement::backward:
+			direction_ -= front;
+			break;
+		case Movement::left:
+			direction_ -= right;
+			break;
+		case Movement::right:
+			direction_ += right;
+			break;
+		default:
+			std::cout << "HELLO\n";
+			direction_ = glm::vec3(0.0f, 0.0f, 0.0f);
+			break;
+	}
+
+	direction_ = glm::normalize(direction_);
 }
 
 void Camera::mouse_move(GLfloat xOffset, GLfloat yOffset) {
@@ -75,6 +111,10 @@ glm::mat4 Camera::calc_view_matrix() {
 	return glm::lookAt(m_position, m_position + m_front, m_up);
 }
 
+void Camera::set_position(glm::vec3 position) { m_position = position; }
+
+void Camera::set_move_direction(glm::vec3 direction) { direction_ = direction; }
+
 void Camera::Update() {
 	m_front.x = cos(glm::radians(m_yaw)) * cos(glm::radians(m_pitch));
 	m_front.y = sin(glm::radians(m_pitch));
@@ -89,5 +129,7 @@ void Camera::Update() {
 glm::vec3 Camera::get_position() const { return m_position; }
 
 glm::vec3 Camera::get_direction() const { return glm::normalize(m_front); }
+
+glm::vec3 Camera::get_move_direction() const { return direction_; }
 
 void Camera::toggle_noclip() { is_noclip_ = !is_noclip_; }

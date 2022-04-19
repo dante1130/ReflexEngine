@@ -16,6 +16,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Model/GameObject/BodyRigid.cpp
 	Model/GameObject/PhysicsObject.cpp
 	Model/GameObject/ScriptableObject.cpp
+	Model/GameObject/Player.cpp
 	
 	View/Renderer/OpenGL/OpenGL.cpp
 	View/Renderer/OpenGL/Objects/Light.cpp
