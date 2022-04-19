@@ -1,0 +1,4 @@
+<map id="TestScene::loadSavedGameObjects" name="TestScene::loadSavedGameObjects">
+<area shape="rect" id="node1" title="loads game objects" alt="" coords="5,5,192,47"/>
+<area shape="rect" id="node2" href="$namespace_generic_functions.html#a495397e71ac8320155d9b5b84240b385" title="Set if game should load objects from save." alt="" coords="240,13,424,39"/>
+</map>

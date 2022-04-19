@@ -1,0 +1,12 @@
+<map id="TestScene::key_controls" name="TestScene::key_controls">
+<area shape="rect" id="node1" title="The function to specify controls for the keyboard." alt="" coords="5,239,172,265"/>
+<area shape="rect" id="node2" href="$class_input_manager.html#ad569ecdfed4bedd78d0c41667ecca2b4" title="Get the instance." alt="" coords="229,5,411,32"/>
+<area shape="rect" id="node3" href="$class_input_manager.html#ac889d9af9e29b30830b56729890d755c" title="Return the key state of an input action." alt="" coords="243,57,397,98"/>
+<area shape="rect" id="node4" href="$namespace_generic_functions.html#ade37ddcfa008e668cc83648731ec5aa8" title="gets if the game should show the help menu" alt="" coords="229,122,411,163"/>
+<area shape="rect" id="node5" href="$namespace_generic_functions.html#a46d8e1d0567cb3b8730f779111b97d6a" title="Gets if the game should be paused." alt="" coords="220,188,420,215"/>
+<area shape="rect" id="node6" href="$class_input_state.html#ae8364ee92b05ee973b113fd3f8362582" title="Returns a boolean whether the key is held." alt="" coords="241,239,399,265"/>
+<area shape="rect" id="node7" href="$class_input_state.html#afc198629540ab321bcd6c29f6fb1b527" title="Returns a boolean whether the key is pressed." alt="" coords="257,290,383,331"/>
+<area shape="rect" id="node8" href="$namespace_generic_functions.html#a0075f92095dd2d3dddc94eff74736870" title="Sets if the game should show the help menu." alt="" coords="229,355,411,397"/>
+<area shape="rect" id="node9" href="$namespace_generic_functions.html#a12494eed72773f39ae5c8c1bcfe8274e" title="Sets if the game should be paused." alt="" coords="220,421,420,448"/>
+<area shape="rect" id="node10" href="$namespace_generic_functions.html#aebb9f24979b314c85522026a7dfd6557" title="Sets if the player should shoot." alt="" coords="222,473,418,514"/>
+</map>

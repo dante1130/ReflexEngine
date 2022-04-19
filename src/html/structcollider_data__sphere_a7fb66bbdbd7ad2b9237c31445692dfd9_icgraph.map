@@ -1,0 +1,4 @@
+<map id="colliderData_sphere::colliderData_sphere" name="colliderData_sphere::colliderData_sphere">
+<area shape="rect" id="node1" title=" " alt="" coords="248,5,392,47"/>
+<area shape="rect" id="node2" href="$class_body_rigid.html#a168f689740783ce97aac66056c62dfb3" title="Adds a sphere collider to a rigid body." alt="" coords="5,13,200,39"/>
+</map>

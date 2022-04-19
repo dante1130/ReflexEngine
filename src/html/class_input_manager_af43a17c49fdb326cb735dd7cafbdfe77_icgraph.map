@@ -1,0 +1,4 @@
+<map id="InputManager::init_action_map" name="InputManager::init_action_map">
+<area shape="rect" id="node1" title="Initialize action map." alt="" coords="240,5,365,47"/>
+<area shape="rect" id="node2" href="$class_input_manager.html#a8be46886da639b26d67181c29dab6d6c" title="Construct a new Input Manager object." alt="" coords="5,13,192,39"/>
+</map>

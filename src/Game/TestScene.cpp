@@ -133,8 +133,6 @@ void TestScene::loadSavedGameObjects() {
 
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file("scripts/save/_MasterCreation.lua");
-	std::cout << "Number of game objects loaded after save: "
-	          << game_objects_.size() << std::endl;
 
 	GenericFunctions::setIfLoad(false);
 	return;

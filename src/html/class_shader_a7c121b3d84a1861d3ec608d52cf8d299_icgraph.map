@@ -1,0 +1,4 @@
+<map id="Shader::Validate" name="Shader::Validate">
+<area shape="rect" id="node1" title="Validates the shader." alt="" coords="200,5,319,32"/>
+<area shape="rect" id="node2" href="$class_skybox.html#a1ad50851f94ed68d6cd26799b7d5c9f1" title="Renders the skybox given a projection and view matrix." alt="" coords="5,5,152,32"/>
+</map>

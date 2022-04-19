@@ -1,0 +1,4 @@
+<map id="BodyRigidPhysics::init" name="BodyRigidPhysics::init">
+<area shape="rect" id="node1" title="Creates rigid body." alt="" coords="5,5,159,32"/>
+<area shape="rect" id="node2" href="$class_body_rigid_physics.html#a5c831cd9266a60c616be00ca93529315" title="Set type of rigid body." alt="" coords="207,5,389,32"/>
+</map>

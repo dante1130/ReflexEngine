@@ -1,0 +1,8 @@
+<map id="ReflexEngine::get_instance" name="ReflexEngine::get_instance">
+<area shape="rect" id="node1" title="Get an instance of the engine." alt="" coords="356,56,536,83"/>
+<area shape="rect" id="node2" href="$class_open_g_l.html#a9361cf4a3f54e17ebd466ae05f9cf363" title="Initializes OpenGL, shaders, camera and the skybox." alt="" coords="186,5,281,32"/>
+<area shape="rect" id="node3" href="$class_open_g_l.html#a51e3e6a3fb96fcdca89f8a28de912b66" title="The default render pass using the default shader." alt="" coords="159,56,308,83"/>
+<area shape="rect" id="node5" href="$class_reflex_engine.html#a9c185c8127a7d9d650a1bcc97e3de170" title="Runs the engine." alt="" coords="171,107,295,133"/>
+<area shape="rect" id="node4" href="$class_open_g_l.html#a7443c85991c40d1abf40825d2cbbf177" title="Draws the scene." alt="" coords="5,56,111,83"/>
+<area shape="rect" id="node6" href="$main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="33,107,83,133"/>
+</map>

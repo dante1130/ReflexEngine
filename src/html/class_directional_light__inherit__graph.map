@@ -1,0 +1,4 @@
+<map id="DirectionalLight" name="DirectionalLight">
+<area shape="rect" id="node1" title="A directional light that provides global illumination." alt="" coords="5,233,187,369"/>
+<area shape="rect" id="node2" href="$class_light.html" title="A light in the scene." alt="" coords="23,5,169,185"/>
+</map>

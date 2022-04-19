@@ -1,0 +1,4 @@
+<map id="Body::physicsWorldDestroyer" name="Body::physicsWorldDestroyer">
+<area shape="rect" id="node1" title="Destoryes physic world." alt="" coords="5,5,200,32"/>
+<area shape="rect" id="node2" href="$namespace_physics.html#a78fe1494aebd79d0b8abaebeba9bddac" title="Creates the world for the physic objects." alt="" coords="248,5,403,32"/>
+</map>

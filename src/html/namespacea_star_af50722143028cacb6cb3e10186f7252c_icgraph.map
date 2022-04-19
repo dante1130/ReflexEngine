@@ -1,0 +1,5 @@
+<map id="aStar::IsDestination" name="aStar::IsDestination">
+<area shape="rect" id="node1" title="Checks if the position is at the goal." alt="" coords="345,5,481,32"/>
+<area shape="rect" id="node2" href="$namespacea_star.html#ab15cf522e6479a30429f0d8f7652e408" title="The heart of the A star search algorithm." alt="" coords="164,5,297,32"/>
+<area shape="rect" id="node3" href="$class_a_star.html#ab48d741225ffbe9434788d9bc8119c79" title="Uses a* to find a path to the destination." alt="" coords="5,5,116,32"/>
+</map>

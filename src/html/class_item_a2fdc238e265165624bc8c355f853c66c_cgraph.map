@@ -1,0 +1,9 @@
+<map id="Item::save_object" name="Item::save_object">
+<area shape="rect" id="node1" title="Saves the object to lau file." alt="" coords="5,107,128,133"/>
+<area shape="rect" id="node2" href="$namespace_object_saving.html#a9cd0c968e930c03e3daf504eba10769e" title="Adds a value to the file." alt="" coords="185,5,345,32"/>
+<area shape="rect" id="node3" href="$namespace_object_saving.html#a9dadcc7281db5e569a16d86421c58422" title="Closes the file." alt="" coords="185,56,344,83"/>
+<area shape="rect" id="node4" href="$namespace_object_saving.html#a8bd80ab63cd87a02055d0e92dd28b372" title="Closes the struct in the file." alt="" coords="179,107,351,133"/>
+<area shape="rect" id="node5" href="$namespace_object_saving.html#a204c90bbce1cc99ceeba01b13582c064" title="Creates a struct in the file." alt="" coords="176,157,353,184"/>
+<area shape="rect" id="node6" href="$namespace_object_saving.html#a2f179e587ac90b3be88f1e4c24bc6a19" title="Opens a file to save data too." alt="" coords="187,208,342,235"/>
+<area shape="rect" id="node7" href="$_object_saving_8cpp.html#a187a31d4f2cf1ae2be7e5f34eee9700a" title=" " alt="" coords="401,208,535,235"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="Mesh::ClearMesh" name="Mesh::ClearMesh">
+<area shape="rect" id="node1" title="Clears the mesh." alt="" coords="156,5,280,32"/>
+<area shape="rect" id="node2" href="$class_mesh.html#a5efe4da1a4c0971cfb037bd70304c303" title="Destroy the Mesh object." alt="" coords="5,5,108,32"/>
+</map>

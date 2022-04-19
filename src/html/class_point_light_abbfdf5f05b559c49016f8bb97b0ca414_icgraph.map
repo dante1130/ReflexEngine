@@ -1,0 +1,4 @@
+<map id="PointLight::PointLight" name="PointLight::PointLight">
+<area shape="rect" id="node1" title="Construct a new Point Light object." alt="" coords="193,29,340,56"/>
+<area shape="rect" id="node2" href="$class_spot_light.html#ae4045cd7c8c6d18af39b57c9cf6f9ce6" title="Construct a new Spot Light object." alt="" coords="5,29,145,56"/>
+</map>

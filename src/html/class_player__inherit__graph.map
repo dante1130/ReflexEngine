@@ -1,0 +1,6 @@
+<map id="Player" name="Player">
+<area shape="rect" id="node1" title="The player game object." alt="" coords="31,836,182,1075"/>
+<area shape="rect" id="node2" href="$class_body_rigid.html" title=" " alt="" coords="5,505,208,788"/>
+<area shape="rect" id="node3" href="$class_body.html" title=" " alt="" coords="18,263,195,457"/>
+<area shape="rect" id="node4" href="$class_game_object.html" title="An abstract class to represent a game object." alt="" coords="45,5,169,215"/>
+</map>

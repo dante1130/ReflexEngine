@@ -1,0 +1,4 @@
+<map id="Texture::UseTexture" name="Texture::UseTexture">
+<area shape="rect" id="node1" title="Enables the texture." alt="" coords="145,5,284,32"/>
+<area shape="rect" id="node2" href="$class_water.html#aca2414328c1d530cebff6ba347225ff9" title="Initialises the water." alt="" coords="5,5,97,32"/>
+</map>

@@ -7,8 +7,6 @@
 
 #include <string>
 #include <map>
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
 
 namespace gui {
 ////METHOD NEEDED FOR GUI TO OPERATE////
@@ -109,7 +107,7 @@ void text(const std::string text);
  * @brief	A checkbox which changes a boolean variable between true & false.
  * Not lua ready
  * @param	name	- The name of the value you are changing
- * @param	bool	- The boolean which is being changed
+ * @param	*option	- The boolean which is being changed
  *
  * @pre		window created
  * @post	module added
@@ -167,7 +165,7 @@ void sliderAngle(const std::string name, float* angle, float min, float max);
 /**
  * @brief	Can change values independently or use a colour picker
  * @param	name		- The name of the value you are changing
- * @param	colour[3]	- Float of 3 different variables
+ * @param	colour	- Float of 3 different variables
  *
  * @pre		window created
  * @post	module added
@@ -177,7 +175,7 @@ void colourEdit3(const std::string name, float colour[3]);
 /**
  * @brief	Can change values independently or use a colour picker
  * @param	name		- The name of the value you are changing
- * @param	colour[4]	- Float of 4 different variables
+ * @param	colour	- Float of 4 different variables
  *
  * @pre		window created
  * @post	module added
@@ -187,6 +185,8 @@ void colourEdit4(const std::string name, float colour[4]);
 /**
  * @brief	Creates a button
  * @param	name	- The name of the button
+ * @param	xSize	- The x size of the button (width)
+ * @param	ySize	- The y size of the button (height)
  * @return	bool	- If it has been pressed
  *
  * @pre		window created

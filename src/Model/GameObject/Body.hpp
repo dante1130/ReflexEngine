@@ -19,7 +19,7 @@ public:
 	 * @brief	Sets if the object is a creator (true) or destructor (false). A
 	 * creator should be one of the fist game objects while a destoryer should
 	 * be one of the last
-	 * @param	bool	- true for creator, false for destructor
+	 * @param	val	- true for creator, false for destructor
 	 *
 	 * @pre		Object initialised
 	 * @post	Creator set
@@ -45,6 +45,7 @@ public:
 
 	/**
 	 * @brief	NOT CURRENTLY USED
+	 * @param	shader	- the shader
 	 *
 	 * @pre		Nothing
 	 * @post	Nothing

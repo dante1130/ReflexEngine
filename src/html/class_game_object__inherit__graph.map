@@ -1,0 +1,10 @@
+<map id="GameObject" name="GameObject">
+<area shape="rect" id="node1" title="An abstract class to represent a game object." alt="" coords="363,5,487,215"/>
+<area shape="rect" id="node2" href="$class_body.html" title=" " alt="" coords="82,314,259,509"/>
+<area shape="rect" id="node6" href="$class_item.html" title="An item in the scene. (JUST FOR TESTING NOW)" alt="" coords="283,329,407,494"/>
+<area shape="rect" id="node7" href="$class_scriptable_object.html" title=" " alt="" coords="432,329,579,494"/>
+<area shape="rect" id="node8" href="$class_water.html" title=" " alt="" coords="603,263,727,560"/>
+<area shape="rect" id="node3" href="$class_body_rigid.html" title=" " alt="" coords="69,608,272,891"/>
+<area shape="rect" id="node4" href="$class_physics_object.html" title=" " alt="" coords="5,939,160,1177"/>
+<area shape="rect" id="node5" href="$class_player.html" title="The player game object." alt="" coords="185,939,335,1177"/>
+</map>

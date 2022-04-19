@@ -1,0 +1,5 @@
+<map id="TestScene::saveGameObjects" name="TestScene::saveGameObjects">
+<area shape="rect" id="node1" title="Saves game objects." alt="" coords="5,31,204,57"/>
+<area shape="rect" id="node2" href="$namespace_object_saving.html#a4fa617f7fcd6edab1367707770ecc4e3" title="Resets the number counter for the file name to 0." alt="" coords="252,5,437,32"/>
+<area shape="rect" id="node3" href="$namespace_generic_functions.html#a3eb5e37a136bc6bcff2c26a6d1e39ca0" title="Sets if the game should be saved." alt="" coords="253,56,437,83"/>
+</map>

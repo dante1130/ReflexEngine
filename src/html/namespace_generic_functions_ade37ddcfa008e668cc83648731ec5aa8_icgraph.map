@@ -1,0 +1,4 @@
+<map id="GenericFunctions::getIfHelpMenuActive" name="GenericFunctions::getIfHelpMenuActive">
+<area shape="rect" id="node1" title="gets if the game should show the help menu" alt="" coords="220,5,403,47"/>
+<area shape="rect" id="node2" href="$class_test_scene.html#aad51ad2040b618871f77b2397ad5a35b" title="The function to specify controls for the keyboard." alt="" coords="5,13,172,39"/>
+</map>

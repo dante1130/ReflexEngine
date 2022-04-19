@@ -1,0 +1,6 @@
+<map id="Light::Light" name="Light::Light">
+<area shape="rect" id="node1" title="Default constructor." alt="" coords="421,78,508,105"/>
+<area shape="rect" id="node2" href="$class_directional_light.html#a949b877ae041b9818f47eb812d80fa1b" title="Default constructor." alt="" coords="193,29,373,71"/>
+<area shape="rect" id="node3" href="$class_point_light.html#abbfdf5f05b559c49016f8bb97b0ca414" title="Construct a new Point Light object." alt="" coords="210,119,357,146"/>
+<area shape="rect" id="node4" href="$class_spot_light.html#ae4045cd7c8c6d18af39b57c9cf6f9ce6" title="Construct a new Spot Light object." alt="" coords="5,119,145,146"/>
+</map>

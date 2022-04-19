@@ -1,0 +1,6 @@
+<map id="ResourceManager" name="ResourceManager">
+<area shape="rect" id="node1" title=" " alt="" coords="164,219,335,413"/>
+<area shape="rect" id="node2" href="$class_material_manager.html" title=" " alt="" coords="5,13,152,149"/>
+<area shape="rect" id="node3" href="$class_texture_manager.html" title="An encapsulated class for an unordered map of textures." alt="" coords="177,5,322,156"/>
+<area shape="rect" id="node4" href="$class_model_manager.html" title="An encapsulated class for an unordered map of models." alt="" coords="346,13,481,149"/>
+</map>

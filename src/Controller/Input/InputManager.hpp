@@ -30,24 +30,23 @@ public:
 	/**
 	 * @brief Bind an input action to a key.
 	 *
-	 * @param input
-	 * @param key
+	 * @param input - The input
+	 * @param key	- The key to bind
 	 */
 	void bind_key(Input input, int key);
 
 	/**
 	 * @brief Read the key states.
 	 *
-	 * @param key
-	 * @param action
+	 * @param window	- The window
 	 */
 	void read_keys(GLFWwindow* window);
 
 	/**
 	 * @brief Return the key state of an input action.
 	 *
-	 * @param input
-	 * @return InputState
+	 * @param input		- Input
+	 * @return InputState	- Input state
 	 */
 	InputState get_key_state(Input input);
 

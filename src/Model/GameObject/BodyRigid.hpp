@@ -228,7 +228,6 @@ public:
 	/**
 	 * NOT CURRENTLY IMPLEMENTED
 	 * @brief	Creates a height field shape collision box
-	 * @param	pos			- The local position of the collision box
 	 * @param	bounciness	- The bounciness of the collision box
 	 * @param	friction	- The friction of the collision box
 	 *

@@ -1,0 +1,4 @@
+<map id="colliderData_capsule::colliderData_capsule" name="colliderData_capsule::colliderData_capsule">
+<area shape="rect" id="node1" title=" " alt="" coords="253,5,404,47"/>
+<area shape="rect" id="node2" href="$class_body_rigid.html#aff4f02fa78c65b3ea2e2801b83027f04" title="Adds a capsule collider to a rigid body." alt="" coords="5,13,205,39"/>
+</map>

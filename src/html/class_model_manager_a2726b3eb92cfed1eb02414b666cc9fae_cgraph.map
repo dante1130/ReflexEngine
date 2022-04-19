@@ -1,0 +1,5 @@
+<map id="ModelManager::load_model" name="ModelManager::load_model">
+<area shape="rect" id="node1" title="Loads a model into the model manager." alt="" coords="5,23,144,65"/>
+<area shape="rect" id="node2" href="$class_model.html#aa6ec4ea18eabbb737268157253425719" title="Loads a new model from a 3D object file format." alt="" coords="192,5,320,32"/>
+<area shape="rect" id="node3" href="$class_model.html#ae3b375de5f6df4faf74a95d64748e048" title="Construct a new Model object." alt="" coords="206,56,306,83"/>
+</map>

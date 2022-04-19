@@ -1,0 +1,5 @@
+<map id="Shader::ReadFile" name="Shader::ReadFile">
+<area shape="rect" id="node1" title="Read a shader file and return the code." alt="" coords="359,5,481,32"/>
+<area shape="rect" id="node2" href="$class_shader.html#a848b585a28f4a7f6c3e3208b96f760de" title="Reads in a shader file and compiles the code." alt="" coords="172,5,311,32"/>
+<area shape="rect" id="node3" href="$class_skybox.html#ab91e236a8c93ba0546079ed0e794ac5d" title="Construct a new Skybox object." alt="" coords="5,5,124,32"/>
+</map>

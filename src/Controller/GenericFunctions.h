@@ -208,8 +208,7 @@ void setShotDelay(float delay);
 
 /**
  * @brief	Sets if the player should shoot
- * @param	bool	- True if the player should shoot
- * @return	float	- z look
+ * @param	val	- True if the player should shoot
  *
  * @pre		Nothing
  * @post	gets value

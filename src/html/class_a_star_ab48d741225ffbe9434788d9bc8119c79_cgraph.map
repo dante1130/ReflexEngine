@@ -1,0 +1,11 @@
+<map id="AStar::findPath" name="AStar::findPath">
+<area shape="rect" id="node1" title="Uses a* to find a path to the destination." alt="" coords="5,157,116,184"/>
+<area shape="rect" id="node2" href="$namespacea_star.html#ab15cf522e6479a30429f0d8f7652e408" title="The heart of the A star search algorithm." alt="" coords="164,157,297,184"/>
+<area shape="rect" id="node3" href="$namespacea_star.html#a7a57e20ecff5c44d659e842dcb5c87c8" title="Checks that the cell is not blocked and can be moved into." alt="" coords="357,5,507,32"/>
+<area shape="rect" id="node4" href="$namespacea_star.html#ab184deb08ea814d7d6ed0f6677142c82" title="Estimates distance between the current position and the goal using diagonal heuristic...." alt="" coords="351,56,513,83"/>
+<area shape="rect" id="node5" href="$namespacea_star.html#afd4c7644e24de853cc4e0fac87cf0bde" title="Finds the nodes with the smallest distance cost and processes it." alt="" coords="355,107,509,133"/>
+<area shape="rect" id="node6" href="$namespacea_star.html#a2b628a9b0dafcd14e903360565ddba9e" title="Sets up the inital grid with default values." alt="" coords="361,157,503,184"/>
+<area shape="rect" id="node7" href="$namespacea_star.html#af50722143028cacb6cb3e10186f7252c" title="Checks if the position is at the goal." alt="" coords="364,208,500,235"/>
+<area shape="rect" id="node8" href="$namespacea_star.html#a7916c8ca55b7366a595c2cc87f26ab4b" title="Estimates distance between the current position and the goal using manhattan heuristic...." alt="" coords="345,259,519,285"/>
+<area shape="rect" id="node9" href="$namespacea_star.html#abbd619e484df481a35a8d265fa169e6e" title="Checks that the position is inside the grid." alt="" coords="363,309,501,336"/>
+</map>

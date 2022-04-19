@@ -1,0 +1,6 @@
+<map id="ObjectSaving::addComma" name="ObjectSaving::addComma">
+<area shape="rect" id="node1" title="Adds a comma to the file." alt="" coords="195,64,367,91"/>
+<area shape="rect" id="node2" href="$class_player.html#a73cc9b57a85b674c4b46732f1e67293e" title="Save the object to a lua script." alt="" coords="9,5,143,32"/>
+<area shape="rect" id="node3" href="$class_physics_object.html#a6103a75cd9288646117068f07b0d75ed" title="Saves the object to lau file." alt="" coords="5,57,147,98"/>
+<area shape="rect" id="node4" href="$class_body.html#a5cc24f642ba107110af39d156232be98" title="Saves the object to lau file." alt="" coords="12,123,140,149"/>
+</map>

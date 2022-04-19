@@ -1,0 +1,5 @@
+<map id="Terrain::get_height_world" name="Terrain::get_height_world">
+<area shape="rect" id="node1" title="Get the height in worldspace given the x and z coordinates." alt="" coords="5,23,135,65"/>
+<area shape="rect" id="node2" href="$class_terrain.html#a80e2c38f2f77d04e17ca276d68e44ad1" title="Get the height in terrain space given the x and z coordinates." alt="" coords="183,5,312,32"/>
+<area shape="rect" id="node3" href="$class_terrain.html#aa272456de114deab2756a575cda0bef5" title="Check whether the given coordinates are within the heightmap." alt="" coords="360,31,505,57"/>
+</map>
