@@ -1,6 +1,7 @@
 #pragma once
 
 #include "BodyRigid.hpp"
+#include "Controller/LuaManager.hpp"
 
 /**
  * @class Player
@@ -58,7 +59,16 @@ public:
 	 */
 	void set_collider_radius(float radius);
 
+	/**
+	 * @brief Sets the script for the player
+	 *
+	 * @param	script	- The lua script
+	 */
+	void set_lua_script(std::string script);
+
 private:
+	/// Player script
+	std::string lua_script_;
 	/// The move speed.
 	float move_speed_ = 0.0f;
 	/// The height.
