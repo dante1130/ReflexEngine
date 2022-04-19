@@ -40,7 +40,7 @@ void ReflexEngine::run() {
 
 		gui::mainLoopStart();
 
-		if (GenericFunctions::getIfPaused()) delta_time = 0.0000000001;
+		if (GenericFunctions::getIfPaused()) delta_time = 0;
 
 		if (GenericFunctions::getIfLoad()) {
 			engine.scenes_.top()->loadSavedGameObjects();

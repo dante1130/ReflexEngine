@@ -11,7 +11,7 @@ else
 	if time < 5 then
 		gui_setWindowSize(300, 100, 1)
 		gui_setWindowPos(550, 0, 1)
-		gui_begin("YOU DIED")
+		gui_begin("SAVE LOADED")
 		gui_text("Reloaded last checkpoint:")
 		gui_text(" - Please don't go below sea level")
 		gui_text(" - Please don't try to leave the island")

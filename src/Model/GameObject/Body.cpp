@@ -8,7 +8,9 @@ void Body::init() {
 
 void Body::update(float delta_time) {
 	if (creator == true) {
-		Physics::updateWorld(delta_time);
+		if (GenericFunctions::getIfPaused() == false) {
+			Physics::updateWorld(delta_time);
+		}
 	}
 }
 
