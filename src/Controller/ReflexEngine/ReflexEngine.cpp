@@ -3,6 +3,7 @@
 #include "Game/TestScene.hpp"
 #include "guiManager.hpp"
 #include "Controller/GenericFunctions.h"
+#include "Controller/Input/InputManager.hpp"
 
 ReflexEngine::ReflexEngine() {
 	if (window_.Init() == 1) return;
@@ -27,8 +28,7 @@ void ReflexEngine::run() {
 	float delta_time = 0.0f;
 	float prev_time = glfwGetTime();
 
-	glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
-	                 GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	auto& input_manager = InputManager::get_instance();
 
 	while (!engine.window_.IsShouldClose()) {
 		float curr_time = glfwGetTime();
@@ -36,6 +36,7 @@ void ReflexEngine::run() {
 		prev_time = curr_time;
 
 		glfwPollEvents();
+		input_manager.read_keys(engine.window_.get_window());
 
 		gui::mainLoopStart();
 
@@ -45,7 +46,6 @@ void ReflexEngine::run() {
 			engine.scenes_.top()->loadSavedGameObjects();
 		} else if (GenericFunctions::getIfSave()) {
 			engine.scenes_.top()->saveGameObjects();
-
 		} else {
 			engine.scenes_.top()->update(delta_time);
 			engine.scenes_.top()->add_draw_call();

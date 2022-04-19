@@ -40,6 +40,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/ResourceManager/MaterialManager.cpp
 	Controller/ResourceManager/ObjectSaving.cpp
 	Controller/Input/InputManager.cpp
+	Controller/Input/InputState.cpp
 	Controller/Input/Input.hpp
 	Controller/LuaManager.cpp
 	Controller/Physics.cpp

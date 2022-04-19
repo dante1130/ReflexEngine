@@ -2,9 +2,10 @@
 
 #include <unordered_map>
 
-#include "GLFW/glfw3.h"
+#include <GLFW/glfw3.h>
 
 #include "Input.hpp"
+#include "InputState.hpp"
 
 /**
  * @class InputManager
@@ -40,16 +41,15 @@ public:
 	 * @param key
 	 * @param action
 	 */
-	void read_keys(int key, int action);
+	void read_keys(GLFWwindow* window);
 
 	/**
 	 * @brief Return the key state of an input action.
 	 *
 	 * @param input
-	 * @return true
-	 * @return false
+	 * @return InputState
 	 */
-	bool get_key_state(Input input);
+	InputState get_key_state(Input input);
 
 	// These are deleted as a singleton pattern is used.
 	InputManager(InputManager& other) = delete;
@@ -83,5 +83,5 @@ private:
 	std::unordered_map<std::string, int> bind_map;
 
 	/// A boolean array of key states.
-	bool key_states[GLFW_KEY_LAST];
+	InputState key_states[GLFW_KEY_LAST];
 };

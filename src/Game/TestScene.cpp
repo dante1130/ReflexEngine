@@ -45,31 +45,31 @@ void TestScene::key_controls(float delta_time) {
 	auto& camera = ReflexEngine::get_instance().camera_;
 	auto& input_manager = InputManager::get_instance();
 
-	if (input_manager.get_key_state(Input::quit))
+	if (input_manager.get_key_state(Input::quit).is_key_pressed())
 		ReflexEngine::get_instance().window_.set_should_close(true);
 
-	if (input_manager.get_key_state(Input::move_forward))
+	if (input_manager.get_key_state(Input::move_forward).is_key_hold())
 		camera.move(CameraMovement::forward, delta_time);
-	if (input_manager.get_key_state(Input::move_backward))
+	if (input_manager.get_key_state(Input::move_backward).is_key_hold())
 		camera.move(CameraMovement::backward, delta_time);
-	if (input_manager.get_key_state(Input::move_left))
+	if (input_manager.get_key_state(Input::move_left).is_key_hold())
 		camera.move(CameraMovement::left, delta_time);
-	if (input_manager.get_key_state(Input::move_right))
+	if (input_manager.get_key_state(Input::move_right).is_key_hold())
 		camera.move(CameraMovement::right, delta_time);
 	//
-	if (input_manager.get_key_state(Input::toggle_wireframe))
+	if (input_manager.get_key_state(Input::toggle_wireframe).is_key_pressed())
 		ReflexEngine::get_instance().renderer_.toggle_wireframe();
-	if (input_manager.get_key_state(Input::toggle_noclip))
+	if (input_manager.get_key_state(Input::toggle_noclip).is_key_pressed())
 		camera.toggle_noclip();
 
-	if (input_manager.get_key_state(Input::pause_game))
+	if (input_manager.get_key_state(Input::pause_game).is_key_pressed())
 		GenericFunctions::setIfPaused(!GenericFunctions::getIfPaused());
 
-	if (input_manager.get_key_state(Input::help_menu))
+	if (input_manager.get_key_state(Input::help_menu).is_key_pressed())
 		GenericFunctions::setifHelpMenuActive(
 		    !GenericFunctions::getIfHelpMenuActive());
 
-	if (input_manager.get_key_state(Input::shoot)) {
+	if (input_manager.get_key_state(Input::shoot).is_key_pressed()) {
 		GenericFunctions::setIfShouldShoot(true);
 	}
 }
