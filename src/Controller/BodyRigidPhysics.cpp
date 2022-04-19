@@ -26,6 +26,14 @@ void BodyRigidPhysics::init(glm::vec3 pos, glm::vec3 rotation, float angle) {
 	created = true;
 }
 
+void BodyRigidPhysics::set_position(glm::vec3 pos) {
+	Transform transform = rb->getTransform();
+
+	transform.setPosition(Vector3(pos.x, pos.y, pos.z));
+
+	rb->setTransform(transform);
+}
+
 void BodyRigidPhysics::setType(int type) {
 	switch (type) {
 		case 0:

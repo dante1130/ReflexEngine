@@ -6,7 +6,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-enum class CameraMovement { forward, backward, left, right };
+enum class Movement { forward, backward, left, right };
 
 /**
  * @class Camera
@@ -38,7 +38,14 @@ public:
 	 * @param direction
 	 * @param delta_time
 	 */
-	void move(CameraMovement direction, float delta_time);
+	void move(Movement direction, float delta_time);
+
+	/**
+	 * @brief Calculates the direction of where the camera is moving.
+	 *
+	 * @param direction
+	 */
+	void calculate_direction(Movement direction);
 
 	/**
 	 * @brief Moves the perspective by the offset in mouse position.
@@ -56,6 +63,19 @@ public:
 	glm::mat4 calc_view_matrix();
 
 	/**
+	 * @brief Set the position.
+	 * @param position
+	 */
+	void set_position(glm::vec3 position);
+
+	/**
+	 * @brief Set the move direction.
+	 *
+	 * @param direction
+	 */
+	void set_move_direction(glm::vec3 direction);
+
+	/**
 	 * @brief Gets a Vector3 of the camera's position.
 	 *
 	 * @return glm::vec3
@@ -68,6 +88,13 @@ public:
 	 * @return glm::vec3
 	 */
 	glm::vec3 get_direction() const;
+
+	/**
+	 * @brief Get the move direction
+	 *
+	 * @return glm::vec3
+	 */
+	glm::vec3 get_move_direction() const;
 
 	/**
 	 * @brief Toggles noclip on and off.
@@ -85,6 +112,8 @@ private:
 	glm::vec3 m_right;
 	/// The camera's upworld vector.
 	glm::vec3 m_upWorld;
+	/// The camera's move direction.
+	glm::vec3 direction_;
 
 	/// The camera's yaw.
 	float m_yaw;
@@ -96,6 +125,7 @@ private:
 	/// The camera's turn speed. (sensitivity)
 	float m_turnSpeed;
 
+	/// The camera's noclip state.
 	bool is_noclip_ = false;
 
 	/**

@@ -48,15 +48,24 @@ void TestScene::key_controls(float delta_time) {
 	if (input_manager.get_key_state(Input::quit).is_key_pressed())
 		ReflexEngine::get_instance().window_.set_should_close(true);
 
-	if (input_manager.get_key_state(Input::move_forward).is_key_hold())
-		camera.move(CameraMovement::forward, delta_time);
-	if (input_manager.get_key_state(Input::move_backward).is_key_hold())
-		camera.move(CameraMovement::backward, delta_time);
-	if (input_manager.get_key_state(Input::move_left).is_key_hold())
-		camera.move(CameraMovement::left, delta_time);
-	if (input_manager.get_key_state(Input::move_right).is_key_hold())
-		camera.move(CameraMovement::right, delta_time);
-	//
+	camera.set_move_direction(glm::vec3(0.0f, 0.0f, 0.0f));
+
+	if (!(input_manager.get_key_state(Input::move_forward).is_key_hold() &&
+	      input_manager.get_key_state(Input::move_backward).is_key_hold())) {
+		if (input_manager.get_key_state(Input::move_forward).is_key_hold())
+			camera.calculate_direction(Movement::forward);
+		if (input_manager.get_key_state(Input::move_backward).is_key_hold())
+			camera.calculate_direction(Movement::backward);
+	}
+
+	if (!(input_manager.get_key_state(Input::move_left).is_key_hold() &&
+	      input_manager.get_key_state(Input::move_right).is_key_hold())) {
+		if (input_manager.get_key_state(Input::move_left).is_key_hold())
+			camera.calculate_direction(Movement::left);
+		if (input_manager.get_key_state(Input::move_right).is_key_hold())
+			camera.calculate_direction(Movement::right);
+	}
+
 	if (input_manager.get_key_state(Input::toggle_wireframe).is_key_pressed())
 		ReflexEngine::get_instance().renderer_.toggle_wireframe();
 	if (input_manager.get_key_state(Input::toggle_noclip).is_key_pressed())
