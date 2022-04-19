@@ -52,6 +52,7 @@ struct Material
 };
 
 uniform bool isUsingTexture;
+uniform bool is_using_detailmap;
 
 uniform int pointLightCount;
 uniform int spotLightCount;
@@ -62,6 +63,7 @@ uniform SpotLight spotLights[MAX_SPOT_LIGHTS];
 
 uniform sampler2D theTexture;
 uniform sampler2D directionalShadowMap;
+uniform sampler2D detailmap;
 uniform OmniShadowMap omniShadowMaps[MAX_POINT_LIGHTS + MAX_SPOT_LIGHTS];
 
 uniform Material material;
@@ -175,6 +177,10 @@ void main()
 	if (isUsingTexture)
 	{
 		finalColor *= texture(theTexture, texCoord);
+	}
+	else if (is_using_detailmap)
+	{
+		finalColor *= mix(texture(detailmap, texCoord), texture(theTexture, texCoord), 0.5f);
 	}
 	else
 	{

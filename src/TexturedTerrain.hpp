@@ -13,7 +13,7 @@ public:
 	 *
 	 * @param shader
 	 */
-	void render(const Shader* shader) override;
+	void render(std::shared_ptr<Shader> shader) override;
 
 	/**
 	 * @brief Reads the heightmap and loads the mesh.
@@ -32,9 +32,20 @@ public:
 	 */
 	bool load_texture(const char* file_name);
 
+	/**
+	 * @brief Reads an image file as a detail map.
+	 *
+	 * @param file_name
+	 * @return true
+	 * @return false
+	 */
+	bool load_detailmap(const char* file_name);
+
 private:
 	/// The mesh.
 	std::shared_ptr<Mesh> mesh_ = nullptr;
 	/// The texture.
 	std::shared_ptr<Texture> texture_ = nullptr;
+	/// The detailmap.
+	std::shared_ptr<Texture> detailmap = nullptr;
 };

@@ -3,7 +3,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-void TexturedTerrain::render(const Shader* shader) {
+void TexturedTerrain::render(std::shared_ptr<Shader> shader) {
 	if (!mesh_) return;
 
 	glm::mat4 model = glm::mat4(1.0f);
@@ -12,9 +12,11 @@ void TexturedTerrain::render(const Shader* shader) {
 
 	glUniformMatrix4fv(shader->GetModelLocation(), 1, GL_FALSE,
 	                   glm::value_ptr(model));
-	glUniform1i(shader->GetUsingTexture(), !mesh_->has_color());
+	glUniform1i(shader->GetUsingTexture(), false);
+	glUniform1i(shader->get_using_detailmap(), true);
 
 	texture_->UseTexture();
+	detailmap->UseTexture();
 
 	mesh_->RenderMesh();
 }
@@ -38,8 +40,8 @@ bool TexturedTerrain::load_mesh() {
 			vertices.push_back(z);
 
 			// Texture coordinates
-			vertices.push_back(x / static_cast<GLfloat>(get_width()));
-			vertices.push_back(z / static_cast<GLfloat>(get_length()));
+			vertices.push_back(x);
+			vertices.push_back(z);
 
 			glm::vec3 normal = calculate_terrain_normal(x, z);
 
@@ -71,4 +73,10 @@ bool TexturedTerrain::load_mesh() {
 bool TexturedTerrain::load_texture(const char* file_name) {
 	texture_ = std::make_shared<Texture>(file_name);
 	return texture_->LoadTextureA();
+}
+
+bool TexturedTerrain::load_detailmap(const char* file_name) {
+	detailmap = std::make_shared<Texture>(file_name);
+	detailmap->set_texture_unit(GL_TEXTURE3);
+	return detailmap->LoadTexture();
 }

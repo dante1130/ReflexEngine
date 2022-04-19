@@ -1,18 +1,10 @@
 #include "Texture.hpp"
 
-Texture::Texture()
-    : m_textureID(0),
-      m_width(0),
-      m_height(0),
-      m_bitDepth(0),
-      m_fileLocation("") {}
+Texture::Texture(const char* fileLocation) : m_fileLocation(fileLocation) {}
 
-Texture::Texture(const char* fileLocation)
-    : m_textureID(0),
-      m_width(0),
-      m_height(0),
-      m_bitDepth(0),
-      m_fileLocation(fileLocation) {}
+void Texture::set_texture_unit(GLuint texture_unit) {
+	texture_unit_ = texture_unit;
+}
 
 bool Texture::LoadTexture() {
 	unsigned char* texData =
@@ -71,7 +63,7 @@ bool Texture::LoadTextureA() {
 }
 
 void Texture::UseTexture() const {
-	glActiveTexture(GL_TEXTURE1);
+	glActiveTexture(texture_unit_);
 	glBindTexture(GL_TEXTURE_2D, m_textureID);
 }
 

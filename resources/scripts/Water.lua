@@ -1,7 +1,7 @@
 baseObject = {
 	type = "Water",
 	xPos = 0,
-	yPos = -1,
+	yPos = 2.5,
 	zPos = 0,
 	xRotation = 0,
 	yRotation = 1,
