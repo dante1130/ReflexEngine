@@ -33,15 +33,17 @@ void InputManager::load_lua_bindings(const std::string& file_path) {
 
 void InputManager::bind_key(Input input, int key) { key_map[input] = key; }
 
-void InputManager::read_keys(int key, int action) {
-	if (action == GLFW_PRESS) {
-		key_states[key] = true;
-	} else if (action == GLFW_RELEASE) {
-		key_states[key] = false;
+void InputManager::read_keys(GLFWwindow* window) {
+	for (const auto& binding : key_map) {
+		if (glfwGetKey(window, binding.second) == GLFW_PRESS) {
+			key_states[key_map[binding.first]].set_key_state(GLFW_PRESS);
+		} else if (glfwGetKey(window, binding.second) == GLFW_RELEASE) {
+			key_states[key_map[binding.first]].set_key_state(GLFW_RELEASE);
+		}
 	}
 }
 
-bool InputManager::get_key_state(Input input) {
+InputState InputManager::get_key_state(Input input) {
 	return key_states[key_map[input]];
 }
 

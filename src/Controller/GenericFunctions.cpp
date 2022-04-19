@@ -67,7 +67,17 @@ void GenericFunctions::setIfLoad(bool val) { shouldLoad = val; }
 
 bool GenericFunctions::getIfPaused() { return paused; }
 
-void GenericFunctions::setIfPaused(bool val) { paused = val; }
+void GenericFunctions::setIfPaused(bool val) {
+	paused = val;
+
+	if (paused) {
+		glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
+		                 GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	} else {
+		glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
+		                 GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	}
+}
 
 void GenericFunctions::exitEngine() {
 	ReflexEngine::get_instance().window_.set_should_close(true);

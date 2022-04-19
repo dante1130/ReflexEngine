@@ -76,15 +76,7 @@ int Window::Init() {
 }
 
 void Window::CreateCallbacks() {
-	glfwSetKeyCallback(m_mainWindow, Window::HandleKeys);
 	glfwSetCursorPosCallback(m_mainWindow, Window::HandleMouse);
-}
-
-void Window::HandleKeys(GLFWwindow* window, int key, int code, int action,
-                        int mode) {
-	auto& input_manager = InputManager::get_instance();
-
-	input_manager.read_keys(key, action);
 }
 
 void Window::HandleMouse(GLFWwindow* window, double xPos, double yPos) {
