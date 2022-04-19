@@ -4,6 +4,9 @@
 
 void Player::update(float delta_time) {
 	auto& camera = ReflexEngine::get_instance().camera_;
+	sol::state& lua = LuaManager::get_instance().get_state();
+
+	lua.script_file(lua_script_);
 
 	glm::vec3 direction = camera.get_move_direction();
 
@@ -14,12 +17,15 @@ void Player::update(float delta_time) {
 	camera.set_position(position);
 }
 
+void Player::set_lua_script(std::string script) { lua_script_ = script; }
+
 void Player::save_object() {
 	ObjectSaving::openFile();
 	ObjectSaving::saveGameObject(position, rotation, scale, angle, "Player");
 	ObjectSaving::addComma();
 	ObjectSaving::addValue("move_speed", move_speed_, true);
 	ObjectSaving::closeStruct();
+	ObjectSaving::addValue("script", lua_script_, true);
 	ObjectSaving::createStruct("collider1");
 	ObjectSaving::addValue("colliderType", "Capsule", false);
 	ObjectSaving::addValue("xPos", rb.getLocalColliderPos(0).x, false);

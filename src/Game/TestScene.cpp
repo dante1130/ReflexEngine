@@ -141,9 +141,12 @@ void TestScene::loadSavedGameObjects() {
 }
 
 void TestScene::garbage_collection() {
-	for (int count = 0; count < game_objects_.size(); count++) {
-		if (game_objects_[count]->position.y < -1000) {
+	int size = game_objects_.size();
+	for (int count = 0; count < size; count++) {
+		if (game_objects_[count]->position.y < -100) {
 			game_objects_.erase(game_objects_.begin() + count);
+			size--;
+			count--;
 		}
 	}
 }

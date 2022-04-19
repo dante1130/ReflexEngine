@@ -13,6 +13,8 @@ baseObject = {
 	move_speed = 5.0
 }
 
+script = "scripts/playerScript.lua"
+
 collider1 = {
 	colliderType = "Capsule",
 	xPos = 0,

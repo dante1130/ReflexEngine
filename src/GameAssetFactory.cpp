@@ -207,6 +207,10 @@ Player* GameAssetFactory::load_player(std::string lua_script) {
 
 	player->addCapsuleCollider(posV, radius, height, bounciness, friction);
 
+	std::string script;
+	script = lua["script"];
+	player->set_lua_script(script);
+
 	return player;
 }
 

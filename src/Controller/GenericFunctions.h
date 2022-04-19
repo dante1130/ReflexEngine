@@ -60,6 +60,24 @@ bool getIfSave();
 void setIfSave(bool val);
 
 /**
+ * @brief	Gets time when the game was last saved
+ * @return	int	- When the game was last saved
+ */
+int timeAtLastSave();
+
+/**
+ * @brief	Gets time when the game was last loaded
+ * @return	int	- When the game was last loaded
+ */
+int timeAtLastLoad();
+
+/**
+ * @brief	Gets time
+ * @return	int	- The time
+ */
+int get_time();
+
+/**
  * @brief	Gets if the game should load game objects from save
  * @param	No param
  * @return	bool	- If it should load

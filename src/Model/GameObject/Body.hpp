@@ -3,6 +3,7 @@
 #include "Model/GameObject/GameObject.hpp"
 #include "Controller/Physics.hpp"
 #include "Controller/ResourceManager/ObjectSaving.hpp"
+#include "Controller/GenericFunctions.h"
 
 class Body : public GameObject {
 public:

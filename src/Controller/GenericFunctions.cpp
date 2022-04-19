@@ -6,6 +6,8 @@ int m_seed = 0;
 
 bool shouldSave = false;
 bool shouldLoad = false;
+int last_save_time_ = -100;
+int last_load_time_ = -100;
 bool paused = false;
 bool helpMenu = false;
 bool shouldShoot;
@@ -28,8 +30,11 @@ void GenericFunctions::lua_access() {
 	sol::state& lua = LuaManager::get_instance().get_state();
 
 	lua.set_function("random_generator", &GenericFunctions::get_random);
+	lua.set_function("current_time", &GenericFunctions::get_time);
 	lua.set_function("save_game", &GenericFunctions::setIfSave);
 	lua.set_function("load_game", &GenericFunctions::setIfLoad);
+	lua.set_function("time_since_last_save", &GenericFunctions::timeAtLastSave);
+	lua.set_function("time_since_last_load", &GenericFunctions::timeAtLastLoad);
 	lua.set_function("set_pause_game", &GenericFunctions::setIfPaused);
 	lua.set_function("get_pause_game", &GenericFunctions::getIfPaused);
 	lua.set_function("exit_game", &GenericFunctions::exitEngine);
@@ -57,13 +62,29 @@ int GenericFunctions::get_random(int min, int max) {
 	return rand() % max + min;
 }
 
+int GenericFunctions::get_time() { return glfwGetTime(); }
+
 bool GenericFunctions::getIfSave() { return shouldSave; }
 
-void GenericFunctions::setIfSave(bool val) { shouldSave = val; }
+void GenericFunctions::setIfSave(bool val) {
+	shouldSave = val;
+	if (val) {
+		last_save_time_ = glfwGetTime();
+	}
+}
+
+int GenericFunctions::timeAtLastSave() { return last_save_time_; }
+
+int GenericFunctions::timeAtLastLoad() { return last_load_time_; }
 
 bool GenericFunctions::getIfLoad() { return shouldLoad; }
 
-void GenericFunctions::setIfLoad(bool val) { shouldLoad = val; }
+void GenericFunctions::setIfLoad(bool val) {
+	shouldLoad = val;
+	if (val) {
+		last_load_time_ = glfwGetTime();
+	}
+}
 
 bool GenericFunctions::getIfPaused() { return paused; }
 
