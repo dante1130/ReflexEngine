@@ -48,7 +48,7 @@ void TestScene::key_controls(float delta_time) {
 	if (input_manager.get_key_state(Input::quit).is_key_pressed())
 		ReflexEngine::get_instance().window_.set_should_close(true);
 
-	camera.set_move_direction(glm::vec3(0.0f, 0.0f, 0.0f));
+	camera.set_move_direction(glm::vec3(0, 0, 0));
 
 	if (!(input_manager.get_key_state(Input::move_forward).is_key_hold() &&
 	      input_manager.get_key_state(Input::move_backward).is_key_hold())) {

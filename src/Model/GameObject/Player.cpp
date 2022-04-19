@@ -7,11 +7,10 @@ void Player::update(float delta_time) {
 
 	glm::vec3 direction = camera.get_move_direction();
 
-	rb.setLinearVelocity(direction * move_speed_);
+	glm::vec3 move = direction * move_speed_;
+	rb.setLinearVelocity(move);
 
 	position = rb.getPosition();
-	//
-
 	camera.set_position(position);
 }
 

@@ -103,7 +103,7 @@ public:
 
 private:
 	/// The camera's position.
-	glm::vec3 m_position;
+	glm::vec3 m_position = glm::vec3(0.0f, 0.0f, 0.0f);
 	/// The camera's front vector.
 	glm::vec3 m_front;
 	/// The camera's up vector.
@@ -113,7 +113,7 @@ private:
 	/// The camera's upworld vector.
 	glm::vec3 m_upWorld;
 	/// The camera's move direction.
-	glm::vec3 direction_;
+	glm::vec3 direction_ = glm::vec3(0.0f, 0.0f, 0.0f);
 
 	/// The camera's yaw.
 	float m_yaw;

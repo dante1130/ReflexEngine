@@ -1,7 +1,5 @@
 #include "Camera.hpp"
 
-#include <iostream>
-
 Camera::Camera()
     : m_position(0.0f),
       m_front(glm::vec3(0.0f, 0.0f, -1.0f)),
@@ -87,7 +85,6 @@ void Camera::calculate_direction(Movement movement) {
 			direction_ += right;
 			break;
 		default:
-			std::cout << "HELLO\n";
 			direction_ = glm::vec3(0.0f, 0.0f, 0.0f);
 			break;
 	}
