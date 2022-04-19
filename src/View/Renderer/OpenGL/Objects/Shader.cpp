@@ -1,21 +1,6 @@
 #include "Shader.hpp"
 
-Shader::Shader()
-    : m_shaderID(0u),
-      uniformProjection(0u),
-      uniformModel(0u),
-      uniformView(0u),
-      uniformEyePosition(0u),
-      uniformSpecularIntensity(0u),
-      uniformShininess(0u),
-      uniformTexture(0u),
-      uniformDirectionalLightTransform(0u),
-      uniformDirectionalShadowMap(0u),
-      uniformSpotLightCount(0u),
-      uniformPointLightCount(0u),
-      uniformUsingTexture(0u),
-      pointLightCount(0),
-      spotLightCount(0) {}
+Shader::Shader() {}
 
 GLuint Shader::GetProjectionLocation() const { return uniformProjection; }
 
@@ -52,6 +37,8 @@ GLuint Shader::GetOmniLightPosLocation() const { return uniformOmniLightPos; }
 GLuint Shader::GetFarPlaneLocation() const { return uniformFarPlane; }
 
 GLuint Shader::GetUsingTexture() const { return uniformUsingTexture; }
+
+GLuint Shader::get_using_detailmap() const { return uniform_using_detailmap; }
 
 void Shader::SetDirectionalLight(const DirectionalLight& dLight) {
 	dLight.UseLight(uniformDirectionalLight.uniformColor,
@@ -116,6 +103,10 @@ void Shader::SetTexture(GLuint textureUnit) {
 
 void Shader::SetDirectionalShadowMap(GLuint textureUnit) {
 	glUniform1i(uniformDirectionalShadowMap, textureUnit);
+}
+
+void Shader::set_detail_map(GLuint textureUnit) {
+	glUniform1i(uniform_detailmap, textureUnit);
 }
 
 void Shader::SetDirectionalLightTransform(const glm::mat4& lTransform) {
@@ -233,6 +224,8 @@ void Shader::CompileProgram() {
 	uniformEyePosition = glGetUniformLocation(m_shaderID, "eyePosition");
 
 	uniformUsingTexture = glGetUniformLocation(m_shaderID, "isUsingTexture");
+	uniform_using_detailmap =
+	    glGetUniformLocation(m_shaderID, "is_using_detailmap");
 
 	uniformDirectionalLight.uniformColor =
 	    glGetUniformLocation(m_shaderID, "directionalLight.base.color");
@@ -334,6 +327,8 @@ void Shader::CompileProgram() {
 	    glGetUniformLocation(m_shaderID, "directionalLightTransform");
 	uniformDirectionalShadowMap =
 	    glGetUniformLocation(m_shaderID, "directionalShadowMap");
+
+	uniform_detailmap = glGetUniformLocation(m_shaderID, "detailmap");
 
 	uniformOmniLightPos = glGetUniformLocation(m_shaderID, "lightPos");
 	uniformFarPlane = glGetUniformLocation(m_shaderID, "farPlane");

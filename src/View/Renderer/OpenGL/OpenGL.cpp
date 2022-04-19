@@ -1,6 +1,9 @@
 #include "OpenGL.hpp"
 
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
+#include "TexturedTerrain.hpp"
+
+TexturedTerrain terrain;
 
 void OpenGL::init() {
 	auto& engine = ReflexEngine::get_instance();
@@ -44,6 +47,12 @@ void OpenGL::init() {
 	    "textures/skyboxes/cupertin-lake/cupertin-lake_ft.tga");
 
 	skybox_ = Skybox(skyboxFaces);
+
+	terrain.set_scale(glm::vec3(0.5f, 0.25f, 0.5f));
+	terrain.load_heightfield("textures/heightmap.png");
+	terrain.load_texture("textures/dirt.png");
+	terrain.load_detailmap("textures/water.png");
+	terrain.load_mesh();
 }
 
 void OpenGL::draw() {
@@ -59,6 +68,8 @@ void OpenGL::render_scene(std::shared_ptr<Shader> shader) {
 	for (const auto& draw_call : draw_calls_) {
 		draw_call(shader);
 	}
+
+	terrain.render(shader);
 }
 
 void OpenGL::render_pass() {
@@ -112,6 +123,7 @@ void OpenGL::render_lights() {
 
 	shader_->SetTexture(1);
 	shader_->SetDirectionalShadowMap(2);
+	shader_->set_detail_map(3);
 }
 
 void OpenGL::directional_shadow_pass(const DirectionalLight& d_light) {

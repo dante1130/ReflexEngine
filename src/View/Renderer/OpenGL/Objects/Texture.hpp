@@ -14,15 +14,17 @@ class Texture {
 public:
 	/**
 	 * @brief Construct a new Texture object
-	 */
-	Texture();
-
-	/**
-	 * @brief Construct a new Texture object
 	 *
 	 * @param fileLocation
 	 */
 	Texture(const char* fileLocation);
+
+	/**
+	 * @brief Set the texture unit.
+	 *
+	 * @param texture_unit
+	 */
+	void set_texture_unit(GLuint texture_unit);
 
 	/**
 	 * @brief Loads a texture without alpha.
@@ -56,12 +58,15 @@ public:
 	~Texture();
 
 private:
-	/// The texture ID.
-	GLuint m_textureID;
-
-	/// Information regarding the texture image.
-	int m_width, m_height, m_bitDepth;
-
 	// The file location of the texture.
 	const char* m_fileLocation;
+
+	/// The texture ID.
+	GLuint m_textureID = 0u;
+
+	/// The texture unit.
+	GLuint texture_unit_ = GL_TEXTURE1;
+
+	/// Information regarding the texture image.
+	int m_width = 0, m_height = 0, m_bitDepth = 0;
 };
