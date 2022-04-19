@@ -2,15 +2,18 @@
 #define NETWORKMANAGER_H
 
 #include <string>
-#include <RakPeerInterface.h>
-#include <MessageIdentifiers.h>
+#include <raknet/Source/RakPeerInterface.h>
+#include <raknet/Source/RakNetTypes.h>
+#include <raknet/Source/RakString.h>
+#include <raknet/Source/BitStream.h>
+#include <raknet/Source/MessageIdentifiers.h>
 
 #define MAX_CLIENTS 6
 #define SERVER_PORT 60000
 
 //TODO: adjust so can be written for the game asset factory
 //      Maybe has it so that all of this (minus GetPacketIdentifier and HandleMessage) can be accessed from Lua?
-//      So that anything gui-related written in Lua can easily access the NetworkManager.
+//      So that anything gui-related written in Lua can easily access the NetworkManager. 
 namespace network 
 {
 	char message[512];
@@ -36,7 +39,7 @@ namespace network
      *
      * @return	Void
      *
-     * @pre		Nonne
+     * @pre		None
      * @post	network instance initialised
      */
     void InitNetwork();
@@ -106,7 +109,7 @@ namespace network
      * @pre		This must be run in a while loop for the network manager to receive messages.
      * @post	Returns the received message to another part of the game engine (notably the gui interface)
      */
-	char *ReceiveMessage();
+	std::string ReceiveMessage();
 
     /**
      * @brief	Handles the message received and identifies it's message type.
@@ -116,7 +119,7 @@ namespace network
      * @pre		Called by ReceiveMessage
      * @post	Returns the message based on the packet's ID
      */
-	char *HandleMessage(RakNet::Packet *packet);
+	std::string HandleMessage(RakNet::Packet *packet);
 
     /**
      * @brief	Ends the current session.

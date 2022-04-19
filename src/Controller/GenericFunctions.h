@@ -248,4 +248,34 @@ void setIfShouldShoot(bool val);
  */
 bool getIfShouldShoot();
 
+/**
+ * @brief	Creates the network manager
+ * @param	No param
+ * @return	void
+ *
+ * @pre		Nothing
+ * @post	Creates the network manager
+ */
+void createNetworkManager();
+
+/**
+ * @brief	Sets the network menu to be active or not
+ * @param	bool - true if menu should be shown
+ * @return	void
+ *
+ * @pre		Nothing
+ * @post	Creates/destroys the network menu
+ */
+void setNetworkMenuActive(bool active);
+
+/**
+ * @brief	Gets the active state of the network menu
+ * @param	No param
+ * @return	bool
+ *
+ * @pre		Nothing
+ * @post	Gets the active state of the network menu
+ */
+bool getNetworkMenuActive();
+
 };  // namespace GenericFunctions

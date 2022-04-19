@@ -78,6 +78,10 @@ void TestScene::key_controls(float delta_time) {
 		GenericFunctions::setifHelpMenuActive(
 		    !GenericFunctions::getIfHelpMenuActive());
 
+	if (input_manager.get_key_state(Input::network_menu).is_key_pressed()) {
+		GenericFunctions::setNetworkMenuActive(!GenericFunctions::getNetworkMenuActive());
+	}
+
 	if (input_manager.get_key_state(Input::shoot).is_key_pressed()) {
 		GenericFunctions::setIfShouldShoot(true);
 	}

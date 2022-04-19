@@ -1,18 +1,19 @@
 #include "NetworkManager.hpp"
 
 void network::InitNetwork() { 
-	peer = RakNet::RakPeerInterface::GetInstance(); 
+	peer = RakNet::RakPeerInterface::GetInstance();
+	printf("Created the network manager.");
 }
 
 void network::SetupClient(std::string userName) {
 	RakNet::SocketDescriptor sd;
 	peer->Startup(1, &sd, 1);
 	isServer = false;
-	if (userName !==NULL) {
+	if (userName !="") {
 		userName.append(": ");
-		name = userName;
+		strcat(name, userName.c_str());
 	} else {
-		name = "Client: ";
+		strcat(name, "Client: ");
 	}
 }
 
@@ -28,13 +29,13 @@ void network::SetupServer() {
 	RakNet::SocketDescriptor sd(SERVER_PORT, 0);
 	peer->Startup(MAX_CLIENTS, &sd, 1);
 	isServer = true;
-	name = "Server: ";
+	strcat(name, "Server");
 	peer->SetMaximumIncomingConnections(MAX_CLIENTS);
 }
 
 void network::ChangeName(std::string userName) { 
 	userName.append(": ");
-	name = userName;
+	strcat(name, userName.c_str());
 }
 
 void network::MessageSend(char* inputMessage) {
@@ -44,7 +45,7 @@ void network::MessageSend(char* inputMessage) {
 	peer->Send(sendMessage, (int)strlen(sendMessage) + 1, HIGH_PRIORITY, RELIABLE_ORDERED, 0, RakNet::UNASSIGNED_SYSTEM_ADDRESS, true);
 }
 
-char* network::ReceiveMessage() {
+std::string network::ReceiveMessage() {
 	for (packet = peer->Receive(); packet;
 		    peer->DeallocatePacket(packet), packet = peer->Receive()) {
 		return (HandleMessage(packet));
@@ -52,7 +53,7 @@ char* network::ReceiveMessage() {
 	
 }
 
-char* network::HandleMessage(RakNet::Packet *packet) {
+std::string network::HandleMessage(RakNet::Packet *packet) {
 	if (isServer) {
 		switch (GetPacketIdentifier(packet)) {
 			case ID_REMOTE_DISCONNECTION_NOTIFICATION:
@@ -92,7 +93,7 @@ char* network::HandleMessage(RakNet::Packet *packet) {
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				bsIn.Read(rs);
-				return (packet->data);
+				return (reinterpret_cast<char*>(packet->data));
 			} break;
 			default:
 				peer->Send(message, (const int)strlen(message) + 1,
@@ -140,11 +141,11 @@ char* network::HandleMessage(RakNet::Packet *packet) {
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				bsIn.Read(rs);
-				return (packet->data);
+				return reinterpret_cast<char*>(packet->data);
 				// bsIn.Reset();
 			} break;
 			default:
-				return (packet->data);
+				return reinterpret_cast<char*>(packet->data);
 				break;
 		}
 	}

@@ -10,6 +10,7 @@ int last_save_time_ = -100;
 int last_load_time_ = -100;
 bool paused = false;
 bool helpMenu = false;
+bool networkMenu = false;
 bool shouldShoot;
 float lastShot = 0;
 float shot_delay = 0;
@@ -46,6 +47,10 @@ void GenericFunctions::lua_access() {
 	lua.set_function("camera_look_x", &GenericFunctions::luaCamLookX);
 	lua.set_function("camera_look_y", &GenericFunctions::luaCamLookY);
 	lua.set_function("camera_look_z", &GenericFunctions::luaCamLookZ);
+
+	lua.set_function("create_network_manager", &GenericFunctions::createNetworkManager);
+	lua.set_function("exit_network_menu", &GenericFunctions::setNetworkMenuActive);
+	lua.set_function("get_network_menu", &GenericFunctions::getNetworkMenuActive);
 
 	lua.set_function("set_last_shot", &GenericFunctions::setLastShot);
 	lua.set_function("set_shot_delay", &GenericFunctions::setShotDelay);
@@ -115,7 +120,7 @@ float GenericFunctions::luaCamPosY() {
 	return ReflexEngine::get_instance().camera_.get_position().y;
 }
 float GenericFunctions::luaCamPosZ() {
-	return ReflexEngine::get_instance().camera_.get_position().z;
+	return ReflexEngine::get_instance().camera_.get_position().z; 
 }
 
 float GenericFunctions::luaCamLookX() {
@@ -142,3 +147,20 @@ void GenericFunctions::setIfShouldShoot(bool val) {
 	}
 }
 bool GenericFunctions::getIfShouldShoot() { return shouldShoot; }
+
+void GenericFunctions::createNetworkManager() { }
+
+void GenericFunctions::setNetworkMenuActive(bool active) {
+	networkMenu = active;
+	/*
+	if (networkMenu) {
+		glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
+		                 GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	} else {
+		glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
+		                 GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	}
+	*/
+}
+
+bool GenericFunctions::getNetworkMenuActive() { return (networkMenu); }

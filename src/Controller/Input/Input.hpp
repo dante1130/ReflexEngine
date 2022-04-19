@@ -16,5 +16,6 @@ enum class Input {
 	toggle_wireframe,
 	toggle_noclip,
 	pause_game,
-	help_menu
+	help_menu,
+	network_menu
 };

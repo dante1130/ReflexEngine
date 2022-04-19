@@ -8,6 +8,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	TexturedTerrain.cpp
 	GameAssetFactory.cpp
 	guiManager.cpp
+	NetworkManager.cpp
 
 	Model/GameObject/GameObject.hpp
 	Model/GameObject/Item.cpp
