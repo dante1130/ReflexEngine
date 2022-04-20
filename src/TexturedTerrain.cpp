@@ -3,7 +3,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-void TexturedTerrain::render(const Shader* shader) {
+void TexturedTerrain::render(std::shared_ptr<Shader> shader) {
 	if (!mesh_) return;
 
 	glm::mat4 model = glm::mat4(1.0f);

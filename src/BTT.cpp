@@ -77,10 +77,22 @@ void Btt::copyTree(Node*& nodeCopy, Node* node) {
 	}
 }
 
-void Btt::setAdjacentTriangles(Node* left, Node* right) {
-	leftTriangle = left;
-	rightTriangle = right;
+void Btt::setAdjacentTriangles(Btt** left, Btt** right) {
+	//std::cout << "left: " << left->lod << " right: " << right->lod << std::endl;
+	leftTriangle = *left;
+	rightTriangle = *right;
 }
+
+void Btt::setLeftTriangle(Btt* left) { 
+	leftTriangle = left; 
+	std::cout << " Left: " << leftTriangle->currentLod << std::endl;
+}
+
+void Btt::setRightTriangle(Btt* right) { 
+	rightTriangle = right; 
+	std::cout << " Right: " << rightTriangle->currentLod << std::endl;
+}
+
 
 void Btt::Insert(const glm::vec3& temp, unsigned int size, bool isFlip) {
 	if (size < 1) return;
@@ -94,12 +106,9 @@ void Btt::Insert(const glm::vec3& temp, unsigned int size, bool isFlip) {
 	depth = size;
 	bttNode->lod = 1;
 
-	//std::cout << "Size: " << depth << std::endl;
-
 	if (bttNode->lod < depth) {
 		Insert(bttNode);
 	}
-	//std::cout << "PASSED" << std::endl;
 }
 
 void Btt::Insert(unsigned int size, bool isFlip) {
@@ -129,6 +138,10 @@ void Btt::Insert(unsigned int size, bool isFlip) {
 
 Node* Btt::getRoot() {
 	return bttNode; 
+}
+
+unsigned int Btt::getLOD() { 
+	return currentLod; 
 }
 
 void Btt::Insert(Node* node) {
@@ -167,7 +180,6 @@ const GLuint* Btt::convertInt(const std::vector<glm::vec3>& temp) {
 	
 	GLuint size = getIndexSize() * GLuint(3);
 	GLuint* buffer{new GLuint[size]{}};
-	//std::cout << "INDEX COUNT:  " << getIndexSize() << std::endl;
 	for (int i = 0; i < temp.size(); ++i) {
 		for (int j = 0; j < 3; ++j) {
 			buffer[(3 * i) + j] = temp.at(i)[j];
@@ -180,10 +192,12 @@ const GLuint* Btt::getIndicesCoverted(const int level) {
 	return convertInt(getIndices(level));
 }
 
-const std::vector<glm::vec3>& Btt::getIndices(const int level) 
+const std::vector<glm::vec3>& Btt::getCurrentIndices() {
+	return currentIndices;
+}
+std::vector<glm::vec3> Btt::getIndices(const int level) 
 {
-	std::vector<glm::vec3> temp;
-
+	currentIndices.clear();
 	leftSideTriangles.clear();
 	rightSideTriangles.clear();
 
@@ -191,95 +205,112 @@ const std::vector<glm::vec3>& Btt::getIndices(const int level)
 	currentLod = level;
 	if (level > depth) {
 		std::cout << "ERROR: level exceeds depth" << std::endl;
-		return temp;
+		return currentIndices;
 	} else if (level <= 0) {
 		std::cout << "ERROR: level is zero or less" << std::endl;
-		return temp;
+		return currentIndices;
 	}
 
 
 	if (bttNode->lod == level) {
-		temp.push_back(bttNode->point);
-		//std::cout << "TRUE!" << std::endl;
+		currentIndices.push_back(bttNode->point);
 	} else {
-		getIndices(bttNode, temp, level);
+		getIndices(bttNode, level);
 	}
 
-	sizeOfIndexArray = temp.size();
-	//for (int i = 0; i < temp.size(); ++i)
-		//std::cout << "Index " << i << ": " << temp[i].x << " " << temp[i].y << " " << temp[i].z << std::endl;
-	/*
-	std::cout << "LEFT SIDE: " << std::endl;
-	for (int j = 0; j < leftSideTriangles.size(); ++ j) {
-		std::cout << "Index " << j << ": " << leftSideTriangles[j]->point.x
-		          << " " << leftSideTriangles[j]->point.y << " "
-		          << leftSideTriangles[j]->point.z << std::endl;
-	}
-	std::cout << "RIGHT SIDE: " << std::endl;
-	for (int k = 0; k < rightSideTriangles.size(); ++k) {
-		std::cout << "Index " << k << ": " << rightSideTriangles[k]->point.x
-		          << " " << rightSideTriangles[k]->point.y << " "
-		          << rightSideTriangles[k]->point.z << std::endl;
-	}
-	*/
-	return temp;
+	sizeOfIndexArray = currentIndices.size();
+	return currentIndices;
 }
 
-const void Btt::getIndices(Node* node, std::vector<glm::vec3>& temp, int level) {
-	std::cout << "NODE VALUE:  " << node->lod << "  LEVEL: " << level << std::endl;
+void Btt::addLeft() { 
+	for(int i = 0; i < bigLeftTriangles.size(); ++i) {
+		currentIndices.erase(currentIndices.begin() + bigLeftTriangles.at(i));
+	}
+	for (int j = 0; j < leftSideTriangles.size(); ++j) {
+		currentIndices.push_back(leftSideTriangles.at(j));
+	}
+}
+
+void Btt::addRight() {
+	for (int i = 0; i < bigRightTriangles.size(); ++i) {
+		currentIndices.erase(currentIndices.begin() + bigRightTriangles.at(i));
+	}
+	for (int j = 0; j < rightSideTriangles.size(); ++j) {
+		currentIndices.push_back(rightSideTriangles.at(j));
+	}
+}
+
+
+const void Btt::getIndices(Node* node, int level) 
+{
+	//std::cout << "NODE VALUE:  " << node->lod << "  LEVEL: " << level << std::endl;
+
 	if ((node->lod + 1) < level) {
-		getIndices(node->left, temp, level);
-		getIndices(node->right, temp, level);
+		getIndices(node->left, level);
+		getIndices(node->right, level);
 	} else {
-		temp.push_back(node->left->point);
-		temp.push_back(node->right->point);
+		currentIndices.push_back(node->left->point);
+		currentIndices.push_back(node->right->point);
 
 		if (((int)node->lod + 1) % 2 == 0) {
-			std::cout << "Were in" << std::endl;
-			addToLeft(node->left);
-			addToLeft(node->right); 
-			addToRight(node->left);
-			addToRight(node->right);
+			addToLeft(node->left, currentIndices.size()-1);
+			addToLeft(node->right, currentIndices.size()-1); 
+			addToRight(node->left, currentIndices.size());
+			addToRight(node->right, currentIndices.size());
 		}
 	}
 }
 
-void Btt::addToLeft(Node* node) { 
+void Btt::addToLeft(Node* node, const int& i) { 
 	GLuint diff;
 	
 	if (!isFlipped) {
 		diff = (bttNode->point.x - bttNode->point.y) / (depth -1); 
-		std::cout << "Not Flipped| Diff : " << diff << " depth-1: " << (depth - 1) << std::endl;
+
 		if ((int)node->point.y % (int)diff == 0 &&
 		    (int)node->point.z % (int)diff == 0) {
-			leftSideTriangles.push_back(node);
+			try {
+				leftSideTriangles.push_back(node->point);
+				bigLeftTriangles.push_back(i);
+			} catch (std::bad_alloc & exception) {
+				std::cout << "bad alloc 2" << std::endl;
+			}
 		}
+
 	}else {
 		diff = (bttNode->point.y - bttNode->point.x) / (depth - 1); 
-		std::cout << "Flipped| Diff : " << diff << " depth-1: " << (depth - 1) << std::endl;
-		if ((int)node->point.y - (depth - 1) % (int)diff == 0 &&
-		    (int)node->point.z - (depth - 1) % (int)diff == 0) {
-			Node* temp = new Node(node);
-			leftSideTriangles.push_back(node);
-			std::cout << "Passed1" << std::endl;
+
+		if (((int)(node->point.y - (depth - 1)) % (int)diff == 0)&&
+			((int)(node->point.z - (depth - 1)) % (int)diff == 0)) {
+			try {
+				leftSideTriangles.push_back(node->point);
+				bigLeftTriangles.push_back(i);
+			} catch (std::bad_alloc & exception) {
+				std::cout << "bad alloc 3" << std::endl;
+			}
 		}
 	}
 }
 
-void Btt::addToRight(Node* node) { 
-	GLuint min;
-	GLuint max;
+void Btt::addToRight(Node* node, const int& i) { 
+	int min;
+	int max;
+
 	if (!isFlipped) {
-		min = bttNode->point.z - (depth - 1);
-		max = bttNode->point.z;
+		min = int(bttNode->point.z - (depth - 1));
+		max = int(bttNode->point.z);
 	}else {
-		min = bttNode->point.z;
-		max = bttNode->point.z + (depth - 1);
+		min = int(bttNode->point.z);
+		max = int(bttNode->point.z + (depth - 1));
 	}
 
-	if (((int)node->point.y >= min && (int)node->point.y < max) &&
-	    ((int)node->point.z >= min &&(int) node->point.z < max)) {
-		rightSideTriangles.push_back(node);
-		std::cout << "Passed2" << std::endl;
+	if ((int(node->point.y) >= min && int(node->point.y) < max) &&
+	    (int(node->point.z) >= min && int(node->point.z) < max)) {
+		try {
+			rightSideTriangles.push_back(node->point);
+			bigRightTriangles.push_back(i);
+		} catch (std::bad_alloc& exception) {
+			std::cout << "bad alloc 4" << std::endl;
+		}
 	}
 }

@@ -13,7 +13,7 @@ public:
 	 *
 	 * @param shader
 	 */
-	void render(const Shader* shader) override;
+	void render(std::shared_ptr<Shader> shader) override;
 
 	/**
 	 * @brief Reads the heightmap and loads the mesh.

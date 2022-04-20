@@ -37,6 +37,25 @@ void Mesh::CreateMesh(const GLfloat* vertices, const GLuint* indices,
 	glBindVertexArray(0);
 }
 
+void Mesh::CreateIndices(GLuint* indices, GLuint noOfIndices) {
+	if (IBO != 0) {
+		glDeleteBuffers(1, &IBO);
+		IBO = 0;
+	}
+
+	indexCount = noOfIndices;
+
+	glGenBuffers(1, &IBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices[0]) * noOfIndices,
+	             indices, GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+}
+
+
+
+
 void Mesh::CreateColorMesh(const GLfloat* vertices, const GLuint* indices, GLuint noOfVerts,
                            GLuint noOfIndices) {
 	indexCount = noOfIndices;

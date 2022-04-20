@@ -1,6 +1,10 @@
 #include "OpenGL.hpp"
 
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
+#include "BttController.hpp"
+
+BttController bttControl;
+
 
 void OpenGL::init() {
 	auto& engine = ReflexEngine::get_instance();
@@ -13,7 +17,7 @@ void OpenGL::init() {
 	           engine.window_.GetBufferHeight());
 
 	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
+	//glEnable(GL_CULL_FACE);
 
 	shader_ = std::make_shared<Shader>();
 	shader_->CompileFile("shaders/shader.vert", "shaders/shader.frag");
@@ -32,7 +36,7 @@ void OpenGL::init() {
 	                 5.0f, 0.2f);
 
 	std::vector<std::string> skyboxFaces;
-
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	skyboxFaces.push_back(
 	    "textures/skyboxes/cupertin-lake/cupertin-lake_rt.tga");
 	skyboxFaces.push_back(
@@ -47,6 +51,12 @@ void OpenGL::init() {
 	    "textures/skyboxes/cupertin-lake/cupertin-lake_ft.tga");
 
 	skybox_ = Skybox(skyboxFaces);
+
+	bttControl.gen_faultformation(64, 161, 0, 255, 0.5);
+	bttControl.set_scale(glm::vec3(1.0f, 0.1f, 1.0f));
+
+	//Tiles: 20, Amount of vertices per tile: 9, n: 3
+	bttControl.CreateTerrain(20, 9, 3);
 }
 
 void OpenGL::draw() {
@@ -65,6 +75,8 @@ void OpenGL::render_scene(std::shared_ptr<Shader> shader) {
 	for (const auto& draw_call : draw_calls_) {
 		draw_call(shader);
 	}
+	bttControl.Update(camera_.GetCamPosition());
+	bttControl.render(ReflexEngine::get_instance().renderer_.get_shader());
 }
 
 void OpenGL::render_pass() {
@@ -80,7 +92,7 @@ void OpenGL::render_pass() {
 
 	glm::mat4 projection = glm::perspective(
 	    glm::radians(60.0f),
-	    static_cast<float>(width) / static_cast<float>(height), 0.1f, 100.0f);
+	    static_cast<float>(width) / static_cast<float>(height), 0.1f, 10000.0f);
 
 	glm::mat4 view = camera_.CalculateViewMatrix();
 

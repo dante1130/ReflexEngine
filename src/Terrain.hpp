@@ -18,7 +18,7 @@ public:
 	 *
 	 * @param shader
 	 */
-	virtual void render(const Shader* shader) = 0;
+	virtual void render(std::shared_ptr<Shader> shader) = 0;
 
 	/**
 	 * @brief Reads the heightmap and loads the mesh.
@@ -50,7 +50,6 @@ public:
 	 */
 	bool gen_faultformation(int iterations, size_t size, int min_height,
 	                        int max_height, float weight);
-
 	/**
 	 * @brief Get the offset to origin of the terrain.
 	 *

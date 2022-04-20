@@ -27,6 +27,8 @@ public:
 	void CreateMesh(const GLfloat* vertices, const GLuint* indices,
 	                GLuint noOfVerts, GLuint noOfIndices);
 
+	void CreateIndices(GLuint* indices, GLuint noOfIndices);
+
 	/**
 	 * @brief Takes in an array of vertices, texture coordinates, normals, and
 	 * indices and passing it to the GPU using VBO, VAO, and IBO.

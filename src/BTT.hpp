@@ -16,21 +16,6 @@ struct Node {
 
 	unsigned int lod;
 
-	
-	Node() { 
-		point = glm::vec3(0, 0, 0);
-		left = nullptr;
-		right = nullptr;
-		lod = 0;
-	}
-
-	Node(const Node*& other) { 
-		point = other->point;
-		lod = other->lod;
-		left = other->left;
-		right = other->right;
-	}
-
 };
 
 using Function = void (*)(glm::vec3&);
@@ -49,7 +34,7 @@ class Btt {
 
 		void Insert(const glm::vec3& temp, unsigned int size, bool isFlip);
 
-		const std::vector<glm::vec3>& getIndices(const int level); 
+		std::vector<glm::vec3> getIndices(const int level); 
 
 		const GLuint* getIndicesCoverted(const int level);
 
@@ -57,9 +42,21 @@ class Btt {
 
 		Node* getRoot();
 
+		unsigned int getLOD();
+
 		void destroyTree();
 
-		void setAdjacentTriangles(Node* left, Node* right);
+		void setAdjacentTriangles(Btt** left, Btt** right);//x
+
+		void setLeftTriangle(Btt* left); //x
+
+		void setRightTriangle(Btt* right);//x
+
+		const std::vector<glm::vec3>& getCurrentIndices(); 
+
+		void addLeft();
+
+		void addRight();
 
 	private:
 		
@@ -73,7 +70,7 @@ class Btt {
 
 		void Insert(Node* node);
 
-		const void getIndices(Node* node, std::vector<glm::vec3>& temp, int level); 
+		const void getIndices(Node* node, int level); 
 		
 		void destroyTree(Node* node);
 
@@ -81,19 +78,21 @@ class Btt {
 
 		const GLuint* convertInt(const std::vector<glm::vec3>& temp);
 
-		void addToLeft(Node* node);
+		void addToLeft(Node* node, const int& i);
 
-		void addToRight(Node* node);
+		void addToRight(Node* node, const int& i);
 
-		
 		Node* bttNode; // holds indices for triangles
 
-		Node* leftTriangle; //touching left side of main triangle (origin and left)
-	    Node* rightTriangle; //touching right side of main triangle (origin and right)
+		Btt* leftTriangle; //touching left side of main triangle (origin and left)
+	    Btt* rightTriangle; //touching right side of main triangle (origin and right)
 
 		 // vectors of triangles that hypotenus touch main triangle smaller sides
-		std::vector<Node*> leftSideTriangles;
-	    std::vector<Node*> rightSideTriangles;
+		std::vector<glm::vec3> leftSideTriangles;
+	    std::vector<glm::vec3> rightSideTriangles;
+	    std::vector<glm::vec3> currentIndices;
+	    std::vector<int> bigLeftTriangles;
+	    std::vector<int> bigRightTriangles;
 
 	    unsigned int currentLod;
 		unsigned int depth; // stores depth
