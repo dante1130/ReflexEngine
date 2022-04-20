@@ -137,6 +137,8 @@ size_t Terrain::get_width() const { return width_; }
 
 size_t Terrain::get_length() const { return length_; }
 
+uint8_t* Terrain::get_height_map() { return heightmap_; }
+
 void Terrain::set_scale(glm::vec3 scale) { scale_ = scale; }
 
 bool Terrain::is_in_bounds(int x, int z) const {

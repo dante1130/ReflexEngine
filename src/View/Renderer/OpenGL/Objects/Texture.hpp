@@ -48,6 +48,11 @@ public:
 	void UseTexture() const;
 
 	/**
+	 * @brief Sets the texture id
+	 */
+	void set_texture_id(GLuint id);
+
+	/**
 	 * @brief Clears the texture.
 	 */
 	void ClearTexture();
