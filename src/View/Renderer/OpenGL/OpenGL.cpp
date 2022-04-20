@@ -18,7 +18,7 @@ void OpenGL::init() {
 	           engine.window_.GetBufferHeight());
 
 	glEnable(GL_DEPTH_TEST);
-	// glEnable(GL_CULL_FACE);
+	glEnable(GL_CULL_FACE);
 
 	shader_ = std::make_shared<Shader>();
 	shader_->CompileFile("shaders/shader.vert", "shaders/shader.frag");

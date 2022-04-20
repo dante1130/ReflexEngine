@@ -37,7 +37,7 @@ public:
 
 	void Update(glm::vec3 player);
 
-	GLuint* getAllIndices(glm::vec3 pos);
+	void getAllIndices(glm::vec3 pos);
 
 	const std::vector<glm::vec2>& getCenters();
 
