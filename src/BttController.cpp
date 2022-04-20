@@ -187,12 +187,13 @@ void BttController::TestThings() {
 
 const GLuint BttController::findLOD(glm::vec3 pos, glm::vec2 center) {
 	// GLfloat dist =
-	// glm::distance(center, glm::vec2(pos.x + height_map_size, pos.z));
+	//     glm::distance(center, glm::vec2(pos.x + height_map_size, pos.z));
 	GLfloat dist = abs((pos.x + height_map_size) - center.x);
-	// GLfloat dist = glm::distance(center, glm::vec2(pos.x, pos.z));
-	// std::cout << dist << std::endl;
-	//   std::cout << " Center x: " << center.x << " z: " << center.y
-	//             << "    Pos x: " << pos.x << " z: " << pos.z << std::endl;
+	// GLfloat dist =
+	//    glm::distance(center, glm::vec2(pos.x + height_map_size, pos.z));
+	//  std::cout << dist << std::endl;
+	//    std::cout << " Center x: " << center.x << " z: " << center.y
+	//              << "    Pos x: " << pos.x << " z: " << pos.z << std::endl;
 	for (int i = 0; i < distances.size(); ++i) {
 		if (dist < distances.at(i)) {
 			return (distances.size() - i);
@@ -259,16 +260,14 @@ void BttController::getAllIndices(glm::vec3 pos) {
 			tempTime = glfwGetTime();
 			//   0.01 seconds --> 0.007
 			stored = bttMap.at(i).at(j).getIndices(lod);
+			time_in_get_indices += glfwGetTime() - tempTime;
 
 			// 0.005 seconds
-			/*
 			for (int k = 0; k < stored.size(); ++k) {
-			    indices.emplace_back(stored.at(k).x);
-			    indices.emplace_back(stored.at(k).y);
-			    indices.emplace_back(stored.at(k).z);
+				indices.emplace_back(stored.at(k).x);
+				indices.emplace_back(stored.at(k).y);
+				indices.emplace_back(stored.at(k).z);
 			}
-			*/
-			time_in_get_indices += glfwGetTime() - tempTime;
 		}
 	}
 
