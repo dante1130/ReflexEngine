@@ -41,6 +41,11 @@ public:
 	 */
 	bool load_detailmap(const char* file_name);
 
+	void set_texture(GLuint id) {
+		texture_ = std::make_shared<Texture>();
+		texture_->set_texture_id(id);
+	}
+
 private:
 	/// The mesh.
 	std::shared_ptr<Mesh> mesh_ = nullptr;

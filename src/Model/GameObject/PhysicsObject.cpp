@@ -18,6 +18,8 @@ void PhysicsObject::fixed_update(float delta_time) {
 	position = rb.getPosition();
 	rotation = rb.getRotation();
 	angle = rb.getAngle();
+	// position.y = GenericFunctions::getHeight(position.x, position.z);
+	// rb.set_position(position);
 }
 
 void PhysicsObject::add_draw_call() {

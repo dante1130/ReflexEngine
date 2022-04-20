@@ -110,7 +110,7 @@ void multiTextureCreator::create_multi_texture() {
 	}
 
 	if (use_better_lighting) {
-		//add_slope_based_lighting(mult_texture);
+		// add_slope_based_lighting(mult_texture);
 	} else {
 		add_height_based_lighting(mult_texture);
 	}
@@ -319,6 +319,8 @@ unsigned char multiTextureCreator::original_height_map_value(int x, int z) {
 	if (z < 0) {
 		z = 0;
 	}
-	
+
 	return m_height_map[z * m_x_size + x];
 }
+
+uint8_t* multiTextureCreator::get_height_map() { return m_height_map; }

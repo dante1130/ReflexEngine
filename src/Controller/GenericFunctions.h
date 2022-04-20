@@ -224,4 +224,8 @@ void setIfShouldShoot(bool val);
  */
 bool getIfShouldShoot();
 
+void setPlayableArea(uint8_t* floor, int size, float yscale);
+
+float getHeight(float x, float z);
+
 };  // namespace GenericFunctions

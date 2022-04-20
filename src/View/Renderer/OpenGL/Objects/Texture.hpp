@@ -12,6 +12,8 @@
  */
 class Texture {
 public:
+	Texture(){};
+
 	/**
 	 * @brief Construct a new Texture object
 	 *

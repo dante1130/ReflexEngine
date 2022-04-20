@@ -46,18 +46,18 @@ void ReflexEngine::run() {
 
 		if (GenericFunctions::getIfLoad())
 			engine.scenes_.top()->loadSavedGameObjects();
-
-		if (GenericFunctions::getIfSave())
+		else if (GenericFunctions::getIfSave())
 			engine.scenes_.top()->saveGameObjects();
+		else {
+			if (engine.fixed_delta_time_ >= time_step) {
+				engine.scenes_.top()->fixed_update(engine.fixed_delta_time_);
+				engine.fixed_delta_time_ = 0.0f;
+			}
 
-		if (engine.fixed_delta_time_ >= time_step) {
-			engine.scenes_.top()->fixed_update(engine.fixed_delta_time_);
-			engine.fixed_delta_time_ = 0.0f;
+			engine.scenes_.top()->update(engine.delta_time_);
+			engine.scenes_.top()->add_draw_call();
+			engine.renderer_.draw();
 		}
-
-		engine.scenes_.top()->update(engine.delta_time_);
-		engine.scenes_.top()->add_draw_call();
-		engine.renderer_.draw();
 
 		gui::mainLoopEnd();
 

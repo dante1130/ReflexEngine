@@ -32,4 +32,9 @@ if cbool then
 	gui_text("Box has been checked")
 end
 
+local xPos = camera_pos_x()
+local zPos = camera_pos_z()
+gui_text(xPos .. " : " .. zPos)
+
+
 gui_end()

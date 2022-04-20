@@ -1,5 +1,5 @@
 #include "BttController.hpp"
-
+#include "Controller/ReflexEngine/ReflexEngine.hpp"
 #include <iostream>
 
 BttController::BttController() {
@@ -204,7 +204,7 @@ const GLuint BttController::findLOD(glm::vec3 pos, glm::vec2 center) {
 GLuint* BttController::convertInt(const std::vector<glm::vec3>& temp) {
 	GLuint size = temp.size() * GLuint(3);
 	GLuint* buffer{new GLuint[size]{}};
-	// std::cout << "INDEX COUNT:  " << temp.size() << std::endl;
+	std::cout << "INDEX COUNT:  " << temp.size() << std::endl;
 	for (int i = 0; i < temp.size(); ++i) {
 		for (int j = 0; j < 3; ++j) {
 			buffer[(3 * i) + j] = temp.at(i)[j];
@@ -216,7 +216,7 @@ GLuint* BttController::convertInt(const std::vector<glm::vec3>& temp) {
 GLfloat* BttController::convertFloat(const std::vector<glm::vec3>& temp) {
 	GLuint size = temp.size() * GLuint(3);
 	GLfloat* buffer{new GLfloat[size]{}};
-	// std::cout << "VERTEX COUNT:  " << temp.size() << std::endl;
+	std::cout << "VERTEX COUNT:  " << temp.size() << std::endl;
 	for (int i = 0; i < temp.size(); ++i) {
 		for (int j = 0; j < 3; ++j) {
 			buffer[(3 * i) + j] = temp.at(i)[j];
@@ -269,10 +269,10 @@ void BttController::getAllIndices(glm::vec3 pos) {
 			}
 		}
 	}
-
 	// std::cout << "total time: " << glfwGetTime() - total_time <<
 	// std::endl; std::cout << "lod time: " << time_in_lod << std::endl;
-	// std::cout << "get indicies time: " << time_in_get_indices << std::endl;
+	//   std::cout
+	//<< "get indicies time: " << time_in_get_indices << std::endl;
 	// std::endl; std::cout << "constructor time: " << constructor_time <<
 	// std::endl;
 
@@ -282,11 +282,6 @@ void BttController::getAllIndices(glm::vec3 pos) {
 }
 
 void BttController::Update(glm::vec3 position) {
-	if (b) {
-		position.x += 0.1;
-		b = false;
-	}
-
 	if (position.x != prev_pos.x || position.z != prev_pos.z) {
 		mesh_ = std::make_shared<Mesh>();
 		getAllIndices(position);
@@ -347,6 +342,12 @@ bool BttController::load_texture(const char* file_name) {
 	texture_ = std::make_shared<Texture>(file_name);
 	return texture_->LoadTextureA();
 }
+
+/*
+void BttController::set_texture_id(GLuint id) {
+    texture_ = std::make_shared<Texture>();
+    texture_->set_texture_id(id);
+} */
 
 bool BttController::load_detailmap(const char* file_name) {
 	detailmap = std::make_shared<Texture>(file_name);

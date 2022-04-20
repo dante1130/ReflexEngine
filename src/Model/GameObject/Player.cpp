@@ -2,13 +2,17 @@
 
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 
-void Player::update(float delta_time) {}
+void Player::update(float delta_time) {
+	sol::state& lua = LuaManager::get_instance().get_state();
+	lua.script_file(lua_script_);
+
+	position = rb.getPosition();
+	position.y = GenericFunctions::getHeight(position.x, position.z) + 0.2;
+	rb.set_position(position);
+}
 
 void Player::fixed_update(float delta_time) {
 	auto& camera = ReflexEngine::get_instance().camera_;
-	sol::state& lua = LuaManager::get_instance().get_state();
-
-	lua.script_file(lua_script_);
 
 	glm::vec3 direction = camera.get_move_direction();
 

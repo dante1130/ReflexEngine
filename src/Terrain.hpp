@@ -113,6 +113,8 @@ public:
 	 */
 	uint8_t* get_height_map();
 
+	void set_height_map(uint8_t* map);
+
 	/**
 	 * @brief Set the scale.
 	 *

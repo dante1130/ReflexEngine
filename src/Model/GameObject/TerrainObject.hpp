@@ -2,25 +2,37 @@
 
 #include "GameObject.hpp"
 #include "BttController.hpp"
+#include "Controller/multiTextureCreator.hpp"
+#include "Controller/ResourceManager/ObjectSaving.hpp"
 
-class TerrainObject {
+class TerrainObject : public GameObject {
 public:
 	TerrainObject();
 
 	void init();
 
-	void update(float delta_time);
+	void fixed_update(float delta_time) override;
 
-	void add_draw_call();
+	void update(float delta_time) override{};
 
-	void draw(std::shared_ptr<Shader> shader);
+	void add_draw_call() override;
 
-	void save_object();
+	void draw(std::shared_ptr<Shader> shader) override;
 
-	void addTexture();
+	void save_object() override;
 
-	void addDetailMap();
+	void add_texture(std::string file_name);
+
+	void add_height_map(uint8_t* heightmap, int xSize, int ySize, bool island);
+
+	void add_detail_map(std::string file_name);
+
+	void create_terrain(int chunckSize, int chunkDetail, int n, int heightSize,
+	                    glm::vec3 scale);
+
+	uint8_t* get_height_map();
 
 private:
 	BttController bttControl;
+	multiTextureCreator mtc;
 };
