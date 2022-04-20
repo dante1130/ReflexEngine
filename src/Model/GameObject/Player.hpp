@@ -83,5 +83,6 @@ private:
 	/// The collider radius.
 	float collider_radius_ = 0.0f;
 
+	/// The flashlight.
 	SpotLight flashlight_;
 };
