@@ -95,7 +95,7 @@ void OpenGL::render_pass() {
 
 	glm::mat4 projection = glm::perspective(
 	    glm::radians(60.0f),
-	    static_cast<float>(width) / static_cast<float>(height), 0.1f, 100.0f);
+	    static_cast<float>(width) / static_cast<float>(height), 0.1f, 1000.0f);
 
 	glm::mat4 view = engine.camera_.calc_view_matrix();
 
