@@ -107,6 +107,13 @@ public:
 	size_t get_length() const;
 
 	/**
+	 * @brief Get the height map
+	 *
+	 * @return uint8_t	- The height map
+	 */
+	uint8_t* get_height_map();
+
+	/**
 	 * @brief Set the scale.
 	 *
 	 * @param scale

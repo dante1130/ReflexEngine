@@ -67,6 +67,8 @@ void Texture::UseTexture() const {
 	glBindTexture(GL_TEXTURE_2D, m_textureID);
 }
 
+void Texture::set_texture_id(GLuint id) { m_textureID = id; }
+
 void Texture::ClearTexture() {
 	glDeleteTextures(1, &m_textureID);
 
