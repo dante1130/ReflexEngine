@@ -118,6 +118,12 @@ void TestScene::update(float delta_time) {
 	}
 }
 
+void TestScene::fixed_update(float delta_time) {
+	for (auto& game_object : game_objects_) {
+		game_object->fixed_update(delta_time);
+	}
+}
+
 void TestScene::saveGameObjects() {
 	for (auto& game_object : game_objects_) {
 		game_object->save_object();

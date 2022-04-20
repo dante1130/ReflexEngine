@@ -55,11 +55,18 @@ public:
 	void mouse_controls(float xpos, float ypos) override;
 
 	/**
-	 * @brief The update loop.
+	 * @brief The update loop of the scene.
 	 *
 	 * @param delta_time	- The time between frames
 	 */
 	void update(float delta_time) override;
+
+	/**
+	 * @brief The fixed update loop of the scene.
+	 *
+	 * @param delta_time
+	 */
+	void fixed_update(float delta_time);
 
 	/**
 	 * @brief Add draw calls to the renderer.

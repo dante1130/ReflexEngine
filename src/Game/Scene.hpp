@@ -48,6 +48,13 @@ public:
 	virtual void update(float delta_time) = 0;
 
 	/**
+	 * @brief The fixed update loop of the scene.
+	 *
+	 * @param delta_time
+	 */
+	virtual void fixed_update(float delta_time) = 0;
+
+	/**
 	 * @brief Adds any draw calls to the renderer.
 	 */
 	virtual void add_draw_call() = 0;

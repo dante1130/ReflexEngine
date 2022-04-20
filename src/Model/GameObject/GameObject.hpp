@@ -32,6 +32,13 @@ public:
 	virtual void update(float delta_time) = 0;
 
 	/**
+	 * @brief Updates the game object with fixed delta time.
+	 *
+	 * @param delta_time
+	 */
+	virtual void fixed_update(float delta_time) = 0;
+
+	/**
 	 * @brief Adds a draw call to the renderer.
 	 */
 	virtual void add_draw_call() = 0;

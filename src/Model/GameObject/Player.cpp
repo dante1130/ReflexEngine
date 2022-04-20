@@ -2,7 +2,9 @@
 
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 
-void Player::update(float delta_time) {
+void Player::update(float delta_time) {}
+
+void Player::fixed_update(float delta_time) {
 	auto& camera = ReflexEngine::get_instance().camera_;
 	sol::state& lua = LuaManager::get_instance().get_state();
 

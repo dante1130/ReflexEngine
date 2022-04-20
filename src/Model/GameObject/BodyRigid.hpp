@@ -141,6 +141,13 @@ public:
 	void update(float delta_time) override;
 
 	/**
+	 * @brief Updates the body object with fixed delta time.
+	 *
+	 * @param delta_time
+	 */
+	void fixed_update(float delta_time);
+
+	/**
 	 * @brief	Gets the position vector
 	 * @return	glm::vec3	- The position of the rigid body
 	 *

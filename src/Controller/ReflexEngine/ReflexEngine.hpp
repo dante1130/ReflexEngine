@@ -7,6 +7,8 @@
 #include "Camera.hpp"
 #include "Window.hpp"
 
+constexpr float time_step = 1.0f / 60.0f;
+
 /**
  * @class ReflexEngine
  * @brief The game engine.
@@ -51,9 +53,18 @@ public:
 	void operator=(const ReflexEngine&) = delete;
 
 private:
+	float prev_time_ = 0.0f;
+	float delta_time_ = 0.0f;
+	float fixed_delta_time_ = 0.0f;
+
 	/**
-	 * @brief The default constructor is private as a singleton pattern is used,
-	 * preventing multiple instances.
+	 * @brief Updates the delta times.
+	 */
+	void update_delta_time();
+
+	/**
+	 * @brief The default constructor is private as a singleton pattern is
+	 * used, preventing multiple instances.
 	 */
 	ReflexEngine();
 };
