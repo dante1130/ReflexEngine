@@ -5,6 +5,8 @@ target_sources(${PROJECT_NAME} PRIVATE
 	AStarInterface.cpp
 	Terrain.cpp
 	BruteForceTerrain.cpp
+	BTT.cpp
+	BttController.cpp
 	TexturedTerrain.cpp
 	GameAssetFactory.cpp
 	guiManager.cpp
@@ -17,6 +19,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Model/GameObject/PhysicsObject.cpp
 	Model/GameObject/ScriptableObject.cpp
 	Model/GameObject/Player.cpp
+	Model/GameObject/TerrainObject.cpp
 	
 	View/Renderer/OpenGL/OpenGL.cpp
 	View/Renderer/OpenGL/Objects/Light.cpp
