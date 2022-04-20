@@ -1,0 +1,7 @@
+<map id="InputManager::get_instance" name="InputManager::get_instance">
+<area shape="rect" id="node1" title="Get the instance." alt="" coords="319,56,501,83"/>
+<area shape="rect" id="node2" href="$class_test_scene.html#a365110203eb94b8e2b9dc442b158620e" title="Initializes the scene." alt="" coords="133,5,242,32"/>
+<area shape="rect" id="node3" href="$class_test_scene.html#aad51ad2040b618871f77b2397ad5a35b" title="The function to specify controls for the keyboard." alt="" coords="104,56,271,83"/>
+<area shape="rect" id="node4" href="$class_reflex_engine.html#a9c185c8127a7d9d650a1bcc97e3de170" title="Runs the engine." alt="" coords="125,107,249,133"/>
+<area shape="rect" id="node5" href="$main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,107,56,133"/>
+</map>

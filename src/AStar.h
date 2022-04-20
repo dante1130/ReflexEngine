@@ -80,8 +80,6 @@ std::vector<std::vector<DistanceNode>> aStarSearch(
  * @param	&grid		- The grid
  * @param	gridSize	- The size of the grid
  * @param	start		- The starting position node
- *
- * @return	Void
  */
 void InitDefaultGrid(std::vector<std::vector<DistanceNode>> &grid,
                      const int gridSize[2], const node start);

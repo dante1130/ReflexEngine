@@ -1,0 +1,5 @@
+<map id="ResourceManager::get_model_manager" name="ResourceManager::get_model_manager">
+<area shape="rect" id="node1" title="Get the model manager." alt="" coords="196,23,349,65"/>
+<area shape="rect" id="node2" href="$class_item.html#ae902d008e98a75d3cf0fef53d9177f9e" title="The draw call for the item." alt="" coords="35,5,118,32"/>
+<area shape="rect" id="node3" href="$class_physics_object.html#a72c03214889819e5bba9d321e69a848c" title="Draws the object." alt="" coords="5,56,148,83"/>
+</map>

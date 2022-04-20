@@ -11,82 +11,64 @@ class AStar {
 public:
 	/**
 	 * @brief	Default constructor
-	 *
-	 * @param	No param
-	 *
-	 * @return	No return
 	 */
 	AStar();
 
 	/**
 	 * @brief	Uses a* to find a path to the destination
-	 *
 	 * @param xStart	- The starting xLocation (side to side)
 	 * @param yStart	- The starting yLocation (up and down)
 	 * @param xEnd	- The ending xLocation (side to size)
 	 * @param yEnd	- The ending yLocation (up and down)
 	 *
-	 * @return	Void
 	 */
 	std::vector<std::vector<DistanceNode>> findPath(int xStart, int yStart,
 	                                                int xEnd, int yEnd);
 
 	/**
 	 * @brief	Sets the grid to be used
-	 *
 	 * @param	newGrid	- The grid to store information from (0 = free space,
 	 * everything else it is not allowed to move into)
-	 *
 	 * @return	bool	- If it was successful
 	 */
 	bool setGrid(std::vector<std::vector<int>> newGrid);
 
 	/**
 	 * @brief	Sets the grid to be used
-	 *
 	 * @param	newGrid	- The grid to store information from (0 = free space,
 	 * everything else it is not allowed to move into)
 	 * @param	xSize	- The size of the grid in the xDirection (left/right)
 	 * @param	ySize	- The size of the grid in the yDirection (up/down)
-	 *
 	 * @return	bool	- If it was successful
 	 */
 	bool setGrid(int **newGrid, int xSize, int ySize);
 
 	/**
-	 * @brief
-	 *
+	 * @brief	Sets diagonal movement cost
 	 * @param	val		- Sets the cost to move diagonal
-	 *
 	 * @return	bool	- If it was successful
 	 */
 	bool setDiagonalMovementCost(float val);
 
 	/**
 	 * @brief
-	 *
 	 * @param	val		- Sets the cost to move non-diagonally
-	 *
 	 * @return	bool	- If it was successful
 	 */
 	bool setNonDiagonalMovementCost(float val);
 
 	/**
 	 * @brief	Sets if you allow diagoanl movement or not
-	 *
-	 * @param	allow	- true: allow diagonal movement, false: don't allow diagonal
-	 * movement
-	 *
+	 * @param	allow	- true: allow diagonal movement, false: don't allow
+	 * diagonal movement
 	 * @return	bool	- If it was successful
 	 */
 	void setAllowDiagonalMovement(bool allow);
 
 	/**
 	 * @brief	Sets the cost of the estimated distance
-	 *
-	 * @param	val		- The heuristicCostScale (larger values means faster but less
-	 * chance to get best path)
-	 *
+	 * @param	val		- The heuristicCostScale (larger values means faster but
+	 * less chance to get best path)
 	 * @return	bool	- If it was successful
 	 */
 	bool setHeuristicsCostScale(float val);
@@ -94,37 +76,28 @@ public:
 	/**
 	 * @brief	Sets the max distance allowed before the algorithm will
 	 * terminate
-	 *
 	 * @param	val		- The max distance
-	 *
 	 * @return	bool	- If it was successful
 	 */
 	bool setMaxDistance(float val);
 
 	/**
 	 * brief		Prints the possible exceptions
-	 *
 	 * @param	val	- the value of the exception
-	 *
-	 * @return	Void
 	 */
 	void printAstarException(int val);
 
 private:
 	/**
 	 * @brief	Sets the size of the grid in the x direction
-	 *
 	 * @param	xSize	- The size of the grid in the x direction
-	 *
 	 * @return	bool	- If it was successful
 	 */
 	bool setGridSizeX(int xSize);
 
 	/**
 	 * @brief	Sets the size of the grid in the y direction
-	 *
 	 * @param	ySize	- The size of the grid in the y direction
-	 *
 	 * @return	bool	- If it was successful
 	 */
 	bool setGridSizeY(int ySize);

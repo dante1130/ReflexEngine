@@ -1,0 +1,4 @@
+<map id="InputManager" name="InputManager">
+<area shape="rect" id="node1" title="A singleton class that manages input bindings." alt="" coords="5,219,151,487"/>
+<area shape="rect" id="node2" href="$class_input_state.html" title="A class that represents the state of a key." alt="" coords="7,5,149,156"/>
+</map>

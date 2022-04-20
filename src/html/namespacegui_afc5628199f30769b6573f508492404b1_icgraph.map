@@ -1,0 +1,5 @@
+<map id="gui::shutdown" name="gui::shutdown">
+<area shape="rect" id="node1" title="Shuts down gui." alt="" coords="276,5,379,32"/>
+<area shape="rect" id="node2" href="$class_reflex_engine.html#a9c185c8127a7d9d650a1bcc97e3de170" title="Runs the engine." alt="" coords="104,5,228,32"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,56,32"/>
+</map>

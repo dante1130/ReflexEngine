@@ -1,0 +1,9 @@
+<map id="TestScene" name="TestScene">
+<area shape="rect" id="node1" title="A test scene for testing purposes." alt="" coords="172,1157,353,1381"/>
+<area shape="rect" id="node2" href="$class_scene.html" title="A scene in the game." alt="" coords="5,900,187,1095"/>
+<area shape="rect" id="node3" href="$class_spot_light.html" title=" " alt="" coords="211,929,314,1065"/>
+<area shape="rect" id="node4" href="$class_point_light.html" title="A point light that illuminates in a sphere." alt="" coords="160,492,341,716"/>
+<area shape="rect" id="node5" href="$class_light.html" title="A light in the scene." alt="" coords="273,277,420,443"/>
+<area shape="rect" id="node7" href="$class_directional_light.html" title="A directional light that provides global illumination." alt="" coords="283,740,464,876"/>
+<area shape="rect" id="node6" href="$class_shadow_map.html" title="A shadow map." alt="" coords="273,5,420,215"/>
+</map>

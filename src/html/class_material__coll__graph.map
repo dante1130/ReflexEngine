@@ -1,0 +1,3 @@
+<map id="Material" name="Material">
+<area shape="rect" id="node1" title="A material to apply to an object of how shiny and how intense the specular lighting should be." alt="" coords="5,5,73,83"/>
+</map>

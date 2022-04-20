@@ -1,0 +1,28 @@
+var _generic_functions_8h =
+[
+    [ "exitEngine", "_generic_functions_8h.html#ab01d030caa470f551634a111ade6a859", null ],
+    [ "get_random", "_generic_functions_8h.html#a35f38c8bca11d94fa554be3107fb2957", null ],
+    [ "get_time", "_generic_functions_8h.html#a6805e732d0fe32de9436d103e32b3538", null ],
+    [ "getIfHelpMenuActive", "_generic_functions_8h.html#ade37ddcfa008e668cc83648731ec5aa8", null ],
+    [ "getIfLoad", "_generic_functions_8h.html#aa086f6a3926c511520907f20bd8377d7", null ],
+    [ "getIfPaused", "_generic_functions_8h.html#a46d8e1d0567cb3b8730f779111b97d6a", null ],
+    [ "getIfSave", "_generic_functions_8h.html#a97c5684fec4c6965654f382e1716b99d", null ],
+    [ "getIfShouldShoot", "_generic_functions_8h.html#ab6450c8d0e73a8c62824ad28866b1d06", null ],
+    [ "init_random", "_generic_functions_8h.html#aa3f6924f8ba52f27980bc3f99eb22b48", null ],
+    [ "lua_access", "_generic_functions_8h.html#aedb1b2ce5d478ef7fedcda90a989e6b2", null ],
+    [ "luaCamLookX", "_generic_functions_8h.html#a4a93b1985470ac73f76cb207d7a9571f", null ],
+    [ "luaCamLookY", "_generic_functions_8h.html#ab3a9926fed6409b2f6d61fad542a490a", null ],
+    [ "luaCamLookZ", "_generic_functions_8h.html#a8c5fa47d77ac1d37b104911c58bd19d3", null ],
+    [ "luaCamPosX", "_generic_functions_8h.html#ac1357693f7cb07f58abccc1078d899d1", null ],
+    [ "luaCamPosY", "_generic_functions_8h.html#a241c335ab90a3df479762c1ff554fe3b", null ],
+    [ "luaCamPosZ", "_generic_functions_8h.html#a3ea449fe0cae6a8a0596f199aa783c61", null ],
+    [ "setifHelpMenuActive", "_generic_functions_8h.html#a0075f92095dd2d3dddc94eff74736870", null ],
+    [ "setIfLoad", "_generic_functions_8h.html#a495397e71ac8320155d9b5b84240b385", null ],
+    [ "setIfPaused", "_generic_functions_8h.html#a12494eed72773f39ae5c8c1bcfe8274e", null ],
+    [ "setIfSave", "_generic_functions_8h.html#a3eb5e37a136bc6bcff2c26a6d1e39ca0", null ],
+    [ "setIfShouldShoot", "_generic_functions_8h.html#aebb9f24979b314c85522026a7dfd6557", null ],
+    [ "setLastShot", "_generic_functions_8h.html#a836349aee1aede1ece87b5f57af8019e", null ],
+    [ "setShotDelay", "_generic_functions_8h.html#a11ec068c228772119b4d068f9e9a66b6", null ],
+    [ "timeAtLastLoad", "_generic_functions_8h.html#a5731fc0a16d33fb115928751c6cd2092", null ],
+    [ "timeAtLastSave", "_generic_functions_8h.html#ad9f593b0b54918bd4f72394068303fa5", null ]
+];

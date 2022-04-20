@@ -1,0 +1,5 @@
+<map id="Terrain::calculate_terrain_normal" name="Terrain::calculate_terrain_normal">
+<area shape="rect" id="node1" title="Calculates the normals for the terrain given x and z coordinates." alt="" coords="5,5,127,47"/>
+<area shape="rect" id="node2" href="$class_terrain.html#a80e2c38f2f77d04e17ca276d68e44ad1" title="Get the height in terrain space given the x and z coordinates." alt="" coords="175,13,304,39"/>
+<area shape="rect" id="node3" href="$class_terrain.html#aa272456de114deab2756a575cda0bef5" title="Check whether the given coordinates are within the heightmap." alt="" coords="352,13,497,39"/>
+</map>

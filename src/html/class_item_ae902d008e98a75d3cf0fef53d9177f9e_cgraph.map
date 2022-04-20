@@ -1,0 +1,8 @@
+<map id="Item::draw" name="Item::draw">
+<area shape="rect" id="node1" title="The draw call for the item." alt="" coords="5,137,88,163"/>
+<area shape="rect" id="node2" href="$class_resource_manager.html#a33b466c53250b7431976a04d42d59036" title="Get the instance of the Resource Manager." alt="" coords="147,5,300,47"/>
+<area shape="rect" id="node3" href="$class_resource_manager.html#aea53ae6d2b9182e3aa71c6bd913922f0" title="Get the material manager." alt="" coords="147,71,300,112"/>
+<area shape="rect" id="node4" href="$class_model_manager.html#a83d75e18240c9ce3e92dfe7349fc0bf5" title="Get the model given the model name." alt="" coords="136,137,311,163"/>
+<area shape="rect" id="node5" href="$class_resource_manager.html#a474f1dfe5e7d553d919d09ff8b827467" title="Get the model manager." alt="" coords="147,188,300,229"/>
+<area shape="rect" id="node6" href="$class_model.html#ae42c614a1244170ee71e73027a8437e5" title="Renders the model." alt="" coords="153,254,294,281"/>
+</map>

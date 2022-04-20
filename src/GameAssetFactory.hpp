@@ -16,21 +16,19 @@ class GameAssetFactory {
 public:
 	/**
 	 * @brief	Parameterised factory method pattern for created game objects
-	 * @param	type		- The type of object to be created
 	 * @param	fileName	- The name of the lua file for object creation
 	 * @return	*GameObject - A child game object
 	 *
-	 * @pre	type/file exists
+	 * @pre		type/file exists
 	 * @post	Game object created
 	 */
 	GameObject* create(std::string fileName);
 
 private:
 	/**
-	 * @brief	Parameterised factory method pattern for created game objects
-	 * @param	type		- The type of object to be created
-	 * @param	fileName	- The name of the lua file for object creation
-	 * @return	*GameObject - A child game object
+	 * @brief	Checks if it is a lua script
+	 * @param	luaScript	- The lua script to check
+	 * @return	bool		- True if lua script
 	 *
 	 * @pre	type/file exists
 	 * @post	Game object created
@@ -38,10 +36,9 @@ private:
 	bool isLuaScript(std::string luaScript);
 
 	/**
-	 * @brief	Parameterised factory method pattern for created game objects
-	 * @param	type		- The type of object to be created
-	 * @param	fileName	- The name of the lua file for object creation
-	 * @return	*GameObject - A child game object
+	 * @brief	Gets the type of game object
+	 * @param	luaScript	- The lua script to check
+	 * @return	std::string	- Name of object type
 	 *
 	 * @pre	type/file exists
 	 * @post	Game object created
@@ -135,7 +132,6 @@ private:
 	 * @brief	Loads in extra physics object data from a lua script
 	 * @param	po	- physic object to store the data to
 	 * @param	lua	- Lua state
-	 * @return	Void
 	 *
 	 * @pre		extra physics data exists
 	 * @post	extra physics data stored
@@ -144,9 +140,9 @@ private:
 
 	/**
 	 * @brief	Loads in a box collider from a lua script
-	 * @param	po	- physic object to add the collider to
-	 * @param	lua	- Lua state
-	 * @return	Void
+	 * @param	count	- Which collider to get
+	 * @param	po		- physic object to add the collider to
+	 * @param	lua		- Lua state
 	 *
 	 * @pre		box collider exists
 	 * @post	box collider added
@@ -155,9 +151,9 @@ private:
 
 	/**
 	 * @brief	Loads in a sphere collider from a lua script
-	 * @param	po	- physic object to add the collider to
-	 * @param	lua	- Lua state
-	 * @return	Void
+	 * @param	count	- Which collider to get
+	 * @param	po		- physic object to add the collider to
+	 * @param	lua		- Lua state
 	 *
 	 * @pre		sphere collider exists
 	 * @post	sphere collider added
@@ -166,9 +162,9 @@ private:
 
 	/**
 	 * @brief	Loads in a capsule collider from a lua script
-	 * @param	po	- physic object to add the collider to
-	 * @param	lua	- Lua state
-	 * @return	Void
+	 * @param	count	- Which collider to get
+	 * @param	po		- physic object to add the collider to
+	 * @param	lua		- Lua state
 	 *
 	 * @pre		capsule collider exists
 	 * @post	capsule collider added

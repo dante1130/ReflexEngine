@@ -1,0 +1,5 @@
+<map id="Texture::Texture" name="Texture::Texture">
+<area shape="rect" id="node1" title="Construct a new Texture object." alt="" coords="200,46,316,73"/>
+<area shape="rect" id="node2" href="$class_texture_manager.html#a471160ce4f8272c1a9eeb9e78d20e862" title="Loads a texture without alpha to the texture manager." alt="" coords="5,5,152,47"/>
+<area shape="rect" id="node3" href="$class_texture_manager.html#a2ea826765f678cbc0643327c69a3e5e6" title="Loads a texture with alpha to the texture manager." alt="" coords="5,71,152,112"/>
+</map>

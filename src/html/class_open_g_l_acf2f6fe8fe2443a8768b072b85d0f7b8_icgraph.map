@@ -1,0 +1,5 @@
+<map id="OpenGL::render_lights" name="OpenGL::render_lights">
+<area shape="rect" id="node1" title="Enable and render lights." alt="" coords="356,5,508,32"/>
+<area shape="rect" id="node2" href="$class_open_g_l.html#a51e3e6a3fb96fcdca89f8a28de912b66" title="The default render pass using the default shader." alt="" coords="159,5,308,32"/>
+<area shape="rect" id="node3" href="$class_open_g_l.html#a7443c85991c40d1abf40825d2cbbf177" title="Draws the scene." alt="" coords="5,5,111,32"/>
+</map>

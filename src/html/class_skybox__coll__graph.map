@@ -1,0 +1,5 @@
+<map id="Skybox" name="Skybox">
+<area shape="rect" id="node1" title="A skybox." alt="" coords="143,659,291,795"/>
+<area shape="rect" id="node2" href="$class_shader.html" title="A shader program." alt="" coords="5,5,224,596"/>
+<area shape="rect" id="node3" href="$class_mesh.html" title="A mesh class representing vertices, texture coordinates, normals, and its indices." alt="" coords="249,189,391,413"/>
+</map>

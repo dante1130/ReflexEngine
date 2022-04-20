@@ -1,0 +1,5 @@
+<map id="OpenGL::render_pass" name="OpenGL::render_pass">
+<area shape="rect" id="node1" title="The default render pass using the default shader." alt="" coords="5,31,155,57"/>
+<area shape="rect" id="node2" href="$class_reflex_engine.html#aceed91c96c9c6774fbcacfde19e9b5f9" title="Get an instance of the engine." alt="" coords="203,5,383,32"/>
+<area shape="rect" id="node3" href="$class_open_g_l.html#acf2f6fe8fe2443a8768b072b85d0f7b8" title="Enable and render lights." alt="" coords="217,56,369,83"/>
+</map>

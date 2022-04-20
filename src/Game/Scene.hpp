@@ -18,8 +18,7 @@ public:
 
 	/**
 	 * @brief	Adds a game object
-	 * @param	No param
-	 * @return	Void
+	 * @param	luaScript	- The lua script of the object you want to add
 	 *
 	 * @pre	Nothing
 	 * @post	Object adde
@@ -29,22 +28,22 @@ public:
 	/**
 	 * @brief The function to specify controls for the keyboard.
 	 *
-	 * @param keys
+	 * @param delta_time	- The time between frames
 	 */
 	virtual void key_controls(float delta_time) = 0;
 
 	/**
 	 * @brief The function to specify controls for the mouse.
 	 *
-	 * @param xpos
-	 * @param ypos
+	 * @param xpos	- the x position of mouse on screen
+	 * @param ypos	- the y position of mouse on screen
 	 */
 	virtual void mouse_controls(float xpos, float ypos) = 0;
 
 	/**
 	 * @brief The update loop of the scene.
 	 *
-	 * @param delta_time
+	 * @param delta_time	- the time between frames
 	 */
 	virtual void update(float delta_time) = 0;
 
@@ -55,8 +54,6 @@ public:
 
 	/**
 	 * @brief	Saves game objects
-	 * @param	No param
-	 * @return	Void
 	 *
 	 * @pre		Game objects exists
 	 * @post	Game objects saved
@@ -65,8 +62,6 @@ public:
 
 	/**
 	 * @brief	loads game objects
-	 * @param	No param
-	 * @return	Void
 	 *
 	 * @pre		Game objects exists in files
 	 * @post	Game objects added

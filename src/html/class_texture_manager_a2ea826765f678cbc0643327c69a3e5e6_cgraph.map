@@ -1,0 +1,5 @@
+<map id="TextureManager::load_texture_rgba" name="TextureManager::load_texture_rgba">
+<area shape="rect" id="node1" title="Loads a texture with alpha to the texture manager." alt="" coords="5,23,152,65"/>
+<area shape="rect" id="node2" href="$class_texture.html#a7b8fa0b3b031e13ef281b0414101f883" title="Loads a texture with alpha." alt="" coords="200,5,353,32"/>
+<area shape="rect" id="node3" href="$class_texture.html#a2f20b4ed3f99df94c03cb6b37a560be2" title="Construct a new Texture object." alt="" coords="219,56,335,83"/>
+</map>

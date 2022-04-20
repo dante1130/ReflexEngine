@@ -1,0 +1,4 @@
+<map id="Terrain::get_height" name="Terrain::get_height">
+<area shape="rect" id="node1" title="Get the height in terrain space given the x and z coordinates." alt="" coords="5,5,135,32"/>
+<area shape="rect" id="node2" href="$class_terrain.html#aa272456de114deab2756a575cda0bef5" title="Check whether the given coordinates are within the heightmap." alt="" coords="183,5,328,32"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="Physics::setDebuggerToActive" name="Physics::setDebuggerToActive">
+<area shape="rect" id="node1" title="Sets which debugger to active." alt="" coords="213,5,412,32"/>
+<area shape="rect" id="node2" href="$class_body.html#abc711fca035985aa0c90df443ed6c72a" title="Adds all possible physic debugger options." alt="" coords="5,5,165,32"/>
+</map>

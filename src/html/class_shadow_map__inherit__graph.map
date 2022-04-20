@@ -1,0 +1,4 @@
+<map id="ShadowMap" name="ShadowMap">
+<area shape="rect" id="node1" title="A shadow map." alt="" coords="5,5,152,215"/>
+<area shape="rect" id="node2" href="$class_omni_shadow_map.html" title="A shadowmap cast by omnidirectional lights." alt="" coords="7,263,151,384"/>
+</map>

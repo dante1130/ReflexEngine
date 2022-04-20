@@ -1,0 +1,4 @@
+<map id="Window::Init" name="Window::Init">
+<area shape="rect" id="node1" title="Initializes the window." alt="" coords="5,5,99,32"/>
+<area shape="rect" id="node2" href="$class_window.html#ae03f4036524c0560c7a4e54f83573b87" title="Create callbacks for the keyboard and mouse events." alt="" coords="147,5,317,32"/>
+</map>

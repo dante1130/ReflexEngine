@@ -9,7 +9,6 @@ public:
 	/**
 	 * @brief	Default constructor
 	 * @param	script	- The script to run every update frame
-	 * @return	Nothing
 	 *
 	 * @pre		Nothing
 	 * @post	Script added to run
@@ -18,8 +17,6 @@ public:
 
 	/**
 	 * @brief	initialisation of game object. Not needed
-	 * @param	No param
-	 * @return	Void
 	 *
 	 * @pre		object exists
 	 * @post	Nothing
@@ -29,7 +26,6 @@ public:
 	/**
 	 * @brief	Updates the object by running the lua script
 	 * @param	delta_time	- The time between frames
-	 * @return	void
 	 *
 	 * @pre		lua script stored
 	 * @post	Script run
@@ -38,8 +34,6 @@ public:
 
 	/**
 	 * @brief	Adds a draw call. Not used
-	 * @param	No param
-	 * @return	void
 	 *
 	 * @pre		object exists
 	 * @post	Nothing
@@ -49,7 +43,6 @@ public:
 	/**
 	 * @brief	Draws the object. Not used
 	 * @param	shader	- The shader
-	 * @return	void
 	 *
 	 * @pre		Object exists
 	 * @post	Nothing
@@ -58,8 +51,6 @@ public:
 
 	/**
 	 * @brief	Saves the object to lau file
-	 * @param	No param
-	 * @return	Void
 	 *
 	 * @pre		Object exists
 	 * @post	Object saved
@@ -68,8 +59,6 @@ public:
 
 	/**
 	 * @brief	Destructor
-	 * @param	No param
-	 * @return	void
 	 *
 	 * @pre		Object exists
 	 * @post	Object deleted

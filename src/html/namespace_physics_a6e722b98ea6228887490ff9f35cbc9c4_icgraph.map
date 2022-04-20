@@ -1,0 +1,4 @@
+<map id="Physics::WorldExsists" name="Physics::WorldExsists">
+<area shape="rect" id="node1" title="Returns if the physics world is created or not." alt="" coords="189,13,344,39"/>
+<area shape="rect" id="node2" href="$class_body_rigid_physics.html#a456336d6946f6e4644ae42ca7425acc4" title="Destructor." alt="" coords="5,5,141,47"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="BruteForceTerrain" name="BruteForceTerrain">
+<area shape="rect" id="node1" title="A terrain that uses uses the 8&#45;bit values of the heightmap to color and render the terrain." alt="" coords="34,439,159,531"/>
+<area shape="rect" id="node2" href="$class_terrain.html" title=" " alt="" coords="5,5,188,391"/>
+</map>

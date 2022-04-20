@@ -1,0 +1,5 @@
+<map id="Body::physicsDebugger" name="Body::physicsDebugger">
+<area shape="rect" id="node1" title="Adds all possible physic debugger options." alt="" coords="5,31,165,57"/>
+<area shape="rect" id="node2" href="$namespace_physics.html#a6a91de887234646c6953c4c9bef48af5" title="Sets which debugger to active." alt="" coords="213,5,412,32"/>
+<area shape="rect" id="node3" href="$namespace_physics.html#a7088a371e1c45b57b5ae2d39e029ac49" title="Can set different debug values to be returned." alt="" coords="217,56,408,83"/>
+</map>

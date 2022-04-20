@@ -1,0 +1,4 @@
+<map id="Light" name="Light">
+<area shape="rect" id="node1" title="A light in the scene." alt="" coords="5,277,152,443"/>
+<area shape="rect" id="node2" href="$class_shadow_map.html" title="A shadow map." alt="" coords="5,5,152,215"/>
+</map>

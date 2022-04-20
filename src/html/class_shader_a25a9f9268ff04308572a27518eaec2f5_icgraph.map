@@ -1,0 +1,4 @@
+<map id="Shader::ClearShader" name="Shader::ClearShader">
+<area shape="rect" id="node1" title="Clears the shader." alt="" coords="173,5,316,32"/>
+<area shape="rect" id="node2" href="$class_shader.html#aff01df87e8a102f270b5b135a295e59d" title="Destroy the Shader object." alt="" coords="5,5,125,32"/>
+</map>

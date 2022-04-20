@@ -1,0 +1,4 @@
+<map id="ObjectSaving::setFreshSave" name="ObjectSaving::setFreshSave">
+<area shape="rect" id="node1" title="Resets the number counter for the file name to 0." alt="" coords="252,5,437,32"/>
+<area shape="rect" id="node2" href="$class_test_scene.html#a0ff60c1f1a14ff37889308135d408c89" title="Saves game objects." alt="" coords="5,5,204,32"/>
+</map>

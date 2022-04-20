@@ -1,0 +1,6 @@
+<map id="TestScene::init" name="TestScene::init">
+<area shape="rect" id="node1" title="Initializes the scene." alt="" coords="5,64,115,91"/>
+<area shape="rect" id="node2" href="$class_input_manager.html#ad569ecdfed4bedd78d0c41667ecca2b4" title="Get the instance." alt="" coords="163,5,345,32"/>
+<area shape="rect" id="node3" href="$class_input_manager.html#a18c7c9fbdaa41b7face531a32ac20443" title="Load the bindings from a Lua file." alt="" coords="188,57,320,98"/>
+<area shape="rect" id="node4" href="$namespace_generic_functions.html#aedb1b2ce5d478ef7fedcda90a989e6b2" title="Exposes generic functions methods to lua." alt="" coords="179,122,329,163"/>
+</map>

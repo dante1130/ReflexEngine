@@ -1,0 +1,4 @@
+<map id="Model::RenderModel" name="Model::RenderModel">
+<area shape="rect" id="node1" title="Renders the model." alt="" coords="136,5,277,32"/>
+<area shape="rect" id="node2" href="$class_item.html#ae902d008e98a75d3cf0fef53d9177f9e" title="The draw call for the item." alt="" coords="5,5,88,32"/>
+</map>

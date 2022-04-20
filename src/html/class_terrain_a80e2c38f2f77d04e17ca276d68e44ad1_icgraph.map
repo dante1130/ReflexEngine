@@ -1,0 +1,5 @@
+<map id="Terrain::get_height" name="Terrain::get_height">
+<area shape="rect" id="node1" title="Get the height in terrain space given the x and z coordinates." alt="" coords="183,46,312,73"/>
+<area shape="rect" id="node2" href="$class_terrain.html#a68bb209102c73c02fdbb959bfb8d4a06" title="Calculates the normals for the terrain given x and z coordinates." alt="" coords="9,5,131,47"/>
+<area shape="rect" id="node3" href="$class_terrain.html#ace2108224f6bb0d0e7f35f9608f3e40f" title="Get the height in worldspace given the x and z coordinates." alt="" coords="5,71,135,112"/>
+</map>

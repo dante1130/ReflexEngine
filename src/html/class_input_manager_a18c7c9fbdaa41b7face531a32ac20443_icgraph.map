@@ -1,0 +1,4 @@
+<map id="InputManager::load_lua_bindings" name="InputManager::load_lua_bindings">
+<area shape="rect" id="node1" title="Load the bindings from a Lua file." alt="" coords="163,5,295,47"/>
+<area shape="rect" id="node2" href="$class_test_scene.html#a365110203eb94b8e2b9dc442b158620e" title="Initializes the scene." alt="" coords="5,13,115,39"/>
+</map>

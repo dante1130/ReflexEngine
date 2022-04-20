@@ -1,0 +1,5 @@
+<map id="Skybox::DrawSkybox" name="Skybox::DrawSkybox">
+<area shape="rect" id="node1" title="Renders the skybox given a projection and view matrix." alt="" coords="5,31,152,57"/>
+<area shape="rect" id="node2" href="$class_shader.html#a3be5ea4b820a72a404e5928332d8c7a3" title="Use the current shader." alt="" coords="200,5,335,32"/>
+<area shape="rect" id="node3" href="$class_shader.html#a7c121b3d84a1861d3ec608d52cf8d299" title="Validates the shader." alt="" coords="208,56,327,83"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="GenericFunctions::setIfSave" name="GenericFunctions::setIfSave">
+<area shape="rect" id="node1" title="Sets if the game should be saved." alt="" coords="252,5,436,32"/>
+<area shape="rect" id="node2" href="$class_test_scene.html#a0ff60c1f1a14ff37889308135d408c89" title="Saves game objects." alt="" coords="5,5,204,32"/>
+</map>

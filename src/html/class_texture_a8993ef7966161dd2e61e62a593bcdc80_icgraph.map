@@ -1,0 +1,4 @@
+<map id="Texture::ClearTexture" name="Texture::ClearTexture">
+<area shape="rect" id="node1" title="Clears the texture." alt="" coords="177,5,324,32"/>
+<area shape="rect" id="node2" href="$class_texture.html#a09c4bcb7462f64c1d20fa69dba3cee8a" title="Destroy the Texture object." alt="" coords="5,5,129,32"/>
+</map>

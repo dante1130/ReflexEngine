@@ -1,0 +1,4 @@
+<map id="Body::init" name="Body::init">
+<area shape="rect" id="node1" title="Initialises the body object." alt="" coords="5,5,83,32"/>
+<area shape="rect" id="node2" href="$namespace_physics.html#a57d5edbfcb404618f3133c135dfdb3ce" title="Creates the world for the physic objects." alt="" coords="131,5,277,32"/>
+</map>

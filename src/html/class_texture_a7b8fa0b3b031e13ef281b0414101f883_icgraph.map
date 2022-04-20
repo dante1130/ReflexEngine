@@ -1,0 +1,4 @@
+<map id="Texture::LoadTextureA" name="Texture::LoadTextureA">
+<area shape="rect" id="node1" title="Loads a texture with alpha." alt="" coords="200,13,353,39"/>
+<area shape="rect" id="node2" href="$class_texture_manager.html#a2ea826765f678cbc0643327c69a3e5e6" title="Loads a texture with alpha to the texture manager." alt="" coords="5,5,152,47"/>
+</map>

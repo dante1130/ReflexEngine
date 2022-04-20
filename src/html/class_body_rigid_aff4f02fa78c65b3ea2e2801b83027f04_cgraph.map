@@ -1,0 +1,4 @@
+<map id="BodyRigid::addCapsuleCollider" name="BodyRigid::addCapsuleCollider">
+<area shape="rect" id="node1" title="Adds a capsule collider to a rigid body." alt="" coords="5,13,205,39"/>
+<area shape="rect" id="node2" href="$structcollider_data__capsule.html#a5f71f32750e41889878512239d81dd61" title=" " alt="" coords="253,5,404,47"/>
+</map>

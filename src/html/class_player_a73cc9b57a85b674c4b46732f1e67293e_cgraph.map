@@ -1,0 +1,8 @@
+<map id="Player::save_object" name="Player::save_object">
+<area shape="rect" id="node1" title="Save the object to a lua script." alt="" coords="5,81,140,108"/>
+<area shape="rect" id="node2" href="$namespace_object_saving.html#a546a372500539c88625a5f07cc4caf9f" title="Adds a comma to the file." alt="" coords="188,5,360,32"/>
+<area shape="rect" id="node3" href="$namespace_object_saving.html#a9dadcc7281db5e569a16d86421c58422" title="Closes the file." alt="" coords="195,56,353,83"/>
+<area shape="rect" id="node4" href="$namespace_object_saving.html#a8bd80ab63cd87a02055d0e92dd28b372" title="Closes the struct in the file." alt="" coords="188,107,360,133"/>
+<area shape="rect" id="node5" href="$namespace_object_saving.html#a2f179e587ac90b3be88f1e4c24bc6a19" title="Opens a file to save data too." alt="" coords="197,157,351,184"/>
+<area shape="rect" id="node6" href="$_object_saving_8cpp.html#a187a31d4f2cf1ae2be7e5f34eee9700a" title=" " alt="" coords="408,157,541,184"/>
+</map>

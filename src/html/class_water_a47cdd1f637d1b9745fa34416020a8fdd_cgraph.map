@@ -1,0 +1,4 @@
+<map id="Water::Water" name="Water::Water">
+<area shape="rect" id="node1" title="Constructor used to set a texture, pos, scale &amp; offMult." alt="" coords="5,5,105,32"/>
+<area shape="rect" id="node2" href="$class_water.html#a3c327b78306f8a970b818e5043ec6cdd" title="Initialises the water." alt="" coords="153,5,236,32"/>
+</map>

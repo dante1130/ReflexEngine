@@ -1,0 +1,6 @@
+<map id="Water::draw" name="Water::draw">
+<area shape="rect" id="node1" title="Initialises the water." alt="" coords="5,78,97,105"/>
+<area shape="rect" id="node2" href="$class_resource_manager.html#a33b466c53250b7431976a04d42d59036" title="Get the instance of the Resource Manager." alt="" coords="145,5,299,47"/>
+<area shape="rect" id="node3" href="$class_resource_manager.html#abbef155bc35aef3f78995effb06120fa" title="Get the texture manager." alt="" coords="145,71,299,112"/>
+<area shape="rect" id="node4" href="$class_texture.html#ac2e11c8bd262877a28a47e85f6f7458f" title="Enables the texture." alt="" coords="153,137,291,163"/>
+</map>

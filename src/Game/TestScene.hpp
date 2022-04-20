@@ -9,11 +9,10 @@
 #include "Model/GameObject/GameObject.hpp"
 #include "View/Renderer/OpenGL/Objects/DirectionalLight.hpp"
 #include "View/Renderer/OpenGL/Objects/SpotLight.hpp"
-#include "guiManager.hpp"
 #include "GameAssetFactory.hpp"
 #include "Controller/GuiLuaAccess.hpp"
-#include "guiManager.hpp" 
-#include "Controller/GenericFunctions.h" 
+#include "Controller/GenericFunctions.h"
+#include "Controller/LuaManager.hpp";
 
 /**
  * @class TestScene
@@ -33,33 +32,32 @@ public:
 
 	/**
 	 * @brief	Adds a game object
-	 * @param	No param
-	 * @return	Void
+	 * @param	luaScript	- a lua script to add
 	 *
-	 * @pre	Nothing
-	 * @post	Object adde
+	 * @pre		Nothing
+	 * @post	Object added
 	 */
 	void addGameObject(std::string luaScript) override;
 
 	/**
 	 * @brief The function to specify controls for the keyboard.
 	 *
-	 * @param keys
+	 * @param delta_time	- The time between frames
 	 */
 	void key_controls(float delta_time) override;
 
 	/**
 	 * @brief The function to specify controls for the mouse.
 	 *
-	 * @param xpos
-	 * @param ypos
+	 * @param xpos	- X position of mouse on screen
+	 * @param ypos	- Y position of mouse on screen
 	 */
 	void mouse_controls(float xpos, float ypos) override;
 
 	/**
 	 * @brief The update loop.
 	 *
-	 * @param delta_time
+	 * @param delta_time	- The time between frames
 	 */
 	void update(float delta_time) override;
 
@@ -70,8 +68,6 @@ public:
 
 	/**
 	 * @brief	Saves game objects
-	 * @param	No param
-	 * @return	Void
 	 *
 	 * @pre		Game objects exists
 	 * @post	Game objects saved
@@ -80,8 +76,6 @@ public:
 
 	/**
 	 * @brief	loads game objects
-	 * @param	No param
-	 * @return	Void
 	 *
 	 * @pre		Game objects exists in files
 	 * @post	Game objects added to scene
@@ -90,8 +84,6 @@ public:
 
 	/**
 	 * @brief	Adds new game objects during run time
-	 * @param	No param
-	 * @return	Void
 	 *
 	 * @pre		Added game objects stored in list
 	 * @post	Game objects loaded and stored
@@ -100,8 +92,6 @@ public:
 
 	/**
 	 * @brief	Deleted game objects which are considered finished
-	 * @param	No param
-	 * @return	Void
 	 *
 	 * @pre		Game objects exists
 	 * @post	Removed bad game objects
