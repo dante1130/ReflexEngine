@@ -174,7 +174,7 @@ char* networkManager::ReceiveMessage() {
 			}
 		}
 	}
-	return ("");
+	return (" ");
 }
 
 void networkManager::DestroySession() {
