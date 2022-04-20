@@ -19,6 +19,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Model/GameObject/PhysicsObject.cpp
 	Model/GameObject/ScriptableObject.cpp
 	Model/GameObject/Player.cpp
+	Model/GameObject/TerrainObject.cpp
 	
 	View/Renderer/OpenGL/OpenGL.cpp
 	View/Renderer/OpenGL/Objects/Light.cpp
@@ -50,7 +51,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/BodyRigidPhysics.cpp
 	Controller/GuiLuaAccess.cpp
 	Controller/GenericFunctions.cpp
-	
+
 	Game/Scene.hpp
 	Game/TestScene.cpp
 )
