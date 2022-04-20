@@ -7,6 +7,7 @@ if get_network_menu() then
 	local initialise = gui_button("INITIALISE", 150, 50)
 	local start = gui_button("Start Server", 150, 50)
 	local ip = gui_luaInputText("Enter Server IP (or 127.0.0.1 if local): ")
+	local name = gui_luaInputText("Name: ")
 	local connect = gui_button("Connect to server", 150, 50)
 
 	local back = gui_button("Exit Menu",150,50)
@@ -14,15 +15,16 @@ if get_network_menu() then
 	if initialise then
 		create_network_manager()
 	end
-	--[[
+	
 	if start then
 		start_server(true)
 	end
 
 	if connect then
-		client_connect(ip)
+		network_client_name(name)
+		network_client_connect(ip)
 	end
-	--]]
+	
 
 	if back then
 		exit_network_menu()

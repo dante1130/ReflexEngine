@@ -2,6 +2,7 @@
 
 #include "ReflexEngine/ReflexEngine.hpp"
 #include "LuaManager.hpp"
+#include "NetworkManager.hpp"
 #include <time.h>
 #include <random>
 #include "Controller/ReflexEngine/Camera.hpp"
@@ -250,13 +251,13 @@ bool getIfShouldShoot();
 
 /**
  * @brief	Creates the network manager
- * @param	No param
+ * @param	bool
  * @return	void
  *
  * @pre		Nothing
  * @post	Creates the network manager
  */
-void createNetworkManager();
+void createNetworkManager(bool create);
 
 /**
  * @brief	Sets the network menu to be active or not
@@ -277,5 +278,11 @@ void setNetworkMenuActive(bool active);
  * @post	Gets the active state of the network menu
  */
 bool getNetworkMenuActive();
+
+void startNetworkServer(bool active);
+
+void networkClientName(std::string userName);
+
+void networkClientConnect(std::string serverIP);
 
 };  // namespace GenericFunctions

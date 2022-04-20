@@ -2,6 +2,7 @@
 #define NETWORKMANAGER_H
 
 #include <string>
+#include <stdio.h>
 #include <raknet/Source/RakPeerInterface.h>
 #include <raknet/Source/RakNetTypes.h>
 #include <raknet/Source/RakString.h>
@@ -16,18 +17,18 @@
 //      So that anything gui-related written in Lua can easily access the NetworkManager. 
 namespace network 
 {
-	char message[512];
+	extern char message[512];
 
-	char name[256];
+	extern char name[256];
 
-	char str1[512];
+	extern char str1[512];
 
-	bool isServer;
+	extern bool isServer;
 
     
-	RakNet::RakPeerInterface *peer;
+	extern RakNet::RakPeerInterface *peer;
 
-	RakNet::Packet *packet;
+	extern RakNet::Packet *packet;
 
     ////METHOD NEEDED FOR NETWORK TO OPERATE////
     /**

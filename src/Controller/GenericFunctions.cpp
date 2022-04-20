@@ -11,6 +11,7 @@ int last_load_time_ = -100;
 bool paused = false;
 bool helpMenu = false;
 bool networkMenu = false;
+bool createNetwork = false;
 bool shouldShoot;
 float lastShot = 0;
 float shot_delay = 0;
@@ -148,11 +149,15 @@ void GenericFunctions::setIfShouldShoot(bool val) {
 }
 bool GenericFunctions::getIfShouldShoot() { return shouldShoot; }
 
-void GenericFunctions::createNetworkManager() { }
+void GenericFunctions::createNetworkManager(bool create) { 
+	if (createNetwork != true) {
+		createNetwork = create;
+		network::InitNetwork();
+	}
+}
 
 void GenericFunctions::setNetworkMenuActive(bool active) {
 	networkMenu = active;
-	/*
 	if (networkMenu) {
 		glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
 		                 GLFW_CURSOR, GLFW_CURSOR_NORMAL);
@@ -160,7 +165,12 @@ void GenericFunctions::setNetworkMenuActive(bool active) {
 		glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
 		                 GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	}
-	*/
+}
+
+void GenericFunctions::startNetworkServer(bool active) {
+	if (active) {
+		network::SetupServer();
+	}
 }
 
 bool GenericFunctions::getNetworkMenuActive() { return (networkMenu); }

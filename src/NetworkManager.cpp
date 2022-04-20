@@ -1,5 +1,19 @@
 #include "NetworkManager.hpp"
 
+namespace network {
+char message[512];
+
+char name[256];
+
+char str1[512];
+
+bool isServer;
+
+RakNet::RakPeerInterface* peer;
+
+RakNet::Packet* packet;
+}
+
 void network::InitNetwork() { 
 	peer = RakNet::RakPeerInterface::GetInstance();
 	printf("Created the network manager.");

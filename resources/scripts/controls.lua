@@ -10,6 +10,6 @@ Bindings = {
 	toggle_wireframe = "k",
 	toggle_noclip = "z",
 	pause_game = "escape",
-	help_menu = "m"
+	help_menu = "m",
 	network_menu = "n"
 }
