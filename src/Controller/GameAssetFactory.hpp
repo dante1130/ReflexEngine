@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Controller/LuaManager.hpp"
-#include "sol/sol.hpp"
+#include <sol/sol.hpp>
 
+#include "Controller/LuaManager.hpp"
 #include "Model/GameObject/GameObject.hpp"
 #include "Model/GameObject/Item.hpp"
 #include "Model/GameObject/Water.hpp"
@@ -12,6 +12,10 @@
 #include "Model/GameObject/PhysicsObject.hpp"
 #include "Model/GameObject/ScriptableObject.hpp"
 
+/**
+ * @class GameAssetFactory
+ * @brief A parameterized factory singleton for creating GameObjects.
+ */
 class GameAssetFactory {
 public:
 	/**
@@ -22,7 +26,7 @@ public:
 	 * @pre		type/file exists
 	 * @post	Game object created
 	 */
-	GameObject* create(std::string fileName);
+	static GameObject* create(std::string fileName);
 
 private:
 	/**
@@ -33,7 +37,7 @@ private:
 	 * @pre	type/file exists
 	 * @post	Game object created
 	 */
-	bool isLuaScript(std::string luaScript);
+	static bool isLuaScript(std::string luaScript);
 
 	/**
 	 * @brief	Gets the type of game object
@@ -43,7 +47,7 @@ private:
 	 * @pre	type/file exists
 	 * @post	Game object created
 	 */
-	std::string getObjectType(std::string luaScript);
+	static std::string getObjectType(std::string luaScript);
 
 	/**
 	 * @brief	Loads in the base objects position from a lua state
@@ -53,7 +57,7 @@ private:
 	 * @pre		Position varaible exists
 	 * @post	Position stored
 	 */
-	glm::vec3 loadBasePos(sol::state& lua);
+	static glm::vec3 loadBasePos(sol::state& lua);
 
 	/**
 	 * @brief	Loads in the base objects rotaiton axis from a lua state
@@ -63,7 +67,7 @@ private:
 	 * @pre		Rotation axis varaible exists
 	 * @post	Rotation axis stored
 	 */
-	glm::vec3 loadBaseRotation(sol::state& lua);
+	static glm::vec3 loadBaseRotation(sol::state& lua);
 
 	/**
 	 * @brief	Loads in the base objects angle of rotation from a lua state
@@ -73,7 +77,7 @@ private:
 	 * @pre		angle of rotation varaible exists
 	 * @post	angle of rotation stored
 	 */
-	float loadBaseAngle(sol::state& lua);
+	static float loadBaseAngle(sol::state& lua);
 
 	/**
 	 * @brief	Loads in the base objects scale from a lua state
@@ -83,7 +87,7 @@ private:
 	 * @pre		scale varaible exists
 	 * @post	scale stored
 	 */
-	glm::vec3 loadBaseScale(sol::state& lua);
+	static glm::vec3 loadBaseScale(sol::state& lua);
 
 	/**
 	 * @brief	Loads in an item object from a lua script
@@ -93,7 +97,7 @@ private:
 	 * @pre		item varaible exists
 	 * @post	Item stored
 	 */
-	Item* loadItem(std::string luaScript);
+	static Item* loadItem(std::string luaScript);
 
 	/**
 	 * @brief	Loads in a water object from a lua script
@@ -103,7 +107,7 @@ private:
 	 * @pre		water varaible exists
 	 * @post	water stored
 	 */
-	Water* loadWater(std::string luaScript);
+	static Water* loadWater(std::string luaScript);
 
 	/**
 	 * @brief	Loads in a body object from a lua script
@@ -113,9 +117,15 @@ private:
 	 * @pre		body varaible exists
 	 * @post	body stored
 	 */
-	Body* loadBody(std::string luaScript);
+	static Body* loadBody(std::string luaScript);
 
-	Player* load_player(std::string lua_script);
+	/**
+	 * @brief Loads in a player object from a lua script.
+	 *
+	 * @param lua_script
+	 * @return Player*
+	 */
+	static Player* load_player(std::string lua_script);
 
 	/**
 	 * @brief	Loads in a physics object object from a lua script
@@ -126,7 +136,7 @@ private:
 	 * @pre		physics object varaible exists
 	 * @post	physics object stored
 	 */
-	PhysicsObject* loadPhysicsObject(std::string luaScript);
+	static PhysicsObject* loadPhysicsObject(std::string luaScript);
 
 	/**
 	 * @brief	Loads in extra physics object data from a lua script
@@ -136,7 +146,8 @@ private:
 	 * @pre		extra physics data exists
 	 * @post	extra physics data stored
 	 */
-	void loadExtraPhysicObjectSettings(PhysicsObject* po, sol::state& lua);
+	static void loadExtraPhysicObjectSettings(PhysicsObject* po,
+	                                          sol::state& lua);
 
 	/**
 	 * @brief	Loads in a box collider from a lua script
@@ -147,7 +158,7 @@ private:
 	 * @pre		box collider exists
 	 * @post	box collider added
 	 */
-	void loadBoxCollider(int count, PhysicsObject* po, sol::state& lua);
+	static void loadBoxCollider(int count, PhysicsObject* po, sol::state& lua);
 
 	/**
 	 * @brief	Loads in a sphere collider from a lua script
@@ -158,7 +169,8 @@ private:
 	 * @pre		sphere collider exists
 	 * @post	sphere collider added
 	 */
-	void loadSphereCollider(int count, PhysicsObject* po, sol::state& lua);
+	static void loadSphereCollider(int count, PhysicsObject* po,
+	                               sol::state& lua);
 
 	/**
 	 * @brief	Loads in a capsule collider from a lua script
@@ -169,7 +181,8 @@ private:
 	 * @pre		capsule collider exists
 	 * @post	capsule collider added
 	 */
-	void loadCapsuleCollider(int count, PhysicsObject* po, sol::state& lua);
+	static void loadCapsuleCollider(int count, PhysicsObject* po,
+	                                sol::state& lua);
 
 	/**
 	 * @brief	Loads in a scriptable object object from a lua script
@@ -180,5 +193,5 @@ private:
 	 * @pre		scriptable object object varaible exists
 	 * @post	scriptable object object stored
 	 */
-	ScriptableObject* loadScriptableObject(std::string luaScript);
+	static ScriptableObject* loadScriptableObject(std::string luaScript);
 };
