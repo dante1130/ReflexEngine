@@ -53,8 +53,11 @@ public:
 	void operator=(const ReflexEngine&) = delete;
 
 private:
+	/// The previous time.
 	float prev_time_ = 0.0f;
+	/// The delta time.
 	float delta_time_ = 0.0f;
+	/// The fixed delta time.
 	float fixed_delta_time_ = 0.0f;
 
 	/**
