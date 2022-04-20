@@ -73,6 +73,7 @@ void InputManager::init_action_map() {
 	action_map["toggle_noclip"] = Input::toggle_noclip;
 	action_map["pause_game"] = Input::pause_game;
 	action_map["help_menu"] = Input::help_menu;
+	action_map["network_menu"] = Input::network_menu;
 }
 
 InputManager::InputManager() {

@@ -27,7 +27,7 @@ bool Terrain::gen_faultformation(int iterations, size_t size, int min_height,
 		return false;
 	}
 
-	srand(time(nullptr));
+	//srand(time(nullptr));
 
 	width_ = size;
 	length_ = size;

@@ -10,7 +10,13 @@ int last_save_time_ = -100;
 int last_load_time_ = -100;
 bool paused = false;
 bool helpMenu = false;
+bool networkMenu = false;
+bool createNetwork = false;
+bool networkConnected = false;
 bool shouldShoot;
+networkManager network;
+std::string message;
+std::string currentIPAddress;
 float lastShot = 0;
 float shot_delay = 0;
 
@@ -46,6 +52,16 @@ void GenericFunctions::lua_access() {
 	lua.set_function("camera_look_x", &GenericFunctions::luaCamLookX);
 	lua.set_function("camera_look_y", &GenericFunctions::luaCamLookY);
 	lua.set_function("camera_look_z", &GenericFunctions::luaCamLookZ);
+
+	lua.set_function("create_network_manager", &GenericFunctions::createNetworkManager);
+	lua.set_function("exit_network_menu", &GenericFunctions::setNetworkMenuActive);
+	lua.set_function("get_network_menu", &GenericFunctions::getNetworkMenuActive);
+	lua.set_function("start_server", &GenericFunctions::startNetworkServer);
+	lua.set_function("network_client_name", &GenericFunctions::networkClientName);
+	lua.set_function("network_client_connect", &GenericFunctions::networkClientConnect);
+	lua.set_function("network_terminate", &GenericFunctions::networkEnd);
+	lua.set_function("network_connection_status", &GenericFunctions::networkConnectionStatus);
+	lua.set_function("network_retain_IP", &GenericFunctions::networkRetainIP);
 
 	lua.set_function("set_last_shot", &GenericFunctions::setLastShot);
 	lua.set_function("set_shot_delay", &GenericFunctions::setShotDelay);
@@ -115,7 +131,7 @@ float GenericFunctions::luaCamPosY() {
 	return ReflexEngine::get_instance().camera_.get_position().y;
 }
 float GenericFunctions::luaCamPosZ() {
-	return ReflexEngine::get_instance().camera_.get_position().z;
+	return ReflexEngine::get_instance().camera_.get_position().z; 
 }
 
 float GenericFunctions::luaCamLookX() {
@@ -142,3 +158,70 @@ void GenericFunctions::setIfShouldShoot(bool val) {
 	}
 }
 bool GenericFunctions::getIfShouldShoot() { return shouldShoot; }
+
+void GenericFunctions::createNetworkManager(bool create) { 
+	if (createNetwork != true) {
+		createNetwork = true;
+		network.InitNetwork();
+	}
+}
+
+void GenericFunctions::setNetworkMenuActive(bool active) {
+	networkMenu = active;
+	if (networkMenu) {
+		glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
+		                 GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	} else if(!networkMenu && !paused){
+		glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
+		                 GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	}
+}
+
+void GenericFunctions::startNetworkServer(bool active) {
+	if (active) {
+		network.SetupServer();
+		networkConnected = true;
+	}
+}
+
+void GenericFunctions::networkClientName(std::string userName) {
+	network.ChangeName(userName);
+}
+
+void GenericFunctions::networkClientConnect(std::string serverIP) {
+	char* serverIPChar;
+	strcpy(serverIPChar, currentIPAddress.c_str());
+	printf("This Runs\n");
+	printf("%s\n", currentIPAddress.c_str());
+	network.SetupClient("Client");
+	networkConnected = !network.ConnectClient(serverIPChar); // Flipped as it returns true if you are NOT connected (which is weird I know)
+}
+
+void GenericFunctions::networkEnd() {
+	if (createNetwork) {
+		network.DestroySession();
+		createNetwork = false;
+	}
+}
+
+void GenericFunctions::networkUpdate() { 
+
+	if(createNetwork && networkConnected && network.ReceiveMessage() != " ") {
+		printf("%s\n",network.ReceiveMessage()); //Currently prints to console, but will eventually print to text chat
+	}
+}
+
+bool GenericFunctions::getNetworkMenuActive() { 
+	return (networkMenu);
+}
+
+bool GenericFunctions::networkConnectionStatus() {
+	bool networkStatus = network.ConnectionStatus();
+	return (networkStatus);
+}
+
+void GenericFunctions::networkRetainIP(std::string savedIP) {
+	if (savedIP != "") {
+		currentIPAddress = savedIP;
+	}
+}

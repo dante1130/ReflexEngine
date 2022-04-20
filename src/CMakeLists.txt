@@ -9,6 +9,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	BttController.cpp
 	TexturedTerrain.cpp
 	guiManager.cpp
+	NetworkManager.cpp
 
 	Model/GameObject/GameObject.hpp
 	Model/GameObject/Item.cpp

@@ -73,6 +73,10 @@ void TestScene::key_controls(float delta_time) {
 		GenericFunctions::setifHelpMenuActive(
 		    !GenericFunctions::getIfHelpMenuActive());
 
+	if (input_manager.get_key_state(Input::network_menu).is_key_pressed()) {
+		GenericFunctions::setNetworkMenuActive(!GenericFunctions::getNetworkMenuActive());
+	}
+
 	if (input_manager.get_key_state(Input::shoot).is_key_pressed()) {
 		GenericFunctions::setIfShouldShoot(true);
 	}
@@ -101,6 +105,7 @@ void TestScene::update(float delta_time) {
 	for (auto& game_object : game_objects_) {
 		game_object->update(delta_time);
 	}
+	GenericFunctions::networkUpdate();
 }
 
 void TestScene::fixed_update(float delta_time) {
