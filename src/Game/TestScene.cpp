@@ -3,9 +3,9 @@
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 #include "Controller/Input/InputManager.hpp"
 #include "TestScene.hpp"
+
 TestScene::TestScene() {}
 
-GameAssetFactory gaf;
 void TestScene::init() {
 	directional_light_ =
 	    DirectionalLight(2048, 2048, glm::vec3(1.0f, 0.53f, 0.3f), 0.2f,
@@ -37,7 +37,7 @@ void TestScene::addGameObject(std::string luaScript) {
 		addGameObjectDuringRun(luaScript);
 	} else {
 		std::cout << luaScript << std::endl;
-		game_objects_.emplace_back(gaf.create(luaScript));
+		game_objects_.emplace_back(GameAssetFactory::create(luaScript));
 	}
 }
 
@@ -158,7 +158,7 @@ void TestScene::garbage_collection() {
 void TestScene::add_new_game_objects() {
 	for (int count = 0; count < to_add.size(); count++) {
 		std::cout << "Adding during runtime = " << to_add[count] << std::endl;
-		game_objects_.emplace_back(gaf.create(to_add[count]));
+		game_objects_.emplace_back(GameAssetFactory::create(to_add[count]));
 	}
 	to_add.clear();
 }

@@ -33,13 +33,6 @@ public:
 	static void run();
 
 	/**
-	 * @brief Updates the camera's position and perspective.
-	 *
-	 * @param delta_time
-	 */
-	void update_camera(float delta_time);
-
-	/**
 	 * @brief Get an instance of the engine.
 	 *
 	 * @return ReflexEngine&
