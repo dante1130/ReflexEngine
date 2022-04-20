@@ -33,6 +33,13 @@ public:
 	void update(float delta_time);
 
 	/**
+	 * @brief Updates the body object with fixed delta time.
+	 *
+	 * @param delta_time
+	 */
+	void fixed_update(float delta_time) {}
+
+	/**
 	 * @brief	Adds a draw call. Not used
 	 *
 	 * @pre		object exists

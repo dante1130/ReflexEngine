@@ -25,44 +25,52 @@ void ReflexEngine::run() {
 	engine.scenes_.emplace(std::make_shared<TestScene>());
 	engine.scenes_.top()->init();
 
-	float delta_time = 0.0f;
-	float prev_time = glfwGetTime();
-
 	auto& input_manager = InputManager::get_instance();
 
 	while (!engine.window_.IsShouldClose()) {
-		float curr_time = glfwGetTime();
-		delta_time = curr_time - prev_time;
-		prev_time = curr_time;
+		engine.update_delta_time();
 
 		glfwPollEvents();
 		input_manager.read_keys(engine.window_.get_window());
 
 		gui::mainLoopStart();
 
-		if (GenericFunctions::getIfPaused()) delta_time = 0;
+		engine.scenes_.top()->key_controls(engine.delta_time_);
 
-		if (GenericFunctions::getIfLoad()) {
-			engine.scenes_.top()->loadSavedGameObjects();
-		} else if (GenericFunctions::getIfSave()) {
-			engine.scenes_.top()->saveGameObjects();
+		if (GenericFunctions::getIfPaused()) {
+			engine.delta_time_ = 0;
 		} else {
-			engine.scenes_.top()->update(delta_time);
-			engine.scenes_.top()->add_draw_call();
-			engine.renderer_.draw();
-
-			if (GenericFunctions::getIfPaused() == false) {
-				engine.scenes_.top()->mouse_controls(
-				    engine.window_.GetXOffset(), engine.window_.GetYOffset());
-			}
-			engine.scenes_.top()->key_controls(delta_time);
+			engine.scenes_.top()->mouse_controls(engine.window_.GetXOffset(),
+			                                     engine.window_.GetYOffset());
 		}
+
+		if (GenericFunctions::getIfLoad())
+			engine.scenes_.top()->loadSavedGameObjects();
+
+		if (GenericFunctions::getIfSave())
+			engine.scenes_.top()->saveGameObjects();
+
+		if (engine.fixed_delta_time_ >= time_step) {
+			engine.scenes_.top()->fixed_update(engine.fixed_delta_time_);
+			engine.fixed_delta_time_ = 0.0f;
+		}
+
+		engine.scenes_.top()->update(engine.delta_time_);
+		engine.scenes_.top()->add_draw_call();
+		engine.renderer_.draw();
 
 		gui::mainLoopEnd();
 
 		engine.window_.SwapBuffers();
 	}
 	gui::shutdown();
+}
+
+void ReflexEngine::update_delta_time() {
+	float curr_time = glfwGetTime();
+	delta_time_ = curr_time - prev_time_;
+	fixed_delta_time_ += delta_time_;
+	prev_time_ = curr_time;
 }
 
 ReflexEngine& ReflexEngine::get_instance() {

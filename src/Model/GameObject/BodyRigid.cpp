@@ -34,7 +34,9 @@ void BodyRigid::setAngularVelocity(glm::vec3 velocity) {
 	rb.setAngularVelocity(velocity);
 }
 
-void BodyRigid::update(float delta_time) {
+void BodyRigid::update(float delta_time) {}
+
+void BodyRigid::fixed_update(float delta_time) {
 	position = rb.getPosition();
 	rotation = rb.getRotation();
 	angle = rb.getAngle();
