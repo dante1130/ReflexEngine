@@ -9,7 +9,18 @@ BttController::BttController() {
 	chunk_detail = 0;
 }
 
-BttController::~BttController() {}
+BttController::~BttController() {
+	for (int i = 0; i < bttMap.size(); ++i) {
+		bttMap.at(i).clear();
+	}
+	bttMap.clear();
+	bttCenters.clear();
+	vertices.clear();
+	distances.clear();
+	current_total_indices = 0;
+	chunk_size = 0;
+	chunk_detail = 0;
+}
 
 void BttController::render(std::shared_ptr<Shader> shader) {
 	if (!mesh_) return;
@@ -50,6 +61,13 @@ void BttController::CreateTerrain(int chunkSize, int chunkDetail, int n) {
 	chunk_size = chunkSize;
 	chunk_detail = chunkDetail;
 
+	/*
+	if (heightmap_ == nullptr) {
+	    std::cout << "No heightmap!" << std::endl;
+	    return;
+	}
+	*/
+
 	GenerateVertices(chunkSize, chunkDetail);
 
 	std::cout << "PASSED VERTICES GENEREATION" << std::endl;
@@ -83,9 +101,23 @@ void BttController::CreateTerrain(int chunkSize, int chunkDetail, int n) {
 			bttCenters.push_back(
 			    glm::vec2(((chunkDetail - 1) * i) + ((chunkDetail - 1) / 2),
 			              ((chunkDetail - 1) * j) + ((chunkDetail - 1) / 2)));
+
+			/*
+			std::cout << "BTT " << i << j << "|  offset: " << offset << "
+			center: x: " << bttCenters.at(int((i * chunkSize) + j)).x
+			<< " z: " << bttCenters.at((i * chunkSize) + j).y << std::endl;
+			std::cout << "Tri " << i << j << " | x : " << vector_temp_sw.x << "
+			y : " << vector_temp_sw.y
+			          << " z: " << vector_temp_sw.z << std::endl;
+			std::cout << "Tri " << i << j << " | x : " << vector_temp_ne.x
+			          << " y : " << vector_temp_ne.y << " z: " <<
+			vector_temp_ne.z
+			          << std::endl;
+			          */
 		}
 		// adds to the y-axis
 		bttMap.push_back(temp);
+		temp.clear();
 	}
 
 	std::cout << "\n\nPASSED INDICES GENEREATION\n\n" << std::endl;
@@ -144,13 +176,23 @@ void BttController::TestThings() {
 					bttMap.at(i).at(j * 2 - 1).addRight();
 				}
 			}
+
+			// std::cout << "Tile " << i << j << "| left: " << i << jl
+			//         << " right: " << i << jr << " up: " << iu << j * 2
+			//       << " down: " << id << j * 2 + 1 << std::endl;
 		}
 	}
 }
 
 const GLuint BttController::findLOD(glm::vec3 pos, glm::vec2 center) {
+	// GLfloat dist =
+	//     glm::distance(center, glm::vec2(pos.x + height_map_size, pos.z));
 	GLfloat dist = abs((pos.x + height_map_size) - center.x);
-
+	// GLfloat dist =
+	//    glm::distance(center, glm::vec2(pos.x + height_map_size, pos.z));
+	//  std::cout << dist << std::endl;
+	//    std::cout << " Center x: " << center.x << " z: " << center.y
+	//              << "    Pos x: " << pos.x << " z: " << pos.z << std::endl;
 	for (int i = 0; i < distances.size(); ++i) {
 		if (dist < distances.at(i)) {
 			return (distances.size() - i);
@@ -195,57 +237,66 @@ void BttController::getAllIndices(glm::vec3 pos) {
 	float time_in_lod = 0, tempTime;
 	float time_in_get_indices = 0;
 	float constructor_time = 0, constructor_temp_time;
+	GLuint lod;
+	int add;
 
 	for (int i = 0; i < chunk_size; ++i) {
 		// std::cout << "Break!" << std::endl;
 
 		for (int j = 0; j < chunk_size * 2; ++j) {
-			constructor_temp_time = glfwGetTime();
-			constructor_time += glfwGetTime() - constructor_temp_time;
-			GLuint lod;
-			int add = 0;
-			if (chunk_size != 1) add = int(j / chunk_size);
+			// constructor_temp_time = glfwGetTime();
+			// constructor_time += glfwGetTime() - constructor_temp_time;
+			if (chunk_size != 1)
+				add = int(j / chunk_size);
+			else
+				add = 0;
 
 			// std::cout << "ADD: " << add << std::endl;
-			tempTime = glfwGetTime();
+			// tempTime = glfwGetTime();
 			lod = findLOD(pos, bttCenters.at((i * chunk_size) + add));
-			time_in_lod += glfwGetTime() - tempTime;
-			// std::cout << "LOD: " << lod << std::endl;
-			// std::cout << "TILE " << i << j << ": " << lod << std::endl;
-			tempTime = glfwGetTime();
-			// stored = temp.getIndices(lod);
-			// 0.01 seconds
-			stored = bttMap.at(i).at(j).getIndices(lod);
+			// time_in_lod += glfwGetTime() - tempTime;
 
-			std::cout << "stored size: " << stored.size() << std::endl;
+			tempTime = glfwGetTime();
+			//   0.01 seconds --> 0.007
+			stored = bttMap.at(i).at(j).getIndices(lod);
+			time_in_get_indices += glfwGetTime() - tempTime;
 
 			// 0.005 seconds
 			for (int k = 0; k < stored.size(); ++k) {
-				indices.push_back((GLuint)stored.at(k).x);
-				indices.push_back((GLuint)stored.at(k).y);
-				indices.push_back((GLuint)stored.at(k).z);
+				indices.emplace_back(stored.at(k).x);
+				indices.emplace_back(stored.at(k).y);
+				indices.emplace_back(stored.at(k).z);
 			}
-			time_in_get_indices += glfwGetTime() - tempTime;
-
-			stored.clear();
 		}
 	}
 
-	std::cout << "total time: " << glfwGetTime() - total_time << std::endl;
-	std::cout << "lod time: " << time_in_lod << std::endl;
+	// std::cout << "total time: " << glfwGetTime() - total_time <<
+	// std::endl; std::cout << "lod time: " << time_in_lod << std::endl;
 	std::cout << "get indicies time: " << time_in_get_indices << std::endl;
-	std::cout << "constructor time: " << constructor_time << std::endl;
+	// std::endl; std::cout << "constructor time: " << constructor_time <<
+	// std::endl;
 
 	current_total_indices += indices.size();
 
-	std::cout << "SIZE: " << indices.size() << std::endl;
+	// std::cout << "SIZE: " << indices.size() << std::endl;
 }
 
 void BttController::Update(glm::vec3 position) {
 	if (position.x != prev_pos.x || position.z != prev_pos.z) {
 		mesh_ = std::make_shared<Mesh>();
 		getAllIndices(position);
-
+		// std::cout << "CAM| x: " << position.x << " z: " << position.z
+		//           << std::endl;
+		/*
+		std::cout << "INDEX SIZE: " << indices.size() << std::endl;
+		for (int k = 0; k < indices.size(); ++k) {
+		    std::cout << "Index " << k << ": ";
+		    for(int i = 0; i < 3; ++i) {
+		        std::cout << indices[int((k * 3) + i)] << " ";
+		    }
+		    std::cout << std::endl;
+		}
+		*/
 		mesh_->CreateMesh(vertices.data(), indices.data(), vertices.size(),
 		                  indices.size());
 	}
@@ -260,24 +311,28 @@ void BttController::GenerateVertices(int chunkSize, int chunkDetail) {
 		std::cout << "YO MAMA" << std::endl;
 	}
 
-	for (int i = 0; i < length; ++i) {
-		for (int j = 0; j < length; ++j) {
-			vertices.push_back((GLfloat)i);
-			// heightmap_[(i * length) + j] = 0.0;
-			vertices.push_back((GLfloat)heightmap_[(i * length) + j]);
-			vertices.push_back((GLfloat)j);
+	try {
+		for (int i = 0; i < length; ++i) {
+			for (int j = 0; j < length; ++j) {
+				vertices.push_back((GLfloat)i);
+				// heightmap_[(i * length) + j] = 0.0;
+				vertices.push_back((GLfloat)heightmap_[(i * length) + j]);
+				vertices.push_back((GLfloat)j);
 
-			// Texture coordinates
-			vertices.push_back(i / static_cast<GLfloat>(length));
-			vertices.push_back(j / static_cast<GLfloat>(length));
+				// Texture coordinates
+				vertices.push_back(i / static_cast<GLfloat>(length));
+				vertices.push_back(j / static_cast<GLfloat>(length));
 
-			glm::vec3 normal = calculate_terrain_normal(i, j);
+				glm::vec3 normal = calculate_terrain_normal(i, j);
 
-			// Normals
-			vertices.push_back(-normal.x);
-			vertices.push_back(-normal.y);
-			vertices.push_back(-normal.z);
+				// Normals
+				vertices.push_back(-normal.x);
+				vertices.push_back(-normal.y);
+				vertices.push_back(-normal.z);
+			}
 		}
+	} catch (std::bad_alloc& exception) {
+		std::cerr << "bad_alloc detected: " << exception.what();
 	}
 }
 

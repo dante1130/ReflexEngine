@@ -5,7 +5,6 @@
 #include <vector>
 #include <iostream>
 
-
 struct Node {
 	// holds indexes
 	glm::vec3 point;
@@ -15,87 +14,86 @@ struct Node {
 	Node* right;
 
 	unsigned int lod;
-
 };
 
 using Function = void (*)(glm::vec3&);
 
 class Btt {
-	public:
-		Btt();  /// Default constructor
+public:
+	Btt();  /// Default constructor
 
-		Btt(const Btt& other);
+	Btt(const Btt& other);
 
-		Btt& operator=(const Btt& treeCopy);
+	Btt& operator=(const Btt& treeCopy);
 
-		~Btt();
-	   
-		void Insert(unsigned int size, bool isFlip);
+	~Btt();
 
-		void Insert(const glm::vec3& temp, unsigned int size, bool isFlip);
+	void Insert(unsigned int size, bool isFlip);
 
-		std::vector<glm::vec3> getIndices(const int level); 
+	void Insert(const glm::vec3& temp, unsigned int size, bool isFlip);
 
-		const GLuint* getIndicesCoverted(const int level);
+	const std::vector<glm::vec3>& getIndices(const int level);
 
-		const GLuint getIndexSize();
+	const GLuint* getIndicesCoverted(const int level);
 
-		Node* getRoot();
+	const GLuint getIndexSize();
 
-		unsigned int getLOD();
+	Node* getRoot();
 
-		void destroyTree();
+	unsigned int getLOD();
 
-		void setAdjacentTriangles(Btt** left, Btt** right);//x
+	void destroyTree();
 
-		void setLeftTriangle(Btt* left); //x
+	void setAdjacentTriangles(Btt** left, Btt** right);  // x
 
-		void setRightTriangle(Btt* right);//x
+	void setLeftTriangle(Btt* left);  // x
 
-		const std::vector<glm::vec3>& getCurrentIndices(); 
+	void setRightTriangle(Btt* right);  // x
 
-		void addLeft();
+	const std::vector<glm::vec3>& getCurrentIndices();
 
-		void addRight();
+	void addLeft();
 
-	private:
-		
-		Node* createNode(const unsigned int& lod, const glm::vec3& data);
+	void addRight();
 
-		//Node* createLeft(Node* parent, GLuint midpoint);
+private:
+	Node* createNode(const unsigned int& lod, const glm::vec3& data);
 
-		//Node* createRight(Node* parent, GLuint midpoint);
+	// Node* createLeft(Node* parent, GLuint midpoint);
 
-		void copyTree(Node*& nodeCopy, Node* node);
+	// Node* createRight(Node* parent, GLuint midpoint);
 
-		void Insert(Node* node);
+	void copyTree(Node*& nodeCopy, Node* node);
 
-		const void getIndices(Node* node, int level); 
-		
-		void destroyTree(Node* node);
+	void Insert(Node* node);
 
-		GLuint findMid(unsigned int p1, unsigned int p2);
+	const void getIndices(Node* node, int level);
 
-		const GLuint* convertInt(const std::vector<glm::vec3>& temp);
+	void destroyTree(Node* node);
 
-		void addToLeft(Node* node, const int& i);
+	GLuint findMid(unsigned int p1, unsigned int p2);
 
-		void addToRight(Node* node, const int& i);
+	const GLuint* convertInt(const std::vector<glm::vec3>& temp);
 
-		Node* bttNode; // holds indices for triangles
+	void addToLeft(Node* node, const int& i);
 
-		Btt* leftTriangle; //touching left side of main triangle (origin and left)
-	    Btt* rightTriangle; //touching right side of main triangle (origin and right)
+	void addToRight(Node* node, const int& i);
 
-		 // vectors of triangles that hypotenus touch main triangle smaller sides
-		std::vector<glm::vec3> leftSideTriangles;
-	    std::vector<glm::vec3> rightSideTriangles;
-	    std::vector<glm::vec3> currentIndices;
-	    std::vector<int> bigLeftTriangles;
-	    std::vector<int> bigRightTriangles;
+	Node* bttNode;  // holds indices for triangles
 
-	    unsigned int currentLod;
-		unsigned int depth; // stores depth
-	    bool isFlipped;
-	    GLuint sizeOfIndexArray;
+	Btt* leftTriangle;  // touching left side of main triangle (origin and left)
+	Btt* rightTriangle;  // touching right side of main triangle (origin and
+	                     // right)
+
+	// vectors of triangles that hypotenus touch main triangle smaller sides
+	std::vector<glm::vec3> leftSideTriangles;
+	std::vector<glm::vec3> rightSideTriangles;
+	std::vector<glm::vec3> currentIndices;
+	std::vector<int> bigLeftTriangles;
+	std::vector<int> bigRightTriangles;
+
+	unsigned int currentLod;
+	unsigned int depth;  // stores depth
+	bool isFlipped;
+	GLuint sizeOfIndexArray;
 };
