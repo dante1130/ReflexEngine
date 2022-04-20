@@ -5,6 +5,8 @@ target_sources(${PROJECT_NAME} PRIVATE
 	AStarInterface.cpp
 	Terrain.cpp
 	BruteForceTerrain.cpp
+	BTT.cpp
+	BttController.cpp
 	TexturedTerrain.cpp
 	GameAssetFactory.cpp
 	guiManager.cpp
