@@ -211,6 +211,8 @@ Player* GameAssetFactory::load_player(std::string lua_script) {
 	script = lua["script"];
 	player->set_lua_script(script);
 
+	player->init();
+
 	return player;
 }
 

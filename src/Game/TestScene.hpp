@@ -108,7 +108,4 @@ public:
 private:
 	/// A directional light.
 	DirectionalLight directional_light_ = {};
-
-	/// Flashlight.
-	SpotLight flashlight_ = {};
 };
