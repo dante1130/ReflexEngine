@@ -18,7 +18,7 @@ void OpenGL::init() {
 	           engine.window_.GetBufferHeight());
 
 	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
+	// glEnable(GL_CULL_FACE);
 
 	shader_ = std::make_shared<Shader>();
 	shader_->CompileFile("shaders/shader.vert", "shaders/shader.frag");
@@ -57,11 +57,12 @@ void OpenGL::init() {
 	terrain.load_detailmap("textures/water.png");
 	terrain.load_mesh();
 	*/
+	bttControl.load_texture("textures/dirt.png");
+	bttControl.load_detailmap("textures/water.png");
 	bttControl.gen_faultformation(64, 241, 0, 255, 0.5);
 	bttControl.set_scale(glm::vec3(1.0f, 0.1f, 1.0f));
 	bttControl.set_height_map_size(241 / 2);
 	bttControl.CreateTerrain(30, 9, 3);
-
 }
 
 void OpenGL::draw() {

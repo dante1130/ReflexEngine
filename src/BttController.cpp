@@ -31,7 +31,11 @@ void BttController::render(std::shared_ptr<Shader> shader) {
 
 	glUniformMatrix4fv(shader->GetModelLocation(), 1, GL_FALSE,
 	                   glm::value_ptr(model));
-	glUniform1i(shader->GetUsingTexture(), !mesh_->has_color());
+	glUniform1i(shader->GetUsingTexture(), false);
+	glUniform1i(shader->get_using_detailmap(), true);
+
+	texture_->UseTexture();
+	detailmap->UseTexture();
 
 	mesh_->RenderMesh();
 }
@@ -327,9 +331,9 @@ void BttController::GenerateVertices(int chunkSize, int chunkDetail) {
 				glm::vec3 normal = calculate_terrain_normal(i, j);
 
 				// Normals
-				vertices.push_back(normal.x);
-				vertices.push_back(normal.y);
-				vertices.push_back(normal.z);
+				vertices.push_back(-normal.x);
+				vertices.push_back(-normal.y);
+				vertices.push_back(-normal.z);
 			}
 		}
 	} catch (std::bad_alloc& exception) {
@@ -338,3 +342,14 @@ void BttController::GenerateVertices(int chunkSize, int chunkDetail) {
 }
 
 void BttController::set_height_map_size(float size) { height_map_size = size; }
+
+bool BttController::load_texture(const char* file_name) {
+	texture_ = std::make_shared<Texture>(file_name);
+	return texture_->LoadTextureA();
+}
+
+bool BttController::load_detailmap(const char* file_name) {
+	detailmap = std::make_shared<Texture>(file_name);
+	detailmap->set_texture_unit(GL_TEXTURE3);
+	return detailmap->LoadTexture();
+}

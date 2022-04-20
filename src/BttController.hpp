@@ -43,6 +43,24 @@ public:
 
 	void set_height_map_size(float size);
 
+	/**
+	 * @brief Reads the texture image file and loads the texture.
+	 *
+	 * @param file_name
+	 * @return true
+	 * @return false
+	 */
+	bool load_texture(const char* file_name);
+
+	/**
+	 * @brief Reads an image file as a detail map.
+	 *
+	 * @param file_name
+	 * @return true
+	 * @return false
+	 */
+	bool load_detailmap(const char* file_name);
+
 private:
 	void GenerateVertices(int chunkSize, int chunkDetail);
 
@@ -70,4 +88,9 @@ private:
 	GLuint chunk_detail;
 
 	int height_map_size = 0;
+
+	/// The texture.
+	std::shared_ptr<Texture> texture_ = nullptr;
+	/// The detailmap.
+	std::shared_ptr<Texture> detailmap = nullptr;
 };
