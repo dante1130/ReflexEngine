@@ -289,4 +289,8 @@ void networkEnd();
 
 void networkUpdate();
 
+bool networkConnectionStatus();
+
+void networkRetainIP(std::string savedIP);
+
 };  // namespace GenericFunctions

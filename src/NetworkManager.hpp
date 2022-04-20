@@ -107,7 +107,7 @@ public:
     void MessageSend(char *inputMessage);
 
     /**
-     * @brief	Receives a message from the network. This message is sent to the HandleMessage method to determine the message type.
+     * @brief	Receives a message from the network. It also handles the contents of the message.
      * @param	void
      * @return	char * - The message
      *
@@ -115,16 +115,6 @@ public:
      * @post	Returns the received message to another part of the game engine (notably the gui interface)
      */
 	char * ReceiveMessage();
-
-    /**
-     * @brief	Handles the message received and identifies it's message type.
-     * @param	Raknet::Packet *packet - the packet of network data.
-     * @return	char * - The message of the packet
-     *
-     * @pre		Called by ReceiveMessage
-     * @post	Returns the message based on the packet's ID
-     */
-	char * HandleMessage(RakNet::Packet *packet);
 
     /**
      * @brief	Ends the current session.
@@ -135,6 +125,17 @@ public:
      * @post	Ends either the connection to the server or the server itself (depending on the state of the isServer boolean)
      */
 	void DestroySession();
+
+    /**
+	 * @brief	Gets the status of the connection
+	 * @param	void
+	 * @return	bool
+	 *
+	 * @pre		A session must be running (either ConnectClient or SetupServer must
+	 * have been run) and connected
+	 * @post	Returns the status of the connection (are you connected or not?)
+	 */
+    bool ConnectionStatus();
 
 private:
     /**

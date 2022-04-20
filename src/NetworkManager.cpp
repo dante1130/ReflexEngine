@@ -84,7 +84,7 @@ char* networkManager::ReceiveMessage() {
 					return ("Another client has lost the connection\n");
 					break;
 				case ID_REMOTE_NEW_INCOMING_CONNECTION:
-					printf("Another Connection are incoming\n");
+					printf("Another Connection is incoming\n");
 					return ("Another client has connected\n");
 					break;
 				case ID_CONNECTION_REQUEST_ACCEPTED:
@@ -92,7 +92,7 @@ char* networkManager::ReceiveMessage() {
 					return ("Our connection request has been accepted\n");
 					break;
 				case ID_NEW_INCOMING_CONNECTION:
-					printf("A Connection are incoming\n");
+					printf("A Connection is incoming\n");
 					return ("A connection is incoming\n");
 					break;
 				case ID_NO_FREE_INCOMING_CONNECTIONS:
@@ -132,7 +132,7 @@ char* networkManager::ReceiveMessage() {
 					return ("Another client has lost the connection\n");
 					break;
 				case ID_REMOTE_NEW_INCOMING_CONNECTION:
-					printf("Another Connection are incoming\n");
+					printf("Another Connection is incoming\n");
 					return ("Another client has connected\n");
 					break;
 				case ID_CONNECTION_REQUEST_ACCEPTED:
@@ -140,7 +140,7 @@ char* networkManager::ReceiveMessage() {
 					return ("Our connection request has been accepted\n");
 					break;
 				case ID_NEW_INCOMING_CONNECTION:
-					printf("A Connection are incoming\n");
+					printf("A Connection is incoming\n");
 					return ("A connection is incoming\n");
 					break;
 				case ID_NO_FREE_INCOMING_CONNECTIONS:
@@ -174,115 +174,16 @@ char* networkManager::ReceiveMessage() {
 			}
 		}
 	}
-	return (" ");
-}
-
-char* networkManager::HandleMessage(RakNet::Packet* packet) {
-	if (isServer) {
-		printf("This is running");
-		switch (GetPacketIdentifier(packet)) {
-			case ID_REMOTE_DISCONNECTION_NOTIFICATION:
-				return ("Another client has disconnected\n");
-				break;
-			case ID_REMOTE_CONNECTION_LOST:
-				return ("Another client has lost the connection\n");
-				break;
-			case ID_REMOTE_NEW_INCOMING_CONNECTION:
-				printf("Another Connection are incoming\n");
-				return ("Another client has connected\n");
-				break;
-			case ID_CONNECTION_REQUEST_ACCEPTED:
-				return ("Our connection request has been accepted\n");
-				break;
-			case ID_NEW_INCOMING_CONNECTION:
-				printf("A Connection are incoming\n");
-				return ("A connection is incoming\n");
-				break;
-			case ID_NO_FREE_INCOMING_CONNECTIONS:
-				return ("The server is full\n");
-				break;
-			case ID_DISCONNECTION_NOTIFICATION:
-				if (isServer) {
-					return ("A client has disconnected\n");
-				} else {
-					return ("We have been disconnected\n");
-				}
-				break;
-			case ID_CONNECTION_LOST:
-				if (isServer) {
-					return ("A client lost the connection\n");
-				} else {
-					return ("Connection lost\n");
-				}
-				break;
-			case ID_GAME_MESSAGE_1: {
-				RakNet::RakString rs;
-				RakNet::BitStream bsIn(packet->data, packet->length, false);
-				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-				bsIn.Read(rs);
-				return (reinterpret_cast<char*>(packet->data));
-			} break;
-			default:
-				peer->Send(message, (const int)strlen(message) + 1,
-				           HIGH_PRIORITY, RELIABLE_ORDERED, 0,
-				           RakNet::UNASSIGNED_SYSTEM_ADDRESS,
-				           true);  // This sends the message to everyone
-				break;
-		}
-	} else {
-		switch (GetPacketIdentifier(packet)) {
-			case ID_REMOTE_DISCONNECTION_NOTIFICATION:
-				return ("Another client has disconnected\n");
-				break;
-			case ID_REMOTE_CONNECTION_LOST:
-				return ("Another client has lost the connection\n");
-				break;
-			case ID_REMOTE_NEW_INCOMING_CONNECTION:
-				printf("Another Connection are incoming\n");
-				return ("Another client has connected\n");
-				break;
-			case ID_CONNECTION_REQUEST_ACCEPTED:
-				return ("Our connection request has been accepted\n");
-				break;
-			case ID_NEW_INCOMING_CONNECTION:
-				printf("A Connection are incoming\n");
-				return ("A connection is incoming\n");
-				break;
-			case ID_NO_FREE_INCOMING_CONNECTIONS:
-				return ("The server is full\n");
-				break;
-			case ID_DISCONNECTION_NOTIFICATION:
-				if (isServer) {
-					return ("A client has disconnected\n");
-				} else {
-					return ("We have been disconnected\n");
-				}
-				break;
-			case ID_CONNECTION_LOST:
-				if (isServer) {
-					return ("A client lost the connection\n");
-				} else {
-					return ("Connection lost\n");
-				}
-				break;
-			case ID_GAME_MESSAGE_1: {
-				RakNet::RakString rs;
-				RakNet::BitStream bsIn(packet->data, packet->length, false);
-				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
-				bsIn.Read(rs);
-				return reinterpret_cast<char*>(packet->data);
-				// bsIn.Reset();
-			} break;
-			default:
-				return reinterpret_cast<char*>(packet->data);
-				break;
-		}
-	}
+	return ("");
 }
 
 void networkManager::DestroySession() {
 	RakNet::RakPeerInterface::DestroyInstance(peer);
 	printf("Killed the session\n");
+}
+
+bool networkManager::ConnectionStatus() { 
+	return (connected);
 }
 
 unsigned char networkManager::GetPacketIdentifier(RakNet::Packet* p) {

@@ -16,6 +16,7 @@ bool networkConnected = false;
 bool shouldShoot;
 networkManager network;
 std::string message;
+std::string currentIPAddress;
 float lastShot = 0;
 float shot_delay = 0;
 
@@ -59,6 +60,8 @@ void GenericFunctions::lua_access() {
 	lua.set_function("network_client_name", &GenericFunctions::networkClientName);
 	lua.set_function("network_client_connect", &GenericFunctions::networkClientConnect);
 	lua.set_function("network_terminate", &GenericFunctions::networkEnd);
+	lua.set_function("network_connection_status", &GenericFunctions::networkConnectionStatus);
+	lua.set_function("network_retain_IP", &GenericFunctions::networkRetainIP);
 
 	lua.set_function("set_last_shot", &GenericFunctions::setLastShot);
 	lua.set_function("set_shot_delay", &GenericFunctions::setShotDelay);
@@ -168,7 +171,7 @@ void GenericFunctions::setNetworkMenuActive(bool active) {
 	if (networkMenu) {
 		glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
 		                 GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-	} else {
+	} else if(!networkMenu && !paused){
 		glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
 		                 GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	}
@@ -187,14 +190,11 @@ void GenericFunctions::networkClientName(std::string userName) {
 
 void GenericFunctions::networkClientConnect(std::string serverIP) {
 	char* serverIPChar;
-	strcpy(serverIPChar, serverIP.c_str());
+	strcpy(serverIPChar, currentIPAddress.c_str());
 	printf("This Runs\n");
-	printf("%c\n", serverIP.c_str());
+	printf("%s\n", currentIPAddress.c_str());
 	network.SetupClient("Client");
-	networkConnected = !network.ConnectClient("127.0.0.1");
-	if (networkConnected) {
-		printf("Network has actually been connected\n");
-	}
+	networkConnected = !network.ConnectClient(serverIPChar); // Flipped as it returns true if you are NOT connected (which is weird I know)
 }
 
 void GenericFunctions::networkEnd() {
@@ -207,11 +207,21 @@ void GenericFunctions::networkEnd() {
 void GenericFunctions::networkUpdate() { 
 
 	if(createNetwork && networkConnected && network.ReceiveMessage() != " ") {
-		printf("%s\n",network.ReceiveMessage());
+		printf("%s\n",network.ReceiveMessage()); //Currently prints to console, but will eventually print to text chat
 	}
-	if (createNetwork && networkConnected) {
-		network.MessageSend("This is a message for the other person!");
-	}
-	}
+}
 
-bool GenericFunctions::getNetworkMenuActive() { return (networkMenu); }
+bool GenericFunctions::getNetworkMenuActive() { 
+	return (networkMenu);
+}
+
+bool GenericFunctions::networkConnectionStatus() {
+	bool networkStatus = network.ConnectionStatus();
+	return (networkStatus);
+}
+
+void GenericFunctions::networkRetainIP(std::string savedIP) {
+	if (savedIP != "") {
+		currentIPAddress = savedIP;
+	}
+}
