@@ -1,6 +1,6 @@
 if get_network_menu() then
-	gui_setWindowSize(300, 300, 2)
-	gui_setWindowPos(0, 500, 2)
+	gui_setWindowSize(600, 300, 2)
+	gui_setWindowPos(0, 800, 2)
 	gui_begin("Network Menu")
 
 	gui_text("--Game is currently NOT paused--")
@@ -21,12 +21,12 @@ if get_network_menu() then
 	end
 
 	if connect then
-		network_client_name(name)
 		network_client_connect(ip)
 	end
 	
 
 	if back then
+		network_terminate()
 		exit_network_menu()
 	end
 

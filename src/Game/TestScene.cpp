@@ -115,6 +115,8 @@ void TestScene::update(float delta_time) {
 
 	glm::vec3 cam_direction = camera.get_direction();
 
+	GenericFunctions::networkUpdate();
+
 	flashlight_.SetFlash(lower_light, cam_direction);
 
 	for (auto& game_object : game_objects_) {

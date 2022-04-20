@@ -12,7 +12,10 @@ bool paused = false;
 bool helpMenu = false;
 bool networkMenu = false;
 bool createNetwork = false;
+bool networkConnected = false;
 bool shouldShoot;
+networkManager network;
+std::string message;
 float lastShot = 0;
 float shot_delay = 0;
 
@@ -52,6 +55,10 @@ void GenericFunctions::lua_access() {
 	lua.set_function("create_network_manager", &GenericFunctions::createNetworkManager);
 	lua.set_function("exit_network_menu", &GenericFunctions::setNetworkMenuActive);
 	lua.set_function("get_network_menu", &GenericFunctions::getNetworkMenuActive);
+	lua.set_function("start_server", &GenericFunctions::startNetworkServer);
+	lua.set_function("network_client_name", &GenericFunctions::networkClientName);
+	lua.set_function("network_client_connect", &GenericFunctions::networkClientConnect);
+	lua.set_function("network_terminate", &GenericFunctions::networkEnd);
 
 	lua.set_function("set_last_shot", &GenericFunctions::setLastShot);
 	lua.set_function("set_shot_delay", &GenericFunctions::setShotDelay);
@@ -151,8 +158,8 @@ bool GenericFunctions::getIfShouldShoot() { return shouldShoot; }
 
 void GenericFunctions::createNetworkManager(bool create) { 
 	if (createNetwork != true) {
-		createNetwork = create;
-		network::InitNetwork();
+		createNetwork = true;
+		network.InitNetwork();
 	}
 }
 
@@ -169,8 +176,42 @@ void GenericFunctions::setNetworkMenuActive(bool active) {
 
 void GenericFunctions::startNetworkServer(bool active) {
 	if (active) {
-		network::SetupServer();
+		network.SetupServer();
+		networkConnected = true;
 	}
 }
+
+void GenericFunctions::networkClientName(std::string userName) {
+	network.ChangeName(userName);
+}
+
+void GenericFunctions::networkClientConnect(std::string serverIP) {
+	char* serverIPChar;
+	strcpy(serverIPChar, serverIP.c_str());
+	printf("This Runs\n");
+	printf("%c\n", serverIP.c_str());
+	network.SetupClient("Client");
+	networkConnected = !network.ConnectClient("127.0.0.1");
+	if (networkConnected) {
+		printf("Network has actually been connected\n");
+	}
+}
+
+void GenericFunctions::networkEnd() {
+	if (createNetwork) {
+		network.DestroySession();
+		createNetwork = false;
+	}
+}
+
+void GenericFunctions::networkUpdate() { 
+
+	if(createNetwork && networkConnected && network.ReceiveMessage() != " ") {
+		printf("%s\n",network.ReceiveMessage());
+	}
+	if (createNetwork && networkConnected) {
+		network.MessageSend("This is a message for the other person!");
+	}
+	}
 
 bool GenericFunctions::getNetworkMenuActive() { return (networkMenu); }

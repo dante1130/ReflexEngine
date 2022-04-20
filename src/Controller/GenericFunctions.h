@@ -285,4 +285,8 @@ void networkClientName(std::string userName);
 
 void networkClientConnect(std::string serverIP);
 
+void networkEnd();
+
+void networkUpdate();
+
 };  // namespace GenericFunctions

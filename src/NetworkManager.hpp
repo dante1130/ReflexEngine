@@ -1,5 +1,4 @@
-#ifndef NETWORKMANAGER_H
-#define NETWORKMANAGER_H
+#pragma once
 
 #include <string>
 #include <stdio.h>
@@ -8,6 +7,8 @@
 #include <raknet/Source/RakString.h>
 #include <raknet/Source/BitStream.h>
 #include <raknet/Source/MessageIdentifiers.h>
+#include <raknet/Source/Gets.h>
+#include <raknet/Source/RakSleep.h>
 
 #define MAX_CLIENTS 6
 #define SERVER_PORT 60000
@@ -15,21 +16,24 @@
 //TODO: adjust so can be written for the game asset factory
 //      Maybe has it so that all of this (minus GetPacketIdentifier and HandleMessage) can be accessed from Lua?
 //      So that anything gui-related written in Lua can easily access the NetworkManager. 
-namespace network 
-{
-	extern char message[512];
+class networkManager {
+private:
+	char message[512];
 
-	extern char name[256];
+	char name[256];
 
-	extern char str1[512];
+	char str1[512];
 
-	extern bool isServer;
+	bool isServer;
+
+    bool connected;
 
     
-	extern RakNet::RakPeerInterface *peer;
+	RakNet::RakPeerInterface *peer;
 
-	extern RakNet::Packet *packet;
+	RakNet::Packet *packet;
 
+public:
     ////METHOD NEEDED FOR NETWORK TO OPERATE////
     /**
      * @brief	Initialises Network
@@ -100,7 +104,7 @@ namespace network
      * or SetupServer has been run (if the server)
      * @post	Sends a message across the network
      */
-	void MessageSend(char *inputMessage);
+    void MessageSend(char *inputMessage);
 
     /**
      * @brief	Receives a message from the network. This message is sent to the HandleMessage method to determine the message type.
@@ -110,7 +114,7 @@ namespace network
      * @pre		This must be run in a while loop for the network manager to receive messages.
      * @post	Returns the received message to another part of the game engine (notably the gui interface)
      */
-	std::string ReceiveMessage();
+	char * ReceiveMessage();
 
     /**
      * @brief	Handles the message received and identifies it's message type.
@@ -120,7 +124,7 @@ namespace network
      * @pre		Called by ReceiveMessage
      * @post	Returns the message based on the packet's ID
      */
-	std::string HandleMessage(RakNet::Packet *packet);
+	char * HandleMessage(RakNet::Packet *packet);
 
     /**
      * @brief	Ends the current session.
@@ -132,6 +136,7 @@ namespace network
      */
 	void DestroySession();
 
+private:
     /**
      * @brief	Gets the packet identifier and returns it.
      * @param	Raknet::Packet *packet - the packet of network data.
@@ -148,6 +153,4 @@ namespace network
 	    /// </summary>
 		ID_GAME_MESSAGE_1 = ID_USER_PACKET_ENUM + 1
 	};
- }
-
-#endif
+};
