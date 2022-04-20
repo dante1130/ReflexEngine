@@ -20,9 +20,9 @@ void TestScene::init() {
 	game_objects_[0]->position = glm::vec3(0.0f, -2.0f, 4.0f);
 	game_objects_[1]->position = glm::vec3(0.0f, -1.0f, 0.0f);
 
-	//bttMesh.CreateColorMesh(points, btt.getIndices(4), 9, btt.getIndexSize());
+	// bttMesh.CreateColorMesh(points, btt.getIndices(4), 9,
+	// btt.getIndexSize());
 	gui::init(ReflexEngine::get_instance().window_.getWindow(), "#version 410");
-
 }
 
 void TestScene::add_draw_call() {
@@ -36,6 +36,11 @@ void TestScene::add_draw_call() {
 
 void TestScene::update(float delta_time) {
 	auto& renderer = ReflexEngine::get_instance().renderer_;
+
+	gui::begin("Frame rate");
+	float frames = gui::guiFrameRate();
+	gui::text("Frames: " + std::to_string(frames));
+	gui::end();
 
 	for (auto& game_object : game_objects_) {
 		game_object->update(delta_time);

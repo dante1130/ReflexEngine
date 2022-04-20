@@ -5,7 +5,6 @@
 
 BttController bttControl;
 
-
 void OpenGL::init() {
 	auto& engine = ReflexEngine::get_instance();
 
@@ -17,7 +16,7 @@ void OpenGL::init() {
 	           engine.window_.GetBufferHeight());
 
 	glEnable(GL_DEPTH_TEST);
-	//glEnable(GL_CULL_FACE);
+	// glEnable(GL_CULL_FACE);
 
 	shader_ = std::make_shared<Shader>();
 	shader_->CompileFile("shaders/shader.vert", "shaders/shader.frag");
@@ -32,11 +31,11 @@ void OpenGL::init() {
 	                                 "shaders/omni_shadow_map.geom",
 	                                 "shaders/omni_shadow_map.frag");
 
-	camera_ = Camera(glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f,
-	                 5.0f, 0.2f);
+	camera_ = Camera(glm::vec3(0.0f, 150.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f),
+	                 -90.0f, 0.0f, 5.0f, 0.2f);
 
 	std::vector<std::string> skyboxFaces;
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	// glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	skyboxFaces.push_back(
 	    "textures/skyboxes/cupertin-lake/cupertin-lake_rt.tga");
 	skyboxFaces.push_back(
@@ -52,11 +51,11 @@ void OpenGL::init() {
 
 	skybox_ = Skybox(skyboxFaces);
 
-	bttControl.gen_faultformation(64, 161, 0, 255, 0.5);
-	bttControl.set_scale(glm::vec3(1.0f, 0.1f, 1.0f));
-
-	//Tiles: 20, Amount of vertices per tile: 9, n: 3
-	bttControl.CreateTerrain(20, 9, 3);
+	bttControl.gen_faultformation(64, 241, 0, 255, 0.5);
+	bttControl.set_scale(glm::vec3(1.0f, 1.0f, 1.0f));
+	bttControl.set_height_map_size(241 / 2);
+	// Tiles: 20, Amount of vertices per tile: 9, n: 3
+	bttControl.CreateTerrain(30, 9, 3);
 }
 
 void OpenGL::draw() {
