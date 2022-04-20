@@ -1,6 +1,5 @@
 #include "BTT.hpp"
 
-
 Btt::Btt()  /// Default constructor
 {
 	bttNode = nullptr;
@@ -12,14 +11,9 @@ Btt::Btt()  /// Default constructor
 	sizeOfIndexArray = 0;
 }
 
-Btt::~Btt() 
-{ 
-	destroyTree(); 
-}
+Btt::~Btt() { destroyTree(); }
 
-
-void Btt::destroyTree() 
-{
+void Btt::destroyTree() {
 	destroyTree(bttNode);
 	leftSideTriangles.clear();
 	rightSideTriangles.clear();
@@ -27,8 +21,7 @@ void Btt::destroyTree()
 	rightTriangle = nullptr;
 }
 
-void Btt::destroyTree(Node* node) 
-{
+void Btt::destroyTree(Node* node) {
 	if (node != nullptr) {
 		destroyTree(node->left);
 		destroyTree(node->right);
@@ -36,9 +29,7 @@ void Btt::destroyTree(Node* node)
 	}
 }
 
-
 Btt::Btt(const Btt& treeCopy) {
-
 	this->depth = treeCopy.depth;
 	this->currentLod = treeCopy.currentLod;
 	this->isFlipped = treeCopy.isFlipped;
@@ -55,8 +46,7 @@ Btt::Btt(const Btt& treeCopy) {
 
 Btt& Btt::operator=(const Btt& treeCopy) {
 	if (this != &treeCopy) {
-		if (bttNode != nullptr) 
-			destroyTree(bttNode);
+		if (bttNode != nullptr) destroyTree(bttNode);
 		if (treeCopy.bttNode == nullptr)
 			bttNode = nullptr;
 		else
@@ -65,7 +55,6 @@ Btt& Btt::operator=(const Btt& treeCopy) {
 
 	return *this;
 }
-
 
 void Btt::copyTree(Node*& nodeCopy, Node* node) {
 	if (node == nullptr) {
@@ -78,21 +67,21 @@ void Btt::copyTree(Node*& nodeCopy, Node* node) {
 }
 
 void Btt::setAdjacentTriangles(Btt** left, Btt** right) {
-	//std::cout << "left: " << left->lod << " right: " << right->lod << std::endl;
+	// std::cout << "left: " << left->lod << " right: " << right->lod <<
+	// std::endl;
 	leftTriangle = *left;
 	rightTriangle = *right;
 }
 
-void Btt::setLeftTriangle(Btt* left) { 
-	leftTriangle = left; 
+void Btt::setLeftTriangle(Btt* left) {
+	leftTriangle = left;
 	std::cout << " Left: " << leftTriangle->currentLod << std::endl;
 }
 
-void Btt::setRightTriangle(Btt* right) { 
-	rightTriangle = right; 
+void Btt::setRightTriangle(Btt* right) {
+	rightTriangle = right;
 	std::cout << " Right: " << rightTriangle->currentLod << std::endl;
 }
-
 
 void Btt::Insert(const glm::vec3& temp, unsigned int size, bool isFlip) {
 	if (size < 1) return;
@@ -112,14 +101,12 @@ void Btt::Insert(const glm::vec3& temp, unsigned int size, bool isFlip) {
 }
 
 void Btt::Insert(unsigned int size, bool isFlip) {
-	if (size < 1) 
-		return;
-	if (bttNode != nullptr)
-		return;
+	if (size < 1) return;
+	if (bttNode != nullptr) return;
 
 	isFlipped = isFlip;
 	bttNode = new Node();
-	//Order: Origin (point opposite hypotenus), Left, Right
+	// Order: Origin (point opposite hypotenus), Left, Right
 	if (!isFlipped)
 		bttNode->point = glm::vec3((size * (size - 1)), 0, (size * size) - 1);
 	else
@@ -129,28 +116,24 @@ void Btt::Insert(unsigned int size, bool isFlip) {
 	bttNode->lod = 1;
 
 	std::cout << "Size: " << depth << std::endl;
-	
+
 	if (bttNode->lod < depth) {
 		Insert(bttNode);
 	}
 	std::cout << "PASSED" << std::endl;
 }
 
-Node* Btt::getRoot() {
-	return bttNode; 
-}
+Node* Btt::getRoot() { return bttNode; }
 
-unsigned int Btt::getLOD() { 
-	return currentLod; 
-}
+unsigned int Btt::getLOD() { return currentLod; }
 
 void Btt::Insert(Node* node) {
-
 	// find midpoint of hypotenus
 	GLuint mid = findMid(node->point.y, node->point.z);
-	node->left = createNode(node->lod, glm::vec3(mid, node->point.x, node->point.y));
-	node->right = createNode(node->lod, glm::vec3(mid, node->point.z, node->point.x));
-
+	node->left =
+	    createNode(node->lod, glm::vec3(mid, node->point.x, node->point.y));
+	node->right =
+	    createNode(node->lod, glm::vec3(mid, node->point.z, node->point.x));
 
 	if (node->lod + 1 < depth) {
 		Insert(node->left);
@@ -158,10 +141,7 @@ void Btt::Insert(Node* node) {
 	}
 }
 
-GLuint Btt::findMid(unsigned int p1, unsigned int p2) {
-
-	return (p1 + p2) / 2;
-}
+GLuint Btt::findMid(unsigned int p1, unsigned int p2) { return (p1 + p2) / 2; }
 
 Node* Btt::createNode(const unsigned int& lod, const glm::vec3& data) {
 	Node* temp = new Node();
@@ -172,12 +152,9 @@ Node* Btt::createNode(const unsigned int& lod, const glm::vec3& data) {
 	return temp;
 }
 
-const GLuint Btt::getIndexSize() { 
-	return sizeOfIndexArray; 
-}
+const GLuint Btt::getIndexSize() { return sizeOfIndexArray; }
 
 const GLuint* Btt::convertInt(const std::vector<glm::vec3>& temp) {
-	
 	GLuint size = getIndexSize() * GLuint(3);
 	GLuint* buffer{new GLuint[size]{}};
 	for (int i = 0; i < temp.size(); ++i) {
@@ -195,12 +172,10 @@ const GLuint* Btt::getIndicesCoverted(const int level) {
 const std::vector<glm::vec3>& Btt::getCurrentIndices() {
 	return currentIndices;
 }
-std::vector<glm::vec3> Btt::getIndices(const int level) 
-{
+const std::vector<glm::vec3>& Btt::getIndices(const int level) {
 	currentIndices.clear();
-	leftSideTriangles.clear();
-	rightSideTriangles.clear();
-
+	//  leftSideTriangles.clear();
+	//  rightSideTriangles.clear();
 
 	currentLod = level;
 	if (level > depth) {
@@ -210,7 +185,6 @@ std::vector<glm::vec3> Btt::getIndices(const int level)
 		std::cout << "ERROR: level is zero or less" << std::endl;
 		return currentIndices;
 	}
-
 
 	if (bttNode->lod == level) {
 		currentIndices.push_back(bttNode->point);
@@ -222,8 +196,8 @@ std::vector<glm::vec3> Btt::getIndices(const int level)
 	return currentIndices;
 }
 
-void Btt::addLeft() { 
-	for(int i = 0; i < bigLeftTriangles.size(); ++i) {
+void Btt::addLeft() {
+	for (int i = 0; i < bigLeftTriangles.size(); ++i) {
 		currentIndices.erase(currentIndices.begin() + bigLeftTriangles.at(i));
 	}
 	for (int j = 0; j < leftSideTriangles.size(); ++j) {
@@ -240,10 +214,9 @@ void Btt::addRight() {
 	}
 }
 
-
-const void Btt::getIndices(Node* node, int level) 
-{
-	//std::cout << "NODE VALUE:  " << node->lod << "  LEVEL: " << level << std::endl;
+const void Btt::getIndices(Node* node, int level) {
+	// std::cout << "NODE VALUE:  " << node->lod << "  LEVEL: " << level <<
+	// std::endl;
 
 	if ((node->lod + 1) < level) {
 		getIndices(node->left, level);
@@ -253,64 +226,52 @@ const void Btt::getIndices(Node* node, int level)
 		currentIndices.push_back(node->right->point);
 
 		if (((int)node->lod + 1) % 2 == 0) {
-			addToLeft(node->left, currentIndices.size()-1);
-			addToLeft(node->right, currentIndices.size()-1); 
+			addToLeft(node->left, currentIndices.size() - 1);
+			addToLeft(node->right, currentIndices.size() - 1);
 			addToRight(node->left, currentIndices.size());
 			addToRight(node->right, currentIndices.size());
 		}
 	}
 }
 
-void Btt::addToLeft(Node* node, const int& i) { 
+void Btt::addToLeft(Node* node, const int& i) {
 	GLuint diff;
-	
+
 	if (!isFlipped) {
-		diff = (bttNode->point.x - bttNode->point.y) / (depth -1); 
+		diff = (bttNode->point.x - bttNode->point.y) / (depth - 1);
 
 		if ((int)node->point.y % (int)diff == 0 &&
 		    (int)node->point.z % (int)diff == 0) {
-			try {
-				leftSideTriangles.push_back(node->point);
-				bigLeftTriangles.push_back(i);
-			} catch (std::bad_alloc & exception) {
-				std::cout << "bad alloc 2" << std::endl;
-			}
+			leftSideTriangles.push_back(node->point);
+			bigLeftTriangles.push_back(i);
 		}
 
-	}else {
-		diff = (bttNode->point.y - bttNode->point.x) / (depth - 1); 
+	} else {
+		diff = (bttNode->point.y - bttNode->point.x) / (depth - 1);
 
-		if (((int)(node->point.y - (depth - 1)) % (int)diff == 0)&&
-			((int)(node->point.z - (depth - 1)) % (int)diff == 0)) {
-			try {
-				leftSideTriangles.push_back(node->point);
-				bigLeftTriangles.push_back(i);
-			} catch (std::bad_alloc & exception) {
-				std::cout << "bad alloc 3" << std::endl;
-			}
+		if (((int)(node->point.y - (depth - 1)) % (int)diff == 0) &&
+		    ((int)(node->point.z - (depth - 1)) % (int)diff == 0)) {
+			leftSideTriangles.push_back(node->point);
+			bigLeftTriangles.push_back(i);
 		}
 	}
 }
 
-void Btt::addToRight(Node* node, const int& i) { 
+void Btt::addToRight(Node* node, const int& i) {
 	int min;
 	int max;
 
 	if (!isFlipped) {
 		min = int(bttNode->point.z - (depth - 1));
 		max = int(bttNode->point.z);
-	}else {
+	} else {
 		min = int(bttNode->point.z);
 		max = int(bttNode->point.z + (depth - 1));
 	}
 
 	if ((int(node->point.y) >= min && int(node->point.y) < max) &&
 	    (int(node->point.z) >= min && int(node->point.z) < max)) {
-		try {
-			rightSideTriangles.push_back(node->point);
-			bigRightTriangles.push_back(i);
-		} catch (std::bad_alloc& exception) {
-			std::cout << "bad alloc 4" << std::endl;
-		}
+		rightSideTriangles.push_back(node->point);
+		bigRightTriangles.push_back(i);
 	}
 }

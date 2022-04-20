@@ -187,12 +187,13 @@ void BttController::TestThings() {
 
 const GLuint BttController::findLOD(glm::vec3 pos, glm::vec2 center) {
 	// GLfloat dist =
-	// glm::distance(center, glm::vec2(pos.x + height_map_size, pos.z));
+	//     glm::distance(center, glm::vec2(pos.x + height_map_size, pos.z));
 	GLfloat dist = abs((pos.x + height_map_size) - center.x);
-	// GLfloat dist = glm::distance(center, glm::vec2(pos.x, pos.z));
-	// std::cout << dist << std::endl;
-	//   std::cout << " Center x: " << center.x << " z: " << center.y
-	//             << "    Pos x: " << pos.x << " z: " << pos.z << std::endl;
+	// GLfloat dist =
+	//    glm::distance(center, glm::vec2(pos.x + height_map_size, pos.z));
+	//  std::cout << dist << std::endl;
+	//    std::cout << " Center x: " << center.x << " z: " << center.y
+	//              << "    Pos x: " << pos.x << " z: " << pos.z << std::endl;
 	for (int i = 0; i < distances.size(); ++i) {
 		if (dist < distances.at(i)) {
 			return (distances.size() - i);
@@ -227,7 +228,7 @@ GLfloat* BttController::convertFloat(const std::vector<glm::vec3>& temp) {
 
 const std::vector<glm::vec2>& BttController::getCenters() { return bttCenters; }
 
-GLuint* BttController::getAllIndices(glm::vec3 pos) {
+void BttController::getAllIndices(glm::vec3 pos) {
 	std::vector<glm::vec3> stored;
 	current_total_indices = 0;
 	indices.clear();
@@ -237,53 +238,48 @@ GLuint* BttController::getAllIndices(glm::vec3 pos) {
 	float time_in_lod = 0, tempTime;
 	float time_in_get_indices = 0;
 	float constructor_time = 0, constructor_temp_time;
+	GLuint lod;
+	int add;
 
 	for (int i = 0; i < chunk_size; ++i) {
 		// std::cout << "Break!" << std::endl;
 
 		for (int j = 0; j < chunk_size * 2; ++j) {
-			constructor_temp_time = glfwGetTime();
-			// Btt temp = Btt(bttMap.at(i).at(j));
-			constructor_time += glfwGetTime() - constructor_temp_time;
-			GLuint lod;
-			int add;
+			// constructor_temp_time = glfwGetTime();
+			// constructor_time += glfwGetTime() - constructor_temp_time;
 			if (chunk_size != 1)
 				add = int(j / chunk_size);
 			else
 				add = 0;
 
 			// std::cout << "ADD: " << add << std::endl;
-			tempTime = glfwGetTime();
+			// tempTime = glfwGetTime();
 			lod = findLOD(pos, bttCenters.at((i * chunk_size) + add));
-			time_in_lod += glfwGetTime() - tempTime;
-			// std::cout << "LOD: " << lod << std::endl;
-			// std::cout << "TILE " << i << j << ": " << lod << std::endl;
+			// time_in_lod += glfwGetTime() - tempTime;
+
 			tempTime = glfwGetTime();
-			// stored = temp.getIndices(lod);
-			// 0.01 seconds
+			//   0.01 seconds --> 0.007
 			stored = bttMap.at(i).at(j).getIndices(lod);
+			time_in_get_indices += glfwGetTime() - tempTime;
 
 			// 0.005 seconds
 			for (int k = 0; k < stored.size(); ++k) {
-				indices.push_back((GLuint)stored.at(k).x);
-				indices.push_back((GLuint)stored.at(k).y);
-				indices.push_back((GLuint)stored.at(k).z);
+				indices.emplace_back(stored.at(k).x);
+				indices.emplace_back(stored.at(k).y);
+				indices.emplace_back(stored.at(k).z);
 			}
-			time_in_get_indices += glfwGetTime() - tempTime;
-
-			stored.clear();
 		}
 	}
 
-	std::cout << "total time: " << glfwGetTime() - total_time << std::endl;
-	std::cout << "lod time: " << time_in_lod << std::endl;
+	// std::cout << "total time: " << glfwGetTime() - total_time <<
+	// std::endl; std::cout << "lod time: " << time_in_lod << std::endl;
 	std::cout << "get indicies time: " << time_in_get_indices << std::endl;
-	std::cout << "constructor time: " << constructor_time << std::endl;
+	// std::endl; std::cout << "constructor time: " << constructor_time <<
+	// std::endl;
 
 	current_total_indices += indices.size();
 
-	std::cout << "SIZE: " << indices.size() << std::endl;
-	return indices.data();
+	// std::cout << "SIZE: " << indices.size() << std::endl;
 }
 
 void BttController::Update(glm::vec3 position) {
