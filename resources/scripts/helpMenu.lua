@@ -1,6 +1,6 @@
 
 if get_help_menu() then
-	gui_setWindowSize(250, 260, 1)
+	gui_setWindowSize(250, 270, 1)
 	gui_setWindowPos(300, 0, 1)
 	gui_begin("Help Menu")
 	gui_text("Controls:")
