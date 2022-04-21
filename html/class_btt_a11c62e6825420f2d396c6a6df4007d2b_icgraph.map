@@ -1,6 +1,6 @@
 <map id="Btt::destroyTree" name="Btt::destroyTree">
-<area shape="rect" id="node1" title=" " alt="" coords="288,31,403,57"/>
-<area shape="rect" id="node2" href="$class_btt.html#a2b0150ee71c8281be94bbb3061c8ac97" title=" " alt="" coords="125,5,240,32"/>
-<area shape="rect" id="node4" href="$class_btt.html#aef3f0b9b7e56dd7c108653f13dfde0d8" title=" " alt="" coords="131,56,234,83"/>
-<area shape="rect" id="node3" href="$class_btt.html#a53aa0dfe26bc79d008be7db54d588a38" title=" " alt="" coords="5,5,77,32"/>
+<area shape="rect" id="node1" title="Deletes a given node of a tree." alt="" coords="288,31,403,57"/>
+<area shape="rect" id="node2" href="$class_btt.html#a2b0150ee71c8281be94bbb3061c8ac97" title="Destroys a node of tree." alt="" coords="125,5,240,32"/>
+<area shape="rect" id="node4" href="$class_btt.html#aef3f0b9b7e56dd7c108653f13dfde0d8" title="Copy constructor for BTT." alt="" coords="131,56,234,83"/>
+<area shape="rect" id="node3" href="$class_btt.html#a53aa0dfe26bc79d008be7db54d588a38" title="equals operator overloader for BTT" alt="" coords="5,5,77,32"/>
 </map>

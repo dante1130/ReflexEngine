@@ -1,9 +1,12 @@
 var class_texture =
 [
-    [ "Texture", "class_texture.html#a6c275e3f186675ff6ed73ccf970e552f", null ],
+    [ "Texture", "class_texture.html#a66179be276016021e80b1c67c047d4ad", null ],
     [ "Texture", "class_texture.html#a2f20b4ed3f99df94c03cb6b37a560be2", null ],
     [ "~Texture", "class_texture.html#a09c4bcb7462f64c1d20fa69dba3cee8a", null ],
     [ "ClearTexture", "class_texture.html#a8993ef7966161dd2e61e62a593bcdc80", null ],
+    [ "get_height", "class_texture.html#a04e93b660b6588087569275641417d51", null ],
+    [ "get_texture_id", "class_texture.html#aa34a6e9bbd7670b45f7bc733042b3560", null ],
+    [ "get_width", "class_texture.html#a0855aaa1c0252620681351b1cf8f2244", null ],
     [ "LoadTexture", "class_texture.html#a903ad3f9fa0cde61863bc1feba419dc1", null ],
     [ "LoadTextureA", "class_texture.html#a7b8fa0b3b031e13ef281b0414101f883", null ],
     [ "set_texture_id", "class_texture.html#ae684fe34b6e645d65a9b39b2f6ceb536", null ],

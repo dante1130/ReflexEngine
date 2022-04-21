@@ -1,3 +1,3 @@
 <map id="Btt::destroyTree" name="Btt::destroyTree">
-<area shape="rect" id="node1" title=" " alt="" coords="5,29,120,56"/>
+<area shape="rect" id="node1" title="Deletes a given node of a tree." alt="" coords="5,29,120,56"/>
 </map>

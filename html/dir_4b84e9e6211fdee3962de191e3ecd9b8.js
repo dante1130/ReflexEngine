@@ -5,7 +5,10 @@ var dir_4b84e9e6211fdee3962de191e3ecd9b8 =
       [ "BruteForceTerrain", "class_brute_force_terrain.html", "class_brute_force_terrain" ]
     ] ],
     [ "BTT.cpp", "_b_t_t_8cpp.html", null ],
-    [ "BTT.hpp", "_b_t_t_8hpp.html", "_b_t_t_8hpp" ],
+    [ "BTT.hpp", "_b_t_t_8hpp.html", [
+      [ "Node", "struct_node.html", "struct_node" ],
+      [ "Btt", "class_btt.html", "class_btt" ]
+    ] ],
     [ "BttController.cpp", "_controller_2_terrain_2_btt_controller_8cpp.html", null ],
     [ "BttController.hpp", "_controller_2_terrain_2_btt_controller_8hpp.html", [
       [ "BttController", "class_btt_controller.html", "class_btt_controller" ]

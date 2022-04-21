@@ -1,4 +1,4 @@
 <map id="Scene" name="Scene">
-<area shape="rect" id="node1" title="A scene in the game." alt="" coords="5,5,187,215"/>
-<area shape="rect" id="node2" href="$class_test_scene.html" title="A test scene for testing purposes." alt="" coords="5,263,187,501"/>
+<area shape="rect" id="node1" title="A scene in the game." alt="" coords="20,5,201,215"/>
+<area shape="rect" id="node2" href="$class_test_scene.html" title="A test scene for testing purposes." alt="" coords="5,263,216,531"/>
 </map>

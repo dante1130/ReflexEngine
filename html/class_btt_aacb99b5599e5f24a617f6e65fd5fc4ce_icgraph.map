@@ -1,4 +1,4 @@
 <map id="Btt::getIndices" name="Btt::getIndices">
-<area shape="rect" id="node1" title=" " alt="" coords="160,5,267,32"/>
-<area shape="rect" id="node2" href="$class_btt.html#a9ba2af9c46a33642c9147b4bf4629b73" title=" " alt="" coords="5,5,112,32"/>
+<area shape="rect" id="node1" title="Gets the indices for a given node and adds to current indices." alt="" coords="160,5,267,32"/>
+<area shape="rect" id="node2" href="$class_btt.html#a9ba2af9c46a33642c9147b4bf4629b73" title="Returns all indices needed for a given level of detail." alt="" coords="5,5,112,32"/>
 </map>

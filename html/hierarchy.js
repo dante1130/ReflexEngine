@@ -3,6 +3,7 @@ var hierarchy =
     [ "A", "class_a.html", null ],
     [ "AStar", "class_a_star.html", null ],
     [ "Base", "class_base.html", null ],
+    [ "Binary", "class_binary.html", null ],
     [ "BodyRigidPhysics", "class_body_rigid_physics.html", null ],
     [ "Btt", "class_btt.html", null ],
     [ "Camera", "class_camera.html", null ],

@@ -4,6 +4,7 @@ var annotated_dup =
     [ "A", "class_a.html", null ],
     [ "AStar", "class_a_star.html", "class_a_star" ],
     [ "Base", "class_base.html", null ],
+    [ "Binary", "class_binary.html", null ],
     [ "Body", "class_body.html", "class_body" ],
     [ "BodyRigid", "class_body_rigid.html", "class_body_rigid" ],
     [ "BodyRigidPhysics", "class_body_rigid_physics.html", "class_body_rigid_physics" ],

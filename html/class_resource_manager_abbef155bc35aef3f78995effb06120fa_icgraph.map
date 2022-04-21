@@ -1,5 +1,6 @@
 <map id="ResourceManager::get_texture_manager" name="ResourceManager::get_texture_manager">
-<area shape="rect" id="node1" title="Get the texture manager." alt="" coords="197,35,351,76"/>
+<area shape="rect" id="node1" title="Get the texture manager." alt="" coords="197,64,351,105"/>
 <area shape="rect" id="node2" href="$namespace_material_lua_controller.html#a2bf77986afcc458d485046c156d5bedd" title="Gives lua access to material related functions (texture &amp; model managers)" alt="" coords="5,5,149,47"/>
 <area shape="rect" id="node3" href="$class_water.html#aca2414328c1d530cebff6ba347225ff9" title="Initialises the water." alt="" coords="31,71,123,98"/>
+<area shape="rect" id="node4" href="$namespacegui.html#a32199bb3c15f21a31295be2e39c258d1" title="Creates an image using a texture name." alt="" coords="24,122,131,149"/>
 </map>

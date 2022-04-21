@@ -1,6 +1,7 @@
 var _generic_functions_8cpp =
 [
     [ "createNetwork", "_generic_functions_8cpp.html#a033e0c7b67f57387273072e5684d44dd", null ],
+    [ "credits", "_generic_functions_8cpp.html#ab7553f552bf11a68d2961329e984f942", null ],
     [ "currentIPAddress", "_generic_functions_8cpp.html#ae00428d0ea7bb32188854076ecbadea6", null ],
     [ "helpMenu", "_generic_functions_8cpp.html#ac4b7a0c763c94e3141231e8f08c1d389", null ],
     [ "last_load_time_", "_generic_functions_8cpp.html#a0d6381774cc6c06a39675652a9004283", null ],

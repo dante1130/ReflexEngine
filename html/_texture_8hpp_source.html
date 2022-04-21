@@ -99,89 +99,116 @@ $(document).ready(function(){initNavTree('_texture_8hpp_source.html',''); initRe
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="class_texture.html">   13</a></span>&#160;<span class="keyword">class</span> <a class="code" href="class_texture.html">Texture</a> {</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_texture.html#a6c275e3f186675ff6ed73ccf970e552f">   15</a></span>&#160;    <a class="code" href="class_texture.html#a6c275e3f186675ff6ed73ccf970e552f">Texture</a>(){};</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">     * @brief Construct a new Texture object</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">     * @param fileLocation</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="class_texture.html#a2f20b4ed3f99df94c03cb6b37a560be2">Texture</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* fileLocation);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">     * @brief Set the texture unit.</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">     * @param texture_unit</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_texture.html#ac62d2fcfa3ee7d69a61a720410e5acc2">set_texture_unit</a>(GLuint texture_unit);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">     * @brief Loads a texture without alpha.</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">     * @return true</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">     * @return false</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_texture.html#a903ad3f9fa0cde61863bc1feba419dc1">LoadTexture</a>();</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">     * @brief Loads a texture with alpha.</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">     * @return true</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">     * @return false</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_texture.html#a7b8fa0b3b031e13ef281b0414101f883">LoadTextureA</a>();</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">     * @brief Enables the texture.</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_texture.html#ac2e11c8bd262877a28a47e85f6f7458f">UseTexture</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">     * @brief Sets the texture id</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_texture.html#ae684fe34b6e645d65a9b39b2f6ceb536">set_texture_id</a>(GLuint id);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">     * @brief Clears the texture.</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_texture.html#a8993ef7966161dd2e61e62a593bcdc80">ClearTexture</a>();</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">     * @brief Destroy the Texture object</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    ~<a class="code" href="class_texture.html#a09c4bcb7462f64c1d20fa69dba3cee8a">Texture</a>();</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="comment">// The file location of the texture.</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="class_texture.html#a374d245aca554bc0404c8a606a6eadb9">   69</a></span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="class_texture.html#a374d245aca554bc0404c8a606a6eadb9">m_fileLocation</a>;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="comment">/// The texture ID.</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="class_texture.html#aa784269ecba9d590f8b046af7232cf36">   72</a></span>&#160;    <a class="code" href="class_texture.html#aa784269ecba9d590f8b046af7232cf36">GLuint</a> <a class="code" href="class_texture.html#aa784269ecba9d590f8b046af7232cf36">m_textureID</a> = 0u;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="comment">/// The texture unit.</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="class_texture.html#aa747cb21b7c907086e1a0dd73381ab51">   75</a></span>&#160;    <a class="code" href="class_texture.html#aa747cb21b7c907086e1a0dd73381ab51">GLuint</a> <a class="code" href="class_texture.html#aa747cb21b7c907086e1a0dd73381ab51">texture_unit_</a> = <a class="code" href="class_texture.html">GL_TEXTURE1</a>;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="comment">/// Information regarding the texture image.</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="class_texture.html#af481acfa0145beff91b45d0bd1cbe3ed">   78</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_texture.html#af481acfa0145beff91b45d0bd1cbe3ed">m_width</a> = 0, <a class="code" href="class_texture.html#a308919fb8790c1b0867a2a509085803e">m_height</a> = 0, <a class="code" href="class_texture.html#a36e78a842c0726645f4b2edc39b4280a">m_bitDepth</a> = 0;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;};</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">     * @brief Construct a new Texture object.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="class_texture.html#a66179be276016021e80b1c67c047d4ad">Texture</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">     * @brief Construct a new Texture object</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">     *</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">     * @param fileLocation</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_texture.html#a2f20b4ed3f99df94c03cb6b37a560be2">Texture</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* fileLocation);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">     * @brief Get the texture id.</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">     *</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">     * @return GLuint</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="class_texture.html#aa34a6e9bbd7670b45f7bc733042b3560">GLuint</a> <a class="code" href="class_texture.html#aa34a6e9bbd7670b45f7bc733042b3560">get_texture_id</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">     * @brief Get the width.</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">     *</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">     * @return int</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_texture.html#a0855aaa1c0252620681351b1cf8f2244">get_width</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">     * @brief Get the height.</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">     *</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">     * @return int</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_texture.html#a04e93b660b6588087569275641417d51">get_height</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">     * @brief Set the texture unit.</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">     *</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">     * @param texture_unit</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_texture.html#ac62d2fcfa3ee7d69a61a720410e5acc2">set_texture_unit</a>(GLuint texture_unit);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">     * @brief Sets the texture id</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_texture.html#ae684fe34b6e645d65a9b39b2f6ceb536">set_texture_id</a>(GLuint id);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">     * @brief Loads a texture without alpha.</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">     *</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">     * @return true</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">     * @return false</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_texture.html#a903ad3f9fa0cde61863bc1feba419dc1">LoadTexture</a>();</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">     * @brief Loads a texture with alpha.</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">     *</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">     * @return true</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">     * @return false</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_texture.html#a7b8fa0b3b031e13ef281b0414101f883">LoadTextureA</a>();</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">     * @brief Enables the texture.</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_texture.html#ac2e11c8bd262877a28a47e85f6f7458f">UseTexture</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">     * @brief Clears the texture.</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_texture.html#a8993ef7966161dd2e61e62a593bcdc80">ClearTexture</a>();</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">     * @brief Destroy the Texture object</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    ~<a class="code" href="class_texture.html#a09c4bcb7462f64c1d20fa69dba3cee8a">Texture</a>();</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="comment">// The file location of the texture.</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="class_texture.html#a374d245aca554bc0404c8a606a6eadb9">   93</a></span>&#160;    <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code" href="class_texture.html#a374d245aca554bc0404c8a606a6eadb9">m_fileLocation</a>;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="comment">/// The texture ID.</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="class_texture.html#aa784269ecba9d590f8b046af7232cf36">   96</a></span>&#160;    <a class="code" href="class_texture.html#aa784269ecba9d590f8b046af7232cf36">GLuint</a> <a class="code" href="class_texture.html#aa784269ecba9d590f8b046af7232cf36">m_textureID</a> = 0u;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="comment">/// The texture unit.</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="class_texture.html#aa747cb21b7c907086e1a0dd73381ab51">   99</a></span>&#160;    <a class="code" href="class_texture.html#aa747cb21b7c907086e1a0dd73381ab51">GLuint</a> <a class="code" href="class_texture.html#aa747cb21b7c907086e1a0dd73381ab51">texture_unit_</a> = <a class="code" href="class_texture.html">GL_TEXTURE1</a>;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="comment">/// Information regarding the texture image.</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="class_texture.html#af481acfa0145beff91b45d0bd1cbe3ed">  102</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_texture.html#af481acfa0145beff91b45d0bd1cbe3ed">m_width</a> = 0, <a class="code" href="class_texture.html#a308919fb8790c1b0867a2a509085803e">m_height</a> = 0, <a class="code" href="class_texture.html#a36e78a842c0726645f4b2edc39b4280a">m_bitDepth</a> = 0;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclass_texture_html_ac2e11c8bd262877a28a47e85f6f7458f"><div class="ttname"><a href="class_texture.html#ac2e11c8bd262877a28a47e85f6f7458f">Texture::UseTexture</a></div><div class="ttdeci">void UseTexture() const</div><div class="ttdoc">Enables the texture.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8cpp_source.html#l00065">Texture.cpp:65</a></div></div>
-<div class="ttc" id="aclass_texture_html_a308919fb8790c1b0867a2a509085803e"><div class="ttname"><a href="class_texture.html#a308919fb8790c1b0867a2a509085803e">Texture::m_height</a></div><div class="ttdeci">int m_height</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8hpp_source.html#l00078">Texture.hpp:78</a></div></div>
+<div class="ttc" id="aclass_texture_html_ac2e11c8bd262877a28a47e85f6f7458f"><div class="ttname"><a href="class_texture.html#ac2e11c8bd262877a28a47e85f6f7458f">Texture::UseTexture</a></div><div class="ttdeci">void UseTexture() const</div><div class="ttdoc">Enables the texture.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8cpp_source.html#l00071">Texture.cpp:71</a></div></div>
+<div class="ttc" id="aclass_texture_html_a308919fb8790c1b0867a2a509085803e"><div class="ttname"><a href="class_texture.html#a308919fb8790c1b0867a2a509085803e">Texture::m_height</a></div><div class="ttdeci">int m_height</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8hpp_source.html#l00102">Texture.hpp:102</a></div></div>
 <div class="ttc" id="aclass_texture_html"><div class="ttname"><a href="class_texture.html">Texture</a></div><div class="ttdoc">A texture class.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8hpp_source.html#l00013">Texture.hpp:13</a></div></div>
-<div class="ttc" id="aclass_texture_html_aa784269ecba9d590f8b046af7232cf36"><div class="ttname"><a href="class_texture.html#aa784269ecba9d590f8b046af7232cf36">Texture::m_textureID</a></div><div class="ttdeci">GLuint m_textureID</div><div class="ttdoc">The texture ID.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8hpp_source.html#l00072">Texture.hpp:72</a></div></div>
-<div class="ttc" id="aclass_texture_html_a6c275e3f186675ff6ed73ccf970e552f"><div class="ttname"><a href="class_texture.html#a6c275e3f186675ff6ed73ccf970e552f">Texture::Texture</a></div><div class="ttdeci">Texture()</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8hpp_source.html#l00015">Texture.hpp:15</a></div></div>
-<div class="ttc" id="aclass_texture_html_ac62d2fcfa3ee7d69a61a720410e5acc2"><div class="ttname"><a href="class_texture.html#ac62d2fcfa3ee7d69a61a720410e5acc2">Texture::set_texture_unit</a></div><div class="ttdeci">void set_texture_unit(GLuint texture_unit)</div><div class="ttdoc">Set the texture unit.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8cpp_source.html#l00005">Texture.cpp:5</a></div></div>
-<div class="ttc" id="aclass_texture_html_a7b8fa0b3b031e13ef281b0414101f883"><div class="ttname"><a href="class_texture.html#a7b8fa0b3b031e13ef281b0414101f883">Texture::LoadTextureA</a></div><div class="ttdeci">bool LoadTextureA()</div><div class="ttdoc">Loads a texture with alpha.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8cpp_source.html#l00037">Texture.cpp:37</a></div></div>
-<div class="ttc" id="aclass_texture_html_a09c4bcb7462f64c1d20fa69dba3cee8a"><div class="ttname"><a href="class_texture.html#a09c4bcb7462f64c1d20fa69dba3cee8a">Texture::~Texture</a></div><div class="ttdeci">~Texture()</div><div class="ttdoc">Destroy the Texture object.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8cpp_source.html#l00082">Texture.cpp:82</a></div></div>
-<div class="ttc" id="aclass_texture_html_ae684fe34b6e645d65a9b39b2f6ceb536"><div class="ttname"><a href="class_texture.html#ae684fe34b6e645d65a9b39b2f6ceb536">Texture::set_texture_id</a></div><div class="ttdeci">void set_texture_id(GLuint id)</div><div class="ttdoc">Sets the texture id.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8cpp_source.html#l00070">Texture.cpp:70</a></div></div>
-<div class="ttc" id="aclass_texture_html_a374d245aca554bc0404c8a606a6eadb9"><div class="ttname"><a href="class_texture.html#a374d245aca554bc0404c8a606a6eadb9">Texture::m_fileLocation</a></div><div class="ttdeci">const char * m_fileLocation</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8hpp_source.html#l00069">Texture.hpp:69</a></div></div>
-<div class="ttc" id="aclass_texture_html_af481acfa0145beff91b45d0bd1cbe3ed"><div class="ttname"><a href="class_texture.html#af481acfa0145beff91b45d0bd1cbe3ed">Texture::m_width</a></div><div class="ttdeci">int m_width</div><div class="ttdoc">Information regarding the texture image.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8hpp_source.html#l00078">Texture.hpp:78</a></div></div>
-<div class="ttc" id="aclass_texture_html_a8993ef7966161dd2e61e62a593bcdc80"><div class="ttname"><a href="class_texture.html#a8993ef7966161dd2e61e62a593bcdc80">Texture::ClearTexture</a></div><div class="ttdeci">void ClearTexture()</div><div class="ttdoc">Clears the texture.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8cpp_source.html#l00072">Texture.cpp:72</a></div></div>
+<div class="ttc" id="aclass_texture_html_aa784269ecba9d590f8b046af7232cf36"><div class="ttname"><a href="class_texture.html#aa784269ecba9d590f8b046af7232cf36">Texture::m_textureID</a></div><div class="ttdeci">GLuint m_textureID</div><div class="ttdoc">The texture ID.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8hpp_source.html#l00096">Texture.hpp:96</a></div></div>
+<div class="ttc" id="aclass_texture_html_ac62d2fcfa3ee7d69a61a720410e5acc2"><div class="ttname"><a href="class_texture.html#ac62d2fcfa3ee7d69a61a720410e5acc2">Texture::set_texture_unit</a></div><div class="ttdeci">void set_texture_unit(GLuint texture_unit)</div><div class="ttdoc">Set the texture unit.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8cpp_source.html#l00011">Texture.cpp:11</a></div></div>
+<div class="ttc" id="aclass_texture_html_a7b8fa0b3b031e13ef281b0414101f883"><div class="ttname"><a href="class_texture.html#a7b8fa0b3b031e13ef281b0414101f883">Texture::LoadTextureA</a></div><div class="ttdeci">bool LoadTextureA()</div><div class="ttdoc">Loads a texture with alpha.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8cpp_source.html#l00043">Texture.cpp:43</a></div></div>
+<div class="ttc" id="aclass_texture_html_a09c4bcb7462f64c1d20fa69dba3cee8a"><div class="ttname"><a href="class_texture.html#a09c4bcb7462f64c1d20fa69dba3cee8a">Texture::~Texture</a></div><div class="ttdeci">~Texture()</div><div class="ttdoc">Destroy the Texture object.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8cpp_source.html#l00088">Texture.cpp:88</a></div></div>
+<div class="ttc" id="aclass_texture_html_ae684fe34b6e645d65a9b39b2f6ceb536"><div class="ttname"><a href="class_texture.html#ae684fe34b6e645d65a9b39b2f6ceb536">Texture::set_texture_id</a></div><div class="ttdeci">void set_texture_id(GLuint id)</div><div class="ttdoc">Sets the texture id.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8cpp_source.html#l00076">Texture.cpp:76</a></div></div>
+<div class="ttc" id="aclass_texture_html_a374d245aca554bc0404c8a606a6eadb9"><div class="ttname"><a href="class_texture.html#a374d245aca554bc0404c8a606a6eadb9">Texture::m_fileLocation</a></div><div class="ttdeci">const char * m_fileLocation</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8hpp_source.html#l00093">Texture.hpp:93</a></div></div>
+<div class="ttc" id="aclass_texture_html_af481acfa0145beff91b45d0bd1cbe3ed"><div class="ttname"><a href="class_texture.html#af481acfa0145beff91b45d0bd1cbe3ed">Texture::m_width</a></div><div class="ttdeci">int m_width</div><div class="ttdoc">Information regarding the texture image.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8hpp_source.html#l00102">Texture.hpp:102</a></div></div>
+<div class="ttc" id="aclass_texture_html_a8993ef7966161dd2e61e62a593bcdc80"><div class="ttname"><a href="class_texture.html#a8993ef7966161dd2e61e62a593bcdc80">Texture::ClearTexture</a></div><div class="ttdeci">void ClearTexture()</div><div class="ttdoc">Clears the texture.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8cpp_source.html#l00078">Texture.cpp:78</a></div></div>
+<div class="ttc" id="aclass_texture_html_a0855aaa1c0252620681351b1cf8f2244"><div class="ttname"><a href="class_texture.html#a0855aaa1c0252620681351b1cf8f2244">Texture::get_width</a></div><div class="ttdeci">int get_width() const</div><div class="ttdoc">Get the width.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8cpp_source.html#l00007">Texture.cpp:7</a></div></div>
 <div class="ttc" id="aclass_texture_html_a2f20b4ed3f99df94c03cb6b37a560be2"><div class="ttname"><a href="class_texture.html#a2f20b4ed3f99df94c03cb6b37a560be2">Texture::Texture</a></div><div class="ttdeci">Texture(const char *fileLocation)</div><div class="ttdoc">Construct a new Texture object.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8cpp_source.html#l00003">Texture.cpp:3</a></div></div>
-<div class="ttc" id="aclass_texture_html_aa747cb21b7c907086e1a0dd73381ab51"><div class="ttname"><a href="class_texture.html#aa747cb21b7c907086e1a0dd73381ab51">Texture::texture_unit_</a></div><div class="ttdeci">GLuint texture_unit_</div><div class="ttdoc">The texture unit.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8hpp_source.html#l00075">Texture.hpp:75</a></div></div>
-<div class="ttc" id="aclass_texture_html_a903ad3f9fa0cde61863bc1feba419dc1"><div class="ttname"><a href="class_texture.html#a903ad3f9fa0cde61863bc1feba419dc1">Texture::LoadTexture</a></div><div class="ttdeci">bool LoadTexture()</div><div class="ttdoc">Loads a texture without alpha.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8cpp_source.html#l00009">Texture.cpp:9</a></div></div>
-<div class="ttc" id="aclass_texture_html_a36e78a842c0726645f4b2edc39b4280a"><div class="ttname"><a href="class_texture.html#a36e78a842c0726645f4b2edc39b4280a">Texture::m_bitDepth</a></div><div class="ttdeci">int m_bitDepth</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8hpp_source.html#l00078">Texture.hpp:78</a></div></div>
+<div class="ttc" id="aclass_texture_html_aa747cb21b7c907086e1a0dd73381ab51"><div class="ttname"><a href="class_texture.html#aa747cb21b7c907086e1a0dd73381ab51">Texture::texture_unit_</a></div><div class="ttdeci">GLuint texture_unit_</div><div class="ttdoc">The texture unit.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8hpp_source.html#l00099">Texture.hpp:99</a></div></div>
+<div class="ttc" id="aclass_texture_html_a903ad3f9fa0cde61863bc1feba419dc1"><div class="ttname"><a href="class_texture.html#a903ad3f9fa0cde61863bc1feba419dc1">Texture::LoadTexture</a></div><div class="ttdeci">bool LoadTexture()</div><div class="ttdoc">Loads a texture without alpha.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8cpp_source.html#l00015">Texture.cpp:15</a></div></div>
+<div class="ttc" id="aclass_texture_html_a36e78a842c0726645f4b2edc39b4280a"><div class="ttname"><a href="class_texture.html#a36e78a842c0726645f4b2edc39b4280a">Texture::m_bitDepth</a></div><div class="ttdeci">int m_bitDepth</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8hpp_source.html#l00102">Texture.hpp:102</a></div></div>
+<div class="ttc" id="aclass_texture_html_a04e93b660b6588087569275641417d51"><div class="ttname"><a href="class_texture.html#a04e93b660b6588087569275641417d51">Texture::get_height</a></div><div class="ttdeci">int get_height() const</div><div class="ttdoc">Get the height.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8cpp_source.html#l00009">Texture.cpp:9</a></div></div>
+<div class="ttc" id="aclass_texture_html_aa34a6e9bbd7670b45f7bc733042b3560"><div class="ttname"><a href="class_texture.html#aa34a6e9bbd7670b45f7bc733042b3560">Texture::get_texture_id</a></div><div class="ttdeci">GLuint get_texture_id() const</div><div class="ttdoc">Get the texture id.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8cpp_source.html#l00005">Texture.cpp:5</a></div></div>
+<div class="ttc" id="aclass_texture_html_a66179be276016021e80b1c67c047d4ad"><div class="ttname"><a href="class_texture.html#a66179be276016021e80b1c67c047d4ad">Texture::Texture</a></div><div class="ttdeci">Texture()=default</div><div class="ttdoc">Construct a new Texture object.</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

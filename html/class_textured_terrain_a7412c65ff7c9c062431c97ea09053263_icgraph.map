@@ -1,4 +1,0 @@
-<map id="TexturedTerrain::load_texture" name="TexturedTerrain::load_texture">
-<area shape="rect" id="node1" title="Reads the texture image file and loads the texture." alt="" coords="148,5,291,47"/>
-<area shape="rect" id="node2" href="$class_open_g_l.html#a9361cf4a3f54e17ebd466ae05f9cf363" title="Initializes OpenGL, shaders, camera and the skybox." alt="" coords="5,13,100,39"/>
-</map>

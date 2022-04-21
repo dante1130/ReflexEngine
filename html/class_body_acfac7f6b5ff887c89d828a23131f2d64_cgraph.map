@@ -1,5 +1,0 @@
-<map id="Body::update" name="Body::update">
-<area shape="rect" id="node1" title="Updates the body object using a delta time value." alt="" coords="5,31,104,57"/>
-<area shape="rect" id="node2" href="$namespace_generic_functions.html#a46d8e1d0567cb3b8730f779111b97d6a" title="Gets if the game should be paused." alt="" coords="152,5,352,32"/>
-<area shape="rect" id="node3" href="$namespace_physics.html#a90f5f7a790b7143554c74de976c0072c" title="Updates the world for the physic objects." alt="" coords="177,56,327,83"/>
-</map>

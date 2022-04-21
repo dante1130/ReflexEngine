@@ -1,3 +1,3 @@
 <map id="Btt::getIndices" name="Btt::getIndices">
-<area shape="rect" id="node1" title=" " alt="" coords="5,29,112,56"/>
+<area shape="rect" id="node1" title="Gets the indices for a given node and adds to current indices." alt="" coords="5,29,112,56"/>
 </map>

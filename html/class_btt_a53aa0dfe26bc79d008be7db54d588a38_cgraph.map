@@ -1,5 +1,5 @@
 <map id="Btt::~Btt" name="Btt::~Btt">
-<area shape="rect" id="node1" title=" " alt="" coords="5,29,77,56"/>
-<area shape="rect" id="node2" href="$class_btt.html#a2b0150ee71c8281be94bbb3061c8ac97" title=" " alt="" coords="125,29,240,56"/>
-<area shape="rect" id="node3" href="$class_btt.html#a11c62e6825420f2d396c6a6df4007d2b" title=" " alt="" coords="288,29,403,56"/>
+<area shape="rect" id="node1" title="equals operator overloader for BTT" alt="" coords="5,29,77,56"/>
+<area shape="rect" id="node2" href="$class_btt.html#a2b0150ee71c8281be94bbb3061c8ac97" title="Destroys a node of tree." alt="" coords="125,29,240,56"/>
+<area shape="rect" id="node3" href="$class_btt.html#a11c62e6825420f2d396c6a6df4007d2b" title="Deletes a given node of a tree." alt="" coords="288,29,403,56"/>
 </map>
