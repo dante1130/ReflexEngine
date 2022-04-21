@@ -19,5 +19,6 @@ void guiLuaAccess::exposeGui() {
 	lua.set_function("gui_progressBar", gui::progressBar);
 	lua.set_function("gui_guiFrameRate", gui::guiFrameRate);
 	lua.set_function("gui_button", gui::button);
+	lua.set_function("gui_image", gui::lua_image);
 	//  lua.set_function("gui_plotLines", gui::plotLines);
 }

@@ -177,7 +177,7 @@ glm::vec3 Terrain::calculate_terrain_normal(int x, int z) const {
 	float height_bottom = get_height(x, z - 1);
 
 	glm::vec3 normal =
-	    glm::vec3(height_left - height_right, 2.0f, height_top - height_bottom);
+	    glm::vec3(height_left - height_right, 2.0f, height_bottom - height_top);
 
 	return glm::normalize(normal);
 }

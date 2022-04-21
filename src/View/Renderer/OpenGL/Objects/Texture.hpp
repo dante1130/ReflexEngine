@@ -12,7 +12,10 @@
  */
 class Texture {
 public:
-	Texture(){};
+	/**
+	 * @brief Construct a new Texture object.
+	 */
+	Texture() = default;
 
 	/**
 	 * @brief Construct a new Texture object
@@ -22,11 +25,37 @@ public:
 	Texture(const char* fileLocation);
 
 	/**
+	 * @brief Get the texture id.
+	 *
+	 * @return GLuint
+	 */
+	GLuint get_texture_id() const;
+
+	/**
+	 * @brief Get the width.
+	 *
+	 * @return int
+	 */
+	int get_width() const;
+
+	/**
+	 * @brief Get the height.
+	 *
+	 * @return int
+	 */
+	int get_height() const;
+
+	/**
 	 * @brief Set the texture unit.
 	 *
 	 * @param texture_unit
 	 */
 	void set_texture_unit(GLuint texture_unit);
+
+	/**
+	 * @brief Sets the texture id
+	 */
+	void set_texture_id(GLuint id);
 
 	/**
 	 * @brief Loads a texture without alpha.
@@ -48,11 +77,6 @@ public:
 	 * @brief Enables the texture.
 	 */
 	void UseTexture() const;
-
-	/**
-	 * @brief Sets the texture id
-	 */
-	void set_texture_id(GLuint id);
 
 	/**
 	 * @brief Clears the texture.

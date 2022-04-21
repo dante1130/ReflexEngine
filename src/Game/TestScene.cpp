@@ -4,8 +4,6 @@
 #include "Controller/Input/InputManager.hpp"
 #include "TestScene.hpp"
 
-TestScene::TestScene() {}
-
 void TestScene::init() {
 	directional_light_ =
 	    DirectionalLight(2048, 2048, glm::vec3(1.0f, 0.53f, 0.3f), 0.2f,
@@ -21,15 +19,13 @@ void TestScene::init() {
 	InputManager::get_instance().load_lua_bindings("scripts/controls.lua");
 }
 
-std::vector<std::string> to_add;
-
-void addGameObjectDuringRun(std::string luaScript) {
-	to_add.push_back(luaScript);
+void TestScene::add_game_object_during_run(std::string luaScript) {
+	to_add_.push_back(luaScript);
 }
 
 void TestScene::addGameObject(std::string luaScript) {
 	if (glfwGetTime() > (double)0.5) {
-		addGameObjectDuringRun(luaScript);
+		add_game_object_during_run(luaScript);
 	} else {
 		std::cout << luaScript << std::endl;
 		game_objects_.emplace_back(GameAssetFactory::create(luaScript));
@@ -41,7 +37,8 @@ void TestScene::key_controls(float delta_time) {
 	auto& input_manager = InputManager::get_instance();
 
 	if (input_manager.get_key_state(Input::quit).is_key_pressed())
-		ReflexEngine::get_instance().window_.set_should_close(true);
+		GenericFunctions::set_if_credits_active(
+		    !GenericFunctions::get_if_credits_active());
 
 	camera.set_move_direction(glm::vec3(0, 0, 0));
 
@@ -147,9 +144,9 @@ void TestScene::garbage_collection() {
 }
 
 void TestScene::add_new_game_objects() {
-	for (int count = 0; count < to_add.size(); count++) {
-		std::cout << "Adding during runtime = " << to_add[count] << std::endl;
-		game_objects_.emplace_back(GameAssetFactory::create(to_add[count]));
+	for (int count = 0; count < to_add_.size(); count++) {
+		std::cout << "Adding during runtime = " << to_add_[count] << std::endl;
+		game_objects_.emplace_back(GameAssetFactory::create(to_add_[count]));
 	}
-	to_add.clear();
+	to_add_.clear();
 }

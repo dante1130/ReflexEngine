@@ -62,7 +62,7 @@ bool TexturedTerrain::load_mesh() {
 			}
 		}
 	}
-
+	//
 	mesh_ = std::make_shared<Mesh>();
 	mesh_->CreateMesh(vertices.data(), indices.data(), vertices.size(),
 	                  indices.size());

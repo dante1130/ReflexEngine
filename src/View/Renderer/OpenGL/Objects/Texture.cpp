@@ -2,6 +2,12 @@
 
 Texture::Texture(const char* fileLocation) : m_fileLocation(fileLocation) {}
 
+GLuint Texture::get_texture_id() const { return m_textureID; }
+
+int Texture::get_width() const { return m_width; }
+
+int Texture::get_height() const { return m_height; }
+
 void Texture::set_texture_unit(GLuint texture_unit) {
 	texture_unit_ = texture_unit;
 }

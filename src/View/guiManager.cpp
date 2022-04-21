@@ -1,5 +1,7 @@
 #include "guiManager.hpp"
 
+#include "Controller/ResourceManager/ResourceManager.hpp"
+
 void gui::init(GLFWwindow* window, std::string openglVersion) {
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
@@ -26,7 +28,7 @@ void gui::shutdown() {
 	ImGui_ImplGlfw_Shutdown();
 	ImGui::DestroyContext();
 }
-
+//
 void gui::begin(const std::string title) { ImGui::Begin(title.c_str()); }
 
 void gui::end() { ImGui::End(); }
@@ -70,6 +72,20 @@ void gui::colourEdit3(const std::string name, float colour[3]) {
 
 void gui::colourEdit4(const std::string name, float colour[4]) {
 	ImGui::ColorEdit4(name.c_str(), colour);
+}
+
+void gui::lua_image(const std::string& texture_name) {
+	auto& texture_manager =
+	    ResourceManager::get_instance().get_texture_manager();
+
+	const auto& texture = texture_manager.get_texture(texture_name);
+
+	gui::image(texture.get_texture_id(), texture.get_width(),
+	           texture.get_height());
+}
+
+void gui::image(uint32_t textureID, int width, int height) {
+	ImGui::Image((void*)(intptr_t)textureID, ImVec2(width, height));
 }
 
 void gui::sliderAngle(const std::string name, float* angle, float min,

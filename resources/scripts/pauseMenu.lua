@@ -1,4 +1,3 @@
-
 local paused = get_pause_game()
 if paused then
 	gui_setWindowSize(300, 300, 1)
@@ -11,7 +10,7 @@ if paused then
 	local unpause = gui_button("UNPAUSE", 150, 50)
 	local save = gui_button("SAVE", 150, 50)
 	local load = gui_button("LOAD", 150, 50)
-	local exit = gui_button("EXIT", 150, 50)
+	local credits = gui_button("EXIT", 150, 50)
 	gui_text("gui frame rate: " .. gui_guiFrameRate())
 
 	if unpause then
@@ -26,8 +25,8 @@ if paused then
 		load_game(true)
 	end
 
-	if exit then
-		exit_game()
+	if credits then
+		set_credits(true)
 	end
 
 

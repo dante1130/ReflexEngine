@@ -23,7 +23,7 @@ public:
 	/**
 	 * @brief Default constructor
 	 */
-	TestScene();
+	TestScene() = default;
 
 	/**
 	 * @brief Initializes the scene.
@@ -90,7 +90,14 @@ public:
 	void loadSavedGameObjects() override;
 
 	/**
-	 * @brief	Adds new game objects during run time
+	 * @brief Adds a new game object during run time.
+	 *
+	 * @param luaScript
+	 */
+	void add_game_object_during_run(std::string luaScript);
+
+	/**
+	 * @brief	Add new game objects during run time.
 	 *
 	 * @pre		Added game objects stored in list
 	 * @post	Game objects loaded and stored
@@ -108,4 +115,7 @@ public:
 private:
 	/// A directional light.
 	DirectionalLight directional_light_ = {};
+
+	/// Scripts for game objects to be added.
+	std::vector<std::string> to_add_;
 };

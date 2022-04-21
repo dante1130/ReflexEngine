@@ -18,6 +18,20 @@ namespace GenericFunctions {
 void lua_access();
 
 /**
+ * @brief Get the window width.
+ *
+ * @return int
+ */
+int get_window_width();
+
+/**
+ * @brief Get the window height.
+ *
+ * @return int
+ */
+int get_window_height();
+
+/**
  * @brief	Initialises rand
  * @param	seed	- The seed of the random generator
  * @param	useSeed	- If you want to use the seed or just use time
@@ -135,6 +149,21 @@ void setifHelpMenuActive(bool val);
  * @post	gets value
  */
 bool getIfHelpMenuActive();
+
+/**
+ * @brief Set the if credits active.
+ *
+ * @param val
+ */
+void set_if_credits_active(bool val);
+
+/**
+ * @brief Get the if credits active.
+ *
+ * @return true
+ * @return false
+ */
+bool get_if_credits_active();
 
 /**
  * @brief	gets camera x position

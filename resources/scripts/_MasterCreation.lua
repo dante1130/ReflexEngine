@@ -21,7 +21,8 @@ addGameObject("scripts/Water.lua")
 -- addGameObject("scripts/guiBasic.lua")
 addGameObject("scripts/pauseMenuSetup.lua")
 addGameObject("scripts/helpMenuSetup.lua")
-addGameObject("scripts/player.lua");
+addGameObject("scripts/credits_setup.lua")
+addGameObject("scripts/player.lua")
 addGameObject("scripts/networkMenuSetup.lua")
 addGameObject("scripts/gunSetup.lua")
 
@@ -37,6 +38,5 @@ addGameObject("scripts/Arrow.lua")
 addGameObject("scripts/Bow.lua")
 addGameObject("scripts/Boat.lua")
 addGameObject("scripts/Lighthouse.lua")
-
 
 addGameObject("scripts/destroyer.lua")

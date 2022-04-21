@@ -7,7 +7,7 @@ void MaterialLuaController::CreateLuaAccess() {
 	TextureManager& texture_manager =
 	    ResourceManager::get_instance().get_texture_manager();
 
-	lua.set_function("loadTextureRGBA", &TextureManager::load_texture_rgb,
+	lua.set_function("loadTextureRGBA", &TextureManager::load_texture_rgba,
 	                 texture_manager);
 	lua.set_function("loadTextureRGB", &TextureManager::load_texture_rgb,
 	                 texture_manager);
