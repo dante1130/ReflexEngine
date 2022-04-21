@@ -1,11 +1,6 @@
 #include "OpenGL.hpp"
 
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
-#include "TexturedTerrain.hpp"
-#include "BttController.hpp"
-
-TexturedTerrain terrain;
-BttController bttControl;
 
 void OpenGL::init() {
 	auto& engine = ReflexEngine::get_instance();
@@ -49,22 +44,6 @@ void OpenGL::init() {
 	    "textures/skyboxes/cupertin-lake/cupertin-lake_ft.tga");
 
 	skybox_ = Skybox(skyboxFaces);
-
-	/*
-	terrain.set_scale(glm::vec3(0.5f, 0.25f, 0.5f));
-	terrain.load_heightfield("textures/heightmap.png");
-	terrain.load_texture("textures/dirt.png");
-	terrain.load_detailmap("textures/water.png");
-	terrain.load_mesh();
-	*/
-	/*
-	bttControl.load_texture("textures/dirt.png");
-	bttControl.load_detailmap("textures/water.png");
-	bttControl.gen_faultformation(64, 241, 0, 255, 0.5);
-	bttControl.set_scale(glm::vec3(1.0f, 0.6f, 1.0f));
-	bttControl.set_height_map_size(241 / 2);
-	bttControl.CreateTerrain(30, 9, 3);
-	*/
 }
 
 void OpenGL::draw() {
@@ -81,13 +60,6 @@ void OpenGL::render_scene(std::shared_ptr<Shader> shader) {
 	for (const auto& draw_call : draw_calls_) {
 		draw_call(shader);
 	}
-
-	if (glfwGetTime() - m_last_time > 0.33) {
-		// bttControl.Update(ReflexEngine::get_instance().camera_.get_position());
-		// m_last_time = glfwGetTime();
-	}
-
-	// bttControl.render(shader);
 }
 
 void OpenGL::render_pass() {

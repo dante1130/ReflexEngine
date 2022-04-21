@@ -12,7 +12,11 @@ void PhysicsObject::initRB(glm::vec3 pos, glm::vec3 rotation, float angle) {
 	rb.init(pos, rotation, angle);
 }
 
-void PhysicsObject::update(float delta_time) {}
+void PhysicsObject::update(float delta_time) {
+	// position = rb.getPosition();
+	// position.y = GenericFunctions::getHeight(position.x, position.z) + 1;
+	// rb.set_position(position);
+}
 
 void PhysicsObject::fixed_update(float delta_time) {
 	position = rb.getPosition();
@@ -137,7 +141,7 @@ void PhysicsObject::save_object() {
 
 	for (int count = 0; count < rb.getNumberOfColliders(); count++) {
 		int type = rb.getColliderType(count);
-		ObjectSaving::createStruct("collider" + std::to_string(count));
+		ObjectSaving::createStruct("collider" + std::to_string(count + 1));
 		saveCollider(count, type);
 		ObjectSaving::closeStruct();
 	}

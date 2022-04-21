@@ -1,7 +1,7 @@
 #include "TerrainObject.hpp"
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 
-TerrainObject::TerrainObject() {}
+TerrainObject::TerrainObject() { position = glm::vec3(0.0f); }
 
 void TerrainObject::init() { bttControl.set_scale(glm::vec3(1, 0.1, 1)); }
 

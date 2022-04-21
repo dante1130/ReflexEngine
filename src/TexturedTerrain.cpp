@@ -40,15 +40,15 @@ bool TexturedTerrain::load_mesh() {
 			vertices.push_back(z);
 
 			// Texture coordinates
-			vertices.push_back(x);
-			vertices.push_back(z);
+			vertices.push_back(x / static_cast<GLfloat>(get_width()));
+			vertices.push_back(z / static_cast<GLfloat>(get_length()));
 
 			glm::vec3 normal = calculate_terrain_normal(x, z);
 
 			// Normals
-			vertices.push_back(normal.x);
-			vertices.push_back(normal.y);
-			vertices.push_back(normal.z);
+			vertices.push_back(-normal.x);
+			vertices.push_back(-normal.y);
+			vertices.push_back(-normal.z);
 
 			if (x < get_width() - 1 && z < get_length() - 1) {
 				// Indices
