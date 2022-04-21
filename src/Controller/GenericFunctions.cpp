@@ -50,6 +50,7 @@ void GenericFunctions::lua_access() {
 	lua.set_function("current_time", get_time);
 	lua.set_function("save_game", setIfSave);
 	lua.set_function("load_game", setIfLoad);
+	lua.set_function("get_load", getIfLoad);
 	lua.set_function("time_since_last_save", timeAtLastSave);
 	lua.set_function("time_since_last_load", timeAtLastLoad);
 	lua.set_function("set_pause_game", setIfPaused);
