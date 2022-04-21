@@ -35,7 +35,7 @@ add_subdirectory(src)
 target_compile_options(${PROJECT_NAME} PRIVATE
     # Clang
     $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>>:
-        -Weverything -fcolor-diagnostics
+        -Wall -Wextra -Wpedantic -fcolor-diagnostics
         # Turn off useless warnings
         -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-padded
         -Wno-deprecated-declarations -Wno-exit-time-destructors

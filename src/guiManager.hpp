@@ -182,6 +182,8 @@ void colourEdit3(const std::string name, float colour[3]);
  */
 void colourEdit4(const std::string name, float colour[4]);
 
+void lua_image(const std::string& texture_name);
+
 void image(uint32_t texture_id, int width, int height);
 
 /**

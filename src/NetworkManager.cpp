@@ -4,11 +4,11 @@ char message[512];
 
 char name[256];
 
-char str1[512];
-
 bool isServer;
 
 bool connected = false;
+
+bool init = false;
 
 RakNet::RakPeerInterface* peer;
 
@@ -20,41 +20,48 @@ enum GameMessages {
 
 void networkManager::InitNetwork() { 
 	peer = RakNet::RakPeerInterface::GetInstance();
+	init = true;
 	printf("Created the network manager.\n");
 }
 
 void networkManager::SetupClient(std::string userName) {
-	RakNet::SocketDescriptor sd;
-	peer->Startup(1, &sd, 1);
-	isServer = false;
-	if (userName !=" ") {
-		userName.append(": ");
-		strcat(name, userName.c_str());
-	} else {
-		strcat(name, "Client: ");
+	if (peer != NULL && init) {
+		RakNet::SocketDescriptor sd;
+		peer->Startup(1, &sd, 1);
+		isServer = false;
+		if (userName != " ") {
+			userName.append(": ");
+			strcat(name, userName.c_str());
+		} else {
+			strcat(name, "Client: ");
+		}
 	}
 }
 
 bool networkManager::ConnectClient(char* serverIP) { 
-	bool connecting;
-	if (serverIP[0] =='\n') 
-	{
-		strcpy(serverIP, "127.0.0.1");
+	if (peer != NULL && init) {
+		bool connecting;
+		if (serverIP[0] == '\n') {
+			strcpy(serverIP, "127.0.0.1");
+		}
+		connecting = peer->Connect(serverIP, SERVER_PORT, 0, 0);
+		if (connecting) {
+			printf("Not connected");
+		}
+		return (connecting);
 	}
-	connecting = peer->Connect(serverIP, SERVER_PORT, 0, 0);
-	if (connecting) {
-		printf("Not connected");
-	}
-	return (connecting);
+	return (false);
 }
 
 void networkManager::SetupServer() {
-	RakNet::SocketDescriptor sd(SERVER_PORT, 0);
-	peer->Startup(MAX_CLIENTS, &sd, 1);
-	isServer = true;
-	strcat(name, "Server: ");
-	peer->SetMaximumIncomingConnections(MAX_CLIENTS);
-	printf("Server Running...\n");
+	if (peer != NULL && init && !isServer) {
+		RakNet::SocketDescriptor sd(SERVER_PORT, 0);
+		peer->Startup(MAX_CLIENTS, &sd, 1);
+		isServer = true;
+		strcat(name, "Server: ");
+		peer->SetMaximumIncomingConnections(MAX_CLIENTS);
+		printf("Server Running...\n");
+	}
 }
 
 void networkManager::ChangeName(std::string userName) { 
@@ -100,6 +107,7 @@ char* networkManager::ReceiveMessage() {
 					break;
 				case ID_DISCONNECTION_NOTIFICATION:
 					if (isServer) {
+						connected = false;
 						return ("A client has disconnected\n");
 					} else {
 						return ("We have been disconnected\n");
@@ -107,6 +115,7 @@ char* networkManager::ReceiveMessage() {
 					break;
 				case ID_CONNECTION_LOST:
 					if (isServer) {
+						connected = false;
 						return ("A client lost the connection\n");
 					} else {
 						return ("Connection lost\n");
@@ -148,8 +157,10 @@ char* networkManager::ReceiveMessage() {
 					break;
 				case ID_DISCONNECTION_NOTIFICATION:
 					if (isServer) {
+						connected = false;
 						return ("A client has disconnected\n");
 					} else {
+						connected = false;
 						return ("We have been disconnected\n");
 					}
 					break;
@@ -157,6 +168,7 @@ char* networkManager::ReceiveMessage() {
 					if (isServer) {
 						return ("A client lost the connection\n");
 					} else {
+						connected = false;
 						return ("Connection lost\n");
 					}
 					break;
@@ -178,8 +190,12 @@ char* networkManager::ReceiveMessage() {
 }
 
 void networkManager::DestroySession() {
-	RakNet::RakPeerInterface::DestroyInstance(peer);
-	printf("Killed the session\n");
+	if (init) {
+		RakNet::RakPeerInterface::DestroyInstance(peer);
+		printf("Killed the session\n");
+		init = false;
+		isServer = false;
+	}
 }
 
 bool networkManager::ConnectionStatus() { 

@@ -13,6 +13,7 @@ static int last_load_time_ = -100;
 static bool paused = false;
 static bool helpMenu = false;
 static bool networkMenu = false;
+static bool credits = false;
 
 static bool createNetwork = false;
 static bool networkConnected = false;
@@ -35,7 +36,7 @@ void GenericFunctions::init_random(int seed, bool useSeed) {
 	if (m_useSeed == true) {
 		srand(m_seed);
 	} else {
-		srand(time(NULL));
+		srand(time(nullptr));
 	}
 	m_initRandom = true;
 }
@@ -43,47 +44,51 @@ void GenericFunctions::init_random(int seed, bool useSeed) {
 void GenericFunctions::lua_access() {
 	sol::state& lua = LuaManager::get_instance().get_state();
 
-	lua.set_function("random_generator", &GenericFunctions::get_random);
-	lua.set_function("current_time", &GenericFunctions::get_time);
-	lua.set_function("save_game", &GenericFunctions::setIfSave);
-	lua.set_function("load_game", &GenericFunctions::setIfLoad);
-	lua.set_function("time_since_last_save", &GenericFunctions::timeAtLastSave);
-	lua.set_function("time_since_last_load", &GenericFunctions::timeAtLastLoad);
-	lua.set_function("set_pause_game", &GenericFunctions::setIfPaused);
-	lua.set_function("get_pause_game", &GenericFunctions::getIfPaused);
-	lua.set_function("exit_game", &GenericFunctions::exitEngine);
-	lua.set_function("set_help_menu", &GenericFunctions::setifHelpMenuActive);
-	lua.set_function("get_help_menu", &GenericFunctions::getIfHelpMenuActive);
-	lua.set_function("camera_pos_x", &GenericFunctions::luaCamPosX);
-	lua.set_function("camera_pos_y", &GenericFunctions::luaCamPosY);
-	lua.set_function("camera_pos_z", &GenericFunctions::luaCamPosZ);
-	lua.set_function("camera_look_x", &GenericFunctions::luaCamLookX);
-	lua.set_function("camera_look_y", &GenericFunctions::luaCamLookY);
-	lua.set_function("camera_look_z", &GenericFunctions::luaCamLookZ);
+	lua.set_function("window_width", get_window_width);
+	lua.set_function("window_height", get_window_height);
+	lua.set_function("random_generator", get_random);
+	lua.set_function("current_time", get_time);
+	lua.set_function("save_game", setIfSave);
+	lua.set_function("load_game", setIfLoad);
+	lua.set_function("time_since_last_save", timeAtLastSave);
+	lua.set_function("time_since_last_load", timeAtLastLoad);
+	lua.set_function("set_pause_game", setIfPaused);
+	lua.set_function("get_pause_game", getIfPaused);
+	lua.set_function("exit_game", exitEngine);
+	lua.set_function("set_help_menu", setifHelpMenuActive);
+	lua.set_function("get_help_menu", getIfHelpMenuActive);
+	lua.set_function("set_credits", set_if_credits_active);
+	lua.set_function("get_credits", get_if_credits_active);
+	lua.set_function("camera_pos_x", luaCamPosX);
+	lua.set_function("camera_pos_y", luaCamPosY);
+	lua.set_function("camera_pos_z", luaCamPosZ);
+	lua.set_function("camera_look_x", luaCamLookX);
+	lua.set_function("camera_look_y", luaCamLookY);
+	lua.set_function("camera_look_z", luaCamLookZ);
 
-	lua.set_function("create_network_manager",
-	                 &GenericFunctions::createNetworkManager);
-	lua.set_function("exit_network_menu",
-	                 &GenericFunctions::setNetworkMenuActive);
-	lua.set_function("get_network_menu",
-	                 &GenericFunctions::getNetworkMenuActive);
-	lua.set_function("start_server", &GenericFunctions::startNetworkServer);
-	lua.set_function("network_client_name",
-	                 &GenericFunctions::networkClientName);
-	lua.set_function("network_client_connect",
-	                 &GenericFunctions::networkClientConnect);
-	lua.set_function("network_terminate", &GenericFunctions::networkEnd);
-	lua.set_function("network_connection_status",
-	                 &GenericFunctions::networkConnectionStatus);
-	lua.set_function("network_retain_IP", &GenericFunctions::networkRetainIP);
+	lua.set_function("create_network_manager", createNetworkManager);
+	lua.set_function("exit_network_menu", setNetworkMenuActive);
+	lua.set_function("get_network_menu", getNetworkMenuActive);
+	lua.set_function("start_server", startNetworkServer);
+	lua.set_function("network_client_connect", networkClientConnect);
+	lua.set_function("network_terminate", networkEnd);
+	lua.set_function("network_connection_status", networkConnectionStatus);
+	lua.set_function("network_retain_IP", networkRetainIP);
+	lua.set_function("network_return_IP", networkReturnRetainedIP);
 
-	lua.set_function("set_last_shot", &GenericFunctions::setLastShot);
-	lua.set_function("set_shot_delay", &GenericFunctions::setShotDelay);
-	lua.set_function("set_if_should_shoot",
-	                 &GenericFunctions::setIfShouldShoot);
-	lua.set_function("get_if_should_shoot",
-	                 &GenericFunctions::getIfShouldShoot);
-	lua.set_function("get_y_coord_on_floor", &GenericFunctions::getHeight);
+	lua.set_function("set_last_shot", setLastShot);
+	lua.set_function("set_shot_delay", setShotDelay);
+	lua.set_function("set_if_should_shoot", setIfShouldShoot);
+	lua.set_function("get_if_should_shoot", getIfShouldShoot);
+	lua.set_function("get_y_coord_on_floor", getHeight);
+}
+
+int GenericFunctions::get_window_width() {
+	return ReflexEngine::get_instance().window_.GetBufferWidth();
+}
+
+int GenericFunctions::get_window_height() {
+	return ReflexEngine::get_instance().window_.GetBufferHeight();
 }
 
 int GenericFunctions::get_random(int min, int max) {
@@ -138,6 +143,10 @@ void GenericFunctions::exitEngine() {
 void GenericFunctions::setifHelpMenuActive(bool val) { helpMenu = val; }
 
 bool GenericFunctions::getIfHelpMenuActive() { return helpMenu; }
+
+void GenericFunctions::set_if_credits_active(bool val) { credits = val; }
+
+bool GenericFunctions::get_if_credits_active() { return credits; }
 
 float GenericFunctions::luaCamPosX() {
 	return ReflexEngine::get_instance().camera_.get_position().x;
@@ -210,11 +219,7 @@ void GenericFunctions::startNetworkServer(bool active) {
 	}
 }
 
-void GenericFunctions::networkClientName(std::string userName) {
-	network.ChangeName(userName);
-}
-
-void GenericFunctions::networkClientConnect(std::string serverIP) {
+void GenericFunctions::networkClientConnect() {
 	char* serverIPChar;
 	strcpy(serverIPChar, currentIPAddress.c_str());
 	printf("This Runs\n");
@@ -251,4 +256,8 @@ void GenericFunctions::networkRetainIP(std::string savedIP) {
 	if (savedIP != "") {
 		currentIPAddress = savedIP;
 	}
+}
+
+std::string GenericFunctions::networkReturnRetainedIP() {
+	return (currentIPAddress);
 }

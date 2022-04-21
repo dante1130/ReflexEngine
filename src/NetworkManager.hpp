@@ -13,24 +13,27 @@
 #define MAX_CLIENTS 6
 #define SERVER_PORT 60000
 
-//TODO: adjust so can be written for the game asset factory
-//      Maybe has it so that all of this (minus GetPacketIdentifier and HandleMessage) can be accessed from Lua?
-//      So that anything gui-related written in Lua can easily access the NetworkManager. 
 class networkManager {
 private:
+	/// The message that was received (UNUSED AS OF NOW)
 	char message[512];
 
+	///	Name given to the client/server
 	char name[256];
 
-	char str1[512];
-
+    /// Is the current instance a server?
 	bool isServer;
 
+    /// Have we connected to a server? Is there a connection to a client?
     bool connected;
 
-    
+    /// Have we initialsed the networkManager?
+    bool init;
+
+    /// The general connection information provided by RakNet. Used for initialisation, sending and receiving data.
 	RakNet::RakPeerInterface *peer;
 
+    /// The packet of information sent/received by RakNet.
 	RakNet::Packet *packet;
 
 public:

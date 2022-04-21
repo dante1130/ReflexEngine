@@ -7,15 +7,13 @@ if get_network_menu() then
 	local initialise = gui_button("INITIALISE", 150, 50)
 	local start = gui_button("Start Server", 150, 50)
 	local ip = gui_luaInputText("Enter Server IP: ")
-	if ip ~= nil or ip ~='' or ip ~= '\0' then
-		fullIP = ip
+	if network_return_IP() ~= nil then
+		fullIP = network_return_IP()
 	else
 		fullIP = ""
 	end
 	gui_text(fullIP)
-	local name = gui_luaInputText("Name: ")
-	local connect = gui_button("Connect to server", 150, 50)
-	local connectLocal = gui_button("Connect to local server (if on same PC)", 200, 50)
+	local connect = gui_button("Connect to server (127.0.0.1 if on same PC)", 300, 50)
 	
 	local back = gui_button("Exit Menu",150,50)
 	
@@ -30,11 +28,7 @@ if get_network_menu() then
 	end
 
 	if connect then
-		network_client_connect(fullIP)
-	end
-	
-	if connectLocal then
-		network_client_connect("127.0.0.1")
+		network_client_connect()
 	end
 	
 	if network_connection_status() == true then
