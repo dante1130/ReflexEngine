@@ -13,8 +13,8 @@ GameObject* GameAssetFactory::create(std::string fileName) {
 		return loadWater(fileName);
 	} else if (type == "Player") {
 		return load_player(fileName);
-	} else if (type == "NPC") {
-		// return GameObjectLoader::npc(fileName);
+	} else if (type == "TerrainObject") {
+		return loadTerrainObject(fileName);
 	} else if (type == "Body") {
 		return loadBody(fileName);
 	} else if (type == "PhysicsObject") {
@@ -360,4 +360,33 @@ ScriptableObject* GameAssetFactory::loadScriptableObject(
 	so->angle = angle;
 
 	return so;
+}
+
+TerrainObject* GameAssetFactory::loadTerrainObject(std::string luaScript) {
+	sol::state& lua = LuaManager::get_instance().get_state();
+	lua.script_file(luaScript);
+
+	glm::vec3 pos, scale, rotation;
+	float angle;
+
+	pos = loadBasePos(lua);
+	scale = loadBaseScale(lua);
+	rotation = loadBaseRotation(lua);
+	angle = loadBaseAngle(lua);
+
+	TexturedTerrain* tt = new TexturedTerrain();
+	tt->load_heightfield("textures/newheightmap.png");
+
+	TerrainObject* to = new TerrainObject();
+	/*
+	to->add_height_map(tt->get_height_map(), 241, 241, true);
+	to->add_texture("textures/sand.jpg");
+	to->add_texture("textures/grass.jpg");
+	to->add_texture("textures/rock.jpg");
+	to->add_texture("textures/snow.jpg");
+	to->add_detail_map("textures/water.png");
+	to->create_terrain(30, 9, 3, 241, glm::vec3(1.0f, 0.05f, 1.0f));
+	GenericFunctions::setPlayableArea(tt, 0.05);
+	*/
+	return to;
 }

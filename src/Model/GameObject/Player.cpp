@@ -7,7 +7,7 @@ void Player::update(float delta_time) {
 	lua.script_file(lua_script_);
 
 	position = rb.getPosition();
-	position.y = GenericFunctions::getHeight(position.x, position.z) + 0.2;
+	position.y = GenericFunctions::getHeight(position.x, position.z) + 0.5;
 	rb.set_position(position);
 
 	const auto& camera = ReflexEngine::get_instance().camera_;

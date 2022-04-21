@@ -38,8 +38,8 @@ void TerrainObject::add_detail_map(std::string fileName) {
 
 void TerrainObject::create_terrain(int chunckSize, int chunkDetail, int n,
                                    int heightSize, glm::vec3 scale) {
-	bttControl.CreateTerrain(chunckSize, chunkDetail, n);
 	bttControl.set_scale(scale);
+	bttControl.CreateTerrain(chunckSize, chunkDetail, n);
 }
 
 uint8_t* TerrainObject::get_height_map() { return mtc.get_height_map(); }

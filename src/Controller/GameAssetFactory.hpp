@@ -11,6 +11,8 @@
 #include "Model/GameObject/Player.hpp"
 #include "Model/GameObject/PhysicsObject.hpp"
 #include "Model/GameObject/ScriptableObject.hpp"
+#include "Model/GameObject/TerrainObject.hpp"
+#include "TexturedTerrain.hpp"
 
 /**
  * @class GameAssetFactory
@@ -194,4 +196,6 @@ private:
 	 * @post	scriptable object object stored
 	 */
 	static ScriptableObject* loadScriptableObject(std::string luaScript);
+
+	static TerrainObject* loadTerrainObject(std::string luaScript);
 };

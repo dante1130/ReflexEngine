@@ -6,6 +6,7 @@
 #include <time.h>
 #include <random>
 #include "Controller/ReflexEngine/Camera.hpp"
+#include "TexturedTerrain.hpp"
 
 namespace GenericFunctions {
 /**
@@ -225,7 +226,8 @@ void setIfShouldShoot(bool val);
  */
 bool getIfShouldShoot();
 
-void setPlayableArea(uint8_t* floor, int size, float yscale);
+void setPlayableArea(uint8_t* heightmap, TexturedTerrain* tt, float scale,
+                     int size);
 
 float getHeight(float x, float z);
 /**

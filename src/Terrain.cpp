@@ -27,7 +27,7 @@ bool Terrain::gen_faultformation(int iterations, size_t size, int min_height,
 		return false;
 	}
 
-	//srand(time(nullptr));
+	// srand(time(nullptr));
 
 	width_ = size;
 	length_ = size;
@@ -93,9 +93,9 @@ float Terrain::get_height_world(float x, float z) const {
 	int grid_x = static_cast<int>(norm_x / grid_square_size);
 	int grid_z = static_cast<int>(norm_z / grid_square_size);
 
-	if (!is_in_bounds(grid_x, grid_z)) {
-		return 0.0f;
-	}
+	// if (!is_in_bounds(grid_x, grid_z)) {
+	//	return 0.0f;
+	// }
 
 	// Gets the coordinates in the grid
 	float coord_x = std::fmod(norm_x, grid_square_size) / grid_square_size;
@@ -115,6 +115,7 @@ float Terrain::get_height_world(float x, float z) const {
 	// Get the final height
 	float height = height_1_2 + (height_3_4 - height_1_2) * coord_z;
 
+	std::cout << height * scale_.y << " : " << scale_.y << std::endl;
 	return height * scale_.y;
 }
 
