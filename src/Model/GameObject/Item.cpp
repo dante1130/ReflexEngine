@@ -12,6 +12,7 @@ void Item::add_draw_call() {
 	//
 	ReflexEngine::get_instance().renderer_.add_draw_call(draw_call);
 }
+//
 
 void Item::draw(std::shared_ptr<Shader> shader) {
 	auto default_shader = ReflexEngine::get_instance().renderer_.get_shader();

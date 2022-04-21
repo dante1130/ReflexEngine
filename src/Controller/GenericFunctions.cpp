@@ -83,7 +83,7 @@ void GenericFunctions::lua_access() {
 	lua.set_function("get_if_should_shoot", getIfShouldShoot);
 	lua.set_function("get_y_coord_on_floor", getHeight);
 }
-
+//
 int GenericFunctions::get_window_width() {
 	return ReflexEngine::get_instance().window_.GetBufferWidth();
 }
