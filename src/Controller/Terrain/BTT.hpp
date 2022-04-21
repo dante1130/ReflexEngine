@@ -34,21 +34,11 @@ public:
 
 	const std::vector<glm::vec3>& getIndices(const int level);
 
-	const GLuint* getIndicesCoverted(const int level);
-
 	const GLuint getIndexSize();
-
-	Node* getRoot();
 
 	unsigned int getLOD();
 
 	void destroyTree();
-
-	void setAdjacentTriangles(Btt** left, Btt** right);  // x
-
-	void setLeftTriangle(Btt* left);  // x
-
-	void setRightTriangle(Btt* right);  // x
 
 	const std::vector<glm::vec3>& getCurrentIndices();
 
@@ -59,10 +49,6 @@ public:
 private:
 	Node* createNode(const unsigned int& lod, const glm::vec3& data);
 
-	// Node* createLeft(Node* parent, GLuint midpoint);
-
-	// Node* createRight(Node* parent, GLuint midpoint);
-
 	void copyTree(Node*& nodeCopy, Node* node);
 
 	void Insert(Node* node);
@@ -72,8 +58,6 @@ private:
 	void destroyTree(Node* node);
 
 	GLuint findMid(unsigned int p1, unsigned int p2);
-
-	const GLuint* convertInt(const std::vector<glm::vec3>& temp);
 
 	void addToLeft(Node* node, const int& i);
 
@@ -95,5 +79,4 @@ private:
 	unsigned int currentLod;
 	unsigned int depth;  // stores depth
 	bool isFlipped;
-	GLuint sizeOfIndexArray;
 };

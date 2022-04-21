@@ -8,7 +8,6 @@ Btt::Btt()  /// Default constructor
 	isFlipped = false;
 	depth = 0;
 	currentLod = 0;
-	sizeOfIndexArray = 0;
 }
 
 Btt::~Btt() { destroyTree(); }
@@ -33,7 +32,6 @@ Btt::Btt(const Btt& treeCopy) {
 	this->depth = treeCopy.depth;
 	this->currentLod = treeCopy.currentLod;
 	this->isFlipped = treeCopy.isFlipped;
-	this->sizeOfIndexArray = treeCopy.sizeOfIndexArray;
 	this->leftSideTriangles = treeCopy.leftSideTriangles;
 	this->rightSideTriangles = treeCopy.rightSideTriangles;
 
@@ -66,23 +64,6 @@ void Btt::copyTree(Node*& nodeCopy, Node* node) {
 	}
 }
 
-void Btt::setAdjacentTriangles(Btt** left, Btt** right) {
-	// std::cout << "left: " << left->lod << " right: " << right->lod <<
-	// std::endl;
-	leftTriangle = *left;
-	rightTriangle = *right;
-}
-
-void Btt::setLeftTriangle(Btt* left) {
-	leftTriangle = left;
-	std::cout << " Left: " << leftTriangle->currentLod << std::endl;
-}
-
-void Btt::setRightTriangle(Btt* right) {
-	rightTriangle = right;
-	std::cout << " Right: " << rightTriangle->currentLod << std::endl;
-}
-
 void Btt::Insert(const glm::vec3& temp, unsigned int size, bool isFlip) {
 	if (size < 1) return;
 	if (bttNode != nullptr) return;
@@ -99,31 +80,6 @@ void Btt::Insert(const glm::vec3& temp, unsigned int size, bool isFlip) {
 		Insert(bttNode);
 	}
 }
-
-void Btt::Insert(unsigned int size, bool isFlip) {
-	if (size < 1) return;
-	if (bttNode != nullptr) return;
-
-	isFlipped = isFlip;
-	bttNode = new Node();
-	// Order: Origin (point opposite hypotenus), Left, Right
-	if (!isFlipped)
-		bttNode->point = glm::vec3((size * (size - 1)), 0, (size * size) - 1);
-	else
-		bttNode->point = glm::vec3(size - 1, (size * size) - 1, 0);
-
-	depth = size;
-	bttNode->lod = 1;
-
-	std::cout << "Size: " << depth << std::endl;
-
-	if (bttNode->lod < depth) {
-		Insert(bttNode);
-	}
-	std::cout << "PASSED" << std::endl;
-}
-
-Node* Btt::getRoot() { return bttNode; }
 
 unsigned int Btt::getLOD() { return currentLod; }
 
@@ -152,30 +108,15 @@ Node* Btt::createNode(const unsigned int& lod, const glm::vec3& data) {
 	return temp;
 }
 
-const GLuint Btt::getIndexSize() { return sizeOfIndexArray; }
-
-const GLuint* Btt::convertInt(const std::vector<glm::vec3>& temp) {
-	GLuint size = getIndexSize() * GLuint(3);
-	GLuint* buffer{new GLuint[size]{}};
-	for (int i = 0; i < temp.size(); ++i) {
-		for (int j = 0; j < 3; ++j) {
-			buffer[(3 * i) + j] = temp.at(i)[j];
-		}
-	}
-	return buffer;
-}
-
-const GLuint* Btt::getIndicesCoverted(const int level) {
-	return convertInt(getIndices(level));
-}
+const GLuint Btt::getIndexSize() { return currentIndices.size(); }
 
 const std::vector<glm::vec3>& Btt::getCurrentIndices() {
 	return currentIndices;
 }
 const std::vector<glm::vec3>& Btt::getIndices(const int level) {
 	currentIndices.clear();
-	//  leftSideTriangles.clear();
-	//  rightSideTriangles.clear();
+	leftSideTriangles.clear();
+	rightSideTriangles.clear();
 
 	currentLod = level;
 	if (level > depth) {
@@ -192,7 +133,6 @@ const std::vector<glm::vec3>& Btt::getIndices(const int level) {
 		getIndices(bttNode, level);
 	}
 
-	sizeOfIndexArray = currentIndices.size();
 	return currentIndices;
 }
 
@@ -215,8 +155,6 @@ void Btt::addRight() {
 }
 
 const void Btt::getIndices(Node* node, int level) {
-	// std::cout << "NODE VALUE:  " << node->lod << "  LEVEL: " << level <<
-	// std::endl;
 
 	if ((node->lod + 1) < level) {
 		getIndices(node->left, level);
