@@ -207,7 +207,7 @@ void GenericFunctions::startNetworkServer(bool active) {
 }
 
 void GenericFunctions::networkClientConnect() {
-	char* serverIPChar;
+	char serverIPChar[30];
 	strcpy(serverIPChar, currentIPAddress.c_str());
 	printf("This Runs\n");
 	printf("%s\n", currentIPAddress.c_str());
