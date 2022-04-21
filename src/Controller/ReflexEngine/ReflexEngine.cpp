@@ -17,7 +17,6 @@ void ReflexEngine::run() {
 	engine.camera_ = Camera(glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 0.0f),
 	                        -90.0f, 0.0f, 5.0f, 0.2f);
 
-
 	engine.renderer_.init();
 
 	gui::init(ReflexEngine::get_instance().window_.get_window(),
@@ -28,6 +27,9 @@ void ReflexEngine::run() {
 	engine.scenes_.top()->init();
 
 	auto& input_manager = InputManager::get_instance();
+
+	glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
+	                 GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
 	while (!engine.window_.IsShouldClose()) {
 		engine.update_delta_time();
