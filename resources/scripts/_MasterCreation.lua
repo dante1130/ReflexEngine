@@ -25,7 +25,14 @@ addGameObject("scripts/player.lua");
 addGameObject("scripts/networkMenuSetup.lua")
 addGameObject("scripts/gunSetup.lua")
 
---addGameObject("scripts/Human.lua")
+for i = 1, 25, 1 do
+	addGameObject("scripts/Human.lua")
+end
+
+for i = 1, 50, 1 do
+	addGameObject("scripts/Ghost.lua")
+end
+
 addGameObject("scripts/Arrow.lua")
 addGameObject("scripts/Bow.lua")
 addGameObject("scripts/Boat.lua")

@@ -3,7 +3,6 @@
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 #include "Controller/Input/InputManager.hpp"
 #include "TestScene.hpp"
-#include "Model/GameObject/TerrainObject.hpp"
 
 TestScene::TestScene() {}
 

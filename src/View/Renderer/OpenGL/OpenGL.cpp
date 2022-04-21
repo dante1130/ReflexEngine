@@ -1,12 +1,6 @@
 #include "OpenGL.hpp"
 
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
-#include "TexturedTerrain.hpp"
-#include "BttController.hpp"
-#include "Controller/multiTextureCreator.hpp"
-
-TexturedTerrain tt;
-multiTextureCreator mtc;
 
 void OpenGL::init() {
 	auto& engine = ReflexEngine::get_instance();
@@ -50,39 +44,6 @@ void OpenGL::init() {
 	    "textures/skyboxes/cupertin-lake/cupertin-lake_ft.tga");
 
 	skybox_ = Skybox(skyboxFaces);
-
-	/*
-	terrain.set_scale(glm::vec3(0.5f, 0.25f, 0.5f));
-	terrain.load_heightfield("textures/heightmap.png");
-	terrain.load_texture("textures/dirt.png");
-	terrain.load_detailmap("textures/water.png");
-	terrain.load_mesh();
-	*/
-	/*
-	bttControl.load_texture("textures/dirt.png");
-	bttControl.load_detailmap("textures/water.png");
-	bttControl.gen_faultformation(64, 241, 0, 255, 0.5);
-	bttControl.set_scale(glm::vec3(1.0f, 0.6f, 1.0f));
-	bttControl.set_height_map_size(241 / 2);
-	bttControl.CreateTerrain(30, 9, 3);
-	*/
-
-	tt = TexturedTerrain();
-	tt.set_scale(glm::vec3(1, 0.3, 1));
-	tt.load_heightfield("textures/newheightmap.png");
-	tt.load_detailmap("textures/grass.jpg");
-	tt.load_mesh();
-
-	multiTextureCreator mtc;
-	mtc.set_texture("textures/sand.jpg");
-	mtc.set_texture("textures/grass.jpg");
-	mtc.set_texture("textures/rock.jpg");
-	mtc.set_texture("textures/snow.jpg");
-	mtc.set_height_map(tt.get_height_map(), 241, 241, true);
-	mtc.create_multi_texture();
-
-	tt.set_texture(mtc.get_multi_texture());
-	// tt.load_texture("textures/water.png");
 }
 
 void OpenGL::draw() {
@@ -99,8 +60,6 @@ void OpenGL::render_scene(std::shared_ptr<Shader> shader) {
 	for (const auto& draw_call : draw_calls_) {
 		draw_call(shader);
 	}
-
-	// tt.render(shader);
 }
 
 void OpenGL::render_pass() {

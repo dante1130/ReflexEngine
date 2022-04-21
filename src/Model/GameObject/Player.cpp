@@ -21,6 +21,8 @@ void Player::update(float delta_time) {
 }
 
 void Player::init() {
+	position.y = 10;
+
 	flashlight_ =
 	    SpotLight(1024, 1024, 0.01f, 100.0f, glm::vec3(1.0f, 1.0f, 1.0f), 0.0f,
 	              2.0f, glm::vec3(0.0f, 0.0f, 0.0f),

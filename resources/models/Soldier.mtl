@@ -1,13 +1,5 @@
-# Blender MTL File: 'Soldier.blend'
-# Material Count: 5
-
-newmtl None
-Ns 500
-Ka 0.8 0.8 0.8
-Kd 0.8 0.8 0.8
-Ks 0.8 0.8 0.8
-d 1
-illum 2
+# Blender 3.1.0 MTL File: 'Soldier.blend'
+# www.blender.org
 
 newmtl T1
 Ns 0.000000
@@ -18,9 +10,9 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 3
-map_Bump -bm 0.200000 -o 0.000000 -1.000000 0.000000 D:\\For Turbo Squid Sell\\Soldier\\source\\tex\\Tex_0013_7.PNG
-map_Kd -o 0.000000 -1.000000 0.000000 D:\\For Turbo Squid Sell\\Soldier\\textures\\Veriation\\Lower.png
-map_d -o 0.000000 -1.000000 0.000000 D:\\For Turbo Squid Sell\\Soldier\\source\\Tex_0013_1.PNG
+map_Kd  -s 0 -1 0 ..\textures\Veriation\Lower.png
+map_d  -s 0 -1 0 Tex_0013_1.PNG
+map_Bump  -s 0 -1 0 -bm 0.200000 Tex_0013_7.PNG
 
 newmtl T2
 Ns 0.000000
@@ -31,9 +23,9 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 3
-map_Bump -bm 0.200000 -o 0.000000 -1.000000 0.000000 D:\\For Turbo Squid Sell\\Soldier\\source\\tex\\Tex_0011_7.PNG
-map_Kd -o 0.000000 -1.000000 0.000000 D:\\For Turbo Squid Sell\\Soldier\\textures\\Veriation\\Body.png
-map_d -o 0.000000 -1.000000 0.000000 D:\\For Turbo Squid Sell\\Soldier\\source\\Tex_0011_1.PNG
+map_Kd  -s 0 -1 0 ..\textures\Veriation\Body.png
+map_d  -s 0 -1 0 Tex_0011_1.PNG
+map_Bump  -s 0 -1 0 -bm 0.200000 Tex_0011_7.PNG
 
 newmtl T3
 Ns 0.000000
@@ -44,8 +36,8 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 3
-map_Kd -o 0.000000 -1.000000 0.000000 D:\\For Turbo Squid Sell\\Soldier\\source\\Tex_0010_1.PNG
-map_d -o 0.000000 -1.000000 0.000000 D:\\For Turbo Squid Sell\\Soldier\\source\\Tex_0010_1.PNG
+map_Kd  -s 0 -1 0 Tex_0010_1.PNG
+map_d  -s 0 -1 0 Tex_0010_1.PNG
 
 newmtl T4
 Ns 0.000000
@@ -56,6 +48,6 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 3
-map_Bump -bm 0.200000 -o 0.000000 -1.000000 0.000000 D:\\For Turbo Squid Sell\\Soldier\\textures\\Tex_0008_7.PNG
-map_Kd -o 0.000000 -1.000000 0.000000 D:\\For Turbo Squid Sell\\Soldier\\textures\\Veriation\\Head.png
-map_d -o 0.000000 -1.000000 0.000000 D:\\For Turbo Squid Sell\\Soldier\\textures\\Tex_0008_1.PNG
+map_Kd  -s 0 -1 0 ..\textures\Veriation\Head.png
+map_d  -s 0 -1 0 ..\textures\Tex_0008_1.PNG
+map_Bump  -s 0 -1 0 -bm 0.200000 ..\textures\Tex_0008_7.PNG

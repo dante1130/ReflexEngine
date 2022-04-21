@@ -141,7 +141,7 @@ void PhysicsObject::save_object() {
 
 	for (int count = 0; count < rb.getNumberOfColliders(); count++) {
 		int type = rb.getColliderType(count);
-		ObjectSaving::createStruct("collider" + std::to_string(count));
+		ObjectSaving::createStruct("collider" + std::to_string(count + 1));
 		saveCollider(count, type);
 		ObjectSaving::closeStruct();
 	}
