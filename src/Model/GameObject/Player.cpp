@@ -9,15 +9,7 @@ void Player::update(float delta_time) {
 	position = rb.getPosition();
 	position.y = GenericFunctions::getHeight(position.x, position.z) + 0.2;
 	rb.set_position(position);
-  
-void Player::init() {
-	flashlight_ =
-	    SpotLight(1024, 1024, 0.01f, 100.0f, glm::vec3(1.0f, 1.0f, 1.0f), 0.0f,
-	              2.0f, glm::vec3(0.0f, 0.0f, 0.0f),
-	              glm::vec3(0.0f, -1.0f, 0.0f), 1.0f, 0.0f, 0.0f, 20.0f);
-}
 
-void Player::update(float delta_time) {
 	const auto& camera = ReflexEngine::get_instance().camera_;
 
 	glm::vec3 lower_light = camera.get_position();
@@ -26,6 +18,13 @@ void Player::update(float delta_time) {
 	glm::vec3 cam_direction = camera.get_direction();
 
 	flashlight_.SetFlash(lower_light, cam_direction);
+}
+
+void Player::init() {
+	flashlight_ =
+	    SpotLight(1024, 1024, 0.01f, 100.0f, glm::vec3(1.0f, 1.0f, 1.0f), 0.0f,
+	              2.0f, glm::vec3(0.0f, 0.0f, 0.0f),
+	              glm::vec3(0.0f, -1.0f, 0.0f), 1.0f, 0.0f, 0.0f, 20.0f);
 }
 
 void Player::fixed_update(float delta_time) {
