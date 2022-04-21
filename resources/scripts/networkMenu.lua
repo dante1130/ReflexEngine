@@ -20,7 +20,7 @@ if get_network_menu() then
 	network_retain_IP(ip)
 	
 	if initialise then
-		create_network_manager()
+		create_network_manager(true)
 	end
 	
 	if start then
