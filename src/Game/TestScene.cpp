@@ -3,6 +3,9 @@
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 #include "Controller/Input/InputManager.hpp"
 #include "TestScene.hpp"
+#include "Model/GameObject/TerrainObject.hpp"
+#include "TexturedTerrain.hpp"
+#include "Controller/multiTextureCreator.hpp"
 
 TestScene::TestScene() {}
 
@@ -18,6 +21,26 @@ void TestScene::init() {
 	lua.set_function("addGameObject", &TestScene::addGameObject, this);
 	lua.script_file("scripts/_MasterCreation.lua");
 
+	TexturedTerrain* tt = new TexturedTerrain();
+	tt->load_heightfield("textures/newheightmap.png");
+
+	std::shared_ptr<TerrainObject> to = std::make_shared<TerrainObject>();
+	to->add_height_map(tt->get_height_map(), 241, 241, true);
+	to->add_texture("textures/sand.jpg");
+	to->add_texture("textures/grass.jpg");
+	to->add_texture("textures/rock.jpg");
+	to->add_texture("textures/snow.jpg");
+	to->add_detail_map("textures/water.png");
+	to->create_terrain(30, 9, 3, 241, glm::vec3(1.0f, 0.05f, 1.0f));
+	GenericFunctions::setPlayableArea(to->get_height_map(), 241, 0.05);
+
+	game_objects_.emplace_back(to);
+
+	// to->add_height_map(tt.get_height_map(), 257, 257, true);
+	// to->create_multi_texture(30, 9, 3, 241);
+	// to->add_detail_map("textures/water.png");
+	// game_objects_.emplace_back(to);
+
 	InputManager::get_instance().load_lua_bindings("scripts/controls.lua");
 }
 
@@ -28,6 +51,8 @@ void addGameObjectDuringRun(std::string luaScript) {
 }
 
 void TestScene::addGameObject(std::string luaScript) {
+	GameAssetFactory gaf;
+
 	if (glfwGetTime() > (double)0.5) {
 		addGameObjectDuringRun(luaScript);
 	} else {
@@ -137,7 +162,7 @@ void TestScene::loadSavedGameObjects() {
 void TestScene::garbage_collection() {
 	int size = game_objects_.size();
 	for (int count = 0; count < size; count++) {
-		if (game_objects_[count]->position.y < -100) {
+		if (game_objects_[count]->position.y < -5000) {
 			game_objects_.erase(game_objects_.begin() + count);
 			size--;
 			count--;
@@ -146,6 +171,7 @@ void TestScene::garbage_collection() {
 }
 
 void TestScene::add_new_game_objects() {
+	GameAssetFactory gaf;
 	for (int count = 0; count < to_add.size(); count++) {
 		std::cout << "Adding during runtime = " << to_add[count] << std::endl;
 		game_objects_.emplace_back(GameAssetFactory::create(to_add[count]));

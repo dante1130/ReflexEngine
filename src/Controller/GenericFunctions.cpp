@@ -19,6 +19,10 @@ std::string message;
 std::string currentIPAddress;
 float lastShot = 0;
 float shot_delay = 0;
+uint8_t* m_playable_floor;  // this is set by a terrain class, so it will deal
+                            // with memory management
+int m_playable_floor_size;
+float m_playable_floor_y_scale;
 
 void GenericFunctions::init_random(int seed, bool useSeed) {
 	m_useSeed = useSeed;
@@ -69,6 +73,7 @@ void GenericFunctions::lua_access() {
 	                 &GenericFunctions::setIfShouldShoot);
 	lua.set_function("get_if_should_shoot",
 	                 &GenericFunctions::getIfShouldShoot);
+	lua.set_function("get_y_coord_on_floor", &GenericFunctions::getHeight);
 }
 
 int GenericFunctions::get_random(int min, int max) {
@@ -135,10 +140,6 @@ float GenericFunctions::luaCamPosZ() {
 }
 
 float GenericFunctions::luaCamLookX() {
-	std::cout << ReflexEngine::get_instance().camera_.get_direction().x << " : "
-	          << ReflexEngine::get_instance().camera_.get_direction().y << " : "
-	          << ReflexEngine::get_instance().camera_.get_direction().z
-	          << std::endl;
 	return ReflexEngine::get_instance().camera_.get_direction().x;
 }
 float GenericFunctions::luaCamLookY() {
@@ -158,6 +159,17 @@ void GenericFunctions::setIfShouldShoot(bool val) {
 	}
 }
 bool GenericFunctions::getIfShouldShoot() { return shouldShoot; }
+
+void GenericFunctions::setPlayableArea(uint8_t* floor, int size, float yscale) {
+	m_playable_floor = floor;
+	m_playable_floor_size = size;
+	m_playable_floor_y_scale = yscale;
+}
+
+float GenericFunctions::getHeight(float x, float z) {
+	return (m_playable_floor[(int)x * m_playable_floor_size + (int)z]) *
+	       m_playable_floor_y_scale;
+}
 
 void GenericFunctions::createNetworkManager(bool create) { 
 	if (createNetwork != true) {

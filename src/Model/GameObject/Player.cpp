@@ -2,14 +2,14 @@
 
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 
-void Player::init() {
-	flashlight_ =
-	    SpotLight(1024, 1024, 0.01f, 100.0f, glm::vec3(1.0f, 1.0f, 1.0f), 0.0f,
-	              2.0f, glm::vec3(0.0f, 0.0f, 0.0f),
-	              glm::vec3(0.0f, -1.0f, 0.0f), 1.0f, 0.0f, 0.0f, 20.0f);
-}
-
 void Player::update(float delta_time) {
+	sol::state& lua = LuaManager::get_instance().get_state();
+	lua.script_file(lua_script_);
+
+	position = rb.getPosition();
+	position.y = GenericFunctions::getHeight(position.x, position.z) + 0.2;
+	rb.set_position(position);
+
 	const auto& camera = ReflexEngine::get_instance().camera_;
 
 	glm::vec3 lower_light = camera.get_position();
@@ -20,11 +20,15 @@ void Player::update(float delta_time) {
 	flashlight_.SetFlash(lower_light, cam_direction);
 }
 
+void Player::init() {
+	flashlight_ =
+	    SpotLight(1024, 1024, 0.01f, 100.0f, glm::vec3(1.0f, 1.0f, 1.0f), 0.0f,
+	              2.0f, glm::vec3(0.0f, 0.0f, 0.0f),
+	              glm::vec3(0.0f, -1.0f, 0.0f), 1.0f, 0.0f, 0.0f, 20.0f);
+}
+
 void Player::fixed_update(float delta_time) {
 	auto& camera = ReflexEngine::get_instance().camera_;
-	sol::state& lua = LuaManager::get_instance().get_state();
-
-	lua.script_file(lua_script_);
 
 	glm::vec3 direction = camera.get_move_direction();
 

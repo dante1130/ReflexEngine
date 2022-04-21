@@ -59,6 +59,8 @@ public:
 	 */
 	GLuint get_multi_texture();
 
+	uint8_t* get_height_map();
+
 private:
 	/// <summary>
 	/// Array of raw texture data

@@ -199,3 +199,5 @@ Terrain::~Terrain() {
 	stbi_image_free(heightmap_);
 	heightmap_ = nullptr;
 }
+
+void Terrain::set_height_map(uint8_t* map) { heightmap_ = map; }
