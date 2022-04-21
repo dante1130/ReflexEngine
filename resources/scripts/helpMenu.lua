@@ -1,6 +1,6 @@
 
 if get_help_menu() then
-	gui_setWindowSize(250, 270, 1)
+	gui_setWindowSize(250, 260, 1)
 	gui_setWindowPos(300, 0, 1)
 	gui_begin("Help Menu")
 	gui_text("Controls:")
@@ -8,7 +8,6 @@ if get_help_menu() then
 	gui_text(" - Help		: m")
 	gui_text(" - Exit		: x")
 	gui_text(" - Wireframe	: k")
-	gui_text(" - noclip		: z")
 	gui_text(" - Movement	: WASD")
 	gui_text(" - Look		: Mouse")
 	gui_text(" - Shoot		: Space")
