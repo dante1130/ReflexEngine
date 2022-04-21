@@ -39,7 +39,7 @@ if get_network_menu() then
 	
 	if back then
 		network_terminate()
-		exit_network_menu()
+		exit_network_menu(false)
 	end
 
 
