@@ -27,19 +27,13 @@ public:
 
 	void getCameraPosition(const glm::vec3& pos);
 
-	void AddHeightMap(std::vector<float> hmap);
-
-	void AddHeightMap(GLfloat* hmap);
-
 	void CreateTerrain(int chunkSize, int chunkDetail, int n);
 
-	void TestThings();
+	void checkTJunction();
 
 	void Update(glm::vec3 player);
 
 	void getAllIndices(glm::vec3 pos);
-
-	const std::vector<glm::vec2>& getCenters();
 
 	void set_height_map_size(float size);
 
@@ -62,13 +56,12 @@ public:
 	bool load_detailmap(const char* file_name);
 
 private:
+	
+	const std::vector<glm::vec2>& getCenters();
+
 	void GenerateVertices(int chunkSize, int chunkDetail);
 
 	const GLuint findLOD(glm::vec3 pos, glm::vec2 center);
-
-	GLuint* convertInt(const std::vector<glm::vec3>& temp);
-
-	GLfloat* convertFloat(const std::vector<glm::vec3>& temp);
 
 	std::vector<std::vector<Btt>> bttMap;  // all binary trees containing
 	                                       // indices
@@ -80,7 +73,7 @@ private:
 	std::vector<GLfloat> distances;
 
 	std::shared_ptr<Mesh> mesh_ = nullptr;
-	bool b = true;
+	bool firstRun;
 
 	glm::vec3 prev_pos;
 	GLuint current_total_indices;

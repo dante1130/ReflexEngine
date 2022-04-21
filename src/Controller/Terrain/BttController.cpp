@@ -7,6 +7,7 @@ BttController::BttController() {
 	current_total_indices = 0;
 	chunk_size = 0;
 	chunk_detail = 0;
+	firstRun = true;
 }
 
 BttController::~BttController() {
@@ -61,21 +62,13 @@ void BttController::CreateTerrain(int chunkSize, int chunkDetail, int n) {
 	chunk_size = chunkSize;
 	chunk_detail = chunkDetail;
 
-	/*
-	if (heightmap_ == nullptr) {
-	    std::cout << "No heightmap!" << std::endl;
-	    return;
-	}
-	*/
-
 	GenerateVertices(chunkSize, chunkDetail);
 
 	std::cout << "PASSED VERTICES GENEREATION" << std::endl;
 	GLuint nsize = (chunkSize - 1);
 	GLuint dsize = (chunkDetail - 1);
 	GLuint baseOrigin = (chunkDetail + ((dsize) * (nsize))) * dsize;
-	std::cout << "BASE: " << baseOrigin << " chunkDetail-1: " << chunkDetail - 1
-	          << " chunkSize: " << nsize << std::endl;
+
 	for (int i = 0; i < chunkSize; ++i) {
 		for (int j = 0; j < chunkSize; ++j) {
 			Btt temp_btt_sw = Btt();
@@ -101,19 +94,6 @@ void BttController::CreateTerrain(int chunkSize, int chunkDetail, int n) {
 			bttCenters.push_back(
 			    glm::vec2(((chunkDetail - 1) * i) + ((chunkDetail - 1) / 2),
 			              ((chunkDetail - 1) * j) + ((chunkDetail - 1) / 2)));
-
-			/*
-			std::cout << "BTT " << i << j << "|  offset: " << offset << "
-			center: x: " << bttCenters.at(int((i * chunkSize) + j)).x
-			<< " z: " << bttCenters.at((i * chunkSize) + j).y << std::endl;
-			std::cout << "Tri " << i << j << " | x : " << vector_temp_sw.x << "
-			y : " << vector_temp_sw.y
-			          << " z: " << vector_temp_sw.z << std::endl;
-			std::cout << "Tri " << i << j << " | x : " << vector_temp_ne.x
-			          << " y : " << vector_temp_ne.y << " z: " <<
-			vector_temp_ne.z
-			          << std::endl;
-			          */
 		}
 		// adds to the y-axis
 		bttMap.push_back(temp);
@@ -123,12 +103,12 @@ void BttController::CreateTerrain(int chunkSize, int chunkDetail, int n) {
 	std::cout << "\n\nPASSED INDICES GENEREATION\n\n" << std::endl;
 
 	for (int k = 0; k < (n * 2 + 1); ++k) {
-		distances.push_back(chunkDetail * 1.44 * (k + 1));
+		distances.push_back(chunkDetail * 2.5 * (k + 1));
 		std::cout << "Distance " << k << ": " << distances.at(k) << std::endl;
 	}
 }
 
-void BttController::TestThings() {
+void BttController::checkTJunction() {
 	bool canThing = false;
 
 	for (int i = 0; i < chunk_size; ++i) {
@@ -201,30 +181,6 @@ const GLuint BttController::findLOD(glm::vec3 pos, glm::vec2 center) {
 	return 1;
 }
 
-GLuint* BttController::convertInt(const std::vector<glm::vec3>& temp) {
-	GLuint size = temp.size() * GLuint(3);
-	GLuint* buffer{new GLuint[size]{}};
-	// std::cout << "INDEX COUNT:  " << temp.size() << std::endl;
-	for (int i = 0; i < temp.size(); ++i) {
-		for (int j = 0; j < 3; ++j) {
-			buffer[(3 * i) + j] = temp.at(i)[j];
-		}
-	}
-	return buffer;
-}
-
-GLfloat* BttController::convertFloat(const std::vector<glm::vec3>& temp) {
-	GLuint size = temp.size() * GLuint(3);
-	GLfloat* buffer{new GLfloat[size]{}};
-	// std::cout << "VERTEX COUNT:  " << temp.size() << std::endl;
-	for (int i = 0; i < temp.size(); ++i) {
-		for (int j = 0; j < 3; ++j) {
-			buffer[(3 * i) + j] = temp.at(i)[j];
-		}
-	}
-	return buffer;
-}
-
 const std::vector<glm::vec2>& BttController::getCenters() { return bttCenters; }
 
 void BttController::getAllIndices(glm::vec3 pos) {
@@ -282,26 +238,14 @@ void BttController::getAllIndices(glm::vec3 pos) {
 }
 
 void BttController::Update(glm::vec3 position) {
-	if (b) {
+	if (firstRun) {
 		position.x += 0.1;
-		b = false;
+		firstRun = false;
 	}
 
 	if (position.x != prev_pos.x || position.z != prev_pos.z) {
 		mesh_ = std::make_shared<Mesh>();
 		getAllIndices(position);
-		// std::cout << "CAM| x: " << position.x << " z: " << position.z
-		//           << std::endl;
-		/*
-		std::cout << "INDEX SIZE: " << indices.size() << std::endl;
-		for (int k = 0; k < indices.size(); ++k) {
-		    std::cout << "Index " << k << ": ";
-		    for(int i = 0; i < 3; ++i) {
-		        std::cout << indices[int((k * 3) + i)] << " ";
-		    }
-		    std::cout << std::endl;
-		}
-		*/
 		mesh_->CreateMesh(vertices.data(), indices.data(), vertices.size(),
 		                  indices.size());
 	}
@@ -310,17 +254,16 @@ void BttController::Update(glm::vec3 position) {
 
 void BttController::GenerateVertices(int chunkSize, int chunkDetail) {
 	int length = (chunkSize * chunkDetail) - (chunkSize - 1);
-	float y = 0.0f;
-	// heightmap_[(i * length) + j]
+
 	if (!heightmap_) {
-		std::cout << "YO MAMA" << std::endl;
+		std::cout << "No heightmap detected!" << std::endl;
 	}
 
 	try {
 		for (int i = 0; i < length; ++i) {
 			for (int j = 0; j < length; ++j) {
+				// vertices
 				vertices.push_back((GLfloat)i);
-				// heightmap_[(i * length) + j] = 0.0;
 				vertices.push_back((GLfloat)heightmap_[(j * length) + i]);
 				vertices.push_back((GLfloat)j);
 
