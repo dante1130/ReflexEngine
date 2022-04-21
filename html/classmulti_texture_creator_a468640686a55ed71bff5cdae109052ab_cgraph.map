@@ -1,0 +1,14 @@
+<map id="multiTextureCreator::create_multi_texture" name="multiTextureCreator::create_multi_texture">
+<area shape="rect" id="node1" title="creates the multi texture" alt="" coords="5,103,153,144"/>
+<area shape="rect" id="node2" href="$classmulti_texture_creator.html#a5768959c5ad0ccd6fe094265634281aa" title="Adds height lighting to a texture." alt="" coords="207,103,389,144"/>
+<area shape="rect" id="node3" href="$classmulti_texture_creator.html#a3ab32f52c3bfec8b1caa4dffea3ffc16" title="Gets height value at coordinate." alt="" coords="443,8,577,50"/>
+<area shape="rect" id="node5" href="$classmulti_texture_creator.html#a9d55cec9a35595579de29065e3d6b8ed" title="Adds slope lighting to a texture." alt="" coords="209,38,387,79"/>
+<area shape="rect" id="node6" href="$classmulti_texture_creator.html#ac5860cb5a2b9454dfaf31cbb1ec286d5" title="Generates super height map." alt="" coords="201,168,395,210"/>
+<area shape="rect" id="node12" href="$classmulti_texture_creator.html#ac380de3fafb4b3d4690a832d87012f59" title="Gets the range of height value based on number of textures." alt="" coords="231,234,365,275"/>
+<area shape="rect" id="node4" href="$classmulti_texture_creator.html#a92f04b2553083e43ba8247c35f6a5781" title="Returns an index value." alt="" coords="443,74,577,115"/>
+<area shape="rect" id="node7" href="$multi_texture_creator_8cpp.html#a8b3617caca63ad07390056cf582e27c8" title=" " alt="" coords="475,270,545,297"/>
+<area shape="rect" id="node8" href="$classmulti_texture_creator.html#a35c8df81c6439ccf39dc61d3952ff8c8" title="Interpolates a new height at point based on points on a plane." alt="" coords="443,322,577,363"/>
+<area shape="rect" id="node10" href="$classmulti_texture_creator.html#a92f6a3e7d7a1fa516bf955f176743931" title="Gets lower original value." alt="" coords="443,139,577,180"/>
+<area shape="rect" id="node11" href="$classmulti_texture_creator.html#ad12506093599c5d9d8ce377078bf8521" title="Gets upper original value." alt="" coords="443,204,577,246"/>
+<area shape="rect" id="node9" href="$classmulti_texture_creator.html#ab1abc1fd16e061b07684acdb4afb56a0" title="Gets original height map value." alt="" coords="625,322,807,363"/>
+</map>

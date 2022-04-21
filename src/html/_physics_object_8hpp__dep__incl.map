@@ -1,9 +1,0 @@
-<map id="Model/GameObject/PhysicsObject.hpp" name="Model/GameObject/PhysicsObject.hpp">
-<area shape="rect" id="node1" title=" " alt="" coords="267,5,453,47"/>
-<area shape="rect" id="node2" href="$_game_asset_factory_8hpp.html" title=" " alt="" coords="181,102,341,129"/>
-<area shape="rect" id="node7" href="$_physics_object_8cpp.html" title=" " alt="" coords="366,95,551,136"/>
-<area shape="rect" id="node3" href="$_test_scene_8hpp.html" title=" " alt="" coords="98,184,246,211"/>
-<area shape="rect" id="node6" href="$_game_asset_factory_8cpp.html" title=" " alt="" coords="271,184,431,211"/>
-<area shape="rect" id="node4" href="$_reflex_engine_8cpp.html" title=" " alt="" coords="5,259,163,300"/>
-<area shape="rect" id="node5" href="$_test_scene_8cpp.html" title=" " alt="" coords="187,266,335,293"/>
-</map>

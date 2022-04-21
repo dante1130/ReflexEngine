@@ -1,5 +1,0 @@
-<map id="Terrain" name="Terrain">
-<area shape="rect" id="node1" title=" " alt="" coords="53,5,235,391"/>
-<area shape="rect" id="node2" href="$class_brute_force_terrain.html" title="A terrain that uses uses the 8&#45;bit values of the heightmap to color and render the terrain." alt="" coords="5,468,131,560"/>
-<area shape="rect" id="node3" href="$class_textured_terrain.html" title="A terrain that uses a texture to render the terrain." alt="" coords="155,439,285,589"/>
-</map>

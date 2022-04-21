@@ -1,0 +1,6 @@
+<map id="GameAssetFactory::load_player" name="GameAssetFactory::load_player">
+<area shape="rect" id="node1" title="Loads in a player object from a lua script." alt="" coords="5,57,172,98"/>
+<area shape="rect" id="node2" href="$class_player.html#a350275a7155ddf4d962fa158622b6cb7" title="Initialize the game object." alt="" coords="245,5,329,32"/>
+<area shape="rect" id="node3" href="$class_player.html#af4a717b8ddc05b2e718635a26aba9f06" title="Set the collider radius." alt="" coords="220,57,353,98"/>
+<area shape="rect" id="node4" href="$class_player.html#aa85cf93e42f25fb2de1da748c62c4d13" title="Set the height." alt="" coords="223,123,350,149"/>
+</map>

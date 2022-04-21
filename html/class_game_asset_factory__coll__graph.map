@@ -1,0 +1,3 @@
+<map id="GameAssetFactory" name="GameAssetFactory">
+<area shape="rect" id="node1" title="A parameterized factory singleton for creating GameObjects." alt="" coords="5,5,145,244"/>
+</map>

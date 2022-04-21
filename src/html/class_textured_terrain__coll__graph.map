@@ -1,4 +1,0 @@
-<map id="TexturedTerrain" name="TexturedTerrain">
-<area shape="rect" id="node1" title="A terrain that uses a texture to render the terrain." alt="" coords="32,439,161,589"/>
-<area shape="rect" id="node2" href="$class_terrain.html" title=" " alt="" coords="5,5,188,391"/>
-</map>

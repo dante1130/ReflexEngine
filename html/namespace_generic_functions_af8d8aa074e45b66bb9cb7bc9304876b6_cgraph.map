@@ -1,0 +1,5 @@
+<map id="GenericFunctions::networkClientConnect" name="GenericFunctions::networkClientConnect">
+<area shape="rect" id="node1" title="Connects the client to a server." alt="" coords="5,23,183,65"/>
+<area shape="rect" id="node2" href="$classnetwork_manager.html#af2976479fbe0d04144c1b42091e9ecb4" title="Connects the client to the server. Returns true if connection was successful or false if connection w..." alt="" coords="231,5,437,32"/>
+<area shape="rect" id="node3" href="$classnetwork_manager.html#a4544b1d96842470e26914fb46a1f83b5" title="Initialises Network for client. Also handles client username." alt="" coords="238,56,430,83"/>
+</map>

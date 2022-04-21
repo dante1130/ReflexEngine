@@ -1,0 +1,11 @@
+<map id="Player" name="Player">
+<area shape="rect" id="node1" title="The player game object." alt="" coords="344,1183,495,1436"/>
+<area shape="rect" id="node2" href="$class_body_rigid.html" title=" " alt="" coords="207,852,410,1120"/>
+<area shape="rect" id="node3" href="$class_body.html" title=" " alt="" coords="5,565,183,775"/>
+<area shape="rect" id="node4" href="$class_game_object.html" title="An abstract class to represent a game object." alt="" coords="32,277,156,501"/>
+<area shape="rect" id="node5" href="$class_body_rigid_physics.html" title=" " alt="" coords="207,551,410,789"/>
+<area shape="rect" id="node6" href="$class_spot_light.html" title=" " alt="" coords="444,918,547,1054"/>
+<area shape="rect" id="node7" href="$class_point_light.html" title="A point light that illuminates in a sphere." alt="" coords="434,558,615,782"/>
+<area shape="rect" id="node8" href="$class_light.html" title="A light in the scene." alt="" coords="451,307,598,472"/>
+<area shape="rect" id="node9" href="$class_shadow_map.html" title="A shadow map." alt="" coords="451,5,598,215"/>
+</map>

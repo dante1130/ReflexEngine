@@ -1,0 +1,4 @@
+<map id="multiTextureCreator::set_height_map" name="multiTextureCreator::set_height_map">
+<area shape="rect" id="node1" title="Sets the height map and if it should be an island." alt="" coords="5,5,140,47"/>
+<area shape="rect" id="node2" href="$classmulti_texture_creator.html#ac874ea2caa5b0b4cac01889987d49a07" title="Lowers the height map sides to make it into an island." alt="" coords="188,5,323,47"/>
+</map>

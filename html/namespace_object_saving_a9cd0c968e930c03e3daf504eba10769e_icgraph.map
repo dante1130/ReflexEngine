@@ -1,0 +1,6 @@
+<map id="ObjectSaving::addValue" name="ObjectSaving::addValue">
+<area shape="rect" id="node1" title="Adds a value to the file." alt="" coords="205,78,365,105"/>
+<area shape="rect" id="node2" href="$class_terrain_object.html#a2604ade59191b836947b9d72e89012a2" title="Saves the object to lua file." alt="" coords="15,5,148,47"/>
+<area shape="rect" id="node3" href="$class_scriptable_object.html#a8ba1a27e44889133f1fc28f06d05236d" title="Saves the object to lau file." alt="" coords="5,71,157,112"/>
+<area shape="rect" id="node4" href="$class_item.html#a2fdc238e265165624bc8c355f853c66c" title="Saves the object to lau file." alt="" coords="20,137,143,163"/>
+</map>

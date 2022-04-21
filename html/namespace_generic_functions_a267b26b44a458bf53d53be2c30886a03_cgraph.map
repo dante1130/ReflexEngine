@@ -1,0 +1,4 @@
+<map id="GenericFunctions::startNetworkServer" name="GenericFunctions::startNetworkServer">
+<area shape="rect" id="node1" title="Starts up the network server." alt="" coords="5,5,211,47"/>
+<area shape="rect" id="node2" href="$classnetwork_manager.html#a25c6aa5fa882d884afa70dd3dca97c78" title="Initialises and begins a server session. Running on the network port number 60000...." alt="" coords="259,13,453,39"/>
+</map>

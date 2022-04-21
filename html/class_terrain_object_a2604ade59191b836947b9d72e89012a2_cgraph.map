@@ -1,0 +1,9 @@
+<map id="TerrainObject::save_object" name="TerrainObject::save_object">
+<area shape="rect" id="node1" title="Saves the object to lua file." alt="" coords="5,99,139,141"/>
+<area shape="rect" id="node2" href="$namespace_object_saving.html#a9cd0c968e930c03e3daf504eba10769e" title="Adds a value to the file." alt="" coords="195,5,355,32"/>
+<area shape="rect" id="node3" href="$namespace_object_saving.html#a9dadcc7281db5e569a16d86421c58422" title="Closes the file." alt="" coords="196,56,355,83"/>
+<area shape="rect" id="node4" href="$namespace_object_saving.html#a8bd80ab63cd87a02055d0e92dd28b372" title="Closes the struct in the file." alt="" coords="189,107,361,133"/>
+<area shape="rect" id="node5" href="$namespace_object_saving.html#a204c90bbce1cc99ceeba01b13582c064" title="Creates a struct in the file." alt="" coords="187,157,364,184"/>
+<area shape="rect" id="node6" href="$namespace_object_saving.html#a2f179e587ac90b3be88f1e4c24bc6a19" title="Opens a file to save data too." alt="" coords="198,208,353,235"/>
+<area shape="rect" id="node7" href="$_object_saving_8cpp.html#a187a31d4f2cf1ae2be7e5f34eee9700a" title=" " alt="" coords="412,208,545,235"/>
+</map>

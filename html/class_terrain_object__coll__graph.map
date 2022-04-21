@@ -1,0 +1,8 @@
+<map id="TerrainObject" name="TerrainObject">
+<area shape="rect" id="node1" title=" " alt="" coords="183,1092,325,1360"/>
+<area shape="rect" id="node2" href="$class_game_object.html" title="An abstract class to represent a game object." alt="" coords="5,644,129,868"/>
+<area shape="rect" id="node3" href="$classmulti_texture_creator.html" title=" " alt="" coords="153,519,355,993"/>
+<area shape="rect" id="node4" href="$structmulti_texture_file_data.html" title=" " alt="" coords="183,152,325,273"/>
+<area shape="rect" id="node5" href="$class_btt_controller.html" title=" " alt="" coords="379,483,531,1029"/>
+<area shape="rect" id="node6" href="$class_terrain.html" title=" " alt="" coords="364,5,547,420"/>
+</map>

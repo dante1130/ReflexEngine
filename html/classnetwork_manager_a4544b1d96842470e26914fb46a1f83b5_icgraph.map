@@ -1,0 +1,4 @@
+<map id="networkManager::SetupClient" name="networkManager::SetupClient">
+<area shape="rect" id="node1" title="Initialises Network for client. Also handles client username." alt="" coords="231,13,423,39"/>
+<area shape="rect" id="node2" href="$namespace_generic_functions.html#af8d8aa074e45b66bb9cb7bc9304876b6" title="Connects the client to a server." alt="" coords="5,5,183,47"/>
+</map>
