@@ -20,6 +20,7 @@ addGameObject("scripts/guiBasic.lua")
 addGameObject("scripts/pauseMenuSetup.lua")
 addGameObject("scripts/helpMenuSetup.lua")
 addGameObject("scripts/player.lua");
+addGameObject("scripts/networkMenuSetup.lua")
 addGameObject("scripts/gunSetup.lua")
 
 --addGameObject("scripts/Human.lua")

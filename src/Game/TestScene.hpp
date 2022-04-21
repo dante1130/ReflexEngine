@@ -9,7 +9,7 @@
 #include "Model/GameObject/GameObject.hpp"
 #include "View/Renderer/OpenGL/Objects/DirectionalLight.hpp"
 #include "View/Renderer/OpenGL/Objects/SpotLight.hpp"
-#include "GameAssetFactory.hpp"
+#include "Controller/GameAssetFactory.hpp"
 #include "Controller/GuiLuaAccess.hpp"
 #include "Controller/GenericFunctions.h"
 #include "Controller/LuaManager.hpp";
@@ -108,7 +108,4 @@ public:
 private:
 	/// A directional light.
 	DirectionalLight directional_light_ = {};
-
-	/// Flashlight.
-	SpotLight flashlight_ = {};
 };

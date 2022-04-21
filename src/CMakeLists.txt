@@ -8,8 +8,8 @@ target_sources(${PROJECT_NAME} PRIVATE
 	BTT.cpp
 	BttController.cpp
 	TexturedTerrain.cpp
-	GameAssetFactory.cpp
 	guiManager.cpp
+	NetworkManager.cpp
 
 	Model/GameObject/GameObject.hpp
 	Model/GameObject/Item.cpp
@@ -46,6 +46,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/Input/InputManager.cpp
 	Controller/Input/InputState.cpp
 	Controller/Input/Input.hpp
+	Controller/GameAssetFactory.cpp
 	Controller/LuaManager.cpp
 	Controller/Physics.cpp
 	Controller/BodyRigidPhysics.cpp

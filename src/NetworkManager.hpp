@@ -1,18 +1,23 @@
-#ifndef NETWORKMANAGER_H
-#define NETWORKMANAGER_H
+#pragma once
 
 #include <string>
-#include <RakPeerInterface.h>
-#include <MessageIdentifiers.h>
+#include <stdio.h>
+#include <raknet/Source/RakPeerInterface.h>
+#include <raknet/Source/RakNetTypes.h>
+#include <raknet/Source/RakString.h>
+#include <raknet/Source/BitStream.h>
+#include <raknet/Source/MessageIdentifiers.h>
+#include <raknet/Source/Gets.h>
+#include <raknet/Source/RakSleep.h>
 
 #define MAX_CLIENTS 6
 #define SERVER_PORT 60000
 
 //TODO: adjust so can be written for the game asset factory
 //      Maybe has it so that all of this (minus GetPacketIdentifier and HandleMessage) can be accessed from Lua?
-//      So that anything gui-related written in Lua can easily access the NetworkManager.
-namespace network 
-{
+//      So that anything gui-related written in Lua can easily access the NetworkManager. 
+class networkManager {
+private:
 	char message[512];
 
 	char name[256];
@@ -21,11 +26,14 @@ namespace network
 
 	bool isServer;
 
+    bool connected;
+
     
 	RakNet::RakPeerInterface *peer;
 
 	RakNet::Packet *packet;
 
+public:
     ////METHOD NEEDED FOR NETWORK TO OPERATE////
     /**
      * @brief	Initialises Network
@@ -36,7 +44,7 @@ namespace network
      *
      * @return	Void
      *
-     * @pre		Nonne
+     * @pre		None
      * @post	network instance initialised
      */
     void InitNetwork();
@@ -96,27 +104,17 @@ namespace network
      * or SetupServer has been run (if the server)
      * @post	Sends a message across the network
      */
-	void MessageSend(char *inputMessage);
+    void MessageSend(char *inputMessage);
 
     /**
-     * @brief	Receives a message from the network. This message is sent to the HandleMessage method to determine the message type.
+     * @brief	Receives a message from the network. It also handles the contents of the message.
      * @param	void
      * @return	char * - The message
      *
      * @pre		This must be run in a while loop for the network manager to receive messages.
      * @post	Returns the received message to another part of the game engine (notably the gui interface)
      */
-	char *ReceiveMessage();
-
-    /**
-     * @brief	Handles the message received and identifies it's message type.
-     * @param	Raknet::Packet *packet - the packet of network data.
-     * @return	char * - The message of the packet
-     *
-     * @pre		Called by ReceiveMessage
-     * @post	Returns the message based on the packet's ID
-     */
-	char *HandleMessage(RakNet::Packet *packet);
+	char * ReceiveMessage();
 
     /**
      * @brief	Ends the current session.
@@ -128,6 +126,18 @@ namespace network
      */
 	void DestroySession();
 
+    /**
+	 * @brief	Gets the status of the connection
+	 * @param	void
+	 * @return	bool
+	 *
+	 * @pre		A session must be running (either ConnectClient or SetupServer must
+	 * have been run) and connected
+	 * @post	Returns the status of the connection (are you connected or not?)
+	 */
+    bool ConnectionStatus();
+
+private:
     /**
      * @brief	Gets the packet identifier and returns it.
      * @param	Raknet::Packet *packet - the packet of network data.
@@ -144,6 +154,4 @@ namespace network
 	    /// </summary>
 		ID_GAME_MESSAGE_1 = ID_USER_PACKET_ENUM + 1
 	};
- }
-
-#endif
+};

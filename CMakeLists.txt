@@ -64,7 +64,7 @@ include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/stb_image)
 include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/assimp/include)
 include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/imgui)
 include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/reactphysics3d)
-include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/raknet)
+include_directories (ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/raknet/include)
 
 # Link libraries.
 target_link_libraries (ReflexEngine PRIVATE glfw)
@@ -74,4 +74,5 @@ target_link_libraries (ReflexEngine PRIVATE ${CMAKE_PREFIX_PATH}/assimp/lib/assi
 target_link_libraries (ReflexEngine PRIVATE imgui)
 target_link_libraries (ReflexEngine PRIVATE lua)
 target_link_libraries (ReflexEngine PRIVATE reactphysics3d)
-target_link_libraries (ReflexEngine PRIVATE raknet)
+target_link_libraries (ReflexEngine PRIVATE ${CMAKE_PREFIX_PATH}/raknet/Lib/DLL_vc9_DLL_Release_x64.lib)
+target_link_libraries (ReflexEngine PRIVATE ${CMAKE_PREFIX_PATH}/raknet/Lib/LibStatic_vc9_LibStatic_Release_x64.lib)
