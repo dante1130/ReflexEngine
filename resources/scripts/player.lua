@@ -1,8 +1,8 @@
 baseObject = {
 	type = "Player",
-	xPos = 50,
+	xPos = 100,
 	yPos = 10,
-	zPos = 100,
+	zPos = 50,
 	xRotation = 0,
 	yRotation = 0,
 	zRotation = 0,
@@ -10,7 +10,7 @@ baseObject = {
 	xScale = 1,
 	yScale = 1,
 	zScale = 1,
-	move_speed = 10.0
+	move_speed = 2.5
 }
 
 script = "scripts/playerScript.lua"

@@ -180,7 +180,7 @@ void main()
 	}
 	else if (is_using_detailmap)
 	{
-		finalColor *= mix(texture(detailmap, texCoord * 100), texture(theTexture, texCoord), 0.4f);
+		finalColor *= mix(texture(detailmap, texCoord * 100), texture(theTexture, texCoord), 0.7f);
 	}
 	else
 	{
@@ -189,3 +189,4 @@ void main()
 
 	color = finalColor;
 }
+

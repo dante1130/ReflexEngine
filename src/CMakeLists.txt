@@ -1,14 +1,14 @@
 target_sources(${PROJECT_NAME} PRIVATE
     main.cpp
 
-	AStar.cpp
-	AStarInterface.cpp
-	Terrain.cpp
-	BruteForceTerrain.cpp
-	BTT.cpp
-	BttController.cpp
-	TexturedTerrain.cpp
-	guiManager.cpp
+	Controller/Pathfinding/AStar.cpp
+	Controller/Pathfinding/AStarInterface.cpp
+	Controller/Terrain/Terrain.cpp
+	Controller/Terrain/BruteForceTerrain.cpp
+	Controller/Terrain/BTT.cpp
+	Controller/Terrain/BttController.cpp
+	Controller/Terrain/TexturedTerrain.cpp
+	View/guiManager.cpp
 	NetworkManager.cpp
 
 	Model/GameObject/GameObject.hpp

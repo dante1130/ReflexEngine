@@ -6,7 +6,7 @@
 #include <time.h>
 #include <random>
 #include "Controller/ReflexEngine/Camera.hpp"
-#include "TexturedTerrain.hpp"
+#include "Controller/Terrain/TexturedTerrain.hpp"
 
 namespace GenericFunctions {
 /**

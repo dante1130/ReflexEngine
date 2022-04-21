@@ -1,7 +1,7 @@
 #pragma once
 
 #include "LuaManager.hpp"
-#include "guiManager.hpp"
+#include "View/guiManager.hpp"
 
 namespace guiLuaAccess {
 /**

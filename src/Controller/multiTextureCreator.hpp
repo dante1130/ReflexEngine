@@ -159,7 +159,7 @@ private:
 	/// <summary>
 	/// Softness value
 	/// </summary>
-	float softness = 0.01;
+	float softness = 0.04;
 
 	/// <summary>
 	/// Switch between slope lighting and height lighting
