@@ -247,7 +247,6 @@ private:
 	 * @brief	Gets original height map value
 	 * @param	x				- x coord
 	 * @param	z				- z coord
-	 * @param	unsigned char	- The height data
 	 *
 	 * @pre		height map stored
 	 * @post	gets height data

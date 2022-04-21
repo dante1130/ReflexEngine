@@ -1,0 +1,6 @@
+<map id="MaterialLuaController::CreateLuaAccess" name="MaterialLuaController::CreateLuaAccess">
+<area shape="rect" id="node1" title="Gives lua access to material related functions (texture &amp; model managers)" alt="" coords="5,71,149,112"/>
+<area shape="rect" id="node2" href="$class_resource_manager.html#a33b466c53250b7431976a04d42d59036" title="Get the instance of the Resource Manager." alt="" coords="197,5,351,47"/>
+<area shape="rect" id="node3" href="$class_resource_manager.html#a474f1dfe5e7d553d919d09ff8b827467" title="Get the model manager." alt="" coords="197,71,351,112"/>
+<area shape="rect" id="node4" href="$class_resource_manager.html#abbef155bc35aef3f78995effb06120fa" title="Get the texture manager." alt="" coords="197,136,351,177"/>
+</map>

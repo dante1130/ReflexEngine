@@ -1,0 +1,6 @@
+<map id="multiTextureCreator::get_height_value" name="multiTextureCreator::get_height_value">
+<area shape="rect" id="node1" title="Gets height value at coordinate." alt="" coords="432,64,567,105"/>
+<area shape="rect" id="node2" href="$classmulti_texture_creator.html#a5768959c5ad0ccd6fe094265634281aa" title="Adds height lighting to a texture." alt="" coords="201,5,384,47"/>
+<area shape="rect" id="node3" href="$classmulti_texture_creator.html#a468640686a55ed71bff5cdae109052ab" title="creates the multi texture" alt="" coords="5,64,153,105"/>
+<area shape="rect" id="node4" href="$classmulti_texture_creator.html#a9d55cec9a35595579de29065e3d6b8ed" title="Adds slope lighting to a texture." alt="" coords="203,123,382,164"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="Physics::updateWorld" name="Physics::updateWorld">
+<area shape="rect" id="node1" title="Updates the world for the physic objects." alt="" coords="187,5,337,32"/>
+<area shape="rect" id="node2" href="$class_body.html#aefcd8a345c89c88d75de1aa2a0b8674a" title="Updates the body object with fixed delta time." alt="" coords="5,5,139,32"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="networkManager::ConnectionStatus" name="networkManager::ConnectionStatus">
+<area shape="rect" id="node1" title="Gets the status of the connection." alt="" coords="231,5,421,47"/>
+<area shape="rect" id="node2" href="$namespace_generic_functions.html#a876718ee347cbb0499b308c6c6969fdb" title="Gets the connection status of the network (if it is connected to either a client or server)" alt="" coords="5,5,183,47"/>
+</map>

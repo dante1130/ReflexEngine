@@ -1,0 +1,4 @@
+<map id="GenericFunctions::networkConnectionStatus" name="GenericFunctions::networkConnectionStatus">
+<area shape="rect" id="node1" title="Gets the connection status of the network (if it is connected to either a client or server)" alt="" coords="5,5,183,47"/>
+<area shape="rect" id="node2" href="$classnetwork_manager.html#a1e7a42bc6bb7ef1f11a9b0d45748715b" title="Gets the status of the connection." alt="" coords="231,5,421,47"/>
+</map>

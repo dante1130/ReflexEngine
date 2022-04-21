@@ -1,0 +1,9 @@
+<map id="ResourceManager::get_instance" name="ResourceManager::get_instance">
+<area shape="rect" id="node1" title="Get the instance of the Resource Manager." alt="" coords="296,115,449,156"/>
+<area shape="rect" id="node2" href="$namespace_material_lua_controller.html#a2bf77986afcc458d485046c156d5bedd" title="Gives lua access to material related functions (texture &amp; model managers)" alt="" coords="104,5,248,47"/>
+<area shape="rect" id="node3" href="$class_item.html#ae902d008e98a75d3cf0fef53d9177f9e" title="The draw call for the item." alt="" coords="135,71,217,98"/>
+<area shape="rect" id="node4" href="$class_physics_object.html#a72c03214889819e5bba9d321e69a848c" title="Draws the object." alt="" coords="105,122,247,149"/>
+<area shape="rect" id="node5" href="$class_water.html#aca2414328c1d530cebff6ba347225ff9" title="Initialises the water." alt="" coords="130,173,222,199"/>
+<area shape="rect" id="node6" href="$class_reflex_engine.html#a9c185c8127a7d9d650a1bcc97e3de170" title="Runs the engine." alt="" coords="114,223,238,250"/>
+<area shape="rect" id="node7" href="$main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,223,56,250"/>
+</map>

@@ -1,0 +1,16 @@
+<map id="src/Controller/ResourceManager/ResourceManager.hpp" name="src/Controller/ResourceManager/ResourceManager.hpp">
+<area shape="rect" id="node1" title=" " alt="" coords="407,5,615,47"/>
+<area shape="rect" id="node2" href="$_material_lua_controller_8hpp.html" title=" " alt="" coords="5,95,176,136"/>
+<area shape="rect" id="node4" href="$_resource_manager_8cpp.html" title=" " alt="" coords="200,95,408,136"/>
+<area shape="rect" id="node5" href="$_item_8hpp.html" title=" " alt="" coords="433,95,589,136"/>
+<area shape="rect" id="node12" href="$_physics_object_8hpp.html" title=" " alt="" coords="613,95,769,136"/>
+<area shape="rect" id="node14" href="$_water_8cpp.html" title=" " alt="" coords="793,95,949,136"/>
+<area shape="rect" id="node3" href="$_material_lua_controller_8cpp.html" title=" " alt="" coords="5,184,176,225"/>
+<area shape="rect" id="node6" href="$_game_asset_factory_8hpp.html" title=" " alt="" coords="514,184,686,225"/>
+<area shape="rect" id="node11" href="$_item_8cpp.html" title=" " alt="" coords="334,184,490,225"/>
+<area shape="rect" id="node7" href="$_game_asset_factory_8cpp.html" title=" " alt="" coords="415,273,587,315"/>
+<area shape="rect" id="node8" href="$_test_scene_8hpp.html" title=" " alt="" coords="612,281,783,307"/>
+<area shape="rect" id="node9" href="$_reflex_engine_8cpp.html" title=" " alt="" coords="509,363,688,404"/>
+<area shape="rect" id="node10" href="$_test_scene_8cpp.html" title=" " alt="" coords="712,370,883,397"/>
+<area shape="rect" id="node13" href="$_physics_object_8cpp.html" title=" " alt="" coords="710,184,866,225"/>
+</map>

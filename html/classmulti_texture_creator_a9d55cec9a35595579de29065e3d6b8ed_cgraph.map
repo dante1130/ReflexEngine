@@ -1,0 +1,5 @@
+<map id="multiTextureCreator::add_slope_based_lighting" name="multiTextureCreator::add_slope_based_lighting">
+<area shape="rect" id="node1" title="Adds slope lighting to a texture." alt="" coords="5,39,184,80"/>
+<area shape="rect" id="node2" href="$classmulti_texture_creator.html#a3ab32f52c3bfec8b1caa4dffea3ffc16" title="Gets height value at coordinate." alt="" coords="232,5,367,47"/>
+<area shape="rect" id="node3" href="$classmulti_texture_creator.html#a92f04b2553083e43ba8247c35f6a5781" title="Returns an index value." alt="" coords="232,71,367,112"/>
+</map>

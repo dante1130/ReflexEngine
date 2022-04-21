@@ -1,7 +1,0 @@
-<map id="OpenGL::init" name="OpenGL::init">
-<area shape="rect" id="node1" title="Initializes OpenGL, shaders, camera and the skybox." alt="" coords="5,93,100,120"/>
-<area shape="rect" id="node2" href="$class_reflex_engine.html#aceed91c96c9c6774fbcacfde19e9b5f9" title="Get an instance of the engine." alt="" coords="149,5,329,32"/>
-<area shape="rect" id="node3" href="$class_textured_terrain.html#afb7d8dfd5eddb8771ab59c78b840f2e0" title="Reads an image file as a detail map." alt="" coords="168,57,311,98"/>
-<area shape="rect" id="node4" href="$class_textured_terrain.html#a9da6fc21e50f4e2102b51f02ec52153d" title="Reads the heightmap and loads the mesh." alt="" coords="148,123,331,149"/>
-<area shape="rect" id="node5" href="$class_textured_terrain.html#a7412c65ff7c9c062431c97ea09053263" title="Reads the texture image file and loads the texture." alt="" coords="168,174,311,215"/>
-</map>

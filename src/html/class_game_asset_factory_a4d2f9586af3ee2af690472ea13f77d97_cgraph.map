@@ -1,5 +1,0 @@
-<map id="GameAssetFactory::load_player" name="GameAssetFactory::load_player">
-<area shape="rect" id="node1" title=" " alt="" coords="5,35,172,76"/>
-<area shape="rect" id="node2" href="$class_player.html#af4a717b8ddc05b2e718635a26aba9f06" title="Set the collider radius." alt="" coords="220,5,353,47"/>
-<area shape="rect" id="node3" href="$class_player.html#aa85cf93e42f25fb2de1da748c62c4d13" title="Set the height." alt="" coords="223,71,350,98"/>
-</map>

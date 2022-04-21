@@ -1,0 +1,5 @@
+<map id="GenericFunctions::getIfPaused" name="GenericFunctions::getIfPaused">
+<area shape="rect" id="node1" title="Gets if the game should be paused." alt="" coords="220,31,420,57"/>
+<area shape="rect" id="node2" href="$class_body.html#aefcd8a345c89c88d75de1aa2a0b8674a" title="Updates the body object with fixed delta time." alt="" coords="22,5,155,32"/>
+<area shape="rect" id="node3" href="$class_test_scene.html#aad51ad2040b618871f77b2397ad5a35b" title="The function to specify controls for the keyboard." alt="" coords="5,56,172,83"/>
+</map>

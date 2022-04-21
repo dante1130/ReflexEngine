@@ -240,8 +240,7 @@ void setPlayableArea(uint8_t* heightmap, TexturedTerrain* tt, float scale,
 float getHeight(float x, float z);
 /**
  * @brief	Creates the network manager
- * @param	bool
- * @return	void
+ * @param	create  - if you want to create it
  *
  * @pre		Nothing
  * @post	Creates the network manager
@@ -250,8 +249,7 @@ void createNetworkManager(bool create);
 
 /**
  * @brief	Sets the network menu to be active or not
- * @param	bool - true if menu should be shown
- * @return	void
+ * @param	active - true if menu should be shown
  *
  * @pre		Nothing
  * @post	Creates/destroys the network menu
@@ -260,8 +258,7 @@ void setNetworkMenuActive(bool active);
 
 /**
  * @brief	Gets the active state of the network menu
- * @param	No param
- * @return	bool
+ * @return	bool - if active
  *
  * @pre		Nothing
  * @post	Gets the active state of the network menu
@@ -270,8 +267,7 @@ bool getNetworkMenuActive();
 
 /**
  * @brief	Starts up the network server
- * @param	bool - true if starting the network server
- * @return	void
+ * @param	active - true if starting the network server
  *
  * @pre		CreateNetworkManager called (for initialisation)
  * @post	Server started
@@ -280,8 +276,6 @@ void startNetworkServer(bool active);
 
 /**
  * @brief	Connects the client to a server
- * @param	string - The serverIP address to connect to
- * @return	bool
  *
  * @pre		CreateNetworkManager called (for initialisation)
  * @post	Connects the client to a server using provided IP
@@ -291,8 +285,6 @@ void networkClientConnect();
 /**
  * @brief	Ends the connection to the network (if client)/Kills the server (if
  * server)
- * @param	No param
- * @return	bool
  *
  * @pre		Nothing
  * @post	Gets the active state of the network menu
@@ -302,8 +294,6 @@ void networkEnd();
 /**
  * @brief	Updates the networkManager (primary used for sending/receiving
  * data). Current use is for connected clients and connection status.
- * @param	No param
- * @return	void
  *
  * @pre		Nothing
  * @post	Updates the network manager so that it can send/receive data packets
@@ -314,8 +304,7 @@ void networkUpdate();
 /**
  * @brief	Gets the connection status of the network (if it is connected to
  * either a client or server)
- * @param	No param
- * @return	bool
+ * @return	bool - true if connected
  *
  * @pre		Nothing
  * @post	returns the connection status of the network
@@ -325,8 +314,7 @@ bool networkConnectionStatus();
 /**
  * @brief	Retains the IP address entered by the user (catches input that the
  * user has entered with guiManager)
- * @param	No param
- * @return	bool
+ * @param   savedIP - ip address to retain
  *
  * @pre		Nothing
  * @post	Retains the IP address that has been entered by the user
@@ -335,7 +323,6 @@ void networkRetainIP(std::string savedIP);
 
 /**
  * @brief	Returns the IP address saved by networkRetainIP
- * @param	No param
  * @return	string - Returns the retained IP address
  *
  * @pre		Nothing

@@ -1,0 +1,4 @@
+<map id="GenericFunctions::networkEnd" name="GenericFunctions::networkEnd">
+<area shape="rect" id="node1" title="Ends the connection to the network (if client)/Kills the server (if server)" alt="" coords="5,5,205,32"/>
+<area shape="rect" id="node2" href="$classnetwork_manager.html#acb47b4d6f2066b782f7c16d1e0a8eed9" title="Ends the current session." alt="" coords="253,5,471,32"/>
+</map>

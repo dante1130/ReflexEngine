@@ -1,0 +1,4 @@
+<map id="GenericFunctions::setNetworkMenuActive" name="GenericFunctions::setNetworkMenuActive">
+<area shape="rect" id="node1" title="Sets the network menu to be active or not." alt="" coords="220,5,417,47"/>
+<area shape="rect" id="node2" href="$class_test_scene.html#aad51ad2040b618871f77b2397ad5a35b" title="The function to specify controls for the keyboard." alt="" coords="5,13,172,39"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="ObjectSaving::createStruct" name="ObjectSaving::createStruct">
+<area shape="rect" id="node1" title="Creates a struct in the file." alt="" coords="187,42,364,69"/>
+<area shape="rect" id="node2" href="$class_terrain_object.html#a2604ade59191b836947b9d72e89012a2" title="Saves the object to lua file." alt="" coords="5,5,139,47"/>
+<area shape="rect" id="node3" href="$class_item.html#a2fdc238e265165624bc8c355f853c66c" title="Saves the object to lau file." alt="" coords="11,71,133,98"/>
+</map>

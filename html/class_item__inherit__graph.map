@@ -1,0 +1,4 @@
+<map id="Item" name="Item">
+<area shape="rect" id="node1" title="An item in the scene. (JUST FOR TESTING NOW)" alt="" coords="5,277,129,457"/>
+<area shape="rect" id="node2" href="$class_game_object.html" title="An abstract class to represent a game object." alt="" coords="5,5,129,229"/>
+</map>

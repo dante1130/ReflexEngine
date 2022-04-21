@@ -1,0 +1,4 @@
+<map id="networkManager::DestroySession" name="networkManager::DestroySession">
+<area shape="rect" id="node1" title="Ends the current session." alt="" coords="253,5,471,32"/>
+<area shape="rect" id="node2" href="$namespace_generic_functions.html#a731d037751483ec6a7e1e85208fa4625" title="Ends the connection to the network (if client)/Kills the server (if server)" alt="" coords="5,5,205,32"/>
+</map>
