@@ -321,7 +321,7 @@ void BttController::GenerateVertices(int chunkSize, int chunkDetail) {
 			for (int j = 0; j < length; ++j) {
 				vertices.push_back((GLfloat)i);
 				// heightmap_[(i * length) + j] = 0.0;
-				vertices.push_back((GLfloat)heightmap_[(i * length) + j]);
+				vertices.push_back((GLfloat)heightmap_[(j * length) + i]);
 				vertices.push_back((GLfloat)j);
 
 				// Texture coordinates

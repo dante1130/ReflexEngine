@@ -3,9 +3,10 @@
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 #include "TexturedTerrain.hpp"
 #include "BttController.hpp"
+#include "Controller/multiTextureCreator.hpp"
 
-TexturedTerrain terrain;
-BttController bttControl;
+TexturedTerrain tt;
+multiTextureCreator mtc;
 
 void OpenGL::init() {
 	auto& engine = ReflexEngine::get_instance();
@@ -65,6 +66,23 @@ void OpenGL::init() {
 	bttControl.set_height_map_size(241 / 2);
 	bttControl.CreateTerrain(30, 9, 3);
 	*/
+
+	tt = TexturedTerrain();
+	tt.set_scale(glm::vec3(1, 0.3, 1));
+	tt.load_heightfield("textures/newheightmap.png");
+	tt.load_detailmap("textures/grass.jpg");
+	tt.load_mesh();
+
+	multiTextureCreator mtc;
+	mtc.set_texture("textures/sand.jpg");
+	mtc.set_texture("textures/grass.jpg");
+	mtc.set_texture("textures/rock.jpg");
+	mtc.set_texture("textures/snow.jpg");
+	mtc.set_height_map(tt.get_height_map(), 241, 241, true);
+	mtc.create_multi_texture();
+
+	tt.set_texture(mtc.get_multi_texture());
+	// tt.load_texture("textures/water.png");
 }
 
 void OpenGL::draw() {
@@ -82,12 +100,7 @@ void OpenGL::render_scene(std::shared_ptr<Shader> shader) {
 		draw_call(shader);
 	}
 
-	if (glfwGetTime() - m_last_time > 0.33) {
-		// bttControl.Update(ReflexEngine::get_instance().camera_.get_position());
-		// m_last_time = glfwGetTime();
-	}
-
-	// bttControl.render(shader);
+	// tt.render(shader);
 }
 
 void OpenGL::render_pass() {

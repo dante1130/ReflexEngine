@@ -7,9 +7,9 @@ baseObject = {
 	yRotation = 1,
 	zRotation = 0,
 	angle = 0,
-	xScale = 1,
+	xScale = 2,
 	yScale = 0.05,
-	zScale = 1
+	zScale = 2
 }
 
 terrain = {

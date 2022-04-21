@@ -175,8 +175,8 @@ void GenericFunctions::setPlayableArea(uint8_t* heightmap, TexturedTerrain* tt,
 }
 
 float GenericFunctions::getHeight(float x, float z) {
-	return m_tt->get_height_world(z - m_playable_floor_size / 2,
-	                              x - m_playable_floor_size / 2) *
+	return m_tt->get_height_world(x - m_playable_floor_size / 2,
+	                              z - m_playable_floor_size / 2) *
 	       m_playable_floor_y_scale;
 	//
 }

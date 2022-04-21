@@ -110,7 +110,7 @@ void multiTextureCreator::create_multi_texture() {
 	}
 
 	if (use_better_lighting) {
-		// add_slope_based_lighting(mult_texture);
+		add_slope_based_lighting(mult_texture);
 	} else {
 		add_height_based_lighting(mult_texture);
 	}

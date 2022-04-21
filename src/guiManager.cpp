@@ -84,15 +84,17 @@ bool gui::button(const std::string name, int xSize, int ySize) {
 }
 
 std::string gui::luaInputText(const std::string name) {
-	char newBuffer[30] = {}; //Could make this static to fix it but its such a crappy way to do it (as you can only have one InputText really)
+	char newBuffer[30] =
+	    {};  // Could make this static to fix it but its such a crappy way to do
+	         // it (as you can only have one InputText really)
 	bool ret;
 	ret = ImGui::InputText(name.c_str(), newBuffer, 30);
 	/*
 	if (ret) {
-		std::string savedBuffer(newBuffer);
-		return savedBuffer;
+	    std::string savedBuffer(newBuffer);
+	    return savedBuffer;
 	} else {
-		return newBuffer;
+	    return newBuffer;
 	}
 	*/
 	return newBuffer;

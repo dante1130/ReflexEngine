@@ -4,8 +4,6 @@
 #include "Controller/Input/InputManager.hpp"
 #include "TestScene.hpp"
 #include "Model/GameObject/TerrainObject.hpp"
-#include "TexturedTerrain.hpp"
-#include "Controller/multiTextureCreator.hpp"
 
 TestScene::TestScene() {}
 
@@ -31,8 +29,6 @@ void addGameObjectDuringRun(std::string luaScript) {
 }
 
 void TestScene::addGameObject(std::string luaScript) {
-	GameAssetFactory gaf;
-
 	if (glfwGetTime() > (double)0.5) {
 		addGameObjectDuringRun(luaScript);
 	} else {
@@ -152,7 +148,6 @@ void TestScene::garbage_collection() {
 }
 
 void TestScene::add_new_game_objects() {
-	GameAssetFactory gaf;
 	for (int count = 0; count < to_add.size(); count++) {
 		std::cout << "Adding during runtime = " << to_add[count] << std::endl;
 		game_objects_.emplace_back(GameAssetFactory::create(to_add[count]));
