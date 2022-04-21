@@ -19,8 +19,8 @@ std::string message;
 std::string currentIPAddress;
 float lastShot = 0;
 float shot_delay = 0;
-uint8_t* m_playable_floor;  // this is set by a terrain class, so it will deal
-                            // with memory management
+uint8_t* m_heightmap;
+TexturedTerrain* m_tt;
 int m_playable_floor_size;
 float m_playable_floor_y_scale;
 
@@ -57,14 +57,20 @@ void GenericFunctions::lua_access() {
 	lua.set_function("camera_look_y", &GenericFunctions::luaCamLookY);
 	lua.set_function("camera_look_z", &GenericFunctions::luaCamLookZ);
 
-	lua.set_function("create_network_manager", &GenericFunctions::createNetworkManager);
-	lua.set_function("exit_network_menu", &GenericFunctions::setNetworkMenuActive);
-	lua.set_function("get_network_menu", &GenericFunctions::getNetworkMenuActive);
+	lua.set_function("create_network_manager",
+	                 &GenericFunctions::createNetworkManager);
+	lua.set_function("exit_network_menu",
+	                 &GenericFunctions::setNetworkMenuActive);
+	lua.set_function("get_network_menu",
+	                 &GenericFunctions::getNetworkMenuActive);
 	lua.set_function("start_server", &GenericFunctions::startNetworkServer);
-	lua.set_function("network_client_name", &GenericFunctions::networkClientName);
-	lua.set_function("network_client_connect", &GenericFunctions::networkClientConnect);
+	lua.set_function("network_client_name",
+	                 &GenericFunctions::networkClientName);
+	lua.set_function("network_client_connect",
+	                 &GenericFunctions::networkClientConnect);
 	lua.set_function("network_terminate", &GenericFunctions::networkEnd);
-	lua.set_function("network_connection_status", &GenericFunctions::networkConnectionStatus);
+	lua.set_function("network_connection_status",
+	                 &GenericFunctions::networkConnectionStatus);
 	lua.set_function("network_retain_IP", &GenericFunctions::networkRetainIP);
 
 	lua.set_function("set_last_shot", &GenericFunctions::setLastShot);
@@ -136,7 +142,7 @@ float GenericFunctions::luaCamPosY() {
 	return ReflexEngine::get_instance().camera_.get_position().y;
 }
 float GenericFunctions::luaCamPosZ() {
-	return ReflexEngine::get_instance().camera_.get_position().z; 
+	return ReflexEngine::get_instance().camera_.get_position().z;
 }
 
 float GenericFunctions::luaCamLookX() {
@@ -160,18 +166,22 @@ void GenericFunctions::setIfShouldShoot(bool val) {
 }
 bool GenericFunctions::getIfShouldShoot() { return shouldShoot; }
 
-void GenericFunctions::setPlayableArea(uint8_t* floor, int size, float yscale) {
-	m_playable_floor = floor;
+void GenericFunctions::setPlayableArea(uint8_t* heightmap, TexturedTerrain* tt,
+                                       float scale, int size) {
+	// m_heightmap = heightmap;
+	m_tt = tt;
 	m_playable_floor_size = size;
-	m_playable_floor_y_scale = yscale;
+	m_playable_floor_y_scale = scale;
 }
 
 float GenericFunctions::getHeight(float x, float z) {
-	return (m_playable_floor[(int)x * m_playable_floor_size + (int)z]) *
+	return m_tt->get_height_world(z - m_playable_floor_size / 2,
+	                              x - m_playable_floor_size / 2) *
 	       m_playable_floor_y_scale;
+	//
 }
 
-void GenericFunctions::createNetworkManager(bool create) { 
+void GenericFunctions::createNetworkManager(bool create) {
 	if (createNetwork != true) {
 		createNetwork = true;
 		network.InitNetwork();
@@ -183,7 +193,7 @@ void GenericFunctions::setNetworkMenuActive(bool active) {
 	if (networkMenu) {
 		glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
 		                 GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-	} else if(!networkMenu && !paused){
+	} else if (!networkMenu && !paused) {
 		glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
 		                 GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	}
@@ -206,7 +216,9 @@ void GenericFunctions::networkClientConnect(std::string serverIP) {
 	printf("This Runs\n");
 	printf("%s\n", currentIPAddress.c_str());
 	network.SetupClient("Client");
-	networkConnected = !network.ConnectClient(serverIPChar); // Flipped as it returns true if you are NOT connected (which is weird I know)
+	networkConnected = !network.ConnectClient(
+	    serverIPChar);  // Flipped as it returns true if you are NOT connected
+	                    // (which is weird I know)
 }
 
 void GenericFunctions::networkEnd() {
@@ -216,16 +228,15 @@ void GenericFunctions::networkEnd() {
 	}
 }
 
-void GenericFunctions::networkUpdate() { 
-
-	if(createNetwork && networkConnected && network.ReceiveMessage() != " ") {
-		printf("%s\n",network.ReceiveMessage()); //Currently prints to console, but will eventually print to text chat
+void GenericFunctions::networkUpdate() {
+	if (createNetwork && networkConnected && network.ReceiveMessage() != " ") {
+		printf("%s\n",
+		       network.ReceiveMessage());  // Currently prints to console, but
+		                                   // will eventually print to text chat
 	}
 }
 
-bool GenericFunctions::getNetworkMenuActive() { 
-	return (networkMenu);
-}
+bool GenericFunctions::getNetworkMenuActive() { return (networkMenu); }
 
 bool GenericFunctions::networkConnectionStatus() {
 	bool networkStatus = network.ConnectionStatus();

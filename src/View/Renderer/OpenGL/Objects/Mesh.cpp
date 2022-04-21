@@ -93,8 +93,6 @@ void Mesh::RenderMesh() {
 }
 
 void Mesh::ClearMesh() {
-	std::cout << "Cleaned mesh!" << std::endl;
-
 	if (IBO != 0) {
 		glDeleteBuffers(1, &IBO);
 		IBO = 0;

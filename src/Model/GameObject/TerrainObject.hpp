@@ -32,7 +32,11 @@ public:
 
 	uint8_t* get_height_map();
 
+	void add_storage_text(std::string text, int n);
+
 private:
 	BttController bttControl;
 	multiTextureCreator mtc;
+	float lastUpdate = -1;
+	std::string m_text[6];
 };
