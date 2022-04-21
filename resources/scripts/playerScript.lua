@@ -2,7 +2,7 @@ if camera_pos_y() < 2 then
 	if current_time() > 10 then
 		local check = current_time() - time_since_last_load()
 		if check > 5 then
-			--load_game(true)
+			load_game(true)
 		end
 	end	
 else
