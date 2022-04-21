@@ -21,28 +21,6 @@ void TestScene::init() {
 	lua.set_function("addGameObject", &TestScene::addGameObject, this);
 	lua.script_file("scripts/_MasterCreation.lua");
 
-	TexturedTerrain* tt = new TexturedTerrain();
-	// tt->set_scale(glm::vec3(1.0f, 0.05f, 1.0f));
-	tt->load_heightfield("textures/newheightmap.png");
-
-	std::shared_ptr<TerrainObject> to = std::make_shared<TerrainObject>();
-	to->add_height_map(tt->get_height_map(), 241, 241, true);
-	to->add_texture("textures/sand.jpg");
-	to->add_texture("textures/grass.jpg");
-	to->add_texture("textures/rock.jpg");
-	to->add_texture("textures/snow.jpg");
-	to->add_detail_map("textures/water.png");
-	to->create_terrain(30, 9, 3, 241, glm::vec3(1.0f, 0.05f, 1.0f));
-
-	GenericFunctions::setPlayableArea(to->get_height_map(), tt, 0.05, 241);
-
-	game_objects_.emplace_back(to);
-
-	// to->add_height_map(tt.get_height_map(), 257, 257, true);
-	// to->create_multi_texture(30, 9, 3, 241);
-	// to->add_detail_map("textures/water.png");
-	// game_objects_.emplace_back(to);
-
 	InputManager::get_instance().load_lua_bindings("scripts/controls.lua");
 }
 

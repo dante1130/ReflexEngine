@@ -374,19 +374,43 @@ TerrainObject* GameAssetFactory::loadTerrainObject(std::string luaScript) {
 	rotation = loadBaseRotation(lua);
 	angle = loadBaseAngle(lua);
 
+	std::string height_map = lua["terrain"]["heightMap"];
+
 	TexturedTerrain* tt = new TexturedTerrain();
-	tt->load_heightfield("textures/newheightmap.png");
+	tt->load_heightfield(height_map.c_str());
 
 	TerrainObject* to = new TerrainObject();
-	/*
-	to->add_height_map(tt->get_height_map(), 241, 241, true);
-	to->add_texture("textures/sand.jpg");
-	to->add_texture("textures/grass.jpg");
-	to->add_texture("textures/rock.jpg");
-	to->add_texture("textures/snow.jpg");
-	to->add_detail_map("textures/water.png");
-	to->create_terrain(30, 9, 3, 241, glm::vec3(1.0f, 0.05f, 1.0f));
-	GenericFunctions::setPlayableArea(tt, 0.05);
-	*/
+	to->scale = scale;
+
+	float height_size = lua["terrain"]["heightSize"];
+	int make_island = lua["terrain"]["island"];
+
+	to->add_texture(lua["terrain"]["text1"]);
+	to->add_texture(lua["terrain"]["text2"]);
+	to->add_texture(lua["terrain"]["text3"]);
+	to->add_texture(lua["terrain"]["text4"]);
+	to->add_detail_map(lua["terrain"]["detailMap"]);
+
+	if (make_island == 1) {
+		to->add_height_map(tt->get_height_map(), height_size, height_size,
+		                   true);
+	} else {
+		to->add_height_map(tt->get_height_map(), height_size, height_size,
+		                   false);
+	}
+
+	to->create_terrain(lua["terrain"]["chunkSize"],
+	                   lua["terrain"]["chunkDetail"], lua["terrain"]["n"],
+	                   height_size, glm::vec3(1.0f, scale.y, 1.0f));
+
+	to->add_storage_text(lua["terrain"]["text1"], 0);
+	to->add_storage_text(lua["terrain"]["text2"], 1);
+	to->add_storage_text(lua["terrain"]["text3"], 2);
+	to->add_storage_text(lua["terrain"]["text4"], 3);
+	to->add_storage_text(lua["terrain"]["heightMap"], 4);
+	to->add_storage_text(lua["terrain"]["detailMap"], 5);
+
+	GenericFunctions::setPlayableArea(to->get_height_map(), tt, scale.y,
+	                                  height_size);
 	return to;
 }
