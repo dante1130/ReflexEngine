@@ -1,5 +1,5 @@
 if camera_pos_y() < 2 then
-	if get_load() == false then
+	if get_pause_game() == false then
 		local check = current_time() - time_since_last_load()
 		if check > 5 then
 			load_game(true)
