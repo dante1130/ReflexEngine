@@ -7,8 +7,6 @@
 #include "TexturedTerrain.hpp"
 #include "Controller/multiTextureCreator.hpp"
 
-TestScene::TestScene() {}
-
 void TestScene::init() {
 	directional_light_ =
 	    DirectionalLight(2048, 2048, glm::vec3(1.0f, 0.53f, 0.3f), 0.2f,
@@ -24,15 +22,13 @@ void TestScene::init() {
 	InputManager::get_instance().load_lua_bindings("scripts/controls.lua");
 }
 
-std::vector<std::string> to_add;
-
-void addGameObjectDuringRun(std::string luaScript) {
-	to_add.push_back(luaScript);
+void TestScene::add_game_object_during_run(std::string luaScript) {
+	to_add_.push_back(luaScript);
 }
 
 void TestScene::addGameObject(std::string luaScript) {
 	if (glfwGetTime() > (double)0.5) {
-		addGameObjectDuringRun(luaScript);
+		add_game_object_during_run(luaScript);
 	} else {
 		std::cout << luaScript << std::endl;
 		game_objects_.emplace_back(GameAssetFactory::create(luaScript));
@@ -152,9 +148,9 @@ void TestScene::garbage_collection() {
 
 void TestScene::add_new_game_objects() {
 	GameAssetFactory gaf;
-	for (int count = 0; count < to_add.size(); count++) {
-		std::cout << "Adding during runtime = " << to_add[count] << std::endl;
-		game_objects_.emplace_back(GameAssetFactory::create(to_add[count]));
+	for (int count = 0; count < to_add_.size(); count++) {
+		std::cout << "Adding during runtime = " << to_add_[count] << std::endl;
+		game_objects_.emplace_back(GameAssetFactory::create(to_add_[count]));
 	}
-	to_add.clear();
+	to_add_.clear();
 }

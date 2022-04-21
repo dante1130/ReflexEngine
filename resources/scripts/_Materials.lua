@@ -1,4 +1,5 @@
 loadTextureRGB("water", "textures/water.png")
+loadTextureRGBA("credits", "textures/reflexbullet.png")
 loadModel("cat", "models/12221_Cat_v1_l3.obj")
 loadModel("tree", "models/Tree_Dry_1.obj")
 loadModel("rock", "models/rock1.obj")

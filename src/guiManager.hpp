@@ -182,8 +182,20 @@ void colourEdit3(const std::string name, float colour[3]);
  */
 void colourEdit4(const std::string name, float colour[4]);
 
+/**
+ * @brief Creates an image using a texture name.
+ *
+ * @param texture_name
+ */
 void lua_image(const std::string& texture_name);
 
+/**
+ * @brief Adds an image to the gui using a texture.
+ *
+ * @param texture_id
+ * @param width
+ * @param height
+ */
 void image(uint32_t texture_id, int width, int height);
 
 /**
