@@ -6,7 +6,7 @@
 #include <time.h>
 #include <random>
 #include "Controller/ReflexEngine/Camera.hpp"
-#include "TexturedTerrain.hpp"
+#include "Controller/Terrain/TexturedTerrain.hpp"
 
 namespace GenericFunctions {
 /**
@@ -281,7 +281,8 @@ void startNetworkServer(bool active);
 void networkClientConnect();
 
 /**
- * @brief	Ends the connection to the network (if client)/Kills the server (if server)
+ * @brief	Ends the connection to the network (if client)/Kills the server (if
+ * server)
  * @param	No param
  * @return	bool
  *
@@ -291,17 +292,20 @@ void networkClientConnect();
 void networkEnd();
 
 /**
- * @brief	Updates the networkManager (primary used for sending/receiving data). Current use is for connected clients and connection status.
+ * @brief	Updates the networkManager (primary used for sending/receiving
+ * data). Current use is for connected clients and connection status.
  * @param	No param
  * @return	void
  *
  * @pre		Nothing
- * @post	Updates the network manager so that it can send/receive data packets (primary use is for receiving data packets).
+ * @post	Updates the network manager so that it can send/receive data packets
+ * (primary use is for receiving data packets).
  */
 void networkUpdate();
 
 /**
- * @brief	Gets the connection status of the network (if it is connected to either a client or server)
+ * @brief	Gets the connection status of the network (if it is connected to
+ * either a client or server)
  * @param	No param
  * @return	bool
  *
@@ -311,7 +315,8 @@ void networkUpdate();
 bool networkConnectionStatus();
 
 /**
- * @brief	Retains the IP address entered by the user (catches input that the user has entered with guiManager)
+ * @brief	Retains the IP address entered by the user (catches input that the
+ * user has entered with guiManager)
  * @param	No param
  * @return	bool
  *

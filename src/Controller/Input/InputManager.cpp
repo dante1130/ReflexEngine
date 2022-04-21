@@ -49,7 +49,7 @@ InputState InputManager::get_key_state(Input input) {
 
 void InputManager::init_bind_map() {
 	bind_map["escape"] = GLFW_KEY_ESCAPE;
-	bind_map["mouse1"] = GLFW_MOUSE_BUTTON_1;
+	bind_map["mouse1"] = GLFW_MOUSE_BUTTON_LEFT;
 	bind_map["mouse2"] = GLFW_MOUSE_BUTTON_2;
 	bind_map["mouse3"] = GLFW_MOUSE_BUTTON_3;
 	bind_map["lshift"] = GLFW_KEY_LEFT_SHIFT;
@@ -58,6 +58,7 @@ void InputManager::init_bind_map() {
 	bind_map["rctrl"] = GLFW_KEY_RIGHT_CONTROL;
 	bind_map["lalt"] = GLFW_KEY_LEFT_ALT;
 	bind_map["ralt"] = GLFW_KEY_RIGHT_ALT;
+	bind_map["space"] = GLFW_KEY_SPACE;
 }
 
 void InputManager::init_action_map() {

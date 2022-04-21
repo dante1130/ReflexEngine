@@ -12,7 +12,7 @@
 #include "Model/GameObject/PhysicsObject.hpp"
 #include "Model/GameObject/ScriptableObject.hpp"
 #include "Model/GameObject/TerrainObject.hpp"
-#include "TexturedTerrain.hpp"
+#include "Controller/Terrain/TexturedTerrain.hpp"
 
 /**
  * @class GameAssetFactory

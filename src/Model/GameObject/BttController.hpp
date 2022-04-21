@@ -5,9 +5,9 @@
 //#include <vector>
 #include <GLFW/glfw3.h>
 
-#include "Terrain.hpp"
+#include "Controller/Terrain/Terrain.hpp"
 #include "View/Renderer/OpenGL/Objects/Mesh.hpp"
-#include "BTT.hpp"
+#include "Controller/Terrain/BTT.hpp"
 
 class BttController : public Terrain {
 public:
