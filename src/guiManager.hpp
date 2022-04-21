@@ -182,6 +182,8 @@ void colourEdit3(const std::string name, float colour[3]);
  */
 void colourEdit4(const std::string name, float colour[4]);
 
+void image(uint32_t texture_id, int width, int height);
+
 /**
  * @brief	Creates a button
  * @param	name	- The name of the button

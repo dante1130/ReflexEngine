@@ -72,6 +72,10 @@ void gui::colourEdit4(const std::string name, float colour[4]) {
 	ImGui::ColorEdit4(name.c_str(), colour);
 }
 
+void gui::image(uint32_t textureID, int width, int height) {
+	ImGui::Image((void*)(intptr_t)textureID, ImVec2(width, height));
+}
+
 void gui::sliderAngle(const std::string name, float* angle, float min,
                       float max) {
 	ImGui::SliderAngle(name.c_str(), angle, min, max);
@@ -84,15 +88,17 @@ bool gui::button(const std::string name, int xSize, int ySize) {
 }
 
 std::string gui::luaInputText(const std::string name) {
-	char newBuffer[30] = {}; //Could make this static to fix it but its such a crappy way to do it (as you can only have one InputText really)
+	char newBuffer[30] =
+	    {};  // Could make this static to fix it but its such a crappy way to do
+	         // it (as you can only have one InputText really)
 	bool ret;
 	ret = ImGui::InputText(name.c_str(), newBuffer, 30);
 	/*
 	if (ret) {
-		std::string savedBuffer(newBuffer);
-		return savedBuffer;
+	    std::string savedBuffer(newBuffer);
+	    return savedBuffer;
 	} else {
-		return newBuffer;
+	    return newBuffer;
 	}
 	*/
 	return newBuffer;

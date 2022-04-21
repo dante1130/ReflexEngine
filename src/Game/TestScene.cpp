@@ -31,8 +31,6 @@ void addGameObjectDuringRun(std::string luaScript) {
 }
 
 void TestScene::addGameObject(std::string luaScript) {
-	GameAssetFactory gaf;
-
 	if (glfwGetTime() > (double)0.5) {
 		addGameObjectDuringRun(luaScript);
 	} else {

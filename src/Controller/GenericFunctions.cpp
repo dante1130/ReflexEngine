@@ -1,28 +1,32 @@
 #include "GenericFunctions.h"
 
-bool m_initRandom = false;
-bool m_useSeed = true;
-int m_seed = 0;
+static bool m_initRandom = false;
+static bool m_useSeed = true;
+static int m_seed = 0;
 
-bool shouldSave = false;
-bool shouldLoad = false;
-int last_save_time_ = -100;
-int last_load_time_ = -100;
-bool paused = false;
-bool helpMenu = false;
-bool networkMenu = false;
-bool createNetwork = false;
-bool networkConnected = false;
-bool shouldShoot;
-networkManager network;
-std::string message;
-std::string currentIPAddress;
-float lastShot = 0;
-float shot_delay = 0;
-uint8_t* m_heightmap;
-TexturedTerrain* m_tt;
-int m_playable_floor_size;
-float m_playable_floor_y_scale;
+static bool shouldSave = false;
+static bool shouldLoad = false;
+
+static int last_save_time_ = -100;
+static int last_load_time_ = -100;
+
+static bool paused = false;
+static bool helpMenu = false;
+static bool networkMenu = false;
+
+static bool createNetwork = false;
+static bool networkConnected = false;
+static bool shouldShoot;
+static networkManager network;
+static std::string message;
+static std::string currentIPAddress;
+
+static float lastShot = 0;
+static float shot_delay = 0;
+static uint8_t* m_heightmap;
+static TexturedTerrain* m_tt;
+static int m_playable_floor_size;
+static float m_playable_floor_y_scale;
 
 void GenericFunctions::init_random(int seed, bool useSeed) {
 	m_useSeed = useSeed;

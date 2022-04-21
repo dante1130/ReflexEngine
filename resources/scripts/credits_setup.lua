@@ -12,4 +12,4 @@ baseObject = {
 	zScale = 1
 }
 
-script = "scripts/basicMenu.lua"
+script = "scripts/credits.lua"
