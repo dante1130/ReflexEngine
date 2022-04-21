@@ -12,6 +12,7 @@ if get_help_menu() then
 	gui_text(" - Movement	: WASD")
 	gui_text(" - Look		: Mouse")
 	gui_text(" - Shoot		: Space")
+	gui_text(" - Networking	: n")
 	gui_text("Objective:")
 	gui_text(" - Make it off the island")
 	gui_text(" - Shoot approaching zombies")

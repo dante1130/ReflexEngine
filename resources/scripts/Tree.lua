@@ -1,10 +1,21 @@
-local x = random_generator(1, 240)
-local z = random_generator(1, 240)
+local notReady = true
+local x
+local y
+local z
+
+while notReady do
+	x = random_generator(1, 240)
+	z = random_generator(1, 240)
+	y = get_y_coord_on_floor(x, z)
+	if(y > 3) then
+		notReady = false
+	end
+end
 
 baseObject = {
 	type = "PhysicsObject",
 	xPos = x,
-	yPos = get_y_coord_on_floor(x, z),
+	yPos = y,
 	zPos = z,
 	xRotation = 1,
 	yRotation = 0,

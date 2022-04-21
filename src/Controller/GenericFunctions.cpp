@@ -10,7 +10,7 @@ static bool shouldLoad = false;
 static int last_save_time_ = -100;
 static int last_load_time_ = -100;
 
-static bool paused = false;
+static bool paused = true;
 static bool helpMenu = false;
 static bool networkMenu = false;
 static bool credits = false;
