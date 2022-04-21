@@ -260,18 +260,74 @@ void setNetworkMenuActive(bool active);
  */
 bool getNetworkMenuActive();
 
+/**
+ * @brief	Starts up the network server
+ * @param	bool - true if starting the network server
+ * @return	void
+ *
+ * @pre		CreateNetworkManager called (for initialisation)
+ * @post	Server started
+ */
 void startNetworkServer(bool active);
 
-void networkClientName(std::string userName);
+/**
+ * @brief	Connects the client to a server
+ * @param	string - The serverIP address to connect to
+ * @return	bool
+ *
+ * @pre		CreateNetworkManager called (for initialisation)
+ * @post	Connects the client to a server using provided IP
+ */
+void networkClientConnect();
 
-void networkClientConnect(std::string serverIP);
-
+/**
+ * @brief	Ends the connection to the network (if client)/Kills the server (if server)
+ * @param	No param
+ * @return	bool
+ *
+ * @pre		Nothing
+ * @post	Gets the active state of the network menu
+ */
 void networkEnd();
 
+/**
+ * @brief	Updates the networkManager (primary used for sending/receiving data). Current use is for connected clients and connection status.
+ * @param	No param
+ * @return	void
+ *
+ * @pre		Nothing
+ * @post	Updates the network manager so that it can send/receive data packets (primary use is for receiving data packets).
+ */
 void networkUpdate();
 
+/**
+ * @brief	Gets the connection status of the network (if it is connected to either a client or server)
+ * @param	No param
+ * @return	bool
+ *
+ * @pre		Nothing
+ * @post	returns the connection status of the network
+ */
 bool networkConnectionStatus();
 
+/**
+ * @brief	Retains the IP address entered by the user (catches input that the user has entered with guiManager)
+ * @param	No param
+ * @return	bool
+ *
+ * @pre		Nothing
+ * @post	Retains the IP address that has been entered by the user
+ */
 void networkRetainIP(std::string savedIP);
+
+/**
+ * @brief	Returns the IP address saved by networkRetainIP
+ * @param	No param
+ * @return	string - Returns the retained IP address
+ *
+ * @pre		Nothing
+ * @post	Returns the retained IP address
+ */
+std::string networkReturnRetainedIP();
 
 };  // namespace GenericFunctions

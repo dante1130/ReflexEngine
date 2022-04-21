@@ -16,7 +16,7 @@ bool networkConnected = false;
 bool shouldShoot;
 networkManager network;
 std::string message;
-std::string currentIPAddress;
+std::string currentIPAddress = " ";
 float lastShot = 0;
 float shot_delay = 0;
 uint8_t* m_heightmap;
@@ -64,14 +64,14 @@ void GenericFunctions::lua_access() {
 	lua.set_function("get_network_menu",
 	                 &GenericFunctions::getNetworkMenuActive);
 	lua.set_function("start_server", &GenericFunctions::startNetworkServer);
-	lua.set_function("network_client_name",
-	                 &GenericFunctions::networkClientName);
 	lua.set_function("network_client_connect",
 	                 &GenericFunctions::networkClientConnect);
 	lua.set_function("network_terminate", &GenericFunctions::networkEnd);
 	lua.set_function("network_connection_status",
 	                 &GenericFunctions::networkConnectionStatus);
 	lua.set_function("network_retain_IP", &GenericFunctions::networkRetainIP);
+	lua.set_function("network_return_IP",
+	                 &GenericFunctions::networkReturnRetainedIP);
 
 	lua.set_function("set_last_shot", &GenericFunctions::setLastShot);
 	lua.set_function("set_shot_delay", &GenericFunctions::setShotDelay);
@@ -206,11 +206,7 @@ void GenericFunctions::startNetworkServer(bool active) {
 	}
 }
 
-void GenericFunctions::networkClientName(std::string userName) {
-	network.ChangeName(userName);
-}
-
-void GenericFunctions::networkClientConnect(std::string serverIP) {
+void GenericFunctions::networkClientConnect() {
 	char* serverIPChar;
 	strcpy(serverIPChar, currentIPAddress.c_str());
 	printf("This Runs\n");
@@ -247,4 +243,8 @@ void GenericFunctions::networkRetainIP(std::string savedIP) {
 	if (savedIP != "") {
 		currentIPAddress = savedIP;
 	}
+}
+
+std::string GenericFunctions::networkReturnRetainedIP() {
+	return (currentIPAddress);
 }
