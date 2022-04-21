@@ -14,10 +14,10 @@ baseObject = {
 
 terrain = {
 	text1 = "textures/sand.jpg",
-	text2 = "textures/grass.jpg",
+	text2 = "textures/grass2.jpg",
 	text3 = "textures/rock.jpg",
 	text4 = "textures/snow.jpg",
-	detailMap = "textures/grass.jpg",
+	detailMap = "textures/grass2.jpg",
 	heightMap = "textures/newheightmap.png",
 	heightSize = 241,
 	chunkSize = 30,
