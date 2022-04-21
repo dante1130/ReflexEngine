@@ -17,8 +17,18 @@ namespace GenericFunctions {
  */
 void lua_access();
 
+/**
+ * @brief Get the window width.
+ *
+ * @return int
+ */
 int get_window_width();
 
+/**
+ * @brief Get the window height.
+ *
+ * @return int
+ */
 int get_window_height();
 
 /**
@@ -140,8 +150,19 @@ void setifHelpMenuActive(bool val);
  */
 bool getIfHelpMenuActive();
 
+/**
+ * @brief Set the if credits active.
+ *
+ * @param val
+ */
 void set_if_credits_active(bool val);
 
+/**
+ * @brief Get the if credits active.
+ *
+ * @return true
+ * @return false
+ */
 bool get_if_credits_active();
 
 /**
