@@ -1,5 +1,6 @@
 #include "Mesh.hpp"
-#include <iostream>
+
+#include <glm/glm.hpp>
 
 Mesh::Mesh() : VAO(0), VBO(0), IBO(0), indexCount(0) {}
 
@@ -37,8 +38,8 @@ void Mesh::CreateMesh(const GLfloat* vertices, const GLuint* indices,
 	glBindVertexArray(0);
 }
 
-void Mesh::CreateColorMesh(GLfloat* vertices, GLuint* indices, GLuint noOfVerts,
-                           GLuint noOfIndices) {
+void Mesh::CreateColorMesh(const GLfloat* vertices, const GLuint* indices,
+                           GLuint noOfVerts, GLuint noOfIndices) {
 	indexCount = noOfIndices;
 
 	glGenVertexArrays(1, &VAO);

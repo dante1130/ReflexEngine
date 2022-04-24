@@ -6,31 +6,17 @@ project (ReflexEngine LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 
+set(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
+set(CMAKE_DISABLE_SOURCE_CHANGES ON)
+
 # CMake path for libraries.
 set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 
-# Set to not build docs, tests and examples of GLFW.
-set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
-set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
-set(RP3D_COMPILE_TESTBED OFF CACHE BOOL "" FORCE)
-set(RP3D_COMPILE_TEST OFF CACHE BOOL "" FORCE)
-set(RP3D_PROFILING_ENABLED OFF CACHE BOOL "" FORCE)
-set(RP3D_DOUBLE_PRECISION_ENABLED OFF CACHE BOOL "" FORCE)
-
 add_executable (ReflexEngine)
 
-# Add subdirectories.
-add_subdirectory(${CMAKE_PREFIX_PATH}/glm)
-add_subdirectory(${CMAKE_PREFIX_PATH}/glad)
-add_subdirectory(${CMAKE_PREFIX_PATH}/glfw)
-add_subdirectory(${CMAKE_PREFIX_PATH}/imgui)
-add_subdirectory(${CMAKE_PREFIX_PATH}/lua)
-add_subdirectory(${CMAKE_PREFIX_PATH}/reactphysics3d)
-add_subdirectory(${CMAKE_PREFIX_PATH}/raknet)
+add_subdirectory(cmake)
 
 add_subdirectory(src)
-
 
 target_compile_options(${PROJECT_NAME} PRIVATE
     # Clang

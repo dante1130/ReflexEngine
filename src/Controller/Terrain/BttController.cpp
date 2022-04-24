@@ -253,9 +253,9 @@ void BttController::Update(glm::vec3 position) {
 }
 
 void BttController::GenerateVertices(int chunkSize, int chunkDetail) {
-	int length = (chunkSize * chunkDetail) - (chunkSize - 1);
+	int length = chunk_detail + ((chunk_detail - 1) * (chunk_size - 1));
 
-	if (!heightmap_) {
+	      if (!heightmap_) {
 		std::cout << "No heightmap detected!" << std::endl;
 	}
 

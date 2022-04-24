@@ -36,8 +36,8 @@ public:
 	 * @param noOfVerts
 	 * @param noOfIndices
 	 */
-	void CreateColorMesh(GLfloat* vertices, GLuint* indices, GLuint noOfVerts,
-	                     GLuint noOfIndices);
+	void CreateColorMesh(const GLfloat* vertices, const GLuint* indices,
+	                     GLuint noOfVerts, GLuint noOfIndices);
 
 	/**
 	 * @brief Binds the VAO and IBO and renders the mesh.

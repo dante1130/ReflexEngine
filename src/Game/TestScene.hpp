@@ -12,7 +12,7 @@
 #include "Controller/GameAssetFactory.hpp"
 #include "Controller/GuiLuaAccess.hpp"
 #include "Controller/GenericFunctions.h"
-#include "Controller/LuaManager.hpp";
+#include "Controller/LuaManager.hpp"
 
 /**
  * @class TestScene
