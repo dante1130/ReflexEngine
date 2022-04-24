@@ -82,5 +82,5 @@ public:
 
 protected:
 	/// A vector of game objects in the scene.
-	std::vector<std::shared_ptr<GameObject>> game_objects_;
+	std::vector<std::unique_ptr<GameObject>> game_objects_;
 };

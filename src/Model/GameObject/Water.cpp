@@ -23,7 +23,7 @@ void Water::init() {
 	                 10.0f,  0.0f, -10.0f, 100.0f, 0.0f,   0.0f, -1.0f, 0.0f,
 	                 -10.0f, 0.0f, 10.0f,  0.0f,   100.0f, 0.0f, -1.0f, 0.0f,
 	                 10.0f,  0.0f, 10.0f,  100.0f, 100.0f, 0.0f, -1.0f, 0.0f};
-	const uint32_t order[6] = {0u, 2u, 1u, 1u, 2u, 3u};
+	uint32_t order[6] = {0u, 2u, 1u, 1u, 2u, 3u};
 
 	m_mesh.CreateMesh(verts, order, 32, 6);
 
