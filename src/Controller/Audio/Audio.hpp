@@ -34,6 +34,9 @@ public:
 	 */
 	void play_sound(const std::string& name, bool loop);
 
+	/**
+	 * @brief Destroy the Audio object
+	 */
 	~Audio();
 
 private:

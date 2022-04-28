@@ -5,6 +5,7 @@
 #include "NetworkManager.hpp"
 #include "Controller/GenericFunctions.h"
 #include "Controller/Input/InputManager.hpp"
+#include "Controller/Audio/Audio.hpp"
 
 ReflexEngine::ReflexEngine() {
 	if (window_.Init() == 1) return;
@@ -12,15 +13,17 @@ ReflexEngine::ReflexEngine() {
 
 void ReflexEngine::run() {
 	auto& engine = ReflexEngine::get_instance();
+
+	GenericFunctions::lua_access();
+	InputManager::get_instance().load_lua_bindings("scripts/_Controls.lua");
 	ResourceManager::get_instance();
+	Audio::get_instance();
 
 	engine.camera_ = Camera(glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 0.0f),
 	                        -90.0f, 0.0f, 5.0f, 0.2f);
 
 	engine.renderer_.init();
-
-	gui::init(ReflexEngine::get_instance().window_.get_window(),
-	          "#version 410");
+	gui::init(engine.window_.get_window(), "#version 410");
 	guiLuaAccess::exposeGui();
 
 	engine.scenes_.emplace(std::make_shared<TestScene>());
@@ -28,8 +31,8 @@ void ReflexEngine::run() {
 
 	auto& input_manager = InputManager::get_instance();
 
-	glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
-	                 GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	glfwSetInputMode(engine.window_.get_window(), GLFW_CURSOR,
+	                 GLFW_CURSOR_NORMAL);
 
 	while (!engine.window_.IsShouldClose()) {
 		engine.update_delta_time();

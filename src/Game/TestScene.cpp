@@ -10,13 +10,12 @@ void TestScene::init() {
 	                     glm::vec3(-10.0f, -12.0f, 18.5f), 0.9f);
 
 	sol::state& lua = LuaManager::get_instance().get_state();
-	GenericFunctions::lua_access();
+
+	lua.set_function("addGameObject", &TestScene::addGameObject, this);
 
 	lua.script_file("scripts/_Materials.lua");
-	lua.set_function("addGameObject", &TestScene::addGameObject, this);
 	lua.script_file("scripts/_MasterCreation.lua");
-
-	InputManager::get_instance().load_lua_bindings("scripts/controls.lua");
+	lua.script_file("scripts/_Sounds.lua");
 }
 
 void TestScene::add_game_object_during_run(std::string luaScript) {
