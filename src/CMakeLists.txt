@@ -1,14 +1,6 @@
 target_sources(${PROJECT_NAME} PRIVATE
     main.cpp
 
-	Controller/Pathfinding/AStar.cpp
-	Controller/Pathfinding/AStarInterface.cpp
-	Controller/Terrain/Terrain.cpp
-	Controller/Terrain/BruteForceTerrain.cpp
-	Controller/Terrain/BTT.cpp
-	Controller/Terrain/BttController.cpp
-	Controller/Terrain/TexturedTerrain.cpp
-	View/guiManager.cpp
 	NetworkManager.cpp
 
 	Model/GameObject/GameObject.hpp
@@ -34,6 +26,8 @@ target_sources(${PROJECT_NAME} PRIVATE
 	View/Renderer/OpenGL/Objects/OmniShadowMap.cpp
 	View/Renderer/OpenGL/Objects/Skybox.cpp
 	View/Renderer/OpenGL/Objects/Texture.cpp
+	View/guiManager.cpp
+
 
 	Controller/ReflexEngine/ReflexEngine.cpp
 	Controller/ReflexEngine/Window.cpp
@@ -46,6 +40,14 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/Input/InputManager.cpp
 	Controller/Input/InputState.cpp
 	Controller/Input/Input.hpp
+	Controller/Audio/Audio.cpp
+	Controller/Pathfinding/AStar.cpp
+	Controller/Pathfinding/AStarInterface.cpp
+	Controller/Terrain/Terrain.cpp
+	Controller/Terrain/BruteForceTerrain.cpp
+	Controller/Terrain/BTT.cpp
+	Controller/Terrain/BttController.cpp
+	Controller/Terrain/TexturedTerrain.cpp
 	Controller/GameAssetFactory.cpp
 	Controller/LuaManager.cpp
 	Controller/Physics.cpp
