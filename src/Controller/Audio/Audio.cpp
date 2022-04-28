@@ -10,7 +10,9 @@ bool Audio::load_audio(const std::string& audio_name, const std::string& path) {
 }
 
 void Audio::play_sound(const std::string& audio_name, bool loop) {
-	audio_engine->play2D(sound_map[audio_name], loop);
+	if (sound_map.find(audio_name) != sound_map.end()) {
+		audio_engine->play2D(sound_map[audio_name], loop);
+	}
 }
 
 Audio::~Audio() {
