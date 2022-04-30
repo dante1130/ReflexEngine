@@ -2,7 +2,6 @@ addGameObject("scripts/creator.lua")
 
 addGameObject("scripts/terrain.lua")
 
-
 for i = 1, 1, 1 do
 	addGameObject("scripts/Cat.lua")
 end

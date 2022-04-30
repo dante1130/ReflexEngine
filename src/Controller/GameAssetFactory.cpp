@@ -34,11 +34,7 @@ bool GameAssetFactory::isLuaScript(std::string luaScript) {
 		ext = luaScript.substr(pos + (int)1, luaScript.length());
 	}
 
-	if (ext._Equal("lua")) {
-		return true;
-	} else {
-		return false;
-	}
+	return ext == "lua";
 }
 
 std::string GameAssetFactory::getObjectType(std::string luaScript) {
