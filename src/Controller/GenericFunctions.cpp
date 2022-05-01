@@ -194,6 +194,8 @@ float GenericFunctions::getHeight(float x, float z) {
 	       m_playable_floor_y_scale;
 }
 
+uint8_t* GenericFunctions::get_height_map() { return m_tt->get_height_map(); }
+
 void GenericFunctions::createNetworkManager(bool create) {
 	if (createNetwork != true) {
 		createNetwork = true;

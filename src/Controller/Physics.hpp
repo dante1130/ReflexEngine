@@ -54,7 +54,7 @@ void setDebuggerValues(int type, bool val);
  * @pre		World is created
  * @post	World is destoryed
  */
-void destoryWorld();
+void destroyWorld();
 
 /**
  * @brief	Returns physics common game object

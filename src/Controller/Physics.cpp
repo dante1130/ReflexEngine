@@ -32,7 +32,7 @@ void Physics::setDebuggerValues(int type, bool val) {
 	debugRenderer.setIsDebugItemDisplayed((DebugRenderer::DebugItem)type, val);
 }
 
-void Physics::destoryWorld() {
+void Physics::destroyWorld() {
 	if (created == true) {
 		physicsCommon.destroyPhysicsWorld(world);
 		created = false;

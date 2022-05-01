@@ -1,5 +1,3 @@
-addGameObject("scripts/creator.lua")
-
 addGameObject("scripts/terrain.lua")
 
 for i = 1, 1, 1 do
@@ -37,5 +35,3 @@ addGameObject("scripts/Arrow.lua")
 addGameObject("scripts/Bow.lua")
 addGameObject("scripts/Boat.lua")
 addGameObject("scripts/Lighthouse.lua")
-
-addGameObject("scripts/destroyer.lua")

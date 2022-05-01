@@ -215,6 +215,49 @@ void BodyRigidPhysics::addCapsuleCollider(glm::vec3 pos, float radius,
 	mat.setFrictionCoefficient(friction);
 }
 
+void BodyRigidPhysics::addHeightFieldShape(glm::vec3 pos, float bounciness,
+                                           float friction, int nColumns,
+                                           int nRows, int minHeight,
+                                           int maxHeight,
+                                           unsigned char* heightValues) {
+	/*
+	if (bounciness < 0) {
+	    bounciness = 0;
+	} else if (bounciness > 1) {
+	    bounciness = 1;
+	}
+
+	if (friction < 0) {
+	    friction = 0;
+	} else if (friction > 1) {
+	    friction = 1;
+	}
+
+	int* values = new int[nColumns * nRows];
+	for (int x = 0; x < nColumns; x++) {
+	    for (int y = 0; y < nRows; y++) {
+	        values[y * nColumns + x] = (int)heightValues[y * nColumns + x];
+	    }
+	}
+
+	HeightFieldShape* heightFieldShape =
+	    Physics::getPhysicsCommon().createHeightFieldShape(
+	        nColumns, nRows, minHeight, maxHeight, values,
+	        HeightFieldShape::HeightDataType::HEIGHT_INT_TYPE);
+
+	Transform t = Transform::identity();
+	t.setPosition(Vector3(pos.x, pos.y, pos.z));
+
+	Collider* collider;
+	collider = rb->addCollider(heightFieldShape, t);
+
+	Material& mat = collider->getMaterial();
+
+	mat.setBounciness(bounciness);
+	mat.setFrictionCoefficient(friction);
+	*/
+}
+
 bool BodyRigidPhysics::getIfGravityActive() { return rb->isGravityEnabled(); }
 
 int BodyRigidPhysics::getRBType() { return (int)rb->getType(); }

@@ -92,8 +92,8 @@ public:
 	~Body();
 
 private:
-	/// <summary>
-	/// True if creator, false if destroyer
-	/// </summary>
-	bool creator = true;
+	// <summary>
+	// True if creator, false if destroyer
+	// </summary>
+	// bool creator = true;
 };
