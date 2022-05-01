@@ -259,6 +259,9 @@ void setPlayableArea(uint8_t* heightmap, TexturedTerrain* tt, float scale,
                      int size);
 
 float getHeight(float x, float z);
+
+uint8_t* get_height_map();
+
 /**
  * @brief	Creates the network manager
  * @param	create  - if you want to create it

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <reactphysics3d/reactphysics3d.h>
+
 #include "Physics.hpp"
 #include <glm/glm.hpp>
 #include <math.h>
@@ -243,8 +244,9 @@ public:
 	 * @pre		Rigid body exists
 	 * @post	Height field added
 	 */
-	void addHeightFieldShape(glm::vec3 pos, float bounciness,
-	                         float friction) = delete;
+	void addHeightFieldShape(glm::vec3 pos, float bounciness, float friction,
+	                         int nColumns, int nRows, int minHeight,
+	                         int maxHeight, unsigned char* heightValues);
 
 	/**
 	 * @brief	Gets if gravity is allowed in the rb (rigid body)

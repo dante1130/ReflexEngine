@@ -6,6 +6,7 @@
 #include "Controller/GenericFunctions.h"
 #include "Controller/Input/InputManager.hpp"
 #include "Controller/Audio/Audio.hpp"
+#include "Controller/Physics.hpp"
 
 ReflexEngine::ReflexEngine() {
 	if (window_.Init() == 1) return;
@@ -18,6 +19,7 @@ void ReflexEngine::run() {
 	InputManager::get_instance().load_lua_bindings("scripts/_Controls.lua");
 	ResourceManager::get_instance();
 	Audio::get_instance();
+	Physics::createWorld();
 
 	engine.camera_ = Camera(glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 0.0f),
 	                        -90.0f, 0.0f, 5.0f, 0.2f);
@@ -47,6 +49,7 @@ void ReflexEngine::run() {
 		if (GenericFunctions::getIfPaused()) {
 			engine.delta_time_ = 0;
 		} else {
+			Physics::updateWorld(engine.delta_time_);
 			engine.scenes_.top()->mouse_controls(engine.window_.GetXOffset(),
 			                                     engine.window_.GetYOffset());
 		}
@@ -70,6 +73,7 @@ void ReflexEngine::run() {
 
 		engine.window_.SwapBuffers();
 	}
+	Physics::destroyWorld();
 	gui::shutdown();
 }
 
