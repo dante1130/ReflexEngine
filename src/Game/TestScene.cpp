@@ -2,6 +2,7 @@
 
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 #include "Controller/Input/InputManager.hpp"
+#include "Controller/Audio/Audio.hpp"
 #include "TestScene.hpp"
 
 void TestScene::init() {
@@ -66,8 +67,7 @@ void TestScene::key_controls(float delta_time) {
 		GenericFunctions::setIfPaused(!GenericFunctions::getIfPaused());
 
 	if (input_manager.get_key_state(Input::help_menu).is_key_pressed())
-		GenericFunctions::setifHelpMenuActive(
-		    !GenericFunctions::getIfHelpMenuActive());
+		Audio::get_instance().stop_all();
 
 	if (input_manager.get_key_state(Input::network_menu).is_key_pressed()) {
 		GenericFunctions::setNetworkMenuActive(
