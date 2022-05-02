@@ -12,11 +12,7 @@ void PhysicsObject::initRB(glm::vec3 pos, glm::vec3 rotation, float angle) {
 	rb.init(pos, rotation, angle);
 }
 
-void PhysicsObject::update(float delta_time) {
-	// position = rb.getPosition();
-	// position.y = GenericFunctions::getHeight(position.x, position.z) + 1;
-	// rb.set_position(position);
-}
+void PhysicsObject::update(float delta_time) {}
 
 void PhysicsObject::fixed_update(float delta_time) {
 	position = rb.getPosition();
@@ -40,6 +36,7 @@ void PhysicsObject::draw(std::shared_ptr<Shader> shader) {
 	    glm::translate(model, glm::vec3(position.x, position.y, position.z));
 	model = glm::rotate(model, glm::radians(angle),
 	                    glm::vec3(rotation.x, rotation.y, rotation.z));
+
 	model = glm::scale(model, glm::vec3(scale.x, scale.y, scale.z));
 	glUniformMatrix4fv(shader->GetModelLocation(), 1, GL_FALSE,
 	                   glm::value_ptr(model));

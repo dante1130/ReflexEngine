@@ -79,7 +79,12 @@ public:
 	 */
 	void save_object() override;
 
-private:
+	/**
+	 * @brief	default destructor
+	 */
+	~PhysicsObject() = default;
+
+protected:
 	/// The model of the item.
 	std::string model_name_;
 	/// The material of the item.

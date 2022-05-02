@@ -16,7 +16,10 @@ public:
 		glm::vec3 rotation = {0.0f, 1.0f, 0.0f};
 		/// The scale of the game object.
 		glm::vec3 scale = {1.0f, 1.0f, 1.0f};
+		/// Angle around the axis of rotation
 		float angle = 0.01;
+		/// If it should be removed from the game loop
+		bool remove_ = false;
 	};
 
 	/**

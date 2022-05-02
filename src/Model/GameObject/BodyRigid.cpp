@@ -77,3 +77,11 @@ void BodyRigid::addCapsuleCollider(glm::vec3 pos, float radius, float height,
 	m_capsule.push_back(cb);
 	m_numOfColliders++;
 }
+
+void BodyRigid::setLinearAxisFactor(glm::vec3 factor) {
+	rb.setLinearAxisFactor(factor);
+}
+
+void BodyRigid::setAngularAxisFactor(glm::vec3 factor) {
+	rb.setAngularAxisFactor(factor);
+}

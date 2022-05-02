@@ -1,6 +1,7 @@
 #pragma once
 
 #include <sol/sol.hpp>
+#include <assert.h>
 
 #include "Controller/LuaManager.hpp"
 #include "Model/GameObject/GameObject.hpp"
@@ -13,6 +14,7 @@
 #include "Model/GameObject/ScriptableObject.hpp"
 #include "Model/GameObject/TerrainObject.hpp"
 #include "Controller/Terrain/TexturedTerrain.hpp"
+#include "Model/GameObject/Projectile.hpp"
 
 /**
  * @class GameAssetFactory
@@ -197,5 +199,25 @@ private:
 	 */
 	static ScriptableObject* loadScriptableObject(std::string luaScript);
 
+	/**
+	 * @brief	Loads in a terrain object object from a lua script
+	 * @param	luaScript	- The lua script to load the terrain object data
+	 * from
+	 * @return	*TerrainObject		- Created terrain object object
+	 *
+	 * @pre		terrain object varaible exists
+	 * @post	terrain object stored
+	 */
 	static TerrainObject* loadTerrainObject(std::string luaScript);
+
+	/**
+	 * @brief	Loads in a projectile object from a lua script
+	 * @param	luaScript	- The lua script to load the projectile data
+	 * from
+	 * @return	*PhysicsObject		- Created projectile object
+	 *
+	 * @pre		projectile object varaible exists
+	 * @post	projectile object stored
+	 */
+	static Projectile* loadProjectileObject(std::string luaScript);
 };
