@@ -28,7 +28,6 @@ target_sources(${PROJECT_NAME} PRIVATE
 	View/Renderer/OpenGL/Objects/Texture.cpp
 	View/guiManager.cpp
 
-
 	Controller/ReflexEngine/ReflexEngine.cpp
 	Controller/ReflexEngine/Window.cpp
 	Controller/ReflexEngine/Camera.cpp
@@ -41,6 +40,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/Input/InputState.cpp
 	Controller/Input/Input.hpp
 	Controller/Audio/Audio.cpp
+	Controller/Audio/AudioStopReceiver.cpp
 	Controller/Pathfinding/AStar.cpp
 	Controller/Pathfinding/AStarInterface.cpp
 	Controller/Terrain/Terrain.cpp
