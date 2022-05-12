@@ -22,6 +22,8 @@ addGameObject("scripts/credits_setup.lua")
 addGameObject("scripts/player.lua")
 addGameObject("scripts/networkMenuSetup.lua")
 addGameObject("scripts/gunSetup.lua")
+addGameObject("scripts/chatMenuSendSetup.lua")
+addGameObject("scripts/chatMenuReadSetup.lua")
 
 for i = 1, 25, 1 do
 	addGameObject("scripts/Human.lua")

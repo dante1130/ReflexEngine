@@ -47,6 +47,8 @@ bool networkManager::ConnectClient(char* serverIP) {
 		connecting = peer->Connect(serverIP, SERVER_PORT, 0, 0);
 		if (connecting) {
 			printf("Not connected");
+		} else {
+			connected = true;
 		}
 		return (connecting);
 	}
@@ -61,6 +63,7 @@ void networkManager::SetupServer() {
 		strcat(name, "Server: ");
 		peer->SetMaximumIncomingConnections(MAX_CLIENTS);
 		printf("Server Running...\n");
+		connected = true;
 	}
 }
 
@@ -73,15 +76,21 @@ void networkManager::MessageSend(char* inputMessage) {
 	char sendMessage[sizeof(inputMessage) + sizeof(name)];
 	strcpy(sendMessage, name);
 	strcat(sendMessage, inputMessage);
-	peer->Send(sendMessage, (int)strlen(sendMessage) + 1, HIGH_PRIORITY, RELIABLE_ORDERED, 0, RakNet::UNASSIGNED_SYSTEM_ADDRESS, true);
+	RakNet::BitStream bsOut;
+	bsOut.Write((RakNet::MessageID)ID_GAME_MESSAGE_1);
+	bsOut.Write(sendMessage);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, RakNet::UNASSIGNED_SYSTEM_ADDRESS, true);
+	//peer->Send(sendMessage, (int)strlen(sendMessage) + 1, HIGH_PRIORITY, RELIABLE_ORDERED, 0, RakNet::UNASSIGNED_SYSTEM_ADDRESS, true);
 }
 
-char* networkManager::ReceiveMessage() {
-	for (packet = peer->Receive(); packet; peer->DeallocatePacket(packet), packet = peer->Receive()) {
-		
-		//strcat(message, HandleMessage(packet));
-			//return (message);
-		connected = true;
+std::string networkManager::ReceiveMessage() {
+	// for (packet = peer->Receive(); packet;
+	// peer->DeallocatePacket(packet), packet = peer->Receive()) {
+	packet = peer->Receive();
+	// strcat(message, HandleMessage(packet));
+	// return (message);
+	connected = true;
+	if (packet) {
 		if (isServer) {
 			switch (GetPacketIdentifier(packet)) {
 				case ID_REMOTE_DISCONNECTION_NOTIFICATION:
@@ -126,10 +135,22 @@ char* networkManager::ReceiveMessage() {
 					RakNet::BitStream bsIn(packet->data, packet->length, false);
 					bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 					bsIn.Read(rs);
-					return (reinterpret_cast<char*>(packet->data));
+					std::string newMessage = rs;
+					// printf("%s NM\n", newMessage);
+					bsIn.Reset();
+					return (newMessage);
+					// return (reinterpret_cast<char*>(packet->data));
 				} break;
 				default:
-					peer->Send(reinterpret_cast<char*>(packet->data), (const int)strlen(reinterpret_cast<char*>(packet->data)) + 1, HIGH_PRIORITY, RELIABLE_ORDERED, 0, RakNet::UNASSIGNED_SYSTEM_ADDRESS, true);  // This sends the message to everyone
+					RakNet::RakString rs;
+					RakNet::BitStream bsIn(packet->data, packet->length, false);
+					bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+					bsIn.Read(rs);
+					peer->Send(&bsIn, HIGH_PRIORITY, RELIABLE_ORDERED, 0,
+					           RakNet::UNASSIGNED_SYSTEM_ADDRESS,
+					           true);  // This sends
+					                   // the message to everyone
+					return (rs);
 					break;
 			}
 		} else {
@@ -177,16 +198,20 @@ char* networkManager::ReceiveMessage() {
 					RakNet::BitStream bsIn(packet->data, packet->length, false);
 					bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 					bsIn.Read(rs);
-					return reinterpret_cast<char*>(packet->data);
+					// printf("%s NM\n", rs.C_String());
+					bsIn.Reset();
+					return (rs);
 					// bsIn.Reset();
 				} break;
 				default:
-					return reinterpret_cast<char*>(packet->data);
+					// printf("%s\n", packet->data);
+					return " ";
 					break;
 			}
 		}
+		peer->DeallocatePacket(packet);
 	}
-	return (" ");
+	return " ";
 }
 
 void networkManager::DestroySession() {
@@ -200,6 +225,15 @@ void networkManager::DestroySession() {
 
 bool networkManager::ConnectionStatus() { 
 	return (connected);
+}
+
+bool networkManager::HasReceivedChatMessage() {
+	for (packet = peer->Receive(); packet; packet = peer->Receive()) {
+		if (GetPacketIdentifier(packet) == ID_GAME_MESSAGE_1) {
+			return (true);
+		}
+	}
+	return (false);
 }
 
 unsigned char networkManager::GetPacketIdentifier(RakNet::Packet* p) {

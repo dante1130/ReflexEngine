@@ -346,6 +346,33 @@ bool networkConnectionStatus();
 void networkRetainIP(std::string savedIP);
 
 /**
+ * @brief	Retains the message entered by the user (catches input that the
+ * user has entered with guiManager)
+ * @param   savedMessage - message to retain
+ *
+ * @pre		Nothing
+ * @post	Retains the message that has been entered by the user
+ */
+void networkRetainMessage(std::string savedMessage);
+
+/**
+ * @brief	Returns the message saved by networkRetainMessage
+ * @return	string - Returns the retained message
+ *
+ * @pre		Nothing
+ * @post	Returns the retained message
+ */
+std::string networkReturnRetainedMessage();
+
+void networkSendMessage();
+
+std::string networkGetMessage();
+
+bool networkValidChatMessage();
+
+bool networkConnectedSafe();
+
+/**
  * @brief	Returns the IP address saved by networkRetainIP
  * @return	string - Returns the retained IP address
  *

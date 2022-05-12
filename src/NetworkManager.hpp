@@ -126,7 +126,7 @@ public:
 	 * @post	Returns the received message to another part of the game engine
 	 * (notably the gui interface)
 	 */
-	char *ReceiveMessage();
+	std::string ReceiveMessage();
 
 	/**
 	 * @brief	Ends the current session.
@@ -150,6 +150,8 @@ public:
 	 * @post	Returns the status of the connection (are you connected or not?)
 	 */
 	bool ConnectionStatus();
+
+	bool HasReceivedChatMessage();
 
 private:
 	/**

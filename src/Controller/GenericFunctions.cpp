@@ -21,6 +21,7 @@ static bool shouldShoot;
 static networkManager network;
 static std::string message;
 static std::string currentIPAddress;
+static std::string incomingMessage;
 
 static float lastShot = 0;
 static float shot_delay = 0;
@@ -76,6 +77,12 @@ void GenericFunctions::lua_access() {
 	lua.set_function("network_connection_status", networkConnectionStatus);
 	lua.set_function("network_retain_IP", networkRetainIP);
 	lua.set_function("network_return_IP", networkReturnRetainedIP);
+	lua.set_function("network_retain_message", networkRetainMessage);
+	lua.set_function("network_return_message", networkReturnRetainedMessage);
+	lua.set_function("network_send_message", networkSendMessage);
+	lua.set_function("network_get_message", networkGetMessage);
+	lua.set_function("network_has_valid_message", networkValidChatMessage);
+	lua.set_function("network_connected", networkConnectedSafe);
 
 	lua.set_function("set_last_shot", setLastShot);
 	lua.set_function("set_shot_delay", setShotDelay);
@@ -240,11 +247,17 @@ void GenericFunctions::networkEnd() {
 }
 
 void GenericFunctions::networkUpdate() {
-	if (createNetwork && networkConnected && network.ReceiveMessage() != " ") {
-		printf("%s\n",
-		       network.ReceiveMessage());  // Currently prints to console, but
+	
+	if (createNetwork && networkConnected){ //&& network.ReceiveMessage() != " ") {
+		//printf("%s\n", network.ReceiveMessage().c_str());  // Currently prints to console, but
 		                                   // will eventually print to text chat
+		incomingMessage = network.ReceiveMessage();
+		if (incomingMessage != " ") {
+			printf("%s Update\n", incomingMessage);
+		}
 	}
+	//network.HasReceivedChatMessage();
+	
 }
 
 bool GenericFunctions::getNetworkMenuActive() { return (networkMenu); }
@@ -258,6 +271,34 @@ void GenericFunctions::networkRetainIP(std::string savedIP) {
 	if (savedIP != "") {
 		currentIPAddress = savedIP;
 	}
+}
+
+void GenericFunctions::networkRetainMessage(std::string savedMessage) {
+	if (savedMessage != "") {
+		message = savedMessage;
+	}
+}
+
+std::string GenericFunctions::networkReturnRetainedMessage() {
+	return (message);
+}
+
+void GenericFunctions::networkSendMessage() { 
+	char messageChar[255];
+	strcpy(messageChar, message.c_str());
+	network.MessageSend(messageChar); 
+}
+
+std::string GenericFunctions::networkGetMessage() {
+	return incomingMessage;
+}
+
+bool GenericFunctions::networkValidChatMessage(){
+	return network.HasReceivedChatMessage();
+}
+
+bool GenericFunctions::networkConnectedSafe() {
+	return (createNetwork && networkConnected);
 }
 
 std::string GenericFunctions::networkReturnRetainedIP() {
