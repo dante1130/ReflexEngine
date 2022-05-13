@@ -115,7 +115,7 @@ float Terrain::get_height_world(float x, float z) const {
 	// Get the final height
 	float height = height_1_2 + (height_3_4 - height_1_2) * coord_z;
 
-	return height * scale_.y;
+	return height;
 }
 
 uint8_t Terrain::get_height_color(int x, int z) const {
