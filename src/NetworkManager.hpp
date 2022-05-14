@@ -30,6 +30,9 @@ private:
 	/// Have we initialsed the networkManager?
 	bool init;
 
+	/// How many clients are we connected to? (should be 1 for clients, > 1 for servers when multiple clients)
+	int connectedClients;
+
 	/// The general connection information provided by RakNet. Used for
 	/// initialisation, sending and receiving data.
 	RakNet::RakPeerInterface *peer;
@@ -84,13 +87,13 @@ public:
 	/**
 	 * @brief	Initialises and begins a server session. Running on the network
 	 * port number 60000. Also sets isServer to "true".
-	 * @param	void
+	 * @param	username - The username that the server will be using. Defaults to 'Server' if empty.
 	 * @return	void
 	 *
-	 * @pre		None
+	 * @pre		string username
 	 * @post	Starts up the server
 	 */
-	void SetupServer();
+	void SetupServer(std::string userName);
 
 	/**
 	 * @brief	Changes the name of the client or server.

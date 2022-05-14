@@ -372,6 +372,12 @@ bool networkValidChatMessage();
 
 bool networkConnectedSafe();
 
+void networkRetainUsername(std::string savedUsername);
+
+void networkSetUsername();
+
+std::string networkReturnUsername();
+
 /**
  * @brief	Returns the IP address saved by networkRetainIP
  * @return	string - Returns the retained IP address

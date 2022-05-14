@@ -13,11 +13,21 @@ if get_network_menu() then
 		fullIP = ""
 	end
 	gui_text(fullIP)
+	local username = gui_luaInputText("Username: ")
+	if network_return_username() ~= nil then
+		fullusername = network_return_username()
+	else
+		fullusername = ""
+	end
+	gui_text("Your username is: " .. fullusername)
+	local saveUsername = gui_button("Save username", 200, 50)
 	local connect = gui_button("Connect to server (127.0.0.1 if on same PC)", 300, 50)
 	
 	local back = gui_button("Exit Menu",150,50)
 	
 	network_retain_IP(ip)
+
+	network_retain_username(username)
 	
 	if initialise then
 		create_network_manager(true)
@@ -25,6 +35,10 @@ if get_network_menu() then
 	
 	if start then
 		start_server(true)
+	end
+
+	if(saveUsername) then
+		network_set_username()
 	end
 
 	if connect then

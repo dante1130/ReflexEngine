@@ -10,6 +10,8 @@ bool connected = false;
 
 bool init = false;
 
+int connectedClients = 0;
+
 RakNet::RakPeerInterface* peer;
 
 RakNet::Packet* packet;
@@ -55,21 +57,27 @@ bool networkManager::ConnectClient(char* serverIP) {
 	return (false);
 }
 
-void networkManager::SetupServer() {
+void networkManager::SetupServer(std::string userName) {
 	if (peer != NULL && init && !isServer) {
 		RakNet::SocketDescriptor sd(SERVER_PORT, 0);
 		peer->Startup(MAX_CLIENTS, &sd, 1);
 		isServer = true;
-		strcat(name, "Server: ");
+		if (userName != " ") {
+			userName.append(": ");
+			strcpy(name, userName.c_str());
+		} else {
+			strcpy(name, "Server: ");
+		}
 		peer->SetMaximumIncomingConnections(MAX_CLIENTS);
 		printf("Server Running...\n");
 		connected = true;
+		connectedClients++; // Server itself is a client
 	}
 }
 
 void networkManager::ChangeName(std::string userName) { 
 	userName.append(": ");
-	strcat(name, userName.c_str());
+	strcpy(name, userName.c_str());
 }
 
 void networkManager::MessageSend(char* inputMessage) {
@@ -101,6 +109,7 @@ std::string networkManager::ReceiveMessage() {
 					break;
 				case ID_REMOTE_NEW_INCOMING_CONNECTION:
 					printf("Another Connection is incoming\n");
+					connectedClients++;
 					return ("Another client has connected\n");
 					break;
 				case ID_CONNECTION_REQUEST_ACCEPTED:
@@ -109,6 +118,7 @@ std::string networkManager::ReceiveMessage() {
 					break;
 				case ID_NEW_INCOMING_CONNECTION:
 					printf("A Connection is incoming\n");
+					connectedClients++;
 					return ("A connection is incoming\n");
 					break;
 				case ID_NO_FREE_INCOMING_CONNECTIONS:
@@ -117,6 +127,7 @@ std::string networkManager::ReceiveMessage() {
 				case ID_DISCONNECTION_NOTIFICATION:
 					if (isServer) {
 						connected = false;
+						connectedClients--;
 						return ("A client has disconnected\n");
 					} else {
 						return ("We have been disconnected\n");
@@ -125,7 +136,8 @@ std::string networkManager::ReceiveMessage() {
 				case ID_CONNECTION_LOST:
 					if (isServer) {
 						connected = false;
-						return ("A client lost the connection\n");
+						connectedClients--;
+						return ("\nA client lost the connection\n");
 					} else {
 						return ("Connection lost\n");
 					}
@@ -167,6 +179,7 @@ std::string networkManager::ReceiveMessage() {
 					break;
 				case ID_CONNECTION_REQUEST_ACCEPTED:
 					printf("We have connected\n");
+					connectedClients++;
 					return ("Our connection request has been accepted\n");
 					break;
 				case ID_NEW_INCOMING_CONNECTION:
@@ -179,17 +192,20 @@ std::string networkManager::ReceiveMessage() {
 				case ID_DISCONNECTION_NOTIFICATION:
 					if (isServer) {
 						connected = false;
-						return ("A client has disconnected\n");
+						connectedClients--;
+						return ("\nA client has disconnected\n");
 					} else {
 						connected = false;
-						return ("We have been disconnected\n");
+						connectedClients--;
+						return ("\nWe have been disconnected\n");
 					}
 					break;
 				case ID_CONNECTION_LOST:
 					if (isServer) {
-						return ("A client lost the connection\n");
+						return ("\nA client lost the connection\n");
 					} else {
 						connected = false;
+						connectedClients--;
 						return ("Connection lost\n");
 					}
 					break;
@@ -220,11 +236,16 @@ void networkManager::DestroySession() {
 		printf("Killed the session\n");
 		init = false;
 		isServer = false;
+		connectedClients = 0;
 	}
 }
 
 bool networkManager::ConnectionStatus() { 
-	return (connected);
+	if (connectedClients > 0) {
+		return (true);
+	} else {
+		return (false);
+	}
 }
 
 bool networkManager::HasReceivedChatMessage() {

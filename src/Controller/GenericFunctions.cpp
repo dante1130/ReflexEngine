@@ -22,6 +22,7 @@ static networkManager network;
 static std::string message;
 static std::string currentIPAddress;
 static std::string incomingMessage;
+static std::string username = " ";
 
 static float lastShot = 0;
 static float shot_delay = 0;
@@ -83,6 +84,9 @@ void GenericFunctions::lua_access() {
 	lua.set_function("network_get_message", networkGetMessage);
 	lua.set_function("network_has_valid_message", networkValidChatMessage);
 	lua.set_function("network_connected", networkConnectedSafe);
+	lua.set_function("network_retain_username", networkRetainUsername);
+	lua.set_function("network_return_username", networkReturnUsername);
+	lua.set_function("network_set_username", networkSetUsername);
 
 	lua.set_function("set_last_shot", setLastShot);
 	lua.set_function("set_shot_delay", setShotDelay);
@@ -223,7 +227,7 @@ void GenericFunctions::setNetworkMenuActive(bool active) {
 
 void GenericFunctions::startNetworkServer(bool active) {
 	if (active) {
-		network.SetupServer();
+		network.SetupServer(username);
 		networkConnected = true;
 	}
 }
@@ -233,7 +237,7 @@ void GenericFunctions::networkClientConnect() {
 	strcpy(serverIPChar, currentIPAddress.c_str());
 	printf("This Runs\n");
 	printf("%s\n", currentIPAddress.c_str());
-	network.SetupClient("Client");
+	network.SetupClient(username);
 	networkConnected = !network.ConnectClient(
 	    serverIPChar);  // Flipped as it returns true if you are NOT connected
 	                    // (which is weird I know)
@@ -284,8 +288,9 @@ std::string GenericFunctions::networkReturnRetainedMessage() {
 }
 
 void GenericFunctions::networkSendMessage() { 
-	char messageChar[255];
+	char messageChar[512];
 	strcpy(messageChar, message.c_str());
+	strcat(messageChar, "\n");
 	network.MessageSend(messageChar); 
 }
 
@@ -299,6 +304,20 @@ bool GenericFunctions::networkValidChatMessage(){
 
 bool GenericFunctions::networkConnectedSafe() {
 	return (createNetwork && networkConnected);
+}
+
+void GenericFunctions::networkRetainUsername(std::string savedUsername) {
+	if (savedUsername != "") {
+		username = savedUsername;
+	}
+}
+
+void GenericFunctions::networkSetUsername() { 
+	network.ChangeName(username); 
+}
+
+std::string GenericFunctions::networkReturnUsername() { 
+	return (username); 
 }
 
 std::string GenericFunctions::networkReturnRetainedIP() {
