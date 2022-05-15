@@ -17,6 +17,7 @@ public:
 		/// The scale of the game object.
 		glm::vec3 scale = {1.0f, 1.0f, 1.0f};
 		float angle = 0.01;
+		bool remove = false;
 	};
 
 	/**

@@ -37,19 +37,19 @@ void ReflexEngine::run() {
 	                 GLFW_CURSOR_NORMAL);
 
 	while (!engine.window_.IsShouldClose()) {
-		engine.update_delta_time();
+		EngineTime::update_delta_time(glfwGetTime());
 
 		glfwPollEvents();
 		input_manager.read_keys(engine.window_.get_window());
 
 		gui::mainLoopStart();
 
-		engine.scenes_.top()->key_controls(engine.delta_time_);
+		engine.scenes_.top()->key_controls(EngineTime::get_delta_time());
 
-		if (GenericFunctions::getIfPaused()) {
-			engine.delta_time_ = 0;
+		if (EngineTime::is_paused()) {
+			EngineTime::force_delta_time(0);
 		} else {
-			Physics::updateWorld(engine.delta_time_);
+			Physics::updateWorld(EngineTime::get_delta_time());
 			engine.scenes_.top()->mouse_controls(engine.window_.GetXOffset(),
 			                                     engine.window_.GetYOffset());
 		}
@@ -59,9 +59,10 @@ void ReflexEngine::run() {
 		else if (GenericFunctions::getIfSave())
 			engine.scenes_.top()->saveGameObjects();
 		else {
-			if (engine.fixed_delta_time_ >= time_step) {
-				engine.scenes_.top()->fixed_update(engine.fixed_delta_time_);
-				engine.fixed_delta_time_ = 0.0f;
+			if (EngineTime::get_fixed_delta_time() >= time_step) {
+				engine.scenes_.top()->fixed_update(
+				    EngineTime::get_fixed_delta_time());
+				EngineTime::reset_fixed_delta_time();
 			}
 
 			engine.scenes_.top()->update(engine.delta_time_);
