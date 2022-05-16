@@ -44,7 +44,10 @@ void ReflexEngine::run() {
 
 		gui::mainLoopStart();
 
-		engine.scenes_.top()->key_controls(engine.delta_time_);
+		if (!GenericFunctions::getNetworkMenuActive()) {
+			engine.scenes_.top()->key_controls(engine.delta_time_);
+		}
+		
 
 		if (GenericFunctions::getIfPaused()) {
 			engine.delta_time_ = 0;
