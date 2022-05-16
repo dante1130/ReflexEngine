@@ -10,7 +10,9 @@ void Player::update(float delta_time) {
 	position.y = GenericFunctions::getHeight(position.x, position.z) + height_;
 	rb.set_position(position);
 
-	const auto& camera = ReflexEngine::get_instance().camera_;
+	auto& camera = ReflexEngine::get_instance().camera_;
+
+	camera.set_position(position);
 
 	glm::vec3 lower_light = camera.get_position();
 	lower_light.y -= 0.3f;
@@ -36,9 +38,6 @@ void Player::fixed_update(float delta_time) {
 
 	glm::vec3 move = direction * move_speed_;
 	rb.setLinearVelocity(move);
-
-	position = rb.getPosition();
-	camera.set_position(position);
 }
 
 void Player::add_draw_call() {

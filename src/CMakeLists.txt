@@ -12,6 +12,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Model/GameObject/ScriptableObject.cpp
 	Model/GameObject/Player.cpp
 	Model/GameObject/TerrainObject.cpp
+	Model/ModelData.cpp
 	
 	View/Renderer/OpenGL/OpenGL.cpp
 	View/Renderer/OpenGL/Objects/Light.cpp
@@ -26,6 +27,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	View/Renderer/OpenGL/Objects/OmniShadowMap.cpp
 	View/Renderer/OpenGL/Objects/Skybox.cpp
 	View/Renderer/OpenGL/Objects/Texture.cpp
+	View/Renderer/OpenGL/Objects/Md2Model.cpp
 	View/guiManager.cpp
 
 	Controller/ReflexEngine/ReflexEngine.cpp
@@ -34,6 +36,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/ResourceManager/ResourceManager.cpp
 	Controller/ResourceManager/TextureManager.cpp
 	Controller/ResourceManager/ModelManager.cpp
+	Controller/ResourceManager/Md2ModelManager.cpp
 	Controller/ResourceManager/MaterialManager.cpp
 	Controller/ResourceManager/ObjectSaving.cpp
 	Controller/Input/InputManager.cpp

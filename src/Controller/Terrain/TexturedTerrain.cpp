@@ -36,7 +36,7 @@ bool TexturedTerrain::load_mesh() {
 
 			// Vertices
 			vertices.push_back(x);
-			vertices.push_back(get_height(x, z));
+			vertices.push_back(heightmap_[x + (z * get_width())]);
 			vertices.push_back(z);
 
 			// Texture coordinates
