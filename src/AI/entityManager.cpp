@@ -23,3 +23,9 @@ void entityManager::removeEntity(NPC* pEntity) {
 void entityManager::registerEntity(NPC* newEntity) {
 	entityMap.insert(std::make_pair(newEntity->get_id(), newEntity));
 }
+
+NPC* entityManager::getEntityByIndex(int index) const {
+	return entityMap.at(index);
+}
+
+int entityManager::numberOfEntities() { return entityMap.size(); }

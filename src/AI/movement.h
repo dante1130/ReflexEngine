@@ -2,6 +2,7 @@
 #define __MOVEMENT_H
 
 #include <glm/glm.hpp>
+#include <iostream>
 
 /*********************************************************************************************
  * Moves an object located at curpos and travelling at curVelocity towards
@@ -14,6 +15,7 @@
  *if the object has reached the target.                     * Returns: true if
  *target has reached targetPos, otherwise false.                            *
  *********************************************************************************************/
+namespace ai_movement {
 bool moveTo(glm::vec2& curPos, const glm::vec2& targetPos,
             glm::vec2& curVelocity, double timeElapsed, double offset = 0);
 
@@ -32,4 +34,5 @@ bool seeTarget(const glm::vec2& patroller, const glm::vec2& target,
                const glm::vec2& patrollerVel, float coneDistance,
                float coneRadius);
 
+}  // namespace ai_movement
 #endif

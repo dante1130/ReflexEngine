@@ -22,5 +22,9 @@ public:
 	NPC* getEntityFromID(int id) const;
 	// this method removes the entity from the list
 	void removeEntity(NPC* pEntity);
+
+	NPC* getEntityByIndex(int index) const;
+
+	int numberOfEntities();
 };
 #endif

@@ -7,7 +7,6 @@
 
 #include <iostream>
 
-#include "NPC.hpp"
 #include "movement.h"
 #include "singletons.h"
 #include <time.h>

@@ -1,5 +1,7 @@
 #include "playerStates.h"
 
+#include "NPC.hpp"
+
 /******************************************************************************/
 void fight::Enter(NPC* curPlayer) {
 	cout << "entered fight state.." << endl;
@@ -11,16 +13,21 @@ void fight::Execute(NPC* curPlayer) {
 	if (!curPlayer->watch_for_enemy()) {
 		curPlayer->get_FSM()->changeState(&patrol_state::Instance());
 	}
+	if (!curPlayer->watch_for_enemy(2)) {
+		curPlayer->get_FSM()->changeState(&chase_state::Instance());
+	}
+
 	double f = rand() % 10 * .1;
 	if (f > 0.85) {
 		cout << "agent " << curPlayer->get_id() << "attacks" << endl;
-		messageMgr.dispatchMsg(0, curPlayer->get_id(), 0, 3, NULL);
+		messageMgr.dispatchMsg(0, curPlayer->get_id(),
+		                       curPlayer->get_target_id(), 3, NULL);
 	}
 }
 
 void fight::Exit(NPC* curPlayer) {
-	// cout<<"Preparing to flee like a little girl ... leaving fight
-	// state"<<endl;
+	cout << "Preparing to flee like a little girl ... leaving fight state"
+	     << endl;
 }
 
 bool fight::onMessage(NPC* curPlayer, const telegram& msg) {
@@ -39,7 +46,7 @@ void global::Enter(NPC* curPlayer) {
 
 void global::Execute(NPC* curPlayer) {
 	if (curPlayer->get_id() == 0 && !curPlayer->is_dead()) {
-		cout << "health " << curPlayer->get_health() << endl;
+		// cout << "health " << curPlayer->get_health() << endl;
 	}
 }
 
@@ -91,14 +98,17 @@ bool Flee::onMessage(NPC* curPlayer, const telegram& msg) { return false; }
 
 /******************************************************************************/
 void backup::Enter(NPC* curPlayer) {  // curPlayer->increaseVelocity();
+	std::cout << "Unit: " << curPlayer->get_id() << " backing up by heading to "
+	          << curPlayer->get_enemy_target().x << " : "
+	          << curPlayer->get_enemy_target().y << std::endl;
 }
 
 void backup::Execute(NPC* curPlayer) {
 	if (curPlayer->move_NPC(curPlayer->get_enemy_target(), 10)) {
-		// if (!gameWorld.dude->isDead() && curPlayer->watch_for_enemy())
-		//	curPlayer->get_FSM()->changeState(&fight_state::Instance());
-		// else
-		//	curPlayer->get_FSM()->revertToPreviousState();
+		if (curPlayer->watch_for_enemy())
+			curPlayer->get_FSM()->changeState(&fight_state::Instance());
+		else
+			curPlayer->get_FSM()->revertToPreviousState();
 	}
 }
 
@@ -114,7 +124,7 @@ void chase::Enter(NPC* curPlayer) {
 }
 
 void chase::Execute(NPC* curPlayer) {
-	curPlayer->move_to_enemy();
+	// curPlayer->move_to_enemy();
 	if (curPlayer->move_to_enemy())
 		curPlayer->get_FSM()->changeState(&fight_state::Instance());
 	if (!curPlayer->watch_for_enemy())
@@ -122,6 +132,7 @@ void chase::Execute(NPC* curPlayer) {
 }
 
 void chase::Exit(NPC* curPlayer) {  // curPlayer->decreaseVelocity();
+	cout << "Chase exit" << endl;
 }
 
 bool chase::onMessage(NPC* curPlayer, const telegram& msg) { return false; }
@@ -131,20 +142,25 @@ void patrol::Enter(NPC* curPlayer) {  // curPlayer->setCurwayPointNo(0);
 }
 
 void patrol::Execute(NPC* curPlayer) {
-	curPlayer->waypoint_follow();
+	curPlayer->waypoint_follow(true);
 	if (curPlayer->watch_for_enemy()) {
 		curPlayer->get_FSM()->changeState(&chase_state::Instance());
-		// vector2D a=;
-		// messageMgr.dispatchMsg(0, curPlayer->get_id(), 1, 1,
-		//                       &gameWorld.dude->getPosition());
+		NPC* target = entityMgr.getEntityFromID(curPlayer->get_target_id());
+
+		messageMgr.dispatchMsg(
+		    0, curPlayer->get_id(), 2, 1,
+		    &glm::vec2(target->position.x, target->position.z));
 	}
 }
 
 void patrol::Exit(NPC* curPlayer) {}
 
 bool patrol::onMessage(NPC* curPlayer, const telegram& msg) {
-	if (msg.msg == 1 && curPlayer->get_id() == 1) {
-		cout << "message recived from agent " << msg.sender << endl;
+	if (msg.msg == 1 &&
+	    curPlayer->get_faction() ==
+	        entityMgr.getEntityFromID(msg.sender)->get_faction()) {
+		cout << "message recived from agent " << msg.sender << " to "
+		     << msg.receiver << endl;
 		curPlayer->set_enemy_target(*(glm::vec2*)msg.extraInfo);
 		curPlayer->get_FSM()->changeState(&backup_state::Instance());
 		// signal that we recieved message

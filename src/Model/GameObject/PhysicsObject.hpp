@@ -79,12 +79,13 @@ public:
 	 */
 	void save_object() override;
 
-private:
+protected:
 	/// The model of the item.
 	std::string model_name_;
 	/// The material of the item.
 	std::string material_name_;
 
+private:
 	/**
 	 * @brief	Saves the sphere collider of rb
 	 * @param	index	- Which collider to save

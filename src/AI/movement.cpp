@@ -15,8 +15,9 @@
  *            timeElaspsed is the time elaspsed since last logic update. *
  *            offset is the distance to stop prior to reaching the target. *
  *********************************************************************************************/
-bool moveTo(glm::vec2& curPos, const glm::vec2& targetPos,
-            glm::vec2& curVelocity, double timeElapsed, double offset) {
+bool ai_movement::moveTo(glm::vec2& curPos, const glm::vec2& targetPos,
+                         glm::vec2& curVelocity, double timeElapsed,
+                         double offset) {
 	bool xdone = false, zdone = false;
 	glm::vec2 newPos;
 
@@ -30,8 +31,8 @@ bool moveTo(glm::vec2& curPos, const glm::vec2& targetPos,
 	if (curPos == pos) {
 		return true;
 	}
-	curVelocity = toTarget * (float)curVelocity.length();  // new velocity
-	newPos = curVelocity * (float)timeElapsed;             // pos = vt
+	curVelocity = toTarget * (float)glm::length(curVelocity);  // new velocity
+	newPos = curVelocity * (float)timeElapsed;                 // pos = vt
 	// test if we have arrived at location.
 	if (curPos.x == pos.x) {
 		xdone = true;
@@ -52,11 +53,17 @@ bool moveTo(glm::vec2& curPos, const glm::vec2& targetPos,
 		return true;
 	} else
 		curPos += newPos;
+
+	if (glm::length(targetPos - curPos) < offset) {
+		return true;
+	}
+
 	return false;
 }
 
-bool flee(glm::vec2& curPos, const glm::vec2& pursuerPos,
-          glm::vec2& curVelocity, double fleeSpeed, double timeElapsed) {
+bool ai_movement::flee(glm::vec2& curPos, const glm::vec2& pursuerPos,
+                       glm::vec2& curVelocity, double fleeSpeed,
+                       double timeElapsed) {
 	glm::vec2 fromPursuer;
 	double panicDistSq = 100.0 * 100.0;
 
@@ -70,9 +77,10 @@ bool flee(glm::vec2& curPos, const glm::vec2& pursuerPos,
 	return true;
 }
 
-void pursue(const glm::vec2& evaderPos, glm::vec2& pursuerPos,
-            const glm::vec2& evaderVelocity, glm::vec2& pursuerVelocity,
-            double timeElapsed, double offset) {
+void ai_movement::pursue(const glm::vec2& evaderPos, glm::vec2& pursuerPos,
+                         const glm::vec2& evaderVelocity,
+                         glm::vec2& pursuerVelocity, double timeElapsed,
+                         double offset) {
 	double lookAheadTime;
 	// distance between evader and pursuer
 	glm::vec2 toEvader = evaderPos - pursuerPos;
@@ -85,34 +93,37 @@ void pursue(const glm::vec2& evaderPos, glm::vec2& pursuerPos,
 	double relativeHeading = glm::dot(pursuerHeading, evaderHeading);
 	// determine if evader is facing pursuer - note .95 radians =18 degrees
 	if (((glm::dot(toEvader, pursuerHeading) > 0) && relativeHeading < -0.95) ||
-	    evaderVelocity.length() == 1) {
+	    glm::length(evaderVelocity) == 1) {
 		moveTo(pursuerPos, evaderPos, pursuerVelocity, timeElapsed, offset);
 	} else {
-		lookAheadTime = (toEvader.length()) /
-		                (evaderVelocity.length() + pursuerVelocity.length());
+		lookAheadTime =
+		    (glm::length(toEvader)) /
+		    (glm::length(evaderVelocity) + glm::length(pursuerVelocity));
 		moveTo(pursuerPos, evaderPos + evaderVelocity * (float)lookAheadTime,
 		       pursuerVelocity, timeElapsed, offset);
 	}
 }
 
-bool evade(glm::vec2& evaderPos, const glm::vec2& pursuerPos,
-           glm::vec2& evaderVelocity, const glm::vec2& pursuerVelocity,
-           double timeElapsed) {
+bool ai_movement::evade(glm::vec2& evaderPos, const glm::vec2& pursuerPos,
+                        glm::vec2& evaderVelocity,
+                        const glm::vec2& pursuerVelocity, double timeElapsed) {
 	// distance between pursuer and evader
 	glm::vec2 toPursuer = pursuerPos - evaderPos;
-	double lookaheadTime = toPursuer.length() /
-	                       (evaderVelocity.length() + pursuerVelocity.length());
+	double lookaheadTime =
+	    glm::length(toPursuer) /
+	    (glm::length(evaderVelocity) + glm::length(pursuerVelocity));
 	return (flee(evaderPos, pursuerPos + pursuerVelocity * (float)lookaheadTime,
-	             evaderVelocity, evaderVelocity.length(), timeElapsed));
+	             evaderVelocity, glm::length(evaderVelocity), timeElapsed));
 }
 
 // fov in degrees not radians
-bool seeTarget(const glm::vec2& patroller, const glm::vec2& target,
-               const glm::vec2& patrollerVel, float coneDistance, float fov) {
+bool ai_movement::seeTarget(const glm::vec2& patroller, const glm::vec2& target,
+                            const glm::vec2& patrollerVel, float coneDistance,
+                            float fov) {
 	// vector between patroller and target
 	glm::vec2 toTarget = target - patroller;
 	// distance between patroller and target
-	float dist = toTarget.length();
+	float dist = glm::length(toTarget);
 	if (dist > coneDistance) return false;
 	// get heading to target
 	toTarget = glm::normalize(toTarget);
