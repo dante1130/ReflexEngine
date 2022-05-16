@@ -3,31 +3,6 @@
 #include <vector>
 #include <fstream>
 
-md2::anim_t Md2Model::animations_[] = {
-    // first, last, fps
-    {0, 39, 9},      // STAND
-    {40, 45, 10},    // RUN
-    {46, 53, 10},    // ATTACK
-    {54, 57, 7},     // PAIN_A
-    {58, 61, 7},     // PAIN_B
-    {62, 65, 7},     // PAIN_C
-    {66, 71, 7},     // JUMP
-    {72, 83, 7},     // FLIP
-    {84, 94, 7},     // SALUTE
-    {95, 111, 10},   // FALLBACK
-    {112, 122, 7},   // WAVE
-    {123, 134, 6},   // POINT
-    {135, 153, 10},  // CROUCH_STAND
-    {154, 159, 7},   // CROUCH_WALK
-    {160, 168, 10},  // CROUCH_ATTACK
-    {196, 172, 7},   // CROUCH_PAIN
-    {173, 177, 5},   // CROUCH_DEATH
-    {178, 183, 7},   // DEATH_FALLBACK
-    {184, 189, 7},   // DEATH_FALLFORWARD
-    {190, 197, 7},   // DEATH_FALLBACKSLOW
-    {198, 198, 5},   // BOOM
-};
-
 md2::vec3_t Md2Model::pre_normals_[] = {
 #include "Anorms.h"
 };
@@ -35,7 +10,7 @@ md2::vec3_t Md2Model::pre_normals_[] = {
 void Md2Model::set_animation(md2::animation_type animation_type) {
 	animstate_.type = animation_type;
 
-	md2::anim_t anim = animations_[static_cast<int>(animation_type)];
+	md2::anim_t anim = md2::animations_[static_cast<int>(animation_type)];
 
 	animstate_.start_frame = anim.first_frame;
 	animstate_.end_frame = anim.last_frame;
@@ -43,19 +18,15 @@ void Md2Model::set_animation(md2::animation_type animation_type) {
 	animstate_.fps = anim.fps;
 }
 
-void Md2Model::render_animated(float delta_time) {
-	if (delta_time > 0.0f) {
-		animate(delta_time);
-	}
+void Md2Model::set_animstate(const md2::animstate_t& animstate) {
+	animstate_ = animstate;
+}
 
+void Md2Model::render_animated(float delta_time) {
 	render_frame(animstate_.curr_frame);
 }
 
 void Md2Model::render_animated_interpolated(float delta_time) {
-	if (delta_time > 0.0f) {
-		animate(delta_time);
-	}
-
 	render_interpolated_frame(animstate_.curr_frame, animstate_.next_frame,
 	                          animstate_.interpol);
 }

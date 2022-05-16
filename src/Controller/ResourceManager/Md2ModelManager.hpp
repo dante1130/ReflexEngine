@@ -46,6 +46,14 @@ public:
 	 * @brief Get the md2 model given the md2 model name.
 	 *
 	 * @param model_name
+	 * @return Md2Model&
+	 */
+	Md2Model& get_md2_model(const std::string& model_name);
+
+	/**
+	 * @brief Get the md2 model given the md2 model name.
+	 *
+	 * @param model_name
 	 * @return const Model&
 	 */
 	const Md2Model& get_md2_model(const std::string& model_name) const;

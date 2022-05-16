@@ -29,11 +29,20 @@ public:
 	bool load_texture(const std::string& filename);
 
 	/**
+	 * @brief Animate the md2 model.
+	 *
+	 * @param delta_time
+	 */
+	void animate(float delta_time);
+
+	/**
 	 * @brief Set the animation type of the md2 model.
 	 *
 	 * @param animation_type
 	 */
 	void set_animation(md2::animation_type animation_type);
+
+	void set_animstate(const md2::animstate_t& animstate);
 
 	/**
 	 * @brief Render the md2 model frame by frame.
@@ -73,13 +82,6 @@ public:
 
 private:
 	/**
-	 * @brief Animate the md2 model.
-	 *
-	 * @param delta_time
-	 */
-	void animate(float delta_time);
-
-	/**
 	 * @brief Loads a frame to a mesh given a frame number.
 	 *
 	 * @param frame_num
@@ -115,7 +117,4 @@ private:
 	std::unique_ptr<Mesh> mesh_ = nullptr;
 	/// The md2 model texture.
 	std::unique_ptr<Texture> texture_ = nullptr;
-
-	/// The md2 model animation type.
-	static md2::anim_t animations_[21];
 };
