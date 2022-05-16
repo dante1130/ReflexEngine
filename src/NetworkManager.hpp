@@ -156,6 +156,8 @@ public:
 
 	bool HasReceivedChatMessage();
 
+	char *GetName();
+
 private:
 	/**
 	 * @brief	Gets the packet identifier and returns it.

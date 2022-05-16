@@ -76,8 +76,23 @@ void networkManager::SetupServer(std::string userName) {
 }
 
 void networkManager::ChangeName(std::string userName) { 
+	std::string oldName = name;
 	userName.append(": ");
 	strcpy(name, userName.c_str());
+	if (connected) {
+		RakNet::BitStream bsOut;
+		bsOut.Write((RakNet::MessageID)ID_GAME_MESSAGE_1);
+		std::string nameChangeMsg;
+		char nameChangeChar[256];
+		nameChangeMsg.append(oldName);
+		nameChangeMsg.append(" Changed name to ");
+		nameChangeMsg.append(userName);
+		nameChangeMsg.append("\n");
+		strcpy(nameChangeChar, nameChangeMsg.c_str());
+		printf("%s\n", nameChangeChar);
+		bsOut.Write(nameChangeChar);
+		peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, RakNet::UNASSIGNED_SYSTEM_ADDRESS, true);
+	}
 }
 
 void networkManager::MessageSend(char* inputMessage) {
@@ -148,7 +163,6 @@ std::string networkManager::ReceiveMessage() {
 					bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 					bsIn.Read(rs);
 					std::string newMessage = rs;
-					// printf("%s NM\n", newMessage);
 					bsIn.Reset();
 					return (newMessage);
 					// return (reinterpret_cast<char*>(packet->data));
@@ -256,6 +270,8 @@ bool networkManager::HasReceivedChatMessage() {
 	}
 	return (false);
 }
+
+char* networkManager::GetName() { return name; }
 
 unsigned char networkManager::GetPacketIdentifier(RakNet::Packet* p) {
 	if (p == 0) 

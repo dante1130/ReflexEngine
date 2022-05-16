@@ -257,7 +257,7 @@ void GenericFunctions::networkUpdate() {
 		                                   // will eventually print to text chat
 		incomingMessage = network.ReceiveMessage();
 		if (incomingMessage != " ") {
-			printf("%s Update\n", incomingMessage);
+			//printf("%s Update\n", incomingMessage);
 		}
 	}
 	//network.HasReceivedChatMessage();
@@ -292,6 +292,9 @@ void GenericFunctions::networkSendMessage() {
 	strcpy(messageChar, message.c_str());
 	strcat(messageChar, "\n");
 	network.MessageSend(messageChar); 
+	incomingMessage = network.GetName();
+	incomingMessage.append(messageChar);
+	networkGetMessage();
 }
 
 std::string GenericFunctions::networkGetMessage() {
