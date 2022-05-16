@@ -3,10 +3,12 @@
 #include "Controller/ResourceManager/ResourceManager.hpp"
 
 ModelData::ModelData(const std::string& model_name,
-                     const std::string& texture_name, bool is_animated)
+                     const std::string& texture_name, bool is_animated,
+                     bool is_loop)
     : model_name_(model_name),
       texture_name_(texture_name),
-      is_animated_(is_animated) {}
+      is_animated_(is_animated),
+      is_loop_(is_loop) {}
 
 void ModelData::render(float delta_time) {
 	if (is_animated_ && delta_time > 0.0f) {
@@ -45,9 +47,13 @@ void ModelData::set_animation(md2::animation_type animation_type) {
 	animstate_.end_frame = anim.last_frame;
 	animstate_.next_frame = anim.first_frame + 1;
 	animstate_.fps = anim.fps;
+
+	is_animation_done = false;
 }
 
 void ModelData::animate(float delta_time) {
+	if (is_animation_done) return;
+
 	animstate_.curr_time += delta_time;
 
 	if (animstate_.curr_time - animstate_.prev_time > (1.0f / animstate_.fps)) {
@@ -55,7 +61,12 @@ void ModelData::animate(float delta_time) {
 		++animstate_.next_frame;
 
 		if (animstate_.next_frame > animstate_.end_frame) {
-			animstate_.next_frame = animstate_.start_frame;
+			if (is_loop_) {
+				animstate_.next_frame = animstate_.start_frame;
+			} else {
+				is_animation_done = true;
+				animstate_.next_frame = animstate_.end_frame;
+			}
 		}
 
 		animstate_.prev_time = animstate_.curr_time;

@@ -8,7 +8,7 @@
 class ModelData {
 public:
 	ModelData(const std::string& model_name, const std::string& texture_name,
-	          bool is_animated);
+	          bool is_animated, bool is_loop_);
 
 	void render(float delta_time);
 
@@ -27,5 +27,7 @@ private:
 
 	md2::animstate_t animstate_;
 
+	bool is_animation_done = false;
+	bool is_loop_ = false;
 	bool is_animated_ = false;
 };
