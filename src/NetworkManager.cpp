@@ -1,4 +1,5 @@
 #include "NetworkManager.hpp"
+#include <iostream>
 
 char message[512];
 
@@ -165,10 +166,15 @@ std::string networkManager::ReceiveMessage() {
 					bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 					bsIn.Read(rs);
 					std::string newMessage = static_cast<std::string>(rs);
+					peer->Send(&bsIn, HIGH_PRIORITY, RELIABLE_ORDERED, 0,
+					           RakNet::UNASSIGNED_SYSTEM_ADDRESS,
+					           true);  // This sends
+					                   // the message to everyone
 					bsIn.Reset();
+
 					return (newMessage);
 					// return (reinterpret_cast<char*>(packet->data));
-				} break;
+				}
 				default:
 					RakNet::RakString rs;
 					RakNet::BitStream bsIn(packet->data, packet->length, false);
