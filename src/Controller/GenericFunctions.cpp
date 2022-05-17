@@ -321,6 +321,7 @@ void GenericFunctions::networkSetUsername() {
 	strcat(messageChar, username.c_str());
 	incomingMessage = network.GetName();
 	incomingMessage.append(messageChar);
+	incomingMessage.append("\n");
 	networkGetMessage();
 	network.ChangeName(username);
 }
