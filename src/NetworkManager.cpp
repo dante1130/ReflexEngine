@@ -16,11 +16,9 @@ RakNet::RakPeerInterface* peer;
 
 RakNet::Packet* packet;
 
-enum GameMessages {
-	ID_GAME_MESSAGE_1 = ID_USER_PACKET_ENUM + 1
-};
+enum GameMessages { ID_GAME_MESSAGE_1 = ID_USER_PACKET_ENUM + 1 };
 
-void networkManager::InitNetwork() { 
+void networkManager::InitNetwork() {
 	peer = RakNet::RakPeerInterface::GetInstance();
 	init = true;
 	printf("Created the network manager.\n");
@@ -40,7 +38,7 @@ void networkManager::SetupClient(std::string userName) {
 	}
 }
 
-bool networkManager::ConnectClient(char* serverIP) { 
+bool networkManager::ConnectClient(char* serverIP) {
 	if (peer != NULL && init) {
 		bool connecting;
 		if (serverIP[0] == '\n') {
@@ -71,11 +69,11 @@ void networkManager::SetupServer(std::string userName) {
 		peer->SetMaximumIncomingConnections(MAX_CLIENTS);
 		printf("Server Running...\n");
 		connected = true;
-		connectedClients++; // Server itself is a client
+		connectedClients++;  // Server itself is a client
 	}
 }
 
-void networkManager::ChangeName(std::string userName) { 
+void networkManager::ChangeName(std::string userName) {
 	std::string oldName = name;
 	std::string updatedName = userName;
 	userName.append(": ");
@@ -92,7 +90,8 @@ void networkManager::ChangeName(std::string userName) {
 		strcpy(nameChangeChar, nameChangeMsg.c_str());
 		printf("%s\n", nameChangeChar);
 		bsOut.Write(nameChangeChar);
-		peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, RakNet::UNASSIGNED_SYSTEM_ADDRESS, true);
+		peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0,
+		           RakNet::UNASSIGNED_SYSTEM_ADDRESS, true);
 	}
 }
 
@@ -103,8 +102,10 @@ void networkManager::MessageSend(char* inputMessage) {
 	RakNet::BitStream bsOut;
 	bsOut.Write((RakNet::MessageID)ID_GAME_MESSAGE_1);
 	bsOut.Write(sendMessage);
-	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0, RakNet::UNASSIGNED_SYSTEM_ADDRESS, true);
-	//peer->Send(sendMessage, (int)strlen(sendMessage) + 1, HIGH_PRIORITY, RELIABLE_ORDERED, 0, RakNet::UNASSIGNED_SYSTEM_ADDRESS, true);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0,
+	           RakNet::UNASSIGNED_SYSTEM_ADDRESS, true);
+	// peer->Send(sendMessage, (int)strlen(sendMessage) + 1, HIGH_PRIORITY,
+	// RELIABLE_ORDERED, 0, RakNet::UNASSIGNED_SYSTEM_ADDRESS, true);
 }
 
 std::string networkManager::ReceiveMessage() {
@@ -163,7 +164,7 @@ std::string networkManager::ReceiveMessage() {
 					RakNet::BitStream bsIn(packet->data, packet->length, false);
 					bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 					bsIn.Read(rs);
-					std::string newMessage = rs;
+					std::string newMessage = static_cast<std::string>(rs);
 					bsIn.Reset();
 					return (newMessage);
 					// return (reinterpret_cast<char*>(packet->data));
@@ -177,7 +178,7 @@ std::string networkManager::ReceiveMessage() {
 					           RakNet::UNASSIGNED_SYSTEM_ADDRESS,
 					           true);  // This sends
 					                   // the message to everyone
-					return (rs);
+					return static_cast<std::string>(rs);
 					break;
 			}
 		} else {
@@ -231,7 +232,7 @@ std::string networkManager::ReceiveMessage() {
 					bsIn.Read(rs);
 					// printf("%s NM\n", rs.C_String());
 					bsIn.Reset();
-					return (rs);
+					return static_cast<std::string>(rs);
 					// bsIn.Reset();
 				} break;
 				default:
@@ -255,7 +256,7 @@ void networkManager::DestroySession() {
 	}
 }
 
-bool networkManager::ConnectionStatus() { 
+bool networkManager::ConnectionStatus() {
 	if (connectedClients > 0) {
 		return (true);
 	} else {
@@ -275,8 +276,7 @@ bool networkManager::HasReceivedChatMessage() {
 char* networkManager::GetName() { return name; }
 
 unsigned char networkManager::GetPacketIdentifier(RakNet::Packet* p) {
-	if (p == 0) 
-		return 255;
+	if (p == 0) return 255;
 
 	if ((unsigned char)p->data[0] == ID_TIMESTAMP) {
 		RakAssert(p->length > sizeof(RakNet::MessageID) + sizeof(RakNet::Time));
