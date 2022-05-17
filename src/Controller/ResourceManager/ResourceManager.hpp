@@ -3,10 +3,12 @@
 #include "TextureManager.hpp"
 #include "ModelManager.hpp"
 #include "MaterialManager.hpp"
+#include "Md2ModelManager.hpp"
 
 /**
- * @class A singleton class for containing other asset managers; models,
- * textures, and materials.
+ * @class ResourceManager
+ * @brief A singleton class for containing other asset managers; models, md2
+ * models textures, and materials.
  *
  */
 class ResourceManager {
@@ -24,6 +26,13 @@ public:
 	 * @return ModelManager&
 	 */
 	ModelManager& get_model_manager();
+
+	/**
+	 * @brief Get the md2 model manager.
+	 *
+	 * @return Md2ModelManager&
+	 */
+	Md2ModelManager& get_md2_model_manager();
 
 	/**
 	 * @brief Get the texture manager.
@@ -51,6 +60,9 @@ private:
 
 	/// The model manager.
 	ModelManager model_manager_;
+
+	/// The md2 model manager.
+	Md2ModelManager md2_model_manager_;
 
 	/// The material manager.
 	MaterialManager material_manager_;

@@ -7,6 +7,10 @@ ResourceManager& ResourceManager::get_instance() {
 
 ModelManager& ResourceManager::get_model_manager() { return model_manager_; }
 
+Md2ModelManager& ResourceManager::get_md2_model_manager() {
+	return md2_model_manager_;
+}
+
 TextureManager& ResourceManager::get_texture_manager() {
 	return texture_manager_;
 }
