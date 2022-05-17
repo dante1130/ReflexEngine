@@ -289,11 +289,13 @@ std::string GenericFunctions::networkReturnRetainedMessage() {
 
 void GenericFunctions::networkSendMessage() { 
 	char messageChar[512];
-	strcpy(messageChar, message.c_str());
-	strcat(messageChar, "\n");
-	network.MessageSend(messageChar); 
-	incomingMessage = network.GetName();
-	incomingMessage.append(messageChar);
+	if (network.GetServer()) {
+		strcpy(messageChar, message.c_str());
+		strcat(messageChar, "\n");
+		network.MessageSend(messageChar);
+		incomingMessage = network.GetName();
+		incomingMessage.append(messageChar);
+	}
 	networkGetMessage();
 }
 
@@ -317,12 +319,14 @@ void GenericFunctions::networkRetainUsername(std::string savedUsername) {
 
 void GenericFunctions::networkSetUsername() { 
 	char messageChar[512];
-	strcpy(messageChar, "Changed their name to ");
-	strcat(messageChar, username.c_str());
-	incomingMessage = network.GetName();
-	incomingMessage.append(messageChar);
-	incomingMessage.append("\n");
-	networkGetMessage();
+	if (network.GetServer()) {
+		strcpy(messageChar, "Changed their name to ");
+		strcat(messageChar, username.c_str());
+		incomingMessage = network.GetName();
+		incomingMessage.append(messageChar);
+		incomingMessage.append("\n");
+		networkGetMessage();
+	}
 	network.ChangeName(username);
 }
 

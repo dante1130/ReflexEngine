@@ -155,6 +155,13 @@ std::string networkManager::ReceiveMessage() {
 					if (isServer) {
 						connected = false;
 						connectedClients--;
+						RakNet::BitStream bsIn;
+						bsIn.Write((RakNet::MessageID)ID_GAME_MESSAGE_1);
+						bsIn.Write("\nA client has lost connection\n");
+						peer->Send(&bsIn, HIGH_PRIORITY, RELIABLE_ORDERED, 0,
+						           RakNet::UNASSIGNED_SYSTEM_ADDRESS,
+						           true);  // This sends
+						                   // the message to everyone
 						return ("\nA client lost the connection\n");
 					} else {
 						return ("Connection lost\n");
@@ -280,6 +287,8 @@ bool networkManager::HasReceivedChatMessage() {
 }
 
 char* networkManager::GetName() { return name; }
+
+bool networkManager::GetServer() { return isServer; }
 
 unsigned char networkManager::GetPacketIdentifier(RakNet::Packet* p) {
 	if (p == 0) return 255;
