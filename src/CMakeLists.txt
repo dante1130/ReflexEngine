@@ -61,6 +61,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	AI/NPC.cpp
 	AI/entityManager.cpp
 	AI/movement.cpp
+	AI/world.cpp
 
 	AI/EngineTime.cpp
 

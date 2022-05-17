@@ -408,5 +408,6 @@ TerrainObject* GameAssetFactory::loadTerrainObject(std::string luaScript) {
 
 	GenericFunctions::setPlayableArea(to->get_height_map(), tt, scale.y,
 	                                  height_size);
+	gameWorld.setWorld(tt);
 	return to;
 }

@@ -13,6 +13,7 @@
 #include "Model/GameObject/ScriptableObject.hpp"
 #include "Model/GameObject/TerrainObject.hpp"
 #include "Controller/Terrain/TexturedTerrain.hpp"
+#include "AI/singletons.h"
 
 /**
  * @class GameAssetFactory

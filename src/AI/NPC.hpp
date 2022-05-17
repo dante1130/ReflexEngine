@@ -36,6 +36,7 @@ public:
 	int get_waypoint_count();
 	void add_waypoint(glm::vec2 waypoint);
 	void add_waypoint(float x, float z);
+	void add_waypoints(std::queue<glm::vec2>& new_waypoints);
 	void remove_waypoints();
 
 	void new_state(State<NPC>* new_state);

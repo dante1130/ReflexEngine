@@ -81,7 +81,26 @@ bool die::onMessage(NPC* curPlayer, const telegram& msg) { return false; }
 /******************************************************************************/
 void idle::Enter(NPC* curPlayer) { cout << "idle state" << endl; }
 
-void idle::Execute(NPC* curPlayer) {}
+void idle::Execute(NPC* curPlayer) {
+	glm::vec2 pos = glm::vec2(GenericFunctions::luaCamPosX(),
+	                          GenericFunctions::luaCamPosZ());
+
+	curPlayer->add_waypoints(gameWorld.pathFinding(
+	    curPlayer->position.x, curPlayer->position.z, pos.x, pos.y));
+	curPlayer->set_enemy_target(pos);
+
+	glm::vec2 distVec =
+	    pos - glm::vec2(curPlayer->position.x, curPlayer->position.z);
+
+	float dist = glm::length(distVec);
+
+	if (dist < 5) {
+		curPlayer->move_NPC(pos, 0.1);
+	} else {
+		curPlayer->waypoint_follow(false);
+		curPlayer->waypoint_follow(false);
+	}
+}
 
 void idle::Exit(NPC* curPlayer) {}
 

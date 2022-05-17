@@ -24,9 +24,10 @@ void TestScene::init() {
 	NPC* player = new NPC();
 	player->set_id(0);
 	player->set_faction(1);
-	player->position = glm::vec3(90, 5, 60);
+	player->position = glm::vec3(90, 5, 45);
 	player->initModel("human", "shiny");
 
+	/*
 	NPC* patroller = new NPC();
 	patroller->set_id(1);
 	patroller->position = glm::vec3(100, 5, 65);
@@ -42,13 +43,14 @@ void TestScene::init() {
 	sentry->angle = 0;
 	sentry->new_state(&patrol_state::Instance());
 	sentry->initModel("ghost", "shiny");
+	*/
 
 	game_objects_.emplace_back(player);
-	game_objects_.emplace_back(patroller);
-	game_objects_.emplace_back(sentry);
+	// game_objects_.emplace_back(patroller);
+	// game_objects_.emplace_back(sentry);
 	entityMgr.registerEntity(player);
-	entityMgr.registerEntity(patroller);
-	entityMgr.registerEntity(sentry);
+	// entityMgr.registerEntity(patroller);
+	// entityMgr.registerEntity(sentry);
 }
 
 void TestScene::add_game_object_during_run(std::string luaScript) {

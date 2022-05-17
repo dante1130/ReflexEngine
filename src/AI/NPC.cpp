@@ -18,11 +18,10 @@ void NPC::fixed_update(float delta_time) {
 			m_NPC_FSM->update();
 
 			if (m_id == 0) {
-				position.x = GenericFunctions::luaCamPosX();
-				position.z = GenericFunctions::luaCamPosZ();
-
-				// position.x += 1.0f * m_AI_time_elapsed;
+				// position.x = GenericFunctions::luaCamPosX();
+				// position.z = GenericFunctions::luaCamPosZ();
 			}
+			position.y = GenericFunctions::getHeight(position.x, position.z);
 
 			m_AI_time_elapsed = 0;
 		}
@@ -83,7 +82,16 @@ float NPC::get_power() { return m_power; }
 int NPC::get_waypoint_count() { return m_waypoints.size(); }
 void NPC::add_waypoint(glm::vec2 waypoint) { m_waypoints.push(waypoint); }
 void NPC::add_waypoint(float x, float z) { add_waypoint(glm::vec2(x, z)); }
-void NPC::remove_waypoints() { m_waypoints.empty(); }
+void NPC::add_waypoints(std::queue<glm::vec2>& new_waypoints) {
+	remove_waypoints();
+	// m_waypoints.push(glm::vec2(100, 100));
+	m_waypoints = new_waypoints;
+}
+void NPC::remove_waypoints() {
+	if (m_waypoints.size() != 0) {
+		m_waypoints.empty();
+	}
+}
 
 void NPC::new_state(State<NPC>* new_state) {
 	m_NPC_FSM->changeState(new_state);
@@ -104,16 +112,12 @@ int NPC::get_target_id() { return m_target_id; }
 //
 
 void NPC::waypoint_follow(bool gen_new) {
-	if (m_waypoints.empty() && gen_new) {
-		m_waypoints.push(glm::vec2(101, 65));
-		m_waypoints.push(glm::vec2(100, 50));
-		if (m_id == 1) {
-			m_waypoints.push(glm::vec2(120, 65));
-		} else {
-			m_waypoints.push(glm::vec2(200, 200));
-		}
+	if (m_waypoints.size() == 0 && gen_new) {
+		std::cout << "waypoints empty & gen new" << std::endl;
+		return;
 
-	} else if (m_waypoints.empty()) {
+	} else if (m_waypoints.size() == 0) {
+		std::cout << "waypoints empty" << std::endl;
 		return;
 	}
 
@@ -124,17 +128,21 @@ void NPC::waypoint_follow(bool gen_new) {
 
 bool NPC::move_NPC(glm::vec2 new_pos, float offset) {
 	glm::vec2 newPos = glm::vec2(position.x, position.z);
+
 	bool ret = ai_movement::moveTo(newPos, new_pos, glm::vec2(1, 1),
 	                               m_AI_time_elapsed, offset);
+
 	position.x = newPos.x;
 	position.z = newPos.y;
 
 	// Look at angle
-	glm::vec2 lookAt;
-	lookAt.x = new_pos.x - newPos.x;
-	lookAt.y = new_pos.y - newPos.y;
-	lookAt = glm::normalize(lookAt);
-	angle = atan2(lookAt.y, lookAt.x) * 180 / 3.151f;
+	if (ret == false) {
+		glm::vec2 lookAt;
+		lookAt.x = new_pos.x - newPos.x;
+		lookAt.y = new_pos.y - newPos.y;
+		lookAt = glm::normalize(lookAt);
+		angle = atan2(lookAt.y, lookAt.x) * 180 / 3.151f;
+	}
 
 	return ret;
 }

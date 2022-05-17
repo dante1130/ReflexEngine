@@ -65,7 +65,7 @@ void ReflexEngine::run() {
 				EngineTime::reset_fixed_delta_time();
 			}
 
-			engine.scenes_.top()->update(engine.delta_time_);
+			engine.scenes_.top()->update(EngineTime::get_delta_time());
 			engine.scenes_.top()->add_draw_call();
 			engine.renderer_.draw();
 		}

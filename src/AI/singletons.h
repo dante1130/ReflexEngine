@@ -5,16 +5,16 @@
 #include "entityManager.h"
 #include "dynamicEnum.h"
 #include "messageDispatcher.h"
-//#include "world.h"
+#include "world.hpp"
 
 typedef singleton<dynamicEnum> message;
 typedef singleton<entityManager> entityMan;
 typedef singleton<messageDispatcher> messageMan;
-// typedef singleton<world> theWorld;
+typedef singleton<world> theWorld;
 
 #define fsmMessage message::Instance()
 #define entityMgr entityMan::Instance()
 #define messageMgr messageMan::Instance()
-//#define gameWorld theWorld::Instance()
+#define gameWorld theWorld::Instance()
 
 #endif
