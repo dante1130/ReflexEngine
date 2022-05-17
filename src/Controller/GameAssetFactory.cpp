@@ -1,6 +1,6 @@
 #include "GameAssetFactory.hpp"
 
-GameObject* GameAssetFactory::create(std::string fileName) {
+GameObject* GameAssetFactory::create(const std::string& fileName) {
 	if (fileName.length() == 0 || isLuaScript(fileName) == false) {
 		return nullptr;
 	}
@@ -21,12 +21,14 @@ GameObject* GameAssetFactory::create(std::string fileName) {
 		return loadPhysicsObject(fileName);
 	} else if (type == "ScriptableObject") {
 		return loadScriptableObject(fileName);
+	} else if (type == "Skybox") {
+		return load_skybox(fileName);
 	} else {
 		return nullptr;
 	}
 }
 
-bool GameAssetFactory::isLuaScript(std::string luaScript) {
+bool GameAssetFactory::isLuaScript(const std::string& luaScript) {
 	int pos = luaScript.find_last_of(".");
 
 	std::string ext = "n/a";
@@ -37,12 +39,11 @@ bool GameAssetFactory::isLuaScript(std::string luaScript) {
 	return ext == "lua";
 }
 
-std::string GameAssetFactory::getObjectType(std::string luaScript) {
+std::string GameAssetFactory::getObjectType(const std::string& luaScript) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file(luaScript);
 
-	std::string type = "N/A";
-	type = lua["baseObject"]["type"];
+	std::string type = lua["baseObject"]["type"];
 
 	return type;
 }
@@ -83,7 +84,7 @@ glm::vec3 GameAssetFactory::loadBaseScale(sol::state& lua) {
 	return scale;
 }
 
-Item* GameAssetFactory::loadItem(std::string luaScript) {
+Item* GameAssetFactory::loadItem(const std::string& luaScript) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file(luaScript);
 
@@ -108,7 +109,7 @@ Item* GameAssetFactory::loadItem(std::string luaScript) {
 	return item;
 }
 
-Water* GameAssetFactory::loadWater(std::string luaScript) {
+Water* GameAssetFactory::loadWater(const std::string& luaScript) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file(luaScript);
 
@@ -144,7 +145,7 @@ Water* GameAssetFactory::loadWater(std::string luaScript) {
 	return water;
 }
 
-Body* GameAssetFactory::loadBody(std::string luaScript) {
+Body* GameAssetFactory::loadBody(const std::string& luaScript) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file(luaScript);
 
@@ -160,7 +161,7 @@ Body* GameAssetFactory::loadBody(std::string luaScript) {
 	return body;
 }
 
-Player* GameAssetFactory::load_player(std::string lua_script) {
+Player* GameAssetFactory::load_player(const std::string& lua_script) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file(lua_script);
 
@@ -212,7 +213,8 @@ Player* GameAssetFactory::load_player(std::string lua_script) {
 	return player;
 }
 
-PhysicsObject* GameAssetFactory::loadPhysicsObject(std::string luaScript) {
+PhysicsObject* GameAssetFactory::loadPhysicsObject(
+    const std::string& luaScript) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file(luaScript);
 
@@ -333,7 +335,7 @@ void GameAssetFactory::loadExtraPhysicObjectSettings(PhysicsObject* po,
 }
 
 ScriptableObject* GameAssetFactory::loadScriptableObject(
-    std::string luaScript) {
+    const std::string& luaScript) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file(luaScript);
 
@@ -358,7 +360,8 @@ ScriptableObject* GameAssetFactory::loadScriptableObject(
 	return so;
 }
 
-TerrainObject* GameAssetFactory::loadTerrainObject(std::string luaScript) {
+TerrainObject* GameAssetFactory::loadTerrainObject(
+    const std::string& luaScript) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file(luaScript);
 
@@ -409,4 +412,23 @@ TerrainObject* GameAssetFactory::loadTerrainObject(std::string luaScript) {
 	GenericFunctions::setPlayableArea(to->get_height_map(), tt, scale.y,
 	                                  height_size);
 	return to;
+}
+
+SkyboxObject* GameAssetFactory::load_skybox(const std::string& lua_script) {
+	sol::state& lua = LuaManager::get_instance().get_state();
+
+	lua.script_file(lua_script);
+
+	SkyboxObject* skybox = new SkyboxObject();
+
+	skybox->set_face(SkyboxFaces::RIGHT, lua["skybox_faces"]["right_face"]);
+	skybox->set_face(SkyboxFaces::LEFT, lua["skybox_faces"]["left_face"]);
+	skybox->set_face(SkyboxFaces::TOP, lua["skybox_faces"]["top_face"]);
+	skybox->set_face(SkyboxFaces::BOTTOM, lua["skybox_faces"]["bottom_face"]);
+	skybox->set_face(SkyboxFaces::BACK, lua["skybox_faces"]["back_face"]);
+	skybox->set_face(SkyboxFaces::FRONT, lua["skybox_faces"]["front_face"]);
+
+	skybox->init();
+
+	return skybox;
 }

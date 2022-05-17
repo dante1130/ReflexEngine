@@ -46,6 +46,13 @@ public:
 	std::shared_ptr<Shader> get_shader();
 
 	/**
+	 * @brief Set the skybox with given texture paths to faces.
+	 *
+	 * @param faces
+	 */
+	void set_skybox(const std::vector<std::string>& faces);
+
+	/**
 	 * @brief Adds a directional light to the renderer.
 	 *
 	 * @param light
