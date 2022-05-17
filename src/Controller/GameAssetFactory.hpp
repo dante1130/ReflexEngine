@@ -12,6 +12,7 @@
 #include "Model/GameObject/PhysicsObject.hpp"
 #include "Model/GameObject/ScriptableObject.hpp"
 #include "Model/GameObject/TerrainObject.hpp"
+#include "Model/GameObject/SkyboxObject.hpp"
 #include "Controller/Terrain/TexturedTerrain.hpp"
 
 /**
@@ -23,12 +24,12 @@ public:
 	/**
 	 * @brief	Parameterised factory method pattern for created game objects
 	 * @param	fileName	- The name of the lua file for object creation
-	 * @return	*GameObject - A child game object
+	 * @return	GameObject* - A child game object
 	 *
 	 * @pre		type/file exists
 	 * @post	Game object created
 	 */
-	static GameObject* create(std::string fileName);
+	static GameObject* create(const std::string& fileName);
 
 private:
 	/**
@@ -39,17 +40,17 @@ private:
 	 * @pre	type/file exists
 	 * @post	Game object created
 	 */
-	static bool isLuaScript(std::string luaScript);
+	static bool isLuaScript(const std::string& luaScript);
 
 	/**
 	 * @brief	Gets the type of game object
 	 * @param	luaScript	- The lua script to check
-	 * @return	std::string	- Name of object type
+	 * @return	const std::string&	- Name of object type
 	 *
 	 * @pre	type/file exists
 	 * @post	Game object created
 	 */
-	static std::string getObjectType(std::string luaScript);
+	static std::string getObjectType(const std::string& luaScript);
 
 	/**
 	 * @brief	Loads in the base objects position from a lua state
@@ -99,7 +100,7 @@ private:
 	 * @pre		item varaible exists
 	 * @post	Item stored
 	 */
-	static Item* loadItem(std::string luaScript);
+	static Item* loadItem(const std::string& luaScript);
 
 	/**
 	 * @brief	Loads in a water object from a lua script
@@ -109,7 +110,7 @@ private:
 	 * @pre		water varaible exists
 	 * @post	water stored
 	 */
-	static Water* loadWater(std::string luaScript);
+	static Water* loadWater(const std::string& luaScript);
 
 	/**
 	 * @brief	Loads in a body object from a lua script
@@ -119,7 +120,7 @@ private:
 	 * @pre		body varaible exists
 	 * @post	body stored
 	 */
-	static Body* loadBody(std::string luaScript);
+	static Body* loadBody(const std::string& luaScript);
 
 	/**
 	 * @brief Loads in a player object from a lua script.
@@ -127,7 +128,7 @@ private:
 	 * @param lua_script
 	 * @return Player*
 	 */
-	static Player* load_player(std::string lua_script);
+	static Player* load_player(const std::string& lua_script);
 
 	/**
 	 * @brief	Loads in a physics object object from a lua script
@@ -138,8 +139,8 @@ private:
 	 * @pre		physics object varaible exists
 	 * @post	physics object stored
 	 */
-	static PhysicsObject* loadPhysicsObject(std::string luaScript);
-
+	static PhysicsObject* loadPhysicsObject(const std::string& luaScript);
+	//
 	/**
 	 * @brief	Loads in extra physics object data from a lua script
 	 * @param	po	- physic object to store the data to
@@ -195,7 +196,21 @@ private:
 	 * @pre		scriptable object object varaible exists
 	 * @post	scriptable object object stored
 	 */
-	static ScriptableObject* loadScriptableObject(std::string luaScript);
+	static ScriptableObject* loadScriptableObject(const std::string& luaScript);
 
-	static TerrainObject* loadTerrainObject(std::string luaScript);
+	/**
+	 * @brief Loads in a terrian object from a lua script
+	 *
+	 * @param luaScript
+	 * @return TerrainObject*
+	 */
+	static TerrainObject* loadTerrainObject(const std::string& luaScript);
+
+	/**
+	 * @brief Loads in a skybox object from a lua script
+	 *
+	 * @param lua_script
+	 * @return SkyboxObject*
+	 */
+	static SkyboxObject* load_skybox(const std::string& lua_script);
 };

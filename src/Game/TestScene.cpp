@@ -6,8 +6,8 @@
 
 void TestScene::init() {
 	directional_light_ =
-	    DirectionalLight(2048, 2048, glm::vec3(1.0f, 0.53f, 0.3f), 0.2f,
-	                     glm::vec3(-10.0f, -12.0f, 18.5f), 0.9f);
+	    DirectionalLight(2048, 2048, glm::vec3(0.22f, 0.40f, 0.59f), 0.1f,
+	                     glm::vec3(-15.0f, -15.0f, 18.5f), 0.5f);
 
 	sol::state& lua = LuaManager::get_instance().get_state();
 
@@ -57,8 +57,14 @@ void TestScene::key_controls(float delta_time) {
 			camera.calculate_direction(Movement::right);
 	}
 
-	if (input_manager.get_key_state(Input::toggle_wireframe).is_key_pressed())
+	if (input_manager.get_key_state(Input::toggle_wireframe).is_key_pressed()) {
 		ReflexEngine::get_instance().renderer_.toggle_wireframe();
+		glm::vec3 direction = camera.get_direction();
+
+		std::cout << "Direction: " << direction.x << " " << direction.y << " "
+		          << direction.z << std::endl;
+	}
+
 	if (input_manager.get_key_state(Input::toggle_noclip).is_key_pressed())
 		camera.toggle_noclip();
 

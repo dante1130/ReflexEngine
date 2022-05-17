@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstdint>
+
 namespace md2 {
 
 /// The identity number of the md2 model.
