@@ -316,7 +316,13 @@ void GenericFunctions::networkRetainUsername(std::string savedUsername) {
 }
 
 void GenericFunctions::networkSetUsername() { 
-	network.ChangeName(username); 
+	char messageChar[512];
+	strcpy(messageChar, "Changed their name to ");
+	strcat(messageChar, username.c_str());
+	incomingMessage = network.GetName();
+	incomingMessage.append(messageChar);
+	networkGetMessage();
+	network.ChangeName(username);
 }
 
 std::string GenericFunctions::networkReturnUsername() { 

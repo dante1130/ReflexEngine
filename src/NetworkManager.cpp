@@ -77,6 +77,7 @@ void networkManager::SetupServer(std::string userName) {
 
 void networkManager::ChangeName(std::string userName) { 
 	std::string oldName = name;
+	std::string updatedName = userName;
 	userName.append(": ");
 	strcpy(name, userName.c_str());
 	if (connected) {
@@ -85,8 +86,8 @@ void networkManager::ChangeName(std::string userName) {
 		std::string nameChangeMsg;
 		char nameChangeChar[256];
 		nameChangeMsg.append(oldName);
-		nameChangeMsg.append(" Changed name to ");
-		nameChangeMsg.append(userName);
+		nameChangeMsg.append(" Changed their name to ");
+		nameChangeMsg.append(updatedName);
 		nameChangeMsg.append("\n");
 		strcpy(nameChangeChar, nameChangeMsg.c_str());
 		printf("%s\n", nameChangeChar);
