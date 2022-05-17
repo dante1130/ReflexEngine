@@ -27,23 +27,6 @@ void OpenGL::init() {
 	omni_shadow_shader_->CompileFile("shaders/omni_shadow_map.vert",
 	                                 "shaders/omni_shadow_map.geom",
 	                                 "shaders/omni_shadow_map.frag");
-
-	std::vector<std::string> skyboxFaces;
-
-	skyboxFaces.push_back(
-	    "textures/skyboxes/cupertin-lake/cupertin-lake_rt.tga");
-	skyboxFaces.push_back(
-	    "textures/skyboxes/cupertin-lake/cupertin-lake_lf.tga");
-	skyboxFaces.push_back(
-	    "textures/skyboxes/cupertin-lake/cupertin-lake_up.tga");
-	skyboxFaces.push_back(
-	    "textures/skyboxes/cupertin-lake/cupertin-lake_dn.tga");
-	skyboxFaces.push_back(
-	    "textures/skyboxes/cupertin-lake/cupertin-lake_bk.tga");
-	skyboxFaces.push_back(
-	    "textures/skyboxes/cupertin-lake/cupertin-lake_ft.tga");
-
-	skybox_ = Skybox(skyboxFaces);
 }
 
 void OpenGL::draw() {
@@ -145,6 +128,10 @@ void OpenGL::toggle_wireframe() {
 }
 
 std::shared_ptr<Shader> OpenGL::get_shader() { return shader_; }
+
+void OpenGL::set_skybox(const std::vector<std::string>& faces) {
+	skybox_ = Skybox(faces);
+}
 
 void OpenGL::add_directional_light(const DirectionalLight& light) {
 	directional_lights_.push_back(light);
