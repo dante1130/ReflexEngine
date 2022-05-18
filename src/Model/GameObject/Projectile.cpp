@@ -10,7 +10,7 @@ void Projectile::update(float delta_time) {
 		floor_contact_ = true;
 	}
 
-	lua["remove_obj"] = remove_;
+	lua["remove_obj"] = remove;
 	lua["to_be_deleted"] = to_be_deleted_;
 	lua["floor_contact"] = floor_contact_;
 	lua["time_alive_left"] = time_alive_left_;
@@ -23,7 +23,7 @@ void Projectile::update(float delta_time) {
 
 	lua.script_file(lua_script_);
 
-	remove_ = lua["remove_obj"];
+	remove = lua["remove_obj"];
 	to_be_deleted_ = lua["to_be_deleted"];
 	time_alive_left_ = lua["time_alive_left"];
 	damage_ = lua["damage"];
