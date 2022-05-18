@@ -13,6 +13,8 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Model/GameObject/Player.cpp
 	Model/GameObject/TerrainObject.cpp
 	Model/GameObject/SkyboxObject.cpp
+	Model/GameObject/DirectionalLightObject.cpp
+	Model/LightData.hpp
 	Model/ModelData.cpp
 	
 	View/Renderer/OpenGL/OpenGL.cpp

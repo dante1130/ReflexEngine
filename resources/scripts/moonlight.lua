@@ -1,0 +1,3 @@
+baseObject = {
+	type = "DirectionalLight",
+};

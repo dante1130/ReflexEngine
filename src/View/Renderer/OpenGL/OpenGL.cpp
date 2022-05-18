@@ -133,8 +133,11 @@ void OpenGL::set_skybox(const std::vector<std::string>& faces) {
 	skybox_ = Skybox(faces);
 }
 
-void OpenGL::add_directional_light(const DirectionalLight& light) {
-	directional_lights_.push_back(light);
+void OpenGL::add_directional_light(const DirectionalLightData& light) {
+	DirectionalLight d_light(2048, 2048, light.color, light.ambient_intensity,
+	                         light.direction, light.diffuse_intensity);
+
+	directional_lights_.push_back(d_light);
 }
 
 void OpenGL::add_point_light(const PointLight& light) {
