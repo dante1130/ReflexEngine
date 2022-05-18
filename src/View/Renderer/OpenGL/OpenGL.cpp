@@ -86,7 +86,7 @@ void OpenGL::render_lights() {
 		shader_->SetDirectionalLight(d_light);
 		shader_->SetDirectionalLightTransform(
 		    d_light.CalculateLightTransform());
-		d_light.GetShadowMap()->Read(GL_TEXTURE2);
+		// d_light.GetShadowMap()->Read(GL_TEXTURE2);
 	}
 
 	shader_->SetPointLights(point_lights_.data(), point_lights_.size(), 3, 0);

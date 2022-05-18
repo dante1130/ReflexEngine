@@ -166,9 +166,10 @@ void patrol::Execute(NPC* curPlayer) {
 		curPlayer->get_FSM()->changeState(&chase_state::Instance());
 		NPC* target = entityMgr.getEntityFromID(curPlayer->get_target_id());
 
-		messageMgr.dispatchMsg(
-		    0, curPlayer->get_id(), 2, 1,
-		    &glm::vec2(target->position.x, target->position.z));
+		glm::vec2* target_pos =
+		    new glm::vec2(target->position.x, target->position.z);
+
+		messageMgr.dispatchMsg(0, curPlayer->get_id(), 2, 1, target_pos);
 	}
 }
 

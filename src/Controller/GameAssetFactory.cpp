@@ -24,6 +24,8 @@ GameObject* GameAssetFactory::create(const std::string& fileName) {
 		return load_skybox(fileName);
 	} else if (type == "Projectile") {
 		return loadProjectileObject(fileName);
+	} else if (type == "DirectionalLight") {
+		return load_directional_light(fileName);
 	} else {
 		assert("Object type not found" && 0);
 		return nullptr;
@@ -435,6 +437,29 @@ SkyboxObject* GameAssetFactory::load_skybox(const std::string& lua_script) {
 
 	return skybox;
 }
+
+DirectionalLightObject* GameAssetFactory::load_directional_light(
+    const std::string& lua_script) {
+	sol::state& lua = LuaManager::get_instance().get_state();
+
+	lua.script_file(lua_script);
+
+	DirectionalLightData light_data;
+
+	light_data.color.x = lua["light"]["color"]["r"];
+	light_data.color.y = lua["light"]["color"]["g"];
+	light_data.color.z = lua["light"]["color"]["b"];
+	light_data.ambient_intensity = lua["light"]["ambient_intensity"];
+	light_data.diffuse_intensity = lua["light"]["diffuse_intensity"];
+	light_data.direction.x = lua["light"]["direction"]["x"];
+	light_data.direction.y = lua["light"]["direction"]["y"];
+	light_data.direction.z = lua["light"]["direction"]["z"];
+
+	DirectionalLightObject* d_light = new DirectionalLightObject(light_data);
+
+	return d_light;
+}
+
 Projectile* GameAssetFactory::loadProjectileObject(std::string luaScript) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file(luaScript);

@@ -88,7 +88,7 @@ float NPC::get_power() { return m_power; }
 int NPC::get_waypoint_count() { return m_waypoints.size(); }
 void NPC::add_waypoint(glm::vec2 waypoint) { m_waypoints.push(waypoint); }
 void NPC::add_waypoint(float x, float z) { add_waypoint(glm::vec2(x, z)); }
-void NPC::add_waypoints(std::queue<glm::vec2>& new_waypoints) {
+void NPC::add_waypoints(const std::queue<glm::vec2>& new_waypoints) {
 	remove_waypoints();
 	m_waypoints = new_waypoints;
 }

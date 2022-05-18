@@ -113,9 +113,6 @@ public:
 	void garbage_collection();
 
 private:
-	/// A directional light.
-	DirectionalLight directional_light_ = {};
-
 	/// Scripts for game objects to be added.
 	std::vector<std::string> to_add_;
 };

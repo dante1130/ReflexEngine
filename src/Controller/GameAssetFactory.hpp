@@ -14,6 +14,7 @@
 #include "Model/GameObject/ScriptableObject.hpp"
 #include "Model/GameObject/TerrainObject.hpp"
 #include "Model/GameObject/SkyboxObject.hpp"
+#include "Model/GameObject/DirectionalLightObject.hpp"
 #include "Controller/Terrain/TexturedTerrain.hpp"
 #include "AI/singletons.h"
 #include "Model/GameObject/Projectile.hpp"
@@ -216,6 +217,9 @@ private:
 	 * @return SkyboxObject*
 	 */
 	static SkyboxObject* load_skybox(const std::string& lua_script);
+
+	static DirectionalLightObject* load_directional_light(
+	    const std::string& lua_script);
 
 	/**
 	 * @brief	Loads in a projectile object from a lua script

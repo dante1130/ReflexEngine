@@ -12,12 +12,13 @@ void PhysicsObject::initRB(glm::vec3 pos, glm::vec3 rotation, float angle) {
 	rb.init(pos, rotation, angle);
 }
 
-void PhysicsObject::update(float delta_time) {}
-
-void PhysicsObject::fixed_update(float delta_time) {
+void PhysicsObject::update(float delta_time) {
 	position = rb.getPosition();
 	rotation = rb.getRotation();
 	angle = rb.getAngle();
+}
+
+void PhysicsObject::fixed_update(float delta_time) {
 	// position.y = GenericFunctions::getHeight(position.x, position.z);
 	// rb.set_position(position);
 }

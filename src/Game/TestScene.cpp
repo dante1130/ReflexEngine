@@ -9,10 +9,6 @@
 #include "AI/messageDispatcher.h"
 
 void TestScene::init() {
-	directional_light_ =
-	    DirectionalLight(2048, 2048, glm::vec3(0.22f, 0.40f, 0.59f), 0.1f,
-	                     glm::vec3(-15.0f, -15.0f, 18.5f), 0.5f);
-
 	sol::state& lua = LuaManager::get_instance().get_state();
 
 	lua.set_function("addGameObject", &TestScene::addGameObject, this);
@@ -92,13 +88,8 @@ void TestScene::key_controls(float delta_time) {
 			camera.calculate_direction(Movement::right);
 	}
 
-	if (input_manager.get_key_state(Input::toggle_wireframe).is_key_pressed()) {
+	if (input_manager.get_key_state(Input::toggle_wireframe).is_key_pressed())
 		ReflexEngine::get_instance().renderer_.toggle_wireframe();
-		glm::vec3 direction = camera.get_direction();
-
-		std::cout << "Direction: " << direction.x << " " << direction.y << " "
-		          << direction.z << std::endl;
-	}
 
 	if (input_manager.get_key_state(Input::toggle_noclip).is_key_pressed())
 		camera.toggle_noclip();
@@ -127,10 +118,6 @@ void TestScene::mouse_controls(float xpos, float ypos) {
 }
 
 void TestScene::add_draw_call() {
-	auto& renderer = ReflexEngine::get_instance().renderer_;
-
-	renderer.add_directional_light(directional_light_);
-
 	for (auto& game_object : game_objects_) {
 		game_object->add_draw_call();
 	}
@@ -160,7 +147,6 @@ void TestScene::saveGameObjects() {
 	GenericFunctions::setIfSave(false);
 	std::cout << "done saving" << std::endl;
 	ObjectSaving::setFreshSave();
-	return;
 }
 
 void TestScene::loadSavedGameObjects() {
@@ -170,7 +156,6 @@ void TestScene::loadSavedGameObjects() {
 	lua.script_file("scripts/save/_MasterCreation.lua");
 
 	GenericFunctions::setIfLoad(false);
-	return;
 }
 
 void TestScene::garbage_collection() {

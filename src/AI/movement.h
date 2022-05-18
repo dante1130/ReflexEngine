@@ -17,7 +17,7 @@
  *********************************************************************************************/
 namespace ai_movement {
 bool moveTo(glm::vec2& curPos, const glm::vec2& targetPos,
-            glm::vec2& curVelocity, double timeElapsed, double offset = 0);
+            glm::vec2 curVelocity, double timeElapsed, double offset = 0);
 
 bool flee(glm::vec2& curPos, const glm::vec2& pursuerPos,
           glm::vec2& curVelocity, double fleeSpeed, double timeElapsed);
