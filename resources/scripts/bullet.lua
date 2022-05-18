@@ -1,5 +1,5 @@
 baseObject = {
-	type = "PhysicsObject",
+	type = "Projectile",
 	xPos = camera_pos_x() + camera_look_x() * 2,
 	yPos = camera_pos_y() + camera_look_y() * 2,
 	zPos = camera_pos_z() + camera_look_z() * 2,
@@ -17,23 +17,26 @@ baseObject = {
 	xForce = camera_look_x() * 25,
 	yForce = camera_look_y() * 25,
 	zForce = camera_look_z() * 25,
-	xTorque = 0,
-	yTorque = 0,
-	zTorque = 0,
+	xTorque = random_generator(-10, 20),
+	yTorque = random_generator(-10, 20),
+	zTorque = random_generator(-10, 20),
 	linearDamping = 0.1,
 	angularDamping = 0.1,
 	sleep = 1,
-	numOfColliders = 1
+	numOfColliders = 1,
+	timeAliveLeft = 20,
+	damage = 1,
+	logic = "scripts/bulletLogic.lua",
+	toDelete = 0,
+	floorContact = 0
 }
 
 collider1 = {
-	colliderType = "Box",
+	colliderType = "Sphere",
 	xPos = 0,
 	yPos = 0,
 	zPos = 0,
-	xBox = 1,
-	yBox = 1,
-	zBox = 1,
+	radius = 0.1,
 	bounciness = 0.5,
 	friction = 0.5
 }

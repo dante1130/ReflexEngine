@@ -10,7 +10,6 @@ static bool shouldLoad = false;
 static int last_save_time_ = -100;
 static int last_load_time_ = -100;
 
-static bool paused = true;
 static bool helpMenu = false;
 static bool networkMenu = false;
 static bool credits = false;
@@ -134,12 +133,12 @@ void GenericFunctions::setIfLoad(bool val) {
 	}
 }
 
-bool GenericFunctions::getIfPaused() { return paused; }
+bool GenericFunctions::getIfPaused() { return EngineTime::is_paused(); }
 
 void GenericFunctions::setIfPaused(bool val) {
-	paused = val;
+	EngineTime::set_pause(val);
 
-	if (paused) {
+	if (val) {
 		glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
 		                 GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 	} else {
@@ -219,7 +218,7 @@ void GenericFunctions::setNetworkMenuActive(bool active) {
 	if (networkMenu) {
 		glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
 		                 GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-	} else if (!networkMenu && !paused) {
+	} else if (!networkMenu && !EngineTime::is_paused()) {
 		glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
 		                 GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	}
@@ -289,11 +288,13 @@ std::string GenericFunctions::networkReturnRetainedMessage() {
 
 void GenericFunctions::networkSendMessage() { 
 	char messageChar[512];
-	strcpy(messageChar, message.c_str());
-	strcat(messageChar, "\n");
-	network.MessageSend(messageChar); 
-	incomingMessage = network.GetName();
-	incomingMessage.append(messageChar);
+	if (network.GetServer()) {
+		strcpy(messageChar, message.c_str());
+		strcat(messageChar, "\n");
+		network.MessageSend(messageChar);
+		incomingMessage = network.GetName();
+		incomingMessage.append(messageChar);
+	}
 	networkGetMessage();
 }
 
@@ -317,12 +318,14 @@ void GenericFunctions::networkRetainUsername(std::string savedUsername) {
 
 void GenericFunctions::networkSetUsername() { 
 	char messageChar[512];
-	strcpy(messageChar, "Changed their name to ");
-	strcat(messageChar, username.c_str());
-	incomingMessage = network.GetName();
-	incomingMessage.append(messageChar);
-	incomingMessage.append("\n");
-	networkGetMessage();
+	if (network.GetServer()) {
+		strcpy(messageChar, "Changed their name to ");
+		strcat(messageChar, username.c_str());
+		incomingMessage = network.GetName();
+		incomingMessage.append(messageChar);
+		incomingMessage.append("\n");
+		networkGetMessage();
+	}
 	network.ChangeName(username);
 }
 

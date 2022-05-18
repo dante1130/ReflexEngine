@@ -1,5 +1,5 @@
 #pragma once
-#include "Controller/BodyRigidPhysics.hpp"
+#include "Controller/Physics/BodyRigidPhysics.hpp"
 #include "Body.hpp"
 #include <glm/glm.hpp>
 #include <vector>
@@ -242,6 +242,28 @@ public:
 	 * @post	Height field added
 	 */
 	void addHeightFieldShape(float bounciness, float friction) = delete;
+
+	/**
+	 * @brief	Changes the linear axis factor. I.e. if set a axis to 0 it will
+	 * no longer move on that axis.
+	 * @param	factor	- The factor you want for each axis. i.e. 1, 0, 1, stops
+	 * y movement.
+	 *
+	 * @pre		Rigid body exists
+	 * @post	Linear axis factor changed
+	 */
+	void setLinearAxisFactor(glm::vec3 factor);
+
+	/**
+	 * @brief	Changes the angular axis factor. I.e. if set a axis to 0 it will
+	 * no longer rotate on that axis.
+	 * @param	factor	- The factor you want for each axis. i.e. 1, 0, 1, stops
+	 * y rotation.
+	 *
+	 * @pre		Rigid body exists
+	 * @post	Angular axis factor changed
+	 */
+	void setAngularAxisFactor(glm::vec3 factor);
 
 	/**
 	 * @brief	Destructor

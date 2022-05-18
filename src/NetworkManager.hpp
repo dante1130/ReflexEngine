@@ -158,6 +158,8 @@ public:
 
 	char *GetName();
 
+	bool GetServer();
+
 private:
 	/**
 	 * @brief	Gets the packet identifier and returns it.

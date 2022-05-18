@@ -343,6 +343,46 @@ public:
 	glm::vec3 getLocalColliderPos(int index);
 
 	/**
+	 * @brief	Changes the linear axis factor. I.e. if set a axis to 0 it will
+	 * no longer move on that axis.
+	 * @param	factor	- The factor you want for each axis. i.e. 1, 0, 1, stops
+	 * y movement.
+	 *
+	 * @pre		Rigid body exists
+	 * @post	Linear axis factor changed
+	 */
+	void setLinearAxisFactor(glm::vec3 factor);
+
+	/**
+	 * @brief	Changes the angular axis factor. I.e. if set a axis to 0 it will
+	 * no longer rotate on that axis.
+	 * @param	factor	- The factor you want for each axis. i.e. 1, 0, 1, stops
+	 * y rotation.
+	 *
+	 * @pre		Rigid body exists
+	 * @post	Angular axis factor changed
+	 */
+	void setAngularAxisFactor(glm::vec3 factor);
+
+	/**
+	 * @brief	Removes the colliders from the rigid body
+	 *
+	 * @pre		Colliders exist
+	 * @post	Colliders removed
+	 */
+	void removeColliders();
+
+	/**
+	 * @brief	Turns rigid body into a trigger (i.e will loose collision
+	 * resolution but will notify when collision occurs)
+	 * @param	val	- True if trigger
+	 *
+	 * @pre		Rigid body exist
+	 * @post	trigger added
+	 */
+	void turnIntoTrigger(bool val);
+
+	/**
 	 * @brief	Destructor
 	 *
 	 * @pre		Object was created

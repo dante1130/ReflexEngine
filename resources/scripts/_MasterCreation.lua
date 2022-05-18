@@ -6,17 +6,17 @@ for i = 1, 1, 1 do
 end
 
 for i = 1, 50, 1 do
-	addGameObject("scripts/Rock.lua")
+--	addGameObject("scripts/Rock.lua")
 end
 
 for i = 1, 25, 1 do
-	addGameObject("scripts/Tree.lua")
+--	addGameObject("scripts/Tree.lua")
 end
 
 addGameObject("scripts/CatPhysics.lua");
 addGameObject("scripts/CatPhysics2.lua");
 addGameObject("scripts/Water.lua")
--- addGameObject("scripts/guiBasic.lua")
+addGameObject("scripts/guiBasic.lua")
 addGameObject("scripts/pauseMenuSetup.lua")
 addGameObject("scripts/helpMenuSetup.lua")
 addGameObject("scripts/credits_setup.lua")
@@ -27,11 +27,11 @@ addGameObject("scripts/chatMenuSendSetup.lua")
 addGameObject("scripts/chatMenuReadSetup.lua")
 
 for i = 1, 25, 1 do
-	addGameObject("scripts/Human.lua")
+--	addGameObject("scripts/Human.lua")
 end
 
 for i = 1, 50, 1 do
-	addGameObject("scripts/Ghost.lua")
+--	addGameObject("scripts/Ghost.lua")
 end
 
 addGameObject("scripts/Arrow.lua")

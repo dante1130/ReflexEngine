@@ -1,6 +1,7 @@
 #pragma once
 
 #include <sol/sol.hpp>
+#include <assert.h>
 
 #include "Controller/LuaManager.hpp"
 #include "Model/GameObject/GameObject.hpp"
@@ -14,6 +15,8 @@
 #include "Model/GameObject/TerrainObject.hpp"
 #include "Model/GameObject/SkyboxObject.hpp"
 #include "Controller/Terrain/TexturedTerrain.hpp"
+#include "AI/singletons.h"
+#include "Model/GameObject/Projectile.hpp"
 
 /**
  * @class GameAssetFactory
@@ -213,4 +216,15 @@ private:
 	 * @return SkyboxObject*
 	 */
 	static SkyboxObject* load_skybox(const std::string& lua_script);
+
+	/**
+	 * @brief	Loads in a projectile object from a lua script
+	 * @param	luaScript	- The lua script to load the projectile data
+	 * from
+	 * @return	*PhysicsObject		- Created projectile object
+	 *
+	 * @pre		projectile object varaible exists
+	 * @post	projectile object stored
+	 */
+	static Projectile* loadProjectileObject(std::string luaScript);
 };

@@ -16,6 +16,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Model/GameObject/DirectionalLightObject.cpp
 	Model/LightData.hpp
 	Model/ModelData.cpp
+	Model/GameObject/Projectile.cpp
 	
 	View/Renderer/OpenGL/OpenGL.cpp
 	View/Renderer/OpenGL/Objects/Light.cpp
@@ -56,12 +57,21 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/Terrain/TexturedTerrain.cpp
 	Controller/GameAssetFactory.cpp
 	Controller/LuaManager.cpp
-	Controller/Physics.cpp
-	Controller/BodyRigidPhysics.cpp
+	Controller/Physics/Physics.cpp
+	Controller/Physics/BodyRigidPhysics.cpp
 	Controller/GuiLuaAccess.cpp
 	Controller/GenericFunctions.cpp
 	Controller/multiTextureCreator.cpp
 	
+	AI/messageDispatcher.cpp
+	AI/playerStates.cpp
+	AI/NPC.cpp
+	AI/entityManager.cpp
+	AI/movement.cpp
+	AI/world.cpp
+
+	AI/EngineTime.cpp
+
 	Game/Scene.hpp
 	Game/TestScene.cpp
 )

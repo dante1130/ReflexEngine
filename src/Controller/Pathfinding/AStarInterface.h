@@ -87,6 +87,12 @@ public:
 	 */
 	void printAstarException(int val);
 
+	/**
+	 * @brief	Returns the set grid
+	 * @return	std::vector<std::vector<int>> &	- The set grid
+	 */
+	std::vector<std::vector<int>> &getGrid();
+
 private:
 	/**
 	 * @brief	Sets the size of the grid in the x direction

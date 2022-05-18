@@ -96,7 +96,7 @@ bool AStar::setGrid(std::vector<std::vector<int>> newGrid) {
 	return false;
 }
 
-bool AStar::setGrid(int **newGrid, int xSize, int ySize) {
+bool AStar::setGrid(int** newGrid, int xSize, int ySize) {
 	if (xSize < 1 || ySize < 1) {
 		return false;
 	}
@@ -204,3 +204,5 @@ bool AStar::setMaxDistance(float val) {
 
 	return true;
 }
+
+std::vector<std::vector<int>>& AStar::getGrid() { return grid; }
