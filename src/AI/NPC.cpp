@@ -57,8 +57,14 @@ void NPC::draw(std::shared_ptr<Shader> shader) {
 	auto& model_m = ResourceManager::get_instance().get_model_manager();
 	model_m.get_model(model_name_).RenderModel();
 }
-void NPC::save_object() {}
+void NPC::save_object() {
+	//
+	//
+	//
+}
 
+//
+//
 //
 //
 //
@@ -84,7 +90,6 @@ void NPC::add_waypoint(glm::vec2 waypoint) { m_waypoints.push(waypoint); }
 void NPC::add_waypoint(float x, float z) { add_waypoint(glm::vec2(x, z)); }
 void NPC::add_waypoints(std::queue<glm::vec2>& new_waypoints) {
 	remove_waypoints();
-	// m_waypoints.push(glm::vec2(100, 100));
 	m_waypoints = new_waypoints;
 }
 void NPC::remove_waypoints() {

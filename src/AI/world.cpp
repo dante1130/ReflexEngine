@@ -7,8 +7,19 @@ void world::setWorld(TexturedTerrain* tt) {
 	create_grid(grid);
 	m_aStar.setGrid(grid);
 	m_aStar.setAllowDiagonalMovement(true);
-	m_aStar.setHeuristicsCostScale(3);
-	// m_aStar.setMaxDistance(100);
+	m_aStar.setHeuristicsCostScale(1.5);
+	m_aStar.setMaxDistance(100);
+
+	// create_sphere_obstruction(100, 50, 5);
+	// create_box_obstruction(100, 50, 5, 5);
+
+	std::vector<std::vector<int>> gsa = m_aStar.getGrid();
+	for (int count = gsa.size() - 1; count >= 0; count--) {
+		for (int x = gsa[count].size() - 1; x >= 0; x--) {
+			std::cout << gsa[count][x];
+		}
+		std::cout << std::endl;
+	}
 }
 
 void world::setMinMaxHeight(float min, float max) {
@@ -19,6 +30,76 @@ void world::setMinMaxHeight(float min, float max) {
 		std::cerr << "world - setMinMaxHeight - min is greater than max - "
 		          << m_min_height << " vs " << m_max_height;
 	}
+}
+
+void world::create_sphere_obstruction(float posX, float posZ, float radius) {
+	std::vector<std::vector<int>> grid = m_aStar.getGrid();
+
+	float checkRadius = radius * 1.2f;
+	glm::vec2 pos =
+	    glm::vec2(posX / m_tt->get_scale().x, posZ / m_tt->get_scale().z);
+	float distance = 0;
+
+	int startY = pos.y - checkRadius;
+	int endY = pos.y + checkRadius;
+	if (startY < 0) {
+		startY = 0;
+	}
+	if (endY > m_tt->get_length() - 1) {
+		endY = m_tt->get_length() - 1;
+	}
+	int startX = pos.x - checkRadius;
+	int endX = pos.x + checkRadius;
+	if (startX < 0) {
+		startX = 0;
+	}
+	if (endX > m_tt->get_width() - 1) {
+		startX = m_tt->get_length() - 1;
+	}
+
+	for (int y = startY; y < endY; y++) {
+		for (int x = startX; x < endX; x++) {
+			distance = glm::length(pos - glm::vec2(x, y));
+			if (distance < radius) {
+				grid[y][x] = 1;
+			}
+		}
+	}
+
+	m_aStar.setGrid(grid);
+}
+
+void world::create_box_obstruction(float posX, float posZ, float xSize,
+                                   float zSize) {
+	std::vector<std::vector<int>> grid = m_aStar.getGrid();
+
+	glm::vec2 pos =
+	    glm::vec2(posX / m_tt->get_scale().x, posZ / m_tt->get_scale().z);
+
+	int startY = pos.y - zSize;
+	int endY = pos.y + zSize;
+	if (startY < 0) {
+		startY = 0;
+	}
+	if (endY > m_tt->get_length() - 1) {
+		endY = m_tt->get_length() - 1;
+	}
+	int startX = pos.x - xSize;
+	int endX = pos.x + xSize;
+	if (startX < 0) {
+		startX = 0;
+	}
+	if (endX > m_tt->get_width() - 1) {
+		startX = m_tt->get_length() - 1;
+	}
+
+	for (int y = startY; y < endY; y++) {
+		for (int x = startX; x < endX; x++) {
+			grid[y][x] = 1;
+		}
+	}
+
+	m_aStar.setGrid(grid);
 }
 
 float world::get_height(float x, float z) { return m_tt->get_height(x, z); }
@@ -56,7 +137,8 @@ std::queue<glm::vec2> world::pathFinding(float currX, float currZ,
 		//           << " x: " << rawPath[end.y][end.x].parentNode.x <<
 		//           std::endl;
 
-		inversePath.push_back(glm::vec2(end.x, end.y));
+		inversePath.push_back(glm::vec2(end.x * m_tt->get_scale().x,
+		                                end.y * m_tt->get_scale().z));
 
 		temp = end.x;
 		end.x = rawPath[end.y][end.x].parentNode.x;
