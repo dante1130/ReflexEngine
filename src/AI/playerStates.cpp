@@ -85,8 +85,6 @@ void idle::Execute(NPC* curPlayer) {
 	glm::vec2 pos = glm::vec2(GenericFunctions::luaCamPosX(),
 	                          GenericFunctions::luaCamPosZ());
 
-	curPlayer->add_waypoints(gameWorld.pathFinding(
-	    curPlayer->position.x, curPlayer->position.z, pos.x, pos.y));
 	curPlayer->set_enemy_target(pos);
 
 	glm::vec2 distVec =
@@ -97,8 +95,15 @@ void idle::Execute(NPC* curPlayer) {
 	if (dist < 5) {
 		curPlayer->move_NPC(pos, 0.1);
 	} else {
-		curPlayer->waypoint_follow(false);
-		curPlayer->waypoint_follow(false);
+		for (int count = 0; count < 2; count++) {
+			if (curPlayer->waypoint_follow(
+			        false)) {  // If reached next waypoint, check if still
+				               // optimal
+				curPlayer->add_waypoints(
+				    gameWorld.pathFinding(curPlayer->position.x,
+				                          curPlayer->position.z, pos.x, pos.y));
+			}
+		}
 	}
 }
 

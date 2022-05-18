@@ -51,7 +51,7 @@ public:
 	void set_target_id(int new_target);
 	int get_target_id();
 
-	void waypoint_follow(bool gen_new);
+	bool waypoint_follow(bool gen_new);
 	bool move_NPC(glm::vec2 new_pos, float offset);
 	bool watch_for_enemy();
 	bool watch_for_enemy(float range);

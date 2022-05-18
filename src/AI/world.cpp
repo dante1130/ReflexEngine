@@ -9,10 +9,9 @@ void world::setWorld(TexturedTerrain* tt) {
 	m_aStar.setAllowDiagonalMovement(true);
 	m_aStar.setHeuristicsCostScale(1.5);
 	m_aStar.setMaxDistance(100);
+}
 
-	// create_sphere_obstruction(100, 50, 5);
-	// create_box_obstruction(100, 50, 5, 5);
-
+void world::show_world() {
 	std::vector<std::vector<int>> gsa = m_aStar.getGrid();
 	for (int count = gsa.size() - 1; count >= 0; count--) {
 		for (int x = gsa[count].size() - 1; x >= 0; x--) {
@@ -39,6 +38,8 @@ void world::create_sphere_obstruction(float posX, float posZ, float radius) {
 	glm::vec2 pos =
 	    glm::vec2(posX / m_tt->get_scale().x, posZ / m_tt->get_scale().z);
 	float distance = 0;
+
+	checkRadius = std::ceil(checkRadius);
 
 	int startY = pos.y - checkRadius;
 	int endY = pos.y + checkRadius;
@@ -75,6 +76,9 @@ void world::create_box_obstruction(float posX, float posZ, float xSize,
 
 	glm::vec2 pos =
 	    glm::vec2(posX / m_tt->get_scale().x, posZ / m_tt->get_scale().z);
+
+	xSize = std::ceil(xSize);
+	zSize = std::ceil(zSize);
 
 	int startY = pos.y - zSize;
 	int endY = pos.y + zSize;

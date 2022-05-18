@@ -5,12 +5,12 @@ for i = 1, 1, 1 do
 	addGameObject("scripts/Cat.lua")
 end
 
-for i = 1, 50, 1 do
---	addGameObject("scripts/Rock.lua")
+for i = 1, 500, 1 do
+	addGameObject("scripts/Rock.lua")
 end
 
-for i = 1, 25, 1 do
---	addGameObject("scripts/Tree.lua")
+for i = 1, 250, 1 do
+	addGameObject("scripts/Tree.lua")
 end
 
 addGameObject("scripts/CatPhysics.lua");

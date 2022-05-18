@@ -12,6 +12,8 @@ class world {
 public:
 	void setWorld(TexturedTerrain* tt);
 
+	void show_world();
+
 	void setMinMaxHeight(float min, float max);
 
 	void create_sphere_obstruction(float posX, float posZ, float radius);

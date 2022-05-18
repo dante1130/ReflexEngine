@@ -41,13 +41,12 @@ baseObject = {
 }
 
 collider1 = {
-	colliderType = "Box",
+	colliderType = "Capsule",
 	xPos = 0,
 	yPos = 0,
 	zPos = 0,
-	xBox = 0.25,
-	yBox = 10,
-	zBox = 0.25,
+	radius = 0.5,
+	height = 2,
 	bounciness = 0.5,
 	friction = 0.5
 }

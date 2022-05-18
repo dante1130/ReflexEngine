@@ -270,6 +270,11 @@ void GameAssetFactory::loadBoxCollider(int count, PhysicsObject* po,
 	float friction = lua[collider]["friction"];
 
 	po->addBoxCollider(posV, boxV, bounciness, friction);
+
+	if (po->getType() != 2) {
+		gameWorld.create_box_obstruction(po->position.x, po->position.z,
+		                                 boxV.x * 2, boxV.z * 2);
+	}
 }
 
 void GameAssetFactory::loadSphereCollider(int count, PhysicsObject* po,
@@ -286,6 +291,10 @@ void GameAssetFactory::loadSphereCollider(int count, PhysicsObject* po,
 	float friction = lua[collider]["friction"];
 
 	po->addSphereCollider(posV, radius, bounciness, friction);
+	if (po->getType() != 2) {
+		gameWorld.create_sphere_obstruction(po->position.x, po->position.z,
+		                                    radius);
+	}
 }
 
 void GameAssetFactory::loadCapsuleCollider(int count, PhysicsObject* po,
@@ -303,6 +312,10 @@ void GameAssetFactory::loadCapsuleCollider(int count, PhysicsObject* po,
 	float friction = lua[collider]["friction"];
 
 	po->addCapsuleCollider(posV, radius, height, bounciness, friction);
+	if (po->getType() != 2) {
+		gameWorld.create_sphere_obstruction(po->position.x, po->position.z,
+		                                    radius);
+	}
 }
 
 void GameAssetFactory::loadExtraPhysicObjectSettings(PhysicsObject* po,

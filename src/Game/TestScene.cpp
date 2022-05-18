@@ -173,6 +173,7 @@ void TestScene::loadSavedGameObjects() {
 	return;
 }
 
+static bool done = false;
 void TestScene::garbage_collection() {
 	int size = game_objects_.size();
 	for (int count = 0; count < size; count++) {
@@ -191,4 +192,9 @@ void TestScene::add_new_game_objects() {
 		game_objects_.emplace_back(GameAssetFactory::create(to_add_[count]));
 	}
 	to_add_.clear();
+
+	if (!done) {
+		gameWorld.show_world();
+		done = true;
+	}
 }

@@ -116,19 +116,21 @@ int NPC::get_target_id() { return m_target_id; }
 //
 //
 
-void NPC::waypoint_follow(bool gen_new) {
+bool NPC::waypoint_follow(bool gen_new) {
 	if (m_waypoints.size() == 0 && gen_new) {
 		std::cout << "waypoints empty & gen new" << std::endl;
-		return;
+		return true;
 
 	} else if (m_waypoints.size() == 0) {
 		std::cout << "waypoints empty" << std::endl;
-		return;
+		return true;
 	}
 
 	if (move_NPC(m_waypoints.front(), 0)) {
 		m_waypoints.pop();
+		return true;
 	}
+	return false;
 }
 
 bool NPC::move_NPC(glm::vec2 new_pos, float offset) {

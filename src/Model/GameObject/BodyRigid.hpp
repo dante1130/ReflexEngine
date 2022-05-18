@@ -60,6 +60,15 @@ public:
 	void setType(int type);
 
 	/**
+	 * @brief	Gets the type of rigid body
+	 * @return	type	- type of body. 0 = static, 1 = kinematic, 2 = dynamic
+	 *
+	 * @pre		Rigid body exists
+	 * @post	Type returned
+	 */
+	int getType();
+
+	/**
 	 * @brief	Set if you want gravity
 	 * @param	val	- True = allow gravity
 	 *
