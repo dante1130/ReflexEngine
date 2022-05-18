@@ -1,20 +1,20 @@
 #pragma once
 
-#include "GameObject.hpp"
 #include "Model/LightData.hpp"
+#include "Model/GameObject/GameObject.hpp"
 
 /**
- * @class DirectionalLightObject
- * @brief A directional light game object.
+ * @class PointLightObject
+ * @brief A point light game object.
  */
-class DirectionalLightObject : public GameObject {
+class PointLightObject : public GameObject {
 public:
 	/**
 	 * @brief Construct a new Directional Light Object object
 	 *
 	 * @param light_data
 	 */
-	DirectionalLightObject(const DirectionalLightData& light_data);
+	PointLightObject(const PointLightData& light_data);
 
 	/**
 	 * @brief Initializes the directional light object.
@@ -56,6 +56,6 @@ public:
 	void save_object() override;
 
 private:
-	/// The directional light data.
-	DirectionalLightData light_data_;
+	/// The point light data.
+	PointLightData light_data_;
 };

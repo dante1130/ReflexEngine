@@ -26,6 +26,8 @@ GameObject* GameAssetFactory::create(const std::string& fileName) {
 		return loadProjectileObject(fileName);
 	} else if (type == "DirectionalLight") {
 		return load_directional_light(fileName);
+	} else if (type == "PointLight") {
+		return load_point_light(fileName);
 	} else {
 		assert("Object type not found" && 0);
 		return nullptr;
@@ -458,6 +460,31 @@ DirectionalLightObject* GameAssetFactory::load_directional_light(
 	DirectionalLightObject* d_light = new DirectionalLightObject(light_data);
 
 	return d_light;
+}
+
+PointLightObject* GameAssetFactory::load_point_light(
+    const std::string& lua_script) {
+	sol::state& lua = LuaManager::get_instance().get_state();
+
+	lua.script_file(lua_script);
+
+	PointLightData light_data;
+
+	light_data.color.x = lua["light"]["color"]["r"];
+	light_data.color.y = lua["light"]["color"]["g"];
+	light_data.color.z = lua["light"]["color"]["b"];
+	light_data.ambient_intensity = lua["light"]["ambient_intensity"];
+	light_data.diffuse_intensity = lua["light"]["diffuse_intensity"];
+	light_data.position.x = lua["light"]["position"]["x"];
+	light_data.position.y = lua["light"]["position"]["y"];
+	light_data.position.z = lua["light"]["position"]["z"];
+	light_data.constant = lua["light"]["constant"];
+	light_data.linear = lua["light"]["linear"];
+	light_data.quadratic = lua["light"]["quadratic"];
+
+	PointLightObject* p_light = new PointLightObject(light_data);
+
+	return p_light;
 }
 
 Projectile* GameAssetFactory::loadProjectileObject(std::string luaScript) {

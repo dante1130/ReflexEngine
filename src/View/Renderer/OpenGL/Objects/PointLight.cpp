@@ -22,8 +22,8 @@ PointLight::PointLight(GLuint shadowWidth, GLuint shadowHeight, GLfloat near,
 
 	m_lightProj = glm::perspective(glm::radians(90.0f), aspect, near, far);
 
-	m_shadowMap = new OmniShadowMap();
-	m_shadowMap->Init(shadowWidth, shadowHeight);
+	// m_shadowMap = new OmniShadowMap();
+	// m_shadowMap->Init(shadowWidth, shadowHeight);
 }
 
 void PointLight::UseLight(GLuint ambientColorLoc, GLuint ambientIntensityLoc,

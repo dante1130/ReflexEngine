@@ -84,9 +84,6 @@ void OpenGL::render_pass() {
 void OpenGL::render_lights() {
 	for (const auto& d_light : directional_lights_) {
 		shader_->SetDirectionalLight(d_light);
-		shader_->SetDirectionalLightTransform(
-		    d_light.CalculateLightTransform());
-		// d_light.GetShadowMap()->Read(GL_TEXTURE2);
 	}
 
 	shader_->SetPointLights(point_lights_.data(), point_lights_.size(), 3, 0);
@@ -134,14 +131,19 @@ void OpenGL::set_skybox(const std::vector<std::string>& faces) {
 }
 
 void OpenGL::add_directional_light(const DirectionalLightData& light) {
-	DirectionalLight d_light(2048, 2048, light.color, light.ambient_intensity,
-	                         light.direction, light.diffuse_intensity);
-
-	directional_lights_.push_back(d_light);
+	directional_lights_.emplace_back(
+	    DirectionalLight(2048, 2048, light.color, light.ambient_intensity,
+	                     light.direction, light.diffuse_intensity));
 }
 
-void OpenGL::add_point_light(const PointLight& light) {
-	if (point_lights_.size() < MAX_POINT_LIGHTS) point_lights_.push_back(light);
+void OpenGL::add_point_light(const PointLightData& light_data) {
+	if (point_lights_.size() < MAX_POINT_LIGHTS) {
+		point_lights_.emplace_back(PointLight(
+		    2048, 2048, 0.01f, 100.0f, light_data.color,
+		    light_data.ambient_intensity, light_data.diffuse_intensity,
+		    light_data.position, light_data.constant, light_data.linear,
+		    light_data.quadratic));
+	}
 }
 
 void OpenGL::add_spot_light(const SpotLight& light) {

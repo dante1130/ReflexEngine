@@ -15,6 +15,7 @@
 #include "Model/GameObject/TerrainObject.hpp"
 #include "Model/GameObject/SkyboxObject.hpp"
 #include "Model/GameObject/DirectionalLightObject.hpp"
+#include "Model/GameObject/PointLightObject.hpp"
 #include "Controller/Terrain/TexturedTerrain.hpp"
 #include "AI/singletons.h"
 #include "Model/GameObject/Projectile.hpp"
@@ -218,8 +219,22 @@ private:
 	 */
 	static SkyboxObject* load_skybox(const std::string& lua_script);
 
+	/**
+	 * @brief Loads in a directional light object from a lua script
+	 *
+	 * @param lua_script
+	 * @return DirectionalLightObject*
+	 */
 	static DirectionalLightObject* load_directional_light(
 	    const std::string& lua_script);
+
+	/**
+	 * @brief Loads in a point light object from a lua script
+	 *
+	 * @param lua_script
+	 * @return PointLightObject*
+	 */
+	static PointLightObject* load_point_light(const std::string& lua_script);
 
 	/**
 	 * @brief	Loads in a projectile object from a lua script

@@ -56,21 +56,21 @@ public:
 	/**
 	 * @brief Adds a directional light to the renderer.
 	 *
-	 * @param light
+	 * @param light_data
 	 */
-	void add_directional_light(const DirectionalLightData& light);
+	void add_directional_light(const DirectionalLightData& light_data);
 
 	/**
 	 * @brief Adds a point light to the renderer.
 	 *
-	 * @param light
+	 * @param light_data
 	 */
-	void add_point_light(const PointLight& light);
+	void add_point_light(const PointLightData& light_data);
 
 	/**
 	 * @brief Adds a spot light to the renderer.
 	 *
-	 * @param light
+	 * @param light_Data
 	 */
 	void add_spot_light(const SpotLight& light);
 

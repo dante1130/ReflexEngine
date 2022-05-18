@@ -14,6 +14,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Model/GameObject/TerrainObject.cpp
 	Model/GameObject/SkyboxObject.cpp
 	Model/GameObject/DirectionalLightObject.cpp
+	Model/GameObject/PointLightObject.cpp
 	Model/LightData.hpp
 	Model/ModelData.cpp
 	Model/GameObject/Projectile.cpp
