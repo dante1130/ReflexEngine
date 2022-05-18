@@ -65,7 +65,7 @@ public:
 private:
 	bool to_be_deleted_ = false;
 	bool floor_contact_ = false;
-	float time_alive_left_ = 60;
+	float time_alive_left_ = 20;
 	float damage_ = 1;
 	bool collision_detected_ = false;
 	std::string lua_script_;
