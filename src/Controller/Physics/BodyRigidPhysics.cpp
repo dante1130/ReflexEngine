@@ -290,3 +290,33 @@ glm::vec3 BodyRigidPhysics::getLocalColliderPos(int index) {
 	Transform t = c->getLocalToBodyTransform();
 	return glm::vec3(t.getPosition().x, t.getPosition().y, t.getPosition().z);
 }
+
+void BodyRigidPhysics::setLinearAxisFactor(glm::vec3 factor) {
+	rb->setLinearLockAxisFactor(
+	    reactphysics3d::Vector3(factor.x, factor.y, factor.z));
+}
+
+void BodyRigidPhysics::setAngularAxisFactor(glm::vec3 factor) {
+	rb->setAngularLockAxisFactor(
+	    reactphysics3d::Vector3(factor.x, factor.y, factor.z));
+}
+
+void BodyRigidPhysics::removeColliders() {
+	int size = rb->getNbColliders();
+	Collider* collider;
+	for (int count = 0; count < size; count++) {
+		collider = rb->getCollider(count);
+		rb->removeCollider(collider);
+		size--;
+		count--;
+	}
+}
+
+void BodyRigidPhysics::turnIntoTrigger(bool val) {
+	int size = rb->getNbColliders();
+	Collider* collider;
+	for (int count = 0; count < size; count++) {
+		collider = rb->getCollider(count);
+		collider->setIsTrigger(val);
+	}
+}

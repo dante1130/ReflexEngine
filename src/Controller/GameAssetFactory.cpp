@@ -6,7 +6,6 @@ GameObject* GameAssetFactory::create(const std::string& fileName) {
 	}
 
 	std::string type = getObjectType(fileName);
-
 	if (type == "Item") {
 		return loadItem(fileName);
 	} else if (type == "Water") {
@@ -23,7 +22,10 @@ GameObject* GameAssetFactory::create(const std::string& fileName) {
 		return loadScriptableObject(fileName);
 	} else if (type == "Skybox") {
 		return load_skybox(fileName);
+	} else if (type == "Projectile") {
+		return loadProjectileObject(fileName);
 	} else {
+		assert("Object type not found" && 0);
 		return nullptr;
 	}
 }
@@ -432,4 +434,48 @@ SkyboxObject* GameAssetFactory::load_skybox(const std::string& lua_script) {
 	skybox->init();
 
 	return skybox;
+}
+Projectile* GameAssetFactory::loadProjectileObject(std::string luaScript) {
+	sol::state& lua = LuaManager::get_instance().get_state();
+	lua.script_file(luaScript);
+
+	Projectile* proj = new Projectile();
+
+	glm::vec3 offMult, intensity;
+
+	proj->position = loadBasePos(lua);
+	proj->scale = loadBaseScale(lua);
+	proj->rotation = loadBaseRotation(lua);
+	proj->angle = loadBaseAngle(lua);
+
+	std::string model_name = lua["baseObject"]["modelName"];
+	std::string material_name = lua["baseObject"]["material_name"];
+
+	proj->initModel(model_name, material_name);
+	proj->initRB(proj->position, proj->rotation, proj->angle);
+	loadExtraPhysicObjectSettings(proj, lua);
+
+	int size = lua["baseObject"]["numOfColliders"];
+	std::string colliderType = "Box";
+
+	for (int count = 1; count <= size; count++) {
+		colliderType = lua["collider" + std::to_string(count)]["colliderType"];
+		if (colliderType == "Box") {
+			loadBoxCollider(count, proj, lua);
+		} else if (colliderType == "Sphere") {
+			loadSphereCollider(count, proj, lua);
+		} else if (colliderType == "Capsule") {
+			loadCapsuleCollider(count, proj, lua);
+		}
+	}
+
+	proj->set_time_alive_left(lua["baseObject"]["timeAliveLeft"]);
+	proj->set_damage(lua["baseObject"]["damage"]);
+	proj->set_logic_script(lua["baseObject"]["logic"]);
+	int tempNum = lua["baseObject"]["floorContact"];
+	proj->set_floor_contact(tempNum);
+	tempNum = lua["baseObject"]["toDelete"];
+	proj->set_to_delete(tempNum);
+
+	return proj;
 }

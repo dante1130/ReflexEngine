@@ -6,7 +6,7 @@
 #include "Controller/GenericFunctions.h"
 #include "Controller/Input/InputManager.hpp"
 #include "Controller/Audio/Audio.hpp"
-#include "Controller/Physics.hpp"
+#include "Controller/Physics/Physics.hpp"
 
 ReflexEngine::ReflexEngine() {
 	if (window_.Init() == 1) return;

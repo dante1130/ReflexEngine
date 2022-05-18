@@ -14,6 +14,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Model/GameObject/TerrainObject.cpp
 	Model/GameObject/SkyboxObject.cpp
 	Model/ModelData.cpp
+	Model/GameObject/Projectile.cpp
 	
 	View/Renderer/OpenGL/OpenGL.cpp
 	View/Renderer/OpenGL/Objects/Light.cpp
@@ -54,8 +55,8 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/Terrain/TexturedTerrain.cpp
 	Controller/GameAssetFactory.cpp
 	Controller/LuaManager.cpp
-	Controller/Physics.cpp
-	Controller/BodyRigidPhysics.cpp
+	Controller/Physics/Physics.cpp
+	Controller/Physics/BodyRigidPhysics.cpp
 	Controller/GuiLuaAccess.cpp
 	Controller/GenericFunctions.cpp
 	Controller/multiTextureCreator.cpp

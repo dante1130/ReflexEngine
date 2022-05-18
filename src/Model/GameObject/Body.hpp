@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Model/GameObject/GameObject.hpp"
-#include "Controller/Physics.hpp"
+#include "Controller/Physics/Physics.hpp"
 #include "Controller/ResourceManager/ObjectSaving.hpp"
 #include "Controller/GenericFunctions.h"
 
