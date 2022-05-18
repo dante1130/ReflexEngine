@@ -60,6 +60,15 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/GenericFunctions.cpp
 	Controller/multiTextureCreator.cpp
 	
+	AI/messageDispatcher.cpp
+	AI/playerStates.cpp
+	AI/NPC.cpp
+	AI/entityManager.cpp
+	AI/movement.cpp
+	AI/world.cpp
+
+	AI/EngineTime.cpp
+
 	Game/Scene.hpp
 	Game/TestScene.cpp
 )

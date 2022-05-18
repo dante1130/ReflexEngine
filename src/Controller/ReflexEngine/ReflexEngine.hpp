@@ -6,6 +6,7 @@
 #include "View/Renderer/OpenGL/OpenGL.hpp"
 #include "Camera.hpp"
 #include "Window.hpp"
+#include "AI/EngineTime.hpp"
 
 constexpr float time_step = 1.0f / 60.0f;
 

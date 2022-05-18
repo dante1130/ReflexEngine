@@ -10,7 +10,7 @@ baseObject = {
 	xScale = 1,
 	yScale = 1,
 	zScale = 1,
-	move_speed = 2.5
+	move_speed = 15
 }
 
 script = "scripts/playerScript.lua"

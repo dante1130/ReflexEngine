@@ -14,6 +14,7 @@
 #include "Model/GameObject/TerrainObject.hpp"
 #include "Model/GameObject/SkyboxObject.hpp"
 #include "Controller/Terrain/TexturedTerrain.hpp"
+#include "AI/singletons.h"
 
 /**
  * @class GameAssetFactory

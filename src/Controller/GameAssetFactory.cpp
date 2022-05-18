@@ -411,6 +411,7 @@ TerrainObject* GameAssetFactory::loadTerrainObject(
 
 	GenericFunctions::setPlayableArea(to->get_height_map(), tt, scale.y,
 	                                  height_size);
+	gameWorld.setWorld(tt);
 	return to;
 }
 
