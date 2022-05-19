@@ -95,6 +95,11 @@ void Window::HandleMouse(GLFWwindow* window, double xPos, double yPos) {
 	currWindow->m_yPrev = yPos;
 }
 
+float Window::get_ratio() const {
+	return static_cast<float>(m_bufferWidth) /
+	       static_cast<float>(m_bufferHeight);
+}
+
 int Window::GetBufferWidth() const { return m_bufferWidth; }
 
 int Window::GetBufferHeight() const { return m_bufferHeight; }
@@ -119,6 +124,10 @@ void Window::set_should_close(bool should_close) {
 
 bool Window::IsShouldClose() const {
 	return glfwWindowShouldClose(m_mainWindow);
+}
+
+void Window::update_window_buffer_size() {
+	glfwGetFramebufferSize(m_mainWindow, &m_bufferWidth, &m_bufferHeight);
 }
 
 void Window::SwapBuffers() { glfwSwapBuffers(m_mainWindow); }

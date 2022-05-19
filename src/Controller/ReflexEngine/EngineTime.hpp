@@ -16,7 +16,11 @@ public:
 
 	static float get_delta_time();
 
+	static float get_time_step();
+
 	static float get_time_unpaused();
+
+	static bool is_time_step_passed();
 
 	static bool is_paused();
 
@@ -29,6 +33,8 @@ private:
 	static float delta_time_;
 	/// The fixed delta time.
 	static float fixed_delta_time_;
+	/// The time step for fixed update.
+	static constexpr float time_step = 1.0F / 60.0F;
 	/// The total unpaused time
 	static float total_unpaused_time_;
 	/// If the engine time is paused

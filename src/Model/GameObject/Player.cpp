@@ -27,10 +27,10 @@ void Player::init() {
 
 	flashlight_ =
 	    SpotLight(1024, 1024, 0.01f, 100.0f, glm::vec3(1.0f, 1.0f, 1.0f), 0.0f,
-	              2.0f, glm::vec3(0.0f, 0.0f, 0.0f),
-	              glm::vec3(0.0f, -1.0f, 0.0f), 1.0f, 0.0f, 0.0f, 20.0f);
+	              5.0f, glm::vec3(0.0f, 0.0f, 0.0f),
+	              glm::vec3(0.0f, -1.0f, 0.0f), 1.0f, 0.25f, 0.0f, 1.0f);
 }
-
+//
 void Player::fixed_update(float delta_time) {
 	auto& camera = ReflexEngine::get_instance().camera_;
 

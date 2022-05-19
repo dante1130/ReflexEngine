@@ -31,6 +31,13 @@ public:
 	int Init();
 
 	/**
+	 * @brief Get the aspect ratio of the window.
+	 *
+	 * @return float
+	 */
+	float get_ratio() const;
+
+	/**
 	 * @brief Get the Buffer Width.
 	 *
 	 * @return GLint
@@ -74,8 +81,12 @@ public:
 	bool IsShouldClose() const;
 
 	/**
-	 * @brief
-	 *
+	 * @brief Updates the window buffer sizes.
+	 */
+	void update_window_buffer_size();
+
+	/**
+	 * @brief Swap the window buffers.
 	 */
 	void SwapBuffers();
 
