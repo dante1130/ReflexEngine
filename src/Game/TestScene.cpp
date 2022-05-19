@@ -2,6 +2,7 @@
 
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 #include "Controller/Input/InputManager.hpp"
+#include "Controller/Audio/Audio.hpp"
 #include "TestScene.hpp"
 #include "AI/NPC.hpp"
 #include "AI/playerStates.h"
@@ -130,6 +131,9 @@ void TestScene::update(float delta_time) {
 	for (auto& game_object : game_objects_) {
 		game_object->update(delta_time);
 	}
+
+	Audio::get_instance().update_listener();
+
 	GenericFunctions::networkUpdate();
 	messageMgr.dispatchDelayedMessages();
 }

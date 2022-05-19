@@ -129,4 +129,6 @@ glm::vec3 Camera::get_direction() const { return glm::normalize(m_front); }
 
 glm::vec3 Camera::get_move_direction() const { return direction_; }
 
+glm::vec3 Camera::get_up_world() const { return m_upWorld; }
+
 void Camera::toggle_noclip() { is_noclip_ = !is_noclip_; }
