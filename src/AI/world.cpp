@@ -34,7 +34,7 @@ void world::setMinMaxHeight(float min, float max) {
 void world::create_sphere_obstruction(float posX, float posZ, float radius) {
 	std::vector<std::vector<int>> grid = m_aStar.getGrid();
 
-	float checkRadius = radius * 1.2f;
+	float checkRadius = radius / m_tt->get_scale().x;
 	glm::vec2 pos =
 	    glm::vec2(posX / m_tt->get_scale().x, posZ / m_tt->get_scale().z);
 	float distance = 0;
@@ -77,8 +77,8 @@ void world::create_box_obstruction(float posX, float posZ, float xSize,
 	glm::vec2 pos =
 	    glm::vec2(posX / m_tt->get_scale().x, posZ / m_tt->get_scale().z);
 
-	xSize = std::ceil(xSize);
-	zSize = std::ceil(zSize);
+	xSize = std::ceil(xSize / m_tt->get_scale().x);
+	zSize = std::ceil(zSize / m_tt->get_scale().z);
 
 	int startY = pos.y - zSize;
 	int endY = pos.y + zSize;

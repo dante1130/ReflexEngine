@@ -7,6 +7,7 @@
 //#include "AI/singletons.h"
 #include "AI/movement.h"
 #include <cmath>
+#include <sol/sol.hpp>
 
 class NPC : public PhysicsObject {
 public:

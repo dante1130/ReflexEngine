@@ -15,20 +15,34 @@ void NPC::fixed_update(float delta_time) {
 	if (!EngineTime::is_paused()) {
 		m_AI_time_elapsed += delta_time;
 		if (m_AI_time_elapsed > m_AI_update_delay) {
-			m_NPC_FSM->update();
+			// m_NPC_FSM->update();
 
-			if (m_id == 0) {
-				// position.x = GenericFunctions::luaCamPosX();
-				// position.z = GenericFunctions::luaCamPosZ();
-			}
+			/// <summary>
+			///
+			/// </summary>
+			/// <param name="delta_time"></param>
+			/*
+		   sol::state& lua = LuaManager::get_instance().get_state();
+
+		   lua.script_file("playerStateMachine.lua");
+
+		   sol::table obj;
+
+		   obj = lua["state_flee"];
+
+		   sol::function exe = obj["execute"];
+
+		   exe(this);
+		   */
+			/// <summary>
+			///
+			/// </summary>
+			/// <param name="delta_time"></param>
+
 			position.y = GenericFunctions::getHeight(position.x, position.z);
 
 			m_AI_time_elapsed = 0;
 		}
-	}
-
-	if (m_health < 0) {
-		// m_dead = true;
 	}
 }
 void NPC::add_draw_call() {
