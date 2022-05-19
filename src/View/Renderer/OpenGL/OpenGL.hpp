@@ -70,8 +70,10 @@ public:
 	/**
 	 * @brief Adds a spot light to the renderer.
 	 *
-	 * @param light_Data
+	 * @param light_data
 	 */
+	void add_spot_light(const SpotLightData& light_data);
+
 	void add_spot_light(const SpotLight& light);
 
 	/**

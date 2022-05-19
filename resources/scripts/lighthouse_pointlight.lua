@@ -4,18 +4,18 @@ baseObject = {
 
 light = {
 	color = {
-		r = 0.88,
-		g = 0.35,
-		b = 0.13
+		r = 1.0,
+		g = 1.0,
+		b = 1.0
 	},
 
 	ambient_intensity = 0.0,
 	diffuse_intensity = 1.0,
 
 	position = {
-		x = 100.0,
-		y = 10.0,
-		z = 75.0
+		x = -48.0,
+		y = 40.0,
+		z = 2.0
 	},
 
 	constant = 0.0,

@@ -16,6 +16,7 @@
 #include "Model/GameObject/SkyboxObject.hpp"
 #include "Model/GameObject/DirectionalLightObject.hpp"
 #include "Model/GameObject/PointLightObject.hpp"
+#include "Model/GameObject/SpotLightObject.hpp"
 #include "Controller/Terrain/TexturedTerrain.hpp"
 #include "AI/singletons.h"
 #include "Model/GameObject/Projectile.hpp"
@@ -237,6 +238,14 @@ private:
 	static PointLightObject* load_point_light(const std::string& lua_script);
 
 	/**
+	 * @brief Loads in a spot light object from a lua script
+	 *
+	 * @param lua_script
+	 * @return SpotLightObject*
+	 */
+	static SpotLightObject* load_spot_light(const std::string& lua_script);
+
+	/**
 	 * @brief	Loads in a projectile object from a lua script
 	 * @param	luaScript	- The lua script to load the projectile data
 	 * from
@@ -245,5 +254,5 @@ private:
 	 * @pre		projectile object varaible exists
 	 * @post	projectile object stored
 	 */
-	static Projectile* loadProjectileObject(std::string luaScript);
+	static Projectile* loadProjectileObject(const std::string& luaScript);
 };

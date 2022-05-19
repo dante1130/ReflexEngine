@@ -4,17 +4,17 @@
 #include "Model/GameObject/GameObject.hpp"
 
 /**
- * @class PointLightObject
- * @brief A point light game object.
+ * @class SpotLightObject
+ * @brief A spot light game object.
  */
-class PointLightObject : public GameObject {
+class SpotLightObject : public GameObject {
 public:
 	/**
 	 * @brief Construct a new Directional Light Object object
 	 *
 	 * @param light_data
 	 */
-	PointLightObject(const PointLightData& light_data);
+	SpotLightObject(const SpotLightData& light_data);
 
 	/**
 	 * @brief Initializes the game object.
@@ -56,6 +56,6 @@ public:
 	void save_object() override;
 
 private:
-	/// The point light data.
-	PointLightData light_data_;
+	/// The spot light data.
+	SpotLightData light_data_;
 };

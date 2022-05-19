@@ -17,7 +17,7 @@ public:
 	DirectionalLightObject(const DirectionalLightData& light_data);
 
 	/**
-	 * @brief Initializes the directional light object.
+	 * @brief Initializes the game object.
 	 */
 	void init() override {}
 

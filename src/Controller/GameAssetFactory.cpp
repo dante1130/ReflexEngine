@@ -2,7 +2,7 @@
 
 GameObject* GameAssetFactory::create(const std::string& fileName) {
 	if (fileName.length() == 0 || isLuaScript(fileName) == false) {
-		return nullptr;
+		assert("Not a valid lua script file!" && 0);
 	}
 
 	std::string type = getObjectType(fileName);
@@ -28,6 +28,8 @@ GameObject* GameAssetFactory::create(const std::string& fileName) {
 		return load_directional_light(fileName);
 	} else if (type == "PointLight") {
 		return load_point_light(fileName);
+	} else if (type == "SpotLight") {
+		return load_spot_light(fileName);
 	} else {
 		assert("Object type not found" && 0);
 		return nullptr;
@@ -487,7 +489,37 @@ PointLightObject* GameAssetFactory::load_point_light(
 	return p_light;
 }
 
-Projectile* GameAssetFactory::loadProjectileObject(std::string luaScript) {
+SpotLightObject* GameAssetFactory::load_spot_light(
+    const std::string& lua_script) {
+	sol::state& lua = LuaManager::get_instance().get_state();
+
+	lua.script_file(lua_script);
+
+	SpotLightData light_data;
+
+	light_data.color.x = lua["light"]["color"]["r"];
+	light_data.color.y = lua["light"]["color"]["g"];
+	light_data.color.z = lua["light"]["color"]["b"];
+	light_data.ambient_intensity = lua["light"]["ambient_intensity"];
+	light_data.diffuse_intensity = lua["light"]["diffuse_intensity"];
+	light_data.position.x = lua["light"]["position"]["x"];
+	light_data.position.y = lua["light"]["position"]["y"];
+	light_data.position.z = lua["light"]["position"]["z"];
+	light_data.constant = lua["light"]["constant"];
+	light_data.linear = lua["light"]["linear"];
+	light_data.quadratic = lua["light"]["quadratic"];
+	light_data.direction.x = lua["light"]["direction"]["x"];
+	light_data.direction.y = lua["light"]["direction"]["y"];
+	light_data.direction.z = lua["light"]["direction"]["z"];
+	light_data.edge = lua["light"]["edge"];
+
+	SpotLightObject* s_light = new SpotLightObject(light_data);
+
+	return s_light;
+}
+
+Projectile* GameAssetFactory::loadProjectileObject(
+    const std::string& luaScript) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file(luaScript);
 

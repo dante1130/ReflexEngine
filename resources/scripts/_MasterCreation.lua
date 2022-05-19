@@ -1,7 +1,8 @@
 addGameObject("scripts/terrain.lua")
 addGameObject("scripts/skybox.lua")
 addGameObject("scripts/moonlight.lua")
-addGameObject("scripts/firelight.lua")
+addGameObject("scripts/lighthouse_pointlight.lua")
+addGameObject("scripts/lighthouse_spotlight.lua")
 
 for i = 1, 1, 1 do
 	addGameObject("scripts/Cat.lua")
