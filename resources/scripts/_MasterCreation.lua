@@ -2,19 +2,19 @@ addGameObject("scripts/terrain.lua")
 addGameObject("scripts/skybox.lua")
 
 for i = 1, 1, 1 do
-	addGameObject("scripts/Cat.lua")
+	--addGameObject("scripts/Cat.lua")
 end
 
-for i = 1, 500, 1 do
-	addGameObject("scripts/Rock.lua")
+for i = 1, 50, 1 do
+	--addGameObject("scripts/Rock.lua")
 end
 
-for i = 1, 250, 1 do
-	addGameObject("scripts/Tree.lua")
+for i = 1, 25, 1 do
+	--addGameObject("scripts/Tree.lua")
 end
 
-addGameObject("scripts/CatPhysics.lua");
-addGameObject("scripts/CatPhysics2.lua");
+--addGameObject("scripts/CatPhysics.lua");
+--addGameObject("scripts/CatPhysics2.lua");
 addGameObject("scripts/Water.lua")
 addGameObject("scripts/guiBasic.lua")
 addGameObject("scripts/pauseMenuSetup.lua")
@@ -35,6 +35,6 @@ for i = 1, 50, 1 do
 end
 
 addGameObject("scripts/Arrow.lua")
-addGameObject("scripts/Bow.lua")
-addGameObject("scripts/Boat.lua")
-addGameObject("scripts/Lighthouse.lua")
+--addGameObject("scripts/Bow.lua")
+--addGameObject("scripts/Boat.lua")
+--addGameObject("scripts/Lighthouse.lua")

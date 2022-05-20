@@ -28,7 +28,7 @@ private:
 public:
 	// send a message to another agent. Receiving agent is referenced by ID.
 	void dispatchMsg(double delay, int sender, int receiver, int msg,
-	                 void* extraInfo);
+	                 sol::object extraInfo);
 	// send out any delayed messages. This method is called each time through
 	// the main game loop.
 	void dispatchDelayedMessages();

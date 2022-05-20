@@ -21,7 +21,7 @@ void messageDispatcher::discharge(NPC* pReceiver, const telegram& msg) {
 //  in the message queue to be dispatched at the correct time
 //------------------------------------------------------------------------
 void messageDispatcher::dispatchMsg(double delay, int sender, int receiver,
-                                    int msg, void* additionalInfo = NULL) {
+                                    int msg, sol::object additionalInfo) {
 	// get a pointer to the receiver
 	NPC* pReceiver = entityMgr.getEntityFromID(receiver);
 	// make sure the receiver is valid

@@ -13,6 +13,7 @@
 //------------------------------------------------------------------------
 #include <iostream>
 #include <math.h>
+#include <sol/sol.hpp>
 
 struct telegram {
 	// the entity that sent this telegram
@@ -31,11 +32,11 @@ struct telegram {
 	double dispatchTime;
 
 	// any additional information that may accompany the message
-	void* extraInfo;
+	sol::object extraInfo;
 
 	telegram() : dispatchTime(-1), sender(-1), receiver(-1), msg(-1) {}
 
-	telegram(double time, int sender, int receiver, int msg, void* info = NULL)
+	telegram(double time, int sender, int receiver, int msg, sol::object info)
 	    : dispatchTime(time),
 	      sender(sender),
 	      receiver(receiver),

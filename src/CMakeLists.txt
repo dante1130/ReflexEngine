@@ -67,7 +67,8 @@ target_sources(${PROJECT_NAME} PRIVATE
 	AI/entityManager.cpp
 	AI/movement.cpp
 	AI/world.cpp
-
+	AI/luaAccessScriptedFSM.cpp
+	AI/Counter.cpp
 	AI/EngineTime.cpp
 
 	Game/Scene.hpp

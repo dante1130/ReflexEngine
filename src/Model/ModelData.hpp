@@ -13,10 +13,12 @@ public:
 	void render(float delta_time);
 
 	void set_fps(float fps);
+	void set_loop(bool loop);
 	void set_animation(md2::animation_type animation_type);
 	void animate(float delta_time);
 
 	bool get_is_animated() const;
+	bool get_is_running() const;
 
 private:
 	void render_animated(float delta_time);

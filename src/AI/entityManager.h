@@ -26,5 +26,7 @@ public:
 	NPC* getEntityByIndex(int index) const;
 
 	int numberOfEntities();
+
+	void killEntities();
 };
 #endif

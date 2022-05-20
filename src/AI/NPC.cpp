@@ -1,10 +1,12 @@
 #include "AI/NPC.hpp"
 #include "playerStates.h"
 
-NPC::NPC() {
+NPC::NPC(const std::string& model_name, const std::string& texture_name,
+         bool is_animated, bool is_loop_)
+    : m_animation(model_name, texture_name, is_animated, is_loop_) {
 	m_NPC_FSM = new stateMachine<NPC>(this);
-	m_NPC_FSM->setCurrentState(&idle_state::Instance());
-	m_NPC_FSM->setGlobalState(&global_state::Instance());
+
+	m_id = idMgr.increment_count();
 }
 
 NPC::~NPC() { delete m_NPC_FSM; }
@@ -15,29 +17,7 @@ void NPC::fixed_update(float delta_time) {
 	if (!EngineTime::is_paused()) {
 		m_AI_time_elapsed += delta_time;
 		if (m_AI_time_elapsed > m_AI_update_delay) {
-			// m_NPC_FSM->update();
-
-			/// <summary>
-			///
-			/// </summary>
-			/// <param name="delta_time"></param>
-			/*
-		   sol::state& lua = LuaManager::get_instance().get_state();
-
-		   lua.script_file("playerStateMachine.lua");
-
-		   sol::table obj;
-
-		   obj = lua["state_flee"];
-
-		   sol::function exe = obj["execute"];
-
-		   exe(this);
-		   */
-			/// <summary>
-			///
-			/// </summary>
-			/// <param name="delta_time"></param>
+			m_NPC_FSM->update();
 
 			position.y = GenericFunctions::getHeight(position.x, position.z);
 
@@ -100,8 +80,9 @@ void NPC::set_power(int new_power) { m_power = new_power; }
 float NPC::get_power() { return m_power; }
 
 int NPC::get_waypoint_count() { return m_waypoints.size(); }
-void NPC::add_waypoint(glm::vec2 waypoint) { m_waypoints.push(waypoint); }
-void NPC::add_waypoint(float x, float z) { add_waypoint(glm::vec2(x, z)); }
+void NPC::add_waypointGLM(glm::vec2 waypoint) { m_waypoints.push(waypoint); }
+
+void NPC::add_waypoint(float x, float z) { add_waypointGLM(glm::vec2(x, z)); }
 void NPC::add_waypoints(std::queue<glm::vec2>& new_waypoints) {
 	remove_waypoints();
 	m_waypoints = new_waypoints;
@@ -112,9 +93,8 @@ void NPC::remove_waypoints() {
 	}
 }
 
-void NPC::new_state(State<NPC>* new_state) {
-	m_NPC_FSM->changeState(new_state);
-}
+void NPC::new_state(sol::table new_state) { m_NPC_FSM->changeState(new_state); }
+
 stateMachine<NPC>* NPC::get_FSM() { return m_NPC_FSM; }
 
 void NPC::set_faction(int new_faction) { m_faction = new_faction; }
@@ -140,14 +120,15 @@ bool NPC::waypoint_follow(bool gen_new) {
 		return true;
 	}
 
-	if (move_NPC(m_waypoints.front(), 0)) {
+	if (move_NPC(m_waypoints.front().x, m_waypoints.front().y, 0)) {
 		m_waypoints.pop();
 		return true;
 	}
 	return false;
 }
 
-bool NPC::move_NPC(glm::vec2 new_pos, float offset) {
+bool NPC::move_NPC(float x, float z, float offset) {
+	glm::vec2 new_pos = glm::vec2(x, z);
 	glm::vec2 newPos = glm::vec2(position.x, position.z);
 
 	bool ret = ai_movement::moveTo(newPos, new_pos, glm::vec2(1, 1),
@@ -168,9 +149,9 @@ bool NPC::move_NPC(glm::vec2 new_pos, float offset) {
 	return ret;
 }
 
-bool NPC::watch_for_enemy() { return watch_for_enemy(10); }
+bool NPC::watch_for_enemy() { return watch_for_enemyVal(10); }
 
-bool NPC::watch_for_enemy(float range) {
+bool NPC::watch_for_enemyVal(float range) {
 	int size = entityMgr.numberOfEntities();
 
 	NPC* npc;
@@ -219,3 +200,5 @@ bool NPC::move_to_enemy() {
 
 	return ret;
 }
+
+ModelData& NPC::get_animation() { return m_animation; }

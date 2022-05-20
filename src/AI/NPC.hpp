@@ -7,11 +7,12 @@
 //#include "AI/singletons.h"
 #include "AI/movement.h"
 #include <cmath>
-#include <sol/sol.hpp>
+#include "Model/ModelData.hpp"
 
 class NPC : public PhysicsObject {
 public:
-	NPC();
+	NPC(const std::string& model_name, const std::string& texture_name,
+	    bool is_animated, bool is_loop_);
 	~NPC();
 	void init();
 	void update(float delta_time);
@@ -35,12 +36,12 @@ public:
 	float get_power();
 
 	int get_waypoint_count();
-	void add_waypoint(glm::vec2 waypoint);
+	void add_waypointGLM(glm::vec2 waypoint);
 	void add_waypoint(float x, float z);
 	void add_waypoints(std::queue<glm::vec2>& new_waypoints);
 	void remove_waypoints();
 
-	void new_state(State<NPC>* new_state);
+	void new_state(sol::table new_state);
 	stateMachine<NPC>* get_FSM();
 
 	void set_faction(int new_faction);
@@ -53,10 +54,12 @@ public:
 	int get_target_id();
 
 	bool waypoint_follow(bool gen_new);
-	bool move_NPC(glm::vec2 new_pos, float offset);
+	bool move_NPC(float x, float z, float offset);
 	bool watch_for_enemy();
-	bool watch_for_enemy(float range);
+	bool watch_for_enemyVal(float range);
 	bool move_to_enemy();
+
+	ModelData& get_animation();
 
 private:
 	int m_id;
@@ -72,4 +75,6 @@ private:
 	stateMachine<NPC>* m_NPC_FSM;
 	glm::vec2 m_target_pos;
 	int m_target_id;
+
+	ModelData m_animation;
 };

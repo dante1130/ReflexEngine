@@ -7,6 +7,7 @@
 #include "AI/playerStates.h"
 #include "AI/entityManager.h"
 #include "AI/messageDispatcher.h"
+#include "AI/luaAccessScriptedFSM.hpp"
 
 void TestScene::init() {
 	directional_light_ =
@@ -16,17 +17,28 @@ void TestScene::init() {
 	sol::state& lua = LuaManager::get_instance().get_state();
 
 	lua.set_function("addGameObject", &TestScene::addGameObject, this);
+	luaAccessScriptedFSM::registerAllAI();
+	lua.script_file("scripts/AI/statemachine.lua");
+	lua.script_file(
+	    "scripts/AI/setupPlayerFSM.lua");  // All player/NPC setup functions are
+	                                       // found in here
 
 	lua.script_file("scripts/_Materials.lua");
 	lua.script_file("scripts/_MasterCreation.lua");
+	lua.script_file("scripts/AI/_MasterCreation.lua");
 	lua.script_file("scripts/_Sounds.lua");
 
-	NPC* player = new NPC();
+	/*
+	lua.script_file("scripts/AI/setupPlayerFSM.lua");
+	NPC* player = new NPC("temp", "temp", true, true);
 	player->set_id(0);
 	player->set_faction(1);
 	player->position = glm::vec3(90, 5, 45);
 	player->initModel("human", "shiny");
-
+	sol::function exe = lua["setupPlayerFSM"];
+	exe(*player);
+	std::cout << "\n\n" << std::endl;
+	*/
 	/*
 	NPC* patroller = new NPC();
 	patroller->set_id(1);
@@ -45,12 +57,12 @@ void TestScene::init() {
 	sentry->initModel("ghost", "shiny");
 	*/
 
-	game_objects_.emplace_back(player);
-	// game_objects_.emplace_back(patroller);
-	// game_objects_.emplace_back(sentry);
-	entityMgr.registerEntity(player);
-	// entityMgr.registerEntity(patroller);
-	// entityMgr.registerEntity(sentry);
+	// game_objects_.emplace_back(player);
+	//  game_objects_.emplace_back(patroller);
+	//  game_objects_.emplace_back(sentry);
+	// entityMgr.registerEntity(player);
+	//  entityMgr.registerEntity(patroller);
+	//  entityMgr.registerEntity(sentry);
 }
 
 void TestScene::add_game_object_during_run(std::string luaScript) {
@@ -165,15 +177,15 @@ void TestScene::saveGameObjects() {
 
 void TestScene::loadSavedGameObjects() {
 	game_objects_.clear();
-
+	entityMgr.killEntities();
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file("scripts/save/_MasterCreation.lua");
-
+	std::cout << "Number of eneitites: " << entityMgr.numberOfEntities()
+	          << std::endl;
 	GenericFunctions::setIfLoad(false);
 	return;
 }
 
-static bool done = false;
 void TestScene::garbage_collection() {
 	int size = game_objects_.size();
 	for (int count = 0; count < size; count++) {
@@ -186,6 +198,7 @@ void TestScene::garbage_collection() {
 	}
 }
 
+static bool done = false;
 void TestScene::add_new_game_objects() {
 	for (int count = 0; count < to_add_.size(); count++) {
 		std::cout << "Adding during runtime = " << to_add_[count] << std::endl;
@@ -194,7 +207,11 @@ void TestScene::add_new_game_objects() {
 	to_add_.clear();
 
 	if (!done) {
-		gameWorld.show_world();
+		// gameWorld.show_world();
+		std::cout << "\nokokok\nokokok\nokokok\nokokok\nRemove code in "
+		             "TestScene::add_new_game_"
+		             "objects\nokokok\nokokok\nokokok\nokokok\nokokok"
+		          << std::endl;
 		done = true;
 	}
 }

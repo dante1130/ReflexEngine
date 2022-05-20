@@ -77,3 +77,7 @@ void ModelData::animate(float delta_time) {
 }
 
 bool ModelData::get_is_animated() const { return is_animated_; }
+
+bool ModelData::get_is_running() const { return is_animation_done; }
+
+void ModelData::set_loop(bool loop) { is_loop_ = loop; }
