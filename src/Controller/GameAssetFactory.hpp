@@ -255,7 +255,7 @@ private:
 	 * @pre		projectile object varaible exists
 	 * @post	projectile object stored
 	 */
-	static Projectile* loadProjectileObject(const std::string luaScript);
+	static Projectile* loadProjectileObject(const std::string& luaScript);
 
 	/**
 	 * @brief	Loads in a NPC object from a lua script
@@ -266,5 +266,5 @@ private:
 	 * @pre		NPC object varaible exists
 	 * @post	NPC object stored
 	 */
-	static NPC* loadNPCObject(std::string luaScript);
+	static NPC* loadNPCObject(const std::string& luaScript);
 };

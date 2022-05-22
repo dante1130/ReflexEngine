@@ -579,7 +579,7 @@ Projectile* GameAssetFactory::loadProjectileObject(
 	return proj;
 }
 
-NPC* GameAssetFactory::loadNPCObject(std::string luaScript) {
+NPC* GameAssetFactory::loadNPCObject(const std::string& luaScript) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file(luaScript);
 
