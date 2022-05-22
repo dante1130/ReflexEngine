@@ -26,6 +26,7 @@ void TerrainObject::add_storage_text(std::string text, int n) {
 }
 
 void TerrainObject::save_object() {
+	/*
 	ObjectSaving::openFile();
 	ObjectSaving::saveGameObject(position, rotation, scale, angle,
 	                             "TerrainObject");
@@ -44,6 +45,7 @@ void TerrainObject::save_object() {
 	ObjectSaving::addValue("island", true, true);
 	ObjectSaving::closeStruct();
 	ObjectSaving::closeFile();
+	*/
 }
 
 void TerrainObject::add_texture(std::string fileName) {

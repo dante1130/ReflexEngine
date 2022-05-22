@@ -20,6 +20,8 @@ public:
 	bool get_is_animated() const;
 	bool get_is_running() const;
 
+	bool get_loop() const;
+
 private:
 	void render_animated(float delta_time);
 	void render_model();

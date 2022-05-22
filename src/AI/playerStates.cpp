@@ -85,7 +85,7 @@ void idle::Execute(NPC* curPlayer) {
 	glm::vec2 pos = glm::vec2(GenericFunctions::luaCamPosX(),
 	                          GenericFunctions::luaCamPosZ());
 
-	curPlayer->set_enemy_target(pos);
+	curPlayer->set_enemy_target(pos.x, pos.y);
 
 	glm::vec2 distVec =
 	    pos - glm::vec2(curPlayer->position.x, curPlayer->position.z);

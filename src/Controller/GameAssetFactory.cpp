@@ -508,10 +508,6 @@ NPC* GameAssetFactory::loadNPCObject(std::string luaScript) {
 	rotation = loadBaseRotation(lua);
 	angle = loadBaseAngle(lua);
 
-	//
-
-	//
-
 	std::string model = lua["baseObject"]["modelName"];
 	std::string mat = lua["baseObject"]["material_name"];
 	int animate = lua["baseObject"]["animate"];
@@ -523,6 +519,23 @@ NPC* GameAssetFactory::loadNPCObject(std::string luaScript) {
 	npc->rotation = rotation;
 	npc->angle = angle;
 
+	npc->initRB(npc->position, npc->rotation, npc->angle);
+	loadExtraPhysicObjectSettings(npc, lua);
+
+	int size = lua["baseObject"]["numOfColliders"];
+	std::string colliderType = "Box";
+
+	for (int count = 1; count <= size; count++) {
+		colliderType = lua["collider" + std::to_string(count)]["colliderType"];
+		if (colliderType == "Box") {
+			loadBoxCollider(count, npc, lua);
+		} else if (colliderType == "Sphere") {
+			loadSphereCollider(count, npc, lua);
+		} else if (colliderType == "Capsule") {
+			loadCapsuleCollider(count, npc, lua);
+		}
+	}
+
 	int faction = lua["AI"]["faction"];
 	int health = lua["AI"]["health"];
 	int power = lua["AI"]["power"];
@@ -530,6 +543,7 @@ NPC* GameAssetFactory::loadNPCObject(std::string luaScript) {
 	npc->set_faction(faction);
 	npc->set_health(health);
 	npc->set_power(power);
+	npc->set_move_speed(lua["AI"]["moveSpeed"]);
 
 	// Sets up Finite State Machine
 	std::string script = lua["AI"]["setUpFSM"];

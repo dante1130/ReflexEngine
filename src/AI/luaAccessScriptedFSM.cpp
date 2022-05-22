@@ -6,6 +6,7 @@ void luaAccessScriptedFSM::registerAllAI() {
 	registerPlayer();
 	registerVector2D();
 	registerMessage();
+	registerWorld();
 	registerTelegram();
 	registerAnimation::registerModelData();
 }
@@ -45,10 +46,14 @@ void luaAccessScriptedFSM::registerPlayer() {
 	player_type["dead"] = sol::property(&NPC::is_dead, &NPC::kill_npc);
 	player_type["target_id"] =
 	    sol::property(&NPC::get_target_id, &NPC::set_target_id);
-	player_type["target_position"] =
-	    sol::property(&NPC::get_enemy_target, &NPC::set_enemy_target);
+	player_type["set_target_position"] = &NPC::set_enemy_target;
+	player_type["get_target_position"] = &NPC::get_enemy_target;
 	player_type["faction"] =
 	    sol::property(&NPC::get_faction, &NPC::set_faction);
+
+	player_type["getX"] = &NPC::get_pos_x;
+	player_type["getY"] = &NPC::get_pos_y;
+	player_type["getZ"] = &NPC::get_pos_z;
 
 	// Waypoints setting & getting
 	player_type["numberOfWaypoints"] = &NPC::get_waypoint_count;
@@ -67,6 +72,7 @@ void luaAccessScriptedFSM::registerPlayer() {
 	player_type["watchForEnemy"] =
 	    sol::overload(&NPC::watch_for_enemy, &NPC::watch_for_enemyVal);
 	player_type["moveToEnemy"] = &NPC::move_to_enemy;
+	player_type["pathfindToPoint"] = &NPC::use_pathfinding;
 }
 
 void luaAccessScriptedFSM::registerVector2D() {
@@ -87,6 +93,8 @@ void luaAccessScriptedFSM::registerMessage() {
 
 	player_type["dispatchMsg"] = &messageDispatcher::dispatchMsg;
 }
+
+void luaAccessScriptedFSM::registerWorld() {}
 
 void luaAccessScriptedFSM::registerTelegram() {
 	sol::state& lua = LuaManager::get_instance().get_state();

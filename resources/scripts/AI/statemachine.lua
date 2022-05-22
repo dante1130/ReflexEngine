@@ -46,7 +46,7 @@ end
 
 
 state_global["execute"] = function(player)
-print("in global")
+--print("in global")
 
 
 end
@@ -82,15 +82,31 @@ end
 
 state_idle["execute"] = function(player)
 --print("In idle")
-player:moveNPC(camera_pos_x(), camera_pos_z(), 0)
+--player:moveNPC(camera_pos_x(), camera_pos_z(), 0)
 --print("END")
+
+local x = camera_pos_x()
+local z = camera_pos_z()
+player:set_target_position(x, z)
+
+local playerX = player:getX()
+local playerZ = player:getZ()
+
+local distance = vector2Length(x - playerX, z - playerZ)
+
+if(distance < 5) then
+  player:moveNPC(camera_pos_x(), camera_pos_z(), 0.1)
+else
+  player:pathfindToPoint(playerX, playerZ, x, z)
+  player:followWaypoint(false)
+  --if(player:followWaypoint(false)) then
+  --  player:pathfindToPoint(playerX, playerZ, x, z)
+  --end
+end
 
 --player:getFSM():setCurrentState(state_global)
 --player:getFSM():setCurrentState(state_global)
 --player:setCurrentState(state_global)
-
-
-
 
 end
 

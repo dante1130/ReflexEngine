@@ -3,10 +3,6 @@
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 #include "Controller/Input/InputManager.hpp"
 #include "TestScene.hpp"
-#include "AI/NPC.hpp"
-#include "AI/playerStates.h"
-#include "AI/entityManager.h"
-#include "AI/messageDispatcher.h"
 #include "AI/luaAccessScriptedFSM.hpp"
 
 void TestScene::init() {
@@ -27,42 +23,6 @@ void TestScene::init() {
 	lua.script_file("scripts/_MasterCreation.lua");
 	lua.script_file("scripts/AI/_MasterCreation.lua");
 	lua.script_file("scripts/_Sounds.lua");
-
-	/*
-	lua.script_file("scripts/AI/setupPlayerFSM.lua");
-	NPC* player = new NPC("temp", "temp", true, true);
-	player->set_id(0);
-	player->set_faction(1);
-	player->position = glm::vec3(90, 5, 45);
-	player->initModel("human", "shiny");
-	sol::function exe = lua["setupPlayerFSM"];
-	exe(*player);
-	std::cout << "\n\n" << std::endl;
-	*/
-	/*
-	NPC* patroller = new NPC();
-	patroller->set_id(1);
-	patroller->position = glm::vec3(100, 5, 65);
-	patroller->scale = glm::vec3(0.01f);
-	patroller->angle = 180;
-	patroller->new_state(&patrol_state::Instance());
-	patroller->initModel("ghost", "shiny");
-
-	NPC* sentry = new NPC();
-	sentry->set_id(2);
-	sentry->position = glm::vec3(105, 5, 70);
-	sentry->scale = glm::vec3(0.01f);
-	sentry->angle = 0;
-	sentry->new_state(&patrol_state::Instance());
-	sentry->initModel("ghost", "shiny");
-	*/
-
-	// game_objects_.emplace_back(player);
-	//  game_objects_.emplace_back(patroller);
-	//  game_objects_.emplace_back(sentry);
-	// entityMgr.registerEntity(player);
-	//  entityMgr.registerEntity(patroller);
-	//  entityMgr.registerEntity(sentry);
 }
 
 void TestScene::add_game_object_during_run(std::string luaScript) {
@@ -176,7 +136,10 @@ void TestScene::saveGameObjects() {
 }
 
 void TestScene::loadSavedGameObjects() {
-	game_objects_.clear();
+	for (int count = 1; count < game_objects_.size(); count++) {
+		game_objects_[count]->remove = true;
+	}
+	// game_objects_.clear();
 	entityMgr.killEntities();
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file("scripts/save/_MasterCreation.lua");
