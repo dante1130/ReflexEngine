@@ -11,10 +11,10 @@ void fight::Enter(NPC* curPlayer) {
 
 void fight::Execute(NPC* curPlayer) {
 	if (!curPlayer->watch_for_enemy()) {
-		curPlayer->get_FSM()->changeState(&patrol_state::Instance());
+		// curPlayer->get_FSM()->changeState(&patrol_state::Instance());
 	}
-	if (!curPlayer->watch_for_enemy(2)) {
-		curPlayer->get_FSM()->changeState(&chase_state::Instance());
+	if (!curPlayer->watch_for_enemyVal(2)) {
+		// curPlayer->get_FSM()->changeState(&chase_state::Instance());
 	}
 
 	double f = rand() % 10 * .1;
@@ -33,7 +33,7 @@ void fight::Exit(NPC* curPlayer) {
 bool fight::onMessage(NPC* curPlayer, const telegram& msg) {
 	if (msg.msg == 2) {
 		// curPlayer->decreaseVelocity();
-		curPlayer->get_FSM()->changeState(&patrol_state::Instance());
+		// curPlayer->get_FSM()->changeState(&patrol_state::Instance());
 		return true;
 	}
 	return false;
@@ -58,7 +58,7 @@ bool global::onMessage(NPC* curPlayer, const telegram& msg) {
 	if (msg.msg == 3 && curPlayer->get_id() == 0) {
 		curPlayer->set_health(curPlayer->get_health() - 5);
 		if (curPlayer->is_dead()) {
-			curPlayer->get_FSM()->changeState(&die_state::Instance());
+			// curPlayer->get_FSM()->changeState(&die_state::Instance());
 			messageMgr.dispatchMsg(0, curPlayer->get_id(), 1, 2, NULL);
 			messageMgr.dispatchMsg(0, curPlayer->get_id(), 2, 2, NULL);
 		}
@@ -85,9 +85,7 @@ void idle::Execute(NPC* curPlayer) {
 	glm::vec2 pos = glm::vec2(GenericFunctions::luaCamPosX(),
 	                          GenericFunctions::luaCamPosZ());
 
-	curPlayer->add_waypoints(gameWorld.pathFinding(
-	    curPlayer->position.x, curPlayer->position.z, pos.x, pos.y));
-	curPlayer->set_enemy_target(pos);
+	curPlayer->set_enemy_target(pos.x, pos.y);
 
 	glm::vec2 distVec =
 	    pos - glm::vec2(curPlayer->position.x, curPlayer->position.z);
@@ -95,10 +93,17 @@ void idle::Execute(NPC* curPlayer) {
 	float dist = glm::length(distVec);
 
 	if (dist < 5) {
-		curPlayer->move_NPC(pos, 0.1);
+		curPlayer->move_NPC(pos.x, pos.y, 0.1);
 	} else {
-		curPlayer->waypoint_follow(false);
-		curPlayer->waypoint_follow(false);
+		for (int count = 0; count < 2; count++) {
+			if (curPlayer->waypoint_follow(
+			        false)) {  // If reached next waypoint, check if still
+				               // optimal
+				curPlayer->add_waypoints(
+				    gameWorld.pathFinding(curPlayer->position.x,
+				                          curPlayer->position.z, pos.x, pos.y));
+			}
+		}
 	}
 }
 
@@ -123,11 +128,12 @@ void backup::Enter(NPC* curPlayer) {  // curPlayer->increaseVelocity();
 }
 
 void backup::Execute(NPC* curPlayer) {
-	if (curPlayer->move_NPC(curPlayer->get_enemy_target(), 10)) {
-		if (curPlayer->watch_for_enemy())
-			curPlayer->get_FSM()->changeState(&fight_state::Instance());
-		else
-			curPlayer->get_FSM()->revertToPreviousState();
+	if (curPlayer->move_NPC(curPlayer->get_enemy_target().x,
+	                        curPlayer->get_enemy_target().y, 10)) {
+		if (curPlayer->watch_for_enemy()) {
+			// curPlayer->get_FSM()->changeState(&fight_state::Instance());
+		}
+		// else curPlayer->get_FSM()->revertToPreviousState();
 	}
 }
 
@@ -145,9 +151,9 @@ void chase::Enter(NPC* curPlayer) {
 void chase::Execute(NPC* curPlayer) {
 	// curPlayer->move_to_enemy();
 	if (curPlayer->move_to_enemy())
-		curPlayer->get_FSM()->changeState(&fight_state::Instance());
-	if (!curPlayer->watch_for_enemy())
-		curPlayer->get_FSM()->revertToPreviousState();
+		// curPlayer->get_FSM()->changeState(&fight_state::Instance());
+		if (!curPlayer->watch_for_enemy())
+			curPlayer->get_FSM()->revertToPreviousState();
 }
 
 void chase::Exit(NPC* curPlayer) {  // curPlayer->decreaseVelocity();
@@ -163,13 +169,17 @@ void patrol::Enter(NPC* curPlayer) {  // curPlayer->setCurwayPointNo(0);
 void patrol::Execute(NPC* curPlayer) {
 	curPlayer->waypoint_follow(true);
 	if (curPlayer->watch_for_enemy()) {
-		curPlayer->get_FSM()->changeState(&chase_state::Instance());
+		// curPlayer->get_FSM()->changeState(&chase_state::Instance());
 		NPC* target = entityMgr.getEntityFromID(curPlayer->get_target_id());
 
-		glm::vec2* target_pos =
-		    new glm::vec2(target->position.x, target->position.z);
+		// messageMgr.dispatchMsg(
+		//     0, curPlayer->get_id(), 2, 1,
+		//     &glm::vec2(target->position.x, target->position.z));
+		// OLD VS NEW
+		//glm::vec2* target_pos =
+		//    new glm::vec2(target->position.x, target->position.z);
 
-		messageMgr.dispatchMsg(0, curPlayer->get_id(), 2, 1, target_pos);
+		//messageMgr.dispatchMsg(0, curPlayer->get_id(), 2, 1, target_pos);
 	}
 }
 
@@ -181,9 +191,9 @@ bool patrol::onMessage(NPC* curPlayer, const telegram& msg) {
 	        entityMgr.getEntityFromID(msg.sender)->get_faction()) {
 		cout << "message recived from agent " << msg.sender << " to "
 		     << msg.receiver << endl;
-		curPlayer->set_enemy_target(*(glm::vec2*)msg.extraInfo);
-		curPlayer->get_FSM()->changeState(&backup_state::Instance());
-		// signal that we recieved message
+		// curPlayer->set_enemy_target(*(glm::vec2*)msg.extraInfo);
+		// curPlayer->get_FSM()->changeState(&backup_state::Instance());
+		//  signal that we recieved message
 		return true;
 	}
 	return false;

@@ -10,6 +10,8 @@ void BodyRigid::set_position(glm::vec3 pos) { rb.set_position(pos); }
 
 void BodyRigid::setType(int type) { rb.setType(type); }
 
+int BodyRigid::getType() { return rb.getRBType(); }
+
 void BodyRigid::enableGravity(bool val) { rb.enableGravity(val); }
 
 void BodyRigid::setLinearVelocityDamping(float val) {

@@ -29,3 +29,5 @@ NPC* entityManager::getEntityByIndex(int index) const {
 }
 
 int entityManager::numberOfEntities() { return entityMap.size(); }
+
+void entityManager::killEntities() { entityMap.clear(); }

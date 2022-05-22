@@ -24,6 +24,8 @@ GameObject* GameAssetFactory::create(const std::string& fileName) {
 		return load_skybox(fileName);
 	} else if (type == "Projectile") {
 		return loadProjectileObject(fileName);
+	} else if (type == "NPC") {
+		return loadNPCObject(fileName);
 	} else if (type == "DirectionalLight") {
 		return load_directional_light(fileName);
 	} else if (type == "PointLight") {
@@ -276,6 +278,11 @@ void GameAssetFactory::loadBoxCollider(int count, PhysicsObject* po,
 	float friction = lua[collider]["friction"];
 
 	po->addBoxCollider(posV, boxV, bounciness, friction);
+
+	if (po->getType() != 2) {
+		gameWorld.create_box_obstruction(po->position.x, po->position.z,
+		                                 boxV.x * 2, boxV.z * 2);
+	}
 }
 
 void GameAssetFactory::loadSphereCollider(int count, PhysicsObject* po,
@@ -292,6 +299,10 @@ void GameAssetFactory::loadSphereCollider(int count, PhysicsObject* po,
 	float friction = lua[collider]["friction"];
 
 	po->addSphereCollider(posV, radius, bounciness, friction);
+	if (po->getType() != 2) {
+		gameWorld.create_sphere_obstruction(po->position.x, po->position.z,
+		                                    radius);
+	}
 }
 
 void GameAssetFactory::loadCapsuleCollider(int count, PhysicsObject* po,
@@ -309,6 +320,10 @@ void GameAssetFactory::loadCapsuleCollider(int count, PhysicsObject* po,
 	float friction = lua[collider]["friction"];
 
 	po->addCapsuleCollider(posV, radius, height, bounciness, friction);
+	if (po->getType() != 2) {
+		gameWorld.create_sphere_obstruction(po->position.x, po->position.z,
+		                                    radius);
+	}
 }
 
 void GameAssetFactory::loadExtraPhysicObjectSettings(PhysicsObject* po,
@@ -562,4 +577,64 @@ Projectile* GameAssetFactory::loadProjectileObject(
 	proj->set_to_delete(tempNum);
 
 	return proj;
+}
+
+NPC* GameAssetFactory::loadNPCObject(const std::string& luaScript) {
+	sol::state& lua = LuaManager::get_instance().get_state();
+	lua.script_file(luaScript);
+
+	glm::vec3 pos, scale, rotation;
+	float angle;
+
+	pos = loadBasePos(lua);
+	scale = loadBaseScale(lua);
+	rotation = loadBaseRotation(lua);
+	angle = loadBaseAngle(lua);
+
+	std::string model = lua["baseObject"]["modelName"];
+	std::string mat = lua["baseObject"]["material_name"];
+	int animate = lua["baseObject"]["animate"];
+	int loopAnimation = lua["baseObject"]["loopAnimation"];
+	NPC* npc = new NPC(model, "NOT_USED", animate, loopAnimation);
+	npc->initModel(model, mat);
+	npc->position = pos;
+	npc->scale = scale;
+	npc->rotation = rotation;
+	npc->angle = angle;
+
+	npc->initRB(npc->position, npc->rotation, npc->angle);
+	loadExtraPhysicObjectSettings(npc, lua);
+
+	int size = lua["baseObject"]["numOfColliders"];
+	std::string colliderType = "Box";
+
+	for (int count = 1; count <= size; count++) {
+		colliderType = lua["collider" + std::to_string(count)]["colliderType"];
+		if (colliderType == "Box") {
+			loadBoxCollider(count, npc, lua);
+		} else if (colliderType == "Sphere") {
+			loadSphereCollider(count, npc, lua);
+		} else if (colliderType == "Capsule") {
+			loadCapsuleCollider(count, npc, lua);
+		}
+	}
+
+	int faction = lua["AI"]["faction"];
+	int health = lua["AI"]["health"];
+	int power = lua["AI"]["power"];
+
+	npc->set_faction(faction);
+	npc->set_health(health);
+	npc->set_power(power);
+	npc->set_move_speed(lua["AI"]["moveSpeed"]);
+
+	// Sets up Finite State Machine
+	std::string script = lua["AI"]["setUpFSM"];
+
+	sol::function exe = lua[script];
+	std::cout << script << std::endl;
+	exe(*npc);
+
+	entityMgr.registerEntity(npc);
+	return npc;
 }

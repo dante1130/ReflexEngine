@@ -4,50 +4,22 @@
 #include "Controller/Input/InputManager.hpp"
 #include "Controller/Audio/Audio.hpp"
 #include "TestScene.hpp"
-#include "AI/NPC.hpp"
-#include "AI/playerStates.h"
-#include "AI/entityManager.h"
-#include "AI/messageDispatcher.h"
+#include "AI/luaAccessScriptedFSM.hpp"
 
 void TestScene::init() {
 	sol::state& lua = LuaManager::get_instance().get_state();
 
 	lua.set_function("addGameObject", &TestScene::addGameObject, this);
+	luaAccessScriptedFSM::registerAllAI();
+	lua.script_file("scripts/AI/statemachine.lua");
+	lua.script_file(
+	    "scripts/AI/setupPlayerFSM.lua");  // All player/NPC setup functions are
+	                                       // found in here
 
 	lua.script_file("scripts/_Materials.lua");
 	lua.script_file("scripts/_MasterCreation.lua");
+	lua.script_file("scripts/AI/_MasterCreation.lua");
 	lua.script_file("scripts/_Sounds.lua");
-
-	NPC* player = new NPC();
-	player->set_id(0);
-	player->set_faction(1);
-	player->position = glm::vec3(90, 5, 45);
-	player->initModel("human", "shiny");
-
-	/*
-	NPC* patroller = new NPC();
-	patroller->set_id(1);
-	patroller->position = glm::vec3(100, 5, 65);
-	patroller->scale = glm::vec3(0.01f);
-	patroller->angle = 180;
-	patroller->new_state(&patrol_state::Instance());
-	patroller->initModel("ghost", "shiny");
-
-	NPC* sentry = new NPC();
-	sentry->set_id(2);
-	sentry->position = glm::vec3(105, 5, 70);
-	sentry->scale = glm::vec3(0.01f);
-	sentry->angle = 0;
-	sentry->new_state(&patrol_state::Instance());
-	sentry->initModel("ghost", "shiny");
-	*/
-
-	game_objects_.emplace_back(player);
-	// game_objects_.emplace_back(patroller);
-	// game_objects_.emplace_back(sentry);
-	entityMgr.registerEntity(player);
-	// entityMgr.registerEntity(patroller);
-	// entityMgr.registerEntity(sentry);
 }
 
 void TestScene::add_game_object_during_run(std::string luaScript) {
@@ -154,11 +126,15 @@ void TestScene::saveGameObjects() {
 }
 
 void TestScene::loadSavedGameObjects() {
-	game_objects_.clear();
-
+	for (int count = 1; count < game_objects_.size(); count++) {
+		game_objects_[count]->remove = true;
+	}
+	// game_objects_.clear();
+	entityMgr.killEntities();
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file("scripts/save/_MasterCreation.lua");
-
+	std::cout << "Number of eneitites: " << entityMgr.numberOfEntities()
+	          << std::endl;
 	GenericFunctions::setIfLoad(false);
 }
 
@@ -174,10 +150,20 @@ void TestScene::garbage_collection() {
 	}
 }
 
+static bool done = false;
 void TestScene::add_new_game_objects() {
 	for (int count = 0; count < to_add_.size(); count++) {
 		std::cout << "Adding during runtime = " << to_add_[count] << std::endl;
 		game_objects_.emplace_back(GameAssetFactory::create(to_add_[count]));
 	}
 	to_add_.clear();
+
+	if (!done) {
+		// gameWorld.show_world();
+		std::cout << "\nokokok\nokokok\nokokok\nokokok\nRemove code in "
+		             "TestScene::add_new_game_"
+		             "objects\nokokok\nokokok\nokokok\nokokok\nokokok"
+		          << std::endl;
+		done = true;
+	}
 }

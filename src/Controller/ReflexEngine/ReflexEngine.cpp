@@ -77,6 +77,12 @@ void ReflexEngine::run() {
 
 		engine.window_.SwapBuffers();
 	}
+
+	for (int count = 0; count < engine.scenes_.size(); count++) {
+		engine.scenes_.pop();
+	}
+	entityMgr.killEntities();
+
 	Physics::destroyWorld();
 	gui::shutdown();
 }

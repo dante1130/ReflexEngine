@@ -20,6 +20,7 @@
 #include "Controller/Terrain/TexturedTerrain.hpp"
 #include "AI/singletons.h"
 #include "Model/GameObject/Projectile.hpp"
+#include "AI/NPC.hpp"
 
 /**
  * @class GameAssetFactory
@@ -255,4 +256,15 @@ private:
 	 * @post	projectile object stored
 	 */
 	static Projectile* loadProjectileObject(const std::string& luaScript);
+
+	/**
+	 * @brief	Loads in a NPC object from a lua script
+	 * @param	luaScript	- The lua script to load the NPC data
+	 * from
+	 * @return	*NPC		- Created NPC object
+	 *
+	 * @pre		NPC object varaible exists
+	 * @post	NPC object stored
+	 */
+	static NPC* loadNPCObject(const std::string& luaScript);
 };

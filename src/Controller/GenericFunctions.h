@@ -388,4 +388,6 @@ std::string networkReturnUsername();
  */
 std::string networkReturnRetainedIP();
 
+float getLength(float x, float y);
+
 };  // namespace GenericFunctions

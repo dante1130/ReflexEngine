@@ -8,12 +8,20 @@ using namespace std;
 template <class entity_type>
 class stateMachine {
 private:
-	entity_type* owner;  // owner of the FSM
-	State<entity_type>* previousState;
-	State<entity_type>* currentState;
-	State<entity_type>* globalState;
+	/// The owner of the FSM
+	entity_type* owner;
+	/// The previous state
+	sol::table previousState;
+	/// The current state
+	sol::table currentState;
+	/// THe global state
+	sol::table globalState;
 
 public:
+	/**
+	 * @brief	Assigns a state machine
+	 * @param	sm	 - The new state machine object
+	 */
 	const stateMachine& operator=(const stateMachine& sm) {
 		owner = sm.owner;
 		previousState = sm.previousState;
@@ -22,63 +30,144 @@ public:
 		return *this;
 	}
 
-	stateMachine(entity_type* FSMowner) {
-		owner = FSMowner;
-		previousState = NULL;
-		currentState = NULL;
-		globalState = NULL;
+	/**
+	 * @brief	Copy constructor
+	 * @param	FSMowner	- FSM to copy over
+	 */
+	stateMachine(entity_type* FSMowner) { owner = FSMowner; }
+
+	/**
+	 * @brief	Sets the previous state
+	 * @param	st	- The new state
+	 */
+	void setPreviousState(sol::table st) { previousState = st; }
+
+	/**
+	 * @brief	Sets the current state
+	 * @param	st	- The new state
+	 */
+	void setCurrentState(sol::table st) {
+		if (st.valid()) {
+			sol::function exe;
+			exe = st["enter"];
+			exe(owner);
+		}
+		currentState = st;
 	}
 
-	// use the following methods to intialise the FSM
-	void setPreviousState(State<entity_type>* st) { previousState = st; }
-	void setCurrentState(State<entity_type>* st) { currentState = st; }
-	void setGlobalState(State<entity_type>* st) { globalState = st; }
+	/**
+	 * @brief	Sets the global state
+	 * @param	st	- The new state
+	 */
+	void setGlobalState(sol::table st) {
+		if (st.valid()) {
+			sol::function exe;
+			exe = st["enter"];
+			exe(owner);
+		}
+		globalState = st;
+	}
 
+	/**
+	 * @brief	Calls the states execute functions
+	 */
 	void update() const {
-		if (globalState) globalState->Execute(owner);
-		if (currentState) currentState->Execute(owner);
+		sol::function exe;
+		if (globalState.valid()) {
+			exe = globalState["execute"];
+			exe(owner);
+		}
+		if (currentState.valid()) {
+			exe = currentState["execute"];
+			exe(owner);
+		}
 	}
 
-	void changeState(State<entity_type>* newState) {
+	/**
+	 * @brief	Sets the current state and moves the previous current state to
+	 * the previous state section & call respective enter & exit functions
+	 * @param	sewState	- The new state
+	 */
+	void changeState(sol::table newState) {
+		sol::function exe;
+
 		// save current state as previous state
 		previousState = currentState;
 		// call the exit function of the current state
-		currentState->Exit(owner);
+		if (currentState.valid()) {
+			std::cout << "exit" << std::endl;
+			exe = currentState["exit"];
+			exe(owner);
+		}
 
 		// change current state to newState
 		currentState = newState;
 		// call the Enter function of the new currentState
-		currentState->Enter(owner);
+		exe = currentState["enter"];
+		exe(owner);
 	}
 
+	/**
+	 * @brief	Reverts to the previous state
+	 */
 	void revertToPreviousState() { currentState = previousState; }
 
-	// accessor methods
-	State<entity_type>* getPreviousState() { return previousState; }
-	State<entity_type>* getCurrentState() { return currentState; }
-	State<entity_type>* getGlobalState() { return globalState; }
+	/**
+	 * @brief	Gets the previous state
+	 * return	sol::table	- the state
+	 */
+	sol::table getPreviousState() { return previousState; }
+
+	/**
+	 * @brief	Gets the current state
+	 * return	sol::table	- the state
+	 */
+	sol::table getCurrentState() { return currentState; }
+
+	/**
+	 * @brief	Gets the global state
+	 * return	sol::table	- the state
+	 */
+	sol::table getGlobalState() { return globalState; }
 
 	// returns true if the current state's type is equal to the type of the
 	// class passed as a parameter.
+	/**
+	 * @brief	Checks if the state is currently being used
+	 * @param	st	- the state to check against
+	 * @return	bool	- True if current state is same as one passed
+	 */
 	bool isInState(const State<entity_type>& st) const {
 		return typeid(*currentState) == typeid(st);
 	}
 
+	/**
+	 * @brief	Handles a message
+	 * @return	bool	- successfully handled the message
+	 */
 	bool handleMessage(const telegram& msg) {
+		sol::function exe;
 		// first see if the current state is valid and that it can handle
 		// the message
-		if (currentState && currentState->onMessage(owner, msg)) {
+		if (currentState.valid()) {
+			exe = currentState["onMessage"];
+			exe(owner, msg);
 			return true;
 		}
 		// if not, and if a global state has been implemented, send
 		// the message to the global state
-		if (globalState && globalState->onMessage(owner, msg)) {
+		if (globalState.valid()) {
+			exe = globalState["onMessage"];
+			exe(owner, msg);
 			return true;
 		}
 		std::cout << "FAILED " << std::endl;
 		return false;
 	}
 
+	/**
+	 * @brief	Destructor
+	 */
 	virtual ~stateMachine() {}
 };
 

@@ -92,6 +92,7 @@ void GenericFunctions::lua_access() {
 	lua.set_function("set_if_should_shoot", setIfShouldShoot);
 	lua.set_function("get_if_should_shoot", getIfShouldShoot);
 	lua.set_function("get_y_coord_on_floor", getHeight);
+	lua.set_function("vector2Length", getLength);
 }
 //
 int GenericFunctions::get_window_width() {
@@ -250,17 +251,17 @@ void GenericFunctions::networkEnd() {
 }
 
 void GenericFunctions::networkUpdate() {
-	
-	if (createNetwork && networkConnected){ //&& network.ReceiveMessage() != " ") {
-		//printf("%s\n", network.ReceiveMessage().c_str());  // Currently prints to console, but
-		                                   // will eventually print to text chat
+	if (createNetwork &&
+	    networkConnected) {  //&& network.ReceiveMessage() != " ") {
+		// printf("%s\n", network.ReceiveMessage().c_str());  // Currently
+		// prints to console, but
+		//  will eventually print to text chat
 		incomingMessage = network.ReceiveMessage();
 		if (incomingMessage != " ") {
-			//printf("%s Update\n", incomingMessage);
+			// printf("%s Update\n", incomingMessage);
 		}
 	}
-	//network.HasReceivedChatMessage();
-	
+	// network.HasReceivedChatMessage();
 }
 
 bool GenericFunctions::getNetworkMenuActive() { return (networkMenu); }
@@ -286,7 +287,7 @@ std::string GenericFunctions::networkReturnRetainedMessage() {
 	return (message);
 }
 
-void GenericFunctions::networkSendMessage() { 
+void GenericFunctions::networkSendMessage() {
 	char messageChar[512];
 	if (network.GetServer()) {
 		strcpy(messageChar, message.c_str());
@@ -298,11 +299,9 @@ void GenericFunctions::networkSendMessage() {
 	networkGetMessage();
 }
 
-std::string GenericFunctions::networkGetMessage() {
-	return incomingMessage;
-}
+std::string GenericFunctions::networkGetMessage() { return incomingMessage; }
 
-bool GenericFunctions::networkValidChatMessage(){
+bool GenericFunctions::networkValidChatMessage() {
 	return network.HasReceivedChatMessage();
 }
 
@@ -316,7 +315,7 @@ void GenericFunctions::networkRetainUsername(std::string savedUsername) {
 	}
 }
 
-void GenericFunctions::networkSetUsername() { 
+void GenericFunctions::networkSetUsername() {
 	char messageChar[512];
 	if (network.GetServer()) {
 		strcpy(messageChar, "Changed their name to ");
@@ -329,10 +328,12 @@ void GenericFunctions::networkSetUsername() {
 	network.ChangeName(username);
 }
 
-std::string GenericFunctions::networkReturnUsername() { 
-	return (username); 
-}
+std::string GenericFunctions::networkReturnUsername() { return (username); }
 
 std::string GenericFunctions::networkReturnRetainedIP() {
 	return (currentIPAddress);
+}
+
+float GenericFunctions::getLength(float x, float y) {
+	return sqrt(pow(x, 2) + pow(y, 2));
 }
