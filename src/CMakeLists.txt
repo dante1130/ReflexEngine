@@ -13,6 +13,10 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Model/GameObject/Player.cpp
 	Model/GameObject/TerrainObject.cpp
 	Model/GameObject/SkyboxObject.cpp
+	Model/GameObject/DirectionalLightObject.cpp
+	Model/GameObject/PointLightObject.cpp
+	Model/GameObject/SpotLightObject.cpp
+	Model/LightData.hpp
 	Model/ModelData.cpp
 	Model/GameObject/Projectile.cpp
 	
@@ -33,6 +37,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	View/guiManager.cpp
 
 	Controller/ReflexEngine/ReflexEngine.cpp
+	Controller/ReflexEngine/EngineTime.cpp
 	Controller/ReflexEngine/Window.cpp
 	Controller/ReflexEngine/Camera.cpp
 	Controller/ResourceManager/ResourceManager.cpp

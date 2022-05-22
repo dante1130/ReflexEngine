@@ -26,6 +26,9 @@ baseObject = {
 	numOfColliders = 1
 }
 
+local boat_pos = Audio.vec3df.new(baseObject.xPos, baseObject.yPos, baseObject.zPos)
+Audio.play_3d_sound("duckandcover", boat_pos, true, 5.0)
+
 collider1 = {
 	colliderType = "Box",
 	xPos = 0,

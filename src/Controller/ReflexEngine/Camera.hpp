@@ -97,6 +97,13 @@ public:
 	glm::vec3 get_move_direction() const;
 
 	/**
+	 * @brief Get the up vector in the world.
+	 *
+	 * @return glm::vec3
+	 */
+	glm::vec3 get_up_world() const;
+
+	/**
 	 * @brief Toggles noclip on and off.
 	 */
 	void toggle_noclip();

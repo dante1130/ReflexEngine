@@ -48,6 +48,10 @@ public:
 	 * @return	float	- the total time unpaused
 	 */
 	static float get_time_unpaused();
+	
+	static float get_time_step();
+
+	static bool is_time_step_passed();
 
 	/**
 	 * @brief	gets if the game is paused
@@ -68,6 +72,8 @@ private:
 	static float delta_time_;
 	/// The fixed delta time.
 	static float fixed_delta_time_;
+	/// The time step for fixed update.
+	static constexpr float time_step = 1.0F / 60.0F;
 	/// The total unpaused time
 	static float total_unpaused_time_;
 	/// If the engine time is paused

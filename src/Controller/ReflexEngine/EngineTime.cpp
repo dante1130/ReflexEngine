@@ -32,7 +32,11 @@ float EngineTime::get_fixed_delta_time() { return fixed_delta_time_; }
 
 float EngineTime::get_delta_time() { return delta_time_; }
 
+float EngineTime::get_time_step() { return time_step; }
+
 float EngineTime::get_time_unpaused() { return total_unpaused_time_; }
+
+bool EngineTime::is_time_step_passed() { return fixed_delta_time_ > time_step; }
 
 bool EngineTime::is_paused() { return paused_; }
 

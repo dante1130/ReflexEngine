@@ -164,7 +164,7 @@ public:
 	 * @brief	Sets a queue of new waypoints and clears existing waypoints
 	 * @param	new_waypoints	- The new waypoints
 	 */
-	void add_waypoints(std::queue<glm::vec2>& new_waypoints);
+	void add_waypoints(const std::queue<glm::vec2>& new_waypoints);
 
 	/**
 	 * @brief	Removes all the currently stored waypoints

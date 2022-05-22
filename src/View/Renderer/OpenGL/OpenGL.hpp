@@ -6,7 +6,8 @@
 #include "Objects/Shader.hpp"
 #include "Objects/Skybox.hpp"
 #include "CommonValues.hpp"
-#include "../Renderer.hpp"
+#include "View/Renderer/Renderer.hpp"
+#include "Model/LightData.hpp"
 
 // A drawcall represents a drawable object that is rendered to the screen, this
 // is done through this function pointer which is passed from the scene to the
@@ -55,22 +56,24 @@ public:
 	/**
 	 * @brief Adds a directional light to the renderer.
 	 *
-	 * @param light
+	 * @param light_data
 	 */
-	void add_directional_light(const DirectionalLight& light);
+	void add_directional_light(const DirectionalLightData& light_data);
 
 	/**
 	 * @brief Adds a point light to the renderer.
 	 *
-	 * @param light
+	 * @param light_data
 	 */
-	void add_point_light(const PointLight& light);
+	void add_point_light(const PointLightData& light_data);
 
 	/**
 	 * @brief Adds a spot light to the renderer.
 	 *
-	 * @param light
+	 * @param light_data
 	 */
+	void add_spot_light(const SpotLightData& light_data);
+
 	void add_spot_light(const SpotLight& light);
 
 	/**

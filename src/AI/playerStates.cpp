@@ -175,6 +175,11 @@ void patrol::Execute(NPC* curPlayer) {
 		// messageMgr.dispatchMsg(
 		//     0, curPlayer->get_id(), 2, 1,
 		//     &glm::vec2(target->position.x, target->position.z));
+		// OLD VS NEW
+		//glm::vec2* target_pos =
+		//    new glm::vec2(target->position.x, target->position.z);
+
+		//messageMgr.dispatchMsg(0, curPlayer->get_id(), 2, 1, target_pos);
 	}
 }
 

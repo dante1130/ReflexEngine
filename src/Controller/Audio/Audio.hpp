@@ -37,6 +37,25 @@ public:
 	void play_sound(const std::string& name, bool loop);
 
 	/**
+	 * @brief Plays a sound given a name and position.
+	 *
+	 * @param name
+	 * @param pos
+	 * @param loop
+	 * @param min_dist
+	 */
+	void play_3d_sound(const std::string& name, const irrklang::vec3df& pos,
+	                   bool loop, float min_dist);
+
+	/**
+	 * @brief
+	 *
+	 * @param pos
+	 * @param forward
+	 */
+	void update_listener();
+
+	/**
 	 * @brief Stops a sound given a name.
 	 *
 	 * @param name
@@ -93,6 +112,14 @@ private:
 	 * @brief Exposes the audio class to lua.
 	 */
 	void lua_access();
+
+	/**
+	 * @brief Adds a sound to the sound map and the stop event listener.
+	 *
+	 * @param name
+	 * @param src
+	 */
+	void add_sound(const std::string& name, irrklang::ISound* sound);
 
 	/// The irrklang sound engine.
 	irrklang::ISoundEngine* audio_engine;

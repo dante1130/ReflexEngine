@@ -8,9 +8,10 @@ Light::Light(GLuint shadowWidth, GLuint shadowHeight, glm::vec3 color,
     : m_color(color),
       m_ambientIntensity(aIntensity),
       m_diffuseIntensity(dIntensity),
-      m_lightProj(glm::mat4(0.0f)),
-      m_shadowMap(new ShadowMap()) {
-	m_shadowMap->Init(shadowWidth, shadowHeight);
+      m_lightProj(glm::mat4(0.0f))
+// m_shadowMap(new ShadowMap())
+{
+	// m_shadowMap->Init(shadowWidth, shadowHeight);
 }
 
 Light::~Light() {}

@@ -38,6 +38,7 @@ void ReflexEngine::run() {
 
 	while (!engine.window_.IsShouldClose()) {
 		EngineTime::update_delta_time(glfwGetTime());
+		engine.window_.update_window_buffer_size();
 
 		glfwPollEvents();
 		input_manager.read_keys(engine.window_.get_window());
@@ -45,7 +46,7 @@ void ReflexEngine::run() {
 		gui::mainLoopStart();
 
 		if (!GenericFunctions::getNetworkMenuActive()) {
-			engine.scenes_.top()->key_controls(engine.delta_time_);
+			engine.scenes_.top()->key_controls(EngineTime::get_delta_time());
 		}
 
 		if (EngineTime::is_paused()) {
@@ -61,7 +62,7 @@ void ReflexEngine::run() {
 		else if (GenericFunctions::getIfSave())
 			engine.scenes_.top()->saveGameObjects();
 		else {
-			if (EngineTime::get_fixed_delta_time() >= time_step) {
+			if (EngineTime::is_time_step_passed()) {
 				engine.scenes_.top()->fixed_update(
 				    EngineTime::get_fixed_delta_time());
 				EngineTime::reset_fixed_delta_time();
@@ -84,13 +85,6 @@ void ReflexEngine::run() {
 
 	Physics::destroyWorld();
 	gui::shutdown();
-}
-
-void ReflexEngine::update_delta_time() {
-	float curr_time = glfwGetTime();
-	delta_time_ = curr_time - prev_time_;
-	fixed_delta_time_ += delta_time_;
-	prev_time_ = curr_time;
 }
 
 ReflexEngine& ReflexEngine::get_instance() {

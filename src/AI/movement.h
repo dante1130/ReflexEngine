@@ -26,7 +26,7 @@ namespace ai_movement {
  * @return   bool        - true if at target
  */
 bool moveTo(glm::vec2& curPos, const glm::vec2& targetPos,
-            glm::vec2& curVelocity, double timeElapsed, double offset = 0);
+            glm::vec2 curVelocity, double timeElapsed, double offset = 0);
 
 /**
  * @brief    Moves away from a persuer position

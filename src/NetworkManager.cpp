@@ -1,5 +1,4 @@
 #include "NetworkManager.hpp"
-#include <iostream>
 
 char message[512];
 
