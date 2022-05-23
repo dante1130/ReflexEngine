@@ -118,7 +118,6 @@ int NPC::get_waypoint_count() { return m_waypoints.size(); }
 void NPC::add_waypointGLM(glm::vec2 waypoint) { m_waypoints.push(waypoint); }
 void NPC::add_waypoint(float x, float z) { add_waypointGLM(glm::vec2(x, z)); }
 void NPC::add_waypoints(const std::queue<glm::vec2>& new_waypoints) {
-
 	remove_waypoints();
 	m_waypoints = new_waypoints;
 }
@@ -137,7 +136,9 @@ void NPC::use_pathfinding(float x1, float z1, float x2, float z2) {
 	}
 }
 
-void NPC::new_state(sol::table new_state) { m_NPC_FSM->changeState(new_state); }
+void NPC::new_state(std::string new_state) {
+	m_NPC_FSM->changeState(new_state);
+}
 
 stateMachine<NPC>* NPC::get_FSM() { return m_NPC_FSM; }
 

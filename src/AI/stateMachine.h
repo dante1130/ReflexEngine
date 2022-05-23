@@ -11,11 +11,11 @@ private:
 	/// The owner of the FSM
 	entity_type* owner;
 	/// The previous state
-	sol::table previousState;
+	std::string previousState;
 	/// The current state
-	sol::table currentState;
+	std::string currentState;
 	/// THe global state
-	sol::table globalState;
+	std::string globalState;
 
 public:
 	/**
@@ -40,18 +40,18 @@ public:
 	 * @brief	Sets the previous state
 	 * @param	st	- The new state
 	 */
-	void setPreviousState(sol::table st) { previousState = st; }
+	void setPreviousState(std::string st) { previousState = st; }
 
 	/**
 	 * @brief	Sets the current state
 	 * @param	st	- The new state
 	 */
-	void setCurrentState(sol::table st) {
-		if (st.valid()) {
-			sol::function exe;
-			exe = st["enter"];
-			exe(owner);
-		}
+	void setCurrentState(std::string st) {
+		sol::state& lua = LuaManager::get_instance().get_state();
+		sol::function exe;
+		exe = lua[st]["enter"];
+		exe(owner);
+
 		currentState = st;
 	}
 
@@ -59,12 +59,12 @@ public:
 	 * @brief	Sets the global state
 	 * @param	st	- The new state
 	 */
-	void setGlobalState(sol::table st) {
-		if (st.valid()) {
-			sol::function exe;
-			exe = st["enter"];
-			exe(owner);
-		}
+	void setGlobalState(std::string st) {
+		sol::state& lua = LuaManager::get_instance().get_state();
+		sol::function exe;
+		exe = lua[st]["enter"];
+		exe(owner);
+
 		globalState = st;
 	}
 
@@ -72,15 +72,15 @@ public:
 	 * @brief	Calls the states execute functions
 	 */
 	void update() const {
+		sol::state& lua = LuaManager::get_instance().get_state();
+
 		sol::function exe;
-		if (globalState.valid()) {
-			exe = globalState["execute"];
-			exe(owner);
-		}
-		if (currentState.valid()) {
-			exe = currentState["execute"];
-			exe(owner);
-		}
+
+		exe = lua[globalState]["execute"];
+		exe(owner);
+
+		exe = lua[currentState]["execute"];
+		exe(owner);
 	}
 
 	/**
@@ -88,22 +88,21 @@ public:
 	 * the previous state section & call respective enter & exit functions
 	 * @param	sewState	- The new state
 	 */
-	void changeState(sol::table newState) {
+	void changeState(std::string newState) {
+		sol::state& lua = LuaManager::get_instance().get_state();
 		sol::function exe;
 
 		// save current state as previous state
 		previousState = currentState;
 		// call the exit function of the current state
-		if (currentState.valid()) {
-			std::cout << "exit" << std::endl;
-			exe = currentState["exit"];
-			exe(owner);
-		}
+
+		exe = lua[currentState]["exit"];
+		exe(owner);
 
 		// change current state to newState
 		currentState = newState;
 		// call the Enter function of the new currentState
-		exe = currentState["enter"];
+		exe = lua[currentState]["enter"];
 		exe(owner);
 	}
 
@@ -116,19 +115,19 @@ public:
 	 * @brief	Gets the previous state
 	 * return	sol::table	- the state
 	 */
-	sol::table getPreviousState() { return previousState; }
+	std::string getPreviousState() { return previousState; }
 
 	/**
 	 * @brief	Gets the current state
 	 * return	sol::table	- the state
 	 */
-	sol::table getCurrentState() { return currentState; }
+	std::string getCurrentState() { return currentState; }
 
 	/**
 	 * @brief	Gets the global state
 	 * return	sol::table	- the state
 	 */
-	sol::table getGlobalState() { return globalState; }
+	std::string getGlobalState() { return globalState; }
 
 	// returns true if the current state's type is equal to the type of the
 	// class passed as a parameter.
@@ -146,23 +145,12 @@ public:
 	 * @return	bool	- successfully handled the message
 	 */
 	bool handleMessage(const telegram& msg) {
+		sol::state& lua = LuaManager::get_instance().get_state();
 		sol::function exe;
-		// first see if the current state is valid and that it can handle
-		// the message
-		if (currentState.valid()) {
-			exe = currentState["onMessage"];
-			exe(owner, msg);
-			return true;
-		}
-		// if not, and if a global state has been implemented, send
-		// the message to the global state
-		if (globalState.valid()) {
-			exe = globalState["onMessage"];
-			exe(owner, msg);
-			return true;
-		}
-		std::cout << "FAILED " << std::endl;
-		return false;
+
+		exe = lua[currentState]["onMessage"];
+		exe(owner, msg);
+		return true;
 	}
 
 	/**
