@@ -104,9 +104,9 @@ struct animstate_t {
 	int end_frame = 0;
 	int fps = 0;
 
-	float curr_time = 0.0f;
-	float prev_time = 0.0f;
-	float interpol = 0.0f;
+	double curr_time = 0.0;
+	double prev_time = 0.0;
+	double interpol = 0.0;
 
 	animation_type type = animation_type::STAND;
 

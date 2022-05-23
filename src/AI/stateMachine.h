@@ -72,15 +72,16 @@ public:
 	 * @brief	Calls the states execute functions
 	 */
 	void update() const {
+		sol::state& lua = LuaManager::get_instance().get_state();
+		// lua.script_file("scripts/AI/statemachine.lua");
+
 		sol::function exe;
-		if (globalState.valid()) {
-			exe = globalState["execute"];
-			exe(owner);
-		}
-		if (currentState.valid()) {
-			exe = currentState["execute"];
-			exe(owner);
-		}
+		exe = lua["state_global"]["execute"];
+		// globalState["execute"];
+		exe(owner);
+
+		exe = lua["state_idle"]["execute"];
+		exe(owner);
 	}
 
 	/**

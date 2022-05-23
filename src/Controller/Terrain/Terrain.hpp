@@ -16,37 +16,34 @@ public:
 	/**
 	 * @brief Renders the terrain.
 	 *
-	 * @param shader
+	 * @param shader The shader to use.
 	 */
 	virtual void render(std::shared_ptr<Shader> shader) = 0;
 
 	/**
 	 * @brief Reads the heightmap and loads the mesh.
 	 *
-	 * @return true
-	 * @return false
+	 * @return bool
 	 */
 	virtual bool load_mesh() = 0;
 
 	/**
 	 * @brief Load an image as a heightmap.
 	 *
-	 * @param file_name
-	 * @return true
-	 * @return false
+	 * @param file_name The file name of the image.
+	 * @return bool
 	 */
 	bool load_heightfield(const char* file_name);
 
 	/**
 	 * @brief Generate terrain by the fault formation method.
 	 *
-	 * @param iterations
-	 * @param size
-	 * @param min_height
-	 * @param max_height
-	 * @param weight
-	 * @return true
-	 * @return false
+	 * @param iterations The number of iterations.
+	 * @param size The size of the terrain.
+	 * @param min_height The minimum height of the terrain.
+	 * @param max_height The maximum height of the terrain.
+	 * @param weight The weight of the fault.
+	 * @return bool
 	 */
 	bool gen_faultformation(int iterations, size_t size, int min_height,
 	                        int max_height, float weight);
@@ -68,8 +65,8 @@ public:
 	/**
 	 * @brief Get the height in terrain space given the x and z coordinates.
 	 *
-	 * @param x
-	 * @param z
+	 * @param x The x coordinate.
+	 * @param z The z coordinate.
 	 * @return float
 	 */
 	float get_height(int x, int z) const;
@@ -77,8 +74,8 @@ public:
 	/**
 	 * @brief Get the height in worldspace given the x and z coordinates.
 	 *
-	 * @param x
-	 * @param z
+	 * @param x The x coordinate.
+	 * @param z The z coordinate.
 	 * @return float
 	 */
 	float get_height_world(float x, float z) const;
@@ -86,8 +83,8 @@ public:
 	/**
 	 * @brief Get the height color.
 	 *
-	 * @param x
-	 * @param z
+	 * @param x The x coordinate.
+	 * @param z The z coordinate.
 	 * @return uint8_t
 	 */
 	uint8_t get_height_color(int x, int z) const;
@@ -113,6 +110,11 @@ public:
 	 */
 	uint8_t* get_height_map();
 
+	/**
+	 * @brief Set the height map.
+	 *
+	 * @param map
+	 */
 	void set_height_map(uint8_t* map);
 
 	/**
@@ -148,8 +150,8 @@ private:
 	/**
 	 * @brief Check whether the given coordinates are within the heightmap.
 	 *
-	 * @param x
-	 * @param z
+	 * @param x The x coordinate.
+	 * @param z The z coordinate.
 	 * @return true
 	 * @return false
 	 */
@@ -158,24 +160,24 @@ private:
 	/**
 	 * @brief Applies a FCI filter to the heightmap.
 	 *
-	 * @param heights
-	 * @param weight
+	 * @param heights The heights to filter.
+	 * @param weight The weight of the filter.
 	 */
 	void add_filter(std::vector<float>& heights, float weight);
 
 	/**
 	 * @brief A pass of the FCI filter.
 	 *
-	 * @param start_point
-	 * @param increment
-	 * @param weight
+	 * @param start_point The start point.
+	 * @param increment The increment.
+	 * @param weight The weight of the filter.
 	 */
 	void filter_pass(float* start_point, int increment, float weight);
 
 	/**
 	 * @brief Normalizes and smoothen the terrain heightmap.
 	 *
-	 * @param heights
+	 * @param heights The heights to normalize.
 	 */
 	void normalize_terrain(std::vector<float>& heights);
 };

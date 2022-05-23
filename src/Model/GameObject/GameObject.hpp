@@ -9,16 +9,18 @@
  */
 class GameObject {
 public:
-	struct {
-		/// The position of the game object.
-		glm::vec3 position = {0.0f, 0.0f, 0.0f};
-		/// The rotation of the game object.
-		glm::vec3 rotation = {0.0f, 1.0f, 0.0f};
-		/// The scale of the game object.
-		glm::vec3 scale = {1.0f, 1.0f, 1.0f};
-		float angle = 0.01f;
-		bool remove = false;
-	};
+	/// The position of the game object.
+	glm::vec3 position = {0.0f, 0.0f, 0.0f};
+	/// The rotation of the game object.
+	glm::vec3 rotation = {0.0f, 1.0f, 0.0f};
+	/// The scale of the game object.
+	glm::vec3 scale = {1.0f, 1.0f, 1.0f};
+
+	/// The angle of rotation.
+	float angle = 0.01f;
+
+	/// Whether the game object should be removed.
+	bool remove = false;
 
 	/**
 	 * @brief Initializes the game object.
@@ -28,16 +30,16 @@ public:
 	/**
 	 * @brief Updates the game object with delta time.
 	 *
-	 * @param delta_time
+	 * @param delta_time The time since the last frame.
 	 */
-	virtual void update(float delta_time) = 0;
+	virtual void update(double delta_time) = 0;
 
 	/**
 	 * @brief Updates the game object with fixed delta time.
 	 *
-	 * @param delta_time
+	 * @param delta_time The time since the last fixed tick.
 	 */
-	virtual void fixed_update(float delta_time) = 0;
+	virtual void fixed_update(double delta_time) = 0;
 
 	/**
 	 * @brief Adds a draw call to the renderer.
@@ -47,7 +49,7 @@ public:
 	/**
 	 * @brief The draw call.
 	 *
-	 * @param shader
+	 * @param shader The shader to use.
 	 */
 	virtual void draw(std::shared_ptr<Shader> shader) = 0;
 

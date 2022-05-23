@@ -9,8 +9,8 @@ void OpenGL::init() {
 		std::cout << "Failed to initialize GLAD" << std::endl;
 	}
 
-	glViewport(0, 0, engine.window_.GetBufferWidth(),
-	           engine.window_.GetBufferHeight());
+	glViewport(0, 0, engine.window_.get_buffer_width(),
+	           engine.window_.get_buffer_height());
 	//
 	// Enable depth testing.
 	glEnable(GL_DEPTH_TEST);
@@ -55,8 +55,8 @@ void OpenGL::render_scene(std::shared_ptr<Shader> shader) {
 void OpenGL::render_pass() {
 	auto& engine = ReflexEngine::get_instance();
 
-	glViewport(0, 0, engine.window_.GetBufferWidth(),
-	           engine.window_.GetBufferHeight());
+	glViewport(0, 0, engine.window_.get_buffer_width(),
+	           engine.window_.get_buffer_height());
 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -149,7 +149,7 @@ void OpenGL::add_point_light(const PointLightData& light_data) {
 		    light_data.quadratic));
 	}
 }
-//
+
 void OpenGL::add_spot_light(const SpotLightData& light_data) {
 	if (spot_lights_.size() < MAX_SPOT_LIGHTS) {
 		spot_lights_.emplace_back(SpotLight(

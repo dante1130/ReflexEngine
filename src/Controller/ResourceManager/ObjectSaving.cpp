@@ -1,12 +1,12 @@
 #include "ObjectSaving.hpp"
 
-std::ofstream outfile;
-std::ofstream creationScript;
-int number = 0;
+std::ofstream ObjectSaving::outfile;
+std::ofstream ObjectSaving::creationScript;
+int ObjectSaving::number = 0;
 
 void ObjectSaving::setFreshSave() { number = 0; }
 
-void appendCreationFile() {
+void ObjectSaving::appendCreationFile() {
 	if (number == 0) {
 		creationScript.open("scripts/save/_MasterCreation.lua");
 	} else {

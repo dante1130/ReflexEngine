@@ -8,12 +8,10 @@
 #include "Controller/Audio/Audio.hpp"
 #include "Controller/Physics/Physics.hpp"
 
-ReflexEngine::ReflexEngine() {
-	if (window_.Init() == 1) return;
-}
-
 void ReflexEngine::run() {
 	auto& engine = ReflexEngine::get_instance();
+
+	if (!engine.window_.init()) return;
 
 	GenericFunctions::lua_access();
 	InputManager::get_instance().load_lua_bindings("scripts/_Controls.lua");
@@ -25,8 +23,7 @@ void ReflexEngine::run() {
 	                        -90.0f, 0.0f, 5.0f, 0.2f);
 
 	engine.renderer_.init();
-	gui::init(engine.window_.get_window(), "#version 410");
-	guiLuaAccess::exposeGui();
+	GuiManager::init(engine.window_.get_window(), "#version 410");
 
 	engine.scenes_.emplace(std::make_shared<TestScene>());
 	engine.scenes_.top()->init();
@@ -36,14 +33,14 @@ void ReflexEngine::run() {
 	glfwSetInputMode(engine.window_.get_window(), GLFW_CURSOR,
 	                 GLFW_CURSOR_NORMAL);
 
-	while (!engine.window_.IsShouldClose()) {
+	while (!engine.window_.is_should_close()) {
 		EngineTime::update_delta_time(glfwGetTime());
 		engine.window_.update_window_buffer_size();
 
 		glfwPollEvents();
 		input_manager.read_keys(engine.window_.get_window());
 
-		gui::mainLoopStart();
+		GuiManager::mainLoopStart();
 
 		if (!GenericFunctions::getNetworkMenuActive()) {
 			engine.scenes_.top()->key_controls(EngineTime::get_delta_time());
@@ -53,8 +50,8 @@ void ReflexEngine::run() {
 			EngineTime::force_delta_time(0);
 		} else {
 			Physics::updateWorld(EngineTime::get_delta_time());
-			engine.scenes_.top()->mouse_controls(engine.window_.GetXOffset(),
-			                                     engine.window_.GetYOffset());
+			engine.scenes_.top()->mouse_controls(engine.window_.get_x_offset(),
+			                                     engine.window_.get_y_offset());
 		}
 
 		if (GenericFunctions::getIfLoad())
@@ -73,18 +70,18 @@ void ReflexEngine::run() {
 			engine.renderer_.draw();
 		}
 
-		gui::mainLoopEnd();
+		GuiManager::mainLoopEnd();
 
-		engine.window_.SwapBuffers();
+		engine.window_.swap_buffers();
 	}
 
-	for (int count = 0; count < engine.scenes_.size(); count++) {
+	while (!engine.scenes_.empty()) {
 		engine.scenes_.pop();
 	}
 	entityMgr.killEntities();
 
 	Physics::destroyWorld();
-	gui::shutdown();
+	GuiManager::shutdown();
 }
 
 ReflexEngine& ReflexEngine::get_instance() {

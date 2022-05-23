@@ -11,6 +11,9 @@
  */
 class ModelManager {
 public:
+	/**
+	 * @brief Exposes the model manager to Lua.
+	 */
 	void lua_access();
 
 	/**
@@ -21,10 +24,9 @@ public:
 	/**
 	 * @brief Loads a model into the model manager.
 	 *
-	 * @param model_name
-	 * @param file_name
-	 * @return true
-	 * @return false
+	 * @param model_name The name given to the model.
+	 * @param file_name The file name of the model.
+	 * @return bool
 	 */
 	bool load_model(const std::string& model_name,
 	                const std::string& file_name);
@@ -32,7 +34,7 @@ public:
 	/**
 	 * @brief Get the model given the model name.
 	 *
-	 * @param model_name
+	 * @param model_name The name given to the model.
 	 * @return const Model&
 	 */
 	const Model& get_model(const std::string& model_name) const;

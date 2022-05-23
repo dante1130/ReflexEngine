@@ -6,9 +6,9 @@ void Body::init() {
 	// }
 }
 
-void Body::update(float delta_time) {}
+void Body::update(double delta_time) {}
 
-void Body::fixed_update(float delta_time) {
+void Body::fixed_update(double delta_time) {
 	// if (creator == true) {
 	//	if (GenericFunctions::getIfPaused() == false) {
 	//		Physics::updateWorld(delta_time);

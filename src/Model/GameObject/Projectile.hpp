@@ -13,16 +13,16 @@ public:
 	/**
 	 * @brief Updates the game object with delta time.
 	 *
-	 * @param delta_time
+	 * @param delta_time The time since the last frame.
 	 */
-	void update(float delta_time);
+	void update(double delta_time);
 
 	/**
 	 * @brief Updates the game object with fixed delta time.
 	 *
-	 * @param delta_time
+	 * @param delta_time The time since the last fixed tick.
 	 */
-	void fixed_update(float delta_time);
+	void fixed_update(double delta_time);
 
 	/**
 	 * @brief Adds a draw call to the renderer.
@@ -32,7 +32,7 @@ public:
 	/**
 	 * @brief The draw call.
 	 *
-	 * @param shader
+	 * @param shader The shader to use.
 	 */
 	void draw(std::shared_ptr<Shader> shader);
 
@@ -49,24 +49,62 @@ public:
 	 */
 	~Projectile() = default;
 
+	/**
+	 * @brief Freeze the projectile.
+	 */
 	void freeze_projectile();
 
 	/**
-	 * @brief removes the colliders from the rigid body
+	 * @brief Removes the colliders from the rigid body
 	 */
 	void remove_colliders();
 
+	/**
+	 * @brief Set the time alive left for the projectile.
+	 *
+	 * @param time The time alive left.
+	 */
 	void set_time_alive_left(float time);
+
+	/**
+	 * @brief Set the damage of the projectile.
+	 *
+	 * @param damage The damage.
+	 */
 	void set_damage(float damage);
-	void set_logic_script(std::string script);
+
+	/**
+	 * @brief Set the logic script.
+	 *
+	 * @param script The script.
+	 */
+	void set_logic_script(const std::string& script);
+
+	/**
+	 * @brief Set the floor contact flag.
+	 *
+	 * @param val
+	 */
 	void set_floor_contact(bool val);
+
+	/**
+	 * @brief Set to delete flag.
+	 *
+	 * @param val
+	 */
 	void set_to_delete(bool val);
 
 private:
+	/// The time alive left.
 	bool to_be_deleted_ = false;
+	/// Floor contact flag
 	bool floor_contact_ = false;
-	float time_alive_left_ = 20;
-	float damage_ = 1;
+	/// The time alive left.
+	float time_alive_left_ = 20.0f;
+	/// The damage.
+	float damage_ = 1.0f;
+	/// The collision detection flag.
 	bool collision_detected_ = false;
+	/// The logic script.
 	std::string lua_script_;
 };

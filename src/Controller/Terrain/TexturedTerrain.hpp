@@ -11,36 +11,38 @@ public:
 	/**
 	 * @brief Renders the terrain.
 	 *
-	 * @param shader
+	 * @param shader The shader to use.
 	 */
 	void render(std::shared_ptr<Shader> shader) override;
 
 	/**
 	 * @brief Reads the heightmap and loads the mesh.
 	 *
-	 * @return true
-	 * @return false
+	 * @return bool
 	 */
 	bool load_mesh() override;
 
 	/**
 	 * @brief Reads the texture image file and loads the texture.
 	 *
-	 * @param file_name
-	 * @return true
-	 * @return false
+	 * @param file_name The file name of the image.
+	 * @return bool
 	 */
 	bool load_texture(const char* file_name);
 
 	/**
 	 * @brief Reads an image file as a detail map.
 	 *
-	 * @param file_name
-	 * @return true
-	 * @return false
+	 * @param file_name The file name of the image.
+	 * @return bool
 	 */
 	bool load_detailmap(const char* file_name);
 
+	/**
+	 * @brief Set the texture by the ID.
+	 *
+	 * @param id
+	 */
 	void set_texture(GLuint id) {
 		texture_ = std::make_shared<Texture>();
 		texture_->set_texture_id(id);

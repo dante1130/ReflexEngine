@@ -30,8 +30,7 @@ void Physics::setDebuggerValues(int type, bool val) {
 		return;
 	}
 	DebugRenderer& debugRenderer = world->getDebugRenderer();
-	debugRenderer.setIsDebugItemDisplayed(
-	    static_cast<DebugRenderer::DebugItem>(type), val);
+	debugRenderer.setIsDebugItemDisplayed((DebugRenderer::DebugItem)type, val);
 }
 
 void Physics::destroyWorld() {

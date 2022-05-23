@@ -1,34 +1,55 @@
 #pragma once
-#include "Controller/Physics/BodyRigidPhysics.hpp"
-#include "Body.hpp"
-#include <glm/glm.hpp>
-#include <vector>
 
-class BodyRigid : public Body {
+#include <reactphysics3d/reactphysics3d.h>
+
+#include "Physics.hpp"
+#include <glm/glm.hpp>
+#include <math.h>
+
+struct colliderData {
+	int m_colliderStored = 0;
+};
+
+struct colliderData_sphere : public colliderData {
+	float m_radius = 0;
+
+	colliderData_sphere(int num, float rad) {
+		m_colliderStored = num;
+		m_radius = rad;
+	}
+};
+
+struct colliderData_capsule : public colliderData {
+	float m_radius = 0;
+	float m_height = 0;
+
+	colliderData_capsule(int num, float rad, float hei) {
+		m_colliderStored = num;
+		m_radius = rad;
+		m_height = hei;
+	}
+};
+
+struct colliderData_box : public colliderData {
+	glm::vec3 m_size = {};
+
+	colliderData_box(int num, float x, float y, float z) {
+		m_colliderStored = num;
+		m_size.x = x;
+		m_size.y = y;
+		m_size.z = z;
+	}
+};
+
+class BodyRigidPhysics {
 public:
 	/**
-	 * @brief	Basic initialiser for engine to call. Does nothing
-	 *
-	 * @pre	Nothing
-	 * @post	Nothing
-	 */
-	void init() override;
-
-	/**
-	 * @brief	Draw call for engine to call. Does nothing
+	 * @brief	Default constructor. DOES NOTHING
 	 *
 	 * @pre		Nothing
-	 * @post	Nothing
+	 * @post	Object created
 	 */
-	void add_draw_call() override {}
-
-	/**
-	 * @brief	Draws object. Does nothing
-	 *
-	 * @pre		Nothing
-	 * @post	Nothing
-	 */
-	void draw(std::shared_ptr<Shader> shader) override {}
+	BodyRigidPhysics();
 
 	/**
 	 * @brief	Creates rigid body.
@@ -39,14 +60,11 @@ public:
 	 * @pre		Physics world exists
 	 * @post	Rigid body initialised
 	 */
-	void createBR(glm::vec3 pos, glm::vec3 rotation, float angle);
+	void init(glm::vec3 pos, glm::vec3 rotation, float angle);
 
 	/**
-	 * @brief	Sets the position of the rigid body
-	 * @param	pos	- The position of the rigid body
-	 *
-	 * @pre		Rigid body exists
-	 * @post		Rigid body updated
+	 * @brief Set the rb position object
+	 * @param pos
 	 */
 	void set_position(glm::vec3 pos);
 
@@ -58,15 +76,6 @@ public:
 	 * @post	Type set
 	 */
 	void setType(int type);
-
-	/**
-	 * @brief	Gets the type of rigid body
-	 * @return	type	- type of body. 0 = static, 1 = kinematic, 2 = dynamic
-	 *
-	 * @pre		Rigid body exists
-	 * @post	Type returned
-	 */
-	int getType();
 
 	/**
 	 * @brief	Set if you want gravity
@@ -139,22 +148,6 @@ public:
 	 * @post	Torque added
 	 */
 	void setAngularVelocity(glm::vec3 velocity);
-
-	/**
-	 * @brief	Updates the object
-	 * @param	delta_time	- Time between last frame
-	 *
-	 * @pre		Rigid body exists
-	 * @post	Rigid body updated
-	 */
-	void update(double delta_time) override;
-
-	/**
-	 * @brief Updates the body object with fixed delta time.
-	 *
-	 * @param delta_time
-	 */
-	void fixed_update(double delta_time) override;
 
 	/**
 	 * @brief	Gets the position vector
@@ -244,75 +237,127 @@ public:
 	/**
 	 * NOT CURRENTLY IMPLEMENTED
 	 * @brief	Creates a height field shape collision box
+	 * @param	pos			- The local position of the collision box
 	 * @param	bounciness	- The bounciness of the collision box
 	 * @param	friction	- The friction of the collision box
 	 *
 	 * @pre		Rigid body exists
 	 * @post	Height field added
 	 */
-	void addHeightFieldShape(float bounciness, float friction) = delete;
+	void addHeightFieldShape(glm::vec3 pos, float bounciness, float friction,
+	                         int nColumns, int nRows, int minHeight,
+	                         int maxHeight, unsigned char* heightValues);
 
 	/**
-	 * @brief	Changes the linear axis factor. I.e. if set a axis to 0 it will
-	 * no longer move on that axis.
-	 * @param	factor	- The factor you want for each axis. i.e. 1, 0, 1, stops
-	 * y movement.
+	 * @brief	Gets if gravity is allowed in the rb (rigid body)
+	 * @return	bool	- True if gravity is allowed on rb
 	 *
-	 * @pre		Rigid body exists
-	 * @post	Linear axis factor changed
+	 * @pre		rb exists
+	 * @post	if gravity allowed retrieved
 	 */
-	void setLinearAxisFactor(glm::vec3 factor);
+	bool getIfGravityActive();
 
 	/**
-	 * @brief	Changes the angular axis factor. I.e. if set a axis to 0 it will
-	 * no longer rotate on that axis.
-	 * @param	factor	- The factor you want for each axis. i.e. 1, 0, 1, stops
-	 * y rotation.
+	 * @brief	Retrieves the rigid body type
+	 * @return	int	- The type of rigid body
 	 *
-	 * @pre		Rigid body exists
-	 * @post	Angular axis factor changed
+	 * @pre		rb exists
+	 * @post	rigid body type retrieved
 	 */
-	void setAngularAxisFactor(glm::vec3 factor);
+	int getRBType();
+
+	/**
+	 * @brief	Gets the number of colliders attached to the rigid body
+	 * @return	int	- Number of colliders
+	 *
+	 * @pre		rb & colliders exist
+	 * @post	Collider number retrieved
+	 */
+	int getNumberOfColliders();
+
+	/**
+	 * @brief	Gets the linear damping value of the object
+	 * @return	float	- the linear damping value
+	 *
+	 * @pre		rb exists
+	 * @post	linear damping retrieved
+	 */
+	float getLinearDamping();
+
+	/**
+	 * @brief	Gets the angular damping value of the object
+	 * @return	float	- The angular damping value
+	 *
+	 * @pre		rb exists
+	 * @post	angular damping retrieved
+	 */
+	float getAngularDamping();
+
+	/**
+	 * @brief	Gets it the object can go to sleep (performce improvement)
+	 * @return	bool	- true if object can go to sleep
+	 *
+	 * @pre		rb exists
+	 * @post	allowed to sleep retrieved
+	 */
+	bool getIfAllowedSleep();
+
+	/**
+	 * @brief	Gets the type of collider (sphere, box, capsule)
+	 * @param	index	- The index of the collider in question
+	 * @return	int		- the colliders type
+	 *
+	 * @pre		collider & rb exist
+	 * @post	collider type retrieved
+	 */
+	int getColliderType(int index);
+
+	/**
+	 * @brief	Gets a collders bounciness value
+	 * @param	index	- The index of the collider in question
+	 * @return	float	- The bounciness of the collider
+	 *
+	 * @pre		collider & rb exist
+	 * @post	collider bounciness retrieved
+	 */
+	float getBounciness(int index);
+
+	/**
+	 * @brief	Gets a colliders friction value
+	 * @param	index	- The index of the collider in question
+	 * @return	float	- The friction of the collider
+	 *
+	 * @pre		collider & rb exist
+	 * @post	Friction value returned
+	 */
+	float getFriction(int index);
+
+	/**
+	 * @brief	Gets the local position of the collider attached to the rb
+	 * @param	index		- The index of the collider in question
+	 * @return	glm::vec3	- The position of the collider in relation to the rb
+	 *
+	 * @pre		Collider & rb exist
+	 * @post	Local coordinates returned
+	 */
+	glm::vec3 getLocalColliderPos(int index);
 
 	/**
 	 * @brief	Destructor
 	 *
-	 * @pre	Object was created
+	 * @pre		Object was created
 	 * @post	Object deleted
 	 */
-	~BodyRigid();
+	~BodyRigidPhysics();
 
-	/**
-	 * @brief	Saves the object to lau file
-	 *
-	 * @pre		Object exists
-	 * @post	Object saved
-	 */
-	void save_object() override {}
-
-protected:
+private:
 	/// <summary>
-	/// Facaded react rigid body
+	/// True if created, else false
 	/// </summary>
-	BodyRigidPhysics rb;
+	bool created = false;
 
 	/// <summary>
-	/// The number of colliders in the rb
+	/// React rigid body of the object
 	/// </summary>
-	int m_numOfColliders = 0;
-
-	/// <summary>
-	/// List of sphere colliders. Used for storing data to file
-	/// </summary>
-	std::vector<colliderData_sphere> m_sphere;
-
-	/// <summary>
-	/// List of capsule colliders. Used for storing data to file
-	/// </summary>
-	std::vector<colliderData_capsule> m_capsule;
-
-	/// <summary>
-	/// List of capsule colliders. Used for storing data to file
-	/// </summary>
-	std::vector<colliderData_box> m_box;
+	RigidBody* rb;
 };

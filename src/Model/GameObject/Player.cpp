@@ -2,7 +2,16 @@
 
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 
-void Player::update(float delta_time) {
+void Player::init() {
+	position.y = 10.0f;
+
+	flashlight_ =
+	    SpotLight(1024, 1024, 0.01f, 100.0f, glm::vec3(1.0f, 1.0f, 1.0f), 0.0f,
+	              5.0f, glm::vec3(0.0f, 0.0f, 0.0f),
+	              glm::vec3(0.0f, -1.0f, 0.0f), 1.0f, 0.25f, 0.0f, 1.0f);
+}
+
+void Player::update(double delta_time) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file(lua_script_);
 
@@ -22,16 +31,7 @@ void Player::update(float delta_time) {
 	flashlight_.SetFlash(lower_light, cam_direction);
 }
 
-void Player::init() {
-	position.y = 10;
-
-	flashlight_ =
-	    SpotLight(1024, 1024, 0.01f, 100.0f, glm::vec3(1.0f, 1.0f, 1.0f), 0.0f,
-	              5.0f, glm::vec3(0.0f, 0.0f, 0.0f),
-	              glm::vec3(0.0f, -1.0f, 0.0f), 1.0f, 0.25f, 0.0f, 1.0f);
-}
-//
-void Player::fixed_update(float delta_time) {
+void Player::fixed_update(double delta_time) {
 	auto& camera = ReflexEngine::get_instance().camera_;
 
 	glm::vec3 direction = camera.get_move_direction();
@@ -46,7 +46,7 @@ void Player::add_draw_call() {
 	renderer.add_spot_light(flashlight_);
 }
 
-void Player::set_lua_script(std::string script) { lua_script_ = script; }
+void Player::set_lua_script(const std::string& script) { lua_script_ = script; }
 
 void Player::save_object() {
 	ObjectSaving::openFile();

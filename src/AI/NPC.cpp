@@ -18,7 +18,7 @@ void NPC::fixed_update(float delta_time) {
 		m_AI_time_elapsed += delta_time;
 		if (m_AI_time_elapsed > m_AI_update_delay) {
 			m_NPC_FSM->update();
-
+			//
 			position = rb.getPosition();
 			position.y = GenericFunctions::getHeight(position.x, position.z);
 			rb.set_position(glm::vec3(position.x, position.y + 1, position.z));
@@ -118,7 +118,6 @@ int NPC::get_waypoint_count() { return m_waypoints.size(); }
 void NPC::add_waypointGLM(glm::vec2 waypoint) { m_waypoints.push(waypoint); }
 void NPC::add_waypoint(float x, float z) { add_waypointGLM(glm::vec2(x, z)); }
 void NPC::add_waypoints(const std::queue<glm::vec2>& new_waypoints) {
-
 	remove_waypoints();
 	m_waypoints = new_waypoints;
 }

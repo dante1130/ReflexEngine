@@ -35,7 +35,7 @@ void Water::init() {
 	m_mesh_under.CreateMesh(verts, orderTwo, 32, 6);
 }
 
-void Water::update(float delta_time) {
+void Water::update(double delta_time) {
 	m_time += delta_time;
 
 	float x = sin(m_time * m_offsetMult.x) / m_intensity.x;

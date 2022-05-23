@@ -4,9 +4,9 @@ class EngineTime {
 public:
 	/**
 	 * @brief	Updates the delta time
-	 * @param	curr_time	- The current time
+	 * @param	curr_time The current time
 	 */
-	static void update_delta_time(float curr_time);
+	static void update_delta_time(double curr_time);
 
 	/**
 	 * @brief	resets the fixed delta time back to 0
@@ -15,42 +15,52 @@ public:
 
 	/**
 	 * @brief	Forces the new delta time
-	 * @param	new_time	- The new delta time
+	 * @param	new_time The new delta time
 	 */
-	static void force_delta_time(float new_time);
+	static void force_delta_time(double new_time);
 
 	/**
 	 * @brief	Sets if it should pause
-	 * @param	new_pause	- Set if it should pause
+	 * @param	new_pause Set if it should pause
 	 */
 	static void set_pause(bool new_pause);
 
 	/**
 	 * @brief	Changes the time scale of the engine
-	 * @param	new_time_scale	- Changes the time scale of the engine
+	 * @param	new_time_scale Changes the time scale of the engine
 	 */
-	static void set_time_scale(float new_time_scale);
+	static void set_time_scale(double new_time_scale);
 
 	/**
 	 * @brief	gets the fixed delta time
-	 * @return	float	- the fixed delta time
+	 * @return	double	- the fixed delta time
 	 */
-	static float get_fixed_delta_time();
+	static double get_fixed_delta_time();
 
 	/**
 	 * @brief	gets the delta time
-	 * @return	float	- delta time
+	 * @return	double	- delta time
 	 */
-	static float get_delta_time();
+	static double get_delta_time();
 
 	/**
 	 * @brief	gets the time unpaused
-	 * @return	float	- the total time unpaused
+	 * @return	double	- the total time unpaused
 	 */
-	static float get_time_unpaused();
-	
-	static float get_time_step();
+	static double get_time_unpaused();
 
+	/**
+	 * @brief Get the time step of the fixed update.
+	 * @return double
+	 */
+	static double get_time_step();
+
+	/**
+	 * @brief Returns whether the fixed delta time has exceeded the time step.
+	 *
+	 * @return true
+	 * @return false
+	 */
 	static bool is_time_step_passed();
 
 	/**
@@ -61,23 +71,23 @@ public:
 
 	/**
 	 * @brief	gets the time scale
-	 * @return	float	- the time scale
+	 * @return	double	- the time scale
 	 */
-	static float get_time_scale();
+	static double get_time_scale();
 
 private:
 	/// The previous time.
-	static float prev_time_;
+	static double prev_time_;
 	/// The delta time.
-	static float delta_time_;
+	static double delta_time_;
 	/// The fixed delta time.
-	static float fixed_delta_time_;
+	static double fixed_delta_time_;
 	/// The time step for fixed update.
-	static constexpr float time_step = 1.0F / 60.0F;
+	static constexpr double time_step_ = 1.0 / 60.0;
 	/// The total unpaused time
-	static float total_unpaused_time_;
+	static double total_unpaused_time_;
 	/// If the engine time is paused
 	static bool paused_;
 	/// The time scale of the engine
-	static float time_scale_;
+	static double time_scale_;
 };

@@ -10,7 +10,6 @@
 #include "View/Renderer/OpenGL/Objects/DirectionalLight.hpp"
 #include "View/Renderer/OpenGL/Objects/SpotLight.hpp"
 #include "Controller/GameAssetFactory.hpp"
-#include "Controller/GuiLuaAccess.hpp"
 #include "Controller/GenericFunctions.h"
 #include "Controller/LuaManager.hpp"
 
@@ -44,7 +43,7 @@ public:
 	 *
 	 * @param delta_time	- The time between frames
 	 */
-	void key_controls(float delta_time) override;
+	void key_controls(double delta_time) override;
 
 	/**
 	 * @brief The function to specify controls for the mouse.
@@ -52,21 +51,21 @@ public:
 	 * @param xpos	- X position of mouse on screen
 	 * @param ypos	- Y position of mouse on screen
 	 */
-	void mouse_controls(float xpos, float ypos) override;
+	void mouse_controls(double xpos, double ypos) override;
 
 	/**
 	 * @brief The update loop of the scene.
 	 *
 	 * @param delta_time	- The time between frames
 	 */
-	void update(float delta_time) override;
+	void update(double delta_time) override;
 
 	/**
 	 * @brief The fixed update loop of the scene.
 	 *
 	 * @param delta_time
 	 */
-	void fixed_update(float delta_time);
+	void fixed_update(double delta_time) override;
 
 	/**
 	 * @brief Add draw calls to the renderer.

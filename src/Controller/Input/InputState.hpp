@@ -16,33 +16,30 @@ public:
 	/**
 	 * @brief Set the key state.
 	 *
-	 * @param action
+	 * @param action The action of the key. E.g. GLFW_PRESS.
 	 */
 	void set_key_state(int action);
 
 	/**
 	 * @brief Returns a boolean whether the key is pressed.
 	 *
-	 * @return true
-	 * @return false
+	 * @return bool
 	 */
-	bool is_key_pressed();
+	bool is_key_pressed() const;
 
 	/**
 	 * @brief Returns a boolean whether the key is held.
 	 *
-	 * @return true
-	 * @return false
+	 * @return bool
 	 */
-	bool is_key_hold();
+	bool is_key_hold() const;
 
 	/**
 	 * @brief Returns a boolean whether the key is released.
 	 *
-	 * @return true
-	 * @return false
+	 * @return bool
 	 */
-	bool is_key_released();
+	bool is_key_released() const;
 
 private:
 	/// The current key state.

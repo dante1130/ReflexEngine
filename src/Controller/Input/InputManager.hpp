@@ -23,30 +23,30 @@ public:
 	/**
 	 * @brief Load the bindings from a Lua file.
 	 *
-	 * @param file_path
+	 * @param file_path The path to the Lua script.
 	 */
 	void load_lua_bindings(const std::string& file_path);
 
 	/**
 	 * @brief Bind an input action to a key.
 	 *
-	 * @param input - The input
-	 * @param key	- The key to bind
+	 * @param input The input
+	 * @param key The key to bind
 	 */
 	void bind_key(Input input, int key);
 
 	/**
 	 * @brief Read the key states.
 	 *
-	 * @param window	- The window
+	 * @param window The window
 	 */
 	void read_keys(GLFWwindow* window);
 
 	/**
 	 * @brief Return the key state of an input action.
 	 *
-	 * @param input		- Input
-	 * @return InputState	- Input state
+	 * @param input	Input
+	 * @return InputState
 	 */
 	InputState get_key_state(Input input);
 

@@ -96,11 +96,11 @@ void GenericFunctions::lua_access() {
 }
 //
 int GenericFunctions::get_window_width() {
-	return ReflexEngine::get_instance().window_.GetBufferWidth();
+	return ReflexEngine::get_instance().window_.get_buffer_width();
 }
 
 int GenericFunctions::get_window_height() {
-	return ReflexEngine::get_instance().window_.GetBufferHeight();
+	return ReflexEngine::get_instance().window_.get_buffer_height();
 }
 
 int GenericFunctions::get_random(int min, int max) {

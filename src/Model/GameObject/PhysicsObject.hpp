@@ -45,14 +45,14 @@ public:
 	 * @pre		rigid body initialised
 	 * @post	Object updated
 	 */
-	void update(float delta_time) override;
+	void update(double delta_time) override;
 
 	/**
 	 * @brief Updates the body object with fixed delta time.
 	 *
 	 * @param delta_time
 	 */
-	void fixed_update(float delta_time) override;
+	void fixed_update(double delta_time) override;
 
 	/**
 	 * @brief	Adds draw call of object
@@ -97,7 +97,7 @@ protected:
 	 * @pre		Collider exists
 	 * @post	Collider stored
 	 */
-	void saveSphereCollider(int index);
+	void saveSphereCollider(size_t index);
 
 	/**
 	 * @brief	Saves the capsule collider of rb
@@ -106,7 +106,7 @@ protected:
 	 * @pre		Collider exists
 	 * @post	Collider stored
 	 */
-	void saveCapsuleCollider(int index);
+	void saveCapsuleCollider(size_t index);
 
 	/**
 	 * @brief	Saves the box collider of rb
@@ -115,7 +115,7 @@ protected:
 	 * @pre		Collider exists
 	 * @post	Collider stored
 	 */
-	void saveBoxCollider(int index);
+	void saveBoxCollider(size_t index);
 
 	/**
 	 * @brief	Saves the collider of rb
@@ -125,5 +125,5 @@ protected:
 	 * @pre		Collider exists
 	 * @post	Collider stored
 	 */
-	void saveCollider(int index, int type);
+	void saveCollider(size_t index, int type);
 };
