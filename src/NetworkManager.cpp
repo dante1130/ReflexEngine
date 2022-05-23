@@ -110,11 +110,7 @@ void networkManager::MessageSend(char* inputMessage) {
 }
 
 std::string networkManager::ReceiveMessage() {
-	// for (packet = peer->Receive(); packet;
-	// peer->DeallocatePacket(packet), packet = peer->Receive()) {
 	packet = peer->Receive();
-	// strcat(message, HandleMessage(packet));
-	// return (message);
 	connected = true;
 	if (packet) {
 		if (isServer) {

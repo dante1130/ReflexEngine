@@ -9,13 +9,14 @@
 #include <raknet/Source/MessageIdentifiers.h>
 #include <raknet/Source/Gets.h>
 #include <raknet/Source/RakSleep.h>
+#include <glm.hpp>
 
 #define MAX_CLIENTS 6
 #define SERVER_PORT 60000
 
 class networkManager {
 private:
-	/// The message that was received (UNUSED AS OF NOW)
+	/// The message that was received
 	char message[512];
 
 	///	Name given to the client/server
@@ -159,6 +160,10 @@ public:
 	char *GetName();
 
 	bool GetServer();
+
+	void ObjectPositionSend(glm::vec3 position);
+
+	glm::vec3 ObjectPositionReceive();
 
 private:
 	/**
