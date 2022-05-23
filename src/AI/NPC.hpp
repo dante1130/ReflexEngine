@@ -175,7 +175,7 @@ public:
 	 * @brief	Sets a new state for the FSM
 	 * @param	new_state	- new state
 	 */
-	void new_state(sol::table new_state);
+	void new_state(std::string new_state);
 
 	/**
 	 * @brief	Gets FSM for the NPC
