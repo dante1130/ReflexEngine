@@ -12,13 +12,13 @@ NPC::NPC(const std::string& model_name, const std::string& texture_name,
 NPC::~NPC() { delete m_NPC_FSM; }
 
 void NPC::init() {}
-void NPC::update(float delta_time) {}
-void NPC::fixed_update(float delta_time) {
+void NPC::update(double delta_time) {}
+void NPC::fixed_update(double delta_time) {
 	if (!EngineTime::is_paused()) {
 		m_AI_time_elapsed += delta_time;
 		if (m_AI_time_elapsed > m_AI_update_delay) {
 			m_NPC_FSM->update();
-			//
+
 			position = rb.getPosition();
 			position.y = GenericFunctions::getHeight(position.x, position.z);
 			rb.set_position(glm::vec3(position.x, position.y + 1, position.z));
@@ -92,12 +92,6 @@ void NPC::save_object() {
 	ObjectSaving::closeFile();
 }
 
-//
-//
-//
-//
-//
-
 bool NPC::handleMessage(const telegram& msg) {
 	return m_NPC_FSM->handleMessage(msg);
 }
@@ -132,11 +126,13 @@ void NPC::use_pathfinding(float x1, float z1, float x2, float z2) {
 	// }
 	remove_waypoints();
 	m_waypoints = gameWorld.pathFinding(x1, z1, x2, z2);
-	for (int count = 0; count < m_waypoints.size(); count++) {
-	}
+	// for (int count = 0; count < m_waypoints.size(); count++) {
+	// }
 }
 
-void NPC::new_state(sol::table new_state) { m_NPC_FSM->changeState(new_state); }
+void NPC::new_state(std::string new_state) {
+	m_NPC_FSM->changeState(new_state);
+}
 
 stateMachine<NPC>* NPC::get_FSM() { return m_NPC_FSM; }
 
@@ -155,10 +151,6 @@ float NPC::get_move_speed() { return m_move_speed; }
 float NPC::get_pos_x() { return position.x; }
 float NPC::get_pos_y() { return position.y; }
 float NPC::get_pos_z() { return position.z; }
-
-//
-//
-//
 
 bool NPC::waypoint_follow(bool gen_new) {
 	if (m_waypoints.size() == 0 && gen_new) {

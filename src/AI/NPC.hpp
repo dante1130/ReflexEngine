@@ -29,35 +29,35 @@ public:
 	/**
 	 * @brief	Initialises the game object
 	 */
-	void init();
+	void init() override;
 
 	/**
 	 * @brief	Updates the game object
 	 * @param	delta_time	- The change in time since it was last called
 	 */
-	void update(float delta_time);
+	void update(double delta_time) override;
 
 	/**
 	 * @brief	Updates the game object on a fixed update loop
 	 * @param	delta_time	- The change in time since it was last called
 	 */
-	void fixed_update(float delta_time);
+	void fixed_update(double delta_time) override;
 
 	/**
 	 * @brief	adds a draw call, so it will be rendered
 	 */
-	void add_draw_call();
+	void add_draw_call() override;
 
 	/**
 	 * @brief	Draws the object
 	 * @param	shader	- The shader
 	 */
-	void draw(std::shared_ptr<Shader> shader);
+	void draw(std::shared_ptr<Shader> shader) override;
 
 	/**
 	 * @brief	Saves the object
 	 */
-	void save_object();
+	void save_object() override;
 
 	/**
 	 * @brief	Handles incomming messages
@@ -175,7 +175,7 @@ public:
 	 * @brief	Sets a new state for the FSM
 	 * @param	new_state	- new state
 	 */
-	void new_state(sol::table new_state);
+	void new_state(std::string new_state);
 
 	/**
 	 * @brief	Gets FSM for the NPC

@@ -633,7 +633,7 @@ NPC* GameAssetFactory::loadNPCObject(const std::string& luaScript) {
 
 	sol::function exe = lua[script];
 	std::cout << script << std::endl;
-	exe(*npc);
+	exe(npc);
 
 	entityMgr.registerEntity(npc);
 	return npc;

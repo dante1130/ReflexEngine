@@ -104,9 +104,8 @@ state_idle["execute"] = function(player)
     --end
   end
 
-  --player:getFSM():setCurrentState(state_global)
-  --player:getFSM():setCurrentState(state_global)
-  --player:setCurrentState(state_global)
+  --player:getFSM():setCurrentState("state_global")
+  --player:setCurrentState("state_global")
 
 end
 
@@ -146,7 +145,7 @@ state_patrol["execute"] = function(player)
     a = vector2D()
     a:set(400, 400)
     player:sendMessage(0, player:getPlayerID(), 1, 1, a)
-    player:getFSM():changeState(state_chase)
+    player:getFSM():changeState("state_chase")
 
 
   end
@@ -164,7 +163,7 @@ state_patrol["onMessage"] = function(player, msg)
   if (msg.msg == 1 and player:getPlayerID() == 1) then
     print("msg recd")
     player:setEnemyTarget(msg.extraInfo:getX(), msg.extraInfo:getY())
-    player:getFSM():changeState(state_chase)
+    player:getFSM():changeState("state_chase")
     --  player:moveToEnemy()
   end
 

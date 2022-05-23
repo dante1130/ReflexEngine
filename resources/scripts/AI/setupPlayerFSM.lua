@@ -15,8 +15,8 @@ function setupPlayerFSM(player)
     player.faction = 1
     print(player.id)
     
-    player:getFSM():setGlobalState(state_global)
-    player:getFSM():setCurrentState(state_idle)
+    player:getFSM():setGlobalState("state_global")
+    player:getFSM():setCurrentState("state_idle")
     print("End of in setupPlayerFSM")
 end
 

@@ -27,7 +27,7 @@ void TestScene::add_game_object_during_run(std::string luaScript) {
 }
 
 void TestScene::addGameObject(std::string luaScript) {
-	if (glfwGetTime() > (double)0.5) {
+	if (glfwGetTime() > 0.5) {
 		add_game_object_during_run(luaScript);
 	} else {
 		std::cout << luaScript << std::endl;
