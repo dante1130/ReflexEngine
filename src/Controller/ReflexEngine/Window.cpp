@@ -24,6 +24,7 @@ bool Window::init() {
 	glfwWindowHint(GLFW_GREEN_BITS, mode->greenBits);
 	glfwWindowHint(GLFW_BLUE_BITS, mode->blueBits);
 	glfwWindowHint(GLFW_REFRESH_RATE, mode->refreshRate);
+	glfwWindowHint(GLFW_MAXIMIZED, GL_TRUE);
 
 	if (width_ == 0 || height_ == 0) {
 		width_ = mode->width;

@@ -20,7 +20,7 @@ public:
 	/**
 	 * @brief Construct a new Texture object
 	 *
-	 * @param fileLocation
+	 * @param fileLocation The location of the texture file.
 	 */
 	Texture(const char* fileLocation);
 
@@ -89,7 +89,7 @@ public:
 	~Texture();
 
 private:
-	// The file location of the texture.
+	/// The file location of the texture.
 	const char* m_fileLocation;
 
 	/// The texture ID.

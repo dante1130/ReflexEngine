@@ -3,6 +3,11 @@
 #include "Model/GameObject/GameObject.hpp"
 #include <fstream>
 
+/**
+ * @class ObjectSaving
+ * @brief Class that writes the data of the game objects to a lua script, so it
+ * can be used to load the game objects into the scene.
+ */
 class ObjectSaving {
 public:
 	/**

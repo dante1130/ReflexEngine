@@ -25,7 +25,7 @@ public:
 	/**
 	 * @brief Loads a new model from a 3D object file format.
 	 *
-	 * @param fileName
+	 * @param fileName The name of the file to load.
 	 */
 	bool LoadModel(const std::string& fileName);
 
@@ -48,23 +48,23 @@ private:
 	/**
 	 * @brief Recursive function to traverse the node and load the meshes.
 	 *
-	 * @param node
-	 * @param scene
+	 * @param node The node to load.
+	 * @param scene The scene to load from.
 	 */
 	void LoadNode(aiNode* node, const aiScene* scene);
 
 	/**
 	 * @brief Loads in a mesh.
 	 *
-	 * @param mesh
-	 * @param scene
+	 * @param mesh The mesh to load.
+	 * @param scene The scene to load from.
 	 */
 	void LoadMesh(aiMesh* mesh, const aiScene* scene);
 
 	/**
 	 * @brief Loads in the material/texture.
 	 *
-	 * @param scene
+	 * @param scene The scene to load from.
 	 */
 	void LoadMaterials(const aiScene* scene);
 

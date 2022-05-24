@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __STATEMACHINE_H
+#define __STATEMACHINE_H
 
 #include <iostream>
 using namespace std;
@@ -151,4 +152,11 @@ public:
 		exe(owner, msg);
 		return true;
 	}
+	//
+	/**
+	 * @brief	Destructor
+	 */
+	virtual ~stateMachine() {}
 };
+
+#endif

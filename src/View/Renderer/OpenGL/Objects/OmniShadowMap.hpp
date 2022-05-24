@@ -17,10 +17,9 @@ public:
 	/**
 	 * @brief Initializes the shadowmap with a width and height.
 	 *
-	 * @param width
-	 * @param height
-	 * @return true
-	 * @return false
+	 * @param width The width of the shadowmap.
+	 * @param height The height of the shadowmap.
+	 * @return bool
 	 */
 	bool Init(GLuint width, GLuint height) override;
 
@@ -33,7 +32,7 @@ public:
 	/**
 	 * @brief Enables the texture for the shadow.
 	 *
-	 * @param textureUnit
+	 * @param textureUnit The texture unit to bind the shadowmap to.
 	 */
 	void Read(GLenum textureUnit) override;
 };

@@ -18,10 +18,9 @@ public:
 	/**
 	 * @brief Generates the framebuffer for the shadow map.
 	 *
-	 * @param width
-	 * @param height
-	 * @return true
-	 * @return false
+	 * @param width The width of the shadow map.
+	 * @param height The height of the shadow map.
+	 * @return bool
 	 */
 	virtual bool Init(GLuint width, GLuint height);
 
@@ -33,7 +32,7 @@ public:
 	/**
 	 * @brief Enable the shadow map given a texture unit.
 	 *
-	 * @param textureUnit The texture unit
+	 * @param textureUnit The texture unit to bind the shadow map to.
 	 */
 	virtual void Read(GLenum textureUnit);
 
@@ -57,12 +56,12 @@ public:
 	virtual ~ShadowMap();
 
 protected:
-	// The framebuffer object.
+	/// The framebuffer object.
 	GLuint m_fbo;
 
-	// The shadow map.
+	/// The shadow map.
 	GLuint m_shadowMap;
 
-	// Shadow dimensions.
+	/// Shadow dimensions.
 	GLuint m_shadowWidth, m_shadowHeight;
 };

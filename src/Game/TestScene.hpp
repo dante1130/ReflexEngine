@@ -36,7 +36,7 @@ public:
 	 * @pre		Nothing
 	 * @post	Object added
 	 */
-	void addGameObject(std::string luaScript) override;
+	void addGameObject(const std::string& luaScript) override;
 
 	/**
 	 * @brief The function to specify controls for the keyboard.
@@ -93,7 +93,7 @@ public:
 	 *
 	 * @param luaScript
 	 */
-	void add_game_object_during_run(std::string luaScript);
+	void add_game_object_during_run(const std::string& luaScript);
 
 	/**
 	 * @brief	Add new game objects during run time.

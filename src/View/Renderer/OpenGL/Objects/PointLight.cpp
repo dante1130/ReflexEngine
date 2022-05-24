@@ -5,17 +5,17 @@ PointLight::PointLight()
       m_position(0.0f),
       m_constant(1.0f),
       m_linear(0.0f),
-      m_exponent(0.0f) {}
+      m_quadratic(0.0f) {}
 
 PointLight::PointLight(GLuint shadowWidth, GLuint shadowHeight, GLfloat near,
                        GLfloat far, glm::vec3 color, GLfloat aIntensity,
                        GLfloat dIntensity, glm::vec3 position, GLfloat constant,
-                       GLfloat linear, GLfloat exponent)
+                       GLfloat linear, GLfloat quadratic)
     : Light(shadowWidth, shadowHeight, color, aIntensity, dIntensity),
       m_position(position),
       m_constant(constant),
       m_linear(linear),
-      m_exponent(exponent),
+      m_quadratic(quadratic),
       m_farPlane(far) {
 	float aspect =
 	    static_cast<float>(shadowWidth) / static_cast<float>(shadowHeight);
@@ -29,7 +29,7 @@ PointLight::PointLight(GLuint shadowWidth, GLuint shadowHeight, GLfloat near,
 void PointLight::UseLight(GLuint ambientColorLoc, GLuint ambientIntensityLoc,
                           GLuint diffuseIntensityLoc, GLuint positionLoc,
                           GLuint constantLoc, GLuint linearLoc,
-                          GLuint exponentLoc) const {
+                          GLuint quadraticLoc) const {
 	glUniform3f(ambientColorLoc, m_color.x, m_color.y, m_color.z);
 	glUniform1f(ambientIntensityLoc, m_ambientIntensity);
 
@@ -38,7 +38,7 @@ void PointLight::UseLight(GLuint ambientColorLoc, GLuint ambientIntensityLoc,
 	glUniform3f(positionLoc, m_position.x, m_position.y, m_position.z);
 	glUniform1f(constantLoc, m_constant);
 	glUniform1f(linearLoc, m_linear);
-	glUniform1f(exponentLoc, m_exponent);
+	glUniform1f(quadraticLoc, m_quadratic);
 }
 
 std::vector<glm::mat4> PointLight::CalculateLightTransform() const {

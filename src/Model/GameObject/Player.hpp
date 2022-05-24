@@ -31,7 +31,7 @@ public:
 	/**
 	 * @brief Adds the draw call to the renderer.
 	 */
-	void add_draw_call() override;
+	void add_draw_call() override {}
 
 	/**
 	 * @brief The draw call function.
@@ -82,7 +82,4 @@ private:
 	float height_ = 0.0f;
 	/// The collider radius.
 	float collider_radius_ = 0.0f;
-
-	/// The flashlight. TO BE REMOVED
-	SpotLight flashlight_;
 };

@@ -12,7 +12,9 @@ NPC::NPC(const std::string& model_name, const std::string& texture_name,
 NPC::~NPC() { delete m_NPC_FSM; }
 
 void NPC::init() {}
+
 void NPC::update(double delta_time) {}
+
 void NPC::fixed_update(double delta_time) {
 	if (!EngineTime::is_paused()) {
 		m_AI_time_elapsed += delta_time;
@@ -22,15 +24,17 @@ void NPC::fixed_update(double delta_time) {
 			position = rb.getPosition();
 			position.y = GenericFunctions::getHeight(position.x, position.z);
 			rb.set_position(glm::vec3(position.x, position.y + 1, position.z));
-			m_AI_time_elapsed = 0;
+			m_AI_time_elapsed = 0.0f;
 		}
 	}
 }
+
 void NPC::add_draw_call() {
 	DrawCall draw_call = [=](std::shared_ptr<Shader> shader) { draw(shader); };
 
 	ReflexEngine::get_instance().renderer_.add_draw_call(draw_call);
 }
+
 void NPC::draw(std::shared_ptr<Shader> shader) {
 	auto default_shader = ReflexEngine::get_instance().renderer_.get_shader();
 

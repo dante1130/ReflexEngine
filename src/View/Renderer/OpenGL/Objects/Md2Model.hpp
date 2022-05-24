@@ -13,32 +13,30 @@ public:
 	/**
 	 * @brief Loads in an md2 model file.
 	 *
-	 * @param filename
-	 * @return true
-	 * @return false
+	 * @param filename The filename of the model.
+	 * @return bool
 	 */
 	bool load_md2(const std::string& filename);
 
 	/**
 	 * @brief Loads in a texture for the md2 model.
 	 *
-	 * @param filename
-	 * @return true
-	 * @return false
+	 * @param filename The filename of the texture.
+	 * @return bool
 	 */
 	bool load_texture(const std::string& filename);
 
 	/**
 	 * @brief Animate the md2 model.
 	 *
-	 * @param delta_time
+	 * @param delta_time The time since the last frame.
 	 */
 	void animate(float delta_time);
 
 	/**
 	 * @brief Set the animation type of the md2 model.
 	 *
-	 * @param animation_type
+	 * @param animation_type The animation type.
 	 */
 	void set_animation(md2::animation_type animation_type);
 
@@ -47,30 +45,30 @@ public:
 	/**
 	 * @brief Render the md2 model frame by frame.
 	 *
-	 * @param delta_time
+	 * @param delta_time The time since the last frame.
 	 */
 	void render_animated(float delta_time);
 
 	/**
 	 * @brief Render the md2 model with interpolated frames.
 	 *
-	 * @param delta_time
+	 * @param delta_time The time since the last frame.
 	 */
 	void render_animated_interpolated(float delta_time);
 
 	/**
 	 * @brief Render a single frame given the frame number.
 	 *
-	 * @param frame_num
+	 * @param frame_num The frame number.
 	 */
 	void render_frame(int frame_num);
 
 	/**
 	 * @brief Render a interpolated frame between 2 frames.
 	 *
-	 * @param frame_a
-	 * @param frame_b
-	 * @param interpolation
+	 * @param frame_a The first frame number.
+	 * @param frame_b The second frame number.
+	 * @param interpolation The interpolation value.
 	 */
 	void render_interpolated_frame(int frame_a, int frame_b,
 	                               float interpolation);
@@ -84,16 +82,16 @@ private:
 	/**
 	 * @brief Loads a frame to a mesh given a frame number.
 	 *
-	 * @param frame_num
+	 * @param frame_num The frame number.
 	 */
 	void load_frame_mesh(int frame_num);
 
 	/**
 	 * @brief Loads an interpolated frame to a mesh given 2 frame numbers.
 	 *
-	 * @param frame_a
-	 * @param frame_b
-	 * @param interpolation
+	 * @param frame_a The first frame number.
+	 * @param frame_b The second frame number.
+	 * @param interpolation The interpolation value.
 	 */
 	void load_interpolated_frame_mesh(int frame_a, int frame_b,
 	                                  float interpolation);

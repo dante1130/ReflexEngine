@@ -160,12 +160,6 @@ void OpenGL::add_spot_light(const SpotLightData& light_data) {
 	}
 }
 
-void OpenGL::add_spot_light(const SpotLight& light) {
-	if (spot_lights_.size() < MAX_SPOT_LIGHTS) {
-		spot_lights_.emplace_back(light);
-	}
-}
-
 void OpenGL::add_draw_call(const DrawCall& draw_call) {
-	draw_calls_.push_back(draw_call);
+	draw_calls_.emplace_back(draw_call);
 }

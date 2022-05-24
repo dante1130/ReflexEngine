@@ -23,7 +23,7 @@ void ReflexEngine::run() {
 	                        -90.0f, 0.0f, 5.0f, 0.2f);
 
 	engine.renderer_.init();
-	GuiManager::init(engine.window_.get_window(), "#version 410");
+	gui::init(engine.window_.get_window(), "#version 410");
 
 	engine.scenes_.emplace(std::make_shared<TestScene>());
 	engine.scenes_.top()->init();
@@ -40,7 +40,7 @@ void ReflexEngine::run() {
 		glfwPollEvents();
 		input_manager.read_keys(engine.window_.get_window());
 
-		GuiManager::mainLoopStart();
+		gui::mainLoopStart();
 
 		if (!GenericFunctions::getNetworkMenuActive()) {
 			engine.scenes_.top()->key_controls(EngineTime::get_delta_time());
@@ -70,7 +70,7 @@ void ReflexEngine::run() {
 			engine.renderer_.draw();
 		}
 
-		GuiManager::mainLoopEnd();
+		gui::mainLoopEnd();
 
 		engine.window_.swap_buffers();
 	}
@@ -81,7 +81,7 @@ void ReflexEngine::run() {
 	entityMgr.killEntities();
 
 	Physics::destroyWorld();
-	GuiManager::shutdown();
+	gui::shutdown();
 }
 
 ReflexEngine& ReflexEngine::get_instance() {

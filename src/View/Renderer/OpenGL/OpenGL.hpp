@@ -74,8 +74,6 @@ public:
 	 */
 	void add_spot_light(const SpotLightData& light_data);
 
-	void add_spot_light(const SpotLight& light);
-
 	/**
 	 * @brief Adds a draw call to the renderer.
 	 *

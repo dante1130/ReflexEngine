@@ -22,11 +22,11 @@ void TestScene::init() {
 	lua.script_file("scripts/_Sounds.lua");
 }
 
-void TestScene::add_game_object_during_run(std::string luaScript) {
+void TestScene::add_game_object_during_run(const std::string& luaScript) {
 	to_add_.push_back(luaScript);
 }
 
-void TestScene::addGameObject(std::string luaScript) {
+void TestScene::addGameObject(const std::string& luaScript) {
 	if (glfwGetTime() > 0.5) {
 		add_game_object_during_run(luaScript);
 	} else {

@@ -23,7 +23,7 @@ public:
 	 * @pre	Nothing
 	 * @post	Object adde
 	 */
-	virtual void addGameObject(std::string luaScript) = 0;
+	virtual void addGameObject(const std::string& luaScript) = 0;
 
 	/**
 	 * @brief The function to specify controls for the keyboard.
