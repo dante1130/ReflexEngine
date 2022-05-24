@@ -12,7 +12,7 @@ public:
 	/**
 	 * @brief Construct a new Directional Light Object object
 	 *
-	 * @param light_data
+	 * @param light_data The light data.
 	 */
 	SpotLightObject(const SpotLightData& light_data);
 
@@ -24,16 +24,16 @@ public:
 	/**
 	 * @brief Updates the game object with delta time.
 	 *
-	 * @param delta_time
+	 * @param delta_time The time since the last frame.
 	 */
-	void update(float delta_time) override {}
+	void update(double delta_time) override {}
 
 	/**
 	 * @brief Updates the game object with fixed delta time.
 	 *
-	 * @param delta_time
+	 * @param delta_time The time since the last fixed tick.
 	 */
-	void fixed_update(float delta_time) override {}
+	void fixed_update(double delta_time) override {}
 
 	/**
 	 * @brief Adds a draw call to the renderer.
@@ -43,7 +43,7 @@ public:
 	/**
 	 * @brief The draw call.
 	 *
-	 * @param shader
+	 * @param shader The shader to use.
 	 */
 	void draw(std::shared_ptr<Shader> shader) override {}
 

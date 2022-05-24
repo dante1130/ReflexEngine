@@ -11,15 +11,15 @@
 
 /**
  * @class Item
- * @brief An item in the scene. (JUST FOR TESTING NOW)
+ * @brief An item in the scene.
  */
 class Item : public GameObject {
 public:
 	/**
 	 * @brief Construct a new Item object with a model name and a texture name.
 	 *
-	 * @param model_name
-	 * @param texture_name
+	 * @param model_name The name of the model.
+	 * @param texture_name The name of the texture.
 	 */
 	Item(const std::string& model_name, const std::string& texture_name);
 
@@ -31,16 +31,16 @@ public:
 	/**
 	 * @brief Updates the item with delta time.
 	 *
-	 * @param delta_time
+	 * @param delta_time The time since the last frame.
 	 */
-	void update(float delta_time) override {}
+	void update(double delta_time) override {}
 
 	/**
 	 * @brief Updates the body object with fixed delta time.
 	 *
-	 * @param delta_time
+	 * @param delta_time The time since the last fixed tick.
 	 */
-	void fixed_update(float delta_time) override {}
+	void fixed_update(double delta_time) override {}
 
 	/**
 	 * @brief Adds the draw call to the renderer.

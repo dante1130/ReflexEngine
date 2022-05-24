@@ -147,14 +147,14 @@ public:
 	 * @pre		Rigid body exists
 	 * @post	Rigid body updated
 	 */
-	void update(float delta_time) override;
+	void update(double delta_time) override;
 
 	/**
 	 * @brief Updates the body object with fixed delta time.
 	 *
 	 * @param delta_time
 	 */
-	void fixed_update(float delta_time);
+	void fixed_update(double delta_time) override;
 
 	/**
 	 * @brief	Gets the position vector

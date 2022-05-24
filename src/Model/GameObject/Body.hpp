@@ -13,7 +13,7 @@ public:
 	 * @pre		Must be creator body object variant
 	 * @post	Body object created
 	 */
-	void init();
+	void init() override;
 
 	/**
 	 * @brief	Sets if the object is a creator (true) or destructor (false). A
@@ -33,14 +33,14 @@ public:
 	 * @pre		Object initialised
 	 * @post	Object updated
 	 */
-	void update(float delta_time);
+	void update(double delta_time) override;
 
 	/**
 	 * @brief Updates the body object with fixed delta time.
 	 *
 	 * @param delta_time
 	 */
-	void fixed_update(float delta_time);
+	void fixed_update(double delta_time) override;
 
 	/**
 	 * @brief	NOT CURRENTLY USED
@@ -48,7 +48,7 @@ public:
 	 * @pre		Nothing
 	 * @post	Nothing
 	 */
-	void add_draw_call() {}
+	void add_draw_call() override {}
 
 	/**
 	 * @brief	NOT CURRENTLY USED
@@ -57,7 +57,7 @@ public:
 	 * @pre		Nothing
 	 * @post	Nothing
 	 */
-	void draw(std::shared_ptr<Shader> shader) {}
+	void draw(std::shared_ptr<Shader> shader) override {}
 
 	/**
 	 * @brief	Adds all possible physic debugger options

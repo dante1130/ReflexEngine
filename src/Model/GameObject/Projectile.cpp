@@ -2,7 +2,7 @@
 
 void Projectile::init() {}
 
-void Projectile::update(float delta_time) {
+void Projectile::update(double delta_time) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 
 	if (position.y - 0.1 <=
@@ -29,7 +29,7 @@ void Projectile::update(float delta_time) {
 	damage_ = lua["damage"];
 }
 
-void Projectile::fixed_update(float delta_time) {
+void Projectile::fixed_update(double delta_time) {
 	position = rb.getPosition();
 	rotation = rb.getRotation();
 	angle = rb.getAngle();
@@ -91,7 +91,9 @@ void Projectile::set_time_alive_left(float time) { time_alive_left_ = time; }
 
 void Projectile::set_damage(float damage) { damage_ = damage; }
 
-void Projectile::set_logic_script(std::string script) { lua_script_ = script; }
+void Projectile::set_logic_script(const std::string& script) {
+	lua_script_ = script;
+}
 
 void Projectile::set_floor_contact(bool val) { floor_contact_ = val; }
 

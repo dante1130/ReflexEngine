@@ -22,12 +22,12 @@ void TestScene::init() {
 	lua.script_file("scripts/_Sounds.lua");
 }
 
-void TestScene::add_game_object_during_run(std::string luaScript) {
+void TestScene::add_game_object_during_run(const std::string& luaScript) {
 	to_add_.push_back(luaScript);
 }
 
-void TestScene::addGameObject(std::string luaScript) {
-	if (glfwGetTime() > (double)0.5) {
+void TestScene::addGameObject(const std::string& luaScript) {
+	if (glfwGetTime() > 0.5) {
 		add_game_object_during_run(luaScript);
 	} else {
 		std::cout << luaScript << std::endl;
@@ -35,7 +35,7 @@ void TestScene::addGameObject(std::string luaScript) {
 	}
 }
 
-void TestScene::key_controls(float delta_time) {
+void TestScene::key_controls(double delta_time) {
 	auto& camera = ReflexEngine::get_instance().camera_;
 	auto& input_manager = InputManager::get_instance();
 
@@ -84,7 +84,7 @@ void TestScene::key_controls(float delta_time) {
 	}
 }
 
-void TestScene::mouse_controls(float xpos, float ypos) {
+void TestScene::mouse_controls(double xpos, double ypos) {
 	auto& camera = ReflexEngine::get_instance().camera_;
 
 	camera.mouse_move(xpos, ypos);
@@ -96,7 +96,7 @@ void TestScene::add_draw_call() {
 	}
 }
 
-void TestScene::update(float delta_time) {
+void TestScene::update(double delta_time) {
 	garbage_collection();
 	add_new_game_objects();
 
@@ -110,7 +110,7 @@ void TestScene::update(float delta_time) {
 	messageMgr.dispatchDelayedMessages();
 }
 
-void TestScene::fixed_update(float delta_time) {
+void TestScene::fixed_update(double delta_time) {
 	for (auto& game_object : game_objects_) {
 		game_object->fixed_update(delta_time);
 	}
@@ -126,7 +126,7 @@ void TestScene::saveGameObjects() {
 }
 
 void TestScene::loadSavedGameObjects() {
-	for (int count = 1; count < game_objects_.size(); count++) {
+	for (size_t count = 1; count < game_objects_.size(); count++) {
 		game_objects_[count]->remove = true;
 	}
 	// game_objects_.clear();
@@ -139,22 +139,27 @@ void TestScene::loadSavedGameObjects() {
 }
 
 void TestScene::garbage_collection() {
-	int size = game_objects_.size();
-	for (int count = 0; count < size; count++) {
-		if (game_objects_[count]->position.y < -5000 ||
-		    game_objects_[count]->remove) {
+	constexpr int offset_y = -5000;
+
+	for (size_t count = 0; count < game_objects_.size(); ++count) {
+		// This checking for the y position should be in lua script.
+		const bool is_should_remove =
+		    game_objects_[count]->position.y < offset_y ||
+		    game_objects_[count]->remove;
+
+		if (is_should_remove) {
 			game_objects_.erase(game_objects_.begin() + count);
-			size--;
-			count--;
+			--count;
 		}
 	}
 }
 
+// Remove this after it is not needed.
 static bool done = false;
 void TestScene::add_new_game_objects() {
-	for (int count = 0; count < to_add_.size(); count++) {
-		std::cout << "Adding during runtime = " << to_add_[count] << std::endl;
-		game_objects_.emplace_back(GameAssetFactory::create(to_add_[count]));
+	for (const auto& lua_file : to_add_) {
+		std::cout << "Adding during runtime = " << lua_file << std::endl;
+		game_objects_.emplace_back(GameAssetFactory::create(lua_file));
 	}
 	to_add_.clear();
 

@@ -1,5 +1,7 @@
 #include "TextureManager.hpp"
 
+#include "Controller/LuaManager.hpp"
+
 void TextureManager::lua_access() {
 	sol::state& lua = LuaManager::get_instance().get_state();
 

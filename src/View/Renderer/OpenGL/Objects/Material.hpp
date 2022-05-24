@@ -18,22 +18,21 @@ public:
 	/**
 	 * @brief Parameterized constructor.
 	 *
-	 * @param shine
-	 * @param sIntensity
+	 * @param shine The shininess of the material.
+	 * @param sIntensity The intensity of the specular lighting.
 	 */
 	Material(GLfloat shine, GLfloat sIntensity);
 
 	/**
 	 * @brief Enable the material by passing the uniforms to the shader.
 	 *
-	 * @param shininessLoc
-	 * @param specularIntensityLoc
+	 * @param shininessLoc The location of the shininess uniform.
+	 * @param specularIntensityLoc The location of the specular intensity
 	 */
 	void UseMaterial(GLuint shininessLoc, GLuint specularIntensityLoc) const;
 
 	/**
 	 * @brief Returns the specular intensity
-	 * @param No param
 	 * @return	float	- specular intensity
 	 *
 	 * @pre	Object exists
@@ -43,7 +42,6 @@ public:
 
 	/**
 	 * @brief Returns the shininess intensity
-	 * @param No param
 	 * @return	float	- shininess intensity
 	 *
 	 * @pre	Object exists

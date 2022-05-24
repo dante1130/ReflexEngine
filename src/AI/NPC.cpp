@@ -12,8 +12,10 @@ NPC::NPC(const std::string& model_name, const std::string& texture_name,
 NPC::~NPC() { delete m_NPC_FSM; }
 
 void NPC::init() {}
-void NPC::update(float delta_time) {}
-void NPC::fixed_update(float delta_time) {
+
+void NPC::update(double delta_time) {}
+
+void NPC::fixed_update(double delta_time) {
 	if (!EngineTime::is_paused()) {
 		m_AI_time_elapsed += delta_time;
 		if (m_AI_time_elapsed > m_AI_update_delay) {
@@ -22,15 +24,17 @@ void NPC::fixed_update(float delta_time) {
 			position = rb.getPosition();
 			position.y = GenericFunctions::getHeight(position.x, position.z);
 			rb.set_position(glm::vec3(position.x, position.y + 1, position.z));
-			m_AI_time_elapsed = 0;
+			m_AI_time_elapsed = 0.0f;
 		}
 	}
 }
+
 void NPC::add_draw_call() {
 	DrawCall draw_call = [=](std::shared_ptr<Shader> shader) { draw(shader); };
 
 	ReflexEngine::get_instance().renderer_.add_draw_call(draw_call);
 }
+
 void NPC::draw(std::shared_ptr<Shader> shader) {
 	auto default_shader = ReflexEngine::get_instance().renderer_.get_shader();
 
@@ -92,12 +96,6 @@ void NPC::save_object() {
 	ObjectSaving::closeFile();
 }
 
-//
-//
-//
-//
-//
-
 bool NPC::handleMessage(const telegram& msg) {
 	return m_NPC_FSM->handleMessage(msg);
 }
@@ -132,8 +130,8 @@ void NPC::use_pathfinding(float x1, float z1, float x2, float z2) {
 	// }
 	remove_waypoints();
 	m_waypoints = gameWorld.pathFinding(x1, z1, x2, z2);
-	for (int count = 0; count < m_waypoints.size(); count++) {
-	}
+	// for (int count = 0; count < m_waypoints.size(); count++) {
+	// }
 }
 
 void NPC::new_state(std::string new_state) {
@@ -157,10 +155,6 @@ float NPC::get_move_speed() { return m_move_speed; }
 float NPC::get_pos_x() { return position.x; }
 float NPC::get_pos_y() { return position.y; }
 float NPC::get_pos_z() { return position.z; }
-
-//
-//
-//
 
 bool NPC::waypoint_follow(bool gen_new) {
 	if (m_waypoints.size() == 0 && gen_new) {

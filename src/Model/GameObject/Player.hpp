@@ -17,26 +17,26 @@ public:
 	/**
 	 * @brief Updates the game object.
 	 *
-	 * @param delta_time
+	 * @param delta_time The time since the last frame.
 	 */
-	void update(float delta_time) override;
+	void update(double delta_time) override;
 
 	/**
 	 * @brief Updates the body object with fixed delta time.
 	 *
-	 * @param delta_time
+	 * @param delta_time The time since the last fixed tick.
 	 */
-	void fixed_update(float delta_time) override;
+	void fixed_update(double delta_time) override;
 
 	/**
 	 * @brief Adds the draw call to the renderer.
 	 */
-	void add_draw_call() override;
+	void add_draw_call() override {}
 
 	/**
 	 * @brief The draw call function.
 	 *
-	 * @param shader
+	 * @param shader The shader to use.
 	 */
 	void draw(std::shared_ptr<Shader> shader) override {}
 
@@ -48,21 +48,21 @@ public:
 	/**
 	 * @brief Set the move speed.
 	 *
-	 * @param move_speed
+	 * @param move_speed The move speed.
 	 */
 	void set_move_speed(float move_speed);
 
 	/**
 	 * @brief Set the height.
 	 *
-	 * @param height
+	 * @param height The height.
 	 */
 	void set_height(float height);
 
 	/**
 	 * @brief Set the collider radius.
 	 *
-	 * @param radius
+	 * @param radius The collider radius.
 	 */
 	void set_collider_radius(float radius);
 
@@ -71,7 +71,7 @@ public:
 	 *
 	 * @param	script	- The lua script
 	 */
-	void set_lua_script(std::string script);
+	void set_lua_script(const std::string& script);
 
 private:
 	/// Player script
@@ -82,7 +82,4 @@ private:
 	float height_ = 0.0f;
 	/// The collider radius.
 	float collider_radius_ = 0.0f;
-
-	/// The flashlight.
-	SpotLight flashlight_;
 };

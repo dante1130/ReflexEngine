@@ -1,5 +1,4 @@
-#ifndef GUIMANAGER_H
-#define GUIMANAGER_H
+#pragma once
 
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
@@ -14,17 +13,20 @@ namespace gui {
  * @brief	Initialises gui
  *
  * @param	window			- The GLFW window
- * @param	openglVersion	- String of opengl version. I.e., OpenGL 4.6 uses
+ * @param	openglVersion	- String of opengl version. I.e., OpenGL 4.6
+ * uses
  * "#version 460", check imGUI documentation if unsure
  *
  * @pre		GLFW window & correct opengl version
  * @post	gui initialised
  */
-void init(GLFWwindow* window, std::string openglVersion);
+void init(GLFWwindow* window, const std::string& openglVersion);
+
+void lua_access();
 
 /**
- * @brief	Does per frame initialise for gui. Should be placed after glClear &
- * glClearColor in the main loop
+ * @brief	Does per frame initialise for gui. Should be placed after
+ * glClear & glClearColor in the main loop
  *
  * @pre		Init has been run for the window
  * @post	start gui frame
@@ -51,18 +53,18 @@ void shutdown();
 
 ////GUI WINDOW OPERATION////
 /**
- * @brief	Begins a window. Sandwich inside gui window methods between begin
- * and end.
+ * @brief	Begins a window. Sandwich inside gui window methods between
+ * begin and end.
  * @param	title	- The title of the window
  *
  * @pre		rui running
  * @post	window created
  */
-void begin(const std::string title);
+void begin(const std::string& title);
 
 /**
- * @brief	Ends the window. Sandwich inside gui window methods between begin
- * and end.
+ * @brief	Ends the window. Sandwich inside gui window methods between
+ * begin and end.
  *
  * @pre		window created
  * @post	window ended
@@ -101,22 +103,22 @@ void setWindowSize(int xSize, int ySize, int constraint);
  * @pre		window created
  * @post	module added
  */
-void text(const std::string text);
+void text(const std::string& text);
 
 /**
- * @brief	A checkbox which changes a boolean variable between true & false.
- * Not lua ready
+ * @brief	A checkbox which changes a boolean variable between true &
+ * false. Not lua ready
  * @param	name	- The name of the value you are changing
  * @param	*option	- The boolean which is being changed
  *
  * @pre		window created
  * @post	module added
  */
-void checkbox(const std::string name, bool* option);
+void checkbox(const std::string& name, bool* option);
 
 /**
- * @brief	A checkbox which changes a boolean variable between true & false.
- * Lua ready
+ * @brief	A checkbox which changes a boolean variable between true &
+ * false. Lua ready
  * @param	name	- The name of the value you are changing
  * @param	state	- current state of checkbox
  * @return	bool	- Current checkbox state
@@ -124,7 +126,7 @@ void checkbox(const std::string name, bool* option);
  * @pre		window created
  * @post	module added
  */
-bool luaCheckBox(const std::string name, bool state);
+bool luaCheckBox(const std::string& name, bool state);
 
 /**
  * @brief	A slider which changes a float variable between min & max
@@ -136,7 +138,7 @@ bool luaCheckBox(const std::string name, bool state);
  * @pre		window created
  * @post	module added
  */
-void sliderFloat(const std::string name, float* value, float min, float max);
+void sliderFloat(const std::string& name, float* value, float min, float max);
 
 /**
  * @brief	A slider which changes an integer variable between min & max
@@ -148,7 +150,7 @@ void sliderFloat(const std::string name, float* value, float min, float max);
  * @pre		window created
  * @post	module added
  */
-void sliderInt(const std::string name, int* value, int min, int max);
+void sliderInt(const std::string& name, int* value, int min, int max);
 
 /**
  * @brief	A slider which changes an angle variable between min & max
@@ -160,7 +162,7 @@ void sliderInt(const std::string name, int* value, int min, int max);
  * @pre		window created
  * @post	module added
  */
-void sliderAngle(const std::string name, float* angle, float min, float max);
+void sliderAngle(const std::string& name, float* angle, float min, float max);
 
 /**
  * @brief	Can change values independently or use a colour picker
@@ -170,7 +172,7 @@ void sliderAngle(const std::string name, float* angle, float min, float max);
  * @pre		window created
  * @post	module added
  */
-void colourEdit3(const std::string name, float colour[3]);
+void colourEdit3(const std::string& name, float colour[3]);
 
 /**
  * @brief	Can change values independently or use a colour picker
@@ -180,7 +182,7 @@ void colourEdit3(const std::string name, float colour[3]);
  * @pre		window created
  * @post	module added
  */
-void colourEdit4(const std::string name, float colour[4]);
+void colourEdit4(const std::string& name, float colour[4]);
 
 /**
  * @brief Creates an image using a texture name.
@@ -208,18 +210,18 @@ void image(uint32_t texture_id, int width, int height);
  * @pre		window created
  * @post	module added
  */
-bool button(const std::string name, int xSize, int ySize);
+bool button(const std::string& name, int xSize, int ySize);
 
 /**
- * @brief	User can enter text into box and submit it with enter. Lua script
- * ready
+ * @brief	User can enter text into box and submit it with enter. Lua
+ * script ready
  * @param	name		- The name of the input text
  * @return	std::stirng	- String of the current buffer
  *
  * @pre		window created
  * @post	module added
  */
-std::string luaInputText(const std::string name);
+std::string luaInputText(const std::string& name);
 
 /**
  * @brief	User can enter text into box and submit it with enter. Not lua
@@ -232,7 +234,7 @@ std::string luaInputText(const std::string name);
  * @pre		window created
  * @post	module added
  */
-bool inputText(const std::string name, char* buffer, int size);
+bool inputText(const std::string& name, char* buffer, int size);
 
 /**
  * @brief	Creates a collapsing header (essentially a checkbox)
@@ -242,7 +244,7 @@ bool inputText(const std::string name, char* buffer, int size);
  * @pre		window created
  * @post	module added
  */
-bool collapsingHeader(const std::string name);
+bool collapsingHeader(const std::string& name);
 
 /**
  * @brief	Creates a plot line
@@ -253,7 +255,7 @@ bool collapsingHeader(const std::string name);
  * @pre		window created
  * @post	module added
  */
-void plotLines(const std::string name, const float* values, int numOfEntries);
+void plotLines(const std::string& name, const float* values, int numOfEntries);
 
 /**
  * @brief	Creates a plot line
@@ -266,7 +268,7 @@ void plotLines(const std::string name, const float* values, int numOfEntries);
  * @pre		window created
  * @post	module added
  */
-void plotLines(const std::string name, const float* values, int numOfEntries,
+void plotLines(const std::string& name, const float* values, int numOfEntries,
                float xWindowSize, float yWindowSize);
 
 /**
@@ -282,7 +284,7 @@ void plotLines(const std::string name, const float* values, int numOfEntries,
  * @pre		window created
  * @post	module added
  */
-void plotLines(const std::string name, const float* values, int numOfEntries,
+void plotLines(const std::string& name, const float* values, int numOfEntries,
                float minVal, float maxVal, float xWindowSize,
                float yWindowSize);
 
@@ -314,24 +316,25 @@ enum {
 	SET_WINDOW_CONSTRAINTS_ALWAYS = 1,
 
 	/// <summary>
-	/// Window constraints enforced on program execution. I.e., window size &
+	/// Window constraints enforced on program execution. I.e., window size
+	/// &
 	/// pos
 	/// </summary>
 	SET_WINDOW_CONSTRAINTS_ON_EXECUTION = 2,
 
 	/// <summary>
-	/// Window constraints enforced on first ever launch. I.e., window size &
+	/// Window constraints enforced on first ever launch. I.e., window size
+	/// &
 	/// pos
 	/// </summary>
 	SET_WINDOW_CONSTRAINT_ON_FIRST_USE_EVER = 4,
 
 	/// <summary>
-	/// Window constraints enforced when window appears. I.e., window size & pos
+	/// Window constraints enforced when window appears. I.e., window size &
+	/// pos
 	/// </summary>
 	SET_WINDOW_CONSTRAINTS_WHEN_ACTIVATED = 8,
 
 };
 
-}  // namespace gui
-
-#endif
+};  // namespace gui

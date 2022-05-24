@@ -24,11 +24,10 @@ public:
 	/**
 	 * @brief Load a material into the material manager.
 	 *
-	 * @param material_name
-	 * @param shine
-	 * @param spec_intensity
-	 * @return true
-	 * @return false
+	 * @param material_name The name given to the material.
+	 * @param shine The shininess of the material.
+	 * @param spec_intensity The specular intensity of the material.
+	 * @return bool
 	 */
 	bool load_material(const std::string& material_name, float shine,
 	                   float spec_intensity);

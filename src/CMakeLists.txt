@@ -54,7 +54,6 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/Pathfinding/AStar.cpp
 	Controller/Pathfinding/AStarInterface.cpp
 	Controller/Terrain/Terrain.cpp
-	Controller/Terrain/BruteForceTerrain.cpp
 	Controller/Terrain/BTT.cpp
 	Controller/Terrain/BttController.cpp
 	Controller/Terrain/TexturedTerrain.cpp
@@ -62,7 +61,6 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/LuaManager.cpp
 	Controller/Physics/Physics.cpp
 	Controller/Physics/BodyRigidPhysics.cpp
-	Controller/GuiLuaAccess.cpp
 	Controller/GenericFunctions.cpp
 	Controller/multiTextureCreator.cpp
 	

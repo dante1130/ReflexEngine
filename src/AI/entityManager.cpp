@@ -7,7 +7,7 @@ NPC* entityManager::getEntityFromID(int id) const {
 	// entityMap::const_iterator ent = entityMap.find(id);
 	map<int, NPC*>::const_iterator ent = entityMap.find(id);
 	if (ent == entityMap.end()) {
-		return NULL;
+		return nullptr;
 	}
 	return ent->second;
 }

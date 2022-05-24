@@ -23,10 +23,9 @@ public:
 	/**
 	 * @brief Loads a md2 model into the md2 model manager.
 	 *
-	 * @param model_name
-	 * @param file_name
-	 * @return true
-	 * @return false
+	 * @param model_name The name given to the md2 model.
+	 * @param file_name The file name of the md2 model.
+	 * @return bool
 	 */
 	bool load_md2_model(const std::string& model_name,
 	                    const std::string& file_name);
@@ -34,10 +33,9 @@ public:
 	/**
 	 * @brief Loads a texture into a md2 model in the md2 model manager.
 	 *
-	 * @param model_name
-	 * @param file_name
-	 * @return true
-	 * @return false
+	 * @param model_name The name given to the md2 model.
+	 * @param file_name The file name of the texture.
+	 * @return bool
 	 */
 	bool load_texture(const std::string& model_name,
 	                  const std::string& file_name);
@@ -45,7 +43,7 @@ public:
 	/**
 	 * @brief Get the md2 model given the md2 model name.
 	 *
-	 * @param model_name
+	 * @param model_name The name given to the md2 model.
 	 * @return Md2Model&
 	 */
 	Md2Model& get_md2_model(const std::string& model_name);
@@ -53,7 +51,7 @@ public:
 	/**
 	 * @brief Get the md2 model given the md2 model name.
 	 *
-	 * @param model_name
+	 * @param model_name The name given to the md2 model.
 	 * @return const Model&
 	 */
 	const Md2Model& get_md2_model(const std::string& model_name) const;

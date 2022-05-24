@@ -13,7 +13,7 @@ public:
 	 * @pre		Nothing
 	 * @post	Script added to run
 	 */
-	ScriptableObject(std::string script);
+	ScriptableObject(const std::string& script);
 
 	/**
 	 * @brief	initialisation of game object. Not needed
@@ -21,7 +21,7 @@ public:
 	 * @pre		object exists
 	 * @post	Nothing
 	 */
-	void init(){};
+	void init() override {}
 
 	/**
 	 * @brief	Updates the object by running the lua script
@@ -30,14 +30,14 @@ public:
 	 * @pre		lua script stored
 	 * @post	Script run
 	 */
-	void update(float delta_time);
+	void update(double delta_time) override;
 
 	/**
 	 * @brief Updates the body object with fixed delta time.
 	 *
-	 * @param delta_time
+	 * @param delta_time The time since the last fixed tick.
 	 */
-	void fixed_update(float delta_time) {}
+	void fixed_update(double delta_time) override {}
 
 	/**
 	 * @brief	Adds a draw call. Not used
@@ -45,7 +45,7 @@ public:
 	 * @pre		object exists
 	 * @post	Nothing
 	 */
-	void add_draw_call() {}
+	void add_draw_call() override {}
 
 	/**
 	 * @brief	Draws the object. Not used
@@ -54,7 +54,7 @@ public:
 	 * @pre		Object exists
 	 * @post	Nothing
 	 */
-	void draw(std::shared_ptr<Shader> shader) {}
+	void draw(std::shared_ptr<Shader> shader) override {}
 
 	/**
 	 * @brief	Saves the object to lau file

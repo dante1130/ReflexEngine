@@ -28,15 +28,15 @@ public:
 	/**
 	 * @brief Construct a new Skybox object
 	 *
-	 * @param faceLocations
+	 * @param faceLocations The locations of the faces of the skybox.
 	 */
 	Skybox(const std::vector<std::string>& faceLocations);
 
 	/**
 	 * @brief Renders the skybox given a projection and view matrix.
 	 *
-	 * @param projectionMatrix
-	 * @param viewMatrix
+	 * @param projectionMatrix The projection matrix.
+	 * @param viewMatrix The view matrix.
 	 */
 	void DrawSkybox(glm::mat4 projectionMatrix, glm::mat4 viewMatrix);
 

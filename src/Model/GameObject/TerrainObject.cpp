@@ -5,7 +5,7 @@ TerrainObject::TerrainObject() { position = glm::vec3(0.0f); }
 
 void TerrainObject::init() { bttControl.set_scale(glm::vec3(1, 0.1, 1)); }
 
-void TerrainObject::fixed_update(float delta_time) {
+void TerrainObject::fixed_update(double delta_time) {
 	if (glfwGetTime() - lastUpdate > 0.2) {
 		bttControl.Update(ReflexEngine::get_instance().camera_.get_position());
 		lastUpdate = glfwGetTime();
@@ -21,7 +21,7 @@ void TerrainObject::draw(std::shared_ptr<Shader> shader) {
 	bttControl.render(shader);
 }
 
-void TerrainObject::add_storage_text(std::string text, int n) {
+void TerrainObject::add_storage_text(const std::string& text, int n) {
 	m_text[n] = text;
 }
 
@@ -48,7 +48,7 @@ void TerrainObject::save_object() {
 	*/
 }
 
-void TerrainObject::add_texture(std::string fileName) {
+void TerrainObject::add_texture(const std::string& fileName) {
 	mtc.set_texture(fileName);
 }
 
@@ -60,7 +60,7 @@ void TerrainObject::add_height_map(uint8_t* heightmap, int xSize, int ySize,
 	bttControl.set_height_map(mtc.get_height_map());
 }
 
-void TerrainObject::add_detail_map(std::string fileName) {
+void TerrainObject::add_detail_map(const std::string& fileName) {
 	bttControl.load_detailmap(fileName.c_str());
 }
 
