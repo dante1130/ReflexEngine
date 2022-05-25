@@ -8,11 +8,10 @@
 #include "View/Renderer/OpenGL/Objects/Texture.hpp"
 #include "View/Renderer/OpenGL/Objects/Material.hpp"
 #include "Controller/ResourceManager/ObjectSaving.hpp"
-#include <NetworkManager.hpp>
 
 /**
  * @class Item
- * @brief An item in the scene that has networking functionality
+ * @brief An item in the scene that is built for networking functionality (simply put, doesn't save)
  */
 class NetworkedItem : public GameObject {
 public:
@@ -41,14 +40,12 @@ public:
 	 *
 	 * @param delta_time
 	 */
-	void fixed_update(float delta_time) override {}
+	void fixed_update(float delta_time) override
 
 	/**
 	 * @brief Adds the draw call to the renderer.
 	 */
 	void add_draw_call() override;
-
-	void initNetworkManager();
 
 	/**
 	 * @brief The draw call for the item.
@@ -72,6 +69,4 @@ private:
 	std::string model_name_;
 	/// The material of the item.
 	std::string material_name_;
-	/// The paired networkManager of the other connected client
-	networkManager client;
 };

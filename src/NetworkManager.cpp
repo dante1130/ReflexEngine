@@ -296,3 +296,31 @@ unsigned char networkManager::GetPacketIdentifier(RakNet::Packet* p) {
 	} else
 		return (unsigned char)p->data[0];
 }
+
+void networkManager::ObjectPositionSend(glm::vec3 position) {
+	RakNet::BitStream bsOut;
+	bsOut.Write((RakNet::MessageID)ID_GAME_MESSAGE_2);
+	bsOut.Write(position);
+	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0,
+	           RakNet::UNASSIGNED_SYSTEM_ADDRESS, true);
+}
+
+glm::vec3 networkManager::ObjectPositionReceive() {
+	packet = peer->Receive();
+	if (packet) {
+		switch (GetPacketIdentifier(packet)) { 
+			case ID_GAME_MESSAGE_2:
+				//RakNet::RakString rs;
+				glm::vec3 tempVec3;
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				bsIn.Read(tempVec3);
+				printf("%f %f %f NM\n", tempVec3.x, tempVec3.y, tempVec3.z);
+				bsIn.Reset();
+				return (tempVec3);
+		}
+	}
+	peer->DeallocatePacket(packet);
+	//printf("Did not read vector correctly\n");
+	return (glm::vec3(0, 0, 0));
+	}

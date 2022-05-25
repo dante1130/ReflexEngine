@@ -12,6 +12,7 @@ static int last_load_time_ = -100;
 
 static bool helpMenu = false;
 static bool networkMenu = false;
+static bool networkMenuPvP = false;
 static bool credits = false;
 
 static bool createNetwork = false;
@@ -22,6 +23,8 @@ static std::string message;
 static std::string currentIPAddress;
 static std::string incomingMessage;
 static std::string username = " ";
+static glm::vec3 opponentPos = glm::vec3(50,100,50);
+static bool receivingData = false;
 
 static float lastShot = 0;
 static float shot_delay = 0;
@@ -68,6 +71,7 @@ void GenericFunctions::lua_access() {
 	lua.set_function("camera_look_y", luaCamLookY);
 	lua.set_function("camera_look_z", luaCamLookZ);
 
+	// For general network functionality
 	lua.set_function("create_network_manager", createNetworkManager);
 	lua.set_function("exit_network_menu", setNetworkMenuActive);
 	lua.set_function("get_network_menu", getNetworkMenuActive);
@@ -77,6 +81,8 @@ void GenericFunctions::lua_access() {
 	lua.set_function("network_connection_status", networkConnectionStatus);
 	lua.set_function("network_retain_IP", networkRetainIP);
 	lua.set_function("network_return_IP", networkReturnRetainedIP);
+
+	// For network chat functionality
 	lua.set_function("network_retain_message", networkRetainMessage);
 	lua.set_function("network_return_message", networkReturnRetainedMessage);
 	lua.set_function("network_send_message", networkSendMessage);
@@ -86,6 +92,14 @@ void GenericFunctions::lua_access() {
 	lua.set_function("network_retain_username", networkRetainUsername);
 	lua.set_function("network_return_username", networkReturnUsername);
 	lua.set_function("network_set_username", networkSetUsername);
+
+	// For network replication functionality
+	lua.set_function("exit_pvp_network_menu", setPvPNetworkMenuActive);
+	lua.set_function("get_pvp_network_menu", getPvPNetworkMenuActive);
+	lua.set_function("get_network_pos_x", getNetworkPosX);
+	lua.set_function("get_network_pos_y", getNetworkPosY);
+	lua.set_function("get_network_pos_z", getNetworkPosZ);
+	lua.set_function("get_receiving_data", getReceivingData);
 
 	lua.set_function("set_last_shot", setLastShot);
 	lua.set_function("set_shot_delay", setShotDelay);
@@ -214,11 +228,11 @@ void GenericFunctions::createNetworkManager(bool create) {
 }
 
 void GenericFunctions::setNetworkMenuActive(bool active) {
-	networkMenu = active;
-	if (networkMenu) {
+	networkMenuPvP = active;
+	if (networkMenuPvP) {
 		glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
 		                 GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-	} else if (!networkMenu && !EngineTime::is_paused()) {
+	} else if (!networkMenuPvP && !EngineTime::is_paused()) {
 		glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
 		                 GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	}
@@ -251,13 +265,16 @@ void GenericFunctions::networkEnd() {
 
 void GenericFunctions::networkUpdate() {
 	
-	if (createNetwork && networkConnected){ //&& network.ReceiveMessage() != " ") {
-		//printf("%s\n", network.ReceiveMessage().c_str());  // Currently prints to console, but
-		                                   // will eventually print to text chat
+	if (createNetwork && networkConnected){ 
 		incomingMessage = network.ReceiveMessage();
+		opponentPos = network.ObjectPositionReceive();
+		network.ObjectPositionSend(glm::vec3(luaCamPosX(), luaCamPosX(), luaCamPosZ()));
+		receivingData = true;
 		if (incomingMessage != " ") {
 			//printf("%s Update\n", incomingMessage);
 		}
+	} else {
+		receivingData = false;
 	}
 	//network.HasReceivedChatMessage();
 	
@@ -336,3 +353,26 @@ std::string GenericFunctions::networkReturnUsername() {
 std::string GenericFunctions::networkReturnRetainedIP() {
 	return (currentIPAddress);
 }
+
+void GenericFunctions::setPvPNetworkMenuActive(bool active) {
+	networkMenuPvP = active;
+	if (networkMenuPvP) {
+		glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
+		                 GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	} else if (!networkMenuPvP && !EngineTime::is_paused()) {
+		glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
+		                 GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	}
+}
+
+bool GenericFunctions::getPvPNetworkMenuActive() { return networkMenuPvP; }
+
+float GenericFunctions::getNetworkPosX() { return opponentPos.x; }
+
+float GenericFunctions::getNetworkPosY() { return opponentPos.y; }
+
+float GenericFunctions::getNetworkPosZ() { return opponentPos.z; }
+
+bool GenericFunctions::getReceivingData() { 
+	printf("doing get receiving data now\n");
+	return receivingData; }

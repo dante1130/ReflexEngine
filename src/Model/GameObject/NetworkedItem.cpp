@@ -14,17 +14,15 @@ void NetworkedItem::add_draw_call() {
 }
 //
 
-void NetworkedItem::initNetworkManager() {
+void NetworkedItem::fixed_update() {
 
 }
 
-void
-    NetworkedItem::draw(std::shared_ptr<Shader> shader) {
+void NetworkedItem::draw(std::shared_ptr<Shader> shader) {
 	auto default_shader = ReflexEngine::get_instance().renderer_.get_shader();
 
 	glm::mat4 model(1.0f);
-	model =
-	    glm::translate(model, glm::vec3(position.x, position.y, position.z));
+	model = glm::translate(model, glm::vec3(position.x, position.y, position.z));
 	model = glm::rotate(model, glm::radians(angle),
 	                    glm::vec3(rotation.x, rotation.y, rotation.z));
 	model = glm::scale(model, glm::vec3(scale.x, scale.y, scale.z));
@@ -42,5 +40,5 @@ void
 	mm.get_model(model_name_).RenderModel();
 }
 
-void Item::save_object() {
+void NetworkedItem::save_object() {
 }

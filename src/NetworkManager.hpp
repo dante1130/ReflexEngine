@@ -10,6 +10,7 @@
 #include <raknet/Source/Gets.h>
 #include <raknet/Source/RakSleep.h>
 #include <glm.hpp>
+#include <glm/ext.hpp>
 
 #define MAX_CLIENTS 6
 #define SERVER_PORT 60000
@@ -180,6 +181,8 @@ private:
 		/// <summary>
 		/// User defined Enumeration for use in message sending
 		/// </summary>
-		ID_GAME_MESSAGE_1 = ID_USER_PACKET_ENUM + 1
+		ID_GAME_MESSAGE_1 = ID_USER_PACKET_ENUM + 1,
+		
+		ID_GAME_MESSAGE_2 = ID_USER_PACKET_ENUM + 2
 	};
 };
