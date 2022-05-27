@@ -1,5 +1,4 @@
-#ifndef TELEGRAM_H
-#define TELEGRAM_H
+#pragma once
 //------------------------------------------------------------------------
 //
 //  Name:   telegram.h
@@ -105,5 +104,3 @@ template <class T>
 inline T DereferenceToType(void* p) {
 	return *(T*)(p);
 }
-
-#endif

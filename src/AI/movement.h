@@ -1,5 +1,4 @@
-#ifndef __MOVEMENT_H
-#define __MOVEMENT_H
+#pragma once
 
 #include <glm/glm.hpp>
 #include <iostream>
@@ -81,4 +80,3 @@ bool seeTarget(const glm::vec2& patroller, const glm::vec2& target,
                float coneRadius);
 
 }  // namespace ai_movement
-#endif

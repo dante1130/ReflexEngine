@@ -1,5 +1,4 @@
-#ifndef __SINGLETONS_H
-#define __SINGLETONS_H
+#pragma once
 
 #include "singleton.h"
 #include "entityManager.h"
@@ -19,5 +18,3 @@ typedef singleton<Counter> idManager;
 #define messageMgr messageMan::Instance()
 #define gameWorld theWorld::Instance()
 #define idMgr idManager::Instance()
-
-#endif

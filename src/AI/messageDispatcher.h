@@ -1,5 +1,4 @@
-#ifndef __MESSAGEDISPATCHER_H
-#define __MESSAGEDISPATCHER_H
+#pragma once
 
 #include <set>
 #include <string>
@@ -51,5 +50,3 @@ public:
 	 */
 	void dispatchDelayedMessages();
 };
-
-#endif

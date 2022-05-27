@@ -1,8 +1,7 @@
-#ifndef __STATEMACHINE_H
-#define __STATEMACHINE_H
+#pragma once
 
-#include <iostream>
 #include "telegram.h"
+//#include "sol/sol.h"
 using namespace std;
 
 template <class entity_type>
@@ -147,5 +146,3 @@ public:
 	 */
 	virtual ~stateMachine() {}
 };
-
-#endif

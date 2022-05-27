@@ -1,5 +1,12 @@
 #include "luaAccessScriptedFSM.hpp"
 
+#include "sol/sol.hpp"
+#include "AI/NPC.hpp"
+#include "AI/stateMachine.h"
+#include "AI/messageDispatcher.h"
+#include "AI/telegram.h"
+#include "Model/ModelData.hpp"
+
 void luaAccessScriptedFSM::registerAllAI() {
 	registerScriptedStateMachine();
 	registerGameObject();
@@ -76,6 +83,7 @@ void luaAccessScriptedFSM::registerPlayer() {
 }
 
 void luaAccessScriptedFSM::registerVector2D() {
+	/*
 	sol::state& lua = LuaManager::get_instance().get_state();
 
 	sol::usertype<glm::vec2> player_type =
@@ -83,6 +91,7 @@ void luaAccessScriptedFSM::registerVector2D() {
 
 	player_type["x"] = &glm::vec2::x;
 	player_type["y"] = &glm::vec2::y;
+	*/
 }
 
 void luaAccessScriptedFSM::registerMessage() {
