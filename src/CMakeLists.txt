@@ -71,6 +71,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	AI/world.cpp
 	AI/luaAccessScriptedFSM.cpp
 	AI/Counter.cpp
+	AI/vector2D.cpp
 
 	Game/Scene.hpp
 	Game/TestScene.cpp

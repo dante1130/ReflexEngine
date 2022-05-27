@@ -46,8 +46,10 @@ end
 
 
 state_global["execute"] = function(player)
-  print("in global")
-
+  --print("in global")
+  if(player.health < 0) then
+    player.dead = true
+  end
 
 end
 
@@ -81,32 +83,27 @@ end
 
 
 state_idle["execute"] = function(player)
-  print("In idle")
-  --player:moveNPC(camera_pos_x(), camera_pos_z(), 0)
-  --print("END")
-
-  local x = camera_pos_x()
-  local z = camera_pos_z()
-  player:set_target_position(x, z)
+  --print("In idle")
+  
+  local pos = vector2D.new()
+  pos:set(camera_pos_x(), camera_pos_z())
+  player:set_target_position(pos.x, pos.y)
 
   local playerX = player:getX()
   local playerZ = player:getZ()
 
-  local distance = vector2Length(x - playerX, z - playerZ)
-
-  if (distance < 5) then
+  local distance = vector2Length(pos.x - playerX, pos.y - playerZ)
+  if (player.dead) then
+    print("dead")
+  elseif (distance < 5) then
     player:moveNPC(camera_pos_x(), camera_pos_z(), 0.1)
   else
-    player:pathfindToPoint(playerX, playerZ, x, z)
-    player:followWaypoint(false)
-    --if(player:followWaypoint(false)) then
-    --  player:pathfindToPoint(playerX, playerZ, x, z)
-    --end
+    --player:pathfindToPoint(playerX, playerZ, pos.x, pos.y)
+    --player:followWaypoint(false)
+    if(player:followWaypoint(false)) then
+      player:pathfindToPoint(playerX, playerZ, pos.x, pos.y)
+    end
   end
-
-  --player:getFSM():setCurrentState("state_global")
-  --player:setCurrentState("state_global")
-
 end
 
 
@@ -117,7 +114,10 @@ state_idle["exit"] = function(player)
 end
 
 state_idle["onMessage"] = function(player, msg)
-
+  if (msg.msg == 2) then
+    print(msg.extraInfo)
+    player.health = player.health - msg.extraInfo
+  end
 
 
 end
@@ -132,14 +132,23 @@ state_patrol = {}
 
 state_patrol["enter"] = function(player)
 
-  player:setCurwayPointNo(0)
 
 
 end
 
 
 state_patrol["execute"] = function(player)
+  if(player:watchForEnemy(10)) then
+    local targetPos = vector2D.new()
+    targetPos:set(100, 100)
+    player:sendGroupMessage(0, player.faction, 25, player.id, 1, targetPos)
+    player:getFSM():changeState("state_chase")
 
+    print("Enemy spotted")
+
+  end
+
+--[[]
   player:waypointFollow()
   if (player:watchForEnemy()) then
     a = vector2D()
@@ -149,7 +158,7 @@ state_patrol["execute"] = function(player)
 
 
   end
-
+]]--
 end
 
 
@@ -160,10 +169,12 @@ state_patrol["exit"] = function(player)
 end
 
 state_patrol["onMessage"] = function(player, msg)
-  if (msg.msg == 1 and player:getPlayerID() == 1) then
+  if (msg.msg == 1) then
     print("msg recd")
-    player:setEnemyTarget(msg.extraInfo:getX(), msg.extraInfo:getY())
-    player:getFSM():changeState("state_chase")
+    print(msg.extraInfo.x)
+    print(msg.extraInfo.y)
+    --player:setEnemyTarget(msg.extraInfo:getX(), msg.extraInfo:getY())
+    --player:getFSM():changeState("state_chase")
     --  player:moveToEnemy()
   end
 
@@ -180,15 +191,17 @@ state_chase = {}
 state_chase["enter"] = function(player)
 
 
-
-
 end
 
 
 state_chase["execute"] = function(player)
+  print("In chase")
 
+  if(player:moveToEnemy(1)) then
+      print("changing to attack")
+      player:getFSM():changeState("state_attack")
+  end
 
-  player:moveToEnemy()
 
 end
 
@@ -200,6 +213,50 @@ state_chase["exit"] = function(player)
 end
 
 state_chase["onMessage"] = function(player, msg)
+
+
+
+end
+
+
+-------------------------------------------------------------------------------
+
+-- create the attack state
+
+-------------------------------------------------------------------------------
+state_attack = {}
+
+state_attack["enter"] = function(player)
+
+
+end
+
+state_attack["execute"] = function(player)
+  print("In attack")
+
+  local vec = vector2D.new()
+  vec:set(player:getX(), player:getZ())
+
+  dist = 2--vec:length()
+
+  if(dist > 2) then
+    player:getFSM():changeState("state_chase")
+  else
+    print("Attacking")
+    player:sendMessage(0, player.id, player.target_id, 2, player.power)
+  end
+
+
+end
+
+
+state_attack["exit"] = function(player)
+
+
+
+end
+
+state_attack["onMessage"] = function(player, msg)
 
 
 
