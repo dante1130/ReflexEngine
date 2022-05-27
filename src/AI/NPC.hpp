@@ -8,7 +8,6 @@
 #include <cmath>
 #include "Model/ModelData.hpp"
 #include "Controller/ResourceManager/ObjectSaving.hpp"
-#include "singletons.h"
 
 class NPC : public PhysicsObject {
 public:

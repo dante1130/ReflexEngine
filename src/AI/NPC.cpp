@@ -1,5 +1,7 @@
 #include "AI/NPC.hpp"
 
+#include "singletons.h"
+
 NPC::NPC(const std::string& model_name, const std::string& texture_name,
          bool is_animated, bool is_loop_)
     : m_animation(model_name, texture_name, is_animated, is_loop_) {

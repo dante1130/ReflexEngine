@@ -2,15 +2,14 @@
 
 #include <map>
 #include <string>
-#include <map>
+#include "NPC.hpp"
 
-class NPC;
 class entityManager {
 private:
 	/// to facilitate quick lookup the entities are stored in a std::map, in
 	/// which pointers to entities are cross referenced by their identifying
 	/// number
-	map<int, NPC*> entityMap;
+	std::map<int, NPC*> entityMap;
 
 public:
 	/**
