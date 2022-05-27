@@ -17,22 +17,14 @@ void TestScene::init() {
 	                                       // found in here
 
 	lua.script_file("scripts/_Materials.lua");
+	lua.script_file("scripts/_Sounds.lua");
 	lua.script_file("scripts/_MasterCreation.lua");
 	lua.script_file("scripts/AI/_MasterCreation.lua");
-	lua.script_file("scripts/_Sounds.lua");
-}
-
-void TestScene::add_game_object_during_run(const std::string& luaScript) {
-	to_add_.push_back(luaScript);
 }
 
 void TestScene::addGameObject(const std::string& luaScript) {
-	if (glfwGetTime() > 0.5) {
-		add_game_object_during_run(luaScript);
-	} else {
-		std::cout << luaScript << std::endl;
-		game_objects_.emplace_back(GameAssetFactory::create(luaScript));
-	}
+	std::cout << "Adding " << luaScript << std::endl;
+	game_objects_.emplace_back(GameAssetFactory::create(luaScript));
 }
 
 void TestScene::key_controls(double delta_time) {
@@ -98,7 +90,6 @@ void TestScene::add_draw_call() {
 
 void TestScene::update(double delta_time) {
 	garbage_collection();
-	add_new_game_objects();
 
 	for (auto& game_object : game_objects_) {
 		game_object->update(delta_time);
@@ -151,24 +142,5 @@ void TestScene::garbage_collection() {
 			game_objects_.erase(game_objects_.begin() + count);
 			--count;
 		}
-	}
-}
-
-// Remove this after it is not needed.
-static bool done = false;
-void TestScene::add_new_game_objects() {
-	for (const auto& lua_file : to_add_) {
-		std::cout << "Adding during runtime = " << lua_file << std::endl;
-		game_objects_.emplace_back(GameAssetFactory::create(lua_file));
-	}
-	to_add_.clear();
-
-	if (!done) {
-		// gameWorld.show_world();
-		std::cout << "\nokokok\nokokok\nokokok\nokokok\nRemove code in "
-		             "TestScene::add_new_game_"
-		             "objects\nokokok\nokokok\nokokok\nokokok\nokokok"
-		          << std::endl;
-		done = true;
 	}
 }
