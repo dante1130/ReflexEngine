@@ -7,6 +7,7 @@
 #include "AI/telegram.h"
 #include "Model/ModelData.hpp"
 #include "AI/vector2D.hpp"
+#include "AI/singletons.h"
 
 void luaAccessScriptedFSM::registerAllAI() {
 	registerScriptedStateMachine();
@@ -40,7 +41,16 @@ void luaAccessScriptedFSM::registerScriptedStateMachine() {
 	player_type["revertStateBack"] = &stateMachine<NPC>::revertToPreviousState;
 }
 
-void luaAccessScriptedFSM::registerGameObject() {}
+void luaAccessScriptedFSM::registerGameObject() {
+	sol::state& lua = LuaManager::get_instance().get_state();
+
+	sol::usertype<entityManager> player_type =
+	    lua.new_usertype<entityManager>("entityManager");
+
+	// player_type["getEntity"] = &entityManager::getEntityFromID;
+	player_type.set_function("getEntity", &entityManager::getEntityFromID,
+	                         entityMgr);
+}
 
 void luaAccessScriptedFSM::registerPlayer() {
 	sol::state& lua = LuaManager::get_instance().get_state();
@@ -84,6 +94,8 @@ void luaAccessScriptedFSM::registerPlayer() {
 
 	player_type["sendMessage"] = &NPC::send_message;
 	player_type["sendGroupMessage"] = &NPC::send_group_message;
+
+	player_type["stopMovement"] = &NPC::freezeNPC;
 }
 
 void luaAccessScriptedFSM::registerVector2D() {

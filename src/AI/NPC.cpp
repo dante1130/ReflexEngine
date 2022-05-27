@@ -126,13 +126,8 @@ void NPC::remove_waypoints() {
 	}
 }
 void NPC::use_pathfinding(float x1, float z1, float x2, float z2) {
-	// if (m_waypoints.size() != 0) {
-	//	return;
-	// }
 	remove_waypoints();
 	m_waypoints = gameWorld.pathFinding(x1, z1, x2, z2);
-	// for (int count = 0; count < m_waypoints.size(); count++) {
-	// }
 }
 
 void NPC::new_state(std::string new_state) {
@@ -144,8 +139,8 @@ stateMachine<NPC>* NPC::get_FSM() { return m_NPC_FSM; }
 void NPC::set_faction(int new_faction) { m_faction = new_faction; }
 int NPC::get_faction() { return m_faction; }
 
-void NPC::set_enemy_target(float x, float z) { m_target_pos = glm::vec2(x, z); }
-glm::vec2 NPC::get_enemy_target() { return m_target_pos; }
+void NPC::set_enemy_target(float x, float z) { m_target_pos.set(x, z); }
+vector2D NPC::get_enemy_target() { return m_target_pos; }
 
 void NPC::set_target_id(int new_target) { m_target_id = new_target; }
 int NPC::get_target_id() { return m_target_id; }
@@ -170,8 +165,8 @@ bool NPC::waypoint_follow(bool gen_new) {
 	}
 
 	if (move_NPC(m_waypoints.front().x, m_waypoints.front().y, 0)) {
-		std::cout << "removing: " << m_waypoints.front().x << " : "
-		          << m_waypoints.front().y << std::endl;
+		// std::cout << "removing: " << m_waypoints.front().x << " : "
+		//           << m_waypoints.front().y << std::endl;
 		m_waypoints.pop();
 		return true;
 	}
@@ -271,5 +266,7 @@ void NPC::send_group_message(double time, int faction, float range, int sender,
 		}
 	}
 }
+
+void NPC::freezeNPC() { rb.setLinearVelocity(glm::vec3(0)); }
 
 ModelData& NPC::get_animation() { return m_animation; }

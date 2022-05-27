@@ -79,6 +79,7 @@ void ReflexEngine::run() {
 		engine.scenes_.pop();
 	}
 	entityMgr.killEntities();
+	entityMgr.killManager();
 
 	Physics::destroyWorld();
 	gui::shutdown();

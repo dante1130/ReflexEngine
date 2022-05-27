@@ -3,4 +3,4 @@
 --end
 
 addGameObject("scripts/AI/Duck.lua")
---addGameObject("scripts/AI/DuckTwo.lua")
+addGameObject("scripts/AI/DuckTwo.lua")

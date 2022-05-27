@@ -41,6 +41,7 @@ void registerWorld();
  * @brief	registers Telegram to lua
  */
 void registerTelegram();
+
 }  // namespace luaAccessScriptedFSM
 
 namespace registerAnimation {

@@ -1,8 +1,7 @@
 #pragma once
 
 #include "telegram.h"
-//#include "sol/sol.h"
-using namespace std;
+#include "sol/sol.hpp"
 
 template <class entity_type>
 class stateMachine {

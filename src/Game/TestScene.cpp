@@ -154,21 +154,10 @@ void TestScene::garbage_collection() {
 	}
 }
 
-// Remove this after it is not needed.
-static bool done = false;
 void TestScene::add_new_game_objects() {
 	for (const auto& lua_file : to_add_) {
 		std::cout << "Adding during runtime = " << lua_file << std::endl;
 		game_objects_.emplace_back(GameAssetFactory::create(lua_file));
 	}
 	to_add_.clear();
-
-	if (!done) {
-		// gameWorld.show_world();
-		std::cout << "\nokokok\nokokok\nokokok\nokokok\nRemove code in "
-		             "TestScene::add_new_game_"
-		             "objects\nokokok\nokokok\nokokok\nokokok\nokokok"
-		          << std::endl;
-		done = true;
-	}
 }

@@ -8,6 +8,7 @@
 #include <cmath>
 #include "Model/ModelData.hpp"
 #include "Controller/ResourceManager/ObjectSaving.hpp"
+#include "AI/vector2D.hpp"
 
 class NPC : public PhysicsObject {
 public:
@@ -206,7 +207,7 @@ public:
 	 * @brief	Gets the enemy target position
 	 * @return	glm::vec2	- Target position
 	 */
-	glm::vec2 get_enemy_target();
+	vector2D get_enemy_target();
 
 	/**
 	 * @brief	Sets the ID of the NPC's target
@@ -295,6 +296,8 @@ public:
 	void send_group_message(double time, int faction, float range, int reciever,
 	                        int msg, sol::object extra);
 
+	void freezeNPC();
+
 	/**
 	 * @brief	Gets the animation data
 	 * @return	ModelDate	- The animation data for the NPC
@@ -325,7 +328,7 @@ private:
 	/// NPC's finite state machine
 	stateMachine<NPC>* m_NPC_FSM;
 	/// NPC's target position
-	glm::vec2 m_target_pos;
+	vector2D m_target_pos;
 	/// NPC's target ID
 	int m_target_id;
 
