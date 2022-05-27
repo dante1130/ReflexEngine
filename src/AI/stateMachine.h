@@ -2,8 +2,8 @@
 #define __STATEMACHINE_H
 
 #include <iostream>
+#include "telegram.h"
 using namespace std;
-#include "state.h"
 
 template <class entity_type>
 class stateMachine {
@@ -128,17 +128,6 @@ public:
 	 * return	sol::table	- the state
 	 */
 	std::string getGlobalState() { return globalState; }
-
-	// returns true if the current state's type is equal to the type of the
-	// class passed as a parameter.
-	/**
-	 * @brief	Checks if the state is currently being used
-	 * @param	st	- the state to check against
-	 * @return	bool	- True if current state is same as one passed
-	 */
-	bool isInState(const State<entity_type>& st) const {
-		return typeid(*currentState) == typeid(st);
-	}
 
 	/**
 	 * @brief	Handles a message

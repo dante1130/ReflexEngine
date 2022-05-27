@@ -620,8 +620,8 @@ NPC* GameAssetFactory::loadNPCObject(const std::string& luaScript) {
 	}
 
 	int faction = lua["AI"]["faction"];
-	int health = lua["AI"]["health"];
-	int power = lua["AI"]["power"];
+	float health = lua["AI"]["health"];
+	float power = lua["AI"]["power"];
 
 	npc->set_faction(faction);
 	npc->set_health(health);

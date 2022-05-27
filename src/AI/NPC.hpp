@@ -106,7 +106,7 @@ public:
 	 * @brief	Sets the power of the NPC
 	 * @param	new_power	- New power of the NPC
 	 */
-	void set_power(int new_power);
+	void set_power(float new_power);
 
 	/**
 	 * @brief	Gets the power of the NPC

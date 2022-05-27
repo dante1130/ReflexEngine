@@ -110,7 +110,7 @@ bool NPC::is_dead() { return m_dead; }
 void NPC::set_health(float new_health) { m_health = new_health; }
 float NPC::get_health() { return m_health; }
 
-void NPC::set_power(int new_power) { m_power = new_power; }
+void NPC::set_power(float new_power) { m_power = new_power; }
 float NPC::get_power() { return m_power; }
 
 int NPC::get_waypoint_count() { return m_waypoints.size(); }
