@@ -1,5 +1,4 @@
 #include "AI/NPC.hpp"
-#include "playerStates.h"
 
 NPC::NPC(const std::string& model_name, const std::string& texture_name,
          bool is_animated, bool is_loop_)

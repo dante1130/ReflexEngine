@@ -65,7 +65,6 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/multiTextureCreator.cpp
 	
 	AI/messageDispatcher.cpp
-	AI/playerStates.cpp
 	AI/NPC.cpp
 	AI/entityManager.cpp
 	AI/movement.cpp

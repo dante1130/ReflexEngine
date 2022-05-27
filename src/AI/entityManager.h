@@ -1,11 +1,10 @@
-#ifndef __ENTITYMANAGER_H
-#define __ENTITYMANAGER_H
+#pragma once
 
 #include <map>
 #include <string>
 #include <map>
-#include "NPC.hpp"
 
+class NPC;
 class entityManager {
 private:
 	/// to facilitate quick lookup the entities are stored in a std::map, in
@@ -50,4 +49,3 @@ public:
 	 */
 	void killEntities();
 };
-#endif
