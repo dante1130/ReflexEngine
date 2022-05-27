@@ -150,7 +150,7 @@ void chase::Enter(NPC* curPlayer) {
 
 void chase::Execute(NPC* curPlayer) {
 	// curPlayer->move_to_enemy();
-	if (curPlayer->move_to_enemy(1))
+	if (curPlayer->move_to_enemy())
 		// curPlayer->get_FSM()->changeState(&fight_state::Instance());
 		if (!curPlayer->watch_for_enemy())
 			curPlayer->get_FSM()->revertToPreviousState();
@@ -176,10 +176,10 @@ void patrol::Execute(NPC* curPlayer) {
 		//     0, curPlayer->get_id(), 2, 1,
 		//     &glm::vec2(target->position.x, target->position.z));
 		// OLD VS NEW
-		// glm::vec2* target_pos =
+		//glm::vec2* target_pos =
 		//    new glm::vec2(target->position.x, target->position.z);
 
-		// messageMgr.dispatchMsg(0, curPlayer->get_id(), 2, 1, target_pos);
+		//messageMgr.dispatchMsg(0, curPlayer->get_id(), 2, 1, target_pos);
 	}
 }
 

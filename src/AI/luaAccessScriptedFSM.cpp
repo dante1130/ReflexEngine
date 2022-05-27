@@ -73,21 +73,16 @@ void luaAccessScriptedFSM::registerPlayer() {
 	    sol::overload(&NPC::watch_for_enemy, &NPC::watch_for_enemyVal);
 	player_type["moveToEnemy"] = &NPC::move_to_enemy;
 	player_type["pathfindToPoint"] = &NPC::use_pathfinding;
-	player_type["sendMessage"] = &NPC::send_message;
-	player_type["sendGroupMessage"] = &NPC::send_group_message;
 }
 
 void luaAccessScriptedFSM::registerVector2D() {
 	sol::state& lua = LuaManager::get_instance().get_state();
 
-	sol::usertype<vector2D> player_type =
-	    lua.new_usertype<vector2D>("vector2D");
-	player_type["set"] = &vector2D::set;
-	player_type["x"] = sol::property(&vector2D::getX, &vector2D::setX);
-	player_type["y"] = sol::property(&vector2D::getY, &vector2D::setY);
+	sol::usertype<glm::vec2> player_type =
+	    lua.new_usertype<glm::vec2>("vector2");
 
-	player_type["normalise"] = &vector2D::normalise;
-	player_type["length"] = &vector2D::length;
+	player_type["x"] = &glm::vec2::x;
+	player_type["y"] = &glm::vec2::y;
 }
 
 void luaAccessScriptedFSM::registerMessage() {

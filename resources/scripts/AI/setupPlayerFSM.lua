@@ -10,25 +10,14 @@ print("At start of setupPlayerFSM")
 
 function setupPlayerFSM(player)
     print("In setupPlayerFSM")
+    print(player.id)
+    player.id = 7
+    player.faction = 1
+    print(player.id)
     
     player:getFSM():setGlobalState("state_global")
     player:getFSM():setCurrentState("state_idle")
-end
-
-function setupDuckFSM(player)
-    print("Setting up Duck FSM")
-
-    player:getFSM():setGlobalState("state_global")
-    player:getFSM():setCurrentState("state_patrol")
-
-end
-
-function setupHumanFSM(player)
-    print("Setting up Human FSM")
-
-    player:getFSM():setGlobalState("state_global")
-    player:getFSM():setCurrentState("state_patrol")
-
+    print("End of in setupPlayerFSM")
 end
 
 

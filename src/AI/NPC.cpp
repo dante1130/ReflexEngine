@@ -236,14 +236,12 @@ bool NPC::watch_for_enemyVal(float range) {
 	return false;
 }
 
-bool NPC::move_to_enemy(float offset) {
+bool NPC::move_to_enemy() {
 	NPC* npc = entityMgr.getEntityFromID(m_target_id);
 	if (npc->is_dead()) {
 		return false;
 	}
 
-	return move_NPC(npc->position.x, npc->position.z, offset);
-	/*
 	glm::vec2 newPos = glm::vec2(position.x, position.z);
 	bool ret =
 	    ai_movement::moveTo(newPos, glm::vec2(npc->position.x, npc->position.z),
@@ -252,33 +250,6 @@ bool NPC::move_to_enemy(float offset) {
 	position.z = newPos.y;
 
 	return ret;
-	*/
-}
-
-void NPC::send_message(double time, int sender, int reciever, int msg,
-                       sol::object extra) {
-	messageMgr.dispatchMsg(time, sender, reciever, msg, extra);
-}
-
-void NPC::send_group_message(double time, int faction, float range, int sender,
-                             int msg, sol::object extra) {
-	glm::vec3 temp;
-	float distance;
-	for (int count = 0; count < entityMgr.numberOfEntities(); count++) {
-		if (entityMgr.getEntityByIndex(count)->m_faction != faction ||
-		    sender == entityMgr.getEntityByIndex(count)->m_id) {
-			continue;
-		}
-
-		temp = entityMgr.getEntityByIndex(count)->position;
-
-		distance = glm::length(temp - position);
-		if (distance < range) {
-			messageMgr.dispatchMsg(time, sender,
-			                       entityMgr.getEntityByIndex(count)->m_id, msg,
-			                       extra);
-		}
-	}
 }
 
 ModelData& NPC::get_animation() { return m_animation; }

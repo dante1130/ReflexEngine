@@ -267,33 +267,9 @@ public:
 
 	/**
 	 * @brief	Moves to a targeted enemy
-	 * @param	offset	- The offset to stop at
 	 * @return	bool	- True if at destination or enemy is dead
 	 */
-	bool move_to_enemy(float offset);
-
-	/**
-	 * @brief	Sends a message to another AI agent
-	 * @param	time		- delay before sending the message
-	 * @param	sender		- the senders ID
-	 * @param	reciever	- the recievers ID
-	 * @param	msg			- the message
-	 * @param	extra		- extra info in the message
-	 */
-	void send_message(double time, int sender, int reciever, int msg,
-	                  sol::object extra);
-
-	/**
-	 * @brief	Sends a group message to a AI faction in range
-	 * @param	time		- delay before sending the message
-	 * @param	faction		- the faction to send the message too
-	 * @param	range		- the range of the message
-	 * @param	reciever	- the recievers ID
-	 * @param	msg			- the message
-	 * @param	extra		- extra info in the message
-	 */
-	void send_group_message(double time, int faction, float range, int reciever,
-	                        int msg, sol::object extra);
+	bool move_to_enemy();
 
 	/**
 	 * @brief	Gets the animation data

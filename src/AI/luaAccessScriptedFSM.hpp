@@ -5,9 +5,10 @@
 #include "AI/stateMachine.h"
 #include "AI/messageDispatcher.h"
 #include "AI/telegram.h"
+#include <glm/glm.hpp>
 #include "Model/ModelData.hpp"
 #include "AI/singletons.h"
-#include "vector2D.hpp"
+
 namespace luaAccessScriptedFSM {
 /*
  * @brief	registers All AI to lua. Only need to call this as it will call the
