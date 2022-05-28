@@ -1,6 +1,11 @@
---for i = 1, 25, 1 do
-	addGameObject("scripts/AI/Human.lua")
---end
+--Player
+addGameObject("scripts/AI/player.lua")
+addGameObject("scripts/AI/guihealthBar.lua")
 
-addGameObject("scripts/AI/Duck.lua")
-addGameObject("scripts/AI/DuckTwo.lua")
+--Allies
+--addGameObject("scripts/AI/Human.lua")
+
+--Enemies
+for i = 1, 25, 1 do
+	addGameObject("scripts/AI/Duck.lua")
+end

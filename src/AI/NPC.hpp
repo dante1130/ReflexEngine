@@ -116,6 +116,12 @@ public:
 	float get_power();
 
 	/**
+	 * @brief	Sets the position of the NPC
+	 * @param	pos	- The new position you want
+	 */
+	void set_pos(vector2D pos);
+
+	/**
 	 * @brief	Gets the NPC's x position
 	 * @return	float	- x position
 	 */
@@ -296,6 +302,9 @@ public:
 	void send_group_message(double time, int faction, float range, int reciever,
 	                        int msg, sol::object extra);
 
+	/**
+	 * @brief	Sets the linear velocity to 0
+	 */
 	void freezeNPC();
 
 	/**
@@ -303,6 +312,8 @@ public:
 	 * @return	ModelDate	- The animation data for the NPC
 	 */
 	ModelData& get_animation();
+
+	void setSetup(std::string set);
 
 private:
 	/// NPC's unique identifier
@@ -331,6 +342,8 @@ private:
 	vector2D m_target_pos;
 	/// NPC's target ID
 	int m_target_id;
+
+	std::string m_setup;
 
 	/// Data for animating
 	ModelData m_animation;

@@ -4,9 +4,9 @@
 
 NPC::NPC(const std::string& model_name, const std::string& texture_name,
          bool is_animated, bool is_loop_)
-    : m_animation(model_name, texture_name, is_animated, is_loop_) {
+    : m_animation(model_name, texture_name, false, is_loop_) {
 	m_NPC_FSM = new stateMachine<NPC>(this);
-
+	m_animation.set_animation(md2::animation_type::JUMP);
 	m_id = idMgr.increment_count();
 }
 
@@ -44,6 +44,10 @@ void NPC::draw(std::shared_ptr<Shader> shader) {
 	    glm::translate(model, glm::vec3(position.x, position.y, position.z));
 	model = glm::rotate(model, glm::radians(-angle),
 	                    glm::vec3(rotation.x, rotation.y, rotation.z));
+	model =
+	    glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	model =
+	    glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 	model = glm::scale(model, glm::vec3(scale.x, scale.y, scale.z));
 	glUniformMatrix4fv(shader->GetModelLocation(), 1, GL_FALSE,
 	                   glm::value_ptr(model));
@@ -54,8 +58,9 @@ void NPC::draw(std::shared_ptr<Shader> shader) {
 	    .UseMaterial(default_shader->GetShininessLocation(),
 	                 default_shader->GetSpecularIntensityLocation());
 
-	auto& model_m = ResourceManager::get_instance().get_model_manager();
-	model_m.get_model(model_name_).RenderModel();
+	// auto& model_m = ResourceManager::get_instance().get_md2_model_manager();
+	// model_m.get_md2_model(model_name_);
+	m_animation.render(EngineTime::get_delta_time());
 }
 void NPC::save_object() {
 	ObjectSaving::openFile();
@@ -80,7 +85,7 @@ void NPC::save_object() {
 	ObjectSaving::closeStruct();
 
 	ObjectSaving::createStruct("AI");
-	ObjectSaving::addValue("setUpFSM", "setupPlayerFSM", false);
+	ObjectSaving::addValue("setUpFSM", m_setup, false);
 	ObjectSaving::addValue("faction", m_faction, false);
 	ObjectSaving::addValue("health", m_health, false);
 	ObjectSaving::addValue("power", m_power, false);
@@ -148,6 +153,12 @@ int NPC::get_target_id() { return m_target_id; }
 void NPC::set_move_speed(float new_speed) { m_move_speed = new_speed; }
 float NPC::get_move_speed() { return m_move_speed; }
 
+void NPC::set_pos(vector2D pos) {
+	position.x = pos.getX();
+	position.z = pos.getY();
+	position.y = GenericFunctions::getHeight(position.x, position.z);
+	rb.set_position(glm::vec3(position.x, position.y, position.z));
+}
 float NPC::get_pos_x() { return position.x; }
 float NPC::get_pos_y() { return position.y; }
 float NPC::get_pos_z() { return position.z; }
@@ -270,3 +281,5 @@ void NPC::send_group_message(double time, int faction, float range, int sender,
 void NPC::freezeNPC() { rb.setLinearVelocity(glm::vec3(0)); }
 
 ModelData& NPC::get_animation() { return m_animation; }
+
+void NPC::setSetup(std::string set) { m_setup = set; }

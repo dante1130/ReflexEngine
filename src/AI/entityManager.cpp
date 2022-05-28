@@ -1,4 +1,5 @@
 #include "entityManager.h"
+#include "AI/singletons.h"
 
 entityManager::~entityManager() {}
 
@@ -33,6 +34,9 @@ NPC* entityManager::getEntityByIndex(int index) const {
 
 int entityManager::numberOfEntities() { return entityMap->size(); }
 
-void entityManager::killEntities() { entityMap->clear(); }
+void entityManager::killEntities() {
+	entityMap->clear();
+	idMgr.reset_count();
+}
 
 void entityManager::killManager() { delete entityMap; }

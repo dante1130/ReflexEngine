@@ -1,16 +1,30 @@
+local notReady = true
+local x
+local y
+local z
+
+while notReady do
+	x = random_generator(1, 240)
+	z = random_generator(1, 240)
+	y = get_y_coord_on_floor(x, z)
+	if(y > 3) then
+		notReady = false
+	end
+end
+
 baseObject = {
 	type = "NPC",
 	xPos = 90,
 	yPos = 5,
-	zPos = 43,
+	zPos = 40,
 	xRotation = 0,
 	yRotation = 1,
 	zRotation = 0,
-	angle = 90,
-	xScale = 0.01,
-	yScale = 0.01,
-	zScale = 0.01,
-	modelName = "ghost",
+	angle = 0.01,
+	xScale = 1,
+	yScale = 1,
+	zScale = 1,
+	modelName = "duck_A",
 	material_name = "shiny",
 	animate = 1,
 	loopAnimation = 1,

@@ -11,7 +11,7 @@ ModelData::ModelData(const std::string& model_name,
       is_loop_(is_loop) {}
 
 void ModelData::render(double delta_time) {
-	if (is_animated_ && delta_time > 0.0f) {
+	if (is_animated_) {
 		animate(delta_time);
 		render_animated(delta_time);
 	} else {
@@ -76,6 +76,14 @@ void ModelData::animate(float delta_time) {
 		}
 
 		animstate_.prev_time = animstate_.curr_time;
+	}
+
+	if (animstate_.curr_frame > (24 - 1)) {
+		animstate_.curr_frame = 0;
+	}
+
+	if (animstate_.next_frame > (24 - 1)) {
+		animstate_.next_frame = 0;
 	}
 
 	animstate_.interpol =

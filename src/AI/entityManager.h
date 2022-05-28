@@ -50,5 +50,8 @@ public:
 	 */
 	void killEntities();
 
+	/**
+	 * @brief	Kills the manager
+	 */
 	void killManager();
 };

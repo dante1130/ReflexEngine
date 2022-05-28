@@ -595,7 +595,7 @@ NPC* GameAssetFactory::loadNPCObject(const std::string& luaScript) {
 	std::string mat = lua["baseObject"]["material_name"];
 	int animate = lua["baseObject"]["animate"];
 	int loopAnimation = lua["baseObject"]["loopAnimation"];
-	NPC* npc = new NPC(model, "NOT_USED", animate, loopAnimation);
+	NPC* npc = new NPC(model, "duck_A", animate, loopAnimation);
 	npc->initModel(model, mat);
 	npc->position = pos;
 	npc->scale = scale;
@@ -630,9 +630,9 @@ NPC* GameAssetFactory::loadNPCObject(const std::string& luaScript) {
 
 	// Sets up Finite State Machine
 	std::string script = lua["AI"]["setUpFSM"];
+	npc->setSetup(script);
 
 	sol::function exe = lua[script];
-	std::cout << script << std::endl;
 	exe(npc);
 
 	entityMgr.registerEntity(npc);

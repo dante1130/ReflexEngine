@@ -69,6 +69,7 @@ void luaAccessScriptedFSM::registerPlayer() {
 	player_type["faction"] =
 	    sol::property(&NPC::get_faction, &NPC::set_faction);
 
+	player_type["setPos"] = &NPC::set_pos;
 	player_type["getX"] = &NPC::get_pos_x;
 	player_type["getY"] = &NPC::get_pos_y;
 	player_type["getZ"] = &NPC::get_pos_z;
