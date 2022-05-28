@@ -8,6 +8,7 @@
 #include "Model/ModelData.hpp"
 #include "AI/vector2D.hpp"
 #include "AI/singletons.h"
+#include "View/Renderer/OpenGL/Objects/Md2.hpp"
 
 void luaAccessScriptedFSM::registerAllAI() {
 	registerScriptedStateMachine();
@@ -64,6 +65,9 @@ void luaAccessScriptedFSM::registerPlayer() {
 	player_type["dead"] = sol::property(&NPC::is_dead, &NPC::kill_npc);
 	player_type["target_id"] =
 	    sol::property(&NPC::get_target_id, &NPC::set_target_id);
+	player_type["moveSpeed"] =
+	    sol::property(&NPC::get_move_speed, &NPC::set_move_speed);
+
 	player_type["set_target_position"] = &NPC::set_enemy_target;
 	player_type["get_target_position"] = &NPC::get_enemy_target;
 	player_type["faction"] =
@@ -97,6 +101,8 @@ void luaAccessScriptedFSM::registerPlayer() {
 	player_type["sendGroupMessage"] = &NPC::send_group_message;
 
 	player_type["stopMovement"] = &NPC::freezeNPC;
+
+	player_type["getAnimation"] = &NPC::get_animation;
 }
 
 void luaAccessScriptedFSM::registerVector2D() {
@@ -146,4 +152,11 @@ void registerAnimation::registerModelData() {
 	player_type["setFPS"] = &ModelData::set_fps;
 	player_type["setAnimation"] = &ModelData::set_animation;
 	player_type["shouldLoop"] = &ModelData::set_loop;
+	player_type["shouldAnimate"] = &ModelData::set_is_animated;
+
+	lua.new_enum("animation_types", "run", md2::animation_type::RUN, "attack",
+	             md2::animation_type::ATTACK, "stand",
+	             md2::animation_type::STAND, "death",
+	             md2::animation_type::DEATH_FALLBACK, "pain",
+	             md2::animation_type::PAIN_A);
 }

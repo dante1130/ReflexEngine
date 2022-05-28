@@ -58,6 +58,13 @@ public:
 	void animate(float delta_time);
 
 	/**
+	 * @brief	If the model should be animated
+	 *
+	 * @param	run	- True to animated the model
+	 */
+	void set_is_animated(bool run);
+
+	/**
 	 * @brief Get if the model is animated.
 	 *
 	 * @return bool

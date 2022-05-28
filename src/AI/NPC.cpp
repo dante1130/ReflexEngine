@@ -4,7 +4,7 @@
 
 NPC::NPC(const std::string& model_name, const std::string& texture_name,
          bool is_animated, bool is_loop_)
-    : m_animation(model_name, texture_name, false, is_loop_) {
+    : m_animation(model_name, texture_name, is_animated, is_loop_) {
 	m_NPC_FSM = new stateMachine<NPC>(this);
 	m_animation.set_animation(md2::animation_type::JUMP);
 	m_id = idMgr.increment_count();
@@ -40,14 +40,14 @@ void NPC::draw(std::shared_ptr<Shader> shader) {
 	auto default_shader = ReflexEngine::get_instance().renderer_.get_shader();
 
 	glm::mat4 model(1.0f);
-	model =
-	    glm::translate(model, glm::vec3(position.x, position.y, position.z));
+	model = glm::translate(model,
+	                       glm::vec3(position.x, position.y + 0.5, position.z));
 	model = glm::rotate(model, glm::radians(-angle),
 	                    glm::vec3(rotation.x, rotation.y, rotation.z));
 	model =
 	    glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-	model =
-	    glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+	// model =
+	//     glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 	model = glm::scale(model, glm::vec3(scale.x, scale.y, scale.z));
 	glUniformMatrix4fv(shader->GetModelLocation(), 1, GL_FALSE,
 	                   glm::value_ptr(model));

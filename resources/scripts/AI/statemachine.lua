@@ -7,21 +7,12 @@ state_player = {}
 
 
 state_player["enter"] = function(player)
-  player.target_id = player.health
-
-
-
 end
 
 
 state_player["execute"] = function(player)
   if(player.dead) then
     load_game(true)
-  end
-
-  if(player.target_id == player.health) then
-  else
-    player:sendGroupMessage(0, player.faction, 200, player.id, 3, 0)
   end
 
   local pos = vector2D.new()
@@ -32,13 +23,12 @@ end
 
 
 state_player["exit"] = function(player)
-
-
 end
 
 state_player["onMessage"] = function(player, msg)
   if (msg.msg == 2) then
     player.health = player.health - msg.extraInfo
+    player:sendGroupMessage(0, player.faction, 200, player.id, 3, 0)
   elseif(msg.msg == 4) then
     player.health = player.health + msg.extraInfo
   end
@@ -133,7 +123,7 @@ state_medic_active["execute"] = function(player)
 
   if (distance < 10) then
     if(distance < 3) then
-      player:sendGroupMessage(0, player.faction, 3, player.id, 1, 20)
+      player:sendGroupMessage(0, player.faction, 3, player.id, 1, 10)
       print("Entity: ", player.id, " | Faction: ", player.faction, " | Medic Active -> Medic Idle", " | Reason: Player healed")
       player:getFSM():changeState("state_medic_idle")
     else
@@ -208,7 +198,7 @@ end
 
 state_global["execute"] = function(player)
   --print("in global")
-  if(player.health < 0) then
+  if(player.health <= 0) then
     player.dead = true
   end
 
@@ -287,16 +277,14 @@ state_patrol = {}
 
 
 state_patrol["enter"] = function(player)
-
-
+local animation = player:getAnimation();
+animation:shouldAnimate(false)
 
 end
 
 
 state_patrol["execute"] = function(player)
   if(player:watchForEnemy(10)) then
-    print("Enemy spotted")
-
     local target = entityManager.getEntity(player.target_id)
     local targetPos = vector2D.new()
     targetPos:set(target:getX(), target:getZ())
@@ -318,6 +306,18 @@ state_patrol["onMessage"] = function(player, msg)
     player.target_id = -1
     print("Entity: ", player.id, " | Faction: ", player.faction, " | Patrol -> Search", " | Reason: Telegram recieved about target")
     player:getFSM():changeState("state_search")
+
+  elseif (msg.msg == 5) then
+    local pos = vector2D.new()
+    pos:set(msg.extraInfo.x - player:getX(), msg.extraInfo.y - player:getZ())
+
+    local dist = pos:length()
+    if(dist < 15) then
+      player.target_id = -1 
+      player:set_target_position(msg.extraInfo.x, msg.extraInfo.y)
+      print("Entity: ", player.id, " | Faction: ", player.faction, " | Patrol -> Search", " | Reason: I heard something")
+      player:getFSM():changeState("state_search")
+    end
   end
 
 end
@@ -331,7 +331,11 @@ state_chase = {}
 
 
 state_chase["enter"] = function(player)
-
+local animation = player:getAnimation();
+animation:shouldAnimate(true)
+animation:setFPS(24)
+animation:shouldLoop(true)
+animation:setAnimation(animation_types.run)
 
 end
 
@@ -344,19 +348,20 @@ state_chase["execute"] = function(player)
     player:getFSM():changeState("state_patrol")
   end
 
+  player.moveSpeed = player.moveSpeed * 1.5
   if(player:moveToEnemy(1.5)) then
       print("Entity: ", player.id, " | Faction: ", player.faction, " | Chase -> Attack", " | Reason: In attack range")
       player:getFSM():changeState("state_attack")
   end
 
+    player.moveSpeed = player.moveSpeed / 1.5
 
 end
 
 
 state_chase["exit"] = function(player)
-
-
-
+local animation = player:getAnimation();
+animation:setFPS(12)
 end
 
 state_chase["onMessage"] = function(player, msg)
@@ -374,7 +379,10 @@ end
 state_attack = {}
 
 state_attack["enter"] = function(player)
-
+local animation = player:getAnimation();
+animation:shouldAnimate(true)
+animation:shouldLoop(false)
+animation:setFPS(80)
 
 end
 
@@ -395,11 +403,17 @@ state_attack["execute"] = function(player)
 
   dist = vec:length()
 
-  if(dist > 3) then
+  local animation = player:getAnimation();
+
+  if(dist > 3 and animation:isRunning() == false) then
     print("Entity: ", player.id, " | Faction: ", player.faction, " | Attack -> Chase", " | Reason: Out of attack range")
     player:getFSM():changeState("state_chase")
   else
-    player:sendMessage(0, player.id, player.target_id, 2, player.power)
+    if(animation:isRunning() == false) then
+      animation:setAnimation(animation_types.attack)
+      animation:setFPS(80)
+      player:sendMessage(0, player.id, player.target_id, 2, player.power)
+    end
   end
 
 
@@ -407,7 +421,8 @@ end
 
 
 state_attack["exit"] = function(player)
-
+local animation = player:getAnimation();
+animation:shouldLoop(true)
 
 
 end
@@ -428,6 +443,11 @@ state_search = {}
 
 
 state_search["enter"] = function(player)
+local animation = player:getAnimation();
+animation:shouldAnimate(true)
+animation:shouldLoop(true)
+animation:setAnimation(animation_types.run)
+
 
 end
 
@@ -462,11 +482,18 @@ end
 
 state_search["onMessage"] = function(player, msg)
   if (msg.msg == 1) then
-    print(msg.extraInfo.x)
-    print(msg.extraInfo.y)
     player.target_id = -1
     player:set_target_position(msg.extraInfo:getX(), msg.extraInfo:getY())
-    player:getFSM():changeState("state_search")
+
+  elseif (msg.msg == 5) then
+    local pos = vector2D.new()
+    pos:set(msg.extraInfo.x - player:getX(), msg.extraInfo.y - player:getZ())
+
+    local dist = pos:length()
+    if(dist < 15) then
+      player.target_id = -1 
+      player:set_target_position(msg.extraInfo.x, msg.extraInfo.y)
+    end
   end
 
 

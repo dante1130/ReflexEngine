@@ -21,9 +21,9 @@ baseObject = {
 	yRotation = 1,
 	zRotation = 0,
 	angle = 0.01,
-	xScale = 1,
-	yScale = 1,
-	zScale = 1,
+	xScale = 0.025,
+	yScale = 0.02,
+	zScale = 0.025,
 	modelName = "duck_A",
 	material_name = "shiny",
 	animate = 1,
@@ -46,7 +46,7 @@ AI = {
 	setUpFSM = "setupDuckFSM",
 	faction = 2,
 	health = 100,
-	power = 0.25,
+	power = 10,
 	moveSpeed = 3
 }
 

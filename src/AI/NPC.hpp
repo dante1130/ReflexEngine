@@ -313,6 +313,10 @@ public:
 	 */
 	ModelData& get_animation();
 
+	/**
+	 * @brief	Sets the setup finite state machine to call
+	 * @param	set	- The lua function which sets up the AI FSM
+	 */
 	void setSetup(std::string set);
 
 private:
