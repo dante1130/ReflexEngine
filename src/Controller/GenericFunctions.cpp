@@ -268,7 +268,7 @@ void GenericFunctions::networkUpdate() {
 	if (createNetwork && networkConnected){ 
 		incomingMessage = network.ReceiveMessage();
 		opponentPos = network.ObjectPositionReceive();
-		network.ObjectPositionSend(glm::vec3(luaCamPosX(), luaCamPosX(), luaCamPosZ()));
+		network.ObjectPositionSend(glm::vec3(luaCamPosX(), luaCamPosY(), luaCamPosZ()));
 		receivingData = true;
 		if (incomingMessage != " ") {
 			//printf("%s Update\n", incomingMessage);
@@ -374,5 +374,5 @@ float GenericFunctions::getNetworkPosY() { return opponentPos.y; }
 float GenericFunctions::getNetworkPosZ() { return opponentPos.z; }
 
 bool GenericFunctions::getReceivingData() { 
-	printf("doing get receiving data now\n");
-	return receivingData; }
+	//printf("doing get receiving data now\n");
+	return !network.ObjectMissedData(); }

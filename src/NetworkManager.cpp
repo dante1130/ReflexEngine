@@ -315,12 +315,14 @@ glm::vec3 networkManager::ObjectPositionReceive() {
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				bsIn.Read(tempVec3);
-				printf("%f %f %f NM\n", tempVec3.x, tempVec3.y, tempVec3.z);
+				//printf("%f %f %f NM\n", tempVec3.x, tempVec3.y, tempVec3.z);
 				bsIn.Reset();
+				dataMissed = false;
 				return (tempVec3);
 		}
 	}
 	peer->DeallocatePacket(packet);
 	//printf("Did not read vector correctly\n");
+	dataMissed = true;
 	return (glm::vec3(0, 0, 0));
 	}

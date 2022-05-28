@@ -24,6 +24,8 @@ GameObject* GameAssetFactory::create(const std::string& fileName) {
 		return load_skybox(fileName);
 	} else if (type == "Projectile") {
 		return loadProjectileObject(fileName);
+	} else if (type == "NetworkedItem") {
+		return loadNetworkedItem(fileName);
 	} else {
 		assert("Object type not found" && 0);
 		return nullptr;
@@ -478,4 +480,29 @@ Projectile* GameAssetFactory::loadProjectileObject(std::string luaScript) {
 	proj->set_to_delete(tempNum);
 
 	return proj;
+}
+
+NetworkedItem* GameAssetFactory::loadNetworkedItem(const std::string& luaScript) {
+	sol::state& lua = LuaManager::get_instance().get_state();
+	lua.script_file(luaScript);
+
+	std::string model_name = lua["NetworkedItem"]["modelName"];
+	std::string material_name = lua["NetworkedItem"]["material_name"];
+
+	NetworkedItem* networkedItem = new NetworkedItem(model_name, material_name);
+
+	glm::vec3 pos, rotation, scale;
+	float angle;
+
+	pos = loadBasePos(lua);
+	scale = loadBaseScale(lua);
+	rotation = loadBaseRotation(lua);
+	angle = loadBaseAngle(lua);
+
+	networkedItem->position = pos;
+	networkedItem->scale = scale;
+	networkedItem->rotation = rotation;
+	networkedItem->angle = angle;
+
+	return networkedItem;
 }

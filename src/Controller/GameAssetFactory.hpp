@@ -17,6 +17,7 @@
 #include "Controller/Terrain/TexturedTerrain.hpp"
 #include "AI/singletons.h"
 #include "Model/GameObject/Projectile.hpp"
+#include "Model/GameObject/NetworkedItem.hpp"
 
 /**
  * @class GameAssetFactory
@@ -227,4 +228,6 @@ private:
 	 * @post	projectile object stored
 	 */
 	static Projectile* loadProjectileObject(std::string luaScript);
+
+	static NetworkedItem* loadNetworkedItem(const std::string& luaScript);
 };

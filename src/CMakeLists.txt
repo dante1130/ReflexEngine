@@ -15,6 +15,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Model/GameObject/SkyboxObject.cpp
 	Model/ModelData.cpp
 	Model/GameObject/Projectile.cpp
+	Model/GameObject/NetworkedItem.cpp
 	
 	View/Renderer/OpenGL/OpenGL.cpp
 	View/Renderer/OpenGL/Objects/Light.cpp

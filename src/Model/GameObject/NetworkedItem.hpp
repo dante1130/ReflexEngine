@@ -8,6 +8,7 @@
 #include "View/Renderer/OpenGL/Objects/Texture.hpp"
 #include "View/Renderer/OpenGL/Objects/Material.hpp"
 #include "Controller/ResourceManager/ObjectSaving.hpp"
+#include "Controller/GenericFunctions.h"
 
 /**
  * @class Item
@@ -33,14 +34,14 @@ public:
 	 *
 	 * @param delta_time
 	 */
-	void update(float delta_time) override {}
+	void update(float delta_time) override;
 
 	/**
 	 * @brief Updates the body object with fixed delta time.
 	 *
 	 * @param delta_time
 	 */
-	void fixed_update(float delta_time) override
+	void fixed_update(float delta_time) override {}
 
 	/**
 	 * @brief Adds the draw call to the renderer.

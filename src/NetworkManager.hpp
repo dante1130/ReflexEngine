@@ -32,6 +32,8 @@ private:
 	/// Have we initialsed the networkManager?
 	bool init;
 
+	bool dataMissed;
+
 	/// How many clients are we connected to? (should be 1 for clients, > 1 for servers when multiple clients)
 	int connectedClients;
 
@@ -165,6 +167,8 @@ public:
 	void ObjectPositionSend(glm::vec3 position);
 
 	glm::vec3 ObjectPositionReceive();
+
+	bool ObjectMissedData() { return dataMissed; }
 
 private:
 	/**

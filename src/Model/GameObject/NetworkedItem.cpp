@@ -14,8 +14,14 @@ void NetworkedItem::add_draw_call() {
 }
 //
 
-void NetworkedItem::fixed_update() {
-
+void NetworkedItem::update(float delta_time) {
+	if (GenericFunctions::getReceivingData()) {
+		position.x = GenericFunctions::getNetworkPosX();
+		position.y = GenericFunctions::getNetworkPosY();
+		position.z = GenericFunctions::getNetworkPosZ();
+		//std::cout << position.x << " " << position.y << " " << position.z
+		          //<< std::endl;
+	}
 }
 
 void NetworkedItem::draw(std::shared_ptr<Shader> shader) {
