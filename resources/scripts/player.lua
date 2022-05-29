@@ -1,8 +1,8 @@
 baseObject = {
 	type = "Player",
-	xPos = 100,
+	xPos = 20,
 	yPos = 10,
-	zPos = 50,
+	zPos = 180,
 	xRotation = 0,
 	yRotation = 0,
 	zRotation = 0,

@@ -41,3 +41,7 @@ addGameObject("scripts/Arrow.lua")
 addGameObject("scripts/Bow.lua")
 addGameObject("scripts/Boat.lua")
 addGameObject("scripts/Lighthouse.lua")
+
+addGameObject("scripts/gui/EndGame.lua")
+addGameObject("scripts/EscapeBoat.lua")
+addGameObject("scripts/bigArrow.lua")
