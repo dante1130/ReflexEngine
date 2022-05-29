@@ -11,7 +11,10 @@ NPC::NPC(const std::string& model_name, const std::string& texture_name,
 	m_model_texture = texture_name;
 }
 
-NPC::~NPC() { delete m_NPC_FSM; }
+NPC::~NPC() {
+	m_NPC_FSM->free_memory();
+	delete m_NPC_FSM;
+}
 
 void NPC::init() {}
 

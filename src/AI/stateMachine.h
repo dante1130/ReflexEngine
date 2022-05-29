@@ -9,36 +9,41 @@ private:
 	/// The owner of the FSM
 	entity_type* owner;
 	/// The previous state
-	std::string previousState;
+	std::string* previousState;
 	/// The current state
-	std::string currentState;
+	std::string* currentState;
 	/// THe global state
-	std::string globalState;
+	std::string* globalState;
 
 public:
+	/**
+	 * @brief	Constructor
+	 * @param	FSMowner	- FSM to copy over
+	 */
+	stateMachine(entity_type* FSMowner) {
+		owner = FSMowner;
+		previousState = new std::string;
+		currentState = new std::string;
+		globalState = new std::string;
+	}
+
 	/**
 	 * @brief	Assigns a state machine
 	 * @param	sm	 - The new state machine object
 	 */
 	const stateMachine& operator=(const stateMachine& sm) {
 		owner = sm.owner;
-		previousState = sm.previousState;
-		currentState = sm.currentState;
-		globalState = sm.globalState;
+		*previousState = sm.previousState;
+		*currentState = sm.currentState;
+		*globalState = sm.globalState;
 		return *this;
 	}
-
-	/**
-	 * @brief	Copy constructor
-	 * @param	FSMowner	- FSM to copy over
-	 */
-	stateMachine(entity_type* FSMowner) { owner = FSMowner; }
 
 	/**
 	 * @brief	Sets the previous state
 	 * @param	st	- The new state
 	 */
-	void setPreviousState(std::string st) { previousState = st; }
+	void setPreviousState(std::string st) { *previousState = st; }
 
 	/**
 	 * @brief	Sets the current state
@@ -50,7 +55,7 @@ public:
 		exe = lua[st]["enter"];
 		exe(owner);
 
-		currentState = st;
+		*currentState = st;
 	}
 
 	/**
@@ -63,7 +68,7 @@ public:
 		exe = lua[st]["enter"];
 		exe(owner);
 
-		globalState = st;
+		*globalState = st;
 	}
 
 	/**
@@ -74,10 +79,10 @@ public:
 
 		sol::function exe;
 
-		exe = lua[globalState]["execute"];
+		exe = lua[*globalState]["execute"];
 		exe(owner);
 
-		exe = lua[currentState]["execute"];
+		exe = lua[*currentState]["execute"];
 		exe(owner);
 	}
 
@@ -91,16 +96,16 @@ public:
 		sol::function exe;
 
 		// save current state as previous state
-		previousState = currentState;
+		*previousState = *currentState;
 		// call the exit function of the current state
 
-		exe = lua[currentState]["exit"];
+		exe = lua[*currentState]["exit"];
 		exe(owner);
 
 		// change current state to newState
-		currentState = newState;
+		*currentState = newState;
 		// call the Enter function of the new currentState
-		exe = lua[currentState]["enter"];
+		exe = lua[*currentState]["enter"];
 		exe(owner);
 	}
 
@@ -113,19 +118,19 @@ public:
 	 * @brief	Gets the previous state
 	 * return	sol::table	- the state
 	 */
-	std::string getPreviousState() { return previousState; }
+	std::string getPreviousState() { return *previousState; }
 
 	/**
 	 * @brief	Gets the current state
 	 * return	sol::table	- the state
 	 */
-	std::string getCurrentState() { return currentState; }
+	std::string getCurrentState() { return *currentState; }
 
 	/**
 	 * @brief	Gets the global state
 	 * return	sol::table	- the state
 	 */
-	std::string getGlobalState() { return globalState; }
+	std::string getGlobalState() { return *globalState; }
 
 	/**
 	 * @brief	Handles a message
@@ -135,13 +140,25 @@ public:
 		sol::state& lua = LuaManager::get_instance().get_state();
 		sol::function exe;
 
-		exe = lua[currentState]["onMessage"];
+		exe = lua[*currentState]["onMessage"];
 		exe(owner, msg);
 		return true;
 	}
-	//
-	/**
-	 * @brief	Destructor
-	 */
-	virtual ~stateMachine() {}
+
+	void free_memory() {
+		if (previousState) {
+			delete previousState;
+			previousState = nullptr;
+		}
+
+		if (currentState) {
+			delete currentState;
+			currentState = nullptr;
+		}
+
+		if (globalState) {
+			delete globalState;
+			globalState = nullptr;
+		}
+	}
 };

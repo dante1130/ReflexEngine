@@ -129,13 +129,14 @@ void TestScene::loadSavedGameObjects() {
 	for (size_t count = 1; count < game_objects_.size(); count++) {
 		game_objects_[count]->remove = true;
 	}
-	// game_objects_.clear();
+
 	entityMgr.killEntities();
 
 	sol::state& lua = LuaManager::get_instance().get_state();
 	if (GenericFunctions::getIfFullLoad() == false) {
 		lua.script_file("scripts/save/_MasterCreation.lua");
 	} else {
+		game_objects_.clear();
 		GenericFunctions::init_random(0, true);
 		Audio& a = Audio::get_instance();
 		a.stop_all();
