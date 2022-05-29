@@ -1,6 +1,6 @@
 -------------------------------------------------------------------------------
 
--- create the flee state
+-- create the player state
 
 -------------------------------------------------------------------------------
 state_player = {}
@@ -32,154 +32,6 @@ state_player["onMessage"] = function(player, msg)
   elseif(msg.msg == 4) then
     player.health = player.health + msg.extraInfo
   end
-
-end
-
-
--------------------------------------------------------------------------------
-
--- create the medic idle state
-
--------------------------------------------------------------------------------
-state_medic_idle = {}
-
-
-state_medic_idle["enter"] = function(player)
-
-end
-
-
-state_medic_idle["execute"] = function(player)
-  if(player.dead == true) then
-    print("Entity: ", player.id, " | Faction: ", player.faction, " | Medic Idle -> Death", " | Reason: Health 0")
-    player:getFSM():changeState("state_death")
-  end
-
-  local pos = vector2D.new()
-  pos:set(camera_pos_x(), camera_pos_z())
-  player:set_target_position(pos.x, pos.y)
-
-  local playerX = player:getX()
-  local playerZ = player:getZ()
-
-  local distance = vector2Length(pos.x - playerX, pos.y - playerZ)
-
-  if (distance < 10) then
-    if(distance > 5) then
-      player:moveNPC(camera_pos_x(), camera_pos_z(), 0.1)
-    else
-      player:stopMovement()
-    end
-  else
-    if(player:followWaypoint(false)) then
-      player:pathfindToPoint(playerX, playerZ, pos.x, pos.y)
-    end
-  end
-end
-
-
-state_medic_idle["exit"] = function(player)
-
-end
-
-state_medic_idle["onMessage"] = function(player, msg)
-  if (msg.msg == 2) then
-    player.health = player.health - msg.extraInfo
-  elseif(msg.msg == 3) then
-    print("Entity: ", player.id, " | Faction: ", player.faction, " | Medic Idle -> Medic Active", " | Reason: Help called")
-    player:getFSM():changeState("state_medic_active")
-  end
-
-
-end
-
--------------------------------------------------------------------------------
-
--- create the medic active state
-
--------------------------------------------------------------------------------
-state_medic_active = {}
-
-
-state_medic_active["enter"] = function(player)
-
-end
-
-
-state_medic_active["execute"] = function(player)
-  if(player.dead == true) then
-    print("Entity: ", player.id, " | Faction: ", player.faction, " | Medic Active -> Death", " | Reason: Health 0")
-    player:getFSM():changeState("state_death")
-  end
-
-  local pos = vector2D.new()
-  pos:set(camera_pos_x(), camera_pos_z())
-  player:set_target_position(pos.x, pos.y)
-
-  local playerX = player:getX()
-  local playerZ = player:getZ()
-
-  local distance = vector2Length(pos.x - playerX, pos.y - playerZ)
-
-  if (distance < 10) then
-    if(distance < 3) then
-      player:sendGroupMessage(0, player.faction, 3, player.id, 1, 10)
-      print("Entity: ", player.id, " | Faction: ", player.faction, " | Medic Active -> Medic Idle", " | Reason: Player healed")
-      player:getFSM():changeState("state_medic_idle")
-    else
-      player:moveNPC(camera_pos_x(), camera_pos_z(), 0.1)
-    end
-  else
-    if(player:followWaypoint(false)) then
-      player:pathfindToPoint(playerX, playerZ, pos.x, pos.y)
-    end
-  end
-end
-
-
-state_medic_active["exit"] = function(player)
-
-end
-
-state_medic_active["onMessage"] = function(player, msg)
-  if (msg.msg == 2) then
-    player.health = player.health - msg.extraInfo
-  end
-
-
-end
-
--------------------------------------------------------------------------------
-
--- create the flee state
-
--------------------------------------------------------------------------------
-state_flee = {}
-
-
-state_flee["enter"] = function(player)
-
-
-
-end
-
-
-state_flee["execute"] = function(player)
-
-
-
-
-
-end
-
-
-state_flee["exit"] = function(player)
-
-
-end
-
-state_flee["onMessage"] = function(player, msg)
-
 
 end
 
@@ -268,6 +120,30 @@ state_idle["onMessage"] = function(player, msg)
 
 end
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 -------------------------------------------------------------------------------
 
 -- create the patrol state
@@ -289,6 +165,9 @@ state_patrol["execute"] = function(player)
     local targetPos = vector2D.new()
     targetPos:set(target:getX(), target:getZ())
 
+    local pos = Audio.vec3df.new(player:getX(), player:getY(), player:getZ())
+    Audio.play_3d_sound("duck_alert", pos, false, 5.0)
+
     print("Entity: ", player.id, " | Faction: ", player.faction, " | Patrol -> Chase", " | Reason: Enemy spotted")
     player:sendGroupMessage(0, player.faction, 25, player.id, 1, targetPos)
     player:getFSM():changeState("state_chase")
@@ -307,6 +186,9 @@ state_patrol["onMessage"] = function(player, msg)
     print("Entity: ", player.id, " | Faction: ", player.faction, " | Patrol -> Search", " | Reason: Telegram recieved about target")
     player:getFSM():changeState("state_search")
 
+    local pos = Audio.vec3df.new(player:getX(), player:getY(), player:getZ())
+    Audio.play_3d_sound("duck_alert", pos, false, 5.0)
+
   elseif (msg.msg == 5) then
     local pos = vector2D.new()
     pos:set(msg.extraInfo.x - player:getX(), msg.extraInfo.y - player:getZ())
@@ -315,6 +197,10 @@ state_patrol["onMessage"] = function(player, msg)
     if(dist < 15) then
       player.target_id = -1 
       player:set_target_position(msg.extraInfo.x, msg.extraInfo.y)
+
+      local pos = Audio.vec3df.new(player:getX(), player:getY(), player:getZ())
+      Audio.play_3d_sound("duck_alert", pos, false, 5.0)
+
       print("Entity: ", player.id, " | Faction: ", player.faction, " | Patrol -> Search", " | Reason: I heard something")
       player:getFSM():changeState("state_search")
     end
@@ -410,8 +296,10 @@ state_attack["execute"] = function(player)
     player:getFSM():changeState("state_chase")
   else
     if(animation:isRunning() == false) then
+      local pos = Audio.vec3df.new(player:getX(), player:getY(), player:getZ())
+      Audio.play_3d_sound("duck_shout", pos, false, 5.0)
       animation:setAnimation(animation_types.attack)
-      animation:setFPS(80)
+      animation:setFPS(40)
       player:sendMessage(0, player.id, player.target_id, 2, player.power)
     end
   end
@@ -461,6 +349,9 @@ state_search["execute"] = function(player)
   end
 
   if(player:watchForEnemy(10)) then
+    local pos = Audio.vec3df.new(player:getX(), player:getY(), player:getZ())
+    Audio.play_3d_sound("duck_alert", pos, false, 5.0)
+
     print("Entity: ", player.id, " | Faction: ", player.faction, " | Search -> Chase", " | Reason: Target spoted")
     player:getFSM():changeState("state_chase")
   end
@@ -484,6 +375,8 @@ state_search["onMessage"] = function(player, msg)
   if (msg.msg == 1) then
     player.target_id = -1
     player:set_target_position(msg.extraInfo:getX(), msg.extraInfo:getY())
+    local pos = Audio.vec3df.new(player:getX(), player:getY(), player:getZ())
+    Audio.play_3d_sound("duck_alert", pos, false, 5.0)
 
   elseif (msg.msg == 5) then
     local pos = vector2D.new()
@@ -493,11 +386,41 @@ state_search["onMessage"] = function(player, msg)
     if(dist < 15) then
       player.target_id = -1 
       player:set_target_position(msg.extraInfo.x, msg.extraInfo.y)
+      local pos = Audio.vec3df.new(player:getX(), player:getY(), player:getZ())
+      Audio.play_3d_sound("duck_alert", pos, false, 5.0)
     end
   end
 
 
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 -------------------------------------------------------------------------------
 
@@ -525,6 +448,173 @@ state_death["exit"] = function(player)
 end
 
 state_death["onMessage"] = function(player, msg)
+
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------
+
+-- create the ghost idle state
+
+-------------------------------------------------------------------------------
+state_ghost_idle = {}
+
+
+state_ghost_idle["enter"] = function(player)
+
+
+
+end
+
+
+state_ghost_idle["execute"] = function(player)
+  player:stopMovement()
+
+  if(player:watchForEnemy(8)) then
+    local target = entityManager.getEntity(player.target_id)
+    local targetPos = vector2D.new()
+    targetPos:set(target:getX(), target:getZ())
+
+    local pos = Audio.vec3df.new(player:getX(), player:getY(), player:getZ())
+    Audio.play_3d_sound("ghost_woo", pos, false, 5.0)
+
+
+    print("Entity: ", player.id, " | Faction: ", player.faction, " | Ghost Idle -> Ghost Chase", " | Reason: Enemy spotted")
+    player:sendGroupMessage(0, player.faction, 25, player.id, 1, targetPos)
+    player:getFSM():changeState("state_ghost_chase")
+  end
+end
+
+
+state_ghost_idle["exit"] = function(player)
+
+
+end
+
+state_ghost_idle["onMessage"] = function(player, msg)
+
+
+end
+
+-------------------------------------------------------------------------------
+
+-- create the ghost chase state
+
+-------------------------------------------------------------------------------
+state_ghost_chase = {}
+
+
+state_ghost_chase["enter"] = function(player)
+
+
+
+end
+
+
+state_ghost_chase["execute"] = function(player)
+  if(player:watchForEnemy(12) == false) then
+    print("Entity: ", player.id, " | Faction: ", player.faction, " | Ghsot Chase -> Ghost Idle", " | Reason: Target lost")
+    player:getFSM():changeState("state_ghost_idle")
+  end
+
+  if(player:moveToEnemy(1.5)) then
+      print("Entity: ", player.id, " | Faction: ", player.faction, " | Ghost Chase -> Ghost Attack", " | Reason: In attack range")
+      player:getFSM():changeState("state_ghost_attack")
+  end
+
+end
+
+
+state_ghost_chase["exit"] = function(player)
+
+
+end
+
+state_ghost_chase["onMessage"] = function(player, msg)
+
+
+end
+
+-------------------------------------------------------------------------------
+
+-- create the ghost attack state
+
+-------------------------------------------------------------------------------
+state_ghost_attack = {}
+
+
+state_ghost_attack["enter"] = function(player)
+
+
+
+end
+
+
+state_ghost_attack["execute"] = function(player)
+  player:stopMovement()
+
+  local entityMgr = entityManager.new()
+  local target = entityMgr.getEntity(player.target_id)
+
+  if(target.dead == true) then
+    print("Entity: ", player.id, " | Faction: ", player.faction, " | Ghost Attack -> Ghost Idle", " | Reason: Target died")
+    player:getFSM():changeState("state_ghost_idle")
+  end
+
+  local vec = vector2D.new()
+  vec:set(player:getX() - target:getX(), player:getZ() - target:getZ())
+
+
+  dist = vec:length()
+
+  if(dist > 3) then
+    print("Entity: ", player.id, " | Faction: ", player.faction, " | Ghost Attack -> Ghost Chase", " | Reason: Out of attack range")
+    player:getFSM():changeState("state_ghost_chase")
+  else
+    player:sendMessage(0, player.id, player.target_id, 2, player.power)
+  end
+
+
+end
+
+
+state_ghost_attack["exit"] = function(player)
+
+
+end
+
+state_ghost_attack["onMessage"] = function(player, msg)
 
 
 end

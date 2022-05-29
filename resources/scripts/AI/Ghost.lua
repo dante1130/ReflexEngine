@@ -2,6 +2,7 @@ local notReady = true
 local x
 local y
 local z
+local angle = random_generator(1, 360)
 
 while notReady do
 	x = random_generator(1, 240)
@@ -14,22 +15,22 @@ end
 
 baseObject = {
 	type = "NPC",
-	xPos = 90,
-	yPos = 5,
-	zPos = 40,
+	xPos = x,
+	yPos = y,
+	zPos = z,
 	xRotation = 0,
 	yRotation = 1,
 	zRotation = 0,
-	angle = 0.01,
-	xScale = 0.025,
-	yScale = 0.02,
-	zScale = 0.025,
-	modelName = "duck_A",
+	angle = angle,
+	xScale = 0.01,
+	yScale = 0.01,
+	zScale = 0.01,
+	modelName = "ghost_A",
 	model_texture = "duck_A",
 	material_name = "shiny",
-	animate = 1,
+	animate = 0,
 	loopAnimation = 1,
-	rbType = 2,
+	rbType = 1,
 	gravity = 0,
 	xForce = 0,
 	yForce = 0,
@@ -44,11 +45,11 @@ baseObject = {
 }
 
 AI = {
-	setUpFSM = "setupDuckFSM",
+	setUpFSM = "setupGhostFSM",
 	faction = 2,
 	health = 100,
-	power = 15,
-	moveSpeed = 4
+	power = 0.25,
+	moveSpeed = 2
 }
 
 collider1 = {

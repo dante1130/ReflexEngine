@@ -15,7 +15,7 @@ function setupDuckFSM(player)
     player:getFSM():setCurrentState("state_patrol")
 end
 
-function setupHumanFSM(player)
+function setupGhostFSM(player)
     player:getFSM():setGlobalState("state_global")
-    player:getFSM():setCurrentState("state_medic_idle")
+    player:getFSM():setCurrentState("state_ghost_idle")
 end

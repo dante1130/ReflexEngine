@@ -9,3 +9,7 @@ addGameObject("scripts/AI/guihealthBar.lua")
 --for i = 1, 25, 1 do
 	addGameObject("scripts/AI/Duck.lua")
 --end
+
+for i = 1, 75, 1 do
+	addGameObject("scripts/AI/Ghost.lua")
+end

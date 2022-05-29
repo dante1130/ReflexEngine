@@ -8,6 +8,7 @@ NPC::NPC(const std::string& model_name, const std::string& texture_name,
 	m_NPC_FSM = new stateMachine<NPC>(this);
 	m_animation.set_animation(md2::animation_type::JUMP);
 	m_id = idMgr.increment_count();
+	m_model_texture = texture_name;
 }
 
 NPC::~NPC() { delete m_NPC_FSM; }
@@ -62,11 +63,13 @@ void NPC::draw(std::shared_ptr<Shader> shader) {
 	// model_m.get_md2_model(model_name_);
 	m_animation.render(EngineTime::get_delta_time());
 }
+
 void NPC::save_object() {
 	ObjectSaving::openFile();
 	ObjectSaving::saveGameObject(position, rotation, scale, angle, "NPC");
 	ObjectSaving::addComma();
 	ObjectSaving::addValue("modelName", model_name_, false);
+	ObjectSaving::addValue("model_texture", m_model_texture, false);
 	ObjectSaving::addValue("material_name", material_name_, false);
 	ObjectSaving::addValue("animate", m_animation.get_is_animated(), false);
 	ObjectSaving::addValue("loopAnimation", m_animation.get_loop(), false);

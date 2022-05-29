@@ -348,6 +348,7 @@ private:
 	int m_target_id;
 
 	std::string m_setup;
+	std::string m_model_texture;
 
 	/// Data for animating
 	ModelData m_animation;

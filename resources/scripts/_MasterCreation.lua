@@ -33,9 +33,9 @@ for i = 1, 25, 1 do
 	addGameObject("scripts/Human.lua")
 end
 
-for i = 1, 50, 1 do
-	addGameObject("scripts/Ghost.lua")
-end
+--for i = 1, 50, 1 do
+--	addGameObject("scripts/Ghost.lua")
+--end
 
 addGameObject("scripts/Arrow.lua")
 addGameObject("scripts/Bow.lua")

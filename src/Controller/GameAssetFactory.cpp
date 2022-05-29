@@ -593,9 +593,10 @@ NPC* GameAssetFactory::loadNPCObject(const std::string& luaScript) {
 
 	std::string model = lua["baseObject"]["modelName"];
 	std::string mat = lua["baseObject"]["material_name"];
+	std::string model_texture = lua["baseObject"]["model_texture"];
 	int animate = lua["baseObject"]["animate"];
 	int loopAnimation = lua["baseObject"]["loopAnimation"];
-	NPC* npc = new NPC(model, "duck_A", animate, loopAnimation);
+	NPC* npc = new NPC(model, model_texture, animate, loopAnimation);
 	npc->initModel(model, mat);
 	npc->position = pos;
 	npc->scale = scale;
