@@ -301,7 +301,8 @@ void networkManager::ObjectPositionSend(glm::vec3 position) {
 	RakNet::BitStream bsOut;
 	bsOut.Write((RakNet::MessageID)ID_GAME_MESSAGE_2);
 	bsOut.Write(position);
-	peer->Send(&bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0,
+	//printf("%f %f %f NM\n", position.x, position.y, position.z);
+	peer->Send(&bsOut, HIGH_PRIORITY, UNRELIABLE_SEQUENCED, 0,
 	           RakNet::UNASSIGNED_SYSTEM_ADDRESS, true);
 }
 

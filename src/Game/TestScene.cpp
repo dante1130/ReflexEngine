@@ -143,7 +143,7 @@ void TestScene::update(float delta_time) {
 	for (auto& game_object : game_objects_) {
 		game_object->update(delta_time);
 	}
-	GenericFunctions::networkUpdate();
+	
 	messageMgr.dispatchDelayedMessages();
 }
 
@@ -151,6 +151,7 @@ void TestScene::fixed_update(float delta_time) {
 	for (auto& game_object : game_objects_) {
 		game_object->fixed_update(delta_time);
 	}
+	GenericFunctions::networkUpdate();
 }
 
 void TestScene::saveGameObjects() {

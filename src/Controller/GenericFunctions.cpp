@@ -267,8 +267,8 @@ void GenericFunctions::networkUpdate() {
 	
 	if (createNetwork && networkConnected){ 
 		incomingMessage = network.ReceiveMessage();
-		opponentPos = network.ObjectPositionReceive();
 		network.ObjectPositionSend(glm::vec3(luaCamPosX(), luaCamPosY(), luaCamPosZ()));
+		opponentPos = network.ObjectPositionReceive();
 		receivingData = true;
 		if (incomingMessage != " ") {
 			//printf("%s Update\n", incomingMessage);
@@ -277,7 +277,6 @@ void GenericFunctions::networkUpdate() {
 		receivingData = false;
 	}
 	//network.HasReceivedChatMessage();
-	
 }
 
 bool GenericFunctions::getNetworkMenuActive() { return (networkMenu); }
