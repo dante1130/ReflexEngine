@@ -108,6 +108,24 @@ bool getIfLoad();
 void setIfLoad(bool val);
 
 /**
+ * @brief	Gets if the game should load game objects from scratch
+ * @return	bool	- If it should load
+ *
+ * @pre		Nothing
+ * @post	retrieves value
+ */
+bool getIfFullLoad();
+
+/**
+ * @brief	Set if game should load objects from scratch
+ * @param	val	- If it should load objects from scratch
+ *
+ * @pre		Nothing
+ * @post	sets value
+ */
+void setIfFullLoad(bool val);
+
+/**
  * @brief	Gets if the game should be paused
  * @return	bool	- True if game is paused
  *

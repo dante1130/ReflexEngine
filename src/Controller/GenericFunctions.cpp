@@ -6,6 +6,7 @@ static int m_seed = 0;
 
 static bool shouldSave = false;
 static bool shouldLoad = false;
+static bool shouldFullLoad = false;
 
 static int last_save_time_ = -100;
 static int last_load_time_ = -100;
@@ -52,6 +53,7 @@ void GenericFunctions::lua_access() {
 	lua.set_function("save_game", setIfSave);
 	lua.set_function("load_game", setIfLoad);
 	lua.set_function("get_load", getIfLoad);
+	lua.set_function("load_from_scratch", setIfFullLoad);
 	lua.set_function("time_since_last_save", timeAtLastSave);
 	lua.set_function("time_since_last_load", timeAtLastLoad);
 	lua.set_function("set_pause_game", setIfPaused);
@@ -133,6 +135,10 @@ void GenericFunctions::setIfLoad(bool val) {
 		last_load_time_ = glfwGetTime();
 	}
 }
+
+bool GenericFunctions::getIfFullLoad() { return shouldFullLoad; }
+
+void GenericFunctions::setIfFullLoad(bool val) { shouldFullLoad = val; }
 
 bool GenericFunctions::getIfPaused() { return EngineTime::is_paused(); }
 

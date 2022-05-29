@@ -26,7 +26,8 @@ if completed then
 
 	local isPressed = gui_button("Restart game", 200, 50)
 	if isPressed == true then
-		gui_text("WHY DID YOU PRESS ME?")
+		load_from_scratch(true)
+		load_game(true)
 	end
 	gui_end()
 end
