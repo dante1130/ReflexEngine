@@ -1,9 +1,7 @@
-#ifndef __ENTITYMANAGER_H
-#define __ENTITYMANAGER_H
+#pragma once
 
 #include <map>
 #include <string>
-#include <map>
 #include "NPC.hpp"
 
 class entityManager {
@@ -11,9 +9,11 @@ private:
 	/// to facilitate quick lookup the entities are stored in a std::map, in
 	/// which pointers to entities are cross referenced by their identifying
 	/// number
-	map<int, NPC*> entityMap;
+	std::map<int, NPC*>* entityMap = new std::map<int, NPC*>;
 
 public:
+	~entityManager();
+
 	/**
 	 * @brief	Registers a new entity to the entity manager
 	 * @param	*NewEntity	- the entity to store
@@ -49,5 +49,9 @@ public:
 	 * @brief	Removes all entitites
 	 */
 	void killEntities();
+
+	/**
+	 * @brief	Kills the manager
+	 */
+	void killManager();
 };
-#endif

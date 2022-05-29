@@ -29,15 +29,19 @@ addGameObject("scripts/gunSetup.lua")
 addGameObject("scripts/chatMenuSendSetup.lua")
 addGameObject("scripts/chatMenuReadSetup.lua")
 
-for i = 1, 25, 1 do
-	addGameObject("scripts/Human.lua")
-end
+--for i = 1, 25, 1 do
+--	addGameObject("scripts/Human.lua")
+--end
 
-for i = 1, 50, 1 do
-	addGameObject("scripts/Ghost.lua")
-end
+--for i = 1, 50, 1 do
+--	addGameObject("scripts/Ghost.lua")
+--end
 
 addGameObject("scripts/Arrow.lua")
 addGameObject("scripts/Bow.lua")
 addGameObject("scripts/Boat.lua")
 addGameObject("scripts/Lighthouse.lua")
+
+addGameObject("scripts/gui/EndGame.lua")
+addGameObject("scripts/EscapeBoat.lua")
+addGameObject("scripts/bigArrow.lua")

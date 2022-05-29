@@ -1,15 +1,20 @@
 #include "AI/NPC.hpp"
-#include "playerStates.h"
+
+#include "singletons.h"
 
 NPC::NPC(const std::string& model_name, const std::string& texture_name,
          bool is_animated, bool is_loop_)
     : m_animation(model_name, texture_name, is_animated, is_loop_) {
 	m_NPC_FSM = new stateMachine<NPC>(this);
-
+	m_animation.set_animation(md2::animation_type::JUMP);
 	m_id = idMgr.increment_count();
+	m_model_texture = texture_name;
 }
 
-NPC::~NPC() { delete m_NPC_FSM; }
+NPC::~NPC() {
+	m_NPC_FSM->free_memory();
+	delete m_NPC_FSM;
+}
 
 void NPC::init() {}
 
@@ -39,10 +44,14 @@ void NPC::draw(std::shared_ptr<Shader> shader) {
 	auto default_shader = ReflexEngine::get_instance().renderer_.get_shader();
 
 	glm::mat4 model(1.0f);
-	model =
-	    glm::translate(model, glm::vec3(position.x, position.y, position.z));
+	model = glm::translate(model,
+	                       glm::vec3(position.x, position.y + 0.5, position.z));
 	model = glm::rotate(model, glm::radians(-angle),
 	                    glm::vec3(rotation.x, rotation.y, rotation.z));
+	model =
+	    glm::rotate(model, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+	// model =
+	//     glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 	model = glm::scale(model, glm::vec3(scale.x, scale.y, scale.z));
 	glUniformMatrix4fv(shader->GetModelLocation(), 1, GL_FALSE,
 	                   glm::value_ptr(model));
@@ -53,14 +62,17 @@ void NPC::draw(std::shared_ptr<Shader> shader) {
 	    .UseMaterial(default_shader->GetShininessLocation(),
 	                 default_shader->GetSpecularIntensityLocation());
 
-	auto& model_m = ResourceManager::get_instance().get_model_manager();
-	model_m.get_model(model_name_).RenderModel();
+	// auto& model_m = ResourceManager::get_instance().get_md2_model_manager();
+	// model_m.get_md2_model(model_name_);
+	m_animation.render(EngineTime::get_delta_time());
 }
+
 void NPC::save_object() {
 	ObjectSaving::openFile();
 	ObjectSaving::saveGameObject(position, rotation, scale, angle, "NPC");
 	ObjectSaving::addComma();
 	ObjectSaving::addValue("modelName", model_name_, false);
+	ObjectSaving::addValue("model_texture", m_model_texture, false);
 	ObjectSaving::addValue("material_name", material_name_, false);
 	ObjectSaving::addValue("animate", m_animation.get_is_animated(), false);
 	ObjectSaving::addValue("loopAnimation", m_animation.get_loop(), false);
@@ -79,7 +91,7 @@ void NPC::save_object() {
 	ObjectSaving::closeStruct();
 
 	ObjectSaving::createStruct("AI");
-	ObjectSaving::addValue("setUpFSM", "setupPlayerFSM", false);
+	ObjectSaving::addValue("setUpFSM", m_setup, false);
 	ObjectSaving::addValue("faction", m_faction, false);
 	ObjectSaving::addValue("health", m_health, false);
 	ObjectSaving::addValue("power", m_power, false);
@@ -109,7 +121,7 @@ bool NPC::is_dead() { return m_dead; }
 void NPC::set_health(float new_health) { m_health = new_health; }
 float NPC::get_health() { return m_health; }
 
-void NPC::set_power(int new_power) { m_power = new_power; }
+void NPC::set_power(float new_power) { m_power = new_power; }
 float NPC::get_power() { return m_power; }
 
 int NPC::get_waypoint_count() { return m_waypoints.size(); }
@@ -125,13 +137,10 @@ void NPC::remove_waypoints() {
 	}
 }
 void NPC::use_pathfinding(float x1, float z1, float x2, float z2) {
-	// if (m_waypoints.size() != 0) {
-	//	return;
-	// }
+	std::cout << "In NPC::use_pathfinding" << x1 << "," << z1 << " : " << x2
+	          << "," << z2 << std::endl;
 	remove_waypoints();
 	m_waypoints = gameWorld.pathFinding(x1, z1, x2, z2);
-	// for (int count = 0; count < m_waypoints.size(); count++) {
-	// }
 }
 
 void NPC::new_state(std::string new_state) {
@@ -143,8 +152,8 @@ stateMachine<NPC>* NPC::get_FSM() { return m_NPC_FSM; }
 void NPC::set_faction(int new_faction) { m_faction = new_faction; }
 int NPC::get_faction() { return m_faction; }
 
-void NPC::set_enemy_target(float x, float z) { m_target_pos = glm::vec2(x, z); }
-glm::vec2 NPC::get_enemy_target() { return m_target_pos; }
+void NPC::set_enemy_target(float x, float z) { m_target_pos.set(x, z); }
+vector2D NPC::get_enemy_target() { return m_target_pos; }
 
 void NPC::set_target_id(int new_target) { m_target_id = new_target; }
 int NPC::get_target_id() { return m_target_id; }
@@ -152,25 +161,31 @@ int NPC::get_target_id() { return m_target_id; }
 void NPC::set_move_speed(float new_speed) { m_move_speed = new_speed; }
 float NPC::get_move_speed() { return m_move_speed; }
 
+void NPC::set_pos(vector2D pos) {
+	position.x = pos.getX();
+	position.z = pos.getY();
+	position.y = GenericFunctions::getHeight(position.x, position.z);
+	rb.set_position(glm::vec3(position.x, position.y, position.z));
+}
 float NPC::get_pos_x() { return position.x; }
 float NPC::get_pos_y() { return position.y; }
 float NPC::get_pos_z() { return position.z; }
 
 bool NPC::waypoint_follow(bool gen_new) {
 	if (m_waypoints.size() == 0 && gen_new) {
-		std::cout << "waypoints empty & gen new" << std::endl;
+		// std::cout << "waypoints empty & gen new" << std::endl;
 		rb.setLinearVelocity(glm::vec3(0, 0, 0));
 		return true;
 
 	} else if (m_waypoints.size() == 0) {
-		std::cout << "waypoints empty" << std::endl;
+		// std::cout << "waypoints empty" << std::endl;
 		rb.setLinearVelocity(glm::vec3(0, 0, 0));
 		return true;
 	}
 
-	if (move_NPC(m_waypoints.front().x, m_waypoints.front().y, 0)) {
-		std::cout << "removing: " << m_waypoints.front().x << " : "
-		          << m_waypoints.front().y << std::endl;
+	if (move_NPC(m_waypoints.front().x, m_waypoints.front().y, 0.5)) {
+		// std::cout << "removing: " << m_waypoints.front().x << " : "
+		//           << m_waypoints.front().y << std::endl;
 		m_waypoints.pop();
 		return true;
 	}
@@ -183,9 +198,6 @@ bool NPC::move_NPC(float x, float z, float offset) {
 
 	bool ret = ai_movement::moveTo(newPos, new_pos, glm::vec2(1, 1),
 	                               m_AI_time_elapsed, offset);
-
-	// position.x = newPos.x;
-	// position.z = newPos.y;
 
 	if (ret == false) {
 		glm::vec2 lookAt;
@@ -236,20 +248,43 @@ bool NPC::watch_for_enemyVal(float range) {
 	return false;
 }
 
-bool NPC::move_to_enemy() {
+bool NPC::move_to_enemy(float offset) {
 	NPC* npc = entityMgr.getEntityFromID(m_target_id);
 	if (npc->is_dead()) {
 		return false;
 	}
 
-	glm::vec2 newPos = glm::vec2(position.x, position.z);
-	bool ret =
-	    ai_movement::moveTo(newPos, glm::vec2(npc->position.x, npc->position.z),
-	                        glm::vec2(2, 2), m_AI_time_elapsed, 3);
-	position.x = newPos.x;
-	position.z = newPos.y;
-
-	return ret;
+	return move_NPC(npc->position.x, npc->position.z, offset);
 }
 
+void NPC::send_message(double time, int sender, int reciever, int msg,
+                       sol::object extra) {
+	messageMgr.dispatchMsg(time, sender, reciever, msg, extra);
+}
+
+void NPC::send_group_message(double time, int faction, float range, int sender,
+                             int msg, sol::object extra) {
+	glm::vec3 temp;
+	float distance;
+	for (int count = 0; count < entityMgr.numberOfEntities(); count++) {
+		if (entityMgr.getEntityByIndex(count)->m_faction != faction ||
+		    sender == entityMgr.getEntityByIndex(count)->m_id) {
+			continue;
+		}
+
+		temp = entityMgr.getEntityByIndex(count)->position;
+
+		distance = glm::length(temp - position);
+		if (distance < range) {
+			messageMgr.dispatchMsg(time, sender,
+			                       entityMgr.getEntityByIndex(count)->m_id, msg,
+			                       extra);
+		}
+	}
+}
+
+void NPC::freezeNPC() { rb.setLinearVelocity(glm::vec3(0)); }
+
 ModelData& NPC::get_animation() { return m_animation; }
+
+void NPC::setSetup(std::string set) { m_setup = set; }

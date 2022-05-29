@@ -120,12 +120,22 @@ void TestScene::loadSavedGameObjects() {
 	for (size_t count = 1; count < game_objects_.size(); count++) {
 		game_objects_[count]->remove = true;
 	}
-	// game_objects_.clear();
+
 	entityMgr.killEntities();
+
 	sol::state& lua = LuaManager::get_instance().get_state();
-	lua.script_file("scripts/save/_MasterCreation.lua");
-	std::cout << "Number of eneitites: " << entityMgr.numberOfEntities()
-	          << std::endl;
+	if (GenericFunctions::getIfFullLoad() == false) {
+		lua.script_file("scripts/save/_MasterCreation.lua");
+	} else {
+		game_objects_.clear();
+		GenericFunctions::init_random(0, true);
+		Audio& a = Audio::get_instance();
+		a.stop_all();
+		lua.script_file("scripts/_MasterCreation.lua");
+		lua.script_file("scripts/AI/_MasterCreation.lua");
+		GenericFunctions::setIfFullLoad(false);
+	}
+
 	GenericFunctions::setIfLoad(false);
 }
 

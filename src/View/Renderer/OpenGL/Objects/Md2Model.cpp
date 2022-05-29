@@ -34,7 +34,7 @@ void Md2Model::render_animated_interpolated(float delta_time) {
 void Md2Model::render_frame(int frame_num) {
 	load_frame_mesh(frame_num);
 
-	texture_->UseTexture();
+	// texture_->UseTexture();
 	mesh_->RenderMesh();
 }
 
@@ -42,7 +42,7 @@ void Md2Model::render_interpolated_frame(int frame_a, int frame_b,
                                          float interpolation) {
 	load_interpolated_frame_mesh(frame_a, frame_b, interpolation);
 
-	texture_->UseTexture();
+	// texture_->UseTexture();
 	mesh_->RenderMesh();
 }
 
@@ -146,8 +146,8 @@ void Md2Model::load_frame_mesh(int frame_num) {
 
 void Md2Model::load_interpolated_frame_mesh(int frame_a, int frame_b,
                                             float interpolation) {
-	if (frame_a < 0 || frame_a >= header_.num_frames || frame_b < 0 ||
-	    frame_b >= header_.num_frames) {
+	if ((frame_a < 0 || frame_a >= header_.num_frames || frame_b < 0 ||
+	     frame_b >= header_.num_frames)) {
 		return;
 	}
 

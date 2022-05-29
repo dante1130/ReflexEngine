@@ -65,13 +65,13 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/multiTextureCreator.cpp
 	
 	AI/messageDispatcher.cpp
-	AI/playerStates.cpp
 	AI/NPC.cpp
 	AI/entityManager.cpp
 	AI/movement.cpp
 	AI/world.cpp
 	AI/luaAccessScriptedFSM.cpp
 	AI/Counter.cpp
+	AI/vector2D.cpp
 
 	Game/Scene.hpp
 	Game/TestScene.cpp

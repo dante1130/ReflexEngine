@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Model/GameObject/PhysicsObject.hpp>
+#include "Model/GameObject/PhysicsObject.hpp"
 #include "stateMachine.h"
 #include "telegram.h"
 #include <queue>
@@ -8,6 +8,7 @@
 #include <cmath>
 #include "Model/ModelData.hpp"
 #include "Controller/ResourceManager/ObjectSaving.hpp"
+#include "AI/vector2D.hpp"
 
 class NPC : public PhysicsObject {
 public:
@@ -106,13 +107,19 @@ public:
 	 * @brief	Sets the power of the NPC
 	 * @param	new_power	- New power of the NPC
 	 */
-	void set_power(int new_power);
+	void set_power(float new_power);
 
 	/**
 	 * @brief	Gets the power of the NPC
 	 * @return	float	- Power of NPC
 	 */
 	float get_power();
+
+	/**
+	 * @brief	Sets the position of the NPC
+	 * @param	pos	- The new position you want
+	 */
+	void set_pos(vector2D pos);
 
 	/**
 	 * @brief	Gets the NPC's x position
@@ -206,7 +213,7 @@ public:
 	 * @brief	Gets the enemy target position
 	 * @return	glm::vec2	- Target position
 	 */
-	glm::vec2 get_enemy_target();
+	vector2D get_enemy_target();
 
 	/**
 	 * @brief	Sets the ID of the NPC's target
@@ -267,15 +274,50 @@ public:
 
 	/**
 	 * @brief	Moves to a targeted enemy
+	 * @param	offset	- The offset to stop at
 	 * @return	bool	- True if at destination or enemy is dead
 	 */
-	bool move_to_enemy();
+	bool move_to_enemy(float offset);
+
+	/**
+	 * @brief	Sends a message to another AI agent
+	 * @param	time		- delay before sending the message
+	 * @param	sender		- the senders ID
+	 * @param	reciever	- the recievers ID
+	 * @param	msg			- the message
+	 * @param	extra		- extra info in the message
+	 */
+	void send_message(double time, int sender, int reciever, int msg,
+	                  sol::object extra);
+
+	/**
+	 * @brief	Sends a group message to a AI faction in range
+	 * @param	time		- delay before sending the message
+	 * @param	faction		- the faction to send the message too
+	 * @param	range		- the range of the message
+	 * @param	reciever	- the recievers ID
+	 * @param	msg			- the message
+	 * @param	extra		- extra info in the message
+	 */
+	void send_group_message(double time, int faction, float range, int reciever,
+	                        int msg, sol::object extra);
+
+	/**
+	 * @brief	Sets the linear velocity to 0
+	 */
+	void freezeNPC();
 
 	/**
 	 * @brief	Gets the animation data
 	 * @return	ModelDate	- The animation data for the NPC
 	 */
 	ModelData& get_animation();
+
+	/**
+	 * @brief	Sets the setup finite state machine to call
+	 * @param	set	- The lua function which sets up the AI FSM
+	 */
+	void setSetup(std::string set);
 
 private:
 	/// NPC's unique identifier
@@ -301,9 +343,12 @@ private:
 	/// NPC's finite state machine
 	stateMachine<NPC>* m_NPC_FSM;
 	/// NPC's target position
-	glm::vec2 m_target_pos;
+	vector2D m_target_pos;
 	/// NPC's target ID
 	int m_target_id;
+
+	std::string m_setup;
+	std::string m_model_texture;
 
 	/// Data for animating
 	ModelData m_animation;

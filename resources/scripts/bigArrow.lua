@@ -1,20 +1,18 @@
 baseObject = {
-	type = "NPC",
-	xPos = 90,
-	yPos = 5,
-	zPos = 45,
+	type = "PhysicsObject",
+	xPos = 15,
+	yPos = 70,
+	zPos = 210,
 	xRotation = 0,
 	yRotation = 1,
 	zRotation = 0,
-	angle = 90,
-	xScale = 0.001,
-	yScale = 0.001,
-	zScale = 0.001,
-	modelName = "duck_A",
+	angle = 45,
+	xScale = 3,
+	yScale = 3,
+	zScale = 3,
+	modelName = "bigArrow",
 	material_name = "shiny",
-	animate = 1,
-	loopAnimation = 1,
-	rbType = 2,
+	rbType = 1,
 	gravity = 0,
 	xForce = 0,
 	yForce = 0,
@@ -28,21 +26,14 @@ baseObject = {
 	numOfColliders = 1
 }
 
-AI = {
-	setUpFSM = "setupHumanFSM",
-	faction = 1,
-	health = 100,
-	power = 1,
-	moveSpeed = 3
-}
-
 collider1 = {
-	colliderType = "Capsule",
+	colliderType = "Box",
 	xPos = 0,
 	yPos = 0,
 	zPos = 0,
-	radius = 0.25,
-	height = 3,
+	xBox = 1,
+	yBox = 4,
+	zBox = 1,
 	bounciness = 0.5,
 	friction = 0.5
 }

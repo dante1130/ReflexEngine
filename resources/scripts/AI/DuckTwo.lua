@@ -1,16 +1,16 @@
 baseObject = {
 	type = "NPC",
-	xPos = 90,
+	xPos = 70,
 	yPos = 5,
-	zPos = 45,
+	zPos = 43,
 	xRotation = 0,
 	yRotation = 1,
 	zRotation = 0,
 	angle = 90,
-	xScale = 0.001,
-	yScale = 0.001,
-	zScale = 0.001,
-	modelName = "duck_A",
+	xScale = 0.01,
+	yScale = 0.01,
+	zScale = 0.01,
+	modelName = "ghost",
 	material_name = "shiny",
 	animate = 1,
 	loopAnimation = 1,
@@ -22,17 +22,17 @@ baseObject = {
 	xTorque = 0,
 	yTorque = 0,
 	zTorque = 0,
-	linearDamping = 0,
-	angularDamping = 0,
+	linearDamping = 0.999,
+	angularDamping = 0.999,
 	sleep = 1,
 	numOfColliders = 1
 }
 
 AI = {
-	setUpFSM = "setupHumanFSM",
-	faction = 1,
+	setUpFSM = "setupDuckFSM",
+	faction = 2,
 	health = 100,
-	power = 1,
+	power = 0.25,
 	moveSpeed = 3
 }
 
