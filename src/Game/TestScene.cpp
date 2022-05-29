@@ -131,14 +131,17 @@ void TestScene::loadSavedGameObjects() {
 	}
 	// game_objects_.clear();
 	entityMgr.killEntities();
+
 	sol::state& lua = LuaManager::get_instance().get_state();
 	if (GenericFunctions::getIfFullLoad() == false) {
 		lua.script_file("scripts/save/_MasterCreation.lua");
 	} else {
-		Audio* a = &Audio::get_instance();
-		a->stop_all();
+		GenericFunctions::init_random(0, true);
+		Audio& a = Audio::get_instance();
+		a.stop_all();
 		lua.script_file("scripts/_MasterCreation.lua");
 		lua.script_file("scripts/AI/_MasterCreation.lua");
+		GenericFunctions::setIfFullLoad(false);
 	}
 
 	GenericFunctions::setIfLoad(false);

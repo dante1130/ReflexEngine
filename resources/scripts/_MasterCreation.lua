@@ -29,9 +29,9 @@ addGameObject("scripts/gunSetup.lua")
 addGameObject("scripts/chatMenuSendSetup.lua")
 addGameObject("scripts/chatMenuReadSetup.lua")
 
-for i = 1, 25, 1 do
-	addGameObject("scripts/Human.lua")
-end
+--for i = 1, 25, 1 do
+--	addGameObject("scripts/Human.lua")
+--end
 
 --for i = 1, 50, 1 do
 --	addGameObject("scripts/Ghost.lua")

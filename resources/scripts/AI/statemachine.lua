@@ -160,6 +160,8 @@ end
 
 
 state_patrol["execute"] = function(player)
+  player:stopMovement()
+
   if(player:watchForEnemy(10)) then
     local target = entityManager.getEntity(player.target_id)
     local targetPos = vector2D.new()
@@ -182,12 +184,12 @@ end
 state_patrol["onMessage"] = function(player, msg)
   if (msg.msg == 1) then
     player:set_target_position(msg.extraInfo.x, msg.extraInfo.y)
-    player.target_id = -1
-    print("Entity: ", player.id, " | Faction: ", player.faction, " | Patrol -> Search", " | Reason: Telegram recieved about target")
-    player:getFSM():changeState("state_search")
-
+    
     local pos = Audio.vec3df.new(player:getX(), player:getY(), player:getZ())
     Audio.play_3d_sound("duck_alert", pos, false, 5.0)
+
+    print("Entity: ", player.id, " | Faction: ", player.faction, " | Patrol -> Search", " | Reason: Telegram recieved about target")
+    player:getFSM():changeState("state_search")
 
   elseif (msg.msg == 5) then
     local pos = vector2D.new()
@@ -195,7 +197,6 @@ state_patrol["onMessage"] = function(player, msg)
 
     local dist = pos:length()
     if(dist < 15) then
-      player.target_id = -1 
       player:set_target_position(msg.extraInfo.x, msg.extraInfo.y)
 
       local pos = Audio.vec3df.new(player:getX(), player:getY(), player:getZ())
@@ -303,8 +304,6 @@ state_attack["execute"] = function(player)
       player:sendMessage(0, player.id, player.target_id, 2, player.power)
     end
   end
-
-
 end
 
 
@@ -335,17 +334,16 @@ local animation = player:getAnimation();
 animation:shouldAnimate(true)
 animation:shouldLoop(true)
 animation:setAnimation(animation_types.run)
-
+player.target_id = -1
 
 end
 
 
 state_search["execute"] = function(player)
-
   if(player.target_id == -1) then
+    player.target_id = -2
     local pos = player:get_target_position()
     player:pathfindToPoint(player:getX(), player:getZ(), pos.x, pos.y)
-    player.target_id = -2
   end
 
   if(player:watchForEnemy(10)) then

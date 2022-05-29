@@ -134,6 +134,8 @@ void NPC::remove_waypoints() {
 	}
 }
 void NPC::use_pathfinding(float x1, float z1, float x2, float z2) {
+	std::cout << "In NPC::use_pathfinding" << x1 << "," << z1 << " : " << x2
+	          << "," << z2 << std::endl;
 	remove_waypoints();
 	m_waypoints = gameWorld.pathFinding(x1, z1, x2, z2);
 }
@@ -168,17 +170,17 @@ float NPC::get_pos_z() { return position.z; }
 
 bool NPC::waypoint_follow(bool gen_new) {
 	if (m_waypoints.size() == 0 && gen_new) {
-		std::cout << "waypoints empty & gen new" << std::endl;
+		// std::cout << "waypoints empty & gen new" << std::endl;
 		rb.setLinearVelocity(glm::vec3(0, 0, 0));
 		return true;
 
 	} else if (m_waypoints.size() == 0) {
-		std::cout << "waypoints empty" << std::endl;
+		// std::cout << "waypoints empty" << std::endl;
 		rb.setLinearVelocity(glm::vec3(0, 0, 0));
 		return true;
 	}
 
-	if (move_NPC(m_waypoints.front().x, m_waypoints.front().y, 0)) {
+	if (move_NPC(m_waypoints.front().x, m_waypoints.front().y, 0.5)) {
 		// std::cout << "removing: " << m_waypoints.front().x << " : "
 		//           << m_waypoints.front().y << std::endl;
 		m_waypoints.pop();
@@ -193,9 +195,6 @@ bool NPC::move_NPC(float x, float z, float offset) {
 
 	bool ret = ai_movement::moveTo(newPos, new_pos, glm::vec2(1, 1),
 	                               m_AI_time_elapsed, offset);
-
-	// position.x = newPos.x;
-	// position.z = newPos.y;
 
 	if (ret == false) {
 		glm::vec2 lookAt;
