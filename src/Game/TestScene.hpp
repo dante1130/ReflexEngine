@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-#include <unordered_map>
 
 #include <glm/glm.hpp>
 
@@ -89,29 +88,10 @@ public:
 	void loadSavedGameObjects() override;
 
 	/**
-	 * @brief Adds a new game object during run time.
-	 *
-	 * @param luaScript
-	 */
-	void add_game_object_during_run(const std::string& luaScript);
-
-	/**
-	 * @brief	Add new game objects during run time.
-	 *
-	 * @pre		Added game objects stored in list
-	 * @post	Game objects loaded and stored
-	 */
-	void add_new_game_objects();
-
-	/**
 	 * @brief	Deleted game objects which are considered finished
 	 *
 	 * @pre		Game objects exists
 	 * @post	Removed bad game objects
 	 */
 	void garbage_collection();
-
-private:
-	/// Scripts for game objects to be added.
-	std::vector<std::string> to_add_;
 };
