@@ -154,8 +154,8 @@ void registerAnimation::registerModelData() {
 	player_type["shouldLoop"] = &ModelData::set_loop;
 	player_type["shouldAnimate"] = &ModelData::set_is_animated;
 
-	lua.new_enum("animation_types", "run", md2::animation_type::RUN, "attack",
-	             md2::animation_type::ATTACK, "stand",
+	lua.new_enum("animation_types", "run", md2::animation_type::CROUCH_STAND,
+	             "attack", md2::animation_type::FALLBACK, "stand",
 	             md2::animation_type::STAND, "death",
 	             md2::animation_type::DEATH_FALLBACK, "pain",
 	             md2::animation_type::PAIN_A);
