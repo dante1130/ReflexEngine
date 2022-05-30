@@ -11,5 +11,6 @@ Bindings = {
 	toggle_noclip = "z",
 	pause_game = "escape",
 	help_menu = "m",
-	network_menu = "n"
+	network_menu = "n",
+	network_pvp_menu = "p"
 }

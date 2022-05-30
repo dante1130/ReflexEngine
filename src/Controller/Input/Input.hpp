@@ -17,5 +17,6 @@ enum class Input {
 	toggle_noclip,
 	pause_game,
 	help_menu,
-	network_menu
+	network_menu,
+	network_pvp_menu
 };

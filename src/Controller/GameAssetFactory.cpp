@@ -24,6 +24,8 @@ GameObject* GameAssetFactory::create(const std::string& fileName) {
 		return load_skybox(fileName);
 	} else if (type == "Projectile") {
 		return loadProjectileObject(fileName);
+	} else if (type == "NetworkedItem") {
+		return loadNetworkedItem(fileName);
 	} else if (type == "NPC") {
 		return loadNPCObject(fileName);
 	} else if (type == "DirectionalLight") {
@@ -580,17 +582,41 @@ Projectile* GameAssetFactory::loadProjectileObject(
 	return proj;
 }
 
-NPC* GameAssetFactory::loadNPCObject(const std::string& luaScript) {
+NetworkedItem* GameAssetFactory::loadNetworkedItem(
+    const std::string& luaScript) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file(luaScript);
 
-	glm::vec3 pos, scale, rotation;
+	std::string model_name = lua["NetworkedItem"]["modelName"];
+	std::string material_name = lua["NetworkedItem"]["material_name"];
+
+	NetworkedItem* networkedItem = new NetworkedItem(model_name, material_name);
+
+	glm::vec3 pos, rotation, scale;
+	
 	float angle;
 
 	pos = loadBasePos(lua);
 	scale = loadBaseScale(lua);
 	rotation = loadBaseRotation(lua);
 	angle = loadBaseAngle(lua);
+
+	networkedItem->position = pos;
+	networkedItem->scale = scale;
+	networkedItem->rotation = rotation;
+	networkedItem->angle = angle;
+
+	return networkedItem;
+
+}
+
+NPC* GameAssetFactory::loadNPCObject(const std::string& luaScript) {
+	sol::state& lua = LuaManager::get_instance().get_state();
+	lua.script_file(luaScript);
+
+	glm::vec3 pos, scale, rotation;
+
+	float angle;
 
 	std::string model = lua["baseObject"]["modelName"];
 	std::string mat = lua["baseObject"]["material_name"];

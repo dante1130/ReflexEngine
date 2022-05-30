@@ -109,11 +109,7 @@ void networkManager::MessageSend(char* inputMessage) {
 }
 
 std::string networkManager::ReceiveMessage() {
-	// for (packet = peer->Receive(); packet;
-	// peer->DeallocatePacket(packet), packet = peer->Receive()) {
 	packet = peer->Receive();
-	// strcat(message, HandleMessage(packet));
-	// return (message);
 	connected = true;
 	if (packet) {
 		if (isServer) {
@@ -299,3 +295,48 @@ unsigned char networkManager::GetPacketIdentifier(RakNet::Packet* p) {
 	} else
 		return (unsigned char)p->data[0];
 }
+
+void networkManager::ObjectPositionSend(glm::vec3 position) {
+	RakNet::BitStream bsOut;
+	bsOut.Write((RakNet::MessageID)ID_GAME_MESSAGE_2);
+	bsOut.Write(position);
+	//printf("%f %f %f NM\n", position.x, position.y, position.z);
+	peer->Send(&bsOut, HIGH_PRIORITY, UNRELIABLE_SEQUENCED, 0,
+	           RakNet::UNASSIGNED_SYSTEM_ADDRESS, true);
+}
+
+glm::vec3 networkManager::ObjectPositionReceive() {
+	packet = peer->Receive();
+	if (packet) {
+		switch (GetPacketIdentifier(packet)) { 
+			case ID_GAME_MESSAGE_2: {
+				// RakNet::RakString rs;
+				glm::vec3 tempVec3;
+				RakNet::BitStream bsIn(packet->data, packet->length, false);
+				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
+				bsIn.Read(tempVec3);
+				// printf("%f %f %f NM\n", tempVec3.x, tempVec3.y, tempVec3.z);
+				bsIn.Reset();
+				dataMissed = false;
+				return (tempVec3);
+				break;
+			}
+			case ID_CONNECTION_REQUEST_ACCEPTED: {
+				connectedClients++;
+				break;
+			}
+			case ID_CONNECTION_LOST: {
+				connectedClients--;
+				break;
+			}
+			case ID_DISCONNECTION_NOTIFICATION: {
+				connectedClients--;
+				break;
+			}
+		}
+	}
+	peer->DeallocatePacket(packet);
+	//printf("Did not read vector correctly\n");
+	dataMissed = true;
+	return (glm::vec3(0, 0, 0));
+	}
