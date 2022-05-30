@@ -328,7 +328,8 @@ bool GenericFunctions::networkConnectionStatus() {
 	return (networkStatus);
 }
 bool GenericFunctions::networkPvPConnectionStatus() {
-	return (networkPvP.ConnectionStatus());
+	bool networkPvPStatus = networkPvP.ConnectionStatus();
+	return (networkPvPStatus);
 }
 
 void GenericFunctions::networkRetainIP(std::string savedIP) {

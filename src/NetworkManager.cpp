@@ -310,16 +310,30 @@ glm::vec3 networkManager::ObjectPositionReceive() {
 	packet = peer->Receive();
 	if (packet) {
 		switch (GetPacketIdentifier(packet)) { 
-			case ID_GAME_MESSAGE_2:
-				//RakNet::RakString rs;
+			case ID_GAME_MESSAGE_2: {
+				// RakNet::RakString rs;
 				glm::vec3 tempVec3;
 				RakNet::BitStream bsIn(packet->data, packet->length, false);
 				bsIn.IgnoreBytes(sizeof(RakNet::MessageID));
 				bsIn.Read(tempVec3);
-				//printf("%f %f %f NM\n", tempVec3.x, tempVec3.y, tempVec3.z);
+				// printf("%f %f %f NM\n", tempVec3.x, tempVec3.y, tempVec3.z);
 				bsIn.Reset();
 				dataMissed = false;
 				return (tempVec3);
+				break;
+			}
+			case ID_CONNECTION_REQUEST_ACCEPTED: {
+				connectedClients++;
+				break;
+			}
+			case ID_CONNECTION_LOST: {
+				connectedClients--;
+				break;
+			}
+			case ID_DISCONNECTION_NOTIFICATION: {
+				connectedClients--;
+				break;
+			}
 		}
 	}
 	peer->DeallocatePacket(packet);
