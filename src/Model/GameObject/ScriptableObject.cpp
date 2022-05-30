@@ -8,6 +8,8 @@ void ScriptableObject::update(double delta_time) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 
 	lua.script_file(scriptPath);
+
+	std::cout << "Finished script: " << scriptPath << std::endl;
 }
 
 void ScriptableObject::save_object() {

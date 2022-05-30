@@ -9,13 +9,15 @@
 #include <raknet/Source/MessageIdentifiers.h>
 #include <raknet/Source/Gets.h>
 #include <raknet/Source/RakSleep.h>
+#include <glm.hpp>
+#include <glm/ext.hpp>
 
 #define MAX_CLIENTS 6
 #define SERVER_PORT 60000
 
 class networkManager {
 private:
-	/// The message that was received (UNUSED AS OF NOW)
+	/// The message that was received
 	char message[512];
 
 	///	Name given to the client/server
@@ -29,6 +31,8 @@ private:
 
 	/// Have we initialsed the networkManager?
 	bool init;
+
+	bool dataMissed;
 
 	/// How many clients are we connected to? (should be 1 for clients, > 1 for servers when multiple clients)
 	int connectedClients;
@@ -160,6 +164,12 @@ public:
 
 	bool GetServer();
 
+	void ObjectPositionSend(glm::vec3 position);
+
+	glm::vec3 ObjectPositionReceive();
+
+	bool ObjectMissedData() { return dataMissed; }
+
 private:
 	/**
 	 * @brief	Gets the packet identifier and returns it.
@@ -175,6 +185,8 @@ private:
 		/// <summary>
 		/// User defined Enumeration for use in message sending
 		/// </summary>
-		ID_GAME_MESSAGE_1 = ID_USER_PACKET_ENUM + 1
+		ID_GAME_MESSAGE_1 = ID_USER_PACKET_ENUM + 1,
+		
+		ID_GAME_MESSAGE_2 = ID_USER_PACKET_ENUM + 2
 	};
 };

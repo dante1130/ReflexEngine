@@ -20,8 +20,8 @@
 #include "Controller/Terrain/TexturedTerrain.hpp"
 #include "AI/singletons.h"
 #include "Model/GameObject/Projectile.hpp"
+#include "Model/GameObject/NetworkedItem.hpp"
 #include "AI/NPC.hpp"
-
 /**
  * @class GameAssetFactory
  * @brief A parameterized factory singleton for creating GameObjects.
@@ -256,6 +256,8 @@ private:
 	 * @post	projectile object stored
 	 */
 	static Projectile* loadProjectileObject(const std::string& luaScript);
+
+	static NetworkedItem* loadNetworkedItem(const std::string& luaScript);
 
 	/**
 	 * @brief	Loads in a NPC object from a lua script

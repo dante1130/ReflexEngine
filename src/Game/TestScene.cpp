@@ -70,6 +70,10 @@ void TestScene::key_controls(double delta_time) {
 		GenericFunctions::setNetworkMenuActive(
 		    !GenericFunctions::getNetworkMenuActive());
 	}
+	if (input_manager.get_key_state(Input::network_pvp_menu).is_key_pressed()) {
+		GenericFunctions::setPvPNetworkMenuActive(
+		    !GenericFunctions::getPvPNetworkMenuActive());
+	}
 
 	if (input_manager.get_key_state(Input::shoot).is_key_pressed()) {
 		GenericFunctions::setIfShouldShoot(true);
@@ -91,8 +95,8 @@ void TestScene::add_draw_call() {
 void TestScene::update(double delta_time) {
 	garbage_collection();
 
-	for (auto& game_object : game_objects_) {
-		game_object->update(delta_time);
+	for (size_t i = 0; i < game_objects_.size(); i++) {
+		game_objects_.at(i)->update(delta_time);
 	}
 
 	Audio::get_instance().update_listener();
@@ -105,6 +109,7 @@ void TestScene::fixed_update(double delta_time) {
 	for (auto& game_object : game_objects_) {
 		game_object->fixed_update(delta_time);
 	}
+	GenericFunctions::networkFixedUpdate();
 }
 
 void TestScene::saveGameObjects() {
