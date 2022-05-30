@@ -73,6 +73,8 @@ target_sources(${PROJECT_NAME} PRIVATE
 	AI/Counter.cpp
 	AI/vector2D.cpp
 
+	PhysicsTemp/physicsEntityManager.cpp
+
 	Game/Scene.hpp
 	Game/TestScene.cpp
 )
