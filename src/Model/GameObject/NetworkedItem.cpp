@@ -14,7 +14,7 @@ void NetworkedItem::add_draw_call() {
 }
 //
 
-void NetworkedItem::update(float delta_time) {
+void NetworkedItem::update(double delta_time) {
 	if (GenericFunctions::getReceivingData()) {
 		position.x = GenericFunctions::getNetworkPosX();
 		position.y = GenericFunctions::getNetworkPosY();
