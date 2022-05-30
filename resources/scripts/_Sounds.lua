@@ -1,3 +1,6 @@
 Audio.set_master_volume(0.25)
 Audio.load_audio("duckandcover", "sounds/gamefast.wav")
-Audio.play_sound("duckandcover", false)
+Audio.load_audio("ghost_woo", "sounds/ghostNoise.wav")
+Audio.load_audio("duck_shout", "sounds/duckWarCry.wav")
+Audio.load_audio("duck_alert", "sounds/duckAlert.wav")
+Audio.load_audio("congrats", "sounds/congrats.wav")

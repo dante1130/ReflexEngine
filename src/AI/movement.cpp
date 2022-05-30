@@ -16,7 +16,7 @@
  *            offset is the distance to stop prior to reaching the target. *
  *********************************************************************************************/
 bool ai_movement::moveTo(glm::vec2& curPos, const glm::vec2& targetPos,
-                         glm::vec2& curVelocity, double timeElapsed,
+                         glm::vec2 curVelocity, double timeElapsed,
                          double offset) {
 	bool xdone = false, zdone = false;
 	glm::vec2 newPos;

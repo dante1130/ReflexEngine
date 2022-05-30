@@ -6,6 +6,7 @@ static int m_seed = 0;
 
 static bool shouldSave = false;
 static bool shouldLoad = false;
+static bool shouldFullLoad = false;
 
 static int last_save_time_ = -100;
 static int last_load_time_ = -100;
@@ -59,6 +60,7 @@ void GenericFunctions::lua_access() {
 	lua.set_function("save_game", setIfSave);
 	lua.set_function("load_game", setIfLoad);
 	lua.set_function("get_load", getIfLoad);
+	lua.set_function("load_from_scratch", setIfFullLoad);
 	lua.set_function("time_since_last_save", timeAtLastSave);
 	lua.set_function("time_since_last_load", timeAtLastLoad);
 	lua.set_function("set_pause_game", setIfPaused);
@@ -111,14 +113,15 @@ void GenericFunctions::lua_access() {
 	lua.set_function("set_if_should_shoot", setIfShouldShoot);
 	lua.set_function("get_if_should_shoot", getIfShouldShoot);
 	lua.set_function("get_y_coord_on_floor", getHeight);
+	lua.set_function("vector2Length", getLength);
 }
 //
 int GenericFunctions::get_window_width() {
-	return ReflexEngine::get_instance().window_.GetBufferWidth();
+	return ReflexEngine::get_instance().window_.get_buffer_width();
 }
 
 int GenericFunctions::get_window_height() {
-	return ReflexEngine::get_instance().window_.GetBufferHeight();
+	return ReflexEngine::get_instance().window_.get_buffer_height();
 }
 
 int GenericFunctions::get_random(int min, int max) {
@@ -151,6 +154,10 @@ void GenericFunctions::setIfLoad(bool val) {
 		last_load_time_ = glfwGetTime();
 	}
 }
+
+bool GenericFunctions::getIfFullLoad() { return shouldFullLoad; }
+
+void GenericFunctions::setIfFullLoad(bool val) { shouldFullLoad = val; }
 
 bool GenericFunctions::getIfPaused() { return EngineTime::is_paused(); }
 
@@ -290,15 +297,13 @@ void GenericFunctions::networkEnd() {
 	}
 }
 
-void GenericFunctions::networkUpdate() {
-	
+void GenericFunctions::networkUpdate() {	
 	if (createNetwork && networkConnected){
 		incomingMessage = network.ReceiveMessage();
 		if (incomingMessage != " ") {
-			//printf("%s Update\n", incomingMessage);
+			// printf("%s Update\n", incomingMessage);
 		}
 	}
-	//network.HasReceivedChatMessage();
 }
 
 void GenericFunctions::networkFixedUpdate() {
@@ -348,7 +353,7 @@ std::string GenericFunctions::networkReturnRetainedMessage() {
 	return (message);
 }
 
-void GenericFunctions::networkSendMessage() { 
+void GenericFunctions::networkSendMessage() {
 	char messageChar[512];
 	if (network.GetServer()) {
 		strcpy(messageChar, message.c_str());
@@ -360,11 +365,9 @@ void GenericFunctions::networkSendMessage() {
 	networkGetMessage();
 }
 
-std::string GenericFunctions::networkGetMessage() {
-	return incomingMessage;
-}
+std::string GenericFunctions::networkGetMessage() { return incomingMessage; }
 
-bool GenericFunctions::networkValidChatMessage(){
+bool GenericFunctions::networkValidChatMessage() {
 	return network.HasReceivedChatMessage();
 }
 
@@ -378,7 +381,7 @@ void GenericFunctions::networkRetainUsername(std::string savedUsername) {
 	}
 }
 
-void GenericFunctions::networkSetUsername() { 
+void GenericFunctions::networkSetUsername() {
 	char messageChar[512];
 	if (network.GetServer()) {
 		strcpy(messageChar, "Changed their name to ");
@@ -391,9 +394,7 @@ void GenericFunctions::networkSetUsername() {
 	network.ChangeName(username);
 }
 
-std::string GenericFunctions::networkReturnUsername() { 
-	return (username); 
-}
+std::string GenericFunctions::networkReturnUsername() { return (username); }
 
 std::string GenericFunctions::networkReturnRetainedIP() {
 	return (currentIPAddress);
@@ -418,7 +419,10 @@ float GenericFunctions::getNetworkPosY() { return opponentPos.y; }
 
 float GenericFunctions::getNetworkPosZ() { return opponentPos.z; }
 
-bool GenericFunctions::getReceivingData() { 
-	//printf("doing get receiving data now\n");
+bool GenericFunctions::getReceivingData() {
+	// printf("doing get receiving data now\n");
 	return !networkPvP.ObjectMissedData();
+}
+float GenericFunctions::getLength(float x, float y) {
+	return sqrt(pow(x, 2) + pow(y, 2));
 }

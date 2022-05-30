@@ -255,7 +255,7 @@ void BttController::Update(glm::vec3 position) {
 void BttController::GenerateVertices(int chunkSize, int chunkDetail) {
 	int length = chunk_detail + ((chunk_detail - 1) * (chunk_size - 1));
 
-	      if (!heightmap_) {
+	if (!heightmap_) {
 		std::cout << "No heightmap detected!" << std::endl;
 	}
 
@@ -285,6 +285,11 @@ void BttController::GenerateVertices(int chunkSize, int chunkDetail) {
 }
 
 void BttController::set_height_map_size(float size) { height_map_size = size; }
+
+void BttController::set_texture_id(GLuint id) {
+	texture_ = std::make_shared<Texture>();
+	texture_->set_texture_id(id);
+}
 
 bool BttController::load_texture(const char* file_name) {
 	texture_ = std::make_shared<Texture>(file_name);

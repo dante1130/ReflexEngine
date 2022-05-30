@@ -9,20 +9,28 @@ void OpenGL::init() {
 		std::cout << "Failed to initialize GLAD" << std::endl;
 	}
 
-	glViewport(0, 0, engine.window_.GetBufferWidth(),
-	           engine.window_.GetBufferHeight());
-
+	glViewport(0, 0, engine.window_.get_buffer_width(),
+	           engine.window_.get_buffer_height());
+	//
+	// Enable depth testing.
 	glEnable(GL_DEPTH_TEST);
+	// Enable face culling.
 	glEnable(GL_CULL_FACE);
+	// Enable blending. (For transparency)
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+	// Default shader.
 	shader_ = std::make_shared<Shader>();
 	shader_->CompileFile("shaders/shader.vert", "shaders/shader.frag");
 
+	// Directional shadow shader.
 	directional_shadow_shader_ = std::make_shared<Shader>();
 	directional_shadow_shader_->CompileFile(
 	    "shaders/directional_shadow_map.vert",
 	    "shaders/directional_shadow_map.frag");
 
+	// Omni shadow shader.
 	omni_shadow_shader_ = std::make_shared<Shader>();
 	omni_shadow_shader_->CompileFile("shaders/omni_shadow_map.vert",
 	                                 "shaders/omni_shadow_map.geom",
@@ -38,7 +46,6 @@ void OpenGL::draw() {
 	draw_calls_.clear();
 }
 
-float m_last_time = 0;
 void OpenGL::render_scene(std::shared_ptr<Shader> shader) {
 	for (const auto& draw_call : draw_calls_) {
 		draw_call(shader);
@@ -48,17 +55,14 @@ void OpenGL::render_scene(std::shared_ptr<Shader> shader) {
 void OpenGL::render_pass() {
 	auto& engine = ReflexEngine::get_instance();
 
-	GLint width = engine.window_.GetBufferWidth();
-	GLint height = engine.window_.GetBufferHeight();
-
-	glViewport(0, 0, width, height);
+	glViewport(0, 0, engine.window_.get_buffer_width(),
+	           engine.window_.get_buffer_height());
 
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glm::mat4 projection = glm::perspective(
-	    glm::radians(60.0f),
-	    static_cast<float>(width) / static_cast<float>(height), 0.1f, 1000.0f);
+	    glm::radians(60.0f), engine.window_.get_ratio(), 0.1f, 1000.0f);
 
 	glm::mat4 view = engine.camera_.calc_view_matrix();
 
@@ -84,9 +88,6 @@ void OpenGL::render_pass() {
 void OpenGL::render_lights() {
 	for (const auto& d_light : directional_lights_) {
 		shader_->SetDirectionalLight(d_light);
-		shader_->SetDirectionalLightTransform(
-		    d_light.CalculateLightTransform());
-		d_light.GetShadowMap()->Read(GL_TEXTURE2);
 	}
 
 	shader_->SetPointLights(point_lights_.data(), point_lights_.size(), 3, 0);
@@ -133,18 +134,32 @@ void OpenGL::set_skybox(const std::vector<std::string>& faces) {
 	skybox_ = Skybox(faces);
 }
 
-void OpenGL::add_directional_light(const DirectionalLight& light) {
-	directional_lights_.push_back(light);
+void OpenGL::add_directional_light(const DirectionalLightData& light) {
+	directional_lights_.emplace_back(
+	    DirectionalLight(2048, 2048, light.color, light.ambient_intensity,
+	                     light.direction, light.diffuse_intensity));
 }
 
-void OpenGL::add_point_light(const PointLight& light) {
-	if (point_lights_.size() < MAX_POINT_LIGHTS) point_lights_.push_back(light);
+void OpenGL::add_point_light(const PointLightData& light_data) {
+	if (point_lights_.size() < MAX_POINT_LIGHTS) {
+		point_lights_.emplace_back(PointLight(
+		    2048, 2048, 0.01f, 100.0f, light_data.color,
+		    light_data.ambient_intensity, light_data.diffuse_intensity,
+		    light_data.position, light_data.constant, light_data.linear,
+		    light_data.quadratic));
+	}
 }
 
-void OpenGL::add_spot_light(const SpotLight& light) {
-	if (spot_lights_.size() < MAX_SPOT_LIGHTS) spot_lights_.push_back(light);
+void OpenGL::add_spot_light(const SpotLightData& light_data) {
+	if (spot_lights_.size() < MAX_SPOT_LIGHTS) {
+		spot_lights_.emplace_back(SpotLight(
+		    2048, 2048, 0.01f, 100.0f, light_data.color,
+		    light_data.ambient_intensity, light_data.diffuse_intensity,
+		    light_data.position, light_data.direction, light_data.constant,
+		    light_data.linear, light_data.quadratic, light_data.edge));
+	}
 }
 
 void OpenGL::add_draw_call(const DrawCall& draw_call) {
-	draw_calls_.push_back(draw_call);
+	draw_calls_.emplace_back(draw_call);
 }

@@ -14,11 +14,14 @@
 #include "Model/GameObject/ScriptableObject.hpp"
 #include "Model/GameObject/TerrainObject.hpp"
 #include "Model/GameObject/SkyboxObject.hpp"
+#include "Model/GameObject/DirectionalLightObject.hpp"
+#include "Model/GameObject/PointLightObject.hpp"
+#include "Model/GameObject/SpotLightObject.hpp"
 #include "Controller/Terrain/TexturedTerrain.hpp"
 #include "AI/singletons.h"
 #include "Model/GameObject/Projectile.hpp"
 #include "Model/GameObject/NetworkedItem.hpp"
-
+#include "AI/NPC.hpp"
 /**
  * @class GameAssetFactory
  * @brief A parameterized factory singleton for creating GameObjects.
@@ -219,6 +222,31 @@ private:
 	static SkyboxObject* load_skybox(const std::string& lua_script);
 
 	/**
+	 * @brief Loads in a directional light object from a lua script
+	 *
+	 * @param lua_script
+	 * @return DirectionalLightObject*
+	 */
+	static DirectionalLightObject* load_directional_light(
+	    const std::string& lua_script);
+
+	/**
+	 * @brief Loads in a point light object from a lua script
+	 *
+	 * @param lua_script
+	 * @return PointLightObject*
+	 */
+	static PointLightObject* load_point_light(const std::string& lua_script);
+
+	/**
+	 * @brief Loads in a spot light object from a lua script
+	 *
+	 * @param lua_script
+	 * @return SpotLightObject*
+	 */
+	static SpotLightObject* load_spot_light(const std::string& lua_script);
+
+	/**
 	 * @brief	Loads in a projectile object from a lua script
 	 * @param	luaScript	- The lua script to load the projectile data
 	 * from
@@ -227,7 +255,20 @@ private:
 	 * @pre		projectile object varaible exists
 	 * @post	projectile object stored
 	 */
-	static Projectile* loadProjectileObject(std::string luaScript);
+	static Projectile* loadProjectileObject(const std::string& luaScript);
 
 	static NetworkedItem* loadNetworkedItem(const std::string& luaScript);
+
+	static Projectile* loadProjectileObject(const std::string& luaScript);
+
+	/**
+	 * @brief	Loads in a NPC object from a lua script
+	 * @param	luaScript	- The lua script to load the NPC data
+	 * from
+	 * @return	*NPC		- Created NPC object
+	 *
+	 * @pre		NPC object varaible exists
+	 * @post	NPC object stored
+	 */
+	static NPC* loadNPCObject(const std::string& luaScript);
 };

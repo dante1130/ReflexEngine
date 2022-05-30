@@ -23,14 +23,14 @@ public:
 	 * @pre	Nothing
 	 * @post	Object adde
 	 */
-	virtual void addGameObject(std::string luaScript) = 0;
+	virtual void addGameObject(const std::string& luaScript) = 0;
 
 	/**
 	 * @brief The function to specify controls for the keyboard.
 	 *
 	 * @param delta_time	- The time between frames
 	 */
-	virtual void key_controls(float delta_time) = 0;
+	virtual void key_controls(double delta_time) = 0;
 
 	/**
 	 * @brief The function to specify controls for the mouse.
@@ -38,21 +38,21 @@ public:
 	 * @param xpos	- the x position of mouse on screen
 	 * @param ypos	- the y position of mouse on screen
 	 */
-	virtual void mouse_controls(float xpos, float ypos) = 0;
+	virtual void mouse_controls(double xpos, double ypos) = 0;
 
 	/**
 	 * @brief The update loop of the scene.
 	 *
 	 * @param delta_time	- the time between frames
 	 */
-	virtual void update(float delta_time) = 0;
+	virtual void update(double delta_time) = 0;
 
 	/**
 	 * @brief The fixed update loop of the scene.
 	 *
 	 * @param delta_time
 	 */
-	virtual void fixed_update(float delta_time) = 0;
+	virtual void fixed_update(double delta_time) = 0;
 
 	/**
 	 * @brief Adds any draw calls to the renderer.

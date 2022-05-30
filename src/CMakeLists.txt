@@ -13,6 +13,10 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Model/GameObject/Player.cpp
 	Model/GameObject/TerrainObject.cpp
 	Model/GameObject/SkyboxObject.cpp
+	Model/GameObject/DirectionalLightObject.cpp
+	Model/GameObject/PointLightObject.cpp
+	Model/GameObject/SpotLightObject.cpp
+	Model/LightData.hpp
 	Model/ModelData.cpp
 	Model/GameObject/Projectile.cpp
 	Model/GameObject/NetworkedItem.cpp
@@ -34,6 +38,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	View/guiManager.cpp
 
 	Controller/ReflexEngine/ReflexEngine.cpp
+	Controller/ReflexEngine/EngineTime.cpp
 	Controller/ReflexEngine/Window.cpp
 	Controller/ReflexEngine/Camera.cpp
 	Controller/ResourceManager/ResourceManager.cpp
@@ -50,7 +55,6 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/Pathfinding/AStar.cpp
 	Controller/Pathfinding/AStarInterface.cpp
 	Controller/Terrain/Terrain.cpp
-	Controller/Terrain/BruteForceTerrain.cpp
 	Controller/Terrain/BTT.cpp
 	Controller/Terrain/BttController.cpp
 	Controller/Terrain/TexturedTerrain.cpp
@@ -58,18 +62,17 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/LuaManager.cpp
 	Controller/Physics/Physics.cpp
 	Controller/Physics/BodyRigidPhysics.cpp
-	Controller/GuiLuaAccess.cpp
 	Controller/GenericFunctions.cpp
 	Controller/multiTextureCreator.cpp
 	
 	AI/messageDispatcher.cpp
-	AI/playerStates.cpp
 	AI/NPC.cpp
 	AI/entityManager.cpp
 	AI/movement.cpp
 	AI/world.cpp
-
-	AI/EngineTime.cpp
+	AI/luaAccessScriptedFSM.cpp
+	AI/Counter.cpp
+	AI/vector2D.cpp
 
 	Game/Scene.hpp
 	Game/TestScene.cpp

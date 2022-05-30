@@ -2,7 +2,7 @@
 
 GameObject* GameAssetFactory::create(const std::string& fileName) {
 	if (fileName.length() == 0 || isLuaScript(fileName) == false) {
-		return nullptr;
+		assert("Not a valid lua script file!" && 0);
 	}
 
 	std::string type = getObjectType(fileName);
@@ -26,6 +26,14 @@ GameObject* GameAssetFactory::create(const std::string& fileName) {
 		return loadProjectileObject(fileName);
 	} else if (type == "NetworkedItem") {
 		return loadNetworkedItem(fileName);
+	} else if (type == "NPC") {
+		return loadNPCObject(fileName);
+	} else if (type == "DirectionalLight") {
+		return load_directional_light(fileName);
+	} else if (type == "PointLight") {
+		return load_point_light(fileName);
+	} else if (type == "SpotLight") {
+		return load_spot_light(fileName);
 	} else {
 		assert("Object type not found" && 0);
 		return nullptr;
@@ -272,6 +280,11 @@ void GameAssetFactory::loadBoxCollider(int count, PhysicsObject* po,
 	float friction = lua[collider]["friction"];
 
 	po->addBoxCollider(posV, boxV, bounciness, friction);
+
+	if (po->getType() != 2) {
+		gameWorld.create_box_obstruction(po->position.x, po->position.z,
+		                                 boxV.x * 2, boxV.z * 2);
+	}
 }
 
 void GameAssetFactory::loadSphereCollider(int count, PhysicsObject* po,
@@ -288,6 +301,10 @@ void GameAssetFactory::loadSphereCollider(int count, PhysicsObject* po,
 	float friction = lua[collider]["friction"];
 
 	po->addSphereCollider(posV, radius, bounciness, friction);
+	if (po->getType() != 2) {
+		gameWorld.create_sphere_obstruction(po->position.x, po->position.z,
+		                                    radius);
+	}
 }
 
 void GameAssetFactory::loadCapsuleCollider(int count, PhysicsObject* po,
@@ -305,6 +322,10 @@ void GameAssetFactory::loadCapsuleCollider(int count, PhysicsObject* po,
 	float friction = lua[collider]["friction"];
 
 	po->addCapsuleCollider(posV, radius, height, bounciness, friction);
+	if (po->getType() != 2) {
+		gameWorld.create_sphere_obstruction(po->position.x, po->position.z,
+		                                    radius);
+	}
 }
 
 void GameAssetFactory::loadExtraPhysicObjectSettings(PhysicsObject* po,
@@ -437,7 +458,85 @@ SkyboxObject* GameAssetFactory::load_skybox(const std::string& lua_script) {
 
 	return skybox;
 }
-Projectile* GameAssetFactory::loadProjectileObject(std::string luaScript) {
+
+DirectionalLightObject* GameAssetFactory::load_directional_light(
+    const std::string& lua_script) {
+	sol::state& lua = LuaManager::get_instance().get_state();
+
+	lua.script_file(lua_script);
+
+	DirectionalLightData light_data;
+
+	light_data.color.x = lua["light"]["color"]["r"];
+	light_data.color.y = lua["light"]["color"]["g"];
+	light_data.color.z = lua["light"]["color"]["b"];
+	light_data.ambient_intensity = lua["light"]["ambient_intensity"];
+	light_data.diffuse_intensity = lua["light"]["diffuse_intensity"];
+	light_data.direction.x = lua["light"]["direction"]["x"];
+	light_data.direction.y = lua["light"]["direction"]["y"];
+	light_data.direction.z = lua["light"]["direction"]["z"];
+
+	DirectionalLightObject* d_light = new DirectionalLightObject(light_data);
+
+	return d_light;
+}
+
+PointLightObject* GameAssetFactory::load_point_light(
+    const std::string& lua_script) {
+	sol::state& lua = LuaManager::get_instance().get_state();
+
+	lua.script_file(lua_script);
+
+	PointLightData light_data;
+
+	light_data.color.x = lua["light"]["color"]["r"];
+	light_data.color.y = lua["light"]["color"]["g"];
+	light_data.color.z = lua["light"]["color"]["b"];
+	light_data.ambient_intensity = lua["light"]["ambient_intensity"];
+	light_data.diffuse_intensity = lua["light"]["diffuse_intensity"];
+	light_data.position.x = lua["light"]["position"]["x"];
+	light_data.position.y = lua["light"]["position"]["y"];
+	light_data.position.z = lua["light"]["position"]["z"];
+	light_data.constant = lua["light"]["constant"];
+	light_data.linear = lua["light"]["linear"];
+	light_data.quadratic = lua["light"]["quadratic"];
+
+	PointLightObject* p_light = new PointLightObject(light_data);
+
+	return p_light;
+}
+
+SpotLightObject* GameAssetFactory::load_spot_light(
+    const std::string& lua_script) {
+	sol::state& lua = LuaManager::get_instance().get_state();
+
+	lua.script_file(lua_script);
+
+	SpotLightData light_data;
+
+	light_data.color.x = lua["light"]["color"]["r"];
+	light_data.color.y = lua["light"]["color"]["g"];
+	light_data.color.z = lua["light"]["color"]["b"];
+	light_data.ambient_intensity = lua["light"]["ambient_intensity"];
+	light_data.diffuse_intensity = lua["light"]["diffuse_intensity"];
+	light_data.position.x = lua["light"]["position"]["x"];
+	light_data.position.y = lua["light"]["position"]["y"];
+	light_data.position.z = lua["light"]["position"]["z"];
+	light_data.constant = lua["light"]["constant"];
+	light_data.linear = lua["light"]["linear"];
+	light_data.quadratic = lua["light"]["quadratic"];
+	light_data.direction.x = lua["light"]["direction"]["x"];
+	light_data.direction.y = lua["light"]["direction"]["y"];
+	light_data.direction.z = lua["light"]["direction"]["z"];
+	light_data.edge = lua["light"]["edge"];
+
+	SpotLightObject* s_light = new SpotLightObject(light_data);
+
+	return s_light;
+}
+
+Projectile* GameAssetFactory::loadProjectileObject(
+    const std::string& luaScript) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file(luaScript);
 
@@ -482,7 +581,8 @@ Projectile* GameAssetFactory::loadProjectileObject(std::string luaScript) {
 	return proj;
 }
 
-NetworkedItem* GameAssetFactory::loadNetworkedItem(const std::string& luaScript) {
+NetworkedItem* GameAssetFactory::loadNetworkedItem(
+    const std::string& luaScript) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file(luaScript);
 
@@ -492,6 +592,7 @@ NetworkedItem* GameAssetFactory::loadNetworkedItem(const std::string& luaScript)
 	NetworkedItem* networkedItem = new NetworkedItem(model_name, material_name);
 
 	glm::vec3 pos, rotation, scale;
+	
 	float angle;
 
 	pos = loadBasePos(lua);
@@ -505,4 +606,62 @@ NetworkedItem* GameAssetFactory::loadNetworkedItem(const std::string& luaScript)
 	networkedItem->angle = angle;
 
 	return networkedItem;
+
+}
+
+NPC* GameAssetFactory::loadNPCObject(const std::string& luaScript) {
+	sol::state& lua = LuaManager::get_instance().get_state();
+	lua.script_file(luaScript);
+
+	glm::vec3 pos, scale, rotation;
+
+	float angle;
+
+	std::string model = lua["baseObject"]["modelName"];
+	std::string mat = lua["baseObject"]["material_name"];
+	std::string model_texture = lua["baseObject"]["model_texture"];
+	int animate = lua["baseObject"]["animate"];
+	int loopAnimation = lua["baseObject"]["loopAnimation"];
+	NPC* npc = new NPC(model, model_texture, animate, loopAnimation);
+	npc->initModel(model, mat);
+	npc->position = pos;
+	npc->scale = scale;
+	npc->rotation = rotation;
+	npc->angle = angle;
+
+	npc->initRB(npc->position, npc->rotation, npc->angle);
+	loadExtraPhysicObjectSettings(npc, lua);
+
+	int size = lua["baseObject"]["numOfColliders"];
+	std::string colliderType = "Box";
+
+	for (int count = 1; count <= size; count++) {
+		colliderType = lua["collider" + std::to_string(count)]["colliderType"];
+		if (colliderType == "Box") {
+			loadBoxCollider(count, npc, lua);
+		} else if (colliderType == "Sphere") {
+			loadSphereCollider(count, npc, lua);
+		} else if (colliderType == "Capsule") {
+			loadCapsuleCollider(count, npc, lua);
+		}
+	}
+
+	int faction = lua["AI"]["faction"];
+	float health = lua["AI"]["health"];
+	float power = lua["AI"]["power"];
+
+	npc->set_faction(faction);
+	npc->set_health(health);
+	npc->set_power(power);
+	npc->set_move_speed(lua["AI"]["moveSpeed"]);
+
+	// Sets up Finite State Machine
+	std::string script = lua["AI"]["setUpFSM"];
+	npc->setSetup(script);
+
+	sol::function exe = lua[script];
+	exe(npc);
+
+	entityMgr.registerEntity(npc);
+	return npc;
 }

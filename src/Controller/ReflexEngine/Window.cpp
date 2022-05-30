@@ -2,35 +2,14 @@
 
 #include "Controller/Input/InputManager.hpp"
 
-Window::Window()
-    : m_mainWindow(nullptr),
-      m_width(0),
-      m_height(0),
-      m_bufferWidth(0),
-      m_bufferHeight(0),
-      m_xPrev(0),
-      m_yPrev(0),
-      m_xOffset(0),
-      m_yOffset(0),
-      m_isFirstMouse(false) {}
+Window::Window(int window_width, int window_height)
+    : main_window_(nullptr), width_(window_width), height_(window_height) {}
 
-Window::Window(int windowWidth, int windowHeight)
-    : m_mainWindow(nullptr),
-      m_width(windowWidth),
-      m_height(windowHeight),
-      m_bufferWidth(0),
-      m_bufferHeight(0),
-      m_xPrev(0),
-      m_yPrev(0),
-      m_xOffset(0),
-      m_yOffset(0),
-      m_isFirstMouse(false) {}
-
-int Window::Init() {
+bool Window::init() {
 	if (!glfwInit()) {
 		std::cout << "GLFW init failed!" << std::endl;
 		glfwTerminate();
-		return 1;
+		return false;
 	}
 
 	GLFWmonitor* monitor = glfwGetPrimaryMonitor();
@@ -45,85 +24,97 @@ int Window::Init() {
 	glfwWindowHint(GLFW_GREEN_BITS, mode->greenBits);
 	glfwWindowHint(GLFW_BLUE_BITS, mode->blueBits);
 	glfwWindowHint(GLFW_REFRESH_RATE, mode->refreshRate);
+	glfwWindowHint(GLFW_MAXIMIZED, GL_TRUE);
 
-	if (m_width == 0 || m_height == 0) {
-		m_width = mode->width;
-		m_height = mode->height;
+	if (width_ == 0 || height_ == 0) {
+		width_ = mode->width;
+		height_ = mode->height;
 	}
 
-	m_mainWindow =
-	    glfwCreateWindow(m_width, m_height, "ReflexBullet", nullptr, nullptr);
+	main_window_ =
+	    glfwCreateWindow(width_, height_, "ReflexBullet", nullptr, nullptr);
 
-	if (!m_mainWindow) {
+	if (!main_window_) {
 		std::cout << "GLFW window creation failed!" << std::endl;
-		glfwDestroyWindow(m_mainWindow);
+		glfwDestroyWindow(main_window_);
 		glfwTerminate();
-		return 1;
+		return false;
 	}
 
-	glfwGetFramebufferSize(m_mainWindow, &m_bufferWidth, &m_bufferHeight);
+	glfwGetFramebufferSize(main_window_, &buffer_width_, &buffer_height_);
 
-	glfwMakeContextCurrent(m_mainWindow);
+	glfwMakeContextCurrent(main_window_);
 
 	glfwSwapInterval(0);
 
-	CreateCallbacks();
-	glfwSetInputMode(m_mainWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	create_callbacks();
+	glfwSetInputMode(main_window_, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-	glfwSetWindowUserPointer(m_mainWindow, this);
+	glfwSetWindowUserPointer(main_window_, this);
 
-	return 0;
+	return true;
 }
 
-void Window::CreateCallbacks() {
-	glfwSetCursorPosCallback(m_mainWindow, Window::HandleMouse);
+GLFWwindow* Window::get_window() const { return main_window_; }
+
+void Window::create_callbacks() {
+	glfwSetCursorPosCallback(main_window_, Window::HandleMouse);
 }
 
 void Window::HandleMouse(GLFWwindow* window, double xPos, double yPos) {
 	Window* currWindow = static_cast<Window*>(glfwGetWindowUserPointer(window));
 
-	if (currWindow->m_isFirstMouse) {
-		currWindow->m_xPrev = xPos;
-		currWindow->m_yPrev = yPos;
-		currWindow->m_isFirstMouse = false;
+	if (currWindow->is_first_mouse_) {
+		currWindow->prev_x_ = xPos;
+		currWindow->prev_y_ = yPos;
+		currWindow->is_first_mouse_ = false;
 	}
 
-	currWindow->m_xOffset = xPos - currWindow->m_xPrev;
-	currWindow->m_yOffset = currWindow->m_yPrev - yPos;
+	currWindow->offset_x_ = xPos - currWindow->prev_x_;
+	currWindow->offset_y_ = currWindow->prev_y_ - yPos;
 
-	currWindow->m_xPrev = xPos;
-	currWindow->m_yPrev = yPos;
+	currWindow->prev_x_ = xPos;
+	currWindow->prev_y_ = yPos;
 }
 
-int Window::GetBufferWidth() const { return m_bufferWidth; }
+float Window::get_ratio() const {
+	return static_cast<float>(buffer_width_) /
+	       static_cast<float>(buffer_height_);
+}
 
-int Window::GetBufferHeight() const { return m_bufferHeight; }
+int Window::get_buffer_width() const { return buffer_width_; }
 
-double Window::GetXOffset() {
-	GLdouble offset = m_xOffset;
-	m_xOffset = 0.0;
+int Window::get_buffer_height() const { return buffer_height_; }
+
+double Window::get_x_offset() {
+	GLdouble offset = offset_x_;
+	offset_x_ = 0.0;
 
 	return offset;
 }
 
-double Window::GetYOffset() {
-	GLdouble offset = m_yOffset;
-	m_yOffset = 0.0;
+double Window::get_y_offset() {
+	GLdouble offset = offset_y_;
+	offset_y_ = 0.0;
 
 	return offset;
 }
 
 void Window::set_should_close(bool should_close) {
-	glfwSetWindowShouldClose(m_mainWindow, should_close);
+	glfwSetWindowShouldClose(main_window_, should_close);
 }
 
-bool Window::IsShouldClose() const {
-	return glfwWindowShouldClose(m_mainWindow);
+bool Window::is_should_close() const {
+	return glfwWindowShouldClose(main_window_);
 }
 
-void Window::SwapBuffers() { glfwSwapBuffers(m_mainWindow); }
+void Window::update_window_buffer_size() {
+	glfwGetFramebufferSize(main_window_, &buffer_width_, &buffer_height_);
+}
+
+void Window::swap_buffers() { glfwSwapBuffers(main_window_); }
 
 Window::~Window() {
-	glfwDestroyWindow(m_mainWindow);
+	glfwDestroyWindow(main_window_);
 	glfwTerminate();
 }

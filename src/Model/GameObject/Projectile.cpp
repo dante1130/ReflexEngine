@@ -2,7 +2,7 @@
 
 void Projectile::init() {}
 
-void Projectile::update(float delta_time) {
+void Projectile::update(double delta_time) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 
 	if (position.y - 0.1 <=
@@ -17,6 +17,8 @@ void Projectile::update(float delta_time) {
 	lua["damage"] = damage_;
 	lua["delta_time"] = delta_time;
 	lua["collision"] = collision_detected_;
+	lua["xPos"] = position.x;
+	lua["zPos"] = position.z;
 
 	lua.set_function("remove_colliders", &Projectile::remove_colliders, this);
 	lua.set_function("freeze_projectile", &Projectile::freeze_projectile, this);
@@ -27,9 +29,11 @@ void Projectile::update(float delta_time) {
 	to_be_deleted_ = lua["to_be_deleted"];
 	time_alive_left_ = lua["time_alive_left"];
 	damage_ = lua["damage"];
+	position.x = lua["xPos"];
+	position.z = lua["zPos"];
 }
 
-void Projectile::fixed_update(float delta_time) {
+void Projectile::fixed_update(double delta_time) {
 	position = rb.getPosition();
 	rotation = rb.getRotation();
 	angle = rb.getAngle();
@@ -91,7 +95,9 @@ void Projectile::set_time_alive_left(float time) { time_alive_left_ = time; }
 
 void Projectile::set_damage(float damage) { damage_ = damage; }
 
-void Projectile::set_logic_script(std::string script) { lua_script_ = script; }
+void Projectile::set_logic_script(const std::string& script) {
+	lua_script_ = script;
+}
 
 void Projectile::set_floor_contact(bool val) { floor_contact_ = val; }
 

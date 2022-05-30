@@ -20,11 +20,11 @@ public:
 	/**
 	 * @brief Parameterized constructor.
 	 *
-	 * @param shadowWidth
-	 * @param shadowHeight
-	 * @param color
-	 * @param aIntensity
-	 * @param dIntensity
+	 * @param shadowWidth The width of the shadow map.
+	 * @param shadowHeight The height of the shadow map.
+	 * @param color The color of the light.
+	 * @param aIntensity The ambient intensity of the light.
+	 * @param dIntensity The diffuse intensity of the light.
 	 */
 	Light(GLuint shadowWidth, GLuint shadowHeight, glm::vec3 color,
 	      GLfloat aIntensity, GLfloat dIntensity);

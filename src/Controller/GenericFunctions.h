@@ -7,7 +7,7 @@
 #include <random>
 #include "Controller/ReflexEngine/Camera.hpp"
 #include "Controller/Terrain/TexturedTerrain.hpp"
-#include "AI/EngineTime.hpp"
+#include "Controller/ReflexEngine/EngineTime.hpp"
 
 namespace GenericFunctions {
 /**
@@ -106,6 +106,24 @@ bool getIfLoad();
  * @post	sets value
  */
 void setIfLoad(bool val);
+
+/**
+ * @brief	Gets if the game should load game objects from scratch
+ * @return	bool	- If it should load
+ *
+ * @pre		Nothing
+ * @post	retrieves value
+ */
+bool getIfFullLoad();
+
+/**
+ * @brief	Set if game should load objects from scratch
+ * @param	val	- If it should load objects from scratch
+ *
+ * @pre		Nothing
+ * @post	sets value
+ */
+void setIfFullLoad(bool val);
 
 /**
  * @brief	Gets if the game should be paused
@@ -403,5 +421,7 @@ void networkFixedUpdate();
  * @post	Returns the retained IP address
  */
 std::string networkReturnRetainedIP();
+
+float getLength(float x, float y);
 
 };  // namespace GenericFunctions

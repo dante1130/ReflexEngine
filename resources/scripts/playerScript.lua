@@ -4,7 +4,7 @@ if camera_pos_y() < 2 then
 		if check > 5 then
 			load_game(true)
 		end
-	end	
+	end
 else
 	local time = current_time() - time_since_last_save()
 	if time > 30 then

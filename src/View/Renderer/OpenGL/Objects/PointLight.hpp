@@ -18,22 +18,22 @@ public:
 	/**
 	 * @brief Construct a new Point Light object
 	 *
-	 * @param shadowWidth
-	 * @param shadowHeight
-	 * @param near
-	 * @param far
-	 * @param color
-	 * @param aIntensity
-	 * @param dIntensity
-	 * @param position
-	 * @param constant
-	 * @param linear
-	 * @param exponent
+	 * @param shadowWidth The width of the shadow map
+	 * @param shadowHeight The height of the shadow map
+	 * @param near The near plane of the shadow map
+	 * @param far The far plane of the shadow map
+	 * @param color The color of the light
+	 * @param aIntensity The ambient intensity of the light
+	 * @param dIntensity The diffuse intensity of the light
+	 * @param position The position of the light
+	 * @param constant The constant attenuation of the light
+	 * @param linear The linear attenuation of the light
+	 * @param quadratic The quadratic attenuation of the light
 	 */
 	PointLight(GLuint shadowWidth, GLuint shadowHeight, GLfloat near,
 	           GLfloat far, glm::vec3 color, GLfloat aIntensity,
 	           GLfloat dIntensity, glm::vec3 position, GLfloat constant,
-	           GLfloat linear, GLfloat exponent);
+	           GLfloat linear, GLfloat quadratic);
 
 	/**
 	 * @brief Enables the light by passing uniforms to the shader.
@@ -44,12 +44,12 @@ public:
 	 * @param positionLoc
 	 * @param constantLoc
 	 * @param linearLoc
-	 * @param exponentLoc
+	 * @param quadraticLoc
 	 */
 	void UseLight(GLuint ambientColorLoc, GLuint ambientIntensityLoc,
 	              GLuint diffuseIntensityLoc, GLuint positionLoc,
 	              GLuint constantLoc, GLuint linearLoc,
-	              GLuint exponentLoc) const;
+	              GLuint quadraticLoc) const;
 
 	/**
 	 * @brief Calculates the light transform matrices.
@@ -82,7 +82,7 @@ protected:
 	glm::vec3 m_position;
 
 	/// Equation of the light.
-	GLfloat m_constant, m_linear, m_exponent;
+	GLfloat m_constant, m_linear, m_quadratic;
 
 	/// The far plane.
 	GLfloat m_farPlane;

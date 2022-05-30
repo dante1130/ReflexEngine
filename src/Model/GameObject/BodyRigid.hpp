@@ -60,6 +60,15 @@ public:
 	void setType(int type);
 
 	/**
+	 * @brief	Gets the type of rigid body
+	 * @return	type	- type of body. 0 = static, 1 = kinematic, 2 = dynamic
+	 *
+	 * @pre		Rigid body exists
+	 * @post	Type returned
+	 */
+	int getType();
+
+	/**
 	 * @brief	Set if you want gravity
 	 * @param	val	- True = allow gravity
 	 *
@@ -138,14 +147,14 @@ public:
 	 * @pre		Rigid body exists
 	 * @post	Rigid body updated
 	 */
-	void update(float delta_time) override;
+	void update(double delta_time) override;
 
 	/**
 	 * @brief Updates the body object with fixed delta time.
 	 *
 	 * @param delta_time
 	 */
-	void fixed_update(float delta_time);
+	void fixed_update(double delta_time) override;
 
 	/**
 	 * @brief	Gets the position vector

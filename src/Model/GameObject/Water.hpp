@@ -7,6 +7,10 @@
 #include "View/Renderer/OpenGL/Objects/Mesh.hpp"
 #include "Controller/ResourceManager/ObjectSaving.hpp"
 
+/**
+ * @class Water
+ * @brief A water game object.
+ */
 class Water : public GameObject {
 public:
 	/**
@@ -51,14 +55,14 @@ public:
 	 * @pre		Water object has been created
 	 * @post	Water position moved according to time difference
 	 */
-	void update(float delta_time) override;
+	void update(double delta_time) override;
 
 	/**
 	 * @brief Updates the body object with fixed delta time.
 	 *
 	 * @param delta_time
 	 */
-	void fixed_update(float delta_time) override {}
+	void fixed_update(double delta_time) override {}
 
 	/**
 	 * @brief	Adds a draw call for the water object

@@ -12,12 +12,13 @@ void PhysicsObject::initRB(glm::vec3 pos, glm::vec3 rotation, float angle) {
 	rb.init(pos, rotation, angle);
 }
 
-void PhysicsObject::update(float delta_time) {}
-
-void PhysicsObject::fixed_update(float delta_time) {
+void PhysicsObject::update(double delta_time) {
 	position = rb.getPosition();
 	rotation = rb.getRotation();
 	angle = rb.getAngle();
+}
+
+void PhysicsObject::fixed_update(double delta_time) {
 	// position.y = GenericFunctions::getHeight(position.x, position.z);
 	// rb.set_position(position);
 }
@@ -51,37 +52,37 @@ void PhysicsObject::draw(std::shared_ptr<Shader> shader) {
 	model_m.get_model(model_name_).RenderModel();
 }
 
-void PhysicsObject::saveSphereCollider(int index) {
-	for (int count = 0; count < m_sphere.size(); count++) {
-		if (m_sphere[count].m_colliderStored == index) {
-			ObjectSaving::addValue("radius", m_sphere[count].m_radius, false);
+void PhysicsObject::saveSphereCollider(size_t index) {
+	for (const auto& sphere : m_sphere) {
+		if (sphere.m_colliderStored == index) {
+			ObjectSaving::addValue("radius", sphere.m_radius, false);
 			return;
 		}
 	}
 }
 
-void PhysicsObject::saveCapsuleCollider(int index) {
-	for (int count = 0; count < m_capsule.size(); count++) {
-		if (m_capsule[count].m_colliderStored == index) {
-			ObjectSaving::addValue("radius", m_capsule[count].m_radius, false);
-			ObjectSaving::addValue("height", m_capsule[count].m_height, false);
+void PhysicsObject::saveCapsuleCollider(size_t index) {
+	for (const auto& capsule : m_capsule) {
+		if (capsule.m_colliderStored == index) {
+			ObjectSaving::addValue("radius", capsule.m_radius, false);
+			ObjectSaving::addValue("height", capsule.m_height, false);
 			return;
 		}
 	}
 }
 
-void PhysicsObject::saveBoxCollider(int index) {
-	for (int count = 0; count < m_box.size(); count++) {
-		if (m_box[count].m_colliderStored == index) {
-			ObjectSaving::addValue("xBox", m_box[count].m_size.x, false);
-			ObjectSaving::addValue("yBox", m_box[count].m_size.y, false);
-			ObjectSaving::addValue("zBox", m_box[count].m_size.z, false);
+void PhysicsObject::saveBoxCollider(size_t index) {
+	for (const auto& box : m_box) {
+		if (box.m_colliderStored == index) {
+			ObjectSaving::addValue("xBox", box.m_size.x, false);
+			ObjectSaving::addValue("yBox", box.m_size.y, false);
+			ObjectSaving::addValue("zBox", box.m_size.z, false);
 			return;
 		}
 	}
 }
 
-void PhysicsObject::saveCollider(int index, int type) {
+void PhysicsObject::saveCollider(size_t index, int type) {
 	std::string typeString;
 
 	switch (type) {
@@ -94,12 +95,15 @@ void PhysicsObject::saveCollider(int index, int type) {
 		case 3:
 			typeString = "Box";
 			break;
+		default:
+			break;
 	}
 
 	ObjectSaving::addValue("colliderType", typeString, false);
 	ObjectSaving::addValue("xPos", rb.getLocalColliderPos(index).x, false);
 	ObjectSaving::addValue("yPos", rb.getLocalColliderPos(index).y, false);
 	ObjectSaving::addValue("zPos", rb.getLocalColliderPos(index).z, false);
+
 	switch (type) {
 		case 1:
 			saveSphereCollider(index);
@@ -109,6 +113,8 @@ void PhysicsObject::saveCollider(int index, int type) {
 			break;
 		case 3:
 			saveBoxCollider(index);
+			break;
+		default:
 			break;
 	}
 	ObjectSaving::addValue("bounciness", rb.getBounciness(index), false);
@@ -136,7 +142,7 @@ void PhysicsObject::save_object() {
 	ObjectSaving::addValue("numOfColliders", rb.getNumberOfColliders(), true);
 	ObjectSaving::closeStruct();
 
-	for (int count = 0; count < rb.getNumberOfColliders(); count++) {
+	for (size_t count = 0; count < rb.getNumberOfColliders(); count++) {
 		int type = rb.getColliderType(count);
 		ObjectSaving::createStruct("collider" + std::to_string(count + 1));
 		saveCollider(count, type);

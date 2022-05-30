@@ -13,78 +13,88 @@ public:
 	/**
 	 * @brief Construct a new Window object
 	 */
-	Window();
+	Window() = default;
 
 	/**
 	 * @brief Construct a new Window object
 	 *
-	 * @param windowWidth
-	 * @param windowHeight
+	 * @param window_width The width of the window.
+	 * @param window_height The height of the window.
 	 */
-	Window(int windowWidth, int windowHeight);
+	Window(int window_width, int window_height);
 
 	/**
 	 * @brief Initializes the window.
 	 *
 	 * @return int
 	 */
-	int Init();
-
-	/**
-	 * @brief Get the Buffer Width.
-	 *
-	 * @return GLint
-	 */
-	int GetBufferWidth() const;
-
-	/**
-	 * @brief Get the Buffer Height.
-	 *
-	 * @return GLint
-	 */
-	int GetBufferHeight() const;
-
-	/**
-	 * @brief Get the mouse x offset.
-	 *
-	 * @return GLdouble
-	 */
-	double GetXOffset();
-
-	/**
-	 * @brief Get the mouse y offset.
-	 *
-	 * @return GLdouble
-	 */
-	double GetYOffset();
-
-	/**
-	 * @brief Set whether the window should close.
-	 *
-	 * @param should_close
-	 */
-	void set_should_close(bool should_close);
-
-	/**
-	 * @brief Returns a boolean whether the window should close.
-	 *
-	 * @return true
-	 * @return false
-	 */
-	bool IsShouldClose() const;
-
-	/**
-	 * @brief
-	 *
-	 */
-	void SwapBuffers();
+	bool init();
 
 	/**
 	 * @brief Returns a pointer to the window.
 	 *
 	 * @return GLFWwindow*
 	 */
-	GLFWwindow* get_window() { return m_mainWindow; }
+	GLFWwindow* get_window() const;
+
+	/**
+	 * @brief Get the aspect ratio of the window.
+	 *
+	 * @return float
+	 */
+	float get_ratio() const;
+
+	/**
+	 * @brief Get the Buffer Width.
+	 *
+	 * @return int
+	 */
+	int get_buffer_width() const;
+
+	/**
+	 * @brief Get the Buffer Height.
+	 *
+	 * @return int
+	 */
+	int get_buffer_height() const;
+
+	/**
+	 * @brief Get the mouse x offset.
+	 *
+	 * @return double
+	 */
+	double get_x_offset();
+
+	/**
+	 * @brief Get the mouse y offset.
+	 *
+	 * @return double
+	 */
+	double get_y_offset();
+
+	/**
+	 * @brief Set whether the window should close.
+	 *
+	 * @param should_close Whether the window should close.
+	 */
+	void set_should_close(bool should_close);
+
+	/**
+	 * @brief Returns a boolean whether the window should close.
+	 *
+	 * @return bool
+	 */
+	bool is_should_close() const;
+
+	/**
+	 * @brief Updates the window buffer sizes.
+	 */
+	void update_window_buffer_size();
+
+	/**
+	 * @brief Swap the window buffers.
+	 */
+	void swap_buffers();
 
 	/**
 	 * @brief Destroy the Window object
@@ -93,27 +103,27 @@ public:
 
 private:
 	/// The GLFW window.
-	GLFWwindow* m_mainWindow;
+	GLFWwindow* main_window_ = nullptr;
 
 	/// Dimensions of the window.
-	int m_width, m_height;
+	int width_ = 0, height_ = 0;
 
 	/// The buffer dimensions.
-	int m_bufferWidth, m_bufferHeight;
+	int buffer_width_ = 0, buffer_height_ = 0;
 
 	/// The previous mouse position.
-	double m_xPrev, m_yPrev;
+	double prev_x_ = 0.0, prev_y_ = 0.0;
 
 	/// The offset between the previous and the current mouse position.
-	double m_xOffset, m_yOffset;
+	double offset_x_ = 0.0, offset_y_ = 0.0;
 
 	/// Check whether if this is the first mouse move.
-	bool m_isFirstMouse;
+	bool is_first_mouse_ = true;
 
 	/**
 	 * @brief Create callbacks for the keyboard and mouse events.
 	 */
-	void CreateCallbacks();
+	void create_callbacks();
 
 	/**
 	 * @brief Keyboard callback.

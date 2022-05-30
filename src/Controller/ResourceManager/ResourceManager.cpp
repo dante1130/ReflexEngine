@@ -23,4 +23,5 @@ ResourceManager::ResourceManager() {
 	texture_manager_.lua_access();
 	model_manager_.lua_access();
 	material_manager_.lua_access();
+	md2_model_manager_.lua_access();
 }

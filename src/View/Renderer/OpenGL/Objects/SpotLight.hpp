@@ -27,13 +27,14 @@ public:
 	 * @param direction
 	 * @param constant
 	 * @param linear
-	 * @param exponent
+	 * @param quadratic
 	 * @param edge
 	 */
 	SpotLight(GLuint shadowWidth, GLuint shadowHeight, GLfloat near,
 	          GLfloat far, glm::vec3 color, GLfloat aIntensity,
 	          GLfloat dIntensity, glm::vec3 position, glm::vec3 direction,
-	          GLfloat constant, GLfloat linear, GLfloat exponent, GLfloat edge);
+	          GLfloat constant, GLfloat linear, GLfloat quadratic,
+	          GLfloat edge);
 
 	/**
 	 * @brief Enables the spotlight by passing uniforms to the shader.
@@ -45,13 +46,13 @@ public:
 	 * @param directionLoc
 	 * @param constantLoc
 	 * @param linearLoc
-	 * @param exponentLoc
+	 * @param quadraticLoc
 	 * @param edgeLoc
 	 */
 	void UseLight(GLuint ambientColorLoc, GLuint ambientIntensityLoc,
 	              GLuint diffuseIntensityLoc, GLuint positionLoc,
 	              GLuint directionLoc, GLuint constantLoc, GLuint linearLoc,
-	              GLuint exponentLoc, GLuint edgeLoc) const;
+	              GLuint quadraticLoc, GLuint edgeLoc) const;
 
 	/**
 	 * @brief Sets the position and the direction of the spotlight.

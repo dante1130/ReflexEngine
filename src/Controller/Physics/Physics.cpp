@@ -1,39 +1,41 @@
 #include "Physics.hpp"
-bool created = false;
-PhysicsCommon physicsCommon;
-PhysicsWorld* world;
+
+bool Physics::created = false;
+PhysicsCommon Physics::physicsCommon;
+PhysicsWorld* Physics::world = nullptr;
 
 void Physics::createWorld() {
-	if (created == false) {
+	if (!created) {
 		world = physicsCommon.createPhysicsWorld();
 		created = true;
 	}
 }
 
-void Physics::updateWorld(float delta_time) {
-	if (created == false) {
+void Physics::updateWorld(double delta_time) {
+	if (!created) {
 		return;
 	}
 	world->update(delta_time);
 }
 
 void Physics::setDebuggerToActive(bool val) {
-	if (created == false) {
+	if (!created) {
 		return;
 	}
-	world->setIsDebugRenderingEnabled(true);
+	world->setIsDebugRenderingEnabled(val);
 }
 
 void Physics::setDebuggerValues(int type, bool val) {
-	if (created == false) {
+	if (!created) {
 		return;
 	}
 	DebugRenderer& debugRenderer = world->getDebugRenderer();
-	debugRenderer.setIsDebugItemDisplayed((DebugRenderer::DebugItem)type, val);
+	debugRenderer.setIsDebugItemDisplayed(
+	    static_cast<DebugRenderer::DebugItem>(type), val);
 }
 
 void Physics::destroyWorld() {
-	if (created == true) {
+	if (created) {
 		physicsCommon.destroyPhysicsWorld(world);
 		created = false;
 	}
@@ -43,4 +45,4 @@ PhysicsCommon& Physics::getPhysicsCommon() { return physicsCommon; }
 
 PhysicsWorld* Physics::getPhysicsWorld() { return world; }
 
-bool Physics::WorldExsists() { return created; }
+bool Physics::WorldExists() { return created; }

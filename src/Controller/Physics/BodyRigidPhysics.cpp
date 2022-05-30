@@ -120,7 +120,7 @@ glm::vec3 BodyRigidPhysics::getAngularVelocity() {
 }
 
 BodyRigidPhysics::~BodyRigidPhysics() {
-	if (created == false || Physics::WorldExsists() == false) {
+	if (created == false || Physics::WorldExists() == false) {
 		return;
 	}
 	Physics::getPhysicsWorld()->destroyRigidBody(rb);

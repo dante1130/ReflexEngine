@@ -8,12 +8,10 @@
 #include "Controller/Audio/Audio.hpp"
 #include "Controller/Physics/Physics.hpp"
 
-ReflexEngine::ReflexEngine() {
-	if (window_.Init() == 1) return;
-}
-
 void ReflexEngine::run() {
 	auto& engine = ReflexEngine::get_instance();
+
+	if (!engine.window_.init()) return;
 
 	GenericFunctions::lua_access();
 	InputManager::get_instance().load_lua_bindings("scripts/_Controls.lua");
@@ -26,7 +24,6 @@ void ReflexEngine::run() {
 
 	engine.renderer_.init();
 	gui::init(engine.window_.get_window(), "#version 410");
-	guiLuaAccess::exposeGui();
 
 	engine.scenes_.emplace(std::make_shared<TestScene>());
 	engine.scenes_.top()->init();
@@ -36,8 +33,9 @@ void ReflexEngine::run() {
 	glfwSetInputMode(engine.window_.get_window(), GLFW_CURSOR,
 	                 GLFW_CURSOR_NORMAL);
 
-	while (!engine.window_.IsShouldClose()) {
+	while (!engine.window_.is_should_close()) {
 		EngineTime::update_delta_time(glfwGetTime());
+		engine.window_.update_window_buffer_size();
 
 		glfwPollEvents();
 		input_manager.read_keys(engine.window_.get_window());
@@ -45,15 +43,15 @@ void ReflexEngine::run() {
 		gui::mainLoopStart();
 
 		if (!GenericFunctions::getNetworkMenuActive()) {
-			engine.scenes_.top()->key_controls(engine.delta_time_);
+			engine.scenes_.top()->key_controls(EngineTime::get_delta_time());
 		}
 
 		if (EngineTime::is_paused()) {
 			EngineTime::force_delta_time(0);
 		} else {
 			Physics::updateWorld(EngineTime::get_delta_time());
-			engine.scenes_.top()->mouse_controls(engine.window_.GetXOffset(),
-			                                     engine.window_.GetYOffset());
+			engine.scenes_.top()->mouse_controls(engine.window_.get_x_offset(),
+			                                     engine.window_.get_y_offset());
 		}
 
 		if (GenericFunctions::getIfLoad())
@@ -61,7 +59,7 @@ void ReflexEngine::run() {
 		else if (GenericFunctions::getIfSave())
 			engine.scenes_.top()->saveGameObjects();
 		else {
-			if (EngineTime::get_fixed_delta_time() >= time_step) {
+			if (EngineTime::is_time_step_passed()) {
 				engine.scenes_.top()->fixed_update(
 				    EngineTime::get_fixed_delta_time());
 				EngineTime::reset_fixed_delta_time();
@@ -74,17 +72,17 @@ void ReflexEngine::run() {
 
 		gui::mainLoopEnd();
 
-		engine.window_.SwapBuffers();
+		engine.window_.swap_buffers();
 	}
+
+	while (!engine.scenes_.empty()) {
+		engine.scenes_.pop();
+	}
+	entityMgr.killEntities();
+	entityMgr.killManager();
+
 	Physics::destroyWorld();
 	gui::shutdown();
-}
-
-void ReflexEngine::update_delta_time() {
-	float curr_time = glfwGetTime();
-	delta_time_ = curr_time - prev_time_;
-	fixed_delta_time_ += delta_time_;
-	prev_time_ = curr_time;
 }
 
 ReflexEngine& ReflexEngine::get_instance() {

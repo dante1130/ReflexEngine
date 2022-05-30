@@ -8,7 +8,6 @@
 #include "View/Renderer/OpenGL/Objects/Mesh.hpp"
 #include "BTT.hpp"
 
-
 /**
  * @class Binary Triangle Tree Controller class
  */
@@ -46,8 +45,8 @@ public:
 	 * @brief	Initialises the BTT grid by generating vertices, creating BTT
 	 * structures defining centers and generating LOD distances
 	 *
-	 * @param		chunkSize - The length of the grid i.e chunkSize * chunkSize is
-	 * equal to number of tiles displayed
+	 * @param		chunkSize - The length of the grid i.e chunkSize * chunkSize
+	 * is equal to number of tiles displayed
 	 * @param		chunkDetail - The amount of vertices per row of a tile i.e
 	 * chunkDetail * chunkDetail is equal to total number of vertice sper tile
 	 * @param		n - Factor that determining tile detail i.e chunkDetail
@@ -65,7 +64,6 @@ public:
 	 */
 	void checkTJunction();
 
-	
 	/**
 	 * @brief	Updates the mesh when the player moves position
 	 *
@@ -76,8 +74,8 @@ public:
 	void Update(glm::vec3 player);
 
 	/**
-	 * @brief	Calculates the meshes new indices for all BTTs and stores them for
-	 * later use
+	 * @brief	Calculates the meshes new indices for all BTTs and stores them
+	 * for later use
 	 *
 	 * @param	pos - The players position in world coordinates
 	 *
@@ -93,6 +91,13 @@ public:
 	 * @return void
 	 */
 	void set_height_map_size(float size);
+
+	/**
+	 * @brief Set the texture id.
+	 *
+	 * @param id
+	 */
+	void set_texture_id(GLuint id);
 
 	/**
 	 * @brief Reads the texture image file and loads the texture.
@@ -113,7 +118,6 @@ public:
 	bool load_detailmap(const char* file_name);
 
 private:
-	
 	/**
 	 * @brief	Gets the array of BTT tile centers
 	 *
@@ -141,25 +145,27 @@ private:
 	 */
 	const GLuint findLOD(glm::vec3 pos, glm::vec2 center);
 
-	std::vector<std::vector<Btt>> bttMap;   /// All binary triangle trees
-	std::vector<glm::vec2> bttCenters;      /// All centers for BTT tiles (hypotenuse-adjacent BTTs)
-	std::vector<GLfloat> vertices;			/// All the vertices for the terrain
-	std::vector<GLuint> indices;			/// All the currently used indices for terrain
-	glm::vec3 cam;							/// Stored position for camera
+	std::vector<std::vector<Btt>> bttMap;  /// All binary triangle trees
+	std::vector<glm::vec2>
+	    bttCenters;  /// All centers for BTT tiles (hypotenuse-adjacent BTTs)
+	std::vector<GLfloat> vertices;  /// All the vertices for the terrain
+	std::vector<GLuint> indices;  /// All the currently used indices for terrain
+	glm::vec3 cam;                /// Stored position for camera
 
-	std::vector<GLfloat> distances;			/// Distances from player for changes in LOD for tile
-
+	std::vector<GLfloat>
+	    distances;  /// Distances from player for changes in LOD for tile
 
 	std::shared_ptr<Mesh> mesh_ = nullptr;  /// Container for mesh data;
-	bool firstRun;							/// Determines if first time of mesh generation
+	bool firstRun;  /// Determines if first time of mesh generation
 
-	glm::vec3 prev_pos;						/// Saves the players previous position
-	GLuint current_total_indices;			/// Number of current total indices being used
-	GLuint chunk_size;						/// The length/width of BTT grid
-	GLuint chunk_detail;					/// The length/width of a given tile (vertice number)
+	glm::vec3 prev_pos;  /// Saves the players previous position
+	GLuint
+	    current_total_indices;  /// Number of current total indices being used
+	GLuint chunk_size;          /// The length/width of BTT grid
+	GLuint chunk_detail;  /// The length/width of a given tile (vertice number)
 
-	int height_map_size = 0;				/// the length/width of height map
+	int height_map_size = 0;  /// the length/width of height map
 
-	std::shared_ptr<Texture> texture_ = nullptr; /// Storage for texture.
-	std::shared_ptr<Texture> detailmap = nullptr; /// Storage for detailmap.
+	std::shared_ptr<Texture> texture_ = nullptr;   /// Storage for texture.
+	std::shared_ptr<Texture> detailmap = nullptr;  /// Storage for detailmap.
 };

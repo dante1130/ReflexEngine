@@ -153,7 +153,7 @@ private:
 		GLuint uniformPosition = 0u;
 		GLuint uniformConstant = 0u;
 		GLuint uniformLinear = 0u;
-		GLuint uniformExponent = 0u;
+		GLuint uniformQuadratic = 0u;
 	} uniformPointLights[MAX_POINT_LIGHTS];
 
 	struct {
@@ -164,7 +164,7 @@ private:
 		GLuint uniformPosition = 0u;
 		GLuint uniformConstant = 0u;
 		GLuint uniformLinear = 0u;
-		GLuint uniformExponent = 0u;
+		GLuint uniformQuadratic = 0u;
 
 		GLuint uniformDirection = 0u;
 		GLuint uniformEdge = 0u;

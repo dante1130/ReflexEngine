@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-#include <unordered_map>
 
 #include <glm/glm.hpp>
 
@@ -10,7 +9,6 @@
 #include "View/Renderer/OpenGL/Objects/DirectionalLight.hpp"
 #include "View/Renderer/OpenGL/Objects/SpotLight.hpp"
 #include "Controller/GameAssetFactory.hpp"
-#include "Controller/GuiLuaAccess.hpp"
 #include "Controller/GenericFunctions.h"
 #include "Controller/LuaManager.hpp"
 
@@ -37,14 +35,14 @@ public:
 	 * @pre		Nothing
 	 * @post	Object added
 	 */
-	void addGameObject(std::string luaScript) override;
+	void addGameObject(const std::string& luaScript) override;
 
 	/**
 	 * @brief The function to specify controls for the keyboard.
 	 *
 	 * @param delta_time	- The time between frames
 	 */
-	void key_controls(float delta_time) override;
+	void key_controls(double delta_time) override;
 
 	/**
 	 * @brief The function to specify controls for the mouse.
@@ -52,21 +50,21 @@ public:
 	 * @param xpos	- X position of mouse on screen
 	 * @param ypos	- Y position of mouse on screen
 	 */
-	void mouse_controls(float xpos, float ypos) override;
+	void mouse_controls(double xpos, double ypos) override;
 
 	/**
 	 * @brief The update loop of the scene.
 	 *
 	 * @param delta_time	- The time between frames
 	 */
-	void update(float delta_time) override;
+	void update(double delta_time) override;
 
 	/**
 	 * @brief The fixed update loop of the scene.
 	 *
 	 * @param delta_time
 	 */
-	void fixed_update(float delta_time);
+	void fixed_update(double delta_time) override;
 
 	/**
 	 * @brief Add draw calls to the renderer.
@@ -90,32 +88,10 @@ public:
 	void loadSavedGameObjects() override;
 
 	/**
-	 * @brief Adds a new game object during run time.
-	 *
-	 * @param luaScript
-	 */
-	void add_game_object_during_run(std::string luaScript);
-
-	/**
-	 * @brief	Add new game objects during run time.
-	 *
-	 * @pre		Added game objects stored in list
-	 * @post	Game objects loaded and stored
-	 */
-	void add_new_game_objects();
-
-	/**
 	 * @brief	Deleted game objects which are considered finished
 	 *
 	 * @pre		Game objects exists
 	 * @post	Removed bad game objects
 	 */
 	void garbage_collection();
-
-private:
-	/// A directional light.
-	DirectionalLight directional_light_ = {};
-
-	/// Scripts for game objects to be added.
-	std::vector<std::string> to_add_;
 };
