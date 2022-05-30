@@ -36,8 +36,11 @@ void ModelData::render_animated(double delta_time) {
 
 void ModelData::render_model() {
 	auto& model_manager = ResourceManager::get_instance().get_model_manager();
+	auto& texture_manager =
+	    ResourceManager::get_instance().get_texture_manager();
 
-	model_manager.get_model(model_name_).RenderModel();
+	texture_manager.get_texture(texture_name_).UseTexture();
+	model_manager.get_model(model_name_).RenderModelTwo();
 }
 
 void ModelData::set_loop(bool loop) { is_loop_ = loop; }
