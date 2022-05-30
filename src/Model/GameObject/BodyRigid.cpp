@@ -86,3 +86,7 @@ void BodyRigid::setLinearAxisFactor(glm::vec3 factor) {
 void BodyRigid::setAngularAxisFactor(glm::vec3 factor) {
 	rb.setAngularAxisFactor(factor);
 }
+
+std::vector<colliderData_capsule> BodyRigid::getCapsuleColliders() {
+	return m_capsule;
+}

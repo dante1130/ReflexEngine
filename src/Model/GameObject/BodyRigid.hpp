@@ -290,6 +290,8 @@ public:
 	 */
 	void save_object() override {}
 
+	std::vector<colliderData_capsule> getCapsuleColliders();
+
 protected:
 	/// <summary>
 	/// Facaded react rigid body

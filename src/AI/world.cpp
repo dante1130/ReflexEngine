@@ -152,8 +152,6 @@ std::queue<glm::vec2> world::pathFinding(float currX, float currZ,
 
 	for (int count = inversePath.size() - 2; count >= 0; count--) {
 		path.push(inversePath[count]);
-		std::cout << inversePath[count].x << " : " << inversePath[count].y
-		          << std::endl;
 	}
 
 	return path;
