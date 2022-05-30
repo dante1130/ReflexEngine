@@ -14,13 +14,13 @@ end
 
 baseObject = {
 	type = "NPC",
-	xPos = 90,
-	yPos = 0,
-	zPos = 40,
+	xPos = x,
+	yPos = y,
+	zPos = z,
 	xRotation = 0,
 	yRotation = 1,
 	zRotation = 0,
-	angle = 0.01,
+	angle = random_generator(1, 360),
 	xScale = 1.0,
 	yScale = 1.0,
 	zScale = 1.0,
@@ -48,7 +48,7 @@ AI = {
 	faction = 2,
 	health = 100,
 	power = 15,
-	moveSpeed = 4
+	moveSpeed = 3
 }
 
 collider1 = {

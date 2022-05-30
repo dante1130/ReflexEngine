@@ -6,9 +6,9 @@ addGameObject("scripts/AI/guihealthBar.lua")
 --addGameObject("scripts/AI/Human.lua")
 
 --Enemies
---for i = 1, 25, 1 do
+for i = 1, 25, 1 do
 	addGameObject("scripts/AI/Duck.lua")
---end
+end
 
 for i = 1, 75, 1 do
 	addGameObject("scripts/AI/Ghost.lua")
