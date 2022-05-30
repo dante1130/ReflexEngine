@@ -272,7 +272,7 @@ void GenericFunctions::networkClientConnect() {
 		printf("This Runs\n");
 		printf("%s\n", currentIPAddress.c_str());
 		networkPvP.SetupClient(username);
-		networkConnected = !networkPvP.ConnectClient(
+		pvpNetworkConnected = !networkPvP.ConnectClient(
 		    serverIPChar);  // Flipped as it returns true if you are NOT
 		                    // connected (which is weird I know)
 	}
