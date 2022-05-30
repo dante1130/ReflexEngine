@@ -28,6 +28,7 @@ addGameObject("scripts/networkMenuSetup.lua")
 addGameObject("scripts/gunSetup.lua")
 addGameObject("scripts/chatMenuSendSetup.lua")
 addGameObject("scripts/chatMenuReadSetup.lua")
+addGameObject("scripts/networkMenuPvPSetup.lua")
 
 --for i = 1, 25, 1 do
 --	addGameObject("scripts/Human.lua")
@@ -41,6 +42,8 @@ addGameObject("scripts/Arrow.lua")
 addGameObject("scripts/Bow.lua")
 addGameObject("scripts/Boat.lua")
 addGameObject("scripts/Lighthouse.lua")
+
+addGameObject("scripts/Opponent.lua")
 
 addGameObject("scripts/gui/EndGame.lua")
 addGameObject("scripts/EscapeBoat.lua")

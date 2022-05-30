@@ -397,6 +397,22 @@ void networkSetUsername();
 
 std::string networkReturnUsername();
 
+void setPvPNetworkMenuActive(bool active);
+
+bool getPvPNetworkMenuActive();
+
+float getNetworkPosX();
+
+float getNetworkPosY();
+
+float getNetworkPosZ();
+
+bool getReceivingData();
+
+bool networkPvPConnectionStatus();
+
+void networkFixedUpdate();
+
 /**
  * @brief	Returns the IP address saved by networkRetainIP
  * @return	string - Returns the retained IP address
