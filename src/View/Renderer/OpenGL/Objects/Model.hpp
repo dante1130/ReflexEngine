@@ -35,6 +35,11 @@ public:
 	void RenderModel() const;
 
 	/**
+	 * @brief Renders the model.
+	 */
+	void RenderModelTwo() const;
+
+	/**
 	 * @brief Clears the model.
 	 */
 	void ClearModel();
