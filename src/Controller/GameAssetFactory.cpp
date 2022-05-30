@@ -618,6 +618,11 @@ NPC* GameAssetFactory::loadNPCObject(const std::string& luaScript) {
 
 	float angle;
 
+	pos = loadBasePos(lua);
+	scale = loadBaseScale(lua);
+	rotation = loadBaseRotation(lua);
+	angle = loadBaseAngle(lua);
+
 	std::string model = lua["baseObject"]["modelName"];
 	std::string mat = lua["baseObject"]["material_name"];
 	std::string model_texture = lua["baseObject"]["model_texture"];
