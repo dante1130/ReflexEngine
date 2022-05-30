@@ -9,7 +9,10 @@ private:
 	/// to facilitate quick lookup the entities are stored in a std::map, in
 	/// which pointers to entities are cross referenced by their identifying
 	/// number
-	std::vector<BodyRigid*>* entityMap = new std::vector<BodyRigid*>;
+	std::vector<BodyRigid*> entityMap;
+
+	bool sphereCollision(glm::vec3 posOne, float radOne, glm::vec3 posTwo,
+	                     float radTwo);
 
 public:
 	~physicsEntityManager();
@@ -42,4 +45,6 @@ public:
 	 * @brief	Kills the manager
 	 */
 	void killManager();
+
+	bool collides(glm::vec3 old_pos, glm::vec3 new_pos, float radius);
 };

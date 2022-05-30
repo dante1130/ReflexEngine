@@ -1,6 +1,7 @@
 #include "Player.hpp"
 
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
+#include "AI/singletons.h"
 
 void Player::init() { position.y = 10.0f; }
 
@@ -8,9 +9,30 @@ void Player::update(double delta_time) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file(lua_script_);
 
+	/*
 	position = rb.getPosition();
 	position.y = GenericFunctions::getHeight(position.x, position.z) + height_;
 	rb.set_position(position);
+	*/
+	glm::vec3 velocity = rb.getLinearVelocity();
+	glm::vec3 newPos = position;
+	newPos.x = position.x + velocity.x * delta_time;
+	newPos.y = position.y + velocity.z * delta_time;
+	newPos.z = position.z + velocity.z * delta_time;
+
+	// position = rb.getPosition();
+	newPos.y = GenericFunctions::getHeight(newPos.x, newPos.z) + 1;
+	// rb.set_position(glm::vec3(position.x, position.y + 1,
+	// position.z));
+	rb.set_position(glm::vec3(-999, 9999, position.z));
+
+	bool collides =
+	    physicsEntityMgr.collides(position, newPos, m_capsule[0].m_radius);
+	if (!collides) {
+		position = newPos;
+	} else {
+		std::cout << "collision" << std::endl;
+	}
 
 	auto& camera = ReflexEngine::get_instance().camera_;
 

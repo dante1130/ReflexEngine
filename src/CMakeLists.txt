@@ -61,6 +61,8 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/LuaManager.cpp
 	Controller/Physics/Physics.cpp
 	Controller/Physics/BodyRigidPhysics.cpp
+	Controller/Physics/physicsEntityManager.cpp
+	Controller/Physics/collision.cpp
 	Controller/GenericFunctions.cpp
 	Controller/multiTextureCreator.cpp
 	
@@ -73,7 +75,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	AI/Counter.cpp
 	AI/vector2D.cpp
 
-	PhysicsTemp/physicsEntityManager.cpp
+	
 
 	Game/Scene.hpp
 	Game/TestScene.cpp

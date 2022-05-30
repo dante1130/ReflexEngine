@@ -122,6 +122,7 @@ void TestScene::loadSavedGameObjects() {
 	}
 
 	entityMgr.killEntities();
+	physicsEntityMgr.killEntities();
 
 	sol::state& lua = LuaManager::get_instance().get_state();
 	if (GenericFunctions::getIfFullLoad() == false) {
