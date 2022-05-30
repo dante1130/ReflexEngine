@@ -16,8 +16,8 @@ for i = 1, 25, 1 do
 	addGameObject("scripts/Tree.lua")
 end
 
---addGameObject("scripts/CatPhysics.lua");
---addGameObject("scripts/CatPhysics2.lua");
+addGameObject("scripts/CatPhysics.lua");
+addGameObject("scripts/CatPhysics2.lua");
 addGameObject("scripts/Water.lua")
 addGameObject("scripts/guiBasic.lua")
 addGameObject("scripts/pauseMenuSetup.lua")

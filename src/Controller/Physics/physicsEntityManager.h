@@ -47,4 +47,6 @@ public:
 	void killManager();
 
 	bool collides(glm::vec3 old_pos, glm::vec3 new_pos, float radius);
+
+	void garbage_collection();
 };

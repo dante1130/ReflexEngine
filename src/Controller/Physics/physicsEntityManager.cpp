@@ -53,3 +53,14 @@ bool physicsEntityManager::sphereCollision(glm::vec3 posOne, float radOne,
 
 	return false;
 }
+
+void physicsEntityManager::garbage_collection() {
+	int size = numberOfEntities();
+	for (int count = 0; count < numberOfEntities(); count++) {
+		if (entityMap[count]->position.y < -5000 ||
+		    entityMap[count]->remove == true) {
+			entityMap.erase(entityMap.begin() + count);
+			count--;
+		}
+	}
+}
