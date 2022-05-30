@@ -259,8 +259,6 @@ private:
 
 	static NetworkedItem* loadNetworkedItem(const std::string& luaScript);
 
-	static Projectile* loadProjectileObject(const std::string& luaScript);
-
 	/**
 	 * @brief	Loads in a NPC object from a lua script
 	 * @param	luaScript	- The lua script to load the NPC data
