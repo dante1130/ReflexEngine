@@ -12,9 +12,10 @@ if get_help_menu() then
 	gui_text(" - Look		: Mouse")
 	gui_text(" - Shoot		: Space")
 	gui_text(" - Networking	: n")
+	gui_text(" - PvP		: p")
 	gui_text("Objective:")
 	gui_text(" - Make it off the island")
-	gui_text(" - Shoot approaching zombies")
+	gui_text(" - Shoot to distract ducks")
 	gui_text(" - Find the boat")
 	gui_end()
 end

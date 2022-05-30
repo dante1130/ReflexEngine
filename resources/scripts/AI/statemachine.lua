@@ -228,7 +228,7 @@ end
 
 
 state_chase["execute"] = function(player)
-  --print("In chase")
+  resetSaveTime()
 
   if(player:watchForEnemy(15) == false) then
     print("Entity: ", player.id, " | Faction: ", player.faction, " | Chase -> Patrol", " | Reason: Target lost")
@@ -275,6 +275,7 @@ end
 
 state_attack["execute"] = function(player)
   player:stopMovement();
+  resetSaveTime()
 
   local entityMgr = entityManager.new()
   local target = entityMgr.getEntity(player.target_id)
@@ -402,24 +403,6 @@ end
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 -------------------------------------------------------------------------------
 
 -- create the death state
@@ -449,33 +432,6 @@ state_death["onMessage"] = function(player, msg)
 
 
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -541,6 +497,8 @@ end
 
 
 state_ghost_chase["execute"] = function(player)
+  resetSaveTime()
+
   if(player:watchForEnemy(12) == false) then
     print("Entity: ", player.id, " | Faction: ", player.faction, " | Ghsot Chase -> Ghost Idle", " | Reason: Target lost")
     player:getFSM():changeState("state_ghost_idle")

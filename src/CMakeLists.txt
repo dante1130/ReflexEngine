@@ -63,7 +63,6 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/Physics/Physics.cpp
 	Controller/Physics/BodyRigidPhysics.cpp
 	Controller/Physics/physicsEntityManager.cpp
-	Controller/Physics/collision.cpp
 	Controller/GenericFunctions.cpp
 	Controller/multiTextureCreator.cpp
 	

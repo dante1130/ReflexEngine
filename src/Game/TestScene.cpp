@@ -102,7 +102,6 @@ void TestScene::update(double delta_time) {
 	Audio::get_instance().update_listener();
 
 	GenericFunctions::networkUpdate();
-	messageMgr.dispatchDelayedMessages();
 }
 
 void TestScene::fixed_update(double delta_time) {
@@ -110,6 +109,7 @@ void TestScene::fixed_update(double delta_time) {
 		game_object->fixed_update(delta_time);
 	}
 	GenericFunctions::networkFixedUpdate();
+	messageMgr.dispatchDelayedMessages();
 }
 
 void TestScene::saveGameObjects() {
