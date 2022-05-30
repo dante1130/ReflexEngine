@@ -17,14 +17,18 @@ static bool credits = false;
 
 static bool createNetwork = false;
 static bool networkConnected = false;
+static bool createPvPNetwork = false;
+static bool pvpNetworkConnected = false;
 static bool shouldShoot;
 static networkManager network;
+static networkManager networkPvP;
 static std::string message;
 static std::string currentIPAddress;
 static std::string incomingMessage;
 static std::string username = " ";
 static glm::vec3 opponentPos = glm::vec3(50,100,50);
-static bool receivingData = false;
+static glm::vec3 prevOpponentPos = glm::vec3(50, 100, 50);
+static glm::vec3 previousPos = glm::vec3(0, 0, 0);
 
 static float lastShot = 0;
 static float shot_delay = 0;
@@ -100,6 +104,7 @@ void GenericFunctions::lua_access() {
 	lua.set_function("get_network_pos_y", getNetworkPosY);
 	lua.set_function("get_network_pos_z", getNetworkPosZ);
 	lua.set_function("get_receiving_data", getReceivingData);
+	lua.set_function("network_pvp_connection_status", networkPvPConnectionStatus);
 
 	lua.set_function("set_last_shot", setLastShot);
 	lua.set_function("set_shot_delay", setShotDelay);
@@ -221,62 +226,99 @@ float GenericFunctions::getHeight(float x, float z) {
 uint8_t* GenericFunctions::get_height_map() { return m_tt->get_height_map(); }
 
 void GenericFunctions::createNetworkManager(bool create) {
-	if (createNetwork != true) {
+	if (createNetwork != true && !networkMenuPvP) {
 		createNetwork = true;
 		network.InitNetwork();
+	} else if (createNetwork != true) {
+		createPvPNetwork = true;
+		networkPvP.InitNetwork();
 	}
 }
 
 void GenericFunctions::setNetworkMenuActive(bool active) {
-	networkMenuPvP = active;
-	if (networkMenuPvP) {
+	networkMenu = active;
+	if (networkMenu) {
 		glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
 		                 GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-	} else if (!networkMenuPvP && !EngineTime::is_paused()) {
+	} else if (!networkMenu && !EngineTime::is_paused()) {
 		glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
 		                 GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	}
 }
 
 void GenericFunctions::startNetworkServer(bool active) {
-	if (active) {
+	if (active && !networkMenuPvP) {
 		network.SetupServer(username);
 		networkConnected = true;
+	} else if (active) {
+		networkPvP.SetupServer(username);
+		pvpNetworkConnected = true;
 	}
 }
 
 void GenericFunctions::networkClientConnect() {
-	char serverIPChar[30];
-	strcpy(serverIPChar, currentIPAddress.c_str());
-	printf("This Runs\n");
-	printf("%s\n", currentIPAddress.c_str());
-	network.SetupClient(username);
-	networkConnected = !network.ConnectClient(
-	    serverIPChar);  // Flipped as it returns true if you are NOT connected
-	                    // (which is weird I know)
+	if (!networkMenuPvP) {
+		char serverIPChar[30];
+		strcpy(serverIPChar, currentIPAddress.c_str());
+		printf("This Runs\n");
+		printf("%s\n", currentIPAddress.c_str());
+		network.SetupClient(username);
+		networkConnected = !network.ConnectClient(
+		    serverIPChar);  // Flipped as it returns true if you are NOT
+		                    // connected (which is weird I know)
+	} else {
+		char serverIPChar[30];
+		strcpy(serverIPChar, currentIPAddress.c_str());
+		printf("This Runs\n");
+		printf("%s\n", currentIPAddress.c_str());
+		networkPvP.SetupClient(username);
+		networkConnected = !networkPvP.ConnectClient(
+		    serverIPChar);  // Flipped as it returns true if you are NOT
+		                    // connected (which is weird I know)
+	}
 }
 
 void GenericFunctions::networkEnd() {
-	if (createNetwork) {
+	if (createNetwork && !networkMenuPvP) {
 		network.DestroySession();
 		createNetwork = false;
+		networkConnected = false;
+	} else if (createPvPNetwork) {
+		networkPvP.DestroySession();
+		pvpNetworkConnected = false;
+		createPvPNetwork = false;
 	}
 }
 
 void GenericFunctions::networkUpdate() {
 	
-	if (createNetwork && networkConnected){ 
+	if (createNetwork && networkConnected){
 		incomingMessage = network.ReceiveMessage();
-		network.ObjectPositionSend(glm::vec3(luaCamPosX(), luaCamPosY(), luaCamPosZ()));
-		opponentPos = network.ObjectPositionReceive();
-		receivingData = true;
 		if (incomingMessage != " ") {
 			//printf("%s Update\n", incomingMessage);
 		}
-	} else {
-		receivingData = false;
 	}
 	//network.HasReceivedChatMessage();
+}
+
+void GenericFunctions::networkFixedUpdate() {
+	if (createPvPNetwork && pvpNetworkConnected) {
+		if (glm::vec3(luaCamPosX(), luaCamPosY(), luaCamPosZ()) !=
+		        previousPos &&
+		    networkPvP.ConnectionStatus()) {  // This should reduce how often
+			                                  // the position is updated, thus
+			                                  // reducing how much data the
+			                                  // client and/or server receives
+			networkPvP.ObjectPositionSend(
+			    glm::vec3(luaCamPosX(), luaCamPosY(), luaCamPosZ()));
+			previousPos = glm::vec3(luaCamPosX(), luaCamPosY(), luaCamPosZ());
+		}
+		prevOpponentPos = opponentPos;
+		opponentPos = networkPvP.ObjectPositionReceive();
+		if (!getReceivingData()) {
+			opponentPos = prevOpponentPos;
+		}
+	}
 }
 
 bool GenericFunctions::getNetworkMenuActive() { return (networkMenu); }
@@ -284,6 +326,9 @@ bool GenericFunctions::getNetworkMenuActive() { return (networkMenu); }
 bool GenericFunctions::networkConnectionStatus() {
 	bool networkStatus = network.ConnectionStatus();
 	return (networkStatus);
+}
+bool GenericFunctions::networkPvPConnectionStatus() {
+	return (networkPvP.ConnectionStatus());
 }
 
 void GenericFunctions::networkRetainIP(std::string savedIP) {
@@ -374,4 +419,5 @@ float GenericFunctions::getNetworkPosZ() { return opponentPos.z; }
 
 bool GenericFunctions::getReceivingData() { 
 	//printf("doing get receiving data now\n");
-	return !network.ObjectMissedData(); }
+	return !networkPvP.ObjectMissedData();
+}

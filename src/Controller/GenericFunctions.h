@@ -391,6 +391,10 @@ float getNetworkPosZ();
 
 bool getReceivingData();
 
+bool networkPvPConnectionStatus();
+
+void networkFixedUpdate();
+
 /**
  * @brief	Returns the IP address saved by networkRetainIP
  * @return	string - Returns the retained IP address

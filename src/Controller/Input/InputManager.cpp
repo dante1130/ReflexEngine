@@ -75,6 +75,7 @@ void InputManager::init_action_map() {
 	action_map["pause_game"] = Input::pause_game;
 	action_map["help_menu"] = Input::help_menu;
 	action_map["network_menu"] = Input::network_menu;
+	action_map["network_pvp_menu"] = Input::network_pvp_menu;
 }
 
 InputManager::InputManager() {

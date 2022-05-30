@@ -33,7 +33,7 @@ if get_pvp_network_menu() then
 		network_client_connect()
 	end
 	
-	if network_connection_status() == true then
+	if network_pvp_connection_status() == true then
 		gui_text("You are connected!")
 	else
 		gui_text("You are not connected")

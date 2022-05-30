@@ -114,6 +114,10 @@ void TestScene::key_controls(float delta_time) {
 		GenericFunctions::setNetworkMenuActive(
 		    !GenericFunctions::getNetworkMenuActive());
 	}
+	if (input_manager.get_key_state(Input::network_pvp_menu).is_key_pressed()) {
+		GenericFunctions::setPvPNetworkMenuActive(
+		    !GenericFunctions::getPvPNetworkMenuActive());
+	}
 
 	if (input_manager.get_key_state(Input::shoot).is_key_pressed()) {
 		GenericFunctions::setIfShouldShoot(true);
@@ -143,7 +147,7 @@ void TestScene::update(float delta_time) {
 	for (auto& game_object : game_objects_) {
 		game_object->update(delta_time);
 	}
-	
+	GenericFunctions::networkUpdate();
 	messageMgr.dispatchDelayedMessages();
 }
 
@@ -151,7 +155,7 @@ void TestScene::fixed_update(float delta_time) {
 	for (auto& game_object : game_objects_) {
 		game_object->fixed_update(delta_time);
 	}
-	GenericFunctions::networkUpdate();
+	GenericFunctions::networkFixedUpdate();
 }
 
 void TestScene::saveGameObjects() {
