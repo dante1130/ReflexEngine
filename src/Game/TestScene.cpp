@@ -95,8 +95,8 @@ void TestScene::add_draw_call() {
 void TestScene::update(double delta_time) {
 	garbage_collection();
 
-	for (auto& game_object : game_objects_) {
-		game_object->update(delta_time);
+	for (size_t i = 0; i < game_objects_.size(); i++) {
+		game_objects_.at(i)->update(delta_time);
 	}
 
 	Audio::get_instance().update_listener();
