@@ -1,13 +1,13 @@
 #include "luaAccessScriptedFSM.hpp"
 
 #include "sol/sol.hpp"
-#include "AI/NPC.hpp"
-#include "AI/stateMachine.h"
-#include "AI/messageDispatcher.h"
-#include "AI/telegram.h"
+#include "Model/GameObject/NPC.hpp"
+#include "Controller/AI/stateMachine.h"
+#include "Controller/AI/messageDispatcher.h"
+#include "Controller/AI/telegram.h"
 #include "Model/ModelData.hpp"
-#include "AI/vector2D.hpp"
-#include "AI/singletons.h"
+#include "Controller/AI/vector2D.hpp"
+#include "Model/singletons.h"
 #include "View/Renderer/OpenGL/Objects/Md2.hpp"
 
 void luaAccessScriptedFSM::registerAllAI() {

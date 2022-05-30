@@ -1,6 +1,6 @@
-#include "AI/NPC.hpp"
+#include "Model/GameObject/NPC.hpp"
 
-#include "singletons.h"
+#include "Model/singletons.h"
 
 NPC::NPC(const std::string& model_name, const std::string& texture_name,
          bool is_animated, bool is_loop_)

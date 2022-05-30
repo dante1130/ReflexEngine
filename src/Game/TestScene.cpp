@@ -4,7 +4,7 @@
 #include "Controller/Input/InputManager.hpp"
 #include "Controller/Audio/Audio.hpp"
 #include "TestScene.hpp"
-#include "AI/luaAccessScriptedFSM.hpp"
+#include "Controller/AI/luaAccessScriptedFSM.hpp"
 
 void TestScene::init() {
 	sol::state& lua = LuaManager::get_instance().get_state();
