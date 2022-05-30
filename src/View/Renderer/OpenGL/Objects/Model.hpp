@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <string>
+#include <initializer_list>
 
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
@@ -20,7 +21,7 @@ public:
 	/**
 	 * @brief Construct a new Model object
 	 */
-	Model();
+	Model() = default;
 
 	/**
 	 * @brief Loads a new model from a 3D object file format.

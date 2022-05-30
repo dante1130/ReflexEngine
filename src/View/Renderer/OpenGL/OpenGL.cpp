@@ -20,6 +20,8 @@ void OpenGL::init() {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
 	// Default shader.
 	shader_ = std::make_shared<Shader>();
 	shader_->CompileFile("shaders/shader.vert", "shaders/shader.frag");
@@ -58,7 +60,6 @@ void OpenGL::render_pass() {
 	glViewport(0, 0, engine.window_.get_buffer_width(),
 	           engine.window_.get_buffer_height());
 
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glm::mat4 projection = glm::perspective(

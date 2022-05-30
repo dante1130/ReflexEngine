@@ -116,26 +116,26 @@ void Md2Model::load_frame_mesh(int frame_num) {
 			    &texcoords_[triangles_[i].index_st[j]];
 
 			// Load vertices.
-			vertices.push_back(ptr_vert->vertex[0] * ptr_frame->scale[0] +
-			                   ptr_frame->translate[0]);
-			vertices.push_back(ptr_vert->vertex[1] * ptr_frame->scale[1] +
-			                   ptr_frame->translate[1]);
-			vertices.push_back(ptr_vert->vertex[2] * ptr_frame->scale[2] +
-			                   ptr_frame->translate[2]);
+			vertices.emplace_back(ptr_vert->vertex[0] * ptr_frame->scale[0] +
+			                      ptr_frame->translate[0]);
+			vertices.emplace_back(ptr_vert->vertex[1] * ptr_frame->scale[1] +
+			                      ptr_frame->translate[1]);
+			vertices.emplace_back(ptr_vert->vertex[2] * ptr_frame->scale[2] +
+			                      ptr_frame->translate[2]);
 
 			// Load texcoords.
-			vertices.push_back(static_cast<float>(ptr_texcoord->s) /
-			                   static_cast<float>(header_.skinwidth));
-			vertices.push_back(static_cast<float>(ptr_texcoord->t) /
-			                   static_cast<float>(header_.skinheight));
+			vertices.emplace_back(static_cast<float>(ptr_texcoord->s) /
+			                      static_cast<float>(header_.skinwidth));
+			vertices.emplace_back(static_cast<float>(ptr_texcoord->t) /
+			                      static_cast<float>(header_.skinheight));
 
 			// Load normals.
-			vertices.push_back(-pre_normals_[ptr_vert->normal_index][0]);
-			vertices.push_back(-pre_normals_[ptr_vert->normal_index][1]);
-			vertices.push_back(-pre_normals_[ptr_vert->normal_index][2]);
+			vertices.emplace_back(-pre_normals_[ptr_vert->normal_index][0]);
+			vertices.emplace_back(-pre_normals_[ptr_vert->normal_index][1]);
+			vertices.emplace_back(-pre_normals_[ptr_vert->normal_index][2]);
 
 			// Reversed order for indices for back face culling.
-			indices.push_back(i * 3 + (2 - j));
+			indices.emplace_back(i * 3 + (2 - j));
 		}
 	}
 
@@ -192,15 +192,15 @@ void Md2Model::load_interpolated_frame_mesh(int frame_a, int frame_b,
 			vertex[2] = (vert_a[2] + interpolation * (vert_b[2] - vert_a[2]));
 
 			// Load interpolated vertices.
-			vertices.push_back(vertex[0]);
-			vertices.push_back(vertex[1]);
-			vertices.push_back(vertex[2]);
+			vertices.emplace_back(vertex[0]);
+			vertices.emplace_back(vertex[1]);
+			vertices.emplace_back(vertex[2]);
 
 			// Load texcoords.
-			vertices.push_back(static_cast<float>(ptr_texcoord->s) /
-			                   static_cast<float>(header_.skinwidth));
-			vertices.push_back(static_cast<float>(ptr_texcoord->t) /
-			                   static_cast<float>(header_.skinheight));
+			vertices.emplace_back(static_cast<float>(ptr_texcoord->s) /
+			                      static_cast<float>(header_.skinwidth));
+			vertices.emplace_back(static_cast<float>(ptr_texcoord->t) /
+			                      static_cast<float>(header_.skinheight));
 
 			const float* norm_a = pre_normals_[ptr_vert_a->normal_index];
 			const float* norm_b = pre_normals_[ptr_vert_b->normal_index];
@@ -213,12 +213,12 @@ void Md2Model::load_interpolated_frame_mesh(int frame_a, int frame_b,
 			normal[2] = norm_a[2] + interpolation * (norm_b[2] - norm_a[2]);
 
 			// Load interpolated normals.
-			vertices.push_back(-normal[0]);
-			vertices.push_back(-normal[1]);
-			vertices.push_back(-normal[2]);
+			vertices.emplace_back(-normal[0]);
+			vertices.emplace_back(-normal[1]);
+			vertices.emplace_back(-normal[2]);
 
 			// Reverse order for indices back face culling.
-			indices.push_back(i * 3 + (2 - j));
+			indices.emplace_back(i * 3 + (2 - j));
 		}
 	}
 
