@@ -1,5 +1,5 @@
 #include "physicsEntityManager.h"
-#include "AI/singletons.h"
+#include "Model/singletons.h"
 
 physicsEntityManager::~physicsEntityManager() {}
 

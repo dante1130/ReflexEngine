@@ -1,6 +1,6 @@
 #include "MessageDispatcher.h"
-#include "singletons.h"
-#include "NPC.hpp"
+#include "Model/singletons.h"
+#include "Model/GameObject/NPC.hpp"
 
 using std::set;
 
@@ -10,7 +10,7 @@ using std::set;
 //------------------------------------------------------------------------
 void messageDispatcher::discharge(NPC* pReceiver, const telegram& msg) {
 	if (!pReceiver->handleMessage(msg)) {
-		cerr << "Message not handled" << endl;
+		std::cerr << "Message not handled" << std::endl;
 	}
 }
 
@@ -26,8 +26,8 @@ void messageDispatcher::dispatchMsg(double delay, int sender, int receiver,
 	NPC* pReceiver = entityMgr.getEntityFromID(receiver);
 	// make sure the receiver is valid
 	if (pReceiver == NULL) {
-		cerr << "\nWarning! No Receiver with ID of " << receiver << " found"
-		     << endl;
+		std::cerr << "\nWarning! No Receiver with ID of " << receiver
+		          << " found" << std::endl;
 		return;
 	}
 	// create the telegram

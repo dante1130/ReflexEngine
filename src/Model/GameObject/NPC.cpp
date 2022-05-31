@@ -1,6 +1,6 @@
-#include "AI/NPC.hpp"
+#include "Model/GameObject/NPC.hpp"
 
-#include "singletons.h"
+#include "Model/singletons.h"
 
 NPC::NPC(const std::string& model_name, const std::string& texture_name,
          bool is_animated, bool is_loop_)
@@ -137,8 +137,6 @@ void NPC::remove_waypoints() {
 	}
 }
 void NPC::use_pathfinding(float x1, float z1, float x2, float z2) {
-	std::cout << "In NPC::use_pathfinding" << x1 << "," << z1 << " : " << x2
-	          << "," << z2 << std::endl;
 	remove_waypoints();
 	m_waypoints = gameWorld.pathFinding(x1, z1, x2, z2);
 }

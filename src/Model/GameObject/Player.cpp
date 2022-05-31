@@ -1,7 +1,7 @@
 #include "Player.hpp"
 
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
-#include "AI/singletons.h"
+#include "Model/singletons.h"
 
 void Player::init() { position.y = 10.0f; }
 

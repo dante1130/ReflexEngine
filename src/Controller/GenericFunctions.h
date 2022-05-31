@@ -72,6 +72,11 @@ bool getIfSave();
 void setIfSave(bool val);
 
 /**
+ * @brief    Resets the time since the last save
+ */
+void resetSaveSinceLastSave();
+
+/**
  * @brief	Gets time when the game was last saved
  * @return	int	- When the game was last saved
  */

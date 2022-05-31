@@ -63,18 +63,17 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/Physics/Physics.cpp
 	Controller/Physics/BodyRigidPhysics.cpp
 	Controller/Physics/physicsEntityManager.cpp
-	Controller/Physics/collision.cpp
 	Controller/GenericFunctions.cpp
 	Controller/multiTextureCreator.cpp
 	
-	AI/messageDispatcher.cpp
-	AI/NPC.cpp
-	AI/entityManager.cpp
-	AI/movement.cpp
-	AI/world.cpp
-	AI/luaAccessScriptedFSM.cpp
-	AI/Counter.cpp
-	AI/vector2D.cpp
+	Controller/AI/messageDispatcher.cpp
+	Model/GameObject/NPC.cpp
+	Controller/AI/entityManager.cpp
+	Controller/Pathfinding/movement.cpp
+	Controller/Pathfinding/world.cpp
+	Controller/AI/luaAccessScriptedFSM.cpp
+	Controller/AI/Counter.cpp
+	Controller/AI/vector2D.cpp
 
 	
 
