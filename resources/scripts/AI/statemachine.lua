@@ -373,7 +373,7 @@ end
 state_search["onMessage"] = function(player, msg)
   if (msg.msg == 1) then
     player.target_id = -1
-    player:set_target_position(msg.extraInfo:getX(), msg.extraInfo:getY())
+    player:set_target_position(msg.extraInfo.x, msg.extraInfo.y)
     local pos = Audio.vec3df.new(player:getX(), player:getY(), player:getZ())
     Audio.play_3d_sound("duck_alert", pos, false, 5.0)
 
