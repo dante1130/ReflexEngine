@@ -46,5 +46,6 @@ addGameObject("scripts/Lighthouse.lua")
 addGameObject("scripts/Opponent.lua")
 
 addGameObject("scripts/gui/EndGame.lua")
+addGameObject("scripts/gui/EndGameNetworkedPvP.lua")
 addGameObject("scripts/EscapeBoat.lua")
 addGameObject("scripts/bigArrow.lua")
