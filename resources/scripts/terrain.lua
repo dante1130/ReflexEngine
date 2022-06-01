@@ -23,5 +23,7 @@ terrain = {
 	chunkSize = 30,
 	chunkDetail = 9,
 	n = 3,
-	island = 1
+	island = 1,
+	min = 2.5,
+	max = 9999
 }
