@@ -1,0 +1,5 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$class_terrain.html" title=" " alt="" coords="5,31,67,57"/>
+<area shape="rect" id="node2" href="$class_btt_controller.html" title=" " alt="" coords="123,5,217,32"/>
+<area shape="rect" id="node3" href="$class_textured_terrain.html" title="A terrain that uses a texture to render the terrain." alt="" coords="115,56,225,83"/>
+</map>

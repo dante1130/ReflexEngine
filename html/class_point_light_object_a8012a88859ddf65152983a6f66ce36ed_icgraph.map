@@ -1,0 +1,4 @@
+<map id="PointLightObject::PointLightObject" name="PointLightObject::PointLightObject">
+<area shape="rect" id="node1" title="Construct a new Directional Light Object object." alt="" coords="220,5,404,47"/>
+<area shape="rect" id="node2" href="$class_game_asset_factory.html#ad478cc235e99516f35f80966445a073c" title="Loads in a point light object from a lua script." alt="" coords="5,5,172,47"/>
+</map>

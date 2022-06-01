@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: Reflex::Material Class Reference</title>
+<title>ICT397 Assignment 2: Reflex::Material Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -182,8 +182,8 @@ Private Attributes</h2></td></tr>
 <p>Parameterized constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">shine</td><td></td></tr>
-    <tr><td class="paramname">sIntensity</td><td></td></tr>
+    <tr><td class="paramname">shine</td><td>The shininess of the material. </td></tr>
+    <tr><td class="paramname">sIntensity</td><td>The intensity of the specular lighting. </td></tr>
   </table>
   </dd>
 </dl>
@@ -230,12 +230,6 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Returns the shininess intensity. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">No</td><td>param </td></tr>
-  </table>
-  </dd>
-</dl>
 <dl class="section return"><dt>Returns</dt><dd>float - shininess intensity</dd></dl>
 <dl class="section pre"><dt>Precondition</dt><dd>Object exists </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>shininess returned </dd></dl>
@@ -261,12 +255,6 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Returns the specular intensity. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">No</td><td>param </td></tr>
-  </table>
-  </dd>
-</dl>
 <dl class="section return"><dt>Returns</dt><dd>float - specular intensity</dd></dl>
 <dl class="section pre"><dt>Precondition</dt><dd>Object exists </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>intensity returned </dd></dl>
@@ -305,8 +293,8 @@ Here is the caller graph for this function:</div>
 <p>Enable the material by passing the uniforms to the shader. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">shininessLoc</td><td></td></tr>
-    <tr><td class="paramname">specularIntensityLoc</td><td></td></tr>
+    <tr><td class="paramname">shininessLoc</td><td>The location of the shininess uniform. </td></tr>
+    <tr><td class="paramname">specularIntensityLoc</td><td>The location of the specular intensity </td></tr>
   </table>
   </dd>
 </dl>
@@ -342,7 +330,7 @@ Here is the caller graph for this function:</div>
 
 <p>The shininess. </p>
 
-<p class="definition">Definition at line <a class="el" href="_material_8hpp_source.html#l00058">58</a> of file <a class="el" href="_material_8hpp_source.html">Material.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_material_8hpp_source.html#l00056">56</a> of file <a class="el" href="_material_8hpp_source.html">Material.hpp</a>.</p>
 
 </div>
 </div>
@@ -368,7 +356,7 @@ Here is the caller graph for this function:</div>
 
 <p>The specular intensity. </p>
 
-<p class="definition">Definition at line <a class="el" href="_material_8hpp_source.html#l00056">56</a> of file <a class="el" href="_material_8hpp_source.html">Material.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_material_8hpp_source.html#l00054">54</a> of file <a class="el" href="_material_8hpp_source.html">Material.hpp</a>.</p>
 
 </div>
 </div>
@@ -378,8 +366,8 @@ Here is the caller graph for this function:</div>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclass_reflex_1_1_material_html_afd220070fbb9e0d9e6edae8f251f748c"><div class="ttname"><a href="class_reflex_1_1_material.html#afd220070fbb9e0d9e6edae8f251f748c">Reflex::Material::m_shininess</a></div><div class="ttdeci">GLfloat m_shininess</div><div class="ttdoc">The shininess.</div><div class="ttdef"><b>Definition:</b> <a href="_material_8hpp_source.html#l00058">Material.hpp:58</a></div></div>
-<div class="ttc" id="aclass_reflex_1_1_material_html_a4038d72b84a5faa7920c6336031c13bf"><div class="ttname"><a href="class_reflex_1_1_material.html#a4038d72b84a5faa7920c6336031c13bf">Reflex::Material::m_specularIntensity</a></div><div class="ttdeci">GLfloat m_specularIntensity</div><div class="ttdoc">The specular intensity.</div><div class="ttdef"><b>Definition:</b> <a href="_material_8hpp_source.html#l00056">Material.hpp:56</a></div></div>
+<div class="ttc" id="aclass_reflex_1_1_material_html_afd220070fbb9e0d9e6edae8f251f748c"><div class="ttname"><a href="class_reflex_1_1_material.html#afd220070fbb9e0d9e6edae8f251f748c">Reflex::Material::m_shininess</a></div><div class="ttdeci">GLfloat m_shininess</div><div class="ttdoc">The shininess.</div><div class="ttdef"><b>Definition:</b> <a href="_material_8hpp_source.html#l00056">Material.hpp:56</a></div></div>
+<div class="ttc" id="aclass_reflex_1_1_material_html_a4038d72b84a5faa7920c6336031c13bf"><div class="ttname"><a href="class_reflex_1_1_material.html#a4038d72b84a5faa7920c6336031c13bf">Reflex::Material::m_specularIntensity</a></div><div class="ttdeci">GLfloat m_specularIntensity</div><div class="ttdoc">The specular intensity.</div><div class="ttdef"><b>Definition:</b> <a href="_material_8hpp_source.html#l00054">Material.hpp:54</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

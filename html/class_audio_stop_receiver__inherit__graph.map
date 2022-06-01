@@ -1,0 +1,4 @@
+<map id="AudioStopReceiver" name="AudioStopReceiver">
+<area shape="rect" id="node1" title="An event class to handle when a sound has stopped playing." alt="" coords="19,145,163,223"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,176,97"/>
+</map>

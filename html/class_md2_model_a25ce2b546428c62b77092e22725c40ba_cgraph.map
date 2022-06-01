@@ -1,0 +1,4 @@
+<map id="Md2Model::render_frame" name="Md2Model::render_frame">
+<area shape="rect" id="node1" title="Render a single frame given the frame number." alt="" coords="5,5,171,32"/>
+<area shape="rect" id="node2" href="$class_md2_model.html#aec6aa156ff58fb33e6215ede3886473b" title="Loads a frame to a mesh given a frame number." alt="" coords="219,5,411,32"/>
+</map>

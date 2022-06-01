@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: BodyRigid Class Reference</title>
+<title>ICT397 Assignment 2: BodyRigid Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -96,11 +96,13 @@ Inheritance diagram for BodyRigid:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_body_rigid__inherit__graph.png" border="0" usemap="#_body_rigid_inherit__map" alt="Inheritance graph"/></div>
 <map name="_body_rigid_inherit__map" id="_body_rigid_inherit__map">
-<area shape="rect" title=" " alt="" coords="69,535,272,817"/>
-<area shape="rect" href="class_physics_object.html" title=" " alt="" coords="5,873,160,1126"/>
-<area shape="rect" href="class_player.html" title="The player game object." alt="" coords="185,865,335,1133"/>
-<area shape="rect" href="class_body.html" title=" " alt="" coords="82,277,259,487"/>
-<area shape="rect" href="class_game_object.html" title="An abstract class to represent a game object." alt="" coords="109,5,233,229"/>
+<area shape="rect" title=" " alt="" coords="151,535,353,817"/>
+<area shape="rect" href="class_physics_object.html" title=" " alt="" coords="84,865,241,1133"/>
+<area shape="rect" href="class_player.html" title="The player game object." alt="" coords="266,873,417,1126"/>
+<area shape="rect" href="class_body.html" title=" " alt="" coords="163,277,341,487"/>
+<area shape="rect" href="class_game_object.html" title="An abstract class to represent a game object." alt="" coords="190,5,314,229"/>
+<area shape="rect" href="class_n_p_c.html" title=" " alt="" coords="5,1181,149,1611"/>
+<area shape="rect" href="class_projectile.html" title=" " alt="" coords="174,1225,322,1567"/>
 </map>
 </div>
 <div class="dynheader">
@@ -135,6 +137,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a84a2f48fcb665e1fd4a852de04a28c97"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body_rigid.html#a84a2f48fcb665e1fd4a852de04a28c97">setType</a> (int type)</td></tr>
 <tr class="memdesc:a84a2f48fcb665e1fd4a852de04a28c97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set type of rigid body.  <a href="class_body_rigid.html#a84a2f48fcb665e1fd4a852de04a28c97">More...</a><br /></td></tr>
 <tr class="separator:a84a2f48fcb665e1fd4a852de04a28c97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d4b576d87c9819d943fd87678b574a0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body_rigid.html#a5d4b576d87c9819d943fd87678b574a0">getType</a> ()</td></tr>
+<tr class="memdesc:a5d4b576d87c9819d943fd87678b574a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the type of rigid body.  <a href="class_body_rigid.html#a5d4b576d87c9819d943fd87678b574a0">More...</a><br /></td></tr>
+<tr class="separator:a5d4b576d87c9819d943fd87678b574a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6a7a73441eadcadabcc1f1f4962252dc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body_rigid.html#a6a7a73441eadcadabcc1f1f4962252dc">enableGravity</a> (bool val)</td></tr>
 <tr class="memdesc:a6a7a73441eadcadabcc1f1f4962252dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set if you want gravity.  <a href="class_body_rigid.html#a6a7a73441eadcadabcc1f1f4962252dc">More...</a><br /></td></tr>
 <tr class="separator:a6a7a73441eadcadabcc1f1f4962252dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -159,12 +164,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3812ff9ed98d179640459e11e51128f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body_rigid.html#a3812ff9ed98d179640459e11e51128f3">setAngularVelocity</a> (glm::vec3 velocity)</td></tr>
 <tr class="memdesc:a3812ff9ed98d179640459e11e51128f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">set torque to the object  <a href="class_body_rigid.html#a3812ff9ed98d179640459e11e51128f3">More...</a><br /></td></tr>
 <tr class="separator:a3812ff9ed98d179640459e11e51128f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8130dffe3466cbf291d4ccad2c677e85"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body_rigid.html#a8130dffe3466cbf291d4ccad2c677e85">update</a> (float delta_time) override</td></tr>
-<tr class="memdesc:a8130dffe3466cbf291d4ccad2c677e85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the object.  <a href="class_body_rigid.html#a8130dffe3466cbf291d4ccad2c677e85">More...</a><br /></td></tr>
-<tr class="separator:a8130dffe3466cbf291d4ccad2c677e85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6fe481f170920812246233f183822024"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body_rigid.html#a6fe481f170920812246233f183822024">fixed_update</a> (float delta_time)</td></tr>
-<tr class="memdesc:a6fe481f170920812246233f183822024"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the body object with fixed delta time.  <a href="class_body_rigid.html#a6fe481f170920812246233f183822024">More...</a><br /></td></tr>
-<tr class="separator:a6fe481f170920812246233f183822024"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5687289a2f5ead76445e91506f6f6c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body_rigid.html#ab5687289a2f5ead76445e91506f6f6c7">update</a> (double delta_time) override</td></tr>
+<tr class="memdesc:ab5687289a2f5ead76445e91506f6f6c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the object.  <a href="class_body_rigid.html#ab5687289a2f5ead76445e91506f6f6c7">More...</a><br /></td></tr>
+<tr class="separator:ab5687289a2f5ead76445e91506f6f6c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50bb7a8a3732003a827397d41df25877"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body_rigid.html#a50bb7a8a3732003a827397d41df25877">fixed_update</a> (double delta_time) override</td></tr>
+<tr class="memdesc:a50bb7a8a3732003a827397d41df25877"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the body object with fixed delta time.  <a href="class_body_rigid.html#a50bb7a8a3732003a827397d41df25877">More...</a><br /></td></tr>
+<tr class="separator:a50bb7a8a3732003a827397d41df25877"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a772e56f7b296bcc6fdae2c8204f6a2a0"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body_rigid.html#a772e56f7b296bcc6fdae2c8204f6a2a0">getPosition</a> ()</td></tr>
 <tr class="memdesc:a772e56f7b296bcc6fdae2c8204f6a2a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the position vector.  <a href="class_body_rigid.html#a772e56f7b296bcc6fdae2c8204f6a2a0">More...</a><br /></td></tr>
 <tr class="separator:a772e56f7b296bcc6fdae2c8204f6a2a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -192,15 +197,23 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0f585614e176a029a1cddce5ccb95184"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body_rigid.html#a0f585614e176a029a1cddce5ccb95184">addHeightFieldShape</a> (float bounciness, float friction)=delete</td></tr>
 <tr class="memdesc:a0f585614e176a029a1cddce5ccb95184"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a height field shape collision box.  <a href="class_body_rigid.html#a0f585614e176a029a1cddce5ccb95184">More...</a><br /></td></tr>
 <tr class="separator:a0f585614e176a029a1cddce5ccb95184"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55be5b2e3584bdacb6837f9c4498d3cf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body_rigid.html#a55be5b2e3584bdacb6837f9c4498d3cf">setLinearAxisFactor</a> (glm::vec3 factor)</td></tr>
+<tr class="memdesc:a55be5b2e3584bdacb6837f9c4498d3cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the linear axis factor. I.e. if set a axis to 0 it will no longer move on that axis.  <a href="class_body_rigid.html#a55be5b2e3584bdacb6837f9c4498d3cf">More...</a><br /></td></tr>
+<tr class="separator:a55be5b2e3584bdacb6837f9c4498d3cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9149ff9cea1ea16e316db2ba1b46558c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body_rigid.html#a9149ff9cea1ea16e316db2ba1b46558c">setAngularAxisFactor</a> (glm::vec3 factor)</td></tr>
+<tr class="memdesc:a9149ff9cea1ea16e316db2ba1b46558c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the angular axis factor. I.e. if set a axis to 0 it will no longer rotate on that axis.  <a href="class_body_rigid.html#a9149ff9cea1ea16e316db2ba1b46558c">More...</a><br /></td></tr>
+<tr class="separator:a9149ff9cea1ea16e316db2ba1b46558c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1197e35ab5afe6178862b0ff36e30e8a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body_rigid.html#a1197e35ab5afe6178862b0ff36e30e8a">~BodyRigid</a> ()</td></tr>
 <tr class="memdesc:a1197e35ab5afe6178862b0ff36e30e8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="class_body_rigid.html#a1197e35ab5afe6178862b0ff36e30e8a">More...</a><br /></td></tr>
 <tr class="separator:a1197e35ab5afe6178862b0ff36e30e8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3cc5bcf86a97d6222867e16f3f10ade8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body_rigid.html#a3cc5bcf86a97d6222867e16f3f10ade8">save_object</a> () override</td></tr>
 <tr class="memdesc:a3cc5bcf86a97d6222867e16f3f10ade8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Saves the object to lau file.  <a href="class_body_rigid.html#a3cc5bcf86a97d6222867e16f3f10ade8">More...</a><br /></td></tr>
 <tr class="separator:a3cc5bcf86a97d6222867e16f3f10ade8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9bd07a5fbfd91bc5cfae5dda0b37c091"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structcollider_data__capsule.html">colliderData_capsule</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body_rigid.html#a9bd07a5fbfd91bc5cfae5dda0b37c091">getCapsuleColliders</a> ()</td></tr>
+<tr class="separator:a9bd07a5fbfd91bc5cfae5dda0b37c091"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_body"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_body')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_body.html">Body</a></td></tr>
 <tr class="memitem:acc9e5b6a32fe16946f552d51efb9262e inherit pub_methods_class_body"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body.html#acc9e5b6a32fe16946f552d51efb9262e">setCreator</a> (bool val)</td></tr>
-<tr class="memdesc:acc9e5b6a32fe16946f552d51efb9262e inherit pub_methods_class_body"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets if the object is a creator (true) or destructor (false). <a class="el" href="class_a.html">A</a> creator should be one of the fist game objects while a destoryer should be one of the last.  <a href="class_body.html#acc9e5b6a32fe16946f552d51efb9262e">More...</a><br /></td></tr>
+<tr class="memdesc:acc9e5b6a32fe16946f552d51efb9262e inherit pub_methods_class_body"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets if the object is a creator (true) or destructor (false). A creator should be one of the fist game objects while a destoryer should be one of the last.  <a href="class_body.html#acc9e5b6a32fe16946f552d51efb9262e">More...</a><br /></td></tr>
 <tr class="separator:acc9e5b6a32fe16946f552d51efb9262e inherit pub_methods_class_body"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abc711fca035985aa0c90df443ed6c72a inherit pub_methods_class_body"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body.html#abc711fca035985aa0c90df443ed6c72a">physicsDebugger</a> ()</td></tr>
 <tr class="memdesc:abc711fca035985aa0c90df443ed6c72a inherit pub_methods_class_body"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds all possible physic debugger options.  <a href="class_body.html#abc711fca035985aa0c90df443ed6c72a">More...</a><br /></td></tr>
@@ -237,20 +250,21 @@ Protected Attributes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_attribs_class_game_object"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_game_object')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_game_object.html">GameObject</a></td></tr>
-<tr class="memitem:a14fb80b5c11845275806d529e605f3b9 inherit pub_attribs_class_game_object"><td class="memItemLeft" >struct {</td></tr>
-<tr class="memitem:ad7477e772a598659ef2d1b19c32a199c inherit pub_attribs_class_game_object"><td class="memItemLeft" >&#160;&#160;&#160;glm::vec3&#160;&#160;&#160;<a class="el" href="class_game_object.html#a16e2e8c2546d7bf920bbe2e288acb278">position</a> = {0.0f, 0.0f, 0.0f}</td></tr>
-<tr class="memdesc:ad7477e772a598659ef2d1b19c32a199c inherit pub_attribs_class_game_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">The position of the game object.  <a href="struct_game_object_1_1_0d5.html#ad7477e772a598659ef2d1b19c32a199c">More...</a><br /></td></tr>
-<tr class="separator:ad7477e772a598659ef2d1b19c32a199c inherit pub_attribs_class_game_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8b5d343cead539d29c5f8efe1c8499c inherit pub_attribs_class_game_object"><td class="memItemLeft" >&#160;&#160;&#160;glm::vec3&#160;&#160;&#160;<a class="el" href="class_game_object.html#acaf894c39661e6d4c13ad39b60684a38">rotation</a> = {0.0f, 1.0f, 0.0f}</td></tr>
-<tr class="memdesc:ac8b5d343cead539d29c5f8efe1c8499c inherit pub_attribs_class_game_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">The rotation of the game object.  <a href="struct_game_object_1_1_0d5.html#ac8b5d343cead539d29c5f8efe1c8499c">More...</a><br /></td></tr>
-<tr class="separator:ac8b5d343cead539d29c5f8efe1c8499c inherit pub_attribs_class_game_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63224ed5cca826d1f218d20aebe007ef inherit pub_attribs_class_game_object"><td class="memItemLeft" >&#160;&#160;&#160;glm::vec3&#160;&#160;&#160;<a class="el" href="class_game_object.html#a5205edf429098d4b7bf0c442d72592d1">scale</a> = {1.0f, 1.0f, 1.0f}</td></tr>
-<tr class="memdesc:a63224ed5cca826d1f218d20aebe007ef inherit pub_attribs_class_game_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">The scale of the game object.  <a href="struct_game_object_1_1_0d5.html#a63224ed5cca826d1f218d20aebe007ef">More...</a><br /></td></tr>
-<tr class="separator:a63224ed5cca826d1f218d20aebe007ef inherit pub_attribs_class_game_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8981cfc2c367a634f5aa6143c1eff46 inherit pub_attribs_class_game_object"><td class="memItemLeft" >&#160;&#160;&#160;float&#160;&#160;&#160;<a class="el" href="class_game_object.html#aae6b1449006f9bbca7c6456676659828">angle</a> = 0.01</td></tr>
-<tr class="separator:af8981cfc2c367a634f5aa6143c1eff46 inherit pub_attribs_class_game_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14fb80b5c11845275806d529e605f3b9 inherit pub_attribs_class_game_object"><td class="memItemLeft" valign="top">};&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
-<tr class="separator:a14fb80b5c11845275806d529e605f3b9 inherit pub_attribs_class_game_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16e2e8c2546d7bf920bbe2e288acb278 inherit pub_attribs_class_game_object"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_object.html#a16e2e8c2546d7bf920bbe2e288acb278">position</a> = {0.0f, 0.0f, 0.0f}</td></tr>
+<tr class="memdesc:a16e2e8c2546d7bf920bbe2e288acb278 inherit pub_attribs_class_game_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">The position of the game object.  <a href="class_game_object.html#a16e2e8c2546d7bf920bbe2e288acb278">More...</a><br /></td></tr>
+<tr class="separator:a16e2e8c2546d7bf920bbe2e288acb278 inherit pub_attribs_class_game_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acaf894c39661e6d4c13ad39b60684a38 inherit pub_attribs_class_game_object"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_object.html#acaf894c39661e6d4c13ad39b60684a38">rotation</a> = {0.0f, 1.0f, 0.0f}</td></tr>
+<tr class="memdesc:acaf894c39661e6d4c13ad39b60684a38 inherit pub_attribs_class_game_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">The rotation of the game object.  <a href="class_game_object.html#acaf894c39661e6d4c13ad39b60684a38">More...</a><br /></td></tr>
+<tr class="separator:acaf894c39661e6d4c13ad39b60684a38 inherit pub_attribs_class_game_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5205edf429098d4b7bf0c442d72592d1 inherit pub_attribs_class_game_object"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_object.html#a5205edf429098d4b7bf0c442d72592d1">scale</a> = {1.0f, 1.0f, 1.0f}</td></tr>
+<tr class="memdesc:a5205edf429098d4b7bf0c442d72592d1 inherit pub_attribs_class_game_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">The scale of the game object.  <a href="class_game_object.html#a5205edf429098d4b7bf0c442d72592d1">More...</a><br /></td></tr>
+<tr class="separator:a5205edf429098d4b7bf0c442d72592d1 inherit pub_attribs_class_game_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae6b1449006f9bbca7c6456676659828 inherit pub_attribs_class_game_object"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_object.html#aae6b1449006f9bbca7c6456676659828">angle</a> = 0.01f</td></tr>
+<tr class="memdesc:aae6b1449006f9bbca7c6456676659828 inherit pub_attribs_class_game_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">The angle of rotation.  <a href="class_game_object.html#aae6b1449006f9bbca7c6456676659828">More...</a><br /></td></tr>
+<tr class="separator:aae6b1449006f9bbca7c6456676659828 inherit pub_attribs_class_game_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae939c981c524a76645abf33cd48b4214 inherit pub_attribs_class_game_object"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_object.html#ae939c981c524a76645abf33cd48b4214">remove</a> = false</td></tr>
+<tr class="memdesc:ae939c981c524a76645abf33cd48b4214 inherit pub_attribs_class_game_object"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether the game object should be removed.  <a href="class_game_object.html#ae939c981c524a76645abf33cd48b4214">More...</a><br /></td></tr>
+<tr class="separator:ae939c981c524a76645abf33cd48b4214 inherit pub_attribs_class_game_object"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
@@ -275,8 +289,8 @@ Additional Inherited Members</h2></td></tr>
 <dl class="section pre"><dt>Precondition</dt><dd>Object was created </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>Object deleted </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00055">55</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;{ <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#a456336d6946f6e4644ae42ca7425acc4">~BodyRigidPhysics</a>(); }</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00057">57</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;{ <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#a456336d6946f6e4644ae42ca7425acc4">~BodyRigidPhysics</a>(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -308,9 +322,9 @@ Additional Inherited Members</h2></td></tr>
 <dl class="section pre"><dt>Precondition</dt><dd>Nothing </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>Nothing </dd></dl>
 
-<p>Reimplemented from <a class="el" href="class_body.html#a7a808e9a7a9ff24f1ce7fac59367adae">Body</a>.</p>
+<p>Reimplemented from <a class="el" href="class_body.html#a079e468daf6b9ddca665c95641547697">Body</a>.</p>
 
-<p>Reimplemented in <a class="el" href="class_physics_object.html#ab7771309d7be5a0707499339b9219492">PhysicsObject</a>, and <a class="el" href="class_player.html#a39db63b91d5e62039ddf9537343eb74a">Player</a>.</p>
+<p>Reimplemented in <a class="el" href="class_physics_object.html#ab7771309d7be5a0707499339b9219492">PhysicsObject</a>, <a class="el" href="class_n_p_c.html#a94b89b04077325d4a79008305f34d39d">NPC</a>, <a class="el" href="class_player.html#a39db63b91d5e62039ddf9537343eb74a">Player</a>, and <a class="el" href="class_projectile.html#a94c51d6f81b2a4986daf7a51e57fae12">Projectile</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_body_rigid_8hpp_source.html#l00023">23</a> of file <a class="el" href="_body_rigid_8hpp_source.html">BodyRigid.hpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{}</div>
@@ -368,15 +382,15 @@ Additional Inherited Members</h2></td></tr>
 <dl class="section pre"><dt>Precondition</dt><dd>Rigid body exists </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>Box collider added </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00057">57</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                                                                 {</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#a31f32db0c271466f58af84d771f48362">addBoxCollider</a>(pos, halfSize, bounciness, friction);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <a class="code" href="structcollider_data__box.html">colliderData_box</a> cb(<a class="code" href="class_body_rigid.html#ac183f8e4f09635c8eaaf051141ed988b">m_numOfColliders</a>, halfSize.x, halfSize.y, halfSize.z);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="class_body_rigid.html#abbc3373aaf38c7f2701ba541e338e0a0">m_box</a>.push_back(cb);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <a class="code" href="class_body_rigid.html#ac183f8e4f09635c8eaaf051141ed988b">m_numOfColliders</a>++;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00059">59</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                                                                 {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#a31f32db0c271466f58af84d771f48362">addBoxCollider</a>(pos, halfSize, bounciness, friction);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <a class="code" href="class_body_rigid.html#abbc3373aaf38c7f2701ba541e338e0a0">m_box</a>.emplace_back(</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <a class="code" href="structcollider_data__box.html">colliderData_box</a>(<a class="code" href="class_body_rigid.html#ac183f8e4f09635c8eaaf051141ed988b">m_numOfColliders</a>, halfSize.x, halfSize.y, halfSize.z));</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <a class="code" href="class_body_rigid.html#ac183f8e4f09635c8eaaf051141ed988b">m_numOfColliders</a>++;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_body_rigid_8hpp_source.html#l00271">m_numOfColliders</a>.</p>
+<p class="reference">References <a class="el" href="_body_rigid_8hpp_source.html#l00304">m_numOfColliders</a>.</p>
 
 </div>
 </div>
@@ -438,24 +452,15 @@ Additional Inherited Members</h2></td></tr>
 <dl class="section pre"><dt>Precondition</dt><dd>Rigid body exists </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>Capsule collider added </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00073">73</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                                                                     {</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#ab39c8fbbb6c546fa1a320cb55cbb9c53">addCapsuleCollider</a>(pos, radius, height, bounciness, friction);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <a class="code" href="structcollider_data__capsule.html">colliderData_capsule</a> cb(<a class="code" href="class_body_rigid.html#ac183f8e4f09635c8eaaf051141ed988b">m_numOfColliders</a>, radius, height);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="class_body_rigid.html#aabc19ade5162b634835fb7abb1dcbdc4">m_capsule</a>.push_back(cb);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <a class="code" href="class_body_rigid.html#ac183f8e4f09635c8eaaf051141ed988b">m_numOfColliders</a>++;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00074">74</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                                                                     {</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#ab39c8fbbb6c546fa1a320cb55cbb9c53">addCapsuleCollider</a>(pos, radius, height, bounciness, friction);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="class_body_rigid.html#aabc19ade5162b634835fb7abb1dcbdc4">m_capsule</a>.emplace_back(</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <a class="code" href="structcollider_data__capsule.html">colliderData_capsule</a>(<a class="code" href="class_body_rigid.html#ac183f8e4f09635c8eaaf051141ed988b">m_numOfColliders</a>, radius, height));</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <a class="code" href="class_body_rigid.html#ac183f8e4f09635c8eaaf051141ed988b">m_numOfColliders</a>++;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_body_rigid_physics_8hpp_source.html#l00025">colliderData_capsule::colliderData_capsule()</a>, and <a class="el" href="_body_rigid_8hpp_source.html#l00271">m_numOfColliders</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_body_rigid_aff4f02fa78c65b3ea2e2801b83027f04_cgraph.png" border="0" usemap="#class_body_rigid_aff4f02fa78c65b3ea2e2801b83027f04_cgraph" alt=""/></div>
-<map name="class_body_rigid_aff4f02fa78c65b3ea2e2801b83027f04_cgraph" id="class_body_rigid_aff4f02fa78c65b3ea2e2801b83027f04_cgraph">
-<area shape="rect" title="Adds a capsule collider to a rigid body." alt="" coords="5,13,205,39"/>
-<area shape="rect" href="structcollider_data__capsule.html#a5f71f32750e41889878512239d81dd61" title=" " alt="" coords="253,5,404,47"/>
-</map>
-</div>
+<p class="reference">References <a class="el" href="_body_rigid_8hpp_source.html#l00304">m_numOfColliders</a>.</p>
 
 </div>
 </div>
@@ -485,8 +490,8 @@ Here is the call graph for this function:</div>
 <dl class="section pre"><dt>Precondition</dt><dd>Rigid body exists </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>Force added </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00025">25</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{ <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#a624fbc2102176f123d69bfd1c0e80090">addForce</a>(force); }</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00027">27</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{ <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#a624fbc2102176f123d69bfd1c0e80090">addForce</a>(force); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -588,24 +593,14 @@ Here is the call graph for this function:</div>
 <dl class="section pre"><dt>Precondition</dt><dd>Rigid body exists </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>Sphere collider added </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00065">65</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                                                  {</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#aad0009d7f9db9a7d9f69827de4beea96">addSphereCollider</a>(pos, radius, bounciness, friction);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <a class="code" href="structcollider_data__sphere.html">colliderData_sphere</a> cb(<a class="code" href="class_body_rigid.html#ac183f8e4f09635c8eaaf051141ed988b">m_numOfColliders</a>, radius);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <a class="code" href="class_body_rigid.html#acd88a5c781b5ba3830504578ca8f5e61">m_sphere</a>.push_back(cb);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <a class="code" href="class_body_rigid.html#ac183f8e4f09635c8eaaf051141ed988b">m_numOfColliders</a>++;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00067">67</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                                                  {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#aad0009d7f9db9a7d9f69827de4beea96">addSphereCollider</a>(pos, radius, bounciness, friction);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <a class="code" href="class_body_rigid.html#acd88a5c781b5ba3830504578ca8f5e61">m_sphere</a>.emplace_back(<a class="code" href="structcollider_data__sphere.html">colliderData_sphere</a>(<a class="code" href="class_body_rigid.html#ac183f8e4f09635c8eaaf051141ed988b">m_numOfColliders</a>, radius));</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <a class="code" href="class_body_rigid.html#ac183f8e4f09635c8eaaf051141ed988b">m_numOfColliders</a>++;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_body_rigid_physics_8hpp_source.html#l00015">colliderData_sphere::colliderData_sphere()</a>, and <a class="el" href="_body_rigid_8hpp_source.html#l00271">m_numOfColliders</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_body_rigid_a168f689740783ce97aac66056c62dfb3_cgraph.png" border="0" usemap="#class_body_rigid_a168f689740783ce97aac66056c62dfb3_cgraph" alt=""/></div>
-<map name="class_body_rigid_a168f689740783ce97aac66056c62dfb3_cgraph" id="class_body_rigid_a168f689740783ce97aac66056c62dfb3_cgraph">
-<area shape="rect" title="Adds a sphere collider to a rigid body." alt="" coords="5,13,200,39"/>
-<area shape="rect" href="structcollider_data__sphere.html#a7fb66bbdbd7ad2b9237c31445692dfd9" title=" " alt="" coords="248,5,392,47"/>
-</map>
-</div>
+<p class="reference">References <a class="el" href="_body_rigid_8hpp_source.html#l00304">m_numOfColliders</a>.</p>
 
 </div>
 </div>
@@ -635,8 +630,8 @@ Here is the call graph for this function:</div>
 <dl class="section pre"><dt>Precondition</dt><dd>Rigid body exists </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>Torque added </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00031">31</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{ <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#acde863358c3e733893da83b2094a3748">addTorque</a>(torque); }</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00033">33</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;{ <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#acde863358c3e733893da83b2094a3748">addTorque</a>(torque); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -681,7 +676,7 @@ Here is the call graph for this function:</div>
   </table>
   </dd>
 </dl>
-<dl class="section pre"><dt>Precondition</dt><dd><a class="el" href="namespace_physics.html">Physics</a> world exists </dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd><a class="el" href="class_physics.html">Physics</a> world exists </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>Rigid body initialised </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00005">5</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
@@ -719,9 +714,9 @@ Here is the call graph for this function:</div>
 <dl class="section pre"><dt>Precondition</dt><dd>Nothing </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>Nothing </dd></dl>
 
-<p>Reimplemented from <a class="el" href="class_body.html#a2f09ad0a99d6dcb392fb05ea2e2d3c09">Body</a>.</p>
+<p>Reimplemented from <a class="el" href="class_body.html#aa33b10c09cdee13f4dd556a0c0980c9a">Body</a>.</p>
 
-<p>Reimplemented in <a class="el" href="class_physics_object.html#a72c03214889819e5bba9d321e69a848c">PhysicsObject</a>, and <a class="el" href="class_player.html#ae3f0114d65a6f38c2666f15aa02c172e">Player</a>.</p>
+<p>Reimplemented in <a class="el" href="class_physics_object.html#a72c03214889819e5bba9d321e69a848c">PhysicsObject</a>, <a class="el" href="class_n_p_c.html#a4e335de59c42c1888ed075fa2ee10e65">NPC</a>, <a class="el" href="class_player.html#ae3f0114d65a6f38c2666f15aa02c172e">Player</a>, and <a class="el" href="class_projectile.html#a6ed3c52762103564272d2284f347d3cc">Projectile</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_body_rigid_8hpp_source.html#l00031">31</a> of file <a class="el" href="_body_rigid_8hpp_source.html">BodyRigid.hpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{}</div>
@@ -754,13 +749,13 @@ Here is the call graph for this function:</div>
 <dl class="section pre"><dt>Precondition</dt><dd>Rigid body exists </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>Gravity set </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00013">13</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{ <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#af76406be5413bb805eda6edbe4700676">enableGravity</a>(val); }</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00015">15</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{ <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#af76406be5413bb805eda6edbe4700676">enableGravity</a>(val); }</div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a6fe481f170920812246233f183822024"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6fe481f170920812246233f183822024">&#9670;&nbsp;</a></span>fixed_update()</h2>
+<a id="a50bb7a8a3732003a827397d41df25877"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50bb7a8a3732003a827397d41df25877">&#9670;&nbsp;</a></span>fixed_update()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -771,14 +766,14 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="memname">void BodyRigid::fixed_update </td>
           <td>(</td>
-          <td class="paramtype">float&#160;</td>
+          <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>delta_time</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -791,16 +786,16 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="class_body.html#aefcd8a345c89c88d75de1aa2a0b8674a">Body</a>.</p>
+<p>Reimplemented from <a class="el" href="class_body.html#a60f494708a7e6c894338323c0cfe54a8">Body</a>.</p>
 
-<p>Reimplemented in <a class="el" href="class_physics_object.html#a6755c9889950a56d765768f5c76cfef6">PhysicsObject</a>, and <a class="el" href="class_player.html#af2021f751c5b2334e5eaa8723be1aab6">Player</a>.</p>
+<p>Reimplemented in <a class="el" href="class_physics_object.html#af18472f2a2fd0179b023a7a4ba51729c">PhysicsObject</a>, <a class="el" href="class_n_p_c.html#aeec369637010a2bc48c399d55984a5b0">NPC</a>, <a class="el" href="class_player.html#a62f1c3f2f4c4ffc60a56060159b49ded">Player</a>, and <a class="el" href="class_projectile.html#aaa797f4d3b1336de033ebe01957d9506">Projectile</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00039">39</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                                             {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="class_game_object.html#a16e2e8c2546d7bf920bbe2e288acb278">position</a> = <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#add1b98f674ddde3bc8955797c65c9ab0">getPosition</a>();</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="class_game_object.html#acaf894c39661e6d4c13ad39b60684a38">rotation</a> = <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#a9d4dcc0ffe56f0b8d834988a85fb8174">getRotation</a>();</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="class_game_object.html#aae6b1449006f9bbca7c6456676659828">angle</a> = <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#a3fce4b285497d130a255c7e5ddbd4030">getAngle</a>();</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00041">41</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                                              {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="class_game_object.html#a16e2e8c2546d7bf920bbe2e288acb278">position</a> = <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#add1b98f674ddde3bc8955797c65c9ab0">getPosition</a>();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="class_game_object.html#acaf894c39661e6d4c13ad39b60684a38">rotation</a> = <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#a9d4dcc0ffe56f0b8d834988a85fb8174">getRotation</a>();</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="class_game_object.html#aae6b1449006f9bbca7c6456676659828">angle</a> = <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#a3fce4b285497d130a255c7e5ddbd4030">getAngle</a>();</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -824,8 +819,8 @@ Here is the call graph for this function:</div>
 <dl class="section pre"><dt>Precondition</dt><dd>Rigid body exists </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>Angle retrieved </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00049">49</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#a3fce4b285497d130a255c7e5ddbd4030">getAngle</a>(); }</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00051">51</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#a3fce4b285497d130a255c7e5ddbd4030">getAngle</a>(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -849,8 +844,30 @@ Here is the call graph for this function:</div>
 <dl class="section pre"><dt>Precondition</dt><dd>Rigid body exists </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>angular velocity retrieved </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00053">53</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#ac7f6a906ecf237f2c11bc574b904af59">getAngularVelocity</a>(); }</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00055">55</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#ac7f6a906ecf237f2c11bc574b904af59">getAngularVelocity</a>(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a9bd07a5fbfd91bc5cfae5dda0b37c091"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9bd07a5fbfd91bc5cfae5dda0b37c091">&#9670;&nbsp;</a></span>getCapsuleColliders()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="structcollider_data__capsule.html">colliderData_capsule</a> &gt; BodyRigid::getCapsuleColliders </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00090">90</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                                                               {</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_body_rigid.html#aabc19ade5162b634835fb7abb1dcbdc4">m_capsule</a>;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -874,8 +891,8 @@ Here is the call graph for this function:</div>
 <dl class="section pre"><dt>Precondition</dt><dd>Rigid body exists </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>linear velocity retrieved </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00051">51</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#ac177806adf91020d4db8e15a9807964f">getLinearVelocity</a>(); }</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00053">53</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#ac177806adf91020d4db8e15a9807964f">getLinearVelocity</a>(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -899,8 +916,8 @@ Here is the call graph for this function:</div>
 <dl class="section pre"><dt>Precondition</dt><dd>Rigid body exists </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>Position retrieved </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00045">45</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#add1b98f674ddde3bc8955797c65c9ab0">getPosition</a>(); }</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00047">47</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#add1b98f674ddde3bc8955797c65c9ab0">getPosition</a>(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -924,8 +941,33 @@ Here is the call graph for this function:</div>
 <dl class="section pre"><dt>Precondition</dt><dd>Rigid body exists </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>Rotation retrieved </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00047">47</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#a9d4dcc0ffe56f0b8d834988a85fb8174">getRotation</a>(); }</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00049">49</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#a9d4dcc0ffe56f0b8d834988a85fb8174">getRotation</a>(); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a5d4b576d87c9819d943fd87678b574a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d4b576d87c9819d943fd87678b574a0">&#9670;&nbsp;</a></span>getType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int BodyRigid::getType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the type of rigid body. </p>
+<dl class="section return"><dt>Returns</dt><dd>type - type of body. 0 = static, 1 = kinematic, 2 = dynamic</dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>Rigid body exists </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Type returned </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00013">13</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#a0c4637aa9aef8454aa5002309f236412">getRBType</a>(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -956,9 +998,9 @@ Here is the call graph for this function:</div>
 <dl class="section pre"><dt>Precondition</dt><dd>Nothing </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>Nothing </dd></dl>
 
-<p>Reimplemented from <a class="el" href="class_body.html#a0e7b8962df553275d0493bb7e9bce430">Body</a>.</p>
+<p>Reimplemented from <a class="el" href="class_body.html#aa815045b8dd6486ec9e88da0b6484ec4">Body</a>.</p>
 
-<p>Reimplemented in <a class="el" href="class_player.html#a350275a7155ddf4d962fa158622b6cb7">Player</a>.</p>
+<p>Reimplemented in <a class="el" href="class_n_p_c.html#ae343f1531c1247332b03d0ac7f154eeb">NPC</a>, <a class="el" href="class_player.html#a350275a7155ddf4d962fa158622b6cb7">Player</a>, and <a class="el" href="class_projectile.html#ac0674cae7317cf2a92b94eb88798f46c">Projectile</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00003">3</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;{}</div>
@@ -994,10 +1036,10 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_body.html#a5cc24f642ba107110af39d156232be98">Body</a>.</p>
 
-<p>Reimplemented in <a class="el" href="class_physics_object.html#a6103a75cd9288646117068f07b0d75ed">PhysicsObject</a>, and <a class="el" href="class_player.html#a73cc9b57a85b674c4b46732f1e67293e">Player</a>.</p>
+<p>Reimplemented in <a class="el" href="class_physics_object.html#a6103a75cd9288646117068f07b0d75ed">PhysicsObject</a>, <a class="el" href="class_n_p_c.html#ab2ea5dd4ca74d5cb48f3ecca0d9cf71a">NPC</a>, <a class="el" href="class_player.html#a73cc9b57a85b674c4b46732f1e67293e">Player</a>, and <a class="el" href="class_projectile.html#a7974563f08a31be7fb9c81798817b58a">Projectile</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_8hpp_source.html#l00260">260</a> of file <a class="el" href="_body_rigid_8hpp_source.html">BodyRigid.hpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;{}</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_8hpp_source.html#l00291">291</a> of file <a class="el" href="_body_rigid_8hpp_source.html">BodyRigid.hpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;{}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1032,6 +1074,39 @@ Here is the call graph for this function:</div>
 </div><!-- fragment -->
 </div>
 </div>
+<a id="a9149ff9cea1ea16e316db2ba1b46558c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9149ff9cea1ea16e316db2ba1b46558c">&#9670;&nbsp;</a></span>setAngularAxisFactor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BodyRigid::setAngularAxisFactor </td>
+          <td>(</td>
+          <td class="paramtype">glm::vec3&#160;</td>
+          <td class="paramname"><em>factor</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Changes the angular axis factor. I.e. if set a axis to 0 it will no longer rotate on that axis. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">factor</td><td>- The factor you want for each axis. i.e. 1, 0, 1, stops y rotation.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section pre"><dt>Precondition</dt><dd>Rigid body exists </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Angular axis factor changed </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00086">86</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                                                   {</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#a606b3ff078c13ccdbbd2c0201608b9e3">setAngularAxisFactor</a>(factor);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;}</div>
+</div><!-- fragment -->
+</div>
+</div>
 <a id="a3812ff9ed98d179640459e11e51128f3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3812ff9ed98d179640459e11e51128f3">&#9670;&nbsp;</a></span>setAngularVelocity()</h2>
 
@@ -1058,10 +1133,10 @@ Here is the call graph for this function:</div>
 <dl class="section pre"><dt>Precondition</dt><dd>Rigid body exists </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>Torque added </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00033">33</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                                                   {</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#a626b45c2d429bc3eeae4fd8bf4faaa9c">setAngularVelocity</a>(velocity);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00035">35</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                                                   {</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#a626b45c2d429bc3eeae4fd8bf4faaa9c">setAngularVelocity</a>(velocity);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1091,10 +1166,10 @@ Here is the call graph for this function:</div>
 <dl class="section pre"><dt>Precondition</dt><dd>Rigid body exists </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>angular dampining set </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00019">19</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;                                                   {</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#a5993349488b60126d08fa5c29b17098b">setAngularVelocityDamping</a>(val);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00021">21</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;                                                   {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#a5993349488b60126d08fa5c29b17098b">setAngularVelocityDamping</a>(val);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1124,8 +1199,41 @@ Here is the call graph for this function:</div>
 <dl class="section pre"><dt>Precondition</dt><dd>Rigid body exists </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>Rigid body can sleep </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00023">23</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;{ <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#a6d09ea176f2cf30357770223d371ea9e">setIfBodyCanSleep</a>(val); }</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00025">25</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{ <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#a6d09ea176f2cf30357770223d371ea9e">setIfBodyCanSleep</a>(val); }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a55be5b2e3584bdacb6837f9c4498d3cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55be5b2e3584bdacb6837f9c4498d3cf">&#9670;&nbsp;</a></span>setLinearAxisFactor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BodyRigid::setLinearAxisFactor </td>
+          <td>(</td>
+          <td class="paramtype">glm::vec3&#160;</td>
+          <td class="paramname"><em>factor</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Changes the linear axis factor. I.e. if set a axis to 0 it will no longer move on that axis. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">factor</td><td>- The factor you want for each axis. i.e. 1, 0, 1, stops y movement.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section pre"><dt>Precondition</dt><dd>Rigid body exists </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Linear axis factor changed </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00082">82</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                                                  {</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#a8262c8bc952eb67b31966c6473672736">setLinearAxisFactor</a>(factor);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1155,10 +1263,10 @@ Here is the call graph for this function:</div>
 <dl class="section pre"><dt>Precondition</dt><dd>Rigid body exists </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>Force added </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00027">27</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                                                  {</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#a6b3a121bd9ea7c67c80cc032f3b862a6">setLinearVelocity</a>(velocity);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00029">29</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                                                  {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#a6b3a121bd9ea7c67c80cc032f3b862a6">setLinearVelocity</a>(velocity);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1188,10 +1296,10 @@ Here is the call graph for this function:</div>
 <dl class="section pre"><dt>Precondition</dt><dd>Rigid body exists </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>linear dampining set </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00015">15</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;                                                  {</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#a3994a964df47b9af6bb10b9740534d29">setLinearVelocityDamping</a>(val);</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00017">17</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;                                                  {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">rb</a>.<a class="code" href="class_body_rigid_physics.html#a3994a964df47b9af6bb10b9740534d29">setLinearVelocityDamping</a>(val);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1226,8 +1334,8 @@ Here is the call graph for this function:</div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a8130dffe3466cbf291d4ccad2c677e85"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8130dffe3466cbf291d4ccad2c677e85">&#9670;&nbsp;</a></span>update()</h2>
+<a id="ab5687289a2f5ead76445e91506f6f6c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5687289a2f5ead76445e91506f6f6c7">&#9670;&nbsp;</a></span>update()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1238,7 +1346,7 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="memname">void BodyRigid::update </td>
           <td>(</td>
-          <td class="paramtype">float&#160;</td>
+          <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>delta_time</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1260,12 +1368,12 @@ Here is the call graph for this function:</div>
 <dl class="section pre"><dt>Precondition</dt><dd>Rigid body exists </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>Rigid body updated </dd></dl>
 
-<p>Reimplemented from <a class="el" href="class_body.html#acfac7f6b5ff887c89d828a23131f2d64">Body</a>.</p>
+<p>Reimplemented from <a class="el" href="class_body.html#a63154d69d987a98155a3f1aeb1087496">Body</a>.</p>
 
-<p>Reimplemented in <a class="el" href="class_physics_object.html#a25cd2d4321593e1aac52c828817216d0">PhysicsObject</a>, and <a class="el" href="class_player.html#a4b125ac0ecb1f3df52b0da46e9ee73b5">Player</a>.</p>
+<p>Reimplemented in <a class="el" href="class_physics_object.html#ac5914714154d43141d497976c5b342c6">PhysicsObject</a>, <a class="el" href="class_n_p_c.html#ad0581cc0077e6e882c59f2fac39a846e">NPC</a>, <a class="el" href="class_player.html#a9541ff91c3f6c96b38b300781d5a313b">Player</a>, and <a class="el" href="class_projectile.html#a8626450e5f4144d4e20d3dee3551feb2">Projectile</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00037">37</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{}</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_8cpp_source.html#l00039">39</a> of file <a class="el" href="_body_rigid_8cpp_source.html">BodyRigid.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;{}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1292,7 +1400,7 @@ Here is the call graph for this function:</div>
 
 <p>List of capsule colliders. Used for storing data to file </p>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_8hpp_source.html#l00286">286</a> of file <a class="el" href="_body_rigid_8hpp_source.html">BodyRigid.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_8hpp_source.html#l00319">319</a> of file <a class="el" href="_body_rigid_8hpp_source.html">BodyRigid.hpp</a>.</p>
 
 </div>
 </div>
@@ -1318,7 +1426,7 @@ Here is the call graph for this function:</div>
 
 <p>List of capsule colliders. Used for storing data to file </p>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_8hpp_source.html#l00281">281</a> of file <a class="el" href="_body_rigid_8hpp_source.html">BodyRigid.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_8hpp_source.html#l00314">314</a> of file <a class="el" href="_body_rigid_8hpp_source.html">BodyRigid.hpp</a>.</p>
 
 </div>
 </div>
@@ -1344,9 +1452,9 @@ Here is the call graph for this function:</div>
 
 <p>The number of colliders in the rb </p>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_8hpp_source.html#l00271">271</a> of file <a class="el" href="_body_rigid_8hpp_source.html">BodyRigid.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_8hpp_source.html#l00304">304</a> of file <a class="el" href="_body_rigid_8hpp_source.html">BodyRigid.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_body_rigid_8cpp_source.html#l00057">addBoxCollider()</a>, <a class="el" href="_body_rigid_8cpp_source.html#l00073">addCapsuleCollider()</a>, and <a class="el" href="_body_rigid_8cpp_source.html#l00065">addSphereCollider()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_body_rigid_8cpp_source.html#l00059">addBoxCollider()</a>, <a class="el" href="_body_rigid_8cpp_source.html#l00074">addCapsuleCollider()</a>, and <a class="el" href="_body_rigid_8cpp_source.html#l00067">addSphereCollider()</a>.</p>
 
 </div>
 </div>
@@ -1372,7 +1480,7 @@ Here is the call graph for this function:</div>
 
 <p>List of sphere colliders. Used for storing data to file </p>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_8hpp_source.html#l00276">276</a> of file <a class="el" href="_body_rigid_8hpp_source.html">BodyRigid.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_8hpp_source.html#l00309">309</a> of file <a class="el" href="_body_rigid_8hpp_source.html">BodyRigid.hpp</a>.</p>
 
 </div>
 </div>
@@ -1398,7 +1506,7 @@ Here is the call graph for this function:</div>
 
 <p>Facaded react rigid body </p>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_8hpp_source.html#l00266">266</a> of file <a class="el" href="_body_rigid_8hpp_source.html">BodyRigid.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_8hpp_source.html#l00299">299</a> of file <a class="el" href="_body_rigid_8hpp_source.html">BodyRigid.hpp</a>.</p>
 
 </div>
 </div>
@@ -1410,34 +1518,37 @@ Here is the call graph for this function:</div>
 </div><!-- doc-content -->
 <div class="ttc" id="aclass_body_rigid_physics_html_a716e75dd8c61f92a834f2fd09f07a304"><div class="ttname"><a href="class_body_rigid_physics.html#a716e75dd8c61f92a834f2fd09f07a304">BodyRigidPhysics::init</a></div><div class="ttdeci">void init(glm::vec3 pos, glm::vec3 rotation, float angle)</div><div class="ttdoc">Creates rigid body.</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8cpp_source.html#l00005">BodyRigidPhysics.cpp:5</a></div></div>
 <div class="ttc" id="aclass_body_rigid_physics_html_aa2baaab9d06d1a1f220f88c56b0e984f"><div class="ttname"><a href="class_body_rigid_physics.html#aa2baaab9d06d1a1f220f88c56b0e984f">BodyRigidPhysics::set_position</a></div><div class="ttdeci">void set_position(glm::vec3 pos)</div><div class="ttdoc">Set the rb position object.</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8cpp_source.html#l00029">BodyRigidPhysics.cpp:29</a></div></div>
-<div class="ttc" id="aclass_body_rigid_html_acd88a5c781b5ba3830504578ca8f5e61"><div class="ttname"><a href="class_body_rigid.html#acd88a5c781b5ba3830504578ca8f5e61">BodyRigid::m_sphere</a></div><div class="ttdeci">std::vector&lt; colliderData_sphere &gt; m_sphere</div><div class="ttdoc">List of sphere colliders. Used for storing data to file</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_8hpp_source.html#l00276">BodyRigid.hpp:276</a></div></div>
+<div class="ttc" id="aclass_body_rigid_html_acd88a5c781b5ba3830504578ca8f5e61"><div class="ttname"><a href="class_body_rigid.html#acd88a5c781b5ba3830504578ca8f5e61">BodyRigid::m_sphere</a></div><div class="ttdeci">std::vector&lt; colliderData_sphere &gt; m_sphere</div><div class="ttdoc">List of sphere colliders. Used for storing data to file</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_8hpp_source.html#l00309">BodyRigid.hpp:309</a></div></div>
 <div class="ttc" id="aclass_body_rigid_physics_html_a5c831cd9266a60c616be00ca93529315"><div class="ttname"><a href="class_body_rigid_physics.html#a5c831cd9266a60c616be00ca93529315">BodyRigidPhysics::setType</a></div><div class="ttdeci">void setType(int type)</div><div class="ttdoc">Set type of rigid body.</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8cpp_source.html#l00037">BodyRigidPhysics.cpp:37</a></div></div>
 <div class="ttc" id="aclass_body_rigid_physics_html_acde863358c3e733893da83b2094a3748"><div class="ttname"><a href="class_body_rigid_physics.html#acde863358c3e733893da83b2094a3748">BodyRigidPhysics::addTorque</a></div><div class="ttdeci">void addTorque(glm::vec3 torque)</div><div class="ttdoc">Adds torque to the object.</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8cpp_source.html#l00075">BodyRigidPhysics.cpp:75</a></div></div>
 <div class="ttc" id="aclass_body_rigid_physics_html_af76406be5413bb805eda6edbe4700676"><div class="ttname"><a href="class_body_rigid_physics.html#af76406be5413bb805eda6edbe4700676">BodyRigidPhysics::enableGravity</a></div><div class="ttdeci">void enableGravity(bool val)</div><div class="ttdoc">Set if you want gravity.</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8cpp_source.html#l00051">BodyRigidPhysics.cpp:51</a></div></div>
-<div class="ttc" id="aclass_body_rigid_html_aabc19ade5162b634835fb7abb1dcbdc4"><div class="ttname"><a href="class_body_rigid.html#aabc19ade5162b634835fb7abb1dcbdc4">BodyRigid::m_capsule</a></div><div class="ttdeci">std::vector&lt; colliderData_capsule &gt; m_capsule</div><div class="ttdoc">List of capsule colliders. Used for storing data to file</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_8hpp_source.html#l00281">BodyRigid.hpp:281</a></div></div>
+<div class="ttc" id="aclass_body_rigid_html_aabc19ade5162b634835fb7abb1dcbdc4"><div class="ttname"><a href="class_body_rigid.html#aabc19ade5162b634835fb7abb1dcbdc4">BodyRigid::m_capsule</a></div><div class="ttdeci">std::vector&lt; colliderData_capsule &gt; m_capsule</div><div class="ttdoc">List of capsule colliders. Used for storing data to file</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_8hpp_source.html#l00314">BodyRigid.hpp:314</a></div></div>
 <div class="ttc" id="aclass_body_rigid_physics_html_a3994a964df47b9af6bb10b9740534d29"><div class="ttname"><a href="class_body_rigid_physics.html#a3994a964df47b9af6bb10b9740534d29">BodyRigidPhysics::setLinearVelocityDamping</a></div><div class="ttdeci">void setLinearVelocityDamping(float val)</div><div class="ttdoc">Movement dampining.</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8cpp_source.html#l00053">BodyRigidPhysics.cpp:53</a></div></div>
-<div class="ttc" id="aclass_game_object_html_acaf894c39661e6d4c13ad39b60684a38"><div class="ttname"><a href="class_game_object.html#acaf894c39661e6d4c13ad39b60684a38">GameObject::rotation</a></div><div class="ttdeci">glm::vec3 rotation</div><div class="ttdoc">The rotation of the game object.</div><div class="ttdef"><b>Definition:</b> <a href="_game_object_8hpp_source.html#l00016">GameObject.hpp:16</a></div></div>
-<div class="ttc" id="aclass_game_object_html_a16e2e8c2546d7bf920bbe2e288acb278"><div class="ttname"><a href="class_game_object.html#a16e2e8c2546d7bf920bbe2e288acb278">GameObject::position</a></div><div class="ttdeci">glm::vec3 position</div><div class="ttdoc">The position of the game object.</div><div class="ttdef"><b>Definition:</b> <a href="_game_object_8hpp_source.html#l00014">GameObject.hpp:14</a></div></div>
-<div class="ttc" id="astructcollider_data__capsule_html"><div class="ttname"><a href="structcollider_data__capsule.html">colliderData_capsule</a></div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8hpp_source.html#l00021">BodyRigidPhysics.hpp:21</a></div></div>
+<div class="ttc" id="aclass_game_object_html_acaf894c39661e6d4c13ad39b60684a38"><div class="ttname"><a href="class_game_object.html#acaf894c39661e6d4c13ad39b60684a38">GameObject::rotation</a></div><div class="ttdeci">glm::vec3 rotation</div><div class="ttdoc">The rotation of the game object.</div><div class="ttdef"><b>Definition:</b> <a href="_game_object_8hpp_source.html#l00015">GameObject.hpp:15</a></div></div>
+<div class="ttc" id="aclass_game_object_html_a16e2e8c2546d7bf920bbe2e288acb278"><div class="ttname"><a href="class_game_object.html#a16e2e8c2546d7bf920bbe2e288acb278">GameObject::position</a></div><div class="ttdeci">glm::vec3 position</div><div class="ttdoc">The position of the game object.</div><div class="ttdef"><b>Definition:</b> <a href="_game_object_8hpp_source.html#l00013">GameObject.hpp:13</a></div></div>
+<div class="ttc" id="astructcollider_data__capsule_html"><div class="ttname"><a href="structcollider_data__capsule.html">colliderData_capsule</a></div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8hpp_source.html#l00022">BodyRigidPhysics.hpp:22</a></div></div>
 <div class="ttc" id="aclass_body_rigid_physics_html_a3fce4b285497d130a255c7e5ddbd4030"><div class="ttname"><a href="class_body_rigid_physics.html#a3fce4b285497d130a255c7e5ddbd4030">BodyRigidPhysics::getAngle</a></div><div class="ttdeci">float getAngle()</div><div class="ttdoc">Gets the angle around the axis of rotation of the rigid body.</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8cpp_source.html#l00102">BodyRigidPhysics.cpp:102</a></div></div>
-<div class="ttc" id="aclass_game_object_html_aae6b1449006f9bbca7c6456676659828"><div class="ttname"><a href="class_game_object.html#aae6b1449006f9bbca7c6456676659828">GameObject::angle</a></div><div class="ttdeci">float angle</div><div class="ttdef"><b>Definition:</b> <a href="_game_object_8hpp_source.html#l00019">GameObject.hpp:19</a></div></div>
+<div class="ttc" id="aclass_game_object_html_aae6b1449006f9bbca7c6456676659828"><div class="ttname"><a href="class_game_object.html#aae6b1449006f9bbca7c6456676659828">GameObject::angle</a></div><div class="ttdeci">float angle</div><div class="ttdoc">The angle of rotation.</div><div class="ttdef"><b>Definition:</b> <a href="_game_object_8hpp_source.html#l00020">GameObject.hpp:20</a></div></div>
 <div class="ttc" id="aclass_body_rigid_physics_html_aad0009d7f9db9a7d9f69827de4beea96"><div class="ttname"><a href="class_body_rigid_physics.html#aad0009d7f9db9a7d9f69827de4beea96">BodyRigidPhysics::addSphereCollider</a></div><div class="ttdeci">void addSphereCollider(glm::vec3 pos, float radius, float bounciness, float friction)</div><div class="ttdoc">Adds a sphere collider to a rigid body.</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8cpp_source.html#l00159">BodyRigidPhysics.cpp:159</a></div></div>
 <div class="ttc" id="aclass_body_rigid_physics_html_a31f32db0c271466f58af84d771f48362"><div class="ttname"><a href="class_body_rigid_physics.html#a31f32db0c271466f58af84d771f48362">BodyRigidPhysics::addBoxCollider</a></div><div class="ttdeci">void addBoxCollider(glm::vec3 pos, glm::vec3 halfSize, float bounciness, float friction)</div><div class="ttdoc">Adds a box ciller to a rigid body.</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8cpp_source.html#l00130">BodyRigidPhysics.cpp:130</a></div></div>
 <div class="ttc" id="aclass_body_rigid_physics_html_a9d4dcc0ffe56f0b8d834988a85fb8174"><div class="ttname"><a href="class_body_rigid_physics.html#a9d4dcc0ffe56f0b8d834988a85fb8174">BodyRigidPhysics::getRotation</a></div><div class="ttdeci">glm::vec3 getRotation()</div><div class="ttdoc">Gets the axis of rotation vector of the rigid body.</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8cpp_source.html#l00092">BodyRigidPhysics.cpp:92</a></div></div>
-<div class="ttc" id="astructcollider_data__sphere_html"><div class="ttname"><a href="structcollider_data__sphere.html">colliderData_sphere</a></div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8hpp_source.html#l00012">BodyRigidPhysics.hpp:12</a></div></div>
+<div class="ttc" id="aclass_body_rigid_physics_html_a0c4637aa9aef8454aa5002309f236412"><div class="ttname"><a href="class_body_rigid_physics.html#a0c4637aa9aef8454aa5002309f236412">BodyRigidPhysics::getRBType</a></div><div class="ttdeci">int getRBType()</div><div class="ttdoc">Retrieves the rigid body type.</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8cpp_source.html#l00263">BodyRigidPhysics.cpp:263</a></div></div>
+<div class="ttc" id="astructcollider_data__sphere_html"><div class="ttname"><a href="structcollider_data__sphere.html">colliderData_sphere</a></div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8hpp_source.html#l00013">BodyRigidPhysics.hpp:13</a></div></div>
 <div class="ttc" id="aclass_body_rigid_physics_html_a6d09ea176f2cf30357770223d371ea9e"><div class="ttname"><a href="class_body_rigid_physics.html#a6d09ea176f2cf30357770223d371ea9e">BodyRigidPhysics::setIfBodyCanSleep</a></div><div class="ttdeci">void setIfBodyCanSleep(bool val)</div><div class="ttdoc">Sets if the body can go to sleep.</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8cpp_source.html#l00061">BodyRigidPhysics.cpp:61</a></div></div>
 <div class="ttc" id="aclass_body_rigid_physics_html_ab39c8fbbb6c546fa1a320cb55cbb9c53"><div class="ttname"><a href="class_body_rigid_physics.html#ab39c8fbbb6c546fa1a320cb55cbb9c53">BodyRigidPhysics::addCapsuleCollider</a></div><div class="ttdeci">void addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounciness, float friction)</div><div class="ttdoc">Adds a capsule collider to a rigid body.</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8cpp_source.html#l00188">BodyRigidPhysics.cpp:188</a></div></div>
 <div class="ttc" id="aclass_body_rigid_physics_html_a6b3a121bd9ea7c67c80cc032f3b862a6"><div class="ttname"><a href="class_body_rigid_physics.html#a6b3a121bd9ea7c67c80cc032f3b862a6">BodyRigidPhysics::setLinearVelocity</a></div><div class="ttdeci">void setLinearVelocity(glm::vec3 velocity)</div><div class="ttdoc">set force to the object</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8cpp_source.html#l00070">BodyRigidPhysics.cpp:70</a></div></div>
 <div class="ttc" id="aclass_body_rigid_physics_html_a624fbc2102176f123d69bfd1c0e80090"><div class="ttname"><a href="class_body_rigid_physics.html#a624fbc2102176f123d69bfd1c0e80090">BodyRigidPhysics::addForce</a></div><div class="ttdeci">void addForce(glm::vec3 force)</div><div class="ttdoc">Adds force to the object.</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8cpp_source.html#l00065">BodyRigidPhysics.cpp:65</a></div></div>
+<div class="ttc" id="aclass_body_rigid_physics_html_a606b3ff078c13ccdbbd2c0201608b9e3"><div class="ttname"><a href="class_body_rigid_physics.html#a606b3ff078c13ccdbbd2c0201608b9e3">BodyRigidPhysics::setAngularAxisFactor</a></div><div class="ttdeci">void setAngularAxisFactor(glm::vec3 factor)</div><div class="ttdoc">Changes the angular axis factor. I.e. if set a axis to 0 it will no longer rotate on that axis.</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8cpp_source.html#l00299">BodyRigidPhysics.cpp:299</a></div></div>
 <div class="ttc" id="aclass_body_rigid_physics_html_a5993349488b60126d08fa5c29b17098b"><div class="ttname"><a href="class_body_rigid_physics.html#a5993349488b60126d08fa5c29b17098b">BodyRigidPhysics::setAngularVelocityDamping</a></div><div class="ttdeci">void setAngularVelocityDamping(float val)</div><div class="ttdoc">Rotation dampining.</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8cpp_source.html#l00057">BodyRigidPhysics.cpp:57</a></div></div>
 <div class="ttc" id="aclass_body_rigid_physics_html_add1b98f674ddde3bc8955797c65c9ab0"><div class="ttname"><a href="class_body_rigid_physics.html#add1b98f674ddde3bc8955797c65c9ab0">BodyRigidPhysics::getPosition</a></div><div class="ttdeci">glm::vec3 getPosition()</div><div class="ttdoc">Gets the position vector.</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8cpp_source.html#l00085">BodyRigidPhysics.cpp:85</a></div></div>
-<div class="ttc" id="astructcollider_data__box_html"><div class="ttname"><a href="structcollider_data__box.html">colliderData_box</a></div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8hpp_source.html#l00032">BodyRigidPhysics.hpp:32</a></div></div>
-<div class="ttc" id="aclass_body_rigid_html_abbc3373aaf38c7f2701ba541e338e0a0"><div class="ttname"><a href="class_body_rigid.html#abbc3373aaf38c7f2701ba541e338e0a0">BodyRigid::m_box</a></div><div class="ttdeci">std::vector&lt; colliderData_box &gt; m_box</div><div class="ttdoc">List of capsule colliders. Used for storing data to file</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_8hpp_source.html#l00286">BodyRigid.hpp:286</a></div></div>
-<div class="ttc" id="aclass_body_rigid_html_ac013c1936a33fce8498834861a9ee149"><div class="ttname"><a href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">BodyRigid::rb</a></div><div class="ttdeci">BodyRigidPhysics rb</div><div class="ttdoc">Facaded react rigid body</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_8hpp_source.html#l00266">BodyRigid.hpp:266</a></div></div>
-<div class="ttc" id="aclass_body_rigid_html_ac183f8e4f09635c8eaaf051141ed988b"><div class="ttname"><a href="class_body_rigid.html#ac183f8e4f09635c8eaaf051141ed988b">BodyRigid::m_numOfColliders</a></div><div class="ttdeci">int m_numOfColliders</div><div class="ttdoc">The number of colliders in the rb</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_8hpp_source.html#l00271">BodyRigid.hpp:271</a></div></div>
+<div class="ttc" id="astructcollider_data__box_html"><div class="ttname"><a href="structcollider_data__box.html">colliderData_box</a></div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8hpp_source.html#l00033">BodyRigidPhysics.hpp:33</a></div></div>
+<div class="ttc" id="aclass_body_rigid_html_abbc3373aaf38c7f2701ba541e338e0a0"><div class="ttname"><a href="class_body_rigid.html#abbc3373aaf38c7f2701ba541e338e0a0">BodyRigid::m_box</a></div><div class="ttdeci">std::vector&lt; colliderData_box &gt; m_box</div><div class="ttdoc">List of capsule colliders. Used for storing data to file</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_8hpp_source.html#l00319">BodyRigid.hpp:319</a></div></div>
+<div class="ttc" id="aclass_body_rigid_html_ac013c1936a33fce8498834861a9ee149"><div class="ttname"><a href="class_body_rigid.html#ac013c1936a33fce8498834861a9ee149">BodyRigid::rb</a></div><div class="ttdeci">BodyRigidPhysics rb</div><div class="ttdoc">Facaded react rigid body</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_8hpp_source.html#l00299">BodyRigid.hpp:299</a></div></div>
+<div class="ttc" id="aclass_body_rigid_html_ac183f8e4f09635c8eaaf051141ed988b"><div class="ttname"><a href="class_body_rigid.html#ac183f8e4f09635c8eaaf051141ed988b">BodyRigid::m_numOfColliders</a></div><div class="ttdeci">int m_numOfColliders</div><div class="ttdoc">The number of colliders in the rb</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_8hpp_source.html#l00304">BodyRigid.hpp:304</a></div></div>
 <div class="ttc" id="aclass_body_rigid_physics_html_a626b45c2d429bc3eeae4fd8bf4faaa9c"><div class="ttname"><a href="class_body_rigid_physics.html#a626b45c2d429bc3eeae4fd8bf4faaa9c">BodyRigidPhysics::setAngularVelocity</a></div><div class="ttdeci">void setAngularVelocity(glm::vec3 velocity)</div><div class="ttdoc">set torque to the object</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8cpp_source.html#l00080">BodyRigidPhysics.cpp:80</a></div></div>
 <div class="ttc" id="aclass_body_rigid_physics_html_ac177806adf91020d4db8e15a9807964f"><div class="ttname"><a href="class_body_rigid_physics.html#ac177806adf91020d4db8e15a9807964f">BodyRigidPhysics::getLinearVelocity</a></div><div class="ttdeci">glm::vec3 getLinearVelocity()</div><div class="ttdoc">Gets the linear velocity of the rigid body.</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8cpp_source.html#l00112">BodyRigidPhysics.cpp:112</a></div></div>
 <div class="ttc" id="aclass_body_rigid_physics_html_a456336d6946f6e4644ae42ca7425acc4"><div class="ttname"><a href="class_body_rigid_physics.html#a456336d6946f6e4644ae42ca7425acc4">BodyRigidPhysics::~BodyRigidPhysics</a></div><div class="ttdeci">~BodyRigidPhysics()</div><div class="ttdoc">Destructor.</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8cpp_source.html#l00122">BodyRigidPhysics.cpp:122</a></div></div>
+<div class="ttc" id="aclass_body_rigid_physics_html_a8262c8bc952eb67b31966c6473672736"><div class="ttname"><a href="class_body_rigid_physics.html#a8262c8bc952eb67b31966c6473672736">BodyRigidPhysics::setLinearAxisFactor</a></div><div class="ttdeci">void setLinearAxisFactor(glm::vec3 factor)</div><div class="ttdoc">Changes the linear axis factor. I.e. if set a axis to 0 it will no longer move on that axis.</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8cpp_source.html#l00294">BodyRigidPhysics.cpp:294</a></div></div>
 <div class="ttc" id="aclass_body_rigid_physics_html_ac7f6a906ecf237f2c11bc574b904af59"><div class="ttname"><a href="class_body_rigid_physics.html#ac7f6a906ecf237f2c11bc574b904af59">BodyRigidPhysics::getAngularVelocity</a></div><div class="ttdeci">glm::vec3 getAngularVelocity()</div><div class="ttdoc">Gets the angular velocity of the rigid body.</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8cpp_source.html#l00117">BodyRigidPhysics.cpp:117</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

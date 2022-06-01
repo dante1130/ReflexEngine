@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: src/Model/GameObject/Item.hpp Source File</title>
+<title>ICT397 Assignment 2: src/Model/GameObject/Item.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -98,15 +98,15 @@ $(document).ready(function(){initNavTree('_item_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">/**</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> * @class Item</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> * @brief An item in the scene. (JUST FOR TESTING NOW)</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> * @brief An item in the scene.</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_item.html">   16</a></span>&#160;<span class="keyword">class</span> <a class="code" href="class_item.html">Item</a> : <span class="keyword">public</span> <a class="code" href="class_game_object.html">GameObject</a> {</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">     * @brief Construct a new Item object with a model name and a texture name.</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">     * @param model_name</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">     * @param texture_name</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">     * @param model_name The name of the model.</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">     * @param texture_name The name of the texture.</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">     */</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_item.html#a0b8edbbd08ed3dcf8fce105c49dbe991">Item</a>(<span class="keyword">const</span> std::string&amp; model_name, <span class="keyword">const</span> std::string&amp; texture_name);</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
@@ -118,16 +118,16 @@ $(document).ready(function(){initNavTree('_item_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">     * @brief Updates the item with delta time.</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">     * @param delta_time</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">     * @param delta_time The time since the last frame.</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="class_item.html#a72eb8ba8e858953da725b4d9454d8da4">   36</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_item.html#a72eb8ba8e858953da725b4d9454d8da4">update</a>(<span class="keywordtype">float</span> delta_time) <span class="keyword">override</span> {}</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="class_item.html#a1e25d4d57a79e97d8a4d833c4ab3417e">   36</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_item.html#a1e25d4d57a79e97d8a4d833c4ab3417e">update</a>(<span class="keywordtype">double</span> delta_time) <span class="keyword">override</span> {}</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">     * @brief Updates the body object with fixed delta time.</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">     * @param delta_time</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">     * @param delta_time The time since the last fixed tick.</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="class_item.html#ae7a20d33234cf6c90e98a5570406350b">   43</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_item.html#ae7a20d33234cf6c90e98a5570406350b">fixed_update</a>(<span class="keywordtype">float</span> delta_time) <span class="keyword">override</span> {}</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="class_item.html#ab08b2287c95b78eb6036e2060d33a754">   43</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_item.html#ab08b2287c95b78eb6036e2060d33a754">fixed_update</a>(<span class="keywordtype">double</span> delta_time) <span class="keyword">override</span> {}</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">     * @brief Adds the draw call to the renderer.</span></div>
@@ -159,16 +159,16 @@ $(document).ready(function(){initNavTree('_item_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="aclass_item_html_a1e25d4d57a79e97d8a4d833c4ab3417e"><div class="ttname"><a href="class_item.html#a1e25d4d57a79e97d8a4d833c4ab3417e">Item::update</a></div><div class="ttdeci">void update(double delta_time) override</div><div class="ttdoc">Updates the item with delta time.</div><div class="ttdef"><b>Definition:</b> <a href="_item_8hpp_source.html#l00036">Item.hpp:36</a></div></div>
 <div class="ttc" id="aclass_item_html_a0b8edbbd08ed3dcf8fce105c49dbe991"><div class="ttname"><a href="class_item.html#a0b8edbbd08ed3dcf8fce105c49dbe991">Item::Item</a></div><div class="ttdeci">Item(const std::string &amp;model_name, const std::string &amp;texture_name)</div><div class="ttdoc">Construct a new Item object with a model name and a texture name.</div><div class="ttdef"><b>Definition:</b> <a href="_item_8cpp_source.html#l00005">Item.cpp:5</a></div></div>
-<div class="ttc" id="aclass_item_html_ae902d008e98a75d3cf0fef53d9177f9e"><div class="ttname"><a href="class_item.html#ae902d008e98a75d3cf0fef53d9177f9e">Item::draw</a></div><div class="ttdeci">void draw(std::shared_ptr&lt; Shader &gt; shader) override</div><div class="ttdoc">The draw call for the item.</div><div class="ttdef"><b>Definition:</b> <a href="_item_8cpp_source.html#l00017">Item.cpp:17</a></div></div>
-<div class="ttc" id="aclass_item_html_a2fdc238e265165624bc8c355f853c66c"><div class="ttname"><a href="class_item.html#a2fdc238e265165624bc8c355f853c66c">Item::save_object</a></div><div class="ttdeci">void save_object() override</div><div class="ttdoc">Saves the object to lau file.</div><div class="ttdef"><b>Definition:</b> <a href="_item_8cpp_source.html#l00040">Item.cpp:40</a></div></div>
-<div class="ttc" id="aclass_item_html_ae7a20d33234cf6c90e98a5570406350b"><div class="ttname"><a href="class_item.html#ae7a20d33234cf6c90e98a5570406350b">Item::fixed_update</a></div><div class="ttdeci">void fixed_update(float delta_time) override</div><div class="ttdoc">Updates the body object with fixed delta time.</div><div class="ttdef"><b>Definition:</b> <a href="_item_8hpp_source.html#l00043">Item.hpp:43</a></div></div>
+<div class="ttc" id="aclass_item_html_ae902d008e98a75d3cf0fef53d9177f9e"><div class="ttname"><a href="class_item.html#ae902d008e98a75d3cf0fef53d9177f9e">Item::draw</a></div><div class="ttdeci">void draw(std::shared_ptr&lt; Shader &gt; shader) override</div><div class="ttdoc">The draw call for the item.</div><div class="ttdef"><b>Definition:</b> <a href="_item_8cpp_source.html#l00016">Item.cpp:16</a></div></div>
+<div class="ttc" id="aclass_item_html_a2fdc238e265165624bc8c355f853c66c"><div class="ttname"><a href="class_item.html#a2fdc238e265165624bc8c355f853c66c">Item::save_object</a></div><div class="ttdeci">void save_object() override</div><div class="ttdoc">Saves the object to lau file.</div><div class="ttdef"><b>Definition:</b> <a href="_item_8cpp_source.html#l00039">Item.cpp:39</a></div></div>
 <div class="ttc" id="aclass_shader_html_a62709321ba81ca847f8a1ef69f9296ef"><div class="ttname"><a href="class_shader.html#a62709321ba81ca847f8a1ef69f9296ef">Shader::uniformLightMatrices</a></div><div class="ttdeci">GLuint uniformLightMatrices[6]</div><div class="ttdef"><b>Definition:</b> <a href="_shader_8hpp_source.html#l00130">Shader.hpp:130</a></div></div>
-<div class="ttc" id="aclass_item_html"><div class="ttname"><a href="class_item.html">Item</a></div><div class="ttdoc">An item in the scene. (JUST FOR TESTING NOW)</div><div class="ttdef"><b>Definition:</b> <a href="_item_8hpp_source.html#l00016">Item.hpp:16</a></div></div>
+<div class="ttc" id="aclass_item_html"><div class="ttname"><a href="class_item.html">Item</a></div><div class="ttdoc">An item in the scene.</div><div class="ttdef"><b>Definition:</b> <a href="_item_8hpp_source.html#l00016">Item.hpp:16</a></div></div>
 <div class="ttc" id="aclass_item_html_a7e6dfb5840cbdd41843707ce1865e2a9"><div class="ttname"><a href="class_item.html#a7e6dfb5840cbdd41843707ce1865e2a9">Item::init</a></div><div class="ttdeci">void init() override</div><div class="ttdoc">Initializes the item with a model, a texture, and a material.</div><div class="ttdef"><b>Definition:</b> <a href="_item_8hpp_source.html#l00029">Item.hpp:29</a></div></div>
-<div class="ttc" id="aclass_item_html_a72eb8ba8e858953da725b4d9454d8da4"><div class="ttname"><a href="class_item.html#a72eb8ba8e858953da725b4d9454d8da4">Item::update</a></div><div class="ttdeci">void update(float delta_time) override</div><div class="ttdoc">Updates the item with delta time.</div><div class="ttdef"><b>Definition:</b> <a href="_item_8hpp_source.html#l00036">Item.hpp:36</a></div></div>
 <div class="ttc" id="aclass_item_html_a5c0febccb2dc7b15d3072928da5d9f2d"><div class="ttname"><a href="class_item.html#a5c0febccb2dc7b15d3072928da5d9f2d">Item::model_name_</a></div><div class="ttdeci">std::string model_name_</div><div class="ttdoc">The model of the item.</div><div class="ttdef"><b>Definition:</b> <a href="_item_8hpp_source.html#l00069">Item.hpp:69</a></div></div>
 <div class="ttc" id="aclass_item_html_a160510955cd4b44c072e01587f18a3f2"><div class="ttname"><a href="class_item.html#a160510955cd4b44c072e01587f18a3f2">Item::add_draw_call</a></div><div class="ttdeci">void add_draw_call() override</div><div class="ttdoc">Adds the draw call to the renderer.</div><div class="ttdef"><b>Definition:</b> <a href="_item_8cpp_source.html#l00010">Item.cpp:10</a></div></div>
+<div class="ttc" id="aclass_item_html_ab08b2287c95b78eb6036e2060d33a754"><div class="ttname"><a href="class_item.html#ab08b2287c95b78eb6036e2060d33a754">Item::fixed_update</a></div><div class="ttdeci">void fixed_update(double delta_time) override</div><div class="ttdoc">Updates the body object with fixed delta time.</div><div class="ttdef"><b>Definition:</b> <a href="_item_8hpp_source.html#l00043">Item.hpp:43</a></div></div>
 <div class="ttc" id="aclass_item_html_a71c1fa9eb26563efd230aababa39ae0b"><div class="ttname"><a href="class_item.html#a71c1fa9eb26563efd230aababa39ae0b">Item::material_name_</a></div><div class="ttdeci">std::string material_name_</div><div class="ttdoc">The material of the item.</div><div class="ttdef"><b>Definition:</b> <a href="_item_8hpp_source.html#l00071">Item.hpp:71</a></div></div>
 <div class="ttc" id="aclass_game_object_html"><div class="ttname"><a href="class_game_object.html">GameObject</a></div><div class="ttdoc">An abstract class to represent a game object.</div><div class="ttdef"><b>Definition:</b> <a href="_game_object_8hpp_source.html#l00010">GameObject.hpp:10</a></div></div>
 <!-- start footer part -->

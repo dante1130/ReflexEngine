@@ -1,0 +1,4 @@
+<map id="GenericFunctions::getIfPaused" name="GenericFunctions::getIfPaused">
+<area shape="rect" id="node1" title="Gets if the game should be paused." alt="" coords="5,5,205,32"/>
+<area shape="rect" id="node2" href="$class_engine_time.html#aad4dc0ef993952ffd7dc44af996bab58" title="gets if the game is paused" alt="" coords="253,5,411,32"/>
+</map>

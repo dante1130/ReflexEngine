@@ -1,4 +1,4 @@
 <map id="OpenGL" name="OpenGL">
-<area shape="rect" id="node1" title="The OpenGL renderer." alt="" coords="5,175,188,560"/>
+<area shape="rect" id="node1" title="The OpenGL renderer." alt="" coords="5,175,188,575"/>
 <area shape="rect" id="node2" href="$class_renderer.html" title="An abstract class to represent a renderer, this can be derived into other renderers such as OpenGL or..." alt="" coords="27,5,166,127"/>
 </map>

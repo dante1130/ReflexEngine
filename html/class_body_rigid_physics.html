@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: BodyRigidPhysics Class Reference</title>
+<title>ICT397 Assignment 2: BodyRigidPhysics Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -162,9 +162,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab39c8fbbb6c546fa1a320cb55cbb9c53"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body_rigid_physics.html#ab39c8fbbb6c546fa1a320cb55cbb9c53">addCapsuleCollider</a> (glm::vec3 pos, float radius, float height, float bounciness, float friction)</td></tr>
 <tr class="memdesc:ab39c8fbbb6c546fa1a320cb55cbb9c53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a capsule collider to a rigid body.  <a href="class_body_rigid_physics.html#ab39c8fbbb6c546fa1a320cb55cbb9c53">More...</a><br /></td></tr>
 <tr class="separator:ab39c8fbbb6c546fa1a320cb55cbb9c53"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe92a95953d6ea40eed86025d3c4079f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body_rigid_physics.html#abe92a95953d6ea40eed86025d3c4079f">addHeightFieldShape</a> (glm::vec3 pos, float bounciness, float friction)=delete</td></tr>
-<tr class="memdesc:abe92a95953d6ea40eed86025d3c4079f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a height field shape collision box.  <a href="class_body_rigid_physics.html#abe92a95953d6ea40eed86025d3c4079f">More...</a><br /></td></tr>
-<tr class="separator:abe92a95953d6ea40eed86025d3c4079f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ef1fb9b1430a3ee112efb74f3db5114"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body_rigid_physics.html#a2ef1fb9b1430a3ee112efb74f3db5114">addHeightFieldShape</a> (glm::vec3 pos, float bounciness, float friction, int nColumns, int nRows, int minHeight, int maxHeight, unsigned char *heightValues)</td></tr>
+<tr class="memdesc:a2ef1fb9b1430a3ee112efb74f3db5114"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a height field shape collision box.  <a href="class_body_rigid_physics.html#a2ef1fb9b1430a3ee112efb74f3db5114">More...</a><br /></td></tr>
+<tr class="separator:a2ef1fb9b1430a3ee112efb74f3db5114"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad0f2341a1605390ddd1b3459b5cbf547"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body_rigid_physics.html#ad0f2341a1605390ddd1b3459b5cbf547">getIfGravityActive</a> ()</td></tr>
 <tr class="memdesc:ad0f2341a1605390ddd1b3459b5cbf547"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets if gravity is allowed in the rb (rigid body)  <a href="class_body_rigid_physics.html#ad0f2341a1605390ddd1b3459b5cbf547">More...</a><br /></td></tr>
 <tr class="separator:ad0f2341a1605390ddd1b3459b5cbf547"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -195,6 +195,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5deab83c84e4c72fad16f3aeaf527a1e"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body_rigid_physics.html#a5deab83c84e4c72fad16f3aeaf527a1e">getLocalColliderPos</a> (int index)</td></tr>
 <tr class="memdesc:a5deab83c84e4c72fad16f3aeaf527a1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the local position of the collider attached to the rb.  <a href="class_body_rigid_physics.html#a5deab83c84e4c72fad16f3aeaf527a1e">More...</a><br /></td></tr>
 <tr class="separator:a5deab83c84e4c72fad16f3aeaf527a1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8262c8bc952eb67b31966c6473672736"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body_rigid_physics.html#a8262c8bc952eb67b31966c6473672736">setLinearAxisFactor</a> (glm::vec3 factor)</td></tr>
+<tr class="memdesc:a8262c8bc952eb67b31966c6473672736"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the linear axis factor. I.e. if set a axis to 0 it will no longer move on that axis.  <a href="class_body_rigid_physics.html#a8262c8bc952eb67b31966c6473672736">More...</a><br /></td></tr>
+<tr class="separator:a8262c8bc952eb67b31966c6473672736"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a606b3ff078c13ccdbbd2c0201608b9e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body_rigid_physics.html#a606b3ff078c13ccdbbd2c0201608b9e3">setAngularAxisFactor</a> (glm::vec3 factor)</td></tr>
+<tr class="memdesc:a606b3ff078c13ccdbbd2c0201608b9e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the angular axis factor. I.e. if set a axis to 0 it will no longer rotate on that axis.  <a href="class_body_rigid_physics.html#a606b3ff078c13ccdbbd2c0201608b9e3">More...</a><br /></td></tr>
+<tr class="separator:a606b3ff078c13ccdbbd2c0201608b9e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29342ba54eec2a8d4e7f7020ae489fe7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body_rigid_physics.html#a29342ba54eec2a8d4e7f7020ae489fe7">removeColliders</a> ()</td></tr>
+<tr class="memdesc:a29342ba54eec2a8d4e7f7020ae489fe7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the colliders from the rigid body.  <a href="class_body_rigid_physics.html#a29342ba54eec2a8d4e7f7020ae489fe7">More...</a><br /></td></tr>
+<tr class="separator:a29342ba54eec2a8d4e7f7020ae489fe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60d708370e1dbb6fd6e7413ab4a5ce15"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body_rigid_physics.html#a60d708370e1dbb6fd6e7413ab4a5ce15">turnIntoTrigger</a> (bool val)</td></tr>
+<tr class="memdesc:a60d708370e1dbb6fd6e7413ab4a5ce15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns rigid body into a trigger (i.e will loose collision resolution but will notify when collision occurs)  <a href="class_body_rigid_physics.html#a60d708370e1dbb6fd6e7413ab4a5ce15">More...</a><br /></td></tr>
+<tr class="separator:a60d708370e1dbb6fd6e7413ab4a5ce15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a456336d6946f6e4644ae42ca7425acc4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body_rigid_physics.html#a456336d6946f6e4644ae42ca7425acc4">~BodyRigidPhysics</a> ()</td></tr>
 <tr class="memdesc:a456336d6946f6e4644ae42ca7425acc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="class_body_rigid_physics.html#a456336d6946f6e4644ae42ca7425acc4">More...</a><br /></td></tr>
 <tr class="separator:a456336d6946f6e4644ae42ca7425acc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -210,7 +222,7 @@ Private Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8hpp_source.html#l00043">43</a> of file <a class="el" href="_body_rigid_physics_8hpp_source.html">BodyRigidPhysics.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8hpp_source.html#l00044">44</a> of file <a class="el" href="_body_rigid_physics_8hpp_source.html">BodyRigidPhysics.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="abe9af01f5ef333afa0d61dee04a86d45"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abe9af01f5ef333afa0d61dee04a86d45">&#9670;&nbsp;</a></span>BodyRigidPhysics()</h2>
@@ -257,21 +269,21 @@ Private Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8cpp_source.html#l00122">122</a> of file <a class="el" href="_body_rigid_physics_8cpp_source.html">BodyRigidPhysics.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                                    {</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="class_body_rigid_physics.html#a226ef34644eb822d6e1dcf8f3c781776">created</a> == <span class="keyword">false</span> || <a class="code" href="namespace_physics.html#a6e722b98ea6228887490ff9f35cbc9c4">Physics::WorldExsists</a>() == <span class="keyword">false</span>) {</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="class_body_rigid_physics.html#a226ef34644eb822d6e1dcf8f3c781776">created</a> == <span class="keyword">false</span> || <a class="code" href="class_physics.html#a222ae72790a837589db1e20985a94e87">Physics::WorldExists</a>() == <span class="keyword">false</span>) {</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="keywordflow">return</span>;</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    }</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <a class="code" href="namespace_physics.html#a50bbdca3f2545a236edf68a7bb74b1e1">Physics::getPhysicsWorld</a>()-&gt;destroyRigidBody(<a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <a class="code" href="class_physics.html#a50bbdca3f2545a236edf68a7bb74b1e1">Physics::getPhysicsWorld</a>()-&gt;destroyRigidBody(<a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>);</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <a class="code" href="class_body_rigid_physics.html#a226ef34644eb822d6e1dcf8f3c781776">created</a> = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_body_rigid_physics_8hpp_source.html#l00355">created</a>, and <a class="el" href="_physics_8cpp_source.html#l00046">Physics::WorldExsists()</a>.</p>
+<p class="reference">References <a class="el" href="_body_rigid_physics_8hpp_source.html#l00397">created</a>, and <a class="el" href="_physics_8cpp_source.html#l00048">Physics::WorldExists()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_body_rigid_physics_a456336d6946f6e4644ae42ca7425acc4_cgraph.png" border="0" usemap="#class_body_rigid_physics_a456336d6946f6e4644ae42ca7425acc4_cgraph" alt=""/></div>
 <map name="class_body_rigid_physics_a456336d6946f6e4644ae42ca7425acc4_cgraph" id="class_body_rigid_physics_a456336d6946f6e4644ae42ca7425acc4_cgraph">
 <area shape="rect" title="Destructor." alt="" coords="5,5,141,47"/>
-<area shape="rect" href="namespace_physics.html#a6e722b98ea6228887490ff9f35cbc9c4" title="Returns if the physics world is created or not." alt="" coords="189,13,344,39"/>
+<area shape="rect" href="class_physics.html#a222ae72790a837589db1e20985a94e87" title="Returns if the physics world is created or not." alt="" coords="189,13,337,39"/>
 </map>
 </div>
 
@@ -343,7 +355,7 @@ Here is the call graph for this function:</div>
 <div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        friction = 1;</div>
 <div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    }</div>
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    BoxShape* boxShape = <a class="code" href="namespace_physics.html#a853968a10280acf230462676bf0f7da7">Physics::getPhysicsCommon</a>().createBoxShape(</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    BoxShape* boxShape = <a class="code" href="class_physics.html#a853968a10280acf230462676bf0f7da7">Physics::getPhysicsCommon</a>().createBoxShape(</div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;        Vector3(halfSize.x, halfSize.y, halfSize.z));</div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    Transform t = Transform::identity();</div>
@@ -433,7 +445,7 @@ Here is the call graph for this function:</div>
 <div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    }</div>
 <div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
 <div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    CapsuleShape* capsuleShape =</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        <a class="code" href="namespace_physics.html#a853968a10280acf230462676bf0f7da7">Physics::getPhysicsCommon</a>().createCapsuleShape(radius, height);</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        <a class="code" href="class_physics.html#a853968a10280acf230462676bf0f7da7">Physics::getPhysicsCommon</a>().createCapsuleShape(radius, height);</div>
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; </div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    Transform t = Transform::identity();</div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    t.setPosition(Vector3(pos.x, pos.y, pos.z));</div>
@@ -483,14 +495,11 @@ Here is the call graph for this function:</div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="abe92a95953d6ea40eed86025d3c4079f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abe92a95953d6ea40eed86025d3c4079f">&#9670;&nbsp;</a></span>addHeightFieldShape()</h2>
+<a id="a2ef1fb9b1430a3ee112efb74f3db5114"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ef1fb9b1430a3ee112efb74f3db5114">&#9670;&nbsp;</a></span>addHeightFieldShape()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void BodyRigidPhysics::addHeightFieldShape </td>
@@ -508,7 +517,37 @@ Here is the call graph for this function:</div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>friction</em>&#160;</td>
+          <td class="paramname"><em>friction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nColumns</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nRows</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>minHeight</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>maxHeight</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned char *&#160;</td>
+          <td class="paramname"><em>heightValues</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -516,11 +555,6 @@ Here is the call graph for this function:</div>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Creates a height field shape collision box. </p>
@@ -535,6 +569,46 @@ Here is the call graph for this function:</div>
 <dl class="section pre"><dt>Precondition</dt><dd>Rigid body exists </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>Height field added </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8cpp_source.html#l00218">218</a> of file <a class="el" href="_body_rigid_physics_8cpp_source.html">BodyRigidPhysics.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;                                                                        {</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    <span class="comment">/*</span></div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="comment">    if (bounciness &lt; 0) {</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="comment">        bounciness = 0;</span></div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="comment">    } else if (bounciness &gt; 1) {</span></div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="comment">        bounciness = 1;</span></div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="comment">    }</span></div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment">    if (friction &lt; 0) {</span></div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment">        friction = 0;</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;<span class="comment">    } else if (friction &gt; 1) {</span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment">        friction = 1;</span></div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment">    }</span></div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment">    int* values = new int[nColumns * nRows];</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment">    for (int x = 0; x &lt; nColumns; x++) {</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment">        for (int y = 0; y &lt; nRows; y++) {</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment">            values[y * nColumns + x] = (int)heightValues[y * nColumns + x];</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment">        }</span></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="comment">    }</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="comment">    HeightFieldShape* heightFieldShape =</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="comment">        Physics::getPhysicsCommon().createHeightFieldShape(</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="comment">            nColumns, nRows, minHeight, maxHeight, values,</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="comment">            HeightFieldShape::HeightDataType::HEIGHT_INT_TYPE);</span></div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="comment">    Transform t = Transform::identity();</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="comment">    t.setPosition(Vector3(pos.x, pos.y, pos.z));</span></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="comment">    Collider* collider;</span></div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="comment">    collider = rb-&gt;addCollider(heightFieldShape, t);</span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="comment">    Material&amp; mat = collider-&gt;getMaterial();</span></div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;<span class="comment">    mat.setBounciness(bounciness);</span></div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;<span class="comment">    mat.setFrictionCoefficient(friction);</span></div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;<span class="comment">    */</span></div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;}</div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="aad0009d7f9db9a7d9f69827de4beea96"></a>
@@ -603,7 +677,7 @@ Here is the call graph for this function:</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    }</div>
 <div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    SphereShape* sphereShape =</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        <a class="code" href="namespace_physics.html#a853968a10280acf230462676bf0f7da7">Physics::getPhysicsCommon</a>().createSphereShape(radius);</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        <a class="code" href="class_physics.html#a853968a10280acf230462676bf0f7da7">Physics::getPhysicsCommon</a>().createSphereShape(radius);</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;    Transform t = Transform::identity();</div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    t.setPosition(Vector3(pos.x, pos.y, pos.z));</div>
@@ -737,8 +811,8 @@ Here is the call graph for this function:</div>
 <dl class="section pre"><dt>Precondition</dt><dd>rb exists </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>angular damping retrieved </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8cpp_source.html#l00226">226</a> of file <a class="el" href="_body_rigid_physics_8cpp_source.html">BodyRigidPhysics.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>-&gt;getAngularDamping(); }</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8cpp_source.html#l00269">269</a> of file <a class="el" href="_body_rigid_physics_8cpp_source.html">BodyRigidPhysics.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>-&gt;getAngularDamping(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -797,11 +871,11 @@ Here is the call graph for this function:</div>
 <dl class="section pre"><dt>Precondition</dt><dd>collider &amp; rb exist </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>collider bounciness retrieved </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8cpp_source.html#l00235">235</a> of file <a class="el" href="_body_rigid_physics_8cpp_source.html">BodyRigidPhysics.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                                               {</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    Collider* c = <a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>-&gt;getCollider(index);</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    <span class="keywordflow">return</span> c-&gt;getMaterial().getBounciness();</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8cpp_source.html#l00278">278</a> of file <a class="el" href="_body_rigid_physics_8cpp_source.html">BodyRigidPhysics.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;                                               {</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;    Collider* c = <a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>-&gt;getCollider(index);</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    <span class="keywordflow">return</span> c-&gt;getMaterial().getBounciness();</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -832,11 +906,11 @@ Here is the call graph for this function:</div>
 <dl class="section pre"><dt>Precondition</dt><dd>collider &amp; rb exist </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>collider type retrieved </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8cpp_source.html#l00230">230</a> of file <a class="el" href="_body_rigid_physics_8cpp_source.html">BodyRigidPhysics.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                                               {</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    Collider* c = <a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>-&gt;getCollider(index);</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    <span class="keywordflow">return</span> (<span class="keywordtype">int</span>)c-&gt;getCollisionShape()-&gt;getName();</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8cpp_source.html#l00273">273</a> of file <a class="el" href="_body_rigid_physics_8cpp_source.html">BodyRigidPhysics.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;                                               {</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    Collider* c = <a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>-&gt;getCollider(index);</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    <span class="keywordflow">return</span> (<span class="keywordtype">int</span>)c-&gt;getCollisionShape()-&gt;getName();</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -867,11 +941,11 @@ Here is the call graph for this function:</div>
 <dl class="section pre"><dt>Precondition</dt><dd>collider &amp; rb exist </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>Friction value returned </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8cpp_source.html#l00240">240</a> of file <a class="el" href="_body_rigid_physics_8cpp_source.html">BodyRigidPhysics.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;                                             {</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    Collider* c = <a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>-&gt;getCollider(index);</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    <span class="keywordflow">return</span> c-&gt;getMaterial().getBounciness();</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8cpp_source.html#l00283">283</a> of file <a class="el" href="_body_rigid_physics_8cpp_source.html">BodyRigidPhysics.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;                                             {</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    Collider* c = <a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>-&gt;getCollider(index);</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    <span class="keywordflow">return</span> c-&gt;getMaterial().getBounciness();</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -895,8 +969,8 @@ Here is the call graph for this function:</div>
 <dl class="section pre"><dt>Precondition</dt><dd>rb exists </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>allowed to sleep retrieved </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8cpp_source.html#l00228">228</a> of file <a class="el" href="_body_rigid_physics_8cpp_source.html">BodyRigidPhysics.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>-&gt;isSleeping(); }</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8cpp_source.html#l00271">271</a> of file <a class="el" href="_body_rigid_physics_8cpp_source.html">BodyRigidPhysics.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>-&gt;isSleeping(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -920,8 +994,8 @@ Here is the call graph for this function:</div>
 <dl class="section pre"><dt>Precondition</dt><dd>rb exists </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>if gravity allowed retrieved </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8cpp_source.html#l00218">218</a> of file <a class="el" href="_body_rigid_physics_8cpp_source.html">BodyRigidPhysics.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>-&gt;isGravityEnabled(); }</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8cpp_source.html#l00261">261</a> of file <a class="el" href="_body_rigid_physics_8cpp_source.html">BodyRigidPhysics.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>-&gt;isGravityEnabled(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -945,8 +1019,8 @@ Here is the call graph for this function:</div>
 <dl class="section pre"><dt>Precondition</dt><dd>rb exists </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>linear damping retrieved </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8cpp_source.html#l00224">224</a> of file <a class="el" href="_body_rigid_physics_8cpp_source.html">BodyRigidPhysics.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>-&gt;getLinearDamping(); }</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8cpp_source.html#l00267">267</a> of file <a class="el" href="_body_rigid_physics_8cpp_source.html">BodyRigidPhysics.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>-&gt;getLinearDamping(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1005,12 +1079,12 @@ Here is the call graph for this function:</div>
 <dl class="section pre"><dt>Precondition</dt><dd>Collider &amp; rb exist </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>Local coordinates returned </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8cpp_source.html#l00245">245</a> of file <a class="el" href="_body_rigid_physics_8cpp_source.html">BodyRigidPhysics.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;                                                       {</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    Collider* c = <a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>-&gt;getCollider(index);</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    Transform t = c-&gt;getLocalToBodyTransform();</div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;    <span class="keywordflow">return</span> glm::vec3(t.getPosition().x, t.getPosition().y, t.getPosition().z);</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8cpp_source.html#l00288">288</a> of file <a class="el" href="_body_rigid_physics_8cpp_source.html">BodyRigidPhysics.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                                                       {</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    Collider* c = <a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>-&gt;getCollider(index);</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    Transform t = c-&gt;getLocalToBodyTransform();</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    <span class="keywordflow">return</span> glm::vec3(t.getPosition().x, t.getPosition().y, t.getPosition().z);</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1034,8 +1108,8 @@ Here is the call graph for this function:</div>
 <dl class="section pre"><dt>Precondition</dt><dd>rb &amp; colliders exist </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>Collider number retrieved </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8cpp_source.html#l00222">222</a> of file <a class="el" href="_body_rigid_physics_8cpp_source.html">BodyRigidPhysics.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>-&gt;getNbColliders(); }</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8cpp_source.html#l00265">265</a> of file <a class="el" href="_body_rigid_physics_8cpp_source.html">BodyRigidPhysics.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>-&gt;getNbColliders(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1089,8 +1163,8 @@ Here is the call graph for this function:</div>
 <dl class="section pre"><dt>Precondition</dt><dd>rb exists </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>rigid body type retrieved </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8cpp_source.html#l00220">220</a> of file <a class="el" href="_body_rigid_physics_8cpp_source.html">BodyRigidPhysics.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;{ <span class="keywordflow">return</span> (<span class="keywordtype">int</span>)<a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>-&gt;getType(); }</div>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8cpp_source.html#l00263">263</a> of file <a class="el" href="_body_rigid_physics_8cpp_source.html">BodyRigidPhysics.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;{ <span class="keywordflow">return</span> (<span class="keywordtype">int</span>)<a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>-&gt;getType(); }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1168,7 +1242,7 @@ Here is the call graph for this function:</div>
   </table>
   </dd>
 </dl>
-<dl class="section pre"><dt>Precondition</dt><dd><a class="el" href="namespace_physics.html">Physics</a> world exists </dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd><a class="el" href="class_physics.html">Physics</a> world exists </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>Rigid body initialised </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8cpp_source.html#l00005">5</a> of file <a class="el" href="_body_rigid_physics_8cpp_source.html">BodyRigidPhysics.cpp</a>.</p>
@@ -1190,13 +1264,13 @@ Here is the call graph for this function:</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    o.setAllValues(x / normal, y / normal, z / normal, w / normal);</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    Transform t(position, o);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a> = <a class="code" href="namespace_physics.html#a50bbdca3f2545a236edf68a7bb74b1e1">Physics::getPhysicsWorld</a>()-&gt;createRigidBody(t);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a> = <a class="code" href="class_physics.html#a50bbdca3f2545a236edf68a7bb74b1e1">Physics::getPhysicsWorld</a>()-&gt;createRigidBody(t);</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_body_rigid_physics.html#a5c831cd9266a60c616be00ca93529315">setType</a>(2);</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="class_body_rigid_physics.html#a226ef34644eb822d6e1dcf8f3c781776">created</a> = <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_body_rigid_physics_8hpp_source.html#l00355">created</a>, and <a class="el" href="_body_rigid_physics_8cpp_source.html#l00037">setType()</a>.</p>
+<p class="reference">References <a class="el" href="_body_rigid_physics_8hpp_source.html#l00397">created</a>, and <a class="el" href="_body_rigid_physics_8cpp_source.html#l00037">setType()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1207,6 +1281,39 @@ Here is the call graph for this function:</div>
 </map>
 </div>
 
+</div>
+</div>
+<a id="a29342ba54eec2a8d4e7f7020ae489fe7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29342ba54eec2a8d4e7f7020ae489fe7">&#9670;&nbsp;</a></span>removeColliders()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BodyRigidPhysics::removeColliders </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Removes the colliders from the rigid body. </p>
+<dl class="section pre"><dt>Precondition</dt><dd>Colliders exist </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Colliders removed </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8cpp_source.html#l00304">304</a> of file <a class="el" href="_body_rigid_physics_8cpp_source.html">BodyRigidPhysics.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;                                       {</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    <span class="keywordtype">int</span> size = <a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>-&gt;getNbColliders();</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    Collider* collider;</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> count = 0; count &lt; size; count++) {</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;        collider = <a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>-&gt;getCollider(count);</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;        <a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>-&gt;removeCollider(collider);</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;        size--;</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        count--;</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    }</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;}</div>
+</div><!-- fragment -->
 </div>
 </div>
 <a id="aa2baaab9d06d1a1f220f88c56b0e984f"></a>
@@ -1241,6 +1348,40 @@ Here is the call graph for this function:</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>-&gt;setTransform(transform);</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a606b3ff078c13ccdbbd2c0201608b9e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a606b3ff078c13ccdbbd2c0201608b9e3">&#9670;&nbsp;</a></span>setAngularAxisFactor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BodyRigidPhysics::setAngularAxisFactor </td>
+          <td>(</td>
+          <td class="paramtype">glm::vec3&#160;</td>
+          <td class="paramname"><em>factor</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Changes the angular axis factor. I.e. if set a axis to 0 it will no longer rotate on that axis. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">factor</td><td>- The factor you want for each axis. i.e. 1, 0, 1, stops y rotation.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section pre"><dt>Precondition</dt><dd>Rigid body exists </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Angular axis factor changed </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8cpp_source.html#l00299">299</a> of file <a class="el" href="_body_rigid_physics_8cpp_source.html">BodyRigidPhysics.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;                                                          {</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    <a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>-&gt;setAngularLockAxisFactor(</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;        reactphysics3d::Vector3(factor.x, factor.y, factor.z));</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1341,6 +1482,40 @@ Here is the call graph for this function:</div>
 <div class="fragment"><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                                                 {</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>-&gt;setIsAllowedToSleep(val);</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a8262c8bc952eb67b31966c6473672736"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8262c8bc952eb67b31966c6473672736">&#9670;&nbsp;</a></span>setLinearAxisFactor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BodyRigidPhysics::setLinearAxisFactor </td>
+          <td>(</td>
+          <td class="paramtype">glm::vec3&#160;</td>
+          <td class="paramname"><em>factor</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Changes the linear axis factor. I.e. if set a axis to 0 it will no longer move on that axis. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">factor</td><td>- The factor you want for each axis. i.e. 1, 0, 1, stops y movement.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section pre"><dt>Precondition</dt><dd>Rigid body exists </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>Linear axis factor changed </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8cpp_source.html#l00294">294</a> of file <a class="el" href="_body_rigid_physics_8cpp_source.html">BodyRigidPhysics.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;                                                         {</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    <a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>-&gt;setLinearLockAxisFactor(</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;        reactphysics3d::Vector3(factor.x, factor.y, factor.z));</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -1465,6 +1640,44 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a id="a60d708370e1dbb6fd6e7413ab4a5ce15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60d708370e1dbb6fd6e7413ab4a5ce15">&#9670;&nbsp;</a></span>turnIntoTrigger()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BodyRigidPhysics::turnIntoTrigger </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Turns rigid body into a trigger (i.e will loose collision resolution but will notify when collision occurs) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">val</td><td>- True if trigger</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section pre"><dt>Precondition</dt><dd>Rigid body exist </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>trigger added </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8cpp_source.html#l00315">315</a> of file <a class="el" href="_body_rigid_physics_8cpp_source.html">BodyRigidPhysics.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;                                               {</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    <span class="keywordtype">int</span> size = <a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>-&gt;getNbColliders();</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    Collider* collider;</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> count = 0; count &lt; size; count++) {</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;        collider = <a class="code" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a>-&gt;getCollider(count);</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;        collider-&gt;setIsTrigger(val);</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    }</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;}</div>
+</div><!-- fragment -->
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="a226ef34644eb822d6e1dcf8f3c781776"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a226ef34644eb822d6e1dcf8f3c781776">&#9670;&nbsp;</a></span>created</h2>
@@ -1488,7 +1701,7 @@ Here is the caller graph for this function:</div>
 
 <p>True if created, else false </p>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8hpp_source.html#l00355">355</a> of file <a class="el" href="_body_rigid_physics_8hpp_source.html">BodyRigidPhysics.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8hpp_source.html#l00397">397</a> of file <a class="el" href="_body_rigid_physics_8hpp_source.html">BodyRigidPhysics.hpp</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_body_rigid_physics_8cpp_source.html#l00005">init()</a>, and <a class="el" href="_body_rigid_physics_8cpp_source.html#l00122">~BodyRigidPhysics()</a>.</p>
 
@@ -1516,23 +1729,23 @@ Here is the caller graph for this function:</div>
 
 <p>React rigid body of the object </p>
 
-<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8hpp_source.html#l00360">360</a> of file <a class="el" href="_body_rigid_physics_8hpp_source.html">BodyRigidPhysics.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_body_rigid_physics_8hpp_source.html#l00402">402</a> of file <a class="el" href="_body_rigid_physics_8hpp_source.html">BodyRigidPhysics.hpp</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/Controller/<a class="el" href="_body_rigid_physics_8hpp_source.html">BodyRigidPhysics.hpp</a></li>
-<li>src/Controller/<a class="el" href="_body_rigid_physics_8cpp_source.html">BodyRigidPhysics.cpp</a></li>
+<li>src/Controller/Physics/<a class="el" href="_body_rigid_physics_8hpp_source.html">BodyRigidPhysics.hpp</a></li>
+<li>src/Controller/Physics/<a class="el" href="_body_rigid_physics_8cpp_source.html">BodyRigidPhysics.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclass_body_rigid_physics_html_a5c831cd9266a60c616be00ca93529315"><div class="ttname"><a href="class_body_rigid_physics.html#a5c831cd9266a60c616be00ca93529315">BodyRigidPhysics::setType</a></div><div class="ttdeci">void setType(int type)</div><div class="ttdoc">Set type of rigid body.</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8cpp_source.html#l00037">BodyRigidPhysics.cpp:37</a></div></div>
-<div class="ttc" id="anamespace_physics_html_a50bbdca3f2545a236edf68a7bb74b1e1"><div class="ttname"><a href="namespace_physics.html#a50bbdca3f2545a236edf68a7bb74b1e1">Physics::getPhysicsWorld</a></div><div class="ttdeci">PhysicsWorld * getPhysicsWorld()</div><div class="ttdoc">Returns physics world game object.</div><div class="ttdef"><b>Definition:</b> <a href="_physics_8cpp_source.html#l00044">Physics.cpp:44</a></div></div>
+<div class="ttc" id="aclass_physics_html_a222ae72790a837589db1e20985a94e87"><div class="ttname"><a href="class_physics.html#a222ae72790a837589db1e20985a94e87">Physics::WorldExists</a></div><div class="ttdeci">static bool WorldExists()</div><div class="ttdoc">Returns if the physics world is created or not.</div><div class="ttdef"><b>Definition:</b> <a href="_physics_8cpp_source.html#l00048">Physics.cpp:48</a></div></div>
 <div class="ttc" id="aclass_material_html"><div class="ttname"><a href="class_material.html">Material</a></div><div class="ttdoc">A material to apply to an object of how shiny and how intense the specular lighting should be.</div></div>
-<div class="ttc" id="anamespace_physics_html_a6e722b98ea6228887490ff9f35cbc9c4"><div class="ttname"><a href="namespace_physics.html#a6e722b98ea6228887490ff9f35cbc9c4">Physics::WorldExsists</a></div><div class="ttdeci">bool WorldExsists()</div><div class="ttdoc">Returns if the physics world is created or not.</div><div class="ttdef"><b>Definition:</b> <a href="_physics_8cpp_source.html#l00046">Physics.cpp:46</a></div></div>
-<div class="ttc" id="anamespace_physics_html_a853968a10280acf230462676bf0f7da7"><div class="ttname"><a href="namespace_physics.html#a853968a10280acf230462676bf0f7da7">Physics::getPhysicsCommon</a></div><div class="ttdeci">PhysicsCommon &amp; getPhysicsCommon()</div><div class="ttdoc">Returns physics common game object.</div><div class="ttdef"><b>Definition:</b> <a href="_physics_8cpp_source.html#l00042">Physics.cpp:42</a></div></div>
-<div class="ttc" id="aclass_body_rigid_physics_html_a226ef34644eb822d6e1dcf8f3c781776"><div class="ttname"><a href="class_body_rigid_physics.html#a226ef34644eb822d6e1dcf8f3c781776">BodyRigidPhysics::created</a></div><div class="ttdeci">bool created</div><div class="ttdoc">True if created, else false</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8hpp_source.html#l00355">BodyRigidPhysics.hpp:355</a></div></div>
-<div class="ttc" id="aclass_body_rigid_physics_html_a08b606ce8506257b9f1345156f3fb0d1"><div class="ttname"><a href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">BodyRigidPhysics::rb</a></div><div class="ttdeci">RigidBody * rb</div><div class="ttdoc">React rigid body of the object</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8hpp_source.html#l00360">BodyRigidPhysics.hpp:360</a></div></div>
+<div class="ttc" id="aclass_physics_html_a50bbdca3f2545a236edf68a7bb74b1e1"><div class="ttname"><a href="class_physics.html#a50bbdca3f2545a236edf68a7bb74b1e1">Physics::getPhysicsWorld</a></div><div class="ttdeci">static PhysicsWorld * getPhysicsWorld()</div><div class="ttdoc">Returns physics world game object.</div><div class="ttdef"><b>Definition:</b> <a href="_physics_8cpp_source.html#l00046">Physics.cpp:46</a></div></div>
+<div class="ttc" id="aclass_body_rigid_physics_html_a226ef34644eb822d6e1dcf8f3c781776"><div class="ttname"><a href="class_body_rigid_physics.html#a226ef34644eb822d6e1dcf8f3c781776">BodyRigidPhysics::created</a></div><div class="ttdeci">bool created</div><div class="ttdoc">True if created, else false</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8hpp_source.html#l00397">BodyRigidPhysics.hpp:397</a></div></div>
+<div class="ttc" id="aclass_body_rigid_physics_html_a08b606ce8506257b9f1345156f3fb0d1"><div class="ttname"><a href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">BodyRigidPhysics::rb</a></div><div class="ttdeci">RigidBody * rb</div><div class="ttdoc">React rigid body of the object</div><div class="ttdef"><b>Definition:</b> <a href="_body_rigid_physics_8hpp_source.html#l00402">BodyRigidPhysics.hpp:402</a></div></div>
+<div class="ttc" id="aclass_physics_html_a853968a10280acf230462676bf0f7da7"><div class="ttname"><a href="class_physics.html#a853968a10280acf230462676bf0f7da7">Physics::getPhysicsCommon</a></div><div class="ttdeci">static PhysicsCommon &amp; getPhysicsCommon()</div><div class="ttdoc">Returns physics common game object.</div><div class="ttdef"><b>Definition:</b> <a href="_physics_8cpp_source.html#l00044">Physics.cpp:44</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

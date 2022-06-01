@@ -1,0 +1,7 @@
+<map id="NPC" name="NPC">
+<area shape="rect" id="node1" title=" " alt="" coords="35,1181,179,1611"/>
+<area shape="rect" id="node2" href="$class_physics_object.html" title=" " alt="" coords="28,865,185,1133"/>
+<area shape="rect" id="node3" href="$class_body_rigid.html" title=" " alt="" coords="5,535,208,817"/>
+<area shape="rect" id="node4" href="$class_body.html" title=" " alt="" coords="18,277,195,487"/>
+<area shape="rect" id="node5" href="$class_game_object.html" title="An abstract class to represent a game object." alt="" coords="45,5,169,229"/>
+</map>

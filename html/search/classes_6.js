@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['light_881',['Light',['../class_light.html',1,'']]],
-  ['luamanager_882',['LuaManager',['../class_lua_manager.html',1,'']]]
+  ['gameassetfactory_1306',['GameAssetFactory',['../class_game_asset_factory.html',1,'']]],
+  ['gameobject_1307',['GameObject',['../class_game_object.html',1,'']]]
 ];

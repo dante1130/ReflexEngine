@@ -1,5 +1,5 @@
 <map id="Camera::Update" name="Camera::Update">
-<area shape="rect" id="node1" title="Updates the camera." alt="" coords="204,55,320,81"/>
-<area shape="rect" id="node2" href="$class_camera.html#a01f94c3543f56ede7af49dc778f19331" title="Default constructor." alt="" coords="21,29,141,56"/>
-<area shape="rect" id="node3" href="$class_camera.html#a9a3b6e06da38f9b7d8a0c84acbf2c9f9" title="Moves the perspective by the offset in mouse position." alt="" coords="5,80,156,107"/>
+<area shape="rect" id="node1" title="Updates the camera." alt="" coords="204,31,320,57"/>
+<area shape="rect" id="node2" href="$class_camera.html#a01f94c3543f56ede7af49dc778f19331" title="Default constructor." alt="" coords="21,5,141,32"/>
+<area shape="rect" id="node3" href="$class_camera.html#ab207735cacd5995f6d0959a6753c10b2" title="Moves the perspective by the offset in mouse position." alt="" coords="5,56,156,83"/>
 </map>

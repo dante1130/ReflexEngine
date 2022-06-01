@@ -2,6 +2,7 @@ var class_a_star =
 [
     [ "AStar", "class_a_star.html#ab7cfaf9e1662f45f5fdce245d28c4508", null ],
     [ "findPath", "class_a_star.html#ab48d741225ffbe9434788d9bc8119c79", null ],
+    [ "getGrid", "class_a_star.html#aa8378edf8b05e492d746453e7d951bda", null ],
     [ "printAstarException", "class_a_star.html#a8a2ef4f7fbc9cef12f3a5261562a7b79", null ],
     [ "setAllowDiagonalMovement", "class_a_star.html#ab4aa7519ef4c0bb69a79c004428ef405", null ],
     [ "setDiagonalMovementCost", "class_a_star.html#a675c84ec1b81bc8e3ddf258d88509443", null ],

@@ -1,0 +1,7 @@
+<map id="GenericFunctions::networkSetUsername" name="GenericFunctions::networkSetUsername">
+<area shape="rect" id="node1" title="Sets the username of the player." alt="" coords="5,74,183,115"/>
+<area shape="rect" id="node2" href="$classnetwork_manager.html#ac1795c011235744a60fd6b45c18c67a4" title="Changes the name of the client or server." alt="" coords="231,5,433,32"/>
+<area shape="rect" id="node3" href="$classnetwork_manager.html#ae05d3d029ead378044a3b4ea36942517" title="Gets the username." alt="" coords="242,56,422,83"/>
+<area shape="rect" id="node4" href="$classnetwork_manager.html#a610fbdba6556c9743c8a84927d681665" title="Gets if the network manager is a server or client." alt="" coords="241,107,423,133"/>
+<area shape="rect" id="node5" href="$namespace_generic_functions.html#a84da67baa98393a72d8b1382056b220e" title="Gets a message received across the network." alt="" coords="243,158,421,199"/>
+</map>

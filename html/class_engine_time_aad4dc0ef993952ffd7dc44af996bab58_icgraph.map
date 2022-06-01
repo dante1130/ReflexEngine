@@ -1,0 +1,8 @@
+<map id="EngineTime::is_paused" name="EngineTime::is_paused">
+<area shape="rect" id="node1" title="gets if the game is paused" alt="" coords="488,85,645,112"/>
+<area shape="rect" id="node2" href="$class_n_p_c.html#aeec369637010a2bc48c399d55984a5b0" title="Updates the game object on a fixed update loop." alt="" coords="265,5,395,32"/>
+<area shape="rect" id="node3" href="$namespace_generic_functions.html#a46d8e1d0567cb3b8730f779111b97d6a" title="Gets if the game should be paused." alt="" coords="230,56,430,83"/>
+<area shape="rect" id="node5" href="$namespace_generic_functions.html#ad7eb2ad6294f522c6da9dc8d279c7f62" title="Sets the network menu to be active or not." alt="" coords="231,107,429,149"/>
+<area shape="rect" id="node6" href="$namespace_generic_functions.html#a5d50ca2ffdab10426701ea9730a5ef66" title="Sets the pvp network menu to be active or inactive." alt="" coords="220,173,440,214"/>
+<area shape="rect" id="node4" href="$class_test_scene.html#aadc1874364de154479e2469ea84d301f" title="The function to specify controls for the keyboard." alt="" coords="5,115,172,141"/>
+</map>

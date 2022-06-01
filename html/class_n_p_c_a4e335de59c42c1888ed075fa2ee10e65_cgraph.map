@@ -1,0 +1,5 @@
+<map id="NPC::draw" name="NPC::draw">
+<area shape="rect" id="node1" title="Draws the object." alt="" coords="5,46,89,73"/>
+<area shape="rect" id="node2" href="$class_resource_manager.html#a33b466c53250b7431976a04d42d59036" title="Get the instance of the Resource Manager." alt="" coords="137,5,291,47"/>
+<area shape="rect" id="node3" href="$class_resource_manager.html#aea53ae6d2b9182e3aa71c6bd913922f0" title="Get the material manager." alt="" coords="137,71,291,112"/>
+</map>

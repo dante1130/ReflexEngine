@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: src/Controller/Input/InputState.cpp Source File</title>
+<title>ICT397 Assignment 2: src/Controller/Input/InputState.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -94,20 +94,22 @@ $(document).ready(function(){initNavTree('_input_state_8cpp_source.html',''); in
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    current_key_state = action;</div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;}</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="class_input_state.html#afc198629540ab321bcd6c29f6fb1b527">   10</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="class_input_state.html">InputState</a>::<a class="code" href="class_input_state.html#afc198629540ab321bcd6c29f6fb1b527">is_key_pressed</a>() {</div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="class_input_state.html#a8e1c03c60a59c484ebee2ba0cb9bcd92">   10</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="class_input_state.html">InputState</a>::<a class="code" href="class_input_state.html#a8e1c03c60a59c484ebee2ba0cb9bcd92">is_key_pressed</a>() <span class="keyword">const</span> {</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keywordflow">return</span> current_key_state == GLFW_PRESS &amp;&amp;</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;           previous_key_state == GLFW_RELEASE;</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;}</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_input_state.html#ae8364ee92b05ee973b113fd3f8362582">   15</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="class_input_state.html">InputState</a>::<a class="code" href="class_input_state.html#ae8364ee92b05ee973b113fd3f8362582">is_key_hold</a>() { <span class="keywordflow">return</span> current_key_state == GLFW_PRESS; }</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_input_state.html#a6fe76c74ce5a5c7e63e19e53e0cc1b17">   15</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="class_input_state.html">InputState</a>::<a class="code" href="class_input_state.html#a6fe76c74ce5a5c7e63e19e53e0cc1b17">is_key_hold</a>() <span class="keyword">const</span> { <span class="keywordflow">return</span> current_key_state == GLFW_PRESS; }</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_input_state.html#a2027f5fcd5039e62564179bf7dd068fe">   17</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="class_input_state.html">InputState</a>::<a class="code" href="class_input_state.html#a2027f5fcd5039e62564179bf7dd068fe">is_key_released</a>() { <span class="keywordflow">return</span> current_key_state == GLFW_RELEASE; }</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_input_state.html#af2b5f06864e0d30cde241ae478a0fcbb">   17</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="class_input_state.html">InputState</a>::<a class="code" href="class_input_state.html#af2b5f06864e0d30cde241ae478a0fcbb">is_key_released</a>() <span class="keyword">const</span> {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keywordflow">return</span> current_key_state == GLFW_RELEASE;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclass_input_state_html_a2027f5fcd5039e62564179bf7dd068fe"><div class="ttname"><a href="class_input_state.html#a2027f5fcd5039e62564179bf7dd068fe">InputState::is_key_released</a></div><div class="ttdeci">bool is_key_released()</div><div class="ttdoc">Returns a boolean whether the key is released.</div><div class="ttdef"><b>Definition:</b> <a href="_input_state_8cpp_source.html#l00017">InputState.cpp:17</a></div></div>
+<div class="ttc" id="aclass_input_state_html_af2b5f06864e0d30cde241ae478a0fcbb"><div class="ttname"><a href="class_input_state.html#af2b5f06864e0d30cde241ae478a0fcbb">InputState::is_key_released</a></div><div class="ttdeci">bool is_key_released() const</div><div class="ttdoc">Returns a boolean whether the key is released.</div><div class="ttdef"><b>Definition:</b> <a href="_input_state_8cpp_source.html#l00017">InputState.cpp:17</a></div></div>
 <div class="ttc" id="aclass_input_state_html"><div class="ttname"><a href="class_input_state.html">InputState</a></div><div class="ttdoc">A class that represents the state of a key.</div><div class="ttdef"><b>Definition:</b> <a href="_input_state_8hpp_source.html#l00009">InputState.hpp:9</a></div></div>
-<div class="ttc" id="aclass_input_state_html_ae8364ee92b05ee973b113fd3f8362582"><div class="ttname"><a href="class_input_state.html#ae8364ee92b05ee973b113fd3f8362582">InputState::is_key_hold</a></div><div class="ttdeci">bool is_key_hold()</div><div class="ttdoc">Returns a boolean whether the key is held.</div><div class="ttdef"><b>Definition:</b> <a href="_input_state_8cpp_source.html#l00015">InputState.cpp:15</a></div></div>
-<div class="ttc" id="aclass_input_state_html_afc198629540ab321bcd6c29f6fb1b527"><div class="ttname"><a href="class_input_state.html#afc198629540ab321bcd6c29f6fb1b527">InputState::is_key_pressed</a></div><div class="ttdeci">bool is_key_pressed()</div><div class="ttdoc">Returns a boolean whether the key is pressed.</div><div class="ttdef"><b>Definition:</b> <a href="_input_state_8cpp_source.html#l00010">InputState.cpp:10</a></div></div>
+<div class="ttc" id="aclass_input_state_html_a6fe76c74ce5a5c7e63e19e53e0cc1b17"><div class="ttname"><a href="class_input_state.html#a6fe76c74ce5a5c7e63e19e53e0cc1b17">InputState::is_key_hold</a></div><div class="ttdeci">bool is_key_hold() const</div><div class="ttdoc">Returns a boolean whether the key is held.</div><div class="ttdef"><b>Definition:</b> <a href="_input_state_8cpp_source.html#l00015">InputState.cpp:15</a></div></div>
+<div class="ttc" id="aclass_input_state_html_a8e1c03c60a59c484ebee2ba0cb9bcd92"><div class="ttname"><a href="class_input_state.html#a8e1c03c60a59c484ebee2ba0cb9bcd92">InputState::is_key_pressed</a></div><div class="ttdeci">bool is_key_pressed() const</div><div class="ttdoc">Returns a boolean whether the key is pressed.</div><div class="ttdef"><b>Definition:</b> <a href="_input_state_8cpp_source.html#l00010">InputState.cpp:10</a></div></div>
 <div class="ttc" id="aclass_input_state_html_abed86b24dabf3e5598bc2601c7f1a886"><div class="ttname"><a href="class_input_state.html#abed86b24dabf3e5598bc2601c7f1a886">InputState::set_key_state</a></div><div class="ttdeci">void set_key_state(int action)</div><div class="ttdoc">Set the key state.</div><div class="ttdef"><b>Definition:</b> <a href="_input_state_8cpp_source.html#l00005">InputState.cpp:5</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

@@ -8,9 +8,9 @@ var dir_41e7e76eee1e9d6bd7e8492dcfb60039 =
     [ "BodyRigid.hpp", "_body_rigid_8hpp.html", [
       [ "BodyRigid", "class_body_rigid.html", "class_body_rigid" ]
     ] ],
-    [ "BttController.cpp", "_model_2_game_object_2_btt_controller_8cpp.html", null ],
-    [ "BttController.hpp", "_model_2_game_object_2_btt_controller_8hpp.html", [
-      [ "BttController", "class_btt_controller.html", "class_btt_controller" ]
+    [ "DirectionalLightObject.cpp", "_directional_light_object_8cpp.html", null ],
+    [ "DirectionalLightObject.hpp", "_directional_light_object_8hpp.html", [
+      [ "DirectionalLightObject", "class_directional_light_object.html", "class_directional_light_object" ]
     ] ],
     [ "GameObject.hpp", "_game_object_8hpp.html", [
       [ "GameObject", "class_game_object.html", "class_game_object" ]
@@ -18,6 +18,14 @@ var dir_41e7e76eee1e9d6bd7e8492dcfb60039 =
     [ "Item.cpp", "_item_8cpp.html", null ],
     [ "Item.hpp", "_item_8hpp.html", [
       [ "Item", "class_item.html", "class_item" ]
+    ] ],
+    [ "NetworkedItem.cpp", "_networked_item_8cpp.html", null ],
+    [ "NetworkedItem.hpp", "_networked_item_8hpp.html", [
+      [ "NetworkedItem", "class_networked_item.html", "class_networked_item" ]
+    ] ],
+    [ "NPC.cpp", "_n_p_c_8cpp.html", null ],
+    [ "NPC.hpp", "_n_p_c_8hpp.html", [
+      [ "NPC", "class_n_p_c.html", "class_n_p_c" ]
     ] ],
     [ "PhysicsObject.cpp", "_physics_object_8cpp.html", null ],
     [ "PhysicsObject.hpp", "_physics_object_8hpp.html", [
@@ -27,9 +35,23 @@ var dir_41e7e76eee1e9d6bd7e8492dcfb60039 =
     [ "Player.hpp", "_player_8hpp.html", [
       [ "Player", "class_player.html", "class_player" ]
     ] ],
+    [ "PointLightObject.cpp", "_point_light_object_8cpp.html", null ],
+    [ "PointLightObject.hpp", "_point_light_object_8hpp.html", [
+      [ "PointLightObject", "class_point_light_object.html", "class_point_light_object" ]
+    ] ],
+    [ "Projectile.cpp", "_projectile_8cpp.html", null ],
+    [ "Projectile.hpp", "_projectile_8hpp.html", [
+      [ "Projectile", "class_projectile.html", "class_projectile" ]
+    ] ],
     [ "ScriptableObject.cpp", "_scriptable_object_8cpp.html", null ],
     [ "ScriptableObject.hpp", "_scriptable_object_8hpp.html", [
       [ "ScriptableObject", "class_scriptable_object.html", "class_scriptable_object" ]
+    ] ],
+    [ "SkyboxObject.cpp", "_skybox_object_8cpp.html", null ],
+    [ "SkyboxObject.hpp", "_skybox_object_8hpp.html", "_skybox_object_8hpp" ],
+    [ "SpotLightObject.cpp", "_spot_light_object_8cpp.html", null ],
+    [ "SpotLightObject.hpp", "_spot_light_object_8hpp.html", [
+      [ "SpotLightObject", "class_spot_light_object.html", "class_spot_light_object" ]
     ] ],
     [ "TerrainObject.cpp", "_terrain_object_8cpp.html", null ],
     [ "TerrainObject.hpp", "_terrain_object_8hpp.html", [

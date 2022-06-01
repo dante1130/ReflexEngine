@@ -1,0 +1,4 @@
+<map id="networkManager::HasReceivedChatMessage" name="networkManager::HasReceivedChatMessage">
+<area shape="rect" id="node1" title="Gets if a chat message has been received." alt="" coords="231,5,431,47"/>
+<area shape="rect" id="node2" href="$namespace_generic_functions.html#a7ae260a821ca90d72fef23e19ebe2c44" title="Checks if the chat message in networkGetMessage is valid or not." alt="" coords="5,5,183,47"/>
+</map>

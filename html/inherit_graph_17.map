@@ -1,3 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$class_mesh.html" title="A mesh class representing vertices, texture coordinates, normals, and its indices." alt="" coords="5,5,60,32"/>
+<area shape="rect" id="node1" href="$class_light.html" title="A light in the scene." alt="" coords="5,31,56,57"/>
+<area shape="rect" id="node2" href="$class_directional_light.html" title="A directional light that provides global illumination." alt="" coords="104,5,215,32"/>
+<area shape="rect" id="node3" href="$class_point_light.html" title="A point light that illuminates in a sphere." alt="" coords="119,56,199,83"/>
+<area shape="rect" id="node4" href="$class_spot_light.html" title=" " alt="" coords="263,56,340,83"/>
 </map>

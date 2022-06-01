@@ -1,0 +1,16 @@
+<map id="ObjectSaving::appendCreationFile" name="ObjectSaving::appendCreationFile">
+<area shape="rect" id="node1" title="On first call, opens the creation script file. And then adds the save files in number order into the ..." alt="" coords="408,340,625,367"/>
+<area shape="rect" id="node2" href="$class_object_saving.html#a2f179e587ac90b3be88f1e4c24bc6a19" title="Opens a file to save data too." alt="" coords="205,340,360,367"/>
+<area shape="rect" id="node3" href="$class_projectile.html#a7974563f08a31be7fb9c81798817b58a" title="Saves the object to lua file." alt="" coords="5,5,157,32"/>
+<area shape="rect" id="node4" href="$class_player.html#a73cc9b57a85b674c4b46732f1e67293e" title="Save the object to a lua script." alt="" coords="14,56,149,83"/>
+<area shape="rect" id="node5" href="$class_skybox_object.html#a060a39027664444615adfe88f00e3f72" title="Saves the object to lua file." alt="" coords="12,107,151,149"/>
+<area shape="rect" id="node6" href="$class_spot_light_object.html#a242313468bdd7cf74c3f3464da0ad3b6" title="Saves the object to lua file." alt="" coords="7,173,156,214"/>
+<area shape="rect" id="node7" href="$class_directional_light_object.html#a8428eaaa0ced5f10c1324dd082b0a56e" title="Saves the object to lua file." alt="" coords="7,238,156,279"/>
+<area shape="rect" id="node8" href="$class_point_light_object.html#a759239db0a1af6fc387548dea1948392" title="Saves the object to lua file." alt="" coords="5,303,157,345"/>
+<area shape="rect" id="node9" href="$class_n_p_c.html#ab2ea5dd4ca74d5cb48f3ecca0d9cf71a" title="Saves the object." alt="" coords="19,369,144,396"/>
+<area shape="rect" id="node10" href="$class_item.html#a2fdc238e265165624bc8c355f853c66c" title="Saves the object to lau file." alt="" coords="20,420,143,447"/>
+<area shape="rect" id="node11" href="$class_scriptable_object.html#a8ba1a27e44889133f1fc28f06d05236d" title="Saves the object to lau file." alt="" coords="5,471,157,513"/>
+<area shape="rect" id="node12" href="$class_networked_item.html#afec6350ae3d916908b9d19647d7f7dac" title="Saves the object to lua file." alt="" coords="10,537,153,578"/>
+<area shape="rect" id="node13" href="$class_physics_object.html#a6103a75cd9288646117068f07b0d75ed" title="Saves the object to lau file." alt="" coords="11,602,152,643"/>
+<area shape="rect" id="node14" href="$class_water.html#a0bf8985235f52d91ff0a82aeded0bfdb" title="Saves the object to lau file." alt="" coords="15,668,148,695"/>
+</map>

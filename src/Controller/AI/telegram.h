@@ -42,7 +42,7 @@ struct telegram {
 	 * @brief	Non defautl constructor
 	 * @param	time		- The time till it should send the message
 	 * @param	sender		- The sender's id
-	 * @param	reciever	- The reciever's id
+	 * @param	receiver	- The reciever's id
 	 * @param	msg			- The message to send
 	 * @param	info		- The sol::object to send as extra information
 	 */

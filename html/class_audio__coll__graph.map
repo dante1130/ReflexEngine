@@ -1,0 +1,5 @@
+<map id="Audio" name="Audio">
+<area shape="rect" id="node1" title="Singleton audio class that facades the irrklang audio library." alt="" coords="13,287,168,599"/>
+<area shape="rect" id="node2" href="$class_audio_stop_receiver.html" title="An event class to handle when a sound has stopped playing." alt="" coords="19,147,163,224"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,5,176,97"/>
+</map>

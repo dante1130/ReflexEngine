@@ -1,0 +1,7 @@
+<map id="SpotLightObject" name="SpotLightObject">
+<area shape="rect" id="node1" title="A spot light game object." alt="" coords="45,619,180,784"/>
+<area shape="rect" id="node2" href="$class_game_object.html" title="An abstract class to represent a game object." alt="" coords="5,332,129,556"/>
+<area shape="rect" id="node3" href="$struct_spot_light_data.html" title="A struct containing the data for a spot light." alt="" coords="154,398,258,490"/>
+<area shape="rect" id="node4" href="$struct_point_light_data.html" title="A struct containing the data for a point light." alt="" coords="153,161,259,283"/>
+<area shape="rect" id="node5" href="$struct_light_data.html" title="A struct containing the data for a light." alt="" coords="138,5,274,112"/>
+</map>

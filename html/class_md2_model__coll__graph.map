@@ -1,0 +1,9 @@
+<map id="Md2Model" name="Md2Model">
+<area shape="rect" id="node1" title="A md2 model from Quake that can be used for keyframe animation." alt="" coords="239,447,453,729"/>
+<area shape="rect" id="node2" href="$structmd2_1_1triangle__t.html" title="A triangle of the md2 model." alt="" coords="5,226,113,318"/>
+<area shape="rect" id="node3" href="$structmd2_1_1header__t.html" title="The header of the md2 model." alt="" coords="138,160,261,384"/>
+<area shape="rect" id="node4" href="$structmd2_1_1animstate__t.html" title="The animation state of the md2 model." alt="" coords="285,175,407,369"/>
+<area shape="rect" id="node5" href="$structmd2_1_1frame__t.html" title="A frame of the md2 model." alt="" coords="431,219,530,325"/>
+<area shape="rect" id="node6" href="$structmd2_1_1vertex__t.html" title="A vertex of the md2 model." alt="" coords="425,5,536,97"/>
+<area shape="rect" id="node7" href="$structmd2_1_1texcoord__t.html" title="A texture coordinate of the md2 model." alt="" coords="555,226,671,318"/>
+</map>

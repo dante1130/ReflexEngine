@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: Terrain Class Reference</title>
+<title>ICT397 Assignment 2: Terrain Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -99,10 +99,9 @@ Inheritance diagram for Terrain:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_terrain__inherit__graph.png" border="0" usemap="#_terrain_inherit__map" alt="Inheritance graph"/></div>
 <map name="_terrain_inherit__map" id="_terrain_inherit__map">
-<area shape="rect" title=" " alt="" coords="146,5,329,420"/>
-<area shape="rect" href="class_brute_force_terrain.html" title="A terrain that uses uses the 8&#45;bit values of the heightmap to color and render the terrain." alt="" coords="5,659,131,751"/>
-<area shape="rect" href="class_btt_controller.html" title=" " alt="" coords="155,468,320,941"/>
-<area shape="rect" href="class_textured_terrain.html" title="A terrain that uses a texture to render the terrain." alt="" coords="345,622,474,787"/>
+<area shape="rect" title=" " alt="" coords="82,5,265,420"/>
+<area shape="rect" href="class_btt_controller.html" title=" " alt="" coords="5,468,171,971"/>
+<area shape="rect" href="class_textured_terrain.html" title="A terrain that uses a texture to render the terrain." alt="" coords="195,637,325,802"/>
 </map>
 </div>
 <div class="dynheader">
@@ -153,6 +152,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a83a5d942ac1472134f61cbc2b1c4e854"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the height map.  <a href="class_terrain.html#a83a5d942ac1472134f61cbc2b1c4e854">More...</a><br /></td></tr>
 <tr class="separator:a83a5d942ac1472134f61cbc2b1c4e854"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05c0e30ed0eebd9efdb04187edab52c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terrain.html#a05c0e30ed0eebd9efdb04187edab52c4">set_height_map</a> (uint8_t *map)</td></tr>
+<tr class="memdesc:a05c0e30ed0eebd9efdb04187edab52c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the height map.  <a href="class_terrain.html#a05c0e30ed0eebd9efdb04187edab52c4">More...</a><br /></td></tr>
 <tr class="separator:a05c0e30ed0eebd9efdb04187edab52c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a637cb1815775decdfcca608384fa95f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terrain.html#a637cb1815775decdfcca608384fa95f9">set_scale</a> (glm::vec3 scale)</td></tr>
 <tr class="memdesc:a637cb1815775decdfcca608384fa95f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the scale.  <a href="class_terrain.html#a637cb1815775decdfcca608384fa95f9">More...</a><br /></td></tr>
@@ -185,7 +185,7 @@ Private Member Functions</h2></td></tr>
 <tr class="memdesc:a0f4c7de9bf88311a0386e7d1c32323b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies a FCI filter to the heightmap.  <a href="class_terrain.html#a0f4c7de9bf88311a0386e7d1c32323b3">More...</a><br /></td></tr>
 <tr class="separator:a0f4c7de9bf88311a0386e7d1c32323b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:add17d198b046ee94be4e249c65b2414b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terrain.html#add17d198b046ee94be4e249c65b2414b">filter_pass</a> (float *start_point, int increment, float weight)</td></tr>
-<tr class="memdesc:add17d198b046ee94be4e249c65b2414b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_a.html">A</a> pass of the FCI filter.  <a href="class_terrain.html#add17d198b046ee94be4e249c65b2414b">More...</a><br /></td></tr>
+<tr class="memdesc:add17d198b046ee94be4e249c65b2414b"><td class="mdescLeft">&#160;</td><td class="mdescRight">A pass of the FCI filter.  <a href="class_terrain.html#add17d198b046ee94be4e249c65b2414b">More...</a><br /></td></tr>
 <tr class="separator:add17d198b046ee94be4e249c65b2414b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a797dfd1ef325a1f21d34429956c301e7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_terrain.html#a797dfd1ef325a1f21d34429956c301e7">normalize_terrain</a> (std::vector&lt; float &gt; &amp;heights)</td></tr>
 <tr class="memdesc:a797dfd1ef325a1f21d34429956c301e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Normalizes and smoothen the terrain heightmap.  <a href="class_terrain.html#a797dfd1ef325a1f21d34429956c301e7">More...</a><br /></td></tr>
@@ -238,7 +238,7 @@ Private Attributes</h2></td></tr>
 <div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <a class="code" href="class_terrain.html#a0c60c83302e0d89189abe4721f1eaac8">heightmap_</a> = <span class="keyword">nullptr</span>;</div>
 <div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_terrain_8hpp_source.html#l00132">heightmap_</a>.</p>
+<p class="reference">References <a class="el" href="_terrain_8hpp_source.html#l00134">heightmap_</a>.</p>
 
 </div>
 </div>
@@ -280,8 +280,8 @@ Private Attributes</h2></td></tr>
 <p>Applies a FCI filter to the heightmap. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">heights</td><td></td></tr>
-    <tr><td class="paramname">weight</td><td></td></tr>
+    <tr><td class="paramname">heights</td><td>The heights to filter. </td></tr>
+    <tr><td class="paramname">weight</td><td>The weight of the filter. </td></tr>
   </table>
   </dd>
 </dl>
@@ -406,12 +406,12 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="class_a.html">A</a> pass of the FCI filter. </p>
+<p>A pass of the FCI filter. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">start_point</td><td></td></tr>
-    <tr><td class="paramname">increment</td><td></td></tr>
-    <tr><td class="paramname">weight</td><td></td></tr>
+    <tr><td class="paramname">start_point</td><td>The start point. </td></tr>
+    <tr><td class="paramname">increment</td><td>The increment. </td></tr>
+    <tr><td class="paramname">weight</td><td>The weight of the filter. </td></tr>
   </table>
   </dd>
 </dl>
@@ -428,7 +428,7 @@ Here is the call graph for this function:</div>
 <div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    }</div>
 <div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_terrain_8hpp_source.html#l00142">width_</a>.</p>
+<p class="reference">References <a class="el" href="_terrain_8hpp_source.html#l00144">width_</a>.</p>
 
 </div>
 </div>
@@ -479,17 +479,15 @@ Here is the call graph for this function:</div>
 <p>Generate terrain by the fault formation method. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">iterations</td><td></td></tr>
-    <tr><td class="paramname">size</td><td></td></tr>
-    <tr><td class="paramname">min_height</td><td></td></tr>
-    <tr><td class="paramname">max_height</td><td></td></tr>
-    <tr><td class="paramname">weight</td><td></td></tr>
+    <tr><td class="paramname">iterations</td><td>The number of iterations. </td></tr>
+    <tr><td class="paramname">size</td><td>The size of the terrain. </td></tr>
+    <tr><td class="paramname">min_height</td><td>The minimum height of the terrain. </td></tr>
+    <tr><td class="paramname">max_height</td><td>The maximum height of the terrain. </td></tr>
+    <tr><td class="paramname">weight</td><td>The weight of the fault. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true </dd>
-<dd>
-false </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>bool </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_terrain_8cpp_source.html#l00023">23</a> of file <a class="el" href="_terrain_8cpp_source.html">Terrain.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                                                               {</div>
@@ -544,7 +542,7 @@ false </dd></dl>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_terrain_8hpp_source.html#l00132">heightmap_</a>, <a class="el" href="_terrain_8hpp_source.html#l00144">length_</a>, and <a class="el" href="_terrain_8hpp_source.html#l00142">width_</a>.</p>
+<p class="reference">References <a class="el" href="_terrain_8hpp_source.html#l00134">heightmap_</a>, <a class="el" href="_terrain_8hpp_source.html#l00146">length_</a>, and <a class="el" href="_terrain_8hpp_source.html#l00144">width_</a>.</p>
 
 </div>
 </div>
@@ -577,8 +575,8 @@ false </dd></dl>
 <p>Get the height in terrain space given the x and z coordinates. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">x</td><td></td></tr>
-    <tr><td class="paramname">z</td><td></td></tr>
+    <tr><td class="paramname">x</td><td>The x coordinate. </td></tr>
+    <tr><td class="paramname">z</td><td>The z coordinate. </td></tr>
   </table>
   </dd>
 </dl>
@@ -647,8 +645,8 @@ Here is the caller graph for this function:</div>
 <p>Get the height color. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">x</td><td></td></tr>
-    <tr><td class="paramname">z</td><td></td></tr>
+    <tr><td class="paramname">x</td><td>The x coordinate. </td></tr>
+    <tr><td class="paramname">z</td><td>The z coordinate. </td></tr>
   </table>
   </dd>
 </dl>
@@ -663,7 +661,7 @@ Here is the caller graph for this function:</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordflow">return</span> 1u;</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_terrain_8hpp_source.html#l00132">heightmap_</a>, <a class="el" href="_terrain_8cpp_source.html#l00144">is_in_bounds()</a>, and <a class="el" href="_terrain_8hpp_source.html#l00142">width_</a>.</p>
+<p class="reference">References <a class="el" href="_terrain_8hpp_source.html#l00134">heightmap_</a>, <a class="el" href="_terrain_8cpp_source.html#l00144">is_in_bounds()</a>, and <a class="el" href="_terrain_8hpp_source.html#l00144">width_</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -697,7 +695,7 @@ Here is the call graph for this function:</div>
 <p class="definition">Definition at line <a class="el" href="_terrain_8cpp_source.html#l00140">140</a> of file <a class="el" href="_terrain_8cpp_source.html">Terrain.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="class_terrain.html#a0c60c83302e0d89189abe4721f1eaac8">heightmap_</a>; }</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_terrain_8hpp_source.html#l00132">heightmap_</a>.</p>
+<p class="reference">References <a class="el" href="_terrain_8hpp_source.html#l00134">heightmap_</a>.</p>
 
 </div>
 </div>
@@ -730,8 +728,8 @@ Here is the call graph for this function:</div>
 <p>Get the height in worldspace given the x and z coordinates. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">x</td><td></td></tr>
-    <tr><td class="paramname">z</td><td></td></tr>
+    <tr><td class="paramname">x</td><td>The x coordinate. </td></tr>
+    <tr><td class="paramname">z</td><td>The z coordinate. </td></tr>
   </table>
   </dd>
 </dl>
@@ -772,10 +770,10 @@ Here is the call graph for this function:</div>
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="comment">// Get the final height</span></div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordtype">float</span> height = height_1_2 + (height_3_4 - height_1_2) * coord_z;</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keywordflow">return</span> height * <a class="code" href="class_terrain.html#aaf87b26911e1c8c9f2615a7c18509576">scale_</a>.y;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keywordflow">return</span> height;</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_terrain_8cpp_source.html#l00076">get_height()</a>, <a class="el" href="_terrain_8cpp_source.html#l00144">is_in_bounds()</a>, <a class="el" href="_terrain_8hpp_source.html#l00144">length_</a>, and <a class="el" href="_terrain_8hpp_source.html#l00142">width_</a>.</p>
+<p class="reference">References <a class="el" href="_terrain_8cpp_source.html#l00076">get_height()</a>, <a class="el" href="_terrain_8cpp_source.html#l00144">is_in_bounds()</a>, <a class="el" href="_terrain_8hpp_source.html#l00146">length_</a>, and <a class="el" href="_terrain_8hpp_source.html#l00144">width_</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -810,7 +808,7 @@ Here is the call graph for this function:</div>
 <p class="definition">Definition at line <a class="el" href="_terrain_8cpp_source.html#l00138">138</a> of file <a class="el" href="_terrain_8cpp_source.html">Terrain.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="class_terrain.html#a71efa960f9cbe9a6046dd97b710f2730">length_</a>; }</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_terrain_8hpp_source.html#l00144">length_</a>.</p>
+<p class="reference">References <a class="el" href="_terrain_8hpp_source.html#l00146">length_</a>.</p>
 
 </div>
 </div>
@@ -884,7 +882,7 @@ Here is the call graph for this function:</div>
 <p class="definition">Definition at line <a class="el" href="_terrain_8cpp_source.html#l00136">136</a> of file <a class="el" href="_terrain_8cpp_source.html">Terrain.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="class_terrain.html#a834d4b5cae42ea1cec97704d80f112e6">width_</a>; }</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_terrain_8hpp_source.html#l00142">width_</a>.</p>
+<p class="reference">References <a class="el" href="_terrain_8hpp_source.html#l00144">width_</a>.</p>
 
 </div>
 </div>
@@ -925,8 +923,8 @@ Here is the call graph for this function:</div>
 <p>Check whether the given coordinates are within the heightmap. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">x</td><td></td></tr>
-    <tr><td class="paramname">z</td><td></td></tr>
+    <tr><td class="paramname">x</td><td>The x coordinate. </td></tr>
+    <tr><td class="paramname">z</td><td>The z coordinate. </td></tr>
   </table>
   </dd>
 </dl>
@@ -939,7 +937,7 @@ false </dd></dl>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    <span class="keywordflow">return</span> (x &gt;= 0 &amp;&amp; x &lt; <a class="code" href="class_terrain.html#a834d4b5cae42ea1cec97704d80f112e6">width_</a>) &amp;&amp; (z &gt;= 0 &amp;&amp; z &lt; <a class="code" href="class_terrain.html#a71efa960f9cbe9a6046dd97b710f2730">length_</a>);</div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_terrain_8hpp_source.html#l00144">length_</a>, and <a class="el" href="_terrain_8hpp_source.html#l00142">width_</a>.</p>
+<p class="reference">References <a class="el" href="_terrain_8hpp_source.html#l00146">length_</a>, and <a class="el" href="_terrain_8hpp_source.html#l00144">width_</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_terrain_8cpp_source.html#l00076">get_height()</a>, <a class="el" href="_terrain_8cpp_source.html#l00121">get_height_color()</a>, and <a class="el" href="_terrain_8cpp_source.html#l00084">get_height_world()</a>.</p>
 <div class="dynheader">
@@ -976,13 +974,11 @@ Here is the caller graph for this function:</div>
 <p>Load an image as a heightmap. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">file_name</td><td></td></tr>
+    <tr><td class="paramname">file_name</td><td>The file name of the image. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true </dd>
-<dd>
-false </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>bool </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_terrain_8cpp_source.html#l00007">7</a> of file <a class="el" href="_terrain_8cpp_source.html">Terrain.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;                                                    {</div>
@@ -1001,7 +997,7 @@ false </dd></dl>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_terrain_8hpp_source.html#l00132">heightmap_</a>, <a class="el" href="_terrain_8hpp_source.html#l00144">length_</a>, and <a class="el" href="_terrain_8hpp_source.html#l00142">width_</a>.</p>
+<p class="reference">References <a class="el" href="_terrain_8hpp_source.html#l00134">heightmap_</a>, <a class="el" href="_terrain_8hpp_source.html#l00146">length_</a>, and <a class="el" href="_terrain_8hpp_source.html#l00144">width_</a>.</p>
 
 </div>
 </div>
@@ -1029,11 +1025,9 @@ false </dd></dl>
 </div><div class="memdoc">
 
 <p>Reads the heightmap and loads the mesh. </p>
-<dl class="section return"><dt>Returns</dt><dd>true </dd>
-<dd>
-false </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>bool </dd></dl>
 
-<p>Implemented in <a class="el" href="class_brute_force_terrain.html#ae1b3d49e34a1a79fa09c2cb56d973b54">BruteForceTerrain</a>, <a class="el" href="class_btt_controller.html#a5d9f3dba457709393ca2b250ebff0d4d">BttController</a>, <a class="el" href="class_textured_terrain.html#a9da6fc21e50f4e2102b51f02ec52153d">TexturedTerrain</a>, and <a class="el" href="class_btt_controller.html#a5d9f3dba457709393ca2b250ebff0d4d">BttController</a>.</p>
+<p>Implemented in <a class="el" href="class_btt_controller.html#a5d9f3dba457709393ca2b250ebff0d4d">BttController</a>, and <a class="el" href="class_textured_terrain.html#a9da6fc21e50f4e2102b51f02ec52153d">TexturedTerrain</a>.</p>
 
 </div>
 </div>
@@ -1064,7 +1058,7 @@ false </dd></dl>
 <p>Normalizes and smoothen the terrain heightmap. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">heights</td><td></td></tr>
+    <tr><td class="paramname">heights</td><td>The heights to normalize. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1112,12 +1106,12 @@ false </dd></dl>
 <p>Renders the terrain. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">shader</td><td></td></tr>
+    <tr><td class="paramname">shader</td><td>The shader to use. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="class_brute_force_terrain.html#a74c0b3ce23a3ff0384b18685bb838ace">BruteForceTerrain</a>, <a class="el" href="class_btt_controller.html#ac0fd62a83931ce6002517e3dfbcd773a">BttController</a>, <a class="el" href="class_textured_terrain.html#af603b53771481fced9b6d0ab467a0fd8">TexturedTerrain</a>, and <a class="el" href="class_btt_controller.html#ac0fd62a83931ce6002517e3dfbcd773a">BttController</a>.</p>
+<p>Implemented in <a class="el" href="class_btt_controller.html#ac0fd62a83931ce6002517e3dfbcd773a">BttController</a>, and <a class="el" href="class_textured_terrain.html#af603b53771481fced9b6d0ab467a0fd8">TexturedTerrain</a>.</p>
 
 </div>
 </div>
@@ -1137,10 +1131,18 @@ false </dd></dl>
       </table>
 </div><div class="memdoc">
 
+<p>Set the height map. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">map</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p class="definition">Definition at line <a class="el" href="_terrain_8cpp_source.html#l00203">203</a> of file <a class="el" href="_terrain_8cpp_source.html">Terrain.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;{ <a class="code" href="class_terrain.html#a0c60c83302e0d89189abe4721f1eaac8">heightmap_</a> = map; }</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_terrain_8hpp_source.html#l00132">heightmap_</a>.</p>
+<p class="reference">References <a class="el" href="_terrain_8hpp_source.html#l00134">heightmap_</a>.</p>
 
 </div>
 </div>
@@ -1196,7 +1198,7 @@ false </dd></dl>
 
 <p>The bit depth of the heightmap. </p>
 
-<p class="definition">Definition at line <a class="el" href="_terrain_8hpp_source.html#l00146">146</a> of file <a class="el" href="_terrain_8hpp_source.html">Terrain.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_terrain_8hpp_source.html#l00148">148</a> of file <a class="el" href="_terrain_8hpp_source.html">Terrain.hpp</a>.</p>
 
 </div>
 </div>
@@ -1222,9 +1224,9 @@ false </dd></dl>
 
 <p>An unsigned char array containing the heightmap. </p>
 
-<p class="definition">Definition at line <a class="el" href="_terrain_8hpp_source.html#l00132">132</a> of file <a class="el" href="_terrain_8hpp_source.html">Terrain.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_terrain_8hpp_source.html#l00134">134</a> of file <a class="el" href="_terrain_8hpp_source.html">Terrain.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_terrain_8cpp_source.html#l00023">gen_faultformation()</a>, <a class="el" href="_controller_2_terrain_2_btt_controller_8cpp_source.html#l00255">BttController::GenerateVertices()</a>, <a class="el" href="_terrain_8cpp_source.html#l00121">get_height_color()</a>, <a class="el" href="_terrain_8cpp_source.html#l00140">get_height_map()</a>, <a class="el" href="_terrain_8cpp_source.html#l00007">load_heightfield()</a>, <a class="el" href="_textured_terrain_8cpp_source.html#l00024">TexturedTerrain::load_mesh()</a>, <a class="el" href="_controller_2_terrain_2_btt_controller_8cpp_source.html#l00046">BttController::load_mesh()</a>, <a class="el" href="_brute_force_terrain_8cpp_source.html#l00020">BruteForceTerrain::load_mesh()</a>, <a class="el" href="_terrain_8cpp_source.html#l00203">set_height_map()</a>, and <a class="el" href="_terrain_8cpp_source.html#l00198">~Terrain()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_terrain_8cpp_source.html#l00023">gen_faultformation()</a>, <a class="el" href="_btt_controller_8cpp_source.html#l00255">BttController::GenerateVertices()</a>, <a class="el" href="_terrain_8cpp_source.html#l00121">get_height_color()</a>, <a class="el" href="_terrain_8cpp_source.html#l00140">get_height_map()</a>, <a class="el" href="_terrain_8cpp_source.html#l00007">load_heightfield()</a>, <a class="el" href="_textured_terrain_8cpp_source.html#l00024">TexturedTerrain::load_mesh()</a>, <a class="el" href="_btt_controller_8cpp_source.html#l00046">BttController::load_mesh()</a>, <a class="el" href="_terrain_8cpp_source.html#l00203">set_height_map()</a>, and <a class="el" href="_terrain_8cpp_source.html#l00198">~Terrain()</a>.</p>
 
 </div>
 </div>
@@ -1250,7 +1252,7 @@ false </dd></dl>
 
 <p>The length of the heightmap. </p>
 
-<p class="definition">Definition at line <a class="el" href="_terrain_8hpp_source.html#l00144">144</a> of file <a class="el" href="_terrain_8hpp_source.html">Terrain.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_terrain_8hpp_source.html#l00146">146</a> of file <a class="el" href="_terrain_8hpp_source.html">Terrain.hpp</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_terrain_8cpp_source.html#l00023">gen_faultformation()</a>, <a class="el" href="_terrain_8cpp_source.html#l00084">get_height_world()</a>, <a class="el" href="_terrain_8cpp_source.html#l00138">get_length()</a>, <a class="el" href="_terrain_8cpp_source.html#l00144">is_in_bounds()</a>, and <a class="el" href="_terrain_8cpp_source.html#l00007">load_heightfield()</a>.</p>
 
@@ -1278,7 +1280,7 @@ false </dd></dl>
 
 <p>The scale of the heightmap. </p>
 
-<p class="definition">Definition at line <a class="el" href="_terrain_8hpp_source.html#l00135">135</a> of file <a class="el" href="_terrain_8hpp_source.html">Terrain.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_terrain_8hpp_source.html#l00137">137</a> of file <a class="el" href="_terrain_8hpp_source.html">Terrain.hpp</a>.</p>
 
 </div>
 </div>
@@ -1304,7 +1306,7 @@ false </dd></dl>
 
 <p>The width of the heightmap. </p>
 
-<p class="definition">Definition at line <a class="el" href="_terrain_8hpp_source.html#l00142">142</a> of file <a class="el" href="_terrain_8hpp_source.html">Terrain.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_terrain_8hpp_source.html#l00144">144</a> of file <a class="el" href="_terrain_8hpp_source.html">Terrain.hpp</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_terrain_8cpp_source.html#l00162">filter_pass()</a>, <a class="el" href="_terrain_8cpp_source.html#l00023">gen_faultformation()</a>, <a class="el" href="_terrain_8cpp_source.html#l00121">get_height_color()</a>, <a class="el" href="_terrain_8cpp_source.html#l00084">get_height_world()</a>, <a class="el" href="_terrain_8cpp_source.html#l00136">get_width()</a>, <a class="el" href="_terrain_8cpp_source.html#l00144">is_in_bounds()</a>, and <a class="el" href="_terrain_8cpp_source.html#l00007">load_heightfield()</a>.</p>
 
@@ -1319,15 +1321,15 @@ false </dd></dl>
 <div class="ttc" id="aclass_terrain_html_aa49ddc89bf6647c234712db0a223f4c9"><div class="ttname"><a href="class_terrain.html#aa49ddc89bf6647c234712db0a223f4c9">Terrain::get_width</a></div><div class="ttdeci">size_t get_width() const</div><div class="ttdoc">Get the width.</div><div class="ttdef"><b>Definition:</b> <a href="_terrain_8cpp_source.html#l00136">Terrain.cpp:136</a></div></div>
 <div class="ttc" id="aclass_terrain_html_a783ecb707a8eaea96683e8177c965586"><div class="ttname"><a href="class_terrain.html#a783ecb707a8eaea96683e8177c965586">Terrain::get_origin</a></div><div class="ttdeci">glm::vec3 get_origin() const</div><div class="ttdoc">Get the offset to origin of the terrain.</div><div class="ttdef"><b>Definition:</b> <a href="_terrain_8cpp_source.html#l00129">Terrain.cpp:129</a></div></div>
 <div class="ttc" id="aclass_terrain_html_a797dfd1ef325a1f21d34429956c301e7"><div class="ttname"><a href="class_terrain.html#a797dfd1ef325a1f21d34429956c301e7">Terrain::normalize_terrain</a></div><div class="ttdeci">void normalize_terrain(std::vector&lt; float &gt; &amp;heights)</div><div class="ttdoc">Normalizes and smoothen the terrain heightmap.</div><div class="ttdef"><b>Definition:</b> <a href="_terrain_8cpp_source.html#l00185">Terrain.cpp:185</a></div></div>
-<div class="ttc" id="aclass_terrain_html_a834d4b5cae42ea1cec97704d80f112e6"><div class="ttname"><a href="class_terrain.html#a834d4b5cae42ea1cec97704d80f112e6">Terrain::width_</a></div><div class="ttdeci">size_t width_</div><div class="ttdoc">The width of the heightmap.</div><div class="ttdef"><b>Definition:</b> <a href="_terrain_8hpp_source.html#l00142">Terrain.hpp:142</a></div></div>
+<div class="ttc" id="aclass_terrain_html_a834d4b5cae42ea1cec97704d80f112e6"><div class="ttname"><a href="class_terrain.html#a834d4b5cae42ea1cec97704d80f112e6">Terrain::width_</a></div><div class="ttdeci">size_t width_</div><div class="ttdoc">The width of the heightmap.</div><div class="ttdef"><b>Definition:</b> <a href="_terrain_8hpp_source.html#l00144">Terrain.hpp:144</a></div></div>
 <div class="ttc" id="aclass_terrain_html_a80e2c38f2f77d04e17ca276d68e44ad1"><div class="ttname"><a href="class_terrain.html#a80e2c38f2f77d04e17ca276d68e44ad1">Terrain::get_height</a></div><div class="ttdeci">float get_height(int x, int z) const</div><div class="ttdoc">Get the height in terrain space given the x and z coordinates.</div><div class="ttdef"><b>Definition:</b> <a href="_terrain_8cpp_source.html#l00076">Terrain.cpp:76</a></div></div>
 <div class="ttc" id="aclass_terrain_html_a50dcd1aeb2d6990fadaf5e1fabafa13f"><div class="ttname"><a href="class_terrain.html#a50dcd1aeb2d6990fadaf5e1fabafa13f">Terrain::get_length</a></div><div class="ttdeci">size_t get_length() const</div><div class="ttdoc">Get the width.</div><div class="ttdef"><b>Definition:</b> <a href="_terrain_8cpp_source.html#l00138">Terrain.cpp:138</a></div></div>
-<div class="ttc" id="aclass_terrain_html_a71efa960f9cbe9a6046dd97b710f2730"><div class="ttname"><a href="class_terrain.html#a71efa960f9cbe9a6046dd97b710f2730">Terrain::length_</a></div><div class="ttdeci">size_t length_</div><div class="ttdoc">The length of the heightmap.</div><div class="ttdef"><b>Definition:</b> <a href="_terrain_8hpp_source.html#l00144">Terrain.hpp:144</a></div></div>
+<div class="ttc" id="aclass_terrain_html_a71efa960f9cbe9a6046dd97b710f2730"><div class="ttname"><a href="class_terrain.html#a71efa960f9cbe9a6046dd97b710f2730">Terrain::length_</a></div><div class="ttdeci">size_t length_</div><div class="ttdoc">The length of the heightmap.</div><div class="ttdef"><b>Definition:</b> <a href="_terrain_8hpp_source.html#l00146">Terrain.hpp:146</a></div></div>
 <div class="ttc" id="aclass_terrain_html_add17d198b046ee94be4e249c65b2414b"><div class="ttname"><a href="class_terrain.html#add17d198b046ee94be4e249c65b2414b">Terrain::filter_pass</a></div><div class="ttdeci">void filter_pass(float *start_point, int increment, float weight)</div><div class="ttdoc">A pass of the FCI filter.</div><div class="ttdef"><b>Definition:</b> <a href="_terrain_8cpp_source.html#l00162">Terrain.cpp:162</a></div></div>
 <div class="ttc" id="aclass_terrain_html_a0f4c7de9bf88311a0386e7d1c32323b3"><div class="ttname"><a href="class_terrain.html#a0f4c7de9bf88311a0386e7d1c32323b3">Terrain::add_filter</a></div><div class="ttdeci">void add_filter(std::vector&lt; float &gt; &amp;heights, float weight)</div><div class="ttdoc">Applies a FCI filter to the heightmap.</div><div class="ttdef"><b>Definition:</b> <a href="_terrain_8cpp_source.html#l00148">Terrain.cpp:148</a></div></div>
-<div class="ttc" id="aclass_terrain_html_a0c60c83302e0d89189abe4721f1eaac8"><div class="ttname"><a href="class_terrain.html#a0c60c83302e0d89189abe4721f1eaac8">Terrain::heightmap_</a></div><div class="ttdeci">uint8_t * heightmap_</div><div class="ttdoc">An unsigned char array containing the heightmap.</div><div class="ttdef"><b>Definition:</b> <a href="_terrain_8hpp_source.html#l00132">Terrain.hpp:132</a></div></div>
-<div class="ttc" id="aclass_terrain_html_a1bcdde29ea826bd1ad54100686d2222c"><div class="ttname"><a href="class_terrain.html#a1bcdde29ea826bd1ad54100686d2222c">Terrain::bit_depth_</a></div><div class="ttdeci">int bit_depth_</div><div class="ttdoc">The bit depth of the heightmap.</div><div class="ttdef"><b>Definition:</b> <a href="_terrain_8hpp_source.html#l00146">Terrain.hpp:146</a></div></div>
-<div class="ttc" id="aclass_terrain_html_aaf87b26911e1c8c9f2615a7c18509576"><div class="ttname"><a href="class_terrain.html#aaf87b26911e1c8c9f2615a7c18509576">Terrain::scale_</a></div><div class="ttdeci">glm::vec3 scale_</div><div class="ttdoc">The scale of the heightmap.</div><div class="ttdef"><b>Definition:</b> <a href="_terrain_8hpp_source.html#l00135">Terrain.hpp:135</a></div></div>
+<div class="ttc" id="aclass_terrain_html_a0c60c83302e0d89189abe4721f1eaac8"><div class="ttname"><a href="class_terrain.html#a0c60c83302e0d89189abe4721f1eaac8">Terrain::heightmap_</a></div><div class="ttdeci">uint8_t * heightmap_</div><div class="ttdoc">An unsigned char array containing the heightmap.</div><div class="ttdef"><b>Definition:</b> <a href="_terrain_8hpp_source.html#l00134">Terrain.hpp:134</a></div></div>
+<div class="ttc" id="aclass_terrain_html_a1bcdde29ea826bd1ad54100686d2222c"><div class="ttname"><a href="class_terrain.html#a1bcdde29ea826bd1ad54100686d2222c">Terrain::bit_depth_</a></div><div class="ttdeci">int bit_depth_</div><div class="ttdoc">The bit depth of the heightmap.</div><div class="ttdef"><b>Definition:</b> <a href="_terrain_8hpp_source.html#l00148">Terrain.hpp:148</a></div></div>
+<div class="ttc" id="aclass_terrain_html_aaf87b26911e1c8c9f2615a7c18509576"><div class="ttname"><a href="class_terrain.html#aaf87b26911e1c8c9f2615a7c18509576">Terrain::scale_</a></div><div class="ttdeci">glm::vec3 scale_</div><div class="ttdoc">The scale of the heightmap.</div><div class="ttdef"><b>Definition:</b> <a href="_terrain_8hpp_source.html#l00137">Terrain.hpp:137</a></div></div>
 <div class="ttc" id="aclass_terrain_html_aa272456de114deab2756a575cda0bef5"><div class="ttname"><a href="class_terrain.html#aa272456de114deab2756a575cda0bef5">Terrain::is_in_bounds</a></div><div class="ttdeci">bool is_in_bounds(int x, int z) const</div><div class="ttdoc">Check whether the given coordinates are within the heightmap.</div><div class="ttdef"><b>Definition:</b> <a href="_terrain_8cpp_source.html#l00144">Terrain.cpp:144</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

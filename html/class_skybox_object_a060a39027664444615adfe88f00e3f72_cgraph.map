@@ -1,0 +1,8 @@
+<map id="SkyboxObject::save_object" name="SkyboxObject::save_object">
+<area shape="rect" id="node1" title="Saves the object to lua file." alt="" coords="5,74,144,115"/>
+<area shape="rect" id="node2" href="$class_object_saving.html#a9dadcc7281db5e569a16d86421c58422" title="Closes the file." alt="" coords="201,5,360,32"/>
+<area shape="rect" id="node3" href="$class_object_saving.html#a8bd80ab63cd87a02055d0e92dd28b372" title="Closes the struct in the file." alt="" coords="195,56,367,83"/>
+<area shape="rect" id="node4" href="$class_object_saving.html#a204c90bbce1cc99ceeba01b13582c064" title="Creates a struct in the file." alt="" coords="192,107,369,133"/>
+<area shape="rect" id="node5" href="$class_object_saving.html#a2f179e587ac90b3be88f1e4c24bc6a19" title="Opens a file to save data too." alt="" coords="203,157,358,184"/>
+<area shape="rect" id="node6" href="$class_object_saving.html#ad38aa3ea541f6a32a6a4cfe7256967f2" title="On first call, opens the creation script file. And then adds the save files in number order into the ..." alt="" coords="417,157,635,184"/>
+</map>

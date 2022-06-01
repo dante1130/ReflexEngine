@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: src/View/Renderer/OpenGL/Objects/Skybox.cpp Source File</title>
+<title>ICT397 Assignment 2: src/View/Renderer/OpenGL/Objects/Skybox.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -124,18 +124,18 @@ $(document).ready(function(){initNavTree('_skybox_8cpp_source.html',''); initRes
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="comment">// Mesh Setup</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> skyboxIndices[] = {<span class="comment">// front</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                                          0, 1, 2, 2, 1, 3,</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                                          <span class="comment">// right</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                                          2, 3, 5, 5, 3, 7,</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                                          <span class="comment">// back</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                                          5, 7, 4, 4, 7, 6,</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                                          <span class="comment">// left</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                                          4, 6, 0, 0, 6, 1,</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                                          <span class="comment">// top</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                                          4, 0, 5, 5, 0, 2,</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                                          <span class="comment">// bottom</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                                          1, 6, 3, 3, 6, 7};</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">const</span> uint32_t skyboxIndices[] = {<span class="comment">// front</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                                      0, 1, 2, 2, 1, 3,</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                                      <span class="comment">// right</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                                      2, 3, 5, 5, 3, 7,</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                                      <span class="comment">// back</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                                      5, 7, 4, 4, 7, 6,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                                      <span class="comment">// left</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                                      4, 6, 0, 0, 6, 1,</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                                      <span class="comment">// top</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                                      4, 0, 5, 5, 0, 2,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                                      <span class="comment">// bottom</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                                      1, 6, 3, 3, 6, 7};</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">const</span> <span class="keywordtype">float</span> skyboxVertices[] = {</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        -1.0f, 1.0f,  -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,</div>

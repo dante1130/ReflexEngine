@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: src/Model/GameObject/GameObject.hpp Source File</title>
+<title>ICT397 Assignment 2: src/Model/GameObject/GameObject.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -96,70 +96,78 @@ $(document).ready(function(){initNavTree('_game_object_8hpp_source.html',''); in
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> */</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="class_game_object.html">   10</a></span>&#160;<span class="keyword">class</span> <a class="code" href="class_game_object.html">GameObject</a> {</div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">struct</span> {</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <span class="comment">/// The position of the game object.</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_game_object.html#a16e2e8c2546d7bf920bbe2e288acb278">   14</a></span>&#160;        glm::vec3 position = {0.0f, 0.0f, 0.0f};</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <span class="comment">/// The rotation of the game object.</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_game_object.html#acaf894c39661e6d4c13ad39b60684a38">   16</a></span>&#160;        glm::vec3 rotation = {0.0f, 1.0f, 0.0f};</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <span class="comment">/// The scale of the game object.</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_game_object.html#a5205edf429098d4b7bf0c442d72592d1">   18</a></span>&#160;        glm::vec3 scale = {1.0f, 1.0f, 1.0f};</div>
-<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_game_object.html#aae6b1449006f9bbca7c6456676659828">   19</a></span>&#160;        <span class="keywordtype">float</span> angle = 0.01;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    };</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="comment">/// The position of the game object.</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="class_game_object.html#a16e2e8c2546d7bf920bbe2e288acb278">   13</a></span>&#160;    glm::vec3 <a class="code" href="class_game_object.html#a16e2e8c2546d7bf920bbe2e288acb278">position</a> = {0.0f, 0.0f, 0.0f};</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="comment">/// The rotation of the game object.</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_game_object.html#acaf894c39661e6d4c13ad39b60684a38">   15</a></span>&#160;    glm::vec3 <a class="code" href="class_game_object.html#acaf894c39661e6d4c13ad39b60684a38">rotation</a> = {0.0f, 1.0f, 0.0f};</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="comment">/// The scale of the game object.</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_game_object.html#a5205edf429098d4b7bf0c442d72592d1">   17</a></span>&#160;    glm::vec3 <a class="code" href="class_game_object.html#a5205edf429098d4b7bf0c442d72592d1">scale</a> = {1.0f, 1.0f, 1.0f};</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="comment">/// The angle of rotation.</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="class_game_object.html#aae6b1449006f9bbca7c6456676659828">   20</a></span>&#160;    <span class="keywordtype">float</span> <a class="code" href="class_game_object.html#aae6b1449006f9bbca7c6456676659828">angle</a> = 0.01f;</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">     * @brief Initializes the game object.</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_game_object.html#aa5cde72ad5bf24a20bc12180d34ec815">init</a>() = 0;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">     * @brief Updates the game object with delta time.</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">     * @param delta_time</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_game_object.html#a14d8ce1f5ce6b76776da93debf97afd0">update</a>(<span class="keywordtype">float</span> delta_time) = 0;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">     * @brief Updates the game object with fixed delta time.</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">     * @param delta_time</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_game_object.html#ab76a39c1da52cdfbbfb1308f907e062b">fixed_update</a>(<span class="keywordtype">float</span> delta_time) = 0;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">     * @brief Adds a draw call to the renderer.</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_game_object.html#ac4526bfe4adf2c0cf3bbba6b87b52bcf">add_draw_call</a>() = 0;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">     * @brief The draw call.</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">     * @param shader</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_game_object.html#a87885dace4f96583576e68a1b02347d3">draw</a>(std::shared_ptr&lt;<a class="code" href="class_shader.html#a62709321ba81ca847f8a1ef69f9296ef">Shader</a>&gt; shader) = 0;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">     * @brief   Saves the object to lua file</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">     * @pre     Object exists</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">     * @post    Object saved</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_game_object.html#aa398f7e3d460009aeeeb5198c7391139">save_object</a>() = 0;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">     * @brief Virtual destructor.</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="class_game_object.html#a67ae2fa6e7916c799700cd659975d8ea">GameObject</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;};</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="comment">/// Whether the game object should be removed.</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="class_game_object.html#ae939c981c524a76645abf33cd48b4214">   23</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_game_object.html#ae939c981c524a76645abf33cd48b4214">remove</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">     * @brief Initializes the game object.</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_game_object.html#aa5cde72ad5bf24a20bc12180d34ec815">init</a>() = 0;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">     * @brief Updates the game object with delta time.</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">     *</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">     * @param delta_time The time since the last frame.</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_game_object.html#ac8439f5d62a3bdfba5013a97ba3eb4b8">update</a>(<span class="keywordtype">double</span> delta_time) = 0;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">     * @brief Updates the game object with fixed delta time.</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">     *</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">     * @param delta_time The time since the last fixed tick.</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_game_object.html#ae46fdbd5de29a7efc871ab382d3d426b">fixed_update</a>(<span class="keywordtype">double</span> delta_time) = 0;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">     * @brief Adds a draw call to the renderer.</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_game_object.html#ac4526bfe4adf2c0cf3bbba6b87b52bcf">add_draw_call</a>() = 0;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">     * @brief The draw call.</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">     *</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">     * @param shader The shader to use.</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_game_object.html#a87885dace4f96583576e68a1b02347d3">draw</a>(std::shared_ptr&lt;<a class="code" href="class_shader.html#a62709321ba81ca847f8a1ef69f9296ef">Shader</a>&gt; shader) = 0;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">     * @brief   Saves the object to lua file</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">     *</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">     * @pre     Object exists</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">     * @post    Object saved</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_game_object.html#aa398f7e3d460009aeeeb5198c7391139">save_object</a>() = 0;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">     * @brief Virtual destructor.</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="class_game_object.html#a67ae2fa6e7916c799700cd659975d8ea">GameObject</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclass_game_object_html_ac4526bfe4adf2c0cf3bbba6b87b52bcf"><div class="ttname"><a href="class_game_object.html#ac4526bfe4adf2c0cf3bbba6b87b52bcf">GameObject::add_draw_call</a></div><div class="ttdeci">virtual void add_draw_call()=0</div><div class="ttdoc">Adds a draw call to the renderer.</div></div>
+<div class="ttc" id="aclass_game_object_html_acaf894c39661e6d4c13ad39b60684a38"><div class="ttname"><a href="class_game_object.html#acaf894c39661e6d4c13ad39b60684a38">GameObject::rotation</a></div><div class="ttdeci">glm::vec3 rotation</div><div class="ttdoc">The rotation of the game object.</div><div class="ttdef"><b>Definition:</b> <a href="_game_object_8hpp_source.html#l00015">GameObject.hpp:15</a></div></div>
+<div class="ttc" id="aclass_game_object_html_a16e2e8c2546d7bf920bbe2e288acb278"><div class="ttname"><a href="class_game_object.html#a16e2e8c2546d7bf920bbe2e288acb278">GameObject::position</a></div><div class="ttdeci">glm::vec3 position</div><div class="ttdoc">The position of the game object.</div><div class="ttdef"><b>Definition:</b> <a href="_game_object_8hpp_source.html#l00013">GameObject.hpp:13</a></div></div>
 <div class="ttc" id="aclass_game_object_html_aa5cde72ad5bf24a20bc12180d34ec815"><div class="ttname"><a href="class_game_object.html#aa5cde72ad5bf24a20bc12180d34ec815">GameObject::init</a></div><div class="ttdeci">virtual void init()=0</div><div class="ttdoc">Initializes the game object.</div></div>
+<div class="ttc" id="aclass_game_object_html_aae6b1449006f9bbca7c6456676659828"><div class="ttname"><a href="class_game_object.html#aae6b1449006f9bbca7c6456676659828">GameObject::angle</a></div><div class="ttdeci">float angle</div><div class="ttdoc">The angle of rotation.</div><div class="ttdef"><b>Definition:</b> <a href="_game_object_8hpp_source.html#l00020">GameObject.hpp:20</a></div></div>
+<div class="ttc" id="aclass_game_object_html_ae46fdbd5de29a7efc871ab382d3d426b"><div class="ttname"><a href="class_game_object.html#ae46fdbd5de29a7efc871ab382d3d426b">GameObject::fixed_update</a></div><div class="ttdeci">virtual void fixed_update(double delta_time)=0</div><div class="ttdoc">Updates the game object with fixed delta time.</div></div>
+<div class="ttc" id="aclass_game_object_html_a5205edf429098d4b7bf0c442d72592d1"><div class="ttname"><a href="class_game_object.html#a5205edf429098d4b7bf0c442d72592d1">GameObject::scale</a></div><div class="ttdeci">glm::vec3 scale</div><div class="ttdoc">The scale of the game object.</div><div class="ttdef"><b>Definition:</b> <a href="_game_object_8hpp_source.html#l00017">GameObject.hpp:17</a></div></div>
 <div class="ttc" id="aclass_shader_html_a62709321ba81ca847f8a1ef69f9296ef"><div class="ttname"><a href="class_shader.html#a62709321ba81ca847f8a1ef69f9296ef">Shader::uniformLightMatrices</a></div><div class="ttdeci">GLuint uniformLightMatrices[6]</div><div class="ttdef"><b>Definition:</b> <a href="_shader_8hpp_source.html#l00130">Shader.hpp:130</a></div></div>
-<div class="ttc" id="aclass_game_object_html_ab76a39c1da52cdfbbfb1308f907e062b"><div class="ttname"><a href="class_game_object.html#ab76a39c1da52cdfbbfb1308f907e062b">GameObject::fixed_update</a></div><div class="ttdeci">virtual void fixed_update(float delta_time)=0</div><div class="ttdoc">Updates the game object with fixed delta time.</div></div>
 <div class="ttc" id="aclass_game_object_html_a87885dace4f96583576e68a1b02347d3"><div class="ttname"><a href="class_game_object.html#a87885dace4f96583576e68a1b02347d3">GameObject::draw</a></div><div class="ttdeci">virtual void draw(std::shared_ptr&lt; Shader &gt; shader)=0</div><div class="ttdoc">The draw call.</div></div>
 <div class="ttc" id="aclass_game_object_html_a67ae2fa6e7916c799700cd659975d8ea"><div class="ttname"><a href="class_game_object.html#a67ae2fa6e7916c799700cd659975d8ea">GameObject::~GameObject</a></div><div class="ttdeci">virtual ~GameObject()=default</div><div class="ttdoc">Virtual destructor.</div></div>
+<div class="ttc" id="aclass_game_object_html_ac8439f5d62a3bdfba5013a97ba3eb4b8"><div class="ttname"><a href="class_game_object.html#ac8439f5d62a3bdfba5013a97ba3eb4b8">GameObject::update</a></div><div class="ttdeci">virtual void update(double delta_time)=0</div><div class="ttdoc">Updates the game object with delta time.</div></div>
 <div class="ttc" id="aclass_game_object_html_aa398f7e3d460009aeeeb5198c7391139"><div class="ttname"><a href="class_game_object.html#aa398f7e3d460009aeeeb5198c7391139">GameObject::save_object</a></div><div class="ttdeci">virtual void save_object()=0</div><div class="ttdoc">Saves the object to lua file.</div></div>
-<div class="ttc" id="aclass_game_object_html_a14d8ce1f5ce6b76776da93debf97afd0"><div class="ttname"><a href="class_game_object.html#a14d8ce1f5ce6b76776da93debf97afd0">GameObject::update</a></div><div class="ttdeci">virtual void update(float delta_time)=0</div><div class="ttdoc">Updates the game object with delta time.</div></div>
+<div class="ttc" id="aclass_game_object_html_ae939c981c524a76645abf33cd48b4214"><div class="ttname"><a href="class_game_object.html#ae939c981c524a76645abf33cd48b4214">GameObject::remove</a></div><div class="ttdeci">bool remove</div><div class="ttdoc">Whether the game object should be removed.</div><div class="ttdef"><b>Definition:</b> <a href="_game_object_8hpp_source.html#l00023">GameObject.hpp:23</a></div></div>
 <div class="ttc" id="aclass_game_object_html"><div class="ttname"><a href="class_game_object.html">GameObject</a></div><div class="ttdoc">An abstract class to represent a game object.</div><div class="ttdef"><b>Definition:</b> <a href="_game_object_8hpp_source.html#l00010">GameObject.hpp:10</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

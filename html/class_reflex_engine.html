@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: ReflexEngine Class Reference</title>
+<title>ICT397 Assignment 2: ReflexEngine Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -86,7 +86,6 @@ $(document).ready(function(){initNavTree('class_reflex_engine.html',''); initRes
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
-<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_reflex_engine-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">ReflexEngine Class Reference</div>  </div>
@@ -102,14 +101,14 @@ Collaboration diagram for ReflexEngine:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_reflex_engine__coll__graph.png" border="0" usemap="#_reflex_engine_coll__map" alt="Collaboration graph"/></div>
 <map name="_reflex_engine_coll__map" id="_reflex_engine_coll__map">
-<area shape="rect" title="The game engine." alt="" coords="202,1335,346,1559"/>
-<area shape="rect" href="class_camera.html" title="A Euler camera." alt="" coords="5,865,159,1265"/>
-<area shape="rect" href="class_open_g_l.html" title="The OpenGL renderer." alt="" coords="183,879,365,1250"/>
+<area shape="rect" title="The game engine." alt="" coords="215,1364,333,1529"/>
+<area shape="rect" href="class_camera.html" title="A Euler camera." alt="" coords="5,872,159,1287"/>
+<area shape="rect" href="class_open_g_l.html" title="The OpenGL renderer." alt="" coords="183,887,365,1272"/>
 <area shape="rect" href="class_renderer.html" title="An abstract class to represent a renderer, this can be derived into other renderers such as OpenGL or..." alt="" coords="183,666,322,787"/>
 <area shape="rect" href="class_skybox.html" title="A skybox." alt="" coords="347,659,495,795"/>
 <area shape="rect" href="class_shader.html" title="A shader program." alt="" coords="209,5,427,596"/>
 <area shape="rect" href="class_mesh.html" title="A mesh class representing vertices, texture coordinates, normals, and its indices." alt="" coords="452,189,595,413"/>
-<area shape="rect" href="class_window.html" title="A window class using GLFW." alt="" coords="389,857,532,1272"/>
+<area shape="rect" href="class_window.html" title="A window class using GLFW." alt="" coords="389,857,588,1301"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -145,34 +144,19 @@ Public Attributes</h2></td></tr>
 <tr class="memdesc:a93e2d784746bd55d1cfcda695b51a27d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The renderer of the engine.  <a href="class_reflex_engine.html#a93e2d784746bd55d1cfcda695b51a27d">More...</a><br /></td></tr>
 <tr class="separator:a93e2d784746bd55d1cfcda695b51a27d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0ca67d64edc87667de72598b32ae2a8"><td class="memItemLeft" align="right" valign="top">std::stack&lt; std::shared_ptr&lt; <a class="el" href="class_scene.html">Scene</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reflex_engine.html#ae0ca67d64edc87667de72598b32ae2a8">scenes_</a> = {}</td></tr>
-<tr class="memdesc:ae0ca67d64edc87667de72598b32ae2a8"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_a.html">A</a> stack of the current <a class="el" href="class_scene.html" title="A scene in the game.">Scene</a>, used to switch between Scenes.  <a href="class_reflex_engine.html#ae0ca67d64edc87667de72598b32ae2a8">More...</a><br /></td></tr>
+<tr class="memdesc:ae0ca67d64edc87667de72598b32ae2a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">A stack of the current <a class="el" href="class_scene.html" title="A scene in the game.">Scene</a>, used to switch between Scenes.  <a href="class_reflex_engine.html#ae0ca67d64edc87667de72598b32ae2a8">More...</a><br /></td></tr>
 <tr class="separator:ae0ca67d64edc87667de72598b32ae2a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:a2229508db80566f2ef6f3d504b3a060b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reflex_engine.html#a2229508db80566f2ef6f3d504b3a060b">update_delta_time</a> ()</td></tr>
-<tr class="memdesc:a2229508db80566f2ef6f3d504b3a060b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the delta times.  <a href="class_reflex_engine.html#a2229508db80566f2ef6f3d504b3a060b">More...</a><br /></td></tr>
-<tr class="separator:a2229508db80566f2ef6f3d504b3a060b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a117085b600b3b457482697bb5e6a5bba"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reflex_engine.html#a117085b600b3b457482697bb5e6a5bba">ReflexEngine</a> ()</td></tr>
-<tr class="memdesc:a117085b600b3b457482697bb5e6a5bba"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default constructor is private as a singleton pattern is used, preventing multiple instances.  <a href="class_reflex_engine.html#a117085b600b3b457482697bb5e6a5bba">More...</a><br /></td></tr>
-<tr class="separator:a117085b600b3b457482697bb5e6a5bba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
-Private Attributes</h2></td></tr>
-<tr class="memitem:afc5b114f7f5c05741971e08affcc6116"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reflex_engine.html#afc5b114f7f5c05741971e08affcc6116">prev_time_</a> = 0.0f</td></tr>
-<tr class="memdesc:afc5b114f7f5c05741971e08affcc6116"><td class="mdescLeft">&#160;</td><td class="mdescRight">The previous time.  <a href="class_reflex_engine.html#afc5b114f7f5c05741971e08affcc6116">More...</a><br /></td></tr>
-<tr class="separator:afc5b114f7f5c05741971e08affcc6116"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6917057a2fdaa132cbe0f55fb564eaab"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reflex_engine.html#a6917057a2fdaa132cbe0f55fb564eaab">delta_time_</a> = 0.0f</td></tr>
-<tr class="memdesc:a6917057a2fdaa132cbe0f55fb564eaab"><td class="mdescLeft">&#160;</td><td class="mdescRight">The delta time.  <a href="class_reflex_engine.html#a6917057a2fdaa132cbe0f55fb564eaab">More...</a><br /></td></tr>
-<tr class="separator:a6917057a2fdaa132cbe0f55fb564eaab"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a203c0ce674895021cd6ae9743b28ad71"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reflex_engine.html#a203c0ce674895021cd6ae9743b28ad71">fixed_delta_time_</a> = 0.0f</td></tr>
-<tr class="memdesc:a203c0ce674895021cd6ae9743b28ad71"><td class="mdescLeft">&#160;</td><td class="mdescRight">The fixed delta time.  <a href="class_reflex_engine.html#a203c0ce674895021cd6ae9743b28ad71">More...</a><br /></td></tr>
-<tr class="separator:a203c0ce674895021cd6ae9743b28ad71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8de17f6e12cef574bff30bcd0418c2ac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_reflex_engine.html#a8de17f6e12cef574bff30bcd0418c2ac">ReflexEngine</a> ()=default</td></tr>
+<tr class="memdesc:a8de17f6e12cef574bff30bcd0418c2ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default constructor is private as a singleton pattern is used, preventing multiple instances.  <a href="class_reflex_engine.html#a8de17f6e12cef574bff30bcd0418c2ac">More...</a><br /></td></tr>
+<tr class="separator:a8de17f6e12cef574bff30bcd0418c2ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The game engine. </p>
 
-<p class="definition">Definition at line <a class="el" href="_reflex_engine_8hpp_source.html#l00016">16</a> of file <a class="el" href="_reflex_engine_8hpp_source.html">ReflexEngine.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_reflex_engine_8hpp_source.html#l00015">15</a> of file <a class="el" href="_reflex_engine_8hpp_source.html">ReflexEngine.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aefae4d3197c1295b1968e530ab618d16"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aefae4d3197c1295b1968e530ab618d16">&#9670;&nbsp;</a></span>ReflexEngine() <span class="overload">[1/3]</span></h2>
@@ -226,8 +210,8 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a117085b600b3b457482697bb5e6a5bba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a117085b600b3b457482697bb5e6a5bba">&#9670;&nbsp;</a></span>ReflexEngine() <span class="overload">[3/3]</span></h2>
+<a id="a8de17f6e12cef574bff30bcd0418c2ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8de17f6e12cef574bff30bcd0418c2ac">&#9670;&nbsp;</a></span>ReflexEngine() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -244,18 +228,13 @@ Private Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">default</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>The default constructor is private as a singleton pattern is used, preventing multiple instances. </p>
 
-<p class="definition">Definition at line <a class="el" href="_reflex_engine_8cpp_source.html#l00009">9</a> of file <a class="el" href="_reflex_engine_8cpp_source.html">ReflexEngine.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;                           {</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="class_reflex_engine.html#a036101631f5148a2fa836983873fade5">window_</a>.<a class="code" href="class_window.html#a0c0b07b8ff8a81f515c722780527aaf5">Init</a>() == 1) <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;}</div>
-</div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -285,13 +264,13 @@ Private Attributes</h2></td></tr>
 <p>Get an instance of the engine. </p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_reflex_engine.html" title="The game engine.">ReflexEngine</a>&amp; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_reflex_engine_8cpp_source.html#l00080">80</a> of file <a class="el" href="_reflex_engine_8cpp_source.html">ReflexEngine.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                                         {</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_reflex_engine.html">ReflexEngine</a> instance;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">return</span> instance;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_reflex_engine_8cpp_source.html#l00088">88</a> of file <a class="el" href="_reflex_engine_8cpp_source.html">ReflexEngine.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                                         {</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_reflex_engine.html">ReflexEngine</a> instance;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordflow">return</span> instance;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="_open_g_l_8cpp_source.html#l00005">OpenGL::init()</a>, <a class="el" href="_open_g_l_8cpp_source.html#l00065">OpenGL::render_pass()</a>, and <a class="el" href="_reflex_engine_8cpp_source.html#l00013">run()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_open_g_l_8cpp_source.html#l00005">OpenGL::init()</a>, <a class="el" href="_open_g_l_8cpp_source.html#l00055">OpenGL::render_pass()</a>, and <a class="el" href="_reflex_engine_8cpp_source.html#l00011">run()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -385,68 +364,85 @@ Here is the caller graph for this function:</div>
 
 <p>Runs the engine. </p>
 
-<p class="definition">Definition at line <a class="el" href="_reflex_engine_8cpp_source.html#l00013">13</a> of file <a class="el" href="_reflex_engine_8cpp_source.html">ReflexEngine.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;                       {</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">auto</span>&amp; engine = <a class="code" href="class_reflex_engine.html#aceed91c96c9c6774fbcacfde19e9b5f9">ReflexEngine::get_instance</a>();</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="class_resource_manager.html#a33b466c53250b7431976a04d42d59036">ResourceManager::get_instance</a>();</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    engine.camera_ = <a class="code" href="class_camera.html">Camera</a>(glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 0.0f),</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;                            -90.0f, 0.0f, 5.0f, 0.2f);</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    engine.renderer_.init();</div>
+<p class="definition">Definition at line <a class="el" href="_reflex_engine_8cpp_source.html#l00011">11</a> of file <a class="el" href="_reflex_engine_8cpp_source.html">ReflexEngine.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;                       {</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">auto</span>&amp; engine = <a class="code" href="class_reflex_engine.html#aceed91c96c9c6774fbcacfde19e9b5f9">ReflexEngine::get_instance</a>();</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keywordflow">if</span> (!engine.window_.init()) <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="namespace_generic_functions.html#aedb1b2ce5d478ef7fedcda90a989e6b2">GenericFunctions::lua_access</a>();</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="class_input_manager.html#ad569ecdfed4bedd78d0c41667ecca2b4">InputManager::get_instance</a>().<a class="code" href="class_input_manager.html#a18c7c9fbdaa41b7face531a32ac20443">load_lua_bindings</a>(<span class="stringliteral">&quot;scripts/_Controls.lua&quot;</span>);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="class_resource_manager.html#a33b466c53250b7431976a04d42d59036">ResourceManager::get_instance</a>();</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="class_audio.html#ac63d7652bc90f882651b8502df2d38d4">Audio::get_instance</a>();</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="class_physics.html#a57d5edbfcb404618f3133c135dfdb3ce">Physics::createWorld</a>();</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="namespacegui.html#a974002976bfd5dbddd9070182db7db60">gui::init</a>(<a class="code" href="class_reflex_engine.html#aceed91c96c9c6774fbcacfde19e9b5f9">ReflexEngine::get_instance</a>().<a class="code" href="class_reflex_engine.html#a036101631f5148a2fa836983873fade5">window_</a>.<a class="code" href="class_window.html#aca3a8c2e012d1914be291b8a0a3bf78c">get_window</a>(),</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;              <span class="stringliteral">&quot;#version 410&quot;</span>);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="namespacegui_lua_access.html#ac5fcf57e6dbe6cc3064717c98b182fc7">guiLuaAccess::exposeGui</a>();</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    engine.scenes_.emplace(std::make_shared&lt;TestScene&gt;());</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    engine.scenes_.top()-&gt;init();</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">auto</span>&amp; input_manager = <a class="code" href="class_input_manager.html#ad569ecdfed4bedd78d0c41667ecca2b4">InputManager::get_instance</a>();</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    engine.camera_ = <a class="code" href="class_camera.html">Camera</a>(glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 0.0f),</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;                            -90.0f, 0.0f, 5.0f, 0.2f);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    engine.renderer_.init();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="namespacegui.html#a0106dfb3406f6720d089d100a5d27cb3">gui::init</a>(engine.window_.get_window(), <span class="stringliteral">&quot;#version 410&quot;</span>);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    engine.scenes_.emplace(std::make_shared&lt;TestScene&gt;());</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    engine.scenes_.top()-&gt;init();</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    glfwSetInputMode(<a class="code" href="class_reflex_engine.html#aceed91c96c9c6774fbcacfde19e9b5f9">ReflexEngine::get_instance</a>().<a class="code" href="class_reflex_engine.html#a036101631f5148a2fa836983873fade5">window_</a>.<a class="code" href="class_window.html#aca3a8c2e012d1914be291b8a0a3bf78c">get_window</a>(),</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                     GLFW_CURSOR, GLFW_CURSOR_NORMAL);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">while</span> (!engine.window_.IsShouldClose()) {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        engine.update_delta_time();</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        glfwPollEvents();</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        input_manager.read_keys(engine.window_.get_window());</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">auto</span>&amp; input_manager = <a class="code" href="class_input_manager.html#ad569ecdfed4bedd78d0c41667ecca2b4">InputManager::get_instance</a>();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    glfwSetInputMode(engine.window_.get_window(), GLFW_CURSOR,</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                     GLFW_CURSOR_NORMAL);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordflow">while</span> (!engine.window_.is_should_close()) {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <a class="code" href="class_engine_time.html#a1ab1e57f3adde220e86594e4a9bc9f87">EngineTime::update_delta_time</a>(glfwGetTime());</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        engine.window_.update_window_buffer_size();</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <a class="code" href="namespacegui.html#a263d36b19c65e8e826e88ed832ceb2bd">gui::mainLoopStart</a>();</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        engine.scenes_.top()-&gt;key_controls(engine.delta_time_);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="namespace_generic_functions.html#a46d8e1d0567cb3b8730f779111b97d6a">GenericFunctions::getIfPaused</a>()) {</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            engine.delta_time_ = 0;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            engine.scenes_.top()-&gt;mouse_controls(engine.window_.GetXOffset(),</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                                                 engine.window_.GetYOffset());</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        }</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="namespace_generic_functions.html#aa086f6a3926c511520907f20bd8377d7">GenericFunctions::getIfLoad</a>())</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            engine.scenes_.top()-&gt;loadSavedGameObjects();</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="namespace_generic_functions.html#a97c5684fec4c6965654f382e1716b99d">GenericFunctions::getIfSave</a>())</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            engine.scenes_.top()-&gt;saveGameObjects();</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="keywordflow">if</span> (engine.fixed_delta_time_ &gt;= <a class="code" href="_reflex_engine_8hpp.html#a6325eaa3bcfa8585cbd1eb539b7f6336">time_step</a>) {</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                engine.scenes_.top()-&gt;fixed_update(engine.fixed_delta_time_);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                engine.fixed_delta_time_ = 0.0f;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            }</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            engine.scenes_.top()-&gt;update(engine.delta_time_);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            engine.scenes_.top()-&gt;add_draw_call();</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            engine.renderer_.draw();</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        }</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <a class="code" href="namespacegui.html#a2ab6a0266f4df7775ddfa795ff5cdf23">gui::mainLoopEnd</a>();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        glfwPollEvents();</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        input_manager.read_keys(engine.window_.get_window());</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <a class="code" href="namespacegui.html#a263d36b19c65e8e826e88ed832ceb2bd">gui::mainLoopStart</a>();</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordflow">if</span> (!<a class="code" href="namespace_generic_functions.html#af87fdad288732d099a6cd9c2c79bb39f">GenericFunctions::getNetworkMenuActive</a>()) {</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            engine.scenes_.top()-&gt;key_controls(<a class="code" href="class_engine_time.html#a8eefac2520a99965c89bedf657e90d32">EngineTime::get_delta_time</a>());</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        }</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="class_engine_time.html#aad4dc0ef993952ffd7dc44af996bab58">EngineTime::is_paused</a>()) {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <a class="code" href="class_engine_time.html#ad2b8bbdf46ac367420438d8f93a4ec63">EngineTime::force_delta_time</a>(0);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <a class="code" href="class_physics.html#aae3da91344073de7b6fd6206f520c134">Physics::updateWorld</a>(<a class="code" href="class_engine_time.html#a8eefac2520a99965c89bedf657e90d32">EngineTime::get_delta_time</a>());</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            engine.scenes_.top()-&gt;mouse_controls(engine.window_.get_x_offset(),</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                                                 engine.window_.get_y_offset());</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        }</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="namespace_generic_functions.html#aa086f6a3926c511520907f20bd8377d7">GenericFunctions::getIfLoad</a>())</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            engine.scenes_.top()-&gt;loadSavedGameObjects();</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code" href="namespace_generic_functions.html#a97c5684fec4c6965654f382e1716b99d">GenericFunctions::getIfSave</a>())</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            engine.scenes_.top()-&gt;saveGameObjects();</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="class_engine_time.html#a556baf3a57398a4862e376635fa38a12">EngineTime::is_time_step_passed</a>()) {</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                engine.scenes_.top()-&gt;fixed_update(</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                    <a class="code" href="class_engine_time.html#a208e4840ecf665887b3cc6581123dd0f">EngineTime::get_fixed_delta_time</a>());</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                <a class="code" href="class_engine_time.html#a0e5e45a24395c7abb8547b57173fa000">EngineTime::reset_fixed_delta_time</a>();</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            }</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        engine.window_.SwapBuffers();</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    }</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <a class="code" href="namespacegui.html#afc5628199f30769b6573f508492404b1">gui::shutdown</a>();</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            engine.scenes_.top()-&gt;update(<a class="code" href="class_engine_time.html#a8eefac2520a99965c89bedf657e90d32">EngineTime::get_delta_time</a>());</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            engine.scenes_.top()-&gt;add_draw_call();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            engine.renderer_.draw();</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        }</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <a class="code" href="namespacegui.html#a2ab6a0266f4df7775ddfa795ff5cdf23">gui::mainLoopEnd</a>();</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        engine.window_.swap_buffers();</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    }</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">while</span> (!engine.scenes_.empty()) {</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        engine.scenes_.pop();</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <a class="code" href="singletons_8h.html#ad73411f982938b7d47f12c81b7c3b196">entityMgr</a>.killEntities();</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <a class="code" href="singletons_8h.html#ad73411f982938b7d47f12c81b7c3b196">entityMgr</a>.killManager();</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <a class="code" href="class_physics.html#abc2fbaff75f375db71bc8fbc88185bde">Physics::destroyWorld</a>();</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <a class="code" href="namespacegui.html#afc5628199f30769b6573f508492404b1">gui::shutdown</a>();</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_gui_lua_access_8cpp_source.html#l00003">guiLuaAccess::exposeGui()</a>, <a class="el" href="_resource_manager_8cpp_source.html#l00003">ResourceManager::get_instance()</a>, <a class="el" href="_input_manager_8cpp_source.html#l00007">InputManager::get_instance()</a>, <a class="el" href="_reflex_engine_8cpp_source.html#l00080">get_instance()</a>, and <a class="el" href="gui_manager_8cpp_source.html#l00026">gui::shutdown()</a>.</p>
+<p class="reference">References <a class="el" href="_physics_8cpp_source.html#l00007">Physics::createWorld()</a>, <a class="el" href="_physics_8cpp_source.html#l00037">Physics::destroyWorld()</a>, <a class="el" href="_input_manager_8cpp_source.html#l00007">InputManager::get_instance()</a>, <a class="el" href="_resource_manager_8cpp_source.html#l00003">ResourceManager::get_instance()</a>, <a class="el" href="_reflex_engine_8cpp_source.html#l00088">get_instance()</a>, <a class="el" href="_input_manager_8cpp_source.html#l00012">InputManager::load_lua_bindings()</a>, <a class="el" href="_generic_functions_8cpp_source.html#l00053">GenericFunctions::lua_access()</a>, and <a class="el" href="gui_manager_8cpp_source.html#l00052">gui::shutdown()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="main_8cpp_source.html#l00005">main()</a>.</p>
 <div class="dynheader">
@@ -454,12 +450,15 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_reflex_engine_a9c185c8127a7d9d650a1bcc97e3de170_cgraph.png" border="0" usemap="#class_reflex_engine_a9c185c8127a7d9d650a1bcc97e3de170_cgraph" alt=""/></div>
 <map name="class_reflex_engine_a9c185c8127a7d9d650a1bcc97e3de170_cgraph" id="class_reflex_engine_a9c185c8127a7d9d650a1bcc97e3de170_cgraph">
-<area shape="rect" title="Runs the engine." alt="" coords="5,123,129,149"/>
-<area shape="rect" href="namespacegui_lua_access.html#ac5fcf57e6dbe6cc3064717c98b182fc7" title="Gives lua access to gui related functions." alt="" coords="181,5,356,32"/>
-<area shape="rect" href="class_resource_manager.html#a33b466c53250b7431976a04d42d59036" title="Get the instance of the Resource Manager." alt="" coords="192,57,345,98"/>
-<area shape="rect" href="class_input_manager.html#ad569ecdfed4bedd78d0c41667ecca2b4" title="Get the instance." alt="" coords="177,123,360,149"/>
-<area shape="rect" href="class_reflex_engine.html#aceed91c96c9c6774fbcacfde19e9b5f9" title="Get an instance of the engine." alt="" coords="179,173,359,200"/>
-<area shape="rect" href="namespacegui.html#afc5628199f30769b6573f508492404b1" title="Shuts down gui." alt="" coords="217,224,320,251"/>
+<area shape="rect" title="Runs the engine." alt="" coords="5,199,129,225"/>
+<area shape="rect" href="class_physics.html#a57d5edbfcb404618f3133c135dfdb3ce" title="Creates the world for the physic objects." alt="" coords="195,5,342,32"/>
+<area shape="rect" href="class_physics.html#abc2fbaff75f375db71bc8fbc88185bde" title="Creates the world for the physic objects." alt="" coords="191,56,346,83"/>
+<area shape="rect" href="class_resource_manager.html#a33b466c53250b7431976a04d42d59036" title="Get the instance of the Resource Manager." alt="" coords="192,107,345,149"/>
+<area shape="rect" href="class_input_manager.html#ad569ecdfed4bedd78d0c41667ecca2b4" title="Get the instance." alt="" coords="177,173,360,200"/>
+<area shape="rect" href="class_reflex_engine.html#aceed91c96c9c6774fbcacfde19e9b5f9" title="Get an instance of the engine." alt="" coords="179,224,359,251"/>
+<area shape="rect" href="class_input_manager.html#a18c7c9fbdaa41b7face531a32ac20443" title="Load the bindings from a Lua file." alt="" coords="203,275,335,317"/>
+<area shape="rect" href="namespace_generic_functions.html#aedb1b2ce5d478ef7fedcda90a989e6b2" title="Exposes generic functions methods to lua." alt="" coords="194,341,343,382"/>
+<area shape="rect" href="namespacegui.html#afc5628199f30769b6573f508492404b1" title="Shuts down gui." alt="" coords="217,407,320,433"/>
 </map>
 </div>
 <div class="dynheader">
@@ -471,43 +470,6 @@ Here is the caller graph for this function:</div>
 <area shape="rect" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,5,56,32"/>
 </map>
 </div>
-
-</div>
-</div>
-<a id="a2229508db80566f2ef6f3d504b3a060b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2229508db80566f2ef6f3d504b3a060b">&#9670;&nbsp;</a></span>update_delta_time()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ReflexEngine::update_delta_time </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Updates the delta times. </p>
-
-<p class="definition">Definition at line <a class="el" href="_reflex_engine_8cpp_source.html#l00073">73</a> of file <a class="el" href="_reflex_engine_8cpp_source.html">ReflexEngine.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                                     {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">float</span> curr_time = glfwGetTime();</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <a class="code" href="class_reflex_engine.html#a6917057a2fdaa132cbe0f55fb564eaab">delta_time_</a> = curr_time - <a class="code" href="class_reflex_engine.html#afc5b114f7f5c05741971e08affcc6116">prev_time_</a>;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <a class="code" href="class_reflex_engine.html#a203c0ce674895021cd6ae9743b28ad71">fixed_delta_time_</a> += <a class="code" href="class_reflex_engine.html#a6917057a2fdaa132cbe0f55fb564eaab">delta_time_</a>;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="class_reflex_engine.html#afc5b114f7f5c05741971e08affcc6116">prev_time_</a> = curr_time;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;}</div>
-</div><!-- fragment -->
-<p class="reference">References <a class="el" href="_reflex_engine_8hpp_source.html#l00052">delta_time_</a>, <a class="el" href="_reflex_engine_8hpp_source.html#l00054">fixed_delta_time_</a>, and <a class="el" href="_reflex_engine_8hpp_source.html#l00050">prev_time_</a>.</p>
 
 </div>
 </div>
@@ -526,91 +488,7 @@ Here is the caller graph for this function:</div>
 
 <p>The camera. </p>
 
-<p class="definition">Definition at line <a class="el" href="_reflex_engine_8hpp_source.html#l00022">22</a> of file <a class="el" href="_reflex_engine_8hpp_source.html">ReflexEngine.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a6917057a2fdaa132cbe0f55fb564eaab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6917057a2fdaa132cbe0f55fb564eaab">&#9670;&nbsp;</a></span>delta_time_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">float ReflexEngine::delta_time_ = 0.0f</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>The delta time. </p>
-
-<p class="definition">Definition at line <a class="el" href="_reflex_engine_8hpp_source.html#l00052">52</a> of file <a class="el" href="_reflex_engine_8hpp_source.html">ReflexEngine.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="_reflex_engine_8cpp_source.html#l00073">update_delta_time()</a>.</p>
-
-</div>
-</div>
-<a id="a203c0ce674895021cd6ae9743b28ad71"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a203c0ce674895021cd6ae9743b28ad71">&#9670;&nbsp;</a></span>fixed_delta_time_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">float ReflexEngine::fixed_delta_time_ = 0.0f</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>The fixed delta time. </p>
-
-<p class="definition">Definition at line <a class="el" href="_reflex_engine_8hpp_source.html#l00054">54</a> of file <a class="el" href="_reflex_engine_8hpp_source.html">ReflexEngine.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="_reflex_engine_8cpp_source.html#l00073">update_delta_time()</a>.</p>
-
-</div>
-</div>
-<a id="afc5b114f7f5c05741971e08affcc6116"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afc5b114f7f5c05741971e08affcc6116">&#9670;&nbsp;</a></span>prev_time_</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">float ReflexEngine::prev_time_ = 0.0f</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>The previous time. </p>
-
-<p class="definition">Definition at line <a class="el" href="_reflex_engine_8hpp_source.html#l00050">50</a> of file <a class="el" href="_reflex_engine_8hpp_source.html">ReflexEngine.hpp</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="_reflex_engine_8cpp_source.html#l00073">update_delta_time()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_reflex_engine_8hpp_source.html#l00021">21</a> of file <a class="el" href="_reflex_engine_8hpp_source.html">ReflexEngine.hpp</a>.</p>
 
 </div>
 </div>
@@ -628,7 +506,7 @@ Here is the caller graph for this function:</div>
 
 <p>The renderer of the engine. </p>
 
-<p class="definition">Definition at line <a class="el" href="_reflex_engine_8hpp_source.html#l00025">25</a> of file <a class="el" href="_reflex_engine_8hpp_source.html">ReflexEngine.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_reflex_engine_8hpp_source.html#l00024">24</a> of file <a class="el" href="_reflex_engine_8hpp_source.html">ReflexEngine.hpp</a>.</p>
 
 </div>
 </div>
@@ -644,9 +522,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="class_a.html">A</a> stack of the current <a class="el" href="class_scene.html" title="A scene in the game.">Scene</a>, used to switch between Scenes. </p>
+<p>A stack of the current <a class="el" href="class_scene.html" title="A scene in the game.">Scene</a>, used to switch between Scenes. </p>
 
-<p class="definition">Definition at line <a class="el" href="_reflex_engine_8hpp_source.html#l00028">28</a> of file <a class="el" href="_reflex_engine_8hpp_source.html">ReflexEngine.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_reflex_engine_8hpp_source.html#l00027">27</a> of file <a class="el" href="_reflex_engine_8hpp_source.html">ReflexEngine.hpp</a>.</p>
 
 </div>
 </div>
@@ -664,7 +542,7 @@ Here is the caller graph for this function:</div>
 
 <p><a class="el" href="class_window.html" title="A window class using GLFW.">Window</a> class. </p>
 
-<p class="definition">Definition at line <a class="el" href="_reflex_engine_8hpp_source.html#l00019">19</a> of file <a class="el" href="_reflex_engine_8hpp_source.html">ReflexEngine.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_reflex_engine_8hpp_source.html#l00018">18</a> of file <a class="el" href="_reflex_engine_8hpp_source.html">ReflexEngine.hpp</a>.</p>
 
 </div>
 </div>
@@ -674,26 +552,32 @@ Here is the caller graph for this function:</div>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="anamespacegui_html_a2ab6a0266f4df7775ddfa795ff5cdf23"><div class="ttname"><a href="namespacegui.html#a2ab6a0266f4df7775ddfa795ff5cdf23">gui::mainLoopEnd</a></div><div class="ttdeci">void mainLoopEnd()</div><div class="ttdoc">Renders gui. Should be placed at the end of the main loop.</div><div class="ttdef"><b>Definition:</b> <a href="gui_manager_8cpp_source.html#l00021">guiManager.cpp:21</a></div></div>
-<div class="ttc" id="aclass_reflex_engine_html_a203c0ce674895021cd6ae9743b28ad71"><div class="ttname"><a href="class_reflex_engine.html#a203c0ce674895021cd6ae9743b28ad71">ReflexEngine::fixed_delta_time_</a></div><div class="ttdeci">float fixed_delta_time_</div><div class="ttdoc">The fixed delta time.</div><div class="ttdef"><b>Definition:</b> <a href="_reflex_engine_8hpp_source.html#l00054">ReflexEngine.hpp:54</a></div></div>
-<div class="ttc" id="aclass_window_html_aca3a8c2e012d1914be291b8a0a3bf78c"><div class="ttname"><a href="class_window.html#aca3a8c2e012d1914be291b8a0a3bf78c">Window::get_window</a></div><div class="ttdeci">GLFWwindow * get_window()</div><div class="ttdoc">Returns a pointer to the window.</div><div class="ttdef"><b>Definition:</b> <a href="_window_8hpp_source.html#l00087">Window.hpp:87</a></div></div>
-<div class="ttc" id="aclass_reflex_engine_html_afc5b114f7f5c05741971e08affcc6116"><div class="ttname"><a href="class_reflex_engine.html#afc5b114f7f5c05741971e08affcc6116">ReflexEngine::prev_time_</a></div><div class="ttdeci">float prev_time_</div><div class="ttdoc">The previous time.</div><div class="ttdef"><b>Definition:</b> <a href="_reflex_engine_8hpp_source.html#l00050">ReflexEngine.hpp:50</a></div></div>
-<div class="ttc" id="anamespacegui_lua_access_html_ac5fcf57e6dbe6cc3064717c98b182fc7"><div class="ttname"><a href="namespacegui_lua_access.html#ac5fcf57e6dbe6cc3064717c98b182fc7">guiLuaAccess::exposeGui</a></div><div class="ttdeci">void exposeGui()</div><div class="ttdoc">Gives lua access to gui related functions.</div><div class="ttdef"><b>Definition:</b> <a href="_gui_lua_access_8cpp_source.html#l00003">GuiLuaAccess.cpp:3</a></div></div>
+<div class="ttc" id="anamespacegui_html_a2ab6a0266f4df7775ddfa795ff5cdf23"><div class="ttname"><a href="namespacegui.html#a2ab6a0266f4df7775ddfa795ff5cdf23">gui::mainLoopEnd</a></div><div class="ttdeci">void mainLoopEnd()</div><div class="ttdoc">Renders gui. Should be placed at the end of the main loop.</div><div class="ttdef"><b>Definition:</b> <a href="gui_manager_8cpp_source.html#l00047">guiManager.cpp:47</a></div></div>
+<div class="ttc" id="aclass_physics_html_aae3da91344073de7b6fd6206f520c134"><div class="ttname"><a href="class_physics.html#aae3da91344073de7b6fd6206f520c134">Physics::updateWorld</a></div><div class="ttdeci">static void updateWorld(double delta_time)</div><div class="ttdoc">Updates the world for the physic objects.</div><div class="ttdef"><b>Definition:</b> <a href="_physics_8cpp_source.html#l00014">Physics.cpp:14</a></div></div>
+<div class="ttc" id="aclass_physics_html_a57d5edbfcb404618f3133c135dfdb3ce"><div class="ttname"><a href="class_physics.html#a57d5edbfcb404618f3133c135dfdb3ce">Physics::createWorld</a></div><div class="ttdeci">static void createWorld()</div><div class="ttdoc">Creates the world for the physic objects.</div><div class="ttdef"><b>Definition:</b> <a href="_physics_8cpp_source.html#l00007">Physics.cpp:7</a></div></div>
 <div class="ttc" id="aclass_resource_manager_html_a33b466c53250b7431976a04d42d59036"><div class="ttname"><a href="class_resource_manager.html#a33b466c53250b7431976a04d42d59036">ResourceManager::get_instance</a></div><div class="ttdeci">static ResourceManager &amp; get_instance()</div><div class="ttdoc">Get the instance of the Resource Manager.</div><div class="ttdef"><b>Definition:</b> <a href="_resource_manager_8cpp_source.html#l00003">ResourceManager.cpp:3</a></div></div>
-<div class="ttc" id="anamespacegui_html_afc5628199f30769b6573f508492404b1"><div class="ttname"><a href="namespacegui.html#afc5628199f30769b6573f508492404b1">gui::shutdown</a></div><div class="ttdeci">void shutdown()</div><div class="ttdoc">Shuts down gui.</div><div class="ttdef"><b>Definition:</b> <a href="gui_manager_8cpp_source.html#l00026">guiManager.cpp:26</a></div></div>
-<div class="ttc" id="aclass_reflex_engine_html"><div class="ttname"><a href="class_reflex_engine.html">ReflexEngine</a></div><div class="ttdoc">The game engine.</div><div class="ttdef"><b>Definition:</b> <a href="_reflex_engine_8hpp_source.html#l00016">ReflexEngine.hpp:16</a></div></div>
-<div class="ttc" id="anamespace_generic_functions_html_a46d8e1d0567cb3b8730f779111b97d6a"><div class="ttname"><a href="namespace_generic_functions.html#a46d8e1d0567cb3b8730f779111b97d6a">GenericFunctions::getIfPaused</a></div><div class="ttdeci">bool getIfPaused()</div><div class="ttdoc">Gets if the game should be paused.</div><div class="ttdef"><b>Definition:</b> <a href="_generic_functions_8cpp_source.html#l00126">GenericFunctions.cpp:126</a></div></div>
-<div class="ttc" id="aclass_reflex_engine_html_aceed91c96c9c6774fbcacfde19e9b5f9"><div class="ttname"><a href="class_reflex_engine.html#aceed91c96c9c6774fbcacfde19e9b5f9">ReflexEngine::get_instance</a></div><div class="ttdeci">static ReflexEngine &amp; get_instance()</div><div class="ttdoc">Get an instance of the engine.</div><div class="ttdef"><b>Definition:</b> <a href="_reflex_engine_8cpp_source.html#l00080">ReflexEngine.cpp:80</a></div></div>
-<div class="ttc" id="anamespacegui_html_a263d36b19c65e8e826e88ed832ceb2bd"><div class="ttname"><a href="namespacegui.html#a263d36b19c65e8e826e88ed832ceb2bd">gui::mainLoopStart</a></div><div class="ttdeci">void mainLoopStart()</div><div class="ttdoc">Does per frame initialise for gui. Should be placed after glClear &amp; glClearColor in the main loop.</div><div class="ttdef"><b>Definition:</b> <a href="gui_manager_8cpp_source.html#l00015">guiManager.cpp:15</a></div></div>
-<div class="ttc" id="aclass_window_html_a0c0b07b8ff8a81f515c722780527aaf5"><div class="ttname"><a href="class_window.html#a0c0b07b8ff8a81f515c722780527aaf5">Window::Init</a></div><div class="ttdeci">int Init()</div><div class="ttdoc">Initializes the window.</div><div class="ttdef"><b>Definition:</b> <a href="_window_8cpp_source.html#l00029">Window.cpp:29</a></div></div>
-<div class="ttc" id="aclass_reflex_engine_html_a6917057a2fdaa132cbe0f55fb564eaab"><div class="ttname"><a href="class_reflex_engine.html#a6917057a2fdaa132cbe0f55fb564eaab">ReflexEngine::delta_time_</a></div><div class="ttdeci">float delta_time_</div><div class="ttdoc">The delta time.</div><div class="ttdef"><b>Definition:</b> <a href="_reflex_engine_8hpp_source.html#l00052">ReflexEngine.hpp:52</a></div></div>
-<div class="ttc" id="anamespace_generic_functions_html_aa086f6a3926c511520907f20bd8377d7"><div class="ttname"><a href="namespace_generic_functions.html#aa086f6a3926c511520907f20bd8377d7">GenericFunctions::getIfLoad</a></div><div class="ttdeci">bool getIfLoad()</div><div class="ttdoc">Gets if the game should load game objects from save.</div><div class="ttdef"><b>Definition:</b> <a href="_generic_functions_8cpp_source.html#l00117">GenericFunctions.cpp:117</a></div></div>
+<div class="ttc" id="aclass_engine_time_html_ad2b8bbdf46ac367420438d8f93a4ec63"><div class="ttname"><a href="class_engine_time.html#ad2b8bbdf46ac367420438d8f93a4ec63">EngineTime::force_delta_time</a></div><div class="ttdeci">static void force_delta_time(double new_time)</div><div class="ttdoc">Forces the new delta time.</div><div class="ttdef"><b>Definition:</b> <a href="_engine_time_8cpp_source.html#l00024">EngineTime.cpp:24</a></div></div>
+<div class="ttc" id="anamespace_generic_functions_html_af87fdad288732d099a6cd9c2c79bb39f"><div class="ttname"><a href="namespace_generic_functions.html#af87fdad288732d099a6cd9c2c79bb39f">GenericFunctions::getNetworkMenuActive</a></div><div class="ttdeci">bool getNetworkMenuActive()</div><div class="ttdoc">Gets the active state of the network menu.</div><div class="ttdef"><b>Definition:</b> <a href="_generic_functions_8cpp_source.html#l00335">GenericFunctions.cpp:335</a></div></div>
+<div class="ttc" id="anamespacegui_html_afc5628199f30769b6573f508492404b1"><div class="ttname"><a href="namespacegui.html#afc5628199f30769b6573f508492404b1">gui::shutdown</a></div><div class="ttdeci">void shutdown()</div><div class="ttdoc">Shuts down gui.</div><div class="ttdef"><b>Definition:</b> <a href="gui_manager_8cpp_source.html#l00052">guiManager.cpp:52</a></div></div>
+<div class="ttc" id="aclass_reflex_engine_html"><div class="ttname"><a href="class_reflex_engine.html">ReflexEngine</a></div><div class="ttdoc">The game engine.</div><div class="ttdef"><b>Definition:</b> <a href="_reflex_engine_8hpp_source.html#l00015">ReflexEngine.hpp:15</a></div></div>
+<div class="ttc" id="aclass_input_manager_html_a18c7c9fbdaa41b7face531a32ac20443"><div class="ttname"><a href="class_input_manager.html#a18c7c9fbdaa41b7face531a32ac20443">InputManager::load_lua_bindings</a></div><div class="ttdeci">void load_lua_bindings(const std::string &amp;file_path)</div><div class="ttdoc">Load the bindings from a Lua file.</div><div class="ttdef"><b>Definition:</b> <a href="_input_manager_8cpp_source.html#l00012">InputManager.cpp:12</a></div></div>
+<div class="ttc" id="aclass_physics_html_abc2fbaff75f375db71bc8fbc88185bde"><div class="ttname"><a href="class_physics.html#abc2fbaff75f375db71bc8fbc88185bde">Physics::destroyWorld</a></div><div class="ttdeci">static void destroyWorld()</div><div class="ttdoc">Creates the world for the physic objects.</div><div class="ttdef"><b>Definition:</b> <a href="_physics_8cpp_source.html#l00037">Physics.cpp:37</a></div></div>
+<div class="ttc" id="aclass_engine_time_html_aad4dc0ef993952ffd7dc44af996bab58"><div class="ttname"><a href="class_engine_time.html#aad4dc0ef993952ffd7dc44af996bab58">EngineTime::is_paused</a></div><div class="ttdeci">static bool is_paused()</div><div class="ttdoc">gets if the game is paused</div><div class="ttdef"><b>Definition:</b> <a href="_engine_time_8cpp_source.html#l00044">EngineTime.cpp:44</a></div></div>
+<div class="ttc" id="aclass_reflex_engine_html_aceed91c96c9c6774fbcacfde19e9b5f9"><div class="ttname"><a href="class_reflex_engine.html#aceed91c96c9c6774fbcacfde19e9b5f9">ReflexEngine::get_instance</a></div><div class="ttdeci">static ReflexEngine &amp; get_instance()</div><div class="ttdoc">Get an instance of the engine.</div><div class="ttdef"><b>Definition:</b> <a href="_reflex_engine_8cpp_source.html#l00088">ReflexEngine.cpp:88</a></div></div>
+<div class="ttc" id="aclass_engine_time_html_a1ab1e57f3adde220e86594e4a9bc9f87"><div class="ttname"><a href="class_engine_time.html#a1ab1e57f3adde220e86594e4a9bc9f87">EngineTime::update_delta_time</a></div><div class="ttdeci">static void update_delta_time(double curr_time)</div><div class="ttdoc">Updates the delta time.</div><div class="ttdef"><b>Definition:</b> <a href="_engine_time_8cpp_source.html#l00010">EngineTime.cpp:10</a></div></div>
+<div class="ttc" id="anamespacegui_html_a263d36b19c65e8e826e88ed832ceb2bd"><div class="ttname"><a href="namespacegui.html#a263d36b19c65e8e826e88ed832ceb2bd">gui::mainLoopStart</a></div><div class="ttdeci">void mainLoopStart()</div><div class="ttdoc">Does per frame initialise for gui. Should be placed after glClear &amp; glClearColor in the main loop.</div><div class="ttdef"><b>Definition:</b> <a href="gui_manager_8cpp_source.html#l00041">guiManager.cpp:41</a></div></div>
+<div class="ttc" id="anamespacegui_html_a0106dfb3406f6720d089d100a5d27cb3"><div class="ttname"><a href="namespacegui.html#a0106dfb3406f6720d089d100a5d27cb3">gui::init</a></div><div class="ttdeci">void init(GLFWwindow *window, const std::string &amp;openglVersion)</div><div class="ttdoc">Initialises gui.</div><div class="ttdef"><b>Definition:</b> <a href="gui_manager_8cpp_source.html#l00006">guiManager.cpp:6</a></div></div>
+<div class="ttc" id="aclass_audio_html_ac63d7652bc90f882651b8502df2d38d4"><div class="ttname"><a href="class_audio.html#ac63d7652bc90f882651b8502df2d38d4">Audio::get_instance</a></div><div class="ttdeci">static Audio &amp; get_instance()</div><div class="ttdoc">Get the instance of the Audio class.</div><div class="ttdef"><b>Definition:</b> <a href="_audio_8cpp_source.html#l00010">Audio.cpp:10</a></div></div>
+<div class="ttc" id="anamespace_generic_functions_html_aa086f6a3926c511520907f20bd8377d7"><div class="ttname"><a href="namespace_generic_functions.html#aa086f6a3926c511520907f20bd8377d7">GenericFunctions::getIfLoad</a></div><div class="ttdeci">bool getIfLoad()</div><div class="ttdoc">Gets if the game should load game objects from save.</div><div class="ttdef"><b>Definition:</b> <a href="_generic_functions_8cpp_source.html#l00155">GenericFunctions.cpp:155</a></div></div>
 <div class="ttc" id="aclass_input_manager_html_ad569ecdfed4bedd78d0c41667ecca2b4"><div class="ttname"><a href="class_input_manager.html#ad569ecdfed4bedd78d0c41667ecca2b4">InputManager::get_instance</a></div><div class="ttdeci">static InputManager &amp; get_instance()</div><div class="ttdoc">Get the instance.</div><div class="ttdef"><b>Definition:</b> <a href="_input_manager_8cpp_source.html#l00007">InputManager.cpp:7</a></div></div>
-<div class="ttc" id="anamespacegui_html_a974002976bfd5dbddd9070182db7db60"><div class="ttname"><a href="namespacegui.html#a974002976bfd5dbddd9070182db7db60">gui::init</a></div><div class="ttdeci">void init(GLFWwindow *window, std::string openglVersion)</div><div class="ttdoc">Initialises gui.</div><div class="ttdef"><b>Definition:</b> <a href="gui_manager_8cpp_source.html#l00005">guiManager.cpp:5</a></div></div>
-<div class="ttc" id="aclass_camera_html"><div class="ttname"><a href="class_camera.html">Camera</a></div><div class="ttdoc">A Euler camera.</div><div class="ttdef"><b>Definition:</b> <a href="_camera_8hpp_source.html#l00015">Camera.hpp:15</a></div></div>
-<div class="ttc" id="aclass_reflex_engine_html_a036101631f5148a2fa836983873fade5"><div class="ttname"><a href="class_reflex_engine.html#a036101631f5148a2fa836983873fade5">ReflexEngine::window_</a></div><div class="ttdeci">Window window_</div><div class="ttdoc">Window class.</div><div class="ttdef"><b>Definition:</b> <a href="_reflex_engine_8hpp_source.html#l00019">ReflexEngine.hpp:19</a></div></div>
-<div class="ttc" id="anamespace_generic_functions_html_a97c5684fec4c6965654f382e1716b99d"><div class="ttname"><a href="namespace_generic_functions.html#a97c5684fec4c6965654f382e1716b99d">GenericFunctions::getIfSave</a></div><div class="ttdeci">bool getIfSave()</div><div class="ttdoc">gets if the game should be saved</div><div class="ttdef"><b>Definition:</b> <a href="_generic_functions_8cpp_source.html#l00104">GenericFunctions.cpp:104</a></div></div>
-<div class="ttc" id="a_reflex_engine_8hpp_html_a6325eaa3bcfa8585cbd1eb539b7f6336"><div class="ttname"><a href="_reflex_engine_8hpp.html#a6325eaa3bcfa8585cbd1eb539b7f6336">time_step</a></div><div class="ttdeci">constexpr float time_step</div><div class="ttdef"><b>Definition:</b> <a href="_reflex_engine_8hpp_source.html#l00010">ReflexEngine.hpp:10</a></div></div>
+<div class="ttc" id="asingletons_8h_html_ad73411f982938b7d47f12c81b7c3b196"><div class="ttname"><a href="singletons_8h.html#ad73411f982938b7d47f12c81b7c3b196">entityMgr</a></div><div class="ttdeci">#define entityMgr</div><div class="ttdef"><b>Definition:</b> <a href="singletons_8h_source.html#l00016">singletons.h:16</a></div></div>
+<div class="ttc" id="aclass_engine_time_html_a208e4840ecf665887b3cc6581123dd0f"><div class="ttname"><a href="class_engine_time.html#a208e4840ecf665887b3cc6581123dd0f">EngineTime::get_fixed_delta_time</a></div><div class="ttdeci">static double get_fixed_delta_time()</div><div class="ttdoc">gets the fixed delta time</div><div class="ttdef"><b>Definition:</b> <a href="_engine_time_8cpp_source.html#l00032">EngineTime.cpp:32</a></div></div>
+<div class="ttc" id="aclass_camera_html"><div class="ttname"><a href="class_camera.html">Camera</a></div><div class="ttdoc">A Euler camera.</div><div class="ttdef"><b>Definition:</b> <a href="_camera_8hpp_source.html#l00019">Camera.hpp:19</a></div></div>
+<div class="ttc" id="aclass_engine_time_html_a8eefac2520a99965c89bedf657e90d32"><div class="ttname"><a href="class_engine_time.html#a8eefac2520a99965c89bedf657e90d32">EngineTime::get_delta_time</a></div><div class="ttdeci">static double get_delta_time()</div><div class="ttdoc">gets the delta time</div><div class="ttdef"><b>Definition:</b> <a href="_engine_time_8cpp_source.html#l00034">EngineTime.cpp:34</a></div></div>
+<div class="ttc" id="anamespace_generic_functions_html_aedb1b2ce5d478ef7fedcda90a989e6b2"><div class="ttname"><a href="namespace_generic_functions.html#aedb1b2ce5d478ef7fedcda90a989e6b2">GenericFunctions::lua_access</a></div><div class="ttdeci">void lua_access()</div><div class="ttdoc">Exposes generic functions methods to lua.</div><div class="ttdef"><b>Definition:</b> <a href="_generic_functions_8cpp_source.html#l00053">GenericFunctions.cpp:53</a></div></div>
+<div class="ttc" id="anamespace_generic_functions_html_a97c5684fec4c6965654f382e1716b99d"><div class="ttname"><a href="namespace_generic_functions.html#a97c5684fec4c6965654f382e1716b99d">GenericFunctions::getIfSave</a></div><div class="ttdeci">bool getIfSave()</div><div class="ttdoc">gets if the game should be saved</div><div class="ttdef"><b>Definition:</b> <a href="_generic_functions_8cpp_source.html#l00138">GenericFunctions.cpp:138</a></div></div>
+<div class="ttc" id="aclass_engine_time_html_a0e5e45a24395c7abb8547b57173fa000"><div class="ttname"><a href="class_engine_time.html#a0e5e45a24395c7abb8547b57173fa000">EngineTime::reset_fixed_delta_time</a></div><div class="ttdeci">static void reset_fixed_delta_time()</div><div class="ttdoc">resets the fixed delta time back to 0</div><div class="ttdef"><b>Definition:</b> <a href="_engine_time_8cpp_source.html#l00022">EngineTime.cpp:22</a></div></div>
+<div class="ttc" id="aclass_engine_time_html_a556baf3a57398a4862e376635fa38a12"><div class="ttname"><a href="class_engine_time.html#a556baf3a57398a4862e376635fa38a12">EngineTime::is_time_step_passed</a></div><div class="ttdeci">static bool is_time_step_passed()</div><div class="ttdoc">Returns whether the fixed delta time has exceeded the time step.</div><div class="ttdef"><b>Definition:</b> <a href="_engine_time_8cpp_source.html#l00040">EngineTime.cpp:40</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

@@ -1,10 +1,14 @@
 <map id="ResourceManager::get_instance" name="ResourceManager::get_instance">
-<area shape="rect" id="node1" title="Get the instance of the Resource Manager." alt="" coords="296,140,449,181"/>
-<area shape="rect" id="node2" href="$namespace_material_lua_controller.html#a2bf77986afcc458d485046c156d5bedd" title="Gives lua access to material related functions (texture &amp; model managers)" alt="" coords="104,5,248,47"/>
-<area shape="rect" id="node3" href="$class_item.html#ae902d008e98a75d3cf0fef53d9177f9e" title="The draw call for the item." alt="" coords="135,71,217,98"/>
-<area shape="rect" id="node4" href="$class_physics_object.html#a72c03214889819e5bba9d321e69a848c" title="Draws the object." alt="" coords="105,122,247,149"/>
-<area shape="rect" id="node5" href="$class_water.html#aca2414328c1d530cebff6ba347225ff9" title="Initialises the water." alt="" coords="130,173,222,199"/>
-<area shape="rect" id="node6" href="$namespacegui.html#a32199bb3c15f21a31295be2e39c258d1" title="Creates an image using a texture name." alt="" coords="123,223,229,250"/>
-<area shape="rect" id="node7" href="$class_reflex_engine.html#a9c185c8127a7d9d650a1bcc97e3de170" title="Runs the engine." alt="" coords="114,274,238,301"/>
-<area shape="rect" id="node8" href="$main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,274,56,301"/>
+<area shape="rect" id="node1" title="Get the instance of the Resource Manager." alt="" coords="417,201,571,242"/>
+<area shape="rect" id="node2" href="$class_item.html#ae902d008e98a75d3cf0fef53d9177f9e" title="The draw call for the item." alt="" coords="234,5,317,32"/>
+<area shape="rect" id="node3" href="$class_n_p_c.html#a4e335de59c42c1888ed075fa2ee10e65" title="Draws the object." alt="" coords="233,56,317,83"/>
+<area shape="rect" id="node4" href="$class_networked_item.html#aee95fbab11712463ac2c7dd9ea472708" title="The draw call for the Networked Item." alt="" coords="204,107,347,133"/>
+<area shape="rect" id="node5" href="$class_physics_object.html#a72c03214889819e5bba9d321e69a848c" title="Draws the object." alt="" coords="204,157,347,184"/>
+<area shape="rect" id="node6" href="$class_water.html#aca2414328c1d530cebff6ba347225ff9" title="Initialises the water." alt="" coords="229,208,321,235"/>
+<area shape="rect" id="node7" href="$namespacegui.html#a32199bb3c15f21a31295be2e39c258d1" title="Creates an image using a texture name." alt="" coords="222,259,329,285"/>
+<area shape="rect" id="node8" href="$class_model_data.html#a82ad8ebbe6baabbf3633586614fb537e" title="Render the model animated." alt="" coords="181,309,369,336"/>
+<area shape="rect" id="node10" href="$class_model_data.html#ae4edf4b22d7cda2e7074d3fe9c130384" title="Render the model statically." alt="" coords="190,360,361,387"/>
+<area shape="rect" id="node11" href="$class_reflex_engine.html#a9c185c8127a7d9d650a1bcc97e3de170" title="Runs the engine." alt="" coords="213,411,337,437"/>
+<area shape="rect" id="node9" href="$class_model_data.html#af93eb28b2566856b36b26d9554e1a584" title="Render the model." alt="" coords="5,335,133,361"/>
+<area shape="rect" id="node12" href="$main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="44,411,95,437"/>
 </map>

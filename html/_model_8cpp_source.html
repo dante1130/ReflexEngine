@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: src/View/Renderer/OpenGL/Objects/Model.cpp Source File</title>
+<title>ICT397 Assignment 2: src/View/Renderer/OpenGL/Objects/Model.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -122,118 +122,125 @@ $(document).ready(function(){initNavTree('_model_8cpp_source.html',''); initResi
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    }</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;}</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="class_model.html#a3af639f039b6437980bb913dbbc75fd4">   38</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_model.html">Model</a>::<a class="code" href="class_model.html#a3af639f039b6437980bb913dbbc75fd4">LoadNode</a>(aiNode* node, <span class="keyword">const</span> aiScene* scene) {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">for</span> (size_t i = 0; i &lt; node-&gt;mNumMeshes; ++i)</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        LoadMesh(scene-&gt;mMeshes[node-&gt;mMeshes[i]], scene);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordflow">for</span> (size_t i = 0; i &lt; node-&gt;mNumChildren; ++i)</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        LoadNode(node-&gt;mChildren[i], scene);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="class_model.html#a7b938178828e48190157d0b1f486ccc8">   46</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_model.html">Model</a>::<a class="code" href="class_model.html#a7b938178828e48190157d0b1f486ccc8">LoadMesh</a>(aiMesh* mesh, <span class="keyword">const</span> aiScene* scene) {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    std::vector&lt;GLfloat&gt; vertices;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    std::vector&lt;GLuint&gt; indices;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">for</span> (size_t i = 0; i &lt; mesh-&gt;mNumVertices; ++i) {</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="comment">// Vertices</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        vertices.insert(</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            vertices.end(),</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            {mesh-&gt;mVertices[i].x, mesh-&gt;mVertices[i].y, mesh-&gt;mVertices[i].z});</div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="class_model.html#a6906216d84bd7a8c0c686fb3b860208a">   38</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_model.html">Model</a>::<a class="code" href="class_model.html#a6906216d84bd7a8c0c686fb3b860208a">RenderModelTwo</a>() <span class="keyword">const</span> {</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordflow">for</span> (size_t i = 0; i &lt; m_meshVec.size(); ++i) {</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        m_meshVec[i]-&gt;RenderMesh();</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    }</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="class_model.html#a3af639f039b6437980bb913dbbc75fd4">   44</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_model.html">Model</a>::<a class="code" href="class_model.html#a3af639f039b6437980bb913dbbc75fd4">LoadNode</a>(aiNode* node, <span class="keyword">const</span> aiScene* scene) {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordflow">for</span> (size_t i = 0; i &lt; node-&gt;mNumMeshes; ++i)</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        LoadMesh(scene-&gt;mMeshes[node-&gt;mMeshes[i]], scene);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordflow">for</span> (size_t i = 0; i &lt; node-&gt;mNumChildren; ++i)</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        LoadNode(node-&gt;mChildren[i], scene);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="class_model.html#a7b938178828e48190157d0b1f486ccc8">   52</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_model.html">Model</a>::<a class="code" href="class_model.html#a7b938178828e48190157d0b1f486ccc8">LoadMesh</a>(aiMesh* mesh, <span class="keyword">const</span> aiScene* scene) {</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    std::vector&lt;GLfloat&gt; vertices;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    std::vector&lt;GLuint&gt; indices;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="comment">// Texture coordinates</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keywordflow">if</span> (mesh-&gt;mTextureCoords[0]) {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            vertices.insert(vertices.end(), {mesh-&gt;mTextureCoords[0][i].x,</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                                             mesh-&gt;mTextureCoords[0][i].y});</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            vertices.insert(vertices.end(), {0.0f, 0.0f});</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        }</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="comment">// Normals</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        vertices.insert(</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            vertices.end(),</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            {-mesh-&gt;mNormals[i].x, -mesh-&gt;mNormals[i].y, -mesh-&gt;mNormals[i].z});</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    }</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">for</span> (size_t i = 0; i &lt; mesh-&gt;mNumVertices; ++i) {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="comment">// Vertices</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        vertices.insert(</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            vertices.end(),</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            {mesh-&gt;mVertices[i].x, mesh-&gt;mVertices[i].y, mesh-&gt;mVertices[i].z});</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="comment">// Texture coordinates</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordflow">if</span> (mesh-&gt;mTextureCoords[0]) {</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            vertices.insert(vertices.end(), {mesh-&gt;mTextureCoords[0][i].x,</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                                             mesh-&gt;mTextureCoords[0][i].y});</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            vertices.insert(vertices.end(), {0.0f, 0.0f});</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        }</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">for</span> (size_t i = 0; i &lt; mesh-&gt;mNumFaces; ++i) {</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        aiFace face = mesh-&gt;mFaces[i];</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keywordflow">for</span> (size_t j = 0; j &lt; face.mNumIndices; ++j) {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            indices.push_back(face.mIndices[j]);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        }</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    }</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <a class="code" href="class_mesh.html">Mesh</a>* newMesh = <span class="keyword">new</span> <a class="code" href="class_mesh.html">Mesh</a><a class="code" href="class_mesh.html#a2af137f1571af89172b9c102302c416b">(</a><a class="code" href="class_mesh.html#a2af137f1571af89172b9c102302c416b">)</a>;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    newMesh-&gt;CreateMesh(&amp;vertices[0], &amp;indices[0], vertices.size(),</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                        indices.size());</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    m_meshVec.push_back(newMesh);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    m_meshToTex.push_back(mesh-&gt;mMaterialIndex);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;}</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="class_model.html#a207d511e9cf1f061b414b8233cd17629">   86</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_model.html">Model</a>::<a class="code" href="class_model.html#a207d511e9cf1f061b414b8233cd17629">LoadMaterials</a>(<span class="keyword">const</span> aiScene* scene) {</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    m_textureVec.resize(scene-&gt;mNumMaterials);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordflow">for</span> (size_t i = 0; i &lt; scene-&gt;mNumMaterials; ++i) {</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        aiMaterial* material = scene-&gt;mMaterials[i];</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="comment">// Normals</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        vertices.insert(</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            vertices.end(),</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            {-mesh-&gt;mNormals[i].x, -mesh-&gt;mNormals[i].y, -mesh-&gt;mNormals[i].z});</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    }</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordflow">for</span> (size_t i = 0; i &lt; mesh-&gt;mNumFaces; ++i) {</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        aiFace face = mesh-&gt;mFaces[i];</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">for</span> (size_t j = 0; j &lt; face.mNumIndices; ++j) {</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            indices.push_back(face.mIndices[j]);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    }</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <a class="code" href="class_mesh.html">Mesh</a>* newMesh = <span class="keyword">new</span> <a class="code" href="class_mesh.html">Mesh</a><a class="code" href="class_mesh.html#a2af137f1571af89172b9c102302c416b">(</a><a class="code" href="class_mesh.html#a2af137f1571af89172b9c102302c416b">)</a>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    newMesh-&gt;CreateMesh(&amp;vertices[0], &amp;indices[0], vertices.size(),</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                        indices.size());</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    m_meshVec.push_back(newMesh);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    m_meshToTex.push_back(mesh-&gt;mMaterialIndex);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;}</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        m_textureVec[i] = <span class="keywordtype">nullptr</span>;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keywordflow">if</span> (material-&gt;GetTextureCount(aiTextureType_DIFFUSE)) {</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            aiString path;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            <span class="keywordflow">if</span> (material-&gt;GetTexture(aiTextureType_DIFFUSE, 0, &amp;path) ==</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                AI_SUCCESS) {</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                <span class="keywordtype">int</span> idx = std::string(path.data).rfind(<span class="stringliteral">&quot;\\&quot;</span>);</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                std::string fileName = std::string(path.data).substr(idx + 1);</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                std::string texPath = std::string(<span class="stringliteral">&quot;Textures/&quot;</span>) + fileName;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                m_textureVec[i] = <span class="keyword">new</span> Texture(texPath.c_str());</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                <span class="keywordflow">if</span> (!m_textureVec[i]-&gt;LoadTexture()) {</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                    std::cout &lt;&lt; <span class="stringliteral">&quot;Failed to load texture at &quot;</span> &lt;&lt; texPath;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                    <span class="keyword">delete</span> m_textureVec[i];</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                    m_textureVec[i] = <span class="keywordtype">nullptr</span>;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                }</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            }</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        }</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        <span class="keywordflow">if</span> (!m_textureVec[i]) {</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            m_textureVec[i] = <span class="keyword">new</span> Texture(<span class="stringliteral">&quot;Textures/plain.png&quot;</span>);</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            m_textureVec[i]-&gt;LoadTextureA();</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        }</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    }</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;}</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno"><a class="line" href="class_model.html#a202ef25daef2ee9825e91406fa597b0b">  120</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_model.html">Model</a>::<a class="code" href="class_model.html#a202ef25daef2ee9825e91406fa597b0b">ClearModel</a>() {</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; mesh : m_meshVec) {</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <span class="keywordflow">if</span> (mesh) {</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            <span class="keyword">delete</span> mesh;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;            mesh = <span class="keywordtype">nullptr</span>;</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        }</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    }</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; texture : m_textureVec) {</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <span class="keywordflow">if</span> (texture) {</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            <span class="keyword">delete</span> texture;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;            texture = <span class="keywordtype">nullptr</span>;</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        }</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    }</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;}</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
-<div class="line"><a name="l00136"></a><span class="lineno"><a class="line" href="class_model.html#ad6ebd2062a0b823db841a0b88baac4c0">  136</a></span>&#160;<a class="code" href="class_model.html">Model</a>::~<a class="code" href="class_model.html#ad6ebd2062a0b823db841a0b88baac4c0">Model</a>() { <a class="code" href="class_model.html#a202ef25daef2ee9825e91406fa597b0b">ClearModel</a><a class="code" href="class_model.html#a202ef25daef2ee9825e91406fa597b0b">(</a><a class="code" href="class_model.html#a202ef25daef2ee9825e91406fa597b0b">)</a>; }</div>
+<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="class_model.html#a207d511e9cf1f061b414b8233cd17629">   92</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_model.html">Model</a>::<a class="code" href="class_model.html#a207d511e9cf1f061b414b8233cd17629">LoadMaterials</a>(<span class="keyword">const</span> aiScene* scene) {</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    m_textureVec.resize(scene-&gt;mNumMaterials);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordflow">for</span> (size_t i = 0; i &lt; scene-&gt;mNumMaterials; ++i) {</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        aiMaterial* material = scene-&gt;mMaterials[i];</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        m_textureVec[i] = <span class="keywordtype">nullptr</span>;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="keywordflow">if</span> (material-&gt;GetTextureCount(aiTextureType_DIFFUSE)) {</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            aiString path;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            <span class="keywordflow">if</span> (material-&gt;GetTexture(aiTextureType_DIFFUSE, 0, &amp;path) ==</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                AI_SUCCESS) {</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                <span class="keywordtype">int</span> idx = std::string(path.data).rfind(<span class="stringliteral">&quot;\\&quot;</span>);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                std::string fileName = std::string(path.data).substr(idx + 1);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                std::string texPath = std::string(<span class="stringliteral">&quot;Textures/&quot;</span>) + fileName;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                m_textureVec[i] = <span class="keyword">new</span> Texture(texPath.c_str());</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                <span class="keywordflow">if</span> (!m_textureVec[i]-&gt;LoadTexture()) {</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                    std::cout &lt;&lt; <span class="stringliteral">&quot;Failed to load texture at &quot;</span> &lt;&lt; texPath;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                    <span class="keyword">delete</span> m_textureVec[i];</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                    m_textureVec[i] = <span class="keywordtype">nullptr</span>;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                }</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            }</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        }</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        <span class="keywordflow">if</span> (!m_textureVec[i]) {</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            m_textureVec[i] = <span class="keyword">new</span> Texture(<span class="stringliteral">&quot;Textures/plain.png&quot;</span>);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            m_textureVec[i]-&gt;LoadTextureA();</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        }</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    }</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;}</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
+<div class="line"><a name="l00126"></a><span class="lineno"><a class="line" href="class_model.html#a202ef25daef2ee9825e91406fa597b0b">  126</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_model.html">Model</a>::<a class="code" href="class_model.html#a202ef25daef2ee9825e91406fa597b0b">ClearModel</a>() {</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; mesh : m_meshVec) {</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        <span class="keywordflow">if</span> (mesh) {</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;            <span class="keyword">delete</span> mesh;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            mesh = <span class="keywordtype">nullptr</span>;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        }</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    }</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; texture : m_textureVec) {</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        <span class="keywordflow">if</span> (texture) {</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            <span class="keyword">delete</span> texture;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;            texture = <span class="keywordtype">nullptr</span>;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        }</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    }</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;}</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160; </div>
+<div class="line"><a name="l00142"></a><span class="lineno"><a class="line" href="class_model.html#ad6ebd2062a0b823db841a0b88baac4c0">  142</a></span>&#160;<a class="code" href="class_model.html">Model</a>::~<a class="code" href="class_model.html#ad6ebd2062a0b823db841a0b88baac4c0">Model</a>() { <a class="code" href="class_model.html#a202ef25daef2ee9825e91406fa597b0b">ClearModel</a><a class="code" href="class_model.html#a202ef25daef2ee9825e91406fa597b0b">(</a><a class="code" href="class_model.html#a202ef25daef2ee9825e91406fa597b0b">)</a>; }</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclass_model_html_aa6ec4ea18eabbb737268157253425719"><div class="ttname"><a href="class_model.html#aa6ec4ea18eabbb737268157253425719">Model::LoadModel</a></div><div class="ttdeci">bool LoadModel(const std::string &amp;fileName)</div><div class="ttdoc">Loads a new model from a 3D object file format.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8cpp_source.html#l00005">Model.cpp:5</a></div></div>
-<div class="ttc" id="aclass_model_html_a207d511e9cf1f061b414b8233cd17629"><div class="ttname"><a href="class_model.html#a207d511e9cf1f061b414b8233cd17629">Model::LoadMaterials</a></div><div class="ttdeci">void LoadMaterials(const aiScene *scene)</div><div class="ttdoc">Loads in the material/texture.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8cpp_source.html#l00086">Model.cpp:86</a></div></div>
-<div class="ttc" id="aclass_mesh_html_a2af137f1571af89172b9c102302c416b"><div class="ttname"><a href="class_mesh.html#a2af137f1571af89172b9c102302c416b">Mesh::Mesh</a></div><div class="ttdeci">Mesh()</div><div class="ttdoc">Construct a new Mesh object.</div><div class="ttdef"><b>Definition:</b> <a href="_mesh_8cpp_source.html#l00004">Mesh.cpp:4</a></div></div>
+<div class="ttc" id="aclass_model_html_a207d511e9cf1f061b414b8233cd17629"><div class="ttname"><a href="class_model.html#a207d511e9cf1f061b414b8233cd17629">Model::LoadMaterials</a></div><div class="ttdeci">void LoadMaterials(const aiScene *scene)</div><div class="ttdoc">Loads in the material/texture.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8cpp_source.html#l00092">Model.cpp:92</a></div></div>
+<div class="ttc" id="aclass_mesh_html_a2af137f1571af89172b9c102302c416b"><div class="ttname"><a href="class_mesh.html#a2af137f1571af89172b9c102302c416b">Mesh::Mesh</a></div><div class="ttdeci">Mesh()</div><div class="ttdoc">Construct a new Mesh object.</div><div class="ttdef"><b>Definition:</b> <a href="_mesh_8cpp_source.html#l00005">Mesh.cpp:5</a></div></div>
 <div class="ttc" id="aclass_mesh_html"><div class="ttname"><a href="class_mesh.html">Mesh</a></div><div class="ttdoc">A mesh class representing vertices, texture coordinates, normals, and its indices.</div><div class="ttdef"><b>Definition:</b> <a href="_mesh_8hpp_source.html#l00011">Mesh.hpp:11</a></div></div>
-<div class="ttc" id="aclass_model_html_a7b938178828e48190157d0b1f486ccc8"><div class="ttname"><a href="class_model.html#a7b938178828e48190157d0b1f486ccc8">Model::LoadMesh</a></div><div class="ttdeci">void LoadMesh(aiMesh *mesh, const aiScene *scene)</div><div class="ttdoc">Loads in a mesh.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8cpp_source.html#l00046">Model.cpp:46</a></div></div>
-<div class="ttc" id="aclass_model_html_ad6ebd2062a0b823db841a0b88baac4c0"><div class="ttname"><a href="class_model.html#ad6ebd2062a0b823db841a0b88baac4c0">Model::~Model</a></div><div class="ttdeci">~Model()</div><div class="ttdoc">Destroy the Model object.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8cpp_source.html#l00136">Model.cpp:136</a></div></div>
+<div class="ttc" id="aclass_model_html_a7b938178828e48190157d0b1f486ccc8"><div class="ttname"><a href="class_model.html#a7b938178828e48190157d0b1f486ccc8">Model::LoadMesh</a></div><div class="ttdeci">void LoadMesh(aiMesh *mesh, const aiScene *scene)</div><div class="ttdoc">Loads in a mesh.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8cpp_source.html#l00052">Model.cpp:52</a></div></div>
+<div class="ttc" id="aclass_model_html_ad6ebd2062a0b823db841a0b88baac4c0"><div class="ttname"><a href="class_model.html#ad6ebd2062a0b823db841a0b88baac4c0">Model::~Model</a></div><div class="ttdeci">~Model()</div><div class="ttdoc">Destroy the Model object.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8cpp_source.html#l00142">Model.cpp:142</a></div></div>
 <div class="ttc" id="aclass_model_html"><div class="ttname"><a href="class_model.html">Model</a></div><div class="ttdoc">A model class representing a Mesh with a texture. Models are loaded in using the 3D object library As...</div><div class="ttdef"><b>Definition:</b> <a href="_model_8hpp_source.html#l00018">Model.hpp:18</a></div></div>
 <div class="ttc" id="aclass_model_html_ae3b375de5f6df4faf74a95d64748e048"><div class="ttname"><a href="class_model.html#ae3b375de5f6df4faf74a95d64748e048">Model::Model</a></div><div class="ttdeci">Model()</div><div class="ttdoc">Construct a new Model object.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8cpp_source.html#l00003">Model.cpp:3</a></div></div>
-<div class="ttc" id="aclass_model_html_a3af639f039b6437980bb913dbbc75fd4"><div class="ttname"><a href="class_model.html#a3af639f039b6437980bb913dbbc75fd4">Model::LoadNode</a></div><div class="ttdeci">void LoadNode(aiNode *node, const aiScene *scene)</div><div class="ttdoc">Recursive function to traverse the node and load the meshes.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8cpp_source.html#l00038">Model.cpp:38</a></div></div>
+<div class="ttc" id="aclass_model_html_a6906216d84bd7a8c0c686fb3b860208a"><div class="ttname"><a href="class_model.html#a6906216d84bd7a8c0c686fb3b860208a">Model::RenderModelTwo</a></div><div class="ttdeci">void RenderModelTwo() const</div><div class="ttdoc">Renders the model.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8cpp_source.html#l00038">Model.cpp:38</a></div></div>
+<div class="ttc" id="aclass_model_html_a3af639f039b6437980bb913dbbc75fd4"><div class="ttname"><a href="class_model.html#a3af639f039b6437980bb913dbbc75fd4">Model::LoadNode</a></div><div class="ttdeci">void LoadNode(aiNode *node, const aiScene *scene)</div><div class="ttdoc">Recursive function to traverse the node and load the meshes.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8cpp_source.html#l00044">Model.cpp:44</a></div></div>
 <div class="ttc" id="aclass_model_html_ae42c614a1244170ee71e73027a8437e5"><div class="ttname"><a href="class_model.html#ae42c614a1244170ee71e73027a8437e5">Model::RenderModel</a></div><div class="ttdeci">void RenderModel() const</div><div class="ttdoc">Renders the model.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8cpp_source.html#l00025">Model.cpp:25</a></div></div>
-<div class="ttc" id="aclass_model_html_a202ef25daef2ee9825e91406fa597b0b"><div class="ttname"><a href="class_model.html#a202ef25daef2ee9825e91406fa597b0b">Model::ClearModel</a></div><div class="ttdeci">void ClearModel()</div><div class="ttdoc">Clears the model.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8cpp_source.html#l00120">Model.cpp:120</a></div></div>
+<div class="ttc" id="aclass_model_html_a202ef25daef2ee9825e91406fa597b0b"><div class="ttname"><a href="class_model.html#a202ef25daef2ee9825e91406fa597b0b">Model::ClearModel</a></div><div class="ttdeci">void ClearModel()</div><div class="ttdoc">Clears the model.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8cpp_source.html#l00126">Model.cpp:126</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

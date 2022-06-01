@@ -1,6 +1,12 @@
 <map id="TestScene::init" name="TestScene::init">
-<area shape="rect" id="node1" title="Initializes the scene." alt="" coords="5,64,115,91"/>
-<area shape="rect" id="node2" href="$class_input_manager.html#ad569ecdfed4bedd78d0c41667ecca2b4" title="Get the instance." alt="" coords="163,5,345,32"/>
-<area shape="rect" id="node3" href="$class_input_manager.html#a18c7c9fbdaa41b7face531a32ac20443" title="Load the bindings from a Lua file." alt="" coords="188,57,320,98"/>
-<area shape="rect" id="node4" href="$namespace_generic_functions.html#aedb1b2ce5d478ef7fedcda90a989e6b2" title="Exposes generic functions methods to lua." alt="" coords="179,122,329,163"/>
+<area shape="rect" id="node1" title="Initializes the scene." alt="" coords="5,242,115,269"/>
+<area shape="rect" id="node2" href="$namespacelua_access_scripted_f_s_m.html#a7b50292b22660b5206339a67a3364a11" title=" " alt="" coords="163,235,321,276"/>
+<area shape="rect" id="node3" href="$namespacelua_access_scripted_f_s_m.html#a32e62475bc82f3dde9730e73e1c1b6b3" title=" " alt="" coords="391,5,549,47"/>
+<area shape="rect" id="node4" href="$namespacelua_access_scripted_f_s_m.html#a5cca4b42fef6ad5b703a670a67f45a88" title=" " alt="" coords="391,71,549,112"/>
+<area shape="rect" id="node5" href="$namespaceregister_animation.html#afcbe5c787cd2bd792c5d59844eb50918" title=" " alt="" coords="405,136,535,177"/>
+<area shape="rect" id="node6" href="$namespacelua_access_scripted_f_s_m.html#a5e2a5e2fd09dba8fa48796d315a4906d" title=" " alt="" coords="391,201,549,243"/>
+<area shape="rect" id="node7" href="$namespacelua_access_scripted_f_s_m.html#af4616dc4d5a2adfe759c6355613b3962" title=" " alt="" coords="369,267,571,308"/>
+<area shape="rect" id="node8" href="$namespacelua_access_scripted_f_s_m.html#a7fcd9e7054747a87cd04cdf860def8db" title=" " alt="" coords="391,332,549,373"/>
+<area shape="rect" id="node9" href="$namespacelua_access_scripted_f_s_m.html#aae3ac47f96225e701b3b9cc4d6590ae5" title=" " alt="" coords="391,397,549,439"/>
+<area shape="rect" id="node10" href="$namespacelua_access_scripted_f_s_m.html#a39119c1d5dad58c3b347e7d02912fb85" title=" " alt="" coords="391,463,549,504"/>
 </map>

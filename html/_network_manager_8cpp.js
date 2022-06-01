@@ -4,6 +4,7 @@ var _network_manager_8cpp =
       [ "ID_GAME_MESSAGE_1", "_network_manager_8cpp.html#a0c9ea8eea151f139b4910b80a2805eb4a8c4ce6bdc2e96343915d9d2df5ce2045", null ]
     ] ],
     [ "connected", "_network_manager_8cpp.html#ab36823025f12a809217f7771125658c2", null ],
+    [ "connectedClients", "_network_manager_8cpp.html#a1c349edcda4107089f6ea55f0b14c576", null ],
     [ "init", "_network_manager_8cpp.html#a50300ba6e38ec30121edcc07ebac42c6", null ],
     [ "isServer", "_network_manager_8cpp.html#adffeed063b3a70c7aee40df5017a4cec", null ],
     [ "message", "_network_manager_8cpp.html#ad247301e4fcee2f3196116b47d536287", null ],

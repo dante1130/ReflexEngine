@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: src/Controller/ResourceManager/TextureManager.hpp Source File</title>
+<title>ICT397 Assignment 2: src/Controller/ResourceManager/TextureManager.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -90,63 +90,68 @@ $(document).ready(function(){initNavTree('_texture_manager_8hpp_source.html','')
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&lt;</span><span class="preprocessor">unordered_map</span><span class="preprocessor">&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&quot;View/Renderer/OpenGL/Objects/Texture.hpp&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&quot;Controller/LuaManager.hpp&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> * @class TextureManager</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> * @brief An encapsulated class for an unordered map of textures.</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> * @todo Maybe a singleton?</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="class_texture_manager.html">   13</a></span>&#160;<span class="keyword">class</span> TextureManager {</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">void</span> lua_access();</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">     * @brief Construct a new Texture Manager object</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    TextureManager() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">     * @brief Loads a texture without alpha to the texture manager.</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">     * @param texture_name</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">     * @param file_path</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">     * @return true</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">     * @return false</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">bool</span> load_texture_rgb(<span class="keyword">const</span> std::string&amp; texture_name,</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                          <span class="keyword">const</span> std::string&amp; file_path);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">     * @brief Loads a texture with alpha to the texture manager.</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">     * @param texture_name</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">     * @param file_path</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">     * @return true</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">     * @return false</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">bool</span> load_texture_rgba(<span class="keyword">const</span> std::string&amp; texture_name,</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                           <span class="keyword">const</span> std::string&amp; file_path);</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">     * @brief Get the texture given the texture name.</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">     * @param texture_name</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">     * @return const Texture&amp;</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">const</span> <a class="code" href="class_texture.html">Texture</a>&amp; get_texture(<span class="keyword">const</span> std::string&amp; texture_name) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">     * @brief Destroy the Texture Manager object</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    ~TextureManager();</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="class_texture_manager.html#a55be96e1f3d0ca70bab99a998f012a62">   58</a></span>&#160;    std::unordered_map&lt;std::string, Texture*&gt; texture_hashmap;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;};</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> * @class TextureManager</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> * @brief An encapsulated class for an unordered map of textures.</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="class_texture_manager.html">   11</a></span>&#160;<span class="keyword">class</span> <a class="code" href="class_texture_manager.html">TextureManager</a> {</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_texture_manager.html#afbba5e042a9bbb4ff156daa464733f03">lua_access</a>();</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">     * @brief Construct a new Texture Manager object</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="class_texture_manager.html#aca4613cdc54d8c39aa1de41dc26c7fec">TextureManager</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">     * @brief Loads a texture without alpha to the texture manager.</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">     *</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">     * @param texture_name The name of the texture.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">     * @param file_path The path to the texture file.</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">     * @return bool</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_texture_manager.html#a471160ce4f8272c1a9eeb9e78d20e862">load_texture_rgb</a>(<span class="keyword">const</span> std::string&amp; texture_name,</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                          <span class="keyword">const</span> std::string&amp; file_path);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">     * @brief Loads a texture with alpha to the texture manager.</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">     *</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">     * @param texture_name The name of the texture.</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">     * @param file_path The path to the texture file.</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">     * @return bool</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_texture_manager.html#a2ea826765f678cbc0643327c69a3e5e6">load_texture_rgba</a>(<span class="keyword">const</span> std::string&amp; texture_name,</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                           <span class="keyword">const</span> std::string&amp; file_path);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">     * @brief Get the texture given the texture name.</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">     *</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">     * @param texture_name The name of the texture.</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">     * @return const Texture&amp;</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">const</span> <a class="code" href="class_texture.html">Texture</a>&amp; <a class="code" href="class_texture_manager.html#a585e8d4ef910075abbb7769db117beda">get_texture</a>(<span class="keyword">const</span> std::string&amp; texture_name) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">     * @brief Destroy the Texture Manager object</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    ~<a class="code" href="class_texture_manager.html#a001d6d74674961db79987e3222682576">TextureManager</a>();</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="comment">/// The unordered map of string as key to value of textures.</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="class_texture_manager.html#a55be96e1f3d0ca70bab99a998f012a62">   55</a></span>&#160;    <a class="code" href="class_texture_manager.html#a55be96e1f3d0ca70bab99a998f012a62">std</a>::<a class="code" href="class_texture_manager.html#a55be96e1f3d0ca70bab99a998f012a62">unordered_map</a>&lt;<a class="code" href="class_texture_manager.html#a55be96e1f3d0ca70bab99a998f012a62">std</a>::<a class="code" href="class_texture_manager.html#a55be96e1f3d0ca70bab99a998f012a62">string</a>, <a class="code" href="class_texture_manager.html#a55be96e1f3d0ca70bab99a998f012a62">Texture</a>*&gt; <a class="code" href="class_texture_manager.html#a55be96e1f3d0ca70bab99a998f012a62">texture_hashmap</a>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="aclass_texture_manager_html_a585e8d4ef910075abbb7769db117beda"><div class="ttname"><a href="class_texture_manager.html#a585e8d4ef910075abbb7769db117beda">TextureManager::get_texture</a></div><div class="ttdeci">const Texture &amp; get_texture(const std::string &amp;texture_name) const</div><div class="ttdoc">Get the texture given the texture name.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_manager_8cpp_source.html#l00039">TextureManager.cpp:39</a></div></div>
 <div class="ttc" id="aclass_texture_html"><div class="ttname"><a href="class_texture.html">Texture</a></div><div class="ttdoc">A texture class.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_8hpp_source.html#l00013">Texture.hpp:13</a></div></div>
+<div class="ttc" id="aclass_texture_manager_html_a2ea826765f678cbc0643327c69a3e5e6"><div class="ttname"><a href="class_texture_manager.html#a2ea826765f678cbc0643327c69a3e5e6">TextureManager::load_texture_rgba</a></div><div class="ttdeci">bool load_texture_rgba(const std::string &amp;texture_name, const std::string &amp;file_path)</div><div class="ttdoc">Loads a texture with alpha to the texture manager.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_manager_8cpp_source.html#l00027">TextureManager.cpp:27</a></div></div>
+<div class="ttc" id="aclass_texture_manager_html_aca4613cdc54d8c39aa1de41dc26c7fec"><div class="ttname"><a href="class_texture_manager.html#aca4613cdc54d8c39aa1de41dc26c7fec">TextureManager::TextureManager</a></div><div class="ttdeci">TextureManager()=default</div><div class="ttdoc">Construct a new Texture Manager object.</div></div>
+<div class="ttc" id="aclass_texture_manager_html_a471160ce4f8272c1a9eeb9e78d20e862"><div class="ttname"><a href="class_texture_manager.html#a471160ce4f8272c1a9eeb9e78d20e862">TextureManager::load_texture_rgb</a></div><div class="ttdeci">bool load_texture_rgb(const std::string &amp;texture_name, const std::string &amp;file_path)</div><div class="ttdoc">Loads a texture without alpha to the texture manager.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_manager_8cpp_source.html#l00013">TextureManager.cpp:13</a></div></div>
+<div class="ttc" id="aclass_texture_manager_html_a55be96e1f3d0ca70bab99a998f012a62"><div class="ttname"><a href="class_texture_manager.html#a55be96e1f3d0ca70bab99a998f012a62">TextureManager::texture_hashmap</a></div><div class="ttdeci">std::unordered_map&lt; std::string, Texture * &gt; texture_hashmap</div><div class="ttdoc">The unordered map of string as key to value of textures.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_manager_8hpp_source.html#l00055">TextureManager.hpp:55</a></div></div>
+<div class="ttc" id="aclass_texture_manager_html_a001d6d74674961db79987e3222682576"><div class="ttname"><a href="class_texture_manager.html#a001d6d74674961db79987e3222682576">TextureManager::~TextureManager</a></div><div class="ttdeci">~TextureManager()</div><div class="ttdoc">Destroy the Texture Manager object.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_manager_8cpp_source.html#l00045">TextureManager.cpp:45</a></div></div>
+<div class="ttc" id="aclass_texture_manager_html"><div class="ttname"><a href="class_texture_manager.html">TextureManager</a></div><div class="ttdoc">An encapsulated class for an unordered map of textures.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_manager_8hpp_source.html#l00011">TextureManager.hpp:11</a></div></div>
+<div class="ttc" id="aclass_texture_manager_html_afbba5e042a9bbb4ff156daa464733f03"><div class="ttname"><a href="class_texture_manager.html#afbba5e042a9bbb4ff156daa464733f03">TextureManager::lua_access</a></div><div class="ttdeci">void lua_access()</div><div class="ttdef"><b>Definition:</b> <a href="_texture_manager_8cpp_source.html#l00005">TextureManager.cpp:5</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

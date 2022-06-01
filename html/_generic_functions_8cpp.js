@@ -1,9 +1,11 @@
 var _generic_functions_8cpp =
 [
     [ "createNetwork", "_generic_functions_8cpp.html#a033e0c7b67f57387273072e5684d44dd", null ],
+    [ "createPvPNetwork", "_generic_functions_8cpp.html#a63115a01bde7b510a8fbb3b02ffe5a41", null ],
     [ "credits", "_generic_functions_8cpp.html#ab7553f552bf11a68d2961329e984f942", null ],
     [ "currentIPAddress", "_generic_functions_8cpp.html#ae00428d0ea7bb32188854076ecbadea6", null ],
     [ "helpMenu", "_generic_functions_8cpp.html#ac4b7a0c763c94e3141231e8f08c1d389", null ],
+    [ "incomingMessage", "_generic_functions_8cpp.html#ad9cf9cbffa6c1b0182289073e368ff9b", null ],
     [ "last_load_time_", "_generic_functions_8cpp.html#a0d6381774cc6c06a39675652a9004283", null ],
     [ "last_save_time_", "_generic_functions_8cpp.html#ab17d521ae1d1b860643a5b2f93911313", null ],
     [ "lastShot", "_generic_functions_8cpp.html#a80b4aeb864f5d032d3e6785230f1c3b1", null ],
@@ -18,9 +20,16 @@ var _generic_functions_8cpp =
     [ "network", "_generic_functions_8cpp.html#ad41cdbbf99165282efc101560f6e2292", null ],
     [ "networkConnected", "_generic_functions_8cpp.html#a684407bee2ea219a93406bbb89cd0855", null ],
     [ "networkMenu", "_generic_functions_8cpp.html#a18097d4bed65c8bf328d4524e012a2d9", null ],
-    [ "paused", "_generic_functions_8cpp.html#a1656129c4a4fd8809254194f08f0ac70", null ],
+    [ "networkMenuPvP", "_generic_functions_8cpp.html#a437ecaa13a550a176ec782cf64e5d025", null ],
+    [ "networkPvP", "_generic_functions_8cpp.html#aa3a8b5cda6d2eebcb62a6ef97be0871e", null ],
+    [ "opponentPos", "_generic_functions_8cpp.html#af51a4bdc92e75f105f96b425f1333e27", null ],
+    [ "previousPos", "_generic_functions_8cpp.html#a5ab3e595f66c2632b922237de7b44a34", null ],
+    [ "prevOpponentPos", "_generic_functions_8cpp.html#af28547d29bb7a0669c710fa32d4815b2", null ],
+    [ "pvpNetworkConnected", "_generic_functions_8cpp.html#a184744e66de497c6efaf63a525e726a7", null ],
     [ "shot_delay", "_generic_functions_8cpp.html#a07f349817ab12905037cacc7eccb2007", null ],
+    [ "shouldFullLoad", "_generic_functions_8cpp.html#aaa1a3efbe99090c08b0cf090ab16c225", null ],
     [ "shouldLoad", "_generic_functions_8cpp.html#a873bffcb29a71a456f1d52a89b10e7ee", null ],
     [ "shouldSave", "_generic_functions_8cpp.html#a5b2105a285d12dbe89e9384d2351e1a9", null ],
-    [ "shouldShoot", "_generic_functions_8cpp.html#a5447dd97ee67d317e4ab331fdeecd1b8", null ]
+    [ "shouldShoot", "_generic_functions_8cpp.html#a5447dd97ee67d317e4ab331fdeecd1b8", null ],
+    [ "username", "_generic_functions_8cpp.html#a7d7441eae4cf94f38c47a1598b8ca759", null ]
 ];

@@ -1,0 +1,5 @@
+<map id="Md2Model::render_animated_interpolated" name="Md2Model::render_animated_interpolated">
+<area shape="rect" id="node1" title="Render the md2 model with interpolated frames." alt="" coords="5,5,192,47"/>
+<area shape="rect" id="node2" href="$class_md2_model.html#a017b7c0b738ad6e2c0aa8513389a45b8" title="Render a interpolated frame between 2 frames." alt="" coords="240,5,440,47"/>
+<area shape="rect" id="node3" href="$class_md2_model.html#a1f4d4876e5d88f64298c66ff0ad39631" title="Loads an interpolated frame to a mesh given 2 frame numbers." alt="" coords="488,5,676,47"/>
+</map>

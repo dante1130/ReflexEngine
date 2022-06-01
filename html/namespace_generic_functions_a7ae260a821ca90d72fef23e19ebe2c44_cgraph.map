@@ -1,0 +1,4 @@
+<map id="GenericFunctions::networkValidChatMessage" name="GenericFunctions::networkValidChatMessage">
+<area shape="rect" id="node1" title="Checks if the chat message in networkGetMessage is valid or not." alt="" coords="5,5,183,47"/>
+<area shape="rect" id="node2" href="$classnetwork_manager.html#aa4146a5d58c69433028888fdda28e098" title="Gets if a chat message has been received." alt="" coords="231,5,431,47"/>
+</map>

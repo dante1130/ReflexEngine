@@ -1,6 +1,8 @@
 <map id="ResourceManager::get_model_manager" name="ResourceManager::get_model_manager">
-<area shape="rect" id="node1" title="Get the model manager." alt="" coords="197,64,351,105"/>
-<area shape="rect" id="node2" href="$namespace_material_lua_controller.html#a2bf77986afcc458d485046c156d5bedd" title="Gives lua access to material related functions (texture &amp; model managers)" alt="" coords="5,5,149,47"/>
-<area shape="rect" id="node3" href="$class_item.html#ae902d008e98a75d3cf0fef53d9177f9e" title="The draw call for the item." alt="" coords="36,71,119,98"/>
-<area shape="rect" id="node4" href="$class_physics_object.html#a72c03214889819e5bba9d321e69a848c" title="Draws the object." alt="" coords="6,122,149,149"/>
+<area shape="rect" id="node1" title="Get the model manager." alt="" coords="400,74,553,115"/>
+<area shape="rect" id="node2" href="$class_item.html#ae902d008e98a75d3cf0fef53d9177f9e" title="The draw call for the item." alt="" coords="225,5,308,32"/>
+<area shape="rect" id="node3" href="$class_networked_item.html#aee95fbab11712463ac2c7dd9ea472708" title="The draw call for the Networked Item." alt="" coords="195,56,338,83"/>
+<area shape="rect" id="node4" href="$class_physics_object.html#a72c03214889819e5bba9d321e69a848c" title="Draws the object." alt="" coords="195,107,338,133"/>
+<area shape="rect" id="node5" href="$class_model_data.html#ae4edf4b22d7cda2e7074d3fe9c130384" title="Render the model statically." alt="" coords="181,157,352,184"/>
+<area shape="rect" id="node6" href="$class_model_data.html#af93eb28b2566856b36b26d9554e1a584" title="Render the model." alt="" coords="5,157,133,184"/>
 </map>

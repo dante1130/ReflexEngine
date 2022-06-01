@@ -1,0 +1,6 @@
+<map id="LightData" name="LightData">
+<area shape="rect" id="node1" title="A struct containing the data for a light." alt="" coords="80,5,216,112"/>
+<area shape="rect" id="node2" href="$struct_directional_light_data.html" title="A struct containing the data for a directional light." alt="" coords="5,182,144,259"/>
+<area shape="rect" id="node3" href="$struct_point_light_data.html" title="A struct containing the data for a point light." alt="" coords="168,160,275,281"/>
+<area shape="rect" id="node4" href="$struct_spot_light_data.html" title="A struct containing the data for a spot light." alt="" coords="169,329,273,421"/>
+</map>

@@ -1,4 +1,4 @@
 <map id="GenericFunctions::networkUpdate" name="GenericFunctions::networkUpdate">
 <area shape="rect" id="node1" title="Updates the networkManager (primary used for sending/receiving data). Current use is for connected cl..." alt="" coords="5,5,183,47"/>
-<area shape="rect" id="node2" href="$classnetwork_manager.html#ad22f91fbb417dcd411879a6875016cea" title="Receives a message from the network. It also handles the contents of the message." alt="" coords="231,13,453,39"/>
+<area shape="rect" id="node2" href="$classnetwork_manager.html#a52784d20ce9ffda395a16a8150a53aa1" title="Receives a message from the network. It also handles the contents of the message." alt="" coords="231,13,453,39"/>
 </map>

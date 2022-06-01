@@ -1,0 +1,4 @@
+<map id="Body::init" name="Body::init">
+<area shape="rect" id="node1" title="Initialises the body object." alt="" coords="251,5,328,32"/>
+<area shape="rect" id="node2" href="$class_game_asset_factory.html#aab2e3b633b9394d155e4d322f22ea858" title="Loads in a body object from a lua script." alt="" coords="5,5,203,32"/>
+</map>

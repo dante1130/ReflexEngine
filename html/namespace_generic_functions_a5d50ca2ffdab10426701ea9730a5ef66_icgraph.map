@@ -1,0 +1,4 @@
+<map id="GenericFunctions::setPvPNetworkMenuActive" name="GenericFunctions::setPvPNetworkMenuActive">
+<area shape="rect" id="node1" title="Sets the pvp network menu to be active or inactive." alt="" coords="220,5,440,47"/>
+<area shape="rect" id="node2" href="$class_test_scene.html#aadc1874364de154479e2469ea84d301f" title="The function to specify controls for the keyboard." alt="" coords="5,13,172,39"/>
+</map>

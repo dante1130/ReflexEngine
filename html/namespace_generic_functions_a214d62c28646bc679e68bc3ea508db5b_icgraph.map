@@ -1,0 +1,4 @@
+<map id="GenericFunctions::setIfFullLoad" name="GenericFunctions::setIfFullLoad">
+<area shape="rect" id="node1" title="Set if game should load objects from scratch." alt="" coords="240,13,445,39"/>
+<area shape="rect" id="node2" href="$class_test_scene.html#ad1b912d2c8ec32a9644048b22c8ec484" title="loads game objects" alt="" coords="5,5,192,47"/>
+</map>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: GameObject Class Reference</title>
+<title>ICT397 Assignment 2: GameObject Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -99,15 +99,22 @@ Inheritance diagram for GameObject:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_game_object__inherit__graph.png" border="0" usemap="#_game_object_inherit__map" alt="Inheritance graph"/></div>
 <map name="_game_object_inherit__map" id="_game_object_inherit__map">
-<area shape="rect" title="An abstract class to represent a game object." alt="" coords="443,5,567,229"/>
-<area shape="rect" href="class_body.html" title=" " alt="" coords="82,329,259,538"/>
-<area shape="rect" href="class_item.html" title="An item in the scene. (JUST FOR TESTING NOW)" alt="" coords="283,343,407,523"/>
-<area shape="rect" href="class_scriptable_object.html" title=" " alt="" coords="432,343,579,523"/>
-<area shape="rect" href="class_terrain_object.html" title=" " alt="" coords="603,285,746,582"/>
-<area shape="rect" href="class_water.html" title=" " alt="" coords="770,277,894,589"/>
-<area shape="rect" href="class_body_rigid.html" title=" " alt="" coords="69,637,272,920"/>
-<area shape="rect" href="class_physics_object.html" title=" " alt="" coords="5,975,160,1229"/>
-<area shape="rect" href="class_player.html" title="The player game object." alt="" coords="185,968,335,1236"/>
+<area shape="rect" title="An abstract class to represent a game object." alt="" coords="949,5,1073,229"/>
+<area shape="rect" href="class_body.html" title=" " alt="" coords="163,329,341,538"/>
+<area shape="rect" href="class_directional_light_object.html" title="A directional light game object." alt="" coords="365,351,534,516"/>
+<area shape="rect" href="class_item.html" title="An item in the scene." alt="" coords="558,343,682,523"/>
+<area shape="rect" href="class_networked_item.html" title=" " alt="" coords="707,343,835,523"/>
+<area shape="rect" href="class_point_light_object.html" title="A point light game object." alt="" coords="859,351,997,516"/>
+<area shape="rect" href="class_scriptable_object.html" title=" " alt="" coords="1021,343,1168,523"/>
+<area shape="rect" href="class_skybox_object.html" title=" " alt="" coords="1193,343,1317,523"/>
+<area shape="rect" href="class_spot_light_object.html" title="A spot light game object." alt="" coords="1341,351,1475,516"/>
+<area shape="rect" href="class_terrain_object.html" title="A terrain game object." alt="" coords="1499,285,1642,582"/>
+<area shape="rect" href="class_water.html" title="A water game object." alt="" coords="1666,277,1790,589"/>
+<area shape="rect" href="class_body_rigid.html" title=" " alt="" coords="151,637,353,920"/>
+<area shape="rect" href="class_physics_object.html" title=" " alt="" coords="84,968,241,1236"/>
+<area shape="rect" href="class_player.html" title="The player game object." alt="" coords="266,975,417,1229"/>
+<area shape="rect" href="class_n_p_c.html" title=" " alt="" coords="5,1284,149,1713"/>
+<area shape="rect" href="class_projectile.html" title=" " alt="" coords="174,1328,322,1669"/>
 </map>
 </div>
 <div class="dynheader">
@@ -124,12 +131,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa5cde72ad5bf24a20bc12180d34ec815"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_object.html#aa5cde72ad5bf24a20bc12180d34ec815">init</a> ()=0</td></tr>
 <tr class="memdesc:aa5cde72ad5bf24a20bc12180d34ec815"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the game object.  <a href="class_game_object.html#aa5cde72ad5bf24a20bc12180d34ec815">More...</a><br /></td></tr>
 <tr class="separator:aa5cde72ad5bf24a20bc12180d34ec815"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14d8ce1f5ce6b76776da93debf97afd0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_object.html#a14d8ce1f5ce6b76776da93debf97afd0">update</a> (float delta_time)=0</td></tr>
-<tr class="memdesc:a14d8ce1f5ce6b76776da93debf97afd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the game object with delta time.  <a href="class_game_object.html#a14d8ce1f5ce6b76776da93debf97afd0">More...</a><br /></td></tr>
-<tr class="separator:a14d8ce1f5ce6b76776da93debf97afd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab76a39c1da52cdfbbfb1308f907e062b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_object.html#ab76a39c1da52cdfbbfb1308f907e062b">fixed_update</a> (float delta_time)=0</td></tr>
-<tr class="memdesc:ab76a39c1da52cdfbbfb1308f907e062b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the game object with fixed delta time.  <a href="class_game_object.html#ab76a39c1da52cdfbbfb1308f907e062b">More...</a><br /></td></tr>
-<tr class="separator:ab76a39c1da52cdfbbfb1308f907e062b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8439f5d62a3bdfba5013a97ba3eb4b8"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_object.html#ac8439f5d62a3bdfba5013a97ba3eb4b8">update</a> (double delta_time)=0</td></tr>
+<tr class="memdesc:ac8439f5d62a3bdfba5013a97ba3eb4b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the game object with delta time.  <a href="class_game_object.html#ac8439f5d62a3bdfba5013a97ba3eb4b8">More...</a><br /></td></tr>
+<tr class="separator:ac8439f5d62a3bdfba5013a97ba3eb4b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae46fdbd5de29a7efc871ab382d3d426b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_object.html#ae46fdbd5de29a7efc871ab382d3d426b">fixed_update</a> (double delta_time)=0</td></tr>
+<tr class="memdesc:ae46fdbd5de29a7efc871ab382d3d426b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the game object with fixed delta time.  <a href="class_game_object.html#ae46fdbd5de29a7efc871ab382d3d426b">More...</a><br /></td></tr>
+<tr class="separator:ae46fdbd5de29a7efc871ab382d3d426b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4526bfe4adf2c0cf3bbba6b87b52bcf"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_object.html#ac4526bfe4adf2c0cf3bbba6b87b52bcf">add_draw_call</a> ()=0</td></tr>
 <tr class="memdesc:ac4526bfe4adf2c0cf3bbba6b87b52bcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a draw call to the renderer.  <a href="class_game_object.html#ac4526bfe4adf2c0cf3bbba6b87b52bcf">More...</a><br /></td></tr>
 <tr class="separator:ac4526bfe4adf2c0cf3bbba6b87b52bcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -145,20 +152,21 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a14fb80b5c11845275806d529e605f3b9"><td class="memItemLeft" >struct {</td></tr>
-<tr class="memitem:ad7477e772a598659ef2d1b19c32a199c"><td class="memItemLeft" >&#160;&#160;&#160;glm::vec3&#160;&#160;&#160;<a class="el" href="class_game_object.html#a16e2e8c2546d7bf920bbe2e288acb278">position</a> = {0.0f, 0.0f, 0.0f}</td></tr>
-<tr class="memdesc:ad7477e772a598659ef2d1b19c32a199c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The position of the game object.  <a href="struct_game_object_1_1_0d5.html#ad7477e772a598659ef2d1b19c32a199c">More...</a><br /></td></tr>
-<tr class="separator:ad7477e772a598659ef2d1b19c32a199c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8b5d343cead539d29c5f8efe1c8499c"><td class="memItemLeft" >&#160;&#160;&#160;glm::vec3&#160;&#160;&#160;<a class="el" href="class_game_object.html#acaf894c39661e6d4c13ad39b60684a38">rotation</a> = {0.0f, 1.0f, 0.0f}</td></tr>
-<tr class="memdesc:ac8b5d343cead539d29c5f8efe1c8499c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The rotation of the game object.  <a href="struct_game_object_1_1_0d5.html#ac8b5d343cead539d29c5f8efe1c8499c">More...</a><br /></td></tr>
-<tr class="separator:ac8b5d343cead539d29c5f8efe1c8499c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63224ed5cca826d1f218d20aebe007ef"><td class="memItemLeft" >&#160;&#160;&#160;glm::vec3&#160;&#160;&#160;<a class="el" href="class_game_object.html#a5205edf429098d4b7bf0c442d72592d1">scale</a> = {1.0f, 1.0f, 1.0f}</td></tr>
-<tr class="memdesc:a63224ed5cca826d1f218d20aebe007ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">The scale of the game object.  <a href="struct_game_object_1_1_0d5.html#a63224ed5cca826d1f218d20aebe007ef">More...</a><br /></td></tr>
-<tr class="separator:a63224ed5cca826d1f218d20aebe007ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8981cfc2c367a634f5aa6143c1eff46"><td class="memItemLeft" >&#160;&#160;&#160;float&#160;&#160;&#160;<a class="el" href="class_game_object.html#aae6b1449006f9bbca7c6456676659828">angle</a> = 0.01</td></tr>
-<tr class="separator:af8981cfc2c367a634f5aa6143c1eff46"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14fb80b5c11845275806d529e605f3b9"><td class="memItemLeft" valign="top">};&#160;</td><td class="memItemRight" valign="bottom"></td></tr>
-<tr class="separator:a14fb80b5c11845275806d529e605f3b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16e2e8c2546d7bf920bbe2e288acb278"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_object.html#a16e2e8c2546d7bf920bbe2e288acb278">position</a> = {0.0f, 0.0f, 0.0f}</td></tr>
+<tr class="memdesc:a16e2e8c2546d7bf920bbe2e288acb278"><td class="mdescLeft">&#160;</td><td class="mdescRight">The position of the game object.  <a href="class_game_object.html#a16e2e8c2546d7bf920bbe2e288acb278">More...</a><br /></td></tr>
+<tr class="separator:a16e2e8c2546d7bf920bbe2e288acb278"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acaf894c39661e6d4c13ad39b60684a38"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_object.html#acaf894c39661e6d4c13ad39b60684a38">rotation</a> = {0.0f, 1.0f, 0.0f}</td></tr>
+<tr class="memdesc:acaf894c39661e6d4c13ad39b60684a38"><td class="mdescLeft">&#160;</td><td class="mdescRight">The rotation of the game object.  <a href="class_game_object.html#acaf894c39661e6d4c13ad39b60684a38">More...</a><br /></td></tr>
+<tr class="separator:acaf894c39661e6d4c13ad39b60684a38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5205edf429098d4b7bf0c442d72592d1"><td class="memItemLeft" align="right" valign="top">glm::vec3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_object.html#a5205edf429098d4b7bf0c442d72592d1">scale</a> = {1.0f, 1.0f, 1.0f}</td></tr>
+<tr class="memdesc:a5205edf429098d4b7bf0c442d72592d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">The scale of the game object.  <a href="class_game_object.html#a5205edf429098d4b7bf0c442d72592d1">More...</a><br /></td></tr>
+<tr class="separator:a5205edf429098d4b7bf0c442d72592d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae6b1449006f9bbca7c6456676659828"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_object.html#aae6b1449006f9bbca7c6456676659828">angle</a> = 0.01f</td></tr>
+<tr class="memdesc:aae6b1449006f9bbca7c6456676659828"><td class="mdescLeft">&#160;</td><td class="mdescRight">The angle of rotation.  <a href="class_game_object.html#aae6b1449006f9bbca7c6456676659828">More...</a><br /></td></tr>
+<tr class="separator:aae6b1449006f9bbca7c6456676659828"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae939c981c524a76645abf33cd48b4214"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_object.html#ae939c981c524a76645abf33cd48b4214">remove</a> = false</td></tr>
+<tr class="memdesc:ae939c981c524a76645abf33cd48b4214"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether the game object should be removed.  <a href="class_game_object.html#ae939c981c524a76645abf33cd48b4214">More...</a><br /></td></tr>
+<tr class="separator:ae939c981c524a76645abf33cd48b4214"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>An abstract class to represent a game object. </p>
@@ -218,7 +226,7 @@ Public Attributes</h2></td></tr>
 
 <p>Adds a draw call to the renderer. </p>
 
-<p>Implemented in <a class="el" href="class_water.html#a49f9183e1ddd60f8b9d83a27e8212bbf">Water</a>, <a class="el" href="class_physics_object.html#ab7771309d7be5a0707499339b9219492">PhysicsObject</a>, <a class="el" href="class_item.html#a160510955cd4b44c072e01587f18a3f2">Item</a>, <a class="el" href="class_player.html#a39db63b91d5e62039ddf9537343eb74a">Player</a>, <a class="el" href="class_body_rigid.html#a182b75ccb70fdf0fa4f7a340a465a7cb">BodyRigid</a>, <a class="el" href="class_terrain_object.html#a06b443dc1cbef773e1c257bf16b475f1">TerrainObject</a>, <a class="el" href="class_body.html#a7a808e9a7a9ff24f1ce7fac59367adae">Body</a>, and <a class="el" href="class_scriptable_object.html#ab0cf74434e2de504631843dcfa875e9f">ScriptableObject</a>.</p>
+<p>Implemented in <a class="el" href="class_water.html#a49f9183e1ddd60f8b9d83a27e8212bbf">Water</a>, <a class="el" href="class_physics_object.html#ab7771309d7be5a0707499339b9219492">PhysicsObject</a>, <a class="el" href="class_body.html#a079e468daf6b9ddca665c95641547697">Body</a>, <a class="el" href="class_n_p_c.html#a94b89b04077325d4a79008305f34d39d">NPC</a>, <a class="el" href="class_networked_item.html#ab6350b76d97239ebf5a595b55a592456">NetworkedItem</a>, <a class="el" href="class_item.html#a160510955cd4b44c072e01587f18a3f2">Item</a>, <a class="el" href="class_scriptable_object.html#ab2e43512fcbe9a3df2f1786aec1d5ba2">ScriptableObject</a>, <a class="el" href="class_directional_light_object.html#a197a1f53c22c57f7dc26de64d420d740">DirectionalLightObject</a>, <a class="el" href="class_point_light_object.html#ac030780b2ceea476069522e99a612331">PointLightObject</a>, <a class="el" href="class_spot_light_object.html#a8f336b81d8dd942297fa843c2c8c8910">SpotLightObject</a>, <a class="el" href="class_terrain_object.html#a06b443dc1cbef773e1c257bf16b475f1">TerrainObject</a>, <a class="el" href="class_skybox_object.html#ab6bed9b848c2112a12bd14677e8c2cd7">SkyboxObject</a>, <a class="el" href="class_player.html#a39db63b91d5e62039ddf9537343eb74a">Player</a>, <a class="el" href="class_body_rigid.html#a182b75ccb70fdf0fa4f7a340a465a7cb">BodyRigid</a>, and <a class="el" href="class_projectile.html#a94c51d6f81b2a4986daf7a51e57fae12">Projectile</a>.</p>
 
 </div>
 </div>
@@ -249,17 +257,17 @@ Public Attributes</h2></td></tr>
 <p>The draw call. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">shader</td><td></td></tr>
+    <tr><td class="paramname">shader</td><td>The shader to use. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="class_water.html#aca2414328c1d530cebff6ba347225ff9">Water</a>, <a class="el" href="class_physics_object.html#a72c03214889819e5bba9d321e69a848c">PhysicsObject</a>, <a class="el" href="class_item.html#ae902d008e98a75d3cf0fef53d9177f9e">Item</a>, <a class="el" href="class_player.html#ae3f0114d65a6f38c2666f15aa02c172e">Player</a>, <a class="el" href="class_body_rigid.html#a289f3928ed96417079e9a9219681c1ea">BodyRigid</a>, <a class="el" href="class_terrain_object.html#a151d365496c4557a4f08c7816904e49a">TerrainObject</a>, <a class="el" href="class_body.html#a2f09ad0a99d6dcb392fb05ea2e2d3c09">Body</a>, and <a class="el" href="class_scriptable_object.html#a7e70cc9145bbad84d86fb31e586fcaf0">ScriptableObject</a>.</p>
+<p>Implemented in <a class="el" href="class_water.html#aca2414328c1d530cebff6ba347225ff9">Water</a>, <a class="el" href="class_physics_object.html#a72c03214889819e5bba9d321e69a848c">PhysicsObject</a>, <a class="el" href="class_body.html#aa33b10c09cdee13f4dd556a0c0980c9a">Body</a>, <a class="el" href="class_scriptable_object.html#a161b43b09447633d4114367525647ca9">ScriptableObject</a>, <a class="el" href="class_networked_item.html#aee95fbab11712463ac2c7dd9ea472708">NetworkedItem</a>, <a class="el" href="class_n_p_c.html#a4e335de59c42c1888ed075fa2ee10e65">NPC</a>, <a class="el" href="class_item.html#ae902d008e98a75d3cf0fef53d9177f9e">Item</a>, <a class="el" href="class_directional_light_object.html#ad31668e55fe511494e0f769241b2eebf">DirectionalLightObject</a>, <a class="el" href="class_point_light_object.html#a74248808fc644040feb8ac90c604c5cf">PointLightObject</a>, <a class="el" href="class_spot_light_object.html#a088e1ca6ab34289c9815aed25123c6f1">SpotLightObject</a>, <a class="el" href="class_terrain_object.html#a151d365496c4557a4f08c7816904e49a">TerrainObject</a>, <a class="el" href="class_skybox_object.html#abf937324a5eaa12414e3d58435d602f7">SkyboxObject</a>, <a class="el" href="class_player.html#ae3f0114d65a6f38c2666f15aa02c172e">Player</a>, <a class="el" href="class_body_rigid.html#a289f3928ed96417079e9a9219681c1ea">BodyRigid</a>, and <a class="el" href="class_projectile.html#a6ed3c52762103564272d2284f347d3cc">Projectile</a>.</p>
 
 </div>
 </div>
-<a id="ab76a39c1da52cdfbbfb1308f907e062b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab76a39c1da52cdfbbfb1308f907e062b">&#9670;&nbsp;</a></span>fixed_update()</h2>
+<a id="ae46fdbd5de29a7efc871ab382d3d426b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae46fdbd5de29a7efc871ab382d3d426b">&#9670;&nbsp;</a></span>fixed_update()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -270,7 +278,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="memname">virtual void GameObject::fixed_update </td>
           <td>(</td>
-          <td class="paramtype">float&#160;</td>
+          <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>delta_time</em></td><td>)</td>
           <td></td>
         </tr>
@@ -285,12 +293,12 @@ Public Attributes</h2></td></tr>
 <p>Updates the game object with fixed delta time. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">delta_time</td><td></td></tr>
+    <tr><td class="paramname">delta_time</td><td>The time since the last fixed tick. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="class_water.html#ad85a62a35f1806f724a8426c2b6acb50">Water</a>, <a class="el" href="class_physics_object.html#a6755c9889950a56d765768f5c76cfef6">PhysicsObject</a>, <a class="el" href="class_item.html#ae7a20d33234cf6c90e98a5570406350b">Item</a>, <a class="el" href="class_player.html#af2021f751c5b2334e5eaa8723be1aab6">Player</a>, <a class="el" href="class_terrain_object.html#a1ada4b9033405d00ceff6fa386f3705d">TerrainObject</a>, <a class="el" href="class_body_rigid.html#a6fe481f170920812246233f183822024">BodyRigid</a>, <a class="el" href="class_body.html#aefcd8a345c89c88d75de1aa2a0b8674a">Body</a>, and <a class="el" href="class_scriptable_object.html#a70c89b81ff9fcb40f023f8a805a24005">ScriptableObject</a>.</p>
+<p>Implemented in <a class="el" href="class_body_rigid.html#a50bb7a8a3732003a827397d41df25877">BodyRigid</a>, <a class="el" href="class_water.html#a4edca88df30a2890fd0b737b50490ed2">Water</a>, <a class="el" href="class_physics_object.html#af18472f2a2fd0179b023a7a4ba51729c">PhysicsObject</a>, <a class="el" href="class_n_p_c.html#aeec369637010a2bc48c399d55984a5b0">NPC</a>, <a class="el" href="class_networked_item.html#ad8a149286a47d3ad8708bc9524a637b5">NetworkedItem</a>, <a class="el" href="class_body.html#a60f494708a7e6c894338323c0cfe54a8">Body</a>, <a class="el" href="class_item.html#ab08b2287c95b78eb6036e2060d33a754">Item</a>, <a class="el" href="class_scriptable_object.html#a59c467bfdf85a2b570a3f76c6c60082c">ScriptableObject</a>, <a class="el" href="class_directional_light_object.html#a6e637e68a8d43990df7e1a674cdbcc6e">DirectionalLightObject</a>, <a class="el" href="class_point_light_object.html#a07641d9de504e065b15307c359d9efa0">PointLightObject</a>, <a class="el" href="class_spot_light_object.html#a83790f04bdb47fed4f214964649ca23c">SpotLightObject</a>, <a class="el" href="class_skybox_object.html#ae3f1a487194ca8d504e576115dc97057">SkyboxObject</a>, <a class="el" href="class_player.html#a62f1c3f2f4c4ffc60a56060159b49ded">Player</a>, <a class="el" href="class_terrain_object.html#a42c127d434c007876422b25889c35412">TerrainObject</a>, and <a class="el" href="class_projectile.html#aaa797f4d3b1336de033ebe01957d9506">Projectile</a>.</p>
 
 </div>
 </div>
@@ -319,7 +327,7 @@ Public Attributes</h2></td></tr>
 
 <p>Initializes the game object. </p>
 
-<p>Implemented in <a class="el" href="class_water.html#a3c327b78306f8a970b818e5043ec6cdd">Water</a>, <a class="el" href="class_item.html#a7e6dfb5840cbdd41843707ce1865e2a9">Item</a>, <a class="el" href="class_body_rigid.html#af7a85eae9744608c42cf3cbb46dfdfa6">BodyRigid</a>, <a class="el" href="class_player.html#a350275a7155ddf4d962fa158622b6cb7">Player</a>, <a class="el" href="class_scriptable_object.html#a97f117d0681e7fd8cbda88e0ab90e98e">ScriptableObject</a>, <a class="el" href="class_body.html#a0e7b8962df553275d0493bb7e9bce430">Body</a>, and <a class="el" href="class_terrain_object.html#a61793d6ca14ffbcae8ce15af0040ceb1">TerrainObject</a>.</p>
+<p>Implemented in <a class="el" href="class_water.html#a3c327b78306f8a970b818e5043ec6cdd">Water</a>, <a class="el" href="class_n_p_c.html#ae343f1531c1247332b03d0ac7f154eeb">NPC</a>, <a class="el" href="class_networked_item.html#a7d541540eb0476fe818ef8719679e3db">NetworkedItem</a>, <a class="el" href="class_item.html#a7e6dfb5840cbdd41843707ce1865e2a9">Item</a>, <a class="el" href="class_scriptable_object.html#aecdb9e2ce4f1a427b7d42c579af32996">ScriptableObject</a>, <a class="el" href="class_directional_light_object.html#a4da8a46fb3e2fbf664707bdc2ee31f84">DirectionalLightObject</a>, <a class="el" href="class_point_light_object.html#a96d9e0a2d444c7ddfb749734c4840a2c">PointLightObject</a>, <a class="el" href="class_spot_light_object.html#a3c05a6092d9e91eabc30bac49ed1ea97">SpotLightObject</a>, <a class="el" href="class_terrain_object.html#ac810eac1970f2e0e23780319a28f0448">TerrainObject</a>, <a class="el" href="class_skybox_object.html#ac504e81c36d79be29770c11078570065">SkyboxObject</a>, <a class="el" href="class_body.html#aa815045b8dd6486ec9e88da0b6484ec4">Body</a>, <a class="el" href="class_body_rigid.html#af7a85eae9744608c42cf3cbb46dfdfa6">BodyRigid</a>, <a class="el" href="class_player.html#a350275a7155ddf4d962fa158622b6cb7">Player</a>, and <a class="el" href="class_projectile.html#ac0674cae7317cf2a92b94eb88798f46c">Projectile</a>.</p>
 
 </div>
 </div>
@@ -350,12 +358,12 @@ Public Attributes</h2></td></tr>
 <dl class="section pre"><dt>Precondition</dt><dd>Object exists </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>Object saved </dd></dl>
 
-<p>Implemented in <a class="el" href="class_body_rigid.html#a3cc5bcf86a97d6222867e16f3f10ade8">BodyRigid</a>, <a class="el" href="class_water.html#a0bf8985235f52d91ff0a82aeded0bfdb">Water</a>, <a class="el" href="class_body.html#a5cc24f642ba107110af39d156232be98">Body</a>, <a class="el" href="class_physics_object.html#a6103a75cd9288646117068f07b0d75ed">PhysicsObject</a>, <a class="el" href="class_item.html#a2fdc238e265165624bc8c355f853c66c">Item</a>, <a class="el" href="class_scriptable_object.html#a8ba1a27e44889133f1fc28f06d05236d">ScriptableObject</a>, <a class="el" href="class_player.html#a73cc9b57a85b674c4b46732f1e67293e">Player</a>, and <a class="el" href="class_terrain_object.html#a2604ade59191b836947b9d72e89012a2">TerrainObject</a>.</p>
+<p>Implemented in <a class="el" href="class_body_rigid.html#a3cc5bcf86a97d6222867e16f3f10ade8">BodyRigid</a>, <a class="el" href="class_water.html#a0bf8985235f52d91ff0a82aeded0bfdb">Water</a>, <a class="el" href="class_body.html#a5cc24f642ba107110af39d156232be98">Body</a>, <a class="el" href="class_physics_object.html#a6103a75cd9288646117068f07b0d75ed">PhysicsObject</a>, <a class="el" href="class_networked_item.html#afec6350ae3d916908b9d19647d7f7dac">NetworkedItem</a>, <a class="el" href="class_item.html#a2fdc238e265165624bc8c355f853c66c">Item</a>, <a class="el" href="class_scriptable_object.html#a8ba1a27e44889133f1fc28f06d05236d">ScriptableObject</a>, <a class="el" href="class_n_p_c.html#ab2ea5dd4ca74d5cb48f3ecca0d9cf71a">NPC</a>, <a class="el" href="class_directional_light_object.html#a8428eaaa0ced5f10c1324dd082b0a56e">DirectionalLightObject</a>, <a class="el" href="class_point_light_object.html#a759239db0a1af6fc387548dea1948392">PointLightObject</a>, <a class="el" href="class_spot_light_object.html#a242313468bdd7cf74c3f3464da0ad3b6">SpotLightObject</a>, <a class="el" href="class_skybox_object.html#a060a39027664444615adfe88f00e3f72">SkyboxObject</a>, <a class="el" href="class_terrain_object.html#a2604ade59191b836947b9d72e89012a2">TerrainObject</a>, <a class="el" href="class_player.html#a73cc9b57a85b674c4b46732f1e67293e">Player</a>, and <a class="el" href="class_projectile.html#a7974563f08a31be7fb9c81798817b58a">Projectile</a>.</p>
 
 </div>
 </div>
-<a id="a14d8ce1f5ce6b76776da93debf97afd0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a14d8ce1f5ce6b76776da93debf97afd0">&#9670;&nbsp;</a></span>update()</h2>
+<a id="ac8439f5d62a3bdfba5013a97ba3eb4b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8439f5d62a3bdfba5013a97ba3eb4b8">&#9670;&nbsp;</a></span>update()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -366,7 +374,7 @@ Public Attributes</h2></td></tr>
         <tr>
           <td class="memname">virtual void GameObject::update </td>
           <td>(</td>
-          <td class="paramtype">float&#160;</td>
+          <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>delta_time</em></td><td>)</td>
           <td></td>
         </tr>
@@ -381,30 +389,16 @@ Public Attributes</h2></td></tr>
 <p>Updates the game object with delta time. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">delta_time</td><td></td></tr>
+    <tr><td class="paramname">delta_time</td><td>The time since the last frame. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="class_body_rigid.html#a8130dffe3466cbf291d4ccad2c677e85">BodyRigid</a>, <a class="el" href="class_water.html#a22536db6b0bd4b49e660ecaccaf1eaa6">Water</a>, <a class="el" href="class_physics_object.html#a25cd2d4321593e1aac52c828817216d0">PhysicsObject</a>, <a class="el" href="class_item.html#a72eb8ba8e858953da725b4d9454d8da4">Item</a>, <a class="el" href="class_player.html#a4b125ac0ecb1f3df52b0da46e9ee73b5">Player</a>, <a class="el" href="class_terrain_object.html#a7f876c233302d5b6a79b827106e6f17a">TerrainObject</a>, <a class="el" href="class_body.html#acfac7f6b5ff887c89d828a23131f2d64">Body</a>, and <a class="el" href="class_scriptable_object.html#a52dd856905db83fc0dec2630d60da768">ScriptableObject</a>.</p>
+<p>Implemented in <a class="el" href="class_body_rigid.html#ab5687289a2f5ead76445e91506f6f6c7">BodyRigid</a>, <a class="el" href="class_water.html#a6693d8197223716310094a13d1d6ba82">Water</a>, <a class="el" href="class_physics_object.html#ac5914714154d43141d497976c5b342c6">PhysicsObject</a>, <a class="el" href="class_n_p_c.html#ad0581cc0077e6e882c59f2fac39a846e">NPC</a>, <a class="el" href="class_networked_item.html#a9d1e5239aaa079a12e6e87cc29f09182">NetworkedItem</a>, <a class="el" href="class_body.html#a63154d69d987a98155a3f1aeb1087496">Body</a>, <a class="el" href="class_item.html#a1e25d4d57a79e97d8a4d833c4ab3417e">Item</a>, <a class="el" href="class_terrain_object.html#aa34ae12f8d7fe923273e481a87b1e939">TerrainObject</a>, <a class="el" href="class_scriptable_object.html#a7383f3e5b47a83a80f4a58e018b2fd0e">ScriptableObject</a>, <a class="el" href="class_directional_light_object.html#a6d3567d10ce042466ce03ef78af7ad08">DirectionalLightObject</a>, <a class="el" href="class_point_light_object.html#ad9db4b756574694bd61aa7eee4f2f2c3">PointLightObject</a>, <a class="el" href="class_spot_light_object.html#ad08eb1f24aa8b9a4cf8ecbab5d3c5eaf">SpotLightObject</a>, <a class="el" href="class_skybox_object.html#a57754e30a09254f69f1c25a868a8cf05">SkyboxObject</a>, <a class="el" href="class_player.html#a9541ff91c3f6c96b38b300781d5a313b">Player</a>, and <a class="el" href="class_projectile.html#a8626450e5f4144d4e20d3dee3551feb2">Projectile</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a14fb80b5c11845275806d529e605f3b9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a14fb80b5c11845275806d529e605f3b9">&#9670;&nbsp;</a></span>@6</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">struct { ... } </td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="aae6b1449006f9bbca7c6456676659828"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aae6b1449006f9bbca7c6456676659828">&#9670;&nbsp;</a></span>angle</h2>
 
@@ -412,12 +406,16 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float GameObject::angle = 0.01</td>
+          <td class="memname">float GameObject::angle = 0.01f</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_game_object_8hpp_source.html#l00019">19</a> of file <a class="el" href="_game_object_8hpp_source.html">GameObject.hpp</a>.</p>
+<p>The angle of rotation. </p>
+
+<p class="definition">Definition at line <a class="el" href="_game_object_8hpp_source.html#l00020">20</a> of file <a class="el" href="_game_object_8hpp_source.html">GameObject.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="_game_asset_factory_8cpp_source.html#l00176">GameAssetFactory::load_player()</a>, <a class="el" href="_game_asset_factory_8cpp_source.html#l00099">GameAssetFactory::loadItem()</a>, <a class="el" href="_game_asset_factory_8cpp_source.html#l00590">GameAssetFactory::loadNetworkedItem()</a>, <a class="el" href="_game_asset_factory_8cpp_source.html#l00617">GameAssetFactory::loadNPCObject()</a>, <a class="el" href="_game_asset_factory_8cpp_source.html#l00363">GameAssetFactory::loadScriptableObject()</a>, <a class="el" href="_game_asset_factory_8cpp_source.html#l00124">GameAssetFactory::loadWater()</a>, <a class="el" href="_spot_light_object_8cpp_source.html#l00015">SpotLightObject::save_object()</a>, and <a class="el" href="_point_light_object_8cpp_source.html#l00015">PointLightObject::save_object()</a>.</p>
 
 </div>
 </div>
@@ -435,7 +433,27 @@ Public Attributes</h2></td></tr>
 
 <p>The position of the game object. </p>
 
-<p class="definition">Definition at line <a class="el" href="_game_object_8hpp_source.html#l00014">14</a> of file <a class="el" href="_game_object_8hpp_source.html">GameObject.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_game_object_8hpp_source.html#l00013">13</a> of file <a class="el" href="_game_object_8hpp_source.html">GameObject.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="_point_light_object_8cpp_source.html#l00015">PointLightObject::save_object()</a>, and <a class="el" href="_spot_light_object_8cpp_source.html#l00015">SpotLightObject::save_object()</a>.</p>
+
+</div>
+</div>
+<a id="ae939c981c524a76645abf33cd48b4214"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae939c981c524a76645abf33cd48b4214">&#9670;&nbsp;</a></span>remove</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GameObject::remove = false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Whether the game object should be removed. </p>
+
+<p class="definition">Definition at line <a class="el" href="_game_object_8hpp_source.html#l00023">23</a> of file <a class="el" href="_game_object_8hpp_source.html">GameObject.hpp</a>.</p>
 
 </div>
 </div>
@@ -453,7 +471,9 @@ Public Attributes</h2></td></tr>
 
 <p>The rotation of the game object. </p>
 
-<p class="definition">Definition at line <a class="el" href="_game_object_8hpp_source.html#l00016">16</a> of file <a class="el" href="_game_object_8hpp_source.html">GameObject.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_game_object_8hpp_source.html#l00015">15</a> of file <a class="el" href="_game_object_8hpp_source.html">GameObject.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="_point_light_object_8cpp_source.html#l00015">PointLightObject::save_object()</a>, and <a class="el" href="_spot_light_object_8cpp_source.html#l00015">SpotLightObject::save_object()</a>.</p>
 
 </div>
 </div>
@@ -471,7 +491,9 @@ Public Attributes</h2></td></tr>
 
 <p>The scale of the game object. </p>
 
-<p class="definition">Definition at line <a class="el" href="_game_object_8hpp_source.html#l00018">18</a> of file <a class="el" href="_game_object_8hpp_source.html">GameObject.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_game_object_8hpp_source.html#l00017">17</a> of file <a class="el" href="_game_object_8hpp_source.html">GameObject.hpp</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="_point_light_object_8cpp_source.html#l00015">PointLightObject::save_object()</a>, and <a class="el" href="_spot_light_object_8cpp_source.html#l00015">SpotLightObject::save_object()</a>.</p>
 
 </div>
 </div>

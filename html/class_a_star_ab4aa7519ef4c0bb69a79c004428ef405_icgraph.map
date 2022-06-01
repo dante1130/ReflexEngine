@@ -1,0 +1,4 @@
+<map id="AStar::setAllowDiagonalMovement" name="AStar::setAllowDiagonalMovement">
+<area shape="rect" id="node1" title="Sets if you allow diagoanl movement or not." alt="" coords="165,5,387,32"/>
+<area shape="rect" id="node2" href="$classworld.html#a3f0aaef2569dbb61b88ca6e4b7cb9475" title="Sets the world." alt="" coords="5,5,117,32"/>
+</map>

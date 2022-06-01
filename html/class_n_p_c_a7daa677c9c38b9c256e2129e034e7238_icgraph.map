@@ -1,0 +1,5 @@
+<map id="NPC::remove_waypoints" name="NPC::remove_waypoints">
+<area shape="rect" id="node1" title="Removes all the currently stored waypoints." alt="" coords="200,31,363,57"/>
+<area shape="rect" id="node2" href="$class_n_p_c.html#a8911e7904a303a572a2150a3e052bdff" title="Sets a queue of new waypoints and clears existing waypoints." alt="" coords="7,5,150,32"/>
+<area shape="rect" id="node3" href="$class_n_p_c.html#a570ea95eb621e73bc4c783e650655624" title="Uses pathfinding algorithm to create set of waypoints." alt="" coords="5,56,152,83"/>
+</map>
