@@ -32,6 +32,7 @@ private:
 	/// Have we initialsed the networkManager?
 	bool init;
 
+	/// Have we missed any data
 	bool dataMissed;
 
 	/// How many clients are we connected to? (should be 1 for clients, > 1 for servers when multiple clients)
@@ -158,16 +159,71 @@ public:
 	 */
 	bool ConnectionStatus();
 
+	/**
+	 * @brief	Gets if a chat message has been received
+	 * @param	void
+	 * @return	bool
+	 *
+	 * @pre		A session must be running (either ConnectClient or SetupServer
+	 * must have been run) and connected
+	 * @post	Returns the validity of a received chat message
+	 */
 	bool HasReceivedChatMessage();
 
+	/**
+	 * @brief	Gets the username
+	 * @param	void
+	 * @return	bool
+	 *
+	 * @pre		A session must be running (either ConnectClient or SetupServer
+	 * must have been run) and connected
+	 * @post	Returns a username
+	 */
 	char *GetName();
 
+	/**
+	 * @brief	Gets if the network manager is a server or client
+	 * @param	void
+	 * @return	bool
+	 *
+	 * @pre		A session must be running (either ConnectClient or SetupServer
+	 * must have been run) and connected
+	 * @post	Returns true if server, false if client
+	 */
 	bool GetServer();
 
+	/**
+	 * @brief	Sends the position of an object
+	 * @param	vec3 - position of a game object
+	 * @return	void
+	 *
+	 * @pre		A session must be running (either ConnectClient or SetupServer
+	 * must have been run) and connected
+	 * @post	Sends the position of an object across the network
+	 */
 	void ObjectPositionSend(glm::vec3 position);
 
+	/**
+	 * @brief	Receives the object position across the network
+	 * @param	void
+	 * @return	vec3- position of a game object
+	 *
+	 * @pre		A session must be running (either ConnectClient or SetupServer
+	 * must have been run) and connected. This must be run in an infinite loop (preferably the fixed update
+	 * for performance optimisation)
+	 * @post	Returns the position of the networked object
+	 */
 	glm::vec3 ObjectPositionReceive();
 
+	/**
+	 * @brief	Gets if the network manager missed getting valid data from ObjectPositionReceive
+	 * @param	void
+	 * @return	bool
+	 *
+	 * @pre		A session must be running (either ConnectClient or SetupServer
+	 * must have been run) and connected
+	 * @post	Returns true if the network manager missed data from ObjectPositionReceive
+	 */
 	bool ObjectMissedData() { return dataMissed; }
 
 private:
@@ -186,7 +242,9 @@ private:
 		/// User defined Enumeration for use in message sending
 		/// </summary>
 		ID_GAME_MESSAGE_1 = ID_USER_PACKET_ENUM + 1,
-		
+		/// <summary>
+		/// User defined Enumeration for use in object sending
+		/// </summary>
 		ID_GAME_MESSAGE_2 = ID_USER_PACKET_ENUM + 2
 	};
 };

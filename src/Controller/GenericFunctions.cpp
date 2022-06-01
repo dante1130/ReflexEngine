@@ -242,7 +242,7 @@ void GenericFunctions::createNetworkManager(bool create) {
 	if (createNetwork != true && !networkMenuPvP) {
 		createNetwork = true;
 		network.InitNetwork();
-	} else if (createNetwork != true) {
+	} else if (createPvPNetwork != true) {
 		createPvPNetwork = true;
 		networkPvP.InitNetwork();
 	}
@@ -430,7 +430,6 @@ float GenericFunctions::getNetworkPosY() { return opponentPos.y; }
 float GenericFunctions::getNetworkPosZ() { return opponentPos.z; }
 
 bool GenericFunctions::getReceivingData() {
-	// printf("doing get receiving data now\n");
 	return !networkPvP.ObjectMissedData();
 }
 float GenericFunctions::getLength(float x, float y) {
