@@ -43,6 +43,8 @@ void TerrainObject::save_object() {
 	ObjectSaving::addValue("chunkDetail", 9, false);
 	ObjectSaving::addValue("n", 3, false);
 	ObjectSaving::addValue("island", true, true);
+	stuff about min
+	stuff about max
 	ObjectSaving::closeStruct();
 	ObjectSaving::closeFile();
 	*/

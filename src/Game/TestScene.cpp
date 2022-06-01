@@ -4,7 +4,7 @@
 #include "Controller/Input/InputManager.hpp"
 #include "Controller/Audio/Audio.hpp"
 #include "TestScene.hpp"
-#include "AI/luaAccessScriptedFSM.hpp"
+#include "Controller/AI/luaAccessScriptedFSM.hpp"
 
 void TestScene::init() {
 	sol::state& lua = LuaManager::get_instance().get_state();
@@ -102,7 +102,6 @@ void TestScene::update(double delta_time) {
 	Audio::get_instance().update_listener();
 
 	GenericFunctions::networkUpdate();
-	messageMgr.dispatchDelayedMessages();
 }
 
 void TestScene::fixed_update(double delta_time) {
@@ -110,6 +109,7 @@ void TestScene::fixed_update(double delta_time) {
 		game_object->fixed_update(delta_time);
 	}
 	GenericFunctions::networkFixedUpdate();
+	messageMgr.dispatchDelayedMessages();
 }
 
 void TestScene::saveGameObjects() {

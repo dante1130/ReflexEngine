@@ -27,7 +27,7 @@ baseObject = {
 	linearDamping = 0,
 	angularDamping = 0,
 	sleep = 1,
-	numOfColliders = 1
+	numOfColliders = 2
 }
 
 collider1 = {
@@ -38,6 +38,17 @@ collider1 = {
 	xBox = 1,
 	yBox = 1,
 	zBox = 1,
+	bounciness = 0.5,
+	friction = 0.5
+}
+
+collider2 = {
+	colliderType = "Capsule",
+	xPos = 0,
+	yPos = 0,
+	zPos = 0,
+	height = 2,
+	radius = 1.5,
 	bounciness = 0.5,
 	friction = 0.5
 }

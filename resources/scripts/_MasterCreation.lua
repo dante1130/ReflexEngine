@@ -19,7 +19,7 @@ end
 addGameObject("scripts/CatPhysics.lua");
 addGameObject("scripts/CatPhysics2.lua");
 addGameObject("scripts/Water.lua")
-addGameObject("scripts/guiBasic.lua")
+--addGameObject("scripts/guiBasic.lua")
 addGameObject("scripts/pauseMenuSetup.lua")
 addGameObject("scripts/helpMenuSetup.lua")
 addGameObject("scripts/credits_setup.lua")
@@ -46,5 +46,6 @@ addGameObject("scripts/Lighthouse.lua")
 addGameObject("scripts/Opponent.lua")
 
 addGameObject("scripts/gui/EndGame.lua")
+addGameObject("scripts/gui/EndGameNetworkedPvP.lua")
 addGameObject("scripts/EscapeBoat.lua")
 addGameObject("scripts/bigArrow.lua")

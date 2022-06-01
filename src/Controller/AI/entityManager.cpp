@@ -1,5 +1,5 @@
 #include "entityManager.h"
-#include "AI/singletons.h"
+#include "Model/singletons.h"
 
 entityManager::~entityManager() {}
 

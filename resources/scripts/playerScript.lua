@@ -1,4 +1,4 @@
-if camera_pos_y() < 2 then
+if camera_pos_y() < 2.5 then
 	if get_pause_game() == false then
 		local check = current_time() - time_since_last_load()
 		if check > 5 then
@@ -7,15 +7,15 @@ if camera_pos_y() < 2 then
 	end
 else
 	local time = current_time() - time_since_last_save()
-	if time > 30 then
+	if time > 15 then
 		save_game(true)
-		print("Checkpoint - 30 seconds passed")
+		print("Checkpoint - 15 seconds passed since last encounter")
 	end
 
 	time = current_time() - time_since_last_load()
 	if time < 10 then
 		gui_setWindowSize(300, 100, 1)
-		gui_setWindowPos(550, 0, 1)
+		gui_setWindowPos(700, 0, 1)
 		gui_begin("SAVE LOADED ")
 		gui_text("Reloaded last checkpoint:")
 		gui_text(" - Please don't go below sea level")

@@ -437,7 +437,12 @@ TerrainObject* GameAssetFactory::loadTerrainObject(
 
 	GenericFunctions::setPlayableArea(to->get_height_map(), tt, scale.y,
 	                                  height_size);
+
+	float min = lua["terrain"]["min"];
+	float max = lua["terrain"]["max"];
+	gameWorld.setMinMaxHeight(min, max);
 	gameWorld.setWorld(tt);
+
 	return to;
 }
 
@@ -593,7 +598,7 @@ NetworkedItem* GameAssetFactory::loadNetworkedItem(
 	NetworkedItem* networkedItem = new NetworkedItem(model_name, material_name);
 
 	glm::vec3 pos, rotation, scale;
-	
+
 	float angle;
 
 	pos = loadBasePos(lua);
@@ -607,7 +612,6 @@ NetworkedItem* GameAssetFactory::loadNetworkedItem(
 	networkedItem->angle = angle;
 
 	return networkedItem;
-
 }
 
 NPC* GameAssetFactory::loadNPCObject(const std::string& luaScript) {

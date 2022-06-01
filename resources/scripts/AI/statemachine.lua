@@ -228,7 +228,7 @@ end
 
 
 state_chase["execute"] = function(player)
-  --print("In chase")
+  resetSaveTime()
 
   if(player:watchForEnemy(15) == false) then
     print("Entity: ", player.id, " | Faction: ", player.faction, " | Chase -> Patrol", " | Reason: Target lost")
@@ -275,6 +275,7 @@ end
 
 state_attack["execute"] = function(player)
   player:stopMovement();
+  resetSaveTime()
 
   local entityMgr = entityManager.new()
   local target = entityMgr.getEntity(player.target_id)
@@ -292,7 +293,7 @@ state_attack["execute"] = function(player)
 
   local animation = player:getAnimation();
 
-  if(dist > 3 and animation:isRunning() == false) then
+  if(dist > 2.5 and animation:isRunning() == false) then
     print("Entity: ", player.id, " | Faction: ", player.faction, " | Attack -> Chase", " | Reason: Out of attack range")
     player:getFSM():changeState("state_chase")
   else
@@ -372,7 +373,7 @@ end
 state_search["onMessage"] = function(player, msg)
   if (msg.msg == 1) then
     player.target_id = -1
-    player:set_target_position(msg.extraInfo:getX(), msg.extraInfo:getY())
+    player:set_target_position(msg.extraInfo.x, msg.extraInfo.y)
     local pos = Audio.vec3df.new(player:getX(), player:getY(), player:getZ())
     Audio.play_3d_sound("duck_alert", pos, false, 5.0)
 
@@ -391,24 +392,6 @@ state_search["onMessage"] = function(player, msg)
 
 
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -449,33 +432,6 @@ state_death["onMessage"] = function(player, msg)
 
 
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -541,6 +497,8 @@ end
 
 
 state_ghost_chase["execute"] = function(player)
+  resetSaveTime()
+
   if(player:watchForEnemy(12) == false) then
     print("Entity: ", player.id, " | Faction: ", player.faction, " | Ghsot Chase -> Ghost Idle", " | Reason: Target lost")
     player:getFSM():changeState("state_ghost_idle")
@@ -596,7 +554,7 @@ state_ghost_attack["execute"] = function(player)
 
   dist = vec:length()
 
-  if(dist > 3) then
+  if(dist > 2.5) then
     print("Entity: ", player.id, " | Faction: ", player.faction, " | Ghost Attack -> Ghost Chase", " | Reason: Out of attack range")
     player:getFSM():changeState("state_ghost_chase")
   else

@@ -1,14 +1,14 @@
 #pragma once
 
 #include "Model/GameObject/PhysicsObject.hpp"
-#include "stateMachine.h"
-#include "telegram.h"
+#include "Controller/AI/stateMachine.h"
+#include "Controller/AI/telegram.h"
 #include <queue>
-#include "AI/movement.h"
+#include "Controller/Pathfinding/movement.h"
 #include <cmath>
 #include "Model/ModelData.hpp"
 #include "Controller/ResourceManager/ObjectSaving.hpp"
-#include "AI/vector2D.hpp"
+#include "Controller/AI/vector2D.hpp"
 
 class NPC : public PhysicsObject {
 public:

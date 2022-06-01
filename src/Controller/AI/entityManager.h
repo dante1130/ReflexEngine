@@ -2,7 +2,7 @@
 
 #include <map>
 #include <string>
-#include "NPC.hpp"
+#include "Model/GameObject/NPC.hpp"
 
 class entityManager {
 private:

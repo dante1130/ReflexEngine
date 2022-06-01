@@ -27,7 +27,7 @@ static std::string message;
 static std::string currentIPAddress;
 static std::string incomingMessage;
 static std::string username = " ";
-static glm::vec3 opponentPos = glm::vec3(50,100,50);
+static glm::vec3 opponentPos = glm::vec3(50, 100, 50);
 static glm::vec3 prevOpponentPos = glm::vec3(50, 100, 50);
 static glm::vec3 previousPos = glm::vec3(0, 0, 0);
 
@@ -58,6 +58,7 @@ void GenericFunctions::lua_access() {
 	lua.set_function("random_generator", get_random);
 	lua.set_function("current_time", get_time);
 	lua.set_function("save_game", setIfSave);
+	lua.set_function("resetSaveTime", resetSaveSinceLastSave);
 	lua.set_function("load_game", setIfLoad);
 	lua.set_function("get_load", getIfLoad);
 	lua.set_function("load_from_scratch", setIfFullLoad);
@@ -106,7 +107,8 @@ void GenericFunctions::lua_access() {
 	lua.set_function("get_network_pos_y", getNetworkPosY);
 	lua.set_function("get_network_pos_z", getNetworkPosZ);
 	lua.set_function("get_receiving_data", getReceivingData);
-	lua.set_function("network_pvp_connection_status", networkPvPConnectionStatus);
+	lua.set_function("network_pvp_connection_status",
+	                 networkPvPConnectionStatus);
 
 	lua.set_function("set_last_shot", setLastShot);
 	lua.set_function("set_shot_delay", setShotDelay);
@@ -140,6 +142,10 @@ void GenericFunctions::setIfSave(bool val) {
 	if (val) {
 		last_save_time_ = glfwGetTime();
 	}
+}
+
+void GenericFunctions::resetSaveSinceLastSave() {
+	last_save_time_ = glfwGetTime();
 }
 
 int GenericFunctions::timeAtLastSave() { return last_save_time_; }
@@ -297,8 +303,8 @@ void GenericFunctions::networkEnd() {
 	}
 }
 
-void GenericFunctions::networkUpdate() {	
-	if (createNetwork && networkConnected){
+void GenericFunctions::networkUpdate() {
+	if (createNetwork && networkConnected) {
 		incomingMessage = network.ReceiveMessage();
 		if (incomingMessage != " ") {
 			// printf("%s Update\n", incomingMessage);
@@ -361,6 +367,10 @@ void GenericFunctions::networkSendMessage() {
 		network.MessageSend(messageChar);
 		incomingMessage = network.GetName();
 		incomingMessage.append(messageChar);
+	} else {
+		strcpy(messageChar, message.c_str());
+		strcat(messageChar, "\n");
+		network.MessageSend(messageChar);
 	}
 	networkGetMessage();
 }

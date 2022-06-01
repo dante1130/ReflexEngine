@@ -47,4 +47,12 @@ void NetworkedItem::draw(std::shared_ptr<Shader> shader) {
 }
 
 void NetworkedItem::save_object() {
+	ObjectSaving::openFile();
+	ObjectSaving::saveGameObject(position, rotation, scale, angle, "NetworkedItem");
+	ObjectSaving::closeStruct();
+	ObjectSaving::createStruct("networkeditem");
+	ObjectSaving::addValue("modelName", model_name_, false);
+	ObjectSaving::addValue("material_name", material_name_, true);
+	ObjectSaving::closeStruct();
+	ObjectSaving::closeFile();
 }
