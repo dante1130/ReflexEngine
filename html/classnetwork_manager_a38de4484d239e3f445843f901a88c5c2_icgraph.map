@@ -1,0 +1,4 @@
+<map id="networkManager::MessageSend" name="networkManager::MessageSend">
+<area shape="rect" id="node1" title="Sends a message across the network to the server (or from the server to all connected clients)" alt="" coords="231,13,439,39"/>
+<area shape="rect" id="node2" href="$namespace_generic_functions.html#a79ad259171a1c073bded0544dc9bb131" title="Sends the message saved in networkRetainMessage across the network." alt="" coords="5,5,183,47"/>
+</map>

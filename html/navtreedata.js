@@ -22,13 +22,16 @@ for the JavaScript code in this file
 */
 var NAVTREE =
 [
-  [ "My Project", "index.html", [
+  [ "ICT397 Assignment 2", "index.html", [
     [ "Todo List", "todo.html", null ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
         [ "All", "namespacemembers.html", null ],
         [ "Functions", "namespacemembers_func.html", null ],
+        [ "Variables", "namespacemembers_vars.html", null ],
+        [ "Typedefs", "namespacemembers_type.html", null ],
+        [ "Enumerations", "namespacemembers_enum.html", null ],
         [ "Enumerator", "namespacemembers_eval.html", null ]
       ] ]
     ] ],
@@ -62,11 +65,13 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_a_star_8cpp.html",
-"_omni_shadow_map_8hpp_source.html",
-"class_btt_controller.html#a367623a1577426ee3c99335fb43195f2",
-"class_player.html#aace43fa16ae9684005a09ef7e6c207ea",
-"class_texture.html#a36e78a842c0726645f4b2edc39b4280a",
-"gui_manager_8hpp.html#a9bc36fbf2d234391dcf41b2994d37cb0"
+"_md2_8hpp.html#ad1fc061c4e7111ebd94b83eed22f1e1ca2e0c2d506a4f592a816a81b656617e5c",
+"class_body_rigid.html#a3cc5bcf86a97d6222867e16f3f10ade8",
+"class_input_manager.html#ae442d69b29147166fde5b8a2fa55d50c",
+"class_physics.html#a009155f695e0ad1293cfdcd087989085",
+"class_spot_light.html#a290cb188d11a34b79d0b0ad6e277da02",
+"classsingleton.html#a45532589b14e6729c81f0b15615cb3c1",
+"singletons_8h.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

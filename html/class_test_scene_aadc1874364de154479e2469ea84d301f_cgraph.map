@@ -1,0 +1,20 @@
+<map id="TestScene::key_controls" name="TestScene::key_controls">
+<area shape="rect" id="node1" title="The function to specify controls for the keyboard." alt="" coords="5,437,172,463"/>
+<area shape="rect" id="node2" href="$namespace_generic_functions.html#a60b43828d536ee91560eb98a399e49e0" title="Get the if credits active." alt="" coords="255,5,405,47"/>
+<area shape="rect" id="node3" href="$class_input_manager.html#ad569ecdfed4bedd78d0c41667ecca2b4" title="Get the instance." alt="" coords="239,71,421,98"/>
+<area shape="rect" id="node4" href="$class_input_manager.html#ac889d9af9e29b30830b56729890d755c" title="Return the key state of an input action." alt="" coords="253,123,407,164"/>
+<area shape="rect" id="node5" href="$namespace_generic_functions.html#ade37ddcfa008e668cc83648731ec5aa8" title="gets if the game should show the help menu" alt="" coords="239,188,421,229"/>
+<area shape="rect" id="node6" href="$namespace_generic_functions.html#a46d8e1d0567cb3b8730f779111b97d6a" title="Gets if the game should be paused." alt="" coords="230,881,430,907"/>
+<area shape="rect" id="node8" href="$namespace_generic_functions.html#af87fdad288732d099a6cd9c2c79bb39f" title="Gets the active state of the network menu." alt="" coords="231,305,429,347"/>
+<area shape="rect" id="node9" href="$namespace_generic_functions.html#a7eda7f2acffcbd1737ded96ef51518fe" title="Gets if the pvp network menu is active." alt="" coords="220,371,440,412"/>
+<area shape="rect" id="node10" href="$class_input_state.html#a6fe76c74ce5a5c7e63e19e53e0cc1b17" title="Returns a boolean whether the key is held." alt="" coords="251,437,409,463"/>
+<area shape="rect" id="node11" href="$class_input_state.html#a8e1c03c60a59c484ebee2ba0cb9bcd92" title="Returns a boolean whether the key is pressed." alt="" coords="267,488,393,529"/>
+<area shape="rect" id="node12" href="$namespace_generic_functions.html#a515390685bf3b88fe5f8c70b350a2439" title="Set the if credits active." alt="" coords="255,553,405,595"/>
+<area shape="rect" id="node13" href="$namespace_generic_functions.html#a0075f92095dd2d3dddc94eff74736870" title="Sets if the game should show the help menu." alt="" coords="239,619,421,660"/>
+<area shape="rect" id="node14" href="$namespace_generic_functions.html#a12494eed72773f39ae5c8c1bcfe8274e" title="Sets if the game should be paused." alt="" coords="230,254,430,281"/>
+<area shape="rect" id="node16" href="$namespace_generic_functions.html#aebb9f24979b314c85522026a7dfd6557" title="Sets if the player should shoot." alt="" coords="232,749,428,791"/>
+<area shape="rect" id="node17" href="$namespace_generic_functions.html#ad7eb2ad6294f522c6da9dc8d279c7f62" title="Sets the network menu to be active or not." alt="" coords="231,815,429,856"/>
+<area shape="rect" id="node18" href="$namespace_generic_functions.html#a5d50ca2ffdab10426701ea9730a5ef66" title="Sets the pvp network menu to be active or inactive." alt="" coords="220,684,440,725"/>
+<area shape="rect" id="node7" href="$class_engine_time.html#aad4dc0ef993952ffd7dc44af996bab58" title="gets if the game is paused" alt="" coords="489,822,646,849"/>
+<area shape="rect" id="node15" href="$class_engine_time.html#a1c3023a0def4aa7825eb131e91e2aa35" title="Sets if it should pause." alt="" coords="488,254,647,281"/>
+</map>

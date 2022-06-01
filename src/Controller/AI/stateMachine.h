@@ -89,7 +89,7 @@ public:
 	/**
 	 * @brief	Sets the current state and moves the previous current state to
 	 * the previous state section & call respective enter & exit functions
-	 * @param	sewState	- The new state
+	 * @param	newState	- The new state
 	 */
 	void changeState(std::string newState) {
 		sol::state& lua = LuaManager::get_instance().get_state();

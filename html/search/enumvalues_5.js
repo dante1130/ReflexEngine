@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['help_5fmenu_1731',['help_menu',['../_input_8hpp.html#a080a822f0093973313bd644e517a5090a1433eb27f21983d3ef9a7538862e7769',1,'Input.hpp']]]
+  ['goal_5fblocked_2570',['GOAL_BLOCKED',['../_a_star_8h.html#a9824af85e661d0440b928846819e15dca399611a30cf6a84cf28cb87ec75f9786',1,'AStar.h']]],
+  ['goal_5fout_5fof_5fbounds_2571',['GOAL_OUT_OF_BOUNDS',['../_a_star_8h.html#a9824af85e661d0440b928846819e15dcab2bac87d73ca92bcb6b430fc4eae77d0',1,'AStar.h']]],
+  ['grid_5funinitialised_2572',['GRID_UNINITIALISED',['../_a_star_8h.html#a9824af85e661d0440b928846819e15dca3644088f076e4b1b2bb8738a008e290e',1,'AStar.h']]]
 ];

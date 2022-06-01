@@ -1,0 +1,4 @@
+<map id="Md2ModelManager::load_texture" name="Md2ModelManager::load_texture">
+<area shape="rect" id="node1" title="Loads a texture into a md2 model in the md2 model manager." alt="" coords="5,5,169,47"/>
+<area shape="rect" id="node2" href="$class_md2_model.html#a82d4b777e2a7a7b26b28c0a60b83513e" title="Loads in a texture for the md2 model." alt="" coords="217,13,379,39"/>
+</map>

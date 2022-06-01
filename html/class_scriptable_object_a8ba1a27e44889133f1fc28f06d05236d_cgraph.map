@@ -1,8 +1,8 @@
 <map id="ScriptableObject::save_object" name="ScriptableObject::save_object">
 <area shape="rect" id="node1" title="Saves the object to lau file." alt="" coords="5,74,157,115"/>
-<area shape="rect" id="node2" href="$namespace_object_saving.html#a9cd0c968e930c03e3daf504eba10769e" title="Adds a value to the file." alt="" coords="211,5,371,32"/>
-<area shape="rect" id="node3" href="$namespace_object_saving.html#a9dadcc7281db5e569a16d86421c58422" title="Closes the file." alt="" coords="212,56,371,83"/>
-<area shape="rect" id="node4" href="$namespace_object_saving.html#a8bd80ab63cd87a02055d0e92dd28b372" title="Closes the struct in the file." alt="" coords="205,107,377,133"/>
-<area shape="rect" id="node5" href="$namespace_object_saving.html#a2f179e587ac90b3be88f1e4c24bc6a19" title="Opens a file to save data too." alt="" coords="214,157,369,184"/>
-<area shape="rect" id="node6" href="$_object_saving_8cpp.html#a187a31d4f2cf1ae2be7e5f34eee9700a" title=" " alt="" coords="425,157,559,184"/>
+<area shape="rect" id="node2" href="$class_object_saving.html#a9cd0c968e930c03e3daf504eba10769e" title="Adds a value to the file." alt="" coords="211,5,371,32"/>
+<area shape="rect" id="node3" href="$class_object_saving.html#a9dadcc7281db5e569a16d86421c58422" title="Closes the file." alt="" coords="212,56,371,83"/>
+<area shape="rect" id="node4" href="$class_object_saving.html#a8bd80ab63cd87a02055d0e92dd28b372" title="Closes the struct in the file." alt="" coords="205,107,377,133"/>
+<area shape="rect" id="node5" href="$class_object_saving.html#a2f179e587ac90b3be88f1e4c24bc6a19" title="Opens a file to save data too." alt="" coords="214,157,369,184"/>
+<area shape="rect" id="node6" href="$class_object_saving.html#ad38aa3ea541f6a32a6a4cfe7256967f2" title="On first call, opens the creation script file. And then adds the save files in number order into the ..." alt="" coords="425,157,643,184"/>
 </map>

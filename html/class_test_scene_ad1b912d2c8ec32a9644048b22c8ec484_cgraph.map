@@ -1,4 +1,7 @@
 <map id="TestScene::loadSavedGameObjects" name="TestScene::loadSavedGameObjects">
-<area shape="rect" id="node1" title="loads game objects" alt="" coords="5,5,192,47"/>
-<area shape="rect" id="node2" href="$namespace_generic_functions.html#a495397e71ac8320155d9b5b84240b385" title="Set if game should load objects from save." alt="" coords="240,13,424,39"/>
+<area shape="rect" id="node1" title="loads game objects" alt="" coords="5,86,192,127"/>
+<area shape="rect" id="node2" href="$namespace_generic_functions.html#a8261f66508c172bf1421213877f53b64" title="Gets if the game should load game objects from scratch." alt="" coords="240,5,445,32"/>
+<area shape="rect" id="node3" href="$namespace_generic_functions.html#aa3f6924f8ba52f27980bc3f99eb22b48" title="Initialises rand." alt="" coords="268,57,417,98"/>
+<area shape="rect" id="node4" href="$namespace_generic_functions.html#a214d62c28646bc679e68bc3ea508db5b" title="Set if game should load objects from scratch." alt="" coords="240,123,445,149"/>
+<area shape="rect" id="node5" href="$namespace_generic_functions.html#a495397e71ac8320155d9b5b84240b385" title="Set if game should load objects from save." alt="" coords="251,173,435,200"/>
 </map>

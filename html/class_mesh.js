@@ -3,7 +3,7 @@ var class_mesh =
     [ "Mesh", "class_mesh.html#a2af137f1571af89172b9c102302c416b", null ],
     [ "~Mesh", "class_mesh.html#a5efe4da1a4c0971cfb037bd70304c303", null ],
     [ "ClearMesh", "class_mesh.html#afa7292342a61bc1cca667be6c00d73d2", null ],
-    [ "CreateColorMesh", "class_mesh.html#aa6815207bb2b81edd4a3f0697ed7baf8", null ],
+    [ "CreateColorMesh", "class_mesh.html#a1a16c5f39f4e5254c5acc9669592452c", null ],
     [ "CreateMesh", "class_mesh.html#a9f549f108dd5cd504a8665d9d0f1da54", null ],
     [ "has_color", "class_mesh.html#a6c42fe5da7df70f1d73c978a969f3c97", null ],
     [ "RenderMesh", "class_mesh.html#a75ccdfd3c16df862abb90d6046abcdb4", null ],

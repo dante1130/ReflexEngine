@@ -1,0 +1,10 @@
+<map id="ObjectSaving::addComma" name="ObjectSaving::addComma">
+<area shape="rect" id="node1" title="Adds a comma to the file." alt="" coords="205,180,377,207"/>
+<area shape="rect" id="node2" href="$class_projectile.html#a7974563f08a31be7fb9c81798817b58a" title="Saves the object to lua file." alt="" coords="5,5,157,32"/>
+<area shape="rect" id="node3" href="$class_player.html#a73cc9b57a85b674c4b46732f1e67293e" title="Save the object to a lua script." alt="" coords="14,56,149,83"/>
+<area shape="rect" id="node4" href="$class_point_light_object.html#a759239db0a1af6fc387548dea1948392" title="Saves the object to lua file." alt="" coords="5,107,157,149"/>
+<area shape="rect" id="node5" href="$class_spot_light_object.html#a242313468bdd7cf74c3f3464da0ad3b6" title="Saves the object to lua file." alt="" coords="7,173,156,214"/>
+<area shape="rect" id="node6" href="$class_directional_light_object.html#a8428eaaa0ced5f10c1324dd082b0a56e" title="Saves the object to lua file." alt="" coords="7,238,156,279"/>
+<area shape="rect" id="node7" href="$class_n_p_c.html#ab2ea5dd4ca74d5cb48f3ecca0d9cf71a" title="Saves the object." alt="" coords="19,304,144,331"/>
+<area shape="rect" id="node8" href="$class_physics_object.html#a6103a75cd9288646117068f07b0d75ed" title="Saves the object to lau file." alt="" coords="11,355,152,397"/>
+</map>

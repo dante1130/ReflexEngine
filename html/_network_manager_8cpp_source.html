@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: src/NetworkManager.cpp Source File</title>
+<title>ICT397 Assignment 2: src/NetworkManager.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -97,13 +97,13 @@ $(document).ready(function(){initNavTree('_network_manager_8cpp_source.html','')
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="_network_manager_8cpp.html#a50300ba6e38ec30121edcc07ebac42c6">   11</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="_network_manager_8cpp.html#a50300ba6e38ec30121edcc07ebac42c6">init</a> = <span class="keyword">false</span>;</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="_network_manager_8cpp.html#ab7d5f5751f150756aff5f6e47729e9a3">   13</a></span>&#160;<a class="code" href="_network_manager_8cpp.html#ab7d5f5751f150756aff5f6e47729e9a3">RakNet</a>::<a class="code" href="_network_manager_8cpp.html#ab7d5f5751f150756aff5f6e47729e9a3">RakPeerInterface</a>* <a class="code" href="_network_manager_8cpp.html#ab7d5f5751f150756aff5f6e47729e9a3">peer</a>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="_network_manager_8cpp.html#a1c349edcda4107089f6ea55f0b14c576">   13</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="_network_manager_8cpp.html#a1c349edcda4107089f6ea55f0b14c576">connectedClients</a> = 0;</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="_network_manager_8cpp.html#aa20a5bf9d6aca09065b03fff1cbc3435">   15</a></span>&#160;<a class="code" href="_network_manager_8cpp.html#aa20a5bf9d6aca09065b03fff1cbc3435">RakNet</a>::<a class="code" href="_network_manager_8cpp.html#aa20a5bf9d6aca09065b03fff1cbc3435">Packet</a>* <a class="code" href="_network_manager_8cpp.html#aa20a5bf9d6aca09065b03fff1cbc3435">packet</a>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="_network_manager_8cpp.html#ab7d5f5751f150756aff5f6e47729e9a3">   15</a></span>&#160;<a class="code" href="_network_manager_8cpp.html#ab7d5f5751f150756aff5f6e47729e9a3">RakNet</a>::<a class="code" href="_network_manager_8cpp.html#ab7d5f5751f150756aff5f6e47729e9a3">RakPeerInterface</a>* <a class="code" href="_network_manager_8cpp.html#ab7d5f5751f150756aff5f6e47729e9a3">peer</a>;</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="_network_manager_8cpp.html#a0c9ea8eea151f139b4910b80a2805eb4">   17</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="_network_manager_8cpp.html#a0c9ea8eea151f139b4910b80a2805eb4">GameMessages</a> {</div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="_network_manager_8cpp.html#a0c9ea8eea151f139b4910b80a2805eb4a8c4ce6bdc2e96343915d9d2df5ce2045">   18</a></span>&#160;    <a class="code" href="_network_manager_8cpp.html#a0c9ea8eea151f139b4910b80a2805eb4a8c4ce6bdc2e96343915d9d2df5ce2045">ID_GAME_MESSAGE_1</a> = <a class="code" href="_network_manager_8cpp.html#a0c9ea8eea151f139b4910b80a2805eb4">ID_USER_PACKET_ENUM</a> + 1</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;};</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="_network_manager_8cpp.html#aa20a5bf9d6aca09065b03fff1cbc3435">   17</a></span>&#160;<a class="code" href="_network_manager_8cpp.html#aa20a5bf9d6aca09065b03fff1cbc3435">RakNet</a>::<a class="code" href="_network_manager_8cpp.html#aa20a5bf9d6aca09065b03fff1cbc3435">Packet</a>* <a class="code" href="_network_manager_8cpp.html#aa20a5bf9d6aca09065b03fff1cbc3435">packet</a>;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="_network_manager_8cpp.html#a0c9ea8eea151f139b4910b80a2805eb4a8c4ce6bdc2e96343915d9d2df5ce2045">   19</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="_network_manager_8cpp.html#a0c9ea8eea151f139b4910b80a2805eb4">GameMessages</a> { <a class="code" href="_network_manager_8cpp.html#a0c9ea8eea151f139b4910b80a2805eb4a8c4ce6bdc2e96343915d9d2df5ce2045">ID_GAME_MESSAGE_1</a> = <a class="code" href="_network_manager_8cpp.html#a0c9ea8eea151f139b4910b80a2805eb4">ID_USER_PACKET_ENUM</a> + 1 };</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
 <div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classnetwork_manager.html#a087b7e1018686c7a25b9b13bba1933bd">   21</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classnetwork_manager.html">networkManager</a>::<a class="code" href="classnetwork_manager.html#a087b7e1018686c7a25b9b13bba1933bd">InitNetwork</a>() {</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    peer = RakNet::RakPeerInterface::GetInstance();</div>
@@ -134,200 +134,335 @@ $(document).ready(function(){initNavTree('_network_manager_8cpp_source.html','')
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        connecting = peer-&gt;Connect(serverIP, <a class="code" href="_network_manager_8hpp.html#ac42367fe5c999ec6650de83e9d72fe8c">SERVER_PORT</a>, 0, 0);</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordflow">if</span> (connecting) {</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            printf(<span class="stringliteral">&quot;Not connected&quot;</span>);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        }</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordflow">return</span> (connecting);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    }</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">return</span> (<span class="keyword">false</span>);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;}</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="classnetwork_manager.html#a25c6aa5fa882d884afa70dd3dca97c78">   56</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classnetwork_manager.html">networkManager</a>::<a class="code" href="classnetwork_manager.html#a25c6aa5fa882d884afa70dd3dca97c78">SetupServer</a>() {</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">if</span> (peer != NULL &amp;&amp; init &amp;&amp; !isServer) {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        RakNet::SocketDescriptor sd(<a class="code" href="_network_manager_8hpp.html#ac42367fe5c999ec6650de83e9d72fe8c">SERVER_PORT</a>, 0);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        peer-&gt;Startup(<a class="code" href="_network_manager_8hpp.html#a0a8f91f93d75a07f0ae45077db45b3eb">MAX_CLIENTS</a>, &amp;sd, 1);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <a class="code" href="classnetwork_manager.html#aa25541e488f5095f30a285867905a70f">isServer</a> = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        strcat(<a class="code" href="classnetwork_manager.html#a9f7e35bd2b4afbb268dc7be56221c471">name</a>, <span class="stringliteral">&quot;Server: &quot;</span>);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        peer-&gt;SetMaximumIncomingConnections(<a class="code" href="_network_manager_8hpp.html#a0a8f91f93d75a07f0ae45077db45b3eb">MAX_CLIENTS</a>);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        printf(<span class="stringliteral">&quot;Server Running...\n&quot;</span>);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    }</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="classnetwork_manager.html#ac1795c011235744a60fd6b45c18c67a4">   67</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classnetwork_manager.html">networkManager</a>::<a class="code" href="classnetwork_manager.html#ac1795c011235744a60fd6b45c18c67a4">ChangeName</a>(std::string userName) {</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    userName.append(<span class="stringliteral">&quot;: &quot;</span>);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    strcat(<a class="code" href="classnetwork_manager.html#a9f7e35bd2b4afbb268dc7be56221c471">name</a>, userName.c_str());</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;}</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="classnetwork_manager.html#a38de4484d239e3f445843f901a88c5c2">   72</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classnetwork_manager.html">networkManager</a>::<a class="code" href="classnetwork_manager.html#a38de4484d239e3f445843f901a88c5c2">MessageSend</a>(<span class="keywordtype">char</span>* inputMessage) {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">char</span> sendMessage[<span class="keyword">sizeof</span>(inputMessage) + <span class="keyword">sizeof</span>(<a class="code" href="classnetwork_manager.html#a9f7e35bd2b4afbb268dc7be56221c471">name</a>)];</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    strcpy(sendMessage, <a class="code" href="classnetwork_manager.html#a9f7e35bd2b4afbb268dc7be56221c471">name</a>);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    strcat(sendMessage, inputMessage);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    peer-&gt;Send(sendMessage, (<span class="keywordtype">int</span>)strlen(sendMessage) + 1, HIGH_PRIORITY, RELIABLE_ORDERED, 0, RakNet::UNASSIGNED_SYSTEM_ADDRESS, <span class="keyword">true</span>);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;}</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno"><a class="line" href="classnetwork_manager.html#ad22f91fbb417dcd411879a6875016cea">   79</a></span>&#160;<span class="keywordtype">char</span>* <a class="code" href="classnetwork_manager.html">networkManager</a>::<a class="code" href="classnetwork_manager.html#ad22f91fbb417dcd411879a6875016cea">ReceiveMessage</a>() {</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">for</span> (packet = peer-&gt;Receive(); packet; peer-&gt;DeallocatePacket(packet), packet = peer-&gt;Receive()) {</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="comment">//strcat(message, HandleMessage(packet));</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="comment">//return (message);</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        connected = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keywordflow">if</span> (isServer) {</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            <span class="keywordflow">switch</span> (GetPacketIdentifier(packet)) {</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                <span class="keywordflow">case</span> ID_REMOTE_DISCONNECTION_NOTIFICATION:</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                    <span class="keywordflow">return</span> (<span class="stringliteral">&quot;Another client has disconnected\n&quot;</span>);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                <span class="keywordflow">case</span> ID_REMOTE_CONNECTION_LOST:</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                    <span class="keywordflow">return</span> (<span class="stringliteral">&quot;Another client has lost the connection\n&quot;</span>);</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                <span class="keywordflow">case</span> ID_REMOTE_NEW_INCOMING_CONNECTION:</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                    printf(<span class="stringliteral">&quot;Another Connection is incoming\n&quot;</span>);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                    <span class="keywordflow">return</span> (<span class="stringliteral">&quot;Another client has connected\n&quot;</span>);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                <span class="keywordflow">case</span> ID_CONNECTION_REQUEST_ACCEPTED:</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                    printf(<span class="stringliteral">&quot;We have connected\n&quot;</span>);</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                    <span class="keywordflow">return</span> (<span class="stringliteral">&quot;Our connection request has been accepted\n&quot;</span>);</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                <span class="keywordflow">case</span> ID_NEW_INCOMING_CONNECTION:</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                    printf(<span class="stringliteral">&quot;A Connection is incoming\n&quot;</span>);</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                    <span class="keywordflow">return</span> (<span class="stringliteral">&quot;A connection is incoming\n&quot;</span>);</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                <span class="keywordflow">case</span> ID_NO_FREE_INCOMING_CONNECTIONS:</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                    <span class="keywordflow">return</span> (<span class="stringliteral">&quot;The server is full\n&quot;</span>);</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                <span class="keywordflow">case</span> ID_DISCONNECTION_NOTIFICATION:</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                    <span class="keywordflow">if</span> (isServer) {</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;                        connected = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                        <span class="keywordflow">return</span> (<span class="stringliteral">&quot;A client has disconnected\n&quot;</span>);</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;                    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                        <span class="keywordflow">return</span> (<span class="stringliteral">&quot;We have been disconnected\n&quot;</span>);</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;                    }</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;                <span class="keywordflow">case</span> ID_CONNECTION_LOST:</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                    <span class="keywordflow">if</span> (isServer) {</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                        connected = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                        <span class="keywordflow">return</span> (<span class="stringliteral">&quot;A client lost the connection\n&quot;</span>);</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                        <span class="keywordflow">return</span> (<span class="stringliteral">&quot;Connection lost\n&quot;</span>);</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                    }</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                <span class="keywordflow">case</span> ID_GAME_MESSAGE_1: {</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                    RakNet::RakString rs;</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                    RakNet::BitStream bsIn(packet-&gt;data, packet-&gt;length, <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                    bsIn.IgnoreBytes(<span class="keyword">sizeof</span>(RakNet::MessageID));</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                    bsIn.Read(rs);</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                    <span class="keywordflow">return</span> (<span class="keyword">reinterpret_cast</span>&lt;<span class="keywordtype">char</span>*&gt;(packet-&gt;data));</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                } <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                    peer-&gt;Send(<span class="keyword">reinterpret_cast</span>&lt;<span class="keywordtype">char</span>*&gt;(packet-&gt;data), (<span class="keyword">const</span> <span class="keywordtype">int</span>)strlen(<span class="keyword">reinterpret_cast</span>&lt;<span class="keywordtype">char</span>*&gt;(packet-&gt;data)) + 1, HIGH_PRIORITY, RELIABLE_ORDERED, 0, RakNet::UNASSIGNED_SYSTEM_ADDRESS, <span class="keyword">true</span>);  <span class="comment">// This sends the message to everyone</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            }</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            <span class="keywordflow">switch</span> (GetPacketIdentifier(packet)) {</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;                <span class="keywordflow">case</span> ID_REMOTE_DISCONNECTION_NOTIFICATION:</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;                    <span class="keywordflow">return</span> (<span class="stringliteral">&quot;Another client has disconnected\n&quot;</span>);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <a class="code" href="classnetwork_manager.html#a69457ab5c5ff952456f76715727400ad">connected</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        }</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordflow">return</span> (connecting);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    }</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordflow">return</span> (<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;}</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="classnetwork_manager.html#ad2d28469edee0c47fe6494b5f0b386b7">   58</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classnetwork_manager.html">networkManager</a>::<a class="code" href="classnetwork_manager.html#ad2d28469edee0c47fe6494b5f0b386b7">SetupServer</a>(std::string userName) {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordflow">if</span> (peer != NULL &amp;&amp; init &amp;&amp; !isServer) {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        RakNet::SocketDescriptor sd(<a class="code" href="_network_manager_8hpp.html#ac42367fe5c999ec6650de83e9d72fe8c">SERVER_PORT</a>, 0);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        peer-&gt;Startup(<a class="code" href="_network_manager_8hpp.html#a0a8f91f93d75a07f0ae45077db45b3eb">MAX_CLIENTS</a>, &amp;sd, 1);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <a class="code" href="classnetwork_manager.html#aa25541e488f5095f30a285867905a70f">isServer</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordflow">if</span> (userName != <span class="stringliteral">&quot; &quot;</span>) {</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            userName.append(<span class="stringliteral">&quot;: &quot;</span>);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            strcpy(<a class="code" href="classnetwork_manager.html#a9f7e35bd2b4afbb268dc7be56221c471">name</a>, userName.c_str());</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            strcpy(<a class="code" href="classnetwork_manager.html#a9f7e35bd2b4afbb268dc7be56221c471">name</a>, <span class="stringliteral">&quot;Server: &quot;</span>);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        }</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        peer-&gt;SetMaximumIncomingConnections(<a class="code" href="_network_manager_8hpp.html#a0a8f91f93d75a07f0ae45077db45b3eb">MAX_CLIENTS</a>);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        printf(<span class="stringliteral">&quot;Server Running...\n&quot;</span>);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <a class="code" href="classnetwork_manager.html#a69457ab5c5ff952456f76715727400ad">connected</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <a class="code" href="classnetwork_manager.html#a86acdc4fae88a09a364bca008d1cd4a4">connectedClients</a>++;  <span class="comment">// Server itself is a client</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    }</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="classnetwork_manager.html#ac1795c011235744a60fd6b45c18c67a4">   76</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classnetwork_manager.html">networkManager</a>::<a class="code" href="classnetwork_manager.html#ac1795c011235744a60fd6b45c18c67a4">ChangeName</a>(std::string userName) {</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    std::string oldName = <a class="code" href="classnetwork_manager.html#a9f7e35bd2b4afbb268dc7be56221c471">name</a>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    std::string updatedName = userName;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    userName.append(<span class="stringliteral">&quot;: &quot;</span>);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    strcpy(<a class="code" href="classnetwork_manager.html#a9f7e35bd2b4afbb268dc7be56221c471">name</a>, userName.c_str());</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classnetwork_manager.html#a69457ab5c5ff952456f76715727400ad">connected</a>) {</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        RakNet::BitStream bsOut;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        bsOut.Write((RakNet::MessageID)ID_GAME_MESSAGE_1);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        std::string nameChangeMsg;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keywordtype">char</span> nameChangeChar[256];</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        nameChangeMsg.append(oldName);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        nameChangeMsg.append(<span class="stringliteral">&quot; Changed their name to &quot;</span>);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        nameChangeMsg.append(updatedName);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        nameChangeMsg.append(<span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        strcpy(nameChangeChar, nameChangeMsg.c_str());</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        printf(<span class="stringliteral">&quot;%s\n&quot;</span>, nameChangeChar);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        bsOut.Write(nameChangeChar);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        peer-&gt;Send(&amp;bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0,</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                   RakNet::UNASSIGNED_SYSTEM_ADDRESS, <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    }</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;}</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="classnetwork_manager.html#a38de4484d239e3f445843f901a88c5c2">   98</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classnetwork_manager.html">networkManager</a>::<a class="code" href="classnetwork_manager.html#a38de4484d239e3f445843f901a88c5c2">MessageSend</a>(<span class="keywordtype">char</span>* inputMessage) {</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordtype">char</span> sendMessage[<span class="keyword">sizeof</span>(inputMessage) + <span class="keyword">sizeof</span>(<a class="code" href="classnetwork_manager.html#a9f7e35bd2b4afbb268dc7be56221c471">name</a>)];</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    strcpy(sendMessage, <a class="code" href="classnetwork_manager.html#a9f7e35bd2b4afbb268dc7be56221c471">name</a>);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    strcat(sendMessage, inputMessage);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    RakNet::BitStream bsOut;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    bsOut.Write((RakNet::MessageID)ID_GAME_MESSAGE_1);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    bsOut.Write(sendMessage);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    peer-&gt;Send(&amp;bsOut, HIGH_PRIORITY, RELIABLE_ORDERED, 0,</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;               RakNet::UNASSIGNED_SYSTEM_ADDRESS, <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="comment">// peer-&gt;Send(sendMessage, (int)strlen(sendMessage) + 1, HIGH_PRIORITY,</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="comment">// RELIABLE_ORDERED, 0, RakNet::UNASSIGNED_SYSTEM_ADDRESS, true);</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;}</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="classnetwork_manager.html#a52784d20ce9ffda395a16a8150a53aa1">  111</a></span>&#160;std::string <a class="code" href="classnetwork_manager.html">networkManager</a>::<a class="code" href="classnetwork_manager.html#a52784d20ce9ffda395a16a8150a53aa1">ReceiveMessage</a>() {</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    packet = peer-&gt;Receive();</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <a class="code" href="classnetwork_manager.html#a69457ab5c5ff952456f76715727400ad">connected</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordflow">if</span> (packet) {</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="classnetwork_manager.html#aa25541e488f5095f30a285867905a70f">isServer</a>) {</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            <span class="keywordflow">switch</span> (GetPacketIdentifier(packet)) {</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                <span class="keywordflow">case</span> ID_REMOTE_DISCONNECTION_NOTIFICATION:</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;                    <span class="keywordflow">return</span> (<span class="stringliteral">&quot;Another client has disconnected\n&quot;</span>);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;                <span class="keywordflow">case</span> ID_REMOTE_CONNECTION_LOST:</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                    <span class="keywordflow">return</span> (<span class="stringliteral">&quot;Another client has lost the connection\n&quot;</span>);</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                <span class="keywordflow">case</span> ID_REMOTE_NEW_INCOMING_CONNECTION:</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                    printf(<span class="stringliteral">&quot;Another Connection is incoming\n&quot;</span>);</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                    connectedClients++;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                    <span class="keywordflow">return</span> (<span class="stringliteral">&quot;Another client has connected\n&quot;</span>);</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                <span class="keywordflow">case</span> ID_CONNECTION_REQUEST_ACCEPTED:</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                    printf(<span class="stringliteral">&quot;We have connected\n&quot;</span>);</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                    <span class="keywordflow">return</span> (<span class="stringliteral">&quot;Our connection request has been accepted\n&quot;</span>);</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;                <span class="keywordflow">case</span> ID_NEW_INCOMING_CONNECTION:</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                    printf(<span class="stringliteral">&quot;A Connection is incoming\n&quot;</span>);</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                    connectedClients++;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                    <span class="keywordflow">return</span> (<span class="stringliteral">&quot;A connection is incoming\n&quot;</span>);</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;                <span class="keywordflow">case</span> ID_NO_FREE_INCOMING_CONNECTIONS:</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;                    <span class="keywordflow">return</span> (<span class="stringliteral">&quot;The server is full\n&quot;</span>);</div>
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                <span class="keywordflow">case</span> ID_REMOTE_CONNECTION_LOST:</div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;                    <span class="keywordflow">return</span> (<span class="stringliteral">&quot;Another client has lost the connection\n&quot;</span>);</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                <span class="keywordflow">case</span> ID_REMOTE_NEW_INCOMING_CONNECTION:</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                    printf(<span class="stringliteral">&quot;Another Connection is incoming\n&quot;</span>);</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                    <span class="keywordflow">return</span> (<span class="stringliteral">&quot;Another client has connected\n&quot;</span>);</div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                <span class="keywordflow">case</span> ID_CONNECTION_REQUEST_ACCEPTED:</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                    printf(<span class="stringliteral">&quot;We have connected\n&quot;</span>);</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                    <span class="keywordflow">return</span> (<span class="stringliteral">&quot;Our connection request has been accepted\n&quot;</span>);</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                <span class="keywordflow">case</span> ID_NEW_INCOMING_CONNECTION:</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                    printf(<span class="stringliteral">&quot;A Connection is incoming\n&quot;</span>);</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                    <span class="keywordflow">return</span> (<span class="stringliteral">&quot;A connection is incoming\n&quot;</span>);</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                <span class="keywordflow">case</span> ID_NO_FREE_INCOMING_CONNECTIONS:</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                    <span class="keywordflow">return</span> (<span class="stringliteral">&quot;The server is full\n&quot;</span>);</div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                <span class="keywordflow">case</span> ID_DISCONNECTION_NOTIFICATION:</div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                    <span class="keywordflow">if</span> (isServer) {</div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                        connected = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                        <span class="keywordflow">return</span> (<span class="stringliteral">&quot;A client has disconnected\n&quot;</span>);</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                        connected = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                        <span class="keywordflow">return</span> (<span class="stringliteral">&quot;We have been disconnected\n&quot;</span>);</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                    }</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                <span class="keywordflow">case</span> ID_CONNECTION_LOST:</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                    <span class="keywordflow">if</span> (isServer) {</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                        <span class="keywordflow">return</span> (<span class="stringliteral">&quot;A client lost the connection\n&quot;</span>);</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                        connected = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                        <span class="keywordflow">return</span> (<span class="stringliteral">&quot;Connection lost\n&quot;</span>);</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                    }</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                <span class="keywordflow">case</span> ID_GAME_MESSAGE_1: {</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                    RakNet::RakString rs;</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                    RakNet::BitStream bsIn(packet-&gt;data, packet-&gt;length, <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                    bsIn.IgnoreBytes(<span class="keyword">sizeof</span>(RakNet::MessageID));</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                    bsIn.Read(rs);</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;                    <span class="keywordflow">return</span> <span class="keyword">reinterpret_cast</span>&lt;<span class="keywordtype">char</span>*&gt;(packet-&gt;data);</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;                    <span class="comment">// bsIn.Reset();</span></div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;                } <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;                <span class="keywordflow">default</span>:</div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;                    <span class="keywordflow">return</span> <span class="keyword">reinterpret_cast</span>&lt;<span class="keywordtype">char</span>*&gt;(packet-&gt;data);</div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;            }</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        }</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    }</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <span class="keywordflow">return</span> (<span class="stringliteral">&quot; &quot;</span>);</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;}</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
-<div class="line"><a name="l00192"></a><span class="lineno"><a class="line" href="classnetwork_manager.html#acb47b4d6f2066b782f7c16d1e0a8eed9">  192</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classnetwork_manager.html">networkManager</a>::<a class="code" href="classnetwork_manager.html#acb47b4d6f2066b782f7c16d1e0a8eed9">DestroySession</a>() {</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classnetwork_manager.html#ab573cdd7387a58c958837eedc2121366">init</a>) {</div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        RakNet::RakPeerInterface::DestroyInstance(peer);</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        printf(<span class="stringliteral">&quot;Killed the session\n&quot;</span>);</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        <a class="code" href="classnetwork_manager.html#ab573cdd7387a58c958837eedc2121366">init</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        <a class="code" href="classnetwork_manager.html#aa25541e488f5095f30a285867905a70f">isServer</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    }</div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;}</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
-<div class="line"><a name="l00201"></a><span class="lineno"><a class="line" href="classnetwork_manager.html#a1e7a42bc6bb7ef1f11a9b0d45748715b">  201</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classnetwork_manager.html">networkManager</a>::<a class="code" href="classnetwork_manager.html#a1e7a42bc6bb7ef1f11a9b0d45748715b">ConnectionStatus</a>() {</div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    <span class="keywordflow">return</span> (<a class="code" href="classnetwork_manager.html#a69457ab5c5ff952456f76715727400ad">connected</a>);</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;}</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160; </div>
-<div class="line"><a name="l00205"></a><span class="lineno"><a class="line" href="classnetwork_manager.html#ae47ae99c3908636bab6b495234f96371">  205</a></span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="classnetwork_manager.html">networkManager</a>::<a class="code" href="classnetwork_manager.html#ae47ae99c3908636bab6b495234f96371">GetPacketIdentifier</a>(RakNet::Packet* p) {</div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    <span class="keywordflow">if</span> (p == 0)</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        <span class="keywordflow">return</span> 255;</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="keywordflow">if</span> ((<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>)p-&gt;data[0] == ID_TIMESTAMP) {</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;        RakAssert(p-&gt;length &gt; <span class="keyword">sizeof</span>(RakNet::MessageID) + <span class="keyword">sizeof</span>(RakNet::Time));</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;        <span class="keywordflow">return</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>)</div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;            p-&gt;data[<span class="keyword">sizeof</span>(RakNet::MessageID) + <span class="keyword">sizeof</span>(RakNet::Time)];</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    } <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        <span class="keywordflow">return</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>)p-&gt;data[0];</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;}</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                <span class="keywordflow">case</span> ID_DISCONNECTION_NOTIFICATION:</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;                    <span class="keywordflow">if</span> (isServer) {</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                        connected = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                        connectedClients--;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                        <span class="keywordflow">return</span> (<span class="stringliteral">&quot;A client has disconnected\n&quot;</span>);</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                        <span class="keywordflow">return</span> (<span class="stringliteral">&quot;We have been disconnected\n&quot;</span>);</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                    }</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                <span class="keywordflow">case</span> ID_CONNECTION_LOST:</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;                    <span class="keywordflow">if</span> (isServer) {</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                        connected = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                        connectedClients--;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                        RakNet::BitStream bsIn;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                        bsIn.Write((RakNet::MessageID)ID_GAME_MESSAGE_1);</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;                        bsIn.Write(<span class="stringliteral">&quot;\nA client has lost connection\n&quot;</span>);</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;                        peer-&gt;Send(&amp;bsIn, HIGH_PRIORITY, RELIABLE_ORDERED, 0,</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;                                   RakNet::UNASSIGNED_SYSTEM_ADDRESS,</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                                   <span class="keyword">true</span>);  <span class="comment">// This sends</span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                                           <span class="comment">// the message to everyone</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                        <span class="keywordflow">return</span> (<span class="stringliteral">&quot;\nA client lost the connection\n&quot;</span>);</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                        <span class="keywordflow">return</span> (<span class="stringliteral">&quot;Connection lost\n&quot;</span>);</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                    }</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;                <span class="keywordflow">case</span> ID_GAME_MESSAGE_1: {</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                    RakNet::RakString rs;</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                    RakNet::BitStream bsIn(packet-&gt;data, packet-&gt;length, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;                    bsIn.IgnoreBytes(<span class="keyword">sizeof</span>(RakNet::MessageID));</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;                    bsIn.Read(rs);</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                    std::string newMessage = <span class="keyword">static_cast</span>&lt;std::string&gt;(rs);</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                    peer-&gt;Send(&amp;bsIn, HIGH_PRIORITY, RELIABLE_ORDERED, 0,</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;                               RakNet::UNASSIGNED_SYSTEM_ADDRESS,</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;                               <span class="keyword">true</span>);  <span class="comment">// This sends</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                                       <span class="comment">// the message to everyone</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                    bsIn.Reset();</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                    <span class="keywordflow">return</span> (newMessage);</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                    <span class="comment">// return (reinterpret_cast&lt;char*&gt;(packet-&gt;data));</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                }</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;                <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;                    RakNet::RakString rs;</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;                    RakNet::BitStream bsIn(packet-&gt;data, packet-&gt;length, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;                    bsIn.IgnoreBytes(<span class="keyword">sizeof</span>(RakNet::MessageID));</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;                    bsIn.Read(rs);</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;                    peer-&gt;Send(&amp;bsIn, HIGH_PRIORITY, RELIABLE_ORDERED, 0,</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;                               RakNet::UNASSIGNED_SYSTEM_ADDRESS,</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;                               <span class="keyword">true</span>);  <span class="comment">// This sends</span></div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;                                       <span class="comment">// the message to everyone</span></div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;                    <span class="keywordflow">return</span> <span class="keyword">static_cast</span>&lt;std::string&gt;(rs);</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;            }</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;            <span class="keywordflow">switch</span> (GetPacketIdentifier(packet)) {</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;                <span class="keywordflow">case</span> ID_REMOTE_DISCONNECTION_NOTIFICATION:</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;                    <span class="keywordflow">return</span> (<span class="stringliteral">&quot;Another client has disconnected\n&quot;</span>);</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;                <span class="keywordflow">case</span> ID_REMOTE_CONNECTION_LOST:</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;                    <span class="keywordflow">return</span> (<span class="stringliteral">&quot;Another client has lost the connection\n&quot;</span>);</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;                <span class="keywordflow">case</span> ID_REMOTE_NEW_INCOMING_CONNECTION:</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;                    printf(<span class="stringliteral">&quot;Another Connection is incoming\n&quot;</span>);</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;                    <span class="keywordflow">return</span> (<span class="stringliteral">&quot;Another client has connected\n&quot;</span>);</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;                <span class="keywordflow">case</span> ID_CONNECTION_REQUEST_ACCEPTED:</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;                    printf(<span class="stringliteral">&quot;We have connected\n&quot;</span>);</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;                    connectedClients++;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;                    <span class="keywordflow">return</span> (<span class="stringliteral">&quot;Our connection request has been accepted\n&quot;</span>);</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;                <span class="keywordflow">case</span> ID_NEW_INCOMING_CONNECTION:</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;                    printf(<span class="stringliteral">&quot;A Connection is incoming\n&quot;</span>);</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;                    <span class="keywordflow">return</span> (<span class="stringliteral">&quot;A connection is incoming\n&quot;</span>);</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;                <span class="keywordflow">case</span> ID_NO_FREE_INCOMING_CONNECTIONS:</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;                    <span class="keywordflow">return</span> (<span class="stringliteral">&quot;The server is full\n&quot;</span>);</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;                <span class="keywordflow">case</span> ID_DISCONNECTION_NOTIFICATION:</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;                    <span class="keywordflow">if</span> (isServer) {</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;                        connected = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;                        connectedClients--;</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;                        <span class="keywordflow">return</span> (<span class="stringliteral">&quot;\nA client has disconnected\n&quot;</span>);</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;                    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;                        connected = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;                        connectedClients--;</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;                        <span class="keywordflow">return</span> (<span class="stringliteral">&quot;\nWe have been disconnected\n&quot;</span>);</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;                    }</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;                <span class="keywordflow">case</span> ID_CONNECTION_LOST:</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;                    <span class="keywordflow">if</span> (isServer) {</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                        <span class="keywordflow">return</span> (<span class="stringliteral">&quot;\nA client lost the connection\n&quot;</span>);</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                        connected = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                        connectedClients--;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                        <span class="keywordflow">return</span> (<span class="stringliteral">&quot;Connection lost\n&quot;</span>);</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;                    }</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;                <span class="keywordflow">case</span> ID_GAME_MESSAGE_1: {</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                    RakNet::RakString rs;</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                    RakNet::BitStream bsIn(packet-&gt;data, packet-&gt;length, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;                    bsIn.IgnoreBytes(<span class="keyword">sizeof</span>(RakNet::MessageID));</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;                    bsIn.Read(rs);</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;                    <span class="comment">// printf(&quot;%s NM\n&quot;, rs.C_String());</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;                    bsIn.Reset();</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;                    <span class="keywordflow">return</span> <span class="keyword">static_cast</span>&lt;std::string&gt;(rs);</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;                    <span class="comment">// bsIn.Reset();</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;                } <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;                <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;                    <span class="comment">// printf(&quot;%s\n&quot;, packet-&gt;data);</span></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;                    <span class="keywordflow">return</span> <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;            }</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        }</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;        peer-&gt;DeallocatePacket(packet);</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    }</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    <span class="keywordflow">return</span> <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;}</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160; </div>
+<div class="line"><a name="l00257"></a><span class="lineno"><a class="line" href="classnetwork_manager.html#acb47b4d6f2066b782f7c16d1e0a8eed9">  257</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classnetwork_manager.html">networkManager</a>::<a class="code" href="classnetwork_manager.html#acb47b4d6f2066b782f7c16d1e0a8eed9">DestroySession</a>() {</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classnetwork_manager.html#ab573cdd7387a58c958837eedc2121366">init</a>) {</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        RakNet::RakPeerInterface::DestroyInstance(peer);</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        printf(<span class="stringliteral">&quot;Killed the session\n&quot;</span>);</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        <a class="code" href="classnetwork_manager.html#ab573cdd7387a58c958837eedc2121366">init</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        <a class="code" href="classnetwork_manager.html#aa25541e488f5095f30a285867905a70f">isServer</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        <a class="code" href="classnetwork_manager.html#a86acdc4fae88a09a364bca008d1cd4a4">connectedClients</a> = 0;</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    }</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;}</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; </div>
+<div class="line"><a name="l00267"></a><span class="lineno"><a class="line" href="classnetwork_manager.html#a1e7a42bc6bb7ef1f11a9b0d45748715b">  267</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classnetwork_manager.html">networkManager</a>::<a class="code" href="classnetwork_manager.html#a1e7a42bc6bb7ef1f11a9b0d45748715b">ConnectionStatus</a>() {</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classnetwork_manager.html#a86acdc4fae88a09a364bca008d1cd4a4">connectedClients</a> &gt; 0) {</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        <span class="keywordflow">return</span> (<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        <span class="keywordflow">return</span> (<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    }</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;}</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; </div>
+<div class="line"><a name="l00275"></a><span class="lineno"><a class="line" href="classnetwork_manager.html#aa4146a5d58c69433028888fdda28e098">  275</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classnetwork_manager.html">networkManager</a>::<a class="code" href="classnetwork_manager.html#aa4146a5d58c69433028888fdda28e098">HasReceivedChatMessage</a>() {</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    <span class="keywordflow">for</span> (packet = peer-&gt;Receive(); packet; packet = peer-&gt;Receive()) {</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        <span class="keywordflow">if</span> (GetPacketIdentifier(packet) == ID_GAME_MESSAGE_1) {</div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;            <span class="keywordflow">return</span> (<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        }</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;    }</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    <span class="keywordflow">return</span> (<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;}</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160; </div>
+<div class="line"><a name="l00284"></a><span class="lineno"><a class="line" href="classnetwork_manager.html#ae05d3d029ead378044a3b4ea36942517">  284</a></span>&#160;<span class="keywordtype">char</span>* <a class="code" href="classnetwork_manager.html">networkManager</a>::<a class="code" href="classnetwork_manager.html#ae05d3d029ead378044a3b4ea36942517">GetName</a>() { <span class="keywordflow">return</span> <a class="code" href="classnetwork_manager.html#a9f7e35bd2b4afbb268dc7be56221c471">name</a>; }</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160; </div>
+<div class="line"><a name="l00286"></a><span class="lineno"><a class="line" href="classnetwork_manager.html#a610fbdba6556c9743c8a84927d681665">  286</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classnetwork_manager.html">networkManager</a>::<a class="code" href="classnetwork_manager.html#a610fbdba6556c9743c8a84927d681665">GetServer</a>() { <span class="keywordflow">return</span> <a class="code" href="classnetwork_manager.html#aa25541e488f5095f30a285867905a70f">isServer</a>; }</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160; </div>
+<div class="line"><a name="l00288"></a><span class="lineno"><a class="line" href="classnetwork_manager.html#ae47ae99c3908636bab6b495234f96371">  288</a></span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="classnetwork_manager.html">networkManager</a>::<a class="code" href="classnetwork_manager.html#ae47ae99c3908636bab6b495234f96371">GetPacketIdentifier</a>(RakNet::Packet* p) {</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    <span class="keywordflow">if</span> (p == 0) <span class="keywordflow">return</span> 255;</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    <span class="keywordflow">if</span> ((<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>)p-&gt;data[0] == ID_TIMESTAMP) {</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;        RakAssert(p-&gt;length &gt; <span class="keyword">sizeof</span>(RakNet::MessageID) + <span class="keyword">sizeof</span>(RakNet::Time));</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        <span class="keywordflow">return</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>)</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;            p-&gt;data[<span class="keyword">sizeof</span>(RakNet::MessageID) + <span class="keyword">sizeof</span>(RakNet::Time)];</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    } <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;        <span class="keywordflow">return</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>)p-&gt;data[0];</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;}</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160; </div>
+<div class="line"><a name="l00299"></a><span class="lineno"><a class="line" href="classnetwork_manager.html#a022b83470fb26366a7c533a52ebc1d69">  299</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classnetwork_manager.html">networkManager</a>::<a class="code" href="classnetwork_manager.html#a022b83470fb26366a7c533a52ebc1d69">ObjectPositionSend</a>(glm::vec3 position) {</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    RakNet::BitStream bsOut;</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    bsOut.Write((RakNet::MessageID)ID_GAME_MESSAGE_2);</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    bsOut.Write(position);</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    <span class="comment">//printf(&quot;%f %f %f NM\n&quot;, position.x, position.y, position.z);</span></div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    peer-&gt;Send(&amp;bsOut, HIGH_PRIORITY, UNRELIABLE_SEQUENCED, 0,</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;               RakNet::UNASSIGNED_SYSTEM_ADDRESS, <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;}</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160; </div>
+<div class="line"><a name="l00308"></a><span class="lineno"><a class="line" href="classnetwork_manager.html#a8f5507e61dff53ed1f7b67edead580d2">  308</a></span>&#160;<a class="code" href="classnetwork_manager.html#a8f5507e61dff53ed1f7b67edead580d2">glm</a>::<a class="code" href="classnetwork_manager.html#a8f5507e61dff53ed1f7b67edead580d2">vec3</a> <a class="code" href="classnetwork_manager.html">networkManager</a>::<a class="code" href="classnetwork_manager.html#a8f5507e61dff53ed1f7b67edead580d2">ObjectPositionReceive</a>() {</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;    packet = peer-&gt;Receive();</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;    <span class="keywordflow">if</span> (packet) {</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        <span class="keywordflow">switch</span> (GetPacketIdentifier(packet)) {</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;            <span class="keywordflow">case</span> ID_GAME_MESSAGE_2: {</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;                <span class="comment">// RakNet::RakString rs;</span></div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;                glm::vec3 tempVec3;</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;                RakNet::BitStream bsIn(packet-&gt;data, packet-&gt;length, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;                bsIn.IgnoreBytes(<span class="keyword">sizeof</span>(RakNet::MessageID));</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;                bsIn.Read(tempVec3);</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;                <span class="comment">// printf(&quot;%f %f %f NM\n&quot;, tempVec3.x, tempVec3.y, tempVec3.z);</span></div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;                bsIn.Reset();</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;                dataMissed = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;                <span class="keywordflow">return</span> (tempVec3);</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;            }</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;            <span class="keywordflow">case</span> ID_CONNECTION_REQUEST_ACCEPTED: {</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;                connectedClients++;</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;            }</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;            <span class="keywordflow">case</span> ID_CONNECTION_LOST: {</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;                connectedClients--;</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;            }</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;            <span class="keywordflow">case</span> ID_DISCONNECTION_NOTIFICATION: {</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;                connectedClients--;</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;            }</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;        }</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    }</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    peer-&gt;DeallocatePacket(packet);</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    <span class="comment">//printf(&quot;Did not read vector correctly\n&quot;);</span></div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;    <a class="code" href="classnetwork_manager.html#a9201f88130b0c6fbd05de2a867386600">dataMissed</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    <span class="keywordflow">return</span> (glm::vec3(0, 0, 0));</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;    }</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="a_network_manager_8cpp_html_aa20a5bf9d6aca09065b03fff1cbc3435"><div class="ttname"><a href="_network_manager_8cpp.html#aa20a5bf9d6aca09065b03fff1cbc3435">packet</a></div><div class="ttdeci">RakNet::Packet * packet</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00015">NetworkManager.cpp:15</a></div></div>
-<div class="ttc" id="a_network_manager_8hpp_html_a0a8f91f93d75a07f0ae45077db45b3eb"><div class="ttname"><a href="_network_manager_8hpp.html#a0a8f91f93d75a07f0ae45077db45b3eb">MAX_CLIENTS</a></div><div class="ttdeci">#define MAX_CLIENTS</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8hpp_source.html#l00013">NetworkManager.hpp:13</a></div></div>
-<div class="ttc" id="aclassnetwork_manager_html_ae47ae99c3908636bab6b495234f96371"><div class="ttname"><a href="classnetwork_manager.html#ae47ae99c3908636bab6b495234f96371">networkManager::GetPacketIdentifier</a></div><div class="ttdeci">unsigned char GetPacketIdentifier(RakNet::Packet *p)</div><div class="ttdoc">Gets the packet identifier and returns it.</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00205">NetworkManager.cpp:205</a></div></div>
+<div class="ttc" id="a_network_manager_8cpp_html_aa20a5bf9d6aca09065b03fff1cbc3435"><div class="ttname"><a href="_network_manager_8cpp.html#aa20a5bf9d6aca09065b03fff1cbc3435">packet</a></div><div class="ttdeci">RakNet::Packet * packet</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00017">NetworkManager.cpp:17</a></div></div>
+<div class="ttc" id="a_network_manager_8hpp_html_a0a8f91f93d75a07f0ae45077db45b3eb"><div class="ttname"><a href="_network_manager_8hpp.html#a0a8f91f93d75a07f0ae45077db45b3eb">MAX_CLIENTS</a></div><div class="ttdeci">#define MAX_CLIENTS</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8hpp_source.html#l00015">NetworkManager.hpp:15</a></div></div>
+<div class="ttc" id="aclassnetwork_manager_html_aa4146a5d58c69433028888fdda28e098"><div class="ttname"><a href="classnetwork_manager.html#aa4146a5d58c69433028888fdda28e098">networkManager::HasReceivedChatMessage</a></div><div class="ttdeci">bool HasReceivedChatMessage()</div><div class="ttdoc">Gets if a chat message has been received.</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00275">NetworkManager.cpp:275</a></div></div>
+<div class="ttc" id="aclassnetwork_manager_html_ae47ae99c3908636bab6b495234f96371"><div class="ttname"><a href="classnetwork_manager.html#ae47ae99c3908636bab6b495234f96371">networkManager::GetPacketIdentifier</a></div><div class="ttdeci">unsigned char GetPacketIdentifier(RakNet::Packet *p)</div><div class="ttdoc">Gets the packet identifier and returns it.</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00288">NetworkManager.cpp:288</a></div></div>
 <div class="ttc" id="a_network_manager_8cpp_html_a8e03167ce04350be901b028cc4cf1ce1"><div class="ttname"><a href="_network_manager_8cpp.html#a8e03167ce04350be901b028cc4cf1ce1">name</a></div><div class="ttdeci">char name[256]</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00005">NetworkManager.cpp:5</a></div></div>
-<div class="ttc" id="aclassnetwork_manager_html_aa25541e488f5095f30a285867905a70f"><div class="ttname"><a href="classnetwork_manager.html#aa25541e488f5095f30a285867905a70f">networkManager::isServer</a></div><div class="ttdeci">bool isServer</div><div class="ttdoc">Is the current instance a server?</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8hpp_source.html#l00025">NetworkManager.hpp:25</a></div></div>
-<div class="ttc" id="a_network_manager_8cpp_html_a0c9ea8eea151f139b4910b80a2805eb4"><div class="ttname"><a href="_network_manager_8cpp.html#a0c9ea8eea151f139b4910b80a2805eb4">GameMessages</a></div><div class="ttdeci">GameMessages</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00017">NetworkManager.cpp:17</a></div></div>
-<div class="ttc" id="aclassnetwork_manager_html_a38de4484d239e3f445843f901a88c5c2"><div class="ttname"><a href="classnetwork_manager.html#a38de4484d239e3f445843f901a88c5c2">networkManager::MessageSend</a></div><div class="ttdeci">void MessageSend(char *inputMessage)</div><div class="ttdoc">Sends a message across the network to the server (or from the server to all connected clients)</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00072">NetworkManager.cpp:72</a></div></div>
-<div class="ttc" id="aclassnetwork_manager_html_a69457ab5c5ff952456f76715727400ad"><div class="ttname"><a href="classnetwork_manager.html#a69457ab5c5ff952456f76715727400ad">networkManager::connected</a></div><div class="ttdeci">bool connected</div><div class="ttdoc">Have we connected to a server? Is there a connection to a client?</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8hpp_source.html#l00028">NetworkManager.hpp:28</a></div></div>
+<div class="ttc" id="aclassnetwork_manager_html_a610fbdba6556c9743c8a84927d681665"><div class="ttname"><a href="classnetwork_manager.html#a610fbdba6556c9743c8a84927d681665">networkManager::GetServer</a></div><div class="ttdeci">bool GetServer()</div><div class="ttdoc">Gets if the network manager is a server or client.</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00286">NetworkManager.cpp:286</a></div></div>
+<div class="ttc" id="aclassnetwork_manager_html_aa25541e488f5095f30a285867905a70f"><div class="ttname"><a href="classnetwork_manager.html#aa25541e488f5095f30a285867905a70f">networkManager::isServer</a></div><div class="ttdeci">bool isServer</div><div class="ttdoc">Is the current instance a server?</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8hpp_source.html#l00027">NetworkManager.hpp:27</a></div></div>
+<div class="ttc" id="a_network_manager_8cpp_html_a0c9ea8eea151f139b4910b80a2805eb4"><div class="ttname"><a href="_network_manager_8cpp.html#a0c9ea8eea151f139b4910b80a2805eb4">GameMessages</a></div><div class="ttdeci">GameMessages</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00019">NetworkManager.cpp:19</a></div></div>
+<div class="ttc" id="aclassnetwork_manager_html_a38de4484d239e3f445843f901a88c5c2"><div class="ttname"><a href="classnetwork_manager.html#a38de4484d239e3f445843f901a88c5c2">networkManager::MessageSend</a></div><div class="ttdeci">void MessageSend(char *inputMessage)</div><div class="ttdoc">Sends a message across the network to the server (or from the server to all connected clients)</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00098">NetworkManager.cpp:98</a></div></div>
+<div class="ttc" id="aclassnetwork_manager_html_a69457ab5c5ff952456f76715727400ad"><div class="ttname"><a href="classnetwork_manager.html#a69457ab5c5ff952456f76715727400ad">networkManager::connected</a></div><div class="ttdeci">bool connected</div><div class="ttdoc">Have we connected to a server? Is there a connection to a client?</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8hpp_source.html#l00030">NetworkManager.hpp:30</a></div></div>
+<div class="ttc" id="aclassnetwork_manager_html_a8f5507e61dff53ed1f7b67edead580d2"><div class="ttname"><a href="classnetwork_manager.html#a8f5507e61dff53ed1f7b67edead580d2">networkManager::ObjectPositionReceive</a></div><div class="ttdeci">glm::vec3 ObjectPositionReceive()</div><div class="ttdoc">Receives the object position across the network.</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00308">NetworkManager.cpp:308</a></div></div>
 <div class="ttc" id="a_network_manager_8cpp_html_ab36823025f12a809217f7771125658c2"><div class="ttname"><a href="_network_manager_8cpp.html#ab36823025f12a809217f7771125658c2">connected</a></div><div class="ttdeci">bool connected</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00009">NetworkManager.cpp:9</a></div></div>
 <div class="ttc" id="aclassnetwork_manager_html_a4544b1d96842470e26914fb46a1f83b5"><div class="ttname"><a href="classnetwork_manager.html#a4544b1d96842470e26914fb46a1f83b5">networkManager::SetupClient</a></div><div class="ttdeci">void SetupClient(std::string userName)</div><div class="ttdoc">Initialises Network for client. Also handles client username.</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00027">NetworkManager.cpp:27</a></div></div>
 <div class="ttc" id="a_network_manager_8cpp_html_ad247301e4fcee2f3196116b47d536287"><div class="ttname"><a href="_network_manager_8cpp.html#ad247301e4fcee2f3196116b47d536287">message</a></div><div class="ttdeci">char message[512]</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00003">NetworkManager.cpp:3</a></div></div>
 <div class="ttc" id="a_network_manager_8cpp_html_adffeed063b3a70c7aee40df5017a4cec"><div class="ttname"><a href="_network_manager_8cpp.html#adffeed063b3a70c7aee40df5017a4cec">isServer</a></div><div class="ttdeci">bool isServer</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00007">NetworkManager.cpp:7</a></div></div>
-<div class="ttc" id="a_network_manager_8cpp_html_a0c9ea8eea151f139b4910b80a2805eb4a8c4ce6bdc2e96343915d9d2df5ce2045"><div class="ttname"><a href="_network_manager_8cpp.html#a0c9ea8eea151f139b4910b80a2805eb4a8c4ce6bdc2e96343915d9d2df5ce2045">ID_GAME_MESSAGE_1</a></div><div class="ttdeci">@ ID_GAME_MESSAGE_1</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00018">NetworkManager.cpp:18</a></div></div>
-<div class="ttc" id="aclassnetwork_manager_html_a25c6aa5fa882d884afa70dd3dca97c78"><div class="ttname"><a href="classnetwork_manager.html#a25c6aa5fa882d884afa70dd3dca97c78">networkManager::SetupServer</a></div><div class="ttdeci">void SetupServer()</div><div class="ttdoc">Initialises and begins a server session. Running on the network port number 60000....</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00056">NetworkManager.cpp:56</a></div></div>
-<div class="ttc" id="a_network_manager_8cpp_html_ab7d5f5751f150756aff5f6e47729e9a3"><div class="ttname"><a href="_network_manager_8cpp.html#ab7d5f5751f150756aff5f6e47729e9a3">peer</a></div><div class="ttdeci">RakNet::RakPeerInterface * peer</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00013">NetworkManager.cpp:13</a></div></div>
+<div class="ttc" id="a_network_manager_8cpp_html_a0c9ea8eea151f139b4910b80a2805eb4a8c4ce6bdc2e96343915d9d2df5ce2045"><div class="ttname"><a href="_network_manager_8cpp.html#a0c9ea8eea151f139b4910b80a2805eb4a8c4ce6bdc2e96343915d9d2df5ce2045">ID_GAME_MESSAGE_1</a></div><div class="ttdeci">@ ID_GAME_MESSAGE_1</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00019">NetworkManager.cpp:19</a></div></div>
+<div class="ttc" id="aclassnetwork_manager_html_a86acdc4fae88a09a364bca008d1cd4a4"><div class="ttname"><a href="classnetwork_manager.html#a86acdc4fae88a09a364bca008d1cd4a4">networkManager::connectedClients</a></div><div class="ttdeci">int connectedClients</div><div class="ttdoc">How many clients are we connected to? (should be 1 for clients, &gt; 1 for servers when multiple clients...</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8hpp_source.html#l00039">NetworkManager.hpp:39</a></div></div>
+<div class="ttc" id="a_network_manager_8cpp_html_ab7d5f5751f150756aff5f6e47729e9a3"><div class="ttname"><a href="_network_manager_8cpp.html#ab7d5f5751f150756aff5f6e47729e9a3">peer</a></div><div class="ttdeci">RakNet::RakPeerInterface * peer</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00015">NetworkManager.cpp:15</a></div></div>
+<div class="ttc" id="aclassnetwork_manager_html_a52784d20ce9ffda395a16a8150a53aa1"><div class="ttname"><a href="classnetwork_manager.html#a52784d20ce9ffda395a16a8150a53aa1">networkManager::ReceiveMessage</a></div><div class="ttdeci">std::string ReceiveMessage()</div><div class="ttdoc">Receives a message from the network. It also handles the contents of the message.</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00111">NetworkManager.cpp:111</a></div></div>
+<div class="ttc" id="aclassnetwork_manager_html_a9201f88130b0c6fbd05de2a867386600"><div class="ttname"><a href="classnetwork_manager.html#a9201f88130b0c6fbd05de2a867386600">networkManager::dataMissed</a></div><div class="ttdeci">bool dataMissed</div><div class="ttdoc">Have we missed any data.</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8hpp_source.html#l00036">NetworkManager.hpp:36</a></div></div>
 <div class="ttc" id="a_network_manager_8cpp_html_a50300ba6e38ec30121edcc07ebac42c6"><div class="ttname"><a href="_network_manager_8cpp.html#a50300ba6e38ec30121edcc07ebac42c6">init</a></div><div class="ttdeci">bool init</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00011">NetworkManager.cpp:11</a></div></div>
-<div class="ttc" id="aclassnetwork_manager_html_acb47b4d6f2066b782f7c16d1e0a8eed9"><div class="ttname"><a href="classnetwork_manager.html#acb47b4d6f2066b782f7c16d1e0a8eed9">networkManager::DestroySession</a></div><div class="ttdeci">void DestroySession()</div><div class="ttdoc">Ends the current session.</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00192">NetworkManager.cpp:192</a></div></div>
-<div class="ttc" id="aclassnetwork_manager_html_ad22f91fbb417dcd411879a6875016cea"><div class="ttname"><a href="classnetwork_manager.html#ad22f91fbb417dcd411879a6875016cea">networkManager::ReceiveMessage</a></div><div class="ttdeci">char * ReceiveMessage()</div><div class="ttdoc">Receives a message from the network. It also handles the contents of the message.</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00079">NetworkManager.cpp:79</a></div></div>
+<div class="ttc" id="aclassnetwork_manager_html_acb47b4d6f2066b782f7c16d1e0a8eed9"><div class="ttname"><a href="classnetwork_manager.html#acb47b4d6f2066b782f7c16d1e0a8eed9">networkManager::DestroySession</a></div><div class="ttdeci">void DestroySession()</div><div class="ttdoc">Ends the current session.</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00257">NetworkManager.cpp:257</a></div></div>
+<div class="ttc" id="aclassnetwork_manager_html_ae05d3d029ead378044a3b4ea36942517"><div class="ttname"><a href="classnetwork_manager.html#ae05d3d029ead378044a3b4ea36942517">networkManager::GetName</a></div><div class="ttdeci">char * GetName()</div><div class="ttdoc">Gets the username.</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00284">NetworkManager.cpp:284</a></div></div>
+<div class="ttc" id="aclassnetwork_manager_html_a022b83470fb26366a7c533a52ebc1d69"><div class="ttname"><a href="classnetwork_manager.html#a022b83470fb26366a7c533a52ebc1d69">networkManager::ObjectPositionSend</a></div><div class="ttdeci">void ObjectPositionSend(glm::vec3 position)</div><div class="ttdoc">Sends the position of an object.</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00299">NetworkManager.cpp:299</a></div></div>
 <div class="ttc" id="aclassnetwork_manager_html_a087b7e1018686c7a25b9b13bba1933bd"><div class="ttname"><a href="classnetwork_manager.html#a087b7e1018686c7a25b9b13bba1933bd">networkManager::InitNetwork</a></div><div class="ttdeci">void InitNetwork()</div><div class="ttdoc">Initialises Network.</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00021">NetworkManager.cpp:21</a></div></div>
-<div class="ttc" id="aclassnetwork_manager_html_ac1795c011235744a60fd6b45c18c67a4"><div class="ttname"><a href="classnetwork_manager.html#ac1795c011235744a60fd6b45c18c67a4">networkManager::ChangeName</a></div><div class="ttdeci">void ChangeName(std::string userName)</div><div class="ttdoc">Changes the name of the client or server.</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00067">NetworkManager.cpp:67</a></div></div>
-<div class="ttc" id="aclassnetwork_manager_html_a1e7a42bc6bb7ef1f11a9b0d45748715b"><div class="ttname"><a href="classnetwork_manager.html#a1e7a42bc6bb7ef1f11a9b0d45748715b">networkManager::ConnectionStatus</a></div><div class="ttdeci">bool ConnectionStatus()</div><div class="ttdoc">Gets the status of the connection.</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00201">NetworkManager.cpp:201</a></div></div>
-<div class="ttc" id="aclassnetwork_manager_html_ab573cdd7387a58c958837eedc2121366"><div class="ttname"><a href="classnetwork_manager.html#ab573cdd7387a58c958837eedc2121366">networkManager::init</a></div><div class="ttdeci">bool init</div><div class="ttdoc">Have we initialsed the networkManager?</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8hpp_source.html#l00031">NetworkManager.hpp:31</a></div></div>
-<div class="ttc" id="aclassnetwork_manager_html"><div class="ttname"><a href="classnetwork_manager.html">networkManager</a></div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8hpp_source.html#l00016">NetworkManager.hpp:16</a></div></div>
+<div class="ttc" id="aclassnetwork_manager_html_ad2d28469edee0c47fe6494b5f0b386b7"><div class="ttname"><a href="classnetwork_manager.html#ad2d28469edee0c47fe6494b5f0b386b7">networkManager::SetupServer</a></div><div class="ttdeci">void SetupServer(std::string userName)</div><div class="ttdoc">Initialises and begins a server session. Running on the network port number 60000....</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00058">NetworkManager.cpp:58</a></div></div>
+<div class="ttc" id="aclassnetwork_manager_html_ac1795c011235744a60fd6b45c18c67a4"><div class="ttname"><a href="classnetwork_manager.html#ac1795c011235744a60fd6b45c18c67a4">networkManager::ChangeName</a></div><div class="ttdeci">void ChangeName(std::string userName)</div><div class="ttdoc">Changes the name of the client or server.</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00076">NetworkManager.cpp:76</a></div></div>
+<div class="ttc" id="aclassnetwork_manager_html_a1e7a42bc6bb7ef1f11a9b0d45748715b"><div class="ttname"><a href="classnetwork_manager.html#a1e7a42bc6bb7ef1f11a9b0d45748715b">networkManager::ConnectionStatus</a></div><div class="ttdeci">bool ConnectionStatus()</div><div class="ttdoc">Gets the status of the connection.</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00267">NetworkManager.cpp:267</a></div></div>
+<div class="ttc" id="aclassnetwork_manager_html_ab573cdd7387a58c958837eedc2121366"><div class="ttname"><a href="classnetwork_manager.html#ab573cdd7387a58c958837eedc2121366">networkManager::init</a></div><div class="ttdeci">bool init</div><div class="ttdoc">Have we initialsed the networkManager?</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8hpp_source.html#l00033">NetworkManager.hpp:33</a></div></div>
+<div class="ttc" id="aclassnetwork_manager_html"><div class="ttname"><a href="classnetwork_manager.html">networkManager</a></div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8hpp_source.html#l00018">NetworkManager.hpp:18</a></div></div>
 <div class="ttc" id="aclassnetwork_manager_html_af2976479fbe0d04144c1b42091e9ecb4"><div class="ttname"><a href="classnetwork_manager.html#af2976479fbe0d04144c1b42091e9ecb4">networkManager::ConnectClient</a></div><div class="ttdeci">bool ConnectClient(char *serverIP)</div><div class="ttdoc">Connects the client to the server. Returns true if connection was successful or false if connection w...</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00041">NetworkManager.cpp:41</a></div></div>
-<div class="ttc" id="aclassnetwork_manager_html_a9f7e35bd2b4afbb268dc7be56221c471"><div class="ttname"><a href="classnetwork_manager.html#a9f7e35bd2b4afbb268dc7be56221c471">networkManager::name</a></div><div class="ttdeci">char name[256]</div><div class="ttdoc">Name given to the client/server.</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8hpp_source.html#l00022">NetworkManager.hpp:22</a></div></div>
-<div class="ttc" id="a_network_manager_8hpp_html_ac42367fe5c999ec6650de83e9d72fe8c"><div class="ttname"><a href="_network_manager_8hpp.html#ac42367fe5c999ec6650de83e9d72fe8c">SERVER_PORT</a></div><div class="ttdeci">#define SERVER_PORT</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8hpp_source.html#l00014">NetworkManager.hpp:14</a></div></div>
+<div class="ttc" id="aclassnetwork_manager_html_a9f7e35bd2b4afbb268dc7be56221c471"><div class="ttname"><a href="classnetwork_manager.html#a9f7e35bd2b4afbb268dc7be56221c471">networkManager::name</a></div><div class="ttdeci">char name[256]</div><div class="ttdoc">Name given to the client/server.</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8hpp_source.html#l00024">NetworkManager.hpp:24</a></div></div>
+<div class="ttc" id="a_network_manager_8cpp_html_a1c349edcda4107089f6ea55f0b14c576"><div class="ttname"><a href="_network_manager_8cpp.html#a1c349edcda4107089f6ea55f0b14c576">connectedClients</a></div><div class="ttdeci">int connectedClients</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8cpp_source.html#l00013">NetworkManager.cpp:13</a></div></div>
+<div class="ttc" id="a_network_manager_8hpp_html_ac42367fe5c999ec6650de83e9d72fe8c"><div class="ttname"><a href="_network_manager_8hpp.html#ac42367fe5c999ec6650de83e9d72fe8c">SERVER_PORT</a></div><div class="ttdeci">#define SERVER_PORT</div><div class="ttdef"><b>Definition:</b> <a href="_network_manager_8hpp_source.html#l00016">NetworkManager.hpp:16</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

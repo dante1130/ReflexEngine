@@ -1,10 +1,10 @@
 var class_open_g_l =
 [
     [ "OpenGL", "class_open_g_l.html#a23a656ffb46cee58077f5819ec2dbff9", null ],
-    [ "add_directional_light", "class_open_g_l.html#ac536ff2dee6dfc2d977b0ca0836faa4e", null ],
+    [ "add_directional_light", "class_open_g_l.html#a4a286c06293197eaa4f435562382ebc3", null ],
     [ "add_draw_call", "class_open_g_l.html#aeb9c50459ef1ac3eca39088916cec4e1", null ],
-    [ "add_point_light", "class_open_g_l.html#a2ae3f841a21cd66fbfbbab3d6b71fe66", null ],
-    [ "add_spot_light", "class_open_g_l.html#ae00421d64b71ceaca962ab3d3cabbb30", null ],
+    [ "add_point_light", "class_open_g_l.html#af93219dc4a2e9853c847140521bc7594", null ],
+    [ "add_spot_light", "class_open_g_l.html#a5af9cfd4f395a612ee8cb7ea52fe8f11", null ],
     [ "directional_shadow_pass", "class_open_g_l.html#a71caa1674775075035d255770832f9d8", null ],
     [ "draw", "class_open_g_l.html#a7443c85991c40d1abf40825d2cbbf177", null ],
     [ "get_shader", "class_open_g_l.html#a60b48f5e2dd6e82133eb6eadd17245d0", null ],
@@ -12,6 +12,7 @@ var class_open_g_l =
     [ "render_lights", "class_open_g_l.html#acf2f6fe8fe2443a8768b072b85d0f7b8", null ],
     [ "render_pass", "class_open_g_l.html#a51e3e6a3fb96fcdca89f8a28de912b66", null ],
     [ "render_scene", "class_open_g_l.html#a737e5833952461ba4f587676efdafdfb", null ],
+    [ "set_skybox", "class_open_g_l.html#aa9a7bfe4c38f3f8cfe0f331cdf9176bb", null ],
     [ "toggle_wireframe", "class_open_g_l.html#a3d14793802cb65d62a2c4c38ad1ee273", null ],
     [ "directional_lights_", "class_open_g_l.html#ac3f708cf5611d9a0671c9f82d2b1725d", null ],
     [ "directional_shadow_shader_", "class_open_g_l.html#a81600a3624dd2735a416f1220035682f", null ],

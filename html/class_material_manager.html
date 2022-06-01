@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: MaterialManager Class Reference</title>
+<title>ICT397 Assignment 2: MaterialManager Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -248,15 +248,13 @@ Private Attributes</h2></td></tr>
 <p>Load a material into the material manager. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">material_name</td><td></td></tr>
-    <tr><td class="paramname">shine</td><td></td></tr>
-    <tr><td class="paramname">spec_intensity</td><td></td></tr>
+    <tr><td class="paramname">material_name</td><td>The name given to the material. </td></tr>
+    <tr><td class="paramname">shine</td><td>The shininess of the material. </td></tr>
+    <tr><td class="paramname">spec_intensity</td><td>The specular intensity of the material. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true </dd>
-<dd>
-false </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>bool </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_material_manager_8cpp_source.html#l00009">9</a> of file <a class="el" href="_material_manager_8cpp_source.html">MaterialManager.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;                                                                       {</div>
@@ -319,7 +317,7 @@ false </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_material_manager_8hpp_source.html#l00051">51</a> of file <a class="el" href="_material_manager_8hpp_source.html">MaterialManager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_material_manager_8hpp_source.html#l00050">50</a> of file <a class="el" href="_material_manager_8hpp_source.html">MaterialManager.hpp</a>.</p>
 
 </div>
 </div>
@@ -331,7 +329,7 @@ false </dd></dl>
 </div><!-- doc-content -->
 <div class="ttc" id="aclass_lua_manager_html_a946b61fad46130d8e3a8bcbfb0759001"><div class="ttname"><a href="class_lua_manager.html#a946b61fad46130d8e3a8bcbfb0759001">LuaManager::get_state</a></div><div class="ttdeci">sol::state &amp; get_state()</div><div class="ttdoc">Get the lua state.</div><div class="ttdef"><b>Definition:</b> <a href="_lua_manager_8cpp_source.html#l00008">LuaManager.cpp:8</a></div></div>
 <div class="ttc" id="aclass_material_manager_html_a3bb9ecaa296f3e5acde7b5117458ed5a"><div class="ttname"><a href="class_material_manager.html#a3bb9ecaa296f3e5acde7b5117458ed5a">MaterialManager::load_material</a></div><div class="ttdeci">bool load_material(const std::string &amp;material_name, float shine, float spec_intensity)</div><div class="ttdoc">Load a material into the material manager.</div><div class="ttdef"><b>Definition:</b> <a href="_material_manager_8cpp_source.html#l00009">MaterialManager.cpp:9</a></div></div>
-<div class="ttc" id="aclass_material_manager_html_a8a4ffc7f920f658073e2677f3805b52c"><div class="ttname"><a href="class_material_manager.html#a8a4ffc7f920f658073e2677f3805b52c">MaterialManager::material_hashmap</a></div><div class="ttdeci">std::unordered_map&lt; std::string, Reflex::Material * &gt; material_hashmap</div><div class="ttdef"><b>Definition:</b> <a href="_material_manager_8hpp_source.html#l00051">MaterialManager.hpp:51</a></div></div>
+<div class="ttc" id="aclass_material_manager_html_a8a4ffc7f920f658073e2677f3805b52c"><div class="ttname"><a href="class_material_manager.html#a8a4ffc7f920f658073e2677f3805b52c">MaterialManager::material_hashmap</a></div><div class="ttdeci">std::unordered_map&lt; std::string, Reflex::Material * &gt; material_hashmap</div><div class="ttdef"><b>Definition:</b> <a href="_material_manager_8hpp_source.html#l00050">MaterialManager.hpp:50</a></div></div>
 <div class="ttc" id="aclass_reflex_1_1_material_html"><div class="ttname"><a href="class_reflex_1_1_material.html">Reflex::Material</a></div><div class="ttdef"><b>Definition:</b> <a href="_material_8hpp_source.html#l00011">Material.hpp:11</a></div></div>
 <div class="ttc" id="aclass_lua_manager_html_a56c31a98da7a859905f416098c69c3ca"><div class="ttname"><a href="class_lua_manager.html#a56c31a98da7a859905f416098c69c3ca">LuaManager::get_instance</a></div><div class="ttdeci">static LuaManager &amp; get_instance()</div><div class="ttdoc">Get an isntance of the LuaManager.</div><div class="ttdef"><b>Definition:</b> <a href="_lua_manager_8cpp_source.html#l00003">LuaManager.cpp:3</a></div></div>
 <!-- start footer part -->

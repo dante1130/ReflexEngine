@@ -1,0 +1,4 @@
+<map id="GameAssetFactory::loadWater" name="GameAssetFactory::loadWater">
+<area shape="rect" id="node1" title="Loads in a water object from a lua script." alt="" coords="5,5,208,32"/>
+<area shape="rect" id="node2" href="$class_water.html#ada72e262387b61c9ee8b6a51e7ce03f7" title=" " alt="" coords="256,5,395,32"/>
+</map>

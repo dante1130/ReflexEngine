@@ -1,6 +1,8 @@
 <map id="ResourceManager::get_texture_manager" name="ResourceManager::get_texture_manager">
-<area shape="rect" id="node1" title="Get the texture manager." alt="" coords="197,64,351,105"/>
-<area shape="rect" id="node2" href="$namespace_material_lua_controller.html#a2bf77986afcc458d485046c156d5bedd" title="Gives lua access to material related functions (texture &amp; model managers)" alt="" coords="5,5,149,47"/>
-<area shape="rect" id="node3" href="$class_water.html#aca2414328c1d530cebff6ba347225ff9" title="Initialises the water." alt="" coords="31,71,123,98"/>
-<area shape="rect" id="node4" href="$namespacegui.html#a32199bb3c15f21a31295be2e39c258d1" title="Creates an image using a texture name." alt="" coords="24,122,131,149"/>
+<area shape="rect" id="node1" title="Get the texture manager." alt="" coords="417,74,571,115"/>
+<area shape="rect" id="node2" href="$class_water.html#aca2414328c1d530cebff6ba347225ff9" title="Initialises the water." alt="" coords="229,5,321,32"/>
+<area shape="rect" id="node3" href="$namespacegui.html#a32199bb3c15f21a31295be2e39c258d1" title="Creates an image using a texture name." alt="" coords="222,56,329,83"/>
+<area shape="rect" id="node4" href="$class_model_data.html#a82ad8ebbe6baabbf3633586614fb537e" title="Render the model animated." alt="" coords="181,107,369,133"/>
+<area shape="rect" id="node6" href="$class_model_data.html#ae4edf4b22d7cda2e7074d3fe9c130384" title="Render the model statically." alt="" coords="190,157,361,184"/>
+<area shape="rect" id="node5" href="$class_model_data.html#af93eb28b2566856b36b26d9554e1a584" title="Render the model." alt="" coords="5,132,133,159"/>
 </map>

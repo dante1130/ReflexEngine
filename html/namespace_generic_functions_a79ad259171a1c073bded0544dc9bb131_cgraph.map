@@ -1,0 +1,7 @@
+<map id="GenericFunctions::networkSendMessage" name="GenericFunctions::networkSendMessage">
+<area shape="rect" id="node1" title="Sends the message saved in networkRetainMessage across the network." alt="" coords="5,74,183,115"/>
+<area shape="rect" id="node2" href="$classnetwork_manager.html#ae05d3d029ead378044a3b4ea36942517" title="Gets the username." alt="" coords="245,5,425,32"/>
+<area shape="rect" id="node3" href="$classnetwork_manager.html#a610fbdba6556c9743c8a84927d681665" title="Gets if the network manager is a server or client." alt="" coords="243,56,426,83"/>
+<area shape="rect" id="node4" href="$classnetwork_manager.html#a38de4484d239e3f445843f901a88c5c2" title="Sends a message across the network to the server (or from the server to all connected clients)" alt="" coords="231,107,439,133"/>
+<area shape="rect" id="node5" href="$namespace_generic_functions.html#a84da67baa98393a72d8b1382056b220e" title="Gets a message received across the network." alt="" coords="246,158,423,199"/>
+</map>

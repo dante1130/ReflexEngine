@@ -1,0 +1,4 @@
+<map id="GameAssetFactory::load_directional_light" name="GameAssetFactory::load_directional_light">
+<area shape="rect" id="node1" title="Loads in a directional light object from a lua script." alt="" coords="5,29,172,71"/>
+<area shape="rect" id="node2" href="$class_directional_light_object.html#a02ab23b2b732eb65276c8a88b71a0e6b" title="Construct a new Directional Light Object object." alt="" coords="220,29,377,71"/>
+</map>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: src/View/Renderer/OpenGL/Objects/DirectionalLight.hpp Source File</title>
+<title>ICT397 Assignment 2: src/View/Renderer/OpenGL/Objects/DirectionalLight.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -103,24 +103,24 @@ $(document).ready(function(){initNavTree('_directional_light_8hpp_source.html','
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">     * @brief Parameterized constructor.</span></div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">     * @param shadowWidth</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">     * @param shadowHeight</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">     * @param color</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">     * @param aIntensity</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">     * @param direction</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">     * @param dIntensity</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">     * @param shadowWidth The width of the shadow map.</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">     * @param shadowHeight The height of the shadow map.</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">     * @param color The color of the light.</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">     * @param aIntensity The ambient intensity of the light.</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">     * @param direction The direction of the light.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">     * @param dIntensity The diffuse intensity of the light.</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="class_directional_light.html#ad1c6d27b186e5219ec5b810a6ac5ca8f">DirectionalLight</a>(GLfloat shadowWidth, GLfloat shadowHeight, glm::vec3 color,</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    DirectionalLight(GLfloat shadowWidth, GLfloat shadowHeight, glm::vec3 color,</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                     GLfloat aIntensity, glm::vec3 direction,</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                     GLfloat dIntensity);</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">     * @brief Enables the light by passing the uniforms to the shader.</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">     * @param ambientColorLoc</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">     * @param ambientIntensityLoc</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">     * @param directionLoc</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">     * @param diffuseIntensityLoc</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">     * @param ambientColorLoc The location of the ambient color uniform.</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">     * @param ambientIntensityLoc The location of the ambient intensity uniform.</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">     * @param directionLoc The location of the direction uniform.</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">     * @param diffuseIntensityLoc The location of the diffuse intensity uniform.</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">     */</span></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_directional_light.html#a06c4ced2727da6668505f485a779cdc7">UseLight</a>(GLuint ambientColorLoc, GLuint ambientIntensityLoc,</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                  GLuint directionLoc, GLuint diffuseIntensityLoc) <span class="keyword">const</span>;</div>
@@ -128,27 +128,25 @@ $(document).ready(function(){initNavTree('_directional_light_8hpp_source.html','
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">     * @brief Calculate the transformation matrix of the light.</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">     * @return glm::mat4</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">     * @return glm::mat4 The transformation matrix of the light.</span></div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    glm::mat4 <a class="code" href="class_directional_light.html#a87b143b632f2208ec575758da736eab3">CalculateLightTransform</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="class_directional_light.html#a87b143b632f2208ec575758da736eab3">glm</a>::<a class="code" href="class_directional_light.html#a87b143b632f2208ec575758da736eab3">mat4</a> <a class="code" href="class_directional_light.html#a87b143b632f2208ec575758da736eab3">CalculateLightTransform</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">     * @brief Destructor.</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    ~<a class="code" href="class_directional_light.html#ac4aca6c806e752c65ffea9b2f237b245">DirectionalLight</a>();</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="comment">/// The direction the light is facing.</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="class_directional_light.html#a4432e8ebaa81b9fe4d033056eb19ca4c">   56</a></span>&#160;    glm::vec3 <a class="code" href="class_directional_light.html#a4432e8ebaa81b9fe4d033056eb19ca4c">m_direction</a>;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;};</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    ~<a class="code" href="class_directional_light.html#ac4aca6c806e752c65ffea9b2f237b245">DirectionalLight</a>();</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="comment">/// The direction the light is facing.</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="class_directional_light.html#a4432e8ebaa81b9fe4d033056eb19ca4c">   55</a></span>&#160;    <a class="code" href="class_directional_light.html#a4432e8ebaa81b9fe4d033056eb19ca4c">glm</a>::<a class="code" href="class_directional_light.html#a4432e8ebaa81b9fe4d033056eb19ca4c">vec3</a> <a class="code" href="class_directional_light.html#a4432e8ebaa81b9fe4d033056eb19ca4c">m_direction</a>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclass_directional_light_html_a87b143b632f2208ec575758da736eab3"><div class="ttname"><a href="class_directional_light.html#a87b143b632f2208ec575758da736eab3">DirectionalLight::CalculateLightTransform</a></div><div class="ttdeci">glm::mat4 CalculateLightTransform() const</div><div class="ttdoc">Calculate the transformation matrix of the light.</div><div class="ttdef"><b>Definition:</b> <a href="_directional_light_8cpp_source.html#l00025">DirectionalLight.cpp:25</a></div></div>
 <div class="ttc" id="aclass_directional_light_html_ac4aca6c806e752c65ffea9b2f237b245"><div class="ttname"><a href="class_directional_light.html#ac4aca6c806e752c65ffea9b2f237b245">DirectionalLight::~DirectionalLight</a></div><div class="ttdeci">~DirectionalLight()</div><div class="ttdoc">Destructor.</div><div class="ttdef"><b>Definition:</b> <a href="_directional_light_8cpp_source.html#l00030">DirectionalLight.cpp:30</a></div></div>
-<div class="ttc" id="aclass_directional_light_html_ad1c6d27b186e5219ec5b810a6ac5ca8f"><div class="ttname"><a href="class_directional_light.html#ad1c6d27b186e5219ec5b810a6ac5ca8f">DirectionalLight::DirectionalLight</a></div><div class="ttdeci">DirectionalLight(GLfloat shadowWidth, GLfloat shadowHeight, glm::vec3 color, GLfloat aIntensity, glm::vec3 direction, GLfloat dIntensity)</div><div class="ttdoc">Parameterized constructor.</div><div class="ttdef"><b>Definition:</b> <a href="_directional_light_8cpp_source.html#l00006">DirectionalLight.cpp:6</a></div></div>
 <div class="ttc" id="aclass_directional_light_html_a949b877ae041b9818f47eb812d80fa1b"><div class="ttname"><a href="class_directional_light.html#a949b877ae041b9818f47eb812d80fa1b">DirectionalLight::DirectionalLight</a></div><div class="ttdeci">DirectionalLight()</div><div class="ttdoc">Default constructor.</div><div class="ttdef"><b>Definition:</b> <a href="_directional_light_8cpp_source.html#l00003">DirectionalLight.cpp:3</a></div></div>
-<div class="ttc" id="aclass_directional_light_html_a4432e8ebaa81b9fe4d033056eb19ca4c"><div class="ttname"><a href="class_directional_light.html#a4432e8ebaa81b9fe4d033056eb19ca4c">DirectionalLight::m_direction</a></div><div class="ttdeci">glm::vec3 m_direction</div><div class="ttdoc">The direction the light is facing.</div><div class="ttdef"><b>Definition:</b> <a href="_directional_light_8hpp_source.html#l00056">DirectionalLight.hpp:56</a></div></div>
+<div class="ttc" id="aclass_directional_light_html_a4432e8ebaa81b9fe4d033056eb19ca4c"><div class="ttname"><a href="class_directional_light.html#a4432e8ebaa81b9fe4d033056eb19ca4c">DirectionalLight::m_direction</a></div><div class="ttdeci">glm::vec3 m_direction</div><div class="ttdoc">The direction the light is facing.</div><div class="ttdef"><b>Definition:</b> <a href="_directional_light_8hpp_source.html#l00055">DirectionalLight.hpp:55</a></div></div>
 <div class="ttc" id="aclass_light_html"><div class="ttname"><a href="class_light.html">Light</a></div><div class="ttdoc">A light in the scene.</div><div class="ttdef"><b>Definition:</b> <a href="_light_8hpp_source.html#l00013">Light.hpp:13</a></div></div>
 <div class="ttc" id="aclass_directional_light_html"><div class="ttname"><a href="class_directional_light.html">DirectionalLight</a></div><div class="ttdoc">A directional light that provides global illumination.</div><div class="ttdef"><b>Definition:</b> <a href="_directional_light_8hpp_source.html#l00009">DirectionalLight.hpp:9</a></div></div>
 <div class="ttc" id="aclass_directional_light_html_a06c4ced2727da6668505f485a779cdc7"><div class="ttname"><a href="class_directional_light.html#a06c4ced2727da6668505f485a779cdc7">DirectionalLight::UseLight</a></div><div class="ttdeci">void UseLight(GLuint ambientColorLoc, GLuint ambientIntensityLoc, GLuint directionLoc, GLuint diffuseIntensityLoc) const</div><div class="ttdoc">Enables the light by passing the uniforms to the shader.</div><div class="ttdef"><b>Definition:</b> <a href="_directional_light_8cpp_source.html#l00015">DirectionalLight.cpp:15</a></div></div>

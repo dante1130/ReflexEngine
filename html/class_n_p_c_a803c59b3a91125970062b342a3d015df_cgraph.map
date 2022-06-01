@@ -1,0 +1,5 @@
+<map id="NPC::watch_for_enemyVal" name="NPC::watch_for_enemyVal">
+<area shape="rect" id="node1" title="Searches for an enemy based on a max distance. If it sees an enemy will set its target ID &amp; return tr..." alt="" coords="5,31,183,57"/>
+<area shape="rect" id="node2" href="$class_n_p_c.html#aaba28fc3c7db07bb1d0c5ce295416bc0" title="Gets the NPC&#39;s faction they are alligned with." alt="" coords="231,5,351,32"/>
+<area shape="rect" id="node3" href="$class_n_p_c.html#a3926089c6f756fc50a6ffac5b72238d1" title="Gets if NPC is dead." alt="" coords="239,56,342,83"/>
+</map>

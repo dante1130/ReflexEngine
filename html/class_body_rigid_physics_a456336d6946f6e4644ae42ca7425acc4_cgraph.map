@@ -1,4 +1,4 @@
 <map id="BodyRigidPhysics::~BodyRigidPhysics" name="BodyRigidPhysics::~BodyRigidPhysics">
 <area shape="rect" id="node1" title="Destructor." alt="" coords="5,5,141,47"/>
-<area shape="rect" id="node2" href="$namespace_physics.html#a6e722b98ea6228887490ff9f35cbc9c4" title="Returns if the physics world is created or not." alt="" coords="189,13,344,39"/>
+<area shape="rect" id="node2" href="$class_physics.html#a222ae72790a837589db1e20985a94e87" title="Returns if the physics world is created or not." alt="" coords="189,13,337,39"/>
 </map>

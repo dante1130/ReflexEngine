@@ -1,0 +1,5 @@
+<map id="NetworkedItem::update" name="NetworkedItem::update">
+<area shape="rect" id="node1" title="Updates the Networked Item with delta time." alt="" coords="5,5,160,32"/>
+<area shape="rect" id="node2" href="$namespace_generic_functions.html#a21f0623abe4bb8f109152ada3d01c4e2" title="Checks if the pvp network manager is receiving data." alt="" coords="208,5,440,32"/>
+<area shape="rect" id="node3" href="$classnetwork_manager.html#aca6dce6dcb1831261e32f3f31e0025c4" title="Gets if the network manager missed getting valid data from ObjectPositionReceive." alt="" coords="488,5,720,32"/>
+</map>

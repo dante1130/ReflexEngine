@@ -1,0 +1,5 @@
+<map id="GameAssetFactory::loadBody" name="GameAssetFactory::loadBody">
+<area shape="rect" id="node1" title="Loads in a body object from a lua script." alt="" coords="5,31,203,57"/>
+<area shape="rect" id="node2" href="$class_body.html#aa815045b8dd6486ec9e88da0b6484ec4" title="Initialises the body object." alt="" coords="272,5,349,32"/>
+<area shape="rect" id="node3" href="$class_body.html#acc9e5b6a32fe16946f552d51efb9262e" title="Sets if the object is a creator (true) or destructor (false). A creator should be one of the fist gam..." alt="" coords="251,56,371,83"/>
+</map>

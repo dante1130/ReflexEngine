@@ -1,0 +1,5 @@
+<map id="NPC::get_faction" name="NPC::get_faction">
+<area shape="rect" id="node1" title="Gets the NPC&#39;s faction they are alligned with." alt="" coords="437,5,557,32"/>
+<area shape="rect" id="node2" href="$class_n_p_c.html#a803c59b3a91125970062b342a3d015df" title="Searches for an enemy based on a max distance. If it sees an enemy will set its target ID &amp; return tr..." alt="" coords="212,5,389,32"/>
+<area shape="rect" id="node3" href="$class_n_p_c.html#a0941e56d477bd5e9c862f786813a47cf" title="Searches for an enemy based on a distance of 10. If it sees an enemy will set its target ID &amp; return ..." alt="" coords="5,5,164,32"/>
+</map>

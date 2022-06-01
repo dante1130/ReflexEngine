@@ -1,0 +1,5 @@
+<map id="EngineTime::set_pause" name="EngineTime::set_pause">
+<area shape="rect" id="node1" title="Sets if it should pause." alt="" coords="468,5,627,32"/>
+<area shape="rect" id="node2" href="$namespace_generic_functions.html#a12494eed72773f39ae5c8c1bcfe8274e" title="Sets if the game should be paused." alt="" coords="220,5,420,32"/>
+<area shape="rect" id="node3" href="$class_test_scene.html#aadc1874364de154479e2469ea84d301f" title="The function to specify controls for the keyboard." alt="" coords="5,5,172,32"/>
+</map>

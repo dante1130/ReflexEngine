@@ -1,0 +1,4 @@
+<map id="AStar::setHeuristicsCostScale" name="AStar::setHeuristicsCostScale">
+<area shape="rect" id="node1" title="Sets the cost of the estimated distance." alt="" coords="165,5,332,47"/>
+<area shape="rect" id="node2" href="$classworld.html#a3f0aaef2569dbb61b88ca6e4b7cb9475" title="Sets the world." alt="" coords="5,13,117,39"/>
+</map>

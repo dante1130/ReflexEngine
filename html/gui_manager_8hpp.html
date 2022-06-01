@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: src/View/guiManager.hpp File Reference</title>
+<title>ICT397 Assignment 2: src/View/guiManager.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -112,13 +112,9 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="gui_manager_8hpp__dep__incl.png" border="0" usemap="#src_2_view_2gui_manager_8hppdep" alt=""/></div>
 <map name="src_2_view_2gui_manager_8hppdep" id="src_2_view_2gui_manager_8hppdep">
-<area shape="rect" title=" " alt="" coords="377,5,545,32"/>
-<area shape="rect" href="_gui_lua_access_8hpp.html" title=" " alt="" coords="211,80,424,107"/>
-<area shape="rect" href="_reflex_engine_8cpp.html" title=" " alt="" coords="372,229,551,271"/>
-<area shape="rect" href="gui_manager_8cpp.html" title=" " alt="" coords="499,80,667,107"/>
-<area shape="rect" href="_gui_lua_access_8cpp.html" title=" " alt="" coords="5,155,219,181"/>
-<area shape="rect" href="_test_scene_8hpp.html" title=" " alt="" coords="243,155,413,181"/>
-<area shape="rect" href="_test_scene_8cpp.html" title=" " alt="" coords="177,237,348,263"/>
+<area shape="rect" title=" " alt="" coords="109,5,277,32"/>
+<area shape="rect" href="_reflex_engine_8cpp.html" title=" " alt="" coords="5,80,184,121"/>
+<area shape="rect" href="gui_manager_8cpp.html" title=" " alt="" coords="208,87,376,114"/>
 </map>
 </div>
 </div>
@@ -140,9 +136,11 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a974002976bfd5dbddd9070182db7db60"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a974002976bfd5dbddd9070182db7db60">gui::init</a> (GLFWwindow *window, std::string openglVersion)</td></tr>
-<tr class="memdesc:a974002976bfd5dbddd9070182db7db60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialises gui.  <a href="namespacegui.html#a974002976bfd5dbddd9070182db7db60">More...</a><br /></td></tr>
-<tr class="separator:a974002976bfd5dbddd9070182db7db60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0106dfb3406f6720d089d100a5d27cb3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a0106dfb3406f6720d089d100a5d27cb3">gui::init</a> (GLFWwindow *window, const std::string &amp;openglVersion)</td></tr>
+<tr class="memdesc:a0106dfb3406f6720d089d100a5d27cb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialises gui.  <a href="namespacegui.html#a0106dfb3406f6720d089d100a5d27cb3">More...</a><br /></td></tr>
+<tr class="separator:a0106dfb3406f6720d089d100a5d27cb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4797706d6ddf1c5f2f0e8b193d9ae85"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#ad4797706d6ddf1c5f2f0e8b193d9ae85">gui::lua_access</a> ()</td></tr>
+<tr class="separator:ad4797706d6ddf1c5f2f0e8b193d9ae85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a263d36b19c65e8e826e88ed832ceb2bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a263d36b19c65e8e826e88ed832ceb2bd">gui::mainLoopStart</a> ()</td></tr>
 <tr class="memdesc:a263d36b19c65e8e826e88ed832ceb2bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Does per frame initialise for gui. Should be placed after glClear &amp; glClearColor in the main loop.  <a href="namespacegui.html#a263d36b19c65e8e826e88ed832ceb2bd">More...</a><br /></td></tr>
 <tr class="separator:a263d36b19c65e8e826e88ed832ceb2bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -152,9 +150,9 @@ Functions</h2></td></tr>
 <tr class="memitem:afc5628199f30769b6573f508492404b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#afc5628199f30769b6573f508492404b1">gui::shutdown</a> ()</td></tr>
 <tr class="memdesc:afc5628199f30769b6573f508492404b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shuts down gui.  <a href="namespacegui.html#afc5628199f30769b6573f508492404b1">More...</a><br /></td></tr>
 <tr class="separator:afc5628199f30769b6573f508492404b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a07b0b5f964eb7b5bb67048136c00a554"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a07b0b5f964eb7b5bb67048136c00a554">gui::begin</a> (const std::string title)</td></tr>
-<tr class="memdesc:a07b0b5f964eb7b5bb67048136c00a554"><td class="mdescLeft">&#160;</td><td class="mdescRight">Begins a window. Sandwich inside gui window methods between begin and end.  <a href="namespacegui.html#a07b0b5f964eb7b5bb67048136c00a554">More...</a><br /></td></tr>
-<tr class="separator:a07b0b5f964eb7b5bb67048136c00a554"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0d4541b64ebf62f1cb60ffd955de95e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#ab0d4541b64ebf62f1cb60ffd955de95e">gui::begin</a> (const std::string &amp;title)</td></tr>
+<tr class="memdesc:ab0d4541b64ebf62f1cb60ffd955de95e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Begins a window. Sandwich inside gui window methods between begin and end.  <a href="namespacegui.html#ab0d4541b64ebf62f1cb60ffd955de95e">More...</a><br /></td></tr>
+<tr class="separator:ab0d4541b64ebf62f1cb60ffd955de95e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18dd0fbf63e2521352b4f2b7279f2e92"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a18dd0fbf63e2521352b4f2b7279f2e92">gui::end</a> ()</td></tr>
 <tr class="memdesc:a18dd0fbf63e2521352b4f2b7279f2e92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ends the window. Sandwich inside gui window methods between begin and end.  <a href="namespacegui.html#a18dd0fbf63e2521352b4f2b7279f2e92">More...</a><br /></td></tr>
 <tr class="separator:a18dd0fbf63e2521352b4f2b7279f2e92"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -164,57 +162,57 @@ Functions</h2></td></tr>
 <tr class="memitem:a9bc36fbf2d234391dcf41b2994d37cb0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a9bc36fbf2d234391dcf41b2994d37cb0">gui::setWindowSize</a> (int xSize, int ySize, int constraint)</td></tr>
 <tr class="memdesc:a9bc36fbf2d234391dcf41b2994d37cb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the windows size.  <a href="namespacegui.html#a9bc36fbf2d234391dcf41b2994d37cb0">More...</a><br /></td></tr>
 <tr class="separator:a9bc36fbf2d234391dcf41b2994d37cb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a401f74a379cf2b20530b4f57b15f8dea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a401f74a379cf2b20530b4f57b15f8dea">gui::text</a> (const std::string text)</td></tr>
-<tr class="memdesc:a401f74a379cf2b20530b4f57b15f8dea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays text in the gui window.  <a href="namespacegui.html#a401f74a379cf2b20530b4f57b15f8dea">More...</a><br /></td></tr>
-<tr class="separator:a401f74a379cf2b20530b4f57b15f8dea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a600fc73f5592c57d82b7c7b82e6913aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a600fc73f5592c57d82b7c7b82e6913aa">gui::checkbox</a> (const std::string <a class="el" href="_network_manager_8cpp.html#a8e03167ce04350be901b028cc4cf1ce1">name</a>, bool *option)</td></tr>
-<tr class="memdesc:a600fc73f5592c57d82b7c7b82e6913aa"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_a.html">A</a> checkbox which changes a boolean variable between true &amp; false. Not lua ready.  <a href="namespacegui.html#a600fc73f5592c57d82b7c7b82e6913aa">More...</a><br /></td></tr>
-<tr class="separator:a600fc73f5592c57d82b7c7b82e6913aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f5401c3af941dfee9a78cb147b2c60b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a1f5401c3af941dfee9a78cb147b2c60b">gui::luaCheckBox</a> (const std::string <a class="el" href="_network_manager_8cpp.html#a8e03167ce04350be901b028cc4cf1ce1">name</a>, bool state)</td></tr>
-<tr class="memdesc:a1f5401c3af941dfee9a78cb147b2c60b"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_a.html">A</a> checkbox which changes a boolean variable between true &amp; false. Lua ready.  <a href="namespacegui.html#a1f5401c3af941dfee9a78cb147b2c60b">More...</a><br /></td></tr>
-<tr class="separator:a1f5401c3af941dfee9a78cb147b2c60b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9439c9ce30cff99a37d05cfd8ecf9507"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a9439c9ce30cff99a37d05cfd8ecf9507">gui::sliderFloat</a> (const std::string <a class="el" href="_network_manager_8cpp.html#a8e03167ce04350be901b028cc4cf1ce1">name</a>, float *value, float min, float max)</td></tr>
-<tr class="memdesc:a9439c9ce30cff99a37d05cfd8ecf9507"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_a.html">A</a> slider which changes a float variable between min &amp; max.  <a href="namespacegui.html#a9439c9ce30cff99a37d05cfd8ecf9507">More...</a><br /></td></tr>
-<tr class="separator:a9439c9ce30cff99a37d05cfd8ecf9507"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e66173a1ffc497107c5edd7b5c0ce18"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a2e66173a1ffc497107c5edd7b5c0ce18">gui::sliderInt</a> (const std::string <a class="el" href="_network_manager_8cpp.html#a8e03167ce04350be901b028cc4cf1ce1">name</a>, int *value, int min, int max)</td></tr>
-<tr class="memdesc:a2e66173a1ffc497107c5edd7b5c0ce18"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_a.html">A</a> slider which changes an integer variable between min &amp; max.  <a href="namespacegui.html#a2e66173a1ffc497107c5edd7b5c0ce18">More...</a><br /></td></tr>
-<tr class="separator:a2e66173a1ffc497107c5edd7b5c0ce18"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab59513576a13a895376c18ba48e73ff8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#ab59513576a13a895376c18ba48e73ff8">gui::sliderAngle</a> (const std::string <a class="el" href="_network_manager_8cpp.html#a8e03167ce04350be901b028cc4cf1ce1">name</a>, float *angle, float min, float max)</td></tr>
-<tr class="memdesc:ab59513576a13a895376c18ba48e73ff8"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_a.html">A</a> slider which changes an angle variable between min &amp; max.  <a href="namespacegui.html#ab59513576a13a895376c18ba48e73ff8">More...</a><br /></td></tr>
-<tr class="separator:ab59513576a13a895376c18ba48e73ff8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30e01b068c0409b10b38353023d30203"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a30e01b068c0409b10b38353023d30203">gui::colourEdit3</a> (const std::string <a class="el" href="_network_manager_8cpp.html#a8e03167ce04350be901b028cc4cf1ce1">name</a>, float colour[3])</td></tr>
-<tr class="memdesc:a30e01b068c0409b10b38353023d30203"><td class="mdescLeft">&#160;</td><td class="mdescRight">Can change values independently or use a colour picker.  <a href="namespacegui.html#a30e01b068c0409b10b38353023d30203">More...</a><br /></td></tr>
-<tr class="separator:a30e01b068c0409b10b38353023d30203"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac0403739964eaa1f53b773b39797e841"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#ac0403739964eaa1f53b773b39797e841">gui::colourEdit4</a> (const std::string <a class="el" href="_network_manager_8cpp.html#a8e03167ce04350be901b028cc4cf1ce1">name</a>, float colour[4])</td></tr>
-<tr class="memdesc:ac0403739964eaa1f53b773b39797e841"><td class="mdescLeft">&#160;</td><td class="mdescRight">Can change values independently or use a colour picker.  <a href="namespacegui.html#ac0403739964eaa1f53b773b39797e841">More...</a><br /></td></tr>
-<tr class="separator:ac0403739964eaa1f53b773b39797e841"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3feffb9559d9092b55945b4ede6fda00"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a3feffb9559d9092b55945b4ede6fda00">gui::text</a> (const std::string &amp;text)</td></tr>
+<tr class="memdesc:a3feffb9559d9092b55945b4ede6fda00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays text in the gui window.  <a href="namespacegui.html#a3feffb9559d9092b55945b4ede6fda00">More...</a><br /></td></tr>
+<tr class="separator:a3feffb9559d9092b55945b4ede6fda00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57ffab288d7c547779e414ae9e2d7277"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a57ffab288d7c547779e414ae9e2d7277">gui::checkbox</a> (const std::string &amp;<a class="el" href="_network_manager_8cpp.html#a8e03167ce04350be901b028cc4cf1ce1">name</a>, bool *option)</td></tr>
+<tr class="memdesc:a57ffab288d7c547779e414ae9e2d7277"><td class="mdescLeft">&#160;</td><td class="mdescRight">A checkbox which changes a boolean variable between true &amp; false. Not lua ready.  <a href="namespacegui.html#a57ffab288d7c547779e414ae9e2d7277">More...</a><br /></td></tr>
+<tr class="separator:a57ffab288d7c547779e414ae9e2d7277"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abeeb468478f844e4c9293177366a0e83"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#abeeb468478f844e4c9293177366a0e83">gui::luaCheckBox</a> (const std::string &amp;<a class="el" href="_network_manager_8cpp.html#a8e03167ce04350be901b028cc4cf1ce1">name</a>, bool state)</td></tr>
+<tr class="memdesc:abeeb468478f844e4c9293177366a0e83"><td class="mdescLeft">&#160;</td><td class="mdescRight">A checkbox which changes a boolean variable between true &amp; false. Lua ready.  <a href="namespacegui.html#abeeb468478f844e4c9293177366a0e83">More...</a><br /></td></tr>
+<tr class="separator:abeeb468478f844e4c9293177366a0e83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32b74478c61175dbfee27453d783cd5a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a32b74478c61175dbfee27453d783cd5a">gui::sliderFloat</a> (const std::string &amp;<a class="el" href="_network_manager_8cpp.html#a8e03167ce04350be901b028cc4cf1ce1">name</a>, float *value, float min, float max)</td></tr>
+<tr class="memdesc:a32b74478c61175dbfee27453d783cd5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">A slider which changes a float variable between min &amp; max.  <a href="namespacegui.html#a32b74478c61175dbfee27453d783cd5a">More...</a><br /></td></tr>
+<tr class="separator:a32b74478c61175dbfee27453d783cd5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f55490fb46ee3d1c7635908db01f283"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a2f55490fb46ee3d1c7635908db01f283">gui::sliderInt</a> (const std::string &amp;<a class="el" href="_network_manager_8cpp.html#a8e03167ce04350be901b028cc4cf1ce1">name</a>, int *value, int min, int max)</td></tr>
+<tr class="memdesc:a2f55490fb46ee3d1c7635908db01f283"><td class="mdescLeft">&#160;</td><td class="mdescRight">A slider which changes an integer variable between min &amp; max.  <a href="namespacegui.html#a2f55490fb46ee3d1c7635908db01f283">More...</a><br /></td></tr>
+<tr class="separator:a2f55490fb46ee3d1c7635908db01f283"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60d9f2f5662aac227e7ea10e3aba9f7e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a60d9f2f5662aac227e7ea10e3aba9f7e">gui::sliderAngle</a> (const std::string &amp;<a class="el" href="_network_manager_8cpp.html#a8e03167ce04350be901b028cc4cf1ce1">name</a>, float *angle, float min, float max)</td></tr>
+<tr class="memdesc:a60d9f2f5662aac227e7ea10e3aba9f7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">A slider which changes an angle variable between min &amp; max.  <a href="namespacegui.html#a60d9f2f5662aac227e7ea10e3aba9f7e">More...</a><br /></td></tr>
+<tr class="separator:a60d9f2f5662aac227e7ea10e3aba9f7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c7c6d55831162ed26f405466cf446c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a3c7c6d55831162ed26f405466cf446c5">gui::colourEdit3</a> (const std::string &amp;<a class="el" href="_network_manager_8cpp.html#a8e03167ce04350be901b028cc4cf1ce1">name</a>, float colour[3])</td></tr>
+<tr class="memdesc:a3c7c6d55831162ed26f405466cf446c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Can change values independently or use a colour picker.  <a href="namespacegui.html#a3c7c6d55831162ed26f405466cf446c5">More...</a><br /></td></tr>
+<tr class="separator:a3c7c6d55831162ed26f405466cf446c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac81c71593f79fe9b236cff090f085a96"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#ac81c71593f79fe9b236cff090f085a96">gui::colourEdit4</a> (const std::string &amp;<a class="el" href="_network_manager_8cpp.html#a8e03167ce04350be901b028cc4cf1ce1">name</a>, float colour[4])</td></tr>
+<tr class="memdesc:ac81c71593f79fe9b236cff090f085a96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Can change values independently or use a colour picker.  <a href="namespacegui.html#ac81c71593f79fe9b236cff090f085a96">More...</a><br /></td></tr>
+<tr class="separator:ac81c71593f79fe9b236cff090f085a96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32199bb3c15f21a31295be2e39c258d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a32199bb3c15f21a31295be2e39c258d1">gui::lua_image</a> (const std::string &amp;texture_name)</td></tr>
 <tr class="memdesc:a32199bb3c15f21a31295be2e39c258d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an image using a texture name.  <a href="namespacegui.html#a32199bb3c15f21a31295be2e39c258d1">More...</a><br /></td></tr>
 <tr class="separator:a32199bb3c15f21a31295be2e39c258d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51ad4a1d0ae58855748835551e36a216"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a51ad4a1d0ae58855748835551e36a216">gui::image</a> (uint32_t texture_id, int width, int height)</td></tr>
 <tr class="memdesc:a51ad4a1d0ae58855748835551e36a216"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an image to the gui using a texture.  <a href="namespacegui.html#a51ad4a1d0ae58855748835551e36a216">More...</a><br /></td></tr>
 <tr class="separator:a51ad4a1d0ae58855748835551e36a216"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a299906acf438d59b27db05690ddfe7e2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a299906acf438d59b27db05690ddfe7e2">gui::button</a> (const std::string <a class="el" href="_network_manager_8cpp.html#a8e03167ce04350be901b028cc4cf1ce1">name</a>, int xSize, int ySize)</td></tr>
-<tr class="memdesc:a299906acf438d59b27db05690ddfe7e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a button.  <a href="namespacegui.html#a299906acf438d59b27db05690ddfe7e2">More...</a><br /></td></tr>
-<tr class="separator:a299906acf438d59b27db05690ddfe7e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7bb726e677d8ff938c5bae5391c2bbd"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#af7bb726e677d8ff938c5bae5391c2bbd">gui::luaInputText</a> (const std::string <a class="el" href="_network_manager_8cpp.html#a8e03167ce04350be901b028cc4cf1ce1">name</a>)</td></tr>
-<tr class="memdesc:af7bb726e677d8ff938c5bae5391c2bbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">User can enter text into box and submit it with enter. Lua script ready.  <a href="namespacegui.html#af7bb726e677d8ff938c5bae5391c2bbd">More...</a><br /></td></tr>
-<tr class="separator:af7bb726e677d8ff938c5bae5391c2bbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3652c856dfd5d39f9d0417b5804a809b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a3652c856dfd5d39f9d0417b5804a809b">gui::inputText</a> (const std::string <a class="el" href="_network_manager_8cpp.html#a8e03167ce04350be901b028cc4cf1ce1">name</a>, char *buffer, int size)</td></tr>
-<tr class="memdesc:a3652c856dfd5d39f9d0417b5804a809b"><td class="mdescLeft">&#160;</td><td class="mdescRight">User can enter text into box and submit it with enter. Not lua script ready.  <a href="namespacegui.html#a3652c856dfd5d39f9d0417b5804a809b">More...</a><br /></td></tr>
-<tr class="separator:a3652c856dfd5d39f9d0417b5804a809b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a503c97fa6a12536a35a49f9f3c3570c8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a503c97fa6a12536a35a49f9f3c3570c8">gui::collapsingHeader</a> (const std::string <a class="el" href="_network_manager_8cpp.html#a8e03167ce04350be901b028cc4cf1ce1">name</a>)</td></tr>
-<tr class="memdesc:a503c97fa6a12536a35a49f9f3c3570c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a collapsing header (essentially a checkbox)  <a href="namespacegui.html#a503c97fa6a12536a35a49f9f3c3570c8">More...</a><br /></td></tr>
-<tr class="separator:a503c97fa6a12536a35a49f9f3c3570c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63a89192466417d73f346f1466ae9663"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a63a89192466417d73f346f1466ae9663">gui::plotLines</a> (const std::string <a class="el" href="_network_manager_8cpp.html#a8e03167ce04350be901b028cc4cf1ce1">name</a>, const float *values, int numOfEntries)</td></tr>
-<tr class="memdesc:a63a89192466417d73f346f1466ae9663"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a plot line.  <a href="namespacegui.html#a63a89192466417d73f346f1466ae9663">More...</a><br /></td></tr>
-<tr class="separator:a63a89192466417d73f346f1466ae9663"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a873b2d67c9c26dbb86830b75fe434251"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a873b2d67c9c26dbb86830b75fe434251">gui::plotLines</a> (const std::string <a class="el" href="_network_manager_8cpp.html#a8e03167ce04350be901b028cc4cf1ce1">name</a>, const float *values, int numOfEntries, float xWindowSize, float yWindowSize)</td></tr>
-<tr class="memdesc:a873b2d67c9c26dbb86830b75fe434251"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a plot line.  <a href="namespacegui.html#a873b2d67c9c26dbb86830b75fe434251">More...</a><br /></td></tr>
-<tr class="separator:a873b2d67c9c26dbb86830b75fe434251"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5b4e30a4620c9e16c0cea204c25e111"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#ad5b4e30a4620c9e16c0cea204c25e111">gui::plotLines</a> (const std::string <a class="el" href="_network_manager_8cpp.html#a8e03167ce04350be901b028cc4cf1ce1">name</a>, const float *values, int numOfEntries, float minVal, float maxVal, float xWindowSize, float yWindowSize)</td></tr>
-<tr class="memdesc:ad5b4e30a4620c9e16c0cea204c25e111"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a plot line.  <a href="namespacegui.html#ad5b4e30a4620c9e16c0cea204c25e111">More...</a><br /></td></tr>
-<tr class="separator:ad5b4e30a4620c9e16c0cea204c25e111"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0da6fe5a7ef70c5c8d885903feee2b96"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a0da6fe5a7ef70c5c8d885903feee2b96">gui::button</a> (const std::string &amp;<a class="el" href="_network_manager_8cpp.html#a8e03167ce04350be901b028cc4cf1ce1">name</a>, int xSize, int ySize)</td></tr>
+<tr class="memdesc:a0da6fe5a7ef70c5c8d885903feee2b96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a button.  <a href="namespacegui.html#a0da6fe5a7ef70c5c8d885903feee2b96">More...</a><br /></td></tr>
+<tr class="separator:a0da6fe5a7ef70c5c8d885903feee2b96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62097832930a0a6433df709ebd379088"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a62097832930a0a6433df709ebd379088">gui::luaInputText</a> (const std::string &amp;<a class="el" href="_network_manager_8cpp.html#a8e03167ce04350be901b028cc4cf1ce1">name</a>)</td></tr>
+<tr class="memdesc:a62097832930a0a6433df709ebd379088"><td class="mdescLeft">&#160;</td><td class="mdescRight">User can enter text into box and submit it with enter. Lua script ready.  <a href="namespacegui.html#a62097832930a0a6433df709ebd379088">More...</a><br /></td></tr>
+<tr class="separator:a62097832930a0a6433df709ebd379088"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa558fbd8c7bba5b9213813814764f681"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#aa558fbd8c7bba5b9213813814764f681">gui::inputText</a> (const std::string &amp;<a class="el" href="_network_manager_8cpp.html#a8e03167ce04350be901b028cc4cf1ce1">name</a>, char *buffer, int size)</td></tr>
+<tr class="memdesc:aa558fbd8c7bba5b9213813814764f681"><td class="mdescLeft">&#160;</td><td class="mdescRight">User can enter text into box and submit it with enter. Not lua script ready.  <a href="namespacegui.html#aa558fbd8c7bba5b9213813814764f681">More...</a><br /></td></tr>
+<tr class="separator:aa558fbd8c7bba5b9213813814764f681"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a704f9a5ad3abd443302c50cc9be0b4e3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a704f9a5ad3abd443302c50cc9be0b4e3">gui::collapsingHeader</a> (const std::string &amp;<a class="el" href="_network_manager_8cpp.html#a8e03167ce04350be901b028cc4cf1ce1">name</a>)</td></tr>
+<tr class="memdesc:a704f9a5ad3abd443302c50cc9be0b4e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a collapsing header (essentially a checkbox)  <a href="namespacegui.html#a704f9a5ad3abd443302c50cc9be0b4e3">More...</a><br /></td></tr>
+<tr class="separator:a704f9a5ad3abd443302c50cc9be0b4e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac45e13e151e74075243550b03b2cf6ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#ac45e13e151e74075243550b03b2cf6ef">gui::plotLines</a> (const std::string &amp;<a class="el" href="_network_manager_8cpp.html#a8e03167ce04350be901b028cc4cf1ce1">name</a>, const float *values, int numOfEntries)</td></tr>
+<tr class="memdesc:ac45e13e151e74075243550b03b2cf6ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a plot line.  <a href="namespacegui.html#ac45e13e151e74075243550b03b2cf6ef">More...</a><br /></td></tr>
+<tr class="separator:ac45e13e151e74075243550b03b2cf6ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a753c6a16f6d5f4a6aabb94757e5ff342"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a753c6a16f6d5f4a6aabb94757e5ff342">gui::plotLines</a> (const std::string &amp;<a class="el" href="_network_manager_8cpp.html#a8e03167ce04350be901b028cc4cf1ce1">name</a>, const float *values, int numOfEntries, float xWindowSize, float yWindowSize)</td></tr>
+<tr class="memdesc:a753c6a16f6d5f4a6aabb94757e5ff342"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a plot line.  <a href="namespacegui.html#a753c6a16f6d5f4a6aabb94757e5ff342">More...</a><br /></td></tr>
+<tr class="separator:a753c6a16f6d5f4a6aabb94757e5ff342"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabf69c10a854bbf1f382150f218e5377"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#aabf69c10a854bbf1f382150f218e5377">gui::plotLines</a> (const std::string &amp;<a class="el" href="_network_manager_8cpp.html#a8e03167ce04350be901b028cc4cf1ce1">name</a>, const float *values, int numOfEntries, float minVal, float maxVal, float xWindowSize, float yWindowSize)</td></tr>
+<tr class="memdesc:aabf69c10a854bbf1f382150f218e5377"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a plot line.  <a href="namespacegui.html#aabf69c10a854bbf1f382150f218e5377">More...</a><br /></td></tr>
+<tr class="separator:aabf69c10a854bbf1f382150f218e5377"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ff4112a09d825dedb4f490511121509"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegui.html#a8ff4112a09d825dedb4f490511121509">gui::progressBar</a> (float percentage)</td></tr>
 <tr class="memdesc:a8ff4112a09d825dedb4f490511121509"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a progress bar.  <a href="namespacegui.html#a8ff4112a09d825dedb4f490511121509">More...</a><br /></td></tr>
 <tr class="separator:a8ff4112a09d825dedb4f490511121509"><td class="memSeparator" colspan="2">&#160;</td></tr>

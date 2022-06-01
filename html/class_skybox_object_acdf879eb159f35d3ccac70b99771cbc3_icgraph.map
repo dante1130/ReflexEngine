@@ -1,0 +1,4 @@
+<map id="SkyboxObject::SkyboxObject" name="SkyboxObject::SkyboxObject">
+<area shape="rect" id="node1" title="Construct a new Skybox Object." alt="" coords="220,13,415,39"/>
+<area shape="rect" id="node2" href="$class_game_asset_factory.html#a7ae072cff9f40baac70fe5a7ffcb680b" title="Loads in a skybox object from a lua script." alt="" coords="5,5,172,47"/>
+</map>

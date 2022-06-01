@@ -1,4 +1,5 @@
 <map id="Model::RenderModel" name="Model::RenderModel">
-<area shape="rect" id="node1" title="Renders the model." alt="" coords="136,5,277,32"/>
-<area shape="rect" id="node2" href="$class_item.html#ae902d008e98a75d3cf0fef53d9177f9e" title="The draw call for the item." alt="" coords="5,5,88,32"/>
+<area shape="rect" id="node1" title="Renders the model." alt="" coords="196,31,337,57"/>
+<area shape="rect" id="node2" href="$class_item.html#ae902d008e98a75d3cf0fef53d9177f9e" title="The draw call for the item." alt="" coords="35,5,118,32"/>
+<area shape="rect" id="node3" href="$class_networked_item.html#aee95fbab11712463ac2c7dd9ea472708" title="The draw call for the Networked Item." alt="" coords="5,56,148,83"/>
 </map>

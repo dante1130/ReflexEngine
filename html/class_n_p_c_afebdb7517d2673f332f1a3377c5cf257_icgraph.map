@@ -1,0 +1,4 @@
+<map id="NPC::set_faction" name="NPC::set_faction">
+<area shape="rect" id="node1" title="Sets the NPC&#39;s faction." alt="" coords="285,5,405,32"/>
+<area shape="rect" id="node2" href="$class_game_asset_factory.html#abdc2920e4c02ce7b6be597092fa229e3" title="Loads in a NPC object from a lua script." alt="" coords="5,5,237,32"/>
+</map>

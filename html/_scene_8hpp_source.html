@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: src/Game/Scene.hpp Source File</title>
+<title>ICT397 Assignment 2: src/Game/Scene.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -110,14 +110,14 @@ $(document).ready(function(){initNavTree('_scene_8hpp_source.html',''); initResi
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">     * @pre Nothing</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">     * @post    Object adde</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_scene.html#aeb4dbd2783dbd2d5235c94bb0a907580">addGameObject</a>(std::string luaScript) = 0;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_scene.html#a19ab3dff64cbb63c997f566acfca82b3">addGameObject</a>(<span class="keyword">const</span> std::string&amp; luaScript) = 0;</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">     * @brief The function to specify controls for the keyboard.</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">     *</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">     * @param delta_time    - The time between frames</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_scene.html#a624c145bec7b1b5331482761498d8e63">key_controls</a>(<span class="keywordtype">float</span> delta_time) = 0;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_scene.html#aab0fcfb4457224dfbb8dfca03bce7ca4">key_controls</a>(<span class="keywordtype">double</span> delta_time) = 0;</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">     * @brief The function to specify controls for the mouse.</span></div>
@@ -125,21 +125,21 @@ $(document).ready(function(){initNavTree('_scene_8hpp_source.html',''); initResi
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">     * @param xpos  - the x position of mouse on screen</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">     * @param ypos  - the y position of mouse on screen</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_scene.html#a11200579b75fd2bb897e1a20b2efca8e">mouse_controls</a>(<span class="keywordtype">float</span> xpos, <span class="keywordtype">float</span> ypos) = 0;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_scene.html#a87b165cb64c416472dfdef6a846a9546">mouse_controls</a>(<span class="keywordtype">double</span> xpos, <span class="keywordtype">double</span> ypos) = 0;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">     * @brief The update loop of the scene.</span></div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">     *</span></div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">     * @param delta_time    - the time between frames</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_scene.html#abe4a77a3947954ca2f0e8b2b0c2c4e9a">update</a>(<span class="keywordtype">float</span> delta_time) = 0;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_scene.html#a6517cda89104251bfb055571166af1ac">update</a>(<span class="keywordtype">double</span> delta_time) = 0;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">     * @brief The fixed update loop of the scene.</span></div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">     *</span></div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">     * @param delta_time</span></div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_scene.html#a1c8a5b943d470476a52549d08d4f31cc">fixed_update</a>(<span class="keywordtype">float</span> delta_time) = 0;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="class_scene.html#ab44391e6d57533d0a44559ba8e6085aa">fixed_update</a>(<span class="keywordtype">double</span> delta_time) = 0;</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">     * @brief Adds any draw calls to the renderer.</span></div>
@@ -169,21 +169,21 @@ $(document).ready(function(){initNavTree('_scene_8hpp_source.html',''); initResi
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keyword">protected</span>:</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="comment">/// A vector of game objects in the scene.</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="class_scene.html#a61edbe9efcc87110de489cbf05a51627">   85</a></span>&#160;    <a class="code" href="class_scene.html#a61edbe9efcc87110de489cbf05a51627">std</a>::<a class="code" href="class_scene.html#a61edbe9efcc87110de489cbf05a51627">vector</a>&lt;<a class="code" href="class_scene.html#a61edbe9efcc87110de489cbf05a51627">std</a>::<a class="code" href="class_scene.html#a61edbe9efcc87110de489cbf05a51627">shared_ptr</a>&lt;<a class="code" href="class_scene.html#a61edbe9efcc87110de489cbf05a51627">GameObject</a>&gt;&gt; <a class="code" href="class_scene.html#a61edbe9efcc87110de489cbf05a51627">game_objects_</a>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="class_scene.html#ab38fb5a2bf973d81d698b9468a2b5f49">   85</a></span>&#160;    <a class="code" href="class_scene.html">std</a>::<a class="code" href="class_scene.html">vector</a>&lt;<a class="code" href="class_scene.html">std</a>::<a class="code" href="class_scene.html">unique_ptr</a>&lt;<a class="code" href="class_scene.html">GameObject</a>&gt;&gt; <a class="code" href="class_scene.html#ab38fb5a2bf973d81d698b9468a2b5f49">game_objects_</a>;</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclass_scene_html_a11200579b75fd2bb897e1a20b2efca8e"><div class="ttname"><a href="class_scene.html#a11200579b75fd2bb897e1a20b2efca8e">Scene::mouse_controls</a></div><div class="ttdeci">virtual void mouse_controls(float xpos, float ypos)=0</div><div class="ttdoc">The function to specify controls for the mouse.</div></div>
-<div class="ttc" id="aclass_scene_html_a1c8a5b943d470476a52549d08d4f31cc"><div class="ttname"><a href="class_scene.html#a1c8a5b943d470476a52549d08d4f31cc">Scene::fixed_update</a></div><div class="ttdeci">virtual void fixed_update(float delta_time)=0</div><div class="ttdoc">The fixed update loop of the scene.</div></div>
-<div class="ttc" id="aclass_scene_html_a61edbe9efcc87110de489cbf05a51627"><div class="ttname"><a href="class_scene.html#a61edbe9efcc87110de489cbf05a51627">Scene::game_objects_</a></div><div class="ttdeci">std::vector&lt; std::shared_ptr&lt; GameObject &gt; &gt; game_objects_</div><div class="ttdoc">A vector of game objects in the scene.</div><div class="ttdef"><b>Definition:</b> <a href="_scene_8hpp_source.html#l00085">Scene.hpp:85</a></div></div>
-<div class="ttc" id="aclass_scene_html_aeb4dbd2783dbd2d5235c94bb0a907580"><div class="ttname"><a href="class_scene.html#aeb4dbd2783dbd2d5235c94bb0a907580">Scene::addGameObject</a></div><div class="ttdeci">virtual void addGameObject(std::string luaScript)=0</div><div class="ttdoc">Adds a game object.</div></div>
+<div class="ttc" id="aclass_scene_html_ab38fb5a2bf973d81d698b9468a2b5f49"><div class="ttname"><a href="class_scene.html#ab38fb5a2bf973d81d698b9468a2b5f49">Scene::game_objects_</a></div><div class="ttdeci">std::vector&lt; std::unique_ptr&lt; GameObject &gt; &gt; game_objects_</div><div class="ttdoc">A vector of game objects in the scene.</div><div class="ttdef"><b>Definition:</b> <a href="_scene_8hpp_source.html#l00085">Scene.hpp:85</a></div></div>
 <div class="ttc" id="aclass_scene_html_a0ec04d7ee0aab281c1c491ebec47f6f1"><div class="ttname"><a href="class_scene.html#a0ec04d7ee0aab281c1c491ebec47f6f1">Scene::add_draw_call</a></div><div class="ttdeci">virtual void add_draw_call()=0</div><div class="ttdoc">Adds any draw calls to the renderer.</div></div>
-<div class="ttc" id="aclass_scene_html_abe4a77a3947954ca2f0e8b2b0c2c4e9a"><div class="ttname"><a href="class_scene.html#abe4a77a3947954ca2f0e8b2b0c2c4e9a">Scene::update</a></div><div class="ttdeci">virtual void update(float delta_time)=0</div><div class="ttdoc">The update loop of the scene.</div></div>
-<div class="ttc" id="aclass_scene_html_a624c145bec7b1b5331482761498d8e63"><div class="ttname"><a href="class_scene.html#a624c145bec7b1b5331482761498d8e63">Scene::key_controls</a></div><div class="ttdeci">virtual void key_controls(float delta_time)=0</div><div class="ttdoc">The function to specify controls for the keyboard.</div></div>
+<div class="ttc" id="aclass_scene_html_aab0fcfb4457224dfbb8dfca03bce7ca4"><div class="ttname"><a href="class_scene.html#aab0fcfb4457224dfbb8dfca03bce7ca4">Scene::key_controls</a></div><div class="ttdeci">virtual void key_controls(double delta_time)=0</div><div class="ttdoc">The function to specify controls for the keyboard.</div></div>
+<div class="ttc" id="aclass_scene_html_a6517cda89104251bfb055571166af1ac"><div class="ttname"><a href="class_scene.html#a6517cda89104251bfb055571166af1ac">Scene::update</a></div><div class="ttdeci">virtual void update(double delta_time)=0</div><div class="ttdoc">The update loop of the scene.</div></div>
+<div class="ttc" id="aclass_scene_html_a87b165cb64c416472dfdef6a846a9546"><div class="ttname"><a href="class_scene.html#a87b165cb64c416472dfdef6a846a9546">Scene::mouse_controls</a></div><div class="ttdeci">virtual void mouse_controls(double xpos, double ypos)=0</div><div class="ttdoc">The function to specify controls for the mouse.</div></div>
 <div class="ttc" id="aclass_scene_html"><div class="ttname"><a href="class_scene.html">Scene</a></div><div class="ttdoc">A scene in the game.</div><div class="ttdef"><b>Definition:</b> <a href="_scene_8hpp_source.html#l00012">Scene.hpp:12</a></div></div>
 <div class="ttc" id="aclass_scene_html_a17a03b4430bc9172f6552f62200ec3a0"><div class="ttname"><a href="class_scene.html#a17a03b4430bc9172f6552f62200ec3a0">Scene::loadSavedGameObjects</a></div><div class="ttdeci">virtual void loadSavedGameObjects()=0</div><div class="ttdoc">loads game objects</div></div>
+<div class="ttc" id="aclass_scene_html_a19ab3dff64cbb63c997f566acfca82b3"><div class="ttname"><a href="class_scene.html#a19ab3dff64cbb63c997f566acfca82b3">Scene::addGameObject</a></div><div class="ttdeci">virtual void addGameObject(const std::string &amp;luaScript)=0</div><div class="ttdoc">Adds a game object.</div></div>
 <div class="ttc" id="aclass_scene_html_a7edd8111e127173d2d06b571a177d7b1"><div class="ttname"><a href="class_scene.html#a7edd8111e127173d2d06b571a177d7b1">Scene::init</a></div><div class="ttdeci">virtual void init()=0</div><div class="ttdoc">Initializes the scene.</div></div>
 <div class="ttc" id="aclass_scene_html_aef453dfa9851e06ac93486c13fb1eacb"><div class="ttname"><a href="class_scene.html#aef453dfa9851e06ac93486c13fb1eacb">Scene::saveGameObjects</a></div><div class="ttdeci">virtual void saveGameObjects()=0</div><div class="ttdoc">Saves game objects.</div></div>
+<div class="ttc" id="aclass_scene_html_ab44391e6d57533d0a44559ba8e6085aa"><div class="ttname"><a href="class_scene.html#ab44391e6d57533d0a44559ba8e6085aa">Scene::fixed_update</a></div><div class="ttdeci">virtual void fixed_update(double delta_time)=0</div><div class="ttdoc">The fixed update loop of the scene.</div></div>
 <div class="ttc" id="aclass_scene_html_af6e09d91ebd10ae9cc7c12c39d06386c"><div class="ttname"><a href="class_scene.html#af6e09d91ebd10ae9cc7c12c39d06386c">Scene::~Scene</a></div><div class="ttdeci">virtual ~Scene()=default</div><div class="ttdoc">Virtual destructor.</div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

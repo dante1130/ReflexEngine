@@ -1,0 +1,6 @@
+<map id="GenericFunctions::getReceivingData" name="GenericFunctions::getReceivingData">
+<area shape="rect" id="node1" title="Checks if the pvp network manager is receiving data." alt="" coords="444,42,676,69"/>
+<area shape="rect" id="node2" href="$namespace_generic_functions.html#a871852b17cc400fab5a18ef44cbc6ff2" title="Fixed update loop for the network manager. Primarily used for object replication to improve network p..." alt="" coords="219,5,396,47"/>
+<area shape="rect" id="node4" href="$class_networked_item.html#a9d1e5239aaa079a12e6e87cc29f09182" title="Updates the Networked Item with delta time." alt="" coords="230,71,385,98"/>
+<area shape="rect" id="node3" href="$class_test_scene.html#aa303498bc5e828d3919a3399e75cede8" title="The fixed update loop of the scene." alt="" coords="5,13,171,39"/>
+</map>

@@ -1,6 +1,8 @@
 <map id="PhysicsObject" name="PhysicsObject">
-<area shape="rect" id="node1" title=" " alt="" coords="29,865,184,1119"/>
-<area shape="rect" id="node2" href="$class_body_rigid.html" title=" " alt="" coords="5,535,208,817"/>
-<area shape="rect" id="node3" href="$class_body.html" title=" " alt="" coords="18,277,195,487"/>
-<area shape="rect" id="node4" href="$class_game_object.html" title="An abstract class to represent a game object." alt="" coords="45,5,169,229"/>
+<area shape="rect" id="node1" title=" " alt="" coords="84,865,241,1133"/>
+<area shape="rect" id="node5" href="$class_n_p_c.html" title=" " alt="" coords="5,1181,149,1611"/>
+<area shape="rect" id="node6" href="$class_projectile.html" title=" " alt="" coords="174,1225,322,1567"/>
+<area shape="rect" id="node2" href="$class_body_rigid.html" title=" " alt="" coords="61,535,264,817"/>
+<area shape="rect" id="node3" href="$class_body.html" title=" " alt="" coords="74,277,251,487"/>
+<area shape="rect" id="node4" href="$class_game_object.html" title="An abstract class to represent a game object." alt="" coords="101,5,225,229"/>
 </map>

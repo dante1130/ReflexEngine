@@ -1,0 +1,4 @@
+<map id="PhysicsObject::saveCapsuleCollider" name="PhysicsObject::saveCapsuleCollider">
+<area shape="rect" id="node1" title="Saves the capsule collider of rb." alt="" coords="237,5,425,47"/>
+<area shape="rect" id="node2" href="$class_physics_object.html#a48bdb5f839cf9e1d117656bce8b47ffb" title="Saves the collider of rb." alt="" coords="5,13,189,39"/>
+</map>

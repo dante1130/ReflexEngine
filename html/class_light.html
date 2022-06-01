@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: Light Class Reference</title>
+<title>ICT397 Assignment 2: Light Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -90,7 +90,7 @@ $(document).ready(function(){initNavTree('class_light.html',''); initResizable()
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="class_a.html">A</a> light in the scene.  
+<p>A light in the scene.  
  <a href="class_light.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_light_8hpp_source.html">Light.hpp</a>&gt;</code></p>
@@ -149,7 +149,7 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ac03805a977e07c63e91bd8c5ab515c22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="class_a.html">A</a> light in the scene. </p>
+<div class="textblock"><p>A light in the scene. </p>
 
 <p class="definition">Definition at line <a class="el" href="_light_8hpp_source.html#l00013">13</a> of file <a class="el" href="_light_8hpp_source.html">Light.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -245,11 +245,11 @@ Here is the caller graph for this function:</div>
 <p>Parameterized constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">shadowWidth</td><td></td></tr>
-    <tr><td class="paramname">shadowHeight</td><td></td></tr>
-    <tr><td class="paramname">color</td><td></td></tr>
-    <tr><td class="paramname">aIntensity</td><td></td></tr>
-    <tr><td class="paramname">dIntensity</td><td></td></tr>
+    <tr><td class="paramname">shadowWidth</td><td>The width of the shadow map. </td></tr>
+    <tr><td class="paramname">shadowHeight</td><td>The height of the shadow map. </td></tr>
+    <tr><td class="paramname">color</td><td>The color of the light. </td></tr>
+    <tr><td class="paramname">aIntensity</td><td>The ambient intensity of the light. </td></tr>
+    <tr><td class="paramname">dIntensity</td><td>The diffuse intensity of the light. </td></tr>
   </table>
   </dd>
 </dl>
@@ -258,12 +258,13 @@ Here is the caller graph for this function:</div>
 <div class="fragment"><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    : <a class="code" href="class_light.html#ae1e458802424a95b629cc1947ef2bcac">m_color</a>(color),</div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;      <a class="code" href="class_light.html#a92ff03f51959af7109370e48ece71de0">m_ambientIntensity</a>(aIntensity),</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;      <a class="code" href="class_light.html#ae8ffc82ed0d95825c5efb2fd51da8352">m_diffuseIntensity</a>(dIntensity),</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;      <a class="code" href="class_light.html#ac1937d01087138b31c48d3030ce3068f">m_lightProj</a>(glm::mat4(0.0f)),</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;      <a class="code" href="class_light.html#ac03805a977e07c63e91bd8c5ab515c22">m_shadowMap</a>(<span class="keyword">new</span> <a class="code" href="class_shadow_map.html">ShadowMap</a>()) {</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <a class="code" href="class_light.html#ac03805a977e07c63e91bd8c5ab515c22">m_shadowMap</a>-&gt;<a class="code" href="class_shadow_map.html#ae84c0e38f609044982514d2e1d7c395a">Init</a>(shadowWidth, shadowHeight);</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;}</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;      <a class="code" href="class_light.html#ac1937d01087138b31c48d3030ce3068f">m_lightProj</a>(glm::mat4(0.0f))</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// m_shadowMap(new ShadowMap())</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="comment">// m_shadowMap-&gt;Init(shadowWidth, shadowHeight);</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_light_8cpp_source.html#l00006">Light()</a>, <a class="el" href="_light_8hpp_source.html#l00059">m_shadowMap</a>, and <a class="el" href="_shadow_map_8cpp_source.html#l00003">ShadowMap::ShadowMap()</a>.</p>
+<p class="reference">References <a class="el" href="_light_8cpp_source.html#l00006">Light()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_light_8cpp_source.html#l00006">Light()</a>.</p>
 <div class="dynheader">
@@ -272,7 +273,6 @@ Here is the call graph for this function:</div>
 <div class="center"><img src="class_light_a0fc51e56baaae62f7e88f03f45ceae30_cgraph.png" border="0" usemap="#class_light_a0fc51e56baaae62f7e88f03f45ceae30_cgraph" alt=""/></div>
 <map name="class_light_a0fc51e56baaae62f7e88f03f45ceae30_cgraph" id="class_light_a0fc51e56baaae62f7e88f03f45ceae30_cgraph">
 <area shape="rect" title="Parameterized constructor." alt="" coords="5,29,92,56"/>
-<area shape="rect" href="class_shadow_map.html#ab6fd44eb98770e85a2fafc27437169b1" title="Construct a new Shadow Map object." alt="" coords="140,29,312,56"/>
 </map>
 </div>
 <div class="dynheader">
@@ -311,8 +311,8 @@ Here is the caller graph for this function:</div>
 
 <p>Destructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="_light_8cpp_source.html#l00016">16</a> of file <a class="el" href="_light_8cpp_source.html">Light.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;{}</div>
+<p class="definition">Definition at line <a class="el" href="_light_8cpp_source.html#l00017">17</a> of file <a class="el" href="_light_8cpp_source.html">Light.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -335,8 +335,8 @@ Here is the caller graph for this function:</div>
 <p>Returns a pointer to the shadow map. </p>
 <dl class="section return"><dt>Returns</dt><dd>ShadowMap* </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_light_8cpp_source.html#l00018">18</a> of file <a class="el" href="_light_8cpp_source.html">Light.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="class_light.html#ac03805a977e07c63e91bd8c5ab515c22">m_shadowMap</a>; }</div>
+<p class="definition">Definition at line <a class="el" href="_light_8cpp_source.html#l00019">19</a> of file <a class="el" href="_light_8cpp_source.html">Light.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="class_light.html#ac03805a977e07c63e91bd8c5ab515c22">m_shadowMap</a>; }</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="_light_8hpp_source.html#l00059">m_shadowMap</a>.</p>
 
@@ -471,7 +471,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="_light_8hpp_source.html#l00059">59</a> of file <a class="el" href="_light_8hpp_source.html">Light.hpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_light_8cpp_source.html#l00018">GetShadowMap()</a>, and <a class="el" href="_light_8cpp_source.html#l00006">Light()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_light_8cpp_source.html#l00019">GetShadowMap()</a>.</p>
 
 </div>
 </div>
@@ -481,8 +481,6 @@ Here is the caller graph for this function:</div>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclass_shadow_map_html"><div class="ttname"><a href="class_shadow_map.html">ShadowMap</a></div><div class="ttdoc">A shadow map.</div><div class="ttdef"><b>Definition:</b> <a href="_shadow_map_8hpp_source.html#l00011">ShadowMap.hpp:11</a></div></div>
-<div class="ttc" id="aclass_shadow_map_html_ae84c0e38f609044982514d2e1d7c395a"><div class="ttname"><a href="class_shadow_map.html#ae84c0e38f609044982514d2e1d7c395a">ShadowMap::Init</a></div><div class="ttdeci">virtual bool Init(GLuint width, GLuint height)</div><div class="ttdoc">Generates the framebuffer for the shadow map.</div><div class="ttdef"><b>Definition:</b> <a href="_shadow_map_8cpp_source.html#l00005">ShadowMap.cpp:5</a></div></div>
 <div class="ttc" id="aclass_light_html_ae8ffc82ed0d95825c5efb2fd51da8352"><div class="ttname"><a href="class_light.html#ae8ffc82ed0d95825c5efb2fd51da8352">Light::m_diffuseIntensity</a></div><div class="ttdeci">GLfloat m_diffuseIntensity</div><div class="ttdoc">The intensity of the diffuse lighting.</div><div class="ttdef"><b>Definition:</b> <a href="_light_8hpp_source.html#l00053">Light.hpp:53</a></div></div>
 <div class="ttc" id="aclass_light_html_a92ff03f51959af7109370e48ece71de0"><div class="ttname"><a href="class_light.html#a92ff03f51959af7109370e48ece71de0">Light::m_ambientIntensity</a></div><div class="ttdeci">GLfloat m_ambientIntensity</div><div class="ttdoc">The intensity of the ambient lighting.</div><div class="ttdef"><b>Definition:</b> <a href="_light_8hpp_source.html#l00049">Light.hpp:49</a></div></div>
 <div class="ttc" id="aclass_light_html_ae1e458802424a95b629cc1947ef2bcac"><div class="ttname"><a href="class_light.html#ae1e458802424a95b629cc1947ef2bcac">Light::m_color</a></div><div class="ttdeci">glm::vec3 m_color</div><div class="ttdoc">The color of the ambient lighting.</div><div class="ttdef"><b>Definition:</b> <a href="_light_8hpp_source.html#l00047">Light.hpp:47</a></div></div>

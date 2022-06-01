@@ -1,0 +1,6 @@
+<map id="GameAssetFactory::loadNPCObject" name="GameAssetFactory::loadNPCObject">
+<area shape="rect" id="node1" title="Loads in a NPC object from a lua script." alt="" coords="5,56,237,83"/>
+<area shape="rect" id="node2" href="$class_n_p_c.html#afebdb7517d2673f332f1a3377c5cf257" title="Sets the NPC&#39;s faction." alt="" coords="285,5,405,32"/>
+<area shape="rect" id="node3" href="$class_n_p_c.html#ad9ef9092f2b8990f11eadec676287d52" title="Sets health of NPC." alt="" coords="287,56,404,83"/>
+<area shape="rect" id="node4" href="$class_n_p_c.html#a0fd3d924c10b9a38940e5df28cd3e71e" title="Sets the power of the NPC." alt="" coords="287,107,403,133"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="Projectile::save_object" name="Projectile::save_object">
+<area shape="rect" id="node1" title="Saves the object to lua file." alt="" coords="5,81,157,108"/>
+<area shape="rect" id="node2" href="$class_object_saving.html#a546a372500539c88625a5f07cc4caf9f" title="Adds a comma to the file." alt="" coords="205,5,377,32"/>
+<area shape="rect" id="node3" href="$class_object_saving.html#a9dadcc7281db5e569a16d86421c58422" title="Closes the file." alt="" coords="212,56,371,83"/>
+<area shape="rect" id="node4" href="$class_object_saving.html#a8bd80ab63cd87a02055d0e92dd28b372" title="Closes the struct in the file." alt="" coords="205,107,377,133"/>
+<area shape="rect" id="node5" href="$class_object_saving.html#a2f179e587ac90b3be88f1e4c24bc6a19" title="Opens a file to save data too." alt="" coords="214,157,369,184"/>
+<area shape="rect" id="node6" href="$class_object_saving.html#ad38aa3ea541f6a32a6a4cfe7256967f2" title="On first call, opens the creation script file. And then adds the save files in number order into the ..." alt="" coords="425,157,643,184"/>
+</map>

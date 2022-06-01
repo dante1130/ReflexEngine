@@ -1,0 +1,5 @@
+<map id="TestScene::update" name="TestScene::update">
+<area shape="rect" id="node1" title="The update loop of the scene." alt="" coords="5,13,136,39"/>
+<area shape="rect" id="node2" href="$namespace_generic_functions.html#a5f13c8b7e649717c3d7474448e950d6b" title="Updates the networkManager (primary used for sending/receiving data). Current use is for connected cl..." alt="" coords="184,5,361,47"/>
+<area shape="rect" id="node3" href="$classnetwork_manager.html#a52784d20ce9ffda395a16a8150a53aa1" title="Receives a message from the network. It also handles the contents of the message." alt="" coords="409,13,632,39"/>
+</map>

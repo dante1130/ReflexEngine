@@ -1,9 +1,12 @@
 <map id="main" name="main">
-<area shape="rect" id="node1" title=" " alt="" coords="5,123,56,149"/>
-<area shape="rect" id="node2" href="$class_reflex_engine.html#a9c185c8127a7d9d650a1bcc97e3de170" title="Runs the engine." alt="" coords="104,123,228,149"/>
-<area shape="rect" id="node3" href="$namespacegui_lua_access.html#ac5fcf57e6dbe6cc3064717c98b182fc7" title="Gives lua access to gui related functions." alt="" coords="280,5,455,32"/>
-<area shape="rect" id="node4" href="$class_resource_manager.html#a33b466c53250b7431976a04d42d59036" title="Get the instance of the Resource Manager." alt="" coords="291,57,444,98"/>
-<area shape="rect" id="node5" href="$class_input_manager.html#ad569ecdfed4bedd78d0c41667ecca2b4" title="Get the instance." alt="" coords="276,123,459,149"/>
-<area shape="rect" id="node6" href="$class_reflex_engine.html#aceed91c96c9c6774fbcacfde19e9b5f9" title="Get an instance of the engine." alt="" coords="277,173,457,200"/>
-<area shape="rect" id="node7" href="$namespacegui.html#afc5628199f30769b6573f508492404b1" title="Shuts down gui." alt="" coords="316,224,419,251"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,199,56,225"/>
+<area shape="rect" id="node2" href="$class_reflex_engine.html#a9c185c8127a7d9d650a1bcc97e3de170" title="Runs the engine." alt="" coords="104,199,228,225"/>
+<area shape="rect" id="node3" href="$class_physics.html#a57d5edbfcb404618f3133c135dfdb3ce" title="Creates the world for the physic objects." alt="" coords="294,5,441,32"/>
+<area shape="rect" id="node4" href="$class_physics.html#abc2fbaff75f375db71bc8fbc88185bde" title="Creates the world for the physic objects." alt="" coords="290,56,445,83"/>
+<area shape="rect" id="node5" href="$class_resource_manager.html#a33b466c53250b7431976a04d42d59036" title="Get the instance of the Resource Manager." alt="" coords="291,107,444,149"/>
+<area shape="rect" id="node6" href="$class_input_manager.html#ad569ecdfed4bedd78d0c41667ecca2b4" title="Get the instance." alt="" coords="276,173,459,200"/>
+<area shape="rect" id="node7" href="$class_reflex_engine.html#aceed91c96c9c6774fbcacfde19e9b5f9" title="Get an instance of the engine." alt="" coords="277,224,457,251"/>
+<area shape="rect" id="node8" href="$class_input_manager.html#a18c7c9fbdaa41b7face531a32ac20443" title="Load the bindings from a Lua file." alt="" coords="301,275,433,317"/>
+<area shape="rect" id="node9" href="$namespace_generic_functions.html#aedb1b2ce5d478ef7fedcda90a989e6b2" title="Exposes generic functions methods to lua." alt="" coords="293,341,442,382"/>
+<area shape="rect" id="node10" href="$namespacegui.html#afc5628199f30769b6573f508492404b1" title="Shuts down gui." alt="" coords="316,407,419,433"/>
 </map>

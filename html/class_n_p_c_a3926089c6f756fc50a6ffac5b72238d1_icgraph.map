@@ -1,0 +1,6 @@
+<map id="NPC::is_dead" name="NPC::is_dead">
+<area shape="rect" id="node1" title="Gets if NPC is dead." alt="" coords="437,31,540,57"/>
+<area shape="rect" id="node2" href="$class_n_p_c.html#a1fa6f84cb8028b4e005231cb1dafb984" title="Moves to a targeted enemy." alt="" coords="225,5,376,32"/>
+<area shape="rect" id="node3" href="$class_n_p_c.html#a803c59b3a91125970062b342a3d015df" title="Searches for an enemy based on a max distance. If it sees an enemy will set its target ID &amp; return tr..." alt="" coords="212,56,389,83"/>
+<area shape="rect" id="node4" href="$class_n_p_c.html#a0941e56d477bd5e9c862f786813a47cf" title="Searches for an enemy based on a distance of 10. If it sees an enemy will set its target ID &amp; return ..." alt="" coords="5,56,164,83"/>
+</map>

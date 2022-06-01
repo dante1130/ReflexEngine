@@ -1,0 +1,4 @@
+<map id="NPC::watch_for_enemyVal" name="NPC::watch_for_enemyVal">
+<area shape="rect" id="node1" title="Searches for an enemy based on a max distance. If it sees an enemy will set its target ID &amp; return tr..." alt="" coords="212,5,389,32"/>
+<area shape="rect" id="node2" href="$class_n_p_c.html#a0941e56d477bd5e9c862f786813a47cf" title="Searches for an enemy based on a distance of 10. If it sees an enemy will set its target ID &amp; return ..." alt="" coords="5,5,164,32"/>
+</map>
