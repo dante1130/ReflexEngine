@@ -30,8 +30,6 @@ void Player::update(double delta_time) {
 	    physicsEntityMgr.collides(position, newPos, m_capsule[0].m_radius);
 	if (!collides) {
 		position = newPos;
-	} else {
-		std::cout << "collision" << std::endl;
 	}
 
 	auto& camera = ReflexEngine::get_instance().camera_;
