@@ -19,8 +19,6 @@ void NetworkedItem::update(double delta_time) {
 		position.x = GenericFunctions::getNetworkPosX();
 		position.y = GenericFunctions::getNetworkPosY();
 		position.z = GenericFunctions::getNetworkPosZ();
-		//std::cout << position.x << " " << position.y << " " << position.z
-		          //<< std::endl;
 	}
 }
 
