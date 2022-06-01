@@ -293,7 +293,7 @@ state_attack["execute"] = function(player)
 
   local animation = player:getAnimation();
 
-  if(dist > 3 and animation:isRunning() == false) then
+  if(dist > 2.5 and animation:isRunning() == false) then
     print("Entity: ", player.id, " | Faction: ", player.faction, " | Attack -> Chase", " | Reason: Out of attack range")
     player:getFSM():changeState("state_chase")
   else
@@ -554,7 +554,7 @@ state_ghost_attack["execute"] = function(player)
 
   dist = vec:length()
 
-  if(dist > 3) then
+  if(dist > 2.5) then
     print("Entity: ", player.id, " | Faction: ", player.faction, " | Ghost Attack -> Ghost Chase", " | Reason: Out of attack range")
     player:getFSM():changeState("state_ghost_chase")
   else
