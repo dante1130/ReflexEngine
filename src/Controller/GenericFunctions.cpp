@@ -367,6 +367,10 @@ void GenericFunctions::networkSendMessage() {
 		network.MessageSend(messageChar);
 		incomingMessage = network.GetName();
 		incomingMessage.append(messageChar);
+	} else {
+		strcpy(messageChar, message.c_str());
+		strcat(messageChar, "\n");
+		network.MessageSend(messageChar);
 	}
 	networkGetMessage();
 }
