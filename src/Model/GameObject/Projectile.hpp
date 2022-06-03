@@ -34,7 +34,7 @@ public:
 	 *
 	 * @param shader The shader to use.
 	 */
-	void draw(std::shared_ptr<Shader> shader);
+	void draw(const Shader& shader);
 
 	/**
 	 * @brief	Saves the object to lua file

@@ -13,7 +13,7 @@
  */
 class BttController : public Terrain {
 public:
-	void render(std::shared_ptr<Shader> shader) override;
+	void render(const Shader& shader) override;
 
 	/**
 	 * @brief Reads the heightmap and loads the mesh.

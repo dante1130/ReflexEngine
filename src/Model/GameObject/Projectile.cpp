@@ -41,9 +41,7 @@ void Projectile::fixed_update(double delta_time) {
 
 void Projectile::add_draw_call() { PhysicsObject::add_draw_call(); }
 
-void Projectile::draw(std::shared_ptr<Shader> shader) {
-	PhysicsObject::draw(shader);
-}
+void Projectile::draw(const Shader& shader) { PhysicsObject::draw(shader); }
 
 void Projectile::save_object() {
 	ObjectSaving::openFile();

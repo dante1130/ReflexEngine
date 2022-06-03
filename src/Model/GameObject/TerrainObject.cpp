@@ -13,13 +13,11 @@ void TerrainObject::fixed_update(double delta_time) {
 }
 
 void TerrainObject::add_draw_call() {
-	DrawCall draw_call = [=](std::shared_ptr<Shader> shader) { draw(shader); };
+	DrawCall draw_call = [this](const Shader& shader) { draw(shader); };
 	ReflexEngine::get_instance().renderer_.add_draw_call(draw_call);
 }
 
-void TerrainObject::draw(std::shared_ptr<Shader> shader) {
-	bttControl.render(shader);
-}
+void TerrainObject::draw(const Shader& shader) { bttControl.render(shader); }
 
 void TerrainObject::add_storage_text(const std::string& text, int n) {
 	m_text[n] = text;

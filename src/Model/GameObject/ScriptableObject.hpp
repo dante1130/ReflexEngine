@@ -54,7 +54,7 @@ public:
 	 * @pre		Object exists
 	 * @post	Nothing
 	 */
-	void draw(std::shared_ptr<Shader> shader) override {}
+	void draw(const Shader& shader) override {}
 
 	/**
 	 * @brief	Saves the object to lau file

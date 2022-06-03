@@ -18,7 +18,7 @@ public:
 	 *
 	 * @param shader The shader to use.
 	 */
-	virtual void render(std::shared_ptr<Shader> shader) = 0;
+	virtual void render(const Shader& shader) = 0;
 
 	/**
 	 * @brief Reads the heightmap and loads the mesh.

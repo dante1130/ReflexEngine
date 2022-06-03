@@ -12,7 +12,8 @@
 
 /**
  * @class Item
- * @brief An item in the scene that is built for networking functionality (simply put, doesn't save)
+ * @brief An item in the scene that is built for networking functionality
+ * (simply put, doesn't save)
  */
 class NetworkedItem : public GameObject {
 public:
@@ -22,7 +23,8 @@ public:
 	 * @param model_name
 	 * @param texture_name
 	 */
-	NetworkedItem(const std::string& model_name, const std::string& texture_name);
+	NetworkedItem(const std::string& model_name,
+	              const std::string& texture_name);
 
 	/**
 	 * @brief Initializes the item with a model, a texture, and a material.
@@ -53,7 +55,7 @@ public:
 	 *
 	 * @param shader
 	 */
-	void draw(std::shared_ptr<Shader> shader) override;
+	void draw(const Shader& shader) override;
 
 	/**
 	 * @brief	Saves the object to lau file

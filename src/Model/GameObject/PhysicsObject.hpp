@@ -69,7 +69,7 @@ public:
 	 * @pre		Model initialised
 	 * @post	Model drawn
 	 */
-	void draw(std::shared_ptr<Shader> shader) override;
+	void draw(const Shader& shader) override;
 
 	/**
 	 * @brief	Saves the object to lau file

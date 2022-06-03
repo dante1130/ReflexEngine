@@ -23,17 +23,17 @@ BttController::~BttController() {
 	chunk_detail = 0;
 }
 
-void BttController::render(std::shared_ptr<Shader> shader) {
+void BttController::render(const Shader& shader) {
 	if (!mesh_) return;
 
 	glm::mat4 model = glm::mat4(1.0f);
 	model = glm::translate(model, get_origin());
 	model = glm::scale(model, scale_);
 
-	glUniformMatrix4fv(shader->GetModelLocation(), 1, GL_FALSE,
+	glUniformMatrix4fv(shader.GetModelLocation(), 1, GL_FALSE,
 	                   glm::value_ptr(model));
-	glUniform1i(shader->GetUsingTexture(), false);
-	glUniform1i(shader->get_using_detailmap(), true);
+	glUniform1i(shader.GetUsingTexture(), false);
+	glUniform1i(shader.get_using_detailmap(), true);
 
 	texture_->UseTexture();
 	detailmap->UseTexture();

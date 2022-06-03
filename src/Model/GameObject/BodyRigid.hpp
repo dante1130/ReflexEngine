@@ -28,7 +28,7 @@ public:
 	 * @pre		Nothing
 	 * @post	Nothing
 	 */
-	void draw(std::shared_ptr<Shader> shader) override {}
+	void draw(const Shader& shader) override {}
 
 	/**
 	 * @brief	Creates rigid body.

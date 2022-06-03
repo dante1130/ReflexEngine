@@ -82,7 +82,7 @@ public:
 	 * @pre		Water object is created & draw call has been added
 	 * @post	Water object displayed to screen
 	 */
-	void draw(std::shared_ptr<Shader> shader) override;
+	void draw(const Shader &shader) override;
 
 	/**
 	 * @brief	Initialises the water

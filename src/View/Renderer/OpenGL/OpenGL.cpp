@@ -23,17 +23,17 @@ void OpenGL::init() {
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	// Default shader.
-	shader_ = std::make_shared<Shader>();
+	shader_ = std::make_unique<Shader>();
 	shader_->CompileFile("shaders/shader.vert", "shaders/shader.frag");
 
 	// Directional shadow shader.
-	directional_shadow_shader_ = std::make_shared<Shader>();
+	directional_shadow_shader_ = std::make_unique<Shader>();
 	directional_shadow_shader_->CompileFile(
 	    "shaders/directional_shadow_map.vert",
 	    "shaders/directional_shadow_map.frag");
 
 	// Omni shadow shader.
-	omni_shadow_shader_ = std::make_shared<Shader>();
+	omni_shadow_shader_ = std::make_unique<Shader>();
 	omni_shadow_shader_->CompileFile("shaders/omni_shadow_map.vert",
 	                                 "shaders/omni_shadow_map.geom",
 	                                 "shaders/omni_shadow_map.frag");
@@ -48,7 +48,7 @@ void OpenGL::draw() {
 	draw_calls_.clear();
 }
 
-void OpenGL::render_scene(std::shared_ptr<Shader> shader) {
+void OpenGL::render_scene(const Shader& shader) {
 	for (const auto& draw_call : draw_calls_) {
 		draw_call(shader);
 	}
@@ -83,7 +83,7 @@ void OpenGL::render_pass() {
 
 	shader_->Validate();
 
-	render_scene(shader_);
+	render_scene(*shader_);
 }
 
 void OpenGL::render_lights() {
@@ -115,7 +115,7 @@ void OpenGL::directional_shadow_pass(const DirectionalLight& d_light) {
 
 	directional_shadow_shader_->Validate();
 
-	render_scene(directional_shadow_shader_);
+	render_scene(*directional_shadow_shader_);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
@@ -129,7 +129,7 @@ void OpenGL::toggle_wireframe() {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
-std::shared_ptr<Shader> OpenGL::get_shader() { return shader_; }
+const Shader& OpenGL::get_shader() { return *shader_; }
 
 void OpenGL::set_skybox(const std::vector<std::string>& faces) {
 	skybox_ = Skybox(faces);

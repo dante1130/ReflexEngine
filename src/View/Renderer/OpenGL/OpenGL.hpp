@@ -12,7 +12,7 @@
 // A drawcall represents a drawable object that is rendered to the screen, this
 // is done through this function pointer which is passed from the scene to the
 // renderer.
-using DrawCall = std::function<void(std::shared_ptr<Shader>)>;
+using DrawCall = std::function<void(const Shader& shader)>;
 
 /**
  * @brief The OpenGL renderer.
@@ -40,11 +40,11 @@ public:
 	void toggle_wireframe() override;
 
 	/**
-	 * @brief Getter for the default shader object.
+	 * @brief Get the shader.
 	 *
-	 * @return std::shared_ptr<Shader>
+	 * @return const Shader&
 	 */
-	std::shared_ptr<Shader> get_shader();
+	const Shader& get_shader();
 
 	/**
 	 * @brief Set the skybox with given texture paths to faces.
@@ -87,7 +87,7 @@ private:
 	 *
 	 * @param shader
 	 */
-	void render_scene(std::shared_ptr<Shader> shader);
+	void render_scene(const Shader& shader);
 
 	/**
 	 * @brief Enable and render lights.
@@ -125,11 +125,11 @@ private:
 	std::vector<DrawCall> draw_calls_ = {};
 
 	/// The default shader.
-	std::shared_ptr<Shader> shader_ = nullptr;
+	std::unique_ptr<Shader> shader_ = nullptr;
 
 	/// The directional shadow shader.
-	std::shared_ptr<Shader> directional_shadow_shader_ = nullptr;
+	std::unique_ptr<Shader> directional_shadow_shader_ = nullptr;
 
 	/// The directional shadow map.
-	std::shared_ptr<Shader> omni_shadow_shader_ = nullptr;
+	std::unique_ptr<Shader> omni_shadow_shader_ = nullptr;
 };
