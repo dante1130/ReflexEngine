@@ -64,10 +64,10 @@ void Shader::SetPointLights(PointLight* pLight, GLuint lightCount,
 
 		// pLight[i].GetShadowMap()->Read(GL_TEXTURE0 + textureUnit + i);
 
-		glUniform1i(uniformOmniShadowMap[i + offset].shadowMap,
-		            textureUnit + i);
-		glUniform1f(uniformOmniShadowMap[i + offset].farPlane,
-		            pLight[i].GetFarPlane());
+		// glUniform1i(uniformOmniShadowMap[i + offset].shadowMap,
+		//             textureUnit + i);
+		// glUniform1f(uniformOmniShadowMap[i + offset].farPlane,
+		//             pLight[i].GetFarPlane());
 	}
 }
 
@@ -90,10 +90,10 @@ void Shader::SetSpotLights(SpotLight* sLight, GLuint lightCount,
 
 		// sLight[i].GetShadowMap()->Read(GL_TEXTURE0 + textureUnit + i);
 
-		glUniform1i(uniformOmniShadowMap[i + offset].shadowMap,
-		            textureUnit + i);
-		glUniform1f(uniformOmniShadowMap[i + offset].farPlane,
-		            sLight[i].GetFarPlane());
+		// glUniform1i(uniformOmniShadowMap[i + offset].shadowMap,
+		//             textureUnit + i);
+		// glUniform1f(uniformOmniShadowMap[i + offset].farPlane,
+		//             sLight[i].GetFarPlane());
 	}
 }
 
@@ -153,7 +153,7 @@ std::string Shader::ReadFile(const char* fileLocation) {
 		return "";
 	}
 
-	std::string line = "";
+	std::string line;
 	while (fileStream) {
 		std::getline(fileStream, line);
 		content.append(line + "\n");

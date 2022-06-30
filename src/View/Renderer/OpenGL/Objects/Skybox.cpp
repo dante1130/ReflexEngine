@@ -1,9 +1,7 @@
 #include "Skybox.hpp"
 
-Skybox::Skybox() {}
-
 Skybox::Skybox(const std::vector<std::string>& faceLocations) {
-	m_skyShader = new Shader();
+	m_skyShader = std::make_unique<Shader>();
 	m_skyShader->CompileFile("shaders/skybox.vert", "shaders/skybox.frag");
 
 	m_uniformProjection = m_skyShader->GetProjectionLocation();
@@ -37,20 +35,20 @@ Skybox::Skybox(const std::vector<std::string>& faceLocations) {
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	// Mesh Setup
-	const uint32_t skyboxIndices[] = {// front
-	                                  0, 1, 2, 2, 1, 3,
-	                                  // right
-	                                  2, 3, 5, 5, 3, 7,
-	                                  // back
-	                                  5, 7, 4, 4, 7, 6,
-	                                  // left
-	                                  4, 6, 0, 0, 6, 1,
-	                                  // top
-	                                  4, 0, 5, 5, 0, 2,
-	                                  // bottom
-	                                  1, 6, 3, 3, 6, 7};
+	constexpr uint32_t skyboxIndices[] = {// front
+	                                      0, 1, 2, 2, 1, 3,
+	                                      // right
+	                                      2, 3, 5, 5, 3, 7,
+	                                      // back
+	                                      5, 7, 4, 4, 7, 6,
+	                                      // left
+	                                      4, 6, 0, 0, 6, 1,
+	                                      // top
+	                                      4, 0, 5, 5, 0, 2,
+	                                      // bottom
+	                                      1, 6, 3, 3, 6, 7};
 
-	const float skyboxVertices[] = {
+	constexpr float skyboxVertices[] = {
 	    -1.0f, 1.0f,  -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
 	    -1.0f, -1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
 	    1.0f,  1.0f,  -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
@@ -61,7 +59,7 @@ Skybox::Skybox(const std::vector<std::string>& faceLocations) {
 	    -1.0f, -1.0f, 1.0f,  0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
 	    1.0f,  -1.0f, 1.0f,  0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
 
-	m_skyMesh = new Mesh();
+	m_skyMesh = std::make_unique<Mesh>();
 	m_skyMesh->CreateMesh(skyboxVertices, skyboxIndices, 64, 36);
 }
 

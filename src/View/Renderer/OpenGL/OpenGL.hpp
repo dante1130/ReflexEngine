@@ -40,13 +40,6 @@ public:
 	void toggle_wireframe() override;
 
 	/**
-	 * @brief Get the shader.
-	 *
-	 * @return const Shader&
-	 */
-	const Shader& get_shader();
-
-	/**
 	 * @brief Set the skybox with given texture paths to faces.
 	 *
 	 * @param faces
@@ -99,13 +92,6 @@ private:
 	 */
 	void render_pass();
 
-	/**
-	 * @brief The directional shadow pass using the directional shadow shader.
-	 *
-	 * @param d_light
-	 */
-	void directional_shadow_pass(const DirectionalLight& d_light);
-
 	/// A boolean to toggle between wireframe and normal rendering.
 	bool is_wireframe_ = false;
 
@@ -126,10 +112,4 @@ private:
 
 	/// The default shader.
 	std::unique_ptr<Shader> shader_ = nullptr;
-
-	/// The directional shadow shader.
-	std::unique_ptr<Shader> directional_shadow_shader_ = nullptr;
-
-	/// The directional shadow map.
-	std::unique_ptr<Shader> omni_shadow_shader_ = nullptr;
 };

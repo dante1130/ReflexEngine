@@ -9,22 +9,14 @@
 class DirectionalLight : public Light {
 public:
 	/**
-	 * @brief Default constructor.
-	 */
-	DirectionalLight();
-
-	/**
 	 * @brief Parameterized constructor.
 	 *
-	 * @param shadowWidth The width of the shadow map.
-	 * @param shadowHeight The height of the shadow map.
 	 * @param color The color of the light.
 	 * @param aIntensity The ambient intensity of the light.
 	 * @param direction The direction of the light.
 	 * @param dIntensity The diffuse intensity of the light.
 	 */
-	DirectionalLight(GLfloat shadowWidth, GLfloat shadowHeight, glm::vec3 color,
-	                 GLfloat aIntensity, glm::vec3 direction,
+	DirectionalLight(glm::vec3 color, GLfloat aIntensity, glm::vec3 direction,
 	                 GLfloat dIntensity);
 
 	/**
@@ -39,16 +31,9 @@ public:
 	              GLuint directionLoc, GLuint diffuseIntensityLoc) const;
 
 	/**
-	 * @brief Calculate the transformation matrix of the light.
-	 *
-	 * @return glm::mat4 The transformation matrix of the light.
-	 */
-	glm::mat4 CalculateLightTransform() const;
-
-	/**
 	 * @brief Destructor.
 	 */
-	~DirectionalLight();
+	~DirectionalLight() = default;
 
 private:
 	/// The direction the light is facing.

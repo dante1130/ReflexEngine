@@ -27,14 +27,14 @@ public:
 	/**
 	 * @brief Binds the FBO of the shadow map.
 	 */
-	virtual void Write();
+	virtual void Write() const;
 
 	/**
 	 * @brief Enable the shadow map given a texture unit.
 	 *
 	 * @param textureUnit The texture unit to bind the shadow map to.
 	 */
-	virtual void Read(GLenum textureUnit);
+	virtual void Read(GLenum textureUnit) const;
 
 	/**
 	 * @brief Get the Shadow Width
