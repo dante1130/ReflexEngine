@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: src/Controller/GameAssetFactory.hpp File Reference</title>
+<title>ICT397 Assignment 2: src/Controller/GameAssetFactory.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -88,6 +88,7 @@ $(document).ready(function(){initNavTree('_game_asset_factory_8hpp.html',''); in
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;sol/sol.hpp&gt;</code><br />
+<code>#include &lt;assert.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="_lua_manager_8hpp_source.html">Controller/LuaManager.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_game_object_8hpp_source.html">Model/GameObject/GameObject.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_item_8hpp_source.html">Model/GameObject/Item.hpp</a>&quot;</code><br />
@@ -98,62 +99,70 @@ $(document).ready(function(){initNavTree('_game_asset_factory_8hpp.html',''); in
 <code>#include &quot;<a class="el" href="_physics_object_8hpp_source.html">Model/GameObject/PhysicsObject.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_scriptable_object_8hpp_source.html">Model/GameObject/ScriptableObject.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_terrain_object_8hpp_source.html">Model/GameObject/TerrainObject.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_skybox_object_8hpp_source.html">Model/GameObject/SkyboxObject.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_directional_light_object_8hpp_source.html">Model/GameObject/DirectionalLightObject.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_point_light_object_8hpp_source.html">Model/GameObject/PointLightObject.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_spot_light_object_8hpp_source.html">Model/GameObject/SpotLightObject.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_textured_terrain_8hpp_source.html">Controller/Terrain/TexturedTerrain.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="singletons_8h_source.html">Model/singletons.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_projectile_8hpp_source.html">Model/GameObject/Projectile.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_networked_item_8hpp_source.html">Model/GameObject/NetworkedItem.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_n_p_c_8hpp_source.html">Model/GameObject/NPC.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for GameAssetFactory.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="_game_asset_factory_8hpp__incl.png" border="0" usemap="#src_2_controller_2_game_asset_factory_8hpp" alt=""/></div>
 <map name="src_2_controller_2_game_asset_factory_8hpp" id="src_2_controller_2_game_asset_factory_8hpp">
-<area shape="rect" title=" " alt="" coords="1405,5,1577,47"/>
-<area shape="rect" title=" " alt="" coords="5,534,91,561"/>
-<area shape="rect" href="_lua_manager_8hpp.html" title=" " alt="" coords="310,445,487,471"/>
-<area shape="rect" href="_game_object_8hpp.html" title=" " alt="" coords="2450,445,2686,471"/>
-<area shape="rect" href="_item_8hpp.html" title=" " alt="" coords="802,184,990,211"/>
-<area shape="rect" href="_water_8hpp.html" title=" " alt="" coords="1875,266,2074,293"/>
-<area shape="rect" href="_body_8hpp.html" title=" " alt="" coords="1335,266,1529,293"/>
-<area shape="rect" href="_textured_terrain_8hpp.html" title=" " alt="" coords="1250,437,1390,479"/>
-<area shape="rect" href="_body_rigid_8hpp.html" title=" " alt="" coords="1186,184,1409,211"/>
-<area shape="rect" href="_player_8hpp.html" title=" " alt="" coords="967,102,1167,129"/>
-<area shape="rect" href="_physics_object_8hpp.html" title=" " alt="" coords="1191,95,1377,136"/>
-<area shape="rect" href="_scriptable_object_8hpp.html" title=" " alt="" coords="1655,259,1851,300"/>
-<area shape="rect" href="_terrain_object_8hpp.html" title=" " alt="" coords="2098,259,2275,300"/>
-<area shape="rect" title=" " alt="" coords="2472,929,2565,956"/>
-<area shape="rect" href="_shader_8hpp.html" title=" " alt="" coords="1809,616,1967,657"/>
-<area shape="rect" title=" " alt="" coords="1300,705,1372,732"/>
-<area shape="rect" title=" " alt="" coords="2195,705,2253,732"/>
-<area shape="rect" title=" " alt="" coords="909,705,963,732"/>
-<area shape="rect" title=" " alt="" coords="1650,705,1715,732"/>
-<area shape="rect" title=" " alt="" coords="1432,855,1488,881"/>
-<area shape="rect" title=" " alt="" coords="1265,929,1351,956"/>
-<area shape="rect" title=" " alt="" coords="1740,705,1881,732"/>
-<area shape="rect" href="_light_8hpp.html" title=" " alt="" coords="2199,855,2273,881"/>
-<area shape="rect" href="_directional_light_8hpp.html" title=" " alt="" coords="2168,780,2304,807"/>
-<area shape="rect" href="_point_light_8hpp.html" title=" " alt="" coords="1819,780,1925,807"/>
-<area shape="rect" href="_spot_light_8hpp.html" title=" " alt="" coords="2069,705,2171,732"/>
-<area shape="rect" href="_common_values_8hpp.html" title=" " alt="" coords="1905,705,2044,732"/>
-<area shape="rect" href="_resource_manager_8hpp.html" title=" " alt="" coords="531,259,717,300"/>
-<area shape="rect" href="_texture_8hpp.html" title=" " alt="" coords="1015,616,1174,657"/>
-<area shape="rect" href="_model_8hpp.html" title=" " alt="" coords="609,527,767,568"/>
-<area shape="rect" href="_material_8hpp.html" title=" " alt="" coords="89,437,247,479"/>
-<area shape="rect" href="_object_saving_8hpp.html" title=" " alt="" coords="1655,348,1841,389"/>
-<area shape="rect" href="_texture_manager_8hpp.html" title=" " alt="" coords="577,355,717,382"/>
-<area shape="rect" href="_model_manager_8hpp.html" title=" " alt="" coords="421,355,553,382"/>
-<area shape="rect" href="_material_manager_8hpp.html" title=" " alt="" coords="151,355,294,382"/>
-<area shape="rect" href="_stb_image_8hpp.html" title=" " alt="" coords="1071,705,1174,732"/>
-<area shape="rect" title=" " alt="" coords="342,623,482,650"/>
-<area shape="rect" title=" " alt="" coords="507,623,621,650"/>
-<area shape="rect" title=" " alt="" coords="646,623,797,650"/>
-<area shape="rect" href="_mesh_8hpp.html" title=" " alt="" coords="1553,623,1631,650"/>
-<area shape="rect" title=" " alt="" coords="1197,355,1259,382"/>
-<area shape="rect" title=" " alt="" coords="2362,355,2430,382"/>
-<area shape="rect" href="_physics_8hpp.html" title=" " alt="" coords="995,355,1149,382"/>
-<area shape="rect" href="_generic_functions_8h.html" title=" " alt="" coords="1385,355,1580,382"/>
-<area shape="rect" title=" " alt="" coords="957,445,1171,471"/>
-<area shape="rect" href="_reflex_engine_8hpp.html" title=" " alt="" coords="1465,445,1668,471"/>
-<area shape="rect" href="_terrain_8hpp.html" title=" " alt="" coords="1845,534,1931,561"/>
-<area shape="rect" href="_body_rigid_physics_8hpp.html" title=" " alt="" coords="997,266,1209,293"/>
-<area shape="rect" href="_model_2_game_object_2_btt_controller_8hpp.html" title=" " alt="" coords="2255,445,2374,471"/>
-<area shape="rect" href="multi_texture_creator_8hpp.html" title=" " alt="" coords="1967,355,2185,382"/>
+<area shape="rect" title=" " alt="" coords="1879,5,2051,47"/>
+<area shape="rect" title=" " alt="" coords="3789,758,3875,785"/>
+<area shape="rect" title=" " alt="" coords="615,95,684,121"/>
+<area shape="rect" href="_lua_manager_8hpp.html" title=" " alt="" coords="3454,669,3631,695"/>
+<area shape="rect" href="_game_object_8hpp.html" title=" " alt="" coords="1366,669,1602,695"/>
+<area shape="rect" href="_item_8hpp.html" title=" " alt="" coords="2346,490,2534,517"/>
+<area shape="rect" href="_water_8hpp.html" title=" " alt="" coords="1046,490,1245,517"/>
+<area shape="rect" href="_body_8hpp.html" title=" " alt="" coords="1502,490,1695,517"/>
+<area shape="rect" href="_textured_terrain_8hpp.html" title=" " alt="" coords="2817,661,2957,703"/>
+<area shape="rect" href="_body_rigid_8hpp.html" title=" " alt="" coords="1510,408,1733,435"/>
+<area shape="rect" href="_player_8hpp.html" title=" " alt="" coords="2315,326,2515,353"/>
+<area shape="rect" href="_physics_object_8hpp.html" title=" " alt="" coords="2105,319,2290,360"/>
+<area shape="rect" href="_scriptable_object_8hpp.html" title=" " alt="" coords="2074,483,2270,524"/>
+<area shape="rect" href="_terrain_object_8hpp.html" title=" " alt="" coords="1719,483,1897,524"/>
+<area shape="rect" href="_skybox_object_8hpp.html" title=" " alt="" coords="805,579,1051,606"/>
+<area shape="rect" href="_directional_light_object_8hpp.html" title=" " alt="" coords="311,572,510,613"/>
+<area shape="rect" href="_point_light_object_8hpp.html" title=" " alt="" coords="534,572,730,613"/>
+<area shape="rect" href="_spot_light_object_8hpp.html" title=" " alt="" coords="94,572,287,613"/>
+<area shape="rect" href="singletons_8h.html" title=" " alt="" coords="3415,95,3545,121"/>
+<area shape="rect" href="_n_p_c_8hpp.html" title=" " alt="" coords="3598,244,3789,271"/>
+<area shape="rect" href="_projectile_8hpp.html" title=" " alt="" coords="2105,244,2322,271"/>
+<area shape="rect" href="_networked_item_8hpp.html" title=" " alt="" coords="2863,483,3062,524"/>
+<area shape="rect" title=" " alt="" coords="1369,847,1463,874"/>
+<area shape="rect" href="_shader_8hpp.html" title=" " alt="" coords="1487,840,1646,881"/>
+<area shape="rect" title=" " alt="" coords="2991,929,3046,956"/>
+<area shape="rect" title=" " alt="" coords="1759,929,1815,956"/>
+<area shape="rect" href="_resource_manager_8hpp.html" title=" " alt="" coords="2504,572,2691,613"/>
+<area shape="rect" href="_model_8hpp.html" title=" " alt="" coords="2169,751,2327,792"/>
+<area shape="rect" href="_texture_8hpp.html" title=" " alt="" coords="1979,840,2138,881"/>
+<area shape="rect" href="_material_8hpp.html" title=" " alt="" coords="2715,572,2874,613"/>
+<area shape="rect" href="_object_saving_8hpp.html" title=" " alt="" coords="1888,572,2075,613"/>
+<area shape="rect" href="_mesh_8hpp.html" title=" " alt="" coords="1670,847,1749,874"/>
+<area shape="rect" title=" " alt="" coords="1321,579,1383,606"/>
+<area shape="rect" title=" " alt="" coords="1075,579,1143,606"/>
+<area shape="rect" href="_physics_8hpp.html" title=" " alt="" coords="1459,572,1587,613"/>
+<area shape="rect" href="_generic_functions_8h.html" title=" " alt="" coords="3101,579,3296,606"/>
+<area shape="rect" href="_terrain_8hpp.html" title=" " alt="" coords="1713,758,1799,785"/>
+<area shape="rect" href="_body_rigid_physics_8hpp.html" title=" " alt="" coords="1320,483,1477,524"/>
+<area shape="rect" href="_btt_controller_8hpp.html" title=" " alt="" coords="1677,661,1800,703"/>
+<area shape="rect" href="multi_texture_creator_8hpp.html" title=" " alt="" coords="1925,758,2144,785"/>
+<area shape="rect" href="_light_data_8hpp.html" title=" " alt="" coords="413,669,555,695"/>
+<area shape="rect" href="singleton_8h.html" title=" " alt="" coords="3437,169,3523,196"/>
+<area shape="rect" href="entity_manager_8h.html" title=" " alt="" coords="3598,169,3789,196"/>
+<area shape="rect" href="message_dispatcher_8h.html" title=" " alt="" coords="3913,408,4135,435"/>
+<area shape="rect" href="world_8hpp.html" title=" " alt="" coords="3131,483,3277,524"/>
+<area shape="rect" href="_counter_8hpp.html" title=" " alt="" coords="3246,169,3413,196"/>
+<area shape="rect" href="physics_entity_manager_8h.html" title=" " alt="" coords="3358,319,3525,360"/>
+<area shape="rect" href="state_machine_8h.html" title=" " alt="" coords="3600,408,3787,435"/>
+<area shape="rect" href="telegram_8h.html" title=" " alt="" coords="3652,490,3735,517"/>
+<area shape="rect" title=" " alt="" coords="3473,579,3530,606"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -174,7 +183,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_asset_factory.html">GameAssetFactory</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_a.html">A</a> parameterized factory singleton for creating GameObjects.  <a href="class_game_asset_factory.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A parameterized factory singleton for creating GameObjects.  <a href="class_game_asset_factory.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->

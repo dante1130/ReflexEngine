@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: src/Controller/ResourceManager/ResourceManager.hpp Source File</title>
+<title>ICT397 Assignment 2: src/Controller/ResourceManager/ResourceManager.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -90,79 +90,93 @@ $(document).ready(function(){initNavTree('_resource_manager_8hpp_source.html',''
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <a class="code" href="_texture_manager_8hpp.html">&quot;TextureManager.hpp&quot;</a></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <a class="code" href="_model_manager_8hpp.html">&quot;ModelManager.hpp&quot;</a></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <a class="code" href="_material_manager_8hpp.html">&quot;MaterialManager.hpp&quot;</a></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">/**</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"> * @class A singleton class for containing other asset managers; models,</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> * textures, and materials.</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="class_resource_manager.html">   12</a></span>&#160;<span class="keyword">class</span> <a class="code" href="class_resource_manager.html">ResourceManager</a> {</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">     * @brief Get the instance of the Resource Manager.</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">     * @return ResourceManager&amp;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_resource_manager.html">ResourceManager</a>&amp; <a class="code" href="class_resource_manager.html#a33b466c53250b7431976a04d42d59036">get_instance</a>();</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">     * @brief Get the model manager.</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">     * @return ModelManager&amp;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    ModelManager&amp; <a class="code" href="class_resource_manager.html#a474f1dfe5e7d553d919d09ff8b827467">get_model_manager</a>();</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">     * @brief Get the texture manager.</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">     * @return TextureManager&amp;</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    TextureManager&amp; <a class="code" href="class_resource_manager.html#abbef155bc35aef3f78995effb06120fa">get_texture_manager</a>();</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">     * @brief Get the material manager.</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">     * @return MaterialManager&amp;</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="class_material_manager.html">MaterialManager</a>&amp; <a class="code" href="class_resource_manager.html#aea53ae6d2b9182e3aa71c6bd913922f0">get_material_manager</a>();</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="comment">// These are deleted as a singleton pattern is used.</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="class_resource_manager.html#aa8719dcc5400699a66d3b9e3f91c55ee">ResourceManager</a>(<a class="code" href="class_resource_manager.html">ResourceManager</a>&amp; other) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="class_resource_manager.html#a75d0eead1e899959c0b9fea954d77697">ResourceManager</a>(<span class="keyword">const</span> <a class="code" href="class_resource_manager.html">ResourceManager</a>&amp; other) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_resource_manager.html#a5d7e5c1e447271044b50f5760f14abca">operator</a>=(<a class="code" href="class_resource_manager.html">ResourceManager</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_resource_manager.html#a876d78c8fa674e6c778f2c037ca7ea29">operator</a>=(<span class="keyword">const</span> <a class="code" href="class_resource_manager.html">ResourceManager</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="comment">/// The texture manager.</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="class_resource_manager.html#a8e998f1141714636fac58e342454a035">   50</a></span>&#160;    TextureManager <a class="code" href="class_resource_manager.html#a8e998f1141714636fac58e342454a035">texture_manager_</a>;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">/// The model manager.</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="class_resource_manager.html#a03f18306449e4d8efcbd9a9f3808e18b">   53</a></span>&#160;    ModelManager <a class="code" href="class_resource_manager.html#a03f18306449e4d8efcbd9a9f3808e18b">model_manager_</a>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="comment">/// The material manager.</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="class_resource_manager.html#a517d32df05e5a7533cd7183014c604d3">   56</a></span>&#160;    <a class="code" href="class_material_manager.html">MaterialManager</a> <a class="code" href="class_resource_manager.html#a517d32df05e5a7533cd7183014c604d3">material_manager_</a>;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">     * @brief Construct a new Resource Manager object</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="class_resource_manager.html#a3b32babd2e81909bbd90d7f2d566fadb">ResourceManager</a>();</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;};</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <a class="code" href="_md2_model_manager_8hpp.html">&quot;Md2ModelManager.hpp&quot;</a></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment"> * @class ResourceManager</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment"> * @brief A singleton class for containing other asset managers; models, md2</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment"> * models textures, and materials.</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_resource_manager.html">   14</a></span>&#160;<span class="keyword">class</span> <a class="code" href="class_resource_manager.html">ResourceManager</a> {</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">     * @brief Get the instance of the Resource Manager.</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">     *</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">     * @return ResourceManager&amp;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">static</span> <a class="code" href="class_resource_manager.html">ResourceManager</a>&amp; <a class="code" href="class_resource_manager.html#a33b466c53250b7431976a04d42d59036">get_instance</a>();</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">     * @brief Get the model manager.</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">     *</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">     * @return ModelManager&amp;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    ModelManager&amp; <a class="code" href="class_resource_manager.html#a474f1dfe5e7d553d919d09ff8b827467">get_model_manager</a>();</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">     * @brief Get the md2 model manager.</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">     *</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">     * @return Md2ModelManager&amp;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    Md2ModelManager&amp; <a class="code" href="class_resource_manager.html#ac371961dc43e0d9b670d35b8c953358e">get_md2_model_manager</a>();</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">     * @brief Get the texture manager.</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">     *</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">     * @return TextureManager&amp;</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="class_texture_manager.html">TextureManager</a>&amp; <a class="code" href="class_resource_manager.html#abbef155bc35aef3f78995effb06120fa">get_texture_manager</a>();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">     * @brief Get the material manager.</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">     *</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">     * @return MaterialManager&amp;</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    MaterialManager&amp; <a class="code" href="class_resource_manager.html#aea53ae6d2b9182e3aa71c6bd913922f0">get_material_manager</a>();</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="comment">// These are deleted as a singleton pattern is used.</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="class_resource_manager.html#aa8719dcc5400699a66d3b9e3f91c55ee">ResourceManager</a>(<a class="code" href="class_resource_manager.html">ResourceManager</a>&amp; other) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <a class="code" href="class_resource_manager.html#a75d0eead1e899959c0b9fea954d77697">ResourceManager</a>(<span class="keyword">const</span> <a class="code" href="class_resource_manager.html">ResourceManager</a>&amp; other) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_resource_manager.html#a5d7e5c1e447271044b50f5760f14abca">operator</a>=(<a class="code" href="class_resource_manager.html">ResourceManager</a>&amp;&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_resource_manager.html#a876d78c8fa674e6c778f2c037ca7ea29">operator</a>=(<span class="keyword">const</span> <a class="code" href="class_resource_manager.html">ResourceManager</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="comment">/// The texture manager.</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="class_resource_manager.html#a8e998f1141714636fac58e342454a035">   59</a></span>&#160;    <a class="code" href="class_texture_manager.html">TextureManager</a> <a class="code" href="class_resource_manager.html#a8e998f1141714636fac58e342454a035">texture_manager_</a>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="comment">/// The model manager.</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="class_resource_manager.html#a03f18306449e4d8efcbd9a9f3808e18b">   62</a></span>&#160;    ModelManager <a class="code" href="class_resource_manager.html#a03f18306449e4d8efcbd9a9f3808e18b">model_manager_</a>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="comment">/// The md2 model manager.</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="class_resource_manager.html#acb5c212f9ecd7de83206312f126693cf">   65</a></span>&#160;    Md2ModelManager <a class="code" href="class_resource_manager.html#acb5c212f9ecd7de83206312f126693cf">md2_model_manager_</a>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="comment">/// The material manager.</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="class_resource_manager.html#a517d32df05e5a7533cd7183014c604d3">   68</a></span>&#160;    MaterialManager <a class="code" href="class_resource_manager.html#a517d32df05e5a7533cd7183014c604d3">material_manager_</a>;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">     * @brief Construct a new Resource Manager object</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <a class="code" href="class_resource_manager.html#a3b32babd2e81909bbd90d7f2d566fadb">ResourceManager</a>();</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclass_resource_manager_html_aa8719dcc5400699a66d3b9e3f91c55ee"><div class="ttname"><a href="class_resource_manager.html#aa8719dcc5400699a66d3b9e3f91c55ee">ResourceManager::ResourceManager</a></div><div class="ttdeci">ResourceManager(ResourceManager &amp;other)=delete</div></div>
 <div class="ttc" id="aclass_resource_manager_html_a474f1dfe5e7d553d919d09ff8b827467"><div class="ttname"><a href="class_resource_manager.html#a474f1dfe5e7d553d919d09ff8b827467">ResourceManager::get_model_manager</a></div><div class="ttdeci">ModelManager &amp; get_model_manager()</div><div class="ttdoc">Get the model manager.</div><div class="ttdef"><b>Definition:</b> <a href="_resource_manager_8cpp_source.html#l00008">ResourceManager.cpp:8</a></div></div>
-<div class="ttc" id="aclass_resource_manager_html_a3b32babd2e81909bbd90d7f2d566fadb"><div class="ttname"><a href="class_resource_manager.html#a3b32babd2e81909bbd90d7f2d566fadb">ResourceManager::ResourceManager</a></div><div class="ttdeci">ResourceManager()</div><div class="ttdoc">Construct a new Resource Manager object.</div><div class="ttdef"><b>Definition:</b> <a href="_resource_manager_8cpp_source.html#l00018">ResourceManager.cpp:18</a></div></div>
+<div class="ttc" id="aclass_resource_manager_html_a3b32babd2e81909bbd90d7f2d566fadb"><div class="ttname"><a href="class_resource_manager.html#a3b32babd2e81909bbd90d7f2d566fadb">ResourceManager::ResourceManager</a></div><div class="ttdeci">ResourceManager()</div><div class="ttdoc">Construct a new Resource Manager object.</div><div class="ttdef"><b>Definition:</b> <a href="_resource_manager_8cpp_source.html#l00022">ResourceManager.cpp:22</a></div></div>
+<div class="ttc" id="aclass_resource_manager_html_ac371961dc43e0d9b670d35b8c953358e"><div class="ttname"><a href="class_resource_manager.html#ac371961dc43e0d9b670d35b8c953358e">ResourceManager::get_md2_model_manager</a></div><div class="ttdeci">Md2ModelManager &amp; get_md2_model_manager()</div><div class="ttdoc">Get the md2 model manager.</div><div class="ttdef"><b>Definition:</b> <a href="_resource_manager_8cpp_source.html#l00010">ResourceManager.cpp:10</a></div></div>
 <div class="ttc" id="aclass_resource_manager_html_a33b466c53250b7431976a04d42d59036"><div class="ttname"><a href="class_resource_manager.html#a33b466c53250b7431976a04d42d59036">ResourceManager::get_instance</a></div><div class="ttdeci">static ResourceManager &amp; get_instance()</div><div class="ttdoc">Get the instance of the Resource Manager.</div><div class="ttdef"><b>Definition:</b> <a href="_resource_manager_8cpp_source.html#l00003">ResourceManager.cpp:3</a></div></div>
-<div class="ttc" id="aclass_resource_manager_html"><div class="ttname"><a href="class_resource_manager.html">ResourceManager</a></div><div class="ttdef"><b>Definition:</b> <a href="_resource_manager_8hpp_source.html#l00012">ResourceManager.hpp:12</a></div></div>
-<div class="ttc" id="aclass_resource_manager_html_aea53ae6d2b9182e3aa71c6bd913922f0"><div class="ttname"><a href="class_resource_manager.html#aea53ae6d2b9182e3aa71c6bd913922f0">ResourceManager::get_material_manager</a></div><div class="ttdeci">MaterialManager &amp; get_material_manager()</div><div class="ttdoc">Get the material manager.</div><div class="ttdef"><b>Definition:</b> <a href="_resource_manager_8cpp_source.html#l00014">ResourceManager.cpp:14</a></div></div>
-<div class="ttc" id="aclass_resource_manager_html_a8e998f1141714636fac58e342454a035"><div class="ttname"><a href="class_resource_manager.html#a8e998f1141714636fac58e342454a035">ResourceManager::texture_manager_</a></div><div class="ttdeci">TextureManager texture_manager_</div><div class="ttdoc">The texture manager.</div><div class="ttdef"><b>Definition:</b> <a href="_resource_manager_8hpp_source.html#l00050">ResourceManager.hpp:50</a></div></div>
+<div class="ttc" id="aclass_resource_manager_html"><div class="ttname"><a href="class_resource_manager.html">ResourceManager</a></div><div class="ttdoc">A singleton class for containing other asset managers; models, md2 models textures,...</div><div class="ttdef"><b>Definition:</b> <a href="_resource_manager_8hpp_source.html#l00014">ResourceManager.hpp:14</a></div></div>
+<div class="ttc" id="aclass_resource_manager_html_aea53ae6d2b9182e3aa71c6bd913922f0"><div class="ttname"><a href="class_resource_manager.html#aea53ae6d2b9182e3aa71c6bd913922f0">ResourceManager::get_material_manager</a></div><div class="ttdeci">MaterialManager &amp; get_material_manager()</div><div class="ttdoc">Get the material manager.</div><div class="ttdef"><b>Definition:</b> <a href="_resource_manager_8cpp_source.html#l00018">ResourceManager.cpp:18</a></div></div>
+<div class="ttc" id="aclass_resource_manager_html_a8e998f1141714636fac58e342454a035"><div class="ttname"><a href="class_resource_manager.html#a8e998f1141714636fac58e342454a035">ResourceManager::texture_manager_</a></div><div class="ttdeci">TextureManager texture_manager_</div><div class="ttdoc">The texture manager.</div><div class="ttdef"><b>Definition:</b> <a href="_resource_manager_8hpp_source.html#l00059">ResourceManager.hpp:59</a></div></div>
 <div class="ttc" id="aclass_resource_manager_html_a876d78c8fa674e6c778f2c037ca7ea29"><div class="ttname"><a href="class_resource_manager.html#a876d78c8fa674e6c778f2c037ca7ea29">ResourceManager::operator=</a></div><div class="ttdeci">void operator=(const ResourceManager &amp;)=delete</div></div>
-<div class="ttc" id="aclass_resource_manager_html_a03f18306449e4d8efcbd9a9f3808e18b"><div class="ttname"><a href="class_resource_manager.html#a03f18306449e4d8efcbd9a9f3808e18b">ResourceManager::model_manager_</a></div><div class="ttdeci">ModelManager model_manager_</div><div class="ttdoc">The model manager.</div><div class="ttdef"><b>Definition:</b> <a href="_resource_manager_8hpp_source.html#l00053">ResourceManager.hpp:53</a></div></div>
+<div class="ttc" id="aclass_resource_manager_html_a03f18306449e4d8efcbd9a9f3808e18b"><div class="ttname"><a href="class_resource_manager.html#a03f18306449e4d8efcbd9a9f3808e18b">ResourceManager::model_manager_</a></div><div class="ttdeci">ModelManager model_manager_</div><div class="ttdoc">The model manager.</div><div class="ttdef"><b>Definition:</b> <a href="_resource_manager_8hpp_source.html#l00062">ResourceManager.hpp:62</a></div></div>
+<div class="ttc" id="aclass_texture_manager_html"><div class="ttname"><a href="class_texture_manager.html">TextureManager</a></div><div class="ttdoc">An encapsulated class for an unordered map of textures.</div><div class="ttdef"><b>Definition:</b> <a href="_texture_manager_8hpp_source.html#l00011">TextureManager.hpp:11</a></div></div>
 <div class="ttc" id="aclass_resource_manager_html_a5d7e5c1e447271044b50f5760f14abca"><div class="ttname"><a href="class_resource_manager.html#a5d7e5c1e447271044b50f5760f14abca">ResourceManager::operator=</a></div><div class="ttdeci">void operator=(ResourceManager &amp;&amp;)=delete</div></div>
-<div class="ttc" id="aclass_material_manager_html"><div class="ttname"><a href="class_material_manager.html">MaterialManager</a></div><div class="ttdef"><b>Definition:</b> <a href="_material_manager_8hpp_source.html#l00012">MaterialManager.hpp:12</a></div></div>
 <div class="ttc" id="aclass_resource_manager_html_a75d0eead1e899959c0b9fea954d77697"><div class="ttname"><a href="class_resource_manager.html#a75d0eead1e899959c0b9fea954d77697">ResourceManager::ResourceManager</a></div><div class="ttdeci">ResourceManager(const ResourceManager &amp;other)=delete</div></div>
-<div class="ttc" id="aclass_resource_manager_html_a517d32df05e5a7533cd7183014c604d3"><div class="ttname"><a href="class_resource_manager.html#a517d32df05e5a7533cd7183014c604d3">ResourceManager::material_manager_</a></div><div class="ttdeci">MaterialManager material_manager_</div><div class="ttdoc">The material manager.</div><div class="ttdef"><b>Definition:</b> <a href="_resource_manager_8hpp_source.html#l00056">ResourceManager.hpp:56</a></div></div>
-<div class="ttc" id="aclass_resource_manager_html_abbef155bc35aef3f78995effb06120fa"><div class="ttname"><a href="class_resource_manager.html#abbef155bc35aef3f78995effb06120fa">ResourceManager::get_texture_manager</a></div><div class="ttdeci">TextureManager &amp; get_texture_manager()</div><div class="ttdoc">Get the texture manager.</div><div class="ttdef"><b>Definition:</b> <a href="_resource_manager_8cpp_source.html#l00010">ResourceManager.cpp:10</a></div></div>
+<div class="ttc" id="aclass_resource_manager_html_a517d32df05e5a7533cd7183014c604d3"><div class="ttname"><a href="class_resource_manager.html#a517d32df05e5a7533cd7183014c604d3">ResourceManager::material_manager_</a></div><div class="ttdeci">MaterialManager material_manager_</div><div class="ttdoc">The material manager.</div><div class="ttdef"><b>Definition:</b> <a href="_resource_manager_8hpp_source.html#l00068">ResourceManager.hpp:68</a></div></div>
+<div class="ttc" id="aclass_resource_manager_html_acb5c212f9ecd7de83206312f126693cf"><div class="ttname"><a href="class_resource_manager.html#acb5c212f9ecd7de83206312f126693cf">ResourceManager::md2_model_manager_</a></div><div class="ttdeci">Md2ModelManager md2_model_manager_</div><div class="ttdoc">The md2 model manager.</div><div class="ttdef"><b>Definition:</b> <a href="_resource_manager_8hpp_source.html#l00065">ResourceManager.hpp:65</a></div></div>
+<div class="ttc" id="aclass_resource_manager_html_abbef155bc35aef3f78995effb06120fa"><div class="ttname"><a href="class_resource_manager.html#abbef155bc35aef3f78995effb06120fa">ResourceManager::get_texture_manager</a></div><div class="ttdeci">TextureManager &amp; get_texture_manager()</div><div class="ttdoc">Get the texture manager.</div><div class="ttdef"><b>Definition:</b> <a href="_resource_manager_8cpp_source.html#l00014">ResourceManager.cpp:14</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

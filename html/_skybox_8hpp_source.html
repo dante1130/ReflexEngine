@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: src/View/Renderer/OpenGL/Objects/Skybox.hpp Source File</title>
+<title>ICT397 Assignment 2: src/View/Renderer/OpenGL/Objects/Skybox.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -115,17 +115,17 @@ $(document).ready(function(){initNavTree('_skybox_8hpp_source.html',''); initRes
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">     * @brief Construct a new Skybox object</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">     * @param faceLocations</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">     * @param faceLocations The locations of the faces of the skybox.</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">     */</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="class_skybox.html#ab91e236a8c93ba0546079ed0e794ac5d">Skybox</a>(<span class="keyword">const</span> std::vector&lt;std::string&gt;&amp; faceLocations);</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">     * @brief Renders the skybox given a projection and view matrix.</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">     * @param projectionMatrix</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">     * @param viewMatrix</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">     * @param projectionMatrix The projection matrix.</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">     * @param viewMatrix The view matrix.</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">void</span> DrawSkybox(glm::mat4 projectionMatrix, glm::mat4 viewMatrix);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_skybox.html#a1ad50851f94ed68d6cd26799b7d5c9f1">DrawSkybox</a>(glm::mat4 projectionMatrix, glm::mat4 viewMatrix);</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="comment">/// The mesh of the skybox.</span></div>
@@ -144,6 +144,7 @@ $(document).ready(function(){initNavTree('_skybox_8hpp_source.html',''); initRes
 </div><!-- doc-content -->
 <div class="ttc" id="aclass_skybox_html_a753adf0aac01b8226b7d3df924758ba8"><div class="ttname"><a href="class_skybox.html#a753adf0aac01b8226b7d3df924758ba8">Skybox::m_skyMesh</a></div><div class="ttdeci">Mesh * m_skyMesh</div><div class="ttdoc">The mesh of the skybox.</div><div class="ttdef"><b>Definition:</b> <a href="_skybox_8hpp_source.html#l00045">Skybox.hpp:45</a></div></div>
 <div class="ttc" id="aclass_skybox_html"><div class="ttname"><a href="class_skybox.html">Skybox</a></div><div class="ttdoc">A skybox.</div><div class="ttdef"><b>Definition:</b> <a href="_skybox_8hpp_source.html#l00021">Skybox.hpp:21</a></div></div>
+<div class="ttc" id="aclass_skybox_html_a1ad50851f94ed68d6cd26799b7d5c9f1"><div class="ttname"><a href="class_skybox.html#a1ad50851f94ed68d6cd26799b7d5c9f1">Skybox::DrawSkybox</a></div><div class="ttdeci">void DrawSkybox(glm::mat4 projectionMatrix, glm::mat4 viewMatrix)</div><div class="ttdoc">Renders the skybox given a projection and view matrix.</div><div class="ttdef"><b>Definition:</b> <a href="_skybox_8cpp_source.html#l00068">Skybox.cpp:68</a></div></div>
 <div class="ttc" id="aclass_skybox_html_aec352a3cacf4a1c1af00fc4b473881b3"><div class="ttname"><a href="class_skybox.html#aec352a3cacf4a1c1af00fc4b473881b3">Skybox::m_uniformProjection</a></div><div class="ttdeci">GLuint m_uniformProjection</div><div class="ttdoc">The uniform projection and view.</div><div class="ttdef"><b>Definition:</b> <a href="_skybox_8hpp_source.html#l00054">Skybox.hpp:54</a></div></div>
 <div class="ttc" id="aclass_mesh_html"><div class="ttname"><a href="class_mesh.html">Mesh</a></div><div class="ttdoc">A mesh class representing vertices, texture coordinates, normals, and its indices.</div><div class="ttdef"><b>Definition:</b> <a href="_mesh_8hpp_source.html#l00011">Mesh.hpp:11</a></div></div>
 <div class="ttc" id="aclass_skybox_html_a2e6c285afd4404f86961101c97740556"><div class="ttname"><a href="class_skybox.html#a2e6c285afd4404f86961101c97740556">Skybox::m_textureID</a></div><div class="ttdeci">GLuint m_textureID</div><div class="ttdoc">The locations of the faces of the skybox.</div><div class="ttdef"><b>Definition:</b> <a href="_skybox_8hpp_source.html#l00051">Skybox.hpp:51</a></div></div>

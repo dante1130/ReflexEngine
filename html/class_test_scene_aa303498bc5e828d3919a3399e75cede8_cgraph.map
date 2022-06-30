@@ -1,0 +1,6 @@
+<map id="TestScene::fixed_update" name="TestScene::fixed_update">
+<area shape="rect" id="node1" title="The fixed update loop of the scene." alt="" coords="5,13,171,39"/>
+<area shape="rect" id="node2" href="$namespace_generic_functions.html#a871852b17cc400fab5a18ef44cbc6ff2" title="Fixed update loop for the network manager. Primarily used for object replication to improve network p..." alt="" coords="219,5,396,47"/>
+<area shape="rect" id="node3" href="$namespace_generic_functions.html#a21f0623abe4bb8f109152ada3d01c4e2" title="Checks if the pvp network manager is receiving data." alt="" coords="444,13,676,39"/>
+<area shape="rect" id="node4" href="$classnetwork_manager.html#aca6dce6dcb1831261e32f3f31e0025c4" title="Gets if the network manager missed getting valid data from ObjectPositionReceive." alt="" coords="724,13,956,39"/>
+</map>

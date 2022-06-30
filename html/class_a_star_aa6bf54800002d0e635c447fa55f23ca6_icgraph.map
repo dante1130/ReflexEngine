@@ -1,0 +1,4 @@
+<map id="AStar::setMaxDistance" name="AStar::setMaxDistance">
+<area shape="rect" id="node1" title="Sets the max distance allowed before the algorithm will terminate." alt="" coords="165,5,323,32"/>
+<area shape="rect" id="node2" href="$classworld.html#a3f0aaef2569dbb61b88ca6e4b7cb9475" title="Sets the world." alt="" coords="5,5,117,32"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="DirectionalLightObject" name="DirectionalLightObject">
+<area shape="rect" id="node1" title="A directional light game object." alt="" coords="5,277,175,443"/>
+<area shape="rect" id="node2" href="$class_game_object.html" title="An abstract class to represent a game object." alt="" coords="28,5,152,229"/>
+</map>

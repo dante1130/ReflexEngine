@@ -1,0 +1,4 @@
+<map id="NPC::use_pathfinding" name="NPC::use_pathfinding">
+<area shape="rect" id="node1" title="Uses pathfinding algorithm to create set of waypoints." alt="" coords="5,5,152,32"/>
+<area shape="rect" id="node2" href="$class_n_p_c.html#a7daa677c9c38b9c256e2129e034e7238" title="Removes all the currently stored waypoints." alt="" coords="200,5,363,32"/>
+</map>

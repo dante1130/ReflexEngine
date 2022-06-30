@@ -13,6 +13,7 @@ var _input_8hpp =
       [ "toggle_noclip", "_input_8hpp.html#a080a822f0093973313bd644e517a5090ad0644baaf3693fe4a11f7e33064bfe1b", null ],
       [ "pause_game", "_input_8hpp.html#a080a822f0093973313bd644e517a5090a32c8e9d842d242d0ae24f20dfe650316", null ],
       [ "help_menu", "_input_8hpp.html#a080a822f0093973313bd644e517a5090a1433eb27f21983d3ef9a7538862e7769", null ],
-      [ "network_menu", "_input_8hpp.html#a080a822f0093973313bd644e517a5090a8fd1aaec347a0b8dcae38a30e866590a", null ]
+      [ "network_menu", "_input_8hpp.html#a080a822f0093973313bd644e517a5090a8fd1aaec347a0b8dcae38a30e866590a", null ],
+      [ "network_pvp_menu", "_input_8hpp.html#a080a822f0093973313bd644e517a5090a1edabc22c9d632da02e5314bfadb702b", null ]
     ] ]
 ];

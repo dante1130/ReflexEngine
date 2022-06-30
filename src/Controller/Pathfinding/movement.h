@@ -32,8 +32,8 @@ bool moveTo(glm::vec2& curPos, const glm::vec2& targetPos,
  * @param    curPos      - current position
  * @param    pursuerPos  - persuers position
  * @param    curVelocity - current veloctiy
+ * @param    fleeSpeed   - How fast to flee
  * @param    timeElapsed - time elapsed to calculate movement
- * @param    flee speed  - How fast to flee
  * @return   bool        - true if in panic range
  */
 bool flee(glm::vec2& curPos, const glm::vec2& pursuerPos,
@@ -72,7 +72,7 @@ bool evade(glm::vec2& evaderPos, const glm::vec2& pursuerPos,
  * @param    target             - target position
  * @param    patrollerVel       - patroller veloctiy
  * @param    coneDistance       - view cone distance
- * @param    flee coneRadius    - cone radius
+ * @param    coneRadius         - cone radius
  * @return   bool               - true if can see the target
  */
 bool seeTarget(const glm::vec2& patroller, const glm::vec2& target,

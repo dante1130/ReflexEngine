@@ -11,14 +11,14 @@
 #include "Controller/GenericFunctions.h"
 
 /**
- * @class Item
+ * @class Networked Item
  * @brief An item in the scene that is built for networking functionality
- * (simply put, doesn't save)
  */
 class NetworkedItem : public GameObject {
 public:
 	/**
-	 * @brief Construct a new Item object with a model name and a texture name.
+	 * @brief Construct a new Networked Item object with a model name and a
+	 * texture name.
 	 *
 	 * @param model_name
 	 * @param texture_name
@@ -32,7 +32,7 @@ public:
 	void init() override {}
 
 	/**
-	 * @brief Updates the item with delta time.
+	 * @brief Updates the Networked Item with delta time.
 	 *
 	 * @param delta_time
 	 */
@@ -51,14 +51,14 @@ public:
 	void add_draw_call() override;
 
 	/**
-	 * @brief The draw call for the item.
+	 * @brief The draw call for the Networked Item.
 	 *
 	 * @param shader
 	 */
 	void draw(const Shader& shader) override;
 
 	/**
-	 * @brief	Saves the object to lau file
+	 * @brief	Saves the object to lua file
 	 * @param	No param
 	 * @return	Void
 	 *
@@ -68,8 +68,8 @@ public:
 	void save_object() override;
 
 private:
-	/// The model of the item.
+	/// The model of the Networked Item.
 	std::string model_name_;
-	/// The material of the item.
+	/// The material of the Networked Item.
 	std::string material_name_;
 };

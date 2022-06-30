@@ -31,7 +31,7 @@ public:
 	/**
 	 * @brief	Create a sphere obstruction on the pathfinding grid
 	 * @param	posX	- The x position of the object
-	 * @param	poxZ	- The z position of the object
+	 * @param	posZ	- The z position of the object
 	 * @param	radius	- The radius of the object
 	 */
 	void create_sphere_obstruction(float posX, float posZ, float radius);
@@ -39,7 +39,7 @@ public:
 	/**
 	 * @brief	Create a box obstruction on the pathfinding grid
 	 * @param	posX	- The x position of the object
-	 * @param	poxZ	- The z position of the object
+	 * @param	posZ	- The z position of the object
 	 * @param	xSize	- The HALF size of the box in the x direction
 	 * @param	zSize	- The HALF size of the box in the z direction
 	 */

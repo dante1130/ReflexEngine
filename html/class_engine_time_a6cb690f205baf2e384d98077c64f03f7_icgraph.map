@@ -1,0 +1,5 @@
+<map id="EngineTime::get_time_unpaused" name="EngineTime::get_time_unpaused">
+<area shape="rect" id="node1" title="gets the time unpaused" alt="" coords="232,39,380,80"/>
+<area shape="rect" id="node2" href="$classmessage_dispatcher.html#a0903dac88e232e01f14cefb6e517bdf2" title="Send out any delayed messages. This method is calledeach time through the main game loop." alt="" coords="5,5,184,47"/>
+<area shape="rect" id="node3" href="$classmessage_dispatcher.html#a5667b6808acca88ee5afa90f821d985f" title=" " alt="" coords="22,71,167,112"/>
+</map>

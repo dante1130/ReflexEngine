@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['max_5fclients_1757',['MAX_CLIENTS',['../_network_manager_8hpp.html#a0a8f91f93d75a07f0ae45077db45b3eb',1,'NetworkManager.hpp']]]
+  ['entitymgr_2612',['entityMgr',['../singletons_8h.html#ad73411f982938b7d47f12c81b7c3b196',1,'singletons.h']]]
 ];

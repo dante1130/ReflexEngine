@@ -1,0 +1,4 @@
+<map id="NPC::move_to_enemy" name="NPC::move_to_enemy">
+<area shape="rect" id="node1" title="Moves to a targeted enemy." alt="" coords="5,5,156,32"/>
+<area shape="rect" id="node2" href="$class_n_p_c.html#a3926089c6f756fc50a6ffac5b72238d1" title="Gets if NPC is dead." alt="" coords="204,5,307,32"/>
+</map>

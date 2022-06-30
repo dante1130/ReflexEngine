@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: src/Controller/Physics.cpp Source File</title>
+<title>ICT397 Assignment 2: src/Controller/Physics/Physics.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -86,69 +86,69 @@ $(document).ready(function(){initNavTree('_physics_8cpp_source.html',''); initRe
 </div><!--header-->
 <div class="contents">
 <a href="_physics_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <a class="code" href="_physics_8hpp.html">&quot;Physics.hpp&quot;</a></div>
-<div class="line"><a name="l00002"></a><span class="lineno"><a class="line" href="_physics_8cpp.html#a0a6e1dfb02851473efd687b6771f87fa">    2</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="_physics_8cpp.html#a0a6e1dfb02851473efd687b6771f87fa">created</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="_physics_8cpp.html#a42297189fd18d56cb8687bc7882bb824">    3</a></span>&#160;<a class="code" href="_physics_8cpp.html#a42297189fd18d56cb8687bc7882bb824">PhysicsCommon</a> <a class="code" href="_physics_8cpp.html#a42297189fd18d56cb8687bc7882bb824">physicsCommon</a>;</div>
-<div class="line"><a name="l00004"></a><span class="lineno"><a class="line" href="_physics_8cpp.html#a80518da77f9ca26660dd6e4584b92be4">    4</a></span>&#160;<a class="code" href="_physics_8cpp.html#a80518da77f9ca26660dd6e4584b92be4">PhysicsWorld</a>* <a class="code" href="_physics_8cpp.html#a80518da77f9ca26660dd6e4584b92be4">world</a>;</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="namespace_physics.html#a57d5edbfcb404618f3133c135dfdb3ce">    6</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespace_physics.html">Physics</a>::<a class="code" href="namespace_physics.html#a57d5edbfcb404618f3133c135dfdb3ce">createWorld</a>() {</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="_physics_8cpp.html#a0a6e1dfb02851473efd687b6771f87fa">created</a> == <span class="keyword">false</span>) {</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;        world = physicsCommon.createPhysicsWorld();</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;        <a class="code" href="_physics_8cpp.html#a0a6e1dfb02851473efd687b6771f87fa">created</a> = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    }</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;}</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="namespace_physics.html#a90f5f7a790b7143554c74de976c0072c">   13</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespace_physics.html">Physics</a>::<a class="code" href="namespace_physics.html#a90f5f7a790b7143554c74de976c0072c">updateWorld</a>(<span class="keywordtype">float</span> delta_time) {</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="_physics_8cpp.html#a0a6e1dfb02851473efd687b6771f87fa">created</a> == <span class="keyword">false</span>) {</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    }</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    world-&gt;update(delta_time);</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;}</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="namespace_physics.html#a6a91de887234646c6953c4c9bef48af5">   20</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespace_physics.html">Physics</a>::<a class="code" href="namespace_physics.html#a6a91de887234646c6953c4c9bef48af5">setDebuggerToActive</a>(<span class="keywordtype">bool</span> val) {</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="_physics_8cpp.html#a0a6e1dfb02851473efd687b6771f87fa">created</a> == <span class="keyword">false</span>) {</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    }</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    world-&gt;setIsDebugRenderingEnabled(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;}</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="namespace_physics.html#a7088a371e1c45b57b5ae2d39e029ac49">   27</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespace_physics.html">Physics</a>::<a class="code" href="namespace_physics.html#a7088a371e1c45b57b5ae2d39e029ac49">setDebuggerValues</a>(<span class="keywordtype">int</span> type, <span class="keywordtype">bool</span> val) {</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="_physics_8cpp.html#a0a6e1dfb02851473efd687b6771f87fa">created</a> == <span class="keyword">false</span>) {</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordflow">return</span>;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    }</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    DebugRenderer&amp; debugRenderer = world-&gt;getDebugRenderer();</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    debugRenderer.setIsDebugItemDisplayed((DebugRenderer::DebugItem)type, val);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;}</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="namespace_physics.html#a78fe1494aebd79d0b8abaebeba9bddac">   35</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespace_physics.html">Physics</a>::<a class="code" href="namespace_physics.html#a78fe1494aebd79d0b8abaebeba9bddac">destoryWorld</a>() {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="_physics_8cpp.html#a0a6e1dfb02851473efd687b6771f87fa">created</a> == <span class="keyword">true</span>) {</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        physicsCommon.destroyPhysicsWorld(world);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <a class="code" href="_physics_8cpp.html#a0a6e1dfb02851473efd687b6771f87fa">created</a> = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    }</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="namespace_physics.html#a853968a10280acf230462676bf0f7da7">   42</a></span>&#160;<a class="code" href="namespace_physics.html#a853968a10280acf230462676bf0f7da7">PhysicsCommon</a>&amp; <a class="code" href="namespace_physics.html">Physics</a>::<a class="code" href="namespace_physics.html#a853968a10280acf230462676bf0f7da7">getPhysicsCommon</a>() { <span class="keywordflow">return</span> physicsCommon; }</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="class_physics.html">Physics</a>::<a class="code" href="class_physics.html#a841a42374412b698ff7db10cce06449d">created</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<a class="code" href="class_physics.html#a009155f695e0ad1293cfdcd087989085">PhysicsCommon</a> <a class="code" href="class_physics.html">Physics</a>::<a class="code" href="class_physics.html#a009155f695e0ad1293cfdcd087989085">physicsCommon</a>;</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<a class="code" href="class_physics.html#a345310cc1b5675837a8abb258f98eaab">PhysicsWorld</a>* <a class="code" href="class_physics.html">Physics</a>::<a class="code" href="class_physics.html#a345310cc1b5675837a8abb258f98eaab">world</a> = <span class="keywordtype">nullptr</span>;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="class_physics.html#a57d5edbfcb404618f3133c135dfdb3ce">    7</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_physics.html">Physics</a>::<a class="code" href="class_physics.html#a57d5edbfcb404618f3133c135dfdb3ce">createWorld</a>() {</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="class_physics.html#a841a42374412b698ff7db10cce06449d">created</a>) {</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;        world = physicsCommon.createPhysicsWorld();</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;        <a class="code" href="class_physics.html#a841a42374412b698ff7db10cce06449d">created</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    }</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;}</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_physics.html#aae3da91344073de7b6fd6206f520c134">   14</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_physics.html">Physics</a>::<a class="code" href="class_physics.html#aae3da91344073de7b6fd6206f520c134">updateWorld</a>(<span class="keywordtype">double</span> delta_time) {</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="class_physics.html#a841a42374412b698ff7db10cce06449d">created</a>) {</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    }</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    world-&gt;update(delta_time);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;}</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="class_physics.html#a6a91de887234646c6953c4c9bef48af5">   21</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_physics.html">Physics</a>::<a class="code" href="class_physics.html#a6a91de887234646c6953c4c9bef48af5">setDebuggerToActive</a>(<span class="keywordtype">bool</span> val) {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="class_physics.html#a841a42374412b698ff7db10cce06449d">created</a>) {</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    }</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    world-&gt;setIsDebugRenderingEnabled(val);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;}</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="class_physics.html#a7088a371e1c45b57b5ae2d39e029ac49">   28</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_physics.html">Physics</a>::<a class="code" href="class_physics.html#a7088a371e1c45b57b5ae2d39e029ac49">setDebuggerValues</a>(<span class="keywordtype">int</span> type, <span class="keywordtype">bool</span> val) {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="class_physics.html#a841a42374412b698ff7db10cce06449d">created</a>) {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    }</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    DebugRenderer&amp; debugRenderer = world-&gt;getDebugRenderer();</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    debugRenderer.setIsDebugItemDisplayed(</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keyword">static_cast</span>&lt;DebugRenderer::DebugItem&gt;(type), val);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="class_physics.html#abc2fbaff75f375db71bc8fbc88185bde">   37</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_physics.html">Physics</a>::<a class="code" href="class_physics.html#abc2fbaff75f375db71bc8fbc88185bde">destroyWorld</a>() {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="class_physics.html#a841a42374412b698ff7db10cce06449d">created</a>) {</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        physicsCommon.destroyPhysicsWorld(world);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <a class="code" href="class_physics.html#a841a42374412b698ff7db10cce06449d">created</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    }</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;}</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="namespace_physics.html#a50bbdca3f2545a236edf68a7bb74b1e1">   44</a></span>&#160;<a class="code" href="namespace_physics.html#a50bbdca3f2545a236edf68a7bb74b1e1">PhysicsWorld</a>* <a class="code" href="namespace_physics.html">Physics</a>::<a class="code" href="namespace_physics.html#a50bbdca3f2545a236edf68a7bb74b1e1">getPhysicsWorld</a>() { <span class="keywordflow">return</span> world; }</div>
+<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="class_physics.html#a853968a10280acf230462676bf0f7da7">   44</a></span>&#160;PhysicsCommon&amp; <a class="code" href="class_physics.html">Physics</a>::getPhysicsCommon() { <span class="keywordflow">return</span> physicsCommon; }</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="namespace_physics.html#a6e722b98ea6228887490ff9f35cbc9c4">   46</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="namespace_physics.html">Physics</a>::<a class="code" href="namespace_physics.html#a6e722b98ea6228887490ff9f35cbc9c4">WorldExsists</a>() { <span class="keywordflow">return</span> <a class="code" href="_physics_8cpp.html#a0a6e1dfb02851473efd687b6771f87fa">created</a>; }</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="class_physics.html#a50bbdca3f2545a236edf68a7bb74b1e1">   46</a></span>&#160;PhysicsWorld* <a class="code" href="class_physics.html">Physics</a>::getPhysicsWorld() { <span class="keywordflow">return</span> world; }</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="class_physics.html#a222ae72790a837589db1e20985a94e87">   48</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="class_physics.html">Physics</a>::<a class="code" href="class_physics.html#a222ae72790a837589db1e20985a94e87">WorldExists</a>() { <span class="keywordflow">return</span> <a class="code" href="class_physics.html#a841a42374412b698ff7db10cce06449d">created</a>; }</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="a_physics_8cpp_html_a42297189fd18d56cb8687bc7882bb824"><div class="ttname"><a href="_physics_8cpp.html#a42297189fd18d56cb8687bc7882bb824">physicsCommon</a></div><div class="ttdeci">PhysicsCommon physicsCommon</div><div class="ttdef"><b>Definition:</b> <a href="_physics_8cpp_source.html#l00003">Physics.cpp:3</a></div></div>
-<div class="ttc" id="anamespace_physics_html"><div class="ttname"><a href="namespace_physics.html">Physics</a></div><div class="ttdef"><b>Definition:</b> <a href="_physics_8hpp_source.html#l00008">Physics.hpp:8</a></div></div>
-<div class="ttc" id="anamespace_physics_html_a6a91de887234646c6953c4c9bef48af5"><div class="ttname"><a href="namespace_physics.html#a6a91de887234646c6953c4c9bef48af5">Physics::setDebuggerToActive</a></div><div class="ttdeci">void setDebuggerToActive(bool val)</div><div class="ttdoc">Sets which debugger to active.</div><div class="ttdef"><b>Definition:</b> <a href="_physics_8cpp_source.html#l00020">Physics.cpp:20</a></div></div>
-<div class="ttc" id="anamespace_physics_html_a50bbdca3f2545a236edf68a7bb74b1e1"><div class="ttname"><a href="namespace_physics.html#a50bbdca3f2545a236edf68a7bb74b1e1">Physics::getPhysicsWorld</a></div><div class="ttdeci">PhysicsWorld * getPhysicsWorld()</div><div class="ttdoc">Returns physics world game object.</div><div class="ttdef"><b>Definition:</b> <a href="_physics_8cpp_source.html#l00044">Physics.cpp:44</a></div></div>
-<div class="ttc" id="anamespace_physics_html_a78fe1494aebd79d0b8abaebeba9bddac"><div class="ttname"><a href="namespace_physics.html#a78fe1494aebd79d0b8abaebeba9bddac">Physics::destoryWorld</a></div><div class="ttdeci">void destoryWorld()</div><div class="ttdoc">Creates the world for the physic objects.</div><div class="ttdef"><b>Definition:</b> <a href="_physics_8cpp_source.html#l00035">Physics.cpp:35</a></div></div>
-<div class="ttc" id="anamespace_physics_html_a7088a371e1c45b57b5ae2d39e029ac49"><div class="ttname"><a href="namespace_physics.html#a7088a371e1c45b57b5ae2d39e029ac49">Physics::setDebuggerValues</a></div><div class="ttdeci">void setDebuggerValues(int type, bool val)</div><div class="ttdoc">Can set different debug values to be returned.</div><div class="ttdef"><b>Definition:</b> <a href="_physics_8cpp_source.html#l00027">Physics.cpp:27</a></div></div>
-<div class="ttc" id="anamespace_physics_html_a90f5f7a790b7143554c74de976c0072c"><div class="ttname"><a href="namespace_physics.html#a90f5f7a790b7143554c74de976c0072c">Physics::updateWorld</a></div><div class="ttdeci">void updateWorld(float delta_time)</div><div class="ttdoc">Updates the world for the physic objects.</div><div class="ttdef"><b>Definition:</b> <a href="_physics_8cpp_source.html#l00013">Physics.cpp:13</a></div></div>
-<div class="ttc" id="a_physics_8cpp_html_a0a6e1dfb02851473efd687b6771f87fa"><div class="ttname"><a href="_physics_8cpp.html#a0a6e1dfb02851473efd687b6771f87fa">created</a></div><div class="ttdeci">bool created</div><div class="ttdef"><b>Definition:</b> <a href="_physics_8cpp_source.html#l00002">Physics.cpp:2</a></div></div>
-<div class="ttc" id="anamespace_physics_html_a6e722b98ea6228887490ff9f35cbc9c4"><div class="ttname"><a href="namespace_physics.html#a6e722b98ea6228887490ff9f35cbc9c4">Physics::WorldExsists</a></div><div class="ttdeci">bool WorldExsists()</div><div class="ttdoc">Returns if the physics world is created or not.</div><div class="ttdef"><b>Definition:</b> <a href="_physics_8cpp_source.html#l00046">Physics.cpp:46</a></div></div>
-<div class="ttc" id="a_physics_8cpp_html_a80518da77f9ca26660dd6e4584b92be4"><div class="ttname"><a href="_physics_8cpp.html#a80518da77f9ca26660dd6e4584b92be4">world</a></div><div class="ttdeci">PhysicsWorld * world</div><div class="ttdef"><b>Definition:</b> <a href="_physics_8cpp_source.html#l00004">Physics.cpp:4</a></div></div>
-<div class="ttc" id="anamespace_physics_html_a853968a10280acf230462676bf0f7da7"><div class="ttname"><a href="namespace_physics.html#a853968a10280acf230462676bf0f7da7">Physics::getPhysicsCommon</a></div><div class="ttdeci">PhysicsCommon &amp; getPhysicsCommon()</div><div class="ttdoc">Returns physics common game object.</div><div class="ttdef"><b>Definition:</b> <a href="_physics_8cpp_source.html#l00042">Physics.cpp:42</a></div></div>
-<div class="ttc" id="anamespace_physics_html_a57d5edbfcb404618f3133c135dfdb3ce"><div class="ttname"><a href="namespace_physics.html#a57d5edbfcb404618f3133c135dfdb3ce">Physics::createWorld</a></div><div class="ttdeci">void createWorld()</div><div class="ttdoc">Creates the world for the physic objects.</div><div class="ttdef"><b>Definition:</b> <a href="_physics_8cpp_source.html#l00006">Physics.cpp:6</a></div></div>
+<div class="ttc" id="aclass_physics_html_a009155f695e0ad1293cfdcd087989085"><div class="ttname"><a href="class_physics.html#a009155f695e0ad1293cfdcd087989085">Physics::physicsCommon</a></div><div class="ttdeci">static PhysicsCommon physicsCommon</div><div class="ttdef"><b>Definition:</b> <a href="_physics_8hpp_source.html#l00089">Physics.hpp:89</a></div></div>
+<div class="ttc" id="aclass_physics_html"><div class="ttname"><a href="class_physics.html">Physics</a></div><div class="ttdef"><b>Definition:</b> <a href="_physics_8hpp_source.html#l00008">Physics.hpp:8</a></div></div>
+<div class="ttc" id="aclass_physics_html_aae3da91344073de7b6fd6206f520c134"><div class="ttname"><a href="class_physics.html#aae3da91344073de7b6fd6206f520c134">Physics::updateWorld</a></div><div class="ttdeci">static void updateWorld(double delta_time)</div><div class="ttdoc">Updates the world for the physic objects.</div><div class="ttdef"><b>Definition:</b> <a href="_physics_8cpp_source.html#l00014">Physics.cpp:14</a></div></div>
+<div class="ttc" id="aclass_physics_html_a57d5edbfcb404618f3133c135dfdb3ce"><div class="ttname"><a href="class_physics.html#a57d5edbfcb404618f3133c135dfdb3ce">Physics::createWorld</a></div><div class="ttdeci">static void createWorld()</div><div class="ttdoc">Creates the world for the physic objects.</div><div class="ttdef"><b>Definition:</b> <a href="_physics_8cpp_source.html#l00007">Physics.cpp:7</a></div></div>
+<div class="ttc" id="aclass_physics_html_a7088a371e1c45b57b5ae2d39e029ac49"><div class="ttname"><a href="class_physics.html#a7088a371e1c45b57b5ae2d39e029ac49">Physics::setDebuggerValues</a></div><div class="ttdeci">static void setDebuggerValues(int type, bool val)</div><div class="ttdoc">Can set different debug values to be returned.</div><div class="ttdef"><b>Definition:</b> <a href="_physics_8cpp_source.html#l00028">Physics.cpp:28</a></div></div>
+<div class="ttc" id="aclass_physics_html_a222ae72790a837589db1e20985a94e87"><div class="ttname"><a href="class_physics.html#a222ae72790a837589db1e20985a94e87">Physics::WorldExists</a></div><div class="ttdeci">static bool WorldExists()</div><div class="ttdoc">Returns if the physics world is created or not.</div><div class="ttdef"><b>Definition:</b> <a href="_physics_8cpp_source.html#l00048">Physics.cpp:48</a></div></div>
+<div class="ttc" id="aclass_physics_html_a6a91de887234646c6953c4c9bef48af5"><div class="ttname"><a href="class_physics.html#a6a91de887234646c6953c4c9bef48af5">Physics::setDebuggerToActive</a></div><div class="ttdeci">static void setDebuggerToActive(bool val)</div><div class="ttdoc">Sets which debugger to active.</div><div class="ttdef"><b>Definition:</b> <a href="_physics_8cpp_source.html#l00021">Physics.cpp:21</a></div></div>
+<div class="ttc" id="aclass_physics_html_abc2fbaff75f375db71bc8fbc88185bde"><div class="ttname"><a href="class_physics.html#abc2fbaff75f375db71bc8fbc88185bde">Physics::destroyWorld</a></div><div class="ttdeci">static void destroyWorld()</div><div class="ttdoc">Creates the world for the physic objects.</div><div class="ttdef"><b>Definition:</b> <a href="_physics_8cpp_source.html#l00037">Physics.cpp:37</a></div></div>
+<div class="ttc" id="aclass_physics_html_a345310cc1b5675837a8abb258f98eaab"><div class="ttname"><a href="class_physics.html#a345310cc1b5675837a8abb258f98eaab">Physics::world</a></div><div class="ttdeci">static PhysicsWorld * world</div><div class="ttdef"><b>Definition:</b> <a href="_physics_8hpp_source.html#l00090">Physics.hpp:90</a></div></div>
+<div class="ttc" id="aclass_physics_html_a841a42374412b698ff7db10cce06449d"><div class="ttname"><a href="class_physics.html#a841a42374412b698ff7db10cce06449d">Physics::created</a></div><div class="ttdeci">static bool created</div><div class="ttdef"><b>Definition:</b> <a href="_physics_8hpp_source.html#l00088">Physics.hpp:88</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b3b6f0ba51cfe0acc4894d1f872bef0a.html">Controller</a></li><li class="navelem"><a class="el" href="_physics_8cpp.html">Physics.cpp</a></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_b3b6f0ba51cfe0acc4894d1f872bef0a.html">Controller</a></li><li class="navelem"><a class="el" href="dir_ffd7219d829485094aa937f46fdab4a9.html">Physics</a></li><li class="navelem"><a class="el" href="_physics_8cpp.html">Physics.cpp</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>

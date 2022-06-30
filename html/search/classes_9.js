@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['omnishadowmap_892',['OmniShadowMap',['../class_omni_shadow_map.html',1,'']]],
-  ['opengl_893',['OpenGL',['../class_open_g_l.html',1,'']]]
+  ['light_1312',['Light',['../class_light.html',1,'']]],
+  ['lightdata_1313',['LightData',['../struct_light_data.html',1,'']]],
+  ['luamanager_1314',['LuaManager',['../class_lua_manager.html',1,'']]]
 ];

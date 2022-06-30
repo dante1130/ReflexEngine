@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: src/View/Renderer/OpenGL/Objects/Light.hpp Source File</title>
+<title>ICT397 Assignment 2: src/View/Renderer/OpenGL/Objects/Light.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -107,13 +107,13 @@ $(document).ready(function(){initNavTree('_light_8hpp_source.html',''); initResi
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">     * @brief Parameterized constructor.</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">     * @param shadowWidth</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">     * @param shadowHeight</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">     * @param color</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">     * @param aIntensity</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">     * @param dIntensity</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">     * @param shadowWidth The width of the shadow map.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">     * @param shadowHeight The height of the shadow map.</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">     * @param color The color of the light.</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">     * @param aIntensity The ambient intensity of the light.</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">     * @param dIntensity The diffuse intensity of the light.</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="class_light.html#a0fc51e56baaae62f7e88f03f45ceae30">Light</a>(GLuint shadowWidth, GLuint shadowHeight, glm::vec3 color,</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    Light(GLuint shadowWidth, GLuint shadowHeight, glm::vec3 color,</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;          GLfloat aIntensity, GLfloat dIntensity);</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="comment">/**</span></div>
@@ -131,7 +131,7 @@ $(document).ready(function(){initNavTree('_light_8hpp_source.html',''); initResi
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keyword">protected</span>:</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="comment">// Ambient lighting</span></div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="comment">/// The color of the ambient lighting.</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="class_light.html#ae1e458802424a95b629cc1947ef2bcac">   47</a></span>&#160;    glm::vec3 <a class="code" href="class_light.html#ae1e458802424a95b629cc1947ef2bcac">m_color</a>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="class_light.html#ae1e458802424a95b629cc1947ef2bcac">   47</a></span>&#160;    <a class="code" href="class_light.html#ae1e458802424a95b629cc1947ef2bcac">glm</a>::<a class="code" href="class_light.html#ae1e458802424a95b629cc1947ef2bcac">vec3</a> <a class="code" href="class_light.html#ae1e458802424a95b629cc1947ef2bcac">m_color</a>;</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="comment">/// The intensity of the ambient lighting.</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="class_light.html#a92ff03f51959af7109370e48ece71de0">   49</a></span>&#160;    <a class="code" href="class_light.html#a92ff03f51959af7109370e48ece71de0">GLfloat</a> <a class="code" href="class_light.html#a92ff03f51959af7109370e48ece71de0">m_ambientIntensity</a>;</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
@@ -140,7 +140,7 @@ $(document).ready(function(){initNavTree('_light_8hpp_source.html',''); initResi
 <div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="class_light.html#ae8ffc82ed0d95825c5efb2fd51da8352">   53</a></span>&#160;    <a class="code" href="class_light.html#ae8ffc82ed0d95825c5efb2fd51da8352">GLfloat</a> <a class="code" href="class_light.html#ae8ffc82ed0d95825c5efb2fd51da8352">m_diffuseIntensity</a>;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="comment">/// The light projection.</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="class_light.html#ac1937d01087138b31c48d3030ce3068f">   56</a></span>&#160;    glm::mat4 <a class="code" href="class_light.html#ac1937d01087138b31c48d3030ce3068f">m_lightProj</a>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="class_light.html#ac1937d01087138b31c48d3030ce3068f">   56</a></span>&#160;    <a class="code" href="class_light.html#ac1937d01087138b31c48d3030ce3068f">glm</a>::<a class="code" href="class_light.html#ac1937d01087138b31c48d3030ce3068f">mat4</a> <a class="code" href="class_light.html#ac1937d01087138b31c48d3030ce3068f">m_lightProj</a>;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="comment">/// Shadow map.</span></div>
 <div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="class_light.html#ac03805a977e07c63e91bd8c5ab515c22">   59</a></span>&#160;    <a class="code" href="class_shadow_map.html">ShadowMap</a>* <a class="code" href="class_light.html#ac03805a977e07c63e91bd8c5ab515c22">m_shadowMap</a>;</div>
@@ -148,13 +148,12 @@ $(document).ready(function(){initNavTree('_light_8hpp_source.html',''); initResi
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclass_shadow_map_html"><div class="ttname"><a href="class_shadow_map.html">ShadowMap</a></div><div class="ttdoc">A shadow map.</div><div class="ttdef"><b>Definition:</b> <a href="_shadow_map_8hpp_source.html#l00011">ShadowMap.hpp:11</a></div></div>
-<div class="ttc" id="aclass_light_html_a792f934089ffe791d2f7079216c80d1e"><div class="ttname"><a href="class_light.html#a792f934089ffe791d2f7079216c80d1e">Light::GetShadowMap</a></div><div class="ttdeci">ShadowMap * GetShadowMap() const</div><div class="ttdoc">Returns a pointer to the shadow map.</div><div class="ttdef"><b>Definition:</b> <a href="_light_8cpp_source.html#l00018">Light.cpp:18</a></div></div>
+<div class="ttc" id="aclass_light_html_a792f934089ffe791d2f7079216c80d1e"><div class="ttname"><a href="class_light.html#a792f934089ffe791d2f7079216c80d1e">Light::GetShadowMap</a></div><div class="ttdeci">ShadowMap * GetShadowMap() const</div><div class="ttdoc">Returns a pointer to the shadow map.</div><div class="ttdef"><b>Definition:</b> <a href="_light_8cpp_source.html#l00019">Light.cpp:19</a></div></div>
 <div class="ttc" id="aclass_light_html_aeb5df09a25a32f19fdffa761268ba24f"><div class="ttname"><a href="class_light.html#aeb5df09a25a32f19fdffa761268ba24f">Light::Light</a></div><div class="ttdeci">Light()</div><div class="ttdoc">Default constructor.</div><div class="ttdef"><b>Definition:</b> <a href="_light_8cpp_source.html#l00003">Light.cpp:3</a></div></div>
 <div class="ttc" id="aclass_light_html_ae8ffc82ed0d95825c5efb2fd51da8352"><div class="ttname"><a href="class_light.html#ae8ffc82ed0d95825c5efb2fd51da8352">Light::m_diffuseIntensity</a></div><div class="ttdeci">GLfloat m_diffuseIntensity</div><div class="ttdoc">The intensity of the diffuse lighting.</div><div class="ttdef"><b>Definition:</b> <a href="_light_8hpp_source.html#l00053">Light.hpp:53</a></div></div>
 <div class="ttc" id="aclass_light_html_a92ff03f51959af7109370e48ece71de0"><div class="ttname"><a href="class_light.html#a92ff03f51959af7109370e48ece71de0">Light::m_ambientIntensity</a></div><div class="ttdeci">GLfloat m_ambientIntensity</div><div class="ttdoc">The intensity of the ambient lighting.</div><div class="ttdef"><b>Definition:</b> <a href="_light_8hpp_source.html#l00049">Light.hpp:49</a></div></div>
-<div class="ttc" id="aclass_light_html_a0fc51e56baaae62f7e88f03f45ceae30"><div class="ttname"><a href="class_light.html#a0fc51e56baaae62f7e88f03f45ceae30">Light::Light</a></div><div class="ttdeci">Light(GLuint shadowWidth, GLuint shadowHeight, glm::vec3 color, GLfloat aIntensity, GLfloat dIntensity)</div><div class="ttdoc">Parameterized constructor.</div><div class="ttdef"><b>Definition:</b> <a href="_light_8cpp_source.html#l00006">Light.cpp:6</a></div></div>
 <div class="ttc" id="aclass_light_html"><div class="ttname"><a href="class_light.html">Light</a></div><div class="ttdoc">A light in the scene.</div><div class="ttdef"><b>Definition:</b> <a href="_light_8hpp_source.html#l00013">Light.hpp:13</a></div></div>
-<div class="ttc" id="aclass_light_html_ad0e59fad13bb6cfadc25b2c477e9ddc7"><div class="ttname"><a href="class_light.html#ad0e59fad13bb6cfadc25b2c477e9ddc7">Light::~Light</a></div><div class="ttdeci">virtual ~Light()</div><div class="ttdoc">Destructor.</div><div class="ttdef"><b>Definition:</b> <a href="_light_8cpp_source.html#l00016">Light.cpp:16</a></div></div>
+<div class="ttc" id="aclass_light_html_ad0e59fad13bb6cfadc25b2c477e9ddc7"><div class="ttname"><a href="class_light.html#ad0e59fad13bb6cfadc25b2c477e9ddc7">Light::~Light</a></div><div class="ttdeci">virtual ~Light()</div><div class="ttdoc">Destructor.</div><div class="ttdef"><b>Definition:</b> <a href="_light_8cpp_source.html#l00017">Light.cpp:17</a></div></div>
 <div class="ttc" id="aclass_light_html_ae1e458802424a95b629cc1947ef2bcac"><div class="ttname"><a href="class_light.html#ae1e458802424a95b629cc1947ef2bcac">Light::m_color</a></div><div class="ttdeci">glm::vec3 m_color</div><div class="ttdoc">The color of the ambient lighting.</div><div class="ttdef"><b>Definition:</b> <a href="_light_8hpp_source.html#l00047">Light.hpp:47</a></div></div>
 <div class="ttc" id="aclass_light_html_ac03805a977e07c63e91bd8c5ab515c22"><div class="ttname"><a href="class_light.html#ac03805a977e07c63e91bd8c5ab515c22">Light::m_shadowMap</a></div><div class="ttdeci">ShadowMap * m_shadowMap</div><div class="ttdoc">Shadow map.</div><div class="ttdef"><b>Definition:</b> <a href="_light_8hpp_source.html#l00059">Light.hpp:59</a></div></div>
 <div class="ttc" id="aclass_light_html_ac1937d01087138b31c48d3030ce3068f"><div class="ttname"><a href="class_light.html#ac1937d01087138b31c48d3030ce3068f">Light::m_lightProj</a></div><div class="ttdeci">glm::mat4 m_lightProj</div><div class="ttdoc">The light projection.</div><div class="ttdef"><b>Definition:</b> <a href="_light_8hpp_source.html#l00056">Light.hpp:56</a></div></div>

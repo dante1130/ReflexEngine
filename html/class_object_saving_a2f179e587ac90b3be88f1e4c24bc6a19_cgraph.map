@@ -1,0 +1,4 @@
+<map id="ObjectSaving::openFile" name="ObjectSaving::openFile">
+<area shape="rect" id="node1" title="Opens a file to save data too." alt="" coords="5,5,160,32"/>
+<area shape="rect" id="node2" href="$class_object_saving.html#ad38aa3ea541f6a32a6a4cfe7256967f2" title="On first call, opens the creation script file. And then adds the save files in number order into the ..." alt="" coords="208,5,425,32"/>
+</map>

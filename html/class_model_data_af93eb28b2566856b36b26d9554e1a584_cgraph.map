@@ -1,0 +1,17 @@
+<map id="ModelData::render" name="ModelData::render">
+<area shape="rect" id="node1" title="Render the model." alt="" coords="5,181,133,208"/>
+<area shape="rect" id="node2" href="$class_model_data.html#a54baeaa115561844ba1bce3d39abed10" title="Animate the model." alt="" coords="206,131,345,157"/>
+<area shape="rect" id="node3" href="$class_model_data.html#a82ad8ebbe6baabbf3633586614fb537e" title="Render the model animated." alt="" coords="181,279,369,305"/>
+<area shape="rect" id="node13" href="$class_model_data.html#ae4edf4b22d7cda2e7074d3fe9c130384" title="Render the model statically." alt="" coords="190,181,361,208"/>
+<area shape="rect" id="node4" href="$class_resource_manager.html#a33b466c53250b7431976a04d42d59036" title="Get the instance of the Resource Manager." alt="" coords="434,174,587,215"/>
+<area shape="rect" id="node5" href="$class_resource_manager.html#ac371961dc43e0d9b670d35b8c953358e" title="Get the md2 model manager." alt="" coords="434,370,587,411"/>
+<area shape="rect" id="node6" href="$class_texture_manager.html#a585e8d4ef910075abbb7769db117beda" title="Get the texture given the texture name." alt="" coords="440,239,581,281"/>
+<area shape="rect" id="node7" href="$class_resource_manager.html#abbef155bc35aef3f78995effb06120fa" title="Get the texture manager." alt="" coords="434,305,587,346"/>
+<area shape="rect" id="node8" href="$class_md2_model.html#af9e8d16f50805de19abfc4d489ae997f" title="Render the md2 model with interpolated frames." alt="" coords="417,435,604,477"/>
+<area shape="rect" id="node11" href="$class_md2_model.html#a937b6f12e1aef0eae130e589c22444ea" title=" " alt="" coords="425,501,597,528"/>
+<area shape="rect" id="node12" href="$class_texture.html#ac2e11c8bd262877a28a47e85f6f7458f" title="Enables the texture." alt="" coords="441,123,580,149"/>
+<area shape="rect" id="node9" href="$class_md2_model.html#a017b7c0b738ad6e2c0aa8513389a45b8" title="Render a interpolated frame between 2 frames." alt="" coords="652,435,852,477"/>
+<area shape="rect" id="node10" href="$class_md2_model.html#a1f4d4876e5d88f64298c66ff0ad39631" title="Loads an interpolated frame to a mesh given 2 frame numbers." alt="" coords="900,435,1088,477"/>
+<area shape="rect" id="node14" href="$class_resource_manager.html#a474f1dfe5e7d553d919d09ff8b827467" title="Get the model manager." alt="" coords="434,57,587,98"/>
+<area shape="rect" id="node15" href="$class_model.html#a6906216d84bd7a8c0c686fb3b860208a" title="Renders the model." alt="" coords="429,5,593,32"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="NPC::handleMessage" name="NPC::handleMessage">
+<area shape="rect" id="node1" title="Handles incomming messages." alt="" coords="392,13,540,39"/>
+<area shape="rect" id="node2" href="$classmessage_dispatcher.html#a7babb0f4b54332e64457002cf59016ce" title=" " alt="" coords="199,5,344,47"/>
+<area shape="rect" id="node3" href="$classmessage_dispatcher.html#a5667b6808acca88ee5afa90f821d985f" title=" " alt="" coords="5,5,151,47"/>
+</map>

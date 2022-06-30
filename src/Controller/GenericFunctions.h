@@ -388,34 +388,137 @@ void networkRetainMessage(std::string savedMessage);
  */
 std::string networkReturnRetainedMessage();
 
+/**
+ * @brief	Sends the message saved in networkRetainMessage across the network
+ *
+ * @pre		Nothing
+ * @post	Sends the retained message across the network
+ */
 void networkSendMessage();
 
+/**
+ * @brief	Gets a message received across the network
+ * @return  string  - The message received by the network manager
+ *
+ * @pre		Nothing
+ * @post	Sends the retained message across the network
+ */
 std::string networkGetMessage();
 
+/**
+ * @brief	Checks if the chat message in networkGetMessage is valid or not
+ * @return  bool  - if the chat message is valid or not
+ *
+ * @pre		Nothing
+ * @post	Returns true of the chat message was a valid message
+ */
 bool networkValidChatMessage();
 
+/**
+ * @brief	Checks if the network has connected
+ * @return  bool  
+ *
+ * @pre		Nothing
+ * @post	Returns if the network has successfully connected
+ */
 bool networkConnectedSafe();
 
+/**
+ * @brief	Checks if the chat message in networkGetMessage is valid or not
+ * @return  bool  - if the chat message is valid or not
+ *
+ * @pre		Nothing
+ * @post	Sends the retained message across the network
+ */
 void networkRetainUsername(std::string savedUsername);
 
+/**
+ * @brief	Sets the username of the player
+ *
+ * @pre		Nothing
+ * @post	Sets the username of the player using the retained username
+ */
 void networkSetUsername();
 
+/**
+ * @brief	Returns the username saved in networkRetainUsername
+ * @return  string - the username saved by networkRetainUsername
+ *
+ * @pre		Nothing
+ * @post	Returns the username stored by networkRetainUsername
+ */
 std::string networkReturnUsername();
 
+/**
+ * @brief	Sets the pvp network menu to be active or inactive
+ * @param	active - true if changing the pvp network menu to be active
+ * @return  void
+ *
+ * @pre		Nothing
+ * @post	Sets the pvp network menu to be active or inactive
+ */
 void setPvPNetworkMenuActive(bool active);
 
+/**
+ * @brief	Gets if the pvp network menu is active
+ * @return  bool
+ *
+ * @pre		Nothing
+ * @post	Returns true if the pvp network menu is active
+ */
 bool getPvPNetworkMenuActive();
 
+/**
+ * @brief	Gets the network position of the other player
+ * @return  float  - get x coordinate position
+ *
+ * @pre		Nothing
+ * @post	Returns the x coordinate of the networked object
+ */
 float getNetworkPosX();
 
+/**
+ * @brief	Gets the network position of the other player
+ * @return  float  - get y coordinate position
+ *
+ * @pre		Nothing
+ * @post	Returns the y coordinate of the networked object
+ */
 float getNetworkPosY();
 
+/**
+ * @brief	Gets the network position of the other player
+ * @return  float  - get z coordinate position
+ *
+ * @pre		Nothing
+ * @post	Returns the z coordinate of the networked object
+ */
 float getNetworkPosZ();
 
+/**
+ * @brief	Checks if the pvp network manager is receiving data. 
+ * @return  bool 
+ *
+ * @pre		Nothing
+ * @post	Returns true if the network manager is receiving valid data and it is not invalid
+ */
 bool getReceivingData();
 
+/**
+ * @brief	Gets the connection status for the pvp network manager
+ * @return  bool 
+ *
+ * @pre		Nothing
+ * @post	Returns true if the pvp network manager has successfully connected (automatic success for the server)
+ */
 bool networkPvPConnectionStatus();
 
+/**
+ * @brief	Fixed update loop for the network manager. Primarily used for object replication to improve network performance.
+ *
+ * @pre		Nothing
+ * @post	Update the network on the engine's fixed update loop
+ */
 void networkFixedUpdate();
 
 /**

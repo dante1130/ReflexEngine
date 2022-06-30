@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: src/View/Renderer/OpenGL/Objects/SpotLight.cpp Source File</title>
+<title>ICT397 Assignment 2: src/View/Renderer/OpenGL/Objects/SpotLight.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -88,47 +88,48 @@ $(document).ready(function(){initNavTree('_spot_light_8cpp_source.html',''); ini
 <a href="_spot_light_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <a class="code" href="_spot_light_8hpp.html">&quot;SpotLight.hpp&quot;</a></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="class_spot_light.html#ae4045cd7c8c6d18af39b57c9cf6f9ce6">    3</a></span>&#160;<a class="code" href="class_spot_light.html">SpotLight</a>::<a class="code" href="class_spot_light.html#ae4045cd7c8c6d18af39b57c9cf6f9ce6">SpotLight</a>()</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    : <a class="code" href="class_point_light.html">PointLight</a><a class="code" href="class_point_light.html#abbfdf5f05b559c49016f8bb97b0ca414">(</a><a class="code" href="class_point_light.html#abbfdf5f05b559c49016f8bb97b0ca414">)</a>, <a class="code" href="class_spot_light.html#ae4045cd7c8c6d18af39b57c9cf6f9ce6">m_direction</a>(<a class="code" href="class_spot_light.html#ae4045cd7c8c6d18af39b57c9cf6f9ce6">glm</a>::<a class="code" href="class_spot_light.html#ae4045cd7c8c6d18af39b57c9cf6f9ce6">vec3</a>(0.0f, -1.0f, 0.0f)), <a class="code" href="class_spot_light.html#ae4045cd7c8c6d18af39b57c9cf6f9ce6">m_procEdge</a>(0.0f)</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;{}</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="class_spot_light.html#ae55990488bb0ec2e2f368e7852529318">    7</a></span>&#160;<a class="code" href="class_spot_light.html">SpotLight</a>::SpotLight(GLuint shadowWidth, GLuint shadowHeight,</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;                     GLfloat near, GLfloat far,</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;                     glm::vec3 color, GLfloat aIntensity, GLfloat dIntensity,</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;                     glm::vec3 position, glm::vec3 direction, GLfloat constant,</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;                     GLfloat linear, GLfloat exponent, GLfloat edge)</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    : PointLight(shadowWidth, shadowHeight, near, far, color, aIntensity, dIntensity, position, constant, linear, exponent),</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        m_direction(glm::normalize(direction)), m_procEdge(cosf(glm::radians(edge)))</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;{}</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_spot_light.html#a9ff109c1a38164f906e9a7295d6e3561">   17</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_spot_light.html">SpotLight</a>::<a class="code" href="class_spot_light.html#a9ff109c1a38164f906e9a7295d6e3561">UseLight</a>(GLuint ambientColorLoc, GLuint ambientIntensityLoc,</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    GLuint diffuseIntensityLoc, GLuint positionLoc, GLuint directionLoc,</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    GLuint constantLoc, GLuint linearLoc, GLuint exponentLoc, GLuint edgeLoc) <span class="keyword">const</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    glUniform3f(ambientColorLoc, m_color.x, m_color.y, m_color.z);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    glUniform1f(ambientIntensityLoc, m_ambientIntensity);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    glUniform1f(diffuseIntensityLoc, m_diffuseIntensity);</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    : <a class="code" href="class_point_light.html">PointLight</a><a class="code" href="class_point_light.html#abbfdf5f05b559c49016f8bb97b0ca414">(</a><a class="code" href="class_point_light.html#abbfdf5f05b559c49016f8bb97b0ca414">)</a>,</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;      <a class="code" href="class_spot_light.html#ae4045cd7c8c6d18af39b57c9cf6f9ce6">m_direction</a>(<a class="code" href="class_spot_light.html#ae4045cd7c8c6d18af39b57c9cf6f9ce6">glm</a>::<a class="code" href="class_spot_light.html#ae4045cd7c8c6d18af39b57c9cf6f9ce6">vec3</a>(0.0f, -1.0f, 0.0f)),</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;      <a class="code" href="class_spot_light.html#ae4045cd7c8c6d18af39b57c9cf6f9ce6">m_procEdge</a>(0.0f) {}</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="class_spot_light.html#a290cb188d11a34b79d0b0ad6e277da02">    8</a></span>&#160;<a class="code" href="class_spot_light.html">SpotLight</a>::SpotLight(GLuint shadowWidth, GLuint shadowHeight, GLfloat near,</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;                     GLfloat far, glm::vec3 color, GLfloat aIntensity,</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;                     GLfloat dIntensity, glm::vec3 position,</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;                     glm::vec3 direction, GLfloat constant, GLfloat linear,</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;                     GLfloat quadratic, GLfloat edge)</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    : PointLight(shadowWidth, shadowHeight, near, far, color, aIntensity,</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;                 dIntensity, position, constant, linear, quadratic),</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;      m_direction(glm::normalize(direction)),</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;      m_procEdge(cosf(glm::radians(edge))) {}</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_spot_light.html#a9df650d1825f252ac5f2b793a4a41f7b">   18</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_spot_light.html">SpotLight</a>::<a class="code" href="class_spot_light.html#a9df650d1825f252ac5f2b793a4a41f7b">UseLight</a>(GLuint ambientColorLoc, GLuint ambientIntensityLoc,</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;                         GLuint diffuseIntensityLoc, GLuint positionLoc,</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;                         GLuint directionLoc, GLuint constantLoc,</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;                         GLuint linearLoc, GLuint quadraticLoc,</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;                         GLuint edgeLoc) <span class="keyword">const</span> {</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    glUniform3f(ambientColorLoc, m_color.x, m_color.y, m_color.z);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    glUniform1f(ambientIntensityLoc, m_ambientIntensity);</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    glUniform3f(positionLoc, m_position.x, m_position.y, m_position.z);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    glUniform1f(constantLoc, m_constant);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    glUniform1f(linearLoc, m_linear);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    glUniform1f(exponentLoc, m_exponent);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    glUniform3f(directionLoc, m_direction.x, m_direction.y, m_direction.z);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    glUniform1f(edgeLoc, m_procEdge);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;}</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="class_spot_light.html#a817490b0e558cb61aaae8004b6a43275">   35</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_spot_light.html">SpotLight</a>::SetFlash(glm::vec3 pos, glm::vec3 dir)</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    m_position = pos;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    m_direction = dir;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    glUniform1f(diffuseIntensityLoc, m_diffuseIntensity);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    glUniform3f(positionLoc, m_position.x, m_position.y, m_position.z);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    glUniform1f(constantLoc, m_constant);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    glUniform1f(linearLoc, m_linear);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    glUniform1f(quadraticLoc, m_quadratic);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    glUniform3f(directionLoc, m_direction.x, m_direction.y, m_direction.z);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    glUniform1f(edgeLoc, m_procEdge);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="class_spot_light.html#a817490b0e558cb61aaae8004b6a43275">   37</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_spot_light.html">SpotLight</a>::SetFlash(glm::vec3 pos, glm::vec3 dir) {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    m_position = pos;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    m_direction = dir;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclass_spot_light_html"><div class="ttname"><a href="class_spot_light.html">SpotLight</a></div><div class="ttdef"><b>Definition:</b> <a href="_spot_light_8hpp_source.html#l00009">SpotLight.hpp:9</a></div></div>
 <div class="ttc" id="aclass_spot_light_html_ae4045cd7c8c6d18af39b57c9cf6f9ce6"><div class="ttname"><a href="class_spot_light.html#ae4045cd7c8c6d18af39b57c9cf6f9ce6">SpotLight::SpotLight</a></div><div class="ttdeci">SpotLight()</div><div class="ttdoc">Construct a new Spot Light object.</div><div class="ttdef"><b>Definition:</b> <a href="_spot_light_8cpp_source.html#l00003">SpotLight.cpp:3</a></div></div>
-<div class="ttc" id="aclass_spot_light_html_a9ff109c1a38164f906e9a7295d6e3561"><div class="ttname"><a href="class_spot_light.html#a9ff109c1a38164f906e9a7295d6e3561">SpotLight::UseLight</a></div><div class="ttdeci">void UseLight(GLuint ambientColorLoc, GLuint ambientIntensityLoc, GLuint diffuseIntensityLoc, GLuint positionLoc, GLuint directionLoc, GLuint constantLoc, GLuint linearLoc, GLuint exponentLoc, GLuint edgeLoc) const</div><div class="ttdoc">Enables the spotlight by passing uniforms to the shader.</div><div class="ttdef"><b>Definition:</b> <a href="_spot_light_8cpp_source.html#l00017">SpotLight.cpp:17</a></div></div>
+<div class="ttc" id="aclass_spot_light_html_a9df650d1825f252ac5f2b793a4a41f7b"><div class="ttname"><a href="class_spot_light.html#a9df650d1825f252ac5f2b793a4a41f7b">SpotLight::UseLight</a></div><div class="ttdeci">void UseLight(GLuint ambientColorLoc, GLuint ambientIntensityLoc, GLuint diffuseIntensityLoc, GLuint positionLoc, GLuint directionLoc, GLuint constantLoc, GLuint linearLoc, GLuint quadraticLoc, GLuint edgeLoc) const</div><div class="ttdoc">Enables the spotlight by passing uniforms to the shader.</div><div class="ttdef"><b>Definition:</b> <a href="_spot_light_8cpp_source.html#l00018">SpotLight.cpp:18</a></div></div>
 <div class="ttc" id="aclass_point_light_html_abbfdf5f05b559c49016f8bb97b0ca414"><div class="ttname"><a href="class_point_light.html#abbfdf5f05b559c49016f8bb97b0ca414">PointLight::PointLight</a></div><div class="ttdeci">PointLight()</div><div class="ttdoc">Construct a new Point Light object.</div><div class="ttdef"><b>Definition:</b> <a href="_point_light_8cpp_source.html#l00003">PointLight.cpp:3</a></div></div>
 <div class="ttc" id="aclass_point_light_html"><div class="ttname"><a href="class_point_light.html">PointLight</a></div><div class="ttdoc">A point light that illuminates in a sphere.</div><div class="ttdef"><b>Definition:</b> <a href="_point_light_8hpp_source.html#l00011">PointLight.hpp:11</a></div></div>
 <!-- start footer part -->

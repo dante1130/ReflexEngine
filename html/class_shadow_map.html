@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: ShadowMap Class Reference</title>
+<title>ICT397 Assignment 2: ShadowMap Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -90,7 +90,7 @@ $(document).ready(function(){initNavTree('class_shadow_map.html',''); initResiza
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="class_a.html">A</a> shadow map.  
+<p>A shadow map.  
  <a href="class_shadow_map.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_shadow_map_8hpp_source.html">ShadowMap.hpp</a>&gt;</code></p>
@@ -139,16 +139,19 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a3907664cdfd42ae24ab4e193743706b2"><td class="memItemLeft" align="right" valign="top">GLuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shadow_map.html#a3907664cdfd42ae24ab4e193743706b2">m_fbo</a></td></tr>
+<tr class="memdesc:a3907664cdfd42ae24ab4e193743706b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The framebuffer object.  <a href="class_shadow_map.html#a3907664cdfd42ae24ab4e193743706b2">More...</a><br /></td></tr>
 <tr class="separator:a3907664cdfd42ae24ab4e193743706b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae993f13e8d643129813cd9e14f538b2a"><td class="memItemLeft" align="right" valign="top">GLuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shadow_map.html#ae993f13e8d643129813cd9e14f538b2a">m_shadowMap</a></td></tr>
+<tr class="memdesc:ae993f13e8d643129813cd9e14f538b2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The shadow map.  <a href="class_shadow_map.html#ae993f13e8d643129813cd9e14f538b2a">More...</a><br /></td></tr>
 <tr class="separator:ae993f13e8d643129813cd9e14f538b2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41568671d66479677c0e7f078fb5765c"><td class="memItemLeft" align="right" valign="top">GLuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shadow_map.html#a41568671d66479677c0e7f078fb5765c">m_shadowWidth</a></td></tr>
+<tr class="memdesc:a41568671d66479677c0e7f078fb5765c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shadow dimensions.  <a href="class_shadow_map.html#a41568671d66479677c0e7f078fb5765c">More...</a><br /></td></tr>
 <tr class="separator:a41568671d66479677c0e7f078fb5765c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0314ec2bc94d1effc6f4f688c1b721f0"><td class="memItemLeft" align="right" valign="top">GLuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_shadow_map.html#a0314ec2bc94d1effc6f4f688c1b721f0">m_shadowHeight</a></td></tr>
 <tr class="separator:a0314ec2bc94d1effc6f4f688c1b721f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="class_a.html">A</a> shadow map. </p>
+<div class="textblock"><p>A shadow map. </p>
 
 <p class="definition">Definition at line <a class="el" href="_shadow_map_8hpp_source.html#l00011">11</a> of file <a class="el" href="_shadow_map_8hpp_source.html">ShadowMap.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -172,17 +175,6 @@ Protected Attributes</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="_shadow_map_8cpp_source.html#l00003">3</a> of file <a class="el" href="_shadow_map_8cpp_source.html">ShadowMap.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;: <a class="code" href="class_shadow_map.html#a3907664cdfd42ae24ab4e193743706b2">m_fbo</a>(0u), <a class="code" href="class_shadow_map.html#ae993f13e8d643129813cd9e14f538b2a">m_shadowMap</a>(0u) {}</div>
 </div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="_light_8cpp_source.html#l00006">Light::Light()</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><img src="class_shadow_map_ab6fd44eb98770e85a2fafc27437169b1_icgraph.png" border="0" usemap="#class_shadow_map_ab6fd44eb98770e85a2fafc27437169b1_icgraph" alt=""/></div>
-<map name="class_shadow_map_ab6fd44eb98770e85a2fafc27437169b1_icgraph" id="class_shadow_map_ab6fd44eb98770e85a2fafc27437169b1_icgraph">
-<area shape="rect" title="Construct a new Shadow Map object." alt="" coords="140,29,312,56"/>
-<area shape="rect" href="class_light.html#a0fc51e56baaae62f7e88f03f45ceae30" title="Parameterized constructor." alt="" coords="5,29,92,56"/>
-</map>
-</div>
-
 </div>
 </div>
 <a id="aade01d2dc3620a7015016ecd3aa3cab3"></a>
@@ -303,14 +295,12 @@ Here is the caller graph for this function:</div>
 <p>Generates the framebuffer for the shadow map. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">width</td><td></td></tr>
-    <tr><td class="paramname">height</td><td></td></tr>
+    <tr><td class="paramname">width</td><td>The width of the shadow map. </td></tr>
+    <tr><td class="paramname">height</td><td>The height of the shadow map. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true </dd>
-<dd>
-false </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>bool </dd></dl>
 
 <p>Reimplemented in <a class="el" href="class_omni_shadow_map.html#a1ec51e3ef53043092160067271102e8e">OmniShadowMap</a>.</p>
 
@@ -382,7 +372,7 @@ false </dd></dl>
 <p>Enable the shadow map given a texture unit. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">textureUnit</td><td>The texture unit </td></tr>
+    <tr><td class="paramname">textureUnit</td><td>The texture unit to bind the shadow map to. </td></tr>
   </table>
   </dd>
 </dl>
@@ -450,7 +440,9 @@ false </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_shadow_map_8hpp_source.html#l00061">61</a> of file <a class="el" href="_shadow_map_8hpp_source.html">ShadowMap.hpp</a>.</p>
+<p>The framebuffer object. </p>
+
+<p class="definition">Definition at line <a class="el" href="_shadow_map_8hpp_source.html#l00060">60</a> of file <a class="el" href="_shadow_map_8hpp_source.html">ShadowMap.hpp</a>.</p>
 
 </div>
 </div>
@@ -474,7 +466,7 @@ false </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_shadow_map_8hpp_source.html#l00067">67</a> of file <a class="el" href="_shadow_map_8hpp_source.html">ShadowMap.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_shadow_map_8hpp_source.html#l00066">66</a> of file <a class="el" href="_shadow_map_8hpp_source.html">ShadowMap.hpp</a>.</p>
 
 </div>
 </div>
@@ -498,7 +490,9 @@ false </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_shadow_map_8hpp_source.html#l00064">64</a> of file <a class="el" href="_shadow_map_8hpp_source.html">ShadowMap.hpp</a>.</p>
+<p>The shadow map. </p>
+
+<p class="definition">Definition at line <a class="el" href="_shadow_map_8hpp_source.html#l00063">63</a> of file <a class="el" href="_shadow_map_8hpp_source.html">ShadowMap.hpp</a>.</p>
 
 </div>
 </div>
@@ -522,7 +516,9 @@ false </dd></dl>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_shadow_map_8hpp_source.html#l00067">67</a> of file <a class="el" href="_shadow_map_8hpp_source.html">ShadowMap.hpp</a>.</p>
+<p>Shadow dimensions. </p>
+
+<p class="definition">Definition at line <a class="el" href="_shadow_map_8hpp_source.html#l00066">66</a> of file <a class="el" href="_shadow_map_8hpp_source.html">ShadowMap.hpp</a>.</p>
 
 </div>
 </div>
@@ -532,10 +528,10 @@ false </dd></dl>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclass_shadow_map_html_a41568671d66479677c0e7f078fb5765c"><div class="ttname"><a href="class_shadow_map.html#a41568671d66479677c0e7f078fb5765c">ShadowMap::m_shadowWidth</a></div><div class="ttdeci">GLuint m_shadowWidth</div><div class="ttdef"><b>Definition:</b> <a href="_shadow_map_8hpp_source.html#l00067">ShadowMap.hpp:67</a></div></div>
-<div class="ttc" id="aclass_shadow_map_html_a3907664cdfd42ae24ab4e193743706b2"><div class="ttname"><a href="class_shadow_map.html#a3907664cdfd42ae24ab4e193743706b2">ShadowMap::m_fbo</a></div><div class="ttdeci">GLuint m_fbo</div><div class="ttdef"><b>Definition:</b> <a href="_shadow_map_8hpp_source.html#l00061">ShadowMap.hpp:61</a></div></div>
-<div class="ttc" id="aclass_shadow_map_html_a0314ec2bc94d1effc6f4f688c1b721f0"><div class="ttname"><a href="class_shadow_map.html#a0314ec2bc94d1effc6f4f688c1b721f0">ShadowMap::m_shadowHeight</a></div><div class="ttdeci">GLuint m_shadowHeight</div><div class="ttdef"><b>Definition:</b> <a href="_shadow_map_8hpp_source.html#l00067">ShadowMap.hpp:67</a></div></div>
-<div class="ttc" id="aclass_shadow_map_html_ae993f13e8d643129813cd9e14f538b2a"><div class="ttname"><a href="class_shadow_map.html#ae993f13e8d643129813cd9e14f538b2a">ShadowMap::m_shadowMap</a></div><div class="ttdeci">GLuint m_shadowMap</div><div class="ttdef"><b>Definition:</b> <a href="_shadow_map_8hpp_source.html#l00064">ShadowMap.hpp:64</a></div></div>
+<div class="ttc" id="aclass_shadow_map_html_a41568671d66479677c0e7f078fb5765c"><div class="ttname"><a href="class_shadow_map.html#a41568671d66479677c0e7f078fb5765c">ShadowMap::m_shadowWidth</a></div><div class="ttdeci">GLuint m_shadowWidth</div><div class="ttdoc">Shadow dimensions.</div><div class="ttdef"><b>Definition:</b> <a href="_shadow_map_8hpp_source.html#l00066">ShadowMap.hpp:66</a></div></div>
+<div class="ttc" id="aclass_shadow_map_html_a3907664cdfd42ae24ab4e193743706b2"><div class="ttname"><a href="class_shadow_map.html#a3907664cdfd42ae24ab4e193743706b2">ShadowMap::m_fbo</a></div><div class="ttdeci">GLuint m_fbo</div><div class="ttdoc">The framebuffer object.</div><div class="ttdef"><b>Definition:</b> <a href="_shadow_map_8hpp_source.html#l00060">ShadowMap.hpp:60</a></div></div>
+<div class="ttc" id="aclass_shadow_map_html_a0314ec2bc94d1effc6f4f688c1b721f0"><div class="ttname"><a href="class_shadow_map.html#a0314ec2bc94d1effc6f4f688c1b721f0">ShadowMap::m_shadowHeight</a></div><div class="ttdeci">GLuint m_shadowHeight</div><div class="ttdef"><b>Definition:</b> <a href="_shadow_map_8hpp_source.html#l00066">ShadowMap.hpp:66</a></div></div>
+<div class="ttc" id="aclass_shadow_map_html_ae993f13e8d643129813cd9e14f538b2a"><div class="ttname"><a href="class_shadow_map.html#ae993f13e8d643129813cd9e14f538b2a">ShadowMap::m_shadowMap</a></div><div class="ttdeci">GLuint m_shadowMap</div><div class="ttdoc">The shadow map.</div><div class="ttdef"><b>Definition:</b> <a href="_shadow_map_8hpp_source.html#l00063">ShadowMap.hpp:63</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

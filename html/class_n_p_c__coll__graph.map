@@ -1,0 +1,13 @@
+<map id="NPC" name="NPC">
+<area shape="rect" id="node1" title=" " alt="" coords="334,1271,478,1656"/>
+<area shape="rect" id="node8" href="$classstate_machine.html" title=" " alt="" coords="249,1719,416,2001"/>
+<area shape="rect" id="node2" href="$class_physics_object.html" title=" " alt="" coords="175,925,333,1193"/>
+<area shape="rect" id="node3" href="$class_body_rigid.html" title=" " alt="" coords="153,580,355,848"/>
+<area shape="rect" id="node4" href="$class_body.html" title=" " alt="" coords="5,293,183,503"/>
+<area shape="rect" id="node5" href="$class_game_object.html" title="An abstract class to represent a game object." alt="" coords="32,5,156,229"/>
+<area shape="rect" id="node6" href="$class_body_rigid_physics.html" title=" " alt="" coords="207,279,410,517"/>
+<area shape="rect" id="node7" href="$classvector2_d.html" title=" " alt="" coords="357,969,455,1149"/>
+<area shape="rect" id="node9" href="$classstate_machine.html" title=" " alt="" coords="143,1307,309,1619"/>
+<area shape="rect" id="node10" href="$class_model_data.html" title="A class for storing the data of a static or animated model." alt="" coords="480,911,625,1208"/>
+<area shape="rect" id="node11" href="$structmd2_1_1animstate__t.html" title="The animation state of the md2 model." alt="" coords="491,617,614,811"/>
+</map>

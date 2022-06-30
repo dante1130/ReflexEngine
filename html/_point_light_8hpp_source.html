@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: src/View/Renderer/OpenGL/Objects/PointLight.hpp Source File</title>
+<title>ICT397 Assignment 2: src/View/Renderer/OpenGL/Objects/PointLight.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -105,22 +105,22 @@ $(document).ready(function(){initNavTree('_point_light_8hpp_source.html',''); in
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">     * @brief Construct a new Point Light object</span></div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">     * @param shadowWidth</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">     * @param shadowHeight</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">     * @param near</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">     * @param far</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">     * @param color</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">     * @param aIntensity</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">     * @param dIntensity</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">     * @param position</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">     * @param constant</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">     * @param linear</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">     * @param exponent</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">     * @param shadowWidth The width of the shadow map</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">     * @param shadowHeight The height of the shadow map</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">     * @param near The near plane of the shadow map</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">     * @param far The far plane of the shadow map</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">     * @param color The color of the light</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">     * @param aIntensity The ambient intensity of the light</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">     * @param dIntensity The diffuse intensity of the light</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">     * @param position The position of the light</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">     * @param constant The constant attenuation of the light</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">     * @param linear The linear attenuation of the light</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">     * @param quadratic The quadratic attenuation of the light</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    PointLight(GLuint shadowWidth, GLuint shadowHeight, GLfloat near,</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="class_point_light.html#a93b3f0eade60353af8ac10a254e2bfe5">PointLight</a>(GLuint shadowWidth, GLuint shadowHeight, GLfloat near,</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;               GLfloat far, glm::vec3 color, GLfloat aIntensity,</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;               GLfloat dIntensity, glm::vec3 position, GLfloat constant,</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;               GLfloat linear, GLfloat exponent);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;               GLfloat linear, GLfloat quadratic);</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">     * @brief Enables the light by passing uniforms to the shader.</span></div>
@@ -131,19 +131,19 @@ $(document).ready(function(){initNavTree('_point_light_8hpp_source.html',''); in
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">     * @param positionLoc</span></div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">     * @param constantLoc</span></div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">     * @param linearLoc</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">     * @param exponentLoc</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">     * @param quadraticLoc</span></div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_point_light.html#a6716a0beb3f1f861812ee15056ae00ea">UseLight</a>(GLuint ambientColorLoc, GLuint ambientIntensityLoc,</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_point_light.html#a3f3d346d9bdad2f53b6324393e128d02">UseLight</a>(GLuint ambientColorLoc, GLuint ambientIntensityLoc,</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                  GLuint diffuseIntensityLoc, GLuint positionLoc,</div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                  GLuint constantLoc, GLuint linearLoc,</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                  GLuint exponentLoc) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                  GLuint quadraticLoc) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">     * @brief Calculates the light transform matrices.</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">     *</span></div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">     * @return std::vector&lt;glm::mat4&gt;</span></div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <a class="code" href="class_point_light.html#ae8a341a8d07a5125ea8870584ba9d66a">std</a>::<a class="code" href="class_point_light.html#ae8a341a8d07a5125ea8870584ba9d66a">vector</a>&lt;<a class="code" href="class_point_light.html#ae8a341a8d07a5125ea8870584ba9d66a">glm</a>::<a class="code" href="class_point_light.html#ae8a341a8d07a5125ea8870584ba9d66a">mat4</a>&gt; <a class="code" href="class_point_light.html#ae8a341a8d07a5125ea8870584ba9d66a">CalculateLightTransform</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <a class="code" href="class_point_light.html">std</a>::<a class="code" href="class_point_light.html">vector</a>&lt;<a class="code" href="class_point_light.html">glm</a>::<a class="code" href="class_point_light.html">mat4</a>&gt; <a class="code" href="class_point_light.html#ae8a341a8d07a5125ea8870584ba9d66a">CalculateLightTransform</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">     * @brief Get the Far Plane.</span></div>
@@ -157,7 +157,7 @@ $(document).ready(function(){initNavTree('_point_light_8hpp_source.html',''); in
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">     *</span></div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">     * @return glm::vec3</span></div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    glm::vec3 <a class="code" href="class_point_light.html#a2fc045076a11ae8825ac98ac2a22deff">GetPosition</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <a class="code" href="class_point_light.html#a2fc045076a11ae8825ac98ac2a22deff">glm</a>::<a class="code" href="class_point_light.html#a2fc045076a11ae8825ac98ac2a22deff">vec3</a> <a class="code" href="class_point_light.html#a2fc045076a11ae8825ac98ac2a22deff">GetPosition</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">     * @brief Destroy the Point Light object</span></div>
@@ -166,19 +166,20 @@ $(document).ready(function(){initNavTree('_point_light_8hpp_source.html',''); in
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">protected</span>:</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="comment">/// Position of the light.</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="class_point_light.html#a58baecb4dd64a4dc3ea59628f55cbac4">   82</a></span>&#160;    glm::vec3 <a class="code" href="class_point_light.html#a58baecb4dd64a4dc3ea59628f55cbac4">m_position</a>;</div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="class_point_light.html#a58baecb4dd64a4dc3ea59628f55cbac4">   82</a></span>&#160;    <a class="code" href="class_point_light.html#a58baecb4dd64a4dc3ea59628f55cbac4">glm</a>::<a class="code" href="class_point_light.html#a58baecb4dd64a4dc3ea59628f55cbac4">vec3</a> <a class="code" href="class_point_light.html#a58baecb4dd64a4dc3ea59628f55cbac4">m_position</a>;</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="comment">/// Equation of the light.</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="class_point_light.html#ae36d4743df8df21fd07b45fd3f6ad600">   85</a></span>&#160;    <a class="code" href="class_point_light.html#a29d3d42cf5b0d1f7cecd1bcfc1c5bd3c">GLfloat</a> <a class="code" href="class_point_light.html#a29d3d42cf5b0d1f7cecd1bcfc1c5bd3c">m_constant</a>, <a class="code" href="class_point_light.html#ae36d4743df8df21fd07b45fd3f6ad600">m_linear</a>, <a class="code" href="class_point_light.html#ac04da87fd53485c0de091633fc631c2e">m_exponent</a>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno"><a class="line" href="class_point_light.html#a1ccfcbe29e3b72a223feb99cfd63fcdb">   85</a></span>&#160;    <a class="code" href="class_point_light.html#a29d3d42cf5b0d1f7cecd1bcfc1c5bd3c">GLfloat</a> <a class="code" href="class_point_light.html#a29d3d42cf5b0d1f7cecd1bcfc1c5bd3c">m_constant</a>, <a class="code" href="class_point_light.html#ae36d4743df8df21fd07b45fd3f6ad600">m_linear</a>, <a class="code" href="class_point_light.html#a1ccfcbe29e3b72a223feb99cfd63fcdb">m_quadratic</a>;</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="comment">/// The far plane.</span></div>
 <div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="class_point_light.html#a787854fa748d0f7502cfdcc48b7d5106">   88</a></span>&#160;    <a class="code" href="class_point_light.html#a787854fa748d0f7502cfdcc48b7d5106">GLfloat</a> <a class="code" href="class_point_light.html#a787854fa748d0f7502cfdcc48b7d5106">m_farPlane</a>;</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="aclass_point_light_html_a3f3d346d9bdad2f53b6324393e128d02"><div class="ttname"><a href="class_point_light.html#a3f3d346d9bdad2f53b6324393e128d02">PointLight::UseLight</a></div><div class="ttdeci">void UseLight(GLuint ambientColorLoc, GLuint ambientIntensityLoc, GLuint diffuseIntensityLoc, GLuint positionLoc, GLuint constantLoc, GLuint linearLoc, GLuint quadraticLoc) const</div><div class="ttdoc">Enables the light by passing uniforms to the shader.</div><div class="ttdef"><b>Definition:</b> <a href="_point_light_8cpp_source.html#l00029">PointLight.cpp:29</a></div></div>
 <div class="ttc" id="aclass_point_light_html_a2fc045076a11ae8825ac98ac2a22deff"><div class="ttname"><a href="class_point_light.html#a2fc045076a11ae8825ac98ac2a22deff">PointLight::GetPosition</a></div><div class="ttdeci">glm::vec3 GetPosition() const</div><div class="ttdoc">Get the Position.</div><div class="ttdef"><b>Definition:</b> <a href="_point_light_8cpp_source.html#l00079">PointLight.cpp:79</a></div></div>
 <div class="ttc" id="aclass_point_light_html_a787854fa748d0f7502cfdcc48b7d5106"><div class="ttname"><a href="class_point_light.html#a787854fa748d0f7502cfdcc48b7d5106">PointLight::m_farPlane</a></div><div class="ttdeci">GLfloat m_farPlane</div><div class="ttdoc">The far plane.</div><div class="ttdef"><b>Definition:</b> <a href="_point_light_8hpp_source.html#l00088">PointLight.hpp:88</a></div></div>
-<div class="ttc" id="aclass_point_light_html_ac04da87fd53485c0de091633fc631c2e"><div class="ttname"><a href="class_point_light.html#ac04da87fd53485c0de091633fc631c2e">PointLight::m_exponent</a></div><div class="ttdeci">GLfloat m_exponent</div><div class="ttdef"><b>Definition:</b> <a href="_point_light_8hpp_source.html#l00085">PointLight.hpp:85</a></div></div>
+<div class="ttc" id="aclass_point_light_html_a1ccfcbe29e3b72a223feb99cfd63fcdb"><div class="ttname"><a href="class_point_light.html#a1ccfcbe29e3b72a223feb99cfd63fcdb">PointLight::m_quadratic</a></div><div class="ttdeci">GLfloat m_quadratic</div><div class="ttdef"><b>Definition:</b> <a href="_point_light_8hpp_source.html#l00085">PointLight.hpp:85</a></div></div>
 <div class="ttc" id="aclass_point_light_html_a5a45bfe17de4decc0c979319ad8366b8"><div class="ttname"><a href="class_point_light.html#a5a45bfe17de4decc0c979319ad8366b8">PointLight::GetFarPlane</a></div><div class="ttdeci">GLfloat GetFarPlane() const</div><div class="ttdoc">Get the Far Plane.</div><div class="ttdef"><b>Definition:</b> <a href="_point_light_8cpp_source.html#l00077">PointLight.cpp:77</a></div></div>
 <div class="ttc" id="aclass_light_html"><div class="ttname"><a href="class_light.html">Light</a></div><div class="ttdoc">A light in the scene.</div><div class="ttdef"><b>Definition:</b> <a href="_light_8hpp_source.html#l00013">Light.hpp:13</a></div></div>
 <div class="ttc" id="aclass_point_light_html_a58baecb4dd64a4dc3ea59628f55cbac4"><div class="ttname"><a href="class_point_light.html#a58baecb4dd64a4dc3ea59628f55cbac4">PointLight::m_position</a></div><div class="ttdeci">glm::vec3 m_position</div><div class="ttdoc">Position of the light.</div><div class="ttdef"><b>Definition:</b> <a href="_point_light_8hpp_source.html#l00082">PointLight.hpp:82</a></div></div>
@@ -187,8 +188,8 @@ $(document).ready(function(){initNavTree('_point_light_8hpp_source.html',''); in
 <div class="ttc" id="aclass_point_light_html_aa12d9005d5372dbbe655a82231634341"><div class="ttname"><a href="class_point_light.html#aa12d9005d5372dbbe655a82231634341">PointLight::~PointLight</a></div><div class="ttdeci">~PointLight()</div><div class="ttdoc">Destroy the Point Light object.</div><div class="ttdef"><b>Definition:</b> <a href="_point_light_8cpp_source.html#l00081">PointLight.cpp:81</a></div></div>
 <div class="ttc" id="aclass_point_light_html_abbfdf5f05b559c49016f8bb97b0ca414"><div class="ttname"><a href="class_point_light.html#abbfdf5f05b559c49016f8bb97b0ca414">PointLight::PointLight</a></div><div class="ttdeci">PointLight()</div><div class="ttdoc">Construct a new Point Light object.</div><div class="ttdef"><b>Definition:</b> <a href="_point_light_8cpp_source.html#l00003">PointLight.cpp:3</a></div></div>
 <div class="ttc" id="aclass_point_light_html"><div class="ttname"><a href="class_point_light.html">PointLight</a></div><div class="ttdoc">A point light that illuminates in a sphere.</div><div class="ttdef"><b>Definition:</b> <a href="_point_light_8hpp_source.html#l00011">PointLight.hpp:11</a></div></div>
-<div class="ttc" id="aclass_point_light_html_a6716a0beb3f1f861812ee15056ae00ea"><div class="ttname"><a href="class_point_light.html#a6716a0beb3f1f861812ee15056ae00ea">PointLight::UseLight</a></div><div class="ttdeci">void UseLight(GLuint ambientColorLoc, GLuint ambientIntensityLoc, GLuint diffuseIntensityLoc, GLuint positionLoc, GLuint constantLoc, GLuint linearLoc, GLuint exponentLoc) const</div><div class="ttdoc">Enables the light by passing uniforms to the shader.</div><div class="ttdef"><b>Definition:</b> <a href="_point_light_8cpp_source.html#l00029">PointLight.cpp:29</a></div></div>
 <div class="ttc" id="aclass_point_light_html_ae36d4743df8df21fd07b45fd3f6ad600"><div class="ttname"><a href="class_point_light.html#ae36d4743df8df21fd07b45fd3f6ad600">PointLight::m_linear</a></div><div class="ttdeci">GLfloat m_linear</div><div class="ttdef"><b>Definition:</b> <a href="_point_light_8hpp_source.html#l00085">PointLight.hpp:85</a></div></div>
+<div class="ttc" id="aclass_point_light_html_a93b3f0eade60353af8ac10a254e2bfe5"><div class="ttname"><a href="class_point_light.html#a93b3f0eade60353af8ac10a254e2bfe5">PointLight::PointLight</a></div><div class="ttdeci">PointLight(GLuint shadowWidth, GLuint shadowHeight, GLfloat near, GLfloat far, glm::vec3 color, GLfloat aIntensity, GLfloat dIntensity, glm::vec3 position, GLfloat constant, GLfloat linear, GLfloat quadratic)</div><div class="ttdoc">Construct a new Point Light object.</div><div class="ttdef"><b>Definition:</b> <a href="_point_light_8cpp_source.html#l00010">PointLight.cpp:10</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

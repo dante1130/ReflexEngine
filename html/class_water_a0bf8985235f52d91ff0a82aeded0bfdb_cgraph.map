@@ -1,7 +1,7 @@
 <map id="Water::save_object" name="Water::save_object">
 <area shape="rect" id="node1" title="Saves the object to lau file." alt="" coords="5,56,139,83"/>
-<area shape="rect" id="node2" href="$namespace_object_saving.html#a9dadcc7281db5e569a16d86421c58422" title="Closes the file." alt="" coords="193,5,352,32"/>
-<area shape="rect" id="node3" href="$namespace_object_saving.html#a8bd80ab63cd87a02055d0e92dd28b372" title="Closes the struct in the file." alt="" coords="187,56,359,83"/>
-<area shape="rect" id="node4" href="$namespace_object_saving.html#a2f179e587ac90b3be88f1e4c24bc6a19" title="Opens a file to save data too." alt="" coords="195,107,350,133"/>
-<area shape="rect" id="node5" href="$_object_saving_8cpp.html#a187a31d4f2cf1ae2be7e5f34eee9700a" title=" " alt="" coords="407,107,540,133"/>
+<area shape="rect" id="node2" href="$class_object_saving.html#a9dadcc7281db5e569a16d86421c58422" title="Closes the file." alt="" coords="193,5,352,32"/>
+<area shape="rect" id="node3" href="$class_object_saving.html#a8bd80ab63cd87a02055d0e92dd28b372" title="Closes the struct in the file." alt="" coords="187,56,359,83"/>
+<area shape="rect" id="node4" href="$class_object_saving.html#a2f179e587ac90b3be88f1e4c24bc6a19" title="Opens a file to save data too." alt="" coords="195,107,350,133"/>
+<area shape="rect" id="node5" href="$class_object_saving.html#ad38aa3ea541f6a32a6a4cfe7256967f2" title="On first call, opens the creation script file. And then adds the save files in number order into the ..." alt="" coords="407,107,624,133"/>
 </map>

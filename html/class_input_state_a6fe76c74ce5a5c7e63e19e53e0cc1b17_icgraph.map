@@ -1,0 +1,4 @@
+<map id="InputState::is_key_hold" name="InputState::is_key_hold">
+<area shape="rect" id="node1" title="Returns a boolean whether the key is held." alt="" coords="220,5,379,32"/>
+<area shape="rect" id="node2" href="$class_test_scene.html#aadc1874364de154479e2469ea84d301f" title="The function to specify controls for the keyboard." alt="" coords="5,5,172,32"/>
+</map>

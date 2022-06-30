@@ -1,0 +1,6 @@
+<map id="DirectionalLightObject" name="DirectionalLightObject">
+<area shape="rect" id="node1" title="A directional light game object." alt="" coords="32,448,201,613"/>
+<area shape="rect" id="node2" href="$class_game_object.html" title="An abstract class to represent a game object." alt="" coords="5,161,129,385"/>
+<area shape="rect" id="node3" href="$struct_directional_light_data.html" title="A struct containing the data for a directional light." alt="" coords="154,235,293,312"/>
+<area shape="rect" id="node4" href="$struct_light_data.html" title="A struct containing the data for a light." alt="" coords="155,5,291,112"/>
+</map>

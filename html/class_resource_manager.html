@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: ResourceManager Class Reference</title>
+<title>ICT397 Assignment 2: ResourceManager Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -92,16 +92,20 @@ $(document).ready(function(){initNavTree('class_resource_manager.html',''); init
 </div><!--header-->
 <div class="contents">
 
+<p>A singleton class for containing other asset managers; models, <a class="el" href="namespacemd2.html">md2</a> models textures, and materials.  
+ <a href="class_resource_manager.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_resource_manager_8hpp_source.html">ResourceManager.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for ResourceManager:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_resource_manager__coll__graph.png" border="0" usemap="#_resource_manager_coll__map" alt="Collaboration graph"/></div>
 <map name="_resource_manager_coll__map" id="_resource_manager_coll__map">
-<area shape="rect" title=" " alt="" coords="164,219,335,413"/>
-<area shape="rect" href="class_material_manager.html" title=" " alt="" coords="5,13,152,149"/>
-<area shape="rect" href="class_texture_manager.html" title="An encapsulated class for an unordered map of textures." alt="" coords="177,5,322,156"/>
-<area shape="rect" href="class_model_manager.html" title="An encapsulated class for an unordered map of models." alt="" coords="346,13,481,149"/>
+<area shape="rect" title="A singleton class for containing other asset managers; models, md2 models textures,..." alt="" coords="242,233,433,443"/>
+<area shape="rect" href="class_material_manager.html" title=" " alt="" coords="5,20,152,156"/>
+<area shape="rect" href="class_texture_manager.html" title="An encapsulated class for an unordered map of textures." alt="" coords="177,13,322,163"/>
+<area shape="rect" href="class_md2_model_manager.html" title="An encapsulated class for an unordered map of md2 models." alt="" coords="347,5,507,171"/>
+<area shape="rect" href="class_model_manager.html" title="An encapsulated class for an unordered map of models." alt="" coords="531,20,666,156"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -110,6 +114,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a474f1dfe5e7d553d919d09ff8b827467"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_model_manager.html">ModelManager</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_resource_manager.html#a474f1dfe5e7d553d919d09ff8b827467">get_model_manager</a> ()</td></tr>
 <tr class="memdesc:a474f1dfe5e7d553d919d09ff8b827467"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the model manager.  <a href="class_resource_manager.html#a474f1dfe5e7d553d919d09ff8b827467">More...</a><br /></td></tr>
 <tr class="separator:a474f1dfe5e7d553d919d09ff8b827467"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac371961dc43e0d9b670d35b8c953358e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_md2_model_manager.html">Md2ModelManager</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_resource_manager.html#ac371961dc43e0d9b670d35b8c953358e">get_md2_model_manager</a> ()</td></tr>
+<tr class="memdesc:ac371961dc43e0d9b670d35b8c953358e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the <a class="el" href="namespacemd2.html">md2</a> model manager.  <a href="class_resource_manager.html#ac371961dc43e0d9b670d35b8c953358e">More...</a><br /></td></tr>
+<tr class="separator:ac371961dc43e0d9b670d35b8c953358e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbef155bc35aef3f78995effb06120fa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_texture_manager.html">TextureManager</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_resource_manager.html#abbef155bc35aef3f78995effb06120fa">get_texture_manager</a> ()</td></tr>
 <tr class="memdesc:abbef155bc35aef3f78995effb06120fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the texture manager.  <a href="class_resource_manager.html#abbef155bc35aef3f78995effb06120fa">More...</a><br /></td></tr>
 <tr class="separator:abbef155bc35aef3f78995effb06120fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -145,13 +152,17 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a03f18306449e4d8efcbd9a9f3808e18b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_model_manager.html">ModelManager</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_resource_manager.html#a03f18306449e4d8efcbd9a9f3808e18b">model_manager_</a></td></tr>
 <tr class="memdesc:a03f18306449e4d8efcbd9a9f3808e18b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The model manager.  <a href="class_resource_manager.html#a03f18306449e4d8efcbd9a9f3808e18b">More...</a><br /></td></tr>
 <tr class="separator:a03f18306449e4d8efcbd9a9f3808e18b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb5c212f9ecd7de83206312f126693cf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_md2_model_manager.html">Md2ModelManager</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_resource_manager.html#acb5c212f9ecd7de83206312f126693cf">md2_model_manager_</a></td></tr>
+<tr class="memdesc:acb5c212f9ecd7de83206312f126693cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="namespacemd2.html">md2</a> model manager.  <a href="class_resource_manager.html#acb5c212f9ecd7de83206312f126693cf">More...</a><br /></td></tr>
+<tr class="separator:acb5c212f9ecd7de83206312f126693cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a517d32df05e5a7533cd7183014c604d3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_material_manager.html">MaterialManager</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_resource_manager.html#a517d32df05e5a7533cd7183014c604d3">material_manager_</a></td></tr>
 <tr class="memdesc:a517d32df05e5a7533cd7183014c604d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">The material manager.  <a href="class_resource_manager.html#a517d32df05e5a7533cd7183014c604d3">More...</a><br /></td></tr>
 <tr class="separator:a517d32df05e5a7533cd7183014c604d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_resource_manager_8hpp_source.html#l00012">12</a> of file <a class="el" href="_resource_manager_8hpp_source.html">ResourceManager.hpp</a>.</p>
+<div class="textblock"><p>A singleton class for containing other asset managers; models, <a class="el" href="namespacemd2.html">md2</a> models textures, and materials. </p>
+
+<p class="definition">Definition at line <a class="el" href="_resource_manager_8hpp_source.html#l00014">14</a> of file <a class="el" href="_resource_manager_8hpp_source.html">ResourceManager.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa8719dcc5400699a66d3b9e3f91c55ee"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa8719dcc5400699a66d3b9e3f91c55ee">&#9670;&nbsp;</a></span>ResourceManager() <span class="overload">[1/3]</span></h2>
@@ -230,12 +241,13 @@ Private Attributes</h2></td></tr>
 
 <p>Construct a new Resource Manager object. </p>
 
-<p class="definition">Definition at line <a class="el" href="_resource_manager_8cpp_source.html#l00018">18</a> of file <a class="el" href="_resource_manager_8cpp_source.html">ResourceManager.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;                                 {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="class_resource_manager.html#a8e998f1141714636fac58e342454a035">texture_manager_</a>.<a class="code" href="class_texture_manager.html#afbba5e042a9bbb4ff156daa464733f03">lua_access</a>();</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="class_resource_manager.html#a03f18306449e4d8efcbd9a9f3808e18b">model_manager_</a>.<a class="code" href="class_model_manager.html#a0e6e285f5204df265cabad801cd17396">lua_access</a>();</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="class_resource_manager.html#a517d32df05e5a7533cd7183014c604d3">material_manager_</a>.<a class="code" href="class_material_manager.html#a88c5663d6d9eae966d84c433e452b947">lua_access</a>();</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_resource_manager_8cpp_source.html#l00022">22</a> of file <a class="el" href="_resource_manager_8cpp_source.html">ResourceManager.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;                                 {</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="class_resource_manager.html#a8e998f1141714636fac58e342454a035">texture_manager_</a>.<a class="code" href="class_texture_manager.html#afbba5e042a9bbb4ff156daa464733f03">lua_access</a>();</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_resource_manager.html#a03f18306449e4d8efcbd9a9f3808e18b">model_manager_</a>.<a class="code" href="class_model_manager.html#a0e6e285f5204df265cabad801cd17396">lua_access</a>();</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_resource_manager.html#a517d32df05e5a7533cd7183014c604d3">material_manager_</a>.<a class="code" href="class_material_manager.html#a88c5663d6d9eae966d84c433e452b947">lua_access</a>();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="class_resource_manager.html#acb5c212f9ecd7de83206312f126693cf">md2_model_manager_</a>.<a class="code" href="class_md2_model_manager.html#ad1951538df13944721f8df20d1536893">lua_access</a>();</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -264,7 +276,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get the instance of the Resource Manager. </p>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_resource_manager.html">ResourceManager</a>&amp; </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_resource_manager.html" title="A singleton class for containing other asset managers; models, md2 models textures,...">ResourceManager</a>&amp; </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_resource_manager_8cpp_source.html#l00003">3</a> of file <a class="el" href="_resource_manager_8cpp_source.html">ResourceManager.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;                                               {</div>
@@ -272,20 +284,24 @@ Private Attributes</h2></td></tr>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    <span class="keywordflow">return</span> instance;</div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="_material_lua_controller_8cpp_source.html#l00003">MaterialLuaController::CreateLuaAccess()</a>, <a class="el" href="_item_8cpp_source.html#l00017">Item::draw()</a>, <a class="el" href="_physics_object_8cpp_source.html#l00035">PhysicsObject::draw()</a>, <a class="el" href="_water_8cpp_source.html#l00056">Water::draw()</a>, <a class="el" href="gui_manager_8cpp_source.html#l00077">gui::lua_image()</a>, and <a class="el" href="_reflex_engine_8cpp_source.html#l00013">ReflexEngine::run()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_item_8cpp_source.html#l00016">Item::draw()</a>, <a class="el" href="_n_p_c_8cpp_source.html#l00043">NPC::draw()</a>, <a class="el" href="_networked_item_8cpp_source.html#l00025">NetworkedItem::draw()</a>, <a class="el" href="_physics_object_8cpp_source.html#l00032">PhysicsObject::draw()</a>, <a class="el" href="_water_8cpp_source.html#l00056">Water::draw()</a>, <a class="el" href="gui_manager_8cpp_source.html#l00103">gui::lua_image()</a>, <a class="el" href="_model_data_8cpp_source.html#l00022">ModelData::render_animated()</a>, <a class="el" href="_model_data_8cpp_source.html#l00037">ModelData::render_model()</a>, and <a class="el" href="_reflex_engine_8cpp_source.html#l00011">ReflexEngine::run()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_resource_manager_a33b466c53250b7431976a04d42d59036_icgraph.png" border="0" usemap="#class_resource_manager_a33b466c53250b7431976a04d42d59036_icgraph" alt=""/></div>
 <map name="class_resource_manager_a33b466c53250b7431976a04d42d59036_icgraph" id="class_resource_manager_a33b466c53250b7431976a04d42d59036_icgraph">
-<area shape="rect" title="Get the instance of the Resource Manager." alt="" coords="296,140,449,181"/>
-<area shape="rect" href="namespace_material_lua_controller.html#a2bf77986afcc458d485046c156d5bedd" title="Gives lua access to material related functions (texture &amp; model managers)" alt="" coords="104,5,248,47"/>
-<area shape="rect" href="class_item.html#ae902d008e98a75d3cf0fef53d9177f9e" title="The draw call for the item." alt="" coords="135,71,217,98"/>
-<area shape="rect" href="class_physics_object.html#a72c03214889819e5bba9d321e69a848c" title="Draws the object." alt="" coords="105,122,247,149"/>
-<area shape="rect" href="class_water.html#aca2414328c1d530cebff6ba347225ff9" title="Initialises the water." alt="" coords="130,173,222,199"/>
-<area shape="rect" href="namespacegui.html#a32199bb3c15f21a31295be2e39c258d1" title="Creates an image using a texture name." alt="" coords="123,223,229,250"/>
-<area shape="rect" href="class_reflex_engine.html#a9c185c8127a7d9d650a1bcc97e3de170" title="Runs the engine." alt="" coords="114,274,238,301"/>
-<area shape="rect" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,274,56,301"/>
+<area shape="rect" title="Get the instance of the Resource Manager." alt="" coords="417,201,571,242"/>
+<area shape="rect" href="class_item.html#ae902d008e98a75d3cf0fef53d9177f9e" title="The draw call for the item." alt="" coords="234,5,317,32"/>
+<area shape="rect" href="class_n_p_c.html#a4e335de59c42c1888ed075fa2ee10e65" title="Draws the object." alt="" coords="233,56,317,83"/>
+<area shape="rect" href="class_networked_item.html#aee95fbab11712463ac2c7dd9ea472708" title="The draw call for the Networked Item." alt="" coords="204,107,347,133"/>
+<area shape="rect" href="class_physics_object.html#a72c03214889819e5bba9d321e69a848c" title="Draws the object." alt="" coords="204,157,347,184"/>
+<area shape="rect" href="class_water.html#aca2414328c1d530cebff6ba347225ff9" title="Initialises the water." alt="" coords="229,208,321,235"/>
+<area shape="rect" href="namespacegui.html#a32199bb3c15f21a31295be2e39c258d1" title="Creates an image using a texture name." alt="" coords="222,259,329,285"/>
+<area shape="rect" href="class_model_data.html#a82ad8ebbe6baabbf3633586614fb537e" title="Render the model animated." alt="" coords="181,309,369,336"/>
+<area shape="rect" href="class_model_data.html#ae4edf4b22d7cda2e7074d3fe9c130384" title="Render the model statically." alt="" coords="190,360,361,387"/>
+<area shape="rect" href="class_reflex_engine.html#a9c185c8127a7d9d650a1bcc97e3de170" title="Runs the engine." alt="" coords="213,411,337,437"/>
+<area shape="rect" href="class_model_data.html#af93eb28b2566856b36b26d9554e1a584" title="Render the model." alt="" coords="5,335,133,361"/>
+<area shape="rect" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="44,411,95,437"/>
 </map>
 </div>
 
@@ -309,20 +325,59 @@ Here is the caller graph for this function:</div>
 <p>Get the material manager. </p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_material_manager.html">MaterialManager</a>&amp; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_resource_manager_8cpp_source.html#l00014">14</a> of file <a class="el" href="_resource_manager_8cpp_source.html">ResourceManager.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;                                                       {</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_resource_manager.html#a517d32df05e5a7533cd7183014c604d3">material_manager_</a>;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_resource_manager_8cpp_source.html#l00018">18</a> of file <a class="el" href="_resource_manager_8cpp_source.html">ResourceManager.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;                                                       {</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_resource_manager.html#a517d32df05e5a7533cd7183014c604d3">material_manager_</a>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="_item_8cpp_source.html#l00017">Item::draw()</a>, and <a class="el" href="_physics_object_8cpp_source.html#l00035">PhysicsObject::draw()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_item_8cpp_source.html#l00016">Item::draw()</a>, <a class="el" href="_networked_item_8cpp_source.html#l00025">NetworkedItem::draw()</a>, <a class="el" href="_n_p_c_8cpp_source.html#l00043">NPC::draw()</a>, and <a class="el" href="_physics_object_8cpp_source.html#l00032">PhysicsObject::draw()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_resource_manager_aea53ae6d2b9182e3aa71c6bd913922f0_icgraph.png" border="0" usemap="#class_resource_manager_aea53ae6d2b9182e3aa71c6bd913922f0_icgraph" alt=""/></div>
 <map name="class_resource_manager_aea53ae6d2b9182e3aa71c6bd913922f0_icgraph" id="class_resource_manager_aea53ae6d2b9182e3aa71c6bd913922f0_icgraph">
-<area shape="rect" title="Get the material manager." alt="" coords="196,23,349,65"/>
+<area shape="rect" title="Get the material manager." alt="" coords="196,74,349,115"/>
 <area shape="rect" href="class_item.html#ae902d008e98a75d3cf0fef53d9177f9e" title="The draw call for the item." alt="" coords="35,5,118,32"/>
-<area shape="rect" href="class_physics_object.html#a72c03214889819e5bba9d321e69a848c" title="Draws the object." alt="" coords="5,56,148,83"/>
+<area shape="rect" href="class_networked_item.html#aee95fbab11712463ac2c7dd9ea472708" title="The draw call for the Networked Item." alt="" coords="5,56,148,83"/>
+<area shape="rect" href="class_n_p_c.html#a4e335de59c42c1888ed075fa2ee10e65" title="Draws the object." alt="" coords="35,107,119,133"/>
+<area shape="rect" href="class_physics_object.html#a72c03214889819e5bba9d321e69a848c" title="Draws the object." alt="" coords="5,157,148,184"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ac371961dc43e0d9b670d35b8c953358e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac371961dc43e0d9b670d35b8c953358e">&#9670;&nbsp;</a></span>get_md2_model_manager()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_md2_model_manager.html">Md2ModelManager</a> &amp; ResourceManager::get_md2_model_manager </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the <a class="el" href="namespacemd2.html">md2</a> model manager. </p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_md2_model_manager.html" title="An encapsulated class for an unordered map of md2 models.">Md2ModelManager</a>&amp; </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_resource_manager_8cpp_source.html#l00010">10</a> of file <a class="el" href="_resource_manager_8cpp_source.html">ResourceManager.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;                                                        {</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_resource_manager.html#acb5c212f9ecd7de83206312f126693cf">md2_model_manager_</a>;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Referenced by <a class="el" href="_model_data_8cpp_source.html#l00022">ModelData::render_animated()</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_resource_manager_ac371961dc43e0d9b670d35b8c953358e_icgraph.png" border="0" usemap="#class_resource_manager_ac371961dc43e0d9b670d35b8c953358e_icgraph" alt=""/></div>
+<map name="class_resource_manager_ac371961dc43e0d9b670d35b8c953358e_icgraph" id="class_resource_manager_ac371961dc43e0d9b670d35b8c953358e_icgraph">
+<area shape="rect" title="Get the md2 model manager." alt="" coords="417,5,571,47"/>
+<area shape="rect" href="class_model_data.html#a82ad8ebbe6baabbf3633586614fb537e" title="Render the model animated." alt="" coords="181,13,369,39"/>
+<area shape="rect" href="class_model_data.html#af93eb28b2566856b36b26d9554e1a584" title="Render the model." alt="" coords="5,13,133,39"/>
 </map>
 </div>
 
@@ -349,16 +404,18 @@ Here is the caller graph for this function:</div>
 <p class="definition">Definition at line <a class="el" href="_resource_manager_8cpp_source.html#l00008">8</a> of file <a class="el" href="_resource_manager_8cpp_source.html">ResourceManager.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{ <span class="keywordflow">return</span> <a class="code" href="class_resource_manager.html#a03f18306449e4d8efcbd9a9f3808e18b">model_manager_</a>; }</div>
 </div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="_material_lua_controller_8cpp_source.html#l00003">MaterialLuaController::CreateLuaAccess()</a>, <a class="el" href="_item_8cpp_source.html#l00017">Item::draw()</a>, and <a class="el" href="_physics_object_8cpp_source.html#l00035">PhysicsObject::draw()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_item_8cpp_source.html#l00016">Item::draw()</a>, <a class="el" href="_networked_item_8cpp_source.html#l00025">NetworkedItem::draw()</a>, <a class="el" href="_physics_object_8cpp_source.html#l00032">PhysicsObject::draw()</a>, and <a class="el" href="_model_data_8cpp_source.html#l00037">ModelData::render_model()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_resource_manager_a474f1dfe5e7d553d919d09ff8b827467_icgraph.png" border="0" usemap="#class_resource_manager_a474f1dfe5e7d553d919d09ff8b827467_icgraph" alt=""/></div>
 <map name="class_resource_manager_a474f1dfe5e7d553d919d09ff8b827467_icgraph" id="class_resource_manager_a474f1dfe5e7d553d919d09ff8b827467_icgraph">
-<area shape="rect" title="Get the model manager." alt="" coords="197,64,351,105"/>
-<area shape="rect" href="namespace_material_lua_controller.html#a2bf77986afcc458d485046c156d5bedd" title="Gives lua access to material related functions (texture &amp; model managers)" alt="" coords="5,5,149,47"/>
-<area shape="rect" href="class_item.html#ae902d008e98a75d3cf0fef53d9177f9e" title="The draw call for the item." alt="" coords="36,71,119,98"/>
-<area shape="rect" href="class_physics_object.html#a72c03214889819e5bba9d321e69a848c" title="Draws the object." alt="" coords="6,122,149,149"/>
+<area shape="rect" title="Get the model manager." alt="" coords="400,74,553,115"/>
+<area shape="rect" href="class_item.html#ae902d008e98a75d3cf0fef53d9177f9e" title="The draw call for the item." alt="" coords="225,5,308,32"/>
+<area shape="rect" href="class_networked_item.html#aee95fbab11712463ac2c7dd9ea472708" title="The draw call for the Networked Item." alt="" coords="195,56,338,83"/>
+<area shape="rect" href="class_physics_object.html#a72c03214889819e5bba9d321e69a848c" title="Draws the object." alt="" coords="195,107,338,133"/>
+<area shape="rect" href="class_model_data.html#ae4edf4b22d7cda2e7074d3fe9c130384" title="Render the model statically." alt="" coords="181,157,352,184"/>
+<area shape="rect" href="class_model_data.html#af93eb28b2566856b36b26d9554e1a584" title="Render the model." alt="" coords="5,157,133,184"/>
 </map>
 </div>
 
@@ -382,21 +439,23 @@ Here is the caller graph for this function:</div>
 <p>Get the texture manager. </p>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_texture_manager.html" title="An encapsulated class for an unordered map of textures.">TextureManager</a>&amp; </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_resource_manager_8cpp_source.html#l00010">10</a> of file <a class="el" href="_resource_manager_8cpp_source.html">ResourceManager.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;                                                     {</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_resource_manager.html#a8e998f1141714636fac58e342454a035">texture_manager_</a>;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_resource_manager_8cpp_source.html#l00014">14</a> of file <a class="el" href="_resource_manager_8cpp_source.html">ResourceManager.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;                                                     {</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_resource_manager.html#a8e998f1141714636fac58e342454a035">texture_manager_</a>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="_material_lua_controller_8cpp_source.html#l00003">MaterialLuaController::CreateLuaAccess()</a>, <a class="el" href="_water_8cpp_source.html#l00056">Water::draw()</a>, and <a class="el" href="gui_manager_8cpp_source.html#l00077">gui::lua_image()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_water_8cpp_source.html#l00056">Water::draw()</a>, <a class="el" href="gui_manager_8cpp_source.html#l00103">gui::lua_image()</a>, <a class="el" href="_model_data_8cpp_source.html#l00022">ModelData::render_animated()</a>, and <a class="el" href="_model_data_8cpp_source.html#l00037">ModelData::render_model()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_resource_manager_abbef155bc35aef3f78995effb06120fa_icgraph.png" border="0" usemap="#class_resource_manager_abbef155bc35aef3f78995effb06120fa_icgraph" alt=""/></div>
 <map name="class_resource_manager_abbef155bc35aef3f78995effb06120fa_icgraph" id="class_resource_manager_abbef155bc35aef3f78995effb06120fa_icgraph">
-<area shape="rect" title="Get the texture manager." alt="" coords="197,64,351,105"/>
-<area shape="rect" href="namespace_material_lua_controller.html#a2bf77986afcc458d485046c156d5bedd" title="Gives lua access to material related functions (texture &amp; model managers)" alt="" coords="5,5,149,47"/>
-<area shape="rect" href="class_water.html#aca2414328c1d530cebff6ba347225ff9" title="Initialises the water." alt="" coords="31,71,123,98"/>
-<area shape="rect" href="namespacegui.html#a32199bb3c15f21a31295be2e39c258d1" title="Creates an image using a texture name." alt="" coords="24,122,131,149"/>
+<area shape="rect" title="Get the texture manager." alt="" coords="417,74,571,115"/>
+<area shape="rect" href="class_water.html#aca2414328c1d530cebff6ba347225ff9" title="Initialises the water." alt="" coords="229,5,321,32"/>
+<area shape="rect" href="namespacegui.html#a32199bb3c15f21a31295be2e39c258d1" title="Creates an image using a texture name." alt="" coords="222,56,329,83"/>
+<area shape="rect" href="class_model_data.html#a82ad8ebbe6baabbf3633586614fb537e" title="Render the model animated." alt="" coords="181,107,369,133"/>
+<area shape="rect" href="class_model_data.html#ae4edf4b22d7cda2e7074d3fe9c130384" title="Render the model statically." alt="" coords="190,157,361,184"/>
+<area shape="rect" href="class_model_data.html#af93eb28b2566856b36b26d9554e1a584" title="Render the model." alt="" coords="5,132,133,159"/>
 </map>
 </div>
 
@@ -477,7 +536,33 @@ Here is the caller graph for this function:</div>
 
 <p>The material manager. </p>
 
-<p class="definition">Definition at line <a class="el" href="_resource_manager_8hpp_source.html#l00056">56</a> of file <a class="el" href="_resource_manager_8hpp_source.html">ResourceManager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_resource_manager_8hpp_source.html#l00068">68</a> of file <a class="el" href="_resource_manager_8hpp_source.html">ResourceManager.hpp</a>.</p>
+
+</div>
+</div>
+<a id="acb5c212f9ecd7de83206312f126693cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb5c212f9ecd7de83206312f126693cf">&#9670;&nbsp;</a></span>md2_model_manager_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_md2_model_manager.html">Md2ModelManager</a> ResourceManager::md2_model_manager_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The <a class="el" href="namespacemd2.html">md2</a> model manager. </p>
+
+<p class="definition">Definition at line <a class="el" href="_resource_manager_8hpp_source.html#l00065">65</a> of file <a class="el" href="_resource_manager_8hpp_source.html">ResourceManager.hpp</a>.</p>
 
 </div>
 </div>
@@ -503,7 +588,7 @@ Here is the caller graph for this function:</div>
 
 <p>The model manager. </p>
 
-<p class="definition">Definition at line <a class="el" href="_resource_manager_8hpp_source.html#l00053">53</a> of file <a class="el" href="_resource_manager_8hpp_source.html">ResourceManager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_resource_manager_8hpp_source.html#l00062">62</a> of file <a class="el" href="_resource_manager_8hpp_source.html">ResourceManager.hpp</a>.</p>
 
 </div>
 </div>
@@ -529,7 +614,7 @@ Here is the caller graph for this function:</div>
 
 <p>The texture manager. </p>
 
-<p class="definition">Definition at line <a class="el" href="_resource_manager_8hpp_source.html#l00050">50</a> of file <a class="el" href="_resource_manager_8hpp_source.html">ResourceManager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_resource_manager_8hpp_source.html#l00059">59</a> of file <a class="el" href="_resource_manager_8hpp_source.html">ResourceManager.hpp</a>.</p>
 
 </div>
 </div>
@@ -540,12 +625,14 @@ Here is the caller graph for this function:</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclass_material_manager_html_a88c5663d6d9eae966d84c433e452b947"><div class="ttname"><a href="class_material_manager.html#a88c5663d6d9eae966d84c433e452b947">MaterialManager::lua_access</a></div><div class="ttdeci">void lua_access()</div><div class="ttdoc">Expose the MaterialManager to Lua.</div><div class="ttdef"><b>Definition:</b> <a href="_material_manager_8cpp_source.html#l00003">MaterialManager.cpp:3</a></div></div>
-<div class="ttc" id="aclass_resource_manager_html"><div class="ttname"><a href="class_resource_manager.html">ResourceManager</a></div><div class="ttdef"><b>Definition:</b> <a href="_resource_manager_8hpp_source.html#l00012">ResourceManager.hpp:12</a></div></div>
-<div class="ttc" id="aclass_resource_manager_html_a8e998f1141714636fac58e342454a035"><div class="ttname"><a href="class_resource_manager.html#a8e998f1141714636fac58e342454a035">ResourceManager::texture_manager_</a></div><div class="ttdeci">TextureManager texture_manager_</div><div class="ttdoc">The texture manager.</div><div class="ttdef"><b>Definition:</b> <a href="_resource_manager_8hpp_source.html#l00050">ResourceManager.hpp:50</a></div></div>
-<div class="ttc" id="aclass_resource_manager_html_a03f18306449e4d8efcbd9a9f3808e18b"><div class="ttname"><a href="class_resource_manager.html#a03f18306449e4d8efcbd9a9f3808e18b">ResourceManager::model_manager_</a></div><div class="ttdeci">ModelManager model_manager_</div><div class="ttdoc">The model manager.</div><div class="ttdef"><b>Definition:</b> <a href="_resource_manager_8hpp_source.html#l00053">ResourceManager.hpp:53</a></div></div>
-<div class="ttc" id="aclass_texture_manager_html_afbba5e042a9bbb4ff156daa464733f03"><div class="ttname"><a href="class_texture_manager.html#afbba5e042a9bbb4ff156daa464733f03">TextureManager::lua_access</a></div><div class="ttdeci">void lua_access()</div><div class="ttdef"><b>Definition:</b> <a href="_texture_manager_8cpp_source.html#l00003">TextureManager.cpp:3</a></div></div>
-<div class="ttc" id="aclass_model_manager_html_a0e6e285f5204df265cabad801cd17396"><div class="ttname"><a href="class_model_manager.html#a0e6e285f5204df265cabad801cd17396">ModelManager::lua_access</a></div><div class="ttdeci">void lua_access()</div><div class="ttdef"><b>Definition:</b> <a href="_model_manager_8cpp_source.html#l00003">ModelManager.cpp:3</a></div></div>
-<div class="ttc" id="aclass_resource_manager_html_a517d32df05e5a7533cd7183014c604d3"><div class="ttname"><a href="class_resource_manager.html#a517d32df05e5a7533cd7183014c604d3">ResourceManager::material_manager_</a></div><div class="ttdeci">MaterialManager material_manager_</div><div class="ttdoc">The material manager.</div><div class="ttdef"><b>Definition:</b> <a href="_resource_manager_8hpp_source.html#l00056">ResourceManager.hpp:56</a></div></div>
+<div class="ttc" id="aclass_resource_manager_html"><div class="ttname"><a href="class_resource_manager.html">ResourceManager</a></div><div class="ttdoc">A singleton class for containing other asset managers; models, md2 models textures,...</div><div class="ttdef"><b>Definition:</b> <a href="_resource_manager_8hpp_source.html#l00014">ResourceManager.hpp:14</a></div></div>
+<div class="ttc" id="aclass_resource_manager_html_a8e998f1141714636fac58e342454a035"><div class="ttname"><a href="class_resource_manager.html#a8e998f1141714636fac58e342454a035">ResourceManager::texture_manager_</a></div><div class="ttdeci">TextureManager texture_manager_</div><div class="ttdoc">The texture manager.</div><div class="ttdef"><b>Definition:</b> <a href="_resource_manager_8hpp_source.html#l00059">ResourceManager.hpp:59</a></div></div>
+<div class="ttc" id="aclass_resource_manager_html_a03f18306449e4d8efcbd9a9f3808e18b"><div class="ttname"><a href="class_resource_manager.html#a03f18306449e4d8efcbd9a9f3808e18b">ResourceManager::model_manager_</a></div><div class="ttdeci">ModelManager model_manager_</div><div class="ttdoc">The model manager.</div><div class="ttdef"><b>Definition:</b> <a href="_resource_manager_8hpp_source.html#l00062">ResourceManager.hpp:62</a></div></div>
+<div class="ttc" id="aclass_md2_model_manager_html_ad1951538df13944721f8df20d1536893"><div class="ttname"><a href="class_md2_model_manager.html#ad1951538df13944721f8df20d1536893">Md2ModelManager::lua_access</a></div><div class="ttdeci">void lua_access()</div><div class="ttdoc">Exposes the md2 model manager to lua.</div><div class="ttdef"><b>Definition:</b> <a href="_md2_model_manager_8cpp_source.html#l00005">Md2ModelManager.cpp:5</a></div></div>
+<div class="ttc" id="aclass_texture_manager_html_afbba5e042a9bbb4ff156daa464733f03"><div class="ttname"><a href="class_texture_manager.html#afbba5e042a9bbb4ff156daa464733f03">TextureManager::lua_access</a></div><div class="ttdeci">void lua_access()</div><div class="ttdef"><b>Definition:</b> <a href="_texture_manager_8cpp_source.html#l00005">TextureManager.cpp:5</a></div></div>
+<div class="ttc" id="aclass_model_manager_html_a0e6e285f5204df265cabad801cd17396"><div class="ttname"><a href="class_model_manager.html#a0e6e285f5204df265cabad801cd17396">ModelManager::lua_access</a></div><div class="ttdeci">void lua_access()</div><div class="ttdoc">Exposes the model manager to Lua.</div><div class="ttdef"><b>Definition:</b> <a href="_model_manager_8cpp_source.html#l00003">ModelManager.cpp:3</a></div></div>
+<div class="ttc" id="aclass_resource_manager_html_acb5c212f9ecd7de83206312f126693cf"><div class="ttname"><a href="class_resource_manager.html#acb5c212f9ecd7de83206312f126693cf">ResourceManager::md2_model_manager_</a></div><div class="ttdeci">Md2ModelManager md2_model_manager_</div><div class="ttdoc">The md2 model manager.</div><div class="ttdef"><b>Definition:</b> <a href="_resource_manager_8hpp_source.html#l00065">ResourceManager.hpp:65</a></div></div>
+<div class="ttc" id="aclass_resource_manager_html_a517d32df05e5a7533cd7183014c604d3"><div class="ttname"><a href="class_resource_manager.html#a517d32df05e5a7533cd7183014c604d3">ResourceManager::material_manager_</a></div><div class="ttdeci">MaterialManager material_manager_</div><div class="ttdoc">The material manager.</div><div class="ttdef"><b>Definition:</b> <a href="_resource_manager_8hpp_source.html#l00068">ResourceManager.hpp:68</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

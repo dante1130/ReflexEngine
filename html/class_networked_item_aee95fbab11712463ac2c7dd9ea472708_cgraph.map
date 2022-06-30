@@ -1,0 +1,7 @@
+<map id="NetworkedItem::draw" name="NetworkedItem::draw">
+<area shape="rect" id="node1" title="The draw call for the Networked Item." alt="" coords="5,111,148,138"/>
+<area shape="rect" id="node2" href="$class_resource_manager.html#a33b466c53250b7431976a04d42d59036" title="Get the instance of the Resource Manager." alt="" coords="196,5,349,47"/>
+<area shape="rect" id="node3" href="$class_resource_manager.html#aea53ae6d2b9182e3aa71c6bd913922f0" title="Get the material manager." alt="" coords="196,71,349,112"/>
+<area shape="rect" id="node4" href="$class_resource_manager.html#a474f1dfe5e7d553d919d09ff8b827467" title="Get the model manager." alt="" coords="196,136,349,177"/>
+<area shape="rect" id="node5" href="$class_model.html#ae42c614a1244170ee71e73027a8437e5" title="Renders the model." alt="" coords="202,202,343,229"/>
+</map>

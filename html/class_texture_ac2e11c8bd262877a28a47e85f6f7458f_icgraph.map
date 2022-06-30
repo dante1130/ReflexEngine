@@ -1,4 +1,7 @@
 <map id="Texture::UseTexture" name="Texture::UseTexture">
-<area shape="rect" id="node1" title="Enables the texture." alt="" coords="145,5,284,32"/>
-<area shape="rect" id="node2" href="$class_water.html#aca2414328c1d530cebff6ba347225ff9" title="Initialises the water." alt="" coords="5,5,97,32"/>
+<area shape="rect" id="node1" title="Enables the texture." alt="" coords="417,56,556,83"/>
+<area shape="rect" id="node2" href="$class_water.html#aca2414328c1d530cebff6ba347225ff9" title="Initialises the water." alt="" coords="229,5,321,32"/>
+<area shape="rect" id="node3" href="$class_model_data.html#a82ad8ebbe6baabbf3633586614fb537e" title="Render the model animated." alt="" coords="181,56,369,83"/>
+<area shape="rect" id="node5" href="$class_model_data.html#ae4edf4b22d7cda2e7074d3fe9c130384" title="Render the model statically." alt="" coords="190,107,361,133"/>
+<area shape="rect" id="node4" href="$class_model_data.html#af93eb28b2566856b36b26d9554e1a584" title="Render the model." alt="" coords="5,81,133,108"/>
 </map>

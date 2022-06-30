@@ -1,0 +1,4 @@
+<map id="GenericFunctions::networkFixedUpdate" name="GenericFunctions::networkFixedUpdate">
+<area shape="rect" id="node1" title="Fixed update loop for the network manager. Primarily used for object replication to improve network p..." alt="" coords="219,5,396,47"/>
+<area shape="rect" id="node2" href="$class_test_scene.html#aa303498bc5e828d3919a3399e75cede8" title="The fixed update loop of the scene." alt="" coords="5,13,171,39"/>
+</map>

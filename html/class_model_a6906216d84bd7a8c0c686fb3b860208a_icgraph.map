@@ -1,0 +1,5 @@
+<map id="Model::RenderModelTwo" name="Model::RenderModelTwo">
+<area shape="rect" id="node1" title="Renders the model." alt="" coords="400,5,564,32"/>
+<area shape="rect" id="node2" href="$class_model_data.html#ae4edf4b22d7cda2e7074d3fe9c130384" title="Render the model statically." alt="" coords="181,5,352,32"/>
+<area shape="rect" id="node3" href="$class_model_data.html#af93eb28b2566856b36b26d9554e1a584" title="Render the model." alt="" coords="5,5,133,32"/>
+</map>

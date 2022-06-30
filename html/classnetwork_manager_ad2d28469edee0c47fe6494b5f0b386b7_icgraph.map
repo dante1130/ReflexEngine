@@ -1,0 +1,4 @@
+<map id="networkManager::SetupServer" name="networkManager::SetupServer">
+<area shape="rect" id="node1" title="Initialises and begins a server session. Running on the network port number 60000...." alt="" coords="259,13,453,39"/>
+<area shape="rect" id="node2" href="$namespace_generic_functions.html#a267b26b44a458bf53d53be2c30886a03" title="Starts up the network server." alt="" coords="5,5,211,47"/>
+</map>

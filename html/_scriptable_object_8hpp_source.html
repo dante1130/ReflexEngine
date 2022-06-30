@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: src/Model/GameObject/ScriptableObject.hpp Source File</title>
+<title>ICT397 Assignment 2: src/Model/GameObject/ScriptableObject.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -100,7 +100,7 @@ $(document).ready(function(){initNavTree('_scriptable_object_8hpp_source.html','
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">     * @pre     Nothing</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">     * @post    Script added to run</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="class_scriptable_object.html#a41014f2f010b20dd98d252c2e3ad849b">ScriptableObject</a>(std::string script);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="class_scriptable_object.html#ac4768ce6d971dffb395fa401accb4e48">ScriptableObject</a>(<span class="keyword">const</span> std::string&amp; script);</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">     * @brief   initialisation of game object. Not needed</span></div>
@@ -108,7 +108,7 @@ $(document).ready(function(){initNavTree('_scriptable_object_8hpp_source.html','
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">     * @pre     object exists</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">     * @post    Nothing</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="class_scriptable_object.html#a97f117d0681e7fd8cbda88e0ab90e98e">   24</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scriptable_object.html#a97f117d0681e7fd8cbda88e0ab90e98e">init</a>(){};</div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="class_scriptable_object.html#aecdb9e2ce4f1a427b7d42c579af32996">   24</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scriptable_object.html#aecdb9e2ce4f1a427b7d42c579af32996">init</a>() <span class="keyword">override</span> {}</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">     * @brief   Updates the object by running the lua script</span></div>
@@ -117,14 +117,14 @@ $(document).ready(function(){initNavTree('_scriptable_object_8hpp_source.html','
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">     * @pre     lua script stored</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">     * @post    Script run</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scriptable_object.html#a52dd856905db83fc0dec2630d60da768">update</a>(<span class="keywordtype">float</span> delta_time);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scriptable_object.html#a7383f3e5b47a83a80f4a58e018b2fd0e">update</a>(<span class="keywordtype">double</span> delta_time) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment">     * @brief Updates the body object with fixed delta time.</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">     * @param delta_time</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">     * @param delta_time The time since the last fixed tick.</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="class_scriptable_object.html#a70c89b81ff9fcb40f023f8a805a24005">   40</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scriptable_object.html#a70c89b81ff9fcb40f023f8a805a24005">fixed_update</a>(<span class="keywordtype">float</span> delta_time) {}</div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="class_scriptable_object.html#a59c467bfdf85a2b570a3f76c6c60082c">   40</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scriptable_object.html#a59c467bfdf85a2b570a3f76c6c60082c">fixed_update</a>(<span class="keywordtype">double</span> delta_time) <span class="keyword">override</span> {}</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">     * @brief   Adds a draw call. Not used</span></div>
@@ -132,7 +132,7 @@ $(document).ready(function(){initNavTree('_scriptable_object_8hpp_source.html','
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">     * @pre     object exists</span></div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">     * @post    Nothing</span></div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="class_scriptable_object.html#ab0cf74434e2de504631843dcfa875e9f">   48</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scriptable_object.html#ab0cf74434e2de504631843dcfa875e9f">add_draw_call</a>() {}</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="class_scriptable_object.html#ab2e43512fcbe9a3df2f1786aec1d5ba2">   48</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scriptable_object.html#ab2e43512fcbe9a3df2f1786aec1d5ba2">add_draw_call</a>() <span class="keyword">override</span> {}</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">     * @brief   Draws the object. Not used</span></div>
@@ -141,7 +141,7 @@ $(document).ready(function(){initNavTree('_scriptable_object_8hpp_source.html','
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">     * @pre     Object exists</span></div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">     * @post    Nothing</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="class_scriptable_object.html#a7e70cc9145bbad84d86fb31e586fcaf0">   57</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scriptable_object.html#a7e70cc9145bbad84d86fb31e586fcaf0">draw</a>(std::shared_ptr&lt;<a class="code" href="class_shader.html#a62709321ba81ca847f8a1ef69f9296ef">Shader</a>&gt; shader) {}</div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="class_scriptable_object.html#a161b43b09447633d4114367525647ca9">   57</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_scriptable_object.html#a161b43b09447633d4114367525647ca9">draw</a>(std::shared_ptr&lt;<a class="code" href="class_shader.html#a62709321ba81ca847f8a1ef69f9296ef">Shader</a>&gt; shader) <span class="keyword">override</span> {}</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">     * @brief   Saves the object to lau file</span></div>
@@ -167,17 +167,17 @@ $(document).ready(function(){initNavTree('_scriptable_object_8hpp_source.html','
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclass_scriptable_object_html_a52dd856905db83fc0dec2630d60da768"><div class="ttname"><a href="class_scriptable_object.html#a52dd856905db83fc0dec2630d60da768">ScriptableObject::update</a></div><div class="ttdeci">void update(float delta_time)</div><div class="ttdoc">Updates the object by running the lua script.</div><div class="ttdef"><b>Definition:</b> <a href="_scriptable_object_8cpp_source.html#l00005">ScriptableObject.cpp:5</a></div></div>
-<div class="ttc" id="aclass_scriptable_object_html_a70c89b81ff9fcb40f023f8a805a24005"><div class="ttname"><a href="class_scriptable_object.html#a70c89b81ff9fcb40f023f8a805a24005">ScriptableObject::fixed_update</a></div><div class="ttdeci">void fixed_update(float delta_time)</div><div class="ttdoc">Updates the body object with fixed delta time.</div><div class="ttdef"><b>Definition:</b> <a href="_scriptable_object_8hpp_source.html#l00040">ScriptableObject.hpp:40</a></div></div>
+<div class="ttc" id="aclass_scriptable_object_html_a7383f3e5b47a83a80f4a58e018b2fd0e"><div class="ttname"><a href="class_scriptable_object.html#a7383f3e5b47a83a80f4a58e018b2fd0e">ScriptableObject::update</a></div><div class="ttdeci">void update(double delta_time) override</div><div class="ttdoc">Updates the object by running the lua script.</div><div class="ttdef"><b>Definition:</b> <a href="_scriptable_object_8cpp_source.html#l00007">ScriptableObject.cpp:7</a></div></div>
+<div class="ttc" id="aclass_scriptable_object_html_ac4768ce6d971dffb395fa401accb4e48"><div class="ttname"><a href="class_scriptable_object.html#ac4768ce6d971dffb395fa401accb4e48">ScriptableObject::ScriptableObject</a></div><div class="ttdeci">ScriptableObject(const std::string &amp;script)</div><div class="ttdoc">Default constructor.</div><div class="ttdef"><b>Definition:</b> <a href="_scriptable_object_8cpp_source.html#l00003">ScriptableObject.cpp:3</a></div></div>
+<div class="ttc" id="aclass_scriptable_object_html_ab2e43512fcbe9a3df2f1786aec1d5ba2"><div class="ttname"><a href="class_scriptable_object.html#ab2e43512fcbe9a3df2f1786aec1d5ba2">ScriptableObject::add_draw_call</a></div><div class="ttdeci">void add_draw_call() override</div><div class="ttdoc">Adds a draw call. Not used.</div><div class="ttdef"><b>Definition:</b> <a href="_scriptable_object_8hpp_source.html#l00048">ScriptableObject.hpp:48</a></div></div>
+<div class="ttc" id="aclass_scriptable_object_html_aecdb9e2ce4f1a427b7d42c579af32996"><div class="ttname"><a href="class_scriptable_object.html#aecdb9e2ce4f1a427b7d42c579af32996">ScriptableObject::init</a></div><div class="ttdeci">void init() override</div><div class="ttdoc">initialisation of game object. Not needed</div><div class="ttdef"><b>Definition:</b> <a href="_scriptable_object_8hpp_source.html#l00024">ScriptableObject.hpp:24</a></div></div>
 <div class="ttc" id="aclass_scriptable_object_html_a9d7340eef93c30cca753787cf4a359f3"><div class="ttname"><a href="class_scriptable_object.html#a9d7340eef93c30cca753787cf4a359f3">ScriptableObject::~ScriptableObject</a></div><div class="ttdeci">~ScriptableObject()</div><div class="ttdoc">Destructor.</div><div class="ttdef"><b>Definition:</b> <a href="_scriptable_object_8hpp_source.html#l00073">ScriptableObject.hpp:73</a></div></div>
 <div class="ttc" id="aclass_scriptable_object_html"><div class="ttname"><a href="class_scriptable_object.html">ScriptableObject</a></div><div class="ttdef"><b>Definition:</b> <a href="_scriptable_object_8hpp_source.html#l00007">ScriptableObject.hpp:7</a></div></div>
+<div class="ttc" id="aclass_scriptable_object_html_a161b43b09447633d4114367525647ca9"><div class="ttname"><a href="class_scriptable_object.html#a161b43b09447633d4114367525647ca9">ScriptableObject::draw</a></div><div class="ttdeci">void draw(std::shared_ptr&lt; Shader &gt; shader) override</div><div class="ttdoc">Draws the object. Not used.</div><div class="ttdef"><b>Definition:</b> <a href="_scriptable_object_8hpp_source.html#l00057">ScriptableObject.hpp:57</a></div></div>
+<div class="ttc" id="aclass_scriptable_object_html_a59c467bfdf85a2b570a3f76c6c60082c"><div class="ttname"><a href="class_scriptable_object.html#a59c467bfdf85a2b570a3f76c6c60082c">ScriptableObject::fixed_update</a></div><div class="ttdeci">void fixed_update(double delta_time) override</div><div class="ttdoc">Updates the body object with fixed delta time.</div><div class="ttdef"><b>Definition:</b> <a href="_scriptable_object_8hpp_source.html#l00040">ScriptableObject.hpp:40</a></div></div>
 <div class="ttc" id="aclass_shader_html_a62709321ba81ca847f8a1ef69f9296ef"><div class="ttname"><a href="class_shader.html#a62709321ba81ca847f8a1ef69f9296ef">Shader::uniformLightMatrices</a></div><div class="ttdeci">GLuint uniformLightMatrices[6]</div><div class="ttdef"><b>Definition:</b> <a href="_shader_8hpp_source.html#l00130">Shader.hpp:130</a></div></div>
-<div class="ttc" id="aclass_scriptable_object_html_ab0cf74434e2de504631843dcfa875e9f"><div class="ttname"><a href="class_scriptable_object.html#ab0cf74434e2de504631843dcfa875e9f">ScriptableObject::add_draw_call</a></div><div class="ttdeci">void add_draw_call()</div><div class="ttdoc">Adds a draw call. Not used.</div><div class="ttdef"><b>Definition:</b> <a href="_scriptable_object_8hpp_source.html#l00048">ScriptableObject.hpp:48</a></div></div>
-<div class="ttc" id="aclass_scriptable_object_html_a41014f2f010b20dd98d252c2e3ad849b"><div class="ttname"><a href="class_scriptable_object.html#a41014f2f010b20dd98d252c2e3ad849b">ScriptableObject::ScriptableObject</a></div><div class="ttdeci">ScriptableObject(std::string script)</div><div class="ttdoc">Default constructor.</div><div class="ttdef"><b>Definition:</b> <a href="_scriptable_object_8cpp_source.html#l00003">ScriptableObject.cpp:3</a></div></div>
-<div class="ttc" id="aclass_scriptable_object_html_a97f117d0681e7fd8cbda88e0ab90e98e"><div class="ttname"><a href="class_scriptable_object.html#a97f117d0681e7fd8cbda88e0ab90e98e">ScriptableObject::init</a></div><div class="ttdeci">void init()</div><div class="ttdoc">initialisation of game object. Not needed</div><div class="ttdef"><b>Definition:</b> <a href="_scriptable_object_8hpp_source.html#l00024">ScriptableObject.hpp:24</a></div></div>
 <div class="ttc" id="aclass_scriptable_object_html_a23f4f335338bba0f80a1d3a82932c51a"><div class="ttname"><a href="class_scriptable_object.html#a23f4f335338bba0f80a1d3a82932c51a">ScriptableObject::scriptPath</a></div><div class="ttdeci">std::string scriptPath</div><div class="ttdoc">Lua script to run every update frame</div><div class="ttdef"><b>Definition:</b> <a href="_scriptable_object_8hpp_source.html#l00073">ScriptableObject.hpp:73</a></div></div>
-<div class="ttc" id="aclass_scriptable_object_html_a7e70cc9145bbad84d86fb31e586fcaf0"><div class="ttname"><a href="class_scriptable_object.html#a7e70cc9145bbad84d86fb31e586fcaf0">ScriptableObject::draw</a></div><div class="ttdeci">void draw(std::shared_ptr&lt; Shader &gt; shader)</div><div class="ttdoc">Draws the object. Not used.</div><div class="ttdef"><b>Definition:</b> <a href="_scriptable_object_8hpp_source.html#l00057">ScriptableObject.hpp:57</a></div></div>
-<div class="ttc" id="aclass_scriptable_object_html_a8ba1a27e44889133f1fc28f06d05236d"><div class="ttname"><a href="class_scriptable_object.html#a8ba1a27e44889133f1fc28f06d05236d">ScriptableObject::save_object</a></div><div class="ttdeci">void save_object() override</div><div class="ttdoc">Saves the object to lau file.</div><div class="ttdef"><b>Definition:</b> <a href="_scriptable_object_8cpp_source.html#l00011">ScriptableObject.cpp:11</a></div></div>
+<div class="ttc" id="aclass_scriptable_object_html_a8ba1a27e44889133f1fc28f06d05236d"><div class="ttname"><a href="class_scriptable_object.html#a8ba1a27e44889133f1fc28f06d05236d">ScriptableObject::save_object</a></div><div class="ttdeci">void save_object() override</div><div class="ttdoc">Saves the object to lau file.</div><div class="ttdef"><b>Definition:</b> <a href="_scriptable_object_8cpp_source.html#l00013">ScriptableObject.cpp:13</a></div></div>
 <div class="ttc" id="aclass_game_object_html"><div class="ttname"><a href="class_game_object.html">GameObject</a></div><div class="ttdoc">An abstract class to represent a game object.</div><div class="ttdef"><b>Definition:</b> <a href="_game_object_8hpp_source.html#l00010">GameObject.hpp:10</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

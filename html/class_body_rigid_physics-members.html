@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: Member List</title>
+<title>ICT397 Assignment 2: Member List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -91,7 +91,7 @@ $(document).ready(function(){initNavTree('class_body_rigid_physics.html',''); in
   <tr class="even"><td class="entry"><a class="el" href="class_body_rigid_physics.html#a31f32db0c271466f58af84d771f48362">addBoxCollider</a>(glm::vec3 pos, glm::vec3 halfSize, float bounciness, float friction)</td><td class="entry"><a class="el" href="class_body_rigid_physics.html">BodyRigidPhysics</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_body_rigid_physics.html#ab39c8fbbb6c546fa1a320cb55cbb9c53">addCapsuleCollider</a>(glm::vec3 pos, float radius, float height, float bounciness, float friction)</td><td class="entry"><a class="el" href="class_body_rigid_physics.html">BodyRigidPhysics</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_body_rigid_physics.html#a624fbc2102176f123d69bfd1c0e80090">addForce</a>(glm::vec3 force)</td><td class="entry"><a class="el" href="class_body_rigid_physics.html">BodyRigidPhysics</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_body_rigid_physics.html#abe92a95953d6ea40eed86025d3c4079f">addHeightFieldShape</a>(glm::vec3 pos, float bounciness, float friction)=delete</td><td class="entry"><a class="el" href="class_body_rigid_physics.html">BodyRigidPhysics</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_body_rigid_physics.html#a2ef1fb9b1430a3ee112efb74f3db5114">addHeightFieldShape</a>(glm::vec3 pos, float bounciness, float friction, int nColumns, int nRows, int minHeight, int maxHeight, unsigned char *heightValues)</td><td class="entry"><a class="el" href="class_body_rigid_physics.html">BodyRigidPhysics</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_body_rigid_physics.html#aad0009d7f9db9a7d9f69827de4beea96">addSphereCollider</a>(glm::vec3 pos, float radius, float bounciness, float friction)</td><td class="entry"><a class="el" href="class_body_rigid_physics.html">BodyRigidPhysics</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_body_rigid_physics.html#acde863358c3e733893da83b2094a3748">addTorque</a>(glm::vec3 torque)</td><td class="entry"><a class="el" href="class_body_rigid_physics.html">BodyRigidPhysics</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_body_rigid_physics.html#abe9af01f5ef333afa0d61dee04a86d45">BodyRigidPhysics</a>()</td><td class="entry"><a class="el" href="class_body_rigid_physics.html">BodyRigidPhysics</a></td><td class="entry"></td></tr>
@@ -114,13 +114,17 @@ $(document).ready(function(){initNavTree('class_body_rigid_physics.html',''); in
   <tr><td class="entry"><a class="el" href="class_body_rigid_physics.html#a9d4dcc0ffe56f0b8d834988a85fb8174">getRotation</a>()</td><td class="entry"><a class="el" href="class_body_rigid_physics.html">BodyRigidPhysics</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_body_rigid_physics.html#a716e75dd8c61f92a834f2fd09f07a304">init</a>(glm::vec3 pos, glm::vec3 rotation, float angle)</td><td class="entry"><a class="el" href="class_body_rigid_physics.html">BodyRigidPhysics</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_body_rigid_physics.html#a08b606ce8506257b9f1345156f3fb0d1">rb</a></td><td class="entry"><a class="el" href="class_body_rigid_physics.html">BodyRigidPhysics</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_body_rigid_physics.html#aa2baaab9d06d1a1f220f88c56b0e984f">set_position</a>(glm::vec3 pos)</td><td class="entry"><a class="el" href="class_body_rigid_physics.html">BodyRigidPhysics</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_body_rigid_physics.html#a29342ba54eec2a8d4e7f7020ae489fe7">removeColliders</a>()</td><td class="entry"><a class="el" href="class_body_rigid_physics.html">BodyRigidPhysics</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_body_rigid_physics.html#aa2baaab9d06d1a1f220f88c56b0e984f">set_position</a>(glm::vec3 pos)</td><td class="entry"><a class="el" href="class_body_rigid_physics.html">BodyRigidPhysics</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_body_rigid_physics.html#a606b3ff078c13ccdbbd2c0201608b9e3">setAngularAxisFactor</a>(glm::vec3 factor)</td><td class="entry"><a class="el" href="class_body_rigid_physics.html">BodyRigidPhysics</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_body_rigid_physics.html#a626b45c2d429bc3eeae4fd8bf4faaa9c">setAngularVelocity</a>(glm::vec3 velocity)</td><td class="entry"><a class="el" href="class_body_rigid_physics.html">BodyRigidPhysics</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="class_body_rigid_physics.html#a5993349488b60126d08fa5c29b17098b">setAngularVelocityDamping</a>(float val)</td><td class="entry"><a class="el" href="class_body_rigid_physics.html">BodyRigidPhysics</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_body_rigid_physics.html#a6d09ea176f2cf30357770223d371ea9e">setIfBodyCanSleep</a>(bool val)</td><td class="entry"><a class="el" href="class_body_rigid_physics.html">BodyRigidPhysics</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_body_rigid_physics.html#a6b3a121bd9ea7c67c80cc032f3b862a6">setLinearVelocity</a>(glm::vec3 velocity)</td><td class="entry"><a class="el" href="class_body_rigid_physics.html">BodyRigidPhysics</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_body_rigid_physics.html#a3994a964df47b9af6bb10b9740534d29">setLinearVelocityDamping</a>(float val)</td><td class="entry"><a class="el" href="class_body_rigid_physics.html">BodyRigidPhysics</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_body_rigid_physics.html#a5c831cd9266a60c616be00ca93529315">setType</a>(int type)</td><td class="entry"><a class="el" href="class_body_rigid_physics.html">BodyRigidPhysics</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_body_rigid_physics.html#a8262c8bc952eb67b31966c6473672736">setLinearAxisFactor</a>(glm::vec3 factor)</td><td class="entry"><a class="el" href="class_body_rigid_physics.html">BodyRigidPhysics</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_body_rigid_physics.html#a6b3a121bd9ea7c67c80cc032f3b862a6">setLinearVelocity</a>(glm::vec3 velocity)</td><td class="entry"><a class="el" href="class_body_rigid_physics.html">BodyRigidPhysics</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_body_rigid_physics.html#a3994a964df47b9af6bb10b9740534d29">setLinearVelocityDamping</a>(float val)</td><td class="entry"><a class="el" href="class_body_rigid_physics.html">BodyRigidPhysics</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_body_rigid_physics.html#a5c831cd9266a60c616be00ca93529315">setType</a>(int type)</td><td class="entry"><a class="el" href="class_body_rigid_physics.html">BodyRigidPhysics</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_body_rigid_physics.html#a60d708370e1dbb6fd6e7413ab4a5ce15">turnIntoTrigger</a>(bool val)</td><td class="entry"><a class="el" href="class_body_rigid_physics.html">BodyRigidPhysics</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_body_rigid_physics.html#a456336d6946f6e4644ae42ca7425acc4">~BodyRigidPhysics</a>()</td><td class="entry"><a class="el" href="class_body_rigid_physics.html">BodyRigidPhysics</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->

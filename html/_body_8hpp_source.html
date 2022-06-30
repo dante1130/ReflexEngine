@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: src/Model/GameObject/Body.hpp Source File</title>
+<title>ICT397 Assignment 2: src/Model/GameObject/Body.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -88,7 +88,7 @@ $(document).ready(function(){initNavTree('_body_8hpp_source.html',''); initResiz
 <a href="_body_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">pragma</span> <span class="preprocessor">once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&quot;Model/GameObject/GameObject.hpp&quot;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&quot;Controller/Physics.hpp&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&quot;Controller/Physics/Physics.hpp&quot;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&quot;Controller/ResourceManager/ObjectSaving.hpp&quot;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&quot;Controller/GenericFunctions.h&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
@@ -100,7 +100,7 @@ $(document).ready(function(){initNavTree('_body_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">     * @pre     Must be creator body object variant</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">     * @post    Body object created</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_body.html#a0e7b8962df553275d0493bb7e9bce430">init</a>();</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_body.html#aa815045b8dd6486ec9e88da0b6484ec4">init</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">     * @brief   Sets if the object is a creator (true) or destructor (false). A</span></div>
@@ -120,14 +120,14 @@ $(document).ready(function(){initNavTree('_body_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">     * @pre     Object initialised</span></div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">     * @post    Object updated</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_body.html#acfac7f6b5ff887c89d828a23131f2d64">update</a>(<span class="keywordtype">float</span> delta_time);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_body.html#a63154d69d987a98155a3f1aeb1087496">update</a>(<span class="keywordtype">double</span> delta_time) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">     * @brief Updates the body object with fixed delta time.</span></div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">     *</span></div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">     * @param delta_time</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_body.html#aefcd8a345c89c88d75de1aa2a0b8674a">fixed_update</a>(<span class="keywordtype">float</span> delta_time);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_body.html#a60f494708a7e6c894338323c0cfe54a8">fixed_update</a>(<span class="keywordtype">double</span> delta_time) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">     * @brief   NOT CURRENTLY USED</span></div>
@@ -135,7 +135,7 @@ $(document).ready(function(){initNavTree('_body_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">     * @pre     Nothing</span></div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">     * @post    Nothing</span></div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="class_body.html#a7a808e9a7a9ff24f1ce7fac59367adae">   51</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_body.html#a7a808e9a7a9ff24f1ce7fac59367adae">add_draw_call</a>() {}</div>
+<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="class_body.html#a079e468daf6b9ddca665c95641547697">   51</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_body.html#a079e468daf6b9ddca665c95641547697">add_draw_call</a>() <span class="keyword">override</span> {}</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">     * @brief   NOT CURRENTLY USED</span></div>
@@ -144,7 +144,7 @@ $(document).ready(function(){initNavTree('_body_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">     * @pre     Nothing</span></div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">     * @post    Nothing</span></div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="class_body.html#a2f09ad0a99d6dcb392fb05ea2e2d3c09">   60</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_body.html#a2f09ad0a99d6dcb392fb05ea2e2d3c09">draw</a>(std::shared_ptr&lt;<a class="code" href="class_shader.html#a62709321ba81ca847f8a1ef69f9296ef">Shader</a>&gt; shader) {}</div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="class_body.html#aa33b10c09cdee13f4dd556a0c0980c9a">   60</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_body.html#aa33b10c09cdee13f4dd556a0c0980c9a">draw</a>(std::shared_ptr&lt;<a class="code" href="class_shader.html#a62709321ba81ca847f8a1ef69f9296ef">Shader</a>&gt; shader) <span class="keyword">override</span> {}</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">     * @brief   Adds all possible physic debugger options</span></div>
@@ -179,26 +179,25 @@ $(document).ready(function(){initNavTree('_body_8hpp_source.html',''); initResiz
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    ~<a class="code" href="class_body.html#abe1c4da65568cf7978b6247affc461e3">Body</a>();</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="comment">/// &lt;summary&gt;</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="comment">/// True if creator, false if destroyer</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="comment">/// &lt;/summary&gt;</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="class_body.html#aae1d172781ed2f7e5b0cbaebe3bfa6f8">   98</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_body.html#aae1d172781ed2f7e5b0cbaebe3bfa6f8">creator</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="comment">// &lt;summary&gt;</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="comment">// True if creator, false if destroyer</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="comment">// &lt;/summary&gt;</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="comment">// bool creator = true;</span></div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclass_body_html_a0e7b8962df553275d0493bb7e9bce430"><div class="ttname"><a href="class_body.html#a0e7b8962df553275d0493bb7e9bce430">Body::init</a></div><div class="ttdeci">void init()</div><div class="ttdoc">Initialises the body object.</div><div class="ttdef"><b>Definition:</b> <a href="_body_8cpp_source.html#l00003">Body.cpp:3</a></div></div>
-<div class="ttc" id="aclass_body_html_aae1d172781ed2f7e5b0cbaebe3bfa6f8"><div class="ttname"><a href="class_body.html#aae1d172781ed2f7e5b0cbaebe3bfa6f8">Body::creator</a></div><div class="ttdeci">bool creator</div><div class="ttdoc">True if creator, false if destroyer</div><div class="ttdef"><b>Definition:</b> <a href="_body_8hpp_source.html#l00098">Body.hpp:98</a></div></div>
-<div class="ttc" id="aclass_body_html_abe1c4da65568cf7978b6247affc461e3"><div class="ttname"><a href="class_body.html#abe1c4da65568cf7978b6247affc461e3">Body::~Body</a></div><div class="ttdeci">~Body()</div><div class="ttdoc">Destructor.</div><div class="ttdef"><b>Definition:</b> <a href="_body_8cpp_source.html#l00046">Body.cpp:46</a></div></div>
-<div class="ttc" id="aclass_body_html_a5cc24f642ba107110af39d156232be98"><div class="ttname"><a href="class_body.html#a5cc24f642ba107110af39d156232be98">Body::save_object</a></div><div class="ttdeci">void save_object() override</div><div class="ttdoc">Saves the object to lau file.</div><div class="ttdef"><b>Definition:</b> <a href="_body_8cpp_source.html#l00037">Body.cpp:37</a></div></div>
-<div class="ttc" id="aclass_body_html_a7a808e9a7a9ff24f1ce7fac59367adae"><div class="ttname"><a href="class_body.html#a7a808e9a7a9ff24f1ce7fac59367adae">Body::add_draw_call</a></div><div class="ttdeci">void add_draw_call()</div><div class="ttdoc">NOT CURRENTLY USED.</div><div class="ttdef"><b>Definition:</b> <a href="_body_8hpp_source.html#l00051">Body.hpp:51</a></div></div>
+<div class="ttc" id="aclass_body_html_a60f494708a7e6c894338323c0cfe54a8"><div class="ttname"><a href="class_body.html#a60f494708a7e6c894338323c0cfe54a8">Body::fixed_update</a></div><div class="ttdeci">void fixed_update(double delta_time) override</div><div class="ttdoc">Updates the body object with fixed delta time.</div><div class="ttdef"><b>Definition:</b> <a href="_body_8cpp_source.html#l00011">Body.cpp:11</a></div></div>
+<div class="ttc" id="aclass_body_html_abe1c4da65568cf7978b6247affc461e3"><div class="ttname"><a href="class_body.html#abe1c4da65568cf7978b6247affc461e3">Body::~Body</a></div><div class="ttdeci">~Body()</div><div class="ttdoc">Destructor.</div><div class="ttdef"><b>Definition:</b> <a href="_body_8cpp_source.html#l00047">Body.cpp:47</a></div></div>
+<div class="ttc" id="aclass_body_html_aa33b10c09cdee13f4dd556a0c0980c9a"><div class="ttname"><a href="class_body.html#aa33b10c09cdee13f4dd556a0c0980c9a">Body::draw</a></div><div class="ttdeci">void draw(std::shared_ptr&lt; Shader &gt; shader) override</div><div class="ttdoc">NOT CURRENTLY USED.</div><div class="ttdef"><b>Definition:</b> <a href="_body_8hpp_source.html#l00060">Body.hpp:60</a></div></div>
+<div class="ttc" id="aclass_body_html_a5cc24f642ba107110af39d156232be98"><div class="ttname"><a href="class_body.html#a5cc24f642ba107110af39d156232be98">Body::save_object</a></div><div class="ttdeci">void save_object() override</div><div class="ttdoc">Saves the object to lau file.</div><div class="ttdef"><b>Definition:</b> <a href="_body_8cpp_source.html#l00038">Body.cpp:38</a></div></div>
 <div class="ttc" id="aclass_body_html_afe231c9f379a739a3bafd0b3eb14b5c6"><div class="ttname"><a href="class_body.html#afe231c9f379a739a3bafd0b3eb14b5c6">Body::physicsWorldDestroyer</a></div><div class="ttdeci">void physicsWorldDestroyer()</div><div class="ttdoc">Destoryes physic world.</div><div class="ttdef"><b>Definition:</b> <a href="_body_8cpp_source.html#l00019">Body.cpp:19</a></div></div>
+<div class="ttc" id="aclass_body_html_a63154d69d987a98155a3f1aeb1087496"><div class="ttname"><a href="class_body.html#a63154d69d987a98155a3f1aeb1087496">Body::update</a></div><div class="ttdeci">void update(double delta_time) override</div><div class="ttdoc">Updates the body object using a delta time value.</div><div class="ttdef"><b>Definition:</b> <a href="_body_8cpp_source.html#l00009">Body.cpp:9</a></div></div>
 <div class="ttc" id="aclass_body_html"><div class="ttname"><a href="class_body.html">Body</a></div><div class="ttdef"><b>Definition:</b> <a href="_body_8hpp_source.html#l00008">Body.hpp:8</a></div></div>
 <div class="ttc" id="aclass_shader_html_a62709321ba81ca847f8a1ef69f9296ef"><div class="ttname"><a href="class_shader.html#a62709321ba81ca847f8a1ef69f9296ef">Shader::uniformLightMatrices</a></div><div class="ttdeci">GLuint uniformLightMatrices[6]</div><div class="ttdef"><b>Definition:</b> <a href="_shader_8hpp_source.html#l00130">Shader.hpp:130</a></div></div>
-<div class="ttc" id="aclass_body_html_acfac7f6b5ff887c89d828a23131f2d64"><div class="ttname"><a href="class_body.html#acfac7f6b5ff887c89d828a23131f2d64">Body::update</a></div><div class="ttdeci">void update(float delta_time)</div><div class="ttdoc">Updates the body object using a delta time value.</div><div class="ttdef"><b>Definition:</b> <a href="_body_8cpp_source.html#l00009">Body.cpp:9</a></div></div>
 <div class="ttc" id="aclass_body_html_acc9e5b6a32fe16946f552d51efb9262e"><div class="ttname"><a href="class_body.html#acc9e5b6a32fe16946f552d51efb9262e">Body::setCreator</a></div><div class="ttdeci">void setCreator(bool val)</div><div class="ttdoc">Sets if the object is a creator (true) or destructor (false). A creator should be one of the fist gam...</div><div class="ttdef"><b>Definition:</b> <a href="_body_8cpp_source.html#l00035">Body.cpp:35</a></div></div>
 <div class="ttc" id="aclass_body_html_abc711fca035985aa0c90df443ed6c72a"><div class="ttname"><a href="class_body.html#abc711fca035985aa0c90df443ed6c72a">Body::physicsDebugger</a></div><div class="ttdeci">void physicsDebugger()</div><div class="ttdoc">Adds all possible physic debugger options.</div><div class="ttdef"><b>Definition:</b> <a href="_body_8cpp_source.html#l00025">Body.cpp:25</a></div></div>
-<div class="ttc" id="aclass_body_html_a2f09ad0a99d6dcb392fb05ea2e2d3c09"><div class="ttname"><a href="class_body.html#a2f09ad0a99d6dcb392fb05ea2e2d3c09">Body::draw</a></div><div class="ttdeci">void draw(std::shared_ptr&lt; Shader &gt; shader)</div><div class="ttdoc">NOT CURRENTLY USED.</div><div class="ttdef"><b>Definition:</b> <a href="_body_8hpp_source.html#l00060">Body.hpp:60</a></div></div>
-<div class="ttc" id="aclass_body_html_aefcd8a345c89c88d75de1aa2a0b8674a"><div class="ttname"><a href="class_body.html#aefcd8a345c89c88d75de1aa2a0b8674a">Body::fixed_update</a></div><div class="ttdeci">void fixed_update(float delta_time)</div><div class="ttdoc">Updates the body object with fixed delta time.</div><div class="ttdef"><b>Definition:</b> <a href="_body_8cpp_source.html#l00011">Body.cpp:11</a></div></div>
+<div class="ttc" id="aclass_body_html_a079e468daf6b9ddca665c95641547697"><div class="ttname"><a href="class_body.html#a079e468daf6b9ddca665c95641547697">Body::add_draw_call</a></div><div class="ttdeci">void add_draw_call() override</div><div class="ttdoc">NOT CURRENTLY USED.</div><div class="ttdef"><b>Definition:</b> <a href="_body_8hpp_source.html#l00051">Body.hpp:51</a></div></div>
+<div class="ttc" id="aclass_body_html_aa815045b8dd6486ec9e88da0b6484ec4"><div class="ttname"><a href="class_body.html#aa815045b8dd6486ec9e88da0b6484ec4">Body::init</a></div><div class="ttdeci">void init() override</div><div class="ttdoc">Initialises the body object.</div><div class="ttdef"><b>Definition:</b> <a href="_body_8cpp_source.html#l00003">Body.cpp:3</a></div></div>
 <div class="ttc" id="aclass_game_object_html"><div class="ttname"><a href="class_game_object.html">GameObject</a></div><div class="ttdoc">An abstract class to represent a game object.</div><div class="ttdef"><b>Definition:</b> <a href="_game_object_8hpp_source.html#l00010">GameObject.hpp:10</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

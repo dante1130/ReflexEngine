@@ -1,0 +1,4 @@
+<map id="GameAssetFactory::loadPhysicsObject" name="GameAssetFactory::loadPhysicsObject">
+<area shape="rect" id="node1" title="Loads in a physics object object from a lua script." alt="" coords="5,5,220,47"/>
+<area shape="rect" id="node2" href="$class_physics_object.html#a66bee971ef37d8917de3a742684ae110" title="Default constructor for physics object." alt="" coords="268,13,468,39"/>
+</map>

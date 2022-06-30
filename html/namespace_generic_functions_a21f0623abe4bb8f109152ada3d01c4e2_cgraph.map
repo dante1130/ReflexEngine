@@ -1,0 +1,4 @@
+<map id="GenericFunctions::getReceivingData" name="GenericFunctions::getReceivingData">
+<area shape="rect" id="node1" title="Checks if the pvp network manager is receiving data." alt="" coords="5,5,237,32"/>
+<area shape="rect" id="node2" href="$classnetwork_manager.html#aca6dce6dcb1831261e32f3f31e0025c4" title="Gets if the network manager missed getting valid data from ObjectPositionReceive." alt="" coords="285,5,517,32"/>
+</map>

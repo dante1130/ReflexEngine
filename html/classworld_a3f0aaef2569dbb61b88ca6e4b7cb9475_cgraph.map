@@ -1,0 +1,6 @@
+<map id="world::setWorld" name="world::setWorld">
+<area shape="rect" id="node1" title="Sets the world." alt="" coords="5,64,117,91"/>
+<area shape="rect" id="node2" href="$class_a_star.html#ab4aa7519ef4c0bb69a79c004428ef405" title="Sets if you allow diagoanl movement or not." alt="" coords="165,5,387,32"/>
+<area shape="rect" id="node3" href="$class_a_star.html#ab7bfda0ac1209446620e2ad864547ee4" title="Sets the cost of the estimated distance." alt="" coords="193,57,359,98"/>
+<area shape="rect" id="node4" href="$class_a_star.html#aa6bf54800002d0e635c447fa55f23ca6" title="Sets the max distance allowed before the algorithm will terminate." alt="" coords="197,123,355,149"/>
+</map>

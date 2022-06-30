@@ -1,4 +1,5 @@
 <map id="GenericFunctions::init_random" name="GenericFunctions::init_random">
-<area shape="rect" id="node1" title="Initialises rand." alt="" coords="204,5,353,47"/>
-<area shape="rect" id="node2" href="$namespace_generic_functions.html#a35f38c8bca11d94fa554be3107fb2957" title="Gets a random number." alt="" coords="5,5,156,47"/>
+<area shape="rect" id="node1" title="Initialises rand." alt="" coords="240,39,389,80"/>
+<area shape="rect" id="node2" href="$namespace_generic_functions.html#a35f38c8bca11d94fa554be3107fb2957" title="Gets a random number." alt="" coords="23,5,174,47"/>
+<area shape="rect" id="node3" href="$class_test_scene.html#ad1b912d2c8ec32a9644048b22c8ec484" title="loads game objects" alt="" coords="5,71,192,112"/>
 </map>

@@ -1,0 +1,5 @@
+<map id="ObjectSaving::addValue" name="ObjectSaving::addValue">
+<area shape="rect" id="node1" title="Adds a value to the file." alt="" coords="205,46,365,73"/>
+<area shape="rect" id="node2" href="$class_point_light_object.html#a759239db0a1af6fc387548dea1948392" title="Saves the object to lua file." alt="" coords="5,5,157,47"/>
+<area shape="rect" id="node3" href="$class_spot_light_object.html#a242313468bdd7cf74c3f3464da0ad3b6" title="Saves the object to lua file." alt="" coords="7,71,156,112"/>
+</map>

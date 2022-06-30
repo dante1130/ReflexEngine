@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: ModelManager Class Reference</title>
+<title>ICT397 Assignment 2: ModelManager Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -106,6 +106,7 @@ Collaboration diagram for ModelManager:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a0e6e285f5204df265cabad801cd17396"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_model_manager.html#a0e6e285f5204df265cabad801cd17396">lua_access</a> ()</td></tr>
+<tr class="memdesc:a0e6e285f5204df265cabad801cd17396"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exposes the model manager to Lua.  <a href="class_model_manager.html#a0e6e285f5204df265cabad801cd17396">More...</a><br /></td></tr>
 <tr class="separator:a0e6e285f5204df265cabad801cd17396"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9bee567bd727cedef4750f8ba638a68"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_model_manager.html#ab9bee567bd727cedef4750f8ba638a68">ModelManager</a> ()=default</td></tr>
 <tr class="memdesc:ab9bee567bd727cedef4750f8ba638a68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="class_model.html" title="A model class representing a Mesh with a texture. Models are loaded in using the 3D object library As...">Model</a> Manager object.  <a href="class_model_manager.html#ab9bee567bd727cedef4750f8ba638a68">More...</a><br /></td></tr>
@@ -123,7 +124,7 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:aebc07bd339be877890fcd216030815e2"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, <a class="el" href="class_model.html">Model</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_model_manager.html#aebc07bd339be877890fcd216030815e2">model_hashmap</a></td></tr>
-<tr class="memdesc:aebc07bd339be877890fcd216030815e2"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_a.html">A</a> hashmap of models.  <a href="class_model_manager.html#aebc07bd339be877890fcd216030815e2">More...</a><br /></td></tr>
+<tr class="memdesc:aebc07bd339be877890fcd216030815e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">A hashmap of models.  <a href="class_model_manager.html#aebc07bd339be877890fcd216030815e2">More...</a><br /></td></tr>
 <tr class="separator:aebc07bd339be877890fcd216030815e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -204,7 +205,7 @@ Private Attributes</h2></td></tr>
 <p>Get the model given the model name. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">model_name</td><td></td></tr>
+    <tr><td class="paramname">model_name</td><td>The name given to the model. </td></tr>
   </table>
   </dd>
 </dl>
@@ -247,14 +248,12 @@ Private Attributes</h2></td></tr>
 <p>Loads a model into the model manager. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">model_name</td><td></td></tr>
-    <tr><td class="paramname">file_name</td><td></td></tr>
+    <tr><td class="paramname">model_name</td><td>The name given to the model. </td></tr>
+    <tr><td class="paramname">file_name</td><td>The file name of the model. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true </dd>
-<dd>
-false </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>bool </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_model_manager_8cpp_source.html#l00009">9</a> of file <a class="el" href="_model_manager_8cpp_source.html">ModelManager.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;                                                          {</div>
@@ -299,6 +298,8 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
+<p>Exposes the model manager to Lua. </p>
+
 <p class="definition">Definition at line <a class="el" href="_model_manager_8cpp_source.html#l00003">3</a> of file <a class="el" href="_model_manager_8cpp_source.html">ModelManager.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;                              {</div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    sol::state&amp; lua = <a class="code" href="class_lua_manager.html#a56c31a98da7a859905f416098c69c3ca">LuaManager::get_instance</a>().<a class="code" href="class_lua_manager.html#a946b61fad46130d8e3a8bcbfb0759001">get_state</a>();</div>
@@ -329,9 +330,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="class_a.html">A</a> hashmap of models. </p>
+<p>A hashmap of models. </p>
 
-<p class="definition">Definition at line <a class="el" href="_model_manager_8hpp_source.html#l00047">47</a> of file <a class="el" href="_model_manager_8hpp_source.html">ModelManager.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_model_manager_8hpp_source.html#l00049">49</a> of file <a class="el" href="_model_manager_8hpp_source.html">ModelManager.hpp</a>.</p>
 
 </div>
 </div>
@@ -346,7 +347,7 @@ Here is the call graph for this function:</div>
 <div class="ttc" id="aclass_model_html"><div class="ttname"><a href="class_model.html">Model</a></div><div class="ttdoc">A model class representing a Mesh with a texture. Models are loaded in using the 3D object library As...</div><div class="ttdef"><b>Definition:</b> <a href="_model_8hpp_source.html#l00018">Model.hpp:18</a></div></div>
 <div class="ttc" id="aclass_model_manager_html_a2726b3eb92cfed1eb02414b666cc9fae"><div class="ttname"><a href="class_model_manager.html#a2726b3eb92cfed1eb02414b666cc9fae">ModelManager::load_model</a></div><div class="ttdeci">bool load_model(const std::string &amp;model_name, const std::string &amp;file_name)</div><div class="ttdoc">Loads a model into the model manager.</div><div class="ttdef"><b>Definition:</b> <a href="_model_manager_8cpp_source.html#l00009">ModelManager.cpp:9</a></div></div>
 <div class="ttc" id="aclass_lua_manager_html_a56c31a98da7a859905f416098c69c3ca"><div class="ttname"><a href="class_lua_manager.html#a56c31a98da7a859905f416098c69c3ca">LuaManager::get_instance</a></div><div class="ttdeci">static LuaManager &amp; get_instance()</div><div class="ttdoc">Get an isntance of the LuaManager.</div><div class="ttdef"><b>Definition:</b> <a href="_lua_manager_8cpp_source.html#l00003">LuaManager.cpp:3</a></div></div>
-<div class="ttc" id="aclass_model_manager_html_aebc07bd339be877890fcd216030815e2"><div class="ttname"><a href="class_model_manager.html#aebc07bd339be877890fcd216030815e2">ModelManager::model_hashmap</a></div><div class="ttdeci">std::unordered_map&lt; std::string, Model * &gt; model_hashmap</div><div class="ttdoc">A hashmap of models.</div><div class="ttdef"><b>Definition:</b> <a href="_model_manager_8hpp_source.html#l00047">ModelManager.hpp:47</a></div></div>
+<div class="ttc" id="aclass_model_manager_html_aebc07bd339be877890fcd216030815e2"><div class="ttname"><a href="class_model_manager.html#aebc07bd339be877890fcd216030815e2">ModelManager::model_hashmap</a></div><div class="ttdeci">std::unordered_map&lt; std::string, Model * &gt; model_hashmap</div><div class="ttdoc">A hashmap of models.</div><div class="ttdef"><b>Definition:</b> <a href="_model_manager_8hpp_source.html#l00049">ModelManager.hpp:49</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

@@ -1,4 +1,5 @@
 <map id="GenericFunctions::lua_access" name="GenericFunctions::lua_access">
-<area shape="rect" id="node1" title="Exposes generic functions methods to lua." alt="" coords="163,5,312,47"/>
-<area shape="rect" id="node2" href="$class_test_scene.html#a365110203eb94b8e2b9dc442b158620e" title="Initializes the scene." alt="" coords="5,13,115,39"/>
+<area shape="rect" id="node1" title="Exposes generic functions methods to lua." alt="" coords="276,5,425,47"/>
+<area shape="rect" id="node2" href="$class_reflex_engine.html#a9c185c8127a7d9d650a1bcc97e3de170" title="Runs the engine." alt="" coords="104,13,228,39"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title=" " alt="" coords="5,13,56,39"/>
 </map>

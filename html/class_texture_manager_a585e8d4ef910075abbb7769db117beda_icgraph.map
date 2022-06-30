@@ -1,0 +1,7 @@
+<map id="TextureManager::get_texture" name="TextureManager::get_texture">
+<area shape="rect" id="node1" title="Get the texture given the texture name." alt="" coords="417,49,559,90"/>
+<area shape="rect" id="node2" href="$namespacegui.html#a32199bb3c15f21a31295be2e39c258d1" title="Creates an image using a texture name." alt="" coords="222,5,329,32"/>
+<area shape="rect" id="node3" href="$class_model_data.html#a82ad8ebbe6baabbf3633586614fb537e" title="Render the model animated." alt="" coords="181,56,369,83"/>
+<area shape="rect" id="node5" href="$class_model_data.html#ae4edf4b22d7cda2e7074d3fe9c130384" title="Render the model statically." alt="" coords="190,107,361,133"/>
+<area shape="rect" id="node4" href="$class_model_data.html#af93eb28b2566856b36b26d9554e1a584" title="Render the model." alt="" coords="5,81,133,108"/>
+</map>

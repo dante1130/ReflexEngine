@@ -1,4 +1,4 @@
 <map id="InputManager::get_key_state" name="InputManager::get_key_state">
 <area shape="rect" id="node1" title="Return the key state of an input action." alt="" coords="220,5,375,47"/>
-<area shape="rect" id="node2" href="$class_test_scene.html#aad51ad2040b618871f77b2397ad5a35b" title="The function to specify controls for the keyboard." alt="" coords="5,13,172,39"/>
+<area shape="rect" id="node2" href="$class_test_scene.html#aadc1874364de154479e2469ea84d301f" title="The function to specify controls for the keyboard." alt="" coords="5,13,172,39"/>
 </map>

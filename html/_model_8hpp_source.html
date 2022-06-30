@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: src/View/Renderer/OpenGL/Objects/Model.hpp Source File</title>
+<title>ICT397 Assignment 2: src/View/Renderer/OpenGL/Objects/Model.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -112,7 +112,7 @@ $(document).ready(function(){initNavTree('_model_8hpp_source.html',''); initResi
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="comment">/**</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">     * @brief Loads a new model from a 3D object file format.</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">     * @param fileName</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">     * @param fileName The name of the file to load.</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">     */</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_model.html#aa6ec4ea18eabbb737268157253425719">LoadModel</a>(<span class="keyword">const</span> std::string&amp; fileName);</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
@@ -122,62 +122,68 @@ $(document).ready(function(){initNavTree('_model_8hpp_source.html',''); initResi
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_model.html#ae42c614a1244170ee71e73027a8437e5">RenderModel</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">     * @brief Clears the model.</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">     * @brief Renders the model.</span></div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_model.html#a202ef25daef2ee9825e91406fa597b0b">ClearModel</a>();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_model.html#a6906216d84bd7a8c0c686fb3b860208a">RenderModelTwo</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">     * @brief Destroy the Model object</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">     * @brief Clears the model.</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    ~<a class="code" href="class_model.html#ad6ebd2062a0b823db841a0b88baac4c0">Model</a>();</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_model.html#a202ef25daef2ee9825e91406fa597b0b">ClearModel</a>();</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">     * @brief Recursive function to traverse the node and load the meshes.</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">     * @param node</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">     * @param scene</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_model.html#a3af639f039b6437980bb913dbbc75fd4">LoadNode</a>(aiNode* node, <span class="keyword">const</span> aiScene* scene);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">     * @brief Loads in a mesh.</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">     * @param mesh</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">     * @param scene</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_model.html#a7b938178828e48190157d0b1f486ccc8">LoadMesh</a>(aiMesh* mesh, <span class="keyword">const</span> aiScene* scene);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="comment">/**</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">     * @brief Loads in the material/texture.</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">     *</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">     * @param scene</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">     */</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_model.html#a207d511e9cf1f061b414b8233cd17629">LoadMaterials</a>(<span class="keyword">const</span> aiScene* scene);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="comment">/// A vector of the meshes.</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="class_model.html#a5c672f73995c9edc239da4972dd34e09">   72</a></span>&#160;    <a class="code" href="class_model.html#a5c672f73995c9edc239da4972dd34e09">std</a>::<a class="code" href="class_model.html#a5c672f73995c9edc239da4972dd34e09">vector</a>&lt;<a class="code" href="class_model.html#a5c672f73995c9edc239da4972dd34e09">Mesh</a>*&gt; <a class="code" href="class_model.html#a5c672f73995c9edc239da4972dd34e09">m_meshVec</a>;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="comment">/// A vector of the textures.</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="class_model.html#aba83b12c200ec0fe0efeaaaf46b56d4f">   75</a></span>&#160;    <a class="code" href="class_model.html#aba83b12c200ec0fe0efeaaaf46b56d4f">std</a>::<a class="code" href="class_model.html#aba83b12c200ec0fe0efeaaaf46b56d4f">vector</a>&lt;<a class="code" href="class_model.html#aba83b12c200ec0fe0efeaaaf46b56d4f">Texture</a>*&gt; <a class="code" href="class_model.html#aba83b12c200ec0fe0efeaaaf46b56d4f">m_textureVec</a>;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="comment">/// A vector of the mesh to texture mapping.</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="class_model.html#ac2d961df8e788ecf6a5deafebf8966d8">   78</a></span>&#160;    <a class="code" href="class_model.html">std</a>::<a class="code" href="class_model.html">vector</a>&lt;<a class="code" href="class_model.html">GLuint</a>&gt; <a class="code" href="class_model.html#ac2d961df8e788ecf6a5deafebf8966d8">m_meshToTex</a>;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;};</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">     * @brief Destroy the Model object</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    ~<a class="code" href="class_model.html#ad6ebd2062a0b823db841a0b88baac4c0">Model</a>();</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">     * @brief Recursive function to traverse the node and load the meshes.</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">     *</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">     * @param node The node to load.</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">     * @param scene The scene to load from.</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_model.html#a3af639f039b6437980bb913dbbc75fd4">LoadNode</a>(aiNode* node, <span class="keyword">const</span> aiScene* scene);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">     * @brief Loads in a mesh.</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">     *</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">     * @param mesh The mesh to load.</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">     * @param scene The scene to load from.</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_model.html#a7b938178828e48190157d0b1f486ccc8">LoadMesh</a>(aiMesh* mesh, <span class="keyword">const</span> aiScene* scene);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="comment">/**</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">     * @brief Loads in the material/texture.</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">     *</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">     * @param scene The scene to load from.</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">     */</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_model.html#a207d511e9cf1f061b414b8233cd17629">LoadMaterials</a>(<span class="keyword">const</span> aiScene* scene);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="comment">/// A vector of the meshes.</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="class_model.html#a5c672f73995c9edc239da4972dd34e09">   77</a></span>&#160;    <a class="code" href="class_model.html#a5c672f73995c9edc239da4972dd34e09">std</a>::<a class="code" href="class_model.html#a5c672f73995c9edc239da4972dd34e09">vector</a>&lt;<a class="code" href="class_model.html#a5c672f73995c9edc239da4972dd34e09">Mesh</a>*&gt; <a class="code" href="class_model.html#a5c672f73995c9edc239da4972dd34e09">m_meshVec</a>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="comment">/// A vector of the textures.</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="class_model.html#aba83b12c200ec0fe0efeaaaf46b56d4f">   80</a></span>&#160;    <a class="code" href="class_model.html#aba83b12c200ec0fe0efeaaaf46b56d4f">std</a>::<a class="code" href="class_model.html#aba83b12c200ec0fe0efeaaaf46b56d4f">vector</a>&lt;<a class="code" href="class_model.html#aba83b12c200ec0fe0efeaaaf46b56d4f">Texture</a>*&gt; <a class="code" href="class_model.html#aba83b12c200ec0fe0efeaaaf46b56d4f">m_textureVec</a>;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="comment">/// A vector of the mesh to texture mapping.</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="class_model.html#ac2d961df8e788ecf6a5deafebf8966d8">   83</a></span>&#160;    <a class="code" href="class_model.html">std</a>::<a class="code" href="class_model.html">vector</a>&lt;<a class="code" href="class_model.html">GLuint</a>&gt; <a class="code" href="class_model.html#ac2d961df8e788ecf6a5deafebf8966d8">m_meshToTex</a>;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclass_model_html_aa6ec4ea18eabbb737268157253425719"><div class="ttname"><a href="class_model.html#aa6ec4ea18eabbb737268157253425719">Model::LoadModel</a></div><div class="ttdeci">bool LoadModel(const std::string &amp;fileName)</div><div class="ttdoc">Loads a new model from a 3D object file format.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8cpp_source.html#l00005">Model.cpp:5</a></div></div>
-<div class="ttc" id="aclass_model_html_a207d511e9cf1f061b414b8233cd17629"><div class="ttname"><a href="class_model.html#a207d511e9cf1f061b414b8233cd17629">Model::LoadMaterials</a></div><div class="ttdeci">void LoadMaterials(const aiScene *scene)</div><div class="ttdoc">Loads in the material/texture.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8cpp_source.html#l00086">Model.cpp:86</a></div></div>
-<div class="ttc" id="aclass_model_html_a7b938178828e48190157d0b1f486ccc8"><div class="ttname"><a href="class_model.html#a7b938178828e48190157d0b1f486ccc8">Model::LoadMesh</a></div><div class="ttdeci">void LoadMesh(aiMesh *mesh, const aiScene *scene)</div><div class="ttdoc">Loads in a mesh.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8cpp_source.html#l00046">Model.cpp:46</a></div></div>
-<div class="ttc" id="aclass_model_html_ad6ebd2062a0b823db841a0b88baac4c0"><div class="ttname"><a href="class_model.html#ad6ebd2062a0b823db841a0b88baac4c0">Model::~Model</a></div><div class="ttdeci">~Model()</div><div class="ttdoc">Destroy the Model object.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8cpp_source.html#l00136">Model.cpp:136</a></div></div>
-<div class="ttc" id="aclass_model_html_aba83b12c200ec0fe0efeaaaf46b56d4f"><div class="ttname"><a href="class_model.html#aba83b12c200ec0fe0efeaaaf46b56d4f">Model::m_textureVec</a></div><div class="ttdeci">std::vector&lt; Texture * &gt; m_textureVec</div><div class="ttdoc">A vector of the textures.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8hpp_source.html#l00075">Model.hpp:75</a></div></div>
+<div class="ttc" id="aclass_model_html_a207d511e9cf1f061b414b8233cd17629"><div class="ttname"><a href="class_model.html#a207d511e9cf1f061b414b8233cd17629">Model::LoadMaterials</a></div><div class="ttdeci">void LoadMaterials(const aiScene *scene)</div><div class="ttdoc">Loads in the material/texture.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8cpp_source.html#l00092">Model.cpp:92</a></div></div>
+<div class="ttc" id="aclass_model_html_a7b938178828e48190157d0b1f486ccc8"><div class="ttname"><a href="class_model.html#a7b938178828e48190157d0b1f486ccc8">Model::LoadMesh</a></div><div class="ttdeci">void LoadMesh(aiMesh *mesh, const aiScene *scene)</div><div class="ttdoc">Loads in a mesh.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8cpp_source.html#l00052">Model.cpp:52</a></div></div>
+<div class="ttc" id="aclass_model_html_ad6ebd2062a0b823db841a0b88baac4c0"><div class="ttname"><a href="class_model.html#ad6ebd2062a0b823db841a0b88baac4c0">Model::~Model</a></div><div class="ttdeci">~Model()</div><div class="ttdoc">Destroy the Model object.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8cpp_source.html#l00142">Model.cpp:142</a></div></div>
+<div class="ttc" id="aclass_model_html_aba83b12c200ec0fe0efeaaaf46b56d4f"><div class="ttname"><a href="class_model.html#aba83b12c200ec0fe0efeaaaf46b56d4f">Model::m_textureVec</a></div><div class="ttdeci">std::vector&lt; Texture * &gt; m_textureVec</div><div class="ttdoc">A vector of the textures.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8hpp_source.html#l00080">Model.hpp:80</a></div></div>
 <div class="ttc" id="aclass_model_html"><div class="ttname"><a href="class_model.html">Model</a></div><div class="ttdoc">A model class representing a Mesh with a texture. Models are loaded in using the 3D object library As...</div><div class="ttdef"><b>Definition:</b> <a href="_model_8hpp_source.html#l00018">Model.hpp:18</a></div></div>
 <div class="ttc" id="aclass_model_html_ae3b375de5f6df4faf74a95d64748e048"><div class="ttname"><a href="class_model.html#ae3b375de5f6df4faf74a95d64748e048">Model::Model</a></div><div class="ttdeci">Model()</div><div class="ttdoc">Construct a new Model object.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8cpp_source.html#l00003">Model.cpp:3</a></div></div>
-<div class="ttc" id="aclass_model_html_a5c672f73995c9edc239da4972dd34e09"><div class="ttname"><a href="class_model.html#a5c672f73995c9edc239da4972dd34e09">Model::m_meshVec</a></div><div class="ttdeci">std::vector&lt; Mesh * &gt; m_meshVec</div><div class="ttdoc">A vector of the meshes.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8hpp_source.html#l00072">Model.hpp:72</a></div></div>
-<div class="ttc" id="aclass_model_html_a3af639f039b6437980bb913dbbc75fd4"><div class="ttname"><a href="class_model.html#a3af639f039b6437980bb913dbbc75fd4">Model::LoadNode</a></div><div class="ttdeci">void LoadNode(aiNode *node, const aiScene *scene)</div><div class="ttdoc">Recursive function to traverse the node and load the meshes.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8cpp_source.html#l00038">Model.cpp:38</a></div></div>
-<div class="ttc" id="aclass_model_html_ac2d961df8e788ecf6a5deafebf8966d8"><div class="ttname"><a href="class_model.html#ac2d961df8e788ecf6a5deafebf8966d8">Model::m_meshToTex</a></div><div class="ttdeci">std::vector&lt; GLuint &gt; m_meshToTex</div><div class="ttdoc">A vector of the mesh to texture mapping.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8hpp_source.html#l00078">Model.hpp:78</a></div></div>
+<div class="ttc" id="aclass_model_html_a6906216d84bd7a8c0c686fb3b860208a"><div class="ttname"><a href="class_model.html#a6906216d84bd7a8c0c686fb3b860208a">Model::RenderModelTwo</a></div><div class="ttdeci">void RenderModelTwo() const</div><div class="ttdoc">Renders the model.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8cpp_source.html#l00038">Model.cpp:38</a></div></div>
+<div class="ttc" id="aclass_model_html_a5c672f73995c9edc239da4972dd34e09"><div class="ttname"><a href="class_model.html#a5c672f73995c9edc239da4972dd34e09">Model::m_meshVec</a></div><div class="ttdeci">std::vector&lt; Mesh * &gt; m_meshVec</div><div class="ttdoc">A vector of the meshes.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8hpp_source.html#l00077">Model.hpp:77</a></div></div>
+<div class="ttc" id="aclass_model_html_a3af639f039b6437980bb913dbbc75fd4"><div class="ttname"><a href="class_model.html#a3af639f039b6437980bb913dbbc75fd4">Model::LoadNode</a></div><div class="ttdeci">void LoadNode(aiNode *node, const aiScene *scene)</div><div class="ttdoc">Recursive function to traverse the node and load the meshes.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8cpp_source.html#l00044">Model.cpp:44</a></div></div>
+<div class="ttc" id="aclass_model_html_ac2d961df8e788ecf6a5deafebf8966d8"><div class="ttname"><a href="class_model.html#ac2d961df8e788ecf6a5deafebf8966d8">Model::m_meshToTex</a></div><div class="ttdeci">std::vector&lt; GLuint &gt; m_meshToTex</div><div class="ttdoc">A vector of the mesh to texture mapping.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8hpp_source.html#l00083">Model.hpp:83</a></div></div>
 <div class="ttc" id="aclass_model_html_ae42c614a1244170ee71e73027a8437e5"><div class="ttname"><a href="class_model.html#ae42c614a1244170ee71e73027a8437e5">Model::RenderModel</a></div><div class="ttdeci">void RenderModel() const</div><div class="ttdoc">Renders the model.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8cpp_source.html#l00025">Model.cpp:25</a></div></div>
-<div class="ttc" id="aclass_model_html_a202ef25daef2ee9825e91406fa597b0b"><div class="ttname"><a href="class_model.html#a202ef25daef2ee9825e91406fa597b0b">Model::ClearModel</a></div><div class="ttdeci">void ClearModel()</div><div class="ttdoc">Clears the model.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8cpp_source.html#l00120">Model.cpp:120</a></div></div>
+<div class="ttc" id="aclass_model_html_a202ef25daef2ee9825e91406fa597b0b"><div class="ttname"><a href="class_model.html#a202ef25daef2ee9825e91406fa597b0b">Model::ClearModel</a></div><div class="ttdeci">void ClearModel()</div><div class="ttdoc">Clears the model.</div><div class="ttdef"><b>Definition:</b> <a href="_model_8cpp_source.html#l00126">Model.cpp:126</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

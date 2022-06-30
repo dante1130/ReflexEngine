@@ -1,0 +1,4 @@
+<map id="GameAssetFactory::loadTerrainObject" name="GameAssetFactory::loadTerrainObject">
+<area shape="rect" id="node1" title="Loads in a terrian object from a lua script." alt="" coords="5,5,212,47"/>
+<area shape="rect" id="node2" href="$class_terrain_object.html#ad40fd2eb21cdb7a162db2f10c622557a" title="Construct a new Terrain Object." alt="" coords="260,13,444,39"/>
+</map>

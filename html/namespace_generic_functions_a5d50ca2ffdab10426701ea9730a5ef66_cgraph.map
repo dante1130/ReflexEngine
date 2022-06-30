@@ -1,0 +1,4 @@
+<map id="GenericFunctions::setPvPNetworkMenuActive" name="GenericFunctions::setPvPNetworkMenuActive">
+<area shape="rect" id="node1" title="Sets the pvp network menu to be active or inactive." alt="" coords="5,5,225,47"/>
+<area shape="rect" id="node2" href="$class_engine_time.html#aad4dc0ef993952ffd7dc44af996bab58" title="gets if the game is paused" alt="" coords="273,13,431,39"/>
+</map>

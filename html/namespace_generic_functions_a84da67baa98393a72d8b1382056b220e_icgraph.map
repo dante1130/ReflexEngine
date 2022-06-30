@@ -1,0 +1,5 @@
+<map id="GenericFunctions::networkGetMessage" name="GenericFunctions::networkGetMessage">
+<area shape="rect" id="node1" title="Gets a message received across the network." alt="" coords="231,39,408,80"/>
+<area shape="rect" id="node2" href="$namespace_generic_functions.html#a79ad259171a1c073bded0544dc9bb131" title="Sends the message saved in networkRetainMessage across the network." alt="" coords="5,5,183,47"/>
+<area shape="rect" id="node3" href="$namespace_generic_functions.html#ac6d0db94a4e400f465478c9dd1a95c5a" title="Sets the username of the player." alt="" coords="5,71,183,112"/>
+</map>

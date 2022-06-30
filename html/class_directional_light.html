@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: DirectionalLight Class Reference</title>
+<title>ICT397 Assignment 2: DirectionalLight Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">ICT397 Assignment 2
    </div>
   </td>
  </tr>
@@ -90,7 +90,7 @@ $(document).ready(function(){initNavTree('class_directional_light.html',''); ini
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="class_a.html">A</a> directional light that provides global illumination.  
+<p>A directional light that provides global illumination.  
  <a href="class_directional_light.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_directional_light_8hpp_source.html">DirectionalLight.hpp</a>&gt;</code></p>
@@ -171,7 +171,7 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:ac03805a977e07c63e91bd8c5ab515c22 inherit pro_attribs_class_light"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="class_a.html">A</a> directional light that provides global illumination. </p>
+<div class="textblock"><p>A directional light that provides global illumination. </p>
 
 <p class="definition">Definition at line <a class="el" href="_directional_light_8hpp_source.html#l00009">9</a> of file <a class="el" href="_directional_light_8hpp_source.html">DirectionalLight.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -271,12 +271,12 @@ Here is the caller graph for this function:</div>
 <p>Parameterized constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">shadowWidth</td><td></td></tr>
-    <tr><td class="paramname">shadowHeight</td><td></td></tr>
-    <tr><td class="paramname">color</td><td></td></tr>
-    <tr><td class="paramname">aIntensity</td><td></td></tr>
-    <tr><td class="paramname">direction</td><td></td></tr>
-    <tr><td class="paramname">dIntensity</td><td></td></tr>
+    <tr><td class="paramname">shadowWidth</td><td>The width of the shadow map. </td></tr>
+    <tr><td class="paramname">shadowHeight</td><td>The height of the shadow map. </td></tr>
+    <tr><td class="paramname">color</td><td>The color of the light. </td></tr>
+    <tr><td class="paramname">aIntensity</td><td>The ambient intensity of the light. </td></tr>
+    <tr><td class="paramname">direction</td><td>The direction of the light. </td></tr>
+    <tr><td class="paramname">dIntensity</td><td>The diffuse intensity of the light. </td></tr>
   </table>
   </dd>
 </dl>
@@ -349,7 +349,7 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Calculate the transformation matrix of the light. </p>
-<dl class="section return"><dt>Returns</dt><dd>glm::mat4 </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>glm::mat4 The transformation matrix of the light. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="_directional_light_8cpp_source.html#l00025">25</a> of file <a class="el" href="_directional_light_8cpp_source.html">DirectionalLight.cpp</a>.</p>
 <div class="fragment"><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                                                        {</div>
@@ -400,10 +400,10 @@ Here is the caller graph for this function:</div>
 <p>Enables the light by passing the uniforms to the shader. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ambientColorLoc</td><td></td></tr>
-    <tr><td class="paramname">ambientIntensityLoc</td><td></td></tr>
-    <tr><td class="paramname">directionLoc</td><td></td></tr>
-    <tr><td class="paramname">diffuseIntensityLoc</td><td></td></tr>
+    <tr><td class="paramname">ambientColorLoc</td><td>The location of the ambient color uniform. </td></tr>
+    <tr><td class="paramname">ambientIntensityLoc</td><td>The location of the ambient intensity uniform. </td></tr>
+    <tr><td class="paramname">directionLoc</td><td>The location of the direction uniform. </td></tr>
+    <tr><td class="paramname">diffuseIntensityLoc</td><td>The location of the diffuse intensity uniform. </td></tr>
   </table>
   </dd>
 </dl>
@@ -442,7 +442,7 @@ Here is the caller graph for this function:</div>
 
 <p>The direction the light is facing. </p>
 
-<p class="definition">Definition at line <a class="el" href="_directional_light_8hpp_source.html#l00056">56</a> of file <a class="el" href="_directional_light_8hpp_source.html">DirectionalLight.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_directional_light_8hpp_source.html#l00055">55</a> of file <a class="el" href="_directional_light_8hpp_source.html">DirectionalLight.hpp</a>.</p>
 
 </div>
 </div>
@@ -455,7 +455,7 @@ Here is the caller graph for this function:</div>
 <div class="ttc" id="aclass_light_html_aeb5df09a25a32f19fdffa761268ba24f"><div class="ttname"><a href="class_light.html#aeb5df09a25a32f19fdffa761268ba24f">Light::Light</a></div><div class="ttdeci">Light()</div><div class="ttdoc">Default constructor.</div><div class="ttdef"><b>Definition:</b> <a href="_light_8cpp_source.html#l00003">Light.cpp:3</a></div></div>
 <div class="ttc" id="aclass_light_html_ae8ffc82ed0d95825c5efb2fd51da8352"><div class="ttname"><a href="class_light.html#ae8ffc82ed0d95825c5efb2fd51da8352">Light::m_diffuseIntensity</a></div><div class="ttdeci">GLfloat m_diffuseIntensity</div><div class="ttdoc">The intensity of the diffuse lighting.</div><div class="ttdef"><b>Definition:</b> <a href="_light_8hpp_source.html#l00053">Light.hpp:53</a></div></div>
 <div class="ttc" id="aclass_light_html_a92ff03f51959af7109370e48ece71de0"><div class="ttname"><a href="class_light.html#a92ff03f51959af7109370e48ece71de0">Light::m_ambientIntensity</a></div><div class="ttdeci">GLfloat m_ambientIntensity</div><div class="ttdoc">The intensity of the ambient lighting.</div><div class="ttdef"><b>Definition:</b> <a href="_light_8hpp_source.html#l00049">Light.hpp:49</a></div></div>
-<div class="ttc" id="aclass_directional_light_html_a4432e8ebaa81b9fe4d033056eb19ca4c"><div class="ttname"><a href="class_directional_light.html#a4432e8ebaa81b9fe4d033056eb19ca4c">DirectionalLight::m_direction</a></div><div class="ttdeci">glm::vec3 m_direction</div><div class="ttdoc">The direction the light is facing.</div><div class="ttdef"><b>Definition:</b> <a href="_directional_light_8hpp_source.html#l00056">DirectionalLight.hpp:56</a></div></div>
+<div class="ttc" id="aclass_directional_light_html_a4432e8ebaa81b9fe4d033056eb19ca4c"><div class="ttname"><a href="class_directional_light.html#a4432e8ebaa81b9fe4d033056eb19ca4c">DirectionalLight::m_direction</a></div><div class="ttdeci">glm::vec3 m_direction</div><div class="ttdoc">The direction the light is facing.</div><div class="ttdef"><b>Definition:</b> <a href="_directional_light_8hpp_source.html#l00055">DirectionalLight.hpp:55</a></div></div>
 <div class="ttc" id="aclass_light_html_ae1e458802424a95b629cc1947ef2bcac"><div class="ttname"><a href="class_light.html#ae1e458802424a95b629cc1947ef2bcac">Light::m_color</a></div><div class="ttdeci">glm::vec3 m_color</div><div class="ttdoc">The color of the ambient lighting.</div><div class="ttdef"><b>Definition:</b> <a href="_light_8hpp_source.html#l00047">Light.hpp:47</a></div></div>
 <div class="ttc" id="aclass_light_html_ac1937d01087138b31c48d3030ce3068f"><div class="ttname"><a href="class_light.html#ac1937d01087138b31c48d3030ce3068f">Light::m_lightProj</a></div><div class="ttdeci">glm::mat4 m_lightProj</div><div class="ttdoc">The light projection.</div><div class="ttdef"><b>Definition:</b> <a href="_light_8hpp_source.html#l00056">Light.hpp:56</a></div></div>
 <!-- start footer part -->

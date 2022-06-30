@@ -8,6 +8,7 @@ var class_model =
     [ "LoadModel", "class_model.html#aa6ec4ea18eabbb737268157253425719", null ],
     [ "LoadNode", "class_model.html#a3af639f039b6437980bb913dbbc75fd4", null ],
     [ "RenderModel", "class_model.html#ae42c614a1244170ee71e73027a8437e5", null ],
+    [ "RenderModelTwo", "class_model.html#a6906216d84bd7a8c0c686fb3b860208a", null ],
     [ "m_meshToTex", "class_model.html#ac2d961df8e788ecf6a5deafebf8966d8", null ],
     [ "m_meshVec", "class_model.html#a5c672f73995c9edc239da4972dd34e09", null ],
     [ "m_textureVec", "class_model.html#aba83b12c200ec0fe0efeaaaf46b56d4f", null ]

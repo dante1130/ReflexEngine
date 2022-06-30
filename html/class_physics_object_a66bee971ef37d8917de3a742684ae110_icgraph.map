@@ -1,4 +1,4 @@
 <map id="PhysicsObject::PhysicsObject" name="PhysicsObject::PhysicsObject">
 <area shape="rect" id="node1" title="Default constructor for physics object." alt="" coords="268,13,468,39"/>
-<area shape="rect" id="node2" href="$class_game_asset_factory.html#ad7c62c013be39301d4a027614516e9b6" title="Loads in a physics object object from a lua script." alt="" coords="5,5,220,47"/>
+<area shape="rect" id="node2" href="$class_game_asset_factory.html#a0ff910751cb0ec2b5e25559dff431319" title="Loads in a physics object object from a lua script." alt="" coords="5,5,220,47"/>
 </map>

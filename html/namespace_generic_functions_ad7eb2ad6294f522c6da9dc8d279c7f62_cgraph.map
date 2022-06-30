@@ -1,0 +1,4 @@
+<map id="GenericFunctions::setNetworkMenuActive" name="GenericFunctions::setNetworkMenuActive">
+<area shape="rect" id="node1" title="Sets the network menu to be active or not." alt="" coords="5,5,203,47"/>
+<area shape="rect" id="node2" href="$class_engine_time.html#aad4dc0ef993952ffd7dc44af996bab58" title="gets if the game is paused" alt="" coords="251,13,408,39"/>
+</map>
