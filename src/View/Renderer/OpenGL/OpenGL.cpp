@@ -20,21 +20,11 @@ void OpenGL::init() {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
 	// Default shader.
-	shader_ = std::make_shared<Shader>();
+	shader_ = std::make_unique<Shader>();
 	shader_->CompileFile("shaders/shader.vert", "shaders/shader.frag");
-
-	// Directional shadow shader.
-	directional_shadow_shader_ = std::make_shared<Shader>();
-	directional_shadow_shader_->CompileFile(
-	    "shaders/directional_shadow_map.vert",
-	    "shaders/directional_shadow_map.frag");
-
-	// Omni shadow shader.
-	omni_shadow_shader_ = std::make_shared<Shader>();
-	omni_shadow_shader_->CompileFile("shaders/omni_shadow_map.vert",
-	                                 "shaders/omni_shadow_map.geom",
-	                                 "shaders/omni_shadow_map.frag");
 }
 
 void OpenGL::draw() {
@@ -46,7 +36,7 @@ void OpenGL::draw() {
 	draw_calls_.clear();
 }
 
-void OpenGL::render_scene(std::shared_ptr<Shader> shader) {
+void OpenGL::render_scene(const Shader& shader) {
 	for (const auto& draw_call : draw_calls_) {
 		draw_call(shader);
 	}
@@ -58,7 +48,6 @@ void OpenGL::render_pass() {
 	glViewport(0, 0, engine.window_.get_buffer_width(),
 	           engine.window_.get_buffer_height());
 
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glm::mat4 projection = glm::perspective(
@@ -82,7 +71,7 @@ void OpenGL::render_pass() {
 
 	shader_->Validate();
 
-	render_scene(shader_);
+	render_scene(*shader_);
 }
 
 void OpenGL::render_lights() {
@@ -100,25 +89,6 @@ void OpenGL::render_lights() {
 	shader_->set_detail_map(3);
 }
 
-void OpenGL::directional_shadow_pass(const DirectionalLight& d_light) {
-	directional_shadow_shader_->UseShader();
-
-	glViewport(0, 0, d_light.GetShadowMap()->GetShadowWidth(),
-	           d_light.GetShadowMap()->GetShadowHeight());
-
-	d_light.GetShadowMap()->Write();
-	glClear(GL_DEPTH_BUFFER_BIT);
-
-	directional_shadow_shader_->SetDirectionalLightTransform(
-	    d_light.CalculateLightTransform());
-
-	directional_shadow_shader_->Validate();
-
-	render_scene(directional_shadow_shader_);
-
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-}
-
 void OpenGL::toggle_wireframe() {
 	is_wireframe_ = !is_wireframe_;
 
@@ -128,35 +98,32 @@ void OpenGL::toggle_wireframe() {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
-std::shared_ptr<Shader> OpenGL::get_shader() { return shader_; }
-
 void OpenGL::set_skybox(const std::vector<std::string>& faces) {
 	skybox_ = Skybox(faces);
 }
 
 void OpenGL::add_directional_light(const DirectionalLightData& light) {
 	directional_lights_.emplace_back(
-	    DirectionalLight(2048, 2048, light.color, light.ambient_intensity,
-	                     light.direction, light.diffuse_intensity));
+	    DirectionalLight(light.color, light.ambient_intensity, light.direction,
+	                     light.diffuse_intensity));
 }
 
 void OpenGL::add_point_light(const PointLightData& light_data) {
 	if (point_lights_.size() < MAX_POINT_LIGHTS) {
 		point_lights_.emplace_back(PointLight(
-		    2048, 2048, 0.01f, 100.0f, light_data.color,
-		    light_data.ambient_intensity, light_data.diffuse_intensity,
-		    light_data.position, light_data.constant, light_data.linear,
-		    light_data.quadratic));
+		    light_data.color, light_data.ambient_intensity,
+		    light_data.diffuse_intensity, light_data.position,
+		    light_data.constant, light_data.linear, light_data.quadratic));
 	}
 }
 
 void OpenGL::add_spot_light(const SpotLightData& light_data) {
 	if (spot_lights_.size() < MAX_SPOT_LIGHTS) {
 		spot_lights_.emplace_back(SpotLight(
-		    2048, 2048, 0.01f, 100.0f, light_data.color,
-		    light_data.ambient_intensity, light_data.diffuse_intensity,
-		    light_data.position, light_data.direction, light_data.constant,
-		    light_data.linear, light_data.quadratic, light_data.edge));
+		    light_data.color, light_data.ambient_intensity,
+		    light_data.diffuse_intensity, light_data.position,
+		    light_data.direction, light_data.constant, light_data.linear,
+		    light_data.quadratic, light_data.edge));
 	}
 }
 

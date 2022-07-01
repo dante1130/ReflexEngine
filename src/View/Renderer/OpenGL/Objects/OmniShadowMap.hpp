@@ -27,12 +27,12 @@ public:
 	 * @brief Binds the framebuffer with the FBO.
 	 *
 	 */
-	void Write() override;
+	void Write() const override;
 
 	/**
 	 * @brief Enables the texture for the shadow.
 	 *
 	 * @param textureUnit The texture unit to bind the shadowmap to.
 	 */
-	void Read(GLenum textureUnit) override;
+	void Read(GLenum textureUnit) const override;
 };

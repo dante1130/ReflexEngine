@@ -13,8 +13,10 @@ void ReflexEngine::run() {
 
 	if (!engine.window_.init()) return;
 
+	auto& input_manager = InputManager::get_instance();
+	input_manager.load_lua_bindings("scripts/_Controls.lua");
+
 	GenericFunctions::lua_access();
-	InputManager::get_instance().load_lua_bindings("scripts/_Controls.lua");
 	ResourceManager::get_instance();
 	Audio::get_instance();
 	Physics::createWorld();
@@ -25,10 +27,8 @@ void ReflexEngine::run() {
 	engine.renderer_.init();
 	gui::init(engine.window_.get_window(), "#version 410");
 
-	engine.scenes_.emplace(std::make_shared<TestScene>());
+	engine.scenes_.emplace(std::make_unique<TestScene>());
 	engine.scenes_.top()->init();
-
-	auto& input_manager = InputManager::get_instance();
 
 	glfwSetInputMode(engine.window_.get_window(), GLFW_CURSOR,
 	                 GLFW_CURSOR_NORMAL);

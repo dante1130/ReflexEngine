@@ -48,22 +48,20 @@ void Water::update(double delta_time) {
 }
 
 void Water::add_draw_call() {
-	DrawCall draw_call = [=](std::shared_ptr<Shader> shader) { draw(shader); };
+	DrawCall draw_call = [this](const Shader &shader) { draw(shader); };
 
 	ReflexEngine::get_instance().renderer_.add_draw_call(draw_call);
 }
 
-void Water::draw(std::shared_ptr<Shader> shader) {
-	auto default_shader = ReflexEngine::get_instance().renderer_.get_shader();
-
+void Water::draw(const Shader &shader) {
 	glm::mat4 model(1.0f);
 	model = glm::translate(model, m_pos);
 
 	model = glm::scale(model, glm::vec3(100, 1, 100));
 
-	glUniformMatrix4fv(shader->GetModelLocation(), 1, GL_FALSE,
+	glUniformMatrix4fv(shader.GetModelLocation(), 1, GL_FALSE,
 	                   glm::value_ptr(model));
-	glUniform1i(shader->GetUsingTexture(), true);
+	glUniform1i(shader.GetUsingTexture(), true);
 	TextureManager &tm = ResourceManager::get_instance().get_texture_manager();
 	const Texture &t = tm.get_texture(m_textureName);
 	t.UseTexture();

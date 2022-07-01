@@ -18,13 +18,6 @@ add_subdirectory(cmake)
 
 add_subdirectory(src)
 
-if (MSVC) 
-  set(MSVC_DISABLED_WARNINGS_LIST
-  "C4100" # 'identifier' : unreferenced formal parameter
-  )
-endif()
-
-
 target_compile_options(${PROJECT_NAME} PRIVATE
     # Clang
     $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>>:
@@ -36,7 +29,10 @@ target_compile_options(${PROJECT_NAME} PRIVATE
     # GCC
     $<$<CXX_COMPILER_ID:GNU>:-Wall -Wextra -Wpedantic -fdiagnostics-color=always>
     # Visual Studio
-    $<$<CXX_COMPILER_ID:MSVC>:/W4>
+    $<$<CXX_COMPILER_ID:MSVC>:/W4 /WD4100>
+
+    $<$<CONFIG:RELEASE>:-O3>
+    $<$<CONFIG:DEBUG>:-O0>
 )
 
 add_custom_command(TARGET ReflexEngine POST_BUILD

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 #include "Md2.hpp"
 #include "Mesh.hpp"
 #include "Texture.hpp"
@@ -79,6 +81,8 @@ public:
 	~Md2Model();
 
 private:
+	void pre_load_frames();
+
 	/**
 	 * @brief Loads a frame to a mesh given a frame number.
 	 *
@@ -110,6 +114,10 @@ private:
 
 	/// The animation state of the md2 model.
 	md2::animstate_t animstate_;
+
+	/// All the frame meshes of the md2 model.
+	std::vector<std::vector<float>> frame_vertices_;
+	std::vector<uint32_t> indices_;
 
 	/// The md2 model mesh.
 	std::unique_ptr<Mesh> mesh_ = nullptr;

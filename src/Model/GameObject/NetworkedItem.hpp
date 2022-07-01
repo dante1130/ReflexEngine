@@ -17,12 +17,14 @@
 class NetworkedItem : public GameObject {
 public:
 	/**
-	 * @brief Construct a new Networked Item object with a model name and a texture name.
+	 * @brief Construct a new Networked Item object with a model name and a
+	 * texture name.
 	 *
 	 * @param model_name
 	 * @param texture_name
 	 */
-	NetworkedItem(const std::string& model_name, const std::string& texture_name);
+	NetworkedItem(const std::string& model_name,
+	              const std::string& texture_name);
 
 	/**
 	 * @brief Initializes the item with a model, a texture, and a material.
@@ -53,7 +55,7 @@ public:
 	 *
 	 * @param shader
 	 */
-	void draw(std::shared_ptr<Shader> shader) override;
+	void draw(const Shader& shader) override;
 
 	/**
 	 * @brief	Saves the object to lua file

@@ -24,7 +24,7 @@ public:
 	OpenGL renderer_ = {};
 
 	/// A stack of the current Scene, used to switch between Scenes.
-	std::stack<std::shared_ptr<Scene>> scenes_ = {};
+	std::stack<std::unique_ptr<Scene>> scenes_ = {};
 
 	/**
 	 * @brief Runs the engine.

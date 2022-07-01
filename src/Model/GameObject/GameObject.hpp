@@ -51,7 +51,7 @@ public:
 	 *
 	 * @param shader The shader to use.
 	 */
-	virtual void draw(std::shared_ptr<Shader> shader) = 0;
+	virtual void draw(const Shader& shader) = 0;
 
 	/**
 	 * @brief	Saves the object to lua file

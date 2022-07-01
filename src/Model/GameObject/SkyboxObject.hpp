@@ -43,7 +43,7 @@ public:
 	 *
 	 * @param shader The shader to use.
 	 */
-	void draw(std::shared_ptr<Shader> shader) override {}
+	void draw(const Shader& shader) override {}
 
 	/**
 	 * @brief	Saves the object to lua file

@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <string>
+#include <memory>
 
 #include <glad/glad.h>
 
@@ -20,10 +21,7 @@
  */
 class Skybox {
 public:
-	/**
-	 * @brief Construct a new Skybox object
-	 */
-	Skybox();
+	Skybox() = default;
 
 	/**
 	 * @brief Construct a new Skybox object
@@ -42,10 +40,10 @@ public:
 
 private:
 	/// The mesh of the skybox.
-	Mesh* m_skyMesh;
+	std::unique_ptr<Mesh> m_skyMesh;
 
 	/// The shader of the skybox.
-	Shader* m_skyShader;
+	std::unique_ptr<Shader> m_skyShader;
 
 	/// The locations of the faces of the skybox.
 	GLuint m_textureID;
