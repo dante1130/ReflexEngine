@@ -10,6 +10,7 @@
 #include "Controller/Physics/Physics.hpp"
 #include "Controller/RandomGenerators/PseudoRandomNumberGenerator.hpp"
 #include "Model/RunTimeDataStorage/GlobalDataStorage.hpp"
+#include "Controller/Terrain/TerrainManager.hpp"
 
 void ReflexEngine::run() {
 	auto& engine = ReflexEngine::get_instance();
@@ -23,6 +24,7 @@ void ReflexEngine::run() {
 	EngineAccess::lua_access();
 	PseudoRandomNumberGenerator::lua_access();
 	GlobalDataStorage::lua_access();
+	TerrainManager::lua_access();
 
 	ResourceManager::get_instance();
 	Audio::get_instance();

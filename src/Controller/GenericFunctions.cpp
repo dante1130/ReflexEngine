@@ -24,14 +24,6 @@ static float m_playable_floor_y_scale;
 void GenericFunctions::lua_access() {
 	sol::state& lua = LuaManager::get_instance().get_state();
 
-	lua.set_function("get_y_coord_on_floor", getHeight);
-	lua.set_function("camera_pos_x", luaCamPosX);
-	lua.set_function("camera_pos_y", luaCamPosY);
-	lua.set_function("camera_pos_z", luaCamPosZ);
-	lua.set_function("camera_look_x", luaCamLookX);
-	lua.set_function("camera_look_y", luaCamLookY);
-	lua.set_function("camera_look_z", luaCamLookZ);
-
 	// For general network functionality
 	lua.set_function("create_network_manager", createNetworkManager);
 	lua.set_function("exit_network_menu", setNetworkMenuActive);
@@ -63,39 +55,6 @@ void GenericFunctions::lua_access() {
 	lua.set_function("get_receiving_data", getReceivingData);
 	lua.set_function("network_pvp_connection_status",
 	                 networkPvPConnectionStatus);
-}
-
-float GenericFunctions::luaCamPosX() {
-	return ReflexEngine::get_instance().camera_.get_position().x;
-}
-float GenericFunctions::luaCamPosY() {
-	return ReflexEngine::get_instance().camera_.get_position().y;
-}
-float GenericFunctions::luaCamPosZ() {
-	return ReflexEngine::get_instance().camera_.get_position().z;
-}
-
-float GenericFunctions::luaCamLookX() {
-	return ReflexEngine::get_instance().camera_.get_direction().x;
-}
-float GenericFunctions::luaCamLookY() {
-	return ReflexEngine::get_instance().camera_.get_direction().y;
-}
-float GenericFunctions::luaCamLookZ() {
-	return ReflexEngine::get_instance().camera_.get_direction().z;
-}
-
-void GenericFunctions::setPlayableArea(TexturedTerrain* tt, float scale,
-                                       int size) {
-	m_tt = tt;
-	m_playable_floor_size = size;
-	m_playable_floor_y_scale = scale;
-}
-
-float GenericFunctions::getHeight(float x, float z) {
-	return m_tt->get_height_world(x - m_playable_floor_size / 2,
-	                              z - m_playable_floor_size / 2) *
-	       m_playable_floor_y_scale;
 }
 
 void GenericFunctions::createNetworkManager(bool create) {
@@ -173,16 +132,16 @@ void GenericFunctions::networkUpdate() {
 }
 
 void GenericFunctions::networkFixedUpdate() {
+	glm::vec3 camPos = ReflexEngine::get_instance().camera_.get_position();
 	if (createPvPNetwork && pvpNetworkConnected) {
-		if (glm::vec3(luaCamPosX(), luaCamPosY(), luaCamPosZ()) !=
-		        previousPos &&
+		if (glm::vec3(camPos.x, camPos.y, camPos.z) != previousPos &&
 		    networkPvP.ConnectionStatus()) {  // This should reduce how often
 			                                  // the position is updated, thus
 			                                  // reducing how much data the
 			                                  // client and/or server receives
 			networkPvP.ObjectPositionSend(
-			    glm::vec3(luaCamPosX(), luaCamPosY(), luaCamPosZ()));
-			previousPos = glm::vec3(luaCamPosX(), luaCamPosY(), luaCamPosZ());
+			    glm::vec3(camPos.x, camPos.y, camPos.z));
+			previousPos = glm::vec3(camPos.x, camPos.y, camPos.z);
 		}
 		prevOpponentPos = opponentPos;
 		opponentPos = networkPvP.ObjectPositionReceive();

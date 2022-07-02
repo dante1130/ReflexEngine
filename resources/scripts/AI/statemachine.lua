@@ -12,7 +12,7 @@ end
 
 state_player["execute"] = function(player)
   if(player.dead) then
-    load_game(true)
+    setBoolData("load_game", true)
   end
 
   local pos = vector2D.new()

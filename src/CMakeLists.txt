@@ -68,6 +68,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/multiTextureCreator.cpp
 	Controller/RandomGenerators/PseudoRandomNumberGenerator.cpp
 	Controller/ReflexEngine/EngineAccess.cpp
+	Controller/Terrain/TerrainManager.cpp
 	
 	Controller/AI/messageDispatcher.cpp
 	Model/GameObject/NPC.cpp

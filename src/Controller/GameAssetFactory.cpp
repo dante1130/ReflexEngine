@@ -433,12 +433,12 @@ TerrainObject* GameAssetFactory::loadTerrainObject(
 	to->add_storage_text(lua["terrain"]["heightMap"], 4);
 	to->add_storage_text(lua["terrain"]["detailMap"], 5);
 
-	GenericFunctions::setPlayableArea(tt, scale.y, height_size);
+	TerrainManager::setPlayableArea(tt, scale.y, height_size);
 
 	float min = lua["terrain"]["min"];
 	float max = lua["terrain"]["max"];
 	gameWorld.setMinMaxHeight(min, max);
-	gameWorld.setWorld(tt);
+	gameWorld.setWorld();
 
 	return to;
 }

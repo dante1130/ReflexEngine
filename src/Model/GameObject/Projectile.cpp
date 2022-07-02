@@ -1,12 +1,12 @@
 #include "Projectile.hpp"
+#include "Controller/Terrain/TerrainManager.hpp"
 
 void Projectile::init() {}
 
 void Projectile::update(double delta_time) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 
-	if (position.y - 0.1 <=
-	    GenericFunctions::getHeight(position.x, position.z)) {
+	if (position.y - 0.1 <= TerrainManager::getHeight(position.x, position.z)) {
 		floor_contact_ = true;
 	}
 
@@ -84,7 +84,7 @@ void Projectile::freeze_projectile() {
 	rb.setLinearAxisFactor(glm::vec3(0));
 	rb.setLinearVelocity(glm::vec3(0));
 	rb.setAngularVelocity(glm::vec3(0));
-	position.y = GenericFunctions::getHeight(position.x, position.z) + 0.1;
+	position.y = TerrainManager::getHeight(position.x, position.z) + 0.1;
 }
 
 void Projectile::remove_colliders() { rb.removeColliders(); }

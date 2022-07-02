@@ -19,66 +19,6 @@ namespace GenericFunctions {
 void lua_access();
 
 /**
- * @brief	gets camera x position
- * @return	float	- x position
- *
- * @pre		Nothing
- * @post	gets value
- */
-float luaCamPosX();
-
-/**
- * @brief	gets camera y position
- * @return	float	- y position
- *
- * @pre		Nothing
- * @post	gets value
- */
-float luaCamPosY();
-
-/**
- * @brief	gets camera z position
- * @return	float	- z position
- *
- * @pre		Nothing
- * @post	gets value
- */
-float luaCamPosZ();
-
-/**
- * @brief	gets camera x look
- * @return	float	- x look
- *
- * @pre		Nothing
- * @post	gets value
- */
-float luaCamLookX();
-
-/**
- * @brief	gets camera y look
- * @return	float	- y look
- *
- * @pre		Nothing
- * @post	gets value
- */
-float luaCamLookY();
-
-/**
- * @brief	gets camera z look
- * @return	float	- z look
- *
- * @pre		Nothing
- * @post	gets value
- */
-float luaCamLookZ();
-
-void setPlayableArea(TexturedTerrain* tt, float scale, int size);
-
-float getHeight(float x, float z);
-
-uint8_t* get_height_map();
-
-/**
  * @brief	Creates the network manager
  * @param	create  - if you want to create it
  *

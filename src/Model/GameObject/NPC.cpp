@@ -27,7 +27,7 @@ void NPC::fixed_update(double delta_time) {
 			m_NPC_FSM->update();
 
 			position = rb.getPosition();
-			position.y = GenericFunctions::getHeight(position.x, position.z);
+			position.y = TerrainManager::getHeight(position.x, position.z);
 			rb.set_position(glm::vec3(position.x, position.y, position.z));
 			m_AI_time_elapsed = 0.0f;
 		}
@@ -158,7 +158,7 @@ float NPC::get_move_speed() { return m_move_speed; }
 void NPC::set_pos(vector2D pos) {
 	position.x = pos.getX();
 	position.z = pos.getY();
-	position.y = GenericFunctions::getHeight(position.x, position.z);
+	position.y = TerrainManager::getHeight(position.x, position.z);
 	rb.set_position(glm::vec3(position.x, position.y, position.z));
 }
 float NPC::get_pos_x() { return position.x; }
