@@ -19,156 +19,6 @@ namespace GenericFunctions {
 void lua_access();
 
 /**
- * @brief Get the window width.
- *
- * @return int
- */
-int get_window_width();
-
-/**
- * @brief Get the window height.
- *
- * @return int
- */
-int get_window_height();
-
-/**
- * @brief	gets if the game should be saved
- * @return	bool	- true if it should be saved
- *
- * @pre		Nothing
- * @post	retrieves value
- */
-bool getIfSave();
-
-/**
- * @brief	Sets if the game should be saved
- * @param	val	- If the game should be saved
- *
- * @pre		Nothing
- * @post	sets value
- */
-void setIfSave(bool val);
-
-/**
- * @brief    Resets the time since the last save
- */
-void resetSaveSinceLastSave();
-
-/**
- * @brief	Gets time when the game was last saved
- * @return	int	- When the game was last saved
- */
-int timeAtLastSave();
-
-/**
- * @brief	Gets time when the game was last loaded
- * @return	int	- When the game was last loaded
- */
-int timeAtLastLoad();
-
-/**
- * @brief	Gets time
- * @return	int	- The time
- */
-int get_time();
-
-/**
- * @brief	Gets if the game should load game objects from save
- * @return	bool	- If it should load
- *
- * @pre		Nothing
- * @post	retrieves value
- */
-bool getIfLoad();
-
-/**
- * @brief	Set if game should load objects from save
- * @param	val	- If it should load objects from save
- *
- * @pre		Nothing
- * @post	sets value
- */
-void setIfLoad(bool val);
-
-/**
- * @brief	Gets if the game should load game objects from scratch
- * @return	bool	- If it should load
- *
- * @pre		Nothing
- * @post	retrieves value
- */
-bool getIfFullLoad();
-
-/**
- * @brief	Set if game should load objects from scratch
- * @param	val	- If it should load objects from scratch
- *
- * @pre		Nothing
- * @post	sets value
- */
-void setIfFullLoad(bool val);
-
-/**
- * @brief	Gets if the game should be paused
- * @return	bool	- True if game is paused
- *
- * @pre		Nothing
- * @post	retrieves value
- */
-bool getIfPaused();
-
-/**
- * @brief	Sets if the game should be paused
- * @param	val	- set true to pause game
- *
- * @pre		Nothing
- * @post	sets value
- */
-void setIfPaused(bool val);
-
-/**
- * @brief	Exits the game
- *
- * @pre		Nothing
- * @post	Exits engine
- */
-void exitEngine();
-
-/**
- * @brief	Sets if the game should show the help menu
- * @param	val	- set true to show help menu
- *
- * @pre		Nothing
- * @post	sets value
- */
-void setifHelpMenuActive(bool val);
-
-/**
- * @brief	gets if the game should show the help menu
- * @return	bool	- True if should show help menu
- *
- * @pre		Nothing
- * @post	gets value
- */
-bool getIfHelpMenuActive();
-
-/**
- * @brief Set the if credits active.
- *
- * @param val
- */
-void set_if_credits_active(bool val);
-
-/**
- * @brief Get the if credits active.
- *
- * @return true
- * @return false
- */
-bool get_if_credits_active();
-
-/**
  * @brief	gets camera x position
  * @return	float	- x position
  *
@@ -222,44 +72,7 @@ float luaCamLookY();
  */
 float luaCamLookZ();
 
-/**
- * @brief	Sets when the last shoot was fired (time of this function being
- * called)
- *
- * @pre		Nothing
- * @post	sets last shoot
- */
-void setLastShot();
-
-/**
- * @brief	Sets delay between shots
- * @param	delay	- The delay between shots
- *
- * @pre		Nothing
- * @post	sets delay
- */
-void setShotDelay(float delay);
-
-/**
- * @brief	Sets if the player should shoot
- * @param	val	- True if the player should shoot
- *
- * @pre		Nothing
- * @post	gets value
- */
-void setIfShouldShoot(bool val);
-
-/**
- * @brief	Gets if the player should shoot
- * @return	bool	- true if should shoot
- *
- * @pre		Nothing
- * @post	gets value
- */
-bool getIfShouldShoot();
-
-void setPlayableArea(uint8_t* heightmap, TexturedTerrain* tt, float scale,
-                     int size);
+void setPlayableArea(TexturedTerrain* tt, float scale, int size);
 
 float getHeight(float x, float z);
 
@@ -479,8 +292,8 @@ float getNetworkPosZ();
  * @return  bool
  *
  * @pre		Nothing
- * @post	Returns true if the network manager is receiving valid data and it is
- * not invalid
+ * @post	Returns true if the network manager is receiving valid data and it
+ * is not invalid
  */
 bool getReceivingData();
 
@@ -511,7 +324,5 @@ void networkFixedUpdate();
  * @post	Returns the retained IP address
  */
 std::string networkReturnRetainedIP();
-
-float getLength(float x, float y);
 
 };  // namespace GenericFunctions

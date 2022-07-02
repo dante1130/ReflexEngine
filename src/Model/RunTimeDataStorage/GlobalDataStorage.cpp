@@ -4,17 +4,17 @@ void GlobalDataStorage::lua_access() {
 	sol::state& lua = LuaManager::get_instance().get_state();
 
 	lua.set_function("setBoolData", &DynamicDataStorage::setDynamicBoolData,
-	                 &dds);
+	                 &dataMgr);
 	lua.set_function("getBoolData", &DynamicDataStorage::getDynamicBoolData,
-	                 &dds);
+	                 &dataMgr);
 
 	lua.set_function("setIntData", &DynamicDataStorage::setDynamicIntData,
-	                 &dds);
+	                 &dataMgr);
 	lua.set_function("getIntData", &DynamicDataStorage::getDynamicIntData,
-	                 &dds);
+	                 &dataMgr);
 
 	lua.set_function("setFloatData", &DynamicDataStorage::setDynamicFloatData,
-	                 &dds);
+	                 &dataMgr);
 	lua.set_function("getFloatData", &DynamicDataStorage::getDynamicFloatData,
-	                 &dds);
+	                 &dataMgr);
 }

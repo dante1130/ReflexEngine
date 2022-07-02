@@ -10,13 +10,13 @@ end
 
 
 if completed then
-	if(get_pause_game() == false) then
+	if(getBoolData("pause_game", true) == false) then
 		local pos = Audio.vec3df.new(camera_pos_x(), camera_pos_y(), camera_pos_z())
   		Audio.play_3d_sound("congrats", pos, false, 5.0)
 	end
 
 	set_pause_game(true)
-
+	setBoolData("pause_game", true)
 	
 
 	gui_setWindowSize(250, 260, 1)
@@ -26,8 +26,8 @@ if completed then
 
 	local isPressed = gui_button("Restart game", 200, 50)
 	if isPressed == true then
-		load_from_scratch(true)
-		load_game(true)
+		setBoolData("reload_game", true)
+		setBoolData("load_game", true)
 	end
 	gui_end()
 end

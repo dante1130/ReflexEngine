@@ -1,4 +1,4 @@
-if(get_pause_game() == false and get_load() == false) then
+if(get_pause_game() == false and getBoolData("load_game", false) == false) then
 	gui_setWindowSize(600, 50, 2)
 	gui_setWindowPos(0, 0, 2)
 	gui_begin("HEALTH")

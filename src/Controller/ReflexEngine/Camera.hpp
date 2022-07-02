@@ -19,6 +19,11 @@ enum class Movement { forward, backward, left, right };
 class Camera {
 public:
 	/**
+	 * @brief	Provides lua access to basic camera variables
+	 */
+	void lua_access();
+
+	/**
 	 * @brief Default constructor.
 	 */
 	Camera();

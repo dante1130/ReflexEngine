@@ -4,6 +4,7 @@
 #include "View/guiManager.hpp"
 #include "NetworkManager.hpp"
 #include "Controller/GenericFunctions.h"
+#include "Controller/ReflexEngine/EngineAccess.hpp"
 #include "Controller/Input/InputManager.hpp"
 #include "Controller/Audio/Audio.hpp"
 #include "Controller/Physics/Physics.hpp"
@@ -19,13 +20,9 @@ void ReflexEngine::run() {
 	input_manager.load_lua_bindings("scripts/_Controls.lua");
 
 	GenericFunctions::lua_access();
+	EngineAccess::lua_access();
 	PseudoRandomNumberGenerator::lua_access();
 	GlobalDataStorage::lua_access();
-	std::cout << GlobalDataStorage::dds.getDynamicBoolData("testing", true)
-	          << std::endl;
-	GlobalDataStorage::dds.setDynamicBoolData("testing", false);
-	std::cout << GlobalDataStorage::dds.getDynamicBoolData("testing", true)
-	          << std::endl;
 
 	ResourceManager::get_instance();
 	Audio::get_instance();
@@ -33,6 +30,7 @@ void ReflexEngine::run() {
 
 	engine.camera_ = Camera(glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 0.0f),
 	                        -90.0f, 0.0f, 5.0f, 0.2f);
+	engine.camera_.lua_access();
 
 	engine.renderer_.init();
 	gui::init(engine.window_.get_window(), "#version 410");
@@ -64,9 +62,9 @@ void ReflexEngine::run() {
 			                                     engine.window_.get_y_offset());
 		}
 
-		if (GenericFunctions::getIfLoad())
+		if (dataMgr.getDynamicBoolData("load_game", false))
 			engine.scenes_.top()->loadSavedGameObjects();
-		else if (GenericFunctions::getIfSave())
+		else if (dataMgr.getDynamicBoolData("save_game", false))
 			engine.scenes_.top()->saveGameObjects();
 		else {
 			if (EngineTime::is_time_step_passed()) {

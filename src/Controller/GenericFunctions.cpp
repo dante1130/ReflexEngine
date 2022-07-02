@@ -1,22 +1,12 @@
 #include "GenericFunctions.h"
 
-static bool shouldSave = false;
-static bool shouldLoad = false;
-static bool shouldFullLoad = false;
-
-static int last_save_time_ = -100;
-static int last_load_time_ = -100;
-
-static bool helpMenu = false;
 static bool networkMenu = false;
 static bool networkMenuPvP = false;
-static bool credits = false;
 
 static bool createNetwork = false;
 static bool networkConnected = false;
 static bool createPvPNetwork = false;
 static bool pvpNetworkConnected = false;
-static bool shouldShoot;
 static networkManager network;
 static networkManager networkPvP;
 static std::string message;
@@ -27,9 +17,6 @@ static glm::vec3 opponentPos = glm::vec3(50, 100, 50);
 static glm::vec3 prevOpponentPos = glm::vec3(50, 100, 50);
 static glm::vec3 previousPos = glm::vec3(0, 0, 0);
 
-static float lastShot = 0;
-static float shot_delay = 0;
-static uint8_t* m_heightmap;
 static TexturedTerrain* m_tt;
 static int m_playable_floor_size;
 static float m_playable_floor_y_scale;
@@ -37,23 +24,7 @@ static float m_playable_floor_y_scale;
 void GenericFunctions::lua_access() {
 	sol::state& lua = LuaManager::get_instance().get_state();
 
-	lua.set_function("window_width", get_window_width);
-	lua.set_function("window_height", get_window_height);
-	lua.set_function("current_time", get_time);
-	lua.set_function("save_game", setIfSave);
-	lua.set_function("resetSaveTime", resetSaveSinceLastSave);
-	lua.set_function("load_game", setIfLoad);
-	lua.set_function("get_load", getIfLoad);
-	lua.set_function("load_from_scratch", setIfFullLoad);
-	lua.set_function("time_since_last_save", timeAtLastSave);
-	lua.set_function("time_since_last_load", timeAtLastLoad);
-	lua.set_function("set_pause_game", setIfPaused);
-	lua.set_function("get_pause_game", getIfPaused);
-	lua.set_function("exit_game", exitEngine);
-	lua.set_function("set_help_menu", setifHelpMenuActive);
-	lua.set_function("get_help_menu", getIfHelpMenuActive);
-	lua.set_function("set_credits", set_if_credits_active);
-	lua.set_function("get_credits", get_if_credits_active);
+	lua.set_function("get_y_coord_on_floor", getHeight);
 	lua.set_function("camera_pos_x", luaCamPosX);
 	lua.set_function("camera_pos_y", luaCamPosY);
 	lua.set_function("camera_pos_z", luaCamPosZ);
@@ -92,80 +63,7 @@ void GenericFunctions::lua_access() {
 	lua.set_function("get_receiving_data", getReceivingData);
 	lua.set_function("network_pvp_connection_status",
 	                 networkPvPConnectionStatus);
-
-	lua.set_function("set_last_shot", setLastShot);
-	lua.set_function("set_shot_delay", setShotDelay);
-	lua.set_function("set_if_should_shoot", setIfShouldShoot);
-	lua.set_function("get_if_should_shoot", getIfShouldShoot);
-	lua.set_function("get_y_coord_on_floor", getHeight);
-	lua.set_function("vector2Length", getLength);
 }
-//
-int GenericFunctions::get_window_width() {
-	return ReflexEngine::get_instance().window_.get_buffer_width();
-}
-
-int GenericFunctions::get_window_height() {
-	return ReflexEngine::get_instance().window_.get_buffer_height();
-}
-
-int GenericFunctions::get_time() { return glfwGetTime(); }
-
-bool GenericFunctions::getIfSave() { return shouldSave; }
-
-void GenericFunctions::setIfSave(bool val) {
-	shouldSave = val;
-	if (val) {
-		last_save_time_ = glfwGetTime();
-	}
-}
-
-void GenericFunctions::resetSaveSinceLastSave() {
-	last_save_time_ = glfwGetTime();
-}
-
-int GenericFunctions::timeAtLastSave() { return last_save_time_; }
-
-int GenericFunctions::timeAtLastLoad() { return last_load_time_; }
-
-bool GenericFunctions::getIfLoad() { return shouldLoad; }
-
-void GenericFunctions::setIfLoad(bool val) {
-	shouldLoad = val;
-	if (val) {
-		last_load_time_ = glfwGetTime();
-	}
-}
-
-bool GenericFunctions::getIfFullLoad() { return shouldFullLoad; }
-
-void GenericFunctions::setIfFullLoad(bool val) { shouldFullLoad = val; }
-
-bool GenericFunctions::getIfPaused() { return EngineTime::is_paused(); }
-
-void GenericFunctions::setIfPaused(bool val) {
-	EngineTime::set_pause(val);
-
-	if (val) {
-		glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
-		                 GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-	} else {
-		glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
-		                 GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	}
-}
-
-void GenericFunctions::exitEngine() {
-	ReflexEngine::get_instance().window_.set_should_close(true);
-}
-
-void GenericFunctions::setifHelpMenuActive(bool val) { helpMenu = val; }
-
-bool GenericFunctions::getIfHelpMenuActive() { return helpMenu; }
-
-void GenericFunctions::set_if_credits_active(bool val) { credits = val; }
-
-bool GenericFunctions::get_if_credits_active() { return credits; }
 
 float GenericFunctions::luaCamPosX() {
 	return ReflexEngine::get_instance().camera_.get_position().x;
@@ -187,20 +85,8 @@ float GenericFunctions::luaCamLookZ() {
 	return ReflexEngine::get_instance().camera_.get_direction().z;
 }
 
-void GenericFunctions::setLastShot() { lastShot = glfwGetTime(); }
-void GenericFunctions::setShotDelay(float delay) { shot_delay = delay; }
-void GenericFunctions::setIfShouldShoot(bool val) {
-	if (lastShot < glfwGetTime() - shot_delay) {
-		shouldShoot = val;
-	} else if (val == false) {
-		shouldShoot = val;
-	}
-}
-bool GenericFunctions::getIfShouldShoot() { return shouldShoot; }
-
-void GenericFunctions::setPlayableArea(uint8_t* heightmap, TexturedTerrain* tt,
-                                       float scale, int size) {
-	// m_heightmap = heightmap;
+void GenericFunctions::setPlayableArea(TexturedTerrain* tt, float scale,
+                                       int size) {
 	m_tt = tt;
 	m_playable_floor_size = size;
 	m_playable_floor_y_scale = scale;
@@ -211,8 +97,6 @@ float GenericFunctions::getHeight(float x, float z) {
 	                              z - m_playable_floor_size / 2) *
 	       m_playable_floor_y_scale;
 }
-
-uint8_t* GenericFunctions::get_height_map() { return m_tt->get_height_map(); }
 
 void GenericFunctions::createNetworkManager(bool create) {
 	if (createNetwork != true && !networkMenuPvP) {
@@ -407,7 +291,4 @@ float GenericFunctions::getNetworkPosZ() { return opponentPos.z; }
 
 bool GenericFunctions::getReceivingData() {
 	return !networkPvP.ObjectMissedData();
-}
-float GenericFunctions::getLength(float x, float y) {
-	return sqrt(pow(x, 2) + pow(y, 2));
 }

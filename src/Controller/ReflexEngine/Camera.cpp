@@ -1,4 +1,18 @@
 #include "Camera.hpp"
+#include "Controller/LuaManager.hpp"
+
+void Camera::lua_access() {
+	/*
+	sol::state& lua = LuaManager::get_instance().get_state();
+
+	lua.set_function("camera_pos_x", position_.x);
+	lua.set_function("camera_pos_y", position_.y);
+	lua.set_function("camera_pos_z", position_.z);
+	lua.set_function("camera_look_x", front_.x);
+	lua.set_function("camera_look_y", front_.y);
+	lua.set_function("camera_look_z", front_.z);
+	*/
+}
 
 Camera::Camera() { Update(); }
 

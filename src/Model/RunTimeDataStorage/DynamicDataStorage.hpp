@@ -14,9 +14,9 @@ public:
 
 private:
 	/// An unordered map of boolean values
-	std::unordered_map<std::string, int> bool_map_;
+	std::unordered_map<std::string, bool> bool_map_;
 	/// An unordered map of int values
 	std::unordered_map<std::string, int> int_map_;
 	/// An unordered map of float values
-	std::unordered_map<std::string, int> float_map_;
+	std::unordered_map<std::string, float> float_map_;
 };
