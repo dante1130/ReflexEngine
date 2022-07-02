@@ -222,7 +222,6 @@ Player* GameAssetFactory::load_player(const std::string& lua_script) {
 
 	player->init();
 
-	physicsEntityMgr.registerEntity(player);
 	return player;
 }
 
@@ -260,7 +259,6 @@ PhysicsObject* GameAssetFactory::loadPhysicsObject(
 			loadCapsuleCollider(count, po, lua);
 		}
 	}
-	physicsEntityMgr.registerEntity(po);
 	return po;
 }
 
@@ -673,6 +671,5 @@ NPC* GameAssetFactory::loadNPCObject(const std::string& luaScript) {
 	exe(npc);
 
 	entityMgr.registerEntity(npc);
-	physicsEntityMgr.registerEntity(npc);
 	return npc;
 }
