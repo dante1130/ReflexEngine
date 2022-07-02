@@ -29,7 +29,7 @@ target_compile_options(${PROJECT_NAME} PRIVATE
     # GCC
     $<$<CXX_COMPILER_ID:GNU>:-Wall -Wextra -Wpedantic -fdiagnostics-color=always>
     # Visual Studio
-    $<$<CXX_COMPILER_ID:MSVC>:/W4 /WD4100>
+    $<$<CXX_COMPILER_ID:MSVC>:/W4>
 
     $<$<CONFIG:RELEASE>:-O3>
     $<$<CONFIG:DEBUG>:-O0>

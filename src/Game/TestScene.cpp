@@ -127,7 +127,6 @@ void TestScene::loadSavedGameObjects() {
 	}
 
 	entityMgr.killEntities();
-	physicsEntityMgr.killEntities();
 
 	sol::state& lua = LuaManager::get_instance().get_state();
 	if (GenericFunctions::getIfFullLoad() == false) {
@@ -155,7 +154,6 @@ void TestScene::garbage_collection() {
 		    game_objects_[count]->remove;
 
 		if (is_should_remove) {
-			physicsEntityMgr.garbage_collection();
 			game_objects_.erase(game_objects_.begin() + count);
 			--count;
 		}
