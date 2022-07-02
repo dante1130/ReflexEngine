@@ -1,5 +1,6 @@
 addGameObject("scripts/terrain.lua")
 addGameObject("scripts/skybox.lua")
+
 addGameObject("scripts/moonlight.lua")
 addGameObject("scripts/lighthouse_pointlight.lua")
 addGameObject("scripts/lighthouse_spotlight.lua")

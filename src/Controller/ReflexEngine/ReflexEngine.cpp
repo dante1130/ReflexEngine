@@ -8,6 +8,7 @@
 #include "Controller/Audio/Audio.hpp"
 #include "Controller/Physics/Physics.hpp"
 #include "Controller/RandomGenerators/PseudoRandomNumberGenerator.hpp"
+#include "Model/RunTimeDataStorage/GlobalDataStorage.hpp"
 
 void ReflexEngine::run() {
 	auto& engine = ReflexEngine::get_instance();
@@ -19,6 +20,13 @@ void ReflexEngine::run() {
 
 	GenericFunctions::lua_access();
 	PseudoRandomNumberGenerator::lua_access();
+	GlobalDataStorage::lua_access();
+	std::cout << GlobalDataStorage::dds.getDynamicBoolData("testing", true)
+	          << std::endl;
+	GlobalDataStorage::dds.setDynamicBoolData("testing", false);
+	std::cout << GlobalDataStorage::dds.getDynamicBoolData("testing", true)
+	          << std::endl;
+
 	ResourceManager::get_instance();
 	Audio::get_instance();
 	Physics::createWorld();

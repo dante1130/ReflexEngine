@@ -20,6 +20,8 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Model/ModelData.cpp
 	Model/GameObject/Projectile.cpp
 	Model/GameObject/NetworkedItem.cpp
+	Model/RunTimeDataStorage/DynamicDataStorage.cpp
+	Model/RunTimeDataStorage/GlobalDataStorage.cpp
 	
 	View/Renderer/OpenGL/OpenGL.cpp
 	View/Renderer/OpenGL/Objects/Light.cpp
