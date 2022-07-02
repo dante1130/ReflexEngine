@@ -8,7 +8,7 @@
 #include "View/Renderer/OpenGL/Objects/Texture.hpp"
 #include "View/Renderer/OpenGL/Objects/Material.hpp"
 #include "Controller/ResourceManager/ObjectSaving.hpp"
-#include "Controller/GenericFunctions.h"
+#include "Controller/NetworkAccess.h"
 
 /**
  * @class Networked Item

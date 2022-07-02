@@ -6,7 +6,6 @@
 #include "Controller/Pathfinding/AStar.h"
 #include <glm/glm.hpp>
 #include "Controller/Terrain/TexturedTerrain.hpp"
-#include "Controller/GenericFunctions.h"
 #include "Controller/Terrain/TerrainManager.hpp"
 
 class world {

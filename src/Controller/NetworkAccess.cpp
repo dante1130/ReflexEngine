@@ -1,4 +1,4 @@
-#include "GenericFunctions.h"
+#include "NetworkAccess.h"
 
 static bool networkMenu = false;
 static bool networkMenuPvP = false;
@@ -17,11 +17,7 @@ static glm::vec3 opponentPos = glm::vec3(50, 100, 50);
 static glm::vec3 prevOpponentPos = glm::vec3(50, 100, 50);
 static glm::vec3 previousPos = glm::vec3(0, 0, 0);
 
-static TexturedTerrain* m_tt;
-static int m_playable_floor_size;
-static float m_playable_floor_y_scale;
-
-void GenericFunctions::lua_access() {
+void NetworkAccess::lua_access() {
 	sol::state& lua = LuaManager::get_instance().get_state();
 
 	// For general network functionality
@@ -57,7 +53,7 @@ void GenericFunctions::lua_access() {
 	                 networkPvPConnectionStatus);
 }
 
-void GenericFunctions::createNetworkManager(bool create) {
+void NetworkAccess::createNetworkManager(bool create) {
 	if (createNetwork != true && !networkMenuPvP) {
 		createNetwork = true;
 		network.InitNetwork();
@@ -67,7 +63,7 @@ void GenericFunctions::createNetworkManager(bool create) {
 	}
 }
 
-void GenericFunctions::setNetworkMenuActive(bool active) {
+void NetworkAccess::setNetworkMenuActive(bool active) {
 	networkMenu = active;
 	if (networkMenu) {
 		glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
@@ -78,7 +74,7 @@ void GenericFunctions::setNetworkMenuActive(bool active) {
 	}
 }
 
-void GenericFunctions::startNetworkServer(bool active) {
+void NetworkAccess::startNetworkServer(bool active) {
 	if (active && !networkMenuPvP) {
 		network.SetupServer(username);
 		networkConnected = true;
@@ -88,7 +84,7 @@ void GenericFunctions::startNetworkServer(bool active) {
 	}
 }
 
-void GenericFunctions::networkClientConnect() {
+void NetworkAccess::networkClientConnect() {
 	if (!networkMenuPvP) {
 		char serverIPChar[30];
 		strcpy(serverIPChar, currentIPAddress.c_str());
@@ -110,7 +106,7 @@ void GenericFunctions::networkClientConnect() {
 	}
 }
 
-void GenericFunctions::networkEnd() {
+void NetworkAccess::networkEnd() {
 	if (createNetwork && !networkMenuPvP) {
 		network.DestroySession();
 		createNetwork = false;
@@ -122,7 +118,7 @@ void GenericFunctions::networkEnd() {
 	}
 }
 
-void GenericFunctions::networkUpdate() {
+void NetworkAccess::networkUpdate() {
 	if (createNetwork && networkConnected) {
 		incomingMessage = network.ReceiveMessage();
 		if (incomingMessage != " ") {
@@ -131,7 +127,7 @@ void GenericFunctions::networkUpdate() {
 	}
 }
 
-void GenericFunctions::networkFixedUpdate() {
+void NetworkAccess::networkFixedUpdate() {
 	glm::vec3 camPos = ReflexEngine::get_instance().camera_.get_position();
 	if (createPvPNetwork && pvpNetworkConnected) {
 		if (glm::vec3(camPos.x, camPos.y, camPos.z) != previousPos &&
@@ -151,34 +147,32 @@ void GenericFunctions::networkFixedUpdate() {
 	}
 }
 
-bool GenericFunctions::getNetworkMenuActive() { return (networkMenu); }
+bool NetworkAccess::getNetworkMenuActive() { return (networkMenu); }
 
-bool GenericFunctions::networkConnectionStatus() {
+bool NetworkAccess::networkConnectionStatus() {
 	bool networkStatus = network.ConnectionStatus();
 	return (networkStatus);
 }
-bool GenericFunctions::networkPvPConnectionStatus() {
+bool NetworkAccess::networkPvPConnectionStatus() {
 	bool networkPvPStatus = networkPvP.ConnectionStatus();
 	return (networkPvPStatus);
 }
 
-void GenericFunctions::networkRetainIP(std::string savedIP) {
+void NetworkAccess::networkRetainIP(std::string savedIP) {
 	if (savedIP != "") {
 		currentIPAddress = savedIP;
 	}
 }
 
-void GenericFunctions::networkRetainMessage(std::string savedMessage) {
+void NetworkAccess::networkRetainMessage(std::string savedMessage) {
 	if (savedMessage != "") {
 		message = savedMessage;
 	}
 }
 
-std::string GenericFunctions::networkReturnRetainedMessage() {
-	return (message);
-}
+std::string NetworkAccess::networkReturnRetainedMessage() { return (message); }
 
-void GenericFunctions::networkSendMessage() {
+void NetworkAccess::networkSendMessage() {
 	char messageChar[512];
 	if (network.GetServer()) {
 		strcpy(messageChar, message.c_str());
@@ -194,23 +188,23 @@ void GenericFunctions::networkSendMessage() {
 	networkGetMessage();
 }
 
-std::string GenericFunctions::networkGetMessage() { return incomingMessage; }
+std::string NetworkAccess::networkGetMessage() { return incomingMessage; }
 
-bool GenericFunctions::networkValidChatMessage() {
+bool NetworkAccess::networkValidChatMessage() {
 	return network.HasReceivedChatMessage();
 }
 
-bool GenericFunctions::networkConnectedSafe() {
+bool NetworkAccess::networkConnectedSafe() {
 	return (createNetwork && networkConnected);
 }
 
-void GenericFunctions::networkRetainUsername(std::string savedUsername) {
+void NetworkAccess::networkRetainUsername(std::string savedUsername) {
 	if (savedUsername != "") {
 		username = savedUsername;
 	}
 }
 
-void GenericFunctions::networkSetUsername() {
+void NetworkAccess::networkSetUsername() {
 	char messageChar[512];
 	if (network.GetServer()) {
 		strcpy(messageChar, "Changed their name to ");
@@ -223,13 +217,13 @@ void GenericFunctions::networkSetUsername() {
 	network.ChangeName(username);
 }
 
-std::string GenericFunctions::networkReturnUsername() { return (username); }
+std::string NetworkAccess::networkReturnUsername() { return (username); }
 
-std::string GenericFunctions::networkReturnRetainedIP() {
+std::string NetworkAccess::networkReturnRetainedIP() {
 	return (currentIPAddress);
 }
 
-void GenericFunctions::setPvPNetworkMenuActive(bool active) {
+void NetworkAccess::setPvPNetworkMenuActive(bool active) {
 	networkMenuPvP = active;
 	if (networkMenuPvP) {
 		glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
@@ -240,14 +234,14 @@ void GenericFunctions::setPvPNetworkMenuActive(bool active) {
 	}
 }
 
-bool GenericFunctions::getPvPNetworkMenuActive() { return networkMenuPvP; }
+bool NetworkAccess::getPvPNetworkMenuActive() { return networkMenuPvP; }
 
-float GenericFunctions::getNetworkPosX() { return opponentPos.x; }
+float NetworkAccess::getNetworkPosX() { return opponentPos.x; }
 
-float GenericFunctions::getNetworkPosY() { return opponentPos.y; }
+float NetworkAccess::getNetworkPosY() { return opponentPos.y; }
 
-float GenericFunctions::getNetworkPosZ() { return opponentPos.z; }
+float NetworkAccess::getNetworkPosZ() { return opponentPos.z; }
 
-bool GenericFunctions::getReceivingData() {
+bool NetworkAccess::getReceivingData() {
 	return !networkPvP.ObjectMissedData();
 }

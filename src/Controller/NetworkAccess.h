@@ -3,13 +3,9 @@
 #include "ReflexEngine/ReflexEngine.hpp"
 #include "LuaManager.hpp"
 #include "NetworkManager.hpp"
-#include <time.h>
-#include <random>
 #include "Controller/ReflexEngine/Camera.hpp"
-#include "Controller/Terrain/TexturedTerrain.hpp"
-#include "Controller/ReflexEngine/EngineTime.hpp"
 
-namespace GenericFunctions {
+namespace NetworkAccess {
 /**
  * @brief	Exposes generic functions methods to lua
  *
@@ -265,4 +261,4 @@ void networkFixedUpdate();
  */
 std::string networkReturnRetainedIP();
 
-};  // namespace GenericFunctions
+};  // namespace NetworkAccess

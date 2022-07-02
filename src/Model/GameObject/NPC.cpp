@@ -1,6 +1,7 @@
 #include "Model/GameObject/NPC.hpp"
 
 #include "Model/singletons.h"
+#include "Controller/ReflexEngine/ReflexEngine.hpp"
 
 NPC::NPC(const std::string& model_name, const std::string& texture_name,
          bool is_animated, bool is_loop_)

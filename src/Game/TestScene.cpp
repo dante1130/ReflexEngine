@@ -70,12 +70,12 @@ void TestScene::key_controls(double delta_time) {
 		    "help_menu", !dataMgr.getDynamicBoolData("help_menu", false));
 
 	if (input_manager.get_key_state(Input::network_menu).is_key_pressed()) {
-		GenericFunctions::setNetworkMenuActive(
-		    !GenericFunctions::getNetworkMenuActive());
+		NetworkAccess::setNetworkMenuActive(
+		    !NetworkAccess::getNetworkMenuActive());
 	}
 	if (input_manager.get_key_state(Input::network_pvp_menu).is_key_pressed()) {
-		GenericFunctions::setPvPNetworkMenuActive(
-		    !GenericFunctions::getPvPNetworkMenuActive());
+		NetworkAccess::setPvPNetworkMenuActive(
+		    !NetworkAccess::getPvPNetworkMenuActive());
 	}
 
 	if (input_manager.get_key_state(Input::shoot).is_key_pressed()) {
@@ -104,14 +104,14 @@ void TestScene::update(double delta_time) {
 
 	Audio::get_instance().update_listener();
 
-	GenericFunctions::networkUpdate();
+	NetworkAccess::networkUpdate();
 }
 
 void TestScene::fixed_update(double delta_time) {
 	for (auto& game_object : game_objects_) {
 		game_object->fixed_update(delta_time);
 	}
-	GenericFunctions::networkFixedUpdate();
+	NetworkAccess::networkFixedUpdate();
 	messageMgr.dispatchDelayedMessages();
 }
 

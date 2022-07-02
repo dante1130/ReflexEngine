@@ -3,7 +3,7 @@
 #include "Game/TestScene.hpp"
 #include "View/guiManager.hpp"
 #include "NetworkManager.hpp"
-#include "Controller/GenericFunctions.h"
+#include "Controller/NetworkAccess.h"
 #include "Controller/ReflexEngine/EngineAccess.hpp"
 #include "Controller/Input/InputManager.hpp"
 #include "Controller/Audio/Audio.hpp"
@@ -20,7 +20,7 @@ void ReflexEngine::run() {
 	auto& input_manager = InputManager::get_instance();
 	input_manager.load_lua_bindings("scripts/_Controls.lua");
 
-	GenericFunctions::lua_access();
+	NetworkAccess::lua_access();
 	EngineAccess::lua_access();
 	PseudoRandomNumberGenerator::lua_access();
 	GlobalDataStorage::lua_access();
@@ -52,7 +52,7 @@ void ReflexEngine::run() {
 
 		gui::mainLoopStart();
 
-		if (!GenericFunctions::getNetworkMenuActive()) {
+		if (!NetworkAccess::getNetworkMenuActive()) {
 			engine.scenes_.top()->key_controls(EngineTime::get_delta_time());
 		}
 

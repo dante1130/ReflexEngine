@@ -16,10 +16,10 @@ void NetworkedItem::add_draw_call() {
 //
 
 void NetworkedItem::update(double delta_time) {
-	if (GenericFunctions::getReceivingData()) {
-		position.x = GenericFunctions::getNetworkPosX();
-		position.y = GenericFunctions::getNetworkPosY();
-		position.z = GenericFunctions::getNetworkPosZ();
+	if (NetworkAccess::getReceivingData()) {
+		position.x = NetworkAccess::getNetworkPosX();
+		position.y = NetworkAccess::getNetworkPosY();
+		position.z = NetworkAccess::getNetworkPosZ();
 	}
 }
 
