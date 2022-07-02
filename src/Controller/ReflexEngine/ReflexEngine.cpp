@@ -7,6 +7,7 @@
 #include "Controller/Input/InputManager.hpp"
 #include "Controller/Audio/Audio.hpp"
 #include "Controller/Physics/Physics.hpp"
+#include "Controller/RandomGenerators/PseudoRandomNumberGenerator.hpp"
 
 void ReflexEngine::run() {
 	auto& engine = ReflexEngine::get_instance();
@@ -17,6 +18,7 @@ void ReflexEngine::run() {
 	input_manager.load_lua_bindings("scripts/_Controls.lua");
 
 	GenericFunctions::lua_access();
+	PseudoRandomNumberGenerator::lua_access();
 	ResourceManager::get_instance();
 	Audio::get_instance();
 	Physics::createWorld();

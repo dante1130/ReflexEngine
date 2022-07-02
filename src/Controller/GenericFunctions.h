@@ -33,27 +33,6 @@ int get_window_width();
 int get_window_height();
 
 /**
- * @brief	Initialises rand
- * @param	seed	- The seed of the random generator
- * @param	useSeed	- If you want to use the seed or just use time
- *
- * @pre		Nothing
- * @post	initialises rand
- */
-void init_random(int seed, bool useSeed);
-
-/**
- * @brief	Gets a random number
- * @param	min	- The minimum value
- * @param	max	- The maximum value
- * @return	int	- The value generated
- *
- * @pre		Nothing
- * @post	gets random number
- */
-int get_random(int min, int max);
-
-/**
  * @brief	gets if the game should be saved
  * @return	bool	- true if it should be saved
  *
@@ -416,7 +395,7 @@ bool networkValidChatMessage();
 
 /**
  * @brief	Checks if the network has connected
- * @return  bool  
+ * @return  bool
  *
  * @pre		Nothing
  * @post	Returns if the network has successfully connected
@@ -496,25 +475,28 @@ float getNetworkPosY();
 float getNetworkPosZ();
 
 /**
- * @brief	Checks if the pvp network manager is receiving data. 
- * @return  bool 
+ * @brief	Checks if the pvp network manager is receiving data.
+ * @return  bool
  *
  * @pre		Nothing
- * @post	Returns true if the network manager is receiving valid data and it is not invalid
+ * @post	Returns true if the network manager is receiving valid data and it is
+ * not invalid
  */
 bool getReceivingData();
 
 /**
  * @brief	Gets the connection status for the pvp network manager
- * @return  bool 
+ * @return  bool
  *
  * @pre		Nothing
- * @post	Returns true if the pvp network manager has successfully connected (automatic success for the server)
+ * @post	Returns true if the pvp network manager has successfully connected
+ * (automatic success for the server)
  */
 bool networkPvPConnectionStatus();
 
 /**
- * @brief	Fixed update loop for the network manager. Primarily used for object replication to improve network performance.
+ * @brief	Fixed update loop for the network manager. Primarily used for object
+ * replication to improve network performance.
  *
  * @pre		Nothing
  * @post	Update the network on the engine's fixed update loop

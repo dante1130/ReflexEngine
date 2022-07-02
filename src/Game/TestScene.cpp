@@ -5,6 +5,7 @@
 #include "Controller/Audio/Audio.hpp"
 #include "TestScene.hpp"
 #include "Controller/AI/luaAccessScriptedFSM.hpp"
+#include "Controller/RandomGenerators/PseudoRandomNumberGenerator.hpp"
 
 void TestScene::init() {
 	sol::state& lua = LuaManager::get_instance().get_state();
@@ -133,7 +134,7 @@ void TestScene::loadSavedGameObjects() {
 		lua.script_file("scripts/save/_MasterCreation.lua");
 	} else {
 		game_objects_.clear();
-		GenericFunctions::init_random(0, true);
+		PseudoRandomNumberGenerator::init_random(0, true);
 		Audio& a = Audio::get_instance();
 		a.stop_all();
 		lua.script_file("scripts/_MasterCreation.lua");

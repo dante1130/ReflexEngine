@@ -1,9 +1,5 @@
 #include "GenericFunctions.h"
 
-static bool m_initRandom = false;
-static bool m_useSeed = true;
-static int m_seed = 0;
-
 static bool shouldSave = false;
 static bool shouldLoad = false;
 static bool shouldFullLoad = false;
@@ -38,24 +34,11 @@ static TexturedTerrain* m_tt;
 static int m_playable_floor_size;
 static float m_playable_floor_y_scale;
 
-void GenericFunctions::init_random(int seed, bool useSeed) {
-	m_useSeed = useSeed;
-	m_seed = seed;
-
-	if (m_useSeed == true) {
-		srand(m_seed);
-	} else {
-		srand(time(nullptr));
-	}
-	m_initRandom = true;
-}
-
 void GenericFunctions::lua_access() {
 	sol::state& lua = LuaManager::get_instance().get_state();
 
 	lua.set_function("window_width", get_window_width);
 	lua.set_function("window_height", get_window_height);
-	lua.set_function("random_generator", get_random);
 	lua.set_function("current_time", get_time);
 	lua.set_function("save_game", setIfSave);
 	lua.set_function("resetSaveTime", resetSaveSinceLastSave);
@@ -124,13 +107,6 @@ int GenericFunctions::get_window_width() {
 
 int GenericFunctions::get_window_height() {
 	return ReflexEngine::get_instance().window_.get_buffer_height();
-}
-
-int GenericFunctions::get_random(int min, int max) {
-	if (m_initRandom == false) {
-		init_random(0, true);
-	}
-	return rand() % max + min;
 }
 
 int GenericFunctions::get_time() { return glfwGetTime(); }

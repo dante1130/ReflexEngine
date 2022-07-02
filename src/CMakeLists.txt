@@ -64,6 +64,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/Physics/BodyRigidPhysics.cpp
 	Controller/GenericFunctions.cpp
 	Controller/multiTextureCreator.cpp
+	Controller/RandomGenerators/PseudoRandomNumberGenerator.cpp
 	
 	Controller/AI/messageDispatcher.cpp
 	Model/GameObject/NPC.cpp
