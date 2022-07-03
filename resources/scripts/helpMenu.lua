@@ -1,5 +1,5 @@
 
-if get_help_menu() then
+if getBoolData("help_menu", false) then
 	gui_setWindowSize(250, 260, 1)
 	gui_setWindowPos(300, 0, 1)
 	gui_begin("Help Menu")

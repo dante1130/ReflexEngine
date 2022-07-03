@@ -1,4 +1,16 @@
 #include "Camera.hpp"
+#include "Controller/LuaManager.hpp"
+
+void Camera::lua_access() {
+	sol::state& lua = LuaManager::get_instance().get_state();
+
+	lua.set_function("camera_pos_x", &Camera::CamPosX, this);
+	lua.set_function("camera_pos_y", &Camera::CamPosY, this);
+	lua.set_function("camera_pos_z", &Camera::CamPosZ, this);
+	lua.set_function("camera_look_x", &Camera::CamLookX, this);
+	lua.set_function("camera_look_y", &Camera::CamLookY, this);
+	lua.set_function("camera_look_z", &Camera::CamLookZ, this);
+}
 
 Camera::Camera() { Update(); }
 
@@ -121,3 +133,10 @@ glm::vec3 Camera::get_move_direction() const { return direction_; }
 glm::vec3 Camera::get_up_world() const { return up_world_; }
 
 void Camera::toggle_noclip() { is_noclip_ = !is_noclip_; }
+
+float Camera::CamPosX() { return position_.x; }
+float Camera::CamPosY() { return position_.y; }
+float Camera::CamPosZ() { return position_.z; }
+float Camera::CamLookX() { return get_direction().x; }
+float Camera::CamLookY() { return get_direction().y; }
+float Camera::CamLookZ() { return get_direction().z; }

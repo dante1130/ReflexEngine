@@ -5,6 +5,9 @@
 #include "Controller/Audio/Audio.hpp"
 #include "TestScene.hpp"
 #include "Controller/AI/luaAccessScriptedFSM.hpp"
+#include "Controller/RandomGenerators/PseudoRandomNumberGenerator.hpp"
+#include "Model/RunTimeDataStorage/GlobalDataStorage.hpp"
+#include "Controller/ReflexEngine/EngineAccess.hpp"
 
 void TestScene::init() {
 	sol::state& lua = LuaManager::get_instance().get_state();
@@ -32,8 +35,8 @@ void TestScene::key_controls(double delta_time) {
 	auto& input_manager = InputManager::get_instance();
 
 	if (input_manager.get_key_state(Input::quit).is_key_pressed())
-		GenericFunctions::set_if_credits_active(
-		    !GenericFunctions::get_if_credits_active());
+		dataMgr.setDynamicBoolData(
+		    "show_credits", !dataMgr.getDynamicBoolData("show_credits", false));
 
 	camera.set_move_direction(glm::vec3(0, 0, 0));
 
@@ -60,23 +63,23 @@ void TestScene::key_controls(double delta_time) {
 		camera.toggle_noclip();
 
 	if (input_manager.get_key_state(Input::pause_game).is_key_pressed())
-		GenericFunctions::setIfPaused(!GenericFunctions::getIfPaused());
+		EngineAccess::setIfPaused(!EngineAccess::getIfPaused());
 
 	if (input_manager.get_key_state(Input::help_menu).is_key_pressed())
-		GenericFunctions::setifHelpMenuActive(
-		    !GenericFunctions::getIfHelpMenuActive());
+		dataMgr.setDynamicBoolData(
+		    "help_menu", !dataMgr.getDynamicBoolData("help_menu", false));
 
 	if (input_manager.get_key_state(Input::network_menu).is_key_pressed()) {
-		GenericFunctions::setNetworkMenuActive(
-		    !GenericFunctions::getNetworkMenuActive());
+		NetworkAccess::setNetworkMenuActive(
+		    !NetworkAccess::getNetworkMenuActive());
 	}
 	if (input_manager.get_key_state(Input::network_pvp_menu).is_key_pressed()) {
-		GenericFunctions::setPvPNetworkMenuActive(
-		    !GenericFunctions::getPvPNetworkMenuActive());
+		NetworkAccess::setPvPNetworkMenuActive(
+		    !NetworkAccess::getPvPNetworkMenuActive());
 	}
 
 	if (input_manager.get_key_state(Input::shoot).is_key_pressed()) {
-		GenericFunctions::setIfShouldShoot(true);
+		dataMgr.setDynamicBoolData("should_shoot", true);
 	}
 }
 
@@ -101,14 +104,14 @@ void TestScene::update(double delta_time) {
 
 	Audio::get_instance().update_listener();
 
-	GenericFunctions::networkUpdate();
+	NetworkAccess::networkUpdate();
 }
 
 void TestScene::fixed_update(double delta_time) {
 	for (auto& game_object : game_objects_) {
 		game_object->fixed_update(delta_time);
 	}
-	GenericFunctions::networkFixedUpdate();
+	NetworkAccess::networkFixedUpdate();
 	messageMgr.dispatchDelayedMessages();
 }
 
@@ -116,7 +119,7 @@ void TestScene::saveGameObjects() {
 	for (auto& game_object : game_objects_) {
 		game_object->save_object();
 	}
-	GenericFunctions::setIfSave(false);
+	dataMgr.setDynamicBoolData("save_game", false);
 	std::cout << "done saving" << std::endl;
 	ObjectSaving::setFreshSave();
 }
@@ -129,19 +132,19 @@ void TestScene::loadSavedGameObjects() {
 	entityMgr.killEntities();
 
 	sol::state& lua = LuaManager::get_instance().get_state();
-	if (GenericFunctions::getIfFullLoad() == false) {
+	if (dataMgr.getDynamicBoolData("reload_game", false) == false) {
 		lua.script_file("scripts/save/_MasterCreation.lua");
 	} else {
 		game_objects_.clear();
-		GenericFunctions::init_random(0, true);
+		PseudoRandomNumberGenerator::init_random(0, true);
 		Audio& a = Audio::get_instance();
 		a.stop_all();
 		lua.script_file("scripts/_MasterCreation.lua");
 		lua.script_file("scripts/AI/_MasterCreation.lua");
-		GenericFunctions::setIfFullLoad(false);
+		dataMgr.setDynamicBoolData("reload_game", false);
 	}
 
-	GenericFunctions::setIfLoad(false);
+	dataMgr.setDynamicBoolData("load_game", false);
 }
 
 void TestScene::garbage_collection() {

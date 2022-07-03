@@ -12,7 +12,7 @@ end
 
 state_player["execute"] = function(player)
   if(player.dead) then
-    load_game(true)
+    setBoolData("load_game", true)
   end
 
   local pos = vector2D.new()
@@ -66,76 +66,6 @@ state_global["onMessage"] = function(player, msg)
   return false
 
 end
-
--------------------------------------------------------------------------------
-
--- create the idle state
-
--------------------------------------------------------------------------------
-state_idle = {}
-
-
-state_idle["enter"] = function(player)
-
-end
-
-
-state_idle["execute"] = function(player)
-  if(player.dead == true) then
-    print("Entity: ", player.id, " | Faction: ", player.faction, " | Idle -> Death", " | Reason: Health 0")
-    player:getFSM():changeState("state_death")
-  end
-
-  local pos = vector2D.new()
-  pos:set(camera_pos_x(), camera_pos_z())
-  player:set_target_position(pos.x, pos.y)
-
-  local playerX = player:getX()
-  local playerZ = player:getZ()
-
-  local distance = vector2Length(pos.x - playerX, pos.y - playerZ)
-
-
-  if (distance < 5) then
-    player:moveNPC(camera_pos_x(), camera_pos_z(), 0.1)
-  else
-    --player:pathfindToPoint(playerX, playerZ, pos.x, pos.y)
-    --player:followWaypoint(false)
-    if(player:followWaypoint(false)) then
-      player:pathfindToPoint(playerX, playerZ, pos.x, pos.y)
-    end
-  end
-end
-
-
-state_idle["exit"] = function(player)
-
-end
-
-state_idle["onMessage"] = function(player, msg)
-  if (msg.msg == 2) then
-    player.health = player.health - msg.extraInfo
-  end
-
-
-end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -228,7 +158,7 @@ end
 
 
 state_chase["execute"] = function(player)
-  resetSaveTime()
+  setIntData("last_save_time", current_time())
 
   if(player:watchForEnemy(15) == false) then
     print("Entity: ", player.id, " | Faction: ", player.faction, " | Chase -> Patrol", " | Reason: Target lost")
@@ -275,7 +205,7 @@ end
 
 state_attack["execute"] = function(player)
   player:stopMovement();
-  resetSaveTime()
+  setIntData("last_save_time", current_time())
 
   local entityMgr = entityManager.new()
   local target = entityMgr.getEntity(player.target_id)
@@ -497,7 +427,7 @@ end
 
 
 state_ghost_chase["execute"] = function(player)
-  resetSaveTime()
+  setIntData("last_save_time", current_time())
 
   if(player:watchForEnemy(12) == false) then
     print("Entity: ", player.id, " | Faction: ", player.faction, " | Ghsot Chase -> Ghost Idle", " | Reason: Target lost")

@@ -1,3 +1,4 @@
+
 loadTextureRGB("water", "textures/water.png")
 loadTextureRGBA("credits", "textures/reflexbullet.png")
 loadTextureRGB("ghost_A", "textures/Ghost_color.png")

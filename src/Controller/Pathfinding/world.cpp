@@ -1,8 +1,6 @@
 #include "world.hpp"
 
-void world::setWorld(TexturedTerrain* tt) {
-	m_tt = tt;
-
+void world::setWorld() {
 	std::vector<std::vector<int>> grid;
 	create_grid(grid);
 	m_aStar.setGrid(grid);
@@ -34,9 +32,10 @@ void world::setMinMaxHeight(float min, float max) {
 void world::create_sphere_obstruction(float posX, float posZ, float radius) {
 	std::vector<std::vector<int>> grid = m_aStar.getGrid();
 
-	float checkRadius = radius / m_tt->get_scale().x;
+	float checkRadius = radius / TerrainManager::getTTerrain()->get_scale().x;
 	glm::vec2 pos =
-	    glm::vec2(posX / m_tt->get_scale().x, posZ / m_tt->get_scale().z);
+	    glm::vec2(posX / TerrainManager::getTTerrain()->get_scale().x,
+	              posZ / TerrainManager::getTTerrain()->get_scale().z);
 	float distance = 0;
 
 	checkRadius = std::ceil(checkRadius);
@@ -46,16 +45,16 @@ void world::create_sphere_obstruction(float posX, float posZ, float radius) {
 	if (startY < 0) {
 		startY = 0;
 	}
-	if (endY > m_tt->get_length() - 1) {
-		endY = m_tt->get_length() - 1;
+	if (endY > TerrainManager::getTTerrain()->get_length() - 1) {
+		endY = TerrainManager::getTTerrain()->get_length() - 1;
 	}
 	int startX = pos.x - checkRadius;
 	int endX = pos.x + checkRadius;
 	if (startX < 0) {
 		startX = 0;
 	}
-	if (endX > m_tt->get_width() - 1) {
-		startX = m_tt->get_length() - 1;
+	if (endX > TerrainManager::getTTerrain()->get_width() - 1) {
+		startX = TerrainManager::getTTerrain()->get_length() - 1;
 	}
 
 	for (int y = startY; y < endY; y++) {
@@ -75,26 +74,27 @@ void world::create_box_obstruction(float posX, float posZ, float xSize,
 	std::vector<std::vector<int>> grid = m_aStar.getGrid();
 
 	glm::vec2 pos =
-	    glm::vec2(posX / m_tt->get_scale().x, posZ / m_tt->get_scale().z);
+	    glm::vec2(posX / TerrainManager::getTTerrain()->get_scale().x,
+	              posZ / TerrainManager::getTTerrain()->get_scale().z);
 
-	xSize = std::ceil(xSize / m_tt->get_scale().x);
-	zSize = std::ceil(zSize / m_tt->get_scale().z);
+	xSize = std::ceil(xSize / TerrainManager::getTTerrain()->get_scale().x);
+	zSize = std::ceil(zSize / TerrainManager::getTTerrain()->get_scale().z);
 
 	int startY = pos.y - zSize;
 	int endY = pos.y + zSize;
 	if (startY < 0) {
 		startY = 0;
 	}
-	if (endY > m_tt->get_length() - 1) {
-		endY = m_tt->get_length() - 1;
+	if (endY > TerrainManager::getTTerrain()->get_length() - 1) {
+		endY = TerrainManager::getTTerrain()->get_length() - 1;
 	}
 	int startX = pos.x - xSize;
 	int endX = pos.x + xSize;
 	if (startX < 0) {
 		startX = 0;
 	}
-	if (endX > m_tt->get_width() - 1) {
-		startX = m_tt->get_length() - 1;
+	if (endX > TerrainManager::getTTerrain()->get_width() - 1) {
+		startX = TerrainManager::getTTerrain()->get_length() - 1;
 	}
 
 	for (int y = startY; y < endY; y++) {
@@ -106,7 +106,9 @@ void world::create_box_obstruction(float posX, float posZ, float xSize,
 	m_aStar.setGrid(grid);
 }
 
-float world::get_height(float x, float z) { return m_tt->get_height(x, z); }
+float world::get_height(float x, float z) {
+	return TerrainManager::getTTerrain()->get_height(x, z);
+}
 
 std::queue<glm::vec2> world::pathFinding(float currX, float currZ,
                                          float targetX, float targetZ) {
@@ -141,8 +143,9 @@ std::queue<glm::vec2> world::pathFinding(float currX, float currZ,
 		//           << " x: " << rawPath[end.y][end.x].parentNode.x <<
 		//           std::endl;
 
-		inversePath.push_back(glm::vec2(end.x * m_tt->get_scale().x,
-		                                end.y * m_tt->get_scale().z));
+		inversePath.push_back(
+		    glm::vec2(end.x * TerrainManager::getTTerrain()->get_scale().x,
+		              end.y * TerrainManager::getTTerrain()->get_scale().z));
 
 		temp = end.x;
 		end.x = rawPath[end.y][end.x].parentNode.x;
@@ -165,12 +168,12 @@ void world::create_grid(std::vector<std::vector<int>>& grid) {
 	int gridValue = 0;
 	std::vector<int> gridRow;
 
-	for (int z = 0; z < m_tt->get_length(); z++) {
+	for (int z = 0; z < TerrainManager::getTTerrain()->get_length(); z++) {
 		gridRow.clear();
 
-		for (int x = 0; x < m_tt->get_width(); x++) {
+		for (int x = 0; x < TerrainManager::getTTerrain()->get_width(); x++) {
 			gridValue = 0;
-			height = GenericFunctions::getHeight(x, z);
+			height = TerrainManager::getHeight(x, z);
 
 			// Check if within min & max heights
 			if (height < m_min_height || height > m_max_height) {

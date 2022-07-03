@@ -3,10 +3,14 @@
 #include "Game/TestScene.hpp"
 #include "View/guiManager.hpp"
 #include "NetworkManager.hpp"
-#include "Controller/GenericFunctions.h"
+#include "Controller/NetworkAccess.h"
+#include "Controller/ReflexEngine/EngineAccess.hpp"
 #include "Controller/Input/InputManager.hpp"
 #include "Controller/Audio/Audio.hpp"
 #include "Controller/Physics/Physics.hpp"
+#include "Controller/RandomGenerators/PseudoRandomNumberGenerator.hpp"
+#include "Model/RunTimeDataStorage/GlobalDataStorage.hpp"
+#include "Controller/Terrain/TerrainManager.hpp"
 
 void ReflexEngine::run() {
 	auto& engine = ReflexEngine::get_instance();
@@ -16,13 +20,19 @@ void ReflexEngine::run() {
 	auto& input_manager = InputManager::get_instance();
 	input_manager.load_lua_bindings("scripts/_Controls.lua");
 
-	GenericFunctions::lua_access();
+	NetworkAccess::lua_access();
+	EngineAccess::lua_access();
+	PseudoRandomNumberGenerator::lua_access();
+	GlobalDataStorage::lua_access();
+	TerrainManager::lua_access();
+
 	ResourceManager::get_instance();
 	Audio::get_instance();
 	Physics::createWorld();
 
 	engine.camera_ = Camera(glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 0.0f),
 	                        -90.0f, 0.0f, 5.0f, 0.2f);
+	engine.camera_.lua_access();
 
 	engine.renderer_.init();
 	gui::init(engine.window_.get_window(), "#version 410");
@@ -42,7 +52,7 @@ void ReflexEngine::run() {
 
 		gui::mainLoopStart();
 
-		if (!GenericFunctions::getNetworkMenuActive()) {
+		if (!NetworkAccess::getNetworkMenuActive()) {
 			engine.scenes_.top()->key_controls(EngineTime::get_delta_time());
 		}
 
@@ -54,9 +64,9 @@ void ReflexEngine::run() {
 			                                     engine.window_.get_y_offset());
 		}
 
-		if (GenericFunctions::getIfLoad())
+		if (dataMgr.getDynamicBoolData("load_game", false))
 			engine.scenes_.top()->loadSavedGameObjects();
-		else if (GenericFunctions::getIfSave())
+		else if (dataMgr.getDynamicBoolData("save_game", false))
 			engine.scenes_.top()->saveGameObjects();
 		else {
 			if (EngineTime::is_time_step_passed()) {

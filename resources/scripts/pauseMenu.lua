@@ -18,15 +18,17 @@ if paused then
 	end
 
 	if save then
-		save_game(true)
+		setBoolData("save_game", true)
+		setIntData("last_save_time", current_time())
 	end
 
 	if load then
-		load_game(true)
+		setBoolData("load_game", true)
+		setIntData("last_load_time", current_time())
 	end
 
 	if credits then
-		set_credits(true)
+		setBoolData("show_credits", true)
 	end
 
 

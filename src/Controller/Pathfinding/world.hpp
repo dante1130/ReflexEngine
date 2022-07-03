@@ -6,15 +6,14 @@
 #include "Controller/Pathfinding/AStar.h"
 #include <glm/glm.hpp>
 #include "Controller/Terrain/TexturedTerrain.hpp"
-#include "Controller/GenericFunctions.h"
+#include "Controller/Terrain/TerrainManager.hpp"
 
 class world {
 public:
 	/**
 	 * @brief	Sets the world
-	 * @param	tt	- The texture terrain to use as a grid base
 	 */
-	void setWorld(TexturedTerrain* tt);
+	void setWorld();
 
 	/**
 	 * @brief	Prints the current pathfinding grid to the terrminal

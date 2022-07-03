@@ -19,6 +19,11 @@ enum class Movement { forward, backward, left, right };
 class Camera {
 public:
 	/**
+	 * @brief	Provides lua access to basic camera variables
+	 */
+	void lua_access();
+
+	/**
 	 * @brief Default constructor.
 	 */
 	Camera();
@@ -143,4 +148,29 @@ private:
 	 * @brief Updates the camera.
 	 */
 	void Update();
+
+	/*
+	 * @brief	Gets camera x position (for lua)
+	 */
+	float CamPosX();
+	/*
+	 * @brief	Gets camera y position (for lua)
+	 */
+	float CamPosY();
+	/*
+	 * @brief	Gets camera z position (for lua)
+	 */
+	float CamPosZ();
+	/*
+	 * @brief	Gets camera x look position (for lua)
+	 */
+	float CamLookX();
+	/*
+	 * @brief	Gets camera y look position (for lua)
+	 */
+	float CamLookY();
+	/*
+	 * @brief	Gets camera z look position (for lua)
+	 */
+	float CamLookZ();
 };

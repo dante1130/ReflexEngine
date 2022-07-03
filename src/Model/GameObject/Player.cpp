@@ -10,7 +10,7 @@ void Player::update(double delta_time) {
 	lua.script_file(lua_script_);
 
 	position = rb.getPosition();
-	position.y = GenericFunctions::getHeight(position.x, position.z) + height_;
+	position.y = TerrainManager::getHeight(position.x, position.z) + height_;
 	rb.set_position(position);
 
 	auto& camera = ReflexEngine::get_instance().camera_;

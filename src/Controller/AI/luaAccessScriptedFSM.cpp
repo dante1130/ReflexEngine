@@ -50,7 +50,7 @@ void luaAccessScriptedFSM::registerGameObject() {
 
 	// player_type["getEntity"] = &entityManager::getEntityFromID;
 	player_type.set_function("getEntity", &entityManager::getEntityFromID,
-	                         entityMgr);
+	                         &entityMgr);
 }
 
 void luaAccessScriptedFSM::registerPlayer() {
