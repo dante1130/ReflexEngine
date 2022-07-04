@@ -1,5 +1,7 @@
 #include "InputManager.hpp"
 
+#include <cctype>
+
 #include "Controller/LuaManager.hpp"
 
 InputManager& InputManager::get_instance() {
@@ -10,7 +12,14 @@ InputManager& InputManager::get_instance() {
 void InputManager::lua_access() {
 	auto& lua = LuaManager::get_instance().get_state();
 
-	auto input_manager = lua.create_named_table("input_manager");
+	auto input_state_type = lua.new_usertype<InputState>(
+	    "InputState", sol::constructors<InputState()>());
+
+	input_state_type["is_key_pressed"] = &InputState::is_key_pressed;
+	input_state_type["is_key_released"] = &InputState::is_key_released;
+	input_state_type["is_key_held"] = &InputState::is_key_hold;
+
+	auto input_manager = lua.create_named_table("Input");
 
 	input_manager.set_function("get_key_state", &InputManager::get_key_state,
 	                           this);
@@ -19,30 +28,34 @@ void InputManager::lua_access() {
 }
 
 void InputManager::read_keys(GLFWwindow* window) {
-	for (const auto& binding : bind_map) {
-		const int key = glfwGetKey(window, binding.second);
+	for (const auto& [bind, key] : bind_map) {
+		const int state = glfwGetKey(window, key);
 
-		if (key == GLFW_PRESS || key == GLFW_RELEASE) {
-			key_states.at(bind_map.at(binding.first)).set_key_state(key);
+		if (state == GLFW_PRESS || state == GLFW_RELEASE) {
+			key_states.at(bind_map.at(bind)).set_key_state(state);
 		}
 	}
 }
 
 void InputManager::read_mouse_buttons(GLFWwindow* window) {
-	for (const auto& binding : bind_map) {
-		const int key = glfwGetMouseButton(window, binding.second);
+	for (const auto& [bind, key] : bind_map) {
+		const int state = glfwGetMouseButton(window, key);
 
-		if (key == GLFW_PRESS || key == GLFW_RELEASE) {
-			key_states.at(bind_map.at(binding.first)).set_key_state(key);
+		if (state == GLFW_PRESS || state == GLFW_RELEASE) {
+			key_states.at(bind_map.at(bind)).set_key_state(state);
 		}
 	}
 }
 
-InputState InputManager::get_key_state(const std::string& bind) {
-	return key_states.at(bind_map.at(bind));
+const InputState& InputManager::get_key_state(const std::string& bind) {
+	if (bind.length() > 1) {
+		return key_states.at(bind_map.at(bind));
+	} else {
+		return key_states.at(toupper(bind[0]));
+	}
 }
 
-InputState InputManager::get_mouse_key_state(const std::string& bind) {
+const InputState& InputManager::get_mouse_key_state(const std::string& bind) {
 	return key_states.at(mouse_bind_map.at(bind));
 }
 
@@ -80,13 +93,11 @@ InputManager::InputManager()
                 {"f10", GLFW_KEY_F10},
                 {"f11", GLFW_KEY_F11},
                 {"f12", GLFW_KEY_F12}}),
-      mouse_bind_map({
-          {"mouse1", GLFW_MOUSE_BUTTON_1},
-          {"mouse2", GLFW_MOUSE_BUTTON_2},
-          {"mouse3", GLFW_MOUSE_BUTTON_3},
-          {"mouse4", GLFW_MOUSE_BUTTON_4},
-          {"mouse5", GLFW_MOUSE_BUTTON_5},
-          {"mouse6", GLFW_MOUSE_BUTTON_6},
-          {"mouse7", GLFW_MOUSE_BUTTON_7},
-          {"mouse8", GLFW_MOUSE_BUTTON_8},
-      }) {}
+      mouse_bind_map({{"mouse1", GLFW_MOUSE_BUTTON_1},
+                      {"mouse2", GLFW_MOUSE_BUTTON_2},
+                      {"mouse3", GLFW_MOUSE_BUTTON_3},
+                      {"mouse4", GLFW_MOUSE_BUTTON_4},
+                      {"mouse5", GLFW_MOUSE_BUTTON_5},
+                      {"mouse6", GLFW_MOUSE_BUTTON_6},
+                      {"mouse7", GLFW_MOUSE_BUTTON_7},
+                      {"mouse8", GLFW_MOUSE_BUTTON_8}}) {}

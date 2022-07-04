@@ -45,7 +45,7 @@ public:
 	 * @param bind The key binding.
 	 * @return InputState
 	 */
-	InputState get_key_state(const std::string& bind);
+	const InputState& get_key_state(const std::string& bind);
 
 	/**
 	 * @brief Return the mouse key state of an input action.
@@ -53,7 +53,7 @@ public:
 	 * @param bind The mouse key binding.
 	 * @return InputState
 	 */
-	InputState get_mouse_key_state(const std::string& bind);
+	const InputState& get_mouse_key_state(const std::string& bind);
 
 	// These are deleted as a singleton pattern is used.
 	InputManager(InputManager& other) = delete;
