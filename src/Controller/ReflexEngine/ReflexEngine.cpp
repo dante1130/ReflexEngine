@@ -18,7 +18,7 @@ void ReflexEngine::run() {
 	if (!engine.window_.init()) return;
 
 	auto& input_manager = InputManager::get_instance();
-	input_manager.load_lua_bindings("scripts/_Controls.lua");
+	input_manager.lua_access();
 
 	NetworkAccess::lua_access();
 	EngineAccess::lua_access();
@@ -49,6 +49,7 @@ void ReflexEngine::run() {
 
 		glfwPollEvents();
 		input_manager.read_keys(engine.window_.get_window());
+		input_manager.read_mouse_buttons(engine.window_.get_window());
 
 		gui::mainLoopStart();
 
