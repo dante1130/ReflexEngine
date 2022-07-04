@@ -1,23 +1,5 @@
 #include "NetworkManager.hpp"
 
-char message[512];
-
-char name[256];
-
-bool isServer;
-
-bool connected = false;
-
-bool init = false;
-
-int connectedClients = 0;
-
-RakNet::RakPeerInterface* peer;
-
-RakNet::Packet* packet;
-
-enum GameMessages { ID_GAME_MESSAGE_1 = ID_USER_PACKET_ENUM + 1 };
-
 void networkManager::InitNetwork() {
 	peer = RakNet::RakPeerInterface::GetInstance();
 	init = true;
