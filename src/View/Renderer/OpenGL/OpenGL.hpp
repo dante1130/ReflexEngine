@@ -25,6 +25,11 @@ public:
 	OpenGL() = default;
 
 	/**
+	 * @brief Expose the OpenGL renderer to the scene.
+	 */
+	void lua_access();
+
+	/**
 	 * @brief Initializes OpenGL, shaders, camera and the skybox.
 	 */
 	void init() override;

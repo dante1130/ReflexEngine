@@ -68,7 +68,7 @@ void NetworkAccess::setNetworkMenuActive(bool active) {
 	if (networkMenu) {
 		glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
 		                 GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-	} else if (!networkMenu && !EngineTime::is_paused()) {
+	} else if (!EngineTime::is_paused()) {
 		glfwSetInputMode(ReflexEngine::get_instance().window_.get_window(),
 		                 GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	}

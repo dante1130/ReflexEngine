@@ -81,23 +81,6 @@ void ModelData::animate(float delta_time) {
 		animstate_.prev_time = animstate_.curr_time;
 	}
 
-	/*
-	if (animstate_.curr_frame > (24 - 1)) {
-	    animstate_.curr_frame = 0;
-	    if (!is_loop_) {
-	        is_animation_done_ = true;
-	    }
-	}
-
-
-	if (animstate_.next_frame > (24 - 1)) {
-	    animstate_.next_frame = 0;
-	    if (!is_loop_) {
-	        is_animation_done_ = true;
-	    }
-	}
-	*/
-
 	animstate_.interpol =
 	    animstate_.fps * (animstate_.curr_time - animstate_.prev_time);
 }

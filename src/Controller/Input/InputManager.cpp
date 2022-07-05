@@ -17,7 +17,7 @@ void InputManager::lua_access() {
 
 	input_state_type["is_key_pressed"] = &InputState::is_key_pressed;
 	input_state_type["is_key_released"] = &InputState::is_key_released;
-	input_state_type["is_key_held"] = &InputState::is_key_hold;
+	input_state_type["is_key_hold"] = &InputState::is_key_hold;
 
 	auto input_manager = lua.create_named_table("Input");
 
@@ -35,14 +35,25 @@ void InputManager::read_keys(GLFWwindow* window) {
 			key_states.at(bind_map.at(bind)).set_key_state(state);
 		}
 	}
+
+	// Check for ASCII key presses.
+	constexpr size_t ascii_size = 256ULL;
+
+	for (size_t i = 0; i < ascii_size; ++i) {
+		const int state = glfwGetKey(window, i);
+
+		if (state == GLFW_PRESS || state == GLFW_RELEASE) {
+			key_states.at(i).set_key_state(state);
+		}
+	}
 }
 
 void InputManager::read_mouse_buttons(GLFWwindow* window) {
-	for (const auto& [bind, key] : bind_map) {
+	for (const auto& [bind, key] : mouse_bind_map) {
 		const int state = glfwGetMouseButton(window, key);
 
 		if (state == GLFW_PRESS || state == GLFW_RELEASE) {
-			key_states.at(bind_map.at(bind)).set_key_state(state);
+			key_states.at(mouse_bind_map.at(bind)).set_key_state(state);
 		}
 	}
 }

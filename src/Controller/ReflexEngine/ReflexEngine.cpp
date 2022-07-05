@@ -53,10 +53,6 @@ void ReflexEngine::run() {
 
 		gui::mainLoopStart();
 
-		if (!NetworkAccess::getNetworkMenuActive()) {
-			engine.scenes_.top()->key_controls(EngineTime::get_delta_time());
-		}
-
 		if (EngineTime::is_paused()) {
 			EngineTime::force_delta_time(0);
 		} else {

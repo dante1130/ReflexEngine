@@ -4,12 +4,21 @@
 void Camera::lua_access() {
 	sol::state& lua = LuaManager::get_instance().get_state();
 
-	lua.set_function("camera_pos_x", &Camera::CamPosX, this);
-	lua.set_function("camera_pos_y", &Camera::CamPosY, this);
-	lua.set_function("camera_pos_z", &Camera::CamPosZ, this);
-	lua.set_function("camera_look_x", &Camera::CamLookX, this);
-	lua.set_function("camera_look_y", &Camera::CamLookY, this);
-	lua.set_function("camera_look_z", &Camera::CamLookZ, this);
+	auto movement_enum = lua.new_enum("Movement", "forward", Movement::forward,
+	                                  "backward", Movement::backward, "left",
+	                                  Movement::left, "right", Movement::right);
+
+	lua.set_function("camera_pos_x", &Camera::cam_pos_x, this);
+	lua.set_function("camera_pos_y", &Camera::cam_pos_y, this);
+	lua.set_function("camera_pos_z", &Camera::cam_pos_z, this);
+	lua.set_function("camera_look_x", &Camera::cam_look_x, this);
+	lua.set_function("camera_look_y", &Camera::cam_look_y, this);
+	lua.set_function("camera_look_z", &Camera::cam_look_z, this);
+	lua.set_function("set_move_dir_x", &Camera::set_move_dir_x, this);
+	lua.set_function("set_move_dir_y", &Camera::set_move_dir_y, this);
+	lua.set_function("set_move_dir_z", &Camera::set_move_dir_z, this);
+	lua.set_function("toggle_noclip", &Camera::toggle_noclip, this);
+	lua.set_function("calculate_direction", &Camera::calculate_direction, this);
 }
 
 Camera::Camera() { Update(); }
@@ -134,9 +143,13 @@ glm::vec3 Camera::get_up_world() const { return up_world_; }
 
 void Camera::toggle_noclip() { is_noclip_ = !is_noclip_; }
 
-float Camera::CamPosX() { return position_.x; }
-float Camera::CamPosY() { return position_.y; }
-float Camera::CamPosZ() { return position_.z; }
-float Camera::CamLookX() { return get_direction().x; }
-float Camera::CamLookY() { return get_direction().y; }
-float Camera::CamLookZ() { return get_direction().z; }
+float Camera::cam_pos_x() { return position_.x; }
+float Camera::cam_pos_y() { return position_.y; }
+float Camera::cam_pos_z() { return position_.z; }
+float Camera::cam_look_x() { return get_direction().x; }
+float Camera::cam_look_y() { return get_direction().y; }
+float Camera::cam_look_z() { return get_direction().z; }
+
+void Camera::set_move_dir_x(float x) { direction_.x = x; }
+void Camera::set_move_dir_y(float y) { direction_.y = y; }
+void Camera::set_move_dir_z(float z) { direction_.z = z; }

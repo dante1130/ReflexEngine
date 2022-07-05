@@ -1,4 +1,3 @@
-
 if getBoolData("help_menu", false) then
 	gui_setWindowSize(250, 260, 1)
 	gui_setWindowPos(300, 0, 1)
@@ -10,7 +9,7 @@ if getBoolData("help_menu", false) then
 	gui_text(" - Wireframe	: k")
 	gui_text(" - Movement	: WASD")
 	gui_text(" - Look		: Mouse")
-	gui_text(" - Shoot		: Space")
+	gui_text(" - Shoot		: Left mouse")
 	gui_text(" - Networking	: n")
 	gui_text(" - PvP		: p")
 	gui_text("Objective:")
