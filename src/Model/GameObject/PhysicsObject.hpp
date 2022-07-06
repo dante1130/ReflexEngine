@@ -2,9 +2,10 @@
 
 #include "BodyRigid.hpp"
 #include "Controller/ResourceManager/ResourceManager.hpp"
+#include "Controller/ResourceManager/ObjectSaving.hpp"
+#include "Controller/Physics/PhysicResolution.hpp"
 #include "View/Renderer/OpenGL/Objects/Model.hpp"
 #include "View/Renderer/OpenGL/Objects/Material.hpp"
-#include "Controller/ResourceManager/ObjectSaving.hpp"
 
 class PhysicsObject : public GameObject{
 public:
@@ -16,6 +17,7 @@ public:
 	 */
 	PhysicsObject() = default;
 
+	void set_resolution_type(const PhysicResolution phyx_res);
 	/**
 	 * @brief	Initialised the model
 	 * @param	model_name		name of model
@@ -90,39 +92,7 @@ protected:
 	/// The material of the item.
 	std::string material_name_;
 
-	/**
-	 * @brief	Saves the sphere collider of rb
-	 * @param	index	- Which collider to save
-	 *
-	 * @pre		Collider exists
-	 * @post	Collider stored
-	 */
-	void saveSphereCollider(size_t index);
+	//physics stuff
+	PhysicResolution rb; 
 
-	/**
-	 * @brief	Saves the capsule collider of rb
-	 * @param	index	- Which collider to save
-	 *
-	 * @pre		Collider exists
-	 * @post	Collider stored
-	 */
-	void saveCapsuleCollider(size_t index);
-
-	/**
-	 * @brief	Saves the box collider of rb
-	 * @param	index	- Which collider to save
-	 *
-	 * @pre		Collider exists
-	 * @post	Collider stored
-	 */
-	void saveBoxCollider(size_t index);
-	/**
-	 * @brief	Saves the collider of rb
-	 * @param	index	- Which collider to save
-	 * @param	type	- The type of collider
-	 *
-	 * @pre		Collider exists
-	 * @post	Collider stored
-	 */
-	void saveCollider(size_t index, int type);
 };
