@@ -1,5 +1,5 @@
 addGameObject("scripts/terrain.lua")
-addGameObject("scripts/skybox.lua")
+--addGameObject("scripts/skybox.lua")
 
 addGameObject("scripts/moonlight.lua")
 addGameObject("scripts/lighthouse_pointlight.lua")
@@ -50,3 +50,4 @@ addGameObject("scripts/gui/EndGame.lua")
 addGameObject("scripts/gui/EndGameNetworkedPvP.lua")
 addGameObject("scripts/EscapeBoat.lua")
 addGameObject("scripts/bigArrow.lua")
+addGameObject("scripts/input_setup.lua")

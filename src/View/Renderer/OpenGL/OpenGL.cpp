@@ -1,6 +1,15 @@
 #include "OpenGL.hpp"
 
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
+#include "Controller/LuaManager.hpp"
+
+void OpenGL::lua_access() {
+	auto& lua = LuaManager::get_instance().get_state();
+
+	auto renderer = lua.create_named_table("Renderer");
+
+	renderer.set_function("toggle_wireframe", &OpenGL::toggle_wireframe, this);
+}
 
 void OpenGL::init() {
 	auto& engine = ReflexEngine::get_instance();
@@ -25,6 +34,18 @@ void OpenGL::init() {
 	// Default shader.
 	shader_ = std::make_unique<Shader>();
 	shader_->CompileFile("shaders/shader.vert", "shaders/shader.frag");
+
+	static const std::vector<std::string> default_skybox = {
+	    "textures/skyboxes/default/right.jpg",
+	    "textures/skyboxes/default/left.jpg",
+	    "textures/skyboxes/default/top.jpg",
+	    "textures/skyboxes/default/bottom.jpg",
+	    "textures/skyboxes/default/front.jpg",
+	    "textures/skyboxes/default/back.jpg"};
+
+	skybox_ = Skybox(default_skybox);
+
+	lua_access();
 }
 
 void OpenGL::draw() {

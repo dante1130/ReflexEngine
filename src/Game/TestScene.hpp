@@ -38,13 +38,6 @@ public:
 	void addGameObject(const std::string& luaScript) override;
 
 	/**
-	 * @brief The function to specify controls for the keyboard.
-	 *
-	 * @param delta_time	- The time between frames
-	 */
-	void key_controls(double delta_time) override;
-
-	/**
 	 * @brief The function to specify controls for the mouse.
 	 *
 	 * @param xpos	- X position of mouse on screen

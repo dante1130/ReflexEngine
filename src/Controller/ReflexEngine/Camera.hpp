@@ -152,25 +152,46 @@ private:
 	/*
 	 * @brief	Gets camera x position (for lua)
 	 */
-	float CamPosX();
+	float cam_pos_x();
 	/*
 	 * @brief	Gets camera y position (for lua)
 	 */
-	float CamPosY();
+	float cam_pos_y();
 	/*
 	 * @brief	Gets camera z position (for lua)
 	 */
-	float CamPosZ();
+	float cam_pos_z();
 	/*
 	 * @brief	Gets camera x look position (for lua)
 	 */
-	float CamLookX();
+	float cam_look_x();
 	/*
 	 * @brief	Gets camera y look position (for lua)
 	 */
-	float CamLookY();
+	float cam_look_y();
 	/*
 	 * @brief	Gets camera z look position (for lua)
 	 */
-	float CamLookZ();
+	float cam_look_z();
+
+	/**
+	 * @brief	Sets camera x position (for lua)
+	 *
+	 * @param	x	The x position.
+	 */
+	void set_move_dir_x(float x);
+
+	/**
+	 * @brief	Sets camera y position (for lua)
+	 *
+	 * @param	y	The y position.
+	 */
+	void set_move_dir_y(float y);
+
+	/**
+	 * @brief	Sets camera z position (for lua)
+	 *
+	 * @param	z	The z position.
+	 */
+	void set_move_dir_z(float z);
 };

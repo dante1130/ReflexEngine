@@ -30,59 +30,6 @@ void TestScene::addGameObject(const std::string& luaScript) {
 	game_objects_.emplace_back(GameAssetFactory::create(luaScript));
 }
 
-void TestScene::key_controls(double delta_time) {
-	auto& camera = ReflexEngine::get_instance().camera_;
-	auto& input_manager = InputManager::get_instance();
-
-	if (input_manager.get_key_state(Input::quit).is_key_pressed())
-		dataMgr.setDynamicBoolData(
-		    "show_credits", !dataMgr.getDynamicBoolData("show_credits", false));
-
-	camera.set_move_direction(glm::vec3(0, 0, 0));
-
-	if (!(input_manager.get_key_state(Input::move_forward).is_key_hold() &&
-	      input_manager.get_key_state(Input::move_backward).is_key_hold())) {
-		if (input_manager.get_key_state(Input::move_forward).is_key_hold())
-			camera.calculate_direction(Movement::forward);
-		if (input_manager.get_key_state(Input::move_backward).is_key_hold())
-			camera.calculate_direction(Movement::backward);
-	}
-
-	if (!(input_manager.get_key_state(Input::move_left).is_key_hold() &&
-	      input_manager.get_key_state(Input::move_right).is_key_hold())) {
-		if (input_manager.get_key_state(Input::move_left).is_key_hold())
-			camera.calculate_direction(Movement::left);
-		if (input_manager.get_key_state(Input::move_right).is_key_hold())
-			camera.calculate_direction(Movement::right);
-	}
-
-	if (input_manager.get_key_state(Input::toggle_wireframe).is_key_pressed())
-		ReflexEngine::get_instance().renderer_.toggle_wireframe();
-
-	if (input_manager.get_key_state(Input::toggle_noclip).is_key_pressed())
-		camera.toggle_noclip();
-
-	if (input_manager.get_key_state(Input::pause_game).is_key_pressed())
-		EngineAccess::setIfPaused(!EngineAccess::getIfPaused());
-
-	if (input_manager.get_key_state(Input::help_menu).is_key_pressed())
-		dataMgr.setDynamicBoolData(
-		    "help_menu", !dataMgr.getDynamicBoolData("help_menu", false));
-
-	if (input_manager.get_key_state(Input::network_menu).is_key_pressed()) {
-		NetworkAccess::setNetworkMenuActive(
-		    !NetworkAccess::getNetworkMenuActive());
-	}
-	if (input_manager.get_key_state(Input::network_pvp_menu).is_key_pressed()) {
-		NetworkAccess::setPvPNetworkMenuActive(
-		    !NetworkAccess::getPvPNetworkMenuActive());
-	}
-
-	if (input_manager.get_key_state(Input::shoot).is_key_pressed()) {
-		dataMgr.setDynamicBoolData("should_shoot", true);
-	}
-}
-
 void TestScene::mouse_controls(double xpos, double ypos) {
 	auto& camera = ReflexEngine::get_instance().camera_;
 

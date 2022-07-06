@@ -1,5 +1,5 @@
 target_sources(${PROJECT_NAME} PRIVATE
-    main.cpp
+	main.cpp
 
 	NetworkManager.cpp
 
@@ -22,7 +22,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Model/GameObject/NetworkedItem.cpp
 	Model/RunTimeDataStorage/DynamicDataStorage.cpp
 	Model/RunTimeDataStorage/GlobalDataStorage.cpp
-	
+
 	View/Renderer/OpenGL/OpenGL.cpp
 	View/Renderer/OpenGL/Objects/Light.cpp
 	View/Renderer/OpenGL/Objects/DirectionalLight.cpp
@@ -51,7 +51,6 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/ResourceManager/ObjectSaving.cpp
 	Controller/Input/InputManager.cpp
 	Controller/Input/InputState.cpp
-	Controller/Input/Input.hpp
 	Controller/Audio/Audio.cpp
 	Controller/Audio/AudioStopReceiver.cpp
 	Controller/Pathfinding/AStar.cpp
@@ -69,7 +68,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/RandomGenerators/PseudoRandomNumberGenerator.cpp
 	Controller/ReflexEngine/EngineAccess.cpp
 	Controller/Terrain/TerrainManager.cpp
-	
+
 	Controller/AI/messageDispatcher.cpp
 	Model/GameObject/NPC.cpp
 	Controller/AI/entityManager.cpp
@@ -78,8 +77,6 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/AI/luaAccessScriptedFSM.cpp
 	Controller/AI/Counter.cpp
 	Controller/AI/vector2D.cpp
-
-	
 
 	Game/Scene.hpp
 	Game/TestScene.cpp

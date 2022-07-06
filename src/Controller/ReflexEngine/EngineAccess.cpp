@@ -1,7 +1,7 @@
 #include "EngineAccess.hpp"
 
 void EngineAccess::lua_access() {
-	sol::state& lua = LuaManager::get_instance().get_state();
+	auto& lua = LuaManager::get_instance().get_state();
 
 	lua.set_function("current_time", get_time);
 	lua.set_function("set_pause_game", setIfPaused);
