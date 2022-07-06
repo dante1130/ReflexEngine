@@ -35,6 +35,16 @@ void OpenGL::init() {
 	shader_ = std::make_unique<Shader>();
 	shader_->CompileFile("shaders/shader.vert", "shaders/shader.frag");
 
+	static const std::vector<std::string> default_skybox = {
+	    "textures/skyboxes/default/right.jpg",
+	    "textures/skyboxes/default/left.jpg",
+	    "textures/skyboxes/default/top.jpg",
+	    "textures/skyboxes/default/bottom.jpg",
+	    "textures/skyboxes/default/front.jpg",
+	    "textures/skyboxes/default/back.jpg"};
+
+	skybox_ = Skybox(default_skybox);
+
 	lua_access();
 }
 
