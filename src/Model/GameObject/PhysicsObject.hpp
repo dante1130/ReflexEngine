@@ -6,7 +6,7 @@
 #include "View/Renderer/OpenGL/Objects/Material.hpp"
 #include "Controller/ResourceManager/ObjectSaving.hpp"
 
-class PhysicsObject : public BodyRigid {
+class PhysicsObject : public GameObject{
 public:
 	/**
 	 * @brief	Default constructor for physics object
@@ -116,7 +116,6 @@ protected:
 	 * @post	Collider stored
 	 */
 	void saveBoxCollider(size_t index);
-
 	/**
 	 * @brief	Saves the collider of rb
 	 * @param	index	- Which collider to save
