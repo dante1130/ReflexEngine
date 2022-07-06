@@ -98,11 +98,22 @@ void OpenGL::render_lights() {
 
 	shader_->SetDirectionalLight(light_manager.get_directional_light());
 
-	shader_->SetPointLights(light_manager.get_point_lights(), MAX_POINT_LIGHTS,
-	                        0, 0);
+	std::vector<PointLight> point_lights;
+	std::vector<SpotLight> spot_lights;
 
-	shader_->SetSpotLights(light_manager.get_spot_lights(), MAX_SPOT_LIGHTS, 0,
-	                       0);
+	std::copy_if(light_manager.get_point_lights().begin(),
+	             light_manager.get_point_lights().end(),
+	             std::back_inserter(point_lights),
+	             [](const PointLight& light) { return light.is_active(); });
+
+	std::copy_if(light_manager.get_spot_lights().begin(),
+	             light_manager.get_spot_lights().end(),
+	             std::back_inserter(spot_lights),
+	             [](const SpotLight& light) { return light.is_active(); });
+
+	shader_->SetPointLights(point_lights.data(), point_lights.size(), 0, 0);
+
+	shader_->SetSpotLights(spot_lights.data(), spot_lights.size(), 0, 0);
 
 	shader_->SetTexture(1);
 	shader_->SetDirectionalShadowMap(2);

@@ -66,12 +66,14 @@ const DirectionalLight& LightManager::get_directional_light() const {
 	return directional_light_;
 }
 
-const PointLight* LightManager::get_point_lights() const {
-	return point_lights_.data();
+const std::array<PointLight, MAX_POINT_LIGHTS>& LightManager::get_point_lights()
+    const {
+	return point_lights_;
 }
 
-const SpotLight* LightManager::get_spot_lights() const {
-	return spot_lights_.data();
+const std::array<SpotLight, MAX_SPOT_LIGHTS>& LightManager::get_spot_lights()
+    const {
+	return spot_lights_;
 }
 
 size_t LightManager::get_next_point_light_id() {

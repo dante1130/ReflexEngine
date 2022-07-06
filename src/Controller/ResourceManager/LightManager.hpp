@@ -30,9 +30,9 @@ public:
 
 	const DirectionalLight& get_directional_light() const;
 
-	const PointLight* get_point_lights() const;
+	const std::array<PointLight, MAX_POINT_LIGHTS>& get_point_lights() const;
 
-	const SpotLight* get_spot_lights() const;
+	const std::array<SpotLight, MAX_SPOT_LIGHTS>& get_spot_lights() const;
 
 private:
 	size_t get_next_point_light_id();
