@@ -8,6 +8,8 @@
  */
 class SpotLight : public PointLight {
 public:
+	SpotLight() = default;
+
 	/**
 	 * @brief Construct a new Spot Light object
 	 *
@@ -26,6 +28,24 @@ public:
 	          GLfloat linear, GLfloat quadratic, GLfloat edge);
 
 	/**
+	 * @brief Set the spotlight object
+	 *
+	 * @param color  The color of the light.
+	 * @param aIntensity  The ambient intensity of the light.
+	 * @param dIntensity  The diffuse intensity of the light.
+	 * @param position  The position of the light.
+	 * @param direction  The direction of the light.
+	 * @param constant  The constant of the light.
+	 * @param linear  The linear of the light.
+	 * @param quadratic  The quadratic of the light.
+	 * @param edge  The edge of the light.
+	 */
+	void set_spot_light(glm::vec3 color, GLfloat aIntensity, GLfloat dIntensity,
+	                    glm::vec3 position, glm::vec3 direction,
+	                    GLfloat constant, GLfloat linear, GLfloat quadratic,
+	                    GLfloat edge);
+
+	/**
 	 * @brief Enables the spotlight by passing uniforms to the shader.
 	 *
 	 * @param ambientColorLoc
@@ -42,14 +62,6 @@ public:
 	              GLuint diffuseIntensityLoc, GLuint positionLoc,
 	              GLuint directionLoc, GLuint constantLoc, GLuint linearLoc,
 	              GLuint quadraticLoc, GLuint edgeLoc) const;
-
-	/**
-	 * @brief Sets the position and the direction of the spotlight.
-	 *
-	 * @param pos
-	 * @param dir
-	 */
-	void SetFlash(glm::vec3 pos, glm::vec3 dir);
 
 private:
 	glm::vec3 m_direction = glm::vec3(0.0f, -1.0f, 0.0f);

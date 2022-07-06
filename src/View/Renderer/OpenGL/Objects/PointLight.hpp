@@ -10,6 +10,8 @@
  */
 class PointLight : public Light {
 public:
+	PointLight() = default;
+
 	/**
 	 * @brief Construct a new Point Light object
 	 *
@@ -42,18 +44,19 @@ public:
 	              GLuint quadraticLoc) const;
 
 	/**
-	 * @brief Calculates the light transform matrices.
+	 * @brief Set the point light object
 	 *
-	 * @return std::vector<glm::mat4>
+	 * @param color The color of the light
+	 * @param aIntensity The ambient intensity of the light
+	 * @param dIntensity The diffuse intensity of the light
+	 * @param position The position of the light
+	 * @param constant The constant attenuation of the light
+	 * @param linear The linear attenuation of the light
+	 * @param quadratic The quadratic attenuation of the light
 	 */
-	std::vector<glm::mat4> CalculateLightTransform() const;
-
-	/**
-	 * @brief Get the Far Plane.
-	 *
-	 * @return GLfloat
-	 */
-	GLfloat GetFarPlane() const;
+	void set_point_light(glm::vec3 color, GLfloat aIntensity,
+	                     GLfloat dIntensity, glm::vec3 position,
+	                     GLfloat constant, GLfloat linear, GLfloat quadratic);
 
 	/**
 	 * @brief Get the Position.
