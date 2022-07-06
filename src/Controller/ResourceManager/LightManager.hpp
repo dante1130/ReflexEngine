@@ -28,6 +28,12 @@ public:
 
 	void delete_spot_light(size_t id);
 
+	const DirectionalLight& get_directional_light() const;
+
+	const PointLight* get_point_lights() const;
+
+	const SpotLight* get_spot_lights() const;
+
 private:
 	size_t get_next_point_light_id();
 

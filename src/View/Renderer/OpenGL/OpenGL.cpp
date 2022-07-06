@@ -2,6 +2,7 @@
 
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 #include "Controller/LuaManager.hpp"
+#include "Controller/ResourceManager/ResourceManager.hpp"
 
 void OpenGL::lua_access() {
 	auto& lua = LuaManager::get_instance().get_state();
@@ -51,9 +52,6 @@ void OpenGL::init() {
 void OpenGL::draw() {
 	render_pass();
 
-	directional_lights_.clear();
-	point_lights_.clear();
-	spot_lights_.clear();
 	draw_calls_.clear();
 }
 
@@ -96,14 +94,15 @@ void OpenGL::render_pass() {
 }
 
 void OpenGL::render_lights() {
-	for (const auto& d_light : directional_lights_) {
-		shader_->SetDirectionalLight(d_light);
-	}
+	auto& light_manager = ResourceManager::get_instance().get_light_manager();
 
-	shader_->SetPointLights(point_lights_.data(), point_lights_.size(), 3, 0);
+	shader_->SetDirectionalLight(light_manager.get_directional_light());
 
-	shader_->SetSpotLights(spot_lights_.data(), spot_lights_.size(),
-	                       3 + point_lights_.size(), point_lights_.size());
+	shader_->SetPointLights(light_manager.get_point_lights(), MAX_POINT_LIGHTS,
+	                        0, 0);
+
+	shader_->SetSpotLights(light_manager.get_spot_lights(), MAX_SPOT_LIGHTS, 0,
+	                       0);
 
 	shader_->SetTexture(1);
 	shader_->SetDirectionalShadowMap(2);
@@ -121,31 +120,6 @@ void OpenGL::toggle_wireframe() {
 
 void OpenGL::set_skybox(const std::vector<std::string>& faces) {
 	skybox_ = Skybox(faces);
-}
-
-void OpenGL::add_directional_light(const DirectionalLightData& light) {
-	directional_lights_.emplace_back(
-	    DirectionalLight(light.color, light.ambient_intensity, light.direction,
-	                     light.diffuse_intensity));
-}
-
-void OpenGL::add_point_light(const PointLightData& light_data) {
-	if (point_lights_.size() < MAX_POINT_LIGHTS) {
-		point_lights_.emplace_back(PointLight(
-		    light_data.color, light_data.ambient_intensity,
-		    light_data.diffuse_intensity, light_data.position,
-		    light_data.constant, light_data.linear, light_data.quadratic));
-	}
-}
-
-void OpenGL::add_spot_light(const SpotLightData& light_data) {
-	if (spot_lights_.size() < MAX_SPOT_LIGHTS) {
-		spot_lights_.emplace_back(SpotLight(
-		    light_data.color, light_data.ambient_intensity,
-		    light_data.diffuse_intensity, light_data.position,
-		    light_data.direction, light_data.constant, light_data.linear,
-		    light_data.quadratic, light_data.edge));
-	}
 }
 
 void OpenGL::add_draw_call(const DrawCall& draw_call) {

@@ -19,14 +19,14 @@ public:
 	/**
 	 * @brief Initializes the game object.
 	 */
-	void init() override {}
+	void init() override;
 
 	/**
 	 * @brief Updates the game object with delta time.
 	 *
 	 * @param delta_time The time since the last frame.
 	 */
-	void update(double delta_time) override {}
+	void update(double delta_time) override;
 
 	/**
 	 * @brief Updates the game object with fixed delta time.
@@ -38,7 +38,7 @@ public:
 	/**
 	 * @brief Adds a draw call to the renderer.
 	 */
-	void add_draw_call() override;
+	void add_draw_call() override {}
 
 	/**
 	 * @brief The draw call.

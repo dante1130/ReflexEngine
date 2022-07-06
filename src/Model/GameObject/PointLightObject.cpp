@@ -1,15 +1,21 @@
 #include "PointLightObject.hpp"
 
 #include "Controller/ResourceManager/ObjectSaving.hpp"
-#include "Controller/ReflexEngine/ReflexEngine.hpp"
+#include "Controller/ResourceManager/ResourceManager.hpp"
 
 PointLightObject::PointLightObject(const PointLightData& light_data)
     : light_data_(light_data) {}
 
-void PointLightObject::add_draw_call() {
-	auto& renderer = ReflexEngine::get_instance().renderer_;
+void PointLightObject::init() {
+	auto& light_manager = ResourceManager::get_instance().get_light_manager();
 
-	renderer.add_point_light(light_data_);
+	light_id_ = light_manager.add_point_light(light_data_);
+}
+
+void PointLightObject::update(double delta_time) {
+	auto& light_manager = ResourceManager::get_instance().get_light_manager();
+
+	light_manager.update_point_light(light_id_, light_data_);
 }
 
 void PointLightObject::save_object() {

@@ -62,6 +62,18 @@ void LightManager::delete_spot_light(size_t id) {
 	spot_lights_.at(id) = SpotLight();
 }
 
+const DirectionalLight& LightManager::get_directional_light() const {
+	return directional_light_;
+}
+
+const PointLight* LightManager::get_point_lights() const {
+	return point_lights_.data();
+}
+
+const SpotLight* LightManager::get_spot_lights() const {
+	return spot_lights_.data();
+}
+
 size_t LightManager::get_next_point_light_id() {
 	for (size_t i = 0; i < MAX_POINT_LIGHTS; i++) {
 		if (!point_lights_.at(i).is_active()) {
