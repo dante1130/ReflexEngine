@@ -6,19 +6,19 @@
 class SimpleTerrainObject : public GameObject {
 public:
 	/**
-	 * @brief Initializes the game object.
+	 * @brief Initializes the simple terrain game object.
 	 */
 	void init() override;
 
 	/**
-	 * @brief Updates the game object with delta time.
+	 * @brief Updates the simple terrain game object with delta time.
 	 *
 	 * @param delta_time The time since the last frame.
 	 */
 	void update(double delta_time) override {}
 
 	/**
-	 * @brief Updates the game object with fixed delta time.
+	 * @brief Updates the simple terrain game object with fixed delta time.
 	 *
 	 * @param delta_time The time since the last fixed tick.
 	 */
@@ -37,15 +37,22 @@ public:
 	void draw(const Shader& shader) override;
 
 	/**
-	 * @brief	Saves the object to lua file
+	 * @brief	Saves the simple terrain object to lua file
 	 *
 	 * @pre		Object exists
 	 * @post	Object saved
 	 */
 	void save_object() override;
 
+	void set_heightmap_name(const std::string& heightmap_name);
+
+	void set_texture_name(const std::string& texture_name);
+
+	void set_detailmap_name(const std::string& detailmap_name);
+
 private:
 	TexturedTerrain terrain_;
+	std::string heightmap_name_;
 	std::string texture_name_;
 	std::string detailmap_name_;
 };
