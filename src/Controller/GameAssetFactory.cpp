@@ -12,6 +12,8 @@ GameObject* GameAssetFactory::create(const std::string& fileName) {
 		return loadWater(fileName);
 	} else if (type == "Player") {
 		return load_player(fileName);
+	} else if (type == "SimpleTerrainObject") {
+		return load_simple_terrain_object(fileName);
 	} else if (type == "TerrainObject") {
 		return loadTerrainObject(fileName);
 	} else if (type == "Body") {
@@ -382,6 +384,27 @@ ScriptableObject* GameAssetFactory::loadScriptableObject(
 	so->angle = angle;
 
 	return so;
+}
+
+SimpleTerrainObject* GameAssetFactory::load_simple_terrain_object(
+    const std::string& lua_script) {
+	auto& lua = LuaManager::get_instance().get_state();
+	lua.script_file(lua_script);
+
+	SimpleTerrainObject* simple_terrain_object = new SimpleTerrainObject();
+
+	simple_terrain_object->position = loadBasePos(lua);
+	simple_terrain_object->scale = loadBaseScale(lua);
+	simple_terrain_object->rotation = loadBaseRotation(lua);
+	simple_terrain_object->angle = loadBaseAngle(lua);
+
+	simple_terrain_object->set_heightmap_name(lua["terrain"]["heightmap"]);
+	simple_terrain_object->set_texture_name(lua["terrain"]["texture"]);
+	simple_terrain_object->set_detailmap_name(lua["terrain"]["detailmap"]);
+
+	simple_terrain_object->init();
+
+	return simple_terrain_object;
 }
 
 TerrainObject* GameAssetFactory::loadTerrainObject(

@@ -28,6 +28,10 @@ public:
 
 	void delete_spot_light(size_t id);
 
+	void delete_all_point_lights();
+
+	void delete_all_spot_lights();
+
 	const DirectionalLight& get_directional_light() const;
 
 	const std::array<PointLight, MAX_POINT_LIGHTS>& get_point_lights() const;

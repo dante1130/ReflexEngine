@@ -13,6 +13,7 @@
 #include "Model/GameObject/PhysicsObject.hpp"
 #include "Model/GameObject/ScriptableObject.hpp"
 #include "Model/GameObject/TerrainObject.hpp"
+#include "Model/GameObject/SimpleTerrainObject.hpp"
 #include "Model/GameObject/SkyboxObject.hpp"
 #include "Model/GameObject/DirectionalLightObject.hpp"
 #include "Model/GameObject/PointLightObject.hpp"
@@ -204,6 +205,14 @@ private:
 	 * @post	scriptable object object stored
 	 */
 	static ScriptableObject* loadScriptableObject(const std::string& luaScript);
+
+	/**
+	 * @brief Loads in a simple terrain object from a lua script
+	 *
+	 * @param lua_script The lua script to load the terrain data from
+	 */
+	static SimpleTerrainObject* load_simple_terrain_object(
+	    const std::string& lua_script);
 
 	/**
 	 * @brief Loads in a terrian object from a lua script

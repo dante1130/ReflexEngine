@@ -76,6 +76,11 @@ void TestScene::loadSavedGameObjects() {
 		game_objects_[count]->remove = true;
 	}
 
+	auto& light_manager = ResourceManager::get_instance().get_light_manager();
+
+	light_manager.delete_all_point_lights();
+	light_manager.delete_all_spot_lights();
+
 	entityMgr.killEntities();
 
 	sol::state& lua = LuaManager::get_instance().get_state();
