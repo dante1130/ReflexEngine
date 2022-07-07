@@ -8,6 +8,8 @@
  */
 class DirectionalLight : public Light {
 public:
+	DirectionalLight() = default;
+
 	/**
 	 * @brief Parameterized constructor.
 	 *
@@ -18,6 +20,17 @@ public:
 	 */
 	DirectionalLight(glm::vec3 color, GLfloat aIntensity, glm::vec3 direction,
 	                 GLfloat dIntensity);
+
+	/**
+	 * @brief Set the directional light object
+	 *
+	 * @param color The color of the light.
+	 * @param aIntensity The ambient intensity of the light.
+	 * @param direction The direction of the light.
+	 * @param dIntensity The diffuse intensity of the light.
+	 */
+	void set_directional_light(glm::vec3 color, GLfloat aIntensity,
+	                           glm::vec3 direction, GLfloat dIntensity);
 
 	/**
 	 * @brief Enables the light by passing the uniforms to the shader.

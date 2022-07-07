@@ -24,4 +24,16 @@ void PointLight::UseLight(GLuint ambientColorLoc, GLuint ambientIntensityLoc,
 	glUniform1f(quadraticLoc, m_quadratic);
 }
 
+void PointLight::set_point_light(glm::vec3 color, GLfloat aIntensity,
+                                 GLfloat dIntensity, glm::vec3 position,
+                                 GLfloat constant, GLfloat linear,
+                                 GLfloat quadratic) {
+	m_color = color;
+	m_ambientIntensity = aIntensity;
+	m_position = position;
+	m_constant = constant;
+	m_linear = linear;
+	m_quadratic = quadratic;
+}
+
 glm::vec3 PointLight::GetPosition() const { return m_position; }

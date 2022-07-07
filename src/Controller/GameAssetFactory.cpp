@@ -481,6 +481,8 @@ DirectionalLightObject* GameAssetFactory::load_directional_light(
 
 	DirectionalLightObject* d_light = new DirectionalLightObject(light_data);
 
+	d_light->init();
+
 	return d_light;
 }
 
@@ -505,6 +507,8 @@ PointLightObject* GameAssetFactory::load_point_light(
 	light_data.quadratic = lua["light"]["quadratic"];
 
 	PointLightObject* p_light = new PointLightObject(light_data);
+
+	p_light->init();
 
 	return p_light;
 }
@@ -534,6 +538,8 @@ SpotLightObject* GameAssetFactory::load_spot_light(
 	light_data.edge = lua["light"]["edge"];
 
 	SpotLightObject* s_light = new SpotLightObject(light_data);
+
+	s_light->init();
 
 	return s_light;
 }
