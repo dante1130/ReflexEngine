@@ -11,6 +11,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Model/GameObject/PhysicsObject.cpp
 	Model/GameObject/ScriptableObject.cpp
 	Model/GameObject/Player.cpp
+	Model/GameObject/SimpleTerrainObject.cpp
 	Model/GameObject/TerrainObject.cpp
 	Model/GameObject/SkyboxObject.cpp
 	Model/GameObject/DirectionalLightObject.cpp
