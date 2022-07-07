@@ -4,9 +4,11 @@
 
 
 class ReactResolve: public PhysicResolution{
-	public:
+	private:
+		RigidBody* rb;
 
-		//ReactResolve();
+	public:
+		ReactResolve();
 	
 		//using engine stuff
 		bool usingReactResolve() override;
@@ -28,6 +30,31 @@ class ReactResolve: public PhysicResolution{
 	    void setVelocity(glm::vec3 vel) override;
 	    void setAngVelocity(glm::vec3 ang_vel) override;
 
+		void setType(BodyType type) override;
+	    void enableGravity(bool ean) override;
+	    void setCanSleep(bool ean) override;
+
+		// Get properties
+	    const float getMass() override;
+	    const glm::vec3 getVelocity() override;
+	    const glm::vec3 getAngVelocity() override;
+	    const float getDragForce() override;
+	    const float getDragTorque() override;
+
+	    const BodyType getType() override;
+	    const bool getIsGravityEnabled() override;
+	    const bool getCanSleep() override;
+
+		// Add colliders
+	    void addBoxCollider(glm::vec3 pos, glm::vec3 size) override;
+	    void addSphereCollider(glm::vec3 pos, float radius) override;
+	    void addCapsuleCollider(glm::vec3 pos, float radius, float height) override;
+
+	    // returns for GameObject position and rotation
+	    const glm::vec3 getPosition() override;
+	    const glm::vec3 getRotation() override;
+	    const float getAngle() override;
+
 		//makes it a trigger
-	    void setIsTrigger(bool ean);
+	   // void setIsTrigger(bool ean);
 };

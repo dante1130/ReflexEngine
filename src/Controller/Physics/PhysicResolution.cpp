@@ -1,50 +1,120 @@
 #include "PhysicResolution.hpp"
 
-
-void PhysicResolution::addBoxCollider(glm::vec3 pos, glm::vec3 size) 
-{
-	BoxShape* bs = Physics::getPhysicsCommon().createBoxShape(
-	    Vector3(size.x / 2, size.y / 2, size.z / 2));
-	//identity only for now maybe idk
-	Transform center = Transform(Vector3(pos.x, pos.y, pos.z), Quaternion::identity());
-	
-	colliders.push_back(cb->addCollider(bs, center));
-
+const int PhysicResolution::colliderSize() { 
+	return colliders.size();
 }
 
-void PhysicResolution::addSphereCollider(glm::vec3 pos, float radius) 
+void PhysicResolution::removeAllColliders()
 {
-	SphereShape* ss = Physics::getPhysicsCommon().createSphereShape(radius);
-	// identity only for now maybe idk
-	Transform center = Transform(Vector3(pos.x, pos.y, pos.z), Quaternion::identity());
+	m_box.clear();
+	m_sphere.clear();;
+	m_capsule.clear();
 
-	colliders.push_back(cb->addCollider(ss, center));
+	colliders.clear();
 }
 
-void PhysicResolution::addCapsuleCollider(glm::vec3 pos, float radius,float height) 
+const glm::vec3 PhysicResolution::getColliderPosition(int index, Apply type)
 {
-	CapsuleShape* cs = Physics::getPhysicsCommon().createCapsuleShape(radius, height);
-	// identity only for now maybe idk
-	Transform center = Transform(Vector3(pos.x, pos.y, pos.z), Quaternion::identity());
+	Vector3 temp;
+	switch (type)
+	{
+		case Apply::LOCAL :
+			temp = colliders[index]->getLocalToBodyTransform().getPosition();
+			break;
+		case Apply::WORLD :
+			temp = colliders[index]->getLocalToWorldTransform().getPosition();
+			break;
+		default:
+			break;
+	}
+	return glm::vec3(temp.x, temp.y, temp.z);
+}
 
-	colliders.push_back(cb->addCollider(cs, center));
+const glm::vec4 PhysicResolution::getColliderOrientation(int index, Apply type)
+{
+	Quaternion temp;
+	switch (type)
+	{
+	case Apply::LOCAL:
+		temp = colliders[index]->getLocalToBodyTransform().getOrientation();
+		break;
+	case Apply::WORLD:
+		temp = colliders[index]->getLocalToWorldTransform().getOrientation();
+		break;
+	default:
+		break;
+	}
+	return glm::vec4(temp.w, temp.x, temp.y, temp.z);
+}
+
+const float PhysicResolution::getColliderBounce(int index){
+	return colliders[index]->getMaterial().getBounciness();
+}
+const float PhysicResolution::getColliderFriction(int index){
+	return colliders[index]->getMaterial().getFrictionCoefficient();
+}
+const float PhysicResolution::getColliderMassDesity(int index) {
+	return colliders[index]->getMaterial().getMassDensity();
+}
+
+const int PhysicResolution::getColliderType(int index)
+{
+	switch (colliders[index]->getCollisionShape()->getName())
+	{
+		case CollisionShapeName::BOX : 
+			return 1;
+		case CollisionShapeName::SPHERE :
+			return 2;
+		case CollisionShapeName::CAPSULE :
+			return 3;
+		default:
+			return 0;
+	}
+}
+
+void PhysicResolution::addMaterialToCollider(int index, float bounce,
+	float mass_density, float friction)
+{
+	Material& material = colliders[index]->getMaterial();
+	material.setBounciness(bounce);
+	material.setMassDensity(mass_density);
+	material.setFrictionCoefficient(friction);
 }
 
 
-glm::vec3 PhysicResolution::getPosition() 
-{
-	Vector3 p = cb->getTransform().getPosition();
-	return glm::vec3(p.x, p.y, p.z);
+const BoxShape* PhysicResolution::getColliderBox(int index){
+	try {
+		if (getColliderType(index) == 1)
+			return m_box.find(index)->second;
+		else
+			throw("Could not convert box type!");
+	}
+	catch(std::string err)
+	{
+		std::cout << "ERROR: " << err << std::endl;
+	}
 }
-
-glm::vec3 PhysicResolution::getRotation() 
-{
-	Quaternion r = cb->getTransform().getOrientation();
-	return glm::vec3(r.x, r.y, r.z);
+const SphereShape* PhysicResolution::getColliderSphere(int index) {
+	try {
+		if (getColliderType(index) == 2)
+			return m_sphere.find(index)->second;
+		else
+			throw("Could not convert sphere type!");
+	}
+	catch (std::string err)
+	{
+		std::cout << "ERROR: " << err << std::endl;
+	}
 }
-
-float PhysicResolution::getAngle() 
-{
-	return cb->getTransform().getOrientation().w;
+const CapsuleShape* PhysicResolution::getColliderCapsule(int index) {
+	try {
+		if (getColliderType(index) == 3)
+			return m_capsule.find(index)->second;
+		else
+			throw("Could not convert capsule type!");
+	}
+	catch (std::string err)
+	{
+		std::cout << "ERROR: " << err << std::endl;
+	}
 }
-

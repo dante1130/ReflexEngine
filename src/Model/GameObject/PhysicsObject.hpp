@@ -17,7 +17,6 @@ public:
 	 */
 	PhysicsObject() = default;
 
-	void set_resolution_type(const PhysicResolution phyx_res);
 	/**
 	 * @brief	Initialised the model
 	 * @param	model_name		name of model
@@ -39,6 +38,17 @@ public:
 	 * @post	rigid body initialised
 	 */
 	void initRB(glm::vec3 pos, glm::vec3 rotation, float angle);
+
+	/**
+	 * @brief	Initialised the rigid body
+	 * @param	pos			- position of the rigid body
+	 * @param	rotation	- axis of rotation of the rigid body
+	 * @param	angle		- Rotation around axis of rotation of rigid body
+	 * @param   type		- Uses engine collision resolution or react3D's
+	 * @pre		Object exists
+	 * @post	rigid body initialised
+	 */
+	void initRB(glm::vec3 pos, glm::vec3 rotation, float angle, bool type);
 
 	/**
 	 * @brief	Updates the object
@@ -93,6 +103,42 @@ protected:
 	std::string material_name_;
 
 	//physics stuff
-	PhysicResolution rb; 
+	PhysicResolution* rb; 
 
+
+	/**
+	 * @brief	Saves the sphere collider of rb
+	 * @param	index	- Which collider to save
+	 *
+	 * @pre		Collider exists
+	 * @post	Collider stored
+	 */
+	void saveSphereCollider(size_t index);
+
+	/**
+	 * @brief	Saves the capsule collider of rb
+	 * @param	index	- Which collider to save
+	 *
+	 * @pre		Collider exists
+	 * @post	Collider stored
+	 */
+	void saveCapsuleCollider(size_t index);
+
+	/**
+	 * @brief	Saves the box collider of rb
+	 * @param	index	- Which collider to save
+	 *
+	 * @pre		Collider exists
+	 * @post	Collider stored
+	 */
+	void saveBoxCollider(size_t index);
+	/**
+	 * @brief	Saves the collider of rb
+	 * @param	index	- Which collider to save
+	 * @param	type	- The type of collider
+	 *
+	 * @pre		Collider exists
+	 * @post	Collider stored
+	 */
+	void saveCollider(size_t index, int type);
 };

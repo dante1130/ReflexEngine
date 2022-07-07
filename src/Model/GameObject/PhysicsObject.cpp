@@ -1,6 +1,9 @@
 #include "PhysicsObject.hpp"
 
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
+#include "Controller/Physics/EngineResolve.hpp"
+#include "Controller/Physics/ReactResolve.hpp"
+
 
 void PhysicsObject::initModel(const std::string& model_name,
                               const std::string& material_name) {
@@ -9,13 +12,23 @@ void PhysicsObject::initModel(const std::string& model_name,
 }
 
 void PhysicsObject::initRB(glm::vec3 pos, glm::vec3 rotation, float angle) {
-	rb.init(pos, rotation, angle);
+	rb = new ReactResolve();
+	rb->init(pos, rotation, angle);
+}
+
+void PhysicsObject::initRB(glm::vec3 pos, glm::vec3 rotation, float angle, bool type) {
+
+	if (type)
+		rb = new EngineResolve();
+	else
+		rb = new ReactResolve();
+	rb->init(pos, rotation, angle);
 }
 
 void PhysicsObject::update(double delta_time) {
-	position = rb.getPosition();
-	rotation = rb.getRotation();
-	angle = rb.getAngle();
+	position = rb->getPosition();
+	rotation = rb->getRotation();
+	angle = rb->getAngle();
 }
 
 void PhysicsObject::fixed_update(double delta_time) {
@@ -51,37 +64,28 @@ void PhysicsObject::draw(const Shader& shader) {
 }
 
 void PhysicsObject::saveSphereCollider(size_t index) {
-	for (const auto& sphere : m_sphere) {
-		if (sphere.m_colliderStored == index) {
-			ObjectSaving::addValue("radius", sphere.m_radius, false);
-			return;
-		}
-	}
+	const SphereShape* temp_sphere = rb->getColliderSphere(index);
+	ObjectSaving::addValue("radius", temp_sphere->getRadius(), false);
 }
 
 void PhysicsObject::saveCapsuleCollider(size_t index) {
-	for (const auto& capsule : m_capsule) {
-		if (capsule.m_colliderStored == index) {
-			ObjectSaving::addValue("radius", capsule.m_radius, false);
-			ObjectSaving::addValue("height", capsule.m_height, false);
-			return;
-		}
-	}
+	const CapsuleShape* temp_capsule = rb->getColliderCapsule(index);
+	ObjectSaving::addValue("radius", temp_capsule->getRadius(), false);
+	ObjectSaving::addValue("height", temp_capsule->getHeight(), false);
 }
 
 void PhysicsObject::saveBoxCollider(size_t index) {
-	for (const auto& box : m_box) {
-		if (box.m_colliderStored == index) {
-			ObjectSaving::addValue("xBox", box.m_size.x, false);
-			ObjectSaving::addValue("yBox", box.m_size.y, false);
-			ObjectSaving::addValue("zBox", box.m_size.z, false);
-			return;
-		}
-	}
+	const BoxShape* temp_box = rb->getColliderBox(index);
+	Vector3 box_size = temp_box->getHalfExtents();
+	ObjectSaving::addValue("xBox", box_size.x * 2, false);
+	ObjectSaving::addValue("yBox", box_size.y * 2, false);
+	ObjectSaving::addValue("zBox", box_size.z * 2, false);
+
 }
 
 void PhysicsObject::saveCollider(size_t index, int type) {
 	std::string typeString;
+	glm::vec3 temp_pos = rb->getColliderPosition(index, Apply::LOCAL);
 
 	switch (type) {
 		case 1:
@@ -98,9 +102,9 @@ void PhysicsObject::saveCollider(size_t index, int type) {
 	}
 
 	ObjectSaving::addValue("colliderType", typeString, false);
-	ObjectSaving::addValue("xPos", rb.getLocalColliderPos(index).x, false);
-	ObjectSaving::addValue("yPos", rb.getLocalColliderPos(index).y, false);
-	ObjectSaving::addValue("zPos", rb.getLocalColliderPos(index).z, false);
+	ObjectSaving::addValue("xPos", temp_pos.x, false);
+	ObjectSaving::addValue("yPos", temp_pos.y, false);
+	ObjectSaving::addValue("zPos", temp_pos.z, false);
 
 	switch (type) {
 		case 1:
@@ -115,33 +119,37 @@ void PhysicsObject::saveCollider(size_t index, int type) {
 		default:
 			break;
 	}
-	ObjectSaving::addValue("bounciness", rb.getBounciness(index), false);
-	ObjectSaving::addValue("friction", rb.getFriction(index), true);
+	ObjectSaving::addValue("bounciness", rb->getColliderBounce(index), false);
+	ObjectSaving::addValue("friction", rb->getColliderFriction(index), true);
 }
 
 void PhysicsObject::save_object() {
+
+	glm::vec3 temp_velocity = rb->getVelocity();
+	glm::vec3 temp_ang_velocity = rb->getAngVelocity();
+
 	ObjectSaving::openFile();
 	ObjectSaving::saveGameObject(position, rotation, scale, angle + 0.01,
 	                             "PhysicsObject");
 	ObjectSaving::addComma();
 	ObjectSaving::addValue("modelName", model_name_, false);
 	ObjectSaving::addValue("material_name", material_name_, false);
-	ObjectSaving::addValue("rbType", rb.getRBType(), false);
-	ObjectSaving::addValue("gravity", (int)rb.getIfGravityActive(), false);
-	ObjectSaving::addValue("xForce", rb.getLinearVelocity().x, false);
-	ObjectSaving::addValue("yForce", rb.getLinearVelocity().y, false);
-	ObjectSaving::addValue("zForce", rb.getLinearVelocity().z, false);
-	ObjectSaving::addValue("xTorque", rb.getAngularVelocity().x, false);
-	ObjectSaving::addValue("yTorque", rb.getAngularVelocity().y, false);
-	ObjectSaving::addValue("zTorque", rb.getAngularVelocity().z, false);
-	ObjectSaving::addValue("linearDamping", rb.getLinearDamping(), false);
-	ObjectSaving::addValue("angularDamping", rb.getAngularDamping(), false);
-	ObjectSaving::addValue("sleep", (int)rb.getIfAllowedSleep(), false);
-	ObjectSaving::addValue("numOfColliders", rb.getNumberOfColliders(), true);
+	ObjectSaving::addValue("rbType", (int)rb->getType(), false);
+	ObjectSaving::addValue("gravity", (int)rb->getIsGravityEnabled(), false);
+	ObjectSaving::addValue("xForce", temp_velocity.x, false);
+	ObjectSaving::addValue("yForce", temp_velocity.y, false);
+	ObjectSaving::addValue("zForce", temp_velocity.z, false);
+	ObjectSaving::addValue("xTorque", temp_ang_velocity.x, false);
+	ObjectSaving::addValue("yTorque", temp_ang_velocity.y, false);
+	ObjectSaving::addValue("zTorque", temp_ang_velocity.z, false);
+	ObjectSaving::addValue("linearDamping", rb->getDragForce(), false);
+	ObjectSaving::addValue("angularDamping", rb->getDragTorque(), false);
+	ObjectSaving::addValue("sleep", (int)rb->getCanSleep(), false);
+	ObjectSaving::addValue("numOfColliders", rb->colliderSize(), true);
 	ObjectSaving::closeStruct();
 
-	for (size_t count = 0; count < rb.getNumberOfColliders(); count++) {
-		int type = rb.getColliderType(count);
+	for (size_t count = 0; count < rb->colliderSize(); count++) {
+		int type = rb->getColliderType(count);
 		ObjectSaving::createStruct("collider" + std::to_string(count + 1));
 		saveCollider(count, type);
 		ObjectSaving::closeStruct();
