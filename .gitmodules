@@ -1,3 +1,6 @@
 [submodule "cmake/slikenet"]
 	path = cmake/slikenet
 	url = https://github.com/SLikeSoft/SLikeNet
+[submodule "cmake/entt"]
+	path = cmake/entt
+	url = https://github.com/skypjack/entt
