@@ -1,9 +1,9 @@
 #pragma once
 
-#include "PhysicResolution.hpp"
+#include "PhysicBody.hpp"
 
 
-class ReactResolve: public PhysicResolution{
+class ReactResolve: public PhysicsBody{
 	private:
 		RigidBody* rb;
 
@@ -31,6 +31,7 @@ class ReactResolve: public PhysicResolution{
 	    void setAngVelocity(glm::vec3 ang_vel) override;
 
 		void setType(BodyType type) override;
+		void setType(int type) override;
 	    void enableGravity(bool ean) override;
 	    void setCanSleep(bool ean) override;
 
@@ -50,10 +51,18 @@ class ReactResolve: public PhysicResolution{
 	    void addSphereCollider(glm::vec3 pos, float radius) override;
 	    void addCapsuleCollider(glm::vec3 pos, float radius, float height) override;
 
+		void addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction) override;
+		void addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction) override;
+		void addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction) override;
+
 	    // returns for GameObject position and rotation
 	    const glm::vec3 getPosition() override;
 	    const glm::vec3 getRotation() override;
 	    const float getAngle() override;
+
+		void setPosition(glm::vec3 pos) override;
+		void setRotation(glm::vec3 rot) override;
+		void setAngle(float ang) override;
 
 		//makes it a trigger
 	   // void setIsTrigger(bool ean);

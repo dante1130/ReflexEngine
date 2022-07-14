@@ -1,9 +1,10 @@
 #pragma once
 
-#include "BodyRigid.hpp"
 #include "Controller/ResourceManager/ResourceManager.hpp"
 #include "Controller/ResourceManager/ObjectSaving.hpp"
-#include "Controller/Physics/PhysicResolution.hpp"
+#include "Controller/Physics/PhysicBody.hpp"
+#include "Controller/Physics/EngineResolve.hpp"
+#include "Controller/Physics/ReactResolve.hpp"
 #include "View/Renderer/OpenGL/Objects/Model.hpp"
 #include "View/Renderer/OpenGL/Objects/Material.hpp"
 
@@ -39,6 +40,7 @@ public:
 	 */
 	void initRB(glm::vec3 pos, glm::vec3 rotation, float angle);
 
+	void init() override;
 	/**
 	 * @brief	Initialised the rigid body
 	 * @param	pos			- position of the rigid body
@@ -96,6 +98,76 @@ public:
 	 */
 	~PhysicsObject() = default;
 
+	//****************************
+	// FUNCTIONS FOR PHYSICS STUFF
+	//****************************
+
+	const int colliderSize();
+	const glm::vec3 getColliderPosition(int index, Apply type);
+	const glm::vec4 getColliderOrientation(int index, Apply type);
+
+	const float getColliderBounce(int index);
+	const float getColliderFriction(int index);
+	const float getColliderMassDesity(int index);
+
+	const int getColliderType(int index);
+
+	const BoxShape* getColliderBox(int index);
+	const SphereShape* getColliderSphere(int index);
+	const CapsuleShape* getColliderCapsule(int index);
+
+	void addMaterialToCollider(int index, float bounce, float mass_density, float friction);
+
+	void removeAllColliders();
+
+	bool usingReactResolve();
+
+	void init(glm::vec3 rot, glm::vec3 pos, float angle);
+
+	void addForce(glm::vec3 force, Apply type);
+	void addForceAtPoint(glm::vec3 force, glm::vec3 point, ApplyPoint type);
+	void addTorque(glm::vec3 torque, Apply type);
+
+	void addDragForce(float drag);
+	void addDragTorque(float ang_drag);
+
+	void setMass(float mass);
+	void setCenterOfMass(glm::vec3 p);
+	void setVelocity(glm::vec3 vel);
+	void setAngVelocity(glm::vec3 ang_vel);
+
+	void setType(BodyType type);
+	void setType(int type);
+	void enableGravity(bool ean);
+	void setCanSleep(bool ean);
+
+	const float getMass();
+	const glm::vec3 getVelocity();
+	const glm::vec3 getAngVelocity();
+	const float getDragForce();
+	const float getDragTorque();
+
+	const BodyType getType();
+	const bool getIsGravityEnabled();
+	const bool getCanSleep();
+
+	void addBoxCollider(glm::vec3 pos, glm::vec3 size);
+	void addSphereCollider(glm::vec3 pos, float radius);
+	void addCapsuleCollider(glm::vec3 pos, float radius, float height);
+
+
+	void addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction);
+	void addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction);
+	void addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction);
+
+	const glm::vec3 getPosition();
+	const glm::vec3 getRotation();
+	const float getAngle();
+
+	void setPosition(glm::vec3 pos);
+	void setRotation(glm::vec3 rot);
+	float setAngle(float ang);
+
 protected:
 	/// The model of the item.
 	std::string model_name_;
@@ -103,7 +175,7 @@ protected:
 	std::string material_name_;
 
 	//physics stuff
-	PhysicResolution* rb; 
+	PhysicsBody* pb; 
 
 
 	/**

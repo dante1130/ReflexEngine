@@ -34,9 +34,9 @@ void Projectile::update(double delta_time) {
 }
 
 void Projectile::fixed_update(double delta_time) {
-	position = rb->getPosition();
-	rotation = rb->getRotation();
-	angle = rb->getAngle();
+	position = pb->getPosition();
+	rotation = pb->getRotation();
+	angle = pb->getAngle();
 }
 
 void Projectile::add_draw_call() { PhysicsObject::add_draw_call(); }
@@ -44,26 +44,26 @@ void Projectile::add_draw_call() { PhysicsObject::add_draw_call(); }
 void Projectile::draw(const Shader& shader) { PhysicsObject::draw(shader); }
 
 void Projectile::save_object() {
-	glm::vec3 temp_velocity = rb->getVelocity();
-	glm::vec3 temp_ang_velocity = rb->getAngVelocity();
+	glm::vec3 temp_velocity = pb->getVelocity();
+	glm::vec3 temp_ang_velocity = pb->getAngVelocity();
 	ObjectSaving::openFile();
 	ObjectSaving::saveGameObject(position, rotation, scale, angle + 0.01,
 	                             "Projectile");
 	ObjectSaving::addComma();
 	ObjectSaving::addValue("modelName", model_name_, false);
 	ObjectSaving::addValue("material_name", material_name_, false);
-	ObjectSaving::addValue("rbType", (int)rb->getType(), false);
-	ObjectSaving::addValue("gravity", (int)rb->getIsGravityEnabled(), false);
+	ObjectSaving::addValue("rbType", (int)pb->getType(), false);
+	ObjectSaving::addValue("gravity", (int)pb->getIsGravityEnabled(), false);
 	ObjectSaving::addValue("xForce", temp_velocity.x, false);
 	ObjectSaving::addValue("yForce", temp_velocity.y, false);
 	ObjectSaving::addValue("zForce", temp_velocity.z, false);
 	ObjectSaving::addValue("xTorque", temp_ang_velocity.x, false);
 	ObjectSaving::addValue("yTorque", temp_ang_velocity.y, false);
 	ObjectSaving::addValue("zTorque", temp_ang_velocity.z, false);
-	ObjectSaving::addValue("linearDamping", rb->getDragForce(), false);
-	ObjectSaving::addValue("angularDamping", rb->getDragTorque(), false);
-	ObjectSaving::addValue("sleep", (int)rb->getCanSleep(), false);
-	ObjectSaving::addValue("numOfColliders", rb->colliderSize(), false);
+	ObjectSaving::addValue("linearDamping", pb->getDragForce(), false);
+	ObjectSaving::addValue("angularDamping", pb->getDragTorque(), false);
+	ObjectSaving::addValue("sleep", (int)pb->getCanSleep(), false);
+	ObjectSaving::addValue("numOfColliders", pb->colliderSize(), false);
 	ObjectSaving::addValue("timeAliveLeft", time_alive_left_, false);
 	ObjectSaving::addValue("damage", damage_, false);
 	ObjectSaving::addValue("logic", lua_script_, false);
@@ -71,8 +71,8 @@ void Projectile::save_object() {
 	ObjectSaving::addValue("floorContact", floor_contact_, true);
 	ObjectSaving::closeStruct();
 
-	for (int count = 0; count < rb->colliderSize(); count++) {
-		int type = rb->getColliderType(count);
+	for (int count = 0; count < pb->colliderSize(); count++) {
+		int type = pb->getColliderType(count);
 		ObjectSaving::createStruct("collider" + std::to_string(count + 1));
 		saveCollider(count, type);
 		ObjectSaving::closeStruct();
@@ -83,13 +83,13 @@ void Projectile::save_object() {
 
 void Projectile::freeze_projectile() {
 
-	rb->setVelocity(glm::vec3(0));
-	rb->setAngVelocity(glm::vec3(0));
-	rb->setType(BodyType::STATIC);
+	pb->setVelocity(glm::vec3(0));
+	pb->setAngVelocity(glm::vec3(0));
+	pb->setType(BodyType::STATIC);
 	position.y = TerrainManager::getHeight(position.x, position.z) + 0.1;
 }
 
-void Projectile::remove_colliders() { rb->removeAllColliders(); }
+void Projectile::remove_colliders() { pb->removeAllColliders(); }
 
 void Projectile::set_time_alive_left(float time) { time_alive_left_ = time; }
 

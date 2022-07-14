@@ -1,63 +1,72 @@
 #pragma once
 
-#include "PhysicResolution.hpp"
+#include "PhysicBody.hpp"
 
-class EngineResolve : public PhysicResolution {
-	
-	private:
-		CollisionBody* cb;
+class EngineResolve : public PhysicsBody {
 
-		//This is going to be physics properties
-		// - velocity, ang_velocity
-		// - accelaration, ang_accelaration
-		// - mass, material properties (maybe)
+private:
+	CollisionBody* cb;
 
-	public:
+	//This is going to be physics properties
+	// - velocity, ang_velocity
+	// - accelaration, ang_accelaration
+	// - mass, material properties (maybe)
 
-		EngineResolve();
+public:
 
-		// using engine stuff
-		bool usingReactResolve() override;
+	EngineResolve();
 
-		// init setup
-		void init(glm::vec3 rot, glm::vec3 pos, float angle) override;
+	// using engine stuff
+	bool usingReactResolve() override;
 
-		//Change movement properties
-		void addForce(glm::vec3 force, Apply type) override;
-		void addForceAtPoint(glm::vec3 force, glm::vec3 point, ApplyPoint type) override;
-		void addTorque(glm::vec3 torque, Apply type) override;
+	// init setup
+	void init(glm::vec3 rot, glm::vec3 pos, float angle) override;
 
-		void addDragForce(float drag) override;
-		void addDragTorque(float ang_drag) override;
+	//Change movement properties
+	void addForce(glm::vec3 force, Apply type) override;
+	void addForceAtPoint(glm::vec3 force, glm::vec3 point, ApplyPoint type) override;
+	void addTorque(glm::vec3 torque, Apply type) override;
 
-		//Set properties
-		void setMass(float mass) override;
-		void setCenterOfMass(glm::vec3 p) override;
-		void setVelocity(glm::vec3 vel) override;
-		void setAngVelocity(glm::vec3 ang_vel) override;
+	void addDragForce(float drag) override;
+	void addDragTorque(float ang_drag) override;
 
-		void setType(BodyType type) override;
-		void enableGravity(bool ean) override;
-		void setCanSleep(bool ean) override;
+	//Set properties
+	void setMass(float mass) override;
+	void setCenterOfMass(glm::vec3 p) override;
+	void setVelocity(glm::vec3 vel) override;
+	void setAngVelocity(glm::vec3 ang_vel) override;
 
-		// Get properties
-		const float getMass() override;
-		const glm::vec3 getVelocity() override;
-		const glm::vec3 getAngVelocity() override;
-		const float getDragForce() override;
-		const float getDragTorque() override;
+	void setType(BodyType type) override;
+	void setType(int type) override;
+	void enableGravity(bool ean) override;
+	void setCanSleep(bool ean) override;
 
-		const BodyType getType() override;
-		const bool getIsGravityEnabled() override;
-		const bool getCanSleep() override;
+	// Get properties
+	const float getMass() override;
+	const glm::vec3 getVelocity() override;
+	const glm::vec3 getAngVelocity() override;
+	const float getDragForce() override;
+	const float getDragTorque() override;
 
-		// Add colliders
-		void addBoxCollider(glm::vec3 pos, glm::vec3 size) override;
-		void addSphereCollider(glm::vec3 pos, float radius) override;
-		void addCapsuleCollider(glm::vec3 pos, float radius, float height) override;
+	const BodyType getType() override;
+	const bool getIsGravityEnabled() override;
+	const bool getCanSleep() override;
 
-		// returns for GameObject position and rotation
-		const glm::vec3 getPosition() override;
-		const glm::vec3 getRotation() override;
-		const float getAngle() override;
+	// Add colliders
+	void addBoxCollider(glm::vec3 pos, glm::vec3 size) override;
+	void addSphereCollider(glm::vec3 pos, float radius) override;
+	void addCapsuleCollider(glm::vec3 pos, float radius, float height) override;
+
+	void addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction) override;
+	void addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction) override;
+	void addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction) override;
+
+	// returns for GameObject position and rotation
+	const glm::vec3 getPosition() override;
+	const glm::vec3 getRotation() override;
+	const float getAngle() override;
+
+	void setPosition(glm::vec3 pos) override;
+	void setRotation(glm::vec3 rot) override;
+	void setAngle(float ang) override;
 };

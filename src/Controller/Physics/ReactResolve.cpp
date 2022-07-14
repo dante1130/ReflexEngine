@@ -108,6 +108,23 @@ void ReactResolve::setAngVelocity(glm::vec3 ang_vel) {
 void ReactResolve::setType(BodyType type) { 
 	rb->setType(type); 
 }
+void ReactResolve::setType(int type)
+{
+	switch (type)
+	{
+		case 0:
+			rb->setType(BodyType::STATIC);
+			break;
+		case 1:
+			rb->setType(BodyType::KINEMATIC);
+			break;
+		case 2:
+			rb->setType(BodyType::DYNAMIC);
+			break;
+		default:
+			break;
+	}
+}
 void ReactResolve::enableGravity(bool ean) {
 	rb->enableGravity(ean);
 }
@@ -170,6 +187,49 @@ void ReactResolve::addCapsuleCollider(glm::vec3 pos, float radius, float height)
 	m_capsule.emplace(colliders.size() - 1, cs);
 }
 
+void ReactResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction)
+{
+	BoxShape* bs = Physics::getPhysicsCommon().createBoxShape(
+		Vector3(size.x / 2, size.y / 2, size.z / 2));
+	// identity only for now maybe idk
+	Transform center = Transform(Vector3(pos.x, pos.y, pos.z), Quaternion::identity());
+
+	colliders.push_back(rb->addCollider(bs, center));
+	m_box.emplace(colliders.size() - 1, bs);
+
+	Material& mat = colliders[colliders.size() - 1]->getMaterial();
+	mat.setBounciness(bounce);
+	mat.setFrictionCoefficient(friction);
+}
+
+void ReactResolve::addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction)
+{
+	SphereShape* ss = Physics::getPhysicsCommon().createSphereShape(radius);
+	// identity only for now maybe idk
+	Transform center = Transform(Vector3(pos.x, pos.y, pos.z), Quaternion::identity());
+
+	colliders.push_back(rb->addCollider(ss, center));
+	m_sphere.emplace(colliders.size() - 1, ss);
+
+	Material& mat = colliders[colliders.size() - 1]->getMaterial();
+	mat.setBounciness(bounce);
+	mat.setFrictionCoefficient(friction);
+}
+
+void ReactResolve::addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction)
+{
+	CapsuleShape* cs = Physics::getPhysicsCommon().createCapsuleShape(radius, height);
+	// identity only for now maybe idk
+	Transform center = Transform(Vector3(pos.x, pos.y, pos.z), Quaternion::identity());
+
+	colliders.push_back(rb->addCollider(cs, center));
+	m_capsule.emplace(colliders.size() - 1, cs);
+
+	Material& mat = colliders[colliders.size() - 1]->getMaterial();
+	mat.setBounciness(bounce);
+	mat.setFrictionCoefficient(friction);
+}
+
 const glm::vec3 ReactResolve::getPosition() {
 	Vector3 p = rb->getTransform().getPosition();
 	return glm::vec3(p.x, p.y, p.z);
@@ -182,6 +242,27 @@ const glm::vec3 ReactResolve::getRotation() {
 
 const float ReactResolve::getAngle() {
 	return rb->getTransform().getOrientation().w;
+}
+
+void ReactResolve::setPosition(glm::vec3 pos)
+{
+	Transform transform = Transform(
+		Vector3(pos.x, pos.y, pos.z), rb->getTransform().getOrientation());
+	rb->setTransform(transform);
+}
+void ReactResolve::setRotation(glm::vec3 rot)
+{
+	Transform transform = Transform( rb->getTransform().getPosition()
+		, Quaternion(rot.x, rot.y, rot.z, getAngle()));
+	rb->setTransform(transform);
+}
+void ReactResolve::setAngle(float ang)
+{
+	Quaternion new_quat = rb->getTransform().getOrientation();
+	new_quat.w = ang;
+	Transform transform = Transform(rb->getTransform().getPosition()
+		, new_quat);
+	rb->setTransform(transform);
 }
 
 //void ReactResolve::setIsTrigger(bool ean) {

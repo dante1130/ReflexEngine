@@ -65,7 +65,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/Physics/EngineResolve.cpp
 	Controller/Physics/ReactResolve.cpp
 	Controller/Physics/BodyRigidPhysics.cpp
-	Controller/Physics/PhysicResolution.cpp
+	Controller/Physics/PhysicBody.cpp
 	Controller/NetworkAccess.cpp
 	Controller/multiTextureCreator.cpp
 	Controller/RandomGenerators/PseudoRandomNumberGenerator.cpp

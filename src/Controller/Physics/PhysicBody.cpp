@@ -1,10 +1,10 @@
-#include "PhysicResolution.hpp"
+#include "PhysicBody.hpp"
 
-const int PhysicResolution::colliderSize() { 
+const int PhysicsBody::colliderSize() { 
 	return colliders.size();
 }
 
-void PhysicResolution::removeAllColliders()
+void PhysicsBody::removeAllColliders()
 {
 	m_box.clear();
 	m_sphere.clear();;
@@ -13,7 +13,7 @@ void PhysicResolution::removeAllColliders()
 	colliders.clear();
 }
 
-const glm::vec3 PhysicResolution::getColliderPosition(int index, Apply type)
+const glm::vec3 PhysicsBody::getColliderPosition(int index, Apply type)
 {
 	Vector3 temp;
 	switch (type)
@@ -30,7 +30,7 @@ const glm::vec3 PhysicResolution::getColliderPosition(int index, Apply type)
 	return glm::vec3(temp.x, temp.y, temp.z);
 }
 
-const glm::vec4 PhysicResolution::getColliderOrientation(int index, Apply type)
+const glm::vec4 PhysicsBody::getColliderOrientation(int index, Apply type)
 {
 	Quaternion temp;
 	switch (type)
@@ -47,17 +47,17 @@ const glm::vec4 PhysicResolution::getColliderOrientation(int index, Apply type)
 	return glm::vec4(temp.w, temp.x, temp.y, temp.z);
 }
 
-const float PhysicResolution::getColliderBounce(int index){
+const float PhysicsBody::getColliderBounce(int index){
 	return colliders[index]->getMaterial().getBounciness();
 }
-const float PhysicResolution::getColliderFriction(int index){
+const float PhysicsBody::getColliderFriction(int index){
 	return colliders[index]->getMaterial().getFrictionCoefficient();
 }
-const float PhysicResolution::getColliderMassDesity(int index) {
+const float PhysicsBody::getColliderMassDesity(int index) {
 	return colliders[index]->getMaterial().getMassDensity();
 }
 
-const int PhysicResolution::getColliderType(int index)
+const int PhysicsBody::getColliderType(int index)
 {
 	switch (colliders[index]->getCollisionShape()->getName())
 	{
@@ -72,7 +72,7 @@ const int PhysicResolution::getColliderType(int index)
 	}
 }
 
-void PhysicResolution::addMaterialToCollider(int index, float bounce,
+void PhysicsBody::addMaterialToCollider(int index, float bounce,
 	float mass_density, float friction)
 {
 	Material& material = colliders[index]->getMaterial();
@@ -82,7 +82,7 @@ void PhysicResolution::addMaterialToCollider(int index, float bounce,
 }
 
 
-const BoxShape* PhysicResolution::getColliderBox(int index){
+const BoxShape* PhysicsBody::getColliderBox(int index){
 	try {
 		if (getColliderType(index) == 1)
 			return m_box.find(index)->second;
@@ -94,7 +94,7 @@ const BoxShape* PhysicResolution::getColliderBox(int index){
 		std::cout << "ERROR: " << err << std::endl;
 	}
 }
-const SphereShape* PhysicResolution::getColliderSphere(int index) {
+const SphereShape* PhysicsBody::getColliderSphere(int index) {
 	try {
 		if (getColliderType(index) == 2)
 			return m_sphere.find(index)->second;
@@ -106,7 +106,7 @@ const SphereShape* PhysicResolution::getColliderSphere(int index) {
 		std::cout << "ERROR: " << err << std::endl;
 	}
 }
-const CapsuleShape* PhysicResolution::getColliderCapsule(int index) {
+const CapsuleShape* PhysicsBody::getColliderCapsule(int index) {
 	try {
 		if (getColliderType(index) == 3)
 			return m_capsule.find(index)->second;

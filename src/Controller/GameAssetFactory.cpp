@@ -280,7 +280,7 @@ void GameAssetFactory::loadBoxCollider(int count, PhysicsObject* po,
 
 	po->addBoxCollider(posV, boxV, bounciness, friction);
 
-	if (po->getType() != 2) {
+	if ((int)po->getType() != 2) {
 		gameWorld.create_box_obstruction(po->position.x, po->position.z,
 		                                 boxV.x * 2, boxV.z * 2);
 	}
@@ -300,7 +300,7 @@ void GameAssetFactory::loadSphereCollider(int count, PhysicsObject* po,
 	float friction = lua[collider]["friction"];
 
 	po->addSphereCollider(posV, radius, bounciness, friction);
-	if (po->getType() != 2) {
+	if ((int)po->getType() != 2) {
 		gameWorld.create_sphere_obstruction(po->position.x, po->position.z,
 		                                    radius);
 	}
@@ -321,7 +321,7 @@ void GameAssetFactory::loadCapsuleCollider(int count, PhysicsObject* po,
 	float friction = lua[collider]["friction"];
 
 	po->addCapsuleCollider(posV, radius, height, bounciness, friction);
-	if (po->getType() != 2) {
+	if ((int)po->getType() != 2) {
 		gameWorld.create_sphere_obstruction(po->position.x, po->position.z,
 		                                    radius);
 	}
@@ -340,21 +340,21 @@ void GameAssetFactory::loadExtraPhysicObjectSettings(PhysicsObject* po,
 	force.x = lua["baseObject"]["xForce"];
 	force.y = lua["baseObject"]["yForce"];
 	force.z = lua["baseObject"]["zForce"];
-	po->setLinearVelocity(force);
+	po->setVelocity(force);
 
 	torque.x = lua["baseObject"]["xTorque"];
 	torque.y = lua["baseObject"]["yTorque"];
 	torque.z = lua["baseObject"]["zTorque"];
-	po->setAngularVelocity(torque);
+	po->setAngVelocity(torque);
 
 	float linDamp = lua["baseObject"]["linearDamping"];
-	po->setLinearVelocityDamping(linDamp);
+	po->addDragForce(linDamp);
 	float angDamp = lua["baseObject"]["angularDamping"];
-	po->setAngularVelocityDamping(angDamp);
+	po->addDragTorque(angDamp);
 
 	int sleep = lua["baseObject"]["sleep"];
 	if (sleep == 0) {
-		po->setIfBodyCanSleep(false);
+		po->setCanSleep(false);
 	}
 }
 
