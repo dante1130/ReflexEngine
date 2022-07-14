@@ -65,6 +65,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/LuaManager.cpp
 	Controller/Physics/Physics.cpp
 	Controller/Physics/BodyRigidPhysics.cpp
+	Controller/Physics/CollisionEvent.cpp
 	Controller/NetworkAccess.cpp
 	Controller/multiTextureCreator.cpp
 	Controller/RandomGenerators/PseudoRandomNumberGenerator.cpp
