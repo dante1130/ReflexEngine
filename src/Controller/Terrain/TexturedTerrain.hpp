@@ -43,16 +43,20 @@ public:
 	 *
 	 * @param id
 	 */
-	void set_texture(GLuint id) {
-		texture_ = std::make_shared<Texture>();
-		texture_->set_texture_id(id);
-	}
+	void set_texture(GLuint id);
+
+	/**
+	 * @brief Set the detail map by the ID.
+	 *
+	 * @param id
+	 */
+	void set_detailmap(GLuint id);
 
 private:
 	/// The mesh.
-	std::shared_ptr<Mesh> mesh_ = nullptr;
+	std::unique_ptr<Mesh> mesh_ = nullptr;
 	/// The texture.
-	std::shared_ptr<Texture> texture_ = nullptr;
+	std::unique_ptr<Texture> texture_ = nullptr;
 	/// The detailmap.
-	std::shared_ptr<Texture> detailmap = nullptr;
+	std::unique_ptr<Texture> detailmap_ = nullptr;
 };

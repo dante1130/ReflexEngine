@@ -12,11 +12,16 @@ void TexturedTerrain::render(const Shader& shader) {
 
 	glUniformMatrix4fv(shader.GetModelLocation(), 1, GL_FALSE,
 	                   glm::value_ptr(model));
-	glUniform1i(shader.GetUsingTexture(), false);
-	glUniform1i(shader.get_using_detailmap(), true);
 
-	texture_->UseTexture();
-	detailmap->UseTexture();
+	if (texture_ && !detailmap_) {
+		glUniform1i(shader.GetUsingTexture(), true);
+		texture_->UseTexture();
+	} else if (texture_ && detailmap_) {
+		glUniform1i(shader.GetUsingTexture(), false);
+		glUniform1i(shader.get_using_detailmap(), true);
+		texture_->UseTexture();
+		detailmap_->UseTexture();
+	}
 
 	mesh_->RenderMesh();
 }
@@ -63,7 +68,7 @@ bool TexturedTerrain::load_mesh() {
 		}
 	}
 	//
-	mesh_ = std::make_shared<Mesh>();
+	mesh_ = std::make_unique<Mesh>();
 	mesh_->CreateMesh(vertices.data(), indices.data(), vertices.size(),
 	                  indices.size());
 
@@ -71,12 +76,22 @@ bool TexturedTerrain::load_mesh() {
 }
 
 bool TexturedTerrain::load_texture(const char* file_name) {
-	texture_ = std::make_shared<Texture>(file_name);
+	texture_ = std::make_unique<Texture>(file_name);
 	return texture_->LoadTextureA();
 }
 
 bool TexturedTerrain::load_detailmap(const char* file_name) {
-	detailmap = std::make_shared<Texture>(file_name);
-	detailmap->set_texture_unit(GL_TEXTURE3);
-	return detailmap->LoadTexture();
+	detailmap_ = std::make_unique<Texture>(file_name);
+	detailmap_->set_texture_unit(GL_TEXTURE3);
+	return detailmap_->LoadTexture();
+}
+
+void TexturedTerrain::set_texture(GLuint id) {
+	texture_ = std::make_unique<Texture>();
+	texture_->set_texture_id(id);
+}
+
+void TexturedTerrain::set_detailmap(GLuint id) {
+	detailmap_ = std::make_unique<Texture>();
+	detailmap_->set_texture_id(id);
 }

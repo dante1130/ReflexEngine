@@ -1,7 +1,8 @@
 #pragma once
 
 #include <reactphysics3d/reactphysics3d.h>
-#include "Physics.hpp"
+
+#include "CollisionEvent.hpp"
 
 using namespace reactphysics3d;
 
@@ -85,7 +86,12 @@ public:
 	static bool WorldExists();
 
 private:
-	static bool created;
+	/// A boolean determining if the world has been created or not.
+	static bool isCreated;
+	/// A class used to create and destroy the physics world and objects.
 	static PhysicsCommon physicsCommon;
+	/// The physics world.
 	static PhysicsWorld* world;
+	/// The collision event listener listening for any collision.
+	static CollisionEventListener collisionEvent;
 };

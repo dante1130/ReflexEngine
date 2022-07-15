@@ -4,6 +4,7 @@
 #include "ModelManager.hpp"
 #include "MaterialManager.hpp"
 #include "Md2ModelManager.hpp"
+#include "LightManager.hpp"
 
 /**
  * @class ResourceManager
@@ -48,6 +49,13 @@ public:
 	 */
 	MaterialManager& get_material_manager();
 
+	/**
+	 * @brief Get the light manager.
+	 *
+	 * @return LightManager&
+	 */
+	LightManager& get_light_manager();
+
 	// These are deleted as a singleton pattern is used.
 	ResourceManager(ResourceManager& other) = delete;
 	ResourceManager(const ResourceManager& other) = delete;
@@ -66,6 +74,9 @@ private:
 
 	/// The material manager.
 	MaterialManager material_manager_;
+
+	/// The light manager.
+	LightManager light_manager_;
 
 	/**
 	 * @brief Construct a new Resource Manager object

@@ -52,27 +52,6 @@ public:
 	void set_skybox(const std::vector<std::string>& faces);
 
 	/**
-	 * @brief Adds a directional light to the renderer.
-	 *
-	 * @param light_data
-	 */
-	void add_directional_light(const DirectionalLightData& light_data);
-
-	/**
-	 * @brief Adds a point light to the renderer.
-	 *
-	 * @param light_data
-	 */
-	void add_point_light(const PointLightData& light_data);
-
-	/**
-	 * @brief Adds a spot light to the renderer.
-	 *
-	 * @param light_data
-	 */
-	void add_spot_light(const SpotLightData& light_data);
-
-	/**
 	 * @brief Adds a draw call to the renderer.
 	 *
 	 * @param draw_call
@@ -102,15 +81,6 @@ private:
 
 	/// The skybox.
 	Skybox skybox_ = {};
-
-	/// A vector of directional lights.
-	std::vector<DirectionalLight> directional_lights_;
-
-	/// An vector of point lights.
-	std::vector<PointLight> point_lights_;
-
-	/// An vector of spot lights.
-	std::vector<SpotLight> spot_lights_;
 
 	/// A vector of draw calls.
 	std::vector<DrawCall> draw_calls_ = {};

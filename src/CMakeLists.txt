@@ -9,6 +9,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Model/GameObject/PhysicsObject.cpp
 	Model/GameObject/ScriptableObject.cpp
 	Model/GameObject/Player.cpp
+	Model/GameObject/SimpleTerrainObject.cpp
 	Model/GameObject/TerrainObject.cpp
 	Model/GameObject/SkyboxObject.cpp
 	Model/GameObject/DirectionalLightObject.cpp
@@ -46,6 +47,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/ResourceManager/ModelManager.cpp
 	Controller/ResourceManager/Md2ModelManager.cpp
 	Controller/ResourceManager/MaterialManager.cpp
+	Controller/ResourceManager/LightManager.cpp
 	Controller/ResourceManager/ObjectSaving.cpp
 	Controller/Input/InputManager.cpp
 	Controller/Input/InputState.cpp
@@ -63,6 +65,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/Physics/EngineResolve.cpp
 	Controller/Physics/ReactResolve.cpp
 	Controller/Physics/PhysicBody.cpp
+	Controller/Physics/CollisionEvent.cpp
 	Controller/NetworkAccess.cpp
 	Controller/multiTextureCreator.cpp
 	Controller/RandomGenerators/PseudoRandomNumberGenerator.cpp
