@@ -20,7 +20,7 @@ public:
 	bool usingReactResolve() override;
 
 	// init setup
-	void init(glm::vec3 rot, glm::vec3 pos, float angle) override;
+	void init(glm::vec3 pos, glm::vec3 rot, float angle) override;
 
 	//Change movement properties
 	void addForce(glm::vec3 force, Apply type) override;

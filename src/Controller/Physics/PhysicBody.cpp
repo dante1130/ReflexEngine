@@ -13,6 +13,12 @@ void PhysicsBody::removeAllColliders()
 	colliders.clear();
 }
 
+void PhysicsBody::setObjectTrigger(bool ean)
+{
+	for (Collider* c : colliders)
+		c->setIsTrigger(ean);
+
+}
 const glm::vec3 PhysicsBody::getColliderPosition(int index, Apply type)
 {
 	Vector3 temp;
@@ -61,11 +67,11 @@ const int PhysicsBody::getColliderType(int index)
 {
 	switch (colliders[index]->getCollisionShape()->getName())
 	{
-		case CollisionShapeName::BOX : 
+		case CollisionShapeName::SPHERE: 
 			return 1;
-		case CollisionShapeName::SPHERE :
-			return 2;
 		case CollisionShapeName::CAPSULE :
+			return 2;
+		case CollisionShapeName::BOX :
 			return 3;
 		default:
 			return 0;
@@ -84,7 +90,7 @@ void PhysicsBody::addMaterialToCollider(int index, float bounce,
 
 const BoxShape* PhysicsBody::getColliderBox(int index){
 	try {
-		if (getColliderType(index) == 1)
+		if (getColliderType(index) == 3)
 			return m_box.find(index)->second;
 		else
 			throw("Could not convert box type!");
@@ -96,7 +102,7 @@ const BoxShape* PhysicsBody::getColliderBox(int index){
 }
 const SphereShape* PhysicsBody::getColliderSphere(int index) {
 	try {
-		if (getColliderType(index) == 2)
+		if (getColliderType(index) == 1)
 			return m_sphere.find(index)->second;
 		else
 			throw("Could not convert sphere type!");
@@ -108,7 +114,7 @@ const SphereShape* PhysicsBody::getColliderSphere(int index) {
 }
 const CapsuleShape* PhysicsBody::getColliderCapsule(int index) {
 	try {
-		if (getColliderType(index) == 3)
+		if (getColliderType(index) == 2)
 			return m_capsule.find(index)->second;
 		else
 			throw("Could not convert capsule type!");

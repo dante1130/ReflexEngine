@@ -10,18 +10,33 @@ ReactResolve::ReactResolve()
 }
 
 
-void ReactResolve::init(glm::vec3 rot, glm::vec3 pos, float angle) 
+void ReactResolve::init(glm::vec3 pos, glm::vec3 rot, float angle) 
 {
-	Vector3 p = Vector3(pos.x, pos.y, pos.z);
-	Quaternion qt = Quaternion(Vector3(rot.x, rot.y, rot.z), angle);
+	Vector3 p(pos.x, pos.y, pos.z);
+	Quaternion o = Quaternion::identity();
 
-	rb = Physics::getPhysicsWorld()->createRigidBody(Transform(p, qt));
+	angle = angle / (180 / PI_RP3D);
+
+	float x = rot.x * sin(angle / 2);
+	float y = rot.y * sin(angle / 2);
+	float z = rot.z * sin(angle / 2);
+	float w = cos(angle / 2);
+
+	float normal = sqrt(pow(cos(angle / 2), 2) +
+		pow(rot.x, 2) * pow(sin(angle / 2), 2) +
+		pow(rot.y, 2) * pow(sin(angle / 2), 2) +
+		pow(rot.z, 2) * pow(sin(angle / 2), 2));
+
+	o.setAllValues(x / normal, y / normal, z / normal, w / normal);
+
+	rb = Physics::getPhysicsWorld()->createRigidBody(Transform(p, o));
+
 }
 
 void ReactResolve::addForce(glm::vec3 force, Apply type) 
 { 
 	try {
-		Vector3 temp_force = Vector3(force.x, force.y, force.z);
+		Vector3 temp_force = Vector3(force.x , force.y , force.z );
 		switch(type)
 		{ 
 			case Apply::LOCAL :
@@ -101,9 +116,10 @@ void ReactResolve::setCenterOfMass(glm::vec3 p) {
 }
 void ReactResolve::setVelocity(glm::vec3 vel) {
 	rb->setLinearVelocity(Vector3(vel.x, vel.y, vel.z));
+	
 }
 void ReactResolve::setAngVelocity(glm::vec3 ang_vel) {
-	rb->setLinearVelocity(Vector3(ang_vel.x, ang_vel.y, ang_vel.z));
+	rb->setAngularVelocity(Vector3(ang_vel.x, ang_vel.y, ang_vel.z));
 }
 void ReactResolve::setType(BodyType type) { 
 	rb->setType(type); 
@@ -246,8 +262,8 @@ const float ReactResolve::getAngle() {
 
 void ReactResolve::setPosition(glm::vec3 pos)
 {
-	Transform transform = Transform(
-		Vector3(pos.x, pos.y, pos.z), rb->getTransform().getOrientation());
+	Transform transform = rb->getTransform();
+	transform.setPosition(Vector3(pos.x, pos.y, pos.z));
 	rb->setTransform(transform);
 }
 void ReactResolve::setRotation(glm::vec3 rot)
@@ -265,10 +281,6 @@ void ReactResolve::setAngle(float ang)
 	rb->setTransform(transform);
 }
 
-//void ReactResolve::setIsTrigger(bool ean) {
-//	for (Collider* c : colliders) 
-//		c->setIsTrigger(ean);
-//}
 
 
 

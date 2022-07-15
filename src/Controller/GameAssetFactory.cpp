@@ -14,8 +14,6 @@ GameObject* GameAssetFactory::create(const std::string& fileName) {
 		return load_player(fileName);
 	} else if (type == "TerrainObject") {
 		return loadTerrainObject(fileName);
-	} else if (type == "Body") {
-		return loadBody(fileName);
 	} else if (type == "PhysicsObject") {
 		return loadPhysicsObject(fileName);
 	} else if (type == "ScriptableObject") {
@@ -157,22 +155,6 @@ Water* GameAssetFactory::loadWater(const std::string& luaScript) {
 	return water;
 }
 
-Body* GameAssetFactory::loadBody(const std::string& luaScript) {
-	sol::state& lua = LuaManager::get_instance().get_state();
-	lua.script_file(luaScript);
-
-	Body* body = new Body();
-
-	int val = lua["baseObject"]["creator"];
-	if (val == 0) {
-		body->setCreator(false);
-	}
-
-	body->init();
-
-	return body;
-}
-
 Player* GameAssetFactory::load_player(const std::string& lua_script) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file(lua_script);
@@ -192,7 +174,7 @@ Player* GameAssetFactory::load_player(const std::string& lua_script) {
 	player->rotation = rotation;
 	player->angle = angle;
 
-	player->createBR(player->position, player->rotation, player->angle);
+	player->initRB(player->position, player->rotation, player->angle);
 
 	player->set_move_speed(lua["baseObject"]["move_speed"]);
 
@@ -540,12 +522,11 @@ SpotLightObject* GameAssetFactory::load_spot_light(
 
 Projectile* GameAssetFactory::loadProjectileObject(
     const std::string& luaScript) {
+	std::cout << "BULLET CALLED" << std::endl;
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file(luaScript);
 
 	Projectile* proj = new Projectile();
-
-	glm::vec3 offMult, intensity;
 
 	proj->position = loadBasePos(lua);
 	proj->scale = loadBaseScale(lua);
@@ -557,6 +538,7 @@ Projectile* GameAssetFactory::loadProjectileObject(
 
 	proj->initModel(model_name, material_name);
 	proj->initRB(proj->position, proj->rotation, proj->angle);
+
 	loadExtraPhysicObjectSettings(proj, lua);
 
 	int size = lua["baseObject"]["numOfColliders"];

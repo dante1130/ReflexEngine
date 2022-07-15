@@ -2,6 +2,15 @@
 
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 
+PhysicsObject::PhysicsObject() 
+{  
+
+}
+
+void PhysicsObject::init()
+{
+
+}
 
 void PhysicsObject::initModel(const std::string& model_name,
                               const std::string& material_name) {
@@ -10,18 +19,34 @@ void PhysicsObject::initModel(const std::string& model_name,
 }
 
 void PhysicsObject::initRB(glm::vec3 pos, glm::vec3 rotation, float angle) {
-	delete pb;
+
+	//std::cout << "Intial Pos| x:" << pos.x << " y: " << pos.y << " z: " << pos.z << std::endl;
+
 	pb = new ReactResolve();
 	pb->init(pos, rotation, angle);
-}
+	std::string ans;
+	glm::vec3 p = pb->getPosition();
 
-void PhysicsObject::init()
-{
-	pb = new ReactResolve();
+	switch (pb->getType())
+	{
+		case BodyType::DYNAMIC :
+			ans = "Dynamic";
+			break;
+		case BodyType::STATIC :
+			ans = "Static";
+			break;
+		case BodyType::KINEMATIC :
+			ans = "Kinematic";
+			break;
+		default:
+			break;
+	}
+
+	//std::cout << "Model name: " << model_name_ << "Type " << ans  << " React: " <<  pb->usingReactResolve() << std::endl;
+	//std::cout << "Final Pos| x:" << p.x << " y: " << p.y << " z: " << p.z << std::endl;
 }
 
 void PhysicsObject::initRB(glm::vec3 pos, glm::vec3 rotation, float angle, bool type) {
-	delete pb;
 	if (type)
 		pb = new EngineResolve();
 	else
@@ -33,6 +58,7 @@ void PhysicsObject::update(double delta_time) {
 	position = pb->getPosition();
 	rotation = pb->getRotation();
 	angle = pb->getAngle();
+
 }
 
 void PhysicsObject::fixed_update(double delta_time) {
@@ -193,6 +219,8 @@ void PhysicsObject::addMaterialToCollider(int index, float bounce, float mass_de
 
 void PhysicsObject::removeAllColliders() { pb->removeAllColliders(); }
 
+void PhysicsObject::setObjectTrigger(bool ean) { pb->setObjectTrigger(ean); }
+
 bool PhysicsObject::usingReactResolve() { return pb->usingReactResolve(); }
 
 void PhysicsObject::init(glm::vec3 rot, glm::vec3 pos, float angle) { pb->init(rot, pos, angle); }
@@ -212,7 +240,10 @@ void PhysicsObject::setMass(float mass) { pb->setMass(mass); }
 
 void PhysicsObject::setCenterOfMass(glm::vec3 p) { pb->setCenterOfMass(p); }
 
-void PhysicsObject::setVelocity(glm::vec3 vel) { pb->setVelocity(vel); }
+void PhysicsObject::setVelocity(glm::vec3 vel) { 
+	std::cout << "Name: " << model_name_ << std::endl;
+	pb->setVelocity(vel); 
+}
 
 void PhysicsObject::setAngVelocity(glm::vec3 ang_vel) { pb->setAngVelocity(ang_vel); }
 

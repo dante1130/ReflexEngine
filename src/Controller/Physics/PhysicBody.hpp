@@ -1,9 +1,8 @@
 #pragma once
 
+#include "Physics.hpp"
 #include "glm/vec3.hpp"
 #include "glm/vec4.hpp"
-#include "BodyRigidPhysics.hpp"
-#include "reactphysics3d/collision/Collider.h"
 
 //These are to make it easier to determine where a force
 //in the game world is can be applied
@@ -45,6 +44,8 @@ class PhysicsBody
 		const float getColliderMassDesity(int index);
 
 		const int getColliderType(int index);
+
+		void setObjectTrigger(bool ean);
 
 		const BoxShape* getColliderBox(int index);
 		const SphereShape* getColliderSphere(int index);

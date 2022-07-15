@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Controller/Physics/Physics.hpp"
 #include "Controller/ResourceManager/ResourceManager.hpp"
 #include "Controller/ResourceManager/ObjectSaving.hpp"
 #include "Controller/Physics/PhysicBody.hpp"
@@ -10,13 +11,14 @@
 
 class PhysicsObject : public GameObject{
 public:
+	void init();
 	/**
 	 * @brief	Default constructor for physics object
 	 *
 	 * @pre	Nothing
 	 * @post	Object created
 	 */
-	PhysicsObject() = default;
+	PhysicsObject();
 
 	/**
 	 * @brief	Initialised the model
@@ -40,7 +42,6 @@ public:
 	 */
 	void initRB(glm::vec3 pos, glm::vec3 rotation, float angle);
 
-	void init() override;
 	/**
 	 * @brief	Initialised the rigid body
 	 * @param	pos			- position of the rigid body
@@ -119,6 +120,8 @@ public:
 	void addMaterialToCollider(int index, float bounce, float mass_density, float friction);
 
 	void removeAllColliders();
+
+	void setObjectTrigger(bool ean);
 
 	bool usingReactResolve();
 

@@ -10,11 +10,25 @@ EngineResolve::EngineResolve()
 	//something
 }
 
-void EngineResolve::init(glm::vec3 rot, glm::vec3 pos, float angle) {
+void EngineResolve::init(glm::vec3 pos, glm::vec3 rot, float angle) {
 	Vector3 p = Vector3(pos.x, pos.y, pos.z);
-	Quaternion qt = Quaternion(Vector3(rot.x, rot.y, rot.z), angle);
+	Quaternion o = Quaternion::identity();
 
-	cb = Physics::getPhysicsWorld()->createCollisionBody(Transform(p, qt));
+	angle = angle / (180 / PI_RP3D);
+
+	float x = rot.x * sin(angle / 2);
+	float y = rot.y * sin(angle / 2);
+	float z = rot.z * sin(angle / 2);
+	float w = cos(angle / 2);
+
+	float normal = sqrt(pow(cos(angle / 2), 2) +
+		pow(rot.x, 2) * pow(sin(angle / 2), 2) +
+		pow(rot.y, 2) * pow(sin(angle / 2), 2) +
+		pow(rot.z, 2) * pow(sin(angle / 2), 2));
+
+	o.setAllValues(x / normal, y / normal, z / normal, w / normal);
+
+	cb = Physics::getPhysicsWorld()->createCollisionBody(Transform(p, o));
 }
 
 void EngineResolve::addForce(glm::vec3 force, Apply type)
