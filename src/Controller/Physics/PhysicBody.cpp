@@ -1,13 +1,13 @@
 #include "PhysicBody.hpp"
 
-const int PhysicsBody::colliderSize() { 
+int PhysicsBody::colliderSize() { 
 	return colliders.size();
 }
 
 void PhysicsBody::removeAllColliders()
 {
 	m_box.clear();
-	m_sphere.clear();;
+	m_sphere.clear();
 	m_capsule.clear();
 
 	colliders.clear();
@@ -17,9 +17,9 @@ void PhysicsBody::setObjectTrigger(bool ean)
 {
 	for (Collider* c : colliders)
 		c->setIsTrigger(ean);
-
 }
-const glm::vec3 PhysicsBody::getColliderPosition(int index, Apply type)
+
+glm::vec3 PhysicsBody::getColliderPosition(int index, Apply type)
 {
 	Vector3 temp;
 	switch (type)
@@ -36,7 +36,7 @@ const glm::vec3 PhysicsBody::getColliderPosition(int index, Apply type)
 	return glm::vec3(temp.x, temp.y, temp.z);
 }
 
-const glm::vec4 PhysicsBody::getColliderOrientation(int index, Apply type)
+glm::vec4 PhysicsBody::getColliderOrientation(int index, Apply type)
 {
 	Quaternion temp;
 	switch (type)
@@ -53,17 +53,17 @@ const glm::vec4 PhysicsBody::getColliderOrientation(int index, Apply type)
 	return glm::vec4(temp.w, temp.x, temp.y, temp.z);
 }
 
-const float PhysicsBody::getColliderBounce(int index){
+float PhysicsBody::getColliderBounce(int index){
 	return colliders[index]->getMaterial().getBounciness();
 }
-const float PhysicsBody::getColliderFriction(int index){
+float PhysicsBody::getColliderFriction(int index){
 	return colliders[index]->getMaterial().getFrictionCoefficient();
 }
-const float PhysicsBody::getColliderMassDesity(int index) {
+float PhysicsBody::getColliderMassDesity(int index) {
 	return colliders[index]->getMaterial().getMassDensity();
 }
 
-const int PhysicsBody::getColliderType(int index)
+int PhysicsBody::getColliderType(int index)
 {
 	switch (colliders[index]->getCollisionShape()->getName())
 	{

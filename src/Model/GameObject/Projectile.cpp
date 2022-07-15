@@ -71,7 +71,7 @@ void Projectile::save_object() {
 	ObjectSaving::addValue("floorContact", floor_contact_, true);
 	ObjectSaving::closeStruct();
 
-	for (int count = 0; count < pb->colliderSize(); count++) {
+	for (size_t count = 0; count < pb->colliderSize(); count++) {
 		int type = pb->getColliderType(count);
 		ObjectSaving::createStruct("collider" + std::to_string(count + 1));
 		saveCollider(count, type);

@@ -18,7 +18,7 @@ public:
 	 * @pre	Nothing
 	 * @post	Object created
 	 */
-	PhysicsObject();
+	PhysicsObject() = default;
 
 	/**
 	 * @brief	Initialised the model
@@ -103,15 +103,15 @@ public:
 	// FUNCTIONS FOR PHYSICS STUFF
 	//****************************
 
-	const int colliderSize();
-	const glm::vec3 getColliderPosition(int index, Apply type);
-	const glm::vec4 getColliderOrientation(int index, Apply type);
+	int colliderSize();
+	glm::vec3 getColliderPosition(int index, Apply type);
+	glm::vec4 getColliderOrientation(int index, Apply type);
 
-	const float getColliderBounce(int index);
-	const float getColliderFriction(int index);
-	const float getColliderMassDesity(int index);
+	float getColliderBounce(int index);
+	float getColliderFriction(int index);
+	float getColliderMassDesity(int index);
 
-	const int getColliderType(int index);
+	int getColliderType(int index);
 
 	const BoxShape* getColliderBox(int index);
 	const SphereShape* getColliderSphere(int index);
@@ -144,32 +144,31 @@ public:
 	void enableGravity(bool ean);
 	void setCanSleep(bool ean);
 
-	const float getMass();
-	const glm::vec3 getVelocity();
-	const glm::vec3 getAngVelocity();
-	const float getDragForce();
-	const float getDragTorque();
+	float getMass();
+	glm::vec3 getVelocity();
+	glm::vec3 getAngVelocity();
+	float getDragForce();
+	float getDragTorque();
 
-	const BodyType getType();
-	const bool getIsGravityEnabled();
-	const bool getCanSleep();
+	BodyType getType();
+	bool getIsGravityEnabled();
+	bool getCanSleep();
 
 	void addBoxCollider(glm::vec3 pos, glm::vec3 size);
 	void addSphereCollider(glm::vec3 pos, float radius);
 	void addCapsuleCollider(glm::vec3 pos, float radius, float height);
 
-
 	void addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction);
 	void addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction);
 	void addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction);
 
-	const glm::vec3 getPosition();
-	const glm::vec3 getRotation();
-	const float getAngle();
+	glm::vec3 getPosition();
+	glm::vec3 getRotation();
+	float getAngle();
 
 	void setPosition(glm::vec3 pos);
 	void setRotation(glm::vec3 rot);
-	float setAngle(float ang);
+	void setAngle(float ang);
 
 protected:
 	/// The model of the item.

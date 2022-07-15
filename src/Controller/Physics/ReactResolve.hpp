@@ -36,15 +36,15 @@ class ReactResolve: public PhysicsBody{
 	    void setCanSleep(bool ean) override;
 
 		// Get properties
-	    const float getMass() override;
-	    const glm::vec3 getVelocity() override;
-	    const glm::vec3 getAngVelocity() override;
-	    const float getDragForce() override;
-	    const float getDragTorque() override;
+	    float getMass() override;
+	    glm::vec3 getVelocity() override;
+	    glm::vec3 getAngVelocity() override;
+	    float getDragForce() override;
+	    float getDragTorque() override;
 
-	    const BodyType getType() override;
-	    const bool getIsGravityEnabled() override;
-	    const bool getCanSleep() override;
+	    BodyType getType() override;
+	    bool getIsGravityEnabled() override;
+	    bool getCanSleep() override;
 
 		// Add colliders
 	    void addBoxCollider(glm::vec3 pos, glm::vec3 size) override;
@@ -56,9 +56,9 @@ class ReactResolve: public PhysicsBody{
 		void addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction) override;
 
 	    // returns for GameObject position and rotation
-	    const glm::vec3 getPosition() override;
-	    const glm::vec3 getRotation() override;
-	    const float getAngle() override;
+	    glm::vec3 getPosition() override;
+	    glm::vec3 getRotation() override;
+	    float getAngle() override;
 
 		void setPosition(glm::vec3 pos) override;
 		void setRotation(glm::vec3 rot) override;

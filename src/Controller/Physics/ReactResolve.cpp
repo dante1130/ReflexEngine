@@ -148,30 +148,30 @@ void ReactResolve::setCanSleep(bool ean) {
 	rb->setIsAllowedToSleep(ean);
 }
 
-const float ReactResolve::getMass(){
+float ReactResolve::getMass(){
 	return rb->getMass();
 }
-const glm::vec3 ReactResolve::getVelocity() {
+glm::vec3 ReactResolve::getVelocity() {
 	Vector3 v = rb->getLinearVelocity();
 	return glm::vec3(v.x, v.y, v.z);
 }
-const glm::vec3 ReactResolve::getAngVelocity() {
+glm::vec3 ReactResolve::getAngVelocity() {
 	Vector3 av = rb->getAngularVelocity();
 	return glm::vec3(av.x, av.y, av.z);
 }
-const float ReactResolve::getDragForce() {
+float ReactResolve::getDragForce() {
 	return rb->getLinearDamping();
 }
-const float ReactResolve::getDragTorque() {
+float ReactResolve::getDragTorque() {
 	return rb->getAngularDamping();
 }
-const BodyType ReactResolve::getType() {
+BodyType ReactResolve::getType() {
 	return rb->getType();
 }
-const bool ReactResolve::getIsGravityEnabled() {
+bool ReactResolve::getIsGravityEnabled() {
 	return rb->isGravityEnabled();
 }
-const bool ReactResolve::getCanSleep() {
+bool ReactResolve::getCanSleep() {
 	return rb->isAllowedToSleep();
 }
 
@@ -246,17 +246,17 @@ void ReactResolve::addCapsuleCollider(glm::vec3 pos, float radius, float height,
 	mat.setFrictionCoefficient(friction);
 }
 
-const glm::vec3 ReactResolve::getPosition() {
+glm::vec3 ReactResolve::getPosition() {
 	Vector3 p = rb->getTransform().getPosition();
 	return glm::vec3(p.x, p.y, p.z);
 }
 
-const glm::vec3 ReactResolve::getRotation() {
+glm::vec3 ReactResolve::getRotation() {
 	Quaternion r = rb->getTransform().getOrientation();
 	return glm::vec3(r.x, r.y, r.z);
 }
 
-const float ReactResolve::getAngle() {
+float ReactResolve::getAngle() {
 	return rb->getTransform().getOrientation().w;
 }
 

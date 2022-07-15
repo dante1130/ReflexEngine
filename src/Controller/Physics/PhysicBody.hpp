@@ -35,15 +35,15 @@ class PhysicsBody
 	public:
 
 		//collider access
-		const int colliderSize();
-		const glm::vec3 getColliderPosition(int index, Apply type);
-		const glm::vec4 getColliderOrientation(int index, Apply type);
+		int colliderSize();
+		glm::vec3 getColliderPosition(int index, Apply type);
+		glm::vec4 getColliderOrientation(int index, Apply type);
 
-		const float getColliderBounce(int index);
-		const float getColliderFriction(int index);
-		const float getColliderMassDesity(int index);
+		float getColliderBounce(int index);
+		float getColliderFriction(int index);
+		float getColliderMassDesity(int index);
 
-		const int getColliderType(int index);
+		int getColliderType(int index);
 
 		void setObjectTrigger(bool ean);
 
@@ -81,15 +81,15 @@ class PhysicsBody
 	    virtual void setCanSleep(bool ean) = 0;
 
 		//Get properties
-	    virtual const float getMass() = 0;
-	    virtual const glm::vec3 getVelocity() = 0;
-	    virtual const glm::vec3 getAngVelocity() = 0;
-	    virtual const float getDragForce() = 0;
-	    virtual const float getDragTorque() = 0;
+	    virtual float getMass() = 0;
+	    virtual glm::vec3 getVelocity() = 0;
+	    virtual glm::vec3 getAngVelocity() = 0;
+	    virtual float getDragForce() = 0;
+	    virtual float getDragTorque() = 0;
 
-		virtual const BodyType getType() = 0;
-	    virtual const bool getIsGravityEnabled() = 0;
-	    virtual const bool getCanSleep() = 0;
+		virtual BodyType getType() = 0;
+	    virtual bool getIsGravityEnabled() = 0;
+	    virtual bool getCanSleep() = 0;
 
 		//Add colliders
 	    virtual void addBoxCollider(glm::vec3 pos, glm::vec3 size) = 0;
@@ -102,9 +102,9 @@ class PhysicsBody
 		virtual void addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction) = 0;
 
 		//returns for GameObject position and rotation
-	    virtual const glm::vec3 getPosition() = 0;
-	    virtual const glm::vec3 getRotation() = 0;
-	    virtual const float getAngle() = 0;
+	    virtual glm::vec3 getPosition() = 0;
+	    virtual glm::vec3 getRotation() = 0;
+	    virtual float getAngle() = 0;
 
 		virtual void setPosition(glm::vec3 pos) = 0;
 		virtual void setRotation(glm::vec3 rot) = 0;

@@ -92,36 +92,36 @@ void EngineResolve::setCanSleep(bool ean)
 
 }
 
-const float EngineResolve::getMass()
+float EngineResolve::getMass()
 {
 	return 0.0f;
 }
-const glm::vec3 EngineResolve::getVelocity()
+glm::vec3 EngineResolve::getVelocity()
 {
 	return glm::vec3(0.0f);
 }
-const glm::vec3 EngineResolve::getAngVelocity()
+glm::vec3 EngineResolve::getAngVelocity()
 {
 	return glm::vec3(0.0f);
 }
-const float EngineResolve::getDragForce()
+float EngineResolve::getDragForce()
 {
 	return 0.0f;
 }
-const float EngineResolve::getDragTorque()
+float EngineResolve::getDragTorque()
 {
 	return 0.0f;
 }
 
-const BodyType EngineResolve::getType()
+BodyType EngineResolve::getType()
 {
 	return BodyType::STATIC;
 }
-const bool EngineResolve::getIsGravityEnabled()
+bool EngineResolve::getIsGravityEnabled()
 {
 	return false;
 }
-const bool EngineResolve::getCanSleep()
+bool EngineResolve::getCanSleep()
 {
 	return false;
 }
@@ -152,15 +152,15 @@ void EngineResolve::addCapsuleCollider(glm::vec3 pos, float radius, float height
 
 }
 
-const glm::vec3 EngineResolve::getPosition()
+glm::vec3 EngineResolve::getPosition()
 {
 	return glm::vec3(0.0f);
 }
-const glm::vec3 EngineResolve::getRotation()
+glm::vec3 EngineResolve::getRotation()
 {
 	return glm::vec3(0.0f);
 }
-const float EngineResolve::getAngle()
+float EngineResolve::getAngle()
 {
 	return 0.0f;
 }

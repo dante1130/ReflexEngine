@@ -2,15 +2,7 @@
 
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 
-PhysicsObject::PhysicsObject() 
-{  
-
-}
-
-void PhysicsObject::init()
-{
-
-}
+void PhysicsObject::init() { }
 
 void PhysicsObject::initModel(const std::string& model_name,
                               const std::string& material_name) {
@@ -20,30 +12,9 @@ void PhysicsObject::initModel(const std::string& model_name,
 
 void PhysicsObject::initRB(glm::vec3 pos, glm::vec3 rotation, float angle) {
 
-	//std::cout << "Intial Pos| x:" << pos.x << " y: " << pos.y << " z: " << pos.z << std::endl;
-
 	pb = new ReactResolve();
 	pb->init(pos, rotation, angle);
-	std::string ans;
-	glm::vec3 p = pb->getPosition();
 
-	switch (pb->getType())
-	{
-		case BodyType::DYNAMIC :
-			ans = "Dynamic";
-			break;
-		case BodyType::STATIC :
-			ans = "Static";
-			break;
-		case BodyType::KINEMATIC :
-			ans = "Kinematic";
-			break;
-		default:
-			break;
-	}
-
-	//std::cout << "Model name: " << model_name_ << "Type " << ans  << " React: " <<  pb->usingReactResolve() << std::endl;
-	//std::cout << "Final Pos| x:" << p.x << " y: " << p.y << " z: " << p.z << std::endl;
 }
 
 void PhysicsObject::initRB(glm::vec3 pos, glm::vec3 rotation, float angle, bool type) {
@@ -194,19 +165,19 @@ void PhysicsObject::save_object() {
 // lord forgive me...
 //***********************************
 
-const int PhysicsObject::colliderSize() { return pb->colliderSize(); }
+int PhysicsObject::colliderSize() { return pb->colliderSize(); }
 
-const glm::vec3 PhysicsObject::getColliderPosition(int index, Apply type) {return pb->getColliderPosition(index, type);}
+glm::vec3 PhysicsObject::getColliderPosition(int index, Apply type) {return pb->getColliderPosition(index, type);}
 
-const glm::vec4 getColliderOrientation(int index, Apply type);
+glm::vec4 getColliderOrientation(int index, Apply type);
 
-const float PhysicsObject::getColliderBounce(int index) { return pb->getColliderBounce(index); }
+float PhysicsObject::getColliderBounce(int index) { return pb->getColliderBounce(index); }
 
-const float PhysicsObject::getColliderFriction(int index) { return pb->getColliderFriction(index); }
+float PhysicsObject::getColliderFriction(int index) { return pb->getColliderFriction(index); }
 
-const float PhysicsObject::getColliderMassDesity(int index) { return pb->getColliderMassDesity(index); }
+float PhysicsObject::getColliderMassDesity(int index) { return pb->getColliderMassDesity(index); }
 
-const int PhysicsObject::getColliderType(int index) { return pb->getColliderType(index); }
+int PhysicsObject::getColliderType(int index) { return pb->getColliderType(index); }
 
 const BoxShape* PhysicsObject::getColliderBox(int index) { return pb->getColliderBox(index); }
 
@@ -241,7 +212,6 @@ void PhysicsObject::setMass(float mass) { pb->setMass(mass); }
 void PhysicsObject::setCenterOfMass(glm::vec3 p) { pb->setCenterOfMass(p); }
 
 void PhysicsObject::setVelocity(glm::vec3 vel) { 
-	std::cout << "Name: " << model_name_ << std::endl;
 	pb->setVelocity(vel); 
 }
 
@@ -255,21 +225,21 @@ void PhysicsObject::enableGravity(bool ean) { pb->enableGravity(ean); }
 
 void PhysicsObject::setCanSleep(bool ean) { pb->setCanSleep(ean); }
 
-const float PhysicsObject::getMass() { return pb->getMass(); }
+float PhysicsObject::getMass() { return pb->getMass(); }
 
-const glm::vec3 PhysicsObject::getVelocity() { return pb->getVelocity(); }
+glm::vec3 PhysicsObject::getVelocity() { return pb->getVelocity(); }
 
-const glm::vec3 PhysicsObject::getAngVelocity() { return pb->getAngVelocity(); }
+glm::vec3 PhysicsObject::getAngVelocity() { return pb->getAngVelocity(); }
 
-const float PhysicsObject::getDragForce() { return pb->getDragForce(); }
+float PhysicsObject::getDragForce() { return pb->getDragForce(); }
 
-const float PhysicsObject::getDragTorque() { return pb->getDragTorque(); }
+float PhysicsObject::getDragTorque() { return pb->getDragTorque(); }
 
-const BodyType PhysicsObject::getType() { return pb->getType(); }
+BodyType PhysicsObject::getType() { return pb->getType(); }
 
-const bool PhysicsObject::getIsGravityEnabled() { return pb->getIsGravityEnabled(); }
+bool PhysicsObject::getIsGravityEnabled() { return pb->getIsGravityEnabled(); }
 
-const bool PhysicsObject::getCanSleep() { return pb->getCanSleep(); }
+bool PhysicsObject::getCanSleep() { return pb->getCanSleep(); }
 
 void PhysicsObject::addBoxCollider(glm::vec3 pos, glm::vec3 size){ pb->addBoxCollider(pos, size); }
 
@@ -289,10 +259,16 @@ void PhysicsObject::addCapsuleCollider(glm::vec3 pos, float radius, float height
 	pb->addCapsuleCollider(pos, radius, height, bounce, friction);
 }
 
-const glm::vec3 PhysicsObject::getPosition() { return pb->getPosition(); }
+glm::vec3 PhysicsObject::getPosition() { return pb->getPosition(); }
 
-const glm::vec3 PhysicsObject::getRotation() { return pb->getRotation(); }
+glm::vec3 PhysicsObject::getRotation() { return pb->getRotation(); }
 
-const float PhysicsObject::getAngle() { return pb->getAngle(); }
+float PhysicsObject::getAngle() { return pb->getAngle(); }
+
+void PhysicsObject::setPosition(glm::vec3 pos) { pb->setPosition(pos); }
+
+void PhysicsObject::setRotation(glm::vec3 rot) { pb->setRotation(rot); }
+
+void PhysicsObject::setAngle(float ang) { pb->setAngle(ang); }
 
 
