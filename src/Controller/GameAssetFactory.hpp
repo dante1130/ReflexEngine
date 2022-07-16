@@ -101,6 +101,16 @@ private:
 	static glm::vec3 loadBaseScale(sol::state& lua);
 
 	/**
+	 * @brief	Loads in the base objects scale from a lua state
+	 * @param	lua			- The lua state
+	 * @return	glm::vec3	- A vector 3 of the scale of the base object
+	 *
+	 * @pre		savable varaible exists
+	 * @post	savable stored
+	 */
+	static bool loadBaseSavable(sol::state& lua);
+
+	/**
 	 * @brief	Loads in an item object from a lua script
 	 * @param	luaScript	- The lua script to load the item data from
 	 * @return	*Item		- Created item object

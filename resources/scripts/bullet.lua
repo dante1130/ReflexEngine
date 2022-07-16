@@ -7,6 +7,7 @@ baseObject = {
 	yRotation = camera_look_x(),
 	zRotation = camera_look_x(),
 	angle = -90,
+	savable = true,
 	xScale = 0.01,
 	yScale = 0.01,
 	zScale = 0.01,

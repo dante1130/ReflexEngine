@@ -35,12 +35,15 @@ void Item::draw(const Shader& shader) {
 }
 
 void Item::save_object() {
-	ObjectSaving::openFile();
-	ObjectSaving::saveGameObject(position, rotation, scale, angle, "Item");
-	ObjectSaving::closeStruct();
-	ObjectSaving::createStruct("item");
-	ObjectSaving::addValue("modelName", model_name_, false);
-	ObjectSaving::addValue("material_name", material_name_, true);
-	ObjectSaving::closeStruct();
-	ObjectSaving::closeFile();
+	if (savable) {
+		ObjectSaving::openFile();
+		ObjectSaving::saveGameObject(position, rotation, scale, angle, "Item",
+		                             savable);
+		ObjectSaving::closeStruct();
+		ObjectSaving::createStruct("item");
+		ObjectSaving::addValue("modelName", model_name_, false);
+		ObjectSaving::addValue("material_name", material_name_, true);
+		ObjectSaving::closeStruct();
+		ObjectSaving::closeFile();
+	}
 }

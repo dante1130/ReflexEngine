@@ -7,6 +7,7 @@ baseObject = {
 	yRotation = 0,
 	zRotation = 0,
 	angle = 0.01,
+	savable = true,
 	xScale = 1,
 	yScale = 1,
 	zScale = 1,

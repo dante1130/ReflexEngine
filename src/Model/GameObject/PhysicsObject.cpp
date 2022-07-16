@@ -120,32 +120,35 @@ void PhysicsObject::saveCollider(size_t index, int type) {
 }
 
 void PhysicsObject::save_object() {
-	ObjectSaving::openFile();
-	ObjectSaving::saveGameObject(position, rotation, scale, angle + 0.01,
-	                             "PhysicsObject");
-	ObjectSaving::addComma();
-	ObjectSaving::addValue("modelName", model_name_, false);
-	ObjectSaving::addValue("material_name", material_name_, false);
-	ObjectSaving::addValue("rbType", rb.getRBType(), false);
-	ObjectSaving::addValue("gravity", (int)rb.getIfGravityActive(), false);
-	ObjectSaving::addValue("xForce", rb.getLinearVelocity().x, false);
-	ObjectSaving::addValue("yForce", rb.getLinearVelocity().y, false);
-	ObjectSaving::addValue("zForce", rb.getLinearVelocity().z, false);
-	ObjectSaving::addValue("xTorque", rb.getAngularVelocity().x, false);
-	ObjectSaving::addValue("yTorque", rb.getAngularVelocity().y, false);
-	ObjectSaving::addValue("zTorque", rb.getAngularVelocity().z, false);
-	ObjectSaving::addValue("linearDamping", rb.getLinearDamping(), false);
-	ObjectSaving::addValue("angularDamping", rb.getAngularDamping(), false);
-	ObjectSaving::addValue("sleep", (int)rb.getIfAllowedSleep(), false);
-	ObjectSaving::addValue("numOfColliders", rb.getNumberOfColliders(), true);
-	ObjectSaving::closeStruct();
-
-	for (size_t count = 0; count < rb.getNumberOfColliders(); count++) {
-		int type = rb.getColliderType(count);
-		ObjectSaving::createStruct("collider" + std::to_string(count + 1));
-		saveCollider(count, type);
+	if (savable) {
+		ObjectSaving::openFile();
+		ObjectSaving::saveGameObject(position, rotation, scale, angle + 0.01,
+		                             "PhysicsObject", savable);
+		ObjectSaving::addComma();
+		ObjectSaving::addValue("modelName", model_name_, false);
+		ObjectSaving::addValue("material_name", material_name_, false);
+		ObjectSaving::addValue("rbType", rb.getRBType(), false);
+		ObjectSaving::addValue("gravity", (int)rb.getIfGravityActive(), false);
+		ObjectSaving::addValue("xForce", rb.getLinearVelocity().x, false);
+		ObjectSaving::addValue("yForce", rb.getLinearVelocity().y, false);
+		ObjectSaving::addValue("zForce", rb.getLinearVelocity().z, false);
+		ObjectSaving::addValue("xTorque", rb.getAngularVelocity().x, false);
+		ObjectSaving::addValue("yTorque", rb.getAngularVelocity().y, false);
+		ObjectSaving::addValue("zTorque", rb.getAngularVelocity().z, false);
+		ObjectSaving::addValue("linearDamping", rb.getLinearDamping(), false);
+		ObjectSaving::addValue("angularDamping", rb.getAngularDamping(), false);
+		ObjectSaving::addValue("sleep", (int)rb.getIfAllowedSleep(), false);
+		ObjectSaving::addValue("numOfColliders", rb.getNumberOfColliders(),
+		                       true);
 		ObjectSaving::closeStruct();
-	}
 
-	ObjectSaving::closeFile();
+		for (size_t count = 0; count < rb.getNumberOfColliders(); count++) {
+			int type = rb.getColliderType(count);
+			ObjectSaving::createStruct("collider" + std::to_string(count + 1));
+			saveCollider(count, type);
+			ObjectSaving::closeStruct();
+		}
+
+		ObjectSaving::closeFile();
+	}
 }

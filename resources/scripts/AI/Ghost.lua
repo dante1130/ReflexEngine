@@ -41,6 +41,7 @@ baseObject = {
 	linearDamping = 0.999,
 	angularDamping = 0.999,
 	sleep = 1,
+	savable = true,
 	numOfColliders = 1
 }
 

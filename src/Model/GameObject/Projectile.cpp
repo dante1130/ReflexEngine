@@ -44,39 +44,42 @@ void Projectile::add_draw_call() { PhysicsObject::add_draw_call(); }
 void Projectile::draw(const Shader& shader) { PhysicsObject::draw(shader); }
 
 void Projectile::save_object() {
-	ObjectSaving::openFile();
-	ObjectSaving::saveGameObject(position, rotation, scale, angle + 0.01,
-	                             "Projectile");
-	ObjectSaving::addComma();
-	ObjectSaving::addValue("modelName", model_name_, false);
-	ObjectSaving::addValue("material_name", material_name_, false);
-	ObjectSaving::addValue("rbType", rb.getRBType(), false);
-	ObjectSaving::addValue("gravity", (int)rb.getIfGravityActive(), false);
-	ObjectSaving::addValue("xForce", rb.getLinearVelocity().x, false);
-	ObjectSaving::addValue("yForce", rb.getLinearVelocity().y, false);
-	ObjectSaving::addValue("zForce", rb.getLinearVelocity().z, false);
-	ObjectSaving::addValue("xTorque", rb.getAngularVelocity().x, false);
-	ObjectSaving::addValue("yTorque", rb.getAngularVelocity().y, false);
-	ObjectSaving::addValue("zTorque", rb.getAngularVelocity().z, false);
-	ObjectSaving::addValue("linearDamping", rb.getLinearDamping(), false);
-	ObjectSaving::addValue("angularDamping", rb.getAngularDamping(), false);
-	ObjectSaving::addValue("sleep", (int)rb.getIfAllowedSleep(), false);
-	ObjectSaving::addValue("numOfColliders", rb.getNumberOfColliders(), false);
-	ObjectSaving::addValue("timeAliveLeft", time_alive_left_, false);
-	ObjectSaving::addValue("damage", damage_, false);
-	ObjectSaving::addValue("logic", lua_script_, false);
-	ObjectSaving::addValue("toDelete", to_be_deleted_, false);
-	ObjectSaving::addValue("floorContact", floor_contact_, true);
-	ObjectSaving::closeStruct();
-
-	for (int count = 0; count < rb.getNumberOfColliders(); count++) {
-		int type = rb.getColliderType(count);
-		ObjectSaving::createStruct("collider" + std::to_string(count + 1));
-		saveCollider(count, type);
+	if (savable) {
+		ObjectSaving::openFile();
+		ObjectSaving::saveGameObject(position, rotation, scale, angle + 0.01,
+		                             "Projectile", savable);
+		ObjectSaving::addComma();
+		ObjectSaving::addValue("modelName", model_name_, false);
+		ObjectSaving::addValue("material_name", material_name_, false);
+		ObjectSaving::addValue("rbType", rb.getRBType(), false);
+		ObjectSaving::addValue("gravity", (int)rb.getIfGravityActive(), false);
+		ObjectSaving::addValue("xForce", rb.getLinearVelocity().x, false);
+		ObjectSaving::addValue("yForce", rb.getLinearVelocity().y, false);
+		ObjectSaving::addValue("zForce", rb.getLinearVelocity().z, false);
+		ObjectSaving::addValue("xTorque", rb.getAngularVelocity().x, false);
+		ObjectSaving::addValue("yTorque", rb.getAngularVelocity().y, false);
+		ObjectSaving::addValue("zTorque", rb.getAngularVelocity().z, false);
+		ObjectSaving::addValue("linearDamping", rb.getLinearDamping(), false);
+		ObjectSaving::addValue("angularDamping", rb.getAngularDamping(), false);
+		ObjectSaving::addValue("sleep", (int)rb.getIfAllowedSleep(), false);
+		ObjectSaving::addValue("numOfColliders", rb.getNumberOfColliders(),
+		                       false);
+		ObjectSaving::addValue("timeAliveLeft", time_alive_left_, false);
+		ObjectSaving::addValue("damage", damage_, false);
+		ObjectSaving::addValue("logic", lua_script_, false);
+		ObjectSaving::addValue("toDelete", to_be_deleted_, false);
+		ObjectSaving::addValue("floorContact", floor_contact_, true);
 		ObjectSaving::closeStruct();
-	}
 
-	ObjectSaving::closeFile();
+		for (int count = 0; count < rb.getNumberOfColliders(); count++) {
+			int type = rb.getColliderType(count);
+			ObjectSaving::createStruct("collider" + std::to_string(count + 1));
+			saveCollider(count, type);
+			ObjectSaving::closeStruct();
+		}
+
+		ObjectSaving::closeFile();
+	}
 }
 
 void Projectile::freeze_projectile() {
