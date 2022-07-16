@@ -7,8 +7,6 @@
 #include "Model/GameObject/GameObject.hpp"
 #include "Model/GameObject/Item.hpp"
 #include "Model/GameObject/Water.hpp"
-#include "Model/GameObject/Body.hpp"
-#include "Model/GameObject/BodyRigid.hpp"
 #include "Model/GameObject/Player.hpp"
 #include "Model/GameObject/PhysicsObject.hpp"
 #include "Model/GameObject/ScriptableObject.hpp"
@@ -119,16 +117,6 @@ private:
 	 * @post	water stored
 	 */
 	static Water* loadWater(const std::string& luaScript);
-
-	/**
-	 * @brief	Loads in a body object from a lua script
-	 * @param	luaScript	- The lua script to load the body data from
-	 * @return	*body		- Created body object
-	 *
-	 * @pre		body varaible exists
-	 * @post	body stored
-	 */
-	static Body* loadBody(const std::string& luaScript);
 
 	/**
 	 * @brief Loads in a player object from a lua script.

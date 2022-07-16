@@ -6,8 +6,6 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Model/GameObject/GameObject.hpp
 	Model/GameObject/Item.cpp
 	Model/GameObject/Water.cpp
-	Model/GameObject/Body.cpp
-	Model/GameObject/BodyRigid.cpp
 	Model/GameObject/PhysicsObject.cpp
 	Model/GameObject/ScriptableObject.cpp
 	Model/GameObject/Player.cpp
@@ -64,7 +62,9 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/GameAssetFactory.cpp
 	Controller/LuaManager.cpp
 	Controller/Physics/Physics.cpp
-	Controller/Physics/BodyRigidPhysics.cpp
+	Controller/Physics/EngineResolve.cpp
+	Controller/Physics/ReactResolve.cpp
+	Controller/Physics/PhysicBody.cpp
 	Controller/Physics/CollisionEvent.cpp
 	Controller/NetworkAccess.cpp
 	Controller/multiTextureCreator.cpp

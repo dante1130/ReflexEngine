@@ -1,13 +1,13 @@
 #pragma once
 
-#include "BodyRigid.hpp"
+#include "PhysicsObject.hpp"
 #include "Controller/LuaManager.hpp"
 
 /**
  * @class Player
  * @brief The player game object.
  */
-class Player : public BodyRigid {
+class Player : public PhysicsObject {
 public:
 	/**
 	 * @brief Initialize the game object.

@@ -16,8 +16,6 @@ GameObject* GameAssetFactory::create(const std::string& fileName) {
 		return load_simple_terrain_object(fileName);
 	} else if (type == "TerrainObject") {
 		return loadTerrainObject(fileName);
-	} else if (type == "Body") {
-		return loadBody(fileName);
 	} else if (type == "PhysicsObject") {
 		return loadPhysicsObject(fileName);
 	} else if (type == "ScriptableObject") {
@@ -159,22 +157,6 @@ Water* GameAssetFactory::loadWater(const std::string& luaScript) {
 	return water;
 }
 
-Body* GameAssetFactory::loadBody(const std::string& luaScript) {
-	sol::state& lua = LuaManager::get_instance().get_state();
-	lua.script_file(luaScript);
-
-	Body* body = new Body();
-
-	int val = lua["baseObject"]["creator"];
-	if (val == 0) {
-		body->setCreator(false);
-	}
-
-	body->init();
-
-	return body;
-}
-
 Player* GameAssetFactory::load_player(const std::string& lua_script) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file(lua_script);
@@ -194,7 +176,7 @@ Player* GameAssetFactory::load_player(const std::string& lua_script) {
 	player->rotation = rotation;
 	player->angle = angle;
 
-	player->createBR(player->position, player->rotation, player->angle);
+	player->initRB(player->position, player->rotation, player->angle);
 
 	player->set_move_speed(lua["baseObject"]["move_speed"]);
 
@@ -282,7 +264,7 @@ void GameAssetFactory::loadBoxCollider(int count, PhysicsObject* po,
 
 	po->addBoxCollider(posV, boxV, bounciness, friction);
 
-	if (po->getType() != 2) {
+	if (po->getType() != BodyType::STATIC) {
 		gameWorld.create_box_obstruction(po->position.x, po->position.z,
 		                                 boxV.x * 2, boxV.z * 2);
 	}
@@ -302,7 +284,7 @@ void GameAssetFactory::loadSphereCollider(int count, PhysicsObject* po,
 	float friction = lua[collider]["friction"];
 
 	po->addSphereCollider(posV, radius, bounciness, friction);
-	if (po->getType() != 2) {
+	if (po->getType() != BodyType::STATIC) {
 		gameWorld.create_sphere_obstruction(po->position.x, po->position.z,
 		                                    radius);
 	}
@@ -323,7 +305,7 @@ void GameAssetFactory::loadCapsuleCollider(int count, PhysicsObject* po,
 	float friction = lua[collider]["friction"];
 
 	po->addCapsuleCollider(posV, radius, height, bounciness, friction);
-	if (po->getType() != 2) {
+	if (po->getType() != BodyType::STATIC) {
 		gameWorld.create_sphere_obstruction(po->position.x, po->position.z,
 		                                    radius);
 	}
@@ -342,21 +324,21 @@ void GameAssetFactory::loadExtraPhysicObjectSettings(PhysicsObject* po,
 	force.x = lua["baseObject"]["xForce"];
 	force.y = lua["baseObject"]["yForce"];
 	force.z = lua["baseObject"]["zForce"];
-	po->setLinearVelocity(force);
+	po->setVelocity(force);
 
 	torque.x = lua["baseObject"]["xTorque"];
 	torque.y = lua["baseObject"]["yTorque"];
 	torque.z = lua["baseObject"]["zTorque"];
-	po->setAngularVelocity(torque);
+	po->setAngVelocity(torque);
 
 	float linDamp = lua["baseObject"]["linearDamping"];
-	po->setLinearVelocityDamping(linDamp);
+	po->addDragForce(linDamp);
 	float angDamp = lua["baseObject"]["angularDamping"];
-	po->setAngularVelocityDamping(angDamp);
+	po->addDragTorque(angDamp);
 
 	int sleep = lua["baseObject"]["sleep"];
 	if (sleep == 0) {
-		po->setIfBodyCanSleep(false);
+		po->setCanSleep(false);
 	}
 }
 
@@ -574,8 +556,6 @@ Projectile* GameAssetFactory::loadProjectileObject(
 
 	Projectile* proj = new Projectile();
 
-	glm::vec3 offMult, intensity;
-
 	proj->position = loadBasePos(lua);
 	proj->scale = loadBaseScale(lua);
 	proj->rotation = loadBaseRotation(lua);
@@ -586,6 +566,7 @@ Projectile* GameAssetFactory::loadProjectileObject(
 
 	proj->initModel(model_name, material_name);
 	proj->initRB(proj->position, proj->rotation, proj->angle);
+
 	loadExtraPhysicObjectSettings(proj, lua);
 
 	int size = lua["baseObject"]["numOfColliders"];
