@@ -11,10 +11,12 @@ void ScriptableObject::update(double delta_time) {
 }
 
 void ScriptableObject::save_object() {
-	ObjectSaving::openFile();
-	ObjectSaving::saveGameObject(position, rotation, scale, angle,
-	                             "ScriptableObject");
-	ObjectSaving::closeStruct();
-	ObjectSaving::addValue("script", scriptPath, true);
-	ObjectSaving::closeFile();
+	if (savable) {
+		ObjectSaving::openFile();
+		ObjectSaving::saveGameObject(position, rotation, scale, angle,
+		                             "ScriptableObject", savable);
+		ObjectSaving::closeStruct();
+		ObjectSaving::addValue("script", scriptPath, true);
+		ObjectSaving::closeFile();
+	}
 }

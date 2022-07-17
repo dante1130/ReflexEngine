@@ -26,13 +26,6 @@ public:
 	virtual void addGameObject(const std::string& luaScript) = 0;
 
 	/**
-	 * @brief The function to specify controls for the keyboard.
-	 *
-	 * @param delta_time	- The time between frames
-	 */
-	virtual void key_controls(double delta_time) = 0;
-
-	/**
 	 * @brief The function to specify controls for the mouse.
 	 *
 	 * @param xpos	- the x position of mouse on screen

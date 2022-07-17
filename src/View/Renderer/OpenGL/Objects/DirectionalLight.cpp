@@ -4,6 +4,16 @@ DirectionalLight::DirectionalLight(glm::vec3 color, GLfloat aIntensity,
                                    glm::vec3 direction, GLfloat dIntensity)
     : Light(color, aIntensity, dIntensity), m_direction(direction) {}
 
+void DirectionalLight::set_directional_light(glm::vec3 color,
+                                             GLfloat aIntensity,
+                                             glm::vec3 direction,
+                                             GLfloat dIntensity) {
+	m_color = color;
+	m_ambientIntensity = aIntensity;
+	m_direction = direction;
+	m_diffuseIntensity = dIntensity;
+}
+
 void DirectionalLight::UseLight(GLuint ambientColorLoc,
                                 GLuint ambientIntensityLoc, GLuint directionLoc,
                                 GLuint diffuseIntensityLoc) const {

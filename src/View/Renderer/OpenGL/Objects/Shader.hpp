@@ -44,10 +44,10 @@ public:
 	GLuint get_using_detailmap() const;
 
 	void SetDirectionalLight(const DirectionalLight& dLight);
-	void SetPointLights(PointLight* pLight, GLuint lightCount,
-	                    GLuint textureUnit, GLuint offset);
-	void SetSpotLights(SpotLight* sLight, GLuint lightCount, GLuint textureUnit,
-	                   GLuint offset);
+	void SetPointLights(const PointLight* pLight, GLuint lightCount,
+	                    GLuint textureUnit, GLuint offset) const;
+	void SetSpotLights(const SpotLight* sLight, GLuint lightCount,
+	                   GLuint textureUnit, GLuint offset) const;
 	void SetTexture(GLuint textureUnit);
 	void SetDirectionalShadowMap(GLuint textureUnit);
 	void set_detail_map(GLuint textureUnit);

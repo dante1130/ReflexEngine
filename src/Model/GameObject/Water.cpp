@@ -88,18 +88,21 @@ void Water::setOffsetMult(glm::vec3 offMult) { m_offsetMult = offMult; }
 void Water::setTotalTime(float time) { m_time = time; }
 
 void Water::save_object() {
-	ObjectSaving::openFile();
-	ObjectSaving::saveGameObject(position, rotation, scale, angle, "Water");
-	ObjectSaving::closeStruct();
-	ObjectSaving::createStruct("water");
-	ObjectSaving::addValue("textureName", m_textureName, false);
-	ObjectSaving::addValue("xMult", m_offsetMult.x, false);
-	ObjectSaving::addValue("yMult", m_offsetMult.y, false);
-	ObjectSaving::addValue("zMult", m_offsetMult.z, false);
-	ObjectSaving::addValue("xIntensity", m_intensity.x, false);
-	ObjectSaving::addValue("yIntensity", m_intensity.y, false);
-	ObjectSaving::addValue("zIntensity", m_intensity.z, false);
-	ObjectSaving::addValue("time", (float)m_time, true);
-	ObjectSaving::closeStruct();
-	ObjectSaving::closeFile();
+	if (savable) {
+		ObjectSaving::openFile();
+		ObjectSaving::saveGameObject(position, rotation, scale, angle, "Water",
+		                             savable);
+		ObjectSaving::closeStruct();
+		ObjectSaving::createStruct("water");
+		ObjectSaving::addValue("textureName", m_textureName, false);
+		ObjectSaving::addValue("xMult", m_offsetMult.x, false);
+		ObjectSaving::addValue("yMult", m_offsetMult.y, false);
+		ObjectSaving::addValue("zMult", m_offsetMult.z, false);
+		ObjectSaving::addValue("xIntensity", m_intensity.x, false);
+		ObjectSaving::addValue("yIntensity", m_intensity.y, false);
+		ObjectSaving::addValue("zIntensity", m_intensity.z, false);
+		ObjectSaving::addValue("time", (float)m_time, true);
+		ObjectSaving::closeStruct();
+		ObjectSaving::closeFile();
+	}
 }

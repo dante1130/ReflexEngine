@@ -7,12 +7,11 @@
 #include "Model/GameObject/GameObject.hpp"
 #include "Model/GameObject/Item.hpp"
 #include "Model/GameObject/Water.hpp"
-#include "Model/GameObject/Body.hpp"
-#include "Model/GameObject/BodyRigid.hpp"
 #include "Model/GameObject/Player.hpp"
 #include "Model/GameObject/PhysicsObject.hpp"
 #include "Model/GameObject/ScriptableObject.hpp"
 #include "Model/GameObject/TerrainObject.hpp"
+#include "Model/GameObject/SimpleTerrainObject.hpp"
 #include "Model/GameObject/SkyboxObject.hpp"
 #include "Model/GameObject/DirectionalLightObject.hpp"
 #include "Model/GameObject/PointLightObject.hpp"
@@ -100,6 +99,16 @@ private:
 	static glm::vec3 loadBaseScale(sol::state& lua);
 
 	/**
+	 * @brief	Loads in the base objects scale from a lua state
+	 * @param	lua			- The lua state
+	 * @return	glm::vec3	- A vector 3 of the scale of the base object
+	 *
+	 * @pre		savable varaible exists
+	 * @post	savable stored
+	 */
+	static bool loadBaseSavable(sol::state& lua);
+
+	/**
 	 * @brief	Loads in an item object from a lua script
 	 * @param	luaScript	- The lua script to load the item data from
 	 * @return	*Item		- Created item object
@@ -118,16 +127,6 @@ private:
 	 * @post	water stored
 	 */
 	static Water* loadWater(const std::string& luaScript);
-
-	/**
-	 * @brief	Loads in a body object from a lua script
-	 * @param	luaScript	- The lua script to load the body data from
-	 * @return	*body		- Created body object
-	 *
-	 * @pre		body varaible exists
-	 * @post	body stored
-	 */
-	static Body* loadBody(const std::string& luaScript);
 
 	/**
 	 * @brief Loads in a player object from a lua script.
@@ -204,6 +203,14 @@ private:
 	 * @post	scriptable object object stored
 	 */
 	static ScriptableObject* loadScriptableObject(const std::string& luaScript);
+
+	/**
+	 * @brief Loads in a simple terrain object from a lua script
+	 *
+	 * @param lua_script The lua script to load the terrain data from
+	 */
+	static SimpleTerrainObject* load_simple_terrain_object(
+	    const std::string& lua_script);
 
 	/**
 	 * @brief Loads in a terrian object from a lua script

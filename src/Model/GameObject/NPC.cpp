@@ -27,9 +27,9 @@ void NPC::fixed_update(double delta_time) {
 		if (m_AI_time_elapsed > m_AI_update_delay) {
 			m_NPC_FSM->update();
 
-			position = rb.getPosition();
+			position = pb->getPosition();
 			position.y = TerrainManager::getHeight(position.x, position.z);
-			rb.set_position(glm::vec3(position.x, position.y, position.z));
+			pb->setPosition(glm::vec3(position.x, position.y, position.z));
 			m_AI_time_elapsed = 0.0f;
 		}
 	}
@@ -65,44 +65,51 @@ void NPC::draw(const Shader& shader) {
 }
 
 void NPC::save_object() {
-	ObjectSaving::openFile();
-	ObjectSaving::saveGameObject(position, rotation, scale, angle, "NPC");
-	ObjectSaving::addComma();
-	ObjectSaving::addValue("modelName", model_name_, false);
-	ObjectSaving::addValue("model_texture", m_model_texture, false);
-	ObjectSaving::addValue("material_name", material_name_, false);
-	ObjectSaving::addValue("animate", m_animation.get_is_animated(), false);
-	ObjectSaving::addValue("loopAnimation", m_animation.get_loop(), false);
-	ObjectSaving::addValue("rbType", rb.getRBType(), false);
-	ObjectSaving::addValue("gravity", (int)rb.getIfGravityActive(), false);
-	ObjectSaving::addValue("xForce", rb.getLinearVelocity().x, false);
-	ObjectSaving::addValue("yForce", rb.getLinearVelocity().y, false);
-	ObjectSaving::addValue("zForce", rb.getLinearVelocity().z, false);
-	ObjectSaving::addValue("xTorque", rb.getAngularVelocity().x, false);
-	ObjectSaving::addValue("yTorque", rb.getAngularVelocity().y, false);
-	ObjectSaving::addValue("zTorque", rb.getAngularVelocity().z, false);
-	ObjectSaving::addValue("linearDamping", rb.getLinearDamping(), false);
-	ObjectSaving::addValue("angularDamping", rb.getAngularDamping(), false);
-	ObjectSaving::addValue("sleep", (int)rb.getIfAllowedSleep(), false);
-	ObjectSaving::addValue("numOfColliders", rb.getNumberOfColliders(), true);
-	ObjectSaving::closeStruct();
-
-	ObjectSaving::createStruct("AI");
-	ObjectSaving::addValue("setUpFSM", m_setup, false);
-	ObjectSaving::addValue("faction", m_faction, false);
-	ObjectSaving::addValue("health", m_health, false);
-	ObjectSaving::addValue("power", m_power, false);
-	ObjectSaving::addValue("moveSpeed", m_move_speed, true);
-	ObjectSaving::closeStruct();
-
-	for (int count = 0; count < rb.getNumberOfColliders(); count++) {
-		int type = rb.getColliderType(count);
-		ObjectSaving::createStruct("collider" + std::to_string(count + 1));
-		saveCollider(count, type);
+	if (savable) {
+    glm::vec3 vel = pb->getVelocity();
+	  glm::vec3 ang = pb->getAngVelocity();
+    
+		ObjectSaving::openFile();
+		ObjectSaving::saveGameObject(position, rotation, scale, angle, "NPC",
+		                             savable);
+		ObjectSaving::addComma();
+		ObjectSaving::addValue("modelName", model_name_, false);
+		ObjectSaving::addValue("model_texture", m_model_texture, false);
+		ObjectSaving::addValue("material_name", material_name_, false);
+		ObjectSaving::addValue("animate", m_animation.get_is_animated(), false);
+		ObjectSaving::addValue("loopAnimation", m_animation.get_loop(), false);
+		ObjectSaving::addValue("rbType", (int)pb->getType(), false);
+		ObjectSaving::addValue("gravity", (int)pb->getIsGravityEnabled(), false);
+		ObjectSaving::addValue("xForce", vel.x, false);
+		ObjectSaving::addValue("yForce", vel.y, false);
+		ObjectSaving::addValue("zForce", vel.z, false);
+		ObjectSaving::addValue("xTorque", ang.x, false);
+		ObjectSaving::addValue("yTorque", ang.y, false);
+		ObjectSaving::addValue("zTorque", ang.z, false);
+		ObjectSaving::addValue("linearDamping", pb->getDragForce(), false);
+		ObjectSaving::addValue("angularDamping", pb->getDragTorque(), false);
+		ObjectSaving::addValue("sleep", (int)pb->getCanSleep(), false);
+		ObjectSaving::addValue("numOfColliders", pb->colliderSize(),
+		                       true);
 		ObjectSaving::closeStruct();
-	}
 
-	ObjectSaving::closeFile();
+		ObjectSaving::createStruct("AI");
+		ObjectSaving::addValue("setUpFSM", m_setup, false);
+		ObjectSaving::addValue("faction", m_faction, false);
+		ObjectSaving::addValue("health", m_health, false);
+		ObjectSaving::addValue("power", m_power, false);
+		ObjectSaving::addValue("moveSpeed", m_move_speed, true);
+		ObjectSaving::closeStruct();
+
+		for (int count = 0; count < pb->colliderSize(); count++) {
+			int type = pb->getColliderType(count);
+			ObjectSaving::createStruct("collider" + std::to_string(count + 1));
+			saveCollider(count, type);
+			ObjectSaving::closeStruct();
+		}
+
+		ObjectSaving::closeFile();
+	}
 }
 
 bool NPC::handleMessage(const telegram& msg) {
@@ -160,7 +167,7 @@ void NPC::set_pos(vector2D pos) {
 	position.x = pos.getX();
 	position.z = pos.getY();
 	position.y = TerrainManager::getHeight(position.x, position.z);
-	rb.set_position(glm::vec3(position.x, position.y, position.z));
+	pb->setPosition(glm::vec3(position.x, position.y, position.z));
 }
 float NPC::get_pos_x() { return position.x; }
 float NPC::get_pos_y() { return position.y; }
@@ -169,12 +176,12 @@ float NPC::get_pos_z() { return position.z; }
 bool NPC::waypoint_follow(bool gen_new) {
 	if (m_waypoints.size() == 0 && gen_new) {
 		// std::cout << "waypoints empty & gen new" << std::endl;
-		rb.setLinearVelocity(glm::vec3(0, 0, 0));
+		pb->setVelocity(glm::vec3(0, 0, 0));
 		return true;
 
 	} else if (m_waypoints.size() == 0) {
 		// std::cout << "waypoints empty" << std::endl;
-		rb.setLinearVelocity(glm::vec3(0, 0, 0));
+		pb->setVelocity(glm::vec3(0, 0, 0));
 		return true;
 	}
 
@@ -201,7 +208,7 @@ bool NPC::move_NPC(float x, float z, float offset) {
 		lookAt = glm::normalize(lookAt);
 		angle = atan2(lookAt.y, lookAt.x) * 180 / 3.151f;
 		lookAt = lookAt * glm::vec2(m_move_speed, m_move_speed);
-		rb.setLinearVelocity(glm::vec3(lookAt.x, 0, lookAt.y));
+		pb->setVelocity(glm::vec3(lookAt.x, 0, lookAt.y));
 	}
 
 	return ret;
@@ -278,7 +285,7 @@ void NPC::send_group_message(double time, int faction, float range, int sender,
 	}
 }
 
-void NPC::freezeNPC() { rb.setLinearVelocity(glm::vec3(0)); }
+void NPC::freezeNPC() { pb->setVelocity(glm::vec3(0)); }
 
 ModelData& NPC::get_animation() { return m_animation; }
 

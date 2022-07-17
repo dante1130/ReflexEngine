@@ -1,16 +1,15 @@
 target_sources(${PROJECT_NAME} PRIVATE
-    main.cpp
+	main.cpp
 
 	NetworkManager.cpp
 
 	Model/GameObject/GameObject.hpp
 	Model/GameObject/Item.cpp
 	Model/GameObject/Water.cpp
-	Model/GameObject/Body.cpp
-	Model/GameObject/BodyRigid.cpp
 	Model/GameObject/PhysicsObject.cpp
 	Model/GameObject/ScriptableObject.cpp
 	Model/GameObject/Player.cpp
+	Model/GameObject/SimpleTerrainObject.cpp
 	Model/GameObject/TerrainObject.cpp
 	Model/GameObject/SkyboxObject.cpp
 	Model/GameObject/DirectionalLightObject.cpp
@@ -22,7 +21,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Model/GameObject/NetworkedItem.cpp
 	Model/RunTimeDataStorage/DynamicDataStorage.cpp
 	Model/RunTimeDataStorage/GlobalDataStorage.cpp
-	
+
 	View/Renderer/OpenGL/OpenGL.cpp
 	View/Renderer/OpenGL/Objects/Light.cpp
 	View/Renderer/OpenGL/Objects/DirectionalLight.cpp
@@ -48,10 +47,10 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/ResourceManager/ModelManager.cpp
 	Controller/ResourceManager/Md2ModelManager.cpp
 	Controller/ResourceManager/MaterialManager.cpp
+	Controller/ResourceManager/LightManager.cpp
 	Controller/ResourceManager/ObjectSaving.cpp
 	Controller/Input/InputManager.cpp
 	Controller/Input/InputState.cpp
-	Controller/Input/Input.hpp
 	Controller/Audio/Audio.cpp
 	Controller/Audio/AudioStopReceiver.cpp
 	Controller/Pathfinding/AStar.cpp
@@ -63,13 +62,16 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/GameAssetFactory.cpp
 	Controller/LuaManager.cpp
 	Controller/Physics/Physics.cpp
-	Controller/Physics/BodyRigidPhysics.cpp
+	Controller/Physics/EngineResolve.cpp
+	Controller/Physics/ReactResolve.cpp
+	Controller/Physics/PhysicBody.cpp
+	Controller/Physics/CollisionEvent.cpp
 	Controller/NetworkAccess.cpp
 	Controller/multiTextureCreator.cpp
 	Controller/RandomGenerators/PseudoRandomNumberGenerator.cpp
 	Controller/ReflexEngine/EngineAccess.cpp
 	Controller/Terrain/TerrainManager.cpp
-	
+
 	Controller/AI/messageDispatcher.cpp
 	Model/GameObject/NPC.cpp
 	Controller/AI/entityManager.cpp
@@ -78,8 +80,6 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/AI/luaAccessScriptedFSM.cpp
 	Controller/AI/Counter.cpp
 	Controller/AI/vector2D.cpp
-
-	
 
 	Game/Scene.hpp
 	Game/TestScene.cpp

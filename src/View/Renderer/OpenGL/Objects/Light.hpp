@@ -4,14 +4,14 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "ShadowMap.hpp"
-
 /**
  * @class Light
  * @brief A light in the scene.
  */
 class Light {
 public:
+	Light() = default;
+
 	/**
 	 * @brief Parameterized constructor.
 	 *
@@ -20,6 +20,14 @@ public:
 	 * @param dIntensity The diffuse intensity of the light.
 	 */
 	Light(glm::vec3 color, GLfloat aIntensity, GLfloat dIntensity);
+
+	/**
+	 * @brief Returns if the light is active.
+	 *
+	 * @return true
+	 * @return false
+	 */
+	bool is_active() const;
 
 	/**
 	 * @brief Destructor.
@@ -37,4 +45,6 @@ protected:
 	// Diffuse lighting
 	/// The intensity of the diffuse lighting.
 	GLfloat m_diffuseIntensity = {1.0f};
+
+	bool is_active_ = false;
 };

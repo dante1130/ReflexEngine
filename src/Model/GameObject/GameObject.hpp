@@ -22,6 +22,9 @@ public:
 	/// Whether the game object should be removed.
 	bool remove = false;
 
+	/// Whether the game object can be saved or not
+	bool savable = false;
+
 	/**
 	 * @brief Initializes the game object.
 	 */

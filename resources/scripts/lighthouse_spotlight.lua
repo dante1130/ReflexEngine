@@ -1,5 +1,6 @@
 baseObject = {
-	type = "SpotLight"
+	type = "SpotLight",
+	savable = true
 }
 
 light = {

@@ -1,0 +1,3 @@
+[submodule "cmake/slikenet"]
+	path = cmake/slikenet
+	url = https://github.com/SLikeSoft/SLikeNet

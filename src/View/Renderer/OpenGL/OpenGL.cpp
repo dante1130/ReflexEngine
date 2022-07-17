@@ -1,6 +1,16 @@
 #include "OpenGL.hpp"
 
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
+#include "Controller/LuaManager.hpp"
+#include "Controller/ResourceManager/ResourceManager.hpp"
+
+void OpenGL::lua_access() {
+	auto& lua = LuaManager::get_instance().get_state();
+
+	auto renderer = lua.create_named_table("Renderer");
+
+	renderer.set_function("toggle_wireframe", &OpenGL::toggle_wireframe, this);
+}
 
 void OpenGL::init() {
 	auto& engine = ReflexEngine::get_instance();
@@ -25,14 +35,23 @@ void OpenGL::init() {
 	// Default shader.
 	shader_ = std::make_unique<Shader>();
 	shader_->CompileFile("shaders/shader.vert", "shaders/shader.frag");
+
+	static const std::vector<std::string> default_skybox = {
+	    "textures/skyboxes/default/right.jpg",
+	    "textures/skyboxes/default/left.jpg",
+	    "textures/skyboxes/default/top.jpg",
+	    "textures/skyboxes/default/bottom.jpg",
+	    "textures/skyboxes/default/front.jpg",
+	    "textures/skyboxes/default/back.jpg"};
+
+	skybox_ = Skybox(default_skybox);
+
+	lua_access();
 }
 
 void OpenGL::draw() {
 	render_pass();
 
-	directional_lights_.clear();
-	point_lights_.clear();
-	spot_lights_.clear();
 	draw_calls_.clear();
 }
 
@@ -75,14 +94,26 @@ void OpenGL::render_pass() {
 }
 
 void OpenGL::render_lights() {
-	for (const auto& d_light : directional_lights_) {
-		shader_->SetDirectionalLight(d_light);
-	}
+	auto& light_manager = ResourceManager::get_instance().get_light_manager();
 
-	shader_->SetPointLights(point_lights_.data(), point_lights_.size(), 3, 0);
+	shader_->SetDirectionalLight(light_manager.get_directional_light());
 
-	shader_->SetSpotLights(spot_lights_.data(), spot_lights_.size(),
-	                       3 + point_lights_.size(), point_lights_.size());
+	std::vector<PointLight> point_lights;
+	std::vector<SpotLight> spot_lights;
+
+	std::copy_if(light_manager.get_point_lights().begin(),
+	             light_manager.get_point_lights().end(),
+	             std::back_inserter(point_lights),
+	             [](const PointLight& light) { return light.is_active(); });
+
+	std::copy_if(light_manager.get_spot_lights().begin(),
+	             light_manager.get_spot_lights().end(),
+	             std::back_inserter(spot_lights),
+	             [](const SpotLight& light) { return light.is_active(); });
+
+	shader_->SetPointLights(point_lights.data(), point_lights.size(), 0, 0);
+
+	shader_->SetSpotLights(spot_lights.data(), spot_lights.size(), 0, 0);
 
 	shader_->SetTexture(1);
 	shader_->SetDirectionalShadowMap(2);
@@ -100,31 +131,6 @@ void OpenGL::toggle_wireframe() {
 
 void OpenGL::set_skybox(const std::vector<std::string>& faces) {
 	skybox_ = Skybox(faces);
-}
-
-void OpenGL::add_directional_light(const DirectionalLightData& light) {
-	directional_lights_.emplace_back(
-	    DirectionalLight(light.color, light.ambient_intensity, light.direction,
-	                     light.diffuse_intensity));
-}
-
-void OpenGL::add_point_light(const PointLightData& light_data) {
-	if (point_lights_.size() < MAX_POINT_LIGHTS) {
-		point_lights_.emplace_back(PointLight(
-		    light_data.color, light_data.ambient_intensity,
-		    light_data.diffuse_intensity, light_data.position,
-		    light_data.constant, light_data.linear, light_data.quadratic));
-	}
-}
-
-void OpenGL::add_spot_light(const SpotLightData& light_data) {
-	if (spot_lights_.size() < MAX_SPOT_LIGHTS) {
-		spot_lights_.emplace_back(SpotLight(
-		    light_data.color, light_data.ambient_intensity,
-		    light_data.diffuse_intensity, light_data.position,
-		    light_data.direction, light_data.constant, light_data.linear,
-		    light_data.quadratic, light_data.edge));
-	}
 }
 
 void OpenGL::add_draw_call(const DrawCall& draw_call) {

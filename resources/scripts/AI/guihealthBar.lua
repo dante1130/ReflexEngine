@@ -9,7 +9,8 @@ baseObject = {
 	angle = 0,
 	xScale = 1,
 	yScale = 1,
-	zScale = 1
+	zScale = 1,
+	savable = true
 }
 
 script = "scripts/AI/healthBar.lua"

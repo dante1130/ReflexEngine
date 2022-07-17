@@ -47,8 +47,8 @@ void Shader::SetDirectionalLight(const DirectionalLight& dLight) {
 	                uniformDirectionalLight.uniformDiffuseIntensity);
 }
 
-void Shader::SetPointLights(PointLight* pLight, GLuint lightCount,
-                            GLuint textureUnit, GLuint offset) {
+void Shader::SetPointLights(const PointLight* pLight, GLuint lightCount,
+                            GLuint textureUnit, GLuint offset) const {
 	if (lightCount > MAX_POINT_LIGHTS) lightCount = MAX_POINT_LIGHTS;
 
 	glUniform1i(uniformPointLightCount, lightCount);
@@ -71,8 +71,8 @@ void Shader::SetPointLights(PointLight* pLight, GLuint lightCount,
 	}
 }
 
-void Shader::SetSpotLights(SpotLight* sLight, GLuint lightCount,
-                           GLuint textureUnit, GLuint offset) {
+void Shader::SetSpotLights(const SpotLight* sLight, GLuint lightCount,
+                           GLuint textureUnit, GLuint offset) const {
 	if (lightCount > MAX_SPOT_LIGHTS) lightCount = MAX_SPOT_LIGHTS;
 
 	glUniform1i(uniformSpotLightCount, lightCount);

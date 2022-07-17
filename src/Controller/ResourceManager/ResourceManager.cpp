@@ -19,6 +19,8 @@ MaterialManager& ResourceManager::get_material_manager() {
 	return material_manager_;
 }
 
+LightManager& ResourceManager::get_light_manager() { return light_manager_; }
+
 ResourceManager::ResourceManager() {
 	texture_manager_.lua_access();
 	model_manager_.lua_access();
