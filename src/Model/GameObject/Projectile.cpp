@@ -44,11 +44,13 @@ void Projectile::add_draw_call() { PhysicsObject::add_draw_call(); }
 void Projectile::draw(const Shader& shader) { PhysicsObject::draw(shader); }
 
 void Projectile::save_object() {
+	if (savable) {
 	glm::vec3 temp_velocity = pb->getVelocity();
 	glm::vec3 temp_ang_velocity = pb->getAngVelocity();
+  
 	ObjectSaving::openFile();
 	ObjectSaving::saveGameObject(position, rotation, scale, angle + 0.01,
-	                             "Projectile");
+	                             "Projectile", savable);
 	ObjectSaving::addComma();
 	ObjectSaving::addValue("modelName", model_name_, false);
 	ObjectSaving::addValue("material_name", material_name_, false);
@@ -69,16 +71,17 @@ void Projectile::save_object() {
 	ObjectSaving::addValue("logic", lua_script_, false);
 	ObjectSaving::addValue("toDelete", to_be_deleted_, false);
 	ObjectSaving::addValue("floorContact", floor_contact_, true);
-	ObjectSaving::closeStruct();
+  ObjectSaving::closeStruct();
 
 	for (size_t count = 0; count < pb->colliderSize(); count++) {
 		int type = pb->getColliderType(count);
 		ObjectSaving::createStruct("collider" + std::to_string(count + 1));
 		saveCollider(count, type);
 		ObjectSaving::closeStruct();
-	}
+    }
 
-	ObjectSaving::closeFile();
+		ObjectSaving::closeFile();
+	}
 }
 
 void Projectile::freeze_projectile() {

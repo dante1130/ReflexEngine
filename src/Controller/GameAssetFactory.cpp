@@ -96,6 +96,16 @@ glm::vec3 GameAssetFactory::loadBaseScale(sol::state& lua) {
 	return scale;
 }
 
+bool GameAssetFactory::loadBaseSavable(sol::state& lua) {
+	auto valid = lua["baseObject"]["savable"];
+	bool savable = false;
+	if (valid.valid()) {
+		savable = lua["baseObject"]["savable"];
+	}
+
+	return savable;
+}
+
 Item* GameAssetFactory::loadItem(const std::string& luaScript) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file(luaScript);
@@ -107,16 +117,19 @@ Item* GameAssetFactory::loadItem(const std::string& luaScript) {
 
 	glm::vec3 pos, rotation, scale;
 	float angle;
+	bool savable;
 
 	pos = loadBasePos(lua);
 	scale = loadBaseScale(lua);
 	rotation = loadBaseRotation(lua);
 	angle = loadBaseAngle(lua);
+	savable = loadBaseSavable(lua);
 
 	item->position = pos;
 	item->scale = scale;
 	item->rotation = rotation;
 	item->angle = angle;
+	item->savable = savable;
 
 	return item;
 }
@@ -130,16 +143,19 @@ Water* GameAssetFactory::loadWater(const std::string& luaScript) {
 
 	glm::vec3 pos, rotation, scale, offMult, intensity;
 	float angle;
+	bool savable;
 
 	pos = loadBasePos(lua);
 	scale = loadBaseScale(lua);
 	rotation = loadBaseRotation(lua);
 	angle = loadBaseAngle(lua);
+	savable = loadBaseSavable(lua);
 
 	water->position = pos;
 	water->scale = scale;
 	water->rotation = rotation;
 	water->angle = angle;
+	water->savable = savable;
 
 	offMult.x = lua["water"]["xMult"];
 	offMult.y = lua["water"]["yMult"];
@@ -165,16 +181,19 @@ Player* GameAssetFactory::load_player(const std::string& lua_script) {
 
 	glm::vec3 pos, rotation, scale;
 	float angle;
+	bool savable;
 
 	pos = loadBasePos(lua);
 	scale = loadBaseScale(lua);
 	rotation = loadBaseRotation(lua);
 	angle = loadBaseAngle(lua);
+	savable = loadBaseSavable(lua);
 
 	player->position = pos;
 	player->scale = scale;
 	player->rotation = rotation;
 	player->angle = angle;
+	player->savable = savable;
 
 	player->initRB(player->position, player->rotation, player->angle);
 
@@ -222,6 +241,7 @@ PhysicsObject* GameAssetFactory::loadPhysicsObject(
 	po->scale = loadBaseScale(lua);
 	po->rotation = loadBaseRotation(lua);
 	po->angle = loadBaseAngle(lua);
+	po->savable = loadBaseSavable(lua);
 
 	std::string model_name = lua["baseObject"]["modelName"];
 	std::string material_name = lua["baseObject"]["material_name"];
@@ -349,11 +369,13 @@ ScriptableObject* GameAssetFactory::loadScriptableObject(
 
 	glm::vec3 pos, scale, rotation;
 	float angle;
+	bool savable;
 
 	pos = loadBasePos(lua);
 	scale = loadBaseScale(lua);
 	rotation = loadBaseRotation(lua);
 	angle = loadBaseAngle(lua);
+	savable = loadBaseSavable(lua);
 
 	std::string script;
 	script = lua["script"];
@@ -364,7 +386,8 @@ ScriptableObject* GameAssetFactory::loadScriptableObject(
 	so->scale = scale;
 	so->rotation = rotation;
 	so->angle = angle;
-
+	so->savable = savable;
+	
 	return so;
 }
 
@@ -396,11 +419,13 @@ TerrainObject* GameAssetFactory::loadTerrainObject(
 
 	glm::vec3 pos, scale, rotation;
 	float angle;
+	bool savable;
 
 	pos = loadBasePos(lua);
 	scale = loadBaseScale(lua);
 	rotation = loadBaseRotation(lua);
 	angle = loadBaseAngle(lua);
+	savable = loadBaseSavable(lua);
 
 	std::string height_map = lua["terrain"]["heightMap"];
 
@@ -486,6 +511,8 @@ DirectionalLightObject* GameAssetFactory::load_directional_light(
 
 	DirectionalLightObject* d_light = new DirectionalLightObject(light_data);
 
+	d_light->savable = loadBaseSavable(lua);
+
 	d_light->init();
 
 	return d_light;
@@ -512,6 +539,8 @@ PointLightObject* GameAssetFactory::load_point_light(
 	light_data.quadratic = lua["light"]["quadratic"];
 
 	PointLightObject* p_light = new PointLightObject(light_data);
+
+	p_light->savable = loadBaseSavable(lua);
 
 	p_light->init();
 
@@ -544,6 +573,8 @@ SpotLightObject* GameAssetFactory::load_spot_light(
 
 	SpotLightObject* s_light = new SpotLightObject(light_data);
 
+	s_light->savable = loadBaseSavable(lua);
+
 	s_light->init();
 
 	return s_light;
@@ -560,6 +591,7 @@ Projectile* GameAssetFactory::loadProjectileObject(
 	proj->scale = loadBaseScale(lua);
 	proj->rotation = loadBaseRotation(lua);
 	proj->angle = loadBaseAngle(lua);
+	proj->savable = loadBaseSavable(lua);
 
 	std::string model_name = lua["baseObject"]["modelName"];
 	std::string material_name = lua["baseObject"]["material_name"];
@@ -607,16 +639,19 @@ NetworkedItem* GameAssetFactory::loadNetworkedItem(
 	glm::vec3 pos, rotation, scale;
 
 	float angle;
+	bool savable;
 
 	pos = loadBasePos(lua);
 	scale = loadBaseScale(lua);
 	rotation = loadBaseRotation(lua);
 	angle = loadBaseAngle(lua);
+	savable = loadBaseSavable(lua);
 
 	networkedItem->position = pos;
 	networkedItem->scale = scale;
 	networkedItem->rotation = rotation;
 	networkedItem->angle = angle;
+	networkedItem->savable = savable;
 
 	return networkedItem;
 }
@@ -628,11 +663,13 @@ NPC* GameAssetFactory::loadNPCObject(const std::string& luaScript) {
 	glm::vec3 pos, scale, rotation;
 
 	float angle;
+	bool savable;
 
 	pos = loadBasePos(lua);
 	scale = loadBaseScale(lua);
 	rotation = loadBaseRotation(lua);
 	angle = loadBaseAngle(lua);
+	savable = loadBaseSavable(lua);
 
 	std::string model = lua["baseObject"]["modelName"];
 	std::string mat = lua["baseObject"]["material_name"];
@@ -645,6 +682,7 @@ NPC* GameAssetFactory::loadNPCObject(const std::string& luaScript) {
 	npc->scale = scale;
 	npc->rotation = rotation;
 	npc->angle = angle;
+	npc->savable = savable;
 
 	npc->initRB(npc->position, npc->rotation, npc->angle);
 	loadExtraPhysicObjectSettings(npc, lua);

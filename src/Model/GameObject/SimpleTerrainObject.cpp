@@ -34,16 +34,18 @@ void SimpleTerrainObject::draw(const Shader& shader) {
 }
 
 void SimpleTerrainObject::save_object() {
-	ObjectSaving::openFile();
-	ObjectSaving::saveGameObject(position, rotation, scale, angle,
-	                             "SimpleTerrainObject");
-	ObjectSaving::closeStruct();
-	ObjectSaving::createStruct("terrain");
-	ObjectSaving::addValue("texture", texture_name_, false);
-	ObjectSaving::addValue("detailmap", detailmap_name_, false);
-	ObjectSaving::addValue("heightmap", heightmap_name_, true);
-	ObjectSaving::closeStruct();
-	ObjectSaving::closeFile();
+	if (savable) {
+		ObjectSaving::openFile();
+		ObjectSaving::saveGameObject(position, rotation, scale, angle,
+		                             "SimpleTerrainObject", savable);
+		ObjectSaving::closeStruct();
+		ObjectSaving::createStruct("terrain");
+		ObjectSaving::addValue("texture", texture_name_, false);
+		ObjectSaving::addValue("detailmap", detailmap_name_, false);
+		ObjectSaving::addValue("heightmap", heightmap_name_, true);
+		ObjectSaving::closeStruct();
+		ObjectSaving::closeFile();
+	}
 }
 
 void SimpleTerrainObject::set_heightmap_name(

@@ -33,25 +33,28 @@ void Player::fixed_update(double delta_time) {
 void Player::set_lua_script(const std::string& script) { lua_script_ = script; }
 
 void Player::save_object() {
-	glm::vec3 pos = pb->getColliderPosition(0, Apply::LOCAL);
-
-	ObjectSaving::openFile();
-	ObjectSaving::saveGameObject(position, rotation, scale, angle, "Player");
-	ObjectSaving::addComma();
-	ObjectSaving::addValue("move_speed", move_speed_, true);
-	ObjectSaving::closeStruct();
-	ObjectSaving::addValue("script", lua_script_, true);
-	ObjectSaving::createStruct("collider1");
-	ObjectSaving::addValue("colliderType", "Capsule", false);
-	ObjectSaving::addValue("xPos", pos.x, false);
-	ObjectSaving::addValue("yPos", pos.y, false);
-	ObjectSaving::addValue("zPos", pos.z, false);
-	ObjectSaving::addValue("height", height_, false);
-	ObjectSaving::addValue("radius", collider_radius_, false);
-	ObjectSaving::addValue("bounciness", pb->getColliderBounce(0), false);
-	ObjectSaving::addValue("friction", pb->getColliderFriction(0), true);
-	ObjectSaving::closeStruct();
-	ObjectSaving::closeFile();
+	if (savable) {
+    glm::vec3 pos = pb->getColliderPosition(0, Apply::LOCAL);
+    
+		ObjectSaving::openFile();
+		ObjectSaving::saveGameObject(position, rotation, scale, angle, "Player",
+		                             savable);
+		ObjectSaving::addComma();
+		ObjectSaving::addValue("move_speed", move_speed_, true);
+		ObjectSaving::closeStruct();
+		ObjectSaving::addValue("script", lua_script_, true);
+		ObjectSaving::createStruct("collider1");
+		ObjectSaving::addValue("colliderType", "Capsule", false);
+		ObjectSaving::addValue("xPos", pos.x, false);
+		ObjectSaving::addValue("yPos", pos.y, false);
+		ObjectSaving::addValue("zPos", pos.z, false);
+		ObjectSaving::addValue("height", height_, false);
+		ObjectSaving::addValue("radius", collider_radius_, false);
+		ObjectSaving::addValue("bounciness", pb->getColliderBounce(0), false);
+		ObjectSaving::addValue("friction", pb->getColliderFriction(0), true);
+		ObjectSaving::closeStruct();
+		ObjectSaving::closeFile();
+	}
 }
 
 void Player::set_move_speed(float speed) { move_speed_ = speed; }

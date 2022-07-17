@@ -10,18 +10,21 @@ void SkyboxObject::init() {
 }
 
 void SkyboxObject::save_object() {
-	ObjectSaving::openFile();
-	ObjectSaving::saveGameObject(position, rotation, scale, angle, "Skybox");
-	ObjectSaving::closeStruct();
-	ObjectSaving::createStruct("skybox_faces");
-	ObjectSaving::addValue("right_face", faces_.at(0), false);
-	ObjectSaving::addValue("left_face", faces_.at(1), false);
-	ObjectSaving::addValue("top_face", faces_.at(2), false);
-	ObjectSaving::addValue("bottom_face", faces_.at(3), false);
-	ObjectSaving::addValue("back_face", faces_.at(4), false);
-	ObjectSaving::addValue("front_face", faces_.at(5), true);
-	ObjectSaving::closeStruct();
-	ObjectSaving::closeFile();
+	if (savable) {
+		ObjectSaving::openFile();
+		ObjectSaving::saveGameObject(position, rotation, scale, angle, "Skybox",
+		                             savable);
+		ObjectSaving::closeStruct();
+		ObjectSaving::createStruct("skybox_faces");
+		ObjectSaving::addValue("right_face", faces_.at(0), false);
+		ObjectSaving::addValue("left_face", faces_.at(1), false);
+		ObjectSaving::addValue("top_face", faces_.at(2), false);
+		ObjectSaving::addValue("bottom_face", faces_.at(3), false);
+		ObjectSaving::addValue("back_face", faces_.at(4), false);
+		ObjectSaving::addValue("front_face", faces_.at(5), true);
+		ObjectSaving::closeStruct();
+		ObjectSaving::closeFile();
+	}
 }
 
 void SkyboxObject::set_face(SkyboxFaces face, const std::string& texture_path) {

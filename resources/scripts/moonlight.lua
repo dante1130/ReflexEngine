@@ -1,5 +1,6 @@
 baseObject = {
-	type = "DirectionalLight"
+	type = "DirectionalLight",
+	savable = true
 }
 
 light = {

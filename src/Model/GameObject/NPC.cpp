@@ -65,48 +65,51 @@ void NPC::draw(const Shader& shader) {
 }
 
 void NPC::save_object() {
-
-	glm::vec3 vel = pb->getVelocity();
-	glm::vec3 ang = pb->getAngVelocity();
-
-	ObjectSaving::openFile();
-	ObjectSaving::saveGameObject(position, rotation, scale, angle, "NPC");
-	ObjectSaving::addComma();
-	ObjectSaving::addValue("modelName", model_name_, false);
-	ObjectSaving::addValue("model_texture", m_model_texture, false);
-	ObjectSaving::addValue("material_name", material_name_, false);
-	ObjectSaving::addValue("animate", m_animation.get_is_animated(), false);
-	ObjectSaving::addValue("loopAnimation", m_animation.get_loop(), false);
-	ObjectSaving::addValue("rbType", (int)pb->getType(), false);
-	ObjectSaving::addValue("gravity", (int)pb->getIsGravityEnabled(), false);
-	ObjectSaving::addValue("xForce", vel.x, false);
-	ObjectSaving::addValue("yForce", vel.y, false);
-	ObjectSaving::addValue("zForce", vel.z, false);
-	ObjectSaving::addValue("xTorque", ang.x, false);
-	ObjectSaving::addValue("yTorque", ang.y, false);
-	ObjectSaving::addValue("zTorque", ang.z, false);
-	ObjectSaving::addValue("linearDamping", pb->getDragForce(), false);
-	ObjectSaving::addValue("angularDamping", pb->getDragTorque(), false);
-	ObjectSaving::addValue("sleep", (int)pb->getCanSleep(), false);
-	ObjectSaving::addValue("numOfColliders", pb->colliderSize(), true);
-	ObjectSaving::closeStruct();
-
-	ObjectSaving::createStruct("AI");
-	ObjectSaving::addValue("setUpFSM", m_setup, false);
-	ObjectSaving::addValue("faction", m_faction, false);
-	ObjectSaving::addValue("health", m_health, false);
-	ObjectSaving::addValue("power", m_power, false);
-	ObjectSaving::addValue("moveSpeed", m_move_speed, true);
-	ObjectSaving::closeStruct();
-
-	for (size_t count = 0; count < pb->colliderSize(); count++) {
-		int type = pb->getColliderType(count);
-		ObjectSaving::createStruct("collider" + std::to_string(count + 1));
-		saveCollider(count, type);
+	if (savable) {
+    glm::vec3 vel = pb->getVelocity();
+	  glm::vec3 ang = pb->getAngVelocity();
+    
+		ObjectSaving::openFile();
+		ObjectSaving::saveGameObject(position, rotation, scale, angle, "NPC",
+		                             savable);
+		ObjectSaving::addComma();
+		ObjectSaving::addValue("modelName", model_name_, false);
+		ObjectSaving::addValue("model_texture", m_model_texture, false);
+		ObjectSaving::addValue("material_name", material_name_, false);
+		ObjectSaving::addValue("animate", m_animation.get_is_animated(), false);
+		ObjectSaving::addValue("loopAnimation", m_animation.get_loop(), false);
+		ObjectSaving::addValue("rbType", (int)pb->getType(), false);
+		ObjectSaving::addValue("gravity", (int)pb->getIsGravityEnabled(), false);
+		ObjectSaving::addValue("xForce", vel.x, false);
+		ObjectSaving::addValue("yForce", vel.y, false);
+		ObjectSaving::addValue("zForce", vel.z, false);
+		ObjectSaving::addValue("xTorque", ang.x, false);
+		ObjectSaving::addValue("yTorque", ang.y, false);
+		ObjectSaving::addValue("zTorque", ang.z, false);
+		ObjectSaving::addValue("linearDamping", pb->getDragForce(), false);
+		ObjectSaving::addValue("angularDamping", pb->getDragTorque(), false);
+		ObjectSaving::addValue("sleep", (int)pb->getCanSleep(), false);
+		ObjectSaving::addValue("numOfColliders", pb->colliderSize(),
+		                       true);
 		ObjectSaving::closeStruct();
-	}
 
-	ObjectSaving::closeFile();
+		ObjectSaving::createStruct("AI");
+		ObjectSaving::addValue("setUpFSM", m_setup, false);
+		ObjectSaving::addValue("faction", m_faction, false);
+		ObjectSaving::addValue("health", m_health, false);
+		ObjectSaving::addValue("power", m_power, false);
+		ObjectSaving::addValue("moveSpeed", m_move_speed, true);
+		ObjectSaving::closeStruct();
+
+		for (int count = 0; count < pb->colliderSize(); count++) {
+			int type = pb->getColliderType(count);
+			ObjectSaving::createStruct("collider" + std::to_string(count + 1));
+			saveCollider(count, type);
+			ObjectSaving::closeStruct();
+		}
+
+		ObjectSaving::closeFile();
+	}
 }
 
 bool NPC::handleMessage(const telegram& msg) {

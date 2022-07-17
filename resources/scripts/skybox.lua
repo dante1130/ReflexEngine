@@ -1,5 +1,6 @@
 baseObject = {
-	type = "Skybox"
+	type = "Skybox",
+	savable = true
 }
 
 skybox_faces = {
