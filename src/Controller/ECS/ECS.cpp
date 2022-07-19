@@ -9,9 +9,9 @@ Entity& ECS::create_entity() {
 	return *(entities_[entity_id] = std::make_unique<Entity>(entity_id, this));
 }
 
-void ECS::update(float delta_time) {}
+void ECS::update(double delta_time) {}
 
-void ECS::fixed_update(float delta_time) {}
+void ECS::fixed_update(double delta_time) {}
 
 void ECS::draw() { component::model_draw(registry_); }
 

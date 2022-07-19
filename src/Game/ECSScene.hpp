@@ -2,26 +2,19 @@
 
 #include <vector>
 
-#include <glm/glm.hpp>
-
 #include "Scene.hpp"
-#include "Model/GameObject/GameObject.hpp"
-#include "View/Renderer/OpenGL/Objects/DirectionalLight.hpp"
-#include "View/Renderer/OpenGL/Objects/SpotLight.hpp"
-#include "Controller/GameAssetFactory.hpp"
-#include "Controller/NetworkAccess.h"
-#include "Controller/LuaManager.hpp"
+#include "Controller/ECS/ECS.hpp"
 
 /**
- * @class TestScene
- * @brief A test scene for testing purposes.
+ * @class ECSScene
+ * @brief A scene using ECS
  */
-class TestScene : public Scene {
+class ECSScene : public Scene {
 public:
 	/**
 	 * @brief Default constructor
 	 */
-	TestScene() = default;
+	ECSScene() = default;
 
 	/**
 	 * @brief Initializes the scene.
@@ -89,6 +82,5 @@ public:
 	void garbage_collection() override;
 
 private:
-	/// A vector of game objects in the scene.
-	std::vector<std::unique_ptr<GameObject>> game_objects_;
+	ECS ecs_;
 };

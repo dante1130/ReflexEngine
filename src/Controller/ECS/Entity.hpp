@@ -2,31 +2,68 @@
 
 #include "ECS.hpp"
 
+/**
+ * @class Entity
+ * @brief An ECS entity object that is able to store and retrieve components.
+ */
 class Entity {
 public:
+	/**
+	 * @brief Construct a new Entity object.
+	 *
+	 * @param entity_id The entity ID.
+	 * @param ecs A pointer to the ECS instance.
+	 */
 	Entity(entt::entity entity_id, ECS* ecs);
 
-	Entity(const Entity& other) = default;
-	Entity(Entity&& other) = default;
-	Entity& operator=(const Entity& other) = default;
-	Entity& operator=(Entity&& other) = default;
-
+	/**
+	 * @brief Adds a component to the entity.
+	 *
+	 * @tparam T The component type.
+	 * @tparam Args The component constructor arguments.
+	 * @param args The component constructor arguments.
+	 * @return T&
+	 */
 	template <typename T, typename... Args>
 	T& add_component(Args&&... args);
 
+	/**
+	 * @brief Removes a component from the entity.
+	 *
+	 * @tparam T The component type.
+	 */
 	template <typename T>
 	void remove_component();
 
+	/**
+	 * @brief Get a component from the entity.
+	 *
+	 * @tparam T The component type.
+	 * @return T&
+	 */
 	template <typename T>
 	T& get_component() const;
 
+	/**
+	 * @brief Returns a boolean whether the entity has a certain component.
+	 *
+	 * @tparam T The component type.
+	 * @return bool
+	 */
 	template <typename T>
 	bool has_component() const;
 
+	/**
+	 * @brief Get the entity id object
+	 *
+	 * @return entt::entity
+	 */
 	entt::entity get_entity_id() const;
 
 private:
+	/// The entity ID.
 	entt::entity entity_id_ = {entt::null};
+	/// A pointer to the ECS instance.
 	ECS* ecs_ = nullptr;
 };
 
