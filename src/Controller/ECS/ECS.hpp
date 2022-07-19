@@ -57,6 +57,11 @@ public:
 	 */
 	Entity& get_entity(entt::entity entity_id) const;
 
+	/**
+	 * @brief Destroy all entities.
+	 */
+	void clear_entities();
+
 private:
 	/// The EnTT registry.
 	entt::registry registry_ = {};

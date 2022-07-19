@@ -45,15 +45,6 @@ public:
 	T& get_component() const;
 
 	/**
-	 * @brief Returns a boolean whether the entity has a certain component.
-	 *
-	 * @tparam T The component type.
-	 * @return bool
-	 */
-	template <typename T>
-	bool has_component() const;
-
-	/**
 	 * @brief Get the entity id object
 	 *
 	 * @return entt::entity
@@ -80,9 +71,4 @@ void Entity::remove_component() {
 template <typename T>
 T& Entity::get_component() const {
 	return ecs_->registry_.get<T>(entity_id_);
-}
-
-template <typename T>
-bool Entity::has_component() const {
-	return ecs_->registry_.has<T>(entity_id_);
 }

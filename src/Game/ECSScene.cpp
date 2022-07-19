@@ -1,6 +1,8 @@
 #include "ECSScene.hpp"
 
-void ECSScene::init() {}
+#include "Controller/ECS/ECSAccess.hpp"
+
+void ECSScene::init() { ECSAccess::register_ecs(); }
 
 void ECSScene::add_game_object(const std::string& luaScript) {}
 

@@ -1,9 +1,12 @@
 #include "ComponentFunctions.hpp"
 
-#include "Model/Components/Transform.hpp"
-#include "Model/Components/Model.hpp"
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 #include "Controller/ResourceManager/ResourceManager.hpp"
+#include "Controller/LuaManager.hpp"
+
+#include "Model/Components/Transform.hpp"
+#include "Model/Components/Model.hpp"
+#include "Model/Components/Script.hpp"
 
 void component::model_draw(entt::registry& registry) {
 	auto& renderer = ReflexEngine::get_instance().renderer_;
@@ -44,5 +47,35 @@ void component::model_draw(entt::registry& registry) {
 		};
 
 		renderer.add_draw_call(draw_call);
+	}
+}
+
+void component::script_init(entt::registry& registry, entt::entity entity) {
+	auto& lua = LuaManager::get_instance().get_state();
+
+	auto& script = registry.get<component::Script>(entity);
+
+	lua.script_file(script.lua_script);
+
+	lua["init"](*script.entity);
+
+	script.lua_variables = lua["variables"];
+}
+
+void component::script_update(entt::registry& registry) {
+	auto& lua = LuaManager::get_instance().get_state();
+
+	auto view = registry.view<component::Script>();
+
+	for (auto entity : view) {
+		auto& script = view.get<component::Script>(entity);
+
+		lua.script_file(script.lua_script);
+
+		lua["variables"] = script.lua_variables;
+
+		lua["update"](*script.entity);
+
+		script.lua_variables = lua["variables"];
 	}
 }
