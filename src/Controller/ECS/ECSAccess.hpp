@@ -1,9 +1,28 @@
 #pragma once
 
 namespace ECSAccess {
+/**
+ * @brief Register the Entity class and all the componenents to Lua.
+ */
 void register_ecs();
+
+/**
+ * @brief Register the Entity class to Lua.
+ */
 void register_entity();
+
+/**
+ * @brief Register the Transform component to Lua.
+ */
 void register_transform_component();
+
+/**
+ * @brief Register the Model component to Lua.
+ */
 void register_model_component();
+
+/**
+ * @brief Register the Script component to Lua.
+ */
 void register_script_component();
 };  // namespace ECSAccess

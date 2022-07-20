@@ -55,6 +55,8 @@ void component::script_init(entt::registry& registry, entt::entity entity) {
 
 	auto& script = registry.get<component::Script>(entity);
 
+	if (!script.entity) return;
+
 	lua.script_file(script.lua_script);
 
 	lua["init"](*script.entity);
@@ -69,6 +71,8 @@ void component::script_update(entt::registry& registry) {
 
 	for (auto entity : view) {
 		auto& script = view.get<component::Script>(entity);
+
+		if (!script.entity) continue;
 
 		lua.script_file(script.lua_script);
 

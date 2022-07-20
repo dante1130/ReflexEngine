@@ -40,6 +40,8 @@ void ECSAccess::register_transform_component() {
 
 	auto transform_type = lua.new_usertype<Transform>("Transform");
 
+	// Probably need to register glm::vec3.
+
 	transform_type["position"] = &Transform::position;
 	transform_type["angle"] = &Transform::angle;
 	transform_type["scale"] = &Transform::scale;
