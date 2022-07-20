@@ -29,10 +29,10 @@ void component::model_draw(entt::registry& registry) {
 			    glm::translate(model_matrix, glm::vec3(transform.position.x,
 			                                           transform.position.y,
 			                                           transform.position.z));
-			model_matrix = glm::rotate(
-			    model_matrix, glm::radians(transform.angle),
-			    glm::vec3(transform.rotation.x, transform.rotation.y,
-			              transform.rotation.z));
+			// model_matrix = glm::rotate(
+			//     model_matrix, glm::radians(transform.angle),
+			//     glm::vec3(transform.rotation.x, transform.rotation.y,
+			//               transform.rotation.z));
 			model_matrix = glm::scale(
 			    model_matrix, glm::vec3(transform.scale.x, transform.scale.y,
 			                            transform.scale.z));
@@ -78,7 +78,7 @@ void component::point_light_init(entt::registry& registry,
 	auto& light_manager = ResourceManager::get_instance().get_light_manager();
 
 	auto& point_light = registry.get<PointLight>(entity);
-	auto& transform = registry.get<Transform>(entity);
+	const auto& transform = registry.get<Transform>(entity);
 
 	point_light.light_data.position = transform.position;
 
@@ -89,7 +89,7 @@ void component::spot_light_init(entt::registry& registry, entt::entity entity) {
 	auto& light_manager = ResourceManager::get_instance().get_light_manager();
 
 	auto& spot_light = registry.get<SpotLight>(entity);
-	auto& transform = registry.get<Transform>(entity);
+	const auto& transform = registry.get<Transform>(entity);
 
 	spot_light.light_data.position = transform.position;
 
