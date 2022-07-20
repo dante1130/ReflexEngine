@@ -55,7 +55,14 @@ public:
 	 * @param entity_id The entity ID.
 	 * @return Entity&
 	 */
-	Entity& get_entity(entt::entity entity_id) const;
+	Entity& get_entity(entt::entity entity_id);
+
+	/**
+	 * @brief Get the registry.
+	 *
+	 * @return entt::registry&
+	 */
+	entt::registry& get_registry();
 
 	/**
 	 * @brief Destroy all entities.
