@@ -1,9 +1,6 @@
 #pragma once
 
-#include <memory>
-#include <vector>
-
-#include "Model/GameObject/GameObject.hpp"
+#include <string>
 
 /**
  * @class Scene
@@ -23,7 +20,7 @@ public:
 	 * @pre	Nothing
 	 * @post	Object adde
 	 */
-	virtual void addGameObject(const std::string& luaScript) = 0;
+	virtual void add_game_object(const std::string& luaScript) = 0;
 
 	/**
 	 * @brief The function to specify controls for the mouse.
@@ -58,7 +55,7 @@ public:
 	 * @pre		Game objects exists
 	 * @post	Game objects saved
 	 */
-	virtual void saveGameObjects() = 0;
+	virtual void save_game_objects() = 0;
 
 	/**
 	 * @brief	loads game objects
@@ -66,14 +63,18 @@ public:
 	 * @pre		Game objects exists in files
 	 * @post	Game objects added
 	 */
-	virtual void loadSavedGameObjects() = 0;
+	virtual void load_saved_game_objects() = 0;
+
+	/**
+	 * @brief	Deleted game objects which are considered finished
+	 *
+	 * @pre		Game objects exists
+	 * @post	Removed bad game objects
+	 */
+	virtual void garbage_collection() = 0;
 
 	/**
 	 * @brief Virtual destructor.
 	 */
 	virtual ~Scene() = default;
-
-protected:
-	/// A vector of game objects in the scene.
-	std::vector<std::unique_ptr<GameObject>> game_objects_;
 };

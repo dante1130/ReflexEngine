@@ -12,7 +12,7 @@
 void TestScene::init() {
 	sol::state& lua = LuaManager::get_instance().get_state();
 
-	lua.set_function("addGameObject", &TestScene::addGameObject, this);
+	lua.set_function("addGameObject", &TestScene::add_game_object, this);
 	luaAccessScriptedFSM::registerAllAI();
 	lua.script_file("scripts/AI/statemachine.lua");
 	lua.script_file(
@@ -25,7 +25,7 @@ void TestScene::init() {
 	lua.script_file("scripts/AI/_MasterCreation.lua");
 }
 
-void TestScene::addGameObject(const std::string& luaScript) {
+void TestScene::add_game_object(const std::string& luaScript) {
 	std::cout << "Adding " << luaScript << std::endl;
 	game_objects_.emplace_back(GameAssetFactory::create(luaScript));
 }
@@ -62,7 +62,7 @@ void TestScene::fixed_update(double delta_time) {
 	messageMgr.dispatchDelayedMessages();
 }
 
-void TestScene::saveGameObjects() {
+void TestScene::save_game_objects() {
 	for (auto& game_object : game_objects_) {
 		game_object->save_object();
 	}
@@ -71,7 +71,7 @@ void TestScene::saveGameObjects() {
 	ObjectSaving::setFreshSave();
 }
 
-void TestScene::loadSavedGameObjects() {
+void TestScene::load_saved_game_objects() {
 	for (size_t count = 1; count < game_objects_.size(); count++) {
 		game_objects_[count]->remove = true;
 	}

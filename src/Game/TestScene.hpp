@@ -35,7 +35,7 @@ public:
 	 * @pre		Nothing
 	 * @post	Object added
 	 */
-	void addGameObject(const std::string& luaScript) override;
+	void add_game_object(const std::string& luaScript) override;
 
 	/**
 	 * @brief The function to specify controls for the mouse.
@@ -70,7 +70,7 @@ public:
 	 * @pre		Game objects exists
 	 * @post	Game objects saved
 	 */
-	void saveGameObjects() override;
+	void save_game_objects() override;
 
 	/**
 	 * @brief	loads game objects
@@ -78,7 +78,7 @@ public:
 	 * @pre		Game objects exists in files
 	 * @post	Game objects added to scene
 	 */
-	void loadSavedGameObjects() override;
+	void load_saved_game_objects() override;
 
 	/**
 	 * @brief	Deleted game objects which are considered finished
@@ -86,5 +86,9 @@ public:
 	 * @pre		Game objects exists
 	 * @post	Removed bad game objects
 	 */
-	void garbage_collection();
+	void garbage_collection() override;
+
+private:
+	/// A vector of game objects in the scene.
+	std::vector<std::unique_ptr<GameObject>> game_objects_;
 };

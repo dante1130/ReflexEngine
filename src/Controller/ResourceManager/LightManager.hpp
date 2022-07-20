@@ -22,7 +22,7 @@ public:
 
 	void update_point_light(size_t id, const PointLightData& light_data);
 
-	void update_spot_lights(size_t id, const SpotLightData& light_data);
+	void update_spot_light(size_t id, const SpotLightData& light_data);
 
 	void delete_point_light(size_t id);
 

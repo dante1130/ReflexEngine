@@ -42,6 +42,10 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/ReflexEngine/EngineTime.cpp
 	Controller/ReflexEngine/Window.cpp
 	Controller/ReflexEngine/Camera.cpp
+	Controller/ECS/ECS.cpp
+	Controller/ECS/Entity.cpp
+	Controller/ECS/ECSAccess.cpp
+	Controller/ECS/ComponentSystem/ComponentFunctions.cpp
 	Controller/ResourceManager/ResourceManager.cpp
 	Controller/ResourceManager/TextureManager.cpp
 	Controller/ResourceManager/ModelManager.cpp

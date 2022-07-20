@@ -45,8 +45,8 @@ void LightManager::update_point_light(size_t id,
 	    light_data.linear, light_data.quadratic);
 }
 
-void LightManager::update_spot_lights(size_t id,
-                                      const SpotLightData& light_data) {
+void LightManager::update_spot_light(size_t id,
+                                     const SpotLightData& light_data) {
 	spot_lights_.at(id).set_spot_light(
 	    light_data.color, light_data.ambient_intensity,
 	    light_data.diffuse_intensity, light_data.position, light_data.direction,
