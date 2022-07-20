@@ -10,7 +10,12 @@ Entity& ECS::create_entity() {
 	return *(entities_[entity_id] = std::make_unique<Entity>(entity_id, this));
 }
 
-void ECS::update(double delta_time) { component::script_update(registry_); }
+void ECS::update(double delta_time) {
+	component::script_update(registry_);
+	component::directional_light_update(registry_);
+	component::point_light_update(registry_);
+	component::spot_light_update(registry_);
+}
 
 void ECS::fixed_update(double delta_time) {}
 

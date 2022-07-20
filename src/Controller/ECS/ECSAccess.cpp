@@ -6,6 +6,7 @@
 #include "Model/Components/Transform.hpp"
 #include "Model/Components/Model.hpp"
 #include "Model/Components/Script.hpp"
+#include "Model/Components/Light.hpp"
 
 using namespace component;
 
@@ -14,6 +15,9 @@ void ECSAccess::register_ecs() {
 	register_transform_component();
 	register_model_component();
 	register_script_component();
+	register_directional_light_component();
+	register_point_light_component();
+	register_spot_light_component();
 }
 
 void ECSAccess::register_entity() {
@@ -62,4 +66,49 @@ void ECSAccess::register_script_component() {
 	auto script_type = lua.new_usertype<Script>("Script");
 
 	script_type["lua_script"] = &Script::lua_script;
+}
+
+void ECSAccess::register_directional_light_component() {
+	auto& lua = LuaManager::get_instance().get_state();
+
+	auto directional_light_type =
+	    lua.new_usertype<DirectionalLight>("DirectionalLight");
+
+	// directional_light_type["color"] = &DirectionalLightData::color;
+	// directional_light_type["ambient_intensity"] =
+	//     &DirectionalLightData::ambient_intensity;
+	// directional_light_type["diffuse_intensity"] =
+	//     &DirectionalLightData::diffuse_intensity;
+	// directional_light_type["direction"] = &DirectionalLightData::direction;
+}
+
+void ECSAccess::register_point_light_component() {
+	auto& lua = LuaManager::get_instance().get_state();
+
+	auto point_light_type = lua.new_usertype<PointLight>("PointLight");
+
+	// point_light_type["color"] = &PointLightData::color;
+	// point_light_type["ambient_intensity"] =
+	// &PointLightData::ambient_intensity; point_light_type["diffuse_intensity"]
+	// = &PointLightData::diffuse_intensity; point_light_type["position"] =
+	// &PointLightData::position; point_light_type["constant"] =
+	// &PointLightData::constant; point_light_type["linear"] =
+	// &PointLightData::linear; point_light_type["quadratic"] =
+	// &PointLightData::quadratic;
+}
+
+void ECSAccess::register_spot_light_component() {
+	auto& lua = LuaManager::get_instance().get_state();
+
+	auto spot_light_type = lua.new_usertype<SpotLight>("SpotLight");
+
+	// spot_light_type["color"] = &SpotLightData::color;
+	// spot_light_type["ambient_intensity"] = &SpotLightData::ambient_intensity;
+	// spot_light_type["diffuse_intensity"] = &SpotLightData::diffuse_intensity;
+	// spot_light_type["position"] = &SpotLightData::position;
+	// spot_light_type["constant"] = &SpotLightData::constant;
+	// spot_light_type["linear"] = &SpotLightData::linear;
+	// spot_light_type["quadratic"] = &SpotLightData::quadratic;
+	// spot_light_type["direction"] = &SpotLightData::direction;
+	// spot_light_type["edge"] = &SpotLightData::edge;
 }

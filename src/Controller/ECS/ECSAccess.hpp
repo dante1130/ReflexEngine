@@ -25,4 +25,19 @@ void register_model_component();
  * @brief Register the Script component to Lua.
  */
 void register_script_component();
+
+/**
+ * @brief Register the directional light component to Lua.
+ */
+void register_directional_light_component();
+
+/**
+ * @brief Register the point light component to Lua.
+ */
+void register_point_light_component();
+
+/**
+ * @brief Register the spot light component to Lua.
+ */
+void register_spot_light_component();
 };  // namespace ECSAccess
