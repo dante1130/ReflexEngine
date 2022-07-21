@@ -19,27 +19,6 @@ void ECSAccess::register_ecs() {
 	register_directional_light_component();
 	register_point_light_component();
 	register_spot_light_component();
-
-	// To be refactored somewhere.
-	auto& lua = LuaManager::get_instance().get_state();
-
-	auto math_table = lua.create_named_table("Math");
-
-	auto vec3_type = math_table.new_usertype<glm::vec3>(
-	    "vec3",
-	    sol::constructors<glm::vec3(), glm::vec3(float, float, float)>());
-
-	vec3_type["x"] = &glm::vec3::x;
-	vec3_type["y"] = &glm::vec3::y;
-	vec3_type["z"] = &glm::vec3::z;
-
-	auto quat_type = math_table.new_usertype<glm::quat>(
-	    "quat", sol::constructors<glm::quat(),
-	                              glm::quat(float, float, float, float)>());
-
-	quat_type["x"] = &glm::quat::x;
-	quat_type["y"] = &glm::quat::y;
-	quat_type["z"] = &glm::quat::z;
 }
 
 void ECSAccess::register_entity() {

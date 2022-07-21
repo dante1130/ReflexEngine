@@ -5,6 +5,7 @@
 #include "View/guiManager.hpp"
 #include "NetworkManager.hpp"
 #include "Controller/NetworkAccess.h"
+#include "Controller/MathAccess.hpp"
 #include "Controller/ReflexEngine/EngineAccess.hpp"
 #include "Controller/ECS/ECSAccess.hpp"
 #include "Controller/AI/luaAccessScriptedFSM.hpp"
@@ -96,6 +97,7 @@ void ReflexEngine::lua_access() {
 	InputManager::get_instance().lua_access();
 	NetworkAccess::lua_access();
 	EngineAccess::lua_access();
+	MathAccess::lua_access();
 	ECSAccess::register_ecs();
 	PseudoRandomNumberGenerator::lua_access();
 	GlobalDataStorage::lua_access();

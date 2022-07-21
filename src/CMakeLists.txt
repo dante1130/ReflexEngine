@@ -15,12 +15,13 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Model/GameObject/DirectionalLightObject.cpp
 	Model/GameObject/PointLightObject.cpp
 	Model/GameObject/SpotLightObject.cpp
-	Model/LightData.hpp
-	Model/ModelData.cpp
+	Model/GameObject/NPC.cpp
 	Model/GameObject/Projectile.cpp
 	Model/GameObject/NetworkedItem.cpp
 	Model/RunTimeDataStorage/DynamicDataStorage.cpp
 	Model/RunTimeDataStorage/GlobalDataStorage.cpp
+	Model/LightData.hpp
+	Model/ModelData.cpp
 
 	View/Renderer/OpenGL/OpenGL.cpp
 	View/Renderer/OpenGL/Objects/Light.cpp
@@ -66,6 +67,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/ECSGameAssetFactory.cpp
 	Controller/GameAssetFactory.cpp
 	Controller/LuaManager.cpp
+	Controller/MathAccess.cpp
 	Controller/Physics/Physics.cpp
 	Controller/Physics/EngineResolve.cpp
 	Controller/Physics/ReactResolve.cpp
@@ -76,9 +78,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/RandomGenerators/PseudoRandomNumberGenerator.cpp
 	Controller/ReflexEngine/EngineAccess.cpp
 	Controller/Terrain/TerrainManager.cpp
-
 	Controller/AI/messageDispatcher.cpp
-	Model/GameObject/NPC.cpp
 	Controller/AI/entityManager.cpp
 	Controller/Pathfinding/movement.cpp
 	Controller/Pathfinding/world.cpp
