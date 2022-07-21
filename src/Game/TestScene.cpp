@@ -13,7 +13,7 @@ void TestScene::init() {
 	sol::state& lua = LuaManager::get_instance().get_state();
 
 	lua.set_function("addGameObject", &TestScene::add_game_object, this);
-	luaAccessScriptedFSM::registerAllAI();
+	// luaAccessScriptedFSM::registerAllAI();
 	lua.script_file("scripts/AI/statemachine.lua");
 	lua.script_file(
 	    "scripts/AI/setupPlayerFSM.lua");  // All player/NPC setup functions are

@@ -19,6 +19,27 @@ void ECSAccess::register_ecs() {
 	register_directional_light_component();
 	register_point_light_component();
 	register_spot_light_component();
+
+	// To be refactored somewhere.
+	auto& lua = LuaManager::get_instance().get_state();
+
+	auto math_table = lua.create_named_table("Math");
+
+	auto vec3_type = math_table.new_usertype<glm::vec3>(
+	    "vec3",
+	    sol::constructors<glm::vec3(), glm::vec3(float, float, float)>());
+
+	vec3_type["x"] = &glm::vec3::x;
+	vec3_type["y"] = &glm::vec3::y;
+	vec3_type["z"] = &glm::vec3::z;
+
+	auto quat_type = math_table.new_usertype<glm::quat>(
+	    "quat", sol::constructors<glm::quat(),
+	                              glm::quat(float, float, float, float)>());
+
+	quat_type["x"] = &glm::quat::x;
+	quat_type["y"] = &glm::quat::y;
+	quat_type["z"] = &glm::quat::z;
 }
 
 void ECSAccess::register_entity() {
@@ -29,23 +50,35 @@ void ECSAccess::register_entity() {
 	entity_type["add_transform_component"] = &Entity::add_component<Transform>;
 	entity_type["add_model_component"] = &Entity::add_component<Model>;
 	entity_type["add_script_component"] = &Entity::add_component<Script>;
+	entity_type["add_directional_light_component"] =
+	    &Entity::add_component<DirectionalLight>;
+	entity_type["add_point_light_component"] =
+	    &Entity::add_component<PointLight>;
+	entity_type["add_spot_light_component"] = &Entity::add_component<SpotLight>;
 
 	entity_type["remove_transform_component"] =
 	    &Entity::remove_component<Transform>;
 	entity_type["remove_model_component"] = &Entity::remove_component<Model>;
 	entity_type["remove_script_component"] = &Entity::remove_component<Script>;
+	entity_type["remove_directional_light_component"] =
+	    &Entity::remove_component<DirectionalLight>;
+	entity_type["remove_point_light_component"] =
+	    &Entity::remove_component<PointLight>;
 
 	entity_type["get_transform_component"] = &Entity::get_component<Transform>;
 	entity_type["get_model_component"] = &Entity::get_component<Model>;
 	entity_type["get_script_component"] = &Entity::get_component<Script>;
+	entity_type["get_directional_light_component"] =
+	    &Entity::get_component<DirectionalLight>;
+	entity_type["get_point_light_component"] =
+	    &Entity::get_component<PointLight>;
+	entity_type["get_spot_light_component"] = &Entity::get_component<SpotLight>;
 }
 
 void ECSAccess::register_transform_component() {
 	auto& lua = LuaManager::get_instance().get_state();
 
 	auto transform_type = lua.new_usertype<Transform>("Transform");
-
-	// Probably need to register glm::vec3.
 
 	transform_type["position"] = &Transform::position;
 	transform_type["rotation"] = &Transform::rotation;

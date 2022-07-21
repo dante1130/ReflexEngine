@@ -7,6 +7,7 @@
 #include "Controller/NetworkAccess.h"
 #include "Controller/ReflexEngine/EngineAccess.hpp"
 #include "Controller/ECS/ECSAccess.hpp"
+#include "Controller/AI/luaAccessScriptedFSM.hpp"
 #include "Controller/Input/InputManager.hpp"
 #include "Controller/Audio/Audio.hpp"
 #include "Controller/Physics/Physics.hpp"
@@ -102,6 +103,7 @@ void ReflexEngine::lua_access() {
 	ResourceManager::get_instance();
 	Audio::get_instance();
 	Physics::createWorld();
+	luaAccessScriptedFSM::registerAllAI();
 
 	camera_.lua_access();
 }
