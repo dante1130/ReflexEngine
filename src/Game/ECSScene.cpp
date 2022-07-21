@@ -1,12 +1,27 @@
 #include "ECSScene.hpp"
 
-#include "Controller/ECS/ECSAccess.hpp"
+#include "Controller/ReflexEngine/ReflexEngine.hpp"
+#include "Controller/LuaManager.hpp"
+#include "Controller/ECSGameAssetFactory.hpp"
 
-void ECSScene::init() { ECSAccess::register_ecs(); }
+void ECSScene::init() {
+	auto& lua = LuaManager::get_instance().get_state();
 
-void ECSScene::add_game_object(const std::string& luaScript) {}
+	lua.set_function("add_game_object", &ECSScene::add_game_object, this);
 
-void ECSScene::mouse_controls(double xpos, double ypos) {}
+	// Hard coded file paths will be replaced when Scene management is
+	// implemented.
+	lua.script_file("scripts/ECSScene/_Materials.lua");
+	lua.script_file("scripts/ECSScene/_MasterCreation.lua");
+}
+
+void ECSScene::add_game_object(const std::string& lua_script) {
+	ECSGameAssetFactory::create(ecs_, lua_script);
+}
+
+void ECSScene::mouse_controls(double xpos, double ypos) {
+	ReflexEngine::get_instance().camera_.mouse_move(xpos, ypos);
+}
 
 void ECSScene::update(double delta_time) { ecs_.update(delta_time); }
 

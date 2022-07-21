@@ -4,10 +4,12 @@
 
 #include "ComponentSystem/ComponentFunctions.hpp"
 
+using namespace Reflex;
+
 Entity& ECS::create_entity() {
 	entt::entity entity_id = registry_.create();
 
-	return *(entities_[entity_id] = std::make_unique<Entity>(entity_id, this));
+	return *(entities_[entity_id] = std::make_shared<Entity>(entity_id, this));
 }
 
 void ECS::update(double delta_time) {

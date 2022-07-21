@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "Scene.hpp"
+
 #include "Controller/ECS/ECS.hpp"
 
 /**
@@ -23,12 +24,12 @@ public:
 
 	/**
 	 * @brief	Adds a game object
-	 * @param	luaScript	- a lua script to add
+	 * @param	lua_script	- a lua script to add
 	 *
 	 * @pre		Nothing
 	 * @post	Object added
 	 */
-	void add_game_object(const std::string& luaScript) override;
+	void add_game_object(const std::string& lua_script) override;
 
 	/**
 	 * @brief The function to specify controls for the mouse.

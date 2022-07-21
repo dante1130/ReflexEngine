@@ -1,10 +1,12 @@
 #include "EngineTime.hpp"
 
+#include "Controller/LuaManager.hpp"
+
 double EngineTime::prev_time_ = 0.0;
 double EngineTime::delta_time_ = 0.0;
 double EngineTime::fixed_delta_time_ = 0.0;
 double EngineTime::total_unpaused_time_ = 0.0;
-bool EngineTime::paused_ = true;
+bool EngineTime::paused_ = false;
 double EngineTime::time_scale_ = 1.0;
 
 void EngineTime::update_delta_time(double curr_time) {

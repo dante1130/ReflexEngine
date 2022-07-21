@@ -2,12 +2,15 @@
 
 #include "ECS.hpp"
 
+namespace Reflex {
 /**
  * @class Entity
  * @brief An ECS entity object that is able to store and retrieve components.
  */
 class Entity {
 public:
+	Entity() = default;
+
 	/**
 	 * @brief Construct a new Entity object.
 	 *
@@ -51,24 +54,32 @@ public:
 	 */
 	entt::entity get_entity_id() const;
 
+	/**
+	 * @brief Get the ECS registry.
+	 *
+	 * @return entt::registry&
+	 */
+	entt::registry& get_registry();
+
 private:
 	/// The entity ID.
 	entt::entity entity_id_ = {entt::null};
 	/// A pointer to the ECS instance.
 	ECS* ecs_ = nullptr;
 };
+};  // namespace Reflex
 
 template <typename T, typename... Args>
-T& Entity::add_component(Args&&... args) {
+T& Reflex::Entity::add_component(Args&&... args) {
 	return ecs_->registry_.emplace<T>(entity_id_, std::forward<Args>(args)...);
 }
 
 template <typename T>
-void Entity::remove_component() {
+void Reflex::Entity::remove_component() {
 	ecs_->registry_.remove<T>(entity_id_);
 }
 
 template <typename T>
-T& Entity::get_component() const {
+T& Reflex::Entity::get_component() const {
 	return ecs_->registry_.get<T>(entity_id_);
 }
