@@ -47,7 +47,7 @@ void ECSAccess::register_transform_component() {
 	// Probably need to register glm::vec3.
 
 	transform_type["position"] = &Transform::position;
-	transform_type["angle"] = &Transform::angle;
+	transform_type["rotation"] = &Transform::rotation;
 	transform_type["scale"] = &Transform::scale;
 }
 
@@ -74,12 +74,12 @@ void ECSAccess::register_directional_light_component() {
 	auto directional_light_type =
 	    lua.new_usertype<DirectionalLight>("DirectionalLight");
 
-	// directional_light_type["color"] = &DirectionalLightData::color;
-	// directional_light_type["ambient_intensity"] =
-	//     &DirectionalLightData::ambient_intensity;
-	// directional_light_type["diffuse_intensity"] =
-	//     &DirectionalLightData::diffuse_intensity;
-	// directional_light_type["direction"] = &DirectionalLightData::direction;
+	directional_light_type["color"] = &DirectionalLight::color;
+	directional_light_type["ambient_intensity"] =
+	    &DirectionalLight::ambient_intensity;
+	directional_light_type["diffuse_intensity"] =
+	    &DirectionalLight::diffuse_intensity;
+	directional_light_type["direction"] = &DirectionalLight::direction;
 }
 
 void ECSAccess::register_point_light_component() {
@@ -87,14 +87,13 @@ void ECSAccess::register_point_light_component() {
 
 	auto point_light_type = lua.new_usertype<PointLight>("PointLight");
 
-	// point_light_type["color"] = &PointLightData::color;
-	// point_light_type["ambient_intensity"] =
-	// &PointLightData::ambient_intensity; point_light_type["diffuse_intensity"]
-	// = &PointLightData::diffuse_intensity; point_light_type["position"] =
-	// &PointLightData::position; point_light_type["constant"] =
-	// &PointLightData::constant; point_light_type["linear"] =
-	// &PointLightData::linear; point_light_type["quadratic"] =
-	// &PointLightData::quadratic;
+	point_light_type["color"] = &PointLight::color;
+	point_light_type["ambient_intensity"] = &PointLight::ambient_intensity;
+	point_light_type["diffuse_intensity"] = &PointLight::diffuse_intensity;
+	point_light_type["position"] = &PointLight::position;
+	point_light_type["constant"] = &PointLight::constant;
+	point_light_type["linear"] = &PointLight::linear;
+	point_light_type["quadratic"] = &PointLight::quadratic;
 }
 
 void ECSAccess::register_spot_light_component() {
@@ -102,13 +101,13 @@ void ECSAccess::register_spot_light_component() {
 
 	auto spot_light_type = lua.new_usertype<SpotLight>("SpotLight");
 
-	// spot_light_type["color"] = &SpotLightData::color;
-	// spot_light_type["ambient_intensity"] = &SpotLightData::ambient_intensity;
-	// spot_light_type["diffuse_intensity"] = &SpotLightData::diffuse_intensity;
-	// spot_light_type["position"] = &SpotLightData::position;
-	// spot_light_type["constant"] = &SpotLightData::constant;
-	// spot_light_type["linear"] = &SpotLightData::linear;
-	// spot_light_type["quadratic"] = &SpotLightData::quadratic;
-	// spot_light_type["direction"] = &SpotLightData::direction;
-	// spot_light_type["edge"] = &SpotLightData::edge;
+	spot_light_type["color"] = &SpotLight::color;
+	spot_light_type["ambient_intensity"] = &SpotLight::ambient_intensity;
+	spot_light_type["diffuse_intensity"] = &SpotLight::diffuse_intensity;
+	spot_light_type["position"] = &SpotLight::position;
+	spot_light_type["constant"] = &SpotLight::constant;
+	spot_light_type["linear"] = &SpotLight::linear;
+	spot_light_type["quadratic"] = &SpotLight::quadratic;
+	spot_light_type["direction"] = &SpotLight::direction;
+	spot_light_type["edge"] = &SpotLight::edge;
 }

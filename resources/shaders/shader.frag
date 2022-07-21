@@ -7,8 +7,8 @@ in vec3 fragPos;
 
 out vec4 color;
 
-const int MAX_POINT_LIGHTS = 8;
-const int MAX_SPOT_LIGHTS = 8;
+const int MAX_POINT_LIGHTS = 16;
+const int MAX_SPOT_LIGHTS = 16;
 
 struct Light
 {

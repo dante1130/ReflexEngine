@@ -7,6 +7,13 @@ void LightManager::set_directional_light(
 	                     light_data.direction, light_data.diffuse_intensity);
 }
 
+void LightManager::set_directional_light(
+    const component::DirectionalLight& light) {
+	directional_light_ =
+	    DirectionalLight(light.color, light.ambient_intensity, light.direction,
+	                     light.diffuse_intensity);
+}
+
 size_t LightManager::add_point_light(const PointLightData& light_data) {
 	const size_t id = get_next_point_light_id();
 
@@ -14,6 +21,16 @@ size_t LightManager::add_point_light(const PointLightData& light_data) {
 	    light_data.color, light_data.ambient_intensity,
 	    light_data.diffuse_intensity, light_data.position, light_data.constant,
 	    light_data.linear, light_data.quadratic);
+
+	return id;
+}
+
+size_t LightManager::add_point_light(const component::PointLight& light) {
+	const size_t id = get_next_point_light_id();
+
+	point_lights_[id] = PointLight(
+	    light.color, light.ambient_intensity, light.diffuse_intensity,
+	    light.position, light.constant, light.linear, light.quadratic);
 
 	return id;
 }
@@ -30,11 +47,29 @@ size_t LightManager::add_spot_light(const SpotLightData& light_data) {
 	return id;
 }
 
+size_t LightManager::add_spot_light(const component::SpotLight& light) {
+	const size_t id = get_next_spot_light_id();
+
+	spot_lights_[id] =
+	    SpotLight(light.color, light.ambient_intensity, light.diffuse_intensity,
+	              light.position, light.direction, light.constant, light.linear,
+	              light.quadratic, light.edge);
+
+	return id;
+}
+
 void LightManager::update_directional_light(
     const DirectionalLightData& light_data) {
 	directional_light_.set_directional_light(
 	    light_data.color, light_data.ambient_intensity, light_data.direction,
 	    light_data.diffuse_intensity);
+}
+
+void LightManager::update_directional_light(
+    const component::DirectionalLight& light) {
+	directional_light_.set_directional_light(
+	    light.color, light.ambient_intensity, light.direction,
+	    light.diffuse_intensity);
 }
 
 void LightManager::update_point_light(size_t id,
@@ -43,6 +78,13 @@ void LightManager::update_point_light(size_t id,
 	    light_data.color, light_data.ambient_intensity,
 	    light_data.diffuse_intensity, light_data.position, light_data.constant,
 	    light_data.linear, light_data.quadratic);
+}
+
+void LightManager::update_point_light(size_t id,
+                                      const component::PointLight& light) {
+	point_lights_.at(id).set_point_light(
+	    light.color, light.ambient_intensity, light.diffuse_intensity,
+	    light.position, light.constant, light.linear, light.quadratic);
 }
 
 void LightManager::update_spot_light(size_t id,
@@ -54,12 +96,20 @@ void LightManager::update_spot_light(size_t id,
 	    light_data.edge);
 }
 
+void LightManager::update_spot_light(size_t id,
+                                     const component::SpotLight& light) {
+	spot_lights_.at(id).set_spot_light(
+	    light.color, light.ambient_intensity, light.diffuse_intensity,
+	    light.position, light.direction, light.constant, light.linear,
+	    light.quadratic, light.edge);
+}
+
 void LightManager::delete_point_light(size_t id) {
-	point_lights_.at(id) = PointLight();
+	point_lights_[id] = PointLight();
 }
 
 void LightManager::delete_spot_light(size_t id) {
-	spot_lights_.at(id) = SpotLight();
+	spot_lights_[id] = SpotLight();
 }
 
 void LightManager::delete_all_point_lights() {

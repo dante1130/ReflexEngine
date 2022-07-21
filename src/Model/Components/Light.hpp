@@ -1,24 +1,40 @@
 #pragma once
 
-#include "Model/LightData.hpp"
+#include <glm/glm.hpp>
 
 namespace component {
+
+struct Light {
+	/// The color of the light.
+	glm::vec3 color = glm::vec3(1.0f);
+	/// The ambient intensity of the light.
+	float ambient_intensity = 0.0f;
+	/// The diffuse intensity of the light.
+	float diffuse_intensity = 0.0f;
+};
+
 /**
  * @struct DirectionalLight
  * @brief A directional light component.
  */
-struct DirectionalLight {
-	/// The directional light data.
-	DirectionalLightData light_data;
+struct DirectionalLight : public Light {
+	/// The direction of the light.
+	glm::vec3 direction = glm::vec3(0.0f, -1.0f, 0.0f);
 };
 
 /**
  * @struct PointLight
  * @brief A point light component.
  */
-struct PointLight {
-	/// The point light data.
-	PointLightData light_data;
+struct PointLight : public Light {
+	/// The position of the light.
+	glm::vec3 position = glm::vec3(0.0f);
+	/// The constant attenuation of the light.
+	float constant = 0.0f;
+	/// The linear attenuation of the light.
+	float linear = 0.0f;
+	/// The quadratic attenuation of the light.
+	float quadratic = 0.0f;
 	/// The point light id in the Light manager.
 	size_t light_id;
 };
@@ -27,11 +43,11 @@ struct PointLight {
  * @struct SpotLight
  * @brief A point light component.
  */
-struct SpotLight {
-	/// The spot light data.
-	SpotLightData light_data;
-	/// The spot light id in the Light Manager.
-	size_t light_id;
+struct SpotLight : public PointLight {
+	/// The direction of the light.
+	glm::vec3 direction = glm::vec3(0.0f, -1.0f, 0.0f);
+	/// The inner cutoff of the light.
+	float edge = 0.0f;
 };
 
 };  // namespace component

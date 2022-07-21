@@ -1,6 +1,7 @@
 #pragma once
 
-#include <glm/glm.hpp>
+#include <glm/vec3.hpp>
+#include <glm/gtc/quaternion.hpp>
 
 namespace component {
 /**
@@ -11,10 +12,8 @@ namespace component {
 struct Transform {
 	/// The position of the entity.
 	glm::vec3 position = {0.0f, 0.0f, 0.0f};
-
 	/// The rotation of the entity.
 	glm::quat rotation = {1.0f, 0.0f, 0.0f, 0.0f};
-
 	/// The scale of the entity.
 	glm::vec3 scale = {1.0f, 1.0f, 1.0f};
 };
