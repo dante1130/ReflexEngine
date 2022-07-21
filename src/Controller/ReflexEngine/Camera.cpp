@@ -19,6 +19,7 @@ void Camera::lua_access() {
 	lua.set_function("set_move_dir_z", &Camera::set_move_dir_z, this);
 	lua.set_function("toggle_noclip", &Camera::toggle_noclip, this);
 	lua.set_function("calculate_direction", &Camera::calculate_direction, this);
+	lua.set_function("move", &Camera::move, this);
 }
 
 Camera::Camera() { Update(); }

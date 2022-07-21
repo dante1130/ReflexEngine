@@ -9,6 +9,7 @@
 #include "Model/Components/Light.hpp"
 
 using namespace component;
+using namespace Reflex;
 
 void ECSAccess::register_ecs() {
 	register_entity();
@@ -23,7 +24,7 @@ void ECSAccess::register_ecs() {
 void ECSAccess::register_entity() {
 	auto& lua = LuaManager::get_instance().get_state();
 
-	auto entity_type = lua.new_usertype<Entity>("Entity");
+	auto entity_type = lua.new_usertype<Reflex::Entity>("Entity");
 
 	entity_type["add_transform_component"] = &Entity::add_component<Transform>;
 	entity_type["add_model_component"] = &Entity::add_component<Model>;

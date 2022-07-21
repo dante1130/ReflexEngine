@@ -1,6 +1,6 @@
 #include "Entity.hpp"
 
-using namespace ecs;
+using namespace Reflex;
 
 Entity::Entity(entt::entity entity_id, ECS* ecs)
     : entity_id_(entity_id), ecs_(ecs) {}

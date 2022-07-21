@@ -5,7 +5,9 @@
 
 #include <entt/entt.hpp>
 
+namespace Reflex {
 class Entity;
+};  // namespace Reflex
 
 /**
  * @class ECS
@@ -19,9 +21,9 @@ public:
 	/**
 	 * @brief Create an entity.
 	 *
-	 * @return Entity&
+	 * @return Reflex::Entity&
 	 */
-	Entity& create_entity();
+	Reflex::Entity& create_entity();
 
 	/**
 	 * @brief Updates the ECS components.
@@ -53,9 +55,9 @@ public:
 	 * @brief Get the entity object
 	 *
 	 * @param entity_id The entity ID.
-	 * @return Entity&
+	 * @return Reflex::Entity&
 	 */
-	Entity& get_entity(entt::entity entity_id);
+	Reflex::Entity& get_entity(entt::entity entity_id);
 
 	/**
 	 * @brief Get the registry.
@@ -73,9 +75,9 @@ private:
 	/// The EnTT registry.
 	entt::registry registry_;
 	/// The hashmap of key value pairs of entity ID and entity object.
-	std::unordered_map<entt::entity, std::unique_ptr<Entity>> entities_;
+	std::unordered_map<entt::entity, std::shared_ptr<Reflex::Entity>> entities_;
 
 	// An entity is made a friend to allow it to access the ECS private members,
 	// this is done because Entity has a pointer to the ECS instance.
-	friend Entity;
+	friend Reflex::Entity;
 };  // namespace ECS

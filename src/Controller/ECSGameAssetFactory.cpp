@@ -23,7 +23,7 @@ void ECSGameAssetFactory::create(ECS& ecs, const std::string& lua_script) {
 	}
 }
 
-void ECSGameAssetFactory::load_components(Entity& entity,
+void ECSGameAssetFactory::load_components(Reflex::Entity& entity,
                                           const sol::table& entity_table) {
 	if (entity_table["transform"].valid()) {
 		load_transform(entity, entity_table["transform"]);
@@ -36,12 +36,16 @@ void ECSGameAssetFactory::load_components(Entity& entity,
 		load_model(entity, entity_table["model"]);
 	}
 
+	if (entity_table["script"].valid()) {
+		load_script(entity, entity_table["script"]);
+	}
+
 	if (entity_table["directional_light"].valid()) {
 		load_directional_light(entity, entity_table["directional_light"]);
 	}
 }
 
-void ECSGameAssetFactory::load_transform(Entity& entity,
+void ECSGameAssetFactory::load_transform(Reflex::Entity& entity,
                                          const sol::table& transform_table) {
 	auto& transform_component = entity.add_component<component::Transform>();
 
@@ -59,7 +63,17 @@ void ECSGameAssetFactory::load_transform(Entity& entity,
 	transform_component.scale.z = transform_table["scale"]["z"];
 }
 
-void ECSGameAssetFactory::load_model(Entity& entity,
+void ECSGameAssetFactory::load_script(Reflex::Entity& entity,
+                                      const sol::table& script_table) {
+	auto& script_component = entity.add_component<component::Script>();
+
+	script_component.lua_script = script_table["lua_script"];
+	script_component.entity = &entity;
+
+	component::init_script(entity.get_registry(), entity.get_entity_id());
+}
+
+void ECSGameAssetFactory::load_model(Reflex::Entity& entity,
                                      const sol::table& model_table) {
 	auto& model_component = entity.add_component<component::Model>();
 
@@ -68,7 +82,7 @@ void ECSGameAssetFactory::load_model(Entity& entity,
 }
 
 void ECSGameAssetFactory::load_directional_light(
-    Entity& entity, const sol::table& light_table) {
+    Reflex::Entity& entity, const sol::table& light_table) {
 	auto& light_component = entity.add_component<component::DirectionalLight>();
 
 	light_component.color.x = light_table["color"]["x"];

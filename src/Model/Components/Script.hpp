@@ -17,6 +17,6 @@ struct Script {
 	/// The variables in the script.
 	sol::table lua_variables;
 	/// A pointer to the entity that the script is attached to.
-	Entity* entity = nullptr;
+	Reflex::Entity* entity = nullptr;
 };
 };  // namespace component

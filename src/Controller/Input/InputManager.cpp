@@ -1,6 +1,7 @@
 #include "InputManager.hpp"
 
 #include <cctype>
+#include <iostream>
 
 #include "Controller/LuaManager.hpp"
 

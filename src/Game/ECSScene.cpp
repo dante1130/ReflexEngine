@@ -9,6 +9,8 @@ void ECSScene::init() {
 
 	lua.set_function("add_game_object", &ECSScene::add_game_object, this);
 
+	// Hard coded file paths will be replaced when Scene management is
+	// implemented.
 	lua.script_file("scripts/ECSScene/_Materials.lua");
 	lua.script_file("scripts/ECSScene/_MasterCreation.lua");
 }

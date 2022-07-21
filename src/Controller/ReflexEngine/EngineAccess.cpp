@@ -9,6 +9,12 @@ void EngineAccess::lua_access() {
 	lua.set_function("exit_game", exitEngine);
 	lua.set_function("window_width", get_window_width);
 	lua.set_function("window_height", get_window_height);
+
+	auto engine_time = lua.create_named_table("EngineTime");
+
+	engine_time.set_function("get_delta_time", &EngineTime::get_delta_time);
+	engine_time.set_function("get_fixed_delta_time",
+	                         &EngineTime::get_fixed_delta_time);
 }
 
 int EngineAccess::get_window_width() {
