@@ -5,8 +5,10 @@
 #include "View/guiManager.hpp"
 #include "NetworkManager.hpp"
 #include "Controller/NetworkAccess.h"
+#include "Controller/MathAccess.hpp"
 #include "Controller/ReflexEngine/EngineAccess.hpp"
 #include "Controller/ECS/ECSAccess.hpp"
+#include "Controller/AI/luaAccessScriptedFSM.hpp"
 #include "Controller/Input/InputManager.hpp"
 #include "Controller/Audio/Audio.hpp"
 #include "Controller/Physics/Physics.hpp"
@@ -95,6 +97,7 @@ void ReflexEngine::lua_access() {
 	InputManager::get_instance().lua_access();
 	NetworkAccess::lua_access();
 	EngineAccess::lua_access();
+	MathAccess::lua_access();
 	ECSAccess::register_ecs();
 	PseudoRandomNumberGenerator::lua_access();
 	GlobalDataStorage::lua_access();
@@ -102,6 +105,7 @@ void ReflexEngine::lua_access() {
 	ResourceManager::get_instance();
 	Audio::get_instance();
 	Physics::createWorld();
+	luaAccessScriptedFSM::registerAllAI();
 
 	camera_.lua_access();
 }

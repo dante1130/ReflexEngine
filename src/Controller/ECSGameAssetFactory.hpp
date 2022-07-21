@@ -68,6 +68,24 @@ private:
 	                                   const sol::table& light_table);
 
 	/**
+	 * @brief Loads a point light component into the entity.
+	 *
+	 * @param entity The entity to load the component into.
+	 * @param light_table The table of the light component.
+	 */
+	static void load_point_light(Reflex::Entity& entity,
+	                             const sol::table& light_table);
+
+	/**
+	 * @brief Loads a spot light component into the entity.
+	 *
+	 * @param entity The entity to load the component into.
+	 * @param light_table The table of the light component.
+	 */
+	static void load_spot_light(Reflex::Entity& entity,
+	                            const sol::table& light_table);
+
+	/**
 	 * @brief Checks the string if it is a valid lua file.
 	 *
 	 * @param lua_script The string to check.

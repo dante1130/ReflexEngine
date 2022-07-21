@@ -3,6 +3,7 @@
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 #include "Controller/LuaManager.hpp"
 #include "Controller/ECSGameAssetFactory.hpp"
+#include "Controller/Audio/Audio.hpp"
 
 void ECSScene::init() {
 	auto& lua = LuaManager::get_instance().get_state();
@@ -23,7 +24,10 @@ void ECSScene::mouse_controls(double xpos, double ypos) {
 	ReflexEngine::get_instance().camera_.mouse_move(xpos, ypos);
 }
 
-void ECSScene::update(double delta_time) { ecs_.update(delta_time); }
+void ECSScene::update(double delta_time) {
+	ecs_.update(delta_time);
+	Audio::get_instance().update_listener();
+}
 
 void ECSScene::fixed_update(double delta_time) {
 	ecs_.fixed_update(delta_time);
