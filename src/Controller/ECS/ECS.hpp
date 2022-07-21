@@ -9,8 +9,8 @@ class Entity;
 
 /**
  * @class ECS
- * @brief The ECS class is a facade of the EnTT registry. It is used to create,
- * destroy, update and retrieve entities.
+ * @brief The ECS class is a facade of the EnTT registry. It is used to
+ * create, destroy, update and retrieve entities.
  */
 class ECS {
 public:
@@ -78,4 +78,4 @@ private:
 	// An entity is made a friend to allow it to access the ECS private members,
 	// this is done because Entity has a pointer to the ECS instance.
 	friend Entity;
-};
+};  // namespace ECS

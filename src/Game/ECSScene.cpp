@@ -1,7 +1,7 @@
 #include "ECSScene.hpp"
 
+#include "Controller/ReflexEngine/ReflexEngine.hpp"
 #include "Controller/LuaManager.hpp"
-
 #include "Controller/ECSGameAssetFactory.hpp"
 
 void ECSScene::init() {
@@ -17,7 +17,9 @@ void ECSScene::add_game_object(const std::string& lua_script) {
 	ECSGameAssetFactory::create(ecs_, lua_script);
 }
 
-void ECSScene::mouse_controls(double xpos, double ypos) {}
+void ECSScene::mouse_controls(double xpos, double ypos) {
+	ReflexEngine::get_instance().camera_.mouse_move(xpos, ypos);
+}
 
 void ECSScene::update(double delta_time) { ecs_.update(delta_time); }
 

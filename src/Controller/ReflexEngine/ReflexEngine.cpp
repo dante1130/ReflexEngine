@@ -1,6 +1,7 @@
 #include "ReflexEngine.hpp"
 
 #include "Game/TestScene.hpp"
+#include "Game/ECSScene.hpp"
 #include "View/guiManager.hpp"
 #include "NetworkManager.hpp"
 #include "Controller/NetworkAccess.h"
@@ -26,7 +27,8 @@ void ReflexEngine::run() {
 	engine.renderer_.init();
 	gui::init(engine.window_.get_window(), "#version 410");
 
-	engine.scenes_.emplace(std::make_unique<TestScene>());
+	// engine.scenes_.emplace(std::make_unique<TestScene>());
+	engine.scenes_.emplace(std::make_unique<ECSScene>());
 	engine.scenes_.top()->init();
 
 	glfwSetInputMode(engine.window_.get_window(), GLFW_CURSOR,
@@ -64,6 +66,7 @@ void ReflexEngine::run() {
 			}
 
 			engine.scenes_.top()->update(EngineTime::get_delta_time());
+			engine.scenes_.top()->garbage_collection();
 			engine.scenes_.top()->add_draw_call();
 			engine.renderer_.draw();
 		}
