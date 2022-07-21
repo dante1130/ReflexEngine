@@ -46,6 +46,11 @@ public:
 
 private:
 	/**
+	 * @brief Exposes all the engine components to lua.
+	 */
+	void lua_access();
+
+	/**
 	 * @brief The default constructor is private as a singleton pattern is
 	 * used, preventing multiple instances.
 	 */

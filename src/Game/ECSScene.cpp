@@ -1,10 +1,21 @@
 #include "ECSScene.hpp"
 
-#include "Controller/ECS/ECSAccess.hpp"
+#include "Controller/LuaManager.hpp"
 
-void ECSScene::init() { ECSAccess::register_ecs(); }
+#include "Controller/ECSGameAssetFactory.hpp"
 
-void ECSScene::add_game_object(const std::string& luaScript) {}
+void ECSScene::init() {
+	auto& lua = LuaManager::get_instance().get_state();
+
+	lua.set_function("add_game_object", &ECSScene::add_game_object, this);
+
+	lua.script_file("scripts/ECSScene/_Materials.lua");
+	lua.script_file("scripts/ECSScene/_MasterCreation.lua");
+}
+
+void ECSScene::add_game_object(const std::string& lua_script) {
+	ECSGameAssetFactory::create(ecs_, lua_script);
+}
 
 void ECSScene::mouse_controls(double xpos, double ypos) {}
 

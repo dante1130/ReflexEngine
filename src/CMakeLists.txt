@@ -63,6 +63,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/Terrain/BTT.cpp
 	Controller/Terrain/BttController.cpp
 	Controller/Terrain/TexturedTerrain.cpp
+	Controller/ECSGameAssetFactory.cpp
 	Controller/GameAssetFactory.cpp
 	Controller/LuaManager.cpp
 	Controller/Physics/Physics.cpp
@@ -87,6 +88,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 
 	Game/Scene.hpp
 	Game/TestScene.cpp
+	Game/ECSScene.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})

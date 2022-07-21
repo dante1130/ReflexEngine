@@ -51,6 +51,13 @@ public:
 	 */
 	entt::entity get_entity_id() const;
 
+	/**
+	 * @brief Get the ECS registry.
+	 *
+	 * @return entt::registry&
+	 */
+	entt::registry& get_registry();
+
 private:
 	/// The entity ID.
 	entt::entity entity_id_ = {entt::null};

@@ -71,9 +71,9 @@ public:
 
 private:
 	/// The EnTT registry.
-	entt::registry registry_ = {};
+	entt::registry registry_;
 	/// The hashmap of key value pairs of entity ID and entity object.
-	std::unordered_map<entt::entity, std::unique_ptr<Entity>> entities_ = {};
+	std::unordered_map<entt::entity, std::unique_ptr<Entity>> entities_;
 
 	// An entity is made a friend to allow it to access the ECS private members,
 	// this is done because Entity has a pointer to the ECS instance.
