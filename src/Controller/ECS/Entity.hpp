@@ -2,8 +2,6 @@
 
 #include "ECS.hpp"
 
-#include <iostream>
-
 namespace Reflex {
 /**
  * @class Entity
