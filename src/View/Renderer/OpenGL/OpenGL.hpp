@@ -4,10 +4,7 @@
 #include <functional>
 
 #include "Objects/Shader.hpp"
-#include "Objects/Skybox.hpp"
-#include "CommonValues.hpp"
 #include "View/Renderer/Renderer.hpp"
-#include "Model/LightData.hpp"
 
 // A drawcall represents a drawable object that is rendered to the screen, this
 // is done through this function pointer which is passed from the scene to the
@@ -67,6 +64,11 @@ private:
 	void render_scene(const Shader& shader);
 
 	/**
+	 * @brief Renders the skybox.
+	 */
+	void render_skybox(const glm::mat4& projection, const glm::mat4& view);
+
+	/**
 	 * @brief Enable and render lights.
 	 */
 	void render_lights();
@@ -78,9 +80,6 @@ private:
 
 	/// A boolean to toggle between wireframe and normal rendering.
 	bool is_wireframe_ = false;
-
-	/// The skybox.
-	Skybox skybox_ = {};
 
 	/// A vector of draw calls.
 	std::vector<DrawCall> draw_calls_ = {};

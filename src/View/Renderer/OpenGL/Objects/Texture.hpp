@@ -4,8 +4,6 @@
 
 #include <glad/glad.h>
 
-#include "StbImage.hpp"
-
 /**
  * @class Texture
  * @brief A texture class.

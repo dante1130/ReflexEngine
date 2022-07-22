@@ -3,7 +3,9 @@
 void ModelManager::lua_access() {
 	sol::state& lua = LuaManager::get_instance().get_state();
 
-	lua.set_function("loadModel", &ModelManager::load_model, this);
+	auto model_table = lua.create_named_table("Model");
+
+	model_table.set_function("load_model", &ModelManager::load_model, this);
 }
 
 bool ModelManager::load_model(const std::string& model_name,

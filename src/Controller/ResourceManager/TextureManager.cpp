@@ -5,13 +5,16 @@
 void TextureManager::lua_access() {
 	sol::state& lua = LuaManager::get_instance().get_state();
 
-	lua.set_function("loadTextureRGB", &TextureManager::load_texture_rgb, this);
-	lua.set_function("loadTextureRGBA", &TextureManager::load_texture_rgba,
-	                 this);
+	auto texture_table = lua.create_named_table("Texture");
+
+	texture_table.set_function("load_texture", &TextureManager::load_texture,
+	                           this);
+	// lua.set_function("loadTextureRGBA", &TextureManager::load_texture_rgba,
+	//                  this);
 }
 
-bool TextureManager::load_texture_rgb(const std::string& texture_name,
-                                      const std::string& file_path) {
+bool TextureManager::load_texture(const std::string& texture_name,
+                                  const std::string& file_path) {
 	Texture* texture = new Texture(file_path.c_str());
 
 	if (texture->LoadTexture()) {

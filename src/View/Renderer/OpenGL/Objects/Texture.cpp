@@ -1,5 +1,8 @@
 #include "Texture.hpp"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "StbImage.hpp"
+
 Texture::Texture(const char* fileLocation) : m_fileLocation(fileLocation) {}
 
 GLuint Texture::get_texture_id() const { return m_textureID; }
@@ -21,6 +24,9 @@ bool Texture::LoadTexture() {
 		return false;
 	}
 
+	auto gamma_channel = m_bitDepth == 3 ? GL_SRGB : GL_SRGB_ALPHA;
+	auto channel = m_bitDepth == 3 ? GL_RGB : GL_RGBA;
+
 	glGenTextures(1, &m_textureID);
 	glBindTexture(GL_TEXTURE_2D, m_textureID);
 
@@ -30,7 +36,7 @@ bool Texture::LoadTexture() {
 	                GL_LINEAR_MIPMAP_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, m_width, m_height, 0, GL_RGB,
+	glTexImage2D(GL_TEXTURE_2D, 0, gamma_channel, m_width, m_height, 0, channel,
 	             GL_UNSIGNED_BYTE, texData);
 	glGenerateMipmap(GL_TEXTURE_2D);
 

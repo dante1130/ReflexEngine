@@ -30,21 +30,14 @@ void OpenGL::init() {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+	// Enable gamma correction.
+	glEnable(GL_FRAMEBUFFER_SRGB);
+
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	// Default shader.
 	shader_ = std::make_unique<Shader>();
 	shader_->CompileFile("shaders/shader.vert", "shaders/shader.frag");
-
-	static const std::vector<std::string> default_skybox = {
-	    "textures/skyboxes/default/right.jpg",
-	    "textures/skyboxes/default/left.jpg",
-	    "textures/skyboxes/default/top.jpg",
-	    "textures/skyboxes/default/bottom.jpg",
-	    "textures/skyboxes/default/front.jpg",
-	    "textures/skyboxes/default/back.jpg"};
-
-	skybox_ = Skybox(default_skybox);
 
 	lua_access();
 }
@@ -82,7 +75,7 @@ void OpenGL::render_pass() {
 	glUniformMatrix4fv(shader_->GetViewLocation(), 1, GL_FALSE,
 	                   glm::value_ptr(view));
 
-	skybox_.DrawSkybox(projection, view);
+	render_skybox(projection, view);
 
 	shader_->UseShader();
 
@@ -91,6 +84,12 @@ void OpenGL::render_pass() {
 	shader_->Validate();
 
 	render_scene(*shader_);
+}
+
+void OpenGL::render_skybox(const glm::mat4& projection, const glm::mat4& view) {
+	auto& skybox_manager = ResourceManager::get_instance().get_skybox_manager();
+
+	skybox_manager.get_skybox().DrawSkybox(projection, view);
 }
 
 void OpenGL::render_lights() {
@@ -129,10 +128,8 @@ void OpenGL::toggle_wireframe() {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
-void OpenGL::set_skybox(const std::vector<std::string>& faces) {
-	skybox_ = Skybox(faces);
-}
-
 void OpenGL::add_draw_call(const DrawCall& draw_call) {
 	draw_calls_.emplace_back(draw_call);
 }
+
+void OpenGL::set_skybox(const std::vector<std::string>& faces) {}
