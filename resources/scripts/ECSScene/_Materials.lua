@@ -11,3 +11,14 @@ Skybox.load_skybox("nightsky", {
 	front = "textures/skyboxes/nightsky/nightsky_bk.tga",
 	back = "textures/skyboxes/nightsky/nightsky_ft.tga"
 })
+Mesh.load_mesh("water",
+	{
+		-10.0, 0.0, -10.0, 0.0, 0.0, 0.0, -1.0, 0.0,
+		10.0, 0.0, -10.0, 100.0, 0.0, 0.0, -1.0, 0.0,
+		-10.0, 0.0, 10.0, 0.0, 100.0, 0.0, -1.0, 0.0,
+		10.0, 0.0, 10.0, 100.0, 100.0, 0.0, -1.0, 0.0
+	},
+	{
+		0, 2, 1, 1, 2, 3
+	}
+)

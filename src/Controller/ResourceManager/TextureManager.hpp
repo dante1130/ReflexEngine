@@ -45,12 +45,7 @@ public:
 	 */
 	const Texture& get_texture(const std::string& texture_name) const;
 
-	/**
-	 * @brief Destroy the Texture Manager object
-	 */
-	~TextureManager();
-
 private:
 	/// The unordered map of string as key to value of textures.
-	std::unordered_map<std::string, Texture*> texture_hashmap;
+	std::unordered_map<std::string, Texture> texture_hashmap;
 };

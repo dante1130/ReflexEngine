@@ -39,12 +39,7 @@ public:
 	 */
 	const Model& get_model(const std::string& model_name) const;
 
-	/**
-	 * @brief Destroy the Model Manager object
-	 */
-	~ModelManager();
-
 private:
 	/// A hashmap of models.
-	std::unordered_map<std::string, Model*> model_hashmap;
+	std::unordered_map<std::string, Model> model_hashmap;
 };

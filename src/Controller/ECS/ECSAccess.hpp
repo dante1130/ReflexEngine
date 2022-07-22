@@ -40,4 +40,9 @@ void register_point_light_component();
  * @brief Register the spot light component to Lua.
  */
 void register_spot_light_component();
+
+/**
+ * @brief Register the mesh component to Lua.
+ */
+void register_mesh_component();
 };  // namespace ECSAccess

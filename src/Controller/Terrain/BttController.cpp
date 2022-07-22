@@ -35,10 +35,10 @@ void BttController::render(const Shader& shader) {
 	glUniform1i(shader.GetUsingTexture(), false);
 	glUniform1i(shader.get_using_detailmap(), true);
 
-	texture_->UseTexture();
-	detailmap->UseTexture();
+	texture_->use_texture();
+	detailmap->use_texture();
 
-	mesh_->RenderMesh();
+	mesh_->render_mesh();
 }
 
 void BttController::getCameraPosition(const glm::vec3& pos) { cam = pos; }
@@ -246,8 +246,8 @@ void BttController::Update(glm::vec3 position) {
 	if (position.x != prev_pos.x || position.z != prev_pos.z) {
 		mesh_ = std::make_shared<Mesh>();
 		getAllIndices(position);
-		mesh_->CreateMesh(vertices.data(), indices.data(), vertices.size(),
-		                  indices.size());
+		mesh_->create_mesh(vertices.data(), indices.data(), vertices.size(),
+		                   indices.size());
 	}
 	prev_pos = position;
 }

@@ -86,6 +86,14 @@ private:
 	                            const sol::table& light_table);
 
 	/**
+	 * @brief Loads a mesh component into the entity.
+	 *
+	 * @param entity The entity to load the component into.
+	 * @param mesh_table The table of the mesh component.
+	 */
+	static void load_mesh(Reflex::Entity& entity, const sol::table& mesh_table);
+
+	/**
 	 * @brief Checks the string if it is a valid lua file.
 	 *
 	 * @param lua_script The string to check.

@@ -8,6 +8,7 @@
 #include "Model/Components/Model.hpp"
 #include "Model/Components/Script.hpp"
 #include "Model/Components/Light.hpp"
+#include "Model/Components/Mesh.hpp"
 
 void component::draw_model(entt::registry& registry) {
 	auto& renderer = ReflexEngine::get_instance().renderer_;
@@ -38,6 +39,44 @@ void component::draw_model(entt::registry& registry) {
 			                 shader.GetSpecularIntensityLocation());
 
 			model_manager.get_model(model.model_name).RenderModel();
+		};
+
+		renderer.add_draw_call(draw_call);
+	}
+}
+
+void component::draw_mesh(entt::registry& registry) {
+	auto& renderer = ReflexEngine::get_instance().renderer_;
+
+	auto& resource_manager = ResourceManager::get_instance();
+	auto& mesh_manager = resource_manager.get_mesh_manager();
+	auto& texture_manager = resource_manager.get_texture_manager();
+	auto& material_manager = resource_manager.get_material_manager();
+
+	auto view = registry.view<Transform, Mesh>();
+
+	for (auto entity : view) {
+		auto& transform = view.get<Transform>(entity);
+		auto& mesh = view.get<Mesh>(entity);
+
+		DrawCall draw_call = [transform, mesh, &mesh_manager, &texture_manager,
+		                      &material_manager](const Shader& shader) {
+			glm::mat4 model_matrix(1.0f);
+			model_matrix = glm::translate(model_matrix, transform.position);
+			model_matrix = model_matrix * glm::mat4_cast(transform.rotation);
+			model_matrix = glm::scale(model_matrix, transform.scale);
+
+			glUniformMatrix4fv(shader.GetModelLocation(), 1, GL_FALSE,
+			                   glm::value_ptr(model_matrix));
+			glUniform1i(shader.GetUsingTexture(), true);
+
+			texture_manager.get_texture(mesh.texture_name).use_texture();
+
+			material_manager.get_material(mesh.material_name)
+			    .UseMaterial(shader.GetShininessLocation(),
+			                 shader.GetSpecularIntensityLocation());
+
+			mesh_manager.get_mesh(mesh.mesh_name).render_mesh();
 		};
 
 		renderer.add_draw_call(draw_call);

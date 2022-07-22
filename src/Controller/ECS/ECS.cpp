@@ -21,7 +21,10 @@ void ECS::update(double delta_time) {
 
 void ECS::fixed_update(double delta_time) {}
 
-void ECS::draw() { component::draw_model(registry_); }
+void ECS::draw() {
+	component::draw_model(registry_);
+	component::draw_mesh(registry_);
+}
 
 void ECS::destroy_entity(entt::entity entity_id) {
 	entities_.erase(entity_id);

@@ -4,6 +4,7 @@
 #include "Model/Components/Model.hpp"
 #include "Model/Components/Script.hpp"
 #include "Model/Components/Light.hpp"
+#include "Model/Components/Mesh.hpp"
 
 #include "Controller/ECS/ComponentSystem/ComponentFunctions.hpp"
 
@@ -50,6 +51,10 @@ void ECSGameAssetFactory::load_components(Reflex::Entity& entity,
 
 	if (entity_table["spot_light"].valid()) {
 		load_spot_light(entity, entity_table["spot_light"]);
+	}
+
+	if (entity_table["mesh"].valid()) {
+		load_mesh(entity, entity_table["mesh"]);
 	}
 }
 
@@ -156,6 +161,15 @@ void ECSGameAssetFactory::load_spot_light(Reflex::Entity& entity,
 	light_component.edge = light_table["edge"];
 
 	component::init_spot_light(entity.get_registry(), entity.get_entity_id());
+}
+
+void ECSGameAssetFactory::load_mesh(Reflex::Entity& entity,
+                                    const sol::table& mesh_table) {
+	auto& mesh_component = entity.add_component<component::Mesh>();
+
+	mesh_component.mesh_name = mesh_table["mesh_name"];
+	mesh_component.material_name = mesh_table["material_name"];
+	mesh_component.texture_name = mesh_table["texture_name"];
 }
 
 bool ECSGameAssetFactory::is_lua_script(const std::string& lua_script) {

@@ -15,15 +15,15 @@ void TexturedTerrain::render(const Shader& shader) {
 
 	if (texture_ && !detailmap_) {
 		glUniform1i(shader.GetUsingTexture(), true);
-		texture_->UseTexture();
+		texture_->use_texture();
 	} else if (texture_ && detailmap_) {
 		glUniform1i(shader.GetUsingTexture(), false);
 		glUniform1i(shader.get_using_detailmap(), true);
-		texture_->UseTexture();
-		detailmap_->UseTexture();
+		texture_->use_texture();
+		detailmap_->use_texture();
 	}
 
-	mesh_->RenderMesh();
+	mesh_->render_mesh();
 }
 
 bool TexturedTerrain::load_mesh() {
@@ -69,8 +69,8 @@ bool TexturedTerrain::load_mesh() {
 	}
 	//
 	mesh_ = std::make_unique<Mesh>();
-	mesh_->CreateMesh(vertices.data(), indices.data(), vertices.size(),
-	                  indices.size());
+	mesh_->create_mesh(vertices.data(), indices.data(), vertices.size(),
+	                   indices.size());
 
 	return true;
 }

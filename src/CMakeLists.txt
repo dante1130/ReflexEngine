@@ -54,6 +54,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/ResourceManager/MaterialManager.cpp
 	Controller/ResourceManager/LightManager.cpp
 	Controller/ResourceManager/SkyboxManager.cpp
+	Controller/ResourceManager/MeshManager.cpp
 	Controller/ResourceManager/ObjectSaving.cpp
 	Controller/Input/InputManager.cpp
 	Controller/Input/InputState.cpp
