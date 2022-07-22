@@ -82,6 +82,18 @@ void MathAccess::register_glm_functions() {
 	    sol::overload([](const glm::vec3& a) { return glm::normalize(a); },
 	                  [](const glm::quat& a) { return glm::normalize(a); });
 
+	math_table["sin"] =
+	    sol::overload([](float a) { return glm::sin(a); },
+	                  [](const glm::vec3& a) { return glm::sin(a); });
+
+	math_table["cos"] =
+	    sol::overload([](float a) { return glm::cos(a); },
+	                  [](const glm::vec3& a) { return glm::cos(a); });
+
+	math_table["tan"] =
+	    sol::overload([](float a) { return glm::tan(a); },
+	                  [](const glm::vec3& a) { return glm::tan(a); });
+
 	math_table["euler_to_quat"] = [](const glm::vec3& euler) {
 		return glm::quat(euler);
 	};

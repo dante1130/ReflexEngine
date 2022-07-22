@@ -1,6 +1,7 @@
 #include "MeshManager.hpp"
 
 #include "Controller/LuaManager.hpp"
+#include <iostream>
 
 void MeshManager::lua_access() {
 	auto& lua = LuaManager::get_instance().get_state();

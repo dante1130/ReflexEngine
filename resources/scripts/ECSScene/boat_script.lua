@@ -1,4 +1,4 @@
-variables = {}
+var = {}
 
 function init(entity)
 	local transform = entity:get_transform_component()

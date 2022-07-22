@@ -94,7 +94,7 @@ void component::init_script(entt::registry& registry, entt::entity entity) {
 
 	lua["init"](*script.entity);
 
-	script.lua_variables = lua["variables"];
+	script.lua_variables = lua["var"];
 }
 
 void component::init_directional_light(entt ::registry& registry,
@@ -170,10 +170,10 @@ void component::update_script(entt::registry& registry) {
 
 		lua.script_file(script.lua_script);
 
-		lua["variables"] = script.lua_variables;
+		lua["var"] = script.lua_variables;
 
 		lua["update"](*script.entity);
 
-		script.lua_variables = lua["variables"];
+		script.lua_variables = lua["var"];
 	}
 }
