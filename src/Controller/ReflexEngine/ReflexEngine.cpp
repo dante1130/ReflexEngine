@@ -33,9 +33,6 @@ void ReflexEngine::run() {
 	engine.scenes_.emplace(std::make_unique<ECSScene>());
 	engine.scenes_.top()->init();
 
-	glfwSetInputMode(engine.window_.get_window(), GLFW_CURSOR,
-	                 GLFW_CURSOR_NORMAL);
-
 	auto& input_manager = InputManager::get_instance();
 
 	while (!engine.window_.is_should_close()) {

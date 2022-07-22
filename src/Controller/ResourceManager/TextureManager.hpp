@@ -24,8 +24,8 @@ public:
 	 * @param file_path The path to the texture file.
 	 * @return bool
 	 */
-	bool load_texture_rgb(const std::string& texture_name,
-	                      const std::string& file_path);
+	bool load_texture(const std::string& texture_name,
+	                  const std::string& file_path);
 
 	/**
 	 * @brief Loads a texture with alpha to the texture manager.

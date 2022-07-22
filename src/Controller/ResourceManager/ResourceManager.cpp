@@ -21,9 +21,12 @@ MaterialManager& ResourceManager::get_material_manager() {
 
 LightManager& ResourceManager::get_light_manager() { return light_manager_; }
 
+SkyboxManager& ResourceManager::get_skybox_manager() { return skybox_manager_; }
+
 ResourceManager::ResourceManager() {
 	texture_manager_.lua_access();
 	model_manager_.lua_access();
 	material_manager_.lua_access();
 	md2_model_manager_.lua_access();
+	skybox_manager_.lua_access();
 }

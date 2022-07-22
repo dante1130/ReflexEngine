@@ -3,7 +3,10 @@
 void MaterialManager::lua_access() {
 	sol::state& lua = LuaManager::get_instance().get_state();
 
-	lua.set_function("load_material", &MaterialManager::load_material, this);
+	auto material_table = lua.create_named_table("Material");
+
+	material_table.set_function("load_material",
+	                            &MaterialManager::load_material, this);
 }
 
 bool MaterialManager::load_material(const std::string& material_name,

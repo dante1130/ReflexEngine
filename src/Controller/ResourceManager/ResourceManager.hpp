@@ -5,12 +5,11 @@
 #include "MaterialManager.hpp"
 #include "Md2ModelManager.hpp"
 #include "LightManager.hpp"
+#include "SkyboxManager.hpp"
 
 /**
  * @class ResourceManager
- * @brief A singleton class for containing other asset managers; models, md2
- * models textures, and materials.
- *
+ * @brief A singleton class for containing other asset managers.
  */
 class ResourceManager {
 public:
@@ -56,6 +55,13 @@ public:
 	 */
 	LightManager& get_light_manager();
 
+	/**
+	 * @brief Get the skybox manager.
+	 *
+	 * @return SkyboxManager&
+	 */
+	SkyboxManager& get_skybox_manager();
+
 	// These are deleted as a singleton pattern is used.
 	ResourceManager(ResourceManager& other) = delete;
 	ResourceManager(const ResourceManager& other) = delete;
@@ -77,6 +83,9 @@ private:
 
 	/// The light manager.
 	LightManager light_manager_;
+
+	/// The skybox manager.
+	SkyboxManager skybox_manager_;
 
 	/**
 	 * @brief Construct a new Resource Manager object

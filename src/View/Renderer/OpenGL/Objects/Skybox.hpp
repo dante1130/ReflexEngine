@@ -10,8 +10,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "StbImage.hpp"
-
 #include "Mesh.hpp"
 #include "Shader.hpp"
 
@@ -36,7 +34,7 @@ public:
 	 * @param projectionMatrix The projection matrix.
 	 * @param viewMatrix The view matrix.
 	 */
-	void DrawSkybox(glm::mat4 projectionMatrix, glm::mat4 viewMatrix);
+	void DrawSkybox(glm::mat4 projectionMatrix, glm::mat4 viewMatrix) const;
 
 private:
 	/// The mesh of the skybox.
