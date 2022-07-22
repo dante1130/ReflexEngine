@@ -72,9 +72,6 @@ void component::init_point_light(entt::registry& registry,
 	auto& light_manager = ResourceManager::get_instance().get_light_manager();
 
 	auto& point_light = registry.get<PointLight>(entity);
-	const auto& transform = registry.get<Transform>(entity);
-
-	point_light.position = transform.position;
 
 	point_light.light_id = light_manager.add_point_light(point_light);
 }
@@ -83,9 +80,6 @@ void component::init_spot_light(entt::registry& registry, entt::entity entity) {
 	auto& light_manager = ResourceManager::get_instance().get_light_manager();
 
 	auto& spot_light = registry.get<SpotLight>(entity);
-	const auto& transform = registry.get<Transform>(entity);
-
-	spot_light.position = transform.position;
 
 	spot_light.light_id = light_manager.add_spot_light(spot_light);
 }
@@ -104,13 +98,10 @@ void component::update_directional_light(entt::registry& registry) {
 void component::update_point_light(entt::registry& registry) {
 	auto& light_manager = ResourceManager::get_instance().get_light_manager();
 
-	auto view = registry.view<PointLight, Transform>();
+	auto view = registry.view<PointLight>();
 
 	for (auto entity : view) {
 		auto& point_light = view.get<PointLight>(entity);
-		auto& transform = view.get<Transform>(entity);
-
-		point_light.position = transform.position;
 
 		light_manager.update_point_light(point_light.light_id, point_light);
 	}
@@ -119,13 +110,10 @@ void component::update_point_light(entt::registry& registry) {
 void component::update_spot_light(entt::registry& registry) {
 	auto& light_manager = ResourceManager::get_instance().get_light_manager();
 
-	auto view = registry.view<SpotLight, Transform>();
+	auto view = registry.view<SpotLight>();
 
 	for (auto entity : view) {
 		auto& spot_light = view.get<SpotLight>(entity);
-		auto& transform = view.get<Transform>(entity);
-
-		spot_light.position = transform.position;
 
 		light_manager.update_spot_light(spot_light.light_id, spot_light);
 	}

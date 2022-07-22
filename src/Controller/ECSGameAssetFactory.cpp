@@ -93,9 +93,9 @@ void ECSGameAssetFactory::load_directional_light(
     Reflex::Entity& entity, const sol::table& light_table) {
 	auto& light_component = entity.add_component<component::DirectionalLight>();
 
-	light_component.color.x = light_table["color"]["x"];
-	light_component.color.y = light_table["color"]["y"];
-	light_component.color.z = light_table["color"]["z"];
+	light_component.color.x = light_table["color"]["r"];
+	light_component.color.y = light_table["color"]["g"];
+	light_component.color.z = light_table["color"]["b"];
 
 	light_component.ambient_intensity = light_table["ambient_intensity"];
 	light_component.diffuse_intensity = light_table["diffuse_intensity"];
@@ -112,9 +112,9 @@ void ECSGameAssetFactory::load_point_light(Reflex::Entity& entity,
                                            const sol::table& light_table) {
 	auto& light_component = entity.add_component<component::PointLight>();
 
-	light_component.color.x = light_table["color"]["x"];
-	light_component.color.y = light_table["color"]["y"];
-	light_component.color.z = light_table["color"]["z"];
+	light_component.color.x = light_table["color"]["r"];
+	light_component.color.y = light_table["color"]["g"];
+	light_component.color.z = light_table["color"]["b"];
 
 	light_component.ambient_intensity = light_table["ambient_intensity"];
 	light_component.diffuse_intensity = light_table["diffuse_intensity"];
@@ -134,9 +134,9 @@ void ECSGameAssetFactory::load_spot_light(Reflex::Entity& entity,
                                           const sol::table& light_table) {
 	auto& light_component = entity.add_component<component::SpotLight>();
 
-	light_component.color.x = light_table["color"]["x"];
-	light_component.color.y = light_table["color"]["y"];
-	light_component.color.z = light_table["color"]["z"];
+	light_component.color.x = light_table["color"]["r"];
+	light_component.color.y = light_table["color"]["g"];
+	light_component.color.z = light_table["color"]["b"];
 
 	light_component.ambient_intensity = light_table["ambient_intensity"];
 	light_component.diffuse_intensity = light_table["diffuse_intensity"];
