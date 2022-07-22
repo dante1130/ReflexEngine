@@ -21,7 +21,9 @@ void SkyboxManager::lua_access() {
 
 	skybox_table["load_skybox"] = [this](const std::string& skybox_name,
 	                                     const sol::table& faces) {
-		SkyboxFacesVec skybox_faces(6);
+		SkyboxFacesVec skybox_faces;
+
+		skybox_faces.reserve(6);
 
 		skybox_faces.emplace_back(faces["right"]);
 		skybox_faces.emplace_back(faces["left"]);

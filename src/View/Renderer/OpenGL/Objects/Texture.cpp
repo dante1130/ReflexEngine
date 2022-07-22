@@ -1,5 +1,6 @@
 #include "Texture.hpp"
 
+#define STB_IMAGE_IMPLEMENTATION
 #include "StbImage.hpp"
 
 Texture::Texture(const char* fileLocation) : m_fileLocation(fileLocation) {}
