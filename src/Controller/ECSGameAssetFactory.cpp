@@ -5,6 +5,7 @@
 #include "Model/Components/Script.hpp"
 #include "Model/Components/Light.hpp"
 #include "Model/Components/Mesh.hpp"
+#include "Model/Components/Terrain.hpp"
 
 #include "Controller/ECS/System.hpp"
 
@@ -55,6 +56,10 @@ void ECSGameAssetFactory::load_components(Reflex::Entity& entity,
 
 	if (entity_table["mesh"].valid()) {
 		load_mesh(entity, entity_table["mesh"]);
+	}
+
+	if (entity_table["terrain"].valid()) {
+		load_terrain(entity, entity_table["terrain"]);
 	}
 }
 
@@ -170,6 +175,16 @@ void ECSGameAssetFactory::load_mesh(Reflex::Entity& entity,
 	mesh_component.mesh_name = mesh_table["mesh_name"];
 	mesh_component.material_name = mesh_table["material_name"];
 	mesh_component.texture_name = mesh_table["texture_name"];
+}
+
+void ECSGameAssetFactory::load_terrain(Reflex::Entity& entity,
+                                       const sol::table& terrain_table) {
+	auto& terrain_component = entity.add_component<Component::Terrain>();
+
+	terrain_component.terrain_name = terrain_table["terrain_name"];
+	terrain_component.texture_name = terrain_table["texture_name"];
+	terrain_component.material_name = terrain_table["material_name"];
+	terrain_component.detailmap_name = terrain_table["detailmap_name"];
 }
 
 bool ECSGameAssetFactory::is_lua_script(const std::string& lua_script) {
