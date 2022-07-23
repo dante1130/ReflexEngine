@@ -14,6 +14,7 @@ void Camera::lua_access() {
 	lua.set_function("camera_look_x", &Camera::cam_look_x, this);
 	lua.set_function("camera_look_y", &Camera::cam_look_y, this);
 	lua.set_function("camera_look_z", &Camera::cam_look_z, this);
+	lua.set_function("set_camera_pos", &Camera::set_position, this);
 	lua.set_function("set_move_dir_x", &Camera::set_move_dir_x, this);
 	lua.set_function("set_move_dir_y", &Camera::set_move_dir_y, this);
 	lua.set_function("set_move_dir_z", &Camera::set_move_dir_z, this);

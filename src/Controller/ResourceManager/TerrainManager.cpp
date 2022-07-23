@@ -9,6 +9,14 @@ void TerrainManager::lua_access() {
 
 	terrain_table.set_function("load_terrain", &TerrainManager::load_terrain,
 	                           this);
+
+	terrain_table["get_height"] = [this](const std::string& terrain_name,
+	                                     const glm::vec3& position,
+	                                     const glm::vec3& scale) {
+		auto& terrain = terrain_map_.at(terrain_name);
+		terrain.set_scale(scale);
+		return terrain.get_height_world(position.x, position.z);
+	};
 }
 
 void TerrainManager::load_terrain(const std::string& terrain_name,

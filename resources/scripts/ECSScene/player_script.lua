@@ -24,4 +24,13 @@ function update(entity)
 	if (Input.get_key_state("z"):is_key_pressed()) then
 		toggle_noclip()
 	end
+
+	local transform = entity:get_transform_component()
+
+	transform.position.x = camera_pos_x()
+	transform.position.z = camera_pos_z()
+
+	transform.position.y = Terrain.get_height("terrain", transform.position, Math.vec3.new(1, 0.05, 1))
+
+	set_camera_pos(transform.position)
 end
