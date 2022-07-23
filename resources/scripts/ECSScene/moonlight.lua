@@ -6,8 +6,8 @@ entity = {
 			b = 0.59
 		},
 
-		ambient_intensity = 0.1,
-		diffuse_intensity = 2,
+		ambient_intensity = 0,
+		diffuse_intensity = 1,
 
 		direction = {
 			x = -15,
