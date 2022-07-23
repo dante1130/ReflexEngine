@@ -7,7 +7,8 @@
 
 #include "View/Renderer/OpenGL/Objects/Skybox.hpp"
 
-using SkyboxFacesVec = std::vector<std::string>;
+#include <string>
+//using SkyboxFacesVec = std::vector<std::string>;
 
 /**
  * @class SkyboxManager
@@ -33,7 +34,7 @@ public:
 	 * @param faces The faces of the skybox.
 	 */
 	void load_skybox(const std::string& skybox_name,
-	                 const SkyboxFacesVec& faces);
+	                 const std::vector<std::string>& faces);
 
 	/**
 	 * @brief Use the skybox with the given name.
@@ -51,7 +52,7 @@ public:
 
 private:
 	/// The map of skybox faces.
-	std::unordered_map<std::string, SkyboxFacesVec> skybox_faces_map_;
+	std::unordered_map<std::string, std::vector<std::string>> skybox_faces_map_;
 	/// The skybox.
 	Skybox skybox_;
 };

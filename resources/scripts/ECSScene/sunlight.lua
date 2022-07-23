@@ -1,9 +1,9 @@
 entity = {
 	directional_light = {
 		color = {
-			x = 1,
-			y = 1,
-			z = 1
+			r = 1,
+			g = 1,
+			b = 1
 		},
 
 		ambient_intensity = 0.5,
