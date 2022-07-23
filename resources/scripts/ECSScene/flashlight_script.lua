@@ -1,19 +1,15 @@
-variables = {
-
-}
+var = {}
 
 function init(entity)
 
 end
 
 function update(entity)
-	local transform = entity:get_transform_component()
-
-	transform.position.x = camera_pos_x()
-	transform.position.y = camera_pos_y()
-	transform.position.z = camera_pos_z()
-
 	local spotlight = entity:get_spot_light_component()
+
+	spotlight.position.x = camera_pos_x()
+	spotlight.position.y = camera_pos_y()
+	spotlight.position.z = camera_pos_z()
 
 	spotlight.direction.x = camera_look_x()
 	spotlight.direction.y = camera_look_y()

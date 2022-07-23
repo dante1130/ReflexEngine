@@ -34,7 +34,7 @@ void Md2Model::render_frame(int frame_num) {
 	load_frame_mesh(frame_num);
 
 	// texture_->UseTexture();
-	mesh_->RenderMesh();
+	mesh_->render_mesh();
 }
 
 void Md2Model::render_interpolated_frame(int frame_a, int frame_b,
@@ -42,7 +42,7 @@ void Md2Model::render_interpolated_frame(int frame_a, int frame_b,
 	load_interpolated_frame_mesh(frame_a, frame_b, interpolation);
 
 	// texture_->UseTexture();
-	mesh_->RenderMesh();
+	mesh_->render_mesh();
 }
 
 bool Md2Model::load_md2(const std::string& filename) {
@@ -151,8 +151,8 @@ void Md2Model::load_frame_mesh(int frame_num) {
 	if (frame_num < 0 || frame_num >= header_.num_frames) return;
 
 	mesh_ = std::make_unique<Mesh>();
-	mesh_->CreateMesh(frame_vertices_[frame_num].data(), indices_.data(),
-	                  frame_vertices_[frame_num].size(), indices_.size());
+	mesh_->create_mesh(frame_vertices_[frame_num].data(), indices_.data(),
+	                   frame_vertices_[frame_num].size(), indices_.size());
 }
 
 void Md2Model::load_interpolated_frame_mesh(int frame_a, int frame_b,
@@ -202,8 +202,8 @@ void Md2Model::load_interpolated_frame_mesh(int frame_a, int frame_b,
 	}
 
 	mesh_ = std::make_unique<Mesh>();
-	mesh_->CreateMesh(vertices.data(), indices_.data(), vertices.size(),
-	                  indices_.size());
+	mesh_->create_mesh(vertices.data(), indices_.data(), vertices.size(),
+	                   indices_.size());
 }
 void Md2Model::animate(float delta_time) {
 	animstate_.curr_time += delta_time;

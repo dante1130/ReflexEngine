@@ -62,7 +62,7 @@ Skybox::Skybox(const std::vector<std::string>& faceLocations) {
 	    1.0f,  -1.0f, 1.0f,  0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
 
 	m_skyMesh = std::make_unique<Mesh>();
-	m_skyMesh->CreateMesh(skyboxVertices, skyboxIndices, 64, 36);
+	m_skyMesh->create_mesh(skyboxVertices, skyboxIndices, 64, 36);
 }
 
 void Skybox::DrawSkybox(glm::mat4 projectionMatrix,
@@ -82,7 +82,7 @@ void Skybox::DrawSkybox(glm::mat4 projectionMatrix,
 
 	m_skyShader->Validate();
 
-	m_skyMesh->RenderMesh();
+	m_skyMesh->render_mesh();
 
 	glDepthMask(GL_TRUE);
 }

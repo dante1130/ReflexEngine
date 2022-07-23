@@ -1,6 +1,6 @@
 entity = {
 	spot_light = {
-		color = { x = 1, y = 1, z = 1 },
+		color = { r = 1, g = 1, b = 1 },
 
 		ambient_intensity = 1,
 		diffuse_intensity = 1,

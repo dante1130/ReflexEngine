@@ -6,6 +6,7 @@
 #include "Md2ModelManager.hpp"
 #include "LightManager.hpp"
 #include "SkyboxManager.hpp"
+#include "MeshManager.hpp"
 
 /**
  * @class ResourceManager
@@ -62,6 +63,13 @@ public:
 	 */
 	SkyboxManager& get_skybox_manager();
 
+	/**
+	 * @brief Get the mesh manager.
+	 *
+	 * @return MeshManager&
+	 */
+	MeshManager& get_mesh_manager();
+
 	// These are deleted as a singleton pattern is used.
 	ResourceManager(ResourceManager& other) = delete;
 	ResourceManager(const ResourceManager& other) = delete;
@@ -86,6 +94,9 @@ private:
 
 	/// The skybox manager.
 	SkyboxManager skybox_manager_;
+
+	/// The mesh manager.
+	MeshManager mesh_manager_;
 
 	/**
 	 * @brief Construct a new Resource Manager object

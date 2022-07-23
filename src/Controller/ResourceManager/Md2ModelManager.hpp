@@ -56,12 +56,7 @@ public:
 	 */
 	const Md2Model& get_md2_model(const std::string& model_name) const;
 
-	/**
-	 * @brief Destroy the Md2 Model Manager object
-	 */
-	~Md2ModelManager();
-
 private:
 	/// A hashmap of models.
-	std::unordered_map<std::string, Md2Model*> md2_model_hashmap;
+	std::unordered_map<std::string, Md2Model> md2_model_hashmap;
 };

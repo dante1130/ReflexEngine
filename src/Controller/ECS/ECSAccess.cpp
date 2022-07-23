@@ -7,6 +7,7 @@
 #include "Model/Components/Model.hpp"
 #include "Model/Components/Script.hpp"
 #include "Model/Components/Light.hpp"
+#include "Model/Components/Mesh.hpp"
 
 using namespace component;
 using namespace Reflex;
@@ -19,6 +20,7 @@ void ECSAccess::register_ecs() {
 	register_directional_light_component();
 	register_point_light_component();
 	register_spot_light_component();
+	register_mesh_component();
 }
 
 void ECSAccess::register_entity() {
@@ -34,6 +36,7 @@ void ECSAccess::register_entity() {
 	entity_type["add_point_light_component"] =
 	    &Entity::add_component<PointLight>;
 	entity_type["add_spot_light_component"] = &Entity::add_component<SpotLight>;
+	entity_type["add_mesh_component"] = &Entity::add_component<Mesh>;
 
 	entity_type["remove_transform_component"] =
 	    &Entity::remove_component<Transform>;
@@ -43,6 +46,9 @@ void ECSAccess::register_entity() {
 	    &Entity::remove_component<DirectionalLight>;
 	entity_type["remove_point_light_component"] =
 	    &Entity::remove_component<PointLight>;
+	entity_type["remove_spot_light_component"] =
+	    &Entity::remove_component<SpotLight>;
+	entity_type["remove_mesh_component"] = &Entity::remove_component<Mesh>;
 
 	entity_type["get_transform_component"] = &Entity::get_component<Transform>;
 	entity_type["get_model_component"] = &Entity::get_component<Model>;
@@ -52,6 +58,7 @@ void ECSAccess::register_entity() {
 	entity_type["get_point_light_component"] =
 	    &Entity::get_component<PointLight>;
 	entity_type["get_spot_light_component"] = &Entity::get_component<SpotLight>;
+	entity_type["get_mesh_component"] = &Entity::get_component<Mesh>;
 }
 
 void ECSAccess::register_transform_component() {
@@ -123,4 +130,14 @@ void ECSAccess::register_spot_light_component() {
 	spot_light_type["quadratic"] = &SpotLight::quadratic;
 	spot_light_type["direction"] = &SpotLight::direction;
 	spot_light_type["edge"] = &SpotLight::edge;
+}
+
+void ECSAccess::register_mesh_component() {
+	auto& lua = LuaManager::get_instance().get_state();
+
+	auto mesh_type = lua.new_usertype<Mesh>("Mesh");
+
+	mesh_type["mesh_name"] = &Mesh::mesh_name;
+	mesh_type["texture_name"] = &Mesh::texture_name;
+	mesh_type["material_name"] = &Mesh::material_name;
 }

@@ -4,6 +4,7 @@
 #include "Model/Components/Model.hpp"
 #include "Model/Components/Script.hpp"
 #include "Model/Components/Light.hpp"
+#include "Model/Components/Mesh.hpp"
 
 #include "Controller/ECS/ComponentSystem/ComponentFunctions.hpp"
 
@@ -51,6 +52,10 @@ void ECSGameAssetFactory::load_components(Reflex::Entity& entity,
 	if (entity_table["spot_light"].valid()) {
 		load_spot_light(entity, entity_table["spot_light"]);
 	}
+
+	if (entity_table["mesh"].valid()) {
+		load_mesh(entity, entity_table["mesh"]);
+	}
 }
 
 void ECSGameAssetFactory::load_transform(Reflex::Entity& entity,
@@ -93,9 +98,9 @@ void ECSGameAssetFactory::load_directional_light(
     Reflex::Entity& entity, const sol::table& light_table) {
 	auto& light_component = entity.add_component<component::DirectionalLight>();
 
-	light_component.color.x = light_table["color"]["x"];
-	light_component.color.y = light_table["color"]["y"];
-	light_component.color.z = light_table["color"]["z"];
+	light_component.color.x = light_table["color"]["r"];
+	light_component.color.y = light_table["color"]["g"];
+	light_component.color.z = light_table["color"]["b"];
 
 	light_component.ambient_intensity = light_table["ambient_intensity"];
 	light_component.diffuse_intensity = light_table["diffuse_intensity"];
@@ -112,9 +117,9 @@ void ECSGameAssetFactory::load_point_light(Reflex::Entity& entity,
                                            const sol::table& light_table) {
 	auto& light_component = entity.add_component<component::PointLight>();
 
-	light_component.color.x = light_table["color"]["x"];
-	light_component.color.y = light_table["color"]["y"];
-	light_component.color.z = light_table["color"]["z"];
+	light_component.color.x = light_table["color"]["r"];
+	light_component.color.y = light_table["color"]["g"];
+	light_component.color.z = light_table["color"]["b"];
 
 	light_component.ambient_intensity = light_table["ambient_intensity"];
 	light_component.diffuse_intensity = light_table["diffuse_intensity"];
@@ -134,9 +139,9 @@ void ECSGameAssetFactory::load_spot_light(Reflex::Entity& entity,
                                           const sol::table& light_table) {
 	auto& light_component = entity.add_component<component::SpotLight>();
 
-	light_component.color.x = light_table["color"]["x"];
-	light_component.color.y = light_table["color"]["y"];
-	light_component.color.z = light_table["color"]["z"];
+	light_component.color.x = light_table["color"]["r"];
+	light_component.color.y = light_table["color"]["g"];
+	light_component.color.z = light_table["color"]["b"];
 
 	light_component.ambient_intensity = light_table["ambient_intensity"];
 	light_component.diffuse_intensity = light_table["diffuse_intensity"];
@@ -156,6 +161,15 @@ void ECSGameAssetFactory::load_spot_light(Reflex::Entity& entity,
 	light_component.edge = light_table["edge"];
 
 	component::init_spot_light(entity.get_registry(), entity.get_entity_id());
+}
+
+void ECSGameAssetFactory::load_mesh(Reflex::Entity& entity,
+                                    const sol::table& mesh_table) {
+	auto& mesh_component = entity.add_component<component::Mesh>();
+
+	mesh_component.mesh_name = mesh_table["mesh_name"];
+	mesh_component.material_name = mesh_table["material_name"];
+	mesh_component.texture_name = mesh_table["texture_name"];
 }
 
 bool ECSGameAssetFactory::is_lua_script(const std::string& lua_script) {

@@ -24,8 +24,8 @@ public:
 	 * @param noOfVerts The number of vertices.
 	 * @param noOfIndices The number of indices.
 	 */
-	void CreateMesh(const GLfloat* vertices, const GLuint* indices,
-	                GLuint noOfVerts, GLuint noOfIndices);
+	void create_mesh(const GLfloat* vertices, const GLuint* indices,
+	                 GLuint noOfVerts, GLuint noOfIndices);
 
 	/**
 	 * @brief Takes in an array of vertices, texture coordinates, normals, and
@@ -42,7 +42,7 @@ public:
 	/**
 	 * @brief Binds the VAO and IBO and renders the mesh.
 	 */
-	void RenderMesh();
+	void render_mesh() const;
 
 	/**
 	 * @brief Clears the mesh.

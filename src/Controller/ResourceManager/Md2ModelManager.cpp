@@ -13,12 +13,11 @@ void Md2ModelManager::lua_access() {
 
 bool Md2ModelManager::load_md2_model(const std::string& model_name,
                                      const std::string& file_name) {
-	Md2Model* md2_model = new Md2Model();
+	auto& md2_model = md2_model_hashmap[model_name];
 
-	if (md2_model->load_md2(file_name)) {
+	if (md2_model.load_md2(file_name)) {
 		std::cout << "loading " << model_name << " from " << file_name
 		          << std::endl;
-		md2_model_hashmap[model_name] = md2_model;
 		return true;
 	}
 
@@ -27,23 +26,16 @@ bool Md2ModelManager::load_md2_model(const std::string& model_name,
 
 bool Md2ModelManager::load_texture(const std::string& model_name,
                                    const std::string& file_name) {
-	Md2Model* md2_model = md2_model_hashmap.at(model_name);
-	return md2_model->load_texture(file_name);
+	return md2_model_hashmap.at(model_name).load_texture(file_name);
 }
 
 Md2Model& Md2ModelManager::get_md2_model(const std::string& model_name) {
 	// Returns a reference instead of the pointer.
-	return *md2_model_hashmap.at(model_name);
+	return md2_model_hashmap.at(model_name);
 }
 
 const Md2Model& Md2ModelManager::get_md2_model(
     const std::string& model_name) const {
 	// Returns a reference instead of the pointer.
-	return *md2_model_hashmap.at(model_name);
-}
-
-Md2ModelManager::~Md2ModelManager() {
-	for (auto& md2_model : md2_model_hashmap) {
-		delete md2_model.second;
-	}
+	return md2_model_hashmap.at(model_name);
 }

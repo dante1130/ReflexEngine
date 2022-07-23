@@ -1,6 +1,4 @@
-variables = {
-
-}
+var = {}
 
 function init(entity)
 

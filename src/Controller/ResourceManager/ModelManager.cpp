@@ -10,12 +10,11 @@ void ModelManager::lua_access() {
 
 bool ModelManager::load_model(const std::string& model_name,
                               const std::string& file_name) {
-	Model* model = new Model();
+	auto& model = model_hashmap[model_name];
 
-	if (model->LoadModel(file_name)) {
+	if (model.LoadModel(file_name)) {
 		std::cout << "loading " << model_name << " from " << file_name
 		          << std::endl;
-		model_hashmap[model_name] = model;
 		return true;
 	}
 
@@ -24,11 +23,5 @@ bool ModelManager::load_model(const std::string& model_name,
 
 const Model& ModelManager::get_model(const std::string& model_name) const {
 	// Returns a reference instead of the pointer.
-	return *model_hashmap.at(model_name);
-}
-
-ModelManager::~ModelManager() {
-	for (auto& model : model_hashmap) {
-		delete model.second;
-	}
+	return model_hashmap.at(model_name);
 }

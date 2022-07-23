@@ -4,8 +4,8 @@
 
 Mesh::Mesh() : VAO(0), VBO(0), IBO(0), indexCount(0) {}
 
-void Mesh::CreateMesh(const GLfloat* vertices, const GLuint* indices,
-                      GLuint noOfVerts, GLuint noOfIndices) {
+void Mesh::create_mesh(const GLfloat* vertices, const GLuint* indices,
+                       GLuint noOfVerts, GLuint noOfIndices) {
 	indexCount = noOfIndices;
 
 	glGenVertexArrays(1, &VAO);
@@ -83,7 +83,7 @@ void Mesh::CreateColorMesh(const GLfloat* vertices, const GLuint* indices,
 	has_color_ = true;
 }
 
-void Mesh::RenderMesh() {
+void Mesh::render_mesh() const {
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
 

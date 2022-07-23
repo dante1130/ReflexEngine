@@ -9,25 +9,12 @@ void MaterialManager::lua_access() {
 	                            &MaterialManager::load_material, this);
 }
 
-bool MaterialManager::load_material(const std::string& material_name,
+void MaterialManager::load_material(const std::string& material_name,
                                     float shine, float spec_intensity) {
-	Reflex::Material* material = new Reflex::Material(shine, spec_intensity);
-
-	if (material) {
-		material_hashmap[material_name] = material;
-		return true;
-	}
-
-	return false;
+	material_hashmap[material_name] = Reflex::Material(shine, spec_intensity);
 }
 
 const Reflex::Material& MaterialManager::get_material(
     const std::string& material_name) const {
-	return *material_hashmap.at(material_name);
-}
-
-MaterialManager::~MaterialManager() {
-	for (auto& material : material_hashmap) {
-		delete material.second;
-	}
+	return material_hashmap.at(material_name);
 }
