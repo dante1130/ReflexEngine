@@ -153,6 +153,4 @@ void ECSAccess::register_terrain_component() {
 	terrain_type["texture_name"] = &Terrain::texture_name;
 	terrain_type["material_name"] = &Terrain::material_name;
 	terrain_type["detailmap_name"] = &Terrain::detailmap_name;
-
-	terrain_type["scale"] = &Terrain::scale;
 }

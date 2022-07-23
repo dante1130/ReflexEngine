@@ -9,6 +9,7 @@
 #include "Model/Components/Script.hpp"
 #include "Model/Components/Light.hpp"
 #include "Model/Components/Mesh.hpp"
+#include "Model/Components/Terrain.hpp"
 
 void System::draw_model(entt::registry& registry) {
 	auto& renderer = ReflexEngine::get_instance().renderer_;
@@ -80,6 +81,53 @@ void System::draw_mesh(entt::registry& registry) {
 		};
 
 		renderer.add_draw_call(draw_call);
+	}
+}
+
+void System::draw_terrain(entt::registry& registry) {
+	auto& renderer = ReflexEngine::get_instance().renderer_;
+
+	auto& resource_manager = ResourceManager::get_instance();
+	auto& terrain_manager = resource_manager.get_terrain_manager();
+	auto& texture_manager = resource_manager.get_texture_manager();
+	auto& material_manager = resource_manager.get_material_manager();
+
+	auto view = registry.view<Component::Transform, Component::Terrain>();
+
+	for (auto entity : view) {
+		auto& transform = view.get<Component::Transform>(entity);
+		auto& terrain_component = view.get<Component::Terrain>(entity);
+
+		DrawCall draw_call = [transform, terrain_component, &terrain_manager,
+		                      &texture_manager,
+		                      &material_manager](const Shader& shader) {
+			auto& terrain =
+			    terrain_manager.get_terrain(terrain_component.terrain_name);
+
+			glm::mat4 model = glm::mat4(1.0f);
+			model = glm::translate(model, transform.position);
+			model = glm::translate(model, terrain.get_origin());
+			model = model * glm::mat4_cast(transform.rotation);
+			model = glm::scale(model, transform.scale);
+
+			glUniformMatrix4fv(shader.GetModelLocation(), 1, GL_FALSE,
+			                   glm::value_ptr(model));
+
+			material_manager.get_material(terrain_component.material_name)
+			    .UseMaterial(shader.GetShininessLocation(),
+			                 shader.GetSpecularIntensityLocation());
+
+			const auto& texture =
+			    texture_manager.get_texture(terrain_component.texture_name);
+
+			const auto& detailmap =
+			    texture_manager.get_texture(terrain_component.detailmap_name);
+
+			terrain.set_texture(texture.get_texture_id());
+			terrain.set_detailmap(detailmap.get_texture_id());
+
+			terrain.render(shader);
+		};
 	}
 }
 

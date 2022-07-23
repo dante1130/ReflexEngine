@@ -20,6 +20,13 @@ void draw_model(entt::registry& registry);
 void draw_mesh(entt::registry& registry);
 
 /**
+ * @brief Passes the draw call of the terrain component to the renderer.
+ *
+ * @param registry The ECS registry.
+ */
+void draw_terrain(entt::registry& registry);
+
+/**
  * @brief Initializes the script component of an entity.
  *
  * @param registry The ECS registry.

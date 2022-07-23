@@ -17,8 +17,5 @@ struct Terrain {
 	std::string material_name;
 	/// The name of the detailmap.
 	std::string detailmap_name;
-
-	/// The scale of the terrain.
-	glm::vec3 scale;
 };
 }  // namespace Component

@@ -21,6 +21,7 @@ void ECS::update(double delta_time) {
 void ECS::fixed_update(double delta_time) {}
 
 void ECS::draw() {
+	System::draw_terrain(registry_);
 	System::draw_model(registry_);
 	System::draw_mesh(registry_);
 }
