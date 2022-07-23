@@ -41,7 +41,7 @@ bool TexturedTerrain::load_mesh() {
 
 			// Vertices
 			vertices.push_back(x);
-			vertices.push_back(heightmap_[x + (z * get_width())]);
+			vertices.push_back(heightmap_[index]);
 			vertices.push_back(z);
 
 			// Texture coordinates
@@ -67,7 +67,7 @@ bool TexturedTerrain::load_mesh() {
 			}
 		}
 	}
-	//
+
 	mesh_ = std::make_unique<Mesh>();
 	mesh_->create_mesh(vertices.data(), indices.data(), vertices.size(),
 	                   indices.size());
@@ -77,7 +77,7 @@ bool TexturedTerrain::load_mesh() {
 
 bool TexturedTerrain::load_texture(const char* file_name) {
 	texture_ = std::make_unique<Texture>(file_name);
-	return texture_->LoadTextureA();
+	return texture_->LoadTexture();
 }
 
 bool TexturedTerrain::load_detailmap(const char* file_name) {
@@ -93,5 +93,6 @@ void TexturedTerrain::set_texture(GLuint id) {
 
 void TexturedTerrain::set_detailmap(GLuint id) {
 	detailmap_ = std::make_unique<Texture>();
+	detailmap_->set_texture_unit(GL_TEXTURE3);
 	detailmap_->set_texture_id(id);
 }

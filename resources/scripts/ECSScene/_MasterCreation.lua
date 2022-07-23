@@ -1,5 +1,5 @@
 add_game_object("scripts/ECSScene/Cat.lua")
-add_game_object("scripts/ECSScene/sunlight.lua")
+add_game_object("scripts/ECSScene/moonlight.lua")
 add_game_object("scripts/ECSScene/player.lua")
 add_game_object("scripts/ECSScene/flashlight.lua")
 add_game_object("scripts/ECSScene/boat.lua")

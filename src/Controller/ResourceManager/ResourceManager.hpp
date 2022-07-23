@@ -7,6 +7,7 @@
 #include "LightManager.hpp"
 #include "SkyboxManager.hpp"
 #include "MeshManager.hpp"
+#include "TerrainManager.hpp"
 
 /**
  * @class ResourceManager
@@ -70,6 +71,13 @@ public:
 	 */
 	MeshManager& get_mesh_manager();
 
+	/**
+	 * @brief Get the terrain manager.
+	 *
+	 * @return TerrainManager&
+	 */
+	TerrainManager& get_terrain_manager();
+
 	// These are deleted as a singleton pattern is used.
 	ResourceManager(ResourceManager& other) = delete;
 	ResourceManager(const ResourceManager& other) = delete;
@@ -97,6 +105,9 @@ private:
 
 	/// The mesh manager.
 	MeshManager mesh_manager_;
+
+	/// The terrain manager.
+	TerrainManager terrain_manager_;
 
 	/**
 	 * @brief Construct a new Resource Manager object

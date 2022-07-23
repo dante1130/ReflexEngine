@@ -1,14 +1,12 @@
 #pragma once
 
+#include <string>
 #include <vector>
 #include <unordered_map>
 
 #include <sol/sol.hpp>
 
 #include "View/Renderer/OpenGL/Objects/Skybox.hpp"
-
-#include <string>
-//using SkyboxFacesVec = std::vector<std::string>;
 
 /**
  * @class SkyboxManager

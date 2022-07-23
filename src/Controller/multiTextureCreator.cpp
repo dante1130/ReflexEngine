@@ -124,7 +124,7 @@ void multiTextureCreator::create_multi_texture() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, x_size, z_size, 0, GL_RGBA,
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB_ALPHA, x_size, z_size, 0, GL_RGBA,
 	             GL_UNSIGNED_BYTE, mult_texture);
 
 	glGenerateMipmap(GL_TEXTURE_2D);

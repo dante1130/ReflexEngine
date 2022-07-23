@@ -32,7 +32,7 @@ entity = {
 			b = 1
 		},
 
-		ambient_intensity = 0.5,
+		ambient_intensity = 0,
 		diffuse_intensity = 1,
 
 		position = {
