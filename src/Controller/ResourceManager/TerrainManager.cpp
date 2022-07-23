@@ -16,6 +16,7 @@ void TerrainManager::load_terrain(const std::string& terrain_name,
 	TexturedTerrain& terrain = terrain_map_[terrain_name];
 
 	terrain.load_heightfield(heightmap.c_str());
+	terrain.load_mesh();
 }
 
 TexturedTerrain& TerrainManager::get_terrain(const std::string& terrain_name) {

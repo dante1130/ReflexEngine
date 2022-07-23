@@ -104,6 +104,8 @@ void System::draw_terrain(entt::registry& registry) {
 			auto& terrain =
 			    terrain_manager.get_terrain(terrain_component.terrain_name);
 
+			terrain.set_scale(transform.scale);
+
 			glm::mat4 model = glm::mat4(1.0f);
 			model = glm::translate(model, transform.position);
 			model = glm::translate(model, terrain.get_origin());
@@ -128,6 +130,8 @@ void System::draw_terrain(entt::registry& registry) {
 
 			terrain.render(shader);
 		};
+
+		renderer.add_draw_call(draw_call);
 	}
 }
 

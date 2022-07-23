@@ -7,5 +7,6 @@ add_game_object("scripts/ECSScene/escape_boat.lua")
 add_game_object("scripts/ECSScene/lighthouse.lua")
 add_game_object("scripts/ECSScene/water.lua")
 add_game_object("scripts/ECSScene/big_arrow.lua")
+add_game_object("scripts/ECSScene/terrain.lua")
 
 Skybox.use_skybox("nightsky")
