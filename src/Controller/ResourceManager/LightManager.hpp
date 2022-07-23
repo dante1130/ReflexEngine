@@ -29,7 +29,7 @@ public:
 	 *
 	 * @param light The light component.
 	 */
-	void set_directional_light(const component::DirectionalLight& light);
+	void set_directional_light(const Component::DirectionalLight& light);
 
 	/**
 	 * @brief Add a point light.
@@ -45,7 +45,7 @@ public:
 	 * @param light The light component.
 	 * @return size_t
 	 */
-	size_t add_point_light(const component::PointLight& light);
+	size_t add_point_light(const Component::PointLight& light);
 
 	/**
 	 * @brief Add a spot light.
@@ -61,7 +61,7 @@ public:
 	 * @param light The light component.
 	 * @return size_t
 	 */
-	size_t add_spot_light(const component::SpotLight& light);
+	size_t add_spot_light(const Component::SpotLight& light);
 
 	/**
 	 * @brief Update the directional light.
@@ -75,7 +75,7 @@ public:
 	 *
 	 * @param light The light component.
 	 */
-	void update_directional_light(const component::DirectionalLight& light);
+	void update_directional_light(const Component::DirectionalLight& light);
 
 	/**
 	 * @brief Update the point light given the id.
@@ -91,7 +91,7 @@ public:
 	 * @param id The id.
 	 * @param light The light component.
 	 */
-	void update_point_light(size_t id, const component::PointLight& light);
+	void update_point_light(size_t id, const Component::PointLight& light);
 
 	/**
 	 * @brief Update the spot light given the id.
@@ -107,7 +107,7 @@ public:
 	 * @param id The id.
 	 * @param light The light component.
 	 */
-	void update_spot_light(size_t id, const component::SpotLight& light);
+	void update_spot_light(size_t id, const Component::SpotLight& light);
 
 	/**
 	 * @brief Delete the point light given the id.

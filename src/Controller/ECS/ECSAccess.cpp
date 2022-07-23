@@ -9,7 +9,7 @@
 #include "Model/Components/Light.hpp"
 #include "Model/Components/Mesh.hpp"
 
-using namespace component;
+using namespace Component;
 using namespace Reflex;
 
 void ECSAccess::register_ecs() {

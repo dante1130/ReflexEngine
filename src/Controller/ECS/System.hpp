@@ -2,7 +2,7 @@
 
 #include <entt/entt.hpp>
 
-namespace component {
+namespace System {
 /**
  * @brief Passes the draw call of the model component to the renderer.
  *
@@ -83,4 +83,4 @@ void update_point_light(entt::registry& registry);
  * @param registry The ECS registry.
  */
 void update_spot_light(entt::registry& registry);
-};  // namespace component
+};  // namespace System

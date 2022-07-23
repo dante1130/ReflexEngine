@@ -27,7 +27,7 @@ public:
 	void load_terrain(const std::string& terrain_name,
 	                  const std::string& heightmap);
 	/**
-	 * @brief Get the terrain.
+	 * @brief Get the terrain with the given name.
 	 *
 	 * @param terrain_name The name of the terrain.
 	 * @return TexturedTerrain&

@@ -46,7 +46,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/ECS/ECS.cpp
 	Controller/ECS/Entity.cpp
 	Controller/ECS/ECSAccess.cpp
-	Controller/ECS/ComponentSystem/ComponentFunctions.cpp
+	Controller/ECS/System.cpp
 	Controller/ResourceManager/ResourceManager.cpp
 	Controller/ResourceManager/TextureManager.cpp
 	Controller/ResourceManager/ModelManager.cpp

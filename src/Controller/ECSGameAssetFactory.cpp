@@ -6,7 +6,7 @@
 #include "Model/Components/Light.hpp"
 #include "Model/Components/Mesh.hpp"
 
-#include "Controller/ECS/ComponentSystem/ComponentFunctions.hpp"
+#include "Controller/ECS/System.hpp"
 
 #include "Controller/LuaManager.hpp"
 
@@ -30,7 +30,7 @@ void ECSGameAssetFactory::load_components(Reflex::Entity& entity,
 		load_transform(entity, entity_table["transform"]);
 	} else {
 		// Load a default transform component if the entity has no transform.
-		entity.add_component<component::Transform>();
+		entity.add_component<Component::Transform>();
 	}
 
 	if (entity_table["model"].valid()) {
@@ -60,7 +60,7 @@ void ECSGameAssetFactory::load_components(Reflex::Entity& entity,
 
 void ECSGameAssetFactory::load_transform(Reflex::Entity& entity,
                                          const sol::table& transform_table) {
-	auto& transform_component = entity.add_component<component::Transform>();
+	auto& transform_component = entity.add_component<Component::Transform>();
 
 	transform_component.position.x = transform_table["position"]["x"];
 	transform_component.position.y = transform_table["position"]["y"];
@@ -78,17 +78,17 @@ void ECSGameAssetFactory::load_transform(Reflex::Entity& entity,
 
 void ECSGameAssetFactory::load_script(Reflex::Entity& entity,
                                       const sol::table& script_table) {
-	auto& script_component = entity.add_component<component::Script>();
+	auto& script_component = entity.add_component<Component::Script>();
 
 	script_component.lua_script = script_table["lua_script"];
 	script_component.entity = &entity;
 
-	component::init_script(entity.get_registry(), entity.get_entity_id());
+	System::init_script(entity.get_registry(), entity.get_entity_id());
 }
 
 void ECSGameAssetFactory::load_model(Reflex::Entity& entity,
                                      const sol::table& model_table) {
-	auto& model_component = entity.add_component<component::Model>();
+	auto& model_component = entity.add_component<Component::Model>();
 
 	model_component.model_name = model_table["model_name"];
 	model_component.material_name = model_table["material_name"];
@@ -96,7 +96,7 @@ void ECSGameAssetFactory::load_model(Reflex::Entity& entity,
 
 void ECSGameAssetFactory::load_directional_light(
     Reflex::Entity& entity, const sol::table& light_table) {
-	auto& light_component = entity.add_component<component::DirectionalLight>();
+	auto& light_component = entity.add_component<Component::DirectionalLight>();
 
 	light_component.color.x = light_table["color"]["r"];
 	light_component.color.y = light_table["color"]["g"];
@@ -109,13 +109,13 @@ void ECSGameAssetFactory::load_directional_light(
 	light_component.direction.y = light_table["direction"]["y"];
 	light_component.direction.z = light_table["direction"]["z"];
 
-	component::init_directional_light(entity.get_registry(),
-	                                  entity.get_entity_id());
+	System::init_directional_light(entity.get_registry(),
+	                               entity.get_entity_id());
 }
 
 void ECSGameAssetFactory::load_point_light(Reflex::Entity& entity,
                                            const sol::table& light_table) {
-	auto& light_component = entity.add_component<component::PointLight>();
+	auto& light_component = entity.add_component<Component::PointLight>();
 
 	light_component.color.x = light_table["color"]["r"];
 	light_component.color.y = light_table["color"]["g"];
@@ -132,12 +132,12 @@ void ECSGameAssetFactory::load_point_light(Reflex::Entity& entity,
 	light_component.linear = light_table["linear"];
 	light_component.quadratic = light_table["quadratic"];
 
-	component::init_point_light(entity.get_registry(), entity.get_entity_id());
+	System::init_point_light(entity.get_registry(), entity.get_entity_id());
 }
 
 void ECSGameAssetFactory::load_spot_light(Reflex::Entity& entity,
                                           const sol::table& light_table) {
-	auto& light_component = entity.add_component<component::SpotLight>();
+	auto& light_component = entity.add_component<Component::SpotLight>();
 
 	light_component.color.x = light_table["color"]["r"];
 	light_component.color.y = light_table["color"]["g"];
@@ -160,12 +160,12 @@ void ECSGameAssetFactory::load_spot_light(Reflex::Entity& entity,
 
 	light_component.edge = light_table["edge"];
 
-	component::init_spot_light(entity.get_registry(), entity.get_entity_id());
+	System::init_spot_light(entity.get_registry(), entity.get_entity_id());
 }
 
 void ECSGameAssetFactory::load_mesh(Reflex::Entity& entity,
                                     const sol::table& mesh_table) {
-	auto& mesh_component = entity.add_component<component::Mesh>();
+	auto& mesh_component = entity.add_component<Component::Mesh>();
 
 	mesh_component.mesh_name = mesh_table["mesh_name"];
 	mesh_component.material_name = mesh_table["material_name"];

@@ -8,7 +8,7 @@ void LightManager::set_directional_light(
 }
 
 void LightManager::set_directional_light(
-    const component::DirectionalLight& light) {
+    const Component::DirectionalLight& light) {
 	directional_light_ =
 	    DirectionalLight(light.color, light.ambient_intensity, light.direction,
 	                     light.diffuse_intensity);
@@ -25,7 +25,7 @@ size_t LightManager::add_point_light(const PointLightData& light_data) {
 	return id;
 }
 
-size_t LightManager::add_point_light(const component::PointLight& light) {
+size_t LightManager::add_point_light(const Component::PointLight& light) {
 	const size_t id = get_next_point_light_id();
 
 	point_lights_[id] = PointLight(
@@ -47,7 +47,7 @@ size_t LightManager::add_spot_light(const SpotLightData& light_data) {
 	return id;
 }
 
-size_t LightManager::add_spot_light(const component::SpotLight& light) {
+size_t LightManager::add_spot_light(const Component::SpotLight& light) {
 	const size_t id = get_next_spot_light_id();
 
 	spot_lights_[id] =
@@ -66,7 +66,7 @@ void LightManager::update_directional_light(
 }
 
 void LightManager::update_directional_light(
-    const component::DirectionalLight& light) {
+    const Component::DirectionalLight& light) {
 	directional_light_.set_directional_light(
 	    light.color, light.ambient_intensity, light.direction,
 	    light.diffuse_intensity);
@@ -81,7 +81,7 @@ void LightManager::update_point_light(size_t id,
 }
 
 void LightManager::update_point_light(size_t id,
-                                      const component::PointLight& light) {
+                                      const Component::PointLight& light) {
 	point_lights_.at(id).set_point_light(
 	    light.color, light.ambient_intensity, light.diffuse_intensity,
 	    light.position, light.constant, light.linear, light.quadratic);
@@ -97,7 +97,7 @@ void LightManager::update_spot_light(size_t id,
 }
 
 void LightManager::update_spot_light(size_t id,
-                                     const component::SpotLight& light) {
+                                     const Component::SpotLight& light) {
 	spot_lights_.at(id).set_spot_light(
 	    light.color, light.ambient_intensity, light.diffuse_intensity,
 	    light.position, light.direction, light.constant, light.linear,

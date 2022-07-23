@@ -28,7 +28,7 @@ void NPC::fixed_update(double delta_time) {
 			m_NPC_FSM->update();
 
 			position = pb->getPosition();
-			position.y = TerrainManager::getHeight(position.x, position.z);
+			position.y = OldTerrainManager::getHeight(position.x, position.z);
 			pb->setPosition(glm::vec3(position.x, position.y, position.z));
 			m_AI_time_elapsed = 0.0f;
 		}
@@ -66,9 +66,9 @@ void NPC::draw(const Shader& shader) {
 
 void NPC::save_object() {
 	if (savable) {
-    glm::vec3 vel = pb->getVelocity();
-	  glm::vec3 ang = pb->getAngVelocity();
-    
+		glm::vec3 vel = pb->getVelocity();
+		glm::vec3 ang = pb->getAngVelocity();
+
 		ObjectSaving::openFile();
 		ObjectSaving::saveGameObject(position, rotation, scale, angle, "NPC",
 		                             savable);
@@ -79,7 +79,8 @@ void NPC::save_object() {
 		ObjectSaving::addValue("animate", m_animation.get_is_animated(), false);
 		ObjectSaving::addValue("loopAnimation", m_animation.get_loop(), false);
 		ObjectSaving::addValue("rbType", (int)pb->getType(), false);
-		ObjectSaving::addValue("gravity", (int)pb->getIsGravityEnabled(), false);
+		ObjectSaving::addValue("gravity", (int)pb->getIsGravityEnabled(),
+		                       false);
 		ObjectSaving::addValue("xForce", vel.x, false);
 		ObjectSaving::addValue("yForce", vel.y, false);
 		ObjectSaving::addValue("zForce", vel.z, false);
@@ -89,8 +90,7 @@ void NPC::save_object() {
 		ObjectSaving::addValue("linearDamping", pb->getDragForce(), false);
 		ObjectSaving::addValue("angularDamping", pb->getDragTorque(), false);
 		ObjectSaving::addValue("sleep", (int)pb->getCanSleep(), false);
-		ObjectSaving::addValue("numOfColliders", pb->colliderSize(),
-		                       true);
+		ObjectSaving::addValue("numOfColliders", pb->colliderSize(), true);
 		ObjectSaving::closeStruct();
 
 		ObjectSaving::createStruct("AI");
@@ -166,7 +166,7 @@ float NPC::get_move_speed() { return m_move_speed; }
 void NPC::set_pos(vector2D pos) {
 	position.x = pos.getX();
 	position.z = pos.getY();
-	position.y = TerrainManager::getHeight(position.x, position.z);
+	position.y = OldTerrainManager::getHeight(position.x, position.z);
 	pb->setPosition(glm::vec3(position.x, position.y, position.z));
 }
 float NPC::get_pos_x() { return position.x; }

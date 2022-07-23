@@ -98,7 +98,7 @@ void ReflexEngine::lua_access() {
 	ECSAccess::register_ecs();
 	PseudoRandomNumberGenerator::lua_access();
 	GlobalDataStorage::lua_access();
-	TerrainManager::lua_access();
+	OldTerrainManager::lua_access();
 	ResourceManager::get_instance();
 	Audio::get_instance();
 	Physics::createWorld();

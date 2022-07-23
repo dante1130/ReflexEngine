@@ -1,8 +1,7 @@
 #include "ECS.hpp"
 
 #include "Entity.hpp"
-
-#include "ComponentSystem/ComponentFunctions.hpp"
+#include "System.hpp"
 
 using namespace Reflex;
 
@@ -13,17 +12,17 @@ Entity& ECS::create_entity() {
 }
 
 void ECS::update(double delta_time) {
-	component::update_script(registry_);
-	component::update_directional_light(registry_);
-	component::update_point_light(registry_);
-	component::update_spot_light(registry_);
+	System::update_script(registry_);
+	System::update_directional_light(registry_);
+	System::update_point_light(registry_);
+	System::update_spot_light(registry_);
 }
 
 void ECS::fixed_update(double delta_time) {}
 
 void ECS::draw() {
-	component::draw_model(registry_);
-	component::draw_mesh(registry_);
+	System::draw_model(registry_);
+	System::draw_mesh(registry_);
 }
 
 void ECS::destroy_entity(entt::entity entity_id) {
