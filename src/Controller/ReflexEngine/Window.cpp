@@ -22,6 +22,8 @@ void Window::lua_access() {
 	                          this);
 	window_table.set_function("set_window_size", &Window::set_window_size,
 	                          this);
+
+	window_table["close"] = [this]() { set_should_close(true); };
 }
 
 bool Window::init() {
@@ -122,12 +124,10 @@ double Window::get_y_offset() {
 void Window::set_fullscreen(bool fullscreen) {
 	is_fullscreen_ = fullscreen;
 
-	if (is_fullscreen_) {
-		glfwSetWindowMonitor(main_window_, glfwGetPrimaryMonitor(), 0, 0,
-		                     width_, height_, 0);
-	} else {
-		glfwSetWindowMonitor(main_window_, nullptr, 0, 0, width_, height_, 0);
-	}
+	GLFWmonitor* monitor = is_fullscreen_ ? glfwGetPrimaryMonitor() : nullptr;
+
+	glfwSetWindowMonitor(main_window_, monitor, 0, 0, width_, height_,
+	                     GLFW_DONT_CARE);
 }
 
 void Window::set_window_size(int width, int height) {

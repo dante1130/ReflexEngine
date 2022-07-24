@@ -7,7 +7,6 @@
 #include "Controller/AI/luaAccessScriptedFSM.hpp"
 #include "Controller/RandomGenerators/PseudoRandomNumberGenerator.hpp"
 #include "Model/RunTimeDataStorage/GlobalDataStorage.hpp"
-#include "Controller/ReflexEngine/EngineAccess.hpp"
 
 void TestScene::init() {
 	sol::state& lua = LuaManager::get_instance().get_state();
