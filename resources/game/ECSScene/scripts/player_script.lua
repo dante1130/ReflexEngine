@@ -30,7 +30,12 @@ function update(entity)
 	end
 
 	if (Input.get_key_state("escape"):is_key_pressed()) then
-		Window.close()
+		Window.set_cursor_visible(not Window.is_cursor_visible())
+		Time.set_pause(not Time.is_paused())
+	end
+
+	if (Input.get_key_state("k"):is_key_pressed()) then
+		Renderer.toggle_wireframe()
 	end
 
 	if (not Camera.is_noclip()) then
@@ -40,5 +45,9 @@ function update(entity)
 		transform.position.y = 1 + Terrain.get_height("terrain", transform.position, Math.vec3.new(2, 0.05, 2))
 
 		Camera.set_position(transform.position)
+	end
+
+	if (Time.is_paused()) then
+		dofile "game/ECSScene/scripts/pause_menu.lua"
 	end
 end
