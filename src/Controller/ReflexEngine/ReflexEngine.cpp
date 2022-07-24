@@ -91,7 +91,7 @@ ReflexEngine& ReflexEngine::get_instance() {
 }
 
 void ReflexEngine::lua_access() {
-	InputManager::get_instance().lua_access();
+	InputManager::get_instance();
 	NetworkAccess::lua_access();
 	EngineAccess::lua_access();
 	MathAccess::lua_access();
@@ -104,5 +104,6 @@ void ReflexEngine::lua_access() {
 	Physics::createWorld();
 	luaAccessScriptedFSM::registerAllAI();
 
+	window_.lua_access();
 	camera_.lua_access();
 }

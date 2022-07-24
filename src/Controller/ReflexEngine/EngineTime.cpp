@@ -5,9 +5,31 @@
 double EngineTime::prev_time_ = 0.0;
 double EngineTime::delta_time_ = 0.0;
 double EngineTime::fixed_delta_time_ = 0.0;
+double EngineTime::time_step_ = 1.0 / 60.0;
 double EngineTime::total_unpaused_time_ = 0.0;
 bool EngineTime::paused_ = false;
 double EngineTime::time_scale_ = 1.0;
+
+void EngineTime::lua_access() {
+	auto& lua = LuaManager::get_instance().get_state();
+
+	auto engine_time = lua.create_named_table("Time");
+
+	engine_time.set_function("get_delta_time", &EngineTime::get_delta_time);
+	engine_time.set_function("get_fixed_delta_time",
+	                         &EngineTime::get_fixed_delta_time);
+	engine_time.set_function("get_time_step", &EngineTime::get_time_step);
+	engine_time.set_function("get_time_scale", &EngineTime::get_time_scale);
+	engine_time.set_function("get_time_unpaused",
+	                         &EngineTime::get_time_unpaused);
+
+	engine_time.set_function("set_pause", &EngineTime::set_pause);
+	engine_time.set_function("set_time_scale", &EngineTime::set_time_scale);
+
+	engine_time.set_function("is_time_step_passed",
+	                         &EngineTime::is_time_step_passed);
+	engine_time.set_function("is_paused", &EngineTime::is_paused);
+}
 
 void EngineTime::update_delta_time(double curr_time) {
 	curr_time *= time_scale_;

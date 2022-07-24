@@ -8,6 +8,14 @@ void Camera::lua_access() {
 	                                  "backward", Movement::backward, "left",
 	                                  Movement::left, "right", Movement::right);
 
+	auto camera_table = lua.create_named_table("Camera");
+
+	camera_table.set_function("get_position", &Camera::get_position, this);
+	camera_table.set_function("get_direction", &Camera::get_direction, this);
+	camera_table.set_function("set_position", &Camera::set_position, this);
+	camera_table.set_function("toggle_noclip", &Camera::toggle_noclip, this);
+	camera_table.set_function("move", &Camera::move, this);
+
 	lua.set_function("camera_pos_x", &Camera::cam_pos_x, this);
 	lua.set_function("camera_pos_y", &Camera::cam_pos_y, this);
 	lua.set_function("camera_pos_z", &Camera::cam_pos_z, this);

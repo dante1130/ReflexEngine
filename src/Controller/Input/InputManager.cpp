@@ -112,4 +112,6 @@ InputManager::InputManager()
                       {"mouse5", GLFW_MOUSE_BUTTON_5},
                       {"mouse6", GLFW_MOUSE_BUTTON_6},
                       {"mouse7", GLFW_MOUSE_BUTTON_7},
-                      {"mouse8", GLFW_MOUSE_BUTTON_8}}) {}
+                      {"mouse8", GLFW_MOUSE_BUTTON_8}}) {
+	lua_access();
+}
