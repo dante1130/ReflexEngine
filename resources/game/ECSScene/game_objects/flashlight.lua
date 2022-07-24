@@ -16,6 +16,6 @@ entity = {
 	},
 
 	script = {
-		lua_script = "scripts/ECSScene/flashlight_script.lua"
+		lua_script = "game/ECSScene/scripts/flashlight_script.lua"
 	}
 }

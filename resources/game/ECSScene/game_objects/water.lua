@@ -12,6 +12,6 @@ entity = {
 	},
 
 	script = {
-		lua_script = "scripts/ECSScene/water_script.lua"
+		lua_script = "game/ECSScene/scripts/water_script.lua"
 	}
 }
