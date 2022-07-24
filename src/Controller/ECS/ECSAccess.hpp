@@ -45,4 +45,9 @@ void register_spot_light_component();
  * @brief Register the mesh component to Lua.
  */
 void register_mesh_component();
+
+/**
+ * @brief Register the terrain component to Lua.
+ */
+void register_terrain_component();
 };  // namespace ECSAccess

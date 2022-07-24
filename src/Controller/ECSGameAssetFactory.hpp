@@ -94,6 +94,15 @@ private:
 	static void load_mesh(Reflex::Entity& entity, const sol::table& mesh_table);
 
 	/**
+	 * @brief Loads a terrain component into the entity.
+	 *
+	 * @param entity The entity to load the component into.
+	 * @param terrain_table The table of the terrain component.
+	 */
+	static void load_terrain(Reflex::Entity& entity,
+	                         const sol::table& terrain_table);
+
+	/**
 	 * @brief Checks the string if it is a valid lua file.
 	 *
 	 * @param lua_script The string to check.

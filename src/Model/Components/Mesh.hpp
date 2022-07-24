@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-namespace component {
+namespace Component {
 /**
  * @brief A mesh component.
  */
@@ -15,4 +15,4 @@ struct Mesh {
 	/// The material name in the material manager.
 	std::string material_name;
 };
-};  // namespace component
+};  // namespace Component

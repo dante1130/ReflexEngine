@@ -1,4 +1,4 @@
-#include "ComponentFunctions.hpp"
+#include "System.hpp"
 
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 #include "Controller/ResourceManager/ResourceManager.hpp"
@@ -9,19 +9,20 @@
 #include "Model/Components/Script.hpp"
 #include "Model/Components/Light.hpp"
 #include "Model/Components/Mesh.hpp"
+#include "Model/Components/Terrain.hpp"
 
-void component::draw_model(entt::registry& registry) {
+void System::draw_model(entt::registry& registry) {
 	auto& renderer = ReflexEngine::get_instance().renderer_;
 
 	auto& resource_manager = ResourceManager::get_instance();
 	auto& model_manager = resource_manager.get_model_manager();
 	auto& material_manager = resource_manager.get_material_manager();
 
-	auto view = registry.view<Transform, Model>();
+	auto view = registry.view<Component::Transform, Component::Model>();
 
 	for (auto entity : view) {
-		auto& transform = view.get<Transform>(entity);
-		auto& model = view.get<Model>(entity);
+		auto& transform = view.get<Component::Transform>(entity);
+		auto& model = view.get<Component::Model>(entity);
 
 		DrawCall draw_call = [transform, model, &model_manager,
 		                      &material_manager](const Shader& shader) {
@@ -45,7 +46,7 @@ void component::draw_model(entt::registry& registry) {
 	}
 }
 
-void component::draw_mesh(entt::registry& registry) {
+void System::draw_mesh(entt::registry& registry) {
 	auto& renderer = ReflexEngine::get_instance().renderer_;
 
 	auto& resource_manager = ResourceManager::get_instance();
@@ -53,11 +54,11 @@ void component::draw_mesh(entt::registry& registry) {
 	auto& texture_manager = resource_manager.get_texture_manager();
 	auto& material_manager = resource_manager.get_material_manager();
 
-	auto view = registry.view<Transform, Mesh>();
+	auto view = registry.view<Component::Transform, Component::Mesh>();
 
 	for (auto entity : view) {
-		auto& transform = view.get<Transform>(entity);
-		auto& mesh = view.get<Mesh>(entity);
+		auto& transform = view.get<Component::Transform>(entity);
+		auto& mesh = view.get<Component::Mesh>(entity);
 
 		DrawCall draw_call = [transform, mesh, &mesh_manager, &texture_manager,
 		                      &material_manager](const Shader& shader) {
@@ -83,10 +84,61 @@ void component::draw_mesh(entt::registry& registry) {
 	}
 }
 
-void component::init_script(entt::registry& registry, entt::entity entity) {
+void System::draw_terrain(entt::registry& registry) {
+	auto& renderer = ReflexEngine::get_instance().renderer_;
+
+	auto& resource_manager = ResourceManager::get_instance();
+	auto& terrain_manager = resource_manager.get_terrain_manager();
+	auto& texture_manager = resource_manager.get_texture_manager();
+	auto& material_manager = resource_manager.get_material_manager();
+
+	auto view = registry.view<Component::Transform, Component::Terrain>();
+
+	for (auto entity : view) {
+		auto& transform = view.get<Component::Transform>(entity);
+		auto& terrain_component = view.get<Component::Terrain>(entity);
+
+		DrawCall draw_call = [transform, terrain_component, &terrain_manager,
+		                      &texture_manager,
+		                      &material_manager](const Shader& shader) {
+			auto& terrain =
+			    terrain_manager.get_terrain(terrain_component.terrain_name);
+
+			terrain.set_scale(transform.scale);
+
+			glm::mat4 model = glm::mat4(1.0f);
+			model = glm::translate(model, transform.position);
+			model = glm::translate(model, terrain.get_origin());
+			model = model * glm::mat4_cast(transform.rotation);
+			model = glm::scale(model, transform.scale);
+
+			glUniformMatrix4fv(shader.GetModelLocation(), 1, GL_FALSE,
+			                   glm::value_ptr(model));
+
+			material_manager.get_material(terrain_component.material_name)
+			    .UseMaterial(shader.GetShininessLocation(),
+			                 shader.GetSpecularIntensityLocation());
+
+			const auto& texture =
+			    texture_manager.get_texture(terrain_component.texture_name);
+
+			const auto& detailmap =
+			    texture_manager.get_texture(terrain_component.detailmap_name);
+
+			terrain.set_texture(texture.get_texture_id());
+			terrain.set_detailmap(detailmap.get_texture_id());
+
+			terrain.render(shader);
+		};
+
+		renderer.add_draw_call(draw_call);
+	}
+}
+
+void System::init_script(entt::registry& registry, entt::entity entity) {
 	auto& lua = LuaManager::get_instance().get_state();
 
-	auto& script = registry.get<Script>(entity);
+	auto& script = registry.get<Component::Script>(entity);
 
 	if (!script.entity) return;
 
@@ -97,74 +149,73 @@ void component::init_script(entt::registry& registry, entt::entity entity) {
 	script.lua_variables = lua["var"];
 }
 
-void component::init_directional_light(entt ::registry& registry,
-                                       entt::entity entity) {
+void System::init_directional_light(entt ::registry& registry,
+                                    entt::entity entity) {
 	auto& light_manager = ResourceManager::get_instance().get_light_manager();
 
-	auto& directional_light = registry.get<DirectionalLight>(entity);
+	auto& directional_light = registry.get<Component::DirectionalLight>(entity);
 
 	light_manager.set_directional_light(directional_light);
 }
 
-void component::init_point_light(entt::registry& registry,
-                                 entt::entity entity) {
+void System::init_point_light(entt::registry& registry, entt::entity entity) {
 	auto& light_manager = ResourceManager::get_instance().get_light_manager();
 
-	auto& point_light = registry.get<PointLight>(entity);
+	auto& point_light = registry.get<Component::PointLight>(entity);
 
 	point_light.light_id = light_manager.add_point_light(point_light);
 }
 
-void component::init_spot_light(entt::registry& registry, entt::entity entity) {
+void System::init_spot_light(entt::registry& registry, entt::entity entity) {
 	auto& light_manager = ResourceManager::get_instance().get_light_manager();
 
-	auto& spot_light = registry.get<SpotLight>(entity);
+	auto& spot_light = registry.get<Component::SpotLight>(entity);
 
 	spot_light.light_id = light_manager.add_spot_light(spot_light);
 }
 
-void component::update_directional_light(entt::registry& registry) {
+void System::update_directional_light(entt::registry& registry) {
 	auto& light_manager = ResourceManager::get_instance().get_light_manager();
 
-	auto view = registry.view<DirectionalLight>();
+	auto view = registry.view<Component::DirectionalLight>();
 
 	for (auto entity : view) {
-		auto& directional_light = view.get<DirectionalLight>(entity);
+		auto& directional_light = view.get<Component::DirectionalLight>(entity);
 		light_manager.update_directional_light(directional_light);
 	}
 }
 
-void component::update_point_light(entt::registry& registry) {
+void System::update_point_light(entt::registry& registry) {
 	auto& light_manager = ResourceManager::get_instance().get_light_manager();
 
-	auto view = registry.view<PointLight>();
+	auto view = registry.view<Component::PointLight>();
 
 	for (auto entity : view) {
-		auto& point_light = view.get<PointLight>(entity);
+		auto& point_light = view.get<Component::PointLight>(entity);
 
 		light_manager.update_point_light(point_light.light_id, point_light);
 	}
 }
 
-void component::update_spot_light(entt::registry& registry) {
+void System::update_spot_light(entt::registry& registry) {
 	auto& light_manager = ResourceManager::get_instance().get_light_manager();
 
-	auto view = registry.view<SpotLight>();
+	auto view = registry.view<Component::SpotLight>();
 
 	for (auto entity : view) {
-		auto& spot_light = view.get<SpotLight>(entity);
+		auto& spot_light = view.get<Component::SpotLight>(entity);
 
 		light_manager.update_spot_light(spot_light.light_id, spot_light);
 	}
 }
 
-void component::update_script(entt::registry& registry) {
+void System::update_script(entt::registry& registry) {
 	auto& lua = LuaManager::get_instance().get_state();
 
-	auto view = registry.view<Script>();
+	auto view = registry.view<Component::Script>();
 
 	for (auto entity : view) {
-		auto& script = view.get<Script>(entity);
+		auto& script = view.get<Component::Script>(entity);
 
 		if (!script.entity) continue;
 

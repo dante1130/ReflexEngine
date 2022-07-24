@@ -3,7 +3,7 @@
 #include "TexturedTerrain.hpp"
 #include "Controller/LuaManager.hpp"
 
-class TerrainManager {
+class OldTerrainManager {
 public:
 	/**
 	 * @brief	Provides access to terrain data in lua

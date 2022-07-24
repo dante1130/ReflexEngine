@@ -6,7 +6,7 @@
 
 #include "Controller/ECS/Entity.hpp"
 
-namespace component {
+namespace Component {
 /**
  * @struct Script
  * @brief The script component is used to run a lua script.
@@ -19,4 +19,4 @@ struct Script {
 	/// A pointer to the entity that the script is attached to.
 	Reflex::Entity* entity = nullptr;
 };
-};  // namespace component
+};  // namespace Component

@@ -113,6 +113,13 @@ public:
 	glm::vec3 get_up_world() const;
 
 	/**
+	 * @brief Returns whether the camera is in noclip mode.
+	 *
+	 * @return bool
+	 */
+	bool is_noclip() const;
+
+	/**
 	 * @brief Toggles noclip on and off.
 	 */
 	void toggle_noclip();

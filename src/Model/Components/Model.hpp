@@ -2,7 +2,7 @@
 
 #include <string>
 
-namespace component {
+namespace Component {
 /**
  * @struct Model
  * @brief The model component is used to store the name of the model and
@@ -14,4 +14,4 @@ struct Model {
 	/// The name of the material.
 	std::string material_name;
 };
-};  // namespace component
+};  // namespace Component

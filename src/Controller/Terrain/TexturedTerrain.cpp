@@ -6,12 +6,12 @@
 void TexturedTerrain::render(const Shader& shader) {
 	if (!mesh_) return;
 
-	glm::mat4 model = glm::mat4(1.0f);
-	model = glm::translate(model, get_origin());
-	model = glm::scale(model, scale_);
+	// glm::mat4 model = glm::mat4(1.0f);
+	// model = glm::translate(model, get_origin());
+	// model = glm::scale(model, scale_);
 
-	glUniformMatrix4fv(shader.GetModelLocation(), 1, GL_FALSE,
-	                   glm::value_ptr(model));
+	// glUniformMatrix4fv(shader.GetModelLocation(), 1, GL_FALSE,
+	//                    glm::value_ptr(model));
 
 	if (texture_ && !detailmap_) {
 		glUniform1i(shader.GetUsingTexture(), true);
@@ -41,7 +41,7 @@ bool TexturedTerrain::load_mesh() {
 
 			// Vertices
 			vertices.push_back(x);
-			vertices.push_back(heightmap_[x + (z * get_width())]);
+			vertices.push_back(heightmap_[index]);
 			vertices.push_back(z);
 
 			// Texture coordinates
@@ -67,7 +67,7 @@ bool TexturedTerrain::load_mesh() {
 			}
 		}
 	}
-	//
+
 	mesh_ = std::make_unique<Mesh>();
 	mesh_->create_mesh(vertices.data(), indices.data(), vertices.size(),
 	                   indices.size());
@@ -77,7 +77,7 @@ bool TexturedTerrain::load_mesh() {
 
 bool TexturedTerrain::load_texture(const char* file_name) {
 	texture_ = std::make_unique<Texture>(file_name);
-	return texture_->LoadTextureA();
+	return texture_->LoadTexture();
 }
 
 bool TexturedTerrain::load_detailmap(const char* file_name) {
@@ -87,11 +87,18 @@ bool TexturedTerrain::load_detailmap(const char* file_name) {
 }
 
 void TexturedTerrain::set_texture(GLuint id) {
-	texture_ = std::make_unique<Texture>();
+	if (!texture_) {
+		texture_ = std::make_unique<Texture>();
+	}
+
 	texture_->set_texture_id(id);
 }
 
 void TexturedTerrain::set_detailmap(GLuint id) {
-	detailmap_ = std::make_unique<Texture>();
+	if (!detailmap_) {
+		detailmap_ = std::make_unique<Texture>();
+		detailmap_->set_texture_unit(GL_TEXTURE3);
+	}
+
 	detailmap_->set_texture_id(id);
 }

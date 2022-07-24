@@ -3,16 +3,14 @@
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 #include "Model/singletons.h"
 
-void Player::init() { 
-	position.y = 10.0f;
-}
+void Player::init() { position.y = 10.0f; }
 
 void Player::update(double delta_time) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 	lua.script_file(lua_script_);
 
 	position = pb->getPosition();
-	position.y = TerrainManager::getHeight(position.x, position.z) + height_;
+	position.y = OldTerrainManager::getHeight(position.x, position.z) + height_;
 	pb->setPosition(position);
 
 	auto& camera = ReflexEngine::get_instance().camera_;
@@ -34,8 +32,8 @@ void Player::set_lua_script(const std::string& script) { lua_script_ = script; }
 
 void Player::save_object() {
 	if (savable) {
-    glm::vec3 pos = pb->getColliderPosition(0, Apply::LOCAL);
-    
+		glm::vec3 pos = pb->getColliderPosition(0, Apply::LOCAL);
+
 		ObjectSaving::openFile();
 		ObjectSaving::saveGameObject(position, rotation, scale, angle, "Player",
 		                             savable);

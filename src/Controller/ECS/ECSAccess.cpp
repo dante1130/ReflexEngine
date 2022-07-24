@@ -8,8 +8,9 @@
 #include "Model/Components/Script.hpp"
 #include "Model/Components/Light.hpp"
 #include "Model/Components/Mesh.hpp"
+#include "Model/Components/Terrain.hpp"
 
-using namespace component;
+using namespace Component;
 using namespace Reflex;
 
 void ECSAccess::register_ecs() {
@@ -21,6 +22,7 @@ void ECSAccess::register_ecs() {
 	register_point_light_component();
 	register_spot_light_component();
 	register_mesh_component();
+	register_terrain_component();
 }
 
 void ECSAccess::register_entity() {
@@ -140,4 +142,15 @@ void ECSAccess::register_mesh_component() {
 	mesh_type["mesh_name"] = &Mesh::mesh_name;
 	mesh_type["texture_name"] = &Mesh::texture_name;
 	mesh_type["material_name"] = &Mesh::material_name;
+}
+
+void ECSAccess::register_terrain_component() {
+	auto& lua = LuaManager::get_instance().get_state();
+
+	auto terrain_type = lua.new_usertype<Terrain>("Terrain");
+
+	terrain_type["terrain_name"] = &Terrain::terrain_name;
+	terrain_type["texture_name"] = &Terrain::texture_name;
+	terrain_type["material_name"] = &Terrain::material_name;
+	terrain_type["detailmap_name"] = &Terrain::detailmap_name;
 }

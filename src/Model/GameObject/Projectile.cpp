@@ -6,7 +6,8 @@ void Projectile::init() {}
 void Projectile::update(double delta_time) {
 	sol::state& lua = LuaManager::get_instance().get_state();
 
-	if (position.y - 0.1 <= TerrainManager::getHeight(position.x, position.z)) {
+	if (position.y - 0.1 <=
+	    OldTerrainManager::getHeight(position.x, position.z)) {
 		floor_contact_ = true;
 	}
 
@@ -45,51 +46,51 @@ void Projectile::draw(const Shader& shader) { PhysicsObject::draw(shader); }
 
 void Projectile::save_object() {
 	if (savable) {
-	glm::vec3 temp_velocity = pb->getVelocity();
-	glm::vec3 temp_ang_velocity = pb->getAngVelocity();
-  
-	ObjectSaving::openFile();
-	ObjectSaving::saveGameObject(position, rotation, scale, angle + 0.01,
-	                             "Projectile", savable);
-	ObjectSaving::addComma();
-	ObjectSaving::addValue("modelName", model_name_, false);
-	ObjectSaving::addValue("material_name", material_name_, false);
-	ObjectSaving::addValue("rbType", (int)pb->getType(), false);
-	ObjectSaving::addValue("gravity", (int)pb->getIsGravityEnabled(), false);
-	ObjectSaving::addValue("xForce", temp_velocity.x, false);
-	ObjectSaving::addValue("yForce", temp_velocity.y, false);
-	ObjectSaving::addValue("zForce", temp_velocity.z, false);
-	ObjectSaving::addValue("xTorque", temp_ang_velocity.x, false);
-	ObjectSaving::addValue("yTorque", temp_ang_velocity.y, false);
-	ObjectSaving::addValue("zTorque", temp_ang_velocity.z, false);
-	ObjectSaving::addValue("linearDamping", pb->getDragForce(), false);
-	ObjectSaving::addValue("angularDamping", pb->getDragTorque(), false);
-	ObjectSaving::addValue("sleep", (int)pb->getCanSleep(), false);
-	ObjectSaving::addValue("numOfColliders", pb->colliderSize(), false);
-	ObjectSaving::addValue("timeAliveLeft", time_alive_left_, false);
-	ObjectSaving::addValue("damage", damage_, false);
-	ObjectSaving::addValue("logic", lua_script_, false);
-	ObjectSaving::addValue("toDelete", to_be_deleted_, false);
-	ObjectSaving::addValue("floorContact", floor_contact_, true);
-  ObjectSaving::closeStruct();
+		glm::vec3 temp_velocity = pb->getVelocity();
+		glm::vec3 temp_ang_velocity = pb->getAngVelocity();
 
-	for (size_t count = 0; count < pb->colliderSize(); count++) {
-		int type = pb->getColliderType(count);
-		ObjectSaving::createStruct("collider" + std::to_string(count + 1));
-		saveCollider(count, type);
+		ObjectSaving::openFile();
+		ObjectSaving::saveGameObject(position, rotation, scale, angle + 0.01,
+		                             "Projectile", savable);
+		ObjectSaving::addComma();
+		ObjectSaving::addValue("modelName", model_name_, false);
+		ObjectSaving::addValue("material_name", material_name_, false);
+		ObjectSaving::addValue("rbType", (int)pb->getType(), false);
+		ObjectSaving::addValue("gravity", (int)pb->getIsGravityEnabled(),
+		                       false);
+		ObjectSaving::addValue("xForce", temp_velocity.x, false);
+		ObjectSaving::addValue("yForce", temp_velocity.y, false);
+		ObjectSaving::addValue("zForce", temp_velocity.z, false);
+		ObjectSaving::addValue("xTorque", temp_ang_velocity.x, false);
+		ObjectSaving::addValue("yTorque", temp_ang_velocity.y, false);
+		ObjectSaving::addValue("zTorque", temp_ang_velocity.z, false);
+		ObjectSaving::addValue("linearDamping", pb->getDragForce(), false);
+		ObjectSaving::addValue("angularDamping", pb->getDragTorque(), false);
+		ObjectSaving::addValue("sleep", (int)pb->getCanSleep(), false);
+		ObjectSaving::addValue("numOfColliders", pb->colliderSize(), false);
+		ObjectSaving::addValue("timeAliveLeft", time_alive_left_, false);
+		ObjectSaving::addValue("damage", damage_, false);
+		ObjectSaving::addValue("logic", lua_script_, false);
+		ObjectSaving::addValue("toDelete", to_be_deleted_, false);
+		ObjectSaving::addValue("floorContact", floor_contact_, true);
 		ObjectSaving::closeStruct();
-    }
+
+		for (size_t count = 0; count < pb->colliderSize(); count++) {
+			int type = pb->getColliderType(count);
+			ObjectSaving::createStruct("collider" + std::to_string(count + 1));
+			saveCollider(count, type);
+			ObjectSaving::closeStruct();
+		}
 
 		ObjectSaving::closeFile();
 	}
 }
 
 void Projectile::freeze_projectile() {
-
 	pb->setVelocity(glm::vec3(0));
 	pb->setAngVelocity(glm::vec3(0));
 	pb->setType(BodyType::STATIC);
-	position.y = TerrainManager::getHeight(position.x, position.z) + 0.1;
+	position.y = OldTerrainManager::getHeight(position.x, position.z) + 0.1;
 }
 
 void Projectile::remove_colliders() { pb->removeAllColliders(); }

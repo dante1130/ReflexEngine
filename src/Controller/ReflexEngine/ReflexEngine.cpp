@@ -6,7 +6,6 @@
 #include "NetworkManager.hpp"
 #include "Controller/NetworkAccess.h"
 #include "Controller/MathAccess.hpp"
-#include "Controller/ReflexEngine/EngineAccess.hpp"
 #include "Controller/ECS/ECSAccess.hpp"
 #include "Controller/AI/luaAccessScriptedFSM.hpp"
 #include "Controller/Input/InputManager.hpp"
@@ -91,18 +90,19 @@ ReflexEngine& ReflexEngine::get_instance() {
 }
 
 void ReflexEngine::lua_access() {
-	InputManager::get_instance().lua_access();
+	InputManager::get_instance();
 	NetworkAccess::lua_access();
-	EngineAccess::lua_access();
 	MathAccess::lua_access();
 	ECSAccess::register_ecs();
 	PseudoRandomNumberGenerator::lua_access();
 	GlobalDataStorage::lua_access();
-	TerrainManager::lua_access();
+	OldTerrainManager::lua_access();
 	ResourceManager::get_instance();
 	Audio::get_instance();
 	Physics::createWorld();
 	luaAccessScriptedFSM::registerAllAI();
+	EngineTime::lua_access();
 
+	window_.lua_access();
 	camera_.lua_access();
 }

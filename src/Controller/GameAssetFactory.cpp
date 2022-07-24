@@ -387,7 +387,7 @@ ScriptableObject* GameAssetFactory::loadScriptableObject(
 	so->rotation = rotation;
 	so->angle = angle;
 	so->savable = savable;
-	
+
 	return so;
 }
 
@@ -463,7 +463,7 @@ TerrainObject* GameAssetFactory::loadTerrainObject(
 	to->add_storage_text(lua["terrain"]["heightMap"], 4);
 	to->add_storage_text(lua["terrain"]["detailMap"], 5);
 
-	TerrainManager::setPlayableArea(tt, scale.y, height_size);
+	OldTerrainManager::setPlayableArea(tt, scale.y, height_size);
 
 	float min = lua["terrain"]["min"];
 	float max = lua["terrain"]["max"];

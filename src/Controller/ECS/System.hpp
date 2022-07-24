@@ -2,7 +2,7 @@
 
 #include <entt/entt.hpp>
 
-namespace component {
+namespace System {
 /**
  * @brief Passes the draw call of the model component to the renderer.
  *
@@ -18,6 +18,13 @@ void draw_model(entt::registry& registry);
  * @param registry The ECS registry.
  */
 void draw_mesh(entt::registry& registry);
+
+/**
+ * @brief Passes the draw call of the terrain component to the renderer.
+ *
+ * @param registry The ECS registry.
+ */
+void draw_terrain(entt::registry& registry);
 
 /**
  * @brief Initializes the script component of an entity.
@@ -83,4 +90,4 @@ void update_point_light(entt::registry& registry);
  * @param registry The ECS registry.
  */
 void update_spot_light(entt::registry& registry);
-};  // namespace component
+};  // namespace System

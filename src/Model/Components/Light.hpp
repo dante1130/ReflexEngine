@@ -2,7 +2,7 @@
 
 #include <glm/glm.hpp>
 
-namespace component {
+namespace Component {
 
 struct Light {
 	/// The color of the light.
@@ -50,4 +50,4 @@ struct SpotLight : public PointLight {
 	float edge = 0.0f;
 };
 
-};  // namespace component
+};  // namespace Component

@@ -46,7 +46,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/ECS/ECS.cpp
 	Controller/ECS/Entity.cpp
 	Controller/ECS/ECSAccess.cpp
-	Controller/ECS/ComponentSystem/ComponentFunctions.cpp
+	Controller/ECS/System.cpp
 	Controller/ResourceManager/ResourceManager.cpp
 	Controller/ResourceManager/TextureManager.cpp
 	Controller/ResourceManager/ModelManager.cpp
@@ -55,6 +55,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/ResourceManager/LightManager.cpp
 	Controller/ResourceManager/SkyboxManager.cpp
 	Controller/ResourceManager/MeshManager.cpp
+	Controller/ResourceManager/TerrainManager.cpp
 	Controller/ResourceManager/ObjectSaving.cpp
 	Controller/Input/InputManager.cpp
 	Controller/Input/InputState.cpp
@@ -78,7 +79,6 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/NetworkAccess.cpp
 	Controller/multiTextureCreator.cpp
 	Controller/RandomGenerators/PseudoRandomNumberGenerator.cpp
-	Controller/ReflexEngine/EngineAccess.cpp
 	Controller/Terrain/TerrainManager.cpp
 	Controller/AI/messageDispatcher.cpp
 	Controller/AI/entityManager.cpp

@@ -3,7 +3,7 @@
 #include <glm/vec3.hpp>
 #include <glm/gtc/quaternion.hpp>
 
-namespace component {
+namespace Component {
 /**
  * @struct Transform
  * @brief The transform component is used to store the position, rotation and
@@ -17,4 +17,4 @@ struct Transform {
 	/// The scale of the entity.
 	glm::vec3 scale = {1.0f, 1.0f, 1.0f};
 };
-};  // namespace component
+};  // namespace Component

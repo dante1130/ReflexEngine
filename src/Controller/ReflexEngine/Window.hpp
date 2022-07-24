@@ -24,6 +24,11 @@ public:
 	Window(int window_width, int window_height);
 
 	/**
+	 * @brief Register the Window class to the Lua state.
+	 */
+	void lua_access();
+
+	/**
 	 * @brief Initializes the window.
 	 *
 	 * @return int
@@ -73,6 +78,28 @@ public:
 	double get_y_offset();
 
 	/**
+	 * @brief Set whether the window should be in fullscreen.
+	 *
+	 * @param fullscreen Whether the window should be in fullscreen.
+	 */
+	void set_fullscreen(bool fullscreen);
+
+	/**
+	 * @brief Set whether the cursor should be visible.
+	 *
+	 * @param visible Whether the cursor should be visible.
+	 */
+	void set_cursor_visible(bool visible);
+
+	/**
+	 * @brief Set the window size.
+	 *
+	 * @param width The width of the window.
+	 * @param height The height of the window.
+	 */
+	void set_window_size(int width, int height);
+
+	/**
 	 * @brief Set whether the window should close.
 	 *
 	 * @param should_close Whether the window should close.
@@ -80,11 +107,25 @@ public:
 	void set_should_close(bool should_close);
 
 	/**
+	 * @brief Returns a boolean whether the cursor is visible.
+	 *
+	 * @return bool Whether the cursor is visible.
+	 */
+	bool is_cursor_visible() const;
+
+	/**
 	 * @brief Returns a boolean whether the window should close.
 	 *
 	 * @return bool
 	 */
 	bool is_should_close() const;
+
+	/**
+	 * @brief Returns a boolean whether the window is in fullscreen.
+	 *
+	 * @return bool
+	 */
+	bool is_fullscreen() const;
 
 	/**
 	 * @brief Updates the window buffer sizes.
@@ -120,22 +161,16 @@ private:
 	/// Check whether if this is the first mouse move.
 	bool is_first_mouse_ = true;
 
+	/// Whether the window is in fullscreen.
+	bool is_fullscreen_ = false;
+
+	/// Whether the cursor should be visible.
+	bool is_cursor_visible_ = false;
+
 	/**
 	 * @brief Create callbacks for the keyboard and mouse events.
 	 */
 	void create_callbacks();
-
-	/**
-	 * @brief Keyboard callback.
-	 *
-	 * @param window
-	 * @param key
-	 * @param code
-	 * @param action
-	 * @param mode
-	 */
-	static void HandleKeys(GLFWwindow* window, int key, int code, int action,
-	                       int mode);
 
 	/**
 	 * @brief Mouse callback.
