@@ -90,4 +90,12 @@ void update_point_light(entt::registry& registry);
  * @param registry The ECS registry.
  */
 void update_spot_light(entt::registry& registry);
+
+/**
+ * @brief Update the statemachine components
+ *
+ * @param registry The ECS registry
+ */
+void update_statemachine(entt::registry& registry);
+
 };  // namespace System

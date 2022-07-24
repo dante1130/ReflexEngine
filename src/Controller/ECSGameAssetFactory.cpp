@@ -6,6 +6,7 @@
 #include "Model/Components/Light.hpp"
 #include "Model/Components/Mesh.hpp"
 #include "Model/Components/Terrain.hpp"
+#include "Model/Components/Statemachine.hpp"
 
 #include "Controller/ECS/System.hpp"
 
@@ -60,6 +61,10 @@ void ECSGameAssetFactory::load_components(Reflex::Entity& entity,
 
 	if (entity_table["terrain"].valid()) {
 		load_terrain(entity, entity_table["terrain"]);
+	}
+
+	if (entity_table["statemachine"].valid()) {
+		load_statemachine(entity, entity_table["statemachine"]);
 	}
 }
 
@@ -185,6 +190,17 @@ void ECSGameAssetFactory::load_terrain(Reflex::Entity& entity,
 	terrain_component.texture_name = terrain_table["texture_name"];
 	terrain_component.material_name = terrain_table["material_name"];
 	terrain_component.detailmap_name = terrain_table["detailmap_name"];
+}
+
+void ECSGameAssetFactory::load_statemachine(
+    Reflex::Entity& entity, const sol::table& statemachine_table) {
+	auto& statemachine_component =
+	    entity.add_component<Component::Statemachine>();
+
+	statemachine_component.global_state = statemachine_table["global_state"];
+	statemachine_component.current_state = statemachine_table["current_state"];
+	statemachine_component.previous_state =
+	    statemachine_table["previous_state"];
 }
 
 bool ECSGameAssetFactory::is_lua_script(const std::string& lua_script) {

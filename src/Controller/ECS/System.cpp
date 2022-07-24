@@ -4,12 +4,15 @@
 #include "Controller/ResourceManager/ResourceManager.hpp"
 #include "Controller/LuaManager.hpp"
 
+#include "Model/RunTimeDataStorage/GlobalDataStorage.hpp"
+
 #include "Model/Components/Transform.hpp"
 #include "Model/Components/Model.hpp"
 #include "Model/Components/Script.hpp"
 #include "Model/Components/Light.hpp"
 #include "Model/Components/Mesh.hpp"
 #include "Model/Components/Terrain.hpp"
+#include "Model/Components/Statemachine.hpp"
 
 void System::draw_model(entt::registry& registry) {
 	auto& renderer = ReflexEngine::get_instance().renderer_;
@@ -226,5 +229,37 @@ void System::update_script(entt::registry& registry) {
 		lua["update"](*script.entity);
 
 		script.lua_variables = lua["var"];
+	}
+}
+
+void System::update_statemachine(entt::registry& registry) {
+	auto& lua = LuaManager::get_instance().get_state();
+	sol::function exe;
+
+	float time =
+	    dataMgr.getDynamicFloatData("time_since_state_machine_last_update", 0);
+	time += EngineTime::get_delta_time();
+
+	if (time <
+	    dataMgr.getDynamicFloatData("state_machine_update_delay", 1 / 20)) {
+		return;
+	}
+
+	auto view = registry.view<Component::Statemachine>();
+
+	for (auto entity : view) {
+		auto& stateM = view.get<Component::Statemachine>(entity);
+
+		// Global state update
+		if (!stateM.global_state.empty()) {
+			exe = lua[stateM.global_state]["execute"];
+			exe();
+		}
+
+		// Current state update
+		if (!stateM.current_state.empty()) {
+			exe = lua[stateM.current_state]["execute"];
+			exe(entity);
+		}
 	}
 }

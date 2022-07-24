@@ -103,6 +103,15 @@ private:
 	                         const sol::table& terrain_table);
 
 	/**
+	 * @brief Loads a statemachine component into the entity.
+	 *
+	 * @param entity The entity to load the component into.
+	 * @param statemachine_table The table fo the statemachine component
+	 */
+	static void load_statemachine(Reflex::Entity& entity,
+	                              const sol::table& statemachine_table);
+
+	/**
 	 * @brief Checks the string if it is a valid lua file.
 	 *
 	 * @param lua_script The string to check.
