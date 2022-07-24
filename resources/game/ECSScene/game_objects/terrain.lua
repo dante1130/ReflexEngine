@@ -2,7 +2,7 @@ entity = {
 	transform = {
 		position = {
 			x = 0,
-			y = -2.5,
+			y = 0,
 			z = 0
 		},
 		rotation = {
@@ -12,9 +12,9 @@ entity = {
 			w = 1
 		},
 		scale = {
-			x = 1,
+			x = 2,
 			y = 0.05,
-			z = 1
+			z = 2
 		}
 	},
 

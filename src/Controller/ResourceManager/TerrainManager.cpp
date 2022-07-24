@@ -17,6 +17,21 @@ void TerrainManager::lua_access() {
 		terrain.set_scale(scale);
 		return terrain.get_height_world(position.x, position.z);
 	};
+
+	terrain_table["get_width"] = [this](const std::string& terrain_name) {
+		return terrain_map_.at(terrain_name).get_width();
+	};
+
+	terrain_table["get_length"] = [this](const std::string& terrain_name) {
+		return terrain_map_.at(terrain_name).get_length();
+	};
+
+	terrain_table["get_origin"] = [this](const std::string& terrain_name,
+	                                     const glm::vec3& scale) {
+		auto& terrain = terrain_map_.at(terrain_name);
+		terrain.set_scale(scale);
+		return terrain.get_origin();
+	};
 }
 
 void TerrainManager::load_terrain(const std::string& terrain_name,
