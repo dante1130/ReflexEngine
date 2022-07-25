@@ -2,11 +2,11 @@
 
 #include <stack>
 
-#include "Game/Scene.hpp"
-#include "View/Renderer/OpenGL/OpenGL.hpp"
+#include "SceneManager.hpp"
 #include "Camera.hpp"
 #include "Window.hpp"
 #include "EngineTime.hpp"
+#include "View/Renderer/OpenGL/OpenGL.hpp"
 
 /**
  * @class ReflexEngine
@@ -22,9 +22,6 @@ public:
 
 	/// The renderer of the engine.
 	OpenGL renderer_ = {};
-
-	/// A stack of the current Scene, used to switch between Scenes.
-	std::stack<std::unique_ptr<Scene>> scenes_ = {};
 
 	/**
 	 * @brief Runs the engine.
@@ -45,6 +42,9 @@ public:
 	void operator=(const ReflexEngine&) = delete;
 
 private:
+	/// The scene manager.
+	SceneManager scene_manager_ = {};
+
 	/**
 	 * @brief Exposes all the engine components to lua.
 	 */

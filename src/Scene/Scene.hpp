@@ -9,6 +9,14 @@
 class Scene {
 public:
 	/**
+	 * @brief Constructs a new scene.
+	 *
+	 * @param master_lua_script The master lua script.
+	 */
+	Scene(const std::string& master_lua_script)
+	    : master_lua_script_(master_lua_script) {}
+
+	/**
 	 * @brief Initializes the scene.
 	 */
 	virtual void init() = 0;
@@ -74,7 +82,17 @@ public:
 	virtual void garbage_collection() = 0;
 
 	/**
+	 * @brief Get the master lua script
+	 *
+	 * @return const std::string& The master lua script
+	 */
+	virtual const std::string& get_master_lua_script() const = 0;
+
+	/**
 	 * @brief Virtual destructor.
 	 */
 	virtual ~Scene() = default;
+
+protected:
+	std::string master_lua_script_;
 };

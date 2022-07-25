@@ -1,10 +1,9 @@
 #include "ReflexEngine.hpp"
 
-#include "Game/TestScene.hpp"
-#include "Game/ECSScene.hpp"
+#include "Scene/ECSScene.hpp"
 #include "View/guiManager.hpp"
 #include "NetworkManager.hpp"
-#include "Controller/NetworkAccess.h"
+#include "Controller/Networking/NetworkAccess.h"
 #include "Controller/MathAccess.hpp"
 #include "Controller/ECS/ECSAccess.hpp"
 #include "Controller/AI/luaAccessScriptedFSM.hpp"
@@ -21,9 +20,6 @@ void ReflexEngine::run() {
 	if (!engine.window_.init()) return;
 
 	engine.lua_access();
-
-	engine.camera_ = Camera(glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 0.0f),
-	                        -90.0f, 0.0f, 5.0f, 0.2f);
 
 	engine.renderer_.init();
 	gui::init(engine.window_.get_window(), "#version 410");
