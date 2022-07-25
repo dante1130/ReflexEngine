@@ -1,12 +1,11 @@
 #pragma once
 
-#include <stack>
+#include "View/Renderer/OpenGL/OpenGL.hpp"
 
 #include "SceneManager.hpp"
 #include "Camera.hpp"
-#include "Window.hpp"
 #include "EngineTime.hpp"
-#include "View/Renderer/OpenGL/OpenGL.hpp"
+#include "Window.hpp"
 
 /**
  * @class ReflexEngine

@@ -9,7 +9,7 @@
 #include "View/Renderer/OpenGL/Objects/DirectionalLight.hpp"
 #include "View/Renderer/OpenGL/Objects/SpotLight.hpp"
 #include "Controller/GameAssetFactory.hpp"
-#include "Controller/NetworkAccess.h"
+#include "Controller/Networking/NetworkAccess.h"
 #include "Controller/LuaManager.hpp"
 
 /**

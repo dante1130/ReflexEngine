@@ -2,7 +2,7 @@
 
 #include "GameObject.hpp"
 #include "Controller/Terrain/BttController.hpp"
-#include "Controller/multiTextureCreator.hpp"
+#include "Controller/Terrain/multiTextureCreator.hpp"
 #include "Controller/ResourceManager/ObjectSaving.hpp"
 
 /**

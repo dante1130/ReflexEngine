@@ -11,13 +11,15 @@
  */
 class SceneManager {
 public:
+	SceneManager() = default;
+
 	/**
-	 * @brief Construct a new Scene Manager, and runs the scene master lua
-	 * script, which creates all the scenes into the scene manager.
+	 * @brief Runs the scene master lua script, which creates all the scenes
+	 * into the scene manager.
 	 *
 	 * @param master_lua_script The master lua script.
 	 */
-	SceneManager(const std::string& master_lua_script);
+	void init(const std::string& master_lua_script);
 
 	/**
 	 * @brief Create a scene with a given name and its master lua script.
@@ -55,7 +57,12 @@ public:
 
 private:
 	/// The map of scenes.
-	std::unordered_map<std::string, ECSScene> scene_map_;
+	std::unordered_map<std::string, std::shared_ptr<ECSScene>> scene_map_;
 	/// The current scene.
 	ECSScene* current_scene_ = nullptr;
+
+	/**
+	 * @brief Expose the add game object function to Lua for the scene.
+	 */
+	void scene_lua_access(ECSScene* scene);
 };

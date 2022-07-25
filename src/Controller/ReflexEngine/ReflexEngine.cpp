@@ -1,6 +1,5 @@
 #include "ReflexEngine.hpp"
 
-#include "Scene/ECSScene.hpp"
 #include "View/guiManager.hpp"
 #include "NetworkManager.hpp"
 #include "Controller/Networking/NetworkAccess.h"
@@ -13,6 +12,7 @@
 #include "Controller/RandomGenerators/PseudoRandomNumberGenerator.hpp"
 #include "Model/RunTimeDataStorage/GlobalDataStorage.hpp"
 #include "Controller/Terrain/TerrainManager.hpp"
+#include "Model/singletons.h"
 
 void ReflexEngine::run() {
 	auto& engine = ReflexEngine::get_instance();
@@ -24,9 +24,7 @@ void ReflexEngine::run() {
 	engine.renderer_.init();
 	gui::init(engine.window_.get_window(), "#version 410");
 
-	// engine.scenes_.emplace(std::make_unique<TestScene>());
-	engine.scenes_.emplace(std::make_unique<ECSScene>());
-	engine.scenes_.top()->init();
+	engine.scene_manager_.init("game/_Scenes.lua");
 
 	auto& input_manager = InputManager::get_instance();
 
@@ -44,24 +42,25 @@ void ReflexEngine::run() {
 			EngineTime::force_delta_time(0);
 		} else {
 			Physics::updateWorld(EngineTime::get_delta_time());
-			engine.scenes_.top()->mouse_controls(engine.window_.get_x_offset(),
-			                                     engine.window_.get_y_offset());
+			engine.scene_manager_.current_scene().mouse_controls(
+			    engine.window_.get_x_offset(), engine.window_.get_y_offset());
 		}
 
 		if (dataMgr.getDynamicBoolData("load_game", false))
-			engine.scenes_.top()->load_saved_game_objects();
+			engine.scene_manager_.current_scene().load_saved_game_objects();
 		else if (dataMgr.getDynamicBoolData("save_game", false))
-			engine.scenes_.top()->save_game_objects();
+			engine.scene_manager_.current_scene().save_game_objects();
 		else {
 			if (EngineTime::is_time_step_passed()) {
-				engine.scenes_.top()->fixed_update(
+				engine.scene_manager_.current_scene().fixed_update(
 				    EngineTime::get_fixed_delta_time());
 				EngineTime::reset_fixed_delta_time();
 			}
 
-			engine.scenes_.top()->update(EngineTime::get_delta_time());
-			engine.scenes_.top()->garbage_collection();
-			engine.scenes_.top()->add_draw_call();
+			engine.scene_manager_.current_scene().update(
+			    EngineTime::get_delta_time());
+			engine.scene_manager_.current_scene().garbage_collection();
+			engine.scene_manager_.current_scene().add_draw_call();
 			engine.renderer_.draw();
 		}
 
@@ -70,9 +69,6 @@ void ReflexEngine::run() {
 		engine.window_.swap_buffers();
 	}
 
-	while (!engine.scenes_.empty()) {
-		engine.scenes_.pop();
-	}
 	entityMgr.killEntities();
 	entityMgr.killManager();
 
