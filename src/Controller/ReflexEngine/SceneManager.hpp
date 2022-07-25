@@ -64,5 +64,5 @@ private:
 	/**
 	 * @brief Expose the add game object function to Lua for the scene.
 	 */
-	void scene_lua_access(ECSScene* scene);
+	static void scene_lua_access(ECSScene* scene);
 };
