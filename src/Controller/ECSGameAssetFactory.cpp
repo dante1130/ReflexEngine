@@ -197,10 +197,14 @@ void ECSGameAssetFactory::load_statemachine(
 	auto& statemachine_component =
 	    entity.add_component<Component::Statemachine>();
 
+	statemachine_component.entity = &entity;
+
 	statemachine_component.global_state = statemachine_table["global_state"];
 	statemachine_component.current_state = statemachine_table["current_state"];
 	statemachine_component.previous_state =
 	    statemachine_table["previous_state"];
+
+	System::init_statemachine(entity.get_registry(), entity.get_entity_id());
 }
 
 bool ECSGameAssetFactory::is_lua_script(const std::string& lua_script) {

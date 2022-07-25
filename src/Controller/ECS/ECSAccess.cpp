@@ -9,6 +9,7 @@
 #include "Model/Components/Light.hpp"
 #include "Model/Components/Mesh.hpp"
 #include "Model/Components/Terrain.hpp"
+#include "Model/Components/Statemachine.hpp"
 
 using namespace Component;
 using namespace Reflex;
@@ -23,6 +24,7 @@ void ECSAccess::register_ecs() {
 	register_spot_light_component();
 	register_mesh_component();
 	register_terrain_component();
+	register_statemachine_component();
 }
 
 void ECSAccess::register_entity() {
@@ -39,6 +41,8 @@ void ECSAccess::register_entity() {
 	    &Entity::add_component<PointLight>;
 	entity_type["add_spot_light_component"] = &Entity::add_component<SpotLight>;
 	entity_type["add_mesh_component"] = &Entity::add_component<Mesh>;
+	entity_type["add_stateMachine_component"] =
+	    &Entity::add_component<Statemachine>;
 
 	entity_type["remove_transform_component"] =
 	    &Entity::remove_component<Transform>;
@@ -51,6 +55,8 @@ void ECSAccess::register_entity() {
 	entity_type["remove_spot_light_component"] =
 	    &Entity::remove_component<SpotLight>;
 	entity_type["remove_mesh_component"] = &Entity::remove_component<Mesh>;
+	entity_type["remove_statemachine_component"] =
+	    &Entity::remove_component<Statemachine>;
 
 	entity_type["get_transform_component"] = &Entity::get_component<Transform>;
 	entity_type["get_model_component"] = &Entity::get_component<Model>;
@@ -61,6 +67,8 @@ void ECSAccess::register_entity() {
 	    &Entity::get_component<PointLight>;
 	entity_type["get_spot_light_component"] = &Entity::get_component<SpotLight>;
 	entity_type["get_mesh_component"] = &Entity::get_component<Mesh>;
+	entity_type["get_statemachine_component"] =
+	    &Entity::get_component<Statemachine>;
 }
 
 void ECSAccess::register_transform_component() {
@@ -153,4 +161,16 @@ void ECSAccess::register_terrain_component() {
 	terrain_type["texture_name"] = &Terrain::texture_name;
 	terrain_type["material_name"] = &Terrain::material_name;
 	terrain_type["detailmap_name"] = &Terrain::detailmap_name;
+}
+
+void ECSAccess::register_statemachine_component() {
+	auto& lua = LuaManager::get_instance().get_state();
+
+	auto statemachine_type = lua.new_usertype<Statemachine>("Statemachine");
+
+	statemachine_type["global_state"] = &Statemachine::global_state;
+	statemachine_type["current_state"] = &Statemachine::current_state;
+	statemachine_type["previous_state"] = &Statemachine::previous_state;
+
+	statemachine_type["change_state"] = &Statemachine::change_state;
 }

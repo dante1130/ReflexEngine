@@ -28,6 +28,12 @@ entity = {
 	statemachine = {
 		current_state = "state_patrol",
 		global_state = "state_global",
-		previous_state = "state_patrol"
+		previous_state = "state_patrol",
+
+		var = {
+			faction = 1,
+			health = 100,
+			damage = 10
+		}
 	}
 }
