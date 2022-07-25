@@ -11,12 +11,13 @@
  */
 class SceneManager {
 public:
-	SceneManager() = default;
-
 	/**
-	 * @brief Register the scene manager to lua.
+	 * @brief Construct a new Scene Manager, and runs the scene master lua
+	 * script, which creates all the scenes into the scene manager.
+	 *
+	 * @param master_lua_script The master lua script.
 	 */
-	void lua_access();
+	SceneManager(const std::string& master_lua_script);
 
 	/**
 	 * @brief Create a scene with a given name and its master lua script.

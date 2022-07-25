@@ -2,7 +2,7 @@
 
 #include "Controller/LuaManager.hpp"
 
-void SceneManager::lua_access() {
+SceneManager::SceneManager() {
 	auto& lua = LuaManager::get_instance().get_state();
 
 	auto scene_table = lua["Scene"].get_or_create<sol::table>();
@@ -10,6 +10,8 @@ void SceneManager::lua_access() {
 	scene_table.set_function("create_scene", &SceneManager::create_scene, this);
 	scene_table.set_function("load_scene", &SceneManager::load_scene, this);
 	scene_table.set_function("reset_scene", &SceneManager::reset_scene, this);
+
+	lua.script_file("game/_Scenes.lua");
 }
 
 void SceneManager::create_scene(const std::string& name,
