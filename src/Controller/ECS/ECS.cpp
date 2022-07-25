@@ -3,8 +3,6 @@
 #include "Entity.hpp"
 #include "System.hpp"
 
-#include <iostream>
-
 using namespace Reflex;
 
 Entity& ECS::create_entity() {
