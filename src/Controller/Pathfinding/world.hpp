@@ -13,7 +13,7 @@ public:
 	/**
 	 * @brief	Sets the world
 	 */
-	void setWorld();
+	void setWorld(std::string name);
 
 	/**
 	 * @brief	Prints the current pathfinding grid to the terrminal
@@ -71,8 +71,6 @@ public:
 private:
 	/// The a* interface whch holds the level's grid
 	AStar m_aStar;
-	/// The textures terrain used as a base (NOT USED CURRENTLY)
-	TexturedTerrain* m_tt;
 
 	/// The minimum height allowed
 	float m_min_height = 2.5;
@@ -80,5 +78,5 @@ private:
 	float m_max_height = 9999;
 
 	/// Creates the grid for the pathfinding algorithm
-	void create_grid(std::vector<std::vector<int>>& grid);
+	void create_grid(std::vector<std::vector<int>>& grid, TexturedTerrain& tt);
 };

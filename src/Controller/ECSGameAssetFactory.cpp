@@ -12,6 +12,8 @@
 
 #include "Controller/LuaManager.hpp"
 
+#include "Model/singletons.h"
+
 void ECSGameAssetFactory::create(ECS& ecs, const std::string& lua_script) {
 	if (!is_lua_script(lua_script)) return;
 
@@ -190,6 +192,8 @@ void ECSGameAssetFactory::load_terrain(Reflex::Entity& entity,
 	terrain_component.texture_name = terrain_table["texture_name"];
 	terrain_component.material_name = terrain_table["material_name"];
 	terrain_component.detailmap_name = terrain_table["detailmap_name"];
+
+	gameWorld.setWorld(terrain_component.terrain_name);
 }
 
 void ECSGameAssetFactory::load_statemachine(

@@ -1,8 +1,13 @@
 #include "world.hpp"
 
-void world::setWorld() {
+#include "Controller/ResourceManager/TerrainManager.hpp"
+#include "Controller/ResourceManager/ResourceManager.hpp"
+
+void world::setWorld(std::string name) {
 	std::vector<std::vector<int>> grid;
-	create_grid(grid);
+	create_grid(
+	    grid, ResourceManager::get_instance().get_terrain_manager().get_terrain(
+	              name));
 	m_aStar.setGrid(grid);
 	m_aStar.setAllowDiagonalMovement(true);
 	m_aStar.setHeuristicsCostScale(1.5);
@@ -164,18 +169,18 @@ std::queue<glm::vec2> world::pathFinding(float currX, float currZ,
 world::~world() {  // delete m_tt;
 }
 
-void world::create_grid(std::vector<std::vector<int>>& grid) {
+void world::create_grid(std::vector<std::vector<int>>& grid,
+                        TexturedTerrain& tt) {
 	float height = 0;
 	int gridValue = 0;
 	std::vector<int> gridRow;
 
-	for (int z = 0; z < OldTerrainManager::getTTerrain()->get_length(); z++) {
+	for (int z = 0; z < tt.get_length(); z++) {
 		gridRow.clear();
 
-		for (int x = 0; x < OldTerrainManager::getTTerrain()->get_width();
-		     x++) {
+		for (int x = 0; x < tt.get_width(); x++) {
 			gridValue = 0;
-			height = OldTerrainManager::getHeight(x, z);
+			height = tt.get_height_world(x, z);
 
 			// Check if within min & max heights
 			if (height < m_min_height || height > m_max_height) {
