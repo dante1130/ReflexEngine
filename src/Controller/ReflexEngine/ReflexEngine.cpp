@@ -69,6 +69,8 @@ void ReflexEngine::run() {
 		engine.window_.swap_buffers();
 	}
 
+	engine.scene_manager_.clear_scenes();
+
 	entityMgr.killEntities();
 	entityMgr.killManager();
 

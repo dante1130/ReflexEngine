@@ -17,33 +17,36 @@ void SceneManager::init(const std::string& master_lua_script) {
 
 void SceneManager::create_scene(const std::string& name,
                                 const std::string& master_lua_script) {
-	auto& scene = scene_map_[name] =
-	    std::make_unique<ECSScene>(master_lua_script);
+	scene_map_.insert_or_assign(name, ECSScene(master_lua_script));
 
-	scene_lua_access(*scene);
+	ECSScene& scene = scene_map_.at(name);
 
-	scene->init();
+	scene_lua_access(scene);
+
+	scene.init();
 
 	// If a scene is loaded,
 	// return Scene.add_game_object access back to the current scene.
 	if (!current_scene_name_.empty()) {
-		scene_lua_access(*scene_map_.at(current_scene_name_));
+		scene_lua_access(scene_map_.at(current_scene_name_));
 	}
 }
 
 void SceneManager::load_scene(const std::string& name) {
 	current_scene_name_ = name;
-	scene_lua_access(*scene_map_.at(current_scene_name_));
+	scene_lua_access(scene_map_.at(current_scene_name_));
 }
 
 void SceneManager::reset_scene(const std::string& name) {
 	auto& scene = scene_map_.at(name);
-	scene = std::make_unique<ECSScene>(scene->get_master_lua_script());
-	scene->init();
+	scene = ECSScene(scene.get_master_lua_script());
+	scene.init();
 }
 
-ECSScene& SceneManager::current_scene() const {
-	return *scene_map_.at(current_scene_name_);
+void SceneManager::clear_scenes() { scene_map_.clear(); }
+
+ECSScene& SceneManager::current_scene() {
+	return scene_map_.at(current_scene_name_);
 }
 
 void SceneManager::scene_lua_access(ECSScene& scene) {

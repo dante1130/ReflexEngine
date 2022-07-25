@@ -49,15 +49,20 @@ public:
 	void reset_scene(const std::string& name);
 
 	/**
+	 * @brief Clears all the scenes from the scene manager.
+	 */
+	void clear_scenes();
+
+	/**
 	 * @brief Get the current scene.
 	 *
 	 * @return ECSScene&
 	 */
-	ECSScene& current_scene() const;
+	ECSScene& current_scene();
 
 private:
 	/// The map of scenes.
-	std::unordered_map<std::string, std::unique_ptr<ECSScene>> scene_map_;
+	std::unordered_map<std::string, ECSScene> scene_map_;
 	/// The current scene name.
 	std::string current_scene_name_;
 
