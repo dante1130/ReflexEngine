@@ -38,29 +38,29 @@ void ReflexEngine::run() {
 
 		gui::mainLoopStart();
 
+		ECSScene& scene = engine.scene_manager_.current_scene();
+
 		if (EngineTime::is_paused()) {
 			EngineTime::force_delta_time(0);
 		} else {
 			Physics::updateWorld(EngineTime::get_delta_time());
-			engine.scene_manager_.current_scene().mouse_controls(
-			    engine.window_.get_x_offset(), engine.window_.get_y_offset());
+			scene.mouse_controls(engine.window_.get_x_offset(),
+			                     engine.window_.get_y_offset());
 		}
 
 		if (dataMgr.getDynamicBoolData("load_game", false))
-			engine.scene_manager_.current_scene().load_saved_game_objects();
+			scene.load_saved_game_objects();
 		else if (dataMgr.getDynamicBoolData("save_game", false))
-			engine.scene_manager_.current_scene().save_game_objects();
+			scene.save_game_objects();
 		else {
 			if (EngineTime::is_time_step_passed()) {
-				engine.scene_manager_.current_scene().fixed_update(
-				    EngineTime::get_fixed_delta_time());
+				scene.fixed_update(EngineTime::get_fixed_delta_time());
 				EngineTime::reset_fixed_delta_time();
 			}
 
-			engine.scene_manager_.current_scene().update(
-			    EngineTime::get_delta_time());
-			engine.scene_manager_.current_scene().garbage_collection();
-			engine.scene_manager_.current_scene().add_draw_call();
+			scene.update(EngineTime::get_delta_time());
+			scene.garbage_collection();
+			scene.add_draw_call();
 			engine.renderer_.draw();
 		}
 

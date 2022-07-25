@@ -57,12 +57,12 @@ public:
 
 private:
 	/// The map of scenes.
-	std::unordered_map<std::string, std::shared_ptr<ECSScene>> scene_map_;
-	/// The current scene.
-	ECSScene* current_scene_ = nullptr;
+	std::unordered_map<std::string, std::unique_ptr<ECSScene>> scene_map_;
+	/// The current scene name.
+	std::string current_scene_name_;
 
 	/**
 	 * @brief Expose the add game object function to Lua for the scene.
 	 */
-	static void scene_lua_access(ECSScene* scene);
+	static void scene_lua_access(ECSScene& scene);
 };
