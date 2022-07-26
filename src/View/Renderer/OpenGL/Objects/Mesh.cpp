@@ -2,21 +2,22 @@
 
 #include <glm/glm.hpp>
 
-Mesh::Mesh() : VAO(0), VBO(0), IBO(0), indexCount(0) {}
+Mesh::Mesh() {
+	glGenVertexArrays(1, &VAO);
+	glGenBuffers(1, &IBO);
+	glGenBuffers(1, &VBO);
+}
 
 void Mesh::create_mesh(const GLfloat* vertices, const GLuint* indices,
                        GLuint noOfVerts, GLuint noOfIndices) {
 	indexCount = noOfIndices;
 
-	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 
-	glGenBuffers(1, &IBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices[0]) * noOfIndices,
 	             indices, GL_STATIC_DRAW);
 
-	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices[0]) * noOfVerts, vertices,
 	             GL_STATIC_DRAW);
@@ -42,15 +43,12 @@ void Mesh::CreateColorMesh(const GLfloat* vertices, const GLuint* indices,
                            GLuint noOfVerts, GLuint noOfIndices) {
 	indexCount = noOfIndices;
 
-	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 
-	glGenBuffers(1, &IBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices[0]) * noOfIndices,
 	             indices, GL_STATIC_DRAW);
 
-	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices[0]) * noOfVerts, vertices,
 	             GL_STATIC_DRAW);

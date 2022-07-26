@@ -37,6 +37,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	View/Renderer/OpenGL/Objects/Skybox.cpp
 	View/Renderer/OpenGL/Objects/Texture.cpp
 	View/Renderer/OpenGL/Objects/Md2Model.cpp
+	View/Renderer/OpenGL/Objects/ReactMesh.cpp
 	View/guiManager.cpp
 
 	Controller/ReflexEngine/ReflexEngine.cpp
@@ -77,6 +78,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/Physics/ReactResolve.cpp
 	Controller/Physics/PhysicBody.cpp
 	Controller/Physics/CollisionEvent.cpp
+	Controller/Physics/ColliderRenderer.cpp
 	Controller/Networking/NetworkAccess.cpp
 	Controller/Terrain/multiTextureCreator.cpp
 	Controller/RandomGenerators/PseudoRandomNumberGenerator.cpp
