@@ -4,6 +4,7 @@
 #include "Controller/LuaManager.hpp"
 #include "Controller/ECSGameAssetFactory.hpp"
 #include "Controller/Audio/Audio.hpp"
+#include "Controller/ECS/System.hpp"
 
 ECSScene::ECSScene(const std::string& master_lua_script)
     : Scene(master_lua_script) {}
@@ -35,7 +36,7 @@ void ECSScene::save_game_objects() {}
 
 void ECSScene::load_saved_game_objects() {}
 
-void ECSScene::garbage_collection() {}
+void ECSScene::garbage_collection() { System::update_remove(ecs_); }
 
 const std::string& ECSScene::get_master_lua_script() const {
 	return master_lua_script_;

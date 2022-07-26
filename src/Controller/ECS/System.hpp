@@ -2,6 +2,8 @@
 
 #include <entt/entt.hpp>
 
+#include <Controller/ECS/ECS.hpp>
+
 namespace System {
 /**
  * @brief Passes the draw call of the model component to the renderer.
@@ -90,4 +92,11 @@ void update_point_light(entt::registry& registry);
  * @param registry The ECS registry.
  */
 void update_spot_light(entt::registry& registry);
+
+/**
+ * @brief Deletes any entities that has a Remove component.
+ *
+ * @param ecs The ECS class.
+ */
+void update_remove(ECS& ecs);
 };  // namespace System

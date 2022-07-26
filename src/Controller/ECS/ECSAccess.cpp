@@ -2,6 +2,7 @@
 
 #include "Controller/LuaManager.hpp"
 
+#include "ECS.hpp"
 #include "Entity.hpp"
 #include "Model/Components/Transform.hpp"
 #include "Model/Components/Model.hpp"
@@ -9,11 +10,13 @@
 #include "Model/Components/Light.hpp"
 #include "Model/Components/Mesh.hpp"
 #include "Model/Components/Terrain.hpp"
+#include "Model/Components/Remove.hpp"
 
 using namespace Component;
 using namespace Reflex;
 
 void ECSAccess::register_ecs() {
+	register_registry();
 	register_entity();
 	register_transform_component();
 	register_model_component();
@@ -23,6 +26,20 @@ void ECSAccess::register_ecs() {
 	register_spot_light_component();
 	register_mesh_component();
 	register_terrain_component();
+}
+
+void ECSAccess::register_registry() {
+	auto& lua = LuaManager::get_instance().get_state();
+
+	auto ecs_table = lua["ECS"].get_or_create<sol::table>();
+
+	ecs_table["create_entity"] = [](ECS& ecs) { return ecs.create_entity(); };
+	ecs_table["get_entity"] = [](ECS& ecs, entt::entity entity_id) {
+		return ecs.get_entity(entity_id);
+	};
+	ecs_table["remove_entity"] = [](ECS& ecs, entt::entity entity_id) {
+		ecs.get_entity(entity_id).add_component<Remove>();
+	};
 }
 
 void ECSAccess::register_entity() {
