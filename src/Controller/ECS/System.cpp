@@ -21,6 +21,8 @@ void System::draw_model(entt::registry& registry) {
 
 	auto view = registry.view<Component::Transform, Component::Model>();
 
+	view.begin();
+
 	for (auto entity : view) {
 		auto& transform = view.get<Component::Transform>(entity);
 		auto& model = view.get<Component::Model>(entity);

@@ -34,11 +34,55 @@ void ECSAccess::register_registry() {
 	auto ecs_table = lua["ECS"].get_or_create<sol::table>();
 
 	ecs_table["create_entity"] = [](ECS& ecs) { return ecs.create_entity(); };
+
 	ecs_table["get_entity"] = [](ECS& ecs, entt::entity entity_id) {
 		return ecs.get_entity(entity_id);
 	};
+
 	ecs_table["remove_entity"] = [](ECS& ecs, entt::entity entity_id) {
 		ecs.get_entity(entity_id).add_component<Remove>();
+	};
+
+	ecs_table["each_transform"] = [](ECS& ecs, const sol::function& callback) {
+		auto view = ecs.get_registry().view<Transform>();
+		for (auto entity_id : view) callback(ecs.get_entity(entity_id));
+	};
+
+	ecs_table["each_model"] = [](ECS& ecs, const sol::function& callback) {
+		auto view = ecs.get_registry().view<Model>();
+		for (auto entity_id : view) callback(ecs.get_entity(entity_id));
+	};
+
+	ecs_table["each_script"] = [](ECS& ecs, const sol::function& callback) {
+		auto view = ecs.get_registry().view<Script>();
+		for (auto entity_id : view) callback(ecs.get_entity(entity_id));
+	};
+
+	ecs_table["each_directional_light"] = [](ECS& ecs,
+	                                         const sol::function& callback) {
+		auto view = ecs.get_registry().view<DirectionalLight>();
+		for (auto entity_id : view) callback(ecs.get_entity(entity_id));
+	};
+
+	ecs_table["each_point_light"] = [](ECS& ecs,
+	                                   const sol::function& callback) {
+		auto view = ecs.get_registry().view<PointLight>();
+		for (auto entity_id : view) callback(ecs.get_entity(entity_id));
+	};
+
+	ecs_table["each_spot_light"] = [](ECS& ecs, const sol::function& callback) {
+		auto view = ecs.get_registry().view<SpotLight>();
+		for (auto entity_id : view) callback(ecs.get_entity(entity_id));
+	};
+
+	ecs_table["each_mesh"] = [](ECS& ecs, const sol::function& callback) {
+		auto view = ecs.get_registry().view<Mesh>();
+		for (auto entity_id : view) callback(ecs.get_entity(entity_id));
+	};
+
+	ecs_table["each_terrain"] = [](ECS& ecs, const sol::function& callback) {
+		auto view = ecs.get_registry().view<Terrain>();
+		for (auto entity_id : view) callback(ecs.get_entity(entity_id));
 	};
 }
 
@@ -46,6 +90,8 @@ void ECSAccess::register_entity() {
 	auto& lua = LuaManager::get_instance().get_state();
 
 	auto entity_type = lua.new_usertype<Reflex::Entity>("Entity");
+
+	entity_type["get_id"] = &Entity::get_entity_id;
 
 	entity_type["add_transform_component"] = &Entity::add_component<Transform>;
 	entity_type["add_model_component"] = &Entity::add_component<Model>;
