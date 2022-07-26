@@ -28,7 +28,7 @@ private:
 	 * @param entity The entity to load the components into.
 	 * @param entity_table The table of the entity.
 	 */
-	static void load_components(Reflex::Entity& entity,
+	static void load_components(ECS& ecs, Reflex::Entity& entity,
 	                            const sol::table& entity_table);
 
 	/**
@@ -46,7 +46,7 @@ private:
 	 * @param entity The entity to load the component into.
 	 * @param script_table The table of the script component.
 	 */
-	static void load_script(Reflex::Entity& entity,
+	static void load_script(ECS& ecs, Reflex::Entity& entity,
 	                        const sol::table& script_table);
 
 	/**

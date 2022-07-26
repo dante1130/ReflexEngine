@@ -5,11 +5,11 @@ var = {
 	time = 0.0,
 }
 
-function init(entity)
+function init(ecs, entity)
 
 end
 
-function update(entity)
+function update(ecs, entity)
 	var.time = var.time + Time.get_delta_time()
 
 	local water_movement = Math.div(Math.sin(Math.mul(var.time, var.offset_multiplier)), var.intensity)
@@ -17,4 +17,10 @@ function update(entity)
 	local transform = entity:get_transform_component()
 
 	transform.position = Math.add(var.water_position, water_movement)
+
+	-- ECS.each_mesh(ecs, function(entity)
+	-- 	local transform = entity:get_transform_component()
+
+	-- 	print(transform.position.x .. " " .. transform.position.y .. " " .. transform.position.z)
+	-- end)
 end

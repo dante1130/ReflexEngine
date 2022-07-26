@@ -10,6 +10,7 @@
 #include "Model/Components/Light.hpp"
 #include "Model/Components/Mesh.hpp"
 #include "Model/Components/Terrain.hpp"
+#include "Model/Components/Remove.hpp"
 
 void System::draw_model(entt::registry& registry) {
 	auto& renderer = ReflexEngine::get_instance().renderer_;
@@ -20,7 +21,9 @@ void System::draw_model(entt::registry& registry) {
 
 	auto view = registry.view<Component::Transform, Component::Model>();
 
-	for (auto& entity : view) {
+	view.begin();
+
+	for (auto entity : view) {
 		auto& transform = view.get<Component::Transform>(entity);
 		auto& model = view.get<Component::Model>(entity);
 
@@ -56,7 +59,7 @@ void System::draw_mesh(entt::registry& registry) {
 
 	auto view = registry.view<Component::Transform, Component::Mesh>();
 
-	for (auto& entity : view) {
+	for (auto entity : view) {
 		auto& transform = view.get<Component::Transform>(entity);
 		auto& mesh = view.get<Component::Mesh>(entity);
 
@@ -95,7 +98,7 @@ void System::draw_terrain(entt::registry& registry) {
 
 	auto view = registry.view<Component::Transform, Component::Terrain>();
 
-	for (auto& entity : view) {
+	for (auto entity : view) {
 		auto& transform = view.get<Component::Transform>(entity);
 		auto& terrain_component = view.get<Component::Terrain>(entity);
 
@@ -136,8 +139,10 @@ void System::draw_terrain(entt::registry& registry) {
 	}
 }
 
-void System::init_script(entt::registry& registry, entt::entity entity) {
+void System::init_script(ECS& ecs, entt::entity entity) {
 	auto& lua = LuaManager::get_instance().get_state();
+
+	auto& registry = ecs.get_registry();
 
 	auto& script = registry.get<Component::Script>(entity);
 
@@ -145,7 +150,7 @@ void System::init_script(entt::registry& registry, entt::entity entity) {
 
 	lua.script_file(script.lua_script);
 
-	lua["init"](*script.entity);
+	lua["init"](ecs, *script.entity);
 
 	script.lua_variables = lua["var"];
 }
@@ -180,7 +185,7 @@ void System::update_directional_light(entt::registry& registry) {
 
 	auto view = registry.view<Component::DirectionalLight>();
 
-	for (auto& entity : view) {
+	for (auto entity : view) {
 		auto& directional_light = view.get<Component::DirectionalLight>(entity);
 		light_manager.update_directional_light(directional_light);
 	}
@@ -191,7 +196,7 @@ void System::update_point_light(entt::registry& registry) {
 
 	auto view = registry.view<Component::PointLight>();
 
-	for (auto& entity : view) {
+	for (auto entity : view) {
 		auto& point_light = view.get<Component::PointLight>(entity);
 
 		light_manager.update_point_light(point_light.light_id, point_light);
@@ -203,19 +208,21 @@ void System::update_spot_light(entt::registry& registry) {
 
 	auto view = registry.view<Component::SpotLight>();
 
-	for (auto& entity : view) {
+	for (auto entity : view) {
 		auto& spot_light = view.get<Component::SpotLight>(entity);
 
 		light_manager.update_spot_light(spot_light.light_id, spot_light);
 	}
 }
 
-void System::update_script(entt::registry& registry) {
+void System::update_script(ECS& ecs) {
 	auto& lua = LuaManager::get_instance().get_state();
+
+	auto& registry = ecs.get_registry();
 
 	auto view = registry.view<Component::Script>();
 
-	for (auto& entity : view) {
+	for (auto entity : view) {
 		auto& script = view.get<Component::Script>(entity);
 
 		if (!script.entity) continue;
@@ -224,8 +231,16 @@ void System::update_script(entt::registry& registry) {
 
 		lua["var"] = script.lua_variables;
 
-		lua["update"](*script.entity);
+		lua["update"](ecs, *script.entity);
 
 		script.lua_variables = lua["var"];
+	}
+}
+
+void System::update_remove(ECS& ecs) {
+	auto view = ecs.get_registry().view<Component::Remove>();
+
+	for (auto entity : view) {
+		ecs.destroy_entity(entity);
 	}
 }
