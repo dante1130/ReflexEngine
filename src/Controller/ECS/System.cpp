@@ -20,11 +20,11 @@ void System::draw_model(entt::registry& registry) {
 
 	auto view = registry.view<Component::Transform, Component::Model>();
 
-	for (auto entity : view) {
+	for (auto& entity : view) {
 		auto& transform = view.get<Component::Transform>(entity);
 		auto& model = view.get<Component::Model>(entity);
 
-		DrawCall draw_call = [transform, model, &model_manager,
+		DrawCall draw_call = [&transform, &model, &model_manager,
 		                      &material_manager](const Shader& shader) {
 			glm::mat4 model_matrix(1.0f);
 			model_matrix = glm::translate(model_matrix, transform.position);
@@ -56,11 +56,12 @@ void System::draw_mesh(entt::registry& registry) {
 
 	auto view = registry.view<Component::Transform, Component::Mesh>();
 
-	for (auto entity : view) {
+	for (auto& entity : view) {
 		auto& transform = view.get<Component::Transform>(entity);
 		auto& mesh = view.get<Component::Mesh>(entity);
 
-		DrawCall draw_call = [transform, mesh, &mesh_manager, &texture_manager,
+		DrawCall draw_call = [&transform, &mesh, &mesh_manager,
+		                      &texture_manager,
 		                      &material_manager](const Shader& shader) {
 			glm::mat4 model_matrix(1.0f);
 			model_matrix = glm::translate(model_matrix, transform.position);
@@ -94,11 +95,11 @@ void System::draw_terrain(entt::registry& registry) {
 
 	auto view = registry.view<Component::Transform, Component::Terrain>();
 
-	for (auto entity : view) {
+	for (auto& entity : view) {
 		auto& transform = view.get<Component::Transform>(entity);
 		auto& terrain_component = view.get<Component::Terrain>(entity);
 
-		DrawCall draw_call = [transform, terrain_component, &terrain_manager,
+		DrawCall draw_call = [&transform, &terrain_component, &terrain_manager,
 		                      &texture_manager,
 		                      &material_manager](const Shader& shader) {
 			auto& terrain =
@@ -179,7 +180,7 @@ void System::update_directional_light(entt::registry& registry) {
 
 	auto view = registry.view<Component::DirectionalLight>();
 
-	for (auto entity : view) {
+	for (auto& entity : view) {
 		auto& directional_light = view.get<Component::DirectionalLight>(entity);
 		light_manager.update_directional_light(directional_light);
 	}
@@ -190,7 +191,7 @@ void System::update_point_light(entt::registry& registry) {
 
 	auto view = registry.view<Component::PointLight>();
 
-	for (auto entity : view) {
+	for (auto& entity : view) {
 		auto& point_light = view.get<Component::PointLight>(entity);
 
 		light_manager.update_point_light(point_light.light_id, point_light);
@@ -202,7 +203,7 @@ void System::update_spot_light(entt::registry& registry) {
 
 	auto view = registry.view<Component::SpotLight>();
 
-	for (auto entity : view) {
+	for (auto& entity : view) {
 		auto& spot_light = view.get<Component::SpotLight>(entity);
 
 		light_manager.update_spot_light(spot_light.light_id, spot_light);
@@ -214,7 +215,7 @@ void System::update_script(entt::registry& registry) {
 
 	auto view = registry.view<Component::Script>();
 
-	for (auto entity : view) {
+	for (auto& entity : view) {
 		auto& script = view.get<Component::Script>(entity);
 
 		if (!script.entity) continue;

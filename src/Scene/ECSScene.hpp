@@ -2,26 +2,22 @@
 
 #include <vector>
 
-#include <glm/glm.hpp>
-
 #include "Scene.hpp"
-#include "Model/GameObject/GameObject.hpp"
-#include "View/Renderer/OpenGL/Objects/DirectionalLight.hpp"
-#include "View/Renderer/OpenGL/Objects/SpotLight.hpp"
-#include "Controller/GameAssetFactory.hpp"
-#include "Controller/NetworkAccess.h"
-#include "Controller/LuaManager.hpp"
+
+#include "Controller/ECS/ECS.hpp"
 
 /**
- * @class TestScene
- * @brief A test scene for testing purposes.
+ * @class ECSScene
+ * @brief A scene using ECS
  */
-class TestScene : public Scene {
+class ECSScene : public Scene {
 public:
 	/**
-	 * @brief Default constructor
+	 * @brief Construct a new ECSScene object
+	 *
+	 * @param master_lua_script The master lua script
 	 */
-	TestScene() = default;
+	ECSScene(const std::string& master_lua_script);
 
 	/**
 	 * @brief Initializes the scene.
@@ -30,12 +26,12 @@ public:
 
 	/**
 	 * @brief	Adds a game object
-	 * @param	luaScript	- a lua script to add
+	 * @param	lua_script	- a lua script to add
 	 *
 	 * @pre		Nothing
 	 * @post	Object added
 	 */
-	void add_game_object(const std::string& luaScript) override;
+	void add_game_object(const std::string& lua_script) override;
 
 	/**
 	 * @brief The function to specify controls for the mouse.
@@ -88,7 +84,13 @@ public:
 	 */
 	void garbage_collection() override;
 
+	/**
+	 * @brief Get the master lua script object
+	 *
+	 * @return const std::string& The master lua script object
+	 */
+	const std::string& get_master_lua_script() const override;
+
 private:
-	/// A vector of game objects in the scene.
-	std::vector<std::unique_ptr<GameObject>> game_objects_;
+	ECS ecs_;
 };

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ReflexEngine/ReflexEngine.hpp"
-#include "LuaManager.hpp"
+#include "Controller/ReflexEngine/ReflexEngine.hpp"
+#include "Controller/LuaManager.hpp"
 #include "NetworkManager.hpp"
 #include "Controller/ReflexEngine/Camera.hpp"
 
