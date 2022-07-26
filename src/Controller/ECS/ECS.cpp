@@ -12,7 +12,7 @@ Entity& ECS::create_entity() {
 }
 
 void ECS::update(double delta_time) {
-	System::update_script(registry_);
+	System::update_script(*this);
 	System::update_directional_light(registry_);
 	System::update_point_light(registry_);
 	System::update_spot_light(registry_);

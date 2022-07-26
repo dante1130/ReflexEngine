@@ -139,8 +139,10 @@ void System::draw_terrain(entt::registry& registry) {
 	}
 }
 
-void System::init_script(entt::registry& registry, entt::entity entity) {
+void System::init_script(ECS& ecs, entt::entity entity) {
 	auto& lua = LuaManager::get_instance().get_state();
+
+	auto& registry = ecs.get_registry();
 
 	auto& script = registry.get<Component::Script>(entity);
 
@@ -148,7 +150,7 @@ void System::init_script(entt::registry& registry, entt::entity entity) {
 
 	lua.script_file(script.lua_script);
 
-	lua["init"](*script.entity);
+	lua["init"](ecs, *script.entity);
 
 	script.lua_variables = lua["var"];
 }
@@ -213,8 +215,10 @@ void System::update_spot_light(entt::registry& registry) {
 	}
 }
 
-void System::update_script(entt::registry& registry) {
+void System::update_script(ECS& ecs) {
 	auto& lua = LuaManager::get_instance().get_state();
+
+	auto& registry = ecs.get_registry();
 
 	auto view = registry.view<Component::Script>();
 
@@ -227,7 +231,7 @@ void System::update_script(entt::registry& registry) {
 
 		lua["var"] = script.lua_variables;
 
-		lua["update"](*script.entity);
+		lua["update"](ecs, *script.entity);
 
 		script.lua_variables = lua["var"];
 	}

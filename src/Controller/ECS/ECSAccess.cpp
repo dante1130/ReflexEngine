@@ -31,6 +31,8 @@ void ECSAccess::register_ecs() {
 void ECSAccess::register_registry() {
 	auto& lua = LuaManager::get_instance().get_state();
 
+	lua.new_usertype<ECS>("ECS");
+
 	auto ecs_table = lua["ECS"].get_or_create<sol::table>();
 
 	ecs_table["create_entity"] = [](ECS& ecs) { return ecs.create_entity(); };

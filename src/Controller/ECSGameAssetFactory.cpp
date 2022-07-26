@@ -21,11 +21,11 @@ void ECSGameAssetFactory::create(ECS& ecs, const std::string& lua_script) {
 	auto entity_table = lua["entity"];
 
 	if (entity_table.valid()) {
-		load_components(ecs.create_entity(), entity_table);
+		load_components(ecs, ecs.create_entity(), entity_table);
 	}
 }
 
-void ECSGameAssetFactory::load_components(Reflex::Entity& entity,
+void ECSGameAssetFactory::load_components(ECS& ecs, Reflex::Entity& entity,
                                           const sol::table& entity_table) {
 	if (entity_table["transform"].valid()) {
 		load_transform(entity, entity_table["transform"]);
@@ -39,7 +39,7 @@ void ECSGameAssetFactory::load_components(Reflex::Entity& entity,
 	}
 
 	if (entity_table["script"].valid()) {
-		load_script(entity, entity_table["script"]);
+		load_script(ecs, entity, entity_table["script"]);
 	}
 
 	if (entity_table["directional_light"].valid()) {
@@ -81,14 +81,14 @@ void ECSGameAssetFactory::load_transform(Reflex::Entity& entity,
 	transform_component.scale.z = transform_table["scale"]["z"];
 }
 
-void ECSGameAssetFactory::load_script(Reflex::Entity& entity,
+void ECSGameAssetFactory::load_script(ECS& ecs, Reflex::Entity& entity,
                                       const sol::table& script_table) {
 	auto& script_component = entity.add_component<Component::Script>();
 
 	script_component.lua_script = script_table["lua_script"];
 	script_component.entity = &entity;
 
-	System::init_script(entity.get_registry(), entity.get_entity_id());
+	System::init_script(ecs, entity.get_entity_id());
 }
 
 void ECSGameAssetFactory::load_model(Reflex::Entity& entity,
