@@ -40,6 +40,11 @@ public:
 	                     GLuint noOfVerts, GLuint noOfIndices);
 
 	/**
+	 * @brief Create a react mesh.
+	 */
+	void create_react_mesh();
+
+	/**
 	 * @brief Binds the VAO and IBO and renders the mesh.
 	 */
 	void render_mesh() const;
@@ -63,14 +68,14 @@ public:
 
 private:
 	/// Vertex array object, specifying the layout of the mesh.
-	GLuint VAO;
+	GLuint VAO = 0;
 	/// Vertex buffer object, containing the data of the mesh.
-	GLuint VBO;
+	GLuint VBO = 0;
 	/// Index buffer object, containing the indices of the mesh.
-	GLuint IBO;
+	GLuint IBO = 0;
 
 	/// The number of indices in the mesh.
-	GLsizei indexCount;
+	GLsizei indexCount = 0;
 
 	/// Boolean to check whether it is a colored mesh.
 	bool has_color_ = false;
