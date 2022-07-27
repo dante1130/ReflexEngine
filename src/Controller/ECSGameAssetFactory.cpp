@@ -112,7 +112,7 @@ void ECSGameAssetFactory::load_directional_light(
 	                       light_table["direction"]["y"],
 	                       light_table["direction"]["z"]};
 
-	auto& light_component = entity.add_component<Component::DirectionalLight>(
+	entity.add_component<Component::DirectionalLight>(
 	    color, light_table["ambient_intensity"],
 	    light_table["diffuse_intensity"], direction);
 }
