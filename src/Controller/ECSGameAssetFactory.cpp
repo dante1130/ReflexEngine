@@ -106,21 +106,21 @@ void ECSGameAssetFactory::load_terrain(Reflex::Entity& entity,
 
 void ECSGameAssetFactory::load_directional_light(
     Reflex::Entity& entity, const sol::table& light_table) {
-	glm::vec3 color = {light_table["color"]["x"], light_table["color"]["y"],
-	                   light_table["color"]["z"]};
+	glm::vec3 color = {light_table["color"]["r"], light_table["color"]["g"],
+	                   light_table["color"]["b"]};
 	glm::vec3 direction = {light_table["direction"]["x"],
 	                       light_table["direction"]["y"],
 	                       light_table["direction"]["z"]};
 
-	entity.add_component<Component::DirectionalLight>(
+	auto& light_component = entity.add_component<Component::DirectionalLight>(
 	    color, light_table["ambient_intensity"],
 	    light_table["diffuse_intensity"], direction);
 }
 
 void ECSGameAssetFactory::load_point_light(Reflex::Entity& entity,
                                            const sol::table& light_table) {
-	glm::vec3 color = {light_table["color"]["x"], light_table["color"]["y"],
-	                   light_table["color"]["z"]};
+	glm::vec3 color = {light_table["color"]["r"], light_table["color"]["g"],
+	                   light_table["color"]["b"]};
 
 	glm::vec3 position = {light_table["position"]["x"],
 	                      light_table["position"]["y"],
@@ -134,8 +134,8 @@ void ECSGameAssetFactory::load_point_light(Reflex::Entity& entity,
 
 void ECSGameAssetFactory::load_spot_light(Reflex::Entity& entity,
                                           const sol::table& light_table) {
-	glm::vec3 color = {light_table["color"]["x"], light_table["color"]["y"],
-	                   light_table["color"]["z"]};
+	glm::vec3 color = {light_table["color"]["r"], light_table["color"]["g"],
+	                   light_table["color"]["b"]};
 
 	glm::vec3 position = {light_table["position"]["x"],
 	                      light_table["position"]["y"],
