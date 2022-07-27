@@ -5,11 +5,11 @@
 -------------------------------------------------------------------------------
 state_global = {}
 
-state_global["enter"] = function(ecs, entity)
+state_global["enter"] = function(registry, entity)
 
 end
 
-state_global["execute"] = function(ecs, entity)
+state_global["execute"] = function(registry, entity)
 print(var.health)
 print(var.faction)
 print(var.damage)
@@ -20,11 +20,11 @@ local position = transform.position
 print(position.x)
 end
 
-state_global["exit"] = function(ecs, entity)
+state_global["exit"] = function(registry, entity)
 
 end
 
-state_global["onMessage"] = function(ecs, entity)
+state_global["onMessage"] = function(registry, entity)
 
 end
 
@@ -36,24 +36,22 @@ end
 -------------------------------------------------------------------------------
 state_patrol = {}
 
-state_patrol["enter"] = function(ecs, entity)
+state_patrol["enter"] = function(registry, entity)
 
 end
 
-state_patrol["execute"] = function(ecs, entity)
+state_patrol["execute"] = function(registry, entity)
   print("in patrol state - statemachine.lua")
-
-  print("hello")
-  statemachine_helper.change_state(ecs, entity, "state_flee")
+  statemachine_helper.change_state(registry, entity, "state_flee")
   print("asdfasddfstatemachine.lua")
 end
 
 
-state_patrol["exit"] = function(ecs, entity)
+state_patrol["exit"] = function(registry, entity)
   print("exiting patrol")
 end
 
-state_patrol["onMessage"] = function(ecs, entity)
+state_patrol["onMessage"] = function(registry, entity)
 
 end
 
@@ -65,19 +63,19 @@ end
 -------------------------------------------------------------------------------
 state_flee = {}
 
-state_flee["enter"] = function(ecs, entity)
+state_flee["enter"] = function(registry, entity)
   print("entering flee")
 end
 
-state_flee["execute"] = function(ecs, entity)
+state_flee["execute"] = function(registry, entity)
   print("in flee state - statemachine.lua")
 end
 
 
-state_flee["exit"] = function(ecs, entity)
+state_flee["exit"] = function(registry, entity)
 
 end
 
-state_flee["onMessage"] = function(ecs, entity)
+state_flee["onMessage"] = function(registry, entity)
 
 end
