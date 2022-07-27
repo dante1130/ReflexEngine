@@ -4,11 +4,18 @@
 #include "System.hpp"
 
 #include "Model/Components/Script.hpp"
+#include "Model/Components/Light.hpp"
 
 using namespace Reflex;
 
 ECS::ECS() {
 	registry_.on_construct<Component::Script>().connect<&System::init_script>();
+	registry_.on_construct<Component::DirectionalLight>()
+	    .connect<&System::init_directional_light>();
+	registry_.on_construct<Component::PointLight>()
+	    .connect<&System::init_point_light>();
+	registry_.on_construct<Component::SpotLight>()
+	    .connect<&System::init_spot_light>();
 }
 
 Entity& ECS::create_entity() {

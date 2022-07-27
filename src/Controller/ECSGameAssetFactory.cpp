@@ -99,81 +99,57 @@ void ECSGameAssetFactory::load_model(Reflex::Entity& entity,
 
 void ECSGameAssetFactory::load_terrain(Reflex::Entity& entity,
                                        const sol::table& terrain_table) {
-	auto& terrain_component = entity.add_component<Component::Terrain>();
-
-	terrain_component.terrain_name = terrain_table["terrain_name"];
-	terrain_component.texture_name = terrain_table["texture_name"];
-	terrain_component.material_name = terrain_table["material_name"];
-	terrain_component.detailmap_name = terrain_table["detailmap_name"];
+	entity.add_component<Component::Terrain>(
+	    terrain_table["terrain_name"], terrain_table["texture_name"],
+	    terrain_table["material_name"], terrain_table["detailmap_name"]);
 }
 
 void ECSGameAssetFactory::load_directional_light(
     Reflex::Entity& entity, const sol::table& light_table) {
-	auto& light_component = entity.add_component<Component::DirectionalLight>();
+	glm::vec3 color = {light_table["color"]["x"], light_table["color"]["y"],
+	                   light_table["color"]["z"]};
+	glm::vec3 direction = {light_table["direction"]["x"],
+	                       light_table["direction"]["y"],
+	                       light_table["direction"]["z"]};
 
-	light_component.color.x = light_table["color"]["r"];
-	light_component.color.y = light_table["color"]["g"];
-	light_component.color.z = light_table["color"]["b"];
-
-	light_component.ambient_intensity = light_table["ambient_intensity"];
-	light_component.diffuse_intensity = light_table["diffuse_intensity"];
-
-	light_component.direction.x = light_table["direction"]["x"];
-	light_component.direction.y = light_table["direction"]["y"];
-	light_component.direction.z = light_table["direction"]["z"];
-
-	System::init_directional_light(entity.get_registry(),
-	                               entity.get_entity_id());
+	entity.add_component<Component::DirectionalLight>(
+	    color, light_table["ambient_intensity"],
+	    light_table["diffuse_intensity"], direction);
 }
 
 void ECSGameAssetFactory::load_point_light(Reflex::Entity& entity,
                                            const sol::table& light_table) {
-	auto& light_component = entity.add_component<Component::PointLight>();
+	glm::vec3 color = {light_table["color"]["x"], light_table["color"]["y"],
+	                   light_table["color"]["z"]};
 
-	light_component.color.x = light_table["color"]["r"];
-	light_component.color.y = light_table["color"]["g"];
-	light_component.color.z = light_table["color"]["b"];
+	glm::vec3 position = {light_table["position"]["x"],
+	                      light_table["position"]["y"],
+	                      light_table["position"]["z"]};
 
-	light_component.ambient_intensity = light_table["ambient_intensity"];
-	light_component.diffuse_intensity = light_table["diffuse_intensity"];
-
-	light_component.position.x = light_table["position"]["x"];
-	light_component.position.y = light_table["position"]["y"];
-	light_component.position.z = light_table["position"]["z"];
-
-	light_component.constant = light_table["constant"];
-	light_component.linear = light_table["linear"];
-	light_component.quadratic = light_table["quadratic"];
-
-	System::init_point_light(entity.get_registry(), entity.get_entity_id());
+	entity.add_component<Component::PointLight>(
+	    color, light_table["ambient_intensity"],
+	    light_table["diffuse_intensity"], position, light_table["constant"],
+	    light_table["linear"], light_table["quadratic"]);
 }
 
 void ECSGameAssetFactory::load_spot_light(Reflex::Entity& entity,
                                           const sol::table& light_table) {
-	auto& light_component = entity.add_component<Component::SpotLight>();
+	glm::vec3 color = {light_table["color"]["x"], light_table["color"]["y"],
+	                   light_table["color"]["z"]};
 
-	light_component.color.x = light_table["color"]["r"];
-	light_component.color.y = light_table["color"]["g"];
-	light_component.color.z = light_table["color"]["b"];
+	glm::vec3 position = {light_table["position"]["x"],
+	                      light_table["position"]["y"],
+	                      light_table["position"]["z"]};
 
-	light_component.ambient_intensity = light_table["ambient_intensity"];
-	light_component.diffuse_intensity = light_table["diffuse_intensity"];
+	glm::vec3 direction = {light_table["direction"]["x"],
+	                       light_table["direction"]["y"],
+	                       light_table["direction"]["z"]};
 
-	light_component.position.x = light_table["position"]["x"];
-	light_component.position.y = light_table["position"]["y"];
-	light_component.position.z = light_table["position"]["z"];
-
-	light_component.direction.x = light_table["direction"]["x"];
-	light_component.direction.y = light_table["direction"]["y"];
-	light_component.direction.z = light_table["direction"]["z"];
-
-	light_component.constant = light_table["constant"];
-	light_component.linear = light_table["linear"];
-	light_component.quadratic = light_table["quadratic"];
-
-	light_component.edge = light_table["edge"];
-
-	System::init_spot_light(entity.get_registry(), entity.get_entity_id());
+	entity.add_component<Component::SpotLight>(
+	    color, light_table["ambient_intensity"],
+	    light_table["diffuse_intensity"], position, light_table["constant"],
+	    light_table["linear"], light_table["quadratic"], direction,
+	    light_table["cutoff"]);
 }
 
 bool ECSGameAssetFactory::is_lua_script(const std::string& lua_script) {

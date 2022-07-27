@@ -17,5 +17,16 @@ struct Terrain {
 	std::string material_name;
 	/// The name of the detailmap.
 	std::string detailmap_name;
+
+	Terrain() = default;
+
+	Terrain(const Terrain&) = default;
+
+	Terrain(const std::string& terrain_name, const std::string& texture_name,
+	        const std::string& material_name, const std::string& detailmap_name)
+	    : terrain_name(terrain_name),
+	      texture_name(texture_name),
+	      material_name(material_name),
+	      detailmap_name(detailmap_name) {}
 };
 }  // namespace Component
