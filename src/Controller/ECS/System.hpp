@@ -2,6 +2,8 @@
 
 #include <entt/entt.hpp>
 
+#include <Controller/ECS/ECS.hpp>
+
 namespace System {
 /**
  * @brief Passes the draw call of the model component to the renderer.
@@ -29,7 +31,7 @@ void draw_terrain(entt::registry& registry);
 /**
  * @brief Initializes the script component of an entity.
  *
- * @param registry The ECS registry.
+ * @param ecs The ECS class.
  * @param entity_id The entity ID to initialize the script component.
  *
  * @pre The script component members must be set.
@@ -73,7 +75,7 @@ void init_statemachine(entt::registry& registry, entt::entity entity_id);
 /**
  * @brief Update the script components.
  *
- * @param registry The ECS registry.
+ * @param ecs The ECS class.
  *
  * @pre The script components must be initialized.
  */
@@ -107,4 +109,10 @@ void update_spot_light(entt::registry& registry);
  */
 void update_statemachine(entt::registry& registry);
 
+/**
+ * @brief Deletes any entities that has a Remove component.
+ *
+ * @param ecs The ECS class.
+ */
+void update_remove(ECS& ecs);
 };  // namespace System

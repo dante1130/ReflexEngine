@@ -2,11 +2,11 @@ var = {
 	speed = 1.0
 }
 
-function init(entity)
-	
+function init(ecs, entity)
+
 end
 
-function update(entity)
+function update(ecs, entity)
 	if (Input.get_key_state("w"):is_key_hold()) then
 		Camera.move(Movement.forward, Time.get_delta_time() * var.speed)
 	end

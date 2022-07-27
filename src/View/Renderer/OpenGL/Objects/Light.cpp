@@ -1,5 +1,7 @@
 #include "Light.hpp"
 
+#include <glad/glad.h>
+
 Light::Light(glm::vec3 color, GLfloat aIntensity, GLfloat dIntensity)
     : m_color(color),
       m_ambientIntensity(aIntensity),

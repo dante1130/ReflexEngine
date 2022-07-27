@@ -13,5 +13,12 @@ struct Model {
 	std::string model_name;
 	/// The name of the material.
 	std::string material_name;
+
+	Model() = default;
+
+	Model(const Model&) = default;
+
+	Model(const std::string& model_name, const std::string& material_name)
+	    : model_name(model_name), material_name(material_name) {}
 };
 };  // namespace Component

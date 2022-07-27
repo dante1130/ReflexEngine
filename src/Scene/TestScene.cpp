@@ -113,3 +113,7 @@ void TestScene::garbage_collection() {
 		}
 	}
 }
+
+const std::string& TestScene::get_master_lua_script() const {
+	return master_lua_script_;
+}

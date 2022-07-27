@@ -1,5 +1,7 @@
 #include "Shader.hpp"
 
+#include <glad/glad.h>
+
 Shader::Shader() {}
 
 GLuint Shader::GetProjectionLocation() const { return uniformProjection; }

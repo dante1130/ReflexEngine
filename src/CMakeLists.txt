@@ -37,12 +37,14 @@ target_sources(${PROJECT_NAME} PRIVATE
 	View/Renderer/OpenGL/Objects/Skybox.cpp
 	View/Renderer/OpenGL/Objects/Texture.cpp
 	View/Renderer/OpenGL/Objects/Md2Model.cpp
+	View/Renderer/OpenGL/Objects/ReactMesh.cpp
 	View/guiManager.cpp
 
 	Controller/ReflexEngine/ReflexEngine.cpp
 	Controller/ReflexEngine/EngineTime.cpp
 	Controller/ReflexEngine/Window.cpp
 	Controller/ReflexEngine/Camera.cpp
+	Controller/ReflexEngine/SceneManager.cpp
 	Controller/ECS/ECS.cpp
 	Controller/ECS/Entity.cpp
 	Controller/ECS/ECSAccess.cpp
@@ -76,8 +78,9 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/Physics/ReactResolve.cpp
 	Controller/Physics/PhysicBody.cpp
 	Controller/Physics/CollisionEvent.cpp
-	Controller/NetworkAccess.cpp
-	Controller/multiTextureCreator.cpp
+	Controller/Physics/ColliderRenderer.cpp
+	Controller/Networking/NetworkAccess.cpp
+	Controller/Terrain/multiTextureCreator.cpp
 	Controller/RandomGenerators/PseudoRandomNumberGenerator.cpp
 	Controller/Terrain/TerrainManager.cpp
 	Controller/AI/messageDispatcher.cpp
@@ -88,9 +91,9 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/AI/Counter.cpp
 	Controller/AI/vector2D.cpp
 
-	Game/Scene.hpp
-	Game/TestScene.cpp
-	Game/ECSScene.cpp
+	Scene/Scene.hpp
+	Scene/TestScene.cpp
+	Scene/ECSScene.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})

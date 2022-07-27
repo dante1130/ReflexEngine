@@ -1,10 +1,10 @@
 var = {}
 
-function init(entity)
+function init(ecs, entity)
 
 end
 
-function update(entity)
+function update(ecs, entity)
 	local spotlight = entity:get_spot_light_component()
 
 	spotlight.position = Camera.get_position()

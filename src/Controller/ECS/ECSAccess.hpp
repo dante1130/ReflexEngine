@@ -7,6 +7,11 @@ namespace ECSAccess {
 void register_ecs();
 
 /**
+ * @brief Register the ECS class to Lua.
+ */
+void register_registry();
+
+/**
  * @brief Register the Entity class to Lua.
  */
 void register_entity();

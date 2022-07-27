@@ -1,6 +1,6 @@
 var = {}
 
-function init(entity)
+function init(ecs, entity)
 	local transform = entity:get_transform_component()
 
 	local boat_pos = Audio.vec3df.new(transform.position.x, transform.position.y, transform.position.z)
@@ -8,6 +8,6 @@ function init(entity)
 	Audio.play_3d_sound("duckandcover", boat_pos, true, 5.0)
 end
 
-function update(entity)
+function update(ecs, entity)
 
 end
