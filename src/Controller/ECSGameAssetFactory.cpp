@@ -149,7 +149,7 @@ void ECSGameAssetFactory::load_spot_light(Reflex::Entity& entity,
 	    color, light_table["ambient_intensity"],
 	    light_table["diffuse_intensity"], position, light_table["constant"],
 	    light_table["linear"], light_table["quadratic"], direction,
-	    light_table["cutoff"]);
+	    light_table["edge"]);
 }
 
 bool ECSGameAssetFactory::is_lua_script(const std::string& lua_script) {
