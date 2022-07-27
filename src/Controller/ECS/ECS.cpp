@@ -3,7 +3,20 @@
 #include "Entity.hpp"
 #include "System.hpp"
 
+#include "Model/Components/Script.hpp"
+#include "Model/Components/Light.hpp"
+
 using namespace Reflex;
+
+ECS::ECS() {
+	registry_.on_construct<Component::Script>().connect<&System::init_script>();
+	registry_.on_construct<Component::DirectionalLight>()
+	    .connect<&System::init_directional_light>();
+	registry_.on_construct<Component::PointLight>()
+	    .connect<&System::init_point_light>();
+	registry_.on_construct<Component::SpotLight>()
+	    .connect<&System::init_spot_light>();
+}
 
 Entity& ECS::create_entity() {
 	entt::entity entity_id = registry_.create();
@@ -12,7 +25,7 @@ Entity& ECS::create_entity() {
 }
 
 void ECS::update(double delta_time) {
-	System::update_script(*this);
+	System::update_script(registry_);
 	System::update_directional_light(registry_);
 	System::update_point_light(registry_);
 	System::update_spot_light(registry_);

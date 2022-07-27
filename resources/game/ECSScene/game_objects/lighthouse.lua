@@ -20,6 +20,10 @@ entity = {
 		},
 	},
 
+	script = {
+		lua_script = "game/ECSScene/scripts/lighthouse_script.lua"
+	},
+
 	model = {
 		model_name = "lighthouse",
 		material_name = "shiny"
@@ -36,9 +40,9 @@ entity = {
 		diffuse_intensity = 1,
 
 		position = {
-			x = -48,
+			x = -50,
 			y = 40,
-			z = 2
+			z = 0
 		},
 
 		constant = 0,
@@ -54,7 +58,7 @@ entity = {
 		},
 
 		ambient_intensity = 0,
-		diffuse_intensity = 1,
+		diffuse_intensity = 2,
 
 		position = {
 			x = -50.0,
@@ -72,6 +76,6 @@ entity = {
 			z = 0.44
 		},
 
-		edge = 5
+		edge = 10
 	}
 }

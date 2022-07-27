@@ -56,6 +56,8 @@ void MathAccess::register_glm_functions() {
 	math_table["mul"] = sol::overload(
 	    [](const glm::vec3& a, const glm::vec3& b) { return a * b; },
 	    [](const glm::quat& a, const glm::quat& b) { return a * b; },
+	    [](const glm::vec3& a, const glm::quat& b) { return a * b; },
+	    [](const glm::quat& a, const glm::vec3& b) { return a * b; },
 	    [](const glm::vec3& a, float b) { return a * b; },
 	    [](float a, const glm::vec3& b) { return a * b; });
 
