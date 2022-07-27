@@ -4,8 +4,7 @@
 
 #include "Model/Components/Statemachine.hpp"
 
-void statemachineComponentHelper::change_state(entt::registry& registry,
-                                               Reflex::Entity& entity,
+void statemachineComponentHelper::change_state(ECS& ecs, Reflex::Entity& entity,
                                                std::string new_state) {
 	auto& lua = LuaManager::get_instance().get_state();
 	sol::function exe;
@@ -16,8 +15,8 @@ void statemachineComponentHelper::change_state(entt::registry& registry,
 	stateMachine.current_state = new_state;
 
 	exe = lua[stateMachine.previous_state]["exit"];
-	exe(registry, entity);
+	exe(ecs, entity);
 
 	exe = lua[stateMachine.current_state]["enter"];
-	exe(registry, entity);
+	exe(ecs, entity);
 }

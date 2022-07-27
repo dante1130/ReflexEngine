@@ -107,7 +107,7 @@ void update_spot_light(entt::registry& registry);
  *
  * @param registry The ECS registry
  */
-void update_statemachine(entt::registry& registry);
+void update_statemachine(ECS& ecs);
 
 /**
  * @brief Deletes any entities that has a Remove component.

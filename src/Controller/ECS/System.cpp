@@ -229,7 +229,7 @@ void System::update_remove(ECS& ecs) {
 	}
 }
 
-void System::update_statemachine(entt::registry& registry) {
+void System::update_statemachine(ECS& ecs) {
 	auto& lua = LuaManager::get_instance().get_state();
 	sol::function exe;
 
@@ -246,7 +246,7 @@ void System::update_statemachine(entt::registry& registry) {
 		return;
 	}
 
-	auto view = registry.view<Component::Statemachine>();
+	auto view = ecs.get_registry().view<Component::Statemachine>();
 
 	for (auto entity : view) {
 		auto& stateM = view.get<Component::Statemachine>(entity);
@@ -257,13 +257,13 @@ void System::update_statemachine(entt::registry& registry) {
 		// Global state update
 		if (!stateM.global_state.empty()) {
 			exe = lua[stateM.global_state]["execute"];
-			exe(registry, stateM.entity);
+			exe(ecs, stateM.entity);
 		}
 
 		// Current state update
 		if (!stateM.current_state.empty()) {
 			exe = lua[stateM.current_state]["execute"];
-			exe(registry, stateM.entity);
+			exe(ecs, stateM.entity);
 		}
 
 		stateM.lua_variables = lua["var"];
