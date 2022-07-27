@@ -65,30 +65,18 @@ void ECSGameAssetFactory::load_components(ECS& ecs, Reflex::Entity& entity,
 
 void ECSGameAssetFactory::load_transform(Reflex::Entity& entity,
                                          const sol::table& transform_table) {
-	auto& transform_component = entity.add_component<Component::Transform>();
+	glm::vec3 position = transform_table["position"];
+	glm::quat rotation = transform_table["rotation"];
+	glm::vec3 scale = transform_table["scale"];
 
-	transform_component.position.x = transform_table["position"]["x"];
-	transform_component.position.y = transform_table["position"]["y"];
-	transform_component.position.z = transform_table["position"]["z"];
-
-	transform_component.rotation.x = transform_table["rotation"]["x"];
-	transform_component.rotation.y = transform_table["rotation"]["y"];
-	transform_component.rotation.z = transform_table["rotation"]["z"];
-	transform_component.rotation.w = transform_table["rotation"]["w"];
-
-	transform_component.scale.x = transform_table["scale"]["x"];
-	transform_component.scale.y = transform_table["scale"]["y"];
-	transform_component.scale.z = transform_table["scale"]["z"];
+	entity.add_component<Component::Transform>();
 }
 
 void ECSGameAssetFactory::load_script(ECS& ecs, Reflex::Entity& entity,
                                       const sol::table& script_table) {
-	auto& script_component = entity.add_component<Component::Script>();
+	std::string lua_script = script_table["lua_script"];
 
-	script_component.lua_script = script_table["lua_script"];
-	script_component.entity = &entity;
-
-	System::init_script(ecs, entity.get_entity_id());
+	entity.add_component<Component::Script>(lua_script, ecs, entity);
 }
 
 void ECSGameAssetFactory::load_model(Reflex::Entity& entity,

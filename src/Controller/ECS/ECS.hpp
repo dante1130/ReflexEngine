@@ -16,7 +16,7 @@ class Entity;
  */
 class ECS {
 public:
-	ECS() = default;
+	ECS();
 
 	/**
 	 * @brief Create an entity.

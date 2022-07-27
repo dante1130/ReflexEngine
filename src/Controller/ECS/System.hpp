@@ -36,7 +36,7 @@ void draw_terrain(entt::registry& registry);
  *
  * @pre The script component members must be set.
  */
-void init_script(ECS& ecs, entt::entity entity_id);
+void init_script(entt::registry& registry, entt::entity entity_id);
 
 /**
  * @brief Initializes the directional light component of an entity.
@@ -70,7 +70,7 @@ void init_spot_light(entt::registry& registry, entt::entity entity_id);
  *
  * @pre The script components must be initialized.
  */
-void update_script(ECS& ecs);
+void update_script(entt::registry& registry);
 
 /**
  * @brief Update the directional light components.
