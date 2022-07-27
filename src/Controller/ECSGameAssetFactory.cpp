@@ -65,11 +65,17 @@ void ECSGameAssetFactory::load_components(ECS& ecs, Reflex::Entity& entity,
 
 void ECSGameAssetFactory::load_transform(Reflex::Entity& entity,
                                          const sol::table& transform_table) {
-	glm::vec3 position = transform_table["position"];
-	glm::quat rotation = transform_table["rotation"];
-	glm::vec3 scale = transform_table["scale"];
+	glm::vec3 position = {transform_table["position"]["x"],
+	                      transform_table["position"]["y"],
+	                      transform_table["position"]["z"]};
+	glm::quat rotation = {
+	    transform_table["rotation"]["w"], transform_table["rotation"]["x"],
+	    transform_table["rotation"]["y"], transform_table["rotation"]["z"]};
+	glm::vec3 scale = {transform_table["scale"]["x"],
+	                   transform_table["scale"]["y"],
+	                   transform_table["scale"]["z"]};
 
-	entity.add_component<Component::Transform>();
+	entity.add_component<Component::Transform>(position, rotation, scale);
 }
 
 void ECSGameAssetFactory::load_script(ECS& ecs, Reflex::Entity& entity,
