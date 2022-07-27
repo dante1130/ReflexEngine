@@ -93,10 +93,8 @@ void ECSGameAssetFactory::load_mesh(Reflex::Entity& entity,
 
 void ECSGameAssetFactory::load_model(Reflex::Entity& entity,
                                      const sol::table& model_table) {
-	auto& model_component = entity.add_component<Component::Model>();
-
-	model_component.model_name = model_table["model_name"];
-	model_component.material_name = model_table["material_name"];
+	entity.add_component<Component::Model>(model_table["model_name"],
+	                                       model_table["material_name"]);
 }
 
 void ECSGameAssetFactory::load_terrain(Reflex::Entity& entity,
