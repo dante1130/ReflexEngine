@@ -27,7 +27,7 @@ public:
 	 *
 	 * @return Reflex::Entity&
 	 */
-	Reflex::Entity& create_entity();
+	Reflex::Entity& create_entity(const std::string& name);
 
 	/**
 	 * @brief Updates the ECS components.

@@ -18,10 +18,11 @@ ECS::ECS() {
 	    .connect<&System::init_spot_light>();
 }
 
-Entity& ECS::create_entity() {
+Entity& ECS::create_entity(const std::string& name) {
 	entt::entity entity_id = registry_.create();
 
-	return *(entities_[entity_id] = std::make_shared<Entity>(entity_id, this));
+	return *(entities_[entity_id] =
+	             std::make_shared<Entity>(name, entity_id, this));
 }
 
 void ECS::update(double delta_time) {

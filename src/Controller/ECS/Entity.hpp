@@ -14,10 +14,11 @@ public:
 	/**
 	 * @brief Construct a new Entity object.
 	 *
+	 * @param name The name of the entity.
 	 * @param entity_id The entity ID.
 	 * @param ecs A pointer to the ECS instance.
 	 */
-	Entity(entt::entity entity_id, ECS* ecs);
+	Entity(const std::string& name, entt::entity entity_id, ECS* ecs);
 
 	/**
 	 * @brief Adds a component to the entity.
@@ -62,6 +63,8 @@ public:
 	entt::registry& get_registry();
 
 private:
+	/// The name of the entity.
+	std::string name_;
 	/// The entity ID.
 	entt::entity entity_id_ = {entt::null};
 	/// A pointer to the ECS instance.

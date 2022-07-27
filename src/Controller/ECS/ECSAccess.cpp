@@ -35,7 +35,9 @@ void ECSAccess::register_registry() {
 
 	auto ecs_table = lua["ECS"].get_or_create<sol::table>();
 
-	ecs_table["create_entity"] = [](ECS& ecs) { return ecs.create_entity(); };
+	ecs_table["create_entity"] = [](ECS& ecs, const std::string& name) {
+		return ecs.create_entity(name);
+	};
 
 	ecs_table["get_entity"] = [](ECS& ecs, entt::entity entity_id) {
 		return ecs.get_entity(entity_id);
