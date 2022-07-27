@@ -10,22 +10,19 @@ state_global["enter"] = function(ecs, entity)
 end
 
 state_global["execute"] = function(ecs, entity)
-	print(var.health)
-	print(var.faction)
-	print(var.damage)
-	print("in global state - statemachine.lua")
+	--print("in global state - statemachine.lua")
 
-	local transform = entity:get_transform_component()
-	local position = transform.position
-	print(position.x)
+	--local transform = entity:get_transform_component()
+	--local position = transform.position
+	--print(position.x)
 end
 
 state_global["exit"] = function(ecs, entity)
 
 end
 
-state_global["onMessage"] = function(ecs, entity)
-
+state_global["onMessage"] = function(ecs, entity, msg)
+print("Incomming message in global state")
 end
 
 
@@ -37,13 +34,12 @@ end
 state_patrol = {}
 
 state_patrol["enter"] = function(ecs, entity)
-
+  print("entering patrol")
 end
 
 state_patrol["execute"] = function(ecs, entity)
   print("in patrol state - statemachine.lua")
   statemachine_helper.change_state(ecs, entity, "state_flee")
-  print("asdfasddfstatemachine.lua")
 end
 
 
@@ -51,8 +47,8 @@ state_patrol["exit"] = function(ecs, entity)
   print("exiting patrol")
 end
 
-state_patrol["onMessage"] = function(ecs, entity)
-
+state_patrol["onMessage"] = function(ecs, entity, msg)
+print("Incomming message in patrol state")
 end
 
 
@@ -73,9 +69,42 @@ end
 
 
 state_flee["exit"] = function(ecs, entity)
+  print("exiting flee")
+end
+
+state_flee["onMessage"] = function(ecs, entity, msg)
+print("Incomming message in flee state")
+	if(msg.msg == 0) then
+		print("Will stop being a baby")
+		statemachine_helper.change_state(ecs, entity, "state_patrol")
+	end
+end
+
+
+-------------------------------------------------------------------------------
+
+-- create the chad state
+
+-------------------------------------------------------------------------------
+state_chad = {}
+
+state_chad["enter"] = function(ecs, entity)
+  print("entering chad")
+end
+
+state_chad["execute"] = function(ecs, entity)
+  print("in chad state - statemachine.lua")
+
+  statemachine_helper.send_area_message(ecs, entity, 100, 0, var)
+  local target = Math.vec3.new(250, 0, 250)
+  statemachine_helper.follow_waypoint(entity, target, 10, "terrain")
+end
+
+
+state_chad["exit"] = function(ecs, entity)
 
 end
 
-state_flee["onMessage"] = function(ecs, entity)
-
+state_chad["onMessage"] = function(ecs, entity, msg)
+print("Incomming message in chad state")
 end

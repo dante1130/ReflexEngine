@@ -14,6 +14,8 @@ Scene.add_game_object("game/ECSScene/game_objects/terrain.lua")
 
 --AI game objects
 Scene.add_game_object("game/ECSScene/game_objects/AI/duck.lua")
+Scene.add_game_object("game/ECSScene/game_objects/AI/duckTwo.lua")
+
 
 
 Skybox.use_skybox("nightsky")

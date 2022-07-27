@@ -241,4 +241,15 @@ void ECSAccess::register_statemachine_component() {
 
 	sol::table statemachine = lua.create_named_table("statemachine_helper");
 	statemachine["change_state"] = &statemachineComponentHelper::change_state;
+	statemachine["send_message"] = &statemachineComponentHelper::send_message;
+	statemachine["send_area_message"] =
+	    &statemachineComponentHelper::send_area_message;
+	statemachine["look_for_enemy"] =
+	    &statemachineComponentHelper::look_for_enemy;
+	statemachine["generate_waypoints"] =
+	    &statemachineComponentHelper::generate_waypoints;
+	statemachine["follow_waypoint"] =
+	    &statemachineComponentHelper::follow_waypoint;
+	statemachine["follow_waypoint_physics"] =
+	    &statemachineComponentHelper::follow_waypoint_physics;
 }
