@@ -33,19 +33,5 @@ struct Statemachine {
 	Statemachine() {
 		unique_statemachine_identifier = statemachineIDMgr.increment_count();
 	}
-
-	void change_state(std::string new_state) {
-		auto& lua = LuaManager::get_instance().get_state();
-		sol::function exe;
-
-		previous_state = current_state;
-		current_state = new_state;
-
-		exe = lua[previous_state]["exit"];
-		exe(entity);
-
-		exe = lua[current_state]["enter"];
-		exe(entity);
-	}
 };
 }  // namespace Component

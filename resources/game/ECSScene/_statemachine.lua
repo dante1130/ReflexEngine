@@ -5,11 +5,11 @@
 -------------------------------------------------------------------------------
 state_global = {}
 
-state_global["enter"] = function(entity)
+state_global["enter"] = function(ecs, entity)
 
 end
 
-state_global["execute"] = function(entity)
+state_global["execute"] = function(ecs, entity)
 print(var.health)
 print(var.faction)
 print(var.damage)
@@ -20,11 +20,11 @@ local position = transform.position
 print(position.x)
 end
 
-state_global["exit"] = function(entity)
+state_global["exit"] = function(ecs, entity)
 
 end
 
-state_global["onMessage"] = function(entity)
+state_global["onMessage"] = function(ecs, entity)
 
 end
 
@@ -36,23 +36,24 @@ end
 -------------------------------------------------------------------------------
 state_patrol = {}
 
-state_patrol["enter"] = function(entity)
+state_patrol["enter"] = function(ecs, entity)
 
 end
 
-state_patrol["execute"] = function(entity)
+state_patrol["execute"] = function(ecs, entity)
   print("in patrol state - statemachine.lua")
 
-  local statemachine = entity:get_statemachine_component()
-  statemachine:change_state("state_flee")
+  print("hello")
+  statemachine_helper.change_state(ecs, entity, "state_flee")
+  print("asdfasddfstatemachine.lua")
 end
 
 
-state_patrol["exit"] = function(entity)
+state_patrol["exit"] = function(ecs, entity)
   print("exiting patrol")
 end
 
-state_patrol["onMessage"] = function(entity)
+state_patrol["onMessage"] = function(ecs, entity)
 
 end
 
@@ -64,19 +65,19 @@ end
 -------------------------------------------------------------------------------
 state_flee = {}
 
-state_flee["enter"] = function(entity)
+state_flee["enter"] = function(ecs, entity)
   print("entering flee")
 end
 
-state_flee["execute"] = function(entity)
+state_flee["execute"] = function(ecs, entity)
   print("in flee state - statemachine.lua")
 end
 
 
-state_flee["exit"] = function(entity)
+state_flee["exit"] = function(ecs, entity)
 
 end
 
-state_flee["onMessage"] = function(entity)
+state_flee["onMessage"] = function(ecs, entity)
 
 end

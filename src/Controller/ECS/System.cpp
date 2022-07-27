@@ -257,13 +257,13 @@ void System::update_statemachine(entt::registry& registry) {
 		// Global state update
 		if (!stateM.global_state.empty()) {
 			exe = lua[stateM.global_state]["execute"];
-			exe(stateM.entity);
+			exe(registry, stateM.entity);
 		}
 
 		// Current state update
 		if (!stateM.current_state.empty()) {
 			exe = lua[stateM.current_state]["execute"];
-			exe(stateM.entity);
+			exe(registry, stateM.entity);
 		}
 
 		stateM.lua_variables = lua["var"];

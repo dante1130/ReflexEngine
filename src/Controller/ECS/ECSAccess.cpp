@@ -13,6 +13,8 @@
 #include "Model/Components/Statemachine.hpp"
 #include "Model/Components/Remove.hpp"
 
+#include "Controller/AI/statemachineComponentHelper.hpp"
+
 using namespace Component;
 using namespace Reflex;
 
@@ -237,5 +239,6 @@ void ECSAccess::register_statemachine_component() {
 	statemachine_type["current_state"] = &Statemachine::current_state;
 	statemachine_type["previous_state"] = &Statemachine::previous_state;
 
-	statemachine_type["change_state"] = &Statemachine::change_state;
+	sol::table statemachine = lua.create_named_table("statemachine_helper");
+	statemachine["change_state"] = &statemachineComponentHelper::change_state;
 }
