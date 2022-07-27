@@ -38,10 +38,6 @@ void ECSGameAssetFactory::load_components(ECS& ecs, Reflex::Entity& entity,
 		load_model(entity, entity_table["model"]);
 	}
 
-	if (entity_table["script"].valid()) {
-		load_script(ecs, entity, entity_table["script"]);
-	}
-
 	if (entity_table["directional_light"].valid()) {
 		load_directional_light(entity, entity_table["directional_light"]);
 	}
@@ -60,6 +56,11 @@ void ECSGameAssetFactory::load_components(ECS& ecs, Reflex::Entity& entity,
 
 	if (entity_table["terrain"].valid()) {
 		load_terrain(entity, entity_table["terrain"]);
+	}
+
+	// Put this last in case the script calls other components.
+	if (entity_table["script"].valid()) {
+		load_script(ecs, entity, entity_table["script"]);
 	}
 }
 
