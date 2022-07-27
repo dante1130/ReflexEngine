@@ -16,6 +16,10 @@ class Entity;
  */
 class ECS {
 public:
+	/**
+	 * @brief Construct a new ECS object and initialize any on_construct and
+	 * on_destroy on components.
+	 */
 	ECS();
 
 	/**

@@ -50,6 +50,14 @@ private:
 	                        const sol::table& script_table);
 
 	/**
+	 * @brief Loads a mesh component into the entity.
+	 *
+	 * @param entity The entity to load the component into.
+	 * @param mesh_table The table of the mesh component.
+	 */
+	static void load_mesh(Reflex::Entity& entity, const sol::table& mesh_table);
+
+	/**
 	 * @brief Loads a model component into the entity.
 	 *
 	 * @param entity The entity to load the component into.
@@ -57,6 +65,15 @@ private:
 	 */
 	static void load_model(Reflex::Entity& entity,
 	                       const sol::table& model_table);
+
+	/**
+	 * @brief Loads a terrain component into the entity.
+	 *
+	 * @param entity The entity to load the component into.
+	 * @param terrain_table The table of the terrain component.
+	 */
+	static void load_terrain(Reflex::Entity& entity,
+	                         const sol::table& terrain_table);
 
 	/**
 	 * @brief Loads a directional light component into the entity.
@@ -84,23 +101,6 @@ private:
 	 */
 	static void load_spot_light(Reflex::Entity& entity,
 	                            const sol::table& light_table);
-
-	/**
-	 * @brief Loads a mesh component into the entity.
-	 *
-	 * @param entity The entity to load the component into.
-	 * @param mesh_table The table of the mesh component.
-	 */
-	static void load_mesh(Reflex::Entity& entity, const sol::table& mesh_table);
-
-	/**
-	 * @brief Loads a terrain component into the entity.
-	 *
-	 * @param entity The entity to load the component into.
-	 * @param terrain_table The table of the terrain component.
-	 */
-	static void load_terrain(Reflex::Entity& entity,
-	                         const sol::table& terrain_table);
 
 	/**
 	 * @brief Checks the string if it is a valid lua file.

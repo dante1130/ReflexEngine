@@ -80,9 +80,15 @@ void ECSGameAssetFactory::load_transform(Reflex::Entity& entity,
 
 void ECSGameAssetFactory::load_script(ECS& ecs, Reflex::Entity& entity,
                                       const sol::table& script_table) {
-	std::string lua_script = script_table["lua_script"];
+	entity.add_component<Component::Script>(script_table["lua_script"], ecs,
+	                                        entity);
+}
 
-	entity.add_component<Component::Script>(lua_script, ecs, entity);
+void ECSGameAssetFactory::load_mesh(Reflex::Entity& entity,
+                                    const sol::table& mesh_table) {
+	entity.add_component<Component::Mesh>(mesh_table["mesh_name"],
+	                                      mesh_table["texture_name"],
+	                                      mesh_table["material_name"]);
 }
 
 void ECSGameAssetFactory::load_model(Reflex::Entity& entity,
@@ -91,6 +97,16 @@ void ECSGameAssetFactory::load_model(Reflex::Entity& entity,
 
 	model_component.model_name = model_table["model_name"];
 	model_component.material_name = model_table["material_name"];
+}
+
+void ECSGameAssetFactory::load_terrain(Reflex::Entity& entity,
+                                       const sol::table& terrain_table) {
+	auto& terrain_component = entity.add_component<Component::Terrain>();
+
+	terrain_component.terrain_name = terrain_table["terrain_name"];
+	terrain_component.texture_name = terrain_table["texture_name"];
+	terrain_component.material_name = terrain_table["material_name"];
+	terrain_component.detailmap_name = terrain_table["detailmap_name"];
 }
 
 void ECSGameAssetFactory::load_directional_light(
@@ -160,25 +176,6 @@ void ECSGameAssetFactory::load_spot_light(Reflex::Entity& entity,
 	light_component.edge = light_table["edge"];
 
 	System::init_spot_light(entity.get_registry(), entity.get_entity_id());
-}
-
-void ECSGameAssetFactory::load_mesh(Reflex::Entity& entity,
-                                    const sol::table& mesh_table) {
-	auto& mesh_component = entity.add_component<Component::Mesh>();
-
-	mesh_component.mesh_name = mesh_table["mesh_name"];
-	mesh_component.material_name = mesh_table["material_name"];
-	mesh_component.texture_name = mesh_table["texture_name"];
-}
-
-void ECSGameAssetFactory::load_terrain(Reflex::Entity& entity,
-                                       const sol::table& terrain_table) {
-	auto& terrain_component = entity.add_component<Component::Terrain>();
-
-	terrain_component.terrain_name = terrain_table["terrain_name"];
-	terrain_component.texture_name = terrain_table["texture_name"];
-	terrain_component.material_name = terrain_table["material_name"];
-	terrain_component.detailmap_name = terrain_table["detailmap_name"];
 }
 
 bool ECSGameAssetFactory::is_lua_script(const std::string& lua_script) {
