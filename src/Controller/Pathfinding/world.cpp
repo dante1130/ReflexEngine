@@ -34,6 +34,10 @@ void world::setMinMaxHeight(float min, float max) {
 	}
 }
 
+void world::setMaxDistance(int max_distance) {
+	m_aStar.setMaxDistance(max_distance);
+}
+
 void world::create_sphere_obstruction(float posX, float posZ, float radius) {
 	std::vector<std::vector<int>> grid = m_aStar.getGrid();
 
@@ -149,9 +153,7 @@ std::queue<glm::vec2> world::pathFinding(float currX, float currZ,
 		//           << " x: " << rawPath[end.y][end.x].parentNode.x <<
 		//           std::endl;
 
-		inversePath.push_back(
-		    glm::vec2(end.x * OldTerrainManager::getTTerrain()->get_scale().x,
-		              end.y * OldTerrainManager::getTTerrain()->get_scale().z));
+		inversePath.push_back(glm::vec2(end.x, end.y));
 
 		temp = end.x;
 		end.x = rawPath[end.y][end.x].parentNode.x;
@@ -180,7 +182,7 @@ void world::create_grid(std::vector<std::vector<int>>& grid,
 
 		for (int x = 0; x < tt.get_width(); x++) {
 			gridValue = 0;
-			height = tt.get_height_world(x, z);
+			height = tt.get_height(x, z);
 
 			// Check if within min & max heights
 			if (height < m_min_height || height > m_max_height) {

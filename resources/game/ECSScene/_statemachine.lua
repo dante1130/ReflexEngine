@@ -38,7 +38,6 @@ state_patrol["enter"] = function(ecs, entity)
 end
 
 state_patrol["execute"] = function(ecs, entity)
-  print("in patrol state - statemachine.lua")
   statemachine_helper.change_state(ecs, entity, "state_flee")
 end
 
@@ -93,11 +92,16 @@ state_chad["enter"] = function(ecs, entity)
 end
 
 state_chad["execute"] = function(ecs, entity)
-  print("in chad state - statemachine.lua")
 
-  statemachine_helper.send_area_message(ecs, entity, 100, 0, var)
-  local target = Math.vec3.new(250, 0, 250)
-  statemachine_helper.follow_waypoint(entity, target, 10, "terrain")
+  local transform = entity:get_transform_component()
+  local position = transform.position
+
+  --statemachine_helper.send_area_message(ecs, entity, 100, 0, var)
+  --local target = Math.vec3.new(250, position.y, position.z)
+  --statemachine_helper.follow_waypoint(entity, target, 10, "terrain")
+  statemachine_helper.look_for_enemy(ecs, entity, 90, 100)
+
+  print("end")
 end
 
 

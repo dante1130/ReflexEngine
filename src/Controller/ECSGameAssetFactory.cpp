@@ -117,7 +117,17 @@ void ECSGameAssetFactory::load_terrain(Reflex::Entity& entity,
 	    terrain_table["terrain_name"], terrain_table["texture_name"],
 	    terrain_table["material_name"], terrain_table["detailmap_name"]);
 
-	gameWorld.setWorld(terrain_table["terrain_name"]);
+	world pathfinding_grid;
+	float min = 0, max = 9999, max_dist = 100;
+	if (terrain_table["pathfinding"].valid()) {
+		min = terrain_table["pathfinding"]["min_value"];
+		max = terrain_table["pathfinding"]["max_value"];
+		max_dist = terrain_table["pathfinding"]["max_distance"];
+	}
+	pathfinding_grid.setMinMaxHeight(min, max);
+	pathfinding_grid.setMaxDistance(max_dist);
+	pathfinding_grid.setWorld(terrain_table["terrain_name"]);
+	gameWorlds.insert({terrain_table["terrain_name"], pathfinding_grid});
 }
 
 void ECSGameAssetFactory::load_statemachine(

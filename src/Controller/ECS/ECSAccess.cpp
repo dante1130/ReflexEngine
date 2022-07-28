@@ -261,6 +261,8 @@ void ECSAccess::register_statemachine_component() {
 	    &statemachineComponentHelper::look_for_enemy;
 	statemachine["generate_waypoints"] =
 	    &statemachineComponentHelper::generate_waypoints;
+	statemachine["follow_generated_waypoints"] =
+	    &statemachineComponentHelper::follow_generated_waypoints;
 	statemachine["follow_waypoint"] =
 	    &statemachineComponentHelper::follow_waypoint;
 	statemachine["follow_waypoint_physics"] =

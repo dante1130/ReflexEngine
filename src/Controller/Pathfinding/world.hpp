@@ -28,6 +28,13 @@ public:
 	void setMinMaxHeight(float min, float max);
 
 	/**
+	 * @brief	Sets the maximum distance the pathfinding can go before giving
+	 * up
+	 * @param	nax_distance	- The maximum distance allowed to travel
+	 */
+	void setMaxDistance(int max_distance);
+
+	/**
 	 * @brief	Create a sphere obstruction on the pathfinding grid
 	 * @param	posX	- The x position of the object
 	 * @param	posZ	- The z position of the object
@@ -73,7 +80,7 @@ private:
 	AStar m_aStar;
 
 	/// The minimum height allowed
-	float m_min_height = 2.5;
+	float m_min_height = 10;
 	/// The maximum height allowed
 	float m_max_height = 9999;
 
