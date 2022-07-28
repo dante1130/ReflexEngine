@@ -63,7 +63,7 @@ state_flee["enter"] = function(ecs, entity)
 end
 
 state_flee["execute"] = function(ecs, entity)
-  print("in flee state - statemachine.lua")
+  --print("in flee state - statemachine.lua")
 end
 
 
@@ -101,7 +101,6 @@ state_chad["execute"] = function(ecs, entity)
   --statemachine_helper.follow_waypoint(entity, target, 10, "terrain")
   statemachine_helper.look_for_enemy(ecs, entity, 90, 100)
 
-  print("end")
 end
 
 
