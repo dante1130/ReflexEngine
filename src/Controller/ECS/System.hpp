@@ -64,6 +64,15 @@ void init_point_light(entt::registry& registry, entt::entity entity_id);
 void init_spot_light(entt::registry& registry, entt::entity entity_id);
 
 /**
+ * @brief Initializes the statemachine component of an entity.
+ *
+ * @param registry The ECS registry.
+ * @param entity_id The entity ID to initialize the spot light
+ * component.
+ */
+void init_statemachine(entt::registry& registry, entt::entity entity_id);
+
+/**
  * @brief Update the script components.
  *
  * @param ecs The ECS class.
@@ -92,6 +101,13 @@ void update_point_light(entt::registry& registry);
  * @param registry The ECS registry.
  */
 void update_spot_light(entt::registry& registry);
+
+/**
+ * @brief Update the statemachine components
+ *
+ * @param registry The ECS registry
+ */
+void update_statemachine(ECS& ecs);
 
 /**
  * @brief Deletes any entities that has a Remove component.

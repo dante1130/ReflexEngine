@@ -11,6 +11,7 @@
 #include "Model/Components/Light.hpp"
 #include "Model/Components/Mesh.hpp"
 #include "Model/Components/Terrain.hpp"
+#include "Model/Components/Statemachine.hpp"
 
 /**
  * @class ECSGui
@@ -96,6 +97,13 @@ private:
 	 * @param spot_light The spot light component of the entity.
 	 */
 	static void draw_spot_light(Component::SpotLight& spot_light);
+
+	/**
+	 * @brief Draw the statemachine component of the entity.
+	 *
+	 * @param statemachine The statemachine component of the entity.
+	 */
+	static void draw_statemachine(Component::Statemachine& statemachine);
 
 	/**
 	 * @brief A helper method for ImGui input text update on enter.

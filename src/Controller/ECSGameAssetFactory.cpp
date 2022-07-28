@@ -6,10 +6,13 @@
 #include "Model/Components/Light.hpp"
 #include "Model/Components/Mesh.hpp"
 #include "Model/Components/Terrain.hpp"
+#include "Model/Components/Statemachine.hpp"
 
 #include "Controller/ECS/System.hpp"
 
 #include "Controller/LuaManager.hpp"
+
+#include "Model/singletons.h"
 
 void ECSGameAssetFactory::create(ECS& ecs, const std::string& lua_script) {
 	if (!is_lua_script(lua_script)) return;
@@ -64,6 +67,10 @@ void ECSGameAssetFactory::load_components(ECS& ecs, Reflex::Entity& entity,
 		load_terrain(entity, entity_table["terrain"]);
 	}
 
+	if (entity_table["statemachine"].valid()) {
+		load_statemachine(entity, entity_table["statemachine"]);
+	}
+
 	// Put this last in case the script calls other components.
 	if (entity_table["script"].valid()) {
 		load_script(ecs, entity, entity_table["script"]);
@@ -109,6 +116,33 @@ void ECSGameAssetFactory::load_terrain(Reflex::Entity& entity,
 	entity.add_component<Component::Terrain>(
 	    terrain_table["terrain_name"], terrain_table["texture_name"],
 	    terrain_table["material_name"], terrain_table["detailmap_name"]);
+
+	world pathfinding_grid;
+	float min = 0, max = 9999, max_dist = 100;
+	if (terrain_table["pathfinding"].valid()) {
+		min = terrain_table["pathfinding"]["min_value"];
+		max = terrain_table["pathfinding"]["max_value"];
+		max_dist = terrain_table["pathfinding"]["max_distance"];
+	}
+	pathfinding_grid.setMinMaxHeight(min, max);
+	pathfinding_grid.setMaxDistance(max_dist);
+	pathfinding_grid.setWorld(terrain_table["terrain_name"]);
+	gameWorlds.insert({terrain_table["terrain_name"], pathfinding_grid});
+}
+
+void ECSGameAssetFactory::load_statemachine(
+    Reflex::Entity& entity, const sol::table& statemachine_table) {
+	auto& statemachine_component =
+	    entity.add_component<Component::Statemachine>();
+
+	statemachine_component.entity = &entity;
+
+	statemachine_component.global_state = statemachine_table["global_state"];
+	statemachine_component.current_state = statemachine_table["current_state"];
+	statemachine_component.previous_state =
+	    statemachine_table["previous_state"];
+
+	System::init_statemachine(entity.get_registry(), entity.get_entity_id());
 }
 
 void ECSGameAssetFactory::load_directional_light(

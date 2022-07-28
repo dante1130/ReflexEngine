@@ -468,7 +468,7 @@ TerrainObject* GameAssetFactory::loadTerrainObject(
 	float min = lua["terrain"]["min"];
 	float max = lua["terrain"]["max"];
 	gameWorld.setMinMaxHeight(min, max);
-	gameWorld.setWorld();
+	gameWorld.setWorld("dead");
 
 	return to;
 }

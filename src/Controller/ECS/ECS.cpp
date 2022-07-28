@@ -30,6 +30,7 @@ void ECS::update(double delta_time) {
 	System::update_directional_light(registry_);
 	System::update_point_light(registry_);
 	System::update_spot_light(registry_);
+	System::update_statemachine(*this);
 }
 
 void ECS::fixed_update(double delta_time) {}

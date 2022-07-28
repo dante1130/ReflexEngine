@@ -13,7 +13,7 @@ public:
 	/**
 	 * @brief	Sets the world
 	 */
-	void setWorld();
+	void setWorld(std::string name);
 
 	/**
 	 * @brief	Prints the current pathfinding grid to the terrminal
@@ -26,6 +26,13 @@ public:
 	 * @param	max	- The max height allowed
 	 */
 	void setMinMaxHeight(float min, float max);
+
+	/**
+	 * @brief	Sets the maximum distance the pathfinding can go before giving
+	 * up
+	 * @param	nax_distance	- The maximum distance allowed to travel
+	 */
+	void setMaxDistance(int max_distance);
 
 	/**
 	 * @brief	Create a sphere obstruction on the pathfinding grid
@@ -71,14 +78,12 @@ public:
 private:
 	/// The a* interface whch holds the level's grid
 	AStar m_aStar;
-	/// The textures terrain used as a base (NOT USED CURRENTLY)
-	TexturedTerrain* m_tt;
 
 	/// The minimum height allowed
-	float m_min_height = 2.5;
+	float m_min_height = 10;
 	/// The maximum height allowed
 	float m_max_height = 9999;
 
 	/// Creates the grid for the pathfinding algorithm
-	void create_grid(std::vector<std::vector<int>>& grid);
+	void create_grid(std::vector<std::vector<int>>& grid, TexturedTerrain& tt);
 };

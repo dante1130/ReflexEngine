@@ -49,11 +49,10 @@ end
 
 
 state_global["execute"] = function(player)
-  --print("in global")
-  if(player.health <= 0) then
-    player.dead = true
-  end
-
+  print("in global state - statemachine.lua")
+  --if(player.health <= 0) then
+  --  player.dead = true
+  --end
 end
 
 

@@ -101,6 +101,14 @@ private:
 	 */
 	static void load_spot_light(Reflex::Entity& entity,
 	                            const sol::table& light_table);
+	/**
+	 * @brief Loads a statemachine component into the entity.
+	 *
+	 * @param entity The entity to load the component into.
+	 * @param statemachine_table The table fo the statemachine component
+	 */
+	static void load_statemachine(Reflex::Entity& entity,
+	                              const sol::table& statemachine_table);
 
 	/**
 	 * @brief Checks the string if it is a valid lua file.

@@ -55,4 +55,10 @@ void register_mesh_component();
  * @brief Register the terrain component to Lua.
  */
 void register_terrain_component();
+
+/**
+ * @brief Register the statemachine component to Lua.
+ */
+void register_statemachine_component();
+
 };  // namespace ECSAccess

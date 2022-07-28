@@ -4,12 +4,15 @@
 #include "Controller/ResourceManager/ResourceManager.hpp"
 #include "Controller/LuaManager.hpp"
 
+#include "Model/RunTimeDataStorage/GlobalDataStorage.hpp"
+
 #include "Model/Components/Transform.hpp"
 #include "Model/Components/Model.hpp"
 #include "Model/Components/Script.hpp"
 #include "Model/Components/Light.hpp"
 #include "Model/Components/Mesh.hpp"
 #include "Model/Components/Terrain.hpp"
+#include "Model/Components/Statemachine.hpp"
 #include "Model/Components/Remove.hpp"
 
 void System::draw_model(entt::registry& registry) {
@@ -167,6 +170,16 @@ void System::init_spot_light(entt::registry& registry, entt::entity entity) {
 	spot_light.light_id = light_manager.add_spot_light(spot_light);
 }
 
+void System::init_statemachine(entt::registry& registry, entt::entity entity) {
+	auto& lua = LuaManager::get_instance().get_state();
+
+	auto& statemachine = registry.get<Component::Statemachine>(entity);
+
+	if (!statemachine.entity) return;
+
+	statemachine.lua_variables = lua["entity"]["statemachine"]["var"];
+}
+
 void System::update_directional_light(entt::registry& registry) {
 	auto& light_manager = ResourceManager::get_instance().get_light_manager();
 
@@ -213,5 +226,46 @@ void System::update_script(entt::registry& registry) {
 void System::update_remove(ECS& ecs) {
 	for (auto entity : ecs.get_registry().view<Component::Remove>()) {
 		ecs.destroy_entity(entity);
+	}
+}
+
+void System::update_statemachine(ECS& ecs) {
+	auto& lua = LuaManager::get_instance().get_state();
+	sol::function exe;
+
+	if (EngineTime::is_paused()) {
+		return;
+	}
+
+	float time =
+	    dataMgr.getDynamicFloatData("time_since_state_machine_last_update", 0);
+	time += EngineTime::get_delta_time();
+
+	if (time <
+	    dataMgr.getDynamicFloatData("state_machine_update_delay", 1 / 20)) {
+		return;
+	}
+
+	auto view = ecs.get_registry().view<Component::Statemachine>();
+
+	for (auto entity : view) {
+		auto& stateM = view.get<Component::Statemachine>(entity);
+
+		if (!stateM.entity) continue;
+		lua["var"] = stateM.lua_variables;
+
+		// Global state update
+		if (!stateM.global_state.empty()) {
+			exe = lua[stateM.global_state]["execute"];
+			exe(ecs, stateM.entity);
+		}
+
+		// Current state update
+		if (!stateM.current_state.empty()) {
+			exe = lua[stateM.current_state]["execute"];
+			exe(ecs, stateM.entity);
+		}
+
+		stateM.lua_variables = lua["var"];
 	}
 }

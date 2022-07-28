@@ -56,6 +56,10 @@ void ECSGui::draw_entity(const Reflex::Entity& entity) {
 	if (entity.any_component<Component::SpotLight>()) {
 		draw_spot_light(entity.get_component<Component::SpotLight>());
 	}
+
+	if (entity.any_component<Component::Statemachine>()) {
+		draw_statemachine(entity.get_component<Component::Statemachine>());
+	}
 }
 
 void ECSGui::draw_script(Component::Script& script) {
@@ -127,6 +131,14 @@ void ECSGui::draw_spot_light(Component::SpotLight& light) {
 	ImGui::DragFloat("Quadratic", &light.quadratic, speed_);
 	ImGui::DragFloat3("Direction", glm::value_ptr(light.direction), speed_);
 	ImGui::DragFloat("Edge", &light.edge, speed_);
+}
+
+void ECSGui::draw_statemachine(Component::Statemachine& statemachine) {
+	ImGui::Text("Statemachine");
+	ImGui::InputInt("unique id", &statemachine.unique_statemachine_identifier);
+	input_text("Global state", statemachine.global_state);
+	input_text("Current state", statemachine.current_state);
+	input_text("Previous state", statemachine.previous_state);
 }
 
 void ECSGui::input_text(const char* label, std::string& text) {

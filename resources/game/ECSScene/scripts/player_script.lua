@@ -1,4 +1,6 @@
-var = {}
+var = {
+	speed = 1.0
+}
 
 function init(ecs, entity)
 
@@ -6,19 +8,19 @@ end
 
 function update(ecs, entity)
 	if (Input.get_key_state("w"):is_key_hold()) then
-		Camera.move(Movement.forward, Time.get_delta_time())
+		Camera.move(Movement.forward, Time.get_delta_time() * var.speed)
 	end
 
 	if (Input.get_key_state("a"):is_key_hold()) then
-		Camera.move(Movement.left, Time.get_delta_time())
+		Camera.move(Movement.left, Time.get_delta_time() * var.speed)
 	end
 
 	if (Input.get_key_state("s"):is_key_hold()) then
-		Camera.move(Movement.backward, Time.get_delta_time())
+		Camera.move(Movement.backward, Time.get_delta_time() * var.speed)
 	end
 
 	if (Input.get_key_state("d"):is_key_hold()) then
-		Camera.move(Movement.right, Time.get_delta_time())
+		Camera.move(Movement.right, Time.get_delta_time() * var.speed)
 	end
 
 	if (Input.get_key_state("z"):is_key_pressed()) then
@@ -46,6 +48,14 @@ function update(ecs, entity)
 
 	if (Input.get_key_state("k"):is_key_pressed()) then
 		Renderer.toggle_wireframe()
+	end
+
+	if (Input.get_key_state("q"):is_key_pressed()) then
+		var.speed = var.speed / 2
+	end
+
+	if (Input.get_key_state("e"):is_key_pressed()) then
+		var.speed = var.speed * 2
 	end
 
 	if (not Camera.is_noclip()) then
