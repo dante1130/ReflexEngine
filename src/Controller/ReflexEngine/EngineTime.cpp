@@ -2,6 +2,7 @@
 
 #include "Controller/LuaManager.hpp"
 
+double EngineTime::curr_time_ = 0.0;
 double EngineTime::prev_time_ = 0.0;
 double EngineTime::delta_time_ = 0.0;
 double EngineTime::fixed_delta_time_ = 0.0;
@@ -32,6 +33,7 @@ void EngineTime::lua_access() {
 }
 
 void EngineTime::update_delta_time(double curr_time) {
+	curr_time_ = curr_time;
 	curr_time *= time_scale_;
 
 	delta_time_ = curr_time - prev_time_;
@@ -58,6 +60,8 @@ double EngineTime::get_fixed_delta_time() { return fixed_delta_time_; }
 double EngineTime::get_delta_time() { return delta_time_; }
 
 double EngineTime::get_time_step() { return time_step_; }
+
+double EngineTime::get_current_time() { return curr_time_; }
 
 double EngineTime::get_time_unpaused() { return total_unpaused_time_; }
 

@@ -13,6 +13,7 @@
 #include "Model/RunTimeDataStorage/GlobalDataStorage.hpp"
 #include "Controller/Terrain/TerrainManager.hpp"
 #include "Model/singletons.h"
+#include "Controller/GUI/DebugLogger.hpp"
 
 void ReflexEngine::run() {
 	auto& engine = ReflexEngine::get_instance();
@@ -20,6 +21,8 @@ void ReflexEngine::run() {
 	if (!engine.window_.init()) return;
 
 	engine.lua_access();
+
+	DebugLogger::clear();
 
 	engine.renderer_.init();
 	gui::init(engine.window_.get_window(), "#version 410");
@@ -64,6 +67,8 @@ void ReflexEngine::run() {
 			engine.renderer_.draw();
 		}
 
+		DebugLogger::draw();
+
 		gui::mainLoopEnd();
 
 		engine.window_.swap_buffers();
@@ -85,6 +90,7 @@ ReflexEngine& ReflexEngine::get_instance() {
 
 void ReflexEngine::lua_access() {
 	InputManager::get_instance();
+	DebugLogger::lua_access();
 	NetworkAccess::lua_access();
 	MathAccess::lua_access();
 	ECSAccess::register_ecs();

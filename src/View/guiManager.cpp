@@ -51,6 +51,9 @@ void gui::mainLoopStart() {
 
 	ImGuiIO& io = ImGui::GetIO();
 	io.DeltaTime = EngineTime::get_delta_time();
+
+	ImGui::DockSpaceOverViewport(ImGui::GetMainViewport(),
+	                             ImGuiDockNodeFlags_PassthruCentralNode);
 }
 
 void gui::mainLoopEnd() {

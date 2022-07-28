@@ -23,6 +23,10 @@ function update(ecs, entity)
 
 	if (Input.get_key_state("z"):is_key_pressed()) then
 		Camera.toggle_noclip()
+
+		if (Camera.is_noclip()) then
+			DebugLogger.log("warning", "You are cheating!")
+		end
 	end
 
 	if (Input.get_key_state("f11"):is_key_pressed()) then
@@ -32,6 +36,12 @@ function update(ecs, entity)
 	if (Input.get_key_state("escape"):is_key_pressed()) then
 		Window.set_cursor_visible(not Window.is_cursor_visible())
 		Time.set_pause(not Time.is_paused())
+		if (Time.is_paused()) then
+			DebugLogger.log("info", "Game is paused.")
+		else
+			DebugLogger.log("info", "Game is unpaused.")
+		end
+
 	end
 
 	if (Input.get_key_state("k"):is_key_pressed()) then

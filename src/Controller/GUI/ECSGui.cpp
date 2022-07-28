@@ -4,9 +4,6 @@
 #include <glm/gtc/type_ptr.hpp>
 
 void ECSGui::draw(ECS& ecs) {
-	ImGui::DockSpaceOverViewport(ImGui::GetMainViewport(),
-	                             ImGuiDockNodeFlags_PassthruCentralNode);
-
 	constexpr ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoBackground;
 
 	ImGui::Begin("Scene entities", nullptr, window_flags);
@@ -89,14 +86,15 @@ void ECSGui::draw_terrain(Component::Terrain& terrain) {
 }
 
 void ECSGui::draw_transform(Component::Transform& transform) {
-	glm::vec3 euler = glm::eulerAngles(transform.rotation);
+	glm::vec3 euler = glm::degrees(glm::eulerAngles(transform.rotation));
 
 	ImGui::Text("Transform");
 	ImGui::DragFloat3("Position", glm::value_ptr(transform.position), speed_);
-	ImGui::DragFloat3("Rotation", glm::value_ptr(euler), speed_);
+	ImGui::DragFloat3("Rotation", glm::value_ptr(euler), speed_, -90.0f, 90.0f,
+	                  "%.3f", ImGuiSliderFlags_ClampOnInput);
 	ImGui::DragFloat3("Scale", glm::value_ptr(transform.scale), speed_);
 
-	transform.rotation = glm::quat(euler);
+	transform.rotation = glm::quat(glm::radians(euler));
 }
 
 void ECSGui::draw_directional_light(Component::DirectionalLight& light) {
