@@ -4,3 +4,7 @@
 [submodule "cmake/entt"]
 	path = cmake/entt
 	url = https://github.com/skypjack/entt
+
+[submodule "cmake/imgui"]
+	path = cmake/imgui
+	url = https://github.com/dante1130/imgui

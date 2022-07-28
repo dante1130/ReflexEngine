@@ -1,4 +1,6 @@
 entity = {
+	name = "Water",
+
 	transform = {
 		-- Position set internally in the water_script.lua
 		position = { x = 0, y = 0, z = 0 },

@@ -39,7 +39,9 @@ void ECSAccess::register_registry() {
 
 	auto ecs_table = lua["ECS"].get_or_create<sol::table>();
 
-	ecs_table["create_entity"] = [](ECS& ecs) { return ecs.create_entity(); };
+	ecs_table["create_entity"] = [](ECS& ecs, const std::string& name) {
+		return ecs.create_entity(name);
+	};
 
 	ecs_table["get_entity"] = [](ECS& ecs, entt::entity entity_id) {
 		return ecs.get_entity(entity_id);
@@ -136,6 +138,17 @@ void ECSAccess::register_entity() {
 	entity_type["get_mesh_component"] = &Entity::get_component<Mesh>;
 	entity_type["get_statemachine_component"] =
 	    &Entity::get_component<Statemachine>;
+
+	entity_type["any_transform_component"] = &Entity::any_component<Transform>;
+	entity_type["any_model_component"] = &Entity::any_component<Model>;
+	entity_type["any_script_component"] = &Entity::any_component<Script>;
+	entity_type["any_directional_light_component"] =
+	    &Entity::any_component<DirectionalLight>;
+	entity_type["any_point_light_component"] =
+	    &Entity::any_component<PointLight>;
+	entity_type["any_spot_light_component"] = &Entity::any_component<SpotLight>;
+	entity_type["any_mesh_component"] = &Entity::any_component<Mesh>;
+	entity_type["any_mesh_statemachine"] = &Entity::any_component<Statemachine>;
 }
 
 void ECSAccess::register_transform_component() {

@@ -5,6 +5,7 @@
 #include "Scene.hpp"
 
 #include "Controller/ECS/ECS.hpp"
+#include "Controller/GUI/ECSGui.hpp"
 
 /**
  * @class ECSScene
@@ -93,4 +94,5 @@ public:
 
 private:
 	ECS ecs_;
+	ECSGui ecs_gui_;
 };

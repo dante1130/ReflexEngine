@@ -1,4 +1,6 @@
 entity = {
+	name = "Terrain",
+
 	transform = {
 		position = {
 			x = 0,
