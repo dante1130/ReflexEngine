@@ -63,78 +63,94 @@ void ECSGui::draw_entity(const Reflex::Entity& entity) {
 }
 
 void ECSGui::draw_script(Component::Script& script) {
+	ImGui::PushID("Script");
 	ImGui::Text("Script");
 	input_text("Script name", script.lua_script);
+	ImGui::PopID();
 }
 
 void ECSGui::draw_mesh(Component::Mesh& mesh) {
+	ImGui::PushID("Mesh");
 	ImGui::Text("Mesh");
-
 	input_text("Mesh name", mesh.mesh_name);
 	input_text("Texture name", mesh.texture_name);
 	input_text("Material name", mesh.material_name);
+	ImGui::PopID();
 }
 
 void ECSGui::draw_model(Component::Model& model) {
+	ImGui::PushID("Model");
 	ImGui::Text("Model");
 	input_text("Model name", model.model_name);
 	input_text("Material name", model.material_name);
+	ImGui::PopID();
 }
 
 void ECSGui::draw_terrain(Component::Terrain& terrain) {
+	ImGui::PushID("Terrain");
 	ImGui::Text("Terrain");
 	input_text("Terrain name", terrain.terrain_name);
 	input_text("Texture name", terrain.texture_name);
 	input_text("Material name", terrain.material_name);
 	input_text("Detailmap name", terrain.detailmap_name);
+	ImGui::PopID();
 }
 
 void ECSGui::draw_transform(Component::Transform& transform) {
+	ImGui::PushID("Transform");
 	ImGui::Text("Transform");
 	ImGui::DragFloat3("Position", glm::value_ptr(transform.position), speed_);
-	ImGui::DragFloat3("Rotation", glm::value_ptr(transform.rotation), speed_,
-	                  0.0f, 0.0f, "%.3f", ImGuiSliderFlags_ClampOnInput);
+	ImGui::DragFloat3("Rotation", glm::value_ptr(transform.rotation), speed_);
 	ImGui::DragFloat3("Scale", glm::value_ptr(transform.scale), speed_);
+	ImGui::PopID();
 }
 
 void ECSGui::draw_directional_light(Component::DirectionalLight& light) {
+	ImGui::PushID("Directional light");
 	ImGui::Text("Directional light");
-	ImGui::DragFloat3("Color", glm::value_ptr(light.color), speed_);
-	ImGui::DragFloat("Ambient intensity", &light.ambient_intensity, speed_);
-	ImGui::DragFloat("Diffuse intensity", &light.diffuse_intensity, speed_);
+	ImGui::ColorEdit3("Color", glm::value_ptr(light.color));
+	ImGui::DragFloat("Ambient", &light.ambient_intensity, speed_);
+	ImGui::DragFloat("Diffuse", &light.diffuse_intensity, speed_);
 	ImGui::DragFloat3("Direction", glm::value_ptr(light.direction), speed_);
+	ImGui::PopID();
 }
 
 void ECSGui::draw_point_light(Component::PointLight& light) {
+	ImGui::PushID("Point light");
 	ImGui::Text("Point light");
-	ImGui::DragFloat3("Color", glm::value_ptr(light.color), speed_);
-	ImGui::DragFloat("Ambient intensity", &light.ambient_intensity, speed_);
-	ImGui::DragFloat("Diffuse intensity", &light.diffuse_intensity, speed_);
+	ImGui::ColorEdit3("Color", glm::value_ptr(light.color));
+	ImGui::DragFloat("Ambient", &light.ambient_intensity, speed_);
+	ImGui::DragFloat("Diffuse", &light.diffuse_intensity, speed_);
 	ImGui::DragFloat3("Position", glm::value_ptr(light.position), speed_);
 	ImGui::DragFloat("Constant", &light.constant, speed_);
 	ImGui::DragFloat("Linear", &light.linear, speed_);
 	ImGui::DragFloat("Quadratic", &light.quadratic, speed_);
+	ImGui::PopID();
 }
 
 void ECSGui::draw_spot_light(Component::SpotLight& light) {
+	ImGui::PushID("Spot light");
 	ImGui::Text("Spot light");
-	ImGui::DragFloat3("Color", glm::value_ptr(light.color), speed_);
-	ImGui::DragFloat("Ambient intensity", &light.ambient_intensity, speed_);
-	ImGui::DragFloat("Diffuse intensity", &light.diffuse_intensity, speed_);
+	ImGui::ColorEdit3("Color", glm::value_ptr(light.color));
+	ImGui::DragFloat("Ambient", &light.ambient_intensity, speed_);
+	ImGui::DragFloat("Diffuse", &light.diffuse_intensity, speed_);
 	ImGui::DragFloat3("Position", glm::value_ptr(light.position), speed_);
 	ImGui::DragFloat("Constant", &light.constant, speed_);
 	ImGui::DragFloat("Linear", &light.linear, speed_);
 	ImGui::DragFloat("Quadratic", &light.quadratic, speed_);
 	ImGui::DragFloat3("Direction", glm::value_ptr(light.direction), speed_);
 	ImGui::DragFloat("Edge", &light.edge, speed_);
+	ImGui::PopID();
 }
 
 void ECSGui::draw_statemachine(Component::Statemachine& statemachine) {
+	ImGui::PushID("Statemachine");
 	ImGui::Text("Statemachine");
 	ImGui::InputInt("unique id", &statemachine.unique_statemachine_identifier);
 	input_text("Global state", statemachine.global_state);
 	input_text("Current state", statemachine.current_state);
 	input_text("Previous state", statemachine.previous_state);
+	ImGui::PopID();
 }
 
 void ECSGui::input_text(const char* label, std::string& text) {

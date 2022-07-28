@@ -19,9 +19,9 @@ entity = {
 		},
 	},
 
-	-- script = {
-	-- 	lua_script = "game/ECSScene/scripts/lighthouse_script.lua"
-	-- },
+	script = {
+		lua_script = "game/ECSScene/scripts/lighthouse_script.lua"
+	},
 
 	model = {
 		model_name = "lighthouse",
