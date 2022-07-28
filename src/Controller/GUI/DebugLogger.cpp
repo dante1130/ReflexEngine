@@ -8,8 +8,6 @@ ImGuiTextFilter DebugLogger::filter_;
 ImVector<int> DebugLogger::line_offsets_;
 bool DebugLogger::auto_scroll_ = true;
 
-DebugLogger::DebugLogger() { clear(); }
-
 void DebugLogger::lua_access() {
 	auto& lua = LuaManager::get_instance().get_state();
 

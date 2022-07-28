@@ -22,6 +22,8 @@ void ReflexEngine::run() {
 
 	engine.lua_access();
 
+	DebugLogger::clear();
+
 	engine.renderer_.init();
 	gui::init(engine.window_.get_window(), "#version 410");
 
