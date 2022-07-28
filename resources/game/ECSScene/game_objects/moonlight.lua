@@ -1,4 +1,6 @@
 entity = {
+	name = "Moonlight",
+
 	directional_light = {
 		color = {
 			r = 0.22,

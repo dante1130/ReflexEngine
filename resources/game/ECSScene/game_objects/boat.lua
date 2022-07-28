@@ -1,6 +1,8 @@
 local quat_rotation = Math.euler_to_quat(Math.vec3.new(0, Math.radians(-180), 0))
 
 entity = {
+	name = "Boat",
+
 	transform = {
 		position = {
 			x = 100,
