@@ -18,9 +18,6 @@ void ECSGui::draw(ECS& ecs) {
 	});
 	ImGui::End();
 
-	if (ImGui::IsMouseDown(ImGuiMouseButton_Left) && ImGui::IsWindowHovered())
-		selected_entity_ = entt::null;
-
 	ImGui::Begin("Properties", nullptr, window_flags);
 	if (selected_entity_ != entt::null) {
 		draw_entity(ecs.get_entity(selected_entity_));
@@ -49,29 +46,59 @@ void ECSGui::draw_entity(const Reflex::Entity& entity) {
 	// 	draw_terrain(entity.get_component<Component::Terrain>());
 	// }
 
-	// if (entity.any_component<Component::DirectionalLight>()) {
-	// 	draw_directional_light(
-	// 	    entity.get_component<Component::DirectionalLight>());
-	// }
+	if (entity.any_component<Component::DirectionalLight>()) {
+		draw_directional_light(
+		    entity.get_component<Component::DirectionalLight>());
+	}
 
-	// if (entity.any_component<Component::PointLight>()) {
-	// 	draw_point_light(entity.get_component<Component::PointLight>());
-	// }
+	if (entity.any_component<Component::PointLight>()) {
+		draw_point_light(entity.get_component<Component::PointLight>());
+	}
 
-	// if (entity.any_component<Component::SpotLight>()) {
-	// 	draw_spot_light(entity.get_component<Component::SpotLight>());
-	// }
+	if (entity.any_component<Component::SpotLight>()) {
+		draw_spot_light(entity.get_component<Component::SpotLight>());
+	}
 }
 
 void ECSGui::draw_transform(Component::Transform& transform) {
-	constexpr float speed = 0.1f;
-
 	glm::vec3 euler = glm::eulerAngles(transform.rotation);
 
 	ImGui::Text("Transform");
-	ImGui::DragFloat3("Position", glm::value_ptr(transform.position), speed);
-	ImGui::DragFloat3("Rotation", glm::value_ptr(euler), speed);
-	ImGui::DragFloat3("Scale", glm::value_ptr(transform.scale), speed);
+	ImGui::DragFloat3("Position", glm::value_ptr(transform.position), speed_);
+	ImGui::DragFloat3("Rotation", glm::value_ptr(euler), speed_);
+	ImGui::DragFloat3("Scale", glm::value_ptr(transform.scale), speed_);
 
 	transform.rotation = glm::quat(euler);
+}
+
+void ECSGui::draw_directional_light(Component::DirectionalLight& light) {
+	ImGui::Text("Directional light");
+	ImGui::DragFloat3("Color", glm::value_ptr(light.color), speed_);
+	ImGui::DragFloat("Ambient intensity", &light.ambient_intensity, speed_);
+	ImGui::DragFloat("Diffuse intensity", &light.diffuse_intensity, speed_);
+	ImGui::DragFloat3("Direction", glm::value_ptr(light.direction), speed_);
+}
+
+void ECSGui::draw_point_light(Component::PointLight& light) {
+	ImGui::Text("Point light");
+	ImGui::DragFloat3("Color", glm::value_ptr(light.color), speed_);
+	ImGui::DragFloat("Ambient intensity", &light.ambient_intensity, speed_);
+	ImGui::DragFloat("Diffuse intensity", &light.diffuse_intensity, speed_);
+	ImGui::DragFloat3("Position", glm::value_ptr(light.position), speed_);
+	ImGui::DragFloat("Constant", &light.constant, speed_);
+	ImGui::DragFloat("Linear", &light.linear, speed_);
+	ImGui::DragFloat("Quadratic", &light.quadratic, speed_);
+}
+
+void ECSGui::draw_spot_light(Component::SpotLight& light) {
+	ImGui::Text("Spot light");
+	ImGui::DragFloat3("Color", glm::value_ptr(light.color), speed_);
+	ImGui::DragFloat("Ambient intensity", &light.ambient_intensity, speed_);
+	ImGui::DragFloat("Diffuse intensity", &light.diffuse_intensity, speed_);
+	ImGui::DragFloat3("Position", glm::value_ptr(light.position), speed_);
+	ImGui::DragFloat("Constant", &light.constant, speed_);
+	ImGui::DragFloat("Linear", &light.linear, speed_);
+	ImGui::DragFloat("Quadratic", &light.quadratic, speed_);
+	ImGui::DragFloat3("Direction", glm::value_ptr(light.direction), speed_);
+	ImGui::DragFloat("Edge", &light.edge, speed_);
 }
