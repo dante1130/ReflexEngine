@@ -46,7 +46,6 @@ void send_area_message(ECS& ecs, Reflex::Entity& entity, float range, int msg,
 /**
  * @brief Looks for an enemy within arc & range, will add to the sol table
  * variables, such as info about the target if it spots one (e.g., target_id)
- * (TOO BE COMPLETED)
  *
  * @param &ecs          - The ecs
  * @param &entity       - The entity
@@ -72,8 +71,7 @@ void generate_waypoints(ECS& ecs, Reflex::Entity& entity, glm::vec3 currentPos,
                         glm::vec3 targetPos, std::string terrain_to_pathfind);
 
 /**
- * @brief Follows a generated waypoint from a pathfinding algorithm (TOO BE
- * COMPLETED)
+ * @brief Follows a generated waypoint from a pathfinding algorithm (UNTESTED)
  *
  * @param &entity               - The entity
  * @param use_physics_movement  - If it should add velocity compared to just
