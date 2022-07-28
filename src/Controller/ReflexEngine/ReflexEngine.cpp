@@ -13,6 +13,7 @@
 #include "Model/RunTimeDataStorage/GlobalDataStorage.hpp"
 #include "Controller/Terrain/TerrainManager.hpp"
 #include "Model/singletons.h"
+#include "Controller/GUI/DebugLogger.hpp"
 
 void ReflexEngine::run() {
 	auto& engine = ReflexEngine::get_instance();
@@ -56,6 +57,7 @@ void ReflexEngine::run() {
 			if (EngineTime::is_time_step_passed()) {
 				scene.fixed_update(EngineTime::get_fixed_delta_time());
 				EngineTime::reset_fixed_delta_time();
+				DebugLogger::log("info", "Fixed update");
 			}
 
 			scene.update(EngineTime::get_delta_time());
@@ -63,6 +65,8 @@ void ReflexEngine::run() {
 			scene.add_draw_call();
 			engine.renderer_.draw();
 		}
+
+		DebugLogger::draw();
 
 		gui::mainLoopEnd();
 

@@ -4,9 +4,6 @@
 #include <glm/gtc/type_ptr.hpp>
 
 void ECSGui::draw(ECS& ecs) {
-	ImGui::DockSpaceOverViewport(ImGui::GetMainViewport(),
-	                             ImGuiDockNodeFlags_PassthruCentralNode);
-
 	constexpr ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoBackground;
 
 	ImGui::Begin("Scene entities", nullptr, window_flags);

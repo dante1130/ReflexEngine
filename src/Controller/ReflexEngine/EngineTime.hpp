@@ -49,6 +49,12 @@ public:
 	static double get_delta_time();
 
 	/**
+	 * @brief Get the current time of runtime.
+	 * @return double - The current time of runtime.
+	 */
+	static double get_current_time();
+
+	/**
 	 * @brief	gets the time unpaused
 	 * @return	double	- the total time unpaused
 	 */
@@ -81,6 +87,8 @@ public:
 	static double get_time_scale();
 
 private:
+	/// The current time.
+	static double curr_time_;
 	/// The previous time.
 	static double prev_time_;
 	/// The delta time.
