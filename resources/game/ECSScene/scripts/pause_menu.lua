@@ -1,4 +1,4 @@
-gui_setWindowSize(300, 300, 1)
+gui_setWindowSize(300, 300, 2)
 gui_setWindowPos(0, 0, 1)
 
 gui_begin("Pause Menu")

@@ -22,6 +22,9 @@ namespace gui {
  */
 void init(GLFWwindow* window, const std::string& openglVersion);
 
+/**
+ * @brief Exposes imGUI to the scene.
+ */
 void lua_access();
 
 /**

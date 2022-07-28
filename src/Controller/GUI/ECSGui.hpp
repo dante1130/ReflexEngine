@@ -19,9 +19,11 @@ public:
 	void draw(ECS& ecs);
 
 private:
+	entt::entity selected_entity_ = {entt::null};
+
 	void draw_entity(const Reflex::Entity& entity);
 
-	// void draw_transform(const Component::Transform& transform);
+	void draw_transform(Component::Transform& transform);
 
 	// void draw_script(const Component::Script& script);
 
