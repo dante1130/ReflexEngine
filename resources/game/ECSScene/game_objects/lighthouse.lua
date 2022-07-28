@@ -1,5 +1,3 @@
-local quat_rotation = Math.euler_to_quat(Math.vec3.new(Math.radians(270), 0, 0))
-
 entity = {
 	name = "Lighthouse",
 
@@ -10,10 +8,9 @@ entity = {
 			z = 0
 		},
 		rotation = {
-			x = quat_rotation.x,
-			y = quat_rotation.y,
-			z = quat_rotation.z,
-			w = quat_rotation.w
+			x = 270,
+			y = 0,
+			z = 0
 		},
 		scale = {
 			x = 0.2,
@@ -22,9 +19,9 @@ entity = {
 		},
 	},
 
-	script = {
-		lua_script = "game/ECSScene/scripts/lighthouse_script.lua"
-	},
+	-- script = {
+	-- 	lua_script = "game/ECSScene/scripts/lighthouse_script.lua"
+	-- },
 
 	model = {
 		model_name = "lighthouse",

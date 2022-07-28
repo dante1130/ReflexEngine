@@ -12,8 +12,8 @@ namespace Component {
 struct Transform {
 	/// The position of the entity.
 	glm::vec3 position = {0.0f, 0.0f, 0.0f};
-	/// The rotation of the entity.
-	glm::quat rotation = {1.0f, 0.0f, 0.0f, 0.0f};
+	/// The rotation (in euler angles) of the entity.
+	glm::vec3 rotation = {0.0f, 0.0f, 0.0f};
 	/// The scale of the entity.
 	glm::vec3 scale = {1.0f, 1.0f, 1.0f};
 
@@ -21,7 +21,7 @@ struct Transform {
 
 	Transform(const Transform&) = default;
 
-	Transform(const glm::vec3& pos, const glm::quat& rot, const glm::vec3& scl)
+	Transform(const glm::vec3& pos, const glm::vec3& rot, const glm::vec3& scl)
 	    : position(pos), rotation(rot), scale(scl) {}
 };
 };  // namespace Component

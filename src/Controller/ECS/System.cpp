@@ -29,8 +29,8 @@ void System::draw_model(entt::registry& registry) {
 		                          &material_manager](const Shader& shader) {
 			    glm::mat4 model_matrix(1.0f);
 			    model_matrix = glm::translate(model_matrix, transform.position);
-			    model_matrix =
-			        model_matrix * glm::mat4_cast(transform.rotation);
+			    model_matrix *=
+			        glm::mat4_cast(glm::quat(glm::radians(transform.rotation)));
 			    model_matrix = glm::scale(model_matrix, transform.scale);
 
 			    glUniformMatrix4fv(shader.GetModelLocation(), 1, GL_FALSE,
@@ -63,8 +63,8 @@ void System::draw_mesh(entt::registry& registry) {
 		                          &material_manager](const Shader& shader) {
 			    glm::mat4 model_matrix(1.0f);
 			    model_matrix = glm::translate(model_matrix, transform.position);
-			    model_matrix =
-			        model_matrix * glm::mat4_cast(transform.rotation);
+			    model_matrix *=
+			        glm::mat4_cast(glm::quat(glm::radians(transform.rotation)));
 			    model_matrix = glm::scale(model_matrix, transform.scale);
 
 			    glUniformMatrix4fv(shader.GetModelLocation(), 1, GL_FALSE,
@@ -105,7 +105,8 @@ void System::draw_terrain(entt::registry& registry) {
 			    glm::mat4 model = glm::mat4(1.0f);
 			    model = glm::translate(model, transform.position);
 			    model = glm::translate(model, terrain.get_origin());
-			    model = model * glm::mat4_cast(transform.rotation);
+			    model *=
+			        glm::mat4_cast(glm::quat(glm::radians(transform.rotation)));
 			    model = glm::scale(model, transform.scale);
 
 			    glUniformMatrix4fv(shader.GetModelLocation(), 1, GL_FALSE,
