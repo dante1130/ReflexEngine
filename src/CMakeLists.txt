@@ -90,6 +90,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/AI/luaAccessScriptedFSM.cpp
 	Controller/AI/Counter.cpp
 	Controller/AI/vector2D.cpp
+	Controller/GUI/ECSGui.cpp
 
 	Scene/Scene.hpp
 	Scene/TestScene.cpp

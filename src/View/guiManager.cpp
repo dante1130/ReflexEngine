@@ -2,12 +2,18 @@
 
 #include "Controller/ResourceManager/ResourceManager.hpp"
 #include "Controller/LuaManager.hpp"
+#include "Controller/ReflexEngine/EngineTime.hpp"
+
+#include <GLFW/glfw3.h>
 
 void gui::init(GLFWwindow* window, const std::string& openglVersion) {
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
+
 	ImGuiIO& io = ImGui::GetIO();
-	(void)io;
+
+	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+
 	ImGui::StyleColorsDark();
 	ImGui_ImplGlfw_InitForOpenGL(window, true);
 	ImGui_ImplOpenGL3_Init(openglVersion.c_str());
@@ -42,6 +48,9 @@ void gui::mainLoopStart() {
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
+
+	ImGuiIO& io = ImGui::GetIO();
+	io.DeltaTime = EngineTime::get_delta_time();
 }
 
 void gui::mainLoopEnd() {

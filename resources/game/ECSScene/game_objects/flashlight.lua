@@ -1,4 +1,6 @@
 entity = {
+	name = "Flashlight",
+
 	spot_light = {
 		color = { r = 1, g = 1, b = 1 },
 

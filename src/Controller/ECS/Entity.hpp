@@ -14,10 +14,11 @@ public:
 	/**
 	 * @brief Construct a new Entity object.
 	 *
+	 * @param name The name of the entity.
 	 * @param entity_id The entity ID.
 	 * @param ecs A pointer to the ECS instance.
 	 */
-	Entity(entt::entity entity_id, ECS* ecs);
+	Entity(const std::string& name, entt::entity entity_id, ECS* ecs);
 
 	/**
 	 * @brief Adds a component to the entity.
@@ -48,6 +49,15 @@ public:
 	T& get_component() const;
 
 	/**
+	 * @brief Returns true if the entity any of the components.
+	 *
+	 * @tparam T The component types.
+	 * @return bool
+	 */
+	template <typename... T>
+	bool any_component() const;
+
+	/**
 	 * @brief Get the entity id object
 	 *
 	 * @return entt::entity
@@ -61,7 +71,11 @@ public:
 	 */
 	entt::registry& get_registry();
 
+	const std::string& get_name() const;
+
 private:
+	/// The name of the entity.
+	std::string name_;
 	/// The entity ID.
 	entt::entity entity_id_ = {entt::null};
 	/// A pointer to the ECS instance.
@@ -82,4 +96,9 @@ void Reflex::Entity::remove_component() {
 template <typename T>
 T& Reflex::Entity::get_component() const {
 	return ecs_->registry_.get<T>(entity_id_);
+}
+
+template <typename... T>
+bool Reflex::Entity::any_component() const {
+	return ecs_->registry_.any_of<T...>(entity_id_);
 }
