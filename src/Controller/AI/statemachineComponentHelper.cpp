@@ -113,7 +113,7 @@ void statemachineComponentHelper::look_for_enemy(ECS& ecs,
                                                  float arc, float distance) {
 	auto& registry = ecs.get_registry();
 
-	auto& view = registry.view<Component::Statemachine, Component::Transform>();
+	auto view = registry.view<Component::Statemachine, Component::Transform>();
 
 	Component::Statemachine& own_statemachine =
 	    entity.get_component<Component::Statemachine>();

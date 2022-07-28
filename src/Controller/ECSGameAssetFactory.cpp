@@ -82,9 +82,9 @@ void ECSGameAssetFactory::load_transform(Reflex::Entity& entity,
 	glm::vec3 position = {transform_table["position"]["x"],
 	                      transform_table["position"]["y"],
 	                      transform_table["position"]["z"]};
-	glm::quat rotation = {
-	    transform_table["rotation"]["w"], transform_table["rotation"]["x"],
-	    transform_table["rotation"]["y"], transform_table["rotation"]["z"]};
+	glm::vec3 rotation = {transform_table["rotation"]["x"],
+	                      transform_table["rotation"]["y"],
+	                      transform_table["rotation"]["z"]};
 	glm::vec3 scale = {transform_table["scale"]["x"],
 	                   transform_table["scale"]["y"],
 	                   transform_table["scale"]["z"]};
