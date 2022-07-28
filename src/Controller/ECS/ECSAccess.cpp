@@ -128,6 +128,16 @@ void ECSAccess::register_entity() {
 	    &Entity::get_component<PointLight>;
 	entity_type["get_spot_light_component"] = &Entity::get_component<SpotLight>;
 	entity_type["get_mesh_component"] = &Entity::get_component<Mesh>;
+
+	entity_type["any_transform_component"] = &Entity::any_component<Transform>;
+	entity_type["any_model_component"] = &Entity::any_component<Model>;
+	entity_type["any_script_component"] = &Entity::any_component<Script>;
+	entity_type["any_directional_light_component"] =
+	    &Entity::any_component<DirectionalLight>;
+	entity_type["any_point_light_component"] =
+	    &Entity::any_component<PointLight>;
+	entity_type["any_spot_light_component"] = &Entity::any_component<SpotLight>;
+	entity_type["any_mesh_component"] = &Entity::any_component<Mesh>;
 }
 
 void ECSAccess::register_transform_component() {

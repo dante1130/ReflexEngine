@@ -9,6 +9,9 @@ namespace Reflex {
 class Entity;
 };  // namespace Reflex
 
+using EntityMap =
+    std::unordered_map<entt::entity, std::shared_ptr<Reflex::Entity>>;
+
 /**
  * @class ECS
  * @brief The ECS class is a facade of the EnTT registry. It is used to
@@ -71,6 +74,13 @@ public:
 	entt::registry& get_registry();
 
 	/**
+	 * @brief Get the entity map.
+	 *
+	 * @return const EntityMap&
+	 */
+	const EntityMap& get_entity_map() const;
+
+	/**
 	 * @brief Destroy all entities.
 	 */
 	void clear_entities();
@@ -79,7 +89,7 @@ private:
 	/// The EnTT registry.
 	entt::registry registry_;
 	/// The hashmap of key value pairs of entity ID and entity object.
-	std::unordered_map<entt::entity, std::shared_ptr<Reflex::Entity>> entities_;
+	EntityMap entities_;
 
 	// An entity is made a friend to allow it to access the ECS private members,
 	// this is done because Entity has a pointer to the ECS instance.

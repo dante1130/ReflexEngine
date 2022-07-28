@@ -51,6 +51,8 @@ Entity& ECS::get_entity(entt::entity entity_id) {
 
 entt::registry& ECS::get_registry() { return registry_; }
 
+const EntityMap& ECS::get_entity_map() const { return entities_; }
+
 void ECS::clear_entities() {
 	entities_.clear();
 	registry_.clear();

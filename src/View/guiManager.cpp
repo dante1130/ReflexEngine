@@ -11,6 +11,9 @@ void gui::init(GLFWwindow* window, const std::string& openglVersion) {
 	ImGui::CreateContext();
 
 	ImGuiIO& io = ImGui::GetIO();
+
+	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+
 	io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
 	io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
 

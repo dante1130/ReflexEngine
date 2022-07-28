@@ -49,6 +49,15 @@ public:
 	T& get_component() const;
 
 	/**
+	 * @brief Returns true if the entity any of the components.
+	 *
+	 * @tparam T The component types.
+	 * @return bool
+	 */
+	template <typename... T>
+	bool any_component() const;
+
+	/**
 	 * @brief Get the entity id object
 	 *
 	 * @return entt::entity
@@ -61,6 +70,8 @@ public:
 	 * @return entt::registry&
 	 */
 	entt::registry& get_registry();
+
+	const std::string& get_name() const;
 
 private:
 	/// The name of the entity.
@@ -85,4 +96,9 @@ void Reflex::Entity::remove_component() {
 template <typename T>
 T& Reflex::Entity::get_component() const {
 	return ecs_->registry_.get<T>(entity_id_);
+}
+
+template <typename... T>
+bool Reflex::Entity::any_component() const {
+	return ecs_->registry_.any_of<T...>(entity_id_);
 }

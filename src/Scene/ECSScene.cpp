@@ -30,7 +30,10 @@ void ECSScene::fixed_update(double delta_time) {
 	ecs_.fixed_update(delta_time);
 }
 
-void ECSScene::add_draw_call() { ecs_.draw(); }
+void ECSScene::add_draw_call() {
+	ecs_gui_.draw(ecs_);
+	ecs_.draw();
+}
 
 void ECSScene::save_game_objects() {}
 
