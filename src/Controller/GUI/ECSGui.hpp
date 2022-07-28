@@ -22,21 +22,24 @@ private:
 	entt::entity selected_entity_ = {entt::null};
 	constexpr static float speed_ = 0.1f;
 
-	void draw_entity(const Reflex::Entity& entity);
+	static void draw_entity(const Reflex::Entity& entity);
 
-	void draw_transform(Component::Transform& transform);
+	static void draw_transform(Component::Transform& transform);
 
-	// void draw_script(Component::Script& script);
+	static void draw_script(Component::Script& script);
 
-	// void draw_mesh(Component::Mesh& mesh);
+	static void draw_mesh(Component::Mesh& mesh);
 
-	// void draw_model(Component::Model& model);
+	static void draw_model(Component::Model& model);
 
-	// void draw_terrain(Component::Terrain& terrain);
+	static void draw_terrain(Component::Terrain& terrain);
 
-	void draw_directional_light(Component::DirectionalLight& directional_light);
+	static void draw_directional_light(
+	    Component::DirectionalLight& directional_light);
 
-	void draw_point_light(Component::PointLight& point_light);
+	static void draw_point_light(Component::PointLight& point_light);
 
-	void draw_spot_light(Component::SpotLight& spot_light);
+	static void draw_spot_light(Component::SpotLight& spot_light);
+
+	static void input_text(const char* label, std::string& text);
 };

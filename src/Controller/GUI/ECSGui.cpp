@@ -1,6 +1,7 @@
 #include "ECSGui.hpp"
 
-#include "glm/gtc/type_ptr.hpp"
+#include <imgui/misc/cpp/imgui_stdlib.h>
+#include <glm/gtc/type_ptr.hpp>
 
 void ECSGui::draw(ECS& ecs) {
 	ImGui::DockSpaceOverViewport(ImGui::GetMainViewport(),
@@ -30,21 +31,21 @@ void ECSGui::draw_entity(const Reflex::Entity& entity) {
 		draw_transform(entity.get_component<Component::Transform>());
 	}
 
-	// if (entity.any_component<Component::Script>()) {
-	// 	draw_script(entity.get_component<Component::Script>());
-	// }
+	if (entity.any_component<Component::Script>()) {
+		draw_script(entity.get_component<Component::Script>());
+	}
 
-	// if (entity.any_component<Component::Mesh>()) {
-	// 	draw_mesh(entity.get_component<Component::Mesh>());
-	// }
+	if (entity.any_component<Component::Mesh>()) {
+		draw_mesh(entity.get_component<Component::Mesh>());
+	}
 
-	// if (entity.any_component<Component::Model>()) {
-	// 	draw_model(entity.get_component<Component::Model>());
-	// }
+	if (entity.any_component<Component::Model>()) {
+		draw_model(entity.get_component<Component::Model>());
+	}
 
-	// if (entity.any_component<Component::Terrain>()) {
-	// 	draw_terrain(entity.get_component<Component::Terrain>());
-	// }
+	if (entity.any_component<Component::Terrain>()) {
+		draw_terrain(entity.get_component<Component::Terrain>());
+	}
 
 	if (entity.any_component<Component::DirectionalLight>()) {
 		draw_directional_light(
@@ -58,6 +59,33 @@ void ECSGui::draw_entity(const Reflex::Entity& entity) {
 	if (entity.any_component<Component::SpotLight>()) {
 		draw_spot_light(entity.get_component<Component::SpotLight>());
 	}
+}
+
+void ECSGui::draw_script(Component::Script& script) {
+	ImGui::Text("Script");
+	input_text("Script name", script.lua_script);
+}
+
+void ECSGui::draw_mesh(Component::Mesh& mesh) {
+	ImGui::Text("Mesh");
+
+	input_text("Mesh name", mesh.mesh_name);
+	input_text("Texture name", mesh.texture_name);
+	input_text("Material name", mesh.material_name);
+}
+
+void ECSGui::draw_model(Component::Model& model) {
+	ImGui::Text("Model");
+	input_text("Model name", model.model_name);
+	input_text("Material name", model.material_name);
+}
+
+void ECSGui::draw_terrain(Component::Terrain& terrain) {
+	ImGui::Text("Terrain");
+	input_text("Terrain name", terrain.terrain_name);
+	input_text("Texture name", terrain.texture_name);
+	input_text("Material name", terrain.material_name);
+	input_text("Detailmap name", terrain.detailmap_name);
 }
 
 void ECSGui::draw_transform(Component::Transform& transform) {
@@ -101,4 +129,12 @@ void ECSGui::draw_spot_light(Component::SpotLight& light) {
 	ImGui::DragFloat("Quadratic", &light.quadratic, speed_);
 	ImGui::DragFloat3("Direction", glm::value_ptr(light.direction), speed_);
 	ImGui::DragFloat("Edge", &light.edge, speed_);
+}
+
+void ECSGui::input_text(const char* label, std::string& text) {
+	std::string temp_str = text;
+	if (ImGui::InputText(label, &temp_str,
+	                     ImGuiInputTextFlags_EnterReturnsTrue)) {
+		text = temp_str;
+	};
 }
