@@ -32,6 +32,12 @@ function update(ecs, entity)
 	if (Input.get_key_state("escape"):is_key_pressed()) then
 		Window.set_cursor_visible(not Window.is_cursor_visible())
 		Time.set_pause(not Time.is_paused())
+		if (Time.is_paused()) then
+			DebugLogger.log("info", "Game is paused.")
+		else
+			DebugLogger.log("warning", "Game is unpaused.")
+		end
+
 	end
 
 	if (Input.get_key_state("k"):is_key_pressed()) then

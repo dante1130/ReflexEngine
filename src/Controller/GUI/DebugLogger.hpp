@@ -6,6 +6,8 @@ class DebugLogger {
 public:
 	DebugLogger();
 
+	static void lua_access();
+
 	static void clear();
 
 	static void log(const std::string& category, const std::string& message);

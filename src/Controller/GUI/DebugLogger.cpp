@@ -1,6 +1,7 @@
 #include "DebugLogger.hpp"
 
 #include "Controller/ReflexEngine/EngineTime.hpp"
+#include "Controller/LuaManager.hpp"
 
 ImGuiTextBuffer DebugLogger::buffer_;
 ImGuiTextFilter DebugLogger::filter_;
@@ -8,6 +9,15 @@ ImVector<int> DebugLogger::line_offsets_;
 bool DebugLogger::auto_scroll_ = true;
 
 DebugLogger::DebugLogger() { clear(); }
+
+void DebugLogger::lua_access() {
+	auto& lua = LuaManager::get_instance().get_state();
+
+	auto debug_logger = lua.create_named_table("DebugLogger");
+
+	debug_logger.set_function("log", &DebugLogger::log);
+	debug_logger.set_function("clear", &DebugLogger::clear);
+}
 
 void DebugLogger::clear() {
 	buffer_.clear();
@@ -18,7 +28,7 @@ void DebugLogger::clear() {
 void DebugLogger::log(const std::string& category, const std::string& message) {
 	int old_size = buffer_.size();
 
-	buffer_.appendf("[%f] [%s] %s\n", EngineTime::get_current_time(),
+	buffer_.appendf("[%.2f] [%s] %s\n", EngineTime::get_current_time(),
 	                category.c_str(), message.c_str());
 
 	for (int new_size = buffer_.size(); old_size < new_size; ++old_size) {
@@ -29,16 +39,9 @@ void DebugLogger::log(const std::string& category, const std::string& message) {
 }
 
 void DebugLogger::draw() {
-	ImGui::Begin("Debug Log");
+	ImGui::Begin("Debug Log", nullptr, ImGuiWindowFlags_NoBackground);
 
-	// Options menu
-	if (ImGui::BeginPopup("Options")) {
-		ImGui::Checkbox("Auto-scroll", &auto_scroll_);
-		ImGui::EndPopup();
-	}
-
-	// Main window
-	if (ImGui::Button("Options")) ImGui::OpenPopup("Options");
+	ImGui::Checkbox("Auto-scroll", &auto_scroll_);
 	ImGui::SameLine();
 	bool clear = ImGui::Button("Clear");
 	ImGui::SameLine();
@@ -56,8 +59,9 @@ void DebugLogger::draw() {
 	ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 0));
 	const char* buf = buffer_.begin();
 	const char* buf_end = buffer_.end();
+
 	if (filter_.IsActive()) {
-		for (int line_no = 0; line_no < line_offsets_.Size; line_no++) {
+		for (int line_no = 0; line_no < line_offsets_.Size; ++line_no) {
 			const char* line_start = buf + line_offsets_[line_no];
 			const char* line_end = (line_no + 1 < line_offsets_.Size)
 			                           ? (buf + line_offsets_[line_no + 1] - 1)
@@ -70,7 +74,7 @@ void DebugLogger::draw() {
 		clipper.Begin(line_offsets_.Size);
 		while (clipper.Step()) {
 			for (int line_no = clipper.DisplayStart;
-			     line_no < clipper.DisplayEnd; line_no++) {
+			     line_no < clipper.DisplayEnd; ++line_no) {
 				const char* line_start = buf + line_offsets_[line_no];
 				const char* line_end =
 				    (line_no + 1 < line_offsets_.Size)

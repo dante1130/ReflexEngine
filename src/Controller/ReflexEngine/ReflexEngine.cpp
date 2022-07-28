@@ -57,7 +57,6 @@ void ReflexEngine::run() {
 			if (EngineTime::is_time_step_passed()) {
 				scene.fixed_update(EngineTime::get_fixed_delta_time());
 				EngineTime::reset_fixed_delta_time();
-				DebugLogger::log("info", "Fixed update");
 			}
 
 			scene.update(EngineTime::get_delta_time());
@@ -89,6 +88,7 @@ ReflexEngine& ReflexEngine::get_instance() {
 
 void ReflexEngine::lua_access() {
 	InputManager::get_instance();
+	DebugLogger::lua_access();
 	NetworkAccess::lua_access();
 	MathAccess::lua_access();
 	ECSAccess::register_ecs();
