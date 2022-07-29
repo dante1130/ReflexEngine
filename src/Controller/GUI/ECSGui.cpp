@@ -3,27 +3,55 @@
 #include <imgui/misc/cpp/imgui_stdlib.h>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "Model/Components/Remove.hpp"
+
 void ECSGui::draw(ECS& ecs) {
 	constexpr ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoBackground;
 
-	ImGui::Begin("Scene entities", nullptr, window_flags);
-	ecs.get_registry().each([this, &ecs](auto entity_id) {
-		auto& entity = ecs.get_entity(entity_id);
+	auto& registry = ecs.get_registry();
 
-		if (ImGui::Selectable(entity.get_name().c_str())) {
-			selected_entity_ = entity.get_entity_id();
-		};
+	if (!registry.valid(selected_entity_)) {
+		selected_entity_ = entt::null;
+	}
+
+	ImGui::Begin("Scene entities", nullptr, window_flags);
+	registry.each([this, &ecs](auto entity_id) {
+		draw_entity(ecs.get_entity(entity_id));
 	});
+
+	// Deselect when clicking on blank space.
+	if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered()) {
+		selected_entity_ = entt::null;
+	}
+
+	if (ImGui::BeginPopupContextWindow("OnBlank",
+	                                   ImGuiPopupFlags_MouseButtonRight |
+	                                       ImGuiPopupFlags_NoOpenOverItems)) {
+		if (ImGui::MenuItem("Create entity")) {
+			ecs.create_entity(std::string())
+			    .add_component<Component::Transform>();
+		}
+		ImGui::EndPopup();
+	}
+
 	ImGui::End();
 
 	ImGui::Begin("Properties", nullptr, window_flags);
 	if (selected_entity_ != entt::null) {
-		draw_entity(ecs.get_entity(selected_entity_));
+		draw_entity_props(ecs.get_entity(selected_entity_));
 	}
 	ImGui::End();
 }
 
-void ECSGui::draw_entity(const Reflex::Entity& entity) {
+void ECSGui::draw_entity(Reflex::Entity& entity) {
+	ImGui::PushID(static_cast<int>(entity.get_entity_id()));
+	if (ImGui::Selectable(entity.get_name().c_str())) {
+		selected_entity_ = entity.get_entity_id();
+	};
+	ImGui::PopID();
+}
+
+void ECSGui::draw_entity_props(const Reflex::Entity& entity) {
 	if (entity.any_component<Component::Transform>()) {
 		draw_transform(entity.get_component<Component::Transform>());
 	}

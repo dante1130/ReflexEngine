@@ -34,12 +34,14 @@ private:
 	/// The drag speed.
 	constexpr static float speed_ = 0.1f;
 
+	void draw_entity(Reflex::Entity& entity);
+
 	/**
 	 * @brief Draw all the components in the entity.
 	 *
 	 * @param entity The entity to draw the components from.
 	 */
-	static void draw_entity(const Reflex::Entity& entity);
+	static void draw_entity_props(const Reflex::Entity& entity);
 
 	/**
 	 * @brief Draw the transform component of the entity.
