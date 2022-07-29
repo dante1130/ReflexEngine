@@ -34,6 +34,11 @@ private:
 	/// The drag speed.
 	constexpr static float speed_ = 0.1f;
 
+	/**
+	 * @brief Draw the selectable for the entity.
+	 *
+	 * @param entity The entity.
+	 */
 	void draw_entity(Reflex::Entity& entity);
 
 	/**
@@ -41,7 +46,14 @@ private:
 	 *
 	 * @param entity The entity to draw the components from.
 	 */
-	static void draw_entity_props(const Reflex::Entity& entity);
+	static void draw_entity_props(Reflex::Entity& entity);
+
+	/**
+	 * @brief Draw the name of the entity.
+	 *
+	 * @param name The entity's name.
+	 */
+	static void draw_name(std::string& name);
 
 	/**
 	 * @brief Draw the transform component of the entity.

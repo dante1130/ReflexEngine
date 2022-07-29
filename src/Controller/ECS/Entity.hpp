@@ -71,7 +71,12 @@ public:
 	 */
 	entt::registry& get_registry();
 
-	const std::string& get_name() const;
+	/**
+	 * @brief Get the name.
+	 *
+	 * @return std::string&
+	 */
+	std::string& get_name();
 
 private:
 	/// The name of the entity.

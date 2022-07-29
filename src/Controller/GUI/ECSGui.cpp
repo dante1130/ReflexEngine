@@ -10,10 +10,6 @@ void ECSGui::draw(ECS& ecs) {
 
 	auto& registry = ecs.get_registry();
 
-	if (!registry.valid(selected_entity_)) {
-		selected_entity_ = entt::null;
-	}
-
 	ImGui::Begin("Scene entities", nullptr, window_flags);
 	registry.each([this, &ecs](auto entity_id) {
 		draw_entity(ecs.get_entity(entity_id));
@@ -45,16 +41,32 @@ void ECSGui::draw(ECS& ecs) {
 
 void ECSGui::draw_entity(Reflex::Entity& entity) {
 	ImGui::PushID(static_cast<int>(entity.get_entity_id()));
-	if (ImGui::Selectable(entity.get_name().c_str())) {
+
+	bool selected = false;
+	ImGui::PushStyleVar(ImGuiStyleVar_SelectableTextAlign, ImVec2(0, 0.5f));
+	ImGui::Selectable(entity.get_name().c_str(), &selected,
+	                  ImGuiSelectableFlags_AllowItemOverlap, ImVec2(0, 20));
+	ImGui::PopStyleVar();
+
+	ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
+
+	if (ImGui::Button("Delete")) {
+		entity.add_component<Component::Remove>();
+		if (selected_entity_ == entity.get_entity_id()) {
+			selected_entity_ = entt::null;
+		}
+	}
+
+	if (selected) {
 		selected_entity_ = entity.get_entity_id();
 	};
-	ImGui::PopID();
-}
 
-void ECSGui::draw_entity_props(const Reflex::Entity& entity) {
-	if (entity.any_component<Component::Transform>()) {
-		draw_transform(entity.get_component<Component::Transform>());
-	}
+	ImGui::PopID();
+};
+
+void ECSGui::draw_entity_props(Reflex::Entity& entity) {
+	draw_name(entity.get_name());
+	draw_transform(entity.get_component<Component::Transform>());
 
 	if (entity.any_component<Component::Script>()) {
 		draw_script(entity.get_component<Component::Script>());
@@ -88,6 +100,13 @@ void ECSGui::draw_entity_props(const Reflex::Entity& entity) {
 	if (entity.any_component<Component::Statemachine>()) {
 		draw_statemachine(entity.get_component<Component::Statemachine>());
 	}
+}
+
+void ECSGui::draw_name(std::string& name) {
+	ImGui::PushID("Name");
+	ImGui::Text("Name");
+	input_text("", name);
+	ImGui::PopID();
 }
 
 void ECSGui::draw_script(Component::Script& script) {
