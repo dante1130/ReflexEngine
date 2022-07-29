@@ -115,4 +115,28 @@ void update_statemachine(ECS& ecs);
  * @param ecs The ECS class.
  */
 void update_remove(ECS& ecs);
+
+/**
+ * @brief Deletes the directional light in the LightManager.
+ *
+ * @param registry The ECS registry.
+ * @param entity_id The entity ID to delete the directional light component.
+ */
+void delete_directional_light(entt::registry& registry, entt::entity entity_id);
+
+/**
+ * @brief Deletes the point light in the LightManager.
+ *
+ * @param registry The ECS registry.
+ * @param entity_id The entity ID to delete the point light component.
+ */
+void delete_point_light(entt::registry& registry, entt::entity entity_id);
+
+/**
+ * @brief Deletes the spot light in the LightManager.
+ *
+ * @param registry The ECS registry.
+ * @param entity_id The entity ID to delete the spot light component.
+ */
+void delete_spot_light(entt::registry& registry, entt::entity entity_id);
 };  // namespace System

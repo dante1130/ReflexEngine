@@ -110,6 +110,11 @@ public:
 	void update_spot_light(size_t id, const Component::SpotLight& light);
 
 	/**
+	 * @brief Delete the directional light.
+	 */
+	void delete_directional_light();
+
+	/**
 	 * @brief Delete the point light given the id.
 	 *
 	 * @param id The id.
