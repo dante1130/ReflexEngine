@@ -233,11 +233,10 @@ void Shader::CompileProgram() {
 	    glGetUniformLocation(m_shaderID, "directionalLight.base.color");
 	uniformDirectionalLight.uniformAmbientIntensity = glGetUniformLocation(
 	    m_shaderID, "directionalLight.base.ambientIntensity");
-
-	uniformDirectionalLight.uniformDirection =
-	    glGetUniformLocation(m_shaderID, "directionalLight.direction");
 	uniformDirectionalLight.uniformDiffuseIntensity = glGetUniformLocation(
 	    m_shaderID, "directionalLight.base.diffuseIntensity");
+	uniformDirectionalLight.uniformDirection =
+	    glGetUniformLocation(m_shaderID, "directionalLight.direction");
 
 	uniformShininess = glGetUniformLocation(m_shaderID, "material.shininess");
 	uniformSpecularIntensity =
@@ -247,7 +246,7 @@ void Shader::CompileProgram() {
 	    glGetUniformLocation(m_shaderID, "pointLightCount");
 
 	for (size_t i = 0; i < MAX_POINT_LIGHTS; ++i) {
-		char locBuff[100] = {'\0'};
+		char locBuff[256] = {'\0'};
 
 		snprintf(locBuff, sizeof(locBuff), "pointLights[%d].base.color", i);
 		uniformPointLights[i].uniformColor =
@@ -283,7 +282,7 @@ void Shader::CompileProgram() {
 	uniformSpotLightCount = glGetUniformLocation(m_shaderID, "spotLightCount");
 
 	for (size_t i = 0; i < MAX_SPOT_LIGHTS; ++i) {
-		char locBuff[100] = {'\0'};
+		char locBuff[256] = {'\0'};
 
 		snprintf(locBuff, sizeof(locBuff), "spotLights[%d].base.base.color", i);
 		uniformSpotLights[i].uniformColor =
