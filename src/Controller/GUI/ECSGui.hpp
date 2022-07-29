@@ -65,66 +65,65 @@ private:
 	/**
 	 * @brief Draw the transform component of the entity.
 	 *
-	 * @param transform The transform component of the entity.
+	 * @param entity The entity.
 	 */
-	static void draw_transform(Component::Transform& transform);
+	static void draw_transform(Reflex::Entity& entity);
 
 	/**
 	 * @brief Draw the script component of the entity.
 	 *
-	 * @param script The script component of the entity.
+	 * @param entity The entity.
 	 */
-	static void draw_script(Component::Script& script);
+	static void draw_script(Reflex::Entity& entity);
 
 	/**
 	 * @brief Draw the mesh component of the entity.
 	 *
-	 * @param mesh The mesh component of the entity.
+	 * @param entity The entity.
 	 */
-	static void draw_mesh(Component::Mesh& mesh);
+	static void draw_mesh(Reflex::Entity& entity);
 
 	/**
 	 * @brief Draw the model component of the entity.
 	 *
-	 * @param model The model component of the entity.
+	 * @param entity The entity.
 	 */
-	static void draw_model(Component::Model& model);
+	static void draw_model(Reflex::Entity& entity);
 
 	/**
 	 * @brief Draw the terrain component of the entity.
 	 *
-	 * @param terrain The terrain component of the entity.
+	 * @param entity The entity.
 	 */
-	static void draw_terrain(Component::Terrain& terrain);
+	static void draw_terrain(Reflex::Entity& entity);
 
 	/**
 	 * @brief Draw the directional light component of the entity.
 	 *
-	 * @param directional_light The directional light component of the entity.
+	 * @param entity The entity.
 	 */
-	static void draw_directional_light(
-	    Component::DirectionalLight& directional_light);
+	static void draw_directional_light(Reflex::Entity& entity);
 
 	/**
 	 * @brief Draw the point light component of the entity.
 	 *
-	 * @param point_light The point light component of the entity.
+	 * @param entity The entity.
 	 */
-	static void draw_point_light(Component::PointLight& point_light);
+	static void draw_point_light(Reflex::Entity& entity);
 
 	/**
 	 * @brief Draw the spot light component of the entity.
 	 *
-	 * @param spot_light The spot light component of the entity.
+	 * @param entity The entity.
 	 */
-	static void draw_spot_light(Component::SpotLight& spot_light);
+	static void draw_spot_light(Reflex::Entity& entity);
 
 	/**
 	 * @brief Draw the statemachine component of the entity.
 	 *
-	 * @param statemachine The statemachine component of the entity.
+	 * @param entity The entity.
 	 */
-	static void draw_statemachine(Component::Statemachine& statemachine);
+	static void draw_statemachine(Reflex::Entity& entity);
 
 	/**
 	 * @brief A helper method for ImGui input text update on enter.

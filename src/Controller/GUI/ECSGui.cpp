@@ -68,39 +68,38 @@ void ECSGui::draw_entity(Reflex::Entity& entity) {
 
 void ECSGui::draw_entity_props(Reflex::Entity& entity) {
 	draw_name(entity.get_name());
-	draw_transform(entity.get_component<Component::Transform>());
+	draw_transform(entity);
 
 	if (entity.any_component<Component::Script>()) {
-		draw_script(entity.get_component<Component::Script>());
+		draw_script(entity);
 	}
 
 	if (entity.any_component<Component::Mesh>()) {
-		draw_mesh(entity.get_component<Component::Mesh>());
+		draw_mesh(entity);
 	}
 
 	if (entity.any_component<Component::Model>()) {
-		draw_model(entity.get_component<Component::Model>());
+		draw_model(entity);
 	}
 
 	if (entity.any_component<Component::Terrain>()) {
-		draw_terrain(entity.get_component<Component::Terrain>());
+		draw_terrain(entity);
 	}
 
 	if (entity.any_component<Component::DirectionalLight>()) {
-		draw_directional_light(
-		    entity.get_component<Component::DirectionalLight>());
+		draw_directional_light(entity);
 	}
 
 	if (entity.any_component<Component::PointLight>()) {
-		draw_point_light(entity.get_component<Component::PointLight>());
+		draw_point_light(entity);
 	}
 
 	if (entity.any_component<Component::SpotLight>()) {
-		draw_spot_light(entity.get_component<Component::SpotLight>());
+		draw_spot_light(entity);
 	}
 
 	if (entity.any_component<Component::Statemachine>()) {
-		draw_statemachine(entity.get_component<Component::Statemachine>());
+		draw_statemachine(entity);
 	}
 }
 
@@ -161,33 +160,57 @@ void ECSGui::draw_name(std::string& name) {
 	ImGui::PopID();
 }
 
-void ECSGui::draw_script(Component::Script& script) {
+void ECSGui::draw_script(Reflex::Entity& entity) {
+	auto& script = entity.get_component<Component::Script>();
+
 	ImGui::PushID("Script");
 	ImGui::Text("Script");
+	ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
+	if (ImGui::Button("Delete")) {
+		entity.remove_component<Component::Script>();
+	}
 	input_text("Script name", script.lua_script);
 	ImGui::PopID();
 }
 
-void ECSGui::draw_mesh(Component::Mesh& mesh) {
+void ECSGui::draw_mesh(Reflex::Entity& entity) {
+	auto& mesh = entity.get_component<Component::Mesh>();
+
 	ImGui::PushID("Mesh");
 	ImGui::Text("Mesh");
+	ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
+	if (ImGui::Button("Delete")) {
+		entity.remove_component<Component::Mesh>();
+	}
 	input_text("Mesh name", mesh.mesh_name);
 	input_text("Texture name", mesh.texture_name);
 	input_text("Material name", mesh.material_name);
 	ImGui::PopID();
 }
 
-void ECSGui::draw_model(Component::Model& model) {
+void ECSGui::draw_model(Reflex::Entity& entity) {
+	auto& model = entity.get_component<Component::Model>();
+
 	ImGui::PushID("Model");
 	ImGui::Text("Model");
+	ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
+	if (ImGui::Button("Delete")) {
+		entity.remove_component<Component::Model>();
+	}
 	input_text("Model name", model.model_name);
 	input_text("Material name", model.material_name);
 	ImGui::PopID();
 }
 
-void ECSGui::draw_terrain(Component::Terrain& terrain) {
+void ECSGui::draw_terrain(Reflex::Entity& entity) {
+	auto& terrain = entity.get_component<Component::Terrain>();
+
 	ImGui::PushID("Terrain");
 	ImGui::Text("Terrain");
+	ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
+	if (ImGui::Button("Delete")) {
+		entity.remove_component<Component::Terrain>();
+	}
 	input_text("Terrain name", terrain.terrain_name);
 	input_text("Texture name", terrain.texture_name);
 	input_text("Material name", terrain.material_name);
@@ -195,7 +218,9 @@ void ECSGui::draw_terrain(Component::Terrain& terrain) {
 	ImGui::PopID();
 }
 
-void ECSGui::draw_transform(Component::Transform& transform) {
+void ECSGui::draw_transform(Reflex::Entity& entity) {
+	auto& transform = entity.get_component<Component::Transform>();
+
 	ImGui::PushID("Transform");
 	ImGui::Text("Transform");
 	ImGui::DragFloat3("Position", glm::value_ptr(transform.position), speed_);
@@ -204,9 +229,15 @@ void ECSGui::draw_transform(Component::Transform& transform) {
 	ImGui::PopID();
 }
 
-void ECSGui::draw_directional_light(Component::DirectionalLight& light) {
+void ECSGui::draw_directional_light(Reflex::Entity& entity) {
+	auto& light = entity.get_component<Component::DirectionalLight>();
+
 	ImGui::PushID("Directional light");
 	ImGui::Text("Directional light");
+	ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
+	if (ImGui::Button("Delete")) {
+		entity.remove_component<Component::DirectionalLight>();
+	}
 	ImGui::ColorEdit3("Color", glm::value_ptr(light.color));
 	ImGui::DragFloat("Ambient", &light.ambient_intensity, speed_);
 	ImGui::DragFloat("Diffuse", &light.diffuse_intensity, speed_);
@@ -214,9 +245,15 @@ void ECSGui::draw_directional_light(Component::DirectionalLight& light) {
 	ImGui::PopID();
 }
 
-void ECSGui::draw_point_light(Component::PointLight& light) {
+void ECSGui::draw_point_light(Reflex::Entity& entity) {
+	auto& light = entity.get_component<Component::PointLight>();
+
 	ImGui::PushID("Point light");
 	ImGui::Text("Point light");
+	ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
+	if (ImGui::Button("Delete")) {
+		entity.remove_component<Component::PointLight>();
+	}
 	ImGui::ColorEdit3("Color", glm::value_ptr(light.color));
 	ImGui::DragFloat("Ambient", &light.ambient_intensity, speed_);
 	ImGui::DragFloat("Diffuse", &light.diffuse_intensity, speed_);
@@ -227,9 +264,15 @@ void ECSGui::draw_point_light(Component::PointLight& light) {
 	ImGui::PopID();
 }
 
-void ECSGui::draw_spot_light(Component::SpotLight& light) {
+void ECSGui::draw_spot_light(Reflex::Entity& entity) {
+	auto& light = entity.get_component<Component::SpotLight>();
+
 	ImGui::PushID("Spot light");
 	ImGui::Text("Spot light");
+	ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
+	if (ImGui::Button("Delete")) {
+		entity.remove_component<Component::SpotLight>();
+	}
 	ImGui::ColorEdit3("Color", glm::value_ptr(light.color));
 	ImGui::DragFloat("Ambient", &light.ambient_intensity, speed_);
 	ImGui::DragFloat("Diffuse", &light.diffuse_intensity, speed_);
@@ -242,9 +285,15 @@ void ECSGui::draw_spot_light(Component::SpotLight& light) {
 	ImGui::PopID();
 }
 
-void ECSGui::draw_statemachine(Component::Statemachine& statemachine) {
+void ECSGui::draw_statemachine(Reflex::Entity& entity) {
+	auto& statemachine = entity.get_component<Component::Statemachine>();
+
 	ImGui::PushID("Statemachine");
 	ImGui::Text("Statemachine");
+	ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
+	if (ImGui::Button("Delete")) {
+		entity.remove_component<Component::Statemachine>();
+	}
 	ImGui::InputInt("unique id", &statemachine.unique_statemachine_identifier);
 	input_text("Global state", statemachine.global_state);
 	input_text("Current state", statemachine.current_state);
