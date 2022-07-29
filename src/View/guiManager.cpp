@@ -24,6 +24,12 @@ void gui::init(GLFWwindow* window, const std::string& openglVersion) {
 void gui::lua_access() {
 	auto& lua = LuaManager::get_instance().get_state();
 
+	auto gui = lua.create_named_table("GUI");
+
+	gui.new_usertype<ImVec4>(
+	    "vec4", sol::constructors<ImVec4(float, float, float, float)>(), "x",
+	    &ImVec4::x, "y", &ImVec4::y, "z", &ImVec4::z, "w", &ImVec4::w);
+
 	lua.set_function("gui_begin", gui::begin);
 	lua.set_function("gui_end", gui::end);
 	lua.set_function("gui_text", gui::text);

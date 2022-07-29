@@ -6,6 +6,7 @@
 ImGuiTextBuffer DebugLogger::buffer_;
 ImGuiTextFilter DebugLogger::filter_;
 ImVector<int> DebugLogger::line_offsets_;
+ImVector<ImVec4> DebugLogger::colors_;
 bool DebugLogger::auto_scroll_ = true;
 
 void DebugLogger::lua_access() {
@@ -14,6 +15,7 @@ void DebugLogger::lua_access() {
 	auto debug_logger = lua.create_named_table("DebugLogger");
 
 	debug_logger.set_function("log", &DebugLogger::log);
+	debug_logger.set_function("log_color", &DebugLogger::log_color);
 	debug_logger.set_function("clear", &DebugLogger::clear);
 }
 
@@ -21,9 +23,15 @@ void DebugLogger::clear() {
 	buffer_.clear();
 	line_offsets_.clear();
 	line_offsets_.push_back(0);
+	colors_.clear();
 }
 
 void DebugLogger::log(const std::string& category, const std::string& message) {
+	log_color(category, message, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
+}
+
+void DebugLogger::log_color(const std::string& category,
+                            const std::string& message, const ImVec4& color) {
 	int old_size = buffer_.size();
 
 	buffer_.appendf("[%.2f] [%s] %s\n", EngineTime::get_current_time(),
@@ -34,6 +42,8 @@ void DebugLogger::log(const std::string& category, const std::string& message) {
 			line_offsets_.push_back(old_size + 1);
 		}
 	}
+
+	colors_.push_back(color);
 }
 
 void DebugLogger::draw() {
@@ -64,8 +74,14 @@ void DebugLogger::draw() {
 			const char* line_end = (line_no + 1 < line_offsets_.Size)
 			                           ? (buf + line_offsets_[line_no + 1] - 1)
 			                           : buf_end;
-			if (filter_.PassFilter(line_start, line_end))
+			if (filter_.PassFilter(line_start, line_end)) {
+				const ImVec4& color = (line_no < colors_.Size)
+				                          ? colors_[line_no]
+				                          : ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
+				ImGui::PushStyleColor(ImGuiCol_Text, color);
 				ImGui::TextUnformatted(line_start, line_end);
+				ImGui::PopStyleColor();
+			}
 		}
 	} else {
 		ImGuiListClipper clipper;
@@ -78,7 +94,13 @@ void DebugLogger::draw() {
 				    (line_no + 1 < line_offsets_.Size)
 				        ? (buf + line_offsets_[line_no + 1] - 1)
 				        : buf_end;
+
+				const ImVec4& color = (line_no < colors_.Size)
+				                          ? colors_[line_no]
+				                          : ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
+				ImGui::PushStyleColor(ImGuiCol_Text, color);
 				ImGui::TextUnformatted(line_start, line_end);
+				ImGui::PopStyleColor();
 			}
 		}
 		clipper.End();

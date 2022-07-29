@@ -27,7 +27,7 @@ function update(ecs, entity)
 		Camera.toggle_noclip()
 
 		if (Camera.is_noclip()) then
-			DebugLogger.log("warning", "You are cheating!")
+			DebugLogger.log_color("warning", "You are cheating!", GUI.vec4.new(1.0, 0.0, 0.0, 1.0))
 		end
 	end
 
