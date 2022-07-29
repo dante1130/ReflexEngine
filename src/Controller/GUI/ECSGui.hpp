@@ -49,6 +49,13 @@ private:
 	static void draw_entity_props(Reflex::Entity& entity);
 
 	/**
+	 * @brief Draw the add component button.
+	 *
+	 * @param entity The entity to add the component to.
+	 */
+	static void draw_add_component(Reflex::Entity& entity);
+
+	/**
 	 * @brief Draw the name of the entity.
 	 *
 	 * @param name The entity's name.

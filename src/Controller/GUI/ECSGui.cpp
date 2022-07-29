@@ -34,7 +34,9 @@ void ECSGui::draw(ECS& ecs) {
 
 	ImGui::Begin("Properties", nullptr, window_flags);
 	if (selected_entity_ != entt::null) {
-		draw_entity_props(ecs.get_entity(selected_entity_));
+		auto& entity = ecs.get_entity(selected_entity_);
+		draw_entity_props(entity);
+		draw_add_component(entity);
 	}
 	ImGui::End();
 }
@@ -99,6 +101,56 @@ void ECSGui::draw_entity_props(Reflex::Entity& entity) {
 
 	if (entity.any_component<Component::Statemachine>()) {
 		draw_statemachine(entity.get_component<Component::Statemachine>());
+	}
+}
+
+void ECSGui::draw_add_component(Reflex::Entity& entity) {
+	if (ImGui::Button("Add component")) {
+		ImGui::OpenPopup("AddComponent");
+	}
+
+	if (ImGui::BeginPopup("AddComponent")) {
+		if (ImGui::MenuItem("Script")) {
+			entity.add_component<Component::Script>();
+			ImGui::CloseCurrentPopup();
+		}
+
+		if (ImGui::MenuItem("Mesh")) {
+			entity.add_component<Component::Mesh>();
+			ImGui::CloseCurrentPopup();
+		}
+
+		if (ImGui::MenuItem("Model")) {
+			entity.add_component<Component::Model>();
+			ImGui::CloseCurrentPopup();
+		}
+
+		if (ImGui::MenuItem("Terrain")) {
+			entity.add_component<Component::Terrain>();
+			ImGui::CloseCurrentPopup();
+		}
+
+		if (ImGui::MenuItem("DirectionalLight")) {
+			entity.add_component<Component::DirectionalLight>();
+			ImGui::CloseCurrentPopup();
+		}
+
+		if (ImGui::MenuItem("PointLight")) {
+			entity.add_component<Component::PointLight>();
+			ImGui::CloseCurrentPopup();
+		}
+
+		if (ImGui::MenuItem("SpotLight")) {
+			entity.add_component<Component::SpotLight>();
+			ImGui::CloseCurrentPopup();
+		}
+
+		if (ImGui::MenuItem("Statemachine")) {
+			entity.add_component<Component::Statemachine>();
+			ImGui::CloseCurrentPopup();
+		}
+
+		ImGui::EndPopup();
 	}
 }
 

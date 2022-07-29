@@ -55,7 +55,7 @@ void DebugLogger::draw() {
 	ImGui::SameLine();
 	bool copy = ImGui::Button("Copy");
 	ImGui::SameLine();
-	filter_.Draw("Filter", -100.0f);
+	filter_.Draw("Filter");
 
 	ImGui::Separator();
 	ImGui::BeginChild("scrolling", ImVec2(0, 0), false,
