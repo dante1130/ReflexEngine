@@ -10,9 +10,9 @@ namespace Component {
  */
 struct Model {
 	/// The name of the model.
-	std::string model_name;
+	std::string model_name = {"default"};
 	/// The name of the material.
-	std::string material_name;
+	std::string material_name = {"default"};
 
 	Model() = default;
 

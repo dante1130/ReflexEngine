@@ -9,11 +9,11 @@ namespace Component {
  */
 struct Mesh {
 	/// The mesh name in the mesh manager.
-	std::string mesh_name;
+	std::string mesh_name = {"default"};
 	/// The material name in the material manager.
-	std::string texture_name;
+	std::string texture_name = {"default"};
 	/// The material name in the material manager.
-	std::string material_name;
+	std::string material_name = {"default"};
 
 	Mesh() = default;
 

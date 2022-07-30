@@ -44,6 +44,10 @@ void SkyboxManager::load_skybox(const std::string& skybox_name,
 }
 
 void SkyboxManager::use_skybox(const std::string& skybox_name) {
+	if (skybox_faces_map_.find(skybox_name) == skybox_faces_map_.end()) {
+		skybox_ = Skybox();
+	}
+
 	skybox_ = Skybox(skybox_faces_map_.at(skybox_name));
 }
 

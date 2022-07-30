@@ -11,14 +11,14 @@
 class Md2ModelManager {
 public:
 	/**
-	 * @brief Exposes the md2 model manager to lua.
-	 */
-	void lua_access();
-
-	/**
 	 * @brief Construct a new Md2 Model Manager object
 	 */
 	Md2ModelManager() = default;
+
+	/**
+	 * @brief Exposes the md2 model manager to lua.
+	 */
+	void lua_access();
 
 	/**
 	 * @brief Loads a md2 model into the md2 model manager.
@@ -47,14 +47,6 @@ public:
 	 * @return Md2Model&
 	 */
 	Md2Model& get_md2_model(const std::string& model_name);
-
-	/**
-	 * @brief Get the md2 model given the md2 model name.
-	 *
-	 * @param model_name The name given to the md2 model.
-	 * @return const Model&
-	 */
-	const Md2Model& get_md2_model(const std::string& model_name) const;
 
 private:
 	/// A hashmap of models.

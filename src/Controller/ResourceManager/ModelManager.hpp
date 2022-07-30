@@ -12,14 +12,14 @@
 class ModelManager {
 public:
 	/**
-	 * @brief Exposes the model manager to Lua.
-	 */
-	void lua_access();
-
-	/**
 	 * @brief Construct a new Model Manager object
 	 */
 	ModelManager() = default;
+
+	/**
+	 * @brief Exposes the model manager to Lua.
+	 */
+	void lua_access();
 
 	/**
 	 * @brief Loads a model into the model manager.
@@ -37,7 +37,7 @@ public:
 	 * @param model_name The name given to the model.
 	 * @return const Model&
 	 */
-	const Model& get_model(const std::string& model_name) const;
+	Model& get_model(const std::string& model_name);
 
 private:
 	/// A hashmap of models.

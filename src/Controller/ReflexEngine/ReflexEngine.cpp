@@ -29,6 +29,8 @@ void ReflexEngine::run() {
 
 	engine.scene_manager_.init("game/_Scenes.lua");
 
+	load_default_resources();
+
 	auto& input_manager = InputManager::get_instance();
 
 	while (!engine.window_.is_should_close()) {
@@ -86,6 +88,17 @@ void ReflexEngine::run() {
 ReflexEngine& ReflexEngine::get_instance() {
 	static ReflexEngine instance;
 	return instance;
+}
+
+void ReflexEngine::load_default_resources() {
+	auto& resource_manager = ResourceManager::get_instance();
+
+	resource_manager.get_texture_manager().load_texture("default",
+	                                                    "textures/default.png");
+	resource_manager.get_model_manager().load_model("default",
+	                                                "models/default.obj");
+	resource_manager.get_material_manager().load_material("default", 32.0f,
+	                                                      1.0f);
 }
 
 void ReflexEngine::lua_access() {

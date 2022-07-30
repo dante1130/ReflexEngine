@@ -1,7 +1,6 @@
 #include "MeshManager.hpp"
 
 #include "Controller/LuaManager.hpp"
-#include <iostream>
 
 void MeshManager::lua_access() {
 	auto& lua = LuaManager::get_instance().get_state();
@@ -38,6 +37,6 @@ void MeshManager::load_mesh(const std::string& mesh_name,
 	                 indices.size());
 }
 
-const Mesh& MeshManager::get_mesh(const std::string& mesh_name) const {
-	return mesh_map.at(mesh_name);
+Mesh& MeshManager::get_mesh(const std::string& mesh_name) {
+	return mesh_map[mesh_name];
 }

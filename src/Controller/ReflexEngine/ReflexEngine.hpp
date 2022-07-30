@@ -50,6 +50,11 @@ private:
 	void lua_access();
 
 	/**
+	 * @brief Loads default resources for the ResourceManager.
+	 */
+	static void load_default_resources();
+
+	/**
 	 * @brief The default constructor is private as a singleton pattern is
 	 * used, preventing multiple instances.
 	 */

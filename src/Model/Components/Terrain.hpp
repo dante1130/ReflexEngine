@@ -10,13 +10,13 @@ namespace Component {
  */
 struct Terrain {
 	/// The name of the terrain.
-	std::string terrain_name;
+	std::string terrain_name = {"default"};
 	/// The name of the texture.
-	std::string texture_name;
+	std::string texture_name = {"default"};
 	/// The name of the material.
-	std::string material_name;
+	std::string material_name = {"default"};
 	/// The name of the detailmap.
-	std::string detailmap_name;
+	std::string detailmap_name = {"default"};
 
 	Terrain() = default;
 

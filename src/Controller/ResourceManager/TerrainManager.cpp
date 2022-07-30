@@ -43,5 +43,5 @@ void TerrainManager::load_terrain(const std::string& terrain_name,
 }
 
 TexturedTerrain& TerrainManager::get_terrain(const std::string& terrain_name) {
-	return terrain_map_.at(terrain_name);
+	return terrain_map_[terrain_name];
 }

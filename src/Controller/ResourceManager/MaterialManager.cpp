@@ -14,7 +14,7 @@ void MaterialManager::load_material(const std::string& material_name,
 	material_hashmap[material_name] = Reflex::Material(shine, spec_intensity);
 }
 
-const Reflex::Material& MaterialManager::get_material(
-    const std::string& material_name) const {
-	return material_hashmap.at(material_name);
+Reflex::Material& MaterialManager::get_material(
+    const std::string& material_name) {
+	return material_hashmap[material_name];
 }

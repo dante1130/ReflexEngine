@@ -31,11 +31,5 @@ bool Md2ModelManager::load_texture(const std::string& model_name,
 
 Md2Model& Md2ModelManager::get_md2_model(const std::string& model_name) {
 	// Returns a reference instead of the pointer.
-	return md2_model_hashmap.at(model_name);
-}
-
-const Md2Model& Md2ModelManager::get_md2_model(
-    const std::string& model_name) const {
-	// Returns a reference instead of the pointer.
-	return md2_model_hashmap.at(model_name);
+	return md2_model_hashmap[model_name];
 }
