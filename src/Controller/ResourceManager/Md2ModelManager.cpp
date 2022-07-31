@@ -5,7 +5,7 @@
 void Md2ModelManager::lua_access() {
 	sol::state& lua = LuaManager::get_instance().get_state();
 
-	auto md2 = lua["Md2Model"].get_or_create<sol::table>();
+	auto md2 = lua["Md2"].get_or_create<sol::table>();
 
 	md2.set_function("load_md2_model", &Md2ModelManager::load_md2_model, this);
 }

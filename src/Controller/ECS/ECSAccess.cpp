@@ -9,6 +9,7 @@
 #include "Model/Components/Script.hpp"
 #include "Model/Components/Light.hpp"
 #include "Model/Components/Mesh.hpp"
+#include "Model/Components/Md2Animation.hpp"
 #include "Model/Components/Terrain.hpp"
 #include "Model/Components/Statemachine.hpp"
 #include "Model/Components/Remove.hpp"
@@ -28,6 +29,7 @@ void ECSAccess::register_ecs() {
 	register_point_light_component();
 	register_spot_light_component();
 	register_mesh_component();
+	register_md2_component();
 	register_terrain_component();
 	register_statemachine_component();
 }
@@ -230,6 +232,62 @@ void ECSAccess::register_mesh_component() {
 	mesh_type["mesh_name"] = &Mesh::mesh_name;
 	mesh_type["texture_name"] = &Mesh::texture_name;
 	mesh_type["material_name"] = &Mesh::material_name;
+}
+
+void ECSAccess::register_md2_component() {
+	auto& lua = LuaManager::get_instance().get_state();
+
+	auto md2_table = lua["Md2"].get_or_create<sol::table>();
+
+	auto animation_types = md2_table.new_enum("Animation");
+
+	animation_types["STAND"] = md2::animation_type::STAND;
+	animation_types["RUN"] = md2::animation_type::RUN;
+	animation_types["ATTACK"] = md2::animation_type::ATTACK;
+	animation_types["PAIN_A"] = md2::animation_type::PAIN_A;
+	animation_types["PAIN_B"] = md2::animation_type::PAIN_B;
+	animation_types["PAIN_C"] = md2::animation_type::PAIN_C;
+	animation_types["JUMP"] = md2::animation_type::JUMP;
+	animation_types["FLIP"] = md2::animation_type::FLIP;
+	animation_types["SALUTE"] = md2::animation_type::SALUTE;
+	animation_types["FALLBACK"] = md2::animation_type::FALLBACK;
+	animation_types["WAVE"] = md2::animation_type::WAVE;
+	animation_types["POINT"] = md2::animation_type::POINT;
+	animation_types["CROUCH_STAND"] = md2::animation_type::CROUCH_STAND;
+	animation_types["CROUCH_WALK"] = md2::animation_type::CROUCH_WALK;
+	animation_types["CROUCH_ATTACK"] = md2::animation_type::CROUCH_ATTACK;
+	animation_types["CROUCH_PAIN"] = md2::animation_type::CROUCH_PAIN;
+	animation_types["CROUCH_DEATH"] = md2::animation_type::CROUCH_DEATH;
+	animation_types["DEATH_FALLBACK"] = md2::animation_type::DEATH_FALLBACK;
+	animation_types["DEATH_FALLFORWARD"] =
+	    md2::animation_type::DEATH_FALLFORWARD;
+	animation_types["DEATH_FALLBACKSLOW"] =
+	    md2::animation_type::DEATH_FALLBACKSLOW;
+	animation_types["BOOM"] = md2::animation_type::BOOM;
+
+	auto md2_type = lua.new_usertype<Md2Animation>("Md2");
+
+	md2_type["md2_name"] = &Md2Animation::md2_name;
+	md2_type["texture_name"] = &Md2Animation::texture_name;
+	md2_type["material_name"] = &Md2Animation::material_name;
+	md2_type["is_loop"] = &Md2Animation::is_loop;
+	md2_type["is_interpolated"] = &Md2Animation::is_interpolated;
+	md2_type["is_animation_done"] =
+	    sol::readonly(&Md2Animation::is_animation_done);
+
+	md2_table["change_animation"] = [](Md2Animation& md2,
+	                                   md2::animation_type animation_type) {
+		md2.animstate.type = animation_type;
+
+		md2::anim_t anim = md2::animations_[static_cast<int>(animation_type)];
+
+		md2.animstate.start_frame = anim.first_frame;
+		md2.animstate.end_frame = anim.last_frame;
+		md2.animstate.next_frame = anim.first_frame + 1;
+		md2.animstate.fps = anim.fps;
+
+		md2.is_animation_done = false;
+	};
 }
 
 void ECSAccess::register_terrain_component() {
