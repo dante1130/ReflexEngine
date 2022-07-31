@@ -44,9 +44,10 @@ private:
 	/**
 	 * @brief Draw all the components in the entity.
 	 *
+	 * @param ecs The ECS.
 	 * @param entity The entity to draw the components from.
 	 */
-	static void draw_entity_props(Reflex::Entity& entity);
+	static void draw_entity_props(ECS& ecs, Reflex::Entity& entity);
 
 	/**
 	 * @brief Draw the add component button.
@@ -72,9 +73,10 @@ private:
 	/**
 	 * @brief Draw the script component of the entity.
 	 *
+	 * @param ecs The ECS.
 	 * @param entity The entity.
 	 */
-	static void draw_script(Reflex::Entity& entity);
+	static void draw_script(ECS& ecs, Reflex::Entity& entity);
 
 	/**
 	 * @brief Draw the mesh component of the entity.
@@ -130,6 +132,8 @@ private:
 	 *
 	 * @param label The label of the input text.
 	 * @param text The text to update.
+	 *
+	 * @return True if the text was updated, false otherwise.
 	 */
-	static void input_text(const char* label, std::string& text);
+	static bool input_text(const char* label, std::string& text);
 };

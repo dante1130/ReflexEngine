@@ -17,6 +17,8 @@ ECS::ECS() {
 	registry_.on_construct<Component::SpotLight>()
 	    .connect<&System::init_spot_light>();
 
+	registry_.on_update<Component::Script>().connect<&System::init_script>();
+
 	registry_.on_destroy<Component::DirectionalLight>()
 	    .connect<&System::delete_directional_light>();
 	registry_.on_destroy<Component::PointLight>()

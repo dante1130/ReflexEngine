@@ -35,7 +35,7 @@ void ECSGui::draw(ECS& ecs) {
 	ImGui::Begin("Properties", nullptr, window_flags);
 	if (selected_entity_ != entt::null) {
 		auto& entity = ecs.get_entity(selected_entity_);
-		draw_entity_props(entity);
+		draw_entity_props(ecs, entity);
 		draw_add_component(entity);
 	}
 	ImGui::End();
@@ -66,12 +66,12 @@ void ECSGui::draw_entity(Reflex::Entity& entity) {
 	ImGui::PopID();
 };
 
-void ECSGui::draw_entity_props(Reflex::Entity& entity) {
+void ECSGui::draw_entity_props(ECS& ecs, Reflex::Entity& entity) {
 	draw_name(entity.get_name());
 	draw_transform(entity);
 
 	if (entity.any_component<Component::Script>()) {
-		draw_script(entity);
+		draw_script(ecs, entity);
 	}
 
 	if (entity.any_component<Component::Mesh>()) {
@@ -160,7 +160,7 @@ void ECSGui::draw_name(std::string& name) {
 	ImGui::PopID();
 }
 
-void ECSGui::draw_script(Reflex::Entity& entity) {
+void ECSGui::draw_script(ECS& ecs, Reflex::Entity& entity) {
 	auto& script = entity.get_component<Component::Script>();
 
 	ImGui::PushID("Script");
@@ -169,7 +169,14 @@ void ECSGui::draw_script(Reflex::Entity& entity) {
 	if (ImGui::Button("Delete")) {
 		entity.remove_component<Component::Script>();
 	}
-	input_text("Script name", script.lua_script);
+
+	if (input_text("Script name", script.lua_script)) {
+		entity.patch_component<Component::Script>(
+		    [&ecs, &entity](auto& script) {
+			    script.ecs = &ecs;
+			    script.entity = &entity;
+		    });
+	};
 	ImGui::PopID();
 }
 
@@ -301,10 +308,13 @@ void ECSGui::draw_statemachine(Reflex::Entity& entity) {
 	ImGui::PopID();
 }
 
-void ECSGui::input_text(const char* label, std::string& text) {
+bool ECSGui::input_text(const char* label, std::string& text) {
 	std::string temp_str = text;
 	if (ImGui::InputText(label, &temp_str,
 	                     ImGuiInputTextFlags_EnterReturnsTrue)) {
 		text = temp_str;
+		return true;
 	};
+
+	return false;
 }
