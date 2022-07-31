@@ -239,15 +239,23 @@ void ECSAccess::register_md2_component() {
 
 	auto md2_table = lua["Md2"].get_or_create<sol::table>();
 
-	auto animation_types = md2_table.new_enum("AnimationType");
-
-	constexpr size_t max_anims =
-	    static_cast<size_t>(md2::animation_type::MAX_ANIMATIONS);
-
-	for (size_t i = 0; i <= max_anims; ++i) {
-		animation_types[md2::animation_type_str[i]] =
-		    static_cast<md2::animation_type>(i);
-	}
+	auto animation_types = md2_table.new_enum(
+	    "AnimationType", "STAND", md2::animation_type::STAND, "RUN",
+	    md2::animation_type::RUN, "ATTACK", md2::animation_type::ATTACK,
+	    "PAIN_A", md2::animation_type::PAIN_A, "PAIN_B",
+	    md2::animation_type::PAIN_B, "PAIN_C", md2::animation_type::PAIN_C,
+	    "JUMP", md2::animation_type::JUMP, "FLIP", md2::animation_type::FLIP,
+	    "SALUTE", md2::animation_type::SALUTE, "SALUTE",
+	    md2::animation_type::SALUTE, "FALLBACK", md2::animation_type::SALUTE,
+	    "WAVE", md2::animation_type::WAVE, "POINT", md2::animation_type::POINT,
+	    "CROUCH_STAND", md2::animation_type::CROUCH_STAND, "CROUCH_WALK",
+	    md2::animation_type::CROUCH_WALK, "CROUCH_ATTACK",
+	    md2::animation_type::CROUCH_ATTACK, "CROUCH_DEATH",
+	    md2::animation_type::CROUCH_DEATH, "DEATH_FALLBACK",
+	    md2::animation_type::DEATH_FALLBACK, "DEATH_FALLFORWARD",
+	    md2::animation_type::DEATH_FALLFORWARD, "DEATH_FALLBACKSLOW",
+	    md2::animation_type::DEATH_FALLBACKSLOW, "BOOM",
+	    md2::animation_type::BOOM);
 
 	auto md2_type = lua.new_usertype<Md2Animation>("Md2");
 

@@ -121,12 +121,12 @@ void System::draw_md2(entt::registry& registry) {
 
 			    auto& md2_model = md2_manager.get_md2_model(md2.md2_name);
 
-			    md2_model.set_animstate(md2.animstate);
-
 			    if (md2.is_interpolated) {
-				    md2_model.render_animated_interpolated();
+				    md2_model.render_interpolated_frame(
+				        md2.animstate.curr_frame, md2.animstate.next_frame,
+				        md2.animstate.interpol);
 			    } else {
-				    md2_model.render_animated();
+				    md2_model.render_frame(md2.animstate.curr_frame);
 			    }
 		    };
 		    renderer.add_draw_call(draw_call);
@@ -219,6 +219,17 @@ void System::init_spot_light(entt::registry& registry, entt::entity entity) {
 	auto& spot_light = registry.get<Component::SpotLight>(entity);
 
 	spot_light.light_id = light_manager.add_spot_light(spot_light);
+}
+
+void System::init_md2_animation(entt::registry& registry, entt::entity entity) {
+	auto& md2 = registry.get<Component::Md2Animation>(entity);
+
+	md2::anim_t anim = md2::animations_[static_cast<int>(md2.animstate.type)];
+
+	md2.animstate.start_frame = anim.first_frame;
+	md2.animstate.end_frame = anim.last_frame;
+	md2.animstate.next_frame = anim.first_frame + 1;
+	md2.animstate.fps = anim.fps;
 }
 
 void System::init_statemachine(entt::registry& registry, entt::entity entity) {

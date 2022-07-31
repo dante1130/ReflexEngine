@@ -71,6 +71,14 @@ void init_point_light(entt::registry& registry, entt::entity entity_id);
 void init_spot_light(entt::registry& registry, entt::entity entity_id);
 
 /**
+ * @brief Initializes the md2 animation component of an entity.
+ *
+ * @param registry The ECS registry.
+ * @param entity_id The entity ID to initialize the md2 animation component.
+ */
+void init_md2_animation(entt::registry& registry, entt::entity entity_id);
+
+/**
  * @brief Initializes the statemachine component of an entity.
  *
  * @param registry The ECS registry.

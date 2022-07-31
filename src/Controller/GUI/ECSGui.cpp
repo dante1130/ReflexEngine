@@ -239,7 +239,7 @@ void ECSGui::draw_md2_animation(Reflex::Entity& entity) {
 	input_text("Texture", md2_animation.texture_name);
 	input_text("Material", md2_animation.material_name);
 
-	draw_animation_state(md2_animation.animstate);
+	draw_animation_state(entity);
 
 	ImGui::Checkbox("Animation done", &md2_animation.is_animation_done);
 	ImGui::Checkbox("Loop", &md2_animation.is_loop);
@@ -248,7 +248,9 @@ void ECSGui::draw_md2_animation(Reflex::Entity& entity) {
 	ImGui::PopID();
 }
 
-void ECSGui::draw_animation_state(md2::animstate_t& animstate) {
+void ECSGui::draw_animation_state(Reflex::Entity& entity) {
+	auto& animstate = entity.get_component<Component::Md2Animation>().animstate;
+
 	ImGui::PushID("AnimationState");
 	ImGui::Text("AnimationState");
 
@@ -262,14 +264,14 @@ void ECSGui::draw_animation_state(md2::animstate_t& animstate) {
 	input_int("End frame", animstate.end_frame);
 	input_int("FPS", animstate.fps);
 
-	input_double("Current time", animstate.curr_time);
-	input_double("Previous time", animstate.prev_time);
-	input_double("Interpolation", animstate.interpol);
-
 	if (ImGui::BeginCombo("Animation type", curr_anim_type)) {
 		for (size_t i = 0; i < max_anims; ++i) {
 			if (ImGui::Selectable(md2::animation_type_str[i])) {
-				animstate.type = static_cast<md2::animation_type>(i);
+				entity.patch_component<Component::Md2Animation>(
+				    [i](auto& md2_animation) {
+					    md2_animation.animstate.type =
+					        static_cast<md2::animation_type>(i);
+				    });
 			}
 		}
 		ImGui::EndCombo();

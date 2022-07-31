@@ -96,9 +96,9 @@ private:
 	/**
 	 * @brief Draw the md2 animation state.
 	 *
-	 * @param animstate The md2 animation state.
+	 * @param entity The entity.
 	 */
-	static void draw_animation_state(md2::animstate_t& animstate);
+	static void draw_animation_state(Reflex::Entity& entity);
 
 	/**
 	 * @brief Draw the terrain component of the entity.
