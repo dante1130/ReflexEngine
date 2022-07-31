@@ -102,6 +102,7 @@ void System::draw_md2(entt::registry& registry) {
 			    model = glm::translate(model, transform.position);
 			    model *=
 			        glm::mat4_cast(glm::quat(glm::radians(transform.rotation)));
+			    // Md2 custom rotations.
 			    model = glm::rotate(model, glm::radians(-90.0F),
 			                        glm::vec3(1.0F, 0.0F, 0.0F));
 			    model = glm::rotate(model, glm::radians(90.0F),
@@ -118,8 +119,15 @@ void System::draw_md2(entt::registry& registry) {
 			        .UseMaterial(shader.GetShininessLocation(),
 			                     shader.GetSpecularIntensityLocation());
 
-			    md2_manager.get_md2_model(md2.md2_name)
-			        .render_animated_interpolated(EngineTime::get_delta_time());
+			    auto& md2_model = md2_manager.get_md2_model(md2.md2_name);
+
+			    md2_model.set_animstate(md2.animstate);
+
+			    if (md2.is_interpolated) {
+				    md2_model.render_animated_interpolated();
+			    } else {
+				    md2_model.render_animated();
+			    }
 		    };
 		    renderer.add_draw_call(draw_call);
 	    });
@@ -268,15 +276,22 @@ void System::update_script(entt::registry& registry) {
 
 void System::update_md2(entt::registry& registry) {
 	registry.view<Component::Md2Animation>().each([](auto& md2) {
+		if (md2.is_animation_done) return;
+
 		md2.animstate.curr_time += EngineTime::get_delta_time();
 
 		if (md2.animstate.curr_time - md2.animstate.prev_time >
-		    (1.0f / md2.animstate.fps)) {
+		    (1.0 / md2.animstate.fps)) {
 			md2.animstate.curr_frame = md2.animstate.next_frame;
 			++md2.animstate.next_frame;
 
 			if (md2.animstate.next_frame > md2.animstate.end_frame) {
-				md2.animstate.next_frame = md2.animstate.start_frame;
+				if (md2.is_loop) {
+					md2.animstate.next_frame = md2.animstate.start_frame;
+				} else {
+					md2.is_animation_done = true;
+					md2.animstate.next_frame = md2.animstate.end_frame;
+				}
 			}
 
 			md2.animstate.prev_time = md2.animstate.curr_time;

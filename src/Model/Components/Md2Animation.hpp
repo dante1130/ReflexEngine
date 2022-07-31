@@ -16,6 +16,8 @@ struct Md2Animation {
 	/// The animation state of the model.
 	md2::animstate_t animstate;
 
+	/// Whether the animation should be interpolated.
+	bool is_interpolated = true;
 	/// Whether the animation has finished.
 	bool is_animation_done = false;
 	/// Whether the animation should loop.

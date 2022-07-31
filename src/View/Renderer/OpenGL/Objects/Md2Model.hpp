@@ -52,17 +52,13 @@ public:
 
 	/**
 	 * @brief Render the md2 model frame by frame.
-	 *
-	 * @param delta_time The time since the last frame.
 	 */
-	void render_animated(float delta_time);
+	void render_animated();
 
 	/**
 	 * @brief Render the md2 model with interpolated frames.
-	 *
-	 * @param delta_time The time since the last frame.
 	 */
-	void render_animated_interpolated(float delta_time);
+	void render_animated_interpolated();
 
 	/**
 	 * @brief Render a single frame given the frame number.

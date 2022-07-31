@@ -31,7 +31,7 @@ void ModelData::render_animated(double delta_time) {
 	md2_model.set_animstate(animstate_);
 
 	texture_manager.get_texture(texture_name_).use_texture();
-	md2_model.render_animated_interpolated(delta_time);
+	md2_model.render_animated_interpolated();
 }
 
 void ModelData::render_model() {
