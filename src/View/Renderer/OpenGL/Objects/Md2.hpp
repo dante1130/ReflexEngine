@@ -91,6 +91,29 @@ enum class animation_type {
 	MAX_ANIMATIONS
 };
 
+static constexpr const char* animation_type_str[] = {"STAND",
+                                                     "RUN",
+                                                     "ATTACK",
+                                                     "PAIN_A",
+                                                     "PAIN_B",
+                                                     "PAIN_C",
+                                                     "JUMP",
+                                                     "FLIP",
+                                                     "SALUTE",
+                                                     "FALLBACK",
+                                                     "WAVE",
+                                                     "POINT",
+                                                     "CROUCH_STAND",
+                                                     "CROUCH_WALK",
+                                                     "CROUCH_ATTACK",
+                                                     "CROUCH_PAIN",
+                                                     "CROUCH_DEATH",
+                                                     "DEATH_FALLBACK",
+                                                     "DEATH_FALLFORWARD",
+                                                     "DEATH_FALLBACKSLOW",
+                                                     "BOOM",
+                                                     "MAX_ANIMATIONS"};
+
 /// An animation of the md2 model.
 struct anim_t {
 	int first_frame = 0;
@@ -138,5 +161,4 @@ static constexpr md2::anim_t animations_[] = {
     {190, 197, 7},   // DEATH_FALLBACKSLOW
     {198, 198, 5},   // BOOM
 };
-
 };  // namespace md2

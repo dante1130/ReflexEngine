@@ -3,6 +3,14 @@
 #include <imgui/misc/cpp/imgui_stdlib.h>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "Model/Components/Transform.hpp"
+#include "Model/Components/Model.hpp"
+#include "Model/Components/Script.hpp"
+#include "Model/Components/Light.hpp"
+#include "Model/Components/Mesh.hpp"
+#include "Model/Components/Md2Animation.hpp"
+#include "Model/Components/Terrain.hpp"
+#include "Model/Components/Statemachine.hpp"
 #include "Model/Components/Remove.hpp"
 
 void ECSGui::draw(ECS& ecs) {
@@ -82,6 +90,10 @@ void ECSGui::draw_entity_props(ECS& ecs, Reflex::Entity& entity) {
 		draw_model(entity);
 	}
 
+	if (entity.any_component<Component::Md2Animation>()) {
+		draw_md2_animation(entity);
+	}
+
 	if (entity.any_component<Component::Terrain>()) {
 		draw_terrain(entity);
 	}
@@ -121,6 +133,11 @@ void ECSGui::draw_add_component(Reflex::Entity& entity) {
 
 		if (ImGui::MenuItem("Model")) {
 			entity.add_component<Component::Model>();
+			ImGui::CloseCurrentPopup();
+		}
+
+		if (ImGui::MenuItem("Md2Animation")) {
+			entity.add_component<Component::Md2Animation>();
 			ImGui::CloseCurrentPopup();
 		}
 
@@ -189,9 +206,9 @@ void ECSGui::draw_mesh(Reflex::Entity& entity) {
 	if (ImGui::Button("Delete")) {
 		entity.remove_component<Component::Mesh>();
 	}
-	input_text("Mesh name", mesh.mesh_name);
-	input_text("Texture name", mesh.texture_name);
-	input_text("Material name", mesh.material_name);
+	input_text("Mesh", mesh.mesh_name);
+	input_text("Texture", mesh.texture_name);
+	input_text("Material", mesh.material_name);
 	ImGui::PopID();
 }
 
@@ -204,8 +221,63 @@ void ECSGui::draw_model(Reflex::Entity& entity) {
 	if (ImGui::Button("Delete")) {
 		entity.remove_component<Component::Model>();
 	}
-	input_text("Model name", model.model_name);
-	input_text("Material name", model.material_name);
+	input_text("Model", model.model_name);
+	input_text("Material", model.material_name);
+	ImGui::PopID();
+}
+
+void ECSGui::draw_md2_animation(Reflex::Entity& entity) {
+	auto& md2_animation = entity.get_component<Component::Md2Animation>();
+
+	ImGui::PushID("Md2Animation");
+	ImGui::Text("Md2Animation");
+	ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
+	if (ImGui::Button("Delete")) {
+		entity.remove_component<Component::Terrain>();
+	}
+	input_text("Md2 model", md2_animation.md2_name);
+	input_text("Texture", md2_animation.texture_name);
+	input_text("Material", md2_animation.material_name);
+
+	draw_animation_state(md2_animation.animstate);
+
+	ImGui::Checkbox("Animation done", &md2_animation.is_animation_done);
+	ImGui::Checkbox("Loop", &md2_animation.is_loop);
+	ImGui::Checkbox("Interpolated", &md2_animation.is_interpolated);
+
+	ImGui::PopID();
+}
+
+void ECSGui::draw_animation_state(md2::animstate_t& animstate) {
+	ImGui::PushID("AnimationState");
+	ImGui::Text("AnimationState");
+
+	const char* curr_anim_type =
+	    md2::animation_type_str[static_cast<size_t>(animstate.type)];
+
+	constexpr size_t max_anims =
+	    static_cast<size_t>(md2::animation_type::MAX_ANIMATIONS);
+
+	input_int("Start frame", animstate.start_frame);
+	input_int("End frame", animstate.end_frame);
+	input_int("FPS", animstate.fps);
+
+	input_double("Current time", animstate.curr_time);
+	input_double("Previous time", animstate.prev_time);
+	input_double("Interpolation", animstate.interpol);
+
+	if (ImGui::BeginCombo("Animation type", curr_anim_type)) {
+		for (size_t i = 0; i < max_anims; ++i) {
+			if (ImGui::Selectable(md2::animation_type_str[i])) {
+				animstate.type = static_cast<md2::animation_type>(i);
+			}
+		}
+		ImGui::EndCombo();
+	}
+
+	input_int("Current frame", animstate.curr_frame);
+	input_int("Next frame", animstate.next_frame);
+
 	ImGui::PopID();
 }
 
@@ -218,10 +290,10 @@ void ECSGui::draw_terrain(Reflex::Entity& entity) {
 	if (ImGui::Button("Delete")) {
 		entity.remove_component<Component::Terrain>();
 	}
-	input_text("Terrain name", terrain.terrain_name);
-	input_text("Texture name", terrain.texture_name);
-	input_text("Material name", terrain.material_name);
-	input_text("Detailmap name", terrain.detailmap_name);
+	input_text("Terrain", terrain.terrain_name);
+	input_text("Texture", terrain.texture_name);
+	input_text("Material", terrain.material_name);
+	input_text("Detailmap", terrain.detailmap_name);
 	ImGui::PopID();
 }
 
@@ -301,7 +373,7 @@ void ECSGui::draw_statemachine(Reflex::Entity& entity) {
 	if (ImGui::Button("Delete")) {
 		entity.remove_component<Component::Statemachine>();
 	}
-	ImGui::InputInt("unique id", &statemachine.unique_statemachine_identifier);
+	input_int("unique id", statemachine.unique_statemachine_identifier);
 	input_text("Global state", statemachine.global_state);
 	input_text("Current state", statemachine.current_state);
 	input_text("Previous state", statemachine.previous_state);
@@ -313,6 +385,26 @@ bool ECSGui::input_text(const char* label, std::string& text) {
 	if (ImGui::InputText(label, &temp_str,
 	                     ImGuiInputTextFlags_EnterReturnsTrue)) {
 		text = temp_str;
+		return true;
+	};
+
+	return false;
+}
+
+bool ECSGui::input_int(const char* label, int& value) {
+	int temp_int = value;
+	if (ImGui::InputInt(label, &temp_int)) {
+		value = temp_int;
+		return true;
+	};
+
+	return false;
+}
+
+bool ECSGui::input_double(const char* label, double& value) {
+	double temp_double = value;
+	if (ImGui::InputDouble(label, &temp_double)) {
+		value = temp_double;
 		return true;
 	};
 

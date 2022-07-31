@@ -2,16 +2,10 @@
 
 #include "View/guiManager.hpp"
 
+#include "View/Renderer/OpenGL/Objects/Md2.hpp"
+
 #include "Controller/ECS/ECS.hpp"
 #include "Controller/ECS/Entity.hpp"
-
-#include "Model/Components/Transform.hpp"
-#include "Model/Components/Model.hpp"
-#include "Model/Components/Script.hpp"
-#include "Model/Components/Light.hpp"
-#include "Model/Components/Mesh.hpp"
-#include "Model/Components/Terrain.hpp"
-#include "Model/Components/Statemachine.hpp"
 
 /**
  * @class ECSGui
@@ -93,6 +87,20 @@ private:
 	static void draw_model(Reflex::Entity& entity);
 
 	/**
+	 * @brief Draw the md2 animation component of the entity.
+	 *
+	 * @param entity The entity.
+	 */
+	static void draw_md2_animation(Reflex::Entity& entity);
+
+	/**
+	 * @brief Draw the md2 animation state.
+	 *
+	 * @param animstate The md2 animation state.
+	 */
+	static void draw_animation_state(md2::animstate_t& animstate);
+
+	/**
 	 * @brief Draw the terrain component of the entity.
 	 *
 	 * @param entity The entity.
@@ -136,4 +144,22 @@ private:
 	 * @return True if the text was updated, false otherwise.
 	 */
 	static bool input_text(const char* label, std::string& text);
+
+	/**
+	 * @brief A helper method for Imgui input integer update on enter.
+	 *
+	 * @param label The label of the input integer.
+	 * @param value The integer to update.
+	 * @return True if the integer was updated, false otherwise.
+	 */
+	static bool input_int(const char* label, int& value);
+
+	/**
+	 * @brief A helper method for Imgui input double update on enter.
+	 *
+	 * @param label The label of the input double.
+	 * @param value The double to update.
+	 * @return True if the double was updated, false otherwise.
+	 */
+	static bool input_double(const char* lable, double& value);
 };
