@@ -239,7 +239,7 @@ void ECSAccess::register_md2_component() {
 
 	auto md2_table = lua["Md2"].get_or_create<sol::table>();
 
-	auto animation_types = md2_table.new_enum("Animation");
+	auto animation_types = md2_table.new_enum("AnimationType");
 
 	animation_types["STAND"] = md2::animation_type::STAND;
 	animation_types["RUN"] = md2::animation_type::RUN;
@@ -270,6 +270,7 @@ void ECSAccess::register_md2_component() {
 	md2_type["md2_name"] = &Md2Animation::md2_name;
 	md2_type["texture_name"] = &Md2Animation::texture_name;
 	md2_type["material_name"] = &Md2Animation::material_name;
+	md2_type["animation_state"] = &Md2Animation::animstate;
 	md2_type["is_loop"] = &Md2Animation::is_loop;
 	md2_type["is_interpolated"] = &Md2Animation::is_interpolated;
 	md2_type["is_animation_done"] =
@@ -288,6 +289,22 @@ void ECSAccess::register_md2_component() {
 
 		md2.is_animation_done = false;
 	};
+
+	auto animstate_type =
+	    md2_table.new_usertype<md2::animstate_t>("AnimationState");
+
+	animstate_type["start_frame"] = &md2::animstate_t::start_frame;
+	animstate_type["end_frame"] = &md2::animstate_t::end_frame;
+	animstate_type["fps"] = &md2::animstate_t::fps;
+
+	animstate_type["curr_time"] = &md2::animstate_t::curr_time;
+	animstate_type["prev_time"] = &md2::animstate_t::prev_time;
+	animstate_type["interpolation"] = &md2::animstate_t::interpol;
+
+	animstate_type["animation_type"] = &md2::animstate_t::type;
+
+	animstate_type["curr_frame"] = &md2::animstate_t::curr_frame;
+	animstate_type["next_frame"] = &md2::animstate_t::next_frame;
 }
 
 void ECSAccess::register_terrain_component() {
