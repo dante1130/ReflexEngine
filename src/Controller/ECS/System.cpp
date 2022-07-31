@@ -270,3 +270,26 @@ void System::update_statemachine(ECS& ecs) {
 		stateM.lua_variables = lua["var"];
 	}
 }
+
+void System::delete_directional_light(entt::registry& registry,
+                                      entt::entity entity) {
+	auto& light_manager = ResourceManager::get_instance().get_light_manager();
+
+	light_manager.delete_directional_light();
+}
+
+void System::delete_point_light(entt::registry& registry, entt::entity entity) {
+	auto& light_manager = ResourceManager::get_instance().get_light_manager();
+
+	auto& point_light = registry.get<Component::PointLight>(entity);
+
+	light_manager.delete_point_light(point_light.light_id);
+}
+
+void System::delete_spot_light(entt::registry& registry, entt::entity entity) {
+	auto& light_manager = ResourceManager::get_instance().get_light_manager();
+
+	auto& spot_light = registry.get<Component::SpotLight>(entity);
+
+	light_manager.delete_spot_light(spot_light.light_id);
+}

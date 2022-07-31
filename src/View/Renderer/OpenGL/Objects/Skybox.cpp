@@ -67,6 +67,8 @@ Skybox::Skybox(const std::vector<std::string>& faceLocations) {
 
 void Skybox::DrawSkybox(glm::mat4 projectionMatrix,
                         glm::mat4 viewMatrix) const {
+	if (!m_skyMesh) return;
+
 	viewMatrix = glm::mat4(glm::mat3(viewMatrix));
 
 	glDepthMask(GL_FALSE);

@@ -38,8 +38,7 @@ public:
 	 * @param material_name
 	 * @return const Reflex::Material&
 	 */
-	const Reflex::Material& get_material(
-	    const std::string& material_name) const;
+	Reflex::Material& get_material(const std::string& material_name);
 
 private:
 	std::unordered_map<std::string, Reflex::Material> material_hashmap;

@@ -9,8 +9,6 @@ void TextureManager::lua_access() {
 
 	texture_table.set_function("load_texture", &TextureManager::load_texture,
 	                           this);
-	// lua.set_function("loadTextureRGBA", &TextureManager::load_texture_rgba,
-	//                  this);
 }
 
 bool TextureManager::load_texture(const std::string& texture_name,
@@ -37,8 +35,7 @@ bool TextureManager::load_texture_rgba(const std::string& texture_name,
 	return false;
 }
 
-const Texture& TextureManager::get_texture(
-    const std::string& texture_name) const {
+Texture& TextureManager::get_texture(const std::string& texture_name) {
 	// Returns a reference instead of the pointer.
-	return texture_hashmap.at(texture_name);
+	return texture_hashmap[texture_name];
 }

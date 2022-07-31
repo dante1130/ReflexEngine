@@ -12,6 +12,8 @@
  */
 class Md2Model {
 public:
+	Md2Model() = default;
+
 	/**
 	 * @brief Loads in an md2 model file.
 	 *

@@ -58,6 +58,16 @@ public:
 	bool any_component() const;
 
 	/**
+	 * @brief Patches the entity's component in place.
+	 *
+	 * @tparam T The component type.
+	 * @tparam Func The function to call on the component.
+	 * @param func The function to call on the component.
+	 */
+	template <typename T, typename... Func>
+	void patch_component(Func&&... func);
+
+	/**
 	 * @brief Get the entity id object
 	 *
 	 * @return entt::entity
@@ -71,7 +81,12 @@ public:
 	 */
 	entt::registry& get_registry();
 
-	const std::string& get_name() const;
+	/**
+	 * @brief Get the name.
+	 *
+	 * @return std::string&
+	 */
+	std::string& get_name();
 
 private:
 	/// The name of the entity.
@@ -101,4 +116,9 @@ T& Reflex::Entity::get_component() const {
 template <typename... T>
 bool Reflex::Entity::any_component() const {
 	return ecs_->registry_.any_of<T...>(entity_id_);
+}
+
+template <typename T, typename... Func>
+void Reflex::Entity::patch_component(Func&&... func) {
+	ecs_->registry_.patch<T>(entity_id_, std::forward<Func>(func)...);
 }

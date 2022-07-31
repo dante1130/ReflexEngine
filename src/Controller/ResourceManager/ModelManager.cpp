@@ -21,7 +21,6 @@ bool ModelManager::load_model(const std::string& model_name,
 	return false;
 }
 
-const Model& ModelManager::get_model(const std::string& model_name) const {
-	// Returns a reference instead of the pointer.
-	return model_hashmap.at(model_name);
+Model& ModelManager::get_model(const std::string& model_name) {
+	return model_hashmap[model_name];
 }

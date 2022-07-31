@@ -15,4 +15,4 @@ entt::entity Entity::get_entity_id() const { return entity_id_; }
 
 entt::registry& Entity::get_registry() { return ecs_->get_registry(); }
 
-const std::string& Entity::get_name() const { return name_; }
+std::string& Entity::get_name() { return name_; }

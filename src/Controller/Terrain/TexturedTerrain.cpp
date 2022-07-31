@@ -6,13 +6,6 @@
 void TexturedTerrain::render(const Shader& shader) {
 	if (!mesh_) return;
 
-	// glm::mat4 model = glm::mat4(1.0f);
-	// model = glm::translate(model, get_origin());
-	// model = glm::scale(model, scale_);
-
-	// glUniformMatrix4fv(shader.GetModelLocation(), 1, GL_FALSE,
-	//                    glm::value_ptr(model));
-
 	if (texture_ && !detailmap_) {
 		glUniform1i(shader.GetUsingTexture(), true);
 		texture_->use_texture();

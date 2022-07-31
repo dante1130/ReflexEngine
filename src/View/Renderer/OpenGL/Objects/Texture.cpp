@@ -76,6 +76,7 @@ bool Texture::LoadTextureA() {
 }
 
 void Texture::use_texture() const {
+	if (m_textureID == 0) return;
 	glActiveTexture(texture_unit_);
 	glBindTexture(GL_TEXTURE_2D, m_textureID);
 }

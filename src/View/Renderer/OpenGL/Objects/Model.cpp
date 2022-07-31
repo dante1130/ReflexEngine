@@ -22,6 +22,8 @@ bool Model::LoadModel(const std::string& fileName) {
 }
 
 void Model::RenderModel() const {
+	if (m_meshVec.size() == 0) return;
+
 	for (size_t i = 0; i < m_meshVec.size(); ++i) {
 		GLuint materialIndex = m_meshToTex.at(i);
 
@@ -35,6 +37,8 @@ void Model::RenderModel() const {
 }
 
 void Model::RenderModelTwo() const {
+	if (m_meshVec.size() == 0) return;
+
 	for (size_t i = 0; i < m_meshVec.size(); ++i) {
 		m_meshVec.at(i)->render_mesh();
 	}

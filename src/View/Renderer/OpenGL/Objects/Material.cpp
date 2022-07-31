@@ -1,6 +1,6 @@
 #include "Material.hpp"
 
-Reflex::Material::Material() : m_specularIntensity(0.0f), m_shininess(0.0f) {}
+Reflex::Material::Material() : m_specularIntensity(0.5f), m_shininess(32.0f) {}
 
 Reflex::Material::Material(GLfloat shine, GLfloat sIntensity)
     : m_specularIntensity(sIntensity), m_shininess(shine) {}

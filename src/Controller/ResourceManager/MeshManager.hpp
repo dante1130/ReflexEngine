@@ -13,6 +13,11 @@ public:
 	MeshManager() = default;
 
 	/**
+	 * @brief Initialize the Mesh Manager with a default mesh.
+	 */
+	void init();
+
+	/**
 	 * @brief Register the mesh manager to Lua.
 	 */
 	void lua_access();
@@ -28,7 +33,7 @@ public:
 	               const std::vector<float>& vertices,
 	               const std::vector<uint32_t>& indices);
 
-	const Mesh& get_mesh(const std::string& mesh_name) const;
+	Mesh& get_mesh(const std::string& mesh_name);
 
 private:
 	/// A hashmap of meshes.

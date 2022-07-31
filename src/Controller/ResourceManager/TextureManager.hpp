@@ -10,12 +10,15 @@
  */
 class TextureManager {
 public:
-	void lua_access();
-
 	/**
 	 * @brief Construct a new Texture Manager object
 	 */
 	TextureManager() = default;
+
+	/**
+	 * @brief Expose the TextureManager to Lua.
+	 */
+	void lua_access();
 
 	/**
 	 * @brief Loads a texture without alpha to the texture manager.
@@ -43,7 +46,7 @@ public:
 	 * @param texture_name The name of the texture.
 	 * @return const Texture&
 	 */
-	const Texture& get_texture(const std::string& texture_name) const;
+	Texture& get_texture(const std::string& texture_name);
 
 private:
 	/// The unordered map of string as key to value of textures.

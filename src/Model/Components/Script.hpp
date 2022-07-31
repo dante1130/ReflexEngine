@@ -14,7 +14,7 @@ namespace Component {
  */
 struct Script {
 	/// The Lua script to run.
-	std::string lua_script;
+	std::string lua_script = {"default"};
 	/// A pointer to the ECS that the script is attached to.
 	ECS* ecs = nullptr;
 	/// A pointer to the entity that the script is attached to.

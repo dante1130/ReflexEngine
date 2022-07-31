@@ -22,10 +22,14 @@ void Md2Model::set_animstate(const md2::animstate_t& animstate) {
 }
 
 void Md2Model::render_animated(float delta_time) {
+	if (!mesh_) return;
+
 	render_frame(animstate_.curr_frame);
 }
 
 void Md2Model::render_animated_interpolated(float delta_time) {
+	if (!mesh_) return;
+
 	render_interpolated_frame(animstate_.curr_frame, animstate_.next_frame,
 	                          animstate_.interpol);
 }

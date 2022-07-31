@@ -15,7 +15,6 @@ void PointLight::UseLight(GLuint ambientColorLoc, GLuint ambientIntensityLoc,
                           GLuint quadraticLoc) const {
 	glUniform3f(ambientColorLoc, m_color.x, m_color.y, m_color.z);
 	glUniform1f(ambientIntensityLoc, m_ambientIntensity);
-
 	glUniform1f(diffuseIntensityLoc, m_diffuseIntensity);
 
 	glUniform3f(positionLoc, m_position.x, m_position.y, m_position.z);
@@ -30,6 +29,7 @@ void PointLight::set_point_light(glm::vec3 color, GLfloat aIntensity,
                                  GLfloat quadratic) {
 	m_color = color;
 	m_ambientIntensity = aIntensity;
+	m_diffuseIntensity = dIntensity;
 	m_position = position;
 	m_constant = constant;
 	m_linear = linear;

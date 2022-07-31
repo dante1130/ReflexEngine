@@ -104,6 +104,10 @@ void LightManager::update_spot_light(size_t id,
 	    light.quadratic, light.edge);
 }
 
+void LightManager::delete_directional_light() {
+	directional_light_ = DirectionalLight();
+}
+
 void LightManager::delete_point_light(size_t id) {
 	point_lights_[id] = PointLight();
 }

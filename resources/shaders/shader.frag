@@ -81,27 +81,18 @@ vec3 sampleOffsetDirections[20] = vec3[]
 
 vec4 CalcLightByDirection(Light light, vec3 direction)
 {
-	vec4 ambientColor = vec4(light.color, 1.0f) * light.ambientIntensity;
+	// Ambient
+	vec4 ambientColor = vec4(light.color * light.ambientIntensity, 1.0f);
 
+	// Diffuse
 	float diffuseFactor = max(dot(normalize(normal), normalize(direction)), 0.0f);
-
 	vec4 diffuseColor = vec4(light.color * light.diffuseIntensity * diffuseFactor, 1.0f);
 
-	vec4 specularColor = vec4(0, 0, 0, 0);
-
-	if (diffuseFactor > 0.0f)
-	{
-		vec3 fragToEye = normalize(eyePosition - fragPos);
-		vec3 reflectedVertex = normalize(reflect(direction, normalize(normal)));
-
-		float specularFactor = dot(fragToEye, reflectedVertex);
-
-		if (specularFactor > 0.0f)
-		{
-			specularFactor = pow(specularFactor, material.shininess);
-			specularColor = vec4(light.color * material.specularIntensity * specularFactor, 1.0f);
-		}
-	}
+	// Specular
+	vec3 fragToEye = normalize(eyePosition - fragPos);
+	vec3 reflectedVertex = reflect(normalize(direction), normalize(normal));
+	float specularFactor = pow(max(dot(fragToEye, reflectedVertex), 0.0), material.shininess);
+	vec4 specularColor = vec4(light.color * material.specularIntensity * specularFactor, 1.0f);
 
 	return ambientColor + diffuseColor + specularColor;
 }
@@ -113,9 +104,8 @@ vec4 CalcDirectionalLight()
 
 vec4 CalcPointLight(PointLight pLight)
 {
-	vec3 direction = normalize(fragPos - pLight.position);
+	vec3 direction = fragPos - pLight.position;
 	float distance = length(direction);
-	direction = normalize(direction);
 
 	vec4 color = CalcLightByDirection(pLight.base, direction);
 

@@ -86,28 +86,28 @@ public:
 
 private:
 	/// The texture manager.
-	TextureManager texture_manager_;
+	TextureManager texture_manager_ = {};
 
 	/// The model manager.
-	ModelManager model_manager_;
+	ModelManager model_manager_ = {};
 
 	/// The md2 model manager.
-	Md2ModelManager md2_model_manager_;
+	Md2ModelManager md2_model_manager_ = {};
 
 	/// The material manager.
-	MaterialManager material_manager_;
+	MaterialManager material_manager_ = {};
 
 	/// The light manager.
-	LightManager light_manager_;
+	LightManager light_manager_ = {};
 
 	/// The skybox manager.
-	SkyboxManager skybox_manager_;
+	SkyboxManager skybox_manager_ = {};
 
 	/// The mesh manager.
-	MeshManager mesh_manager_;
+	MeshManager mesh_manager_ = {};
 
 	/// The terrain manager.
-	TerrainManager terrain_manager_;
+	TerrainManager terrain_manager_ = {};
 
 	/**
 	 * @brief Construct a new Resource Manager object
