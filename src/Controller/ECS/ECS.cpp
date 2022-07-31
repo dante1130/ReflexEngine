@@ -39,6 +39,7 @@ void ECS::update(double delta_time) {
 	System::update_directional_light(registry_);
 	System::update_point_light(registry_);
 	System::update_spot_light(registry_);
+	System::update_md2(registry_);
 	System::update_statemachine(*this);
 }
 
@@ -48,6 +49,7 @@ void ECS::draw() {
 	System::draw_terrain(registry_);
 	System::draw_model(registry_);
 	System::draw_mesh(registry_);
+	System::draw_md2(registry_);
 }
 
 void ECS::destroy_entity(entt::entity entity_id) {

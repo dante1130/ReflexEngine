@@ -23,19 +23,18 @@ public:
 	bool load_md2(const std::string& filename);
 
 	/**
-	 * @brief Loads in a texture for the md2 model.
-	 *
-	 * @param filename The filename of the texture.
-	 * @return bool
-	 */
-	bool load_texture(const std::string& filename);
-
-	/**
 	 * @brief Animate the md2 model.
 	 *
 	 * @param delta_time The time since the last frame.
 	 */
 	void animate(float delta_time);
+
+	/**
+	 * @brief Get the animation state.
+	 *
+	 * @return const md2::animstate_t&
+	 */
+	const md2::animstate_t& get_animstate() const;
 
 	/**
 	 * @brief Set the animation type of the md2 model.
@@ -44,6 +43,11 @@ public:
 	 */
 	void set_animation(md2::animation_type animation_type);
 
+	/**
+	 * @brief Set the animation state.
+	 *
+	 * @param animstate The animation state.
+	 */
 	void set_animstate(const md2::animstate_t& animstate);
 
 	/**
@@ -123,6 +127,4 @@ private:
 
 	/// The md2 model mesh.
 	std::unique_ptr<Mesh> mesh_ = nullptr;
-	/// The md2 model texture.
-	std::unique_ptr<Texture> texture_ = nullptr;
 };

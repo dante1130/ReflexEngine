@@ -37,7 +37,6 @@ void Md2Model::render_animated_interpolated(float delta_time) {
 void Md2Model::render_frame(int frame_num) {
 	load_frame_mesh(frame_num);
 
-	// texture_->UseTexture();
 	mesh_->render_mesh();
 }
 
@@ -45,7 +44,6 @@ void Md2Model::render_interpolated_frame(int frame_a, int frame_b,
                                          float interpolation) {
 	load_interpolated_frame_mesh(frame_a, frame_b, interpolation);
 
-	// texture_->UseTexture();
 	mesh_->render_mesh();
 }
 
@@ -97,11 +95,6 @@ bool Md2Model::load_md2(const std::string& filename) {
 	pre_load_frames();
 
 	return true;
-}
-
-bool Md2Model::load_texture(const std::string& filename) {
-	texture_ = std::make_unique<Texture>(filename.c_str());
-	return texture_->LoadTextureA();
 }
 
 void Md2Model::pre_load_frames() {

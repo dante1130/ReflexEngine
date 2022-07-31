@@ -22,6 +22,13 @@ void draw_model(entt::registry& registry);
 void draw_mesh(entt::registry& registry);
 
 /**
+ * @brief Passes the draw call of the Md2 component to the renderer.
+ *
+ * @param registry The ECS registry.
+ */
+void draw_md2(entt::registry& registry);
+
+/**
  * @brief Passes the draw call of the terrain component to the renderer.
  *
  * @param registry The ECS registry.
@@ -80,6 +87,13 @@ void init_statemachine(entt::registry& registry, entt::entity entity_id);
  * @pre The script components must be initialized.
  */
 void update_script(entt::registry& registry);
+
+/**
+ * @brief Update the md2 animation components.
+ *
+ * @param registry The ECS registry.
+ */
+void update_md2(entt::registry& registry);
 
 /**
  * @brief Update the directional light components.
