@@ -21,6 +21,16 @@ struct Md2Animation {
 	/// Whether the animation has finished.
 	bool is_animation_done = false;
 	/// Whether the animation should loop.
-	bool is_loop = false;
+	bool is_loop = true;
+
+	Md2Animation() = default;
+
+	Md2Animation(const Md2Animation&) = default;
+
+	Md2Animation(const std::string& md2_name, const std::string& texture_name,
+	             const std::string& material_name)
+	    : md2_name(md2_name),
+	      texture_name(texture_name),
+	      material_name(material_name) {}
 };
 }  // namespace Component

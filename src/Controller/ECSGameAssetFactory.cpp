@@ -5,6 +5,7 @@
 #include "Model/Components/Script.hpp"
 #include "Model/Components/Light.hpp"
 #include "Model/Components/Mesh.hpp"
+#include "Model/Components/Md2Animation.hpp"
 #include "Model/Components/Terrain.hpp"
 #include "Model/Components/Statemachine.hpp"
 
@@ -63,6 +64,10 @@ void ECSGameAssetFactory::load_components(ECS& ecs, Reflex::Entity& entity,
 		load_mesh(entity, entity_table["mesh"]);
 	}
 
+	if (entity_table["md2_animation"].valid()) {
+		load_md2_animation(entity, entity_table["md2_animation"]);
+	}
+
 	if (entity_table["terrain"].valid()) {
 		load_terrain(entity, entity_table["terrain"]);
 	}
@@ -109,6 +114,21 @@ void ECSGameAssetFactory::load_model(Reflex::Entity& entity,
                                      const sol::table& model_table) {
 	entity.add_component<Component::Model>(model_table["model_name"],
 	                                       model_table["material_name"]);
+}
+
+void ECSGameAssetFactory::load_md2_animation(Reflex::Entity& entity,
+                                             const sol::table& md2_table) {
+	auto& md2 = entity.add_component<Component::Md2Animation>(
+	    md2_table["md2_name"], md2_table["texture_name"],
+	    md2_table["material_name"]);
+
+	if (md2_table["is_loop"].valid()) {
+		md2.is_loop = md2_table["is_loop"];
+	}
+
+	if (md2_table["is_interpolated"].valid()) {
+		md2.is_interpolated = md2_table["is_interpolated"];
+	}
 }
 
 void ECSGameAssetFactory::load_terrain(Reflex::Entity& entity,
