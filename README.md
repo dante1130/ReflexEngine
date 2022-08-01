@@ -56,3 +56,11 @@ git submodule update --init --recursive
   * `CMake: Set build target` -> `ReflexEngine`
   * `CMake: Build`
   * `CMake: Run without debugging`
+
+## Contributing
+
+Please refer to the [contributing guide](CONTRIBUTING.md).
+
+## License
+
+This project is licensed under the [MIT license](LICENSE.md).
