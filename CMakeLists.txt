@@ -30,7 +30,7 @@ target_compile_options(${PROJECT_NAME} PRIVATE
     -Wno-switch-enum -Wno-weak-vtables -Wno-global-constructors>
 
     # GCC
-    $<$<CXX_COMPILER_ID:GNU>:-Wall -Wextra -Wpedantic -fdiagnostics-color=always>
+    $<$<CXX_COMPILER_ID:GNU>:-Wall -Wextra -Wpedantic -fdiagnostics-color=always -mbig-obj>
 
     # Visual Studio
     $<$<CXX_COMPILER_ID:MSVC>:/W4 /bigobj>
