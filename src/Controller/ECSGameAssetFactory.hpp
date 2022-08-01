@@ -67,6 +67,15 @@ private:
 	                       const sol::table& model_table);
 
 	/**
+	 * @brief Loads a md2 animation component into the entity.
+	 *
+	 * @param entity The entity to load the component into.
+	 * @param md2_table The table of the md2 animation component.
+	 */
+	static void load_md2_animation(Reflex::Entity& entity,
+	                               const sol::table& md2_table);
+
+	/**
 	 * @brief Loads a terrain component into the entity.
 	 *
 	 * @param entity The entity to load the component into.

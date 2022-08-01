@@ -5,6 +5,7 @@
 
 #include "Model/Components/Script.hpp"
 #include "Model/Components/Light.hpp"
+#include "Model/Components/Md2Animation.hpp"
 
 using namespace Reflex;
 
@@ -16,8 +17,12 @@ ECS::ECS() {
 	    .connect<&System::init_point_light>();
 	registry_.on_construct<Component::SpotLight>()
 	    .connect<&System::init_spot_light>();
+	registry_.on_construct<Component::Md2Animation>()
+	    .connect<&System::init_md2_animation>();
 
 	registry_.on_update<Component::Script>().connect<&System::init_script>();
+	registry_.on_update<Component::Md2Animation>()
+	    .connect<&System::init_md2_animation>();
 
 	registry_.on_destroy<Component::DirectionalLight>()
 	    .connect<&System::delete_directional_light>();
@@ -39,6 +44,7 @@ void ECS::update(double delta_time) {
 	System::update_directional_light(registry_);
 	System::update_point_light(registry_);
 	System::update_spot_light(registry_);
+	System::update_md2(registry_);
 	System::update_statemachine(*this);
 }
 
@@ -48,6 +54,7 @@ void ECS::draw() {
 	System::draw_terrain(registry_);
 	System::draw_model(registry_);
 	System::draw_mesh(registry_);
+	System::draw_md2(registry_);
 }
 
 void ECS::destroy_entity(entt::entity entity_id) {

@@ -5,10 +5,9 @@
 void Md2ModelManager::lua_access() {
 	sol::state& lua = LuaManager::get_instance().get_state();
 
-	auto md2 = lua["Md2Model"].get_or_create<sol::table>();
+	auto md2 = lua["Md2"].get_or_create<sol::table>();
 
 	md2.set_function("load_md2_model", &Md2ModelManager::load_md2_model, this);
-	md2.set_function("load_texture", &Md2ModelManager::load_texture, this);
 }
 
 bool Md2ModelManager::load_md2_model(const std::string& model_name,
@@ -22,11 +21,6 @@ bool Md2ModelManager::load_md2_model(const std::string& model_name,
 	}
 
 	return false;
-}
-
-bool Md2ModelManager::load_texture(const std::string& model_name,
-                                   const std::string& file_name) {
-	return md2_model_hashmap.at(model_name).load_texture(file_name);
 }
 
 Md2Model& Md2ModelManager::get_md2_model(const std::string& model_name) {

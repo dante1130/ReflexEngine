@@ -52,6 +52,11 @@ void register_spot_light_component();
 void register_mesh_component();
 
 /**
+ * @brief Register the md2 animation component to Lua.
+ */
+void register_md2_component();
+
+/**
  * @brief Register the terrain component to Lua.
  */
 void register_terrain_component();

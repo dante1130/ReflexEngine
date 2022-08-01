@@ -11,6 +11,7 @@
 #include "Model/Components/Script.hpp"
 #include "Model/Components/Light.hpp"
 #include "Model/Components/Mesh.hpp"
+#include "Model/Components/Md2Animation.hpp"
 #include "Model/Components/Terrain.hpp"
 #include "Model/Components/Statemachine.hpp"
 #include "Model/Components/Remove.hpp"
@@ -78,6 +79,55 @@ void System::draw_mesh(entt::registry& registry) {
 			                     shader.GetSpecularIntensityLocation());
 
 			    mesh_manager.get_mesh(mesh.mesh_name).render_mesh();
+		    };
+		    renderer.add_draw_call(draw_call);
+	    });
+}
+
+void System::draw_md2(entt::registry& registry) {
+	auto& renderer = ReflexEngine::get_instance().renderer_;
+
+	auto& resource_manager = ResourceManager::get_instance();
+	auto& md2_manager = resource_manager.get_md2_model_manager();
+	auto& texture_manager = resource_manager.get_texture_manager();
+	auto& material_manager = resource_manager.get_material_manager();
+
+	registry.view<Component::Transform, Component::Md2Animation>().each(
+	    [&renderer, &md2_manager, &texture_manager, &material_manager](
+	        auto& transform, auto& md2) {
+		    DrawCall draw_call = [&transform, &md2, &md2_manager,
+		                          &texture_manager,
+		                          &material_manager](const Shader& shader) {
+			    glm::mat4 model(1.0F);
+			    model = glm::translate(model, transform.position);
+			    model *=
+			        glm::mat4_cast(glm::quat(glm::radians(transform.rotation)));
+			    // Md2 custom rotations.
+			    model = glm::rotate(model, glm::radians(-90.0F),
+			                        glm::vec3(1.0F, 0.0F, 0.0F));
+			    model = glm::rotate(model, glm::radians(90.0F),
+			                        glm::vec3(0.0F, 0.0F, 1.0F));
+			    model = glm::scale(model, transform.scale);
+
+			    glUniformMatrix4fv(shader.GetModelLocation(), 1, GL_FALSE,
+			                       glm::value_ptr(model));
+			    glUniform1i(shader.GetUsingTexture(), true);
+
+			    texture_manager.get_texture(md2.texture_name).use_texture();
+
+			    material_manager.get_material(md2.material_name)
+			        .UseMaterial(shader.GetShininessLocation(),
+			                     shader.GetSpecularIntensityLocation());
+
+			    auto& md2_model = md2_manager.get_md2_model(md2.md2_name);
+
+			    if (md2.is_interpolated) {
+				    md2_model.render_interpolated_frame(
+				        md2.animstate.curr_frame, md2.animstate.next_frame,
+				        md2.animstate.interpol);
+			    } else {
+				    md2_model.render_frame(md2.animstate.curr_frame);
+			    }
 		    };
 		    renderer.add_draw_call(draw_call);
 	    });
@@ -171,6 +221,17 @@ void System::init_spot_light(entt::registry& registry, entt::entity entity) {
 	spot_light.light_id = light_manager.add_spot_light(spot_light);
 }
 
+void System::init_md2_animation(entt::registry& registry, entt::entity entity) {
+	auto& md2 = registry.get<Component::Md2Animation>(entity);
+
+	md2::anim_t anim = md2::animations_[static_cast<int>(md2.animstate.type)];
+
+	md2.animstate.start_frame = anim.first_frame;
+	md2.animstate.end_frame = anim.last_frame;
+	md2.animstate.next_frame = anim.first_frame + 1;
+	md2.animstate.fps = anim.fps;
+}
+
 void System::init_statemachine(entt::registry& registry, entt::entity entity) {
 	auto& lua = LuaManager::get_instance().get_state();
 
@@ -221,6 +282,34 @@ void System::update_script(entt::registry& registry) {
 
 			script.lua_variables = lua["var"];
 		}
+	});
+}
+
+void System::update_md2(entt::registry& registry) {
+	registry.view<Component::Md2Animation>().each([](auto& md2) {
+		if (md2.is_animation_done) return;
+
+		md2.animstate.curr_time += EngineTime::get_delta_time();
+
+		if (md2.animstate.curr_time - md2.animstate.prev_time >
+		    (1.0 / md2.animstate.fps)) {
+			md2.animstate.curr_frame = md2.animstate.next_frame;
+			++md2.animstate.next_frame;
+
+			if (md2.animstate.next_frame > md2.animstate.end_frame) {
+				if (md2.is_loop) {
+					md2.animstate.next_frame = md2.animstate.start_frame;
+				} else {
+					md2.is_animation_done = true;
+					md2.animstate.next_frame = md2.animstate.end_frame;
+				}
+			}
+
+			md2.animstate.prev_time = md2.animstate.curr_time;
+		}
+
+		md2.animstate.interpol = md2.animstate.fps * (md2.animstate.curr_time -
+		                                              md2.animstate.prev_time);
 	});
 }
 
