@@ -33,7 +33,7 @@ target_compile_options(${PROJECT_NAME} PRIVATE
     $<$<CXX_COMPILER_ID:GNU>:-Wall -Wextra -Wpedantic -fdiagnostics-color=always>
 
     # Visual Studio
-    $<$<CXX_COMPILER_ID:MSVC>:/W4>
+    $<$<CXX_COMPILER_ID:MSVC>:/W4 /bigobj>
 
     $<$<CONFIG:RELEASE>:-O3>
     $<$<CONFIG:DEBUG>:-O0>
