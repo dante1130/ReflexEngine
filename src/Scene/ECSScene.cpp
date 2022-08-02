@@ -5,6 +5,7 @@
 #include "Controller/ECSGameAssetFactory.hpp"
 #include "Controller/Audio/Audio.hpp"
 #include "Controller/ECS/System.hpp"
+#include "Controller/Networking/NetworkAccess.h"
 
 ECSScene::ECSScene(const std::string& master_lua_script)
     : Scene(master_lua_script) {}
@@ -24,6 +25,7 @@ void ECSScene::mouse_controls(double xpos, double ypos) {
 void ECSScene::update(double delta_time) {
 	ecs_.update(delta_time);
 	Audio::get_instance().update_listener();
+	NetworkAccess::networkUpdate();
 }
 
 void ECSScene::fixed_update(double delta_time) {
