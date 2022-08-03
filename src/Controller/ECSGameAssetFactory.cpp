@@ -15,6 +15,8 @@
 
 #include "Model/singletons.h"
 
+#include "Controller/ECS/EntitySerializer.hpp"
+
 void ECSGameAssetFactory::create(ECS& ecs, const std::string& lua_script) {
 	if (!is_lua_script(lua_script)) return;
 
@@ -80,6 +82,11 @@ void ECSGameAssetFactory::load_components(ECS& ecs, Reflex::Entity& entity,
 	if (entity_table["script"].valid()) {
 		load_script(ecs, entity, entity_table["script"]);
 	}
+
+	auto& lua = LuaManager::get_instance().get_state();
+	std::string serialized_table = EntitySerializer::serialize(lua, entity);
+
+	std::cout << serialized_table << std::endl;
 }
 
 void ECSGameAssetFactory::load_transform(Reflex::Entity& entity,

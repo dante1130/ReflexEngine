@@ -42,13 +42,6 @@ public:
 	void toggle_wireframe() override;
 
 	/**
-	 * @brief Set the skybox with given texture paths to faces.
-	 *
-	 * @param faces
-	 */
-	void set_skybox(const std::vector<std::string>& faces);
-
-	/**
 	 * @brief Adds a draw call to the renderer.
 	 *
 	 * @param draw_call
