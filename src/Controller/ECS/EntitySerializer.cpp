@@ -57,6 +57,10 @@ void EntitySerializer::serialize_entity(Reflex::Entity& entity) {
 		serialize_mesh(entity.get_component<Component::Mesh>());
 	}
 
+	if (entity.any_component<Component::Model>()) {
+		serialize_model(entity.get_component<Component::Model>());
+	}
+
 	close_table();
 }
 
@@ -90,6 +94,13 @@ void EntitySerializer::serialize_mesh(const Component::Mesh& mesh) {
 	create_var("mesh_name", '"' + mesh.mesh_name + '"', true);
 	create_var("texture_name", '"' + mesh.texture_name + '"', true);
 	create_var("material_name", '"' + mesh.material_name + '"');
+	close_table(true);
+}
+
+void EntitySerializer::serialize_model(const Component::Model& model) {
+	create_table("model");
+	create_var("model_name", '"' + model.model_name + '"', true);
+	create_var("material_name", '"' + model.material_name + '"');
 	close_table(true);
 }
 

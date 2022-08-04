@@ -7,6 +7,7 @@
 
 #include "Model/Components/Transform.hpp"
 #include "Model/Components/Mesh.hpp"
+#include "Model/Components/Model.hpp"
 
 /**
  * @class EntitySerializer
@@ -60,6 +61,13 @@ private:
 	 * @param mesh The mesh component to serialize.
 	 */
 	static void serialize_mesh(const Component::Mesh& mesh);
+
+	/**
+	 * @brief Serialize the model component to the save output stream.
+	 *
+	 * @param model The model component to serialize.
+	 */
+	static void serialize_model(const Component::Model& model);
 
 	/**
 	 * @brief Writes the beginning of a Lua table to the output stream,
