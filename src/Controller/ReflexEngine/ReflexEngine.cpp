@@ -46,7 +46,7 @@ void ReflexEngine::run() {
 		ECSScene& scene = engine.scene_manager_.current_scene();
 
 		if (EngineTime::is_paused()) {
-			EngineTime::force_delta_time(0);
+			EngineTime::force_delta_time(0.0);
 		} else {
 			Physics::updateWorld(EngineTime::get_delta_time());
 			scene.mouse_controls(engine.window_.get_x_offset(),
