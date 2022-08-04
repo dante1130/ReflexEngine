@@ -53,20 +53,23 @@ void ReflexEngine::run() {
 			                     engine.window_.get_y_offset());
 		}
 
-		// if (dataMgr.getDynamicBoolData("load_game", false))
-		// 	scene.load();
-		// else if (dataMgr.getDynamicBoolData("save_game", false))
-		// 	scene.save();
+		if (dataMgr.getDynamicBoolData("load_game", false)) {
+			scene.load("game/ECSScene/save");
+			dataMgr.setDynamicBoolData("load_game", false);
+		} else if (dataMgr.getDynamicBoolData("save_game", false)) {
+			scene.save("game/ECSScene/save");
+			dataMgr.setDynamicBoolData("save_game", false);
+		} else {
+			if (EngineTime::is_time_step_passed()) {
+				scene.fixed_update(EngineTime::get_fixed_delta_time());
+				EngineTime::reset_fixed_delta_time();
+			}
 
-		if (EngineTime::is_time_step_passed()) {
-			scene.fixed_update(EngineTime::get_fixed_delta_time());
-			EngineTime::reset_fixed_delta_time();
+			scene.update(EngineTime::get_delta_time());
+			scene.garbage_collection();
+			scene.add_draw_call();
+			engine.renderer_.draw();
 		}
-
-		scene.update(EngineTime::get_delta_time());
-		scene.garbage_collection();
-		scene.add_draw_call();
-		engine.renderer_.draw();
 
 		DebugLogger::draw();
 

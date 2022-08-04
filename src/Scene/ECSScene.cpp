@@ -38,9 +38,19 @@ void ECSScene::add_draw_call() {
 	ecs_.draw();
 }
 
-void ECSScene::save(const std::string& dir_path) {}
+void ECSScene::save(const std::string& dir_path) {
+	EntitySerializer::serialize(dir_path, ecs_);
+}
 
-void ECSScene::load(const std::string& dir_path) {}
+void ECSScene::load(const std::string& dir_path) {
+	Audio::get_instance().stop_all();
+	ecs_.clear_entities();
+
+	const std::filesystem::path path(dir_path);
+
+	LuaManager::get_instance().get_state().script_file(path.string() +
+	                                                   "_SaveCreation.lua");
+}
 
 void ECSScene::garbage_collection() { System::update_remove(ecs_); }
 
