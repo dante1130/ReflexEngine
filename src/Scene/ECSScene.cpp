@@ -1,10 +1,13 @@
 #include "ECSScene.hpp"
 
+#include <filesystem>
+
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 #include "Controller/LuaManager.hpp"
 #include "Controller/ECSGameAssetFactory.hpp"
 #include "Controller/Audio/Audio.hpp"
 #include "Controller/ECS/System.hpp"
+#include "Controller/ECS/EntitySerializer.hpp"
 
 ECSScene::ECSScene(const std::string& master_lua_script)
     : Scene(master_lua_script) {}

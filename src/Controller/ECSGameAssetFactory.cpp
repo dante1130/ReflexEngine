@@ -10,7 +10,6 @@
 #include "Model/Components/Statemachine.hpp"
 
 #include "Controller/ECS/System.hpp"
-#include "Controller/ECS/EntitySerializer.hpp"
 
 #include "Controller/LuaManager.hpp"
 

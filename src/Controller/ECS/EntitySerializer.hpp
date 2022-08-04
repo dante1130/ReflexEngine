@@ -9,8 +9,10 @@
 
 class EntitySerializer {
 public:
+	static void serialize(const std::filesystem::path& dir_path, ECS& ecs);
+
 	static void serialize(const std::filesystem::path& dir_path,
-	                      Reflex::Entity& entity);
+	                      Reflex::Entity& entity, bool overwrite = false);
 
 private:
 	static std::ofstream save_stream_;
