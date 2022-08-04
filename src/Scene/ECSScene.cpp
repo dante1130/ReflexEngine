@@ -35,9 +35,9 @@ void ECSScene::add_draw_call() {
 	ecs_.draw();
 }
 
-void ECSScene::save() {}
+void ECSScene::save(const std::string& dir_path) {}
 
-void ECSScene::load() {}
+void ECSScene::load(const std::string& dir_path) {}
 
 void ECSScene::garbage_collection() { System::update_remove(ecs_); }
 

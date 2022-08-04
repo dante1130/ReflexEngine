@@ -64,18 +64,22 @@ public:
 	/**
 	 * @brief	Saves game objects
 	 *
+	 * @param 	dir_path The directory path to save the game objects to
+	 *
 	 * @pre		Game objects exists
 	 * @post	Game objects saved
 	 */
-	void save() override;
+	void save(const std::string& dir_path) override;
 
 	/**
 	 * @brief	loads game objects
 	 *
+	 * @param 	dir_path The directory path to load the game objects from
+	 *
 	 * @pre		Game objects exists in files
 	 * @post	Game objects added to scene
 	 */
-	void load() override;
+	void load(const std::string& dir_path) override;
 
 	/**
 	 * @brief	Deleted game objects which are considered finished

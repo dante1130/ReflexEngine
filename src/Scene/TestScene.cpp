@@ -61,7 +61,7 @@ void TestScene::fixed_update(double delta_time) {
 	messageMgr.dispatchDelayedMessages();
 }
 
-void TestScene::save() {
+void TestScene::save(const std::string& dir_path) {
 	for (auto& game_object : game_objects_) {
 		game_object->save_object();
 	}
@@ -70,7 +70,7 @@ void TestScene::save() {
 	ObjectSaving::setFreshSave();
 }
 
-void TestScene::load() {
+void TestScene::load(const std::string& dir_path) {
 	for (size_t count = 1; count < game_objects_.size(); count++) {
 		game_objects_[count]->remove = true;
 	}

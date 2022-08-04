@@ -81,8 +81,6 @@ void ECSGameAssetFactory::load_components(ECS& ecs, Reflex::Entity& entity,
 	if (entity_table["script"].valid()) {
 		load_script(ecs, entity, entity_table["script"]);
 	}
-
-	EntitySerializer::serialize("game/ECSScene/save1", entity);
 }
 
 void ECSGameAssetFactory::load_transform(Reflex::Entity& entity,
