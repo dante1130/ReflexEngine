@@ -10,6 +10,7 @@
 #include "Model/Components/Model.hpp"
 #include "Model/Components/Md2Animation.hpp"
 #include "Model/Components/Terrain.hpp"
+#include "Model/Components/Light.hpp"
 
 /**
  * @class EntitySerializer
@@ -84,6 +85,15 @@ private:
 	 * @param terrain The terrain component to serialize.
 	 */
 	static void serialize_terrain(const Component::Terrain& terrain);
+
+	/**
+	 * @brief Serialize the directional light component to the save output
+	 * stream.
+	 *
+	 * @param light The directional light component to serialize.
+	 */
+	static void serialize_directional_light(
+	    const Component::DirectionalLight& light);
 
 	/**
 	 * @brief Writes the beginning of a Lua table to the output stream,

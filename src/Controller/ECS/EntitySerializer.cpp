@@ -69,6 +69,11 @@ void EntitySerializer::serialize_entity(Reflex::Entity& entity) {
 		serialize_terrain(entity.get_component<Component::Terrain>());
 	}
 
+	if (entity.any_component<Component::DirectionalLight>()) {
+		serialize_directional_light(
+		    entity.get_component<Component::DirectionalLight>());
+	}
+
 	close_table();
 }
 
@@ -126,6 +131,28 @@ void EntitySerializer::serialize_terrain(const Component::Terrain& terrain) {
 	create_var("texture_name", '"' + terrain.texture_name + '"', true);
 	create_var("material_name", '"' + terrain.material_name + '"', true);
 	create_var("detailmap_name", '"' + terrain.detailmap_name + '"');
+	close_table(true);
+}
+
+void EntitySerializer::serialize_directional_light(
+    const Component::DirectionalLight& light) {
+	create_table("directional_light");
+
+	create_table("color");
+	create_var("r", light.color.r, true);
+	create_var("g", light.color.g, true);
+	create_var("b", light.color.b);
+	close_table(true);
+
+	create_var("ambient_intensity", light.ambient_intensity, true);
+	create_var("diffuse_intensity", light.diffuse_intensity, true);
+
+	create_table("direction");
+	create_var("x", light.direction.x, true);
+	create_var("y", light.direction.y, true);
+	create_var("z", light.direction.z);
+	close_table();
+
 	close_table(true);
 }
 
