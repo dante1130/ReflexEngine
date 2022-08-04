@@ -54,9 +54,9 @@ void ReflexEngine::run() {
 		}
 
 		if (dataMgr.getDynamicBoolData("load_game", false))
-			scene.load_saved_game_objects();
+			scene.load();
 		else if (dataMgr.getDynamicBoolData("save_game", false))
-			scene.save_game_objects();
+			scene.save();
 		else {
 			if (EngineTime::is_time_step_passed()) {
 				scene.fixed_update(EngineTime::get_fixed_delta_time());

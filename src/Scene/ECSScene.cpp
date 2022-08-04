@@ -35,9 +35,9 @@ void ECSScene::add_draw_call() {
 	ecs_.draw();
 }
 
-void ECSScene::save_game_objects() {}
+void ECSScene::save() {}
 
-void ECSScene::load_saved_game_objects() {}
+void ECSScene::load() {}
 
 void ECSScene::garbage_collection() { System::update_remove(ecs_); }
 

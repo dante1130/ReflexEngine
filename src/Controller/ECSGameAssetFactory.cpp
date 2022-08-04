@@ -10,6 +10,7 @@
 #include "Model/Components/Statemachine.hpp"
 
 #include "Controller/ECS/System.hpp"
+#include "Controller/ECS/EntitySerializer.hpp"
 
 #include "Controller/LuaManager.hpp"
 
@@ -81,10 +82,7 @@ void ECSGameAssetFactory::load_components(ECS& ecs, Reflex::Entity& entity,
 		load_script(ecs, entity, entity_table["script"]);
 	}
 
-	auto& lua = LuaManager::get_instance().get_state();
-	std::string serialized_table = EntitySerializer::serialize(lua, entity);
-
-	std::cout << serialized_table << std::endl;
+	EntitySerializer::serialize("game/ECSScene/save1", entity);
 }
 
 void ECSGameAssetFactory::load_transform(Reflex::Entity& entity,

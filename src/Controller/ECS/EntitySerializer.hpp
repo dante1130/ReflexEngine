@@ -13,9 +13,9 @@ public:
 	                      Reflex::Entity& entity);
 
 private:
-	static std::ofstream save_stream;
-	static std::ofstream creation_stream;
-	static size_t indent_level;
+	static std::ofstream save_stream_;
+	static std::ofstream creation_stream_;
+	static size_t indent_level_;
 
 	static void serialize_entity(Reflex::Entity& entity);
 	static void serialize_transform(const Component::Transform& transform);
@@ -31,6 +31,6 @@ private:
 template <typename T>
 void EntitySerializer::create_var(const std::string& var_name,
                                   const T& var_value, bool comma) {
-	save_stream << std::string(indent_level, '\t') << var_name << " = "
-	            << var_value << (comma ? ",\n" : "\n");
+	save_stream_ << std::string(indent_level_, '\t') << var_name << " = "
+	             << var_value << (comma ? ",\n" : "\n");
 }

@@ -67,7 +67,7 @@ public:
 	 * @pre		Game objects exists
 	 * @post	Game objects saved
 	 */
-	void save_game_objects() override;
+	void save() override;
 
 	/**
 	 * @brief	loads game objects
@@ -75,7 +75,7 @@ public:
 	 * @pre		Game objects exists in files
 	 * @post	Game objects added to scene
 	 */
-	void load_saved_game_objects() override;
+	void load() override;
 
 	/**
 	 * @brief	Deleted game objects which are considered finished

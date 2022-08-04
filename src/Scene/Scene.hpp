@@ -63,7 +63,7 @@ public:
 	 * @pre		Game objects exists
 	 * @post	Game objects saved
 	 */
-	virtual void save_game_objects() = 0;
+	virtual void save() = 0;
 
 	/**
 	 * @brief	loads game objects
@@ -71,7 +71,7 @@ public:
 	 * @pre		Game objects exists in files
 	 * @post	Game objects added
 	 */
-	virtual void load_saved_game_objects() = 0;
+	virtual void load() = 0;
 
 	/**
 	 * @brief	Deleted game objects which are considered finished
