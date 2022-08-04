@@ -16,10 +16,10 @@ void EntitySerializer::serialize(const std::filesystem::path& dir_path,
 		auto& entity = ecs.get_entity(entity_id);
 
 		if (!is_first) {
+			serialize(dir_path, entity, false);
+		} else {
 			serialize(dir_path, entity, true);
 			is_first = false;
-		} else {
-			serialize(dir_path, entity, false);
 		}
 	});
 }
@@ -34,7 +34,7 @@ void EntitySerializer::serialize(const std::filesystem::path& dir_path,
 	const std::filesystem::path save_file =
 	    dir_path / "save" / (entity.get_name() + '_' + entity_id + ".lua");
 
-	const auto mode = overwrite ? std::ios_base::out : std::ios_base::app;
+	const auto mode = overwrite ? std::ios_base::trunc : std::ios_base::app;
 
 	creation_stream_.open(dir_path / "_SaveCreation.lua", mode);
 	creation_stream_ << "Scene.add_game_object(" << save_file << ")\n";

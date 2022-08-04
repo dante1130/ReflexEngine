@@ -46,10 +46,10 @@ void ECSScene::load(const std::string& dir_path) {
 	Audio::get_instance().stop_all();
 	ecs_.clear_entities();
 
-	const std::filesystem::path path(dir_path);
+	std::filesystem::path path(dir_path);
+	path /= "_SaveCreation.lua";
 
-	LuaManager::get_instance().get_state().script_file(path.string() +
-	                                                   "_SaveCreation.lua");
+	LuaManager::get_instance().get_state().script_file(path.string());
 }
 
 void ECSScene::garbage_collection() { System::update_remove(ecs_); }
