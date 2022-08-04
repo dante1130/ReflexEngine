@@ -16,7 +16,7 @@ void EntitySerializer::serialize(const std::filesystem::path& dir_path,
 		auto& entity = ecs.get_entity(entity_id);
 
 		if (!is_first) {
-			serialize(dir_path, entity, false);
+			serialize(dir_path, entity);
 		} else {
 			serialize(dir_path, entity, true);
 			is_first = false;
