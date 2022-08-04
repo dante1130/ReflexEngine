@@ -21,15 +21,9 @@ void Md2Model::set_animstate(const md2::animstate_t& animstate) {
 	animstate_ = animstate;
 }
 
-void Md2Model::render_animated() {
-	if (!mesh_) return;
-
-	render_frame(animstate_.curr_frame);
-}
+void Md2Model::render_animated() { render_frame(animstate_.curr_frame); }
 
 void Md2Model::render_animated_interpolated() {
-	if (!mesh_) return;
-
 	render_interpolated_frame(animstate_.curr_frame, animstate_.next_frame,
 	                          animstate_.interpol);
 }
@@ -37,12 +31,16 @@ void Md2Model::render_animated_interpolated() {
 void Md2Model::render_frame(int frame_num) {
 	load_frame_mesh(frame_num);
 
+	if (!mesh_) return;
+
 	mesh_->render_mesh();
 }
 
 void Md2Model::render_interpolated_frame(int frame_a, int frame_b,
                                          float interpolation) {
 	load_interpolated_frame_mesh(frame_a, frame_b, interpolation);
+
+	if (!mesh_) return;
 
 	mesh_->render_mesh();
 }

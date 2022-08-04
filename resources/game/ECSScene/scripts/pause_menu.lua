@@ -17,6 +17,14 @@ if (unpause) then
 	Time.set_pause(false)
 end
 
+if (save) then
+	setBoolData("save_game", true);
+end
+
+if (load) then
+	setBoolData("load_game", true);
+end
+
 if (credits) then
 	setBoolData("show_credits", true)
 end

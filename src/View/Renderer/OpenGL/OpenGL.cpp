@@ -128,5 +128,3 @@ void OpenGL::toggle_wireframe() {
 void OpenGL::add_draw_call(const DrawCall& draw_call) {
 	draw_calls_.emplace_back(draw_call);
 }
-
-void OpenGL::set_skybox(const std::vector<std::string>& faces) {}

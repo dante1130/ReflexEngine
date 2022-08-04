@@ -82,6 +82,10 @@ void Mesh::CreateColorMesh(const GLfloat* vertices, const GLuint* indices,
 }
 
 void Mesh::render_mesh() const {
+	if (IBO == 0 || VBO == 0 || VAO == 0 || indexCount == 0) {
+		return;
+	}
+
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
 

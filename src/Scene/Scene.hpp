@@ -60,18 +60,22 @@ public:
 	/**
 	 * @brief	Saves game objects
 	 *
+	 * @param 	dir_path The path to the directory you want to save to.
+	 *
 	 * @pre		Game objects exists
 	 * @post	Game objects saved
 	 */
-	virtual void save_game_objects() = 0;
+	virtual void save(const std::string& dir_path) = 0;
 
 	/**
 	 * @brief	loads game objects
 	 *
+	 * @param 	dir_path The path to the directory you want to load from.
+	 *
 	 * @pre		Game objects exists in files
 	 * @post	Game objects added
 	 */
-	virtual void load_saved_game_objects() = 0;
+	virtual void load(const std::string& dir_path) = 0;
 
 	/**
 	 * @brief	Deleted game objects which are considered finished

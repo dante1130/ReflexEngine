@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Model/GameObject/GameObject.hpp"
 #include <fstream>
+
+#include "Model/GameObject/GameObject.hpp"
 
 /**
  * @class ObjectSaving

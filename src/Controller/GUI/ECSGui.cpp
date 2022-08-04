@@ -41,7 +41,7 @@ void ECSGui::draw(ECS& ecs) {
 	ImGui::End();
 
 	ImGui::Begin("Properties", nullptr, window_flags);
-	if (selected_entity_ != entt::null) {
+	if (registry.valid(selected_entity_)) {
 		auto& entity = ecs.get_entity(selected_entity_);
 		draw_entity_props(ecs, entity);
 		draw_add_component(entity);

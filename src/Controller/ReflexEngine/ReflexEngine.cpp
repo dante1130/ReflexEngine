@@ -46,18 +46,20 @@ void ReflexEngine::run() {
 		ECSScene& scene = engine.scene_manager_.current_scene();
 
 		if (EngineTime::is_paused()) {
-			EngineTime::force_delta_time(0);
+			EngineTime::force_delta_time(0.0);
 		} else {
 			Physics::updateWorld(EngineTime::get_delta_time());
 			scene.mouse_controls(engine.window_.get_x_offset(),
 			                     engine.window_.get_y_offset());
 		}
 
-		if (dataMgr.getDynamicBoolData("load_game", false))
-			scene.load_saved_game_objects();
-		else if (dataMgr.getDynamicBoolData("save_game", false))
-			scene.save_game_objects();
-		else {
+		if (dataMgr.getDynamicBoolData("load_game", false)) {
+			scene.load("game/ECSScene/save");
+			dataMgr.setDynamicBoolData("load_game", false);
+		} else if (dataMgr.getDynamicBoolData("save_game", false)) {
+			scene.save("game/ECSScene/save");
+			dataMgr.setDynamicBoolData("save_game", false);
+		} else {
 			if (EngineTime::is_time_step_passed()) {
 				scene.fixed_update(EngineTime::get_fixed_delta_time());
 				EngineTime::reset_fixed_delta_time();
