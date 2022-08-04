@@ -15,8 +15,6 @@
 
 #include "Model/singletons.h"
 
-#include "Controller/ECS/EntitySerializer.hpp"
-
 void ECSGameAssetFactory::create(ECS& ecs, const std::string& lua_script) {
 	if (!is_lua_script(lua_script)) return;
 
