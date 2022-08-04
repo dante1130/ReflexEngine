@@ -7,11 +7,11 @@
 namespace Component {
 struct Md2Animation {
 	/// The name of the md2 model.
-	std::string md2_name;
+	std::string md2_name = {"default"};
 	/// The name of the texture.
-	std::string texture_name;
+	std::string texture_name = {"default"};
 	/// The name of the material.
-	std::string material_name;
+	std::string material_name = {"default"};
 
 	/// The animation state of the model.
 	md2::animstate_t animstate;

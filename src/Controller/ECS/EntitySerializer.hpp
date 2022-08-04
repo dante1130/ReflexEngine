@@ -12,6 +12,7 @@
 #include "Model/Components/Terrain.hpp"
 #include "Model/Components/Light.hpp"
 #include "Model/Components/Script.hpp"
+#include "Model/Components/Statemachine.hpp"
 
 /**
  * @class EntitySerializer

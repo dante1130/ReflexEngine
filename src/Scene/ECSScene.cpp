@@ -43,6 +43,10 @@ void ECSScene::save(const std::string& dir_path) {
 }
 
 void ECSScene::load(const std::string& dir_path) {
+	if (!std::filesystem::exists(dir_path)) {
+		return;
+	}
+
 	Audio::get_instance().stop_all();
 	ecs_.clear_entities();
 
