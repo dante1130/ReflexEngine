@@ -11,6 +11,7 @@
 #include "Model/Components/Md2Animation.hpp"
 #include "Model/Components/Terrain.hpp"
 #include "Model/Components/Light.hpp"
+#include "Model/Components/Script.hpp"
 
 /**
  * @class EntitySerializer
@@ -57,6 +58,13 @@ private:
 	 * @param transform The transform component to serialize.
 	 */
 	static void serialize_transform(const Component::Transform& transform);
+
+	/**
+	 * @brief Serialize the script component to the save output stream.
+	 *
+	 * @param script The script component to serialize.
+	 */
+	static void serialize_script(const Component::Script& script);
 
 	/**
 	 * @brief Serialize the mesh component to the save output stream.

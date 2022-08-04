@@ -57,6 +57,10 @@ void EntitySerializer::serialize_entity(Reflex::Entity& entity) {
 		serialize_mesh(entity.get_component<Component::Mesh>());
 	}
 
+	if (entity.any_component<Component::Script>()) {
+		serialize_script(entity.get_component<Component::Script>());
+	}
+
 	if (entity.any_component<Component::Model>()) {
 		serialize_model(entity.get_component<Component::Model>());
 	}
@@ -107,6 +111,12 @@ void EntitySerializer::serialize_transform(
 	create_var("z", transform.scale.z);
 	close_table(true);
 
+	close_table(true);
+}
+
+void EntitySerializer::serialize_script(const Component::Script& script) {
+	create_table("script");
+	create_var("lua_script", '"' + script.lua_script + '"');
 	close_table(true);
 }
 
