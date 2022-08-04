@@ -74,6 +74,14 @@ void EntitySerializer::serialize_entity(Reflex::Entity& entity) {
 		    entity.get_component<Component::DirectionalLight>());
 	}
 
+	if (entity.any_component<Component::PointLight>()) {
+		serialize_point_light(entity.get_component<Component::PointLight>());
+	}
+
+	if (entity.any_component<Component::SpotLight>()) {
+		serialize_spot_light(entity.get_component<Component::SpotLight>());
+	}
+
 	close_table();
 }
 
@@ -152,6 +160,64 @@ void EntitySerializer::serialize_directional_light(
 	create_var("y", light.direction.y, true);
 	create_var("z", light.direction.z);
 	close_table();
+
+	close_table(true);
+}
+
+void EntitySerializer::serialize_point_light(
+    const Component::PointLight& light) {
+	create_table("point_light");
+
+	create_table("color");
+	create_var("r", light.color.r, true);
+	create_var("g", light.color.g, true);
+	create_var("b", light.color.b);
+	close_table(true);
+
+	create_var("ambient_intensity", light.ambient_intensity, true);
+	create_var("diffuse_intensity", light.diffuse_intensity, true);
+
+	create_table("position");
+	create_var("x", light.position.x, true);
+	create_var("y", light.position.y, true);
+	create_var("z", light.position.z);
+	close_table(true);
+
+	create_var("constant", light.constant, true);
+	create_var("linear", light.linear, true);
+	create_var("quadratic", light.quadratic);
+
+	close_table(true);
+}
+
+void EntitySerializer::serialize_spot_light(const Component::SpotLight& light) {
+	create_table("spot_light");
+
+	create_table("color");
+	create_var("r", light.color.r, true);
+	create_var("g", light.color.g, true);
+	create_var("b", light.color.b);
+	close_table(true);
+
+	create_var("ambient_intensity", light.ambient_intensity, true);
+	create_var("diffuse_intensity", light.diffuse_intensity, true);
+
+	create_table("position");
+	create_var("x", light.position.x, true);
+	create_var("y", light.position.y, true);
+	create_var("z", light.position.z);
+	close_table(true);
+
+	create_table("direction");
+	create_var("x", light.direction.x, true);
+	create_var("y", light.direction.y, true);
+	create_var("z", light.direction.z);
+	close_table(true);
+
+	create_var("constant", light.constant, true);
+	create_var("linear", light.linear, true);
+	create_var("quadratic", light.quadratic, true);
+	create_var("edge", light.edge);
 
 	close_table(true);
 }

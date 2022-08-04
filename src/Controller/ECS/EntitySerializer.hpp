@@ -96,6 +96,20 @@ private:
 	    const Component::DirectionalLight& light);
 
 	/**
+	 * @brief Serialize the point light component to the save output stream.
+	 *
+	 * @param light The point light component to serialize.
+	 */
+	static void serialize_point_light(const Component::PointLight& light);
+
+	/**
+	 * @brief Serialize the spot light component to the save output stream.
+	 *
+	 * @param light The spot light component to serialize.
+	 */
+	static void serialize_spot_light(const Component::SpotLight& light);
+
+	/**
 	 * @brief Writes the beginning of a Lua table to the output stream,
 	 * increments the indent level.
 	 *
