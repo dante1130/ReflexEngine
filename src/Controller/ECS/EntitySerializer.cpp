@@ -49,9 +49,13 @@ void EntitySerializer::serialize(const std::filesystem::path& dir_path,
 
 void EntitySerializer::serialize_entity(Reflex::Entity& entity) {
 	create_table("entity");
-	create_var("name", ('"' + entity.get_name() + '"'), true);
+	create_var("name", '"' + entity.get_name() + '"', true);
 
 	serialize_transform(entity.get_component<Component::Transform>());
+
+	if (entity.any_component<Component::Mesh>()) {
+		serialize_mesh(entity.get_component<Component::Mesh>());
+	}
 
 	close_table();
 }
@@ -78,6 +82,14 @@ void EntitySerializer::serialize_transform(
 	create_var("z", transform.scale.z);
 	close_table(true);
 
+	close_table(true);
+}
+
+void EntitySerializer::serialize_mesh(const Component::Mesh& mesh) {
+	create_table("mesh");
+	create_var("mesh_name", '"' + mesh.mesh_name + '"', true);
+	create_var("texture_name", '"' + mesh.texture_name + '"', true);
+	create_var("material_name", '"' + mesh.material_name + '"');
 	close_table(true);
 }
 
