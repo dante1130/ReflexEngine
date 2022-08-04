@@ -9,6 +9,7 @@
 #include "Model/Components/Mesh.hpp"
 #include "Model/Components/Model.hpp"
 #include "Model/Components/Md2Animation.hpp"
+#include "Model/Components/Terrain.hpp"
 
 /**
  * @class EntitySerializer
@@ -76,6 +77,13 @@ private:
 	 * @param md2 The md2 animation component to serialize.
 	 */
 	static void serialize_md2(const Component::Md2Animation& md2);
+
+	/**
+	 * @brief Serialize the terrain component to the save output stream.
+	 *
+	 * @param terrain The terrain component to serialize.
+	 */
+	static void serialize_terrain(const Component::Terrain& terrain);
 
 	/**
 	 * @brief Writes the beginning of a Lua table to the output stream,

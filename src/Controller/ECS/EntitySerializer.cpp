@@ -65,6 +65,10 @@ void EntitySerializer::serialize_entity(Reflex::Entity& entity) {
 		serialize_md2(entity.get_component<Component::Md2Animation>());
 	}
 
+	if (entity.any_component<Component::Terrain>()) {
+		serialize_terrain(entity.get_component<Component::Terrain>());
+	}
+
 	close_table();
 }
 
@@ -113,6 +117,15 @@ void EntitySerializer::serialize_md2(const Component::Md2Animation& md2) {
 	create_var("md2_name", '"' + md2.md2_name + '"', true);
 	create_var("texture_name", '"' + md2.texture_name + '"', true);
 	create_var("material_name", '"' + md2.material_name + '"');
+	close_table(true);
+}
+
+void EntitySerializer::serialize_terrain(const Component::Terrain& terrain) {
+	create_table("terrain");
+	create_var("terrain_name", '"' + terrain.terrain_name + '"', true);
+	create_var("texture_name", '"' + terrain.texture_name + '"', true);
+	create_var("material_name", '"' + terrain.material_name + '"', true);
+	create_var("detailmap_name", '"' + terrain.detailmap_name + '"');
 	close_table(true);
 }
 
