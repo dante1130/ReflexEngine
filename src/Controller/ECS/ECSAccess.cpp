@@ -12,6 +12,7 @@
 #include "Model/Components/Md2Animation.hpp"
 #include "Model/Components/Terrain.hpp"
 #include "Model/Components/Statemachine.hpp"
+#include "Model/Components/RigidBody.hpp"
 #include "Model/Components/Remove.hpp"
 
 #include "Controller/AI/statemachineComponentHelper.hpp"
@@ -32,6 +33,7 @@ void ECSAccess::register_ecs() {
 	register_md2_component();
 	register_terrain_component();
 	register_statemachine_component();
+	register_rigidbody_component();
 }
 
 void ECSAccess::register_registry() {
@@ -334,4 +336,16 @@ void ECSAccess::register_statemachine_component() {
 	    &statemachineComponentHelper::follow_waypoint;
 	statemachine["follow_waypoint_physics"] =
 	    &statemachineComponentHelper::follow_waypoint_physics;
+}
+
+void ECSAccess::register_rigidbody_component() {
+	auto& lua = LuaManager::get_instance().get_state();
+
+	auto rigidbody_type = lua.new_usertype<Rigidbody>("Rigidbody");
+
+	rigidbody_type["gravity_on"] = &Rigidbody::gravity_on;
+	rigidbody_type["can_sleep"] = &Rigidbody::can_sleep;
+	rigidbody_type["is_trigger"] = &Rigidbody::is_trigger;
+	rigidbody_type["linear_drag"] = &Rigidbody::linear_drag;
+	rigidbody_type["angular_drag"] = &Rigidbody::angular_drag;
 }

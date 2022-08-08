@@ -168,6 +168,7 @@ public:
 
 	void setPosition(glm::vec3 pos);
 	void setRotation(glm::vec3 rot);
+	void setEulerRotation(glm::vec3 rot);
 	void setAngle(float ang);
 
 protected:

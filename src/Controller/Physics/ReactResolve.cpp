@@ -33,6 +33,17 @@ void ReactResolve::init(glm::vec3 pos, glm::vec3 rot, float angle)
 
 }
 
+void ReactResolve::init(glm::vec3 pos, glm::vec3 rot)
+{
+	Vector3 p(pos.x, pos.y, pos.z);
+	Quaternion o = Quaternion::identity();
+	glm::vec3 rot_radians = glm::radians(rot);
+	o.fromEulerAngles(rot_radians.x, rot_radians.y, rot_radians.z);
+
+	rb = Physics::getPhysicsWorld()->createRigidBody(Transform(p, o));
+
+}
+
 void ReactResolve::addForce(glm::vec3 force, Apply type) 
 { 
 	try {
@@ -253,11 +264,12 @@ glm::vec3 ReactResolve::getPosition() {
 
 glm::vec3 ReactResolve::getRotation() {
 	Quaternion r = rb->getTransform().getOrientation();
-	return glm::vec3(r.x, r.y, r.z);
+	return glm::degrees(glm::eulerAngles(glm::quat(r.w, r.x, r.y, r.z)));
 }
 
-float ReactResolve::getAngle() {
-	return rb->getTransform().getOrientation().w;
+glm::quat ReactResolve::getOrientation() {
+	Quaternion r = rb->getTransform().getOrientation();
+	return glm::quat(r.w, r.x, r.y, r.z);
 }
 
 void ReactResolve::setPosition(glm::vec3 pos)
@@ -266,21 +278,42 @@ void ReactResolve::setPosition(glm::vec3 pos)
 	transform.setPosition(Vector3(pos.x, pos.y, pos.z));
 	rb->setTransform(transform);
 }
+
+void ReactResolve::setQuanternion(glm::quat quat)
+{
+	Transform transform = rb->getTransform();
+	transform.setOrientation(Quaternion(quat.x, quat.y, quat.z, quat.w));
+	rb->setTransform(transform);
+}
+
+void ReactResolve::setEulerRotation(glm::vec3 rot)
+{
+	Transform transform = rb->getTransform();
+	glm::vec3 rot_radians = glm::radians(rot);
+	transform.setOrientation(Quaternion::fromEulerAngles(rot_radians.x, 
+		rot_radians.y, rot_radians.z));
+	rb->setTransform(transform);
+}
+
+//Physics object needed, can delete later
+float ReactResolve::getAngle()
+{
+	return rb->getTransform().getOrientation().w;
+}
 void ReactResolve::setRotation(glm::vec3 rot)
 {
-	Transform transform = Transform( rb->getTransform().getPosition()
-		, Quaternion(rot.x, rot.y, rot.z, getAngle()));
+	Transform transform = rb->getTransform();
+	transform.setOrientation(Quaternion(rot.x, rot.y, rot.z, transform.getOrientation().w));
 	rb->setTransform(transform);
 }
 void ReactResolve::setAngle(float ang)
 {
-	Quaternion new_quat = rb->getTransform().getOrientation();
-	new_quat.w = ang;
-	Transform transform = Transform(rb->getTransform().getPosition()
-		, new_quat);
+	Transform transform = rb->getTransform();
+	Quaternion orientation = rb->getTransform().getOrientation();
+	orientation.w = ang;
+	transform.setOrientation(orientation);
 	rb->setTransform(transform);
 }
-
 
 
 

@@ -31,6 +31,17 @@ void EngineResolve::init(glm::vec3 pos, glm::vec3 rot, float angle) {
 	cb = Physics::getPhysicsWorld()->createCollisionBody(Transform(p, o));
 }
 
+void EngineResolve::init(glm::vec3 pos, glm::vec3 rot)
+{
+	Vector3 p(pos.x, pos.y, pos.z);
+	Quaternion o = Quaternion::identity();
+	glm::vec3 rot_radians = glm::radians(rot);
+	o.fromEulerAngles(rot_radians.x, rot_radians.y, rot_radians.z);
+
+	cb = Physics::getPhysicsWorld()->createCollisionBody(Transform(p, o));
+
+}
+
 void EngineResolve::addForce(glm::vec3 force, Apply type)
 {
 
@@ -152,26 +163,45 @@ void EngineResolve::addCapsuleCollider(glm::vec3 pos, float radius, float height
 
 }
 
-glm::vec3 EngineResolve::getPosition()
-{
-	return glm::vec3(0.0f);
+
+glm::vec3 EngineResolve::getPosition() {
+	return glm::vec3(0);
 }
-glm::vec3 EngineResolve::getRotation()
-{
-	return glm::vec3(0.0f);
+
+glm::vec3 EngineResolve::getRotation() {
+	return glm::vec3(0);
 }
+
+glm::quat EngineResolve::getOrientation() {
+	return glm::quat(0, glm::vec3(0));
+}
+
+void EngineResolve::setPosition(glm::vec3 pos)
+{
+	
+}
+
+void EngineResolve::setQuanternion(glm::quat quat)
+{
+
+}
+
+void EngineResolve::setEulerRotation(glm::vec3 rot)
+{
+
+}
+
+
+//Physics object needed, can delete later
 float EngineResolve::getAngle()
 {
 	return 0.0f;
-}
-
-void EngineResolve::setPosition(glm::vec3 pos) {
-
 }
 void EngineResolve::setRotation(glm::vec3 rot)
 {
 
 }
-void EngineResolve::setAngle(float ang) {
+void EngineResolve::setAngle(float ang)
+{
 
 }

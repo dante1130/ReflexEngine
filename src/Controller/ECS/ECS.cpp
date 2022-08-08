@@ -6,6 +6,7 @@
 #include "Model/Components/Script.hpp"
 #include "Model/Components/Light.hpp"
 #include "Model/Components/Md2Animation.hpp"
+#include "Model/Components/RigidBody.hpp"
 
 using namespace Reflex;
 
@@ -19,10 +20,12 @@ ECS::ECS() {
 	    .connect<&System::init_spot_light>();
 	registry_.on_construct<Component::Md2Animation>()
 	    .connect<&System::init_md2_animation>();
+	registry_.on_construct<Component::Rigidbody>().connect<&System::init_rigidbody>();
 
 	registry_.on_update<Component::Script>().connect<&System::init_script>();
 	registry_.on_update<Component::Md2Animation>()
 	    .connect<&System::init_md2_animation>();
+	registry_.on_update<Component::Rigidbody>().connect<&System::update_rigidbody>();
 
 	registry_.on_destroy<Component::DirectionalLight>()
 	    .connect<&System::delete_directional_light>();
@@ -46,6 +49,7 @@ void ECS::update(double delta_time) {
 	System::update_spot_light(registry_);
 	System::update_md2(registry_);
 	System::update_statemachine(*this);
+	System::update_rigidbody(registry_);
 }
 
 void ECS::fixed_update(double delta_time) {}

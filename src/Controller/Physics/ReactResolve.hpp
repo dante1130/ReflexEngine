@@ -15,6 +15,7 @@ class ReactResolve: public PhysicsBody{
 
 		// init setup
 	    void init(glm::vec3 pos, glm::vec3 rot, float angle) override;
+		void init(glm::vec3 pos, glm::vec3 rot) override;
 
 		//Change movement properties
 		void addForce(glm::vec3 force, Apply type) override;
@@ -58,9 +59,12 @@ class ReactResolve: public PhysicsBody{
 	    // returns for GameObject position and rotation
 	    glm::vec3 getPosition() override;
 	    glm::vec3 getRotation() override;
-	    float getAngle() override;
+		glm::quat getOrientation() override;
+		float getAngle() override;
 
 		void setPosition(glm::vec3 pos) override;
+		void setQuanternion(glm::quat quat) override;
+		void setEulerRotation(glm::vec3 rot) override;
 		void setRotation(glm::vec3 rot) override;
 		void setAngle(float ang) override;
 

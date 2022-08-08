@@ -3,6 +3,7 @@
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 #include "Controller/ResourceManager/ResourceManager.hpp"
 #include "Controller/LuaManager.hpp"
+#include "Controller/Physics/Physics.hpp"
 
 #include "Model/RunTimeDataStorage/GlobalDataStorage.hpp"
 
@@ -15,6 +16,7 @@
 #include "Model/Components/Terrain.hpp"
 #include "Model/Components/Statemachine.hpp"
 #include "Model/Components/Remove.hpp"
+#include "Model/Components/RigidBody.hpp"
 
 void System::draw_model(entt::registry& registry) {
 	auto& renderer = ReflexEngine::get_instance().renderer_;
@@ -182,6 +184,17 @@ void System::draw_terrain(entt::registry& registry) {
 	    });
 }
 
+void System::init_rigidbody(entt::registry& registry, entt::entity entity)
+{
+	auto& rigidbody_manager = ResourceManager::get_instance().get_rigidbody_manager();
+
+	auto& rigidbody = registry.get<Component::Rigidbody>(entity);
+	auto& transform = registry.get<Component::Transform>(entity);
+
+	rigidbody_manager.add_rigidbody(entity, rigidbody, transform);
+
+}
+
 void System::init_script(entt::registry& registry, entt::entity entity) {
 	auto& lua = LuaManager::get_instance().get_state();
 
@@ -240,6 +253,28 @@ void System::init_statemachine(entt::registry& registry, entt::entity entity) {
 	if (!statemachine.entity) return;
 
 	statemachine.lua_variables = lua["entity"]["statemachine"]["var"];
+}
+
+void System::update_rigidbody(entt::registry& registry)
+{
+	auto& rigidbody_manager = ResourceManager::get_instance().get_rigidbody_manager();
+
+	//Calls the physics world update
+
+	static float accumulator;
+	accumulator += EngineTime::get_delta_time();
+
+	while (accumulator >= Physics::getTimeStep())
+	{
+		Physics::getPhysicsWorld()->update(Physics::getTimeStep());
+		accumulator -= Physics::getTimeStep();
+	}
+
+	registry.view<Component::Rigidbody, Component::Transform>().each(
+		[&rigidbody_manager](const auto entity, auto& rigidbody, auto& transform)
+		{
+			rigidbody_manager.update_rigidbody(entity, rigidbody, transform);
+		});
 }
 
 void System::update_directional_light(entt::registry& registry) {

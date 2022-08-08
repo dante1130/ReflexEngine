@@ -59,6 +59,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/ResourceManager/MeshManager.cpp
 	Controller/ResourceManager/TerrainManager.cpp
 	Controller/ResourceManager/ObjectSaving.cpp
+	Controller/ResourceManager/RigidbodyManager.cpp
 	Controller/Input/InputManager.cpp
 	Controller/Input/InputState.cpp
 	Controller/Audio/Audio.cpp
@@ -77,6 +78,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/Physics/EngineResolve.cpp
 	Controller/Physics/ReactResolve.cpp
 	Controller/Physics/PhysicBody.cpp
+	Controller/Physics/Rigidbody.cpp
 	Controller/Physics/CollisionEvent.cpp
 	Controller/Physics/ColliderRenderer.cpp
 	Controller/Networking/NetworkAccess.cpp

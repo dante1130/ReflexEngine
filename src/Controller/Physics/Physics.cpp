@@ -4,6 +4,7 @@ bool Physics::isCreated = false;
 PhysicsCommon Physics::physicsCommon;
 PhysicsWorld* Physics::world = nullptr;
 CollisionEventListener Physics::collisionEvent;
+float Physics::time_step = 1.0f / 60.0f;
 
 void Physics::createWorld() {
 	if (!isCreated) {
@@ -44,3 +45,5 @@ PhysicsCommon& Physics::getPhysicsCommon() { return physicsCommon; }
 PhysicsWorld* Physics::getPhysicsWorld() { return world; }
 
 bool Physics::WorldExists() { return isCreated; }
+
+float Physics::getTimeStep() { return time_step;  }

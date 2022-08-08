@@ -85,6 +85,9 @@ public:
 	 */
 	static bool WorldExists();
 
+
+	static float getTimeStep();
+
 private:
 	/// A boolean determining if the world has been created or not.
 	static bool isCreated;
@@ -94,4 +97,7 @@ private:
 	static PhysicsWorld* world;
 	/// The collision event listener listening for any collision.
 	static CollisionEventListener collisionEvent;
+
+	static float time_step;
+
 };

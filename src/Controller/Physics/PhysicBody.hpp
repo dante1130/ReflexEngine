@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Physics.hpp"
-#include "glm/vec3.hpp"
-#include "glm/vec4.hpp"
+#include "glm/glm.hpp"
+#include "glm/gtc/quaternion.hpp"
 
 //These are to make it easier to determine where a force
 //in the game world is can be applied
@@ -31,7 +31,6 @@ class PhysicsBody
 		std::unordered_map<int, SphereShape*>  m_sphere;
 		std::unordered_map<int, CapsuleShape*>  m_capsule;
 
-
 	public:
 
 		//collider access
@@ -59,6 +58,7 @@ class PhysicsBody
 
 		//init setup
 	    virtual void init(glm::vec3 rot, glm::vec3 pos, float angle) = 0;
+		virtual void init(glm::vec3 rot, glm::vec3 pos) = 0;
 
 
 		//Change movement properties
@@ -104,10 +104,12 @@ class PhysicsBody
 		//returns for GameObject position and rotation
 	    virtual glm::vec3 getPosition() = 0;
 	    virtual glm::vec3 getRotation() = 0;
-	    virtual float getAngle() = 0;
+		virtual glm::quat getOrientation() = 0;
+		virtual float getAngle() = 0;
 
 		virtual void setPosition(glm::vec3 pos) = 0;
+		virtual void setQuanternion(glm::quat quat) = 0;
+		virtual void setEulerRotation(glm::vec3 rot) = 0;
 		virtual void setRotation(glm::vec3 rot) = 0;
 		virtual void setAngle(float ang) = 0;
-
 };
