@@ -43,7 +43,7 @@ public:
 	 *
 	 * @return glm::mat4
 	 */
-	glm::mat4 calculate_light_transform();
+	glm::mat4 calculate_light_transform() const;
 
 	/**
 	 * @brief Enables the light by passing the uniforms to the shader.

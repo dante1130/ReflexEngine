@@ -24,7 +24,7 @@ void DirectionalLight::set_directional_light(glm::vec3 color,
 	m_diffuseIntensity = dIntensity;
 }
 
-glm::mat4 DirectionalLight::calculate_light_transform() {
+glm::mat4 DirectionalLight::calculate_light_transform() const {
 	return light_projection_ * glm::lookAt(-m_direction,
 	                                       glm::vec3(0.0f, 0.0f, 0.0f),
 	                                       glm::vec3(0.0f, 1.0f, 0.0f));

@@ -4,7 +4,7 @@ in vec3 vColor;
 in vec2 texCoord;
 in vec3 normal;
 in vec3 fragPos;
-in vec4 directional_light_space_pos
+in vec4 directional_light_space_pos;
 
 out vec4 color;
 
@@ -80,7 +80,8 @@ vec3 sampleOffsetDirections[20] = vec3[]
    vec3(0, 1,  1), vec3( 0, -1,  1), vec3( 0, -1, -1), vec3( 0, 1, -1)
 );
 
-float calc_directional_shadow_factor(DirectionalLight light) {
+float calc_directional_shadow_factor(DirectionalLight light) 
+{
 	vec3 proj_coords = directional_light_space_pos.xyz / directional_light_space_pos.w;
 	proj_coords = (proj_coords * 0.5) + 0.5;
 
@@ -107,12 +108,12 @@ vec4 CalcLightByDirection(Light light, vec3 direction, float shadow_factor)
 	float specularFactor = pow(max(dot(fragToEye, reflectedVertex), 0.0), material.shininess);
 	vec4 specularColor = vec4(light.color * material.specularIntensity * specularFactor, 1.0f);
 
-	return ambientColor + ((1.0 - shadow) * (diffuseColor + specularColor));
+	return ambientColor + diffuseColor + specularColor;
 }
 
 vec4 CalcDirectionalLight()
 {
-	float shadow_factor = calc_directional_shadow_factor(directionalLight)
+	float shadow_factor = calc_directional_shadow_factor(directionalLight);
 	return CalcLightByDirection(directionalLight.base, directionalLight.direction, shadow_factor);
 }
 

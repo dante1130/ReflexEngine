@@ -11,6 +11,6 @@ Light::Light(GLuint shadow_width, GLuint shadow_height, glm::vec3 color,
 	shadow_map_.init(shadow_width, shadow_height);
 }
 
-ShadowMap& Light::get_shadow_map() { return shadow_map_; }
+const ShadowMap& Light::get_shadow_map() const { return shadow_map_; }
 
 bool Light::is_active() const { return is_active_; }

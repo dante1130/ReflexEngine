@@ -31,7 +31,7 @@ public:
 	 *
 	 * @return ShadowMap&
 	 */
-	ShadowMap& get_shadow_map();
+	const ShadowMap& get_shadow_map() const;
 
 	/**
 	 * @brief Returns if the light is active.
