@@ -10,9 +10,8 @@ class OmniShadowMap : public ShadowMap {
 public:
 	/**
 	 * @brief Construct a new Omni Shadow Map object
-	 *
 	 */
-	OmniShadowMap();
+	OmniShadowMap() = default;
 
 	/**
 	 * @brief Initializes the shadowmap with a width and height.
@@ -21,18 +20,18 @@ public:
 	 * @param height The height of the shadowmap.
 	 * @return bool
 	 */
-	bool Init(GLuint width, GLuint height) override;
+	bool init(GLuint width, GLuint height) override;
 
 	/**
 	 * @brief Binds the framebuffer with the FBO.
 	 *
 	 */
-	void Write() const override;
+	void write() const override;
 
 	/**
 	 * @brief Enables the texture for the shadow.
 	 *
 	 * @param textureUnit The texture unit to bind the shadowmap to.
 	 */
-	void Read(GLenum textureUnit) const override;
+	void read(GLenum textureUnit) const override;
 };
