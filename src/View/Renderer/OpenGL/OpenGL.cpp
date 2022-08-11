@@ -125,9 +125,9 @@ void OpenGL::directional_shadow_pass(const DirectionalLight& d_light) {
 	glViewport(0, 0, d_light.get_shadow_map().get_shadow_width(),
 	           d_light.get_shadow_map().get_shadow_height());
 
-	glClear(GL_DEPTH_BUFFER_BIT);
-
 	d_light.get_shadow_map().write();
+
+	glClear(GL_DEPTH_BUFFER_BIT);
 
 	directional_shadow_shader_.UseShader();
 
@@ -155,9 +155,9 @@ void OpenGL::omnidirectional_shadow_pass(const PointLights& p_lights,
 		glViewport(0, 0, light.get_shadow_map().get_shadow_width(),
 		           light.get_shadow_map().get_shadow_height());
 
-		glClear(GL_DEPTH_BUFFER_BIT);
-
 		light.get_shadow_map().write();
+
+		glClear(GL_DEPTH_BUFFER_BIT);
 
 		glUniform3fv(uniform_omni_light_pos, 1,
 		             glm::value_ptr(light.get_position()));
@@ -173,9 +173,9 @@ void OpenGL::omnidirectional_shadow_pass(const PointLights& p_lights,
 		glViewport(0, 0, light.get_shadow_map().get_shadow_width(),
 		           light.get_shadow_map().get_shadow_height());
 
-		glClear(GL_DEPTH_BUFFER_BIT);
-
 		light.get_shadow_map().write();
+
+		glClear(GL_DEPTH_BUFFER_BIT);
 
 		glUniform3fv(uniform_omni_light_pos, 1,
 		             glm::value_ptr(light.get_position()));
