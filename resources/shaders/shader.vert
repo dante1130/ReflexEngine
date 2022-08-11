@@ -28,5 +28,5 @@ void main() {
 	gl_Position = projection * view * vec4(fragPos, 1.0f);
 
 	directional_light_space_pos =
-	    directional_light_transform * model * vec4(pos, 1.0f);
+	    directional_light_transform * vec4(fragPos, 1.0f);
 }

@@ -135,6 +135,9 @@ void OpenGL::render_lights() {
 	std::vector<PointLight> point_lights;
 	std::vector<SpotLight> spot_lights;
 
+	point_lights.reserve(light_manager.get_point_lights().size());
+	spot_lights.reserve(light_manager.get_spot_lights().size());
+
 	std::copy_if(light_manager.get_point_lights().begin(),
 	             light_manager.get_point_lights().end(),
 	             std::back_inserter(point_lights),

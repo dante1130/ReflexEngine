@@ -85,16 +85,30 @@ float calc_directional_shadow_factor(DirectionalLight light)
 	vec3 proj_coords = directional_light_space_pos.xyz / directional_light_space_pos.w;
 	proj_coords = (proj_coords * 0.5) + 0.5;
 
-	float closest = texture(directional_shadow_map, proj_coords.xy).r;
 	float current = proj_coords.z;
 
 	vec3 normal = normalize(normal);
-	vec3 light_dir = normalize(light.direction);
+	vec3 light_dir = normalize(light.direction - fragPos);
 
 	float bias = max(0.05 * (1.0 - dot(normal, light_dir)), 0.005);
-	float shadow = (current - bias) > closest ? 1.0 : 0.0;
+	float shadow = 0.0;
 
-	if (proj_coords.z > 1.0) {
+	vec2 texel_size = 1.0 / textureSize(directional_shadow_map, 0);
+
+	for (int x = -1; x <= 1; ++x) 
+	{
+		for (int y = -1; y <= 1; ++y) 
+		{
+			float pcf_depth = texture(directional_shadow_map, proj_coords.xy + vec2(x, y) * texel_size).r;
+			shadow += (current - bias) > pcf_depth ? 1.0 : 0.0;
+		}
+	}
+
+	// Divide by how many pixels sampled.
+	shadow /= 9.0;
+
+	if (proj_coords.z > 1.0) 
+	{
 		shadow = 0.0;
 	}
 
