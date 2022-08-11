@@ -2,6 +2,8 @@
 
 #include "Light.hpp"
 
+#include <iostream>
+
 /**
  * @class DirectionalLight
  * @brief A directional light that provides global illumination.

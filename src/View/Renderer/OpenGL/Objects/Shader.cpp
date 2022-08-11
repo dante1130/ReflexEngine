@@ -194,7 +194,7 @@ void Shader::CompileShader(const char* vertexCode, const char* geometryCode,
 	CompileProgram();
 }
 
-void Shader::Validate() {
+void Shader::Validate() const {
 	GLint result = 0;
 	GLchar errLog[1024] = {0};
 

@@ -108,7 +108,7 @@ vec4 CalcLightByDirection(Light light, vec3 direction, float shadow_factor)
 	float specularFactor = pow(max(dot(fragToEye, reflectedVertex), 0.0), material.shininess);
 	vec4 specularColor = vec4(light.color * material.specularIntensity * specularFactor, 1.0f);
 
-	return ambientColor + diffuseColor + specularColor;
+	return ambientColor + ((1.0 - shadow_factor) * (diffuseColor + specularColor));
 }
 
 vec4 CalcDirectionalLight()

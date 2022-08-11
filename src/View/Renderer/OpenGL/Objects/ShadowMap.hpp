@@ -53,7 +53,7 @@ public:
 	/**
 	 * @brief Destroy the Shadow Map object
 	 */
-	virtual ~ShadowMap();
+	virtual ~ShadowMap() = default;
 
 protected:
 	/// The framebuffer object.

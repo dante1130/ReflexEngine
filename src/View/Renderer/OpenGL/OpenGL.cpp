@@ -44,7 +44,8 @@ void OpenGL::init() {
 }
 
 void OpenGL::draw() {
-	// directional_shadow_pass();
+	render_pass();
+	directional_shadow_pass();
 	render_pass();
 
 	draw_calls_.clear();
@@ -97,14 +98,14 @@ void OpenGL::directional_shadow_pass() {
 
 	const auto& light = light_manager.get_directional_light();
 
-	directional_shadow_shader_.UseShader();
+	light.get_shadow_map().write();
 
 	glViewport(0, 0, light.get_shadow_map().get_shadow_width(),
 	           light.get_shadow_map().get_shadow_height());
 
-	light.get_shadow_map().write();
-
 	glClear(GL_DEPTH_BUFFER_BIT);
+
+	directional_shadow_shader_.UseShader();
 
 	directional_shadow_shader_.SetDirectionalLightTransform(
 	    light.calculate_light_transform());
@@ -145,7 +146,6 @@ void OpenGL::render_lights() {
 	             [](const SpotLight& light) { return light.is_active(); });
 
 	shader_.SetPointLights(point_lights.data(), point_lights.size(), 0, 0);
-
 	shader_.SetSpotLights(spot_lights.data(), spot_lights.size(), 0, 0);
 
 	directional_light.get_shadow_map().read(GL_TEXTURE2);

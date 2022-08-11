@@ -48,9 +48,3 @@ void ShadowMap::read(GLenum textureUnit) const {
 GLuint ShadowMap::get_shadow_width() const { return shadow_width_; }
 
 GLuint ShadowMap::get_shadow_height() const { return shadow_height_; }
-
-ShadowMap::~ShadowMap() {
-	if (fbo_) glDeleteFramebuffers(1, &fbo_);
-
-	if (shadow_map_) glDeleteTextures(1, &shadow_map_);
-}
