@@ -21,7 +21,7 @@ void OpenGL::init() {
 
 	glViewport(0, 0, engine.window_.get_buffer_width(),
 	           engine.window_.get_buffer_height());
-	//
+
 	// Enable depth testing.
 	glEnable(GL_DEPTH_TEST);
 	// Enable face culling.
@@ -91,6 +91,7 @@ void OpenGL::render_pass(const DirectionalLight& d_light,
 	glViewport(0, 0, engine.window_.get_buffer_width(),
 	           engine.window_.get_buffer_height());
 
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glm::mat4 projection = glm::perspective(
@@ -202,8 +203,9 @@ void OpenGL::render_lights(const DirectionalLight& d_light,
 	shader_.SetDirectionalLight(d_light);
 	shader_.SetDirectionalLightTransform(d_light.calculate_light_transform());
 
-	shader_.SetPointLights(p_lights.data(), p_lights.size(), 0, 0);
-	shader_.SetSpotLights(s_lights.data(), s_lights.size(), 0, 0);
+	shader_.SetPointLights(p_lights.data(), p_lights.size(), 4, 0);
+	shader_.SetSpotLights(s_lights.data(), s_lights.size(), 4 + p_lights.size(),
+	                      p_lights.size());
 
 	d_light.get_shadow_map().read(GL_TEXTURE2);
 

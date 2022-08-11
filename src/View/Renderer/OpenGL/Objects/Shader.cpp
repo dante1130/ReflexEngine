@@ -62,12 +62,12 @@ void Shader::SetPointLights(const PointLight* pLight, GLuint lightCount,
 		                   uniformPointLights[i].uniformLinear,
 		                   uniformPointLights[i].uniformQuadratic);
 
-		// pLight[i].GetShadowMap()->Read(GL_TEXTURE0 + textureUnit + i);
+		pLight[i].get_shadow_map().read(GL_TEXTURE0 + textureUnit + i);
 
-		// glUniform1i(uniformOmniShadowMap[i + offset].shadowMap,
-		//             textureUnit + i);
-		// glUniform1f(uniformOmniShadowMap[i + offset].farPlane,
-		//             pLight[i].GetFarPlane());
+		glUniform1i(uniformOmniShadowMap[i + offset].shadowMap,
+		            textureUnit + i);
+		glUniform1f(uniformOmniShadowMap[i + offset].farPlane,
+		            pLight[i].get_far_plane());
 	}
 }
 
@@ -88,12 +88,12 @@ void Shader::SetSpotLights(const SpotLight* sLight, GLuint lightCount,
 		                   uniformSpotLights[i].uniformQuadratic,
 		                   uniformSpotLights[i].uniformEdge);
 
-		// sLight[i].GetShadowMap()->Read(GL_TEXTURE0 + textureUnit + i);
+		sLight[i].get_shadow_map().read(GL_TEXTURE0 + textureUnit + i);
 
-		// glUniform1i(uniformOmniShadowMap[i + offset].shadowMap,
-		//             textureUnit + i);
-		// glUniform1f(uniformOmniShadowMap[i + offset].farPlane,
-		//             sLight[i].GetFarPlane());
+		glUniform1i(uniformOmniShadowMap[i + offset].shadowMap,
+		            textureUnit + i);
+		glUniform1f(uniformOmniShadowMap[i + offset].farPlane,
+		            sLight[i].get_far_plane());
 	}
 }
 

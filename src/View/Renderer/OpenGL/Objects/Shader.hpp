@@ -167,7 +167,7 @@ private:
 
 	struct {
 		GLuint shadowMap = 0u;
-		GLfloat farPlane = 0u;
+		GLuint farPlane = 0u;
 	} uniformOmniShadowMap[MAX_POINT_LIGHTS + MAX_SPOT_LIGHTS];
 
 	/**
