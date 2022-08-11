@@ -10,7 +10,7 @@ void Rigidbody::init(bool usingReact, glm::vec3 pos, glm::vec3 rot)
 	else
 		pb = new EngineResolve();
 
-	pb->init(rot, pos);
+	pb->init(pos, rot);
 }
 
 Rigidbody::Rigidbody(bool usingReact, glm::vec3 pos, glm::vec3 rot)
@@ -20,7 +20,7 @@ Rigidbody::Rigidbody(bool usingReact, glm::vec3 pos, glm::vec3 rot)
 	else
 		pb = new EngineResolve();
 
-	pb->init(rot, pos);
+	pb->init(pos, rot);
 }
 
 

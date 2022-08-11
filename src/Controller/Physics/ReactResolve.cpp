@@ -35,13 +35,19 @@ void ReactResolve::init(glm::vec3 pos, glm::vec3 rot, float angle)
 
 void ReactResolve::init(glm::vec3 pos, glm::vec3 rot)
 {
+	std::cout << "Rotation: x: " << rot.x << " y: " << rot.y << " z: " << rot.z << std::endl;
 	Vector3 p(pos.x, pos.y, pos.z);
 	Quaternion o = Quaternion::identity();
 	glm::vec3 rot_radians = glm::radians(rot);
 	o.fromEulerAngles(rot_radians.x, rot_radians.y, rot_radians.z);
 
+	std::cout << "After conversion quanternion: w: " << o.w << " x: " << o.x << " y : " << o.y << " z : " << o.z << std::endl;
+
 	rb = Physics::getPhysicsWorld()->createRigidBody(Transform(p, o));
 
+	glm::vec3 t = glm::degrees(glm::eulerAngles(glm::quat(o.w, o.x, o.y, o.z)));
+	
+	std::cout << "After conversion rotation: x: " << t.x << " y: " << t.y << " z: " << t.z << std::endl;
 }
 
 void ReactResolve::addForce(glm::vec3 force, Apply type) 

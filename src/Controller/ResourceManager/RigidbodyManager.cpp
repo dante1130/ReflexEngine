@@ -67,6 +67,9 @@ void RigidbodyManager::add_rigidbody(entt::entity id, const Component::Rigidbody
 	r_body.addDragTorque(rb.angular_drag);
 
 	rigidbodies_.emplace(id, r_body);
+
+	glm::vec3 pos = r_body.getPosition();
+	std::cout << "Position: x: " << pos.x << " y: " << pos.y << " z: " << pos.z << std::endl;
 }
 
 void RigidbodyManager::update_rigidbody(entt::entity id, const Component::Rigidbody& rb, Component::Transform& tf)

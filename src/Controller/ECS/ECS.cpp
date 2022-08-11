@@ -49,6 +49,7 @@ void ECS::update(double delta_time) {
 	System::update_spot_light(registry_);
 	System::update_md2(registry_);
 	System::update_statemachine(*this);
+	
 	System::update_rigidbody(registry_);
 }
 

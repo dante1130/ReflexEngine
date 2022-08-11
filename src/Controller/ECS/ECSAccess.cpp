@@ -96,6 +96,11 @@ void ECSAccess::register_registry() {
 		auto view = ecs.get_registry().view<Terrain>();
 		for (auto entity_id : view) callback(ecs.get_entity(entity_id));
 	};
+
+	ecs_table["each_rigidbody"] = [](ECS& ecs, const sol::function& callback) {
+		auto view = ecs.get_registry().view<Rigidbody>();
+		for (auto entity_id : view) callback(ecs.get_entity(entity_id));
+	};
 }
 
 void ECSAccess::register_entity() {
@@ -116,6 +121,8 @@ void ECSAccess::register_entity() {
 	entity_type["add_mesh_component"] = &Entity::add_component<Mesh>;
 	entity_type["add_stateMachine_component"] =
 	    &Entity::add_component<Statemachine>;
+	entity_type["add_rigidbody_component"] =
+		&Entity::add_component<Rigidbody>;
 
 	entity_type["remove_transform_component"] =
 	    &Entity::remove_component<Transform>;
@@ -130,6 +137,8 @@ void ECSAccess::register_entity() {
 	entity_type["remove_mesh_component"] = &Entity::remove_component<Mesh>;
 	entity_type["remove_statemachine_component"] =
 	    &Entity::remove_component<Statemachine>;
+	entity_type["remove_rigidbody_component"] =
+		&Entity::remove_component<Rigidbody>;
 
 	entity_type["get_transform_component"] = &Entity::get_component<Transform>;
 	entity_type["get_model_component"] = &Entity::get_component<Model>;
@@ -142,6 +151,8 @@ void ECSAccess::register_entity() {
 	entity_type["get_mesh_component"] = &Entity::get_component<Mesh>;
 	entity_type["get_statemachine_component"] =
 	    &Entity::get_component<Statemachine>;
+	entity_type["get_rigidbody_component"] =
+		&Entity::get_component<Rigidbody>;
 
 	entity_type["any_transform_component"] = &Entity::any_component<Transform>;
 	entity_type["any_model_component"] = &Entity::any_component<Model>;
@@ -153,6 +164,8 @@ void ECSAccess::register_entity() {
 	entity_type["any_spot_light_component"] = &Entity::any_component<SpotLight>;
 	entity_type["any_mesh_component"] = &Entity::any_component<Mesh>;
 	entity_type["any_mesh_statemachine"] = &Entity::any_component<Statemachine>;
+	entity_type["any_rigidbody_component"] = &Entity::any_component<Statemachine>;
+
 }
 
 void ECSAccess::register_transform_component() {

@@ -257,19 +257,15 @@ void System::init_statemachine(entt::registry& registry, entt::entity entity) {
 
 void System::update_rigidbody(entt::registry& registry)
 {
+	if (EngineTime::is_paused())
+		return;
+
 	auto& rigidbody_manager = ResourceManager::get_instance().get_rigidbody_manager();
-
+	
 	//Calls the physics world update
+	Physics::getPhysicsWorld()->update(Physics::getTimeStep());
 
-	static float accumulator;
-	accumulator += EngineTime::get_delta_time();
-
-	while (accumulator >= Physics::getTimeStep())
-	{
-		Physics::getPhysicsWorld()->update(Physics::getTimeStep());
-		accumulator -= Physics::getTimeStep();
-	}
-
+	
 	registry.view<Component::Rigidbody, Component::Transform>().each(
 		[&rigidbody_manager](const auto entity, auto& rigidbody, auto& transform)
 		{

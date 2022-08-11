@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Controller/Physics/Physics.hpp"
-#include "Controller/ResourceManager/ResourceManager.hpp"
 #include "Controller/Physics/PhysicBody.hpp"
 #include "Controller/Physics/EngineResolve.hpp"
 #include "Controller/Physics/ReactResolve.hpp"
