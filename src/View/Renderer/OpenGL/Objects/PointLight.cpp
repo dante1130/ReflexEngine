@@ -82,6 +82,8 @@ void PointLight::set_point_light(glm::vec3 color, GLfloat aIntensity,
 	m_quadratic = quadratic;
 }
 
+const glm::vec3& PointLight::get_position() const { return m_position; }
+
 const OmniShadowMap& PointLight::get_shadow_map() const {
 	return omni_shadow_map_;
 }

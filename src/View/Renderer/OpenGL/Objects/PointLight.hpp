@@ -72,6 +72,8 @@ public:
 	                     GLfloat dIntensity, glm::vec3 position,
 	                     GLfloat constant, GLfloat linear, GLfloat quadratic);
 
+	const glm::vec3& get_position() const;
+
 	const OmniShadowMap& get_shadow_map() const;
 
 	GLfloat get_far_plane() const;
