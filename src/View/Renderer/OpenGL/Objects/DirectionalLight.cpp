@@ -1,8 +1,18 @@
 #include "DirectionalLight.hpp"
 
-DirectionalLight::DirectionalLight(glm::vec3 color, GLfloat aIntensity,
+#include <glm/gtc/matrix_transform.hpp>
+
+DirectionalLight::DirectionalLight() {
+	light_projection_ = glm::ortho(-64.0f, 64.0f, -64.0f, 64.0f, 1.0f, 256.0f);
+}
+
+DirectionalLight::DirectionalLight(GLuint shadow_width, GLuint shadow_height,
+                                   glm::vec3 color, GLfloat aIntensity,
                                    glm::vec3 direction, GLfloat dIntensity)
-    : Light(color, aIntensity, dIntensity), m_direction(direction) {}
+    : Light(shadow_width, shadow_height, color, aIntensity, dIntensity),
+      m_direction(direction) {
+	light_projection_ = glm::ortho(-64.0f, 64.0f, -64.0f, 64.0f, 1.0f, 256.0f);
+}
 
 void DirectionalLight::set_directional_light(glm::vec3 color,
                                              GLfloat aIntensity,
@@ -12,6 +22,12 @@ void DirectionalLight::set_directional_light(glm::vec3 color,
 	m_ambientIntensity = aIntensity;
 	m_direction = direction;
 	m_diffuseIntensity = dIntensity;
+}
+
+glm::mat4 DirectionalLight::calculate_light_transform() const {
+	return light_projection_ * glm::lookAt(-m_direction,
+	                                       glm::vec3(0.0f, 0.0f, 0.0f),
+	                                       glm::vec3(0.0f, 1.0f, 0.0f));
 }
 
 void DirectionalLight::UseLight(GLuint ambientColorLoc,

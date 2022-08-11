@@ -33,13 +33,19 @@ void OpenGL::init() {
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	// Default shader.
-	shader_ = std::make_unique<Shader>();
-	shader_->CompileFile("shaders/shader.vert", "shaders/shader.frag");
+	shader_.CompileFile("shaders/shader.vert", "shaders/shader.frag");
+
+	// Directional shadow shader.
+	directional_shadow_shader_.CompileFile(
+	    "shaders/directional_shadow_map.vert",
+	    "shaders/directional_shadow_map.frag");
 
 	lua_access();
 }
 
 void OpenGL::draw() {
+	render_pass();
+	directional_shadow_pass();
 	render_pass();
 
 	draw_calls_.clear();
@@ -65,22 +71,50 @@ void OpenGL::render_pass() {
 	glm::mat4 view = engine.camera_.calc_view_matrix();
 
 	// Creates projection matrix mode
-	glUniformMatrix4fv(shader_->GetProjectionLocation(), 1, GL_FALSE,
+	glUniformMatrix4fv(shader_.GetProjectionLocation(), 1, GL_FALSE,
 	                   glm::value_ptr(projection));
 
 	// Create view matrix mode
-	glUniformMatrix4fv(shader_->GetViewLocation(), 1, GL_FALSE,
+	glUniformMatrix4fv(shader_.GetViewLocation(), 1, GL_FALSE,
 	                   glm::value_ptr(view));
+
+	// Set the eye position.
+	glUniform3fv(shader_.GetEyePositionLocation(), 1,
+	             glm::value_ptr(engine.camera_.get_position()));
 
 	render_skybox(projection, view);
 
-	shader_->UseShader();
+	shader_.UseShader();
 
 	render_lights();
 
-	shader_->Validate();
+	shader_.Validate();
 
-	render_scene(*shader_);
+	render_scene(shader_);
+}
+
+void OpenGL::directional_shadow_pass() {
+	auto& light_manager = ResourceManager::get_instance().get_light_manager();
+
+	const auto& light = light_manager.get_directional_light();
+
+	light.get_shadow_map().write();
+
+	glViewport(0, 0, light.get_shadow_map().get_shadow_width(),
+	           light.get_shadow_map().get_shadow_height());
+
+	glClear(GL_DEPTH_BUFFER_BIT);
+
+	directional_shadow_shader_.UseShader();
+
+	directional_shadow_shader_.SetDirectionalLightTransform(
+	    light.calculate_light_transform());
+
+	directional_shadow_shader_.Validate();
+
+	render_scene(directional_shadow_shader_);
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 void OpenGL::render_skybox(const glm::mat4& projection, const glm::mat4& view) {
@@ -92,10 +126,17 @@ void OpenGL::render_skybox(const glm::mat4& projection, const glm::mat4& view) {
 void OpenGL::render_lights() {
 	auto& light_manager = ResourceManager::get_instance().get_light_manager();
 
-	shader_->SetDirectionalLight(light_manager.get_directional_light());
+	const auto& directional_light = light_manager.get_directional_light();
+
+	shader_.SetDirectionalLight(directional_light);
+	shader_.SetDirectionalLightTransform(
+	    directional_light.calculate_light_transform());
 
 	std::vector<PointLight> point_lights;
 	std::vector<SpotLight> spot_lights;
+
+	point_lights.reserve(light_manager.get_point_lights().size());
+	spot_lights.reserve(light_manager.get_spot_lights().size());
 
 	std::copy_if(light_manager.get_point_lights().begin(),
 	             light_manager.get_point_lights().end(),
@@ -107,13 +148,14 @@ void OpenGL::render_lights() {
 	             std::back_inserter(spot_lights),
 	             [](const SpotLight& light) { return light.is_active(); });
 
-	shader_->SetPointLights(point_lights.data(), point_lights.size(), 0, 0);
+	shader_.SetPointLights(point_lights.data(), point_lights.size(), 0, 0);
+	shader_.SetSpotLights(spot_lights.data(), spot_lights.size(), 0, 0);
 
-	shader_->SetSpotLights(spot_lights.data(), spot_lights.size(), 0, 0);
+	directional_light.get_shadow_map().read(GL_TEXTURE2);
 
-	shader_->SetTexture(1);
-	shader_->SetDirectionalShadowMap(2);
-	shader_->set_detail_map(3);
+	shader_.SetTexture(1);
+	shader_.SetDirectionalShadowMap(2);
+	shader_.set_detail_map(3);
 }
 
 void OpenGL::toggle_wireframe() {

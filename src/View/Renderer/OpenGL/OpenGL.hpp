@@ -71,6 +71,11 @@ private:
 	 */
 	void render_pass();
 
+	/**
+	 * @brief The directional shadow map pass.
+	 */
+	void directional_shadow_pass();
+
 	/// A boolean to toggle between wireframe and normal rendering.
 	bool is_wireframe_ = false;
 
@@ -78,5 +83,8 @@ private:
 	std::vector<DrawCall> draw_calls_ = {};
 
 	/// The default shader.
-	std::unique_ptr<Shader> shader_ = nullptr;
+	Shader shader_ = {};
+
+	/// The directional shadow shader.
+	Shader directional_shadow_shader_ = {};
 };

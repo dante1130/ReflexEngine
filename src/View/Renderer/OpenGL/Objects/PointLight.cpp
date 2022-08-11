@@ -3,7 +3,7 @@
 PointLight::PointLight(glm::vec3 color, GLfloat aIntensity, GLfloat dIntensity,
                        glm::vec3 position, GLfloat constant, GLfloat linear,
                        GLfloat quadratic)
-    : Light(color, aIntensity, dIntensity),
+    : Light(1024, 1024, color, aIntensity, dIntensity),
       m_position(position),
       m_constant(constant),
       m_linear(linear),

@@ -86,7 +86,7 @@ public:
 	/**
 	 * @brief Validates the shader.
 	 */
-	void Validate();
+	void Validate() const;
 
 	/**
 	 * @brief Read a shader file and return the code.

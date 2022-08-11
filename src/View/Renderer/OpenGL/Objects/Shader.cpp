@@ -194,7 +194,7 @@ void Shader::CompileShader(const char* vertexCode, const char* geometryCode,
 	CompileProgram();
 }
 
-void Shader::Validate() {
+void Shader::Validate() const {
 	GLint result = 0;
 	GLchar errLog[1024] = {0};
 
@@ -325,9 +325,9 @@ void Shader::CompileProgram() {
 
 	uniformTexture = glGetUniformLocation(m_shaderID, "theTexture");
 	uniformDirectionalLightTransform =
-	    glGetUniformLocation(m_shaderID, "directionalLightTransform");
+	    glGetUniformLocation(m_shaderID, "directional_light_transform");
 	uniformDirectionalShadowMap =
-	    glGetUniformLocation(m_shaderID, "directionalShadowMap");
+	    glGetUniformLocation(m_shaderID, "directional_shadow_map");
 
 	uniform_detailmap = glGetUniformLocation(m_shaderID, "detailmap");
 

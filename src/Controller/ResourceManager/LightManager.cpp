@@ -2,16 +2,16 @@
 
 void LightManager::set_directional_light(
     const DirectionalLightData& light_data) {
-	directional_light_ =
-	    DirectionalLight(light_data.color, light_data.ambient_intensity,
-	                     light_data.direction, light_data.diffuse_intensity);
+	directional_light_ = DirectionalLight(
+	    2048, 2048, light_data.color, light_data.ambient_intensity,
+	    light_data.direction, light_data.diffuse_intensity);
 }
 
 void LightManager::set_directional_light(
     const Component::DirectionalLight& light) {
 	directional_light_ =
-	    DirectionalLight(light.color, light.ambient_intensity, light.direction,
-	                     light.diffuse_intensity);
+	    DirectionalLight(2048, 2048, light.color, light.ambient_intensity,
+	                     light.direction, light.diffuse_intensity);
 }
 
 size_t LightManager::add_point_light(const PointLightData& light_data) {
