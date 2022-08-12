@@ -125,7 +125,7 @@ float calc_omni_shadow_factor(PointLight light, int shadow_index)
 	int samples = 20;
 
 	float view_distance = length(eyePosition - fragPos);
-	float disk_radius = (1.0 * (view_distance / omni_shadow_maps[shadow_index].far_plane)) / 25.0;
+	float disk_radius = (1.0 + (view_distance / omni_shadow_maps[shadow_index].far_plane)) / 25.0;
 
 	for (int i = 0; i < samples; ++i) {
 		float closest = texture(omni_shadow_maps[shadow_index].shadow_map, 

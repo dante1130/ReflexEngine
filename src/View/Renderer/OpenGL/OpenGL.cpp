@@ -69,7 +69,6 @@ void OpenGL::draw() {
 	             std::back_inserter(spot_lights),
 	             [](const SpotLight& light) { return light.is_active(); });
 
-	render_pass(directional_light, point_lights, spot_lights);
 	directional_shadow_pass(directional_light);
 	omnidirectional_shadow_pass(point_lights, spot_lights);
 	render_pass(directional_light, point_lights, spot_lights);
@@ -99,6 +98,10 @@ void OpenGL::render_pass(const DirectionalLight& d_light,
 
 	glm::mat4 view = engine.camera_.calc_view_matrix();
 
+	render_skybox(projection, view);
+
+	shader_.UseShader();
+
 	// Creates projection matrix mode
 	glUniformMatrix4fv(shader_.GetProjectionLocation(), 1, GL_FALSE,
 	                   glm::value_ptr(projection));
@@ -111,10 +114,6 @@ void OpenGL::render_pass(const DirectionalLight& d_light,
 	glUniform3fv(shader_.GetEyePositionLocation(), 1,
 	             glm::value_ptr(engine.camera_.get_position()));
 
-	render_skybox(projection, view);
-
-	shader_.UseShader();
-
 	render_lights(d_light, p_lights, s_lights);
 
 	shader_.Validate();
@@ -123,14 +122,14 @@ void OpenGL::render_pass(const DirectionalLight& d_light,
 }
 
 void OpenGL::directional_shadow_pass(const DirectionalLight& d_light) {
+	directional_shadow_shader_.UseShader();
+
 	glViewport(0, 0, d_light.get_shadow_map().get_shadow_width(),
 	           d_light.get_shadow_map().get_shadow_height());
 
 	d_light.get_shadow_map().write();
 
 	glClear(GL_DEPTH_BUFFER_BIT);
-
-	directional_shadow_shader_.UseShader();
 
 	directional_shadow_shader_.SetDirectionalLightTransform(
 	    d_light.calculate_light_transform());
@@ -144,15 +143,13 @@ void OpenGL::directional_shadow_pass(const DirectionalLight& d_light) {
 
 void OpenGL::omnidirectional_shadow_pass(const PointLights& p_lights,
                                          const SpotLights& s_lights) {
-	omni_shadow_shader_.UseShader();
-
 	GLuint uniform_omni_light_pos =
 	    omni_shadow_shader_.GetOmniLightPosLocation();
 	GLuint uniform_omni_light_far = omni_shadow_shader_.GetFarPlaneLocation();
 
-	omni_shadow_shader_.Validate();
-
 	for (const auto& light : p_lights) {
+		omni_shadow_shader_.UseShader();
+
 		glViewport(0, 0, light.get_shadow_map().get_shadow_width(),
 		           light.get_shadow_map().get_shadow_height());
 
@@ -167,10 +164,16 @@ void OpenGL::omnidirectional_shadow_pass(const PointLights& p_lights,
 		omni_shadow_shader_.SetLightMatrices(
 		    light.calculate_light_transforms());
 
+		omni_shadow_shader_.Validate();
+
 		render_scene(omni_shadow_shader_);
+
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 
 	for (const auto& light : s_lights) {
+		omni_shadow_shader_.UseShader();
+
 		glViewport(0, 0, light.get_shadow_map().get_shadow_width(),
 		           light.get_shadow_map().get_shadow_height());
 
@@ -186,9 +189,9 @@ void OpenGL::omnidirectional_shadow_pass(const PointLights& p_lights,
 		    light.calculate_light_transforms());
 
 		render_scene(omni_shadow_shader_);
-	}
 
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	}
 }
 
 void OpenGL::render_skybox(const glm::mat4& projection, const glm::mat4& view) {
