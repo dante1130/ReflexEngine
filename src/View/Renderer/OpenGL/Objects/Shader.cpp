@@ -247,6 +247,9 @@ void Shader::CompileProgram() {
 	uniformSpecularIntensity =
 	    glGetUniformLocation(m_shaderID, "material.specularIntensity");
 
+	uniformPointLightCount =
+	    glGetUniformLocation(m_shaderID, "pointLightCount");
+
 	for (size_t i = 0; i < MAX_POINT_LIGHTS; ++i) {
 		char locBuff[256] = {'\0'};
 
