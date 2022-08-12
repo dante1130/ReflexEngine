@@ -2,15 +2,11 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-DirectionalLight::DirectionalLight() {
-	light_projection_ = glm::ortho(-64.0f, 64.0f, -64.0f, 64.0f, 1.0f, 256.0f);
-}
-
 DirectionalLight::DirectionalLight(GLuint shadow_width, GLuint shadow_height,
                                    glm::vec3 color, GLfloat aIntensity,
                                    glm::vec3 direction, GLfloat dIntensity)
-    : Light(shadow_width, shadow_height, color, aIntensity, dIntensity),
-      m_direction(direction) {
+    : Light(color, aIntensity, dIntensity), m_direction(direction) {
+	shadow_map_.init(shadow_width, shadow_height);
 	light_projection_ = glm::ortho(-64.0f, 64.0f, -64.0f, 64.0f, 1.0f, 256.0f);
 }
 
@@ -38,4 +34,8 @@ void DirectionalLight::UseLight(GLuint ambientColorLoc,
 
 	glUniform3f(directionLoc, m_direction.x, m_direction.y, m_direction.z);
 	glUniform1f(diffuseIntensityLoc, m_diffuseIntensity);
+}
+
+const ShadowMap& DirectionalLight::get_shadow_map() const {
+	return shadow_map_;
 }

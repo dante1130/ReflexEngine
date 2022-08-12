@@ -1,12 +1,6 @@
 #pragma once
 
-#include <iostream>
-#include <cstdio>
-#include <string>
-#include <fstream>
 #include <vector>
-
-#include <glm/gtc/type_ptr.hpp>
 
 #include "Light.hpp"
 #include "DirectionalLight.hpp"
@@ -24,7 +18,7 @@ public:
 	/**
 	 * @brief Construct a new Shader object
 	 */
-	Shader();
+	Shader() = default;
 
 	GLuint GetProjectionLocation() const;
 	GLuint GetModelLocation() const;
@@ -50,7 +44,7 @@ public:
 	void SetDirectionalShadowMap(GLuint textureUnit);
 	void set_detail_map(GLuint textureUnit);
 	void SetDirectionalLightTransform(const glm::mat4& lTransform);
-	void SetLightMatrices(std::vector<glm::mat4> lightmatrices);
+	void SetLightMatrices(const std::vector<glm::mat4>& lightmatrices);
 
 	/**
 	 * @brief Use the current shader.
@@ -133,9 +127,6 @@ private:
 	GLuint uniformUsingTexture = 0u;
 	GLuint uniform_using_detailmap = 0u;
 
-	int pointLightCount = 0;
-	int spotLightCount = 0;
-
 	struct {
 		GLuint uniformColor = 0u;
 		GLuint uniformAmbientIntensity = 0u;
@@ -170,7 +161,7 @@ private:
 
 	struct {
 		GLuint shadowMap = 0u;
-		GLfloat farPlane = 0u;
+		GLuint farPlane = 0u;
 	} uniformOmniShadowMap[MAX_POINT_LIGHTS + MAX_SPOT_LIGHTS];
 
 	/**

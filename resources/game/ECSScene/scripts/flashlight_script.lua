@@ -9,4 +9,6 @@ function update(ecs, entity)
 
 	spotlight.position = Camera.get_position()
 	spotlight.direction = Camera.get_direction()
+
+	spotlight.position.y = spotlight.position.y - 0.3;
 end

@@ -1,8 +1,7 @@
 #pragma once
 
 #include "Light.hpp"
-
-#include <iostream>
+#include "ShadowMap.hpp"
 
 /**
  * @class DirectionalLight
@@ -13,7 +12,7 @@ public:
 	/**
 	 * @brief Construct a new Directional Light
 	 */
-	DirectionalLight();
+	DirectionalLight() = default;
 
 	/**
 	 * @brief Parameterized constructor.
@@ -58,12 +57,17 @@ public:
 	void UseLight(GLuint ambientColorLoc, GLuint ambientIntensityLoc,
 	              GLuint directionLoc, GLuint diffuseIntensityLoc) const;
 
+	const ShadowMap& get_shadow_map() const;
+
 	/**
 	 * @brief Destructor.
 	 */
 	~DirectionalLight() = default;
 
 private:
+	/// The shadow map.
+	ShadowMap shadow_map_;
+
 	/// The direction the light is facing.
 	glm::vec3 m_direction;
 };

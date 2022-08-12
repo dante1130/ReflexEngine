@@ -1,6 +1,8 @@
 #pragma once
 
 #include <functional>
+#include <vector>
+
 #include <glad/glad.h>
 
 #include "Objects/Shader.hpp"
@@ -10,6 +12,10 @@
 // is done through this function pointer which is passed from the scene to the
 // renderer.
 using DrawCall = std::function<void(const Shader& shader)>;
+
+using PointLights = std::vector<PointLight>;
+
+using SpotLights = std::vector<SpotLight>;
 
 /**
  * @brief The OpenGL renderer.
@@ -64,17 +70,25 @@ private:
 	/**
 	 * @brief Enable and render lights.
 	 */
-	void render_lights();
+	void render_lights(const DirectionalLight& d_light,
+	                   const PointLights& p_lights, const SpotLights& s_lights);
 
 	/**
 	 * @brief The default render pass using the default shader.
 	 */
-	void render_pass();
+	void render_pass(const DirectionalLight& d_light,
+	                 const PointLights& p_lights, const SpotLights& s_lights);
 
 	/**
 	 * @brief The directional shadow map pass.
 	 */
-	void directional_shadow_pass();
+	void directional_shadow_pass(const DirectionalLight& d_light);
+
+	/**
+	 * @brief The omnidirectional shadow map pass.
+	 */
+	void omnidirectional_shadow_pass(const PointLights& p_lights,
+	                                 const SpotLights& s_lights);
 
 	/// A boolean to toggle between wireframe and normal rendering.
 	bool is_wireframe_ = false;
@@ -87,4 +101,7 @@ private:
 
 	/// The directional shadow shader.
 	Shader directional_shadow_shader_ = {};
+
+	/// The omnidirectional shadow shader.
+	Shader omni_shadow_shader_ = {};
 };
