@@ -147,7 +147,8 @@ void Md2Model::load_frame_mesh(int frame_num) {
 
 	mesh_ = std::make_unique<Mesh>();
 	mesh_->create_mesh(frame_vertices_[frame_num].data(), indices_.data(),
-	                   frame_vertices_[frame_num].size(), indices_.size());
+	                   frame_vertices_[frame_num].size(), indices_.size(),
+	                   GL_DYNAMIC_DRAW);
 }
 
 void Md2Model::load_interpolated_frame_mesh(int frame_a, int frame_b,
@@ -198,7 +199,7 @@ void Md2Model::load_interpolated_frame_mesh(int frame_a, int frame_b,
 
 	mesh_ = std::make_unique<Mesh>();
 	mesh_->create_mesh(vertices.data(), indices_.data(), vertices.size(),
-	                   indices_.size());
+	                   indices_.size(), GL_DYNAMIC_DRAW);
 }
 void Md2Model::animate(float delta_time) {
 	animstate_.curr_time += delta_time;

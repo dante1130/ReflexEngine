@@ -90,7 +90,6 @@ void OpenGL::render_pass(const DirectionalLight& d_light,
 	glViewport(0, 0, engine.window_.get_buffer_width(),
 	           engine.window_.get_buffer_height());
 
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glm::mat4 projection = glm::perspective(

@@ -1,12 +1,6 @@
 #pragma once
 
-#include <iostream>
-#include <cstdio>
-#include <string>
-#include <fstream>
 #include <vector>
-
-#include <glm/gtc/type_ptr.hpp>
 
 #include "Light.hpp"
 #include "DirectionalLight.hpp"

@@ -9,18 +9,19 @@ Mesh::Mesh() {
 }
 
 void Mesh::create_mesh(const GLfloat* vertices, const GLuint* indices,
-                       GLuint noOfVerts, GLuint noOfIndices) {
+                       GLuint noOfVerts, GLuint noOfIndices,
+                       GLenum draw_usage) {
 	indexCount = noOfIndices;
 
 	glBindVertexArray(VAO);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices[0]) * noOfIndices,
-	             indices, GL_STATIC_DRAW);
+	             indices, draw_usage);
 
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices[0]) * noOfVerts, vertices,
-	             GL_STATIC_DRAW);
+	             draw_usage);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vertices[0]) * 8, 0);
 	glEnableVertexAttribArray(0);

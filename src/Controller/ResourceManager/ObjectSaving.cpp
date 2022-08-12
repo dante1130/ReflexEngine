@@ -1,5 +1,7 @@
 #include "ObjectSaving.hpp"
 
+#include <string>
+
 std::ofstream ObjectSaving::outfile;
 std::ofstream ObjectSaving::creationScript;
 int ObjectSaving::number = 0;

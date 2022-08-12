@@ -18,7 +18,7 @@ size_t LightManager::add_point_light(const PointLightData& light_data) {
 	const size_t id = get_next_point_light_id();
 
 	point_lights_[id] =
-	    PointLight(2048, 2048, 0.01f, 100.0f, light_data.color,
+	    PointLight(2048, 2048, 0.1f, 1000.0f, light_data.color,
 	               light_data.ambient_intensity, light_data.diffuse_intensity,
 	               light_data.position, light_data.constant, light_data.linear,
 	               light_data.quadratic);
@@ -30,7 +30,7 @@ size_t LightManager::add_point_light(const Component::PointLight& light) {
 	const size_t id = get_next_point_light_id();
 
 	point_lights_[id] = PointLight(
-	    2048, 2048, 0.01f, 100.0f, light.color, light.ambient_intensity,
+	    2048, 2048, 0.1f, 1000.0f, light.color, light.ambient_intensity,
 	    light.diffuse_intensity, light.position, light.constant, light.linear,
 	    light.quadratic);
 
@@ -41,7 +41,7 @@ size_t LightManager::add_spot_light(const SpotLightData& light_data) {
 	const size_t id = get_next_spot_light_id();
 
 	spot_lights_[id] = SpotLight(
-	    2048, 2048, 0.0f, 100.0f, light_data.color,
+	    2048, 2048, 0.1f, 1000.0f, light_data.color,
 	    light_data.ambient_intensity, light_data.diffuse_intensity,
 	    light_data.position, light_data.direction, light_data.constant,
 	    light_data.linear, light_data.quadratic, light_data.edge);
@@ -53,7 +53,7 @@ size_t LightManager::add_spot_light(const Component::SpotLight& light) {
 	const size_t id = get_next_spot_light_id();
 
 	spot_lights_[id] = SpotLight(
-	    2048, 2048, 0.0f, 100.0f, light.color, light.ambient_intensity,
+	    2048, 2048, 0.1f, 1000.0f, light.color, light.ambient_intensity,
 	    light.diffuse_intensity, light.position, light.direction,
 	    light.constant, light.linear, light.quadratic, light.edge);
 

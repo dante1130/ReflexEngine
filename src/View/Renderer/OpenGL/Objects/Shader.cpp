@@ -1,6 +1,13 @@
 #include "Shader.hpp"
 
+#include <iostream>
+#include <cstdio>
+#include <string>
+#include <fstream>
+
 #include <glad/glad.h>
+
+#include <glm/gtc/type_ptr.hpp>
 
 GLuint Shader::GetProjectionLocation() const { return uniformProjection; }
 
