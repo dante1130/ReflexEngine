@@ -165,15 +165,15 @@ vec4 CalcDirectionalLight() {
 
 vec4 CalcPointLight(PointLight pLight, int shadow_index) {
 	vec3 direction = fragPos - pLight.position;
-	float distance = length(direction);
+	float light_distance = length(direction);
 	direction = normalize(direction);
 
 	float shadow_factor = calc_omni_shadow_factor(pLight, shadow_index);
 
-	vec4 color = CalcLightByDirection(pLight.base, direction, shadow_factor);
+	vec4 color = CalcLightByDirection(pLight.base, direction, 0.0);
 
-	float attenuation = (pLight.exponent * (distance * distance)) +
-	                    (pLight.linear * distance) + (pLight.constant);
+	float attenuation = (pLight.exponent * (light_distance * light_distance)) +
+	                    (pLight.linear * light_distance) + (pLight.constant);
 
 	return (color / attenuation);
 }
