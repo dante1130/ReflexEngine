@@ -3,6 +3,7 @@
 #include "Physics.hpp"
 #include "glm/glm.hpp"
 #include "glm/gtc/quaternion.hpp"
+#include "glm/gtx/euler_angles.hpp"
 
 //These are to make it easier to determine where a force
 //in the game world is can be applied

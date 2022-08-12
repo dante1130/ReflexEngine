@@ -38,15 +38,30 @@ void ReactResolve::init(glm::vec3 pos, glm::vec3 rot)
 	std::cout << "Rotation: x: " << rot.x << " y: " << rot.y << " z: " << rot.z << std::endl;
 	Vector3 p(pos.x, pos.y, pos.z);
 	Quaternion o = Quaternion::identity();
+
 	glm::vec3 rot_radians = glm::radians(rot);
-	o.fromEulerAngles(rot_radians.x, rot_radians.y, rot_radians.z);
+
+	glm::quat temp2 = glm::quat_cast(glm::orientate3(rot_radians));
+
+	std::cout << "quanternion (radians): w: " << temp2.w << " x: " << temp2.x << " y : " << temp2.y << " z : " << temp2.z << std::endl;
+
+	double cy = std::cos(rot_radians.z * 0.5);
+    double sy = std::sin(rot_radians.z * 0.5);
+    double cp = std::cos(rot_radians.y * 0.5);
+    double sp = std::sin(rot_radians.y * 0.5);
+    double cr = std::cos(rot_radians.x * 0.5);
+    double sr = std::sin(rot_radians.x * 0.5);
+
+    o.w = cr * cp * cy + sr * sp * sy;
+    o.x = sr * cp * cy - cr * sp * sy;
+    o.y = cr * sp * cy + sr * cp * sy;
+    o.z = cr * cp * sy - sr * sp * cy;
+
+	//o.fromEulerAngles(rot_radians.x, rot_radians.y, rot_radians.z);
 
 	std::cout << "After conversion quanternion: w: " << o.w << " x: " << o.x << " y : " << o.y << " z : " << o.z << std::endl;
-
 	rb = Physics::getPhysicsWorld()->createRigidBody(Transform(p, o));
-
 	glm::vec3 t = glm::degrees(glm::eulerAngles(glm::quat(o.w, o.x, o.y, o.z)));
-	
 	std::cout << "After conversion rotation: x: " << t.x << " y: " << t.y << " z: " << t.z << std::endl;
 }
 
