@@ -72,10 +72,25 @@ public:
 	                     GLfloat dIntensity, glm::vec3 position,
 	                     GLfloat constant, GLfloat linear, GLfloat quadratic);
 
+	/**
+	 * @brief Get the position of the light.
+	 *
+	 * @return const glm::vec3&
+	 */
 	const glm::vec3& get_position() const;
 
+	/**
+	 * @brief Get the OmniShadowMap object.
+	 *
+	 * @return const OmniShadowMap&
+	 */
 	const OmniShadowMap& get_shadow_map() const;
 
+	/**
+	 * @brief Get the far plane.
+	 *
+	 * @return GLfloat
+	 */
 	GLfloat get_far_plane() const;
 
 	/**
@@ -90,10 +105,13 @@ protected:
 	/// Position of the light.
 	glm::vec3 m_position = glm::vec3(0.0f, 0.0f, 0.0f);
 
-	/// Equation of the light.
+	/// Constant light attenuation.
 	GLfloat m_constant = 1.0f;
+	/// Linear light attenuation.
 	GLfloat m_linear = 0.0f;
+	/// Quadratic light attenuation.
 	GLfloat m_quadratic = 0.0f;
 
+	/// Far plane of the shadow map.
 	GLfloat far_plane_ = 100.0f;
 };
