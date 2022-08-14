@@ -5,6 +5,10 @@
 namespace Component {
 
 struct Light {
+	/// The width of the shadow map.
+	uint32_t shadow_width;
+	/// The height of the shadow map.
+	uint32_t shadow_height;
 	/// The color of the light.
 	glm::vec3 color = glm::vec3(1.0f);
 	/// The ambient intensity of the light.
@@ -16,9 +20,11 @@ struct Light {
 
 	Light(const Light&) = default;
 
-	Light(const glm::vec3& color, float ambient_intensity,
-	      float diffuse_intensity)
-	    : color(color),
+	Light(uint32_t shadow_width, uint32_t shadow_height, const glm::vec3& color,
+	      float ambient_intensity, float diffuse_intensity)
+	    : shadow_width(shadow_width),
+	      shadow_height(shadow_height),
+	      color(color),
 	      ambient_intensity(ambient_intensity),
 	      diffuse_intensity(diffuse_intensity) {}
 };
@@ -35,9 +41,11 @@ struct DirectionalLight : public Light {
 
 	DirectionalLight(const DirectionalLight&) = default;
 
-	DirectionalLight(const glm::vec3& color, float ambient_intensity,
+	DirectionalLight(uint32_t shadow_width, uint32_t shadow_height,
+	                 const glm::vec3& color, float ambient_intensity,
 	                 float diffuse_intensity, const glm::vec3& direction)
-	    : Light(color, ambient_intensity, diffuse_intensity),
+	    : Light(shadow_width, shadow_height, color, ambient_intensity,
+	            diffuse_intensity),
 	      direction(direction) {}
 };
 
@@ -61,10 +69,12 @@ struct PointLight : public Light {
 
 	PointLight(const PointLight&) = default;
 
-	PointLight(const glm::vec3& color, float ambient_intensity,
+	PointLight(uint32_t shadow_width, uint32_t shadow_height,
+	           const glm::vec3& color, float ambient_intensity,
 	           float diffuse_intensity, const glm::vec3& position,
 	           float constant, float linear, float quadratic)
-	    : Light(color, ambient_intensity, diffuse_intensity),
+	    : Light(shadow_width, shadow_height, color, ambient_intensity,
+	            diffuse_intensity),
 	      position(position),
 	      constant(constant),
 	      linear(linear),
@@ -85,12 +95,13 @@ struct SpotLight : public PointLight {
 
 	SpotLight(const SpotLight&) = default;
 
-	SpotLight(const glm::vec3& color, float ambient_intensity,
+	SpotLight(uint32_t shadow_width, uint32_t shadow_height,
+	          const glm::vec3& color, float ambient_intensity,
 	          float diffuse_intensity, const glm::vec3& position,
 	          float constant, float linear, float quadratic,
 	          const glm::vec3& direction, float edge)
-	    : PointLight(color, ambient_intensity, diffuse_intensity, position,
-	                 constant, linear, quadratic),
+	    : PointLight(shadow_width, shadow_height, color, ambient_intensity,
+	                 diffuse_intensity, position, constant, linear, quadratic),
 	      direction(direction),
 	      edge(edge) {}
 };
