@@ -191,7 +191,8 @@ void ECSGameAssetFactory::load_point_light(Reflex::Entity& entity,
 	                            light_table["position"]["z"]};
 
 	entity.add_component<Component::PointLight>(
-	    light_table["shadow_width"], light_table["shadow_height"], color,
+	    light_table["shadow_width"], light_table["shadow_height"],
+	    light_table["near_plane"], light_table["far_plane"], color,
 	    light_table["ambient_intensity"], light_table["diffuse_intensity"],
 	    position, light_table["constant"], light_table["linear"],
 	    light_table["quadratic"]);
@@ -212,7 +213,8 @@ void ECSGameAssetFactory::load_spot_light(Reflex::Entity& entity,
 	                             light_table["direction"]["z"]};
 
 	entity.add_component<Component::SpotLight>(
-	    light_table["shadow_width"], light_table["shadow_height"], color,
+	    light_table["shadow_width"], light_table["shadow_height"],
+	    light_table["near_plane"], light_table["far_plane"], color,
 	    light_table["ambient_intensity"], light_table["diffuse_intensity"],
 	    position, light_table["constant"], light_table["linear"],
 	    light_table["quadratic"], direction, light_table["edge"]);
