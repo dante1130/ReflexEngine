@@ -2,6 +2,9 @@ entity = {
 	name = "Moonlight",
 
 	directional_light = {
+		shadow_width = 1024,
+		shadow_height = 1024,
+
 		color = {
 			r = 0.22,
 			g = 0.40,
