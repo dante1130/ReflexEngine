@@ -9,9 +9,9 @@ void LightManager::set_directional_light(
 
 void LightManager::set_directional_light(
     const Component::DirectionalLight& light) {
-	directional_light_ =
-	    DirectionalLight(2048, 2048, light.color, light.ambient_intensity,
-	                     light.direction, light.diffuse_intensity);
+	directional_light_ = DirectionalLight(
+	    light.shadow_width, light.shadow_height, light.color,
+	    light.ambient_intensity, light.direction, light.diffuse_intensity);
 }
 
 size_t LightManager::add_point_light(const PointLightData& light_data) {
@@ -29,10 +29,11 @@ size_t LightManager::add_point_light(const PointLightData& light_data) {
 size_t LightManager::add_point_light(const Component::PointLight& light) {
 	const size_t id = get_next_point_light_id();
 
-	point_lights_[id] = PointLight(
-	    2048, 2048, 0.1f, 1000.0f, light.color, light.ambient_intensity,
-	    light.diffuse_intensity, light.position, light.constant, light.linear,
-	    light.quadratic);
+	point_lights_[id] =
+	    PointLight(light.shadow_width, light.shadow_height, light.near_plane,
+	               light.far_plane, light.color, light.ambient_intensity,
+	               light.diffuse_intensity, light.position, light.constant,
+	               light.linear, light.quadratic);
 
 	return id;
 }
@@ -52,10 +53,11 @@ size_t LightManager::add_spot_light(const SpotLightData& light_data) {
 size_t LightManager::add_spot_light(const Component::SpotLight& light) {
 	const size_t id = get_next_spot_light_id();
 
-	spot_lights_[id] = SpotLight(
-	    2048, 2048, 0.1f, 1000.0f, light.color, light.ambient_intensity,
-	    light.diffuse_intensity, light.position, light.direction,
-	    light.constant, light.linear, light.quadratic, light.edge);
+	spot_lights_[id] =
+	    SpotLight(light.shadow_width, light.shadow_height, light.near_plane,
+	              light.far_plane, light.color, light.ambient_intensity,
+	              light.diffuse_intensity, light.position, light.direction,
+	              light.constant, light.linear, light.quadratic, light.edge);
 
 	return id;
 }
