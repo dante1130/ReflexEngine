@@ -68,7 +68,9 @@ public:
 	              GLuint quadraticLoc, GLuint edgeLoc) const;
 
 private:
+	/// The direction of the light.
 	glm::vec3 m_direction = glm::vec3(0.0f, -1.0f, 0.0f);
 
+	/// The cutoff angle of the spotlight.
 	GLfloat m_procEdge = 0.0f;
 };

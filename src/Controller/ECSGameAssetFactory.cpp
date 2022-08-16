@@ -25,11 +25,11 @@ void ECSGameAssetFactory::create(ECS& ecs, const std::string& lua_script) {
 	auto entity_table = lua["entity"];
 
 	if (entity_table.valid()) {
-		std::string name;
-
-		if (entity_table["name"].valid()) {
-			name = entity_table["name"];
-		}
+		const std::string name = [&entity_table]() {
+			if (entity_table["name"].valid()) {
+				return entity_table["name"];
+			}
+		}();
 
 		load_components(ecs, ecs.create_entity(name), entity_table);
 	}
@@ -84,15 +84,15 @@ void ECSGameAssetFactory::load_components(ECS& ecs, Reflex::Entity& entity,
 
 void ECSGameAssetFactory::load_transform(Reflex::Entity& entity,
                                          const sol::table& transform_table) {
-	glm::vec3 position = {transform_table["position"]["x"],
-	                      transform_table["position"]["y"],
-	                      transform_table["position"]["z"]};
-	glm::vec3 rotation = {transform_table["rotation"]["x"],
-	                      transform_table["rotation"]["y"],
-	                      transform_table["rotation"]["z"]};
-	glm::vec3 scale = {transform_table["scale"]["x"],
-	                   transform_table["scale"]["y"],
-	                   transform_table["scale"]["z"]};
+	const glm::vec3 position = {transform_table["position"]["x"],
+	                            transform_table["position"]["y"],
+	                            transform_table["position"]["z"]};
+	const glm::vec3 rotation = {transform_table["rotation"]["x"],
+	                            transform_table["rotation"]["y"],
+	                            transform_table["rotation"]["z"]};
+	const glm::vec3 scale = {transform_table["scale"]["x"],
+	                         transform_table["scale"]["y"],
+	                         transform_table["scale"]["z"]};
 
 	entity.add_component<Component::Transform>(position, rotation, scale);
 }
@@ -167,50 +167,57 @@ void ECSGameAssetFactory::load_statemachine(
 
 void ECSGameAssetFactory::load_directional_light(
     Reflex::Entity& entity, const sol::table& light_table) {
-	glm::vec3 color = {light_table["color"]["r"], light_table["color"]["g"],
-	                   light_table["color"]["b"]};
-	glm::vec3 direction = {light_table["direction"]["x"],
-	                       light_table["direction"]["y"],
-	                       light_table["direction"]["z"]};
+	const glm::vec3 color = {light_table["color"]["r"],
+	                         light_table["color"]["g"],
+	                         light_table["color"]["b"]};
+	const glm::vec3 direction = {light_table["direction"]["x"],
+	                             light_table["direction"]["y"],
+	                             light_table["direction"]["z"]};
 
 	entity.add_component<Component::DirectionalLight>(
-	    color, light_table["ambient_intensity"],
-	    light_table["diffuse_intensity"], direction);
+	    light_table["shadow_width"], light_table["shadow_height"], color,
+	    light_table["ambient_intensity"], light_table["diffuse_intensity"],
+	    direction);
 }
 
 void ECSGameAssetFactory::load_point_light(Reflex::Entity& entity,
                                            const sol::table& light_table) {
-	glm::vec3 color = {light_table["color"]["r"], light_table["color"]["g"],
-	                   light_table["color"]["b"]};
+	const glm::vec3 color = {light_table["color"]["r"],
+	                         light_table["color"]["g"],
+	                         light_table["color"]["b"]};
 
-	glm::vec3 position = {light_table["position"]["x"],
-	                      light_table["position"]["y"],
-	                      light_table["position"]["z"]};
+	const glm::vec3 position = {light_table["position"]["x"],
+	                            light_table["position"]["y"],
+	                            light_table["position"]["z"]};
 
 	entity.add_component<Component::PointLight>(
-	    color, light_table["ambient_intensity"],
-	    light_table["diffuse_intensity"], position, light_table["constant"],
-	    light_table["linear"], light_table["quadratic"]);
+	    light_table["shadow_width"], light_table["shadow_height"],
+	    light_table["near_plane"], light_table["far_plane"], color,
+	    light_table["ambient_intensity"], light_table["diffuse_intensity"],
+	    position, light_table["constant"], light_table["linear"],
+	    light_table["quadratic"]);
 }
 
 void ECSGameAssetFactory::load_spot_light(Reflex::Entity& entity,
                                           const sol::table& light_table) {
-	glm::vec3 color = {light_table["color"]["r"], light_table["color"]["g"],
-	                   light_table["color"]["b"]};
+	const glm::vec3 color = {light_table["color"]["r"],
+	                         light_table["color"]["g"],
+	                         light_table["color"]["b"]};
 
-	glm::vec3 position = {light_table["position"]["x"],
-	                      light_table["position"]["y"],
-	                      light_table["position"]["z"]};
+	const glm::vec3 position = {light_table["position"]["x"],
+	                            light_table["position"]["y"],
+	                            light_table["position"]["z"]};
 
-	glm::vec3 direction = {light_table["direction"]["x"],
-	                       light_table["direction"]["y"],
-	                       light_table["direction"]["z"]};
+	const glm::vec3 direction = {light_table["direction"]["x"],
+	                             light_table["direction"]["y"],
+	                             light_table["direction"]["z"]};
 
 	entity.add_component<Component::SpotLight>(
-	    color, light_table["ambient_intensity"],
-	    light_table["diffuse_intensity"], position, light_table["constant"],
-	    light_table["linear"], light_table["quadratic"], direction,
-	    light_table["edge"]);
+	    light_table["shadow_width"], light_table["shadow_height"],
+	    light_table["near_plane"], light_table["far_plane"], color,
+	    light_table["ambient_intensity"], light_table["diffuse_intensity"],
+	    position, light_table["constant"], light_table["linear"],
+	    light_table["quadratic"], direction, light_table["edge"]);
 }
 
 bool ECSGameAssetFactory::is_lua_script(const std::string& lua_script) {

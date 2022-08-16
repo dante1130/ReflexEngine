@@ -24,10 +24,8 @@ void System::draw_model(entt::registry& registry) {
 	auto& material_manager = resource_manager.get_material_manager();
 
 	registry.view<Component::Transform, Component::Model>().each(
-	    [&renderer, &model_manager, &material_manager](auto& transform,
-	                                                   auto& model) {
-		    DrawCall draw_call = [&transform, &model, &model_manager,
-		                          &material_manager](const Shader& shader) {
+	    [&](auto& transform, auto& model) {
+		    DrawCall draw_call = [&](const Shader& shader) {
 			    glm::mat4 model_matrix(1.0f);
 			    model_matrix = glm::translate(model_matrix, transform.position);
 			    model_matrix *=
@@ -57,11 +55,8 @@ void System::draw_mesh(entt::registry& registry) {
 	auto& material_manager = resource_manager.get_material_manager();
 
 	registry.view<Component::Transform, Component::Mesh>().each(
-	    [&renderer, &mesh_manager, &texture_manager, &material_manager](
-	        auto& transform, auto& mesh) {
-		    DrawCall draw_call = [&transform, &mesh, &mesh_manager,
-		                          &texture_manager,
-		                          &material_manager](const Shader& shader) {
+	    [&](auto& transform, auto& mesh) {
+		    DrawCall draw_call = [&](const Shader& shader) {
 			    glm::mat4 model_matrix(1.0f);
 			    model_matrix = glm::translate(model_matrix, transform.position);
 			    model_matrix *=
@@ -93,11 +88,8 @@ void System::draw_md2(entt::registry& registry) {
 	auto& material_manager = resource_manager.get_material_manager();
 
 	registry.view<Component::Transform, Component::Md2Animation>().each(
-	    [&renderer, &md2_manager, &texture_manager, &material_manager](
-	        auto& transform, auto& md2) {
-		    DrawCall draw_call = [&transform, &md2, &md2_manager,
-		                          &texture_manager,
-		                          &material_manager](const Shader& shader) {
+	    [&](auto& transform, auto& md2) {
+		    DrawCall draw_call = [&](const Shader& shader) {
 			    glm::mat4 model(1.0F);
 			    model = glm::translate(model, transform.position);
 			    model *=
@@ -142,11 +134,8 @@ void System::draw_terrain(entt::registry& registry) {
 	auto& material_manager = resource_manager.get_material_manager();
 
 	registry.view<Component::Transform, Component::Terrain>().each(
-	    [&renderer, &terrain_manager, &texture_manager, &material_manager](
-	        auto& transform, auto& terrain_component) {
-		    DrawCall draw_call = [&transform, &terrain_component,
-		                          &terrain_manager, &texture_manager,
-		                          &material_manager](const Shader& shader) {
+	    [&](auto& transform, auto& terrain_component) {
+		    DrawCall draw_call = [&](const Shader& shader) {
 			    auto& terrain =
 			        terrain_manager.get_terrain(terrain_component.terrain_name);
 

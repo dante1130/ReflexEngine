@@ -156,6 +156,9 @@ void EntitySerializer::serialize_directional_light(
     const Component::DirectionalLight& light) {
 	create_table("directional_light");
 
+	create_var("shadow_width", light.shadow_width, true);
+	create_var("shadow_height", light.shadow_height, true);
+
 	create_table("color");
 	create_var("r", light.color.r, true);
 	create_var("g", light.color.g, true);
@@ -177,6 +180,11 @@ void EntitySerializer::serialize_directional_light(
 void EntitySerializer::serialize_point_light(
     const Component::PointLight& light) {
 	create_table("point_light");
+
+	create_var("shadow_width", light.shadow_width, true);
+	create_var("shadow_height", light.shadow_height, true);
+	create_var("near_plane", light.near_plane, true);
+	create_var("far_plane", light.far_plane, true);
 
 	create_table("color");
 	create_var("r", light.color.r, true);
@@ -202,6 +210,11 @@ void EntitySerializer::serialize_point_light(
 
 void EntitySerializer::serialize_spot_light(const Component::SpotLight& light) {
 	create_table("spot_light");
+
+	create_var("shadow_width", light.shadow_width, true);
+	create_var("shadow_height", light.shadow_height, true);
+	create_var("near_plane", light.near_plane, true);
+	create_var("far_plane", light.far_plane, true);
 
 	create_table("color");
 	create_var("r", light.color.r, true);
