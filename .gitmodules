@@ -4,3 +4,6 @@
 [submodule "cmake/imgui"]
 	path = cmake/imgui
 	url = https://github.com/dante1130/imgui
+[submodule "cmake/catch2"]
+	path = cmake/catch2
+	url = https://github.com/catchorg/Catch2
