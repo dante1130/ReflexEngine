@@ -78,7 +78,7 @@ target_link_libraries(ReflexEngine PRIVATE ${PROJECT_SOURCE_DIR}/lib/assimp-vc14
 target_link_libraries(ReflexEngine PRIVATE ${PROJECT_SOURCE_DIR}/lib/RakNet_DLL_Release_x64.lib)
 target_link_libraries(ReflexEngine PRIVATE ${CMAKE_PREFIX_PATH}/irrklang/lib/irrKlang.lib)
 
-target_link_libraries(ReflexEngineTest PRIVATE Catch2::Catch2)
+target_link_libraries(ReflexEngineTest PRIVATE Catch2::Catch2WithMain)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_PREFIX_PATH}/catch2/extras)
 
