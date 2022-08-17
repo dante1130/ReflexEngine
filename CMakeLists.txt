@@ -12,11 +12,15 @@ set(CMAKE_DISABLE_SOURCE_CHANGES ON)
 # CMake path for libraries.
 set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 
+enable_testing()
+
 add_executable(ReflexEngine)
+add_executable(ReflexEngineTest)
 
 add_subdirectory(cmake)
 
 add_subdirectory(src)
+add_subdirectory(test)
 
 target_compile_options(${PROJECT_NAME} PRIVATE
 
@@ -60,6 +64,7 @@ include_directories(ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/reactphysics3d)
 include_directories(ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/irrklang)
 include_directories(ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/slikenet/Source)
 include_directories(ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/entt/single_include)
+include_directories(ReflexEngine SYSTEM ${CMAKE_PREFIX_PATH}/catch2/src)
 
 # Link libraries.
 target_link_libraries(ReflexEngine PRIVATE glfw)
@@ -69,13 +74,14 @@ target_link_libraries(ReflexEngine PRIVATE imgui)
 target_link_libraries(ReflexEngine PRIVATE lua)
 target_link_libraries(ReflexEngine PRIVATE reactphysics3d)
 target_link_libraries(ReflexEngine PRIVATE EnTT)
-target_link_libraries(ReflexEngine PRIVATE catch2)
 target_link_libraries(ReflexEngine PRIVATE ${PROJECT_SOURCE_DIR}/lib/assimp-vc143-mt.lib)
 target_link_libraries(ReflexEngine PRIVATE ${PROJECT_SOURCE_DIR}/lib/RakNet_DLL_Release_x64.lib)
 target_link_libraries(ReflexEngine PRIVATE ${CMAKE_PREFIX_PATH}/irrklang/lib/irrKlang.lib)
+
+target_link_libraries(ReflexEngineTest PRIVATE Catch2::Catch2)
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_PREFIX_PATH}/catch2/extras)
 
 include(CTest)
 include(Catch)
-catch_discover_tests(ReflexEngine)
+catch_discover_tests(ReflexEngineTest)
