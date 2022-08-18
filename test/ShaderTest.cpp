@@ -64,4 +64,13 @@ TEST_CASE("Shader uniforms", "[OpenGL]") {
 		REQUIRE(is_valid_uniform(shader.GetFarPlaneLocation()));
 		REQUIRE(is_valid_uniform(shader.GetOmniLightPosLocation()));
 	}
+
+	SECTION("React shader uniforms") {
+		Shader shader;
+
+		shader.CompileFile("shaders/react.vert", "shaders/react.frag");
+
+		REQUIRE(is_valid_uniform(shader.GetProjectionLocation()));
+		REQUIRE(is_valid_uniform(shader.GetViewLocation()));
+	}
 }
