@@ -35,7 +35,7 @@ namespace Component {
 			else
 				pb = new EngineResolve();
 
-			pb->init(pos, rot);
+			pb->initialise_body(pos, rot);
 
 		}
 
@@ -47,7 +47,7 @@ namespace Component {
 			else
 				pb = new EngineResolve();
 
-			pb->init(pos, rot);
+			pb->initialise_body(pos, rot);
 
 			pb->enableGravity(gravity_on);
 			pb->setCanSleep(can_sleep);
@@ -64,7 +64,7 @@ namespace Component {
 			else
 				pb = new EngineResolve();
 
-			pb->init(pos, rot);
+			pb->initialise_body(pos, rot);
 		}
 
 		void setTransform(glm::vec3 pos, glm::vec3 rot)
@@ -218,14 +218,14 @@ namespace Component {
 
 		//void addCapsuleCollider(glm::vec3 pos, float radius, float height) { pb->addCapsuleCollider(pos, radius, height); }
 
-		unsigned int addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction) {
+		uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction) {
 			return pb->addBoxCollider(pos, size, bounce, friction);
 		}
-		unsigned int addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction)
+		uint32_t addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction)
 		{
 			return pb->addSphereCollider(pos, radius, bounce, friction);
 		}
-		unsigned int addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction)
+		uint32_t addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction)
 		{
 			return pb->addCapsuleCollider(pos, radius, height, bounce, friction);
 		}
@@ -241,7 +241,7 @@ namespace Component {
 
 		void setPosition(glm::vec3 pos) { pb->setPosition(pos); }
 
-		void setQuanternion(glm::quat quat) { pb->setQuanternion(quat); }
+		void setQuanternion(glm::quat quat) { pb->setQuaternion(quat); }
 
 		void setEulerRotation(glm::vec3 rot) { pb->setEulerRotation(rot); }
 

@@ -260,14 +260,14 @@ void System::update_rigidbody(entt::registry& registry)
 	if (EngineTime::is_paused())
 		return;
 
-	static float accumulator;
-	accumulator += EngineTime::get_delta_time();
+	static double accumulator;
+	accumulator += EngineTime::get_fixed_delta_time();
 
 	//Calls the physics world update
-	while (accumulator > Physics::getTimeStep())
+	while (accumulator > EngineTime::get_time_step())
 	{
-		Physics::getPhysicsWorld()->update(Physics::getTimeStep());
-		accumulator -= Physics::getTimeStep();
+		Physics::getPhysicsWorld()->update(EngineTime::get_time_step());
+		accumulator -= EngineTime::get_time_step();
 	}
 	
 	auto& rigidbody_manager = ResourceManager::get_instance().get_rigidbody_manager();

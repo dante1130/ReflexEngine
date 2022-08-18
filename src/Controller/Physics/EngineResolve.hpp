@@ -8,10 +8,7 @@ private:
 
 	rp3d::CollisionBody* cb;
 
-	//This is going to be physics properties
-	// - velocity, ang_velocity
-	// - accelaration, ang_accelaration
-	// - mass, material properties (maybe)
+	
 
 public:
 
@@ -21,8 +18,8 @@ public:
 	bool usingReactResolve() override;
 
 	// init setup
-	void init(glm::vec3 pos, glm::vec3 rot, float angle) override;
-	void init(glm::vec3 pos, glm::vec3 rot) override;
+	void initialise_body(glm::vec3 pos, glm::vec3 rot, float angle) override;
+	void initialise_body(glm::vec3 pos, glm::vec3 rot) override;
 
 	//Change movement properties
 	void addForce(glm::vec3 force, Apply type) override;
@@ -57,13 +54,13 @@ public:
 	bool getCanSleep() override;
 
 	// Add colliders
-	unsigned int addBoxCollider(glm::vec3 pos, glm::vec3 size) override;
-	unsigned int addSphereCollider(glm::vec3 pos, float radius) override;
-	unsigned int addCapsuleCollider(glm::vec3 pos, float radius, float height) override;
+	uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 size) override;
+	uint32_t addSphereCollider(glm::vec3 pos, float radius) override;
+	uint32_t addCapsuleCollider(glm::vec3 pos, float radius, float height) override;
 
-	unsigned int addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction) override;
-	unsigned int addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction) override;
-	unsigned int addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction) override;
+	uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction) override;
+	uint32_t addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction) override;
+	uint32_t addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction) override;
 
 	// returns for GameObject position and rotation
 	glm::vec3 getPosition() override;
@@ -72,7 +69,7 @@ public:
 	float getAngle() override;
 
 	void setPosition(glm::vec3 pos) override;
-	void setQuanternion(glm::quat quat) override;
+	void setQuaternion(glm::quat quat) override;
 	void setEulerRotation(glm::vec3 rot) override;
 	void setRotation(glm::vec3 rot) override;
 	void setAngle(float ang) override;

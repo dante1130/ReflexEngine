@@ -12,7 +12,7 @@ ReactResolve::ReactResolve()
 }
 
 
-void ReactResolve::init(glm::vec3 pos, glm::vec3 rot, float angle) 
+void ReactResolve::initialise_body(glm::vec3 pos, glm::vec3 rot, float angle)
 {
 	Vector3 p(pos.x, pos.y, pos.z);
 	Quaternion o = Quaternion::identity();
@@ -35,20 +35,19 @@ void ReactResolve::init(glm::vec3 pos, glm::vec3 rot, float angle)
 
 }
 
-void ReactResolve::init(glm::vec3 pos, glm::vec3 rot)
+void ReactResolve::initialise_body(glm::vec3 pos, glm::vec3 rot)
 {
-	std::cout << "Rotation: x: " << rot.x << " y: " << rot.y << " z: " << rot.z << std::endl;
 	Vector3 p(pos.x, pos.y, pos.z);
 	Quaternion o = rp3d::Quaternion::identity();
 
 	glm::vec3 rot_radians = glm::radians(rot);
 
-	double cy = std::cos(rot_radians.z * 0.5);
-    double sy = std::sin(rot_radians.z * 0.5);
-    double cp = std::cos(rot_radians.y * 0.5);
-    double sp = std::sin(rot_radians.y * 0.5);
-    double cr = std::cos(rot_radians.x * 0.5);
-    double sr = std::sin(rot_radians.x * 0.5);
+	double cy = glm::cos(rot_radians.z * 0.5);
+    double sy = glm::sin(rot_radians.z * 0.5);
+    double cp = glm::cos(rot_radians.y * 0.5);
+    double sp = glm::sin(rot_radians.y * 0.5);
+    double cr = glm::cos(rot_radians.x * 0.5);
+    double sr = glm::sin(rot_radians.x * 0.5);
 
     o.w = cr * cp * cy + sr * sp * sy;
     o.x = sr * cp * cy - cr * sp * sy;
@@ -207,7 +206,7 @@ bool ReactResolve::getCanSleep() {
 	return rb->isAllowedToSleep();
 }
 
-unsigned int ReactResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size)
+uint32_t ReactResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size)
 {
 	BoxShape* bs = Physics::getPhysicsCommon().createBoxShape(
 		Vector3(size.x / 2, size.y / 2, size.z / 2));
@@ -217,7 +216,7 @@ unsigned int ReactResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size)
 	return colliders.size() - 1;
 }
 
-unsigned int ReactResolve::addSphereCollider(glm::vec3 pos, float radius)
+uint32_t ReactResolve::addSphereCollider(glm::vec3 pos, float radius)
 {
 	SphereShape* ss = Physics::getPhysicsCommon().createSphereShape(radius);
 	// identity only for now maybe idk
@@ -227,7 +226,7 @@ unsigned int ReactResolve::addSphereCollider(glm::vec3 pos, float radius)
 	return colliders.size() - 1;
 }
 
-unsigned int ReactResolve::addCapsuleCollider(glm::vec3 pos, float radius, float height)
+uint32_t ReactResolve::addCapsuleCollider(glm::vec3 pos, float radius, float height)
 {
 	CapsuleShape* cs = Physics::getPhysicsCommon().createCapsuleShape(radius, height);
 	// identity only for now maybe idk
@@ -237,7 +236,7 @@ unsigned int ReactResolve::addCapsuleCollider(glm::vec3 pos, float radius, float
 	return colliders.size() - 1;
 }
 
-unsigned int ReactResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction)
+uint32_t ReactResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction)
 {
 	unsigned int index = addBoxCollider(pos, size);
 	Material& mat = colliders[colliders.size() - 1]->getMaterial();
@@ -246,7 +245,7 @@ unsigned int ReactResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size, float b
 	return index;
 }
 
-unsigned int ReactResolve::addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction)
+uint32_t ReactResolve::addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction)
 {
 	unsigned int index = addSphereCollider(pos, radius);
 	Material& mat = colliders[colliders.size() - 1]->getMaterial();
@@ -255,7 +254,7 @@ unsigned int ReactResolve::addSphereCollider(glm::vec3 pos, float radius, float 
 	return index;
 }
 
-unsigned int ReactResolve::addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction)
+uint32_t ReactResolve::addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction)
 {
 	unsigned int index = addCapsuleCollider(pos, radius, height);
 	Material& mat = colliders[colliders.size() - 1]->getMaterial();
@@ -286,7 +285,7 @@ void ReactResolve::setPosition(glm::vec3 pos)
 	rb->setTransform(transform);
 }
 
-void ReactResolve::setQuanternion(glm::quat quat)
+void ReactResolve::setQuaternion(glm::quat quat)
 {
 	Transform transform = rb->getTransform();
 	transform.setOrientation(Quaternion(quat.x, quat.y, quat.z, quat.w));
@@ -299,12 +298,12 @@ void ReactResolve::setEulerRotation(glm::vec3 rot)
 	Quaternion o = Quaternion::identity();
 	glm::vec3 rot_radians = glm::radians(rot);
 
-	double cy = std::cos(rot_radians.z * 0.5);
-	double sy = std::sin(rot_radians.z * 0.5);
-	double cp = std::cos(rot_radians.y * 0.5);
-	double sp = std::sin(rot_radians.y * 0.5);
-	double cr = std::cos(rot_radians.x * 0.5);
-	double sr = std::sin(rot_radians.x * 0.5);
+	double cy = glm::cos(rot_radians.z * 0.5);
+	double sy = glm::sin(rot_radians.z * 0.5);
+	double cp = glm::cos(rot_radians.y * 0.5);
+	double sp = glm::sin(rot_radians.y * 0.5);
+	double cr = glm::cos(rot_radians.x * 0.5);
+	double sr = glm::sin(rot_radians.x * 0.5);
 
 	o.w = cr * cp * cy + sr * sp * sy;
 	o.x = sr * cp * cy - cr * sp * sy;

@@ -50,16 +50,18 @@ void ECS::update(double delta_time) {
 	System::update_md2(registry_);
 	System::update_statemachine(*this);
 	
-	System::update_rigidbody(registry_);
 }
 
-void ECS::fixed_update(double delta_time) {}
+void ECS::fixed_update(double delta_time) {
+	System::update_rigidbody(registry_);
+}
 
 void ECS::draw() {
 	System::draw_terrain(registry_);
 	System::draw_model(registry_);
 	System::draw_mesh(registry_);
 	System::draw_md2(registry_);
+
 }
 
 void ECS::destroy_entity(entt::entity entity_id) {

@@ -13,7 +13,7 @@ void PhysicsObject::initModel(const std::string& model_name,
 void PhysicsObject::initRB(glm::vec3 pos, glm::vec3 rotation, float angle) {
 
 	pb = new ReactResolve();
-	pb->init(pos, rotation, angle);
+	pb->initialise_body(pos, rotation, angle);
 
 }
 
@@ -22,7 +22,7 @@ void PhysicsObject::initRB(glm::vec3 pos, glm::vec3 rotation, float angle, bool 
 		pb = new EngineResolve();
 	else
 		pb = new ReactResolve();
-	pb->init(pos, rotation, angle);
+	pb->initialise_body(pos, rotation, angle);
 }
 
 void PhysicsObject::update(double delta_time) {
@@ -146,7 +146,7 @@ void PhysicsObject::save_object() {
 		ObjectSaving::addValue("linearDamping", pb->getDragForce(), false);
 		ObjectSaving::addValue("angularDamping", pb->getDragTorque(), false);
 		ObjectSaving::addValue("sleep", (int)pb->getCanSleep(), false);
-		ObjectSaving::addValue("numOfColliders", pb->colliderSize(),
+		ObjectSaving::addValue("numOfColliders", (int)pb->colliderSize(),
 		                       true);
 		ObjectSaving::closeStruct();
 
@@ -196,7 +196,7 @@ void PhysicsObject::setObjectTrigger(bool ean) { pb->setObjectTrigger(ean); }
 
 bool PhysicsObject::usingReactResolve() { return pb->usingReactResolve(); }
 
-void PhysicsObject::init(glm::vec3 rot, glm::vec3 pos, float angle) { pb->init(rot, pos, angle); }
+void PhysicsObject::init(glm::vec3 rot, glm::vec3 pos, float angle) { pb->initialise_body(rot, pos, angle); }
 
 void PhysicsObject::addForce(glm::vec3 force, Apply type) { pb->addForce(force, type); }
 

@@ -67,7 +67,7 @@ void Projectile::save_object() {
 		ObjectSaving::addValue("linearDamping", pb->getDragForce(), false);
 		ObjectSaving::addValue("angularDamping", pb->getDragTorque(), false);
 		ObjectSaving::addValue("sleep", (int)pb->getCanSleep(), false);
-		ObjectSaving::addValue("numOfColliders", pb->colliderSize(), false);
+		ObjectSaving::addValue("numOfColliders", (int)pb->colliderSize(), false);
 		ObjectSaving::addValue("timeAliveLeft", time_alive_left_, false);
 		ObjectSaving::addValue("damage", damage_, false);
 		ObjectSaving::addValue("logic", lua_script_, false);

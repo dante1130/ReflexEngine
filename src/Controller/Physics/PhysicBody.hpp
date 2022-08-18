@@ -32,6 +32,14 @@ class PhysicsBody
 	protected:
 	    std::vector<rp3d::Collider*> colliders;
 
+		/*
+		*  The body needs three seperate maps as to allow
+		*  users to retrieve specified information about the collider
+		*  type. A collider holds information as material properties, whether 
+		*  the object is a trigger etc. A collider shape, such as BoxShape for
+		*  example, holds information such as its extents (how large the box is).
+		*/
+
 		std::unordered_map<rp3d::Collider*, rp3d::BoxShape*> m_box;
 		std::unordered_map<rp3d::Collider*, rp3d::SphereShape*>  m_sphere;
 		std::unordered_map<rp3d::Collider*, rp3d::CapsuleShape*>  m_capsule;
@@ -39,32 +47,31 @@ class PhysicsBody
 	public:
 
 		//collider access
-		int colliderSize();
-		glm::vec3 getColliderPosition(int index, Apply type);
-		glm::vec4 getColliderOrientation(int index, Apply type);
+		size_t colliderSize();
+		glm::vec3 getColliderPosition(size_t index, Apply type);
+		glm::vec4 getColliderOrientation(size_t index, Apply type);
 
-		float getColliderBounce(int index);
-		float getColliderFriction(int index);
-		float getColliderMassDesity(int index);
-		int getColliderType(int index);
+		float getColliderBounce(size_t index);
+		float getColliderFriction(size_t index);
+		float getColliderMassDesity(size_t index);
+		int getColliderType(size_t index);
 
 		void setObjectTrigger(bool ean);
 
-		const rp3d::BoxShape* getColliderBox(int index);
-		const rp3d::SphereShape* getColliderSphere(int index);
-		const rp3d::CapsuleShape* getColliderCapsule(int index);
+		const rp3d::BoxShape* getColliderBox(size_t index);
+		const rp3d::SphereShape* getColliderSphere(size_t index);
+		const rp3d::CapsuleShape* getColliderCapsule(size_t index);
 
-		void addMaterialToCollider(int index, float bounce, float mass_density, float friction);
+		void addMaterialToCollider(size_t index, float bounce, float mass_density, float friction);
 
-		void removeCollider(int index);
+		void removeCollider(size_t index);
 		void removeAllColliders();
 	    // collision resolution system type check
 	    virtual bool usingReactResolve() = 0;
 
 		//init setup
-	    virtual void init(glm::vec3 pos, glm::vec3 rot, float angle) = 0;
-		virtual void init(glm::vec3 pos, glm::vec3 rot) = 0;
-
+	    virtual void initialise_body(glm::vec3 pos, glm::vec3 rot, float angle) = 0;
+		virtual void initialise_body(glm::vec3 pos, glm::vec3 rot) = 0;
 
 		//Change movement properties
 	    virtual void addForce(glm::vec3 force, Apply type) = 0;
@@ -100,14 +107,14 @@ class PhysicsBody
 		bool getIsTrigger();
 
 		//Add colliders
-	    virtual unsigned int addBoxCollider(glm::vec3 pos, glm::vec3 size) = 0;
-	    virtual unsigned int addSphereCollider(glm::vec3 pos, float radius) = 0;
-	    virtual unsigned int addCapsuleCollider(glm::vec3 pos, float radius, float height) = 0;
+	    virtual uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 size) = 0;
+	    virtual uint32_t addSphereCollider(glm::vec3 pos, float radius) = 0;
+	    virtual uint32_t addCapsuleCollider(glm::vec3 pos, float radius, float height) = 0;
 
 
-		virtual unsigned int addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction) = 0;
-		virtual unsigned int addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction) = 0;
-		virtual unsigned int addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction) = 0;
+		virtual uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction) = 0;
+		virtual uint32_t addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction) = 0;
+		virtual uint32_t addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction) = 0;
 
 		//returns for GameObject position and rotation
 	    virtual glm::vec3 getPosition() = 0;
@@ -116,7 +123,7 @@ class PhysicsBody
 		virtual float getAngle() = 0;
 
 		virtual void setPosition(glm::vec3 pos) = 0;
-		virtual void setQuanternion(glm::quat quat) = 0;
+		virtual void setQuaternion(glm::quat quat) = 0;
 		virtual void setEulerRotation(glm::vec3 rot) = 0;
 		virtual void setRotation(glm::vec3 rot) = 0;
 		virtual void setAngle(float ang) = 0;

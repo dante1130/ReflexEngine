@@ -354,12 +354,12 @@ void ECSAccess::register_statemachine_component() {
 void ECSAccess::register_rigidbody_component() {
 	auto& lua = LuaManager::get_instance().get_state();
 
-	lua["Apply"] = lua.create_table_with(
+	lua.new_enum("Apply",
 		"LOCAL", Apply::LOCAL,
 		"WORLD", Apply::WORLD
 	);
 
-	lua["ApplyPoint"] = lua.create_table_with(
+	lua.new_enum("ApplyPoint",
 		"LOCAL_LOCAL", ApplyPoint::LOCAL_LOCAL,
 		"LOCAL_WORLD", ApplyPoint::LOCAL_WORLD,
 		"WORLD_LOCAL", ApplyPoint::WORLD_LOCAL,

@@ -12,7 +12,7 @@ EngineResolve::EngineResolve()
 	//something
 }
 
-void EngineResolve::init(glm::vec3 pos, glm::vec3 rot, float angle) {
+void EngineResolve::initialise_body(glm::vec3 pos, glm::vec3 rot, float angle) {
 	Vector3 p = Vector3(pos.x, pos.y, pos.z);
 	Quaternion o = Quaternion::identity();
 
@@ -33,7 +33,7 @@ void EngineResolve::init(glm::vec3 pos, glm::vec3 rot, float angle) {
 	cb = Physics::getPhysicsWorld()->createCollisionBody(Transform(p, o));
 }
 
-void EngineResolve::init(glm::vec3 pos, glm::vec3 rot)
+void EngineResolve::initialise_body(glm::vec3 pos, glm::vec3 rot)
 {
 	Vector3 p(pos.x, pos.y, pos.z);
 	Quaternion o = Quaternion::identity();
@@ -148,28 +148,28 @@ bool EngineResolve::getCanSleep()
 	return false;
 }
 
-unsigned int EngineResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size)
+uint32_t EngineResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size)
 {
 	return 0;
 }
-unsigned int EngineResolve::addSphereCollider(glm::vec3 pos, float radius)
+uint32_t EngineResolve::addSphereCollider(glm::vec3 pos, float radius)
 {
 	return 0;
 }
-unsigned int EngineResolve::addCapsuleCollider(glm::vec3 pos, float radius, float height)
+uint32_t EngineResolve::addCapsuleCollider(glm::vec3 pos, float radius, float height)
 {
 	return 0;
 }
 
-unsigned int EngineResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction)
+uint32_t EngineResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction)
 {
 	return 0;
 }
-unsigned int EngineResolve::addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction)
+uint32_t EngineResolve::addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction)
 {
 	return 0;
 }
-unsigned int EngineResolve::addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction)
+uint32_t EngineResolve::addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction)
 {
 	return 0;
 }
@@ -192,7 +192,7 @@ void EngineResolve::setPosition(glm::vec3 pos)
 	
 }
 
-void EngineResolve::setQuanternion(glm::quat quat)
+void EngineResolve::setQuaternion(glm::quat quat)
 {
 
 }
