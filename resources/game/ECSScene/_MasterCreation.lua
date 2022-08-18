@@ -12,6 +12,7 @@ Scene.add_game_object("game/ECSScene/game_objects/water.lua")
 Scene.add_game_object("game/ECSScene/game_objects/big_arrow.lua")
 Scene.add_game_object("game/ECSScene/game_objects/terrain.lua")
 Scene.add_game_object("game/ECSScene/game_objects/duck.lua")
+Scene.add_game_object("game/ECSScene/game_objects/TheDen.lua")
 
 --AI game objects
 Scene.add_game_object("game/ECSScene/game_objects/AI/duck.lua")
