@@ -24,8 +24,6 @@ namespace Component {
 		float lin_drag;
 		float ang_drag;
 
-		bool* transform_move;
-
 		Rigidbody() = default;
 
 		Rigidbody(const Rigidbody&) = default;
@@ -85,7 +83,7 @@ namespace Component {
 			pb->setDragTorque(angular_drag);
 		}
 
-		//****************************
+	//****************************
 	// FUNCTIONS FOR PHYSICS STUFF
 	//****************************
 

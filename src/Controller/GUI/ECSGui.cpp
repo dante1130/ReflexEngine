@@ -14,8 +14,6 @@
 #include "Model/Components/Remove.hpp"
 #include "Model/Components/Rigidbody.hpp"
 
-bool is_user_moved;
-
 void ECSGui::draw(ECS& ecs) {
 	constexpr ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoBackground;
 
@@ -316,7 +314,7 @@ void ECSGui::draw_transform(Reflex::Entity& entity) {
 
 	ImGui::PushID("Transform");
 	ImGui::Text("Transform");
-	is_user_moved = ImGui::DragFloat3("Position", glm::value_ptr(transform.position), speed_);
+	ImGui::DragFloat3("Position", glm::value_ptr(transform.position), speed_);
 	ImGui::DragFloat3("Rotation", glm::value_ptr(transform.rotation), speed_);
 	ImGui::DragFloat3("Scale", glm::value_ptr(transform.scale), speed_);
 	ImGui::PopID();
@@ -337,8 +335,6 @@ void ECSGui::draw_rigidbody(Reflex::Entity& entity) {
 	ImGui::InputFloat("Drag Force", &rigidbody.lin_drag, speed_);
 	ImGui::InputFloat("Drag Torque", &rigidbody.ang_drag, speed_);
 	ImGui::PopID();
-
-	rigidbody.transform_move = &is_user_moved;
 }
 
 void ECSGui::draw_directional_light(Reflex::Entity& entity) {

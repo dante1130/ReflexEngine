@@ -17,7 +17,7 @@ void ReactResolve::init(glm::vec3 pos, glm::vec3 rot, float angle)
 	Vector3 p(pos.x, pos.y, pos.z);
 	Quaternion o = Quaternion::identity();
 
-	angle = angle / (180 / rp3d::PI_RP3D);
+	angle = angle / (180 / PI_RP3D);
 
 	float x = rot.x * sin(angle / 2);
 	float y = rot.y * sin(angle / 2);
