@@ -47,6 +47,10 @@ GLint Shader::GetUsingTexture() const { return uniformUsingTexture; }
 
 GLint Shader::get_using_detailmap() const { return uniform_using_detailmap; }
 
+GLint Shader::get_uniform_light_transform() const {
+	return uniformDirectionalLightTransform;
+}
+
 void Shader::SetDirectionalLight(const DirectionalLight& dLight) {
 	dLight.UseLight(uniformDirectionalLight.uniformColor,
 	                uniformDirectionalLight.uniformAmbientIntensity,

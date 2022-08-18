@@ -34,6 +34,7 @@ public:
 	GLint GetFarPlaneLocation() const;
 	GLint GetUsingTexture() const;
 	GLint get_using_detailmap() const;
+	GLint get_uniform_light_transform() const;
 
 	void SetDirectionalLight(const DirectionalLight& dLight);
 	void SetPointLights(const PointLight* pLight, GLuint lightCount,
