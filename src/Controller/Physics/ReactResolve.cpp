@@ -1,5 +1,7 @@
 #include "ReactResolve.hpp"
 
+using namespace rp3d;
+
 bool ReactResolve::usingReactResolve() { 
 	return true; 
 }
@@ -15,7 +17,7 @@ void ReactResolve::init(glm::vec3 pos, glm::vec3 rot, float angle)
 	Vector3 p(pos.x, pos.y, pos.z);
 	Quaternion o = Quaternion::identity();
 
-	angle = angle / (180 / PI_RP3D);
+	angle = angle / (180 / rp3d::PI_RP3D);
 
 	float x = rot.x * sin(angle / 2);
 	float y = rot.y * sin(angle / 2);
@@ -37,7 +39,7 @@ void ReactResolve::init(glm::vec3 pos, glm::vec3 rot)
 {
 	std::cout << "Rotation: x: " << rot.x << " y: " << rot.y << " z: " << rot.z << std::endl;
 	Vector3 p(pos.x, pos.y, pos.z);
-	Quaternion o = Quaternion::identity();
+	Quaternion o = rp3d::Quaternion::identity();
 
 	glm::vec3 rot_radians = glm::radians(rot);
 
@@ -308,9 +310,22 @@ void ReactResolve::setQuanternion(glm::quat quat)
 void ReactResolve::setEulerRotation(glm::vec3 rot)
 {
 	Transform transform = rb->getTransform();
+	Quaternion o = Quaternion::identity();
 	glm::vec3 rot_radians = glm::radians(rot);
-	transform.setOrientation(Quaternion::fromEulerAngles(rot_radians.x, 
-		rot_radians.y, rot_radians.z));
+
+	double cy = std::cos(rot_radians.z * 0.5);
+	double sy = std::sin(rot_radians.z * 0.5);
+	double cp = std::cos(rot_radians.y * 0.5);
+	double sp = std::sin(rot_radians.y * 0.5);
+	double cr = std::cos(rot_radians.x * 0.5);
+	double sr = std::sin(rot_radians.x * 0.5);
+
+	o.w = cr * cp * cy + sr * sp * sy;
+	o.x = sr * cp * cy - cr * sp * sy;
+	o.y = cr * sp * cy + sr * cp * sy;
+	o.z = cr * cp * sy - sr * sp * cy;
+
+	transform.setOrientation(o);
 	rb->setTransform(transform);
 }
 

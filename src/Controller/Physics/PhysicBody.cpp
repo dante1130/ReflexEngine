@@ -1,5 +1,7 @@
 #include "PhysicBody.hpp"
 
+using namespace rp3d;
+
 int PhysicsBody::colliderSize() { 
 	return colliders.size();
 }
@@ -46,6 +48,7 @@ glm::vec3 PhysicsBody::getColliderPosition(int index, Apply type)
 glm::vec4 PhysicsBody::getColliderOrientation(int index, Apply type)
 {
 	Quaternion temp;
+
 	switch (type)
 	{
 	case Apply::LOCAL:
@@ -74,7 +77,7 @@ int PhysicsBody::getColliderType(int index)
 {
 	switch (colliders[index]->getCollisionShape()->getName())
 	{
-		case CollisionShapeName::SPHERE: 
+		case CollisionShapeName::SPHERE:
 			return 1;
 		case CollisionShapeName::CAPSULE :
 			return 2;

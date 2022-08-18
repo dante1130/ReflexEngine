@@ -5,6 +5,7 @@
 #include "glm/gtc/quaternion.hpp"
 #include "glm/gtx/euler_angles.hpp"
 
+
 //These are to make it easier to determine where a force
 //in the game world is can be applied
 
@@ -24,16 +25,16 @@ enum class ApplyPoint {
 class PhysicsBody
 {
 	//This is basically what physics object should be, might need to change it up
-
+	
 	private:
 		bool is_trigger;
 
 	protected:
-	    std::vector<Collider*> colliders;
+	    std::vector<reactphysics3d::Collider*> colliders;
 
-		std::unordered_map<int, BoxShape*> m_box;
-		std::unordered_map<int, SphereShape*>  m_sphere;
-		std::unordered_map<int, CapsuleShape*>  m_capsule;
+		std::unordered_map<int, rp3d::BoxShape*> m_box;
+		std::unordered_map<int, rp3d::SphereShape*>  m_sphere;
+		std::unordered_map<int, rp3d::CapsuleShape*>  m_capsule;
 
 	public:
 
@@ -50,9 +51,9 @@ class PhysicsBody
 
 		void setObjectTrigger(bool ean);
 
-		const BoxShape* getColliderBox(int index);
-		const SphereShape* getColliderSphere(int index);
-		const CapsuleShape* getColliderCapsule(int index);
+		const rp3d::BoxShape* getColliderBox(int index);
+		const rp3d::SphereShape* getColliderSphere(int index);
+		const rp3d::CapsuleShape* getColliderCapsule(int index);
 
 		void addMaterialToCollider(int index, float bounce, float mass_density, float friction);
 
@@ -61,8 +62,8 @@ class PhysicsBody
 	    virtual bool usingReactResolve() = 0;
 
 		//init setup
-	    virtual void init(glm::vec3 rot, glm::vec3 pos, float angle) = 0;
-		virtual void init(glm::vec3 rot, glm::vec3 pos) = 0;
+	    virtual void init(glm::vec3 pos, glm::vec3 rot, float angle) = 0;
+		virtual void init(glm::vec3 pos, glm::vec3 rot) = 0;
 
 
 		//Change movement properties
@@ -81,7 +82,7 @@ class PhysicsBody
 		virtual void setDragForce(float drag) = 0;
 		virtual void setDragTorque(float ang_drag) = 0;
 
-		virtual void setType(BodyType type) = 0;
+		virtual void setType(rp3d::BodyType type) = 0;
 		virtual void setType(int type) = 0;
 	    virtual void enableGravity(bool ean) = 0;
 	    virtual void setCanSleep(bool ean) = 0;
@@ -93,7 +94,7 @@ class PhysicsBody
 	    virtual float getDragForce() = 0;
 	    virtual float getDragTorque() = 0;
 
-		virtual BodyType getType() = 0;
+		virtual rp3d::BodyType getType() = 0;
 	    virtual bool getIsGravityEnabled() = 0;
 	    virtual bool getCanSleep() = 0;
 		bool getIsTrigger();

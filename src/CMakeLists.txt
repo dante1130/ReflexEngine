@@ -78,7 +78,6 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/Physics/EngineResolve.cpp
 	Controller/Physics/ReactResolve.cpp
 	Controller/Physics/PhysicBody.cpp
-	Controller/Physics/Rigidbody.cpp
 	Controller/Physics/CollisionEvent.cpp
 	Controller/Physics/ColliderRenderer.cpp
 	Controller/Networking/NetworkAccess.cpp

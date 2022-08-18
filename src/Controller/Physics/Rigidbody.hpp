@@ -5,19 +5,19 @@
 #include "Controller/Physics/EngineResolve.hpp"
 #include "Controller/Physics/ReactResolve.hpp"
 
-class Rigidbody{
+class Rigidbody_{
 public:
 
 	void init(bool usingReact, glm::vec3 pos, glm::vec3 rot);
 
-	Rigidbody(bool usingReact, glm::vec3 pos, glm::vec3 rot);
+	Rigidbody_(bool usingReact, glm::vec3 pos, glm::vec3 rot);
 
-	Rigidbody() = default;
+	Rigidbody_() = default;
 
 	/**
 	 * @brief	default destructor
 	 */
-	~Rigidbody() = default;
+	~Rigidbody_() = default;
 
 	//****************************
 	// FUNCTIONS FOR PHYSICS STUFF

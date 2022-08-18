@@ -1,10 +1,9 @@
 #pragma once
 
 #include <reactphysics3d/reactphysics3d.h>
-
 #include "CollisionEvent.hpp"
 
-using namespace reactphysics3d;
+//using namespace reactphysics3d;
 
 class Physics {
 public:
@@ -65,7 +64,7 @@ public:
 	 * @pre		Nothing
 	 * @post	Nothing
 	 */
-	static PhysicsCommon& getPhysicsCommon();
+	static reactphysics3d::PhysicsCommon& getPhysicsCommon();
 
 	/**
 	 * @brief	Returns physics world game object
@@ -74,7 +73,7 @@ public:
 	 * @pre		Nothing
 	 * @post	Nothing
 	 */
-	static PhysicsWorld* getPhysicsWorld();
+	static reactphysics3d::PhysicsWorld* getPhysicsWorld();
 
 	/**
 	 * @brief	Returns if the physics world is created or not
@@ -92,9 +91,9 @@ private:
 	/// A boolean determining if the world has been created or not.
 	static bool isCreated;
 	/// A class used to create and destroy the physics world and objects.
-	static PhysicsCommon physicsCommon;
+	static reactphysics3d::PhysicsCommon physicsCommon;
 	/// The physics world.
-	static PhysicsWorld* world;
+	static reactphysics3d::PhysicsWorld* world;
 	/// The collision event listener listening for any collision.
 	static CollisionEventListener collisionEvent;
 

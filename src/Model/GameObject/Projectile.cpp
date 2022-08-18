@@ -89,7 +89,7 @@ void Projectile::save_object() {
 void Projectile::freeze_projectile() {
 	pb->setVelocity(glm::vec3(0));
 	pb->setAngVelocity(glm::vec3(0));
-	pb->setType(BodyType::STATIC);
+	pb->setType(rp3d::BodyType::STATIC);
 	position.y = OldTerrainManager::getHeight(position.x, position.z) + 0.1;
 }
 

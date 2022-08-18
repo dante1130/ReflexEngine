@@ -191,7 +191,7 @@ void System::init_rigidbody(entt::registry& registry, entt::entity entity)
 	auto& rigidbody = registry.get<Component::Rigidbody>(entity);
 	auto& transform = registry.get<Component::Transform>(entity);
 
-	rigidbody_manager.add_rigidbody(entity, rigidbody, transform);
+	rigidbody_manager.add_rigidbody(rigidbody, transform);
 
 }
 
@@ -260,16 +260,23 @@ void System::update_rigidbody(entt::registry& registry)
 	if (EngineTime::is_paused())
 		return;
 
-	auto& rigidbody_manager = ResourceManager::get_instance().get_rigidbody_manager();
-	
+	static float accumulator;
+	accumulator += EngineTime::get_delta_time();
+
 	//Calls the physics world update
-	Physics::getPhysicsWorld()->update(Physics::getTimeStep());
+	while (accumulator > Physics::getTimeStep())
+	{
+		Physics::getPhysicsWorld()->update(Physics::getTimeStep());
+		accumulator -= Physics::getTimeStep();
+	}
+	
+	auto& rigidbody_manager = ResourceManager::get_instance().get_rigidbody_manager();
 
 	
 	registry.view<Component::Rigidbody, Component::Transform>().each(
-		[&rigidbody_manager](const auto entity, auto& rigidbody, auto& transform)
+		[&rigidbody_manager](auto& rigidbody, auto& transform)
 		{
-			rigidbody_manager.update_rigidbody(entity, rigidbody, transform);
+			rigidbody_manager.update_rigidbody(rigidbody, transform);
 		});
 }
 

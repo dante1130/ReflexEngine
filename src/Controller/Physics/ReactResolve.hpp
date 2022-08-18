@@ -5,7 +5,7 @@
 
 class ReactResolve: public PhysicsBody{
 	private:
-		RigidBody* rb;
+		rp3d::RigidBody* rb;
 
 	public:
 		ReactResolve();
@@ -33,7 +33,7 @@ class ReactResolve: public PhysicsBody{
 		void setDragForce(float drag) override;
 		void setDragTorque(float ang_drag) override;
 
-		void setType(BodyType type) override;
+		void setType(rp3d::BodyType type) override;
 		void setType(int type) override;
 	    void enableGravity(bool ean) override;
 	    void setCanSleep(bool ean) override;
@@ -45,7 +45,7 @@ class ReactResolve: public PhysicsBody{
 	    float getDragForce() override;
 	    float getDragTorque() override;
 
-	    BodyType getType() override;
+		rp3d::BodyType getType() override;
 	    bool getIsGravityEnabled() override;
 	    bool getCanSleep() override;
 	

@@ -1,5 +1,7 @@
 #include "EngineResolve.hpp"
 
+using namespace rp3d;
+
 bool EngineResolve::usingReactResolve() 
 { 
 	return false; 

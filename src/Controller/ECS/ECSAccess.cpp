@@ -356,9 +356,15 @@ void ECSAccess::register_rigidbody_component() {
 
 	auto rigidbody_type = lua.new_usertype<Rigidbody>("Rigidbody");
 
-	rigidbody_type["gravity_on"] = &Rigidbody::gravity_on;
-	rigidbody_type["can_sleep"] = &Rigidbody::can_sleep;
-	rigidbody_type["is_trigger"] = &Rigidbody::is_trigger;
-	rigidbody_type["linear_drag"] = &Rigidbody::linear_drag;
-	rigidbody_type["angular_drag"] = &Rigidbody::angular_drag;
+	rigidbody_type["using_react"] = &Rigidbody::usingReactResolve;
+	rigidbody_type["get_position"] = &Rigidbody::getPosition;
+	rigidbody_type["get_rotation"] = &Rigidbody::getRotation;
+
+	rigidbody_type["can_sleep"] = sol::property(&Rigidbody::getCanSleep, &Rigidbody::setCanSleep);
+	rigidbody_type["is_trigger"] = sol::property(&Rigidbody::getIsTrigger, &Rigidbody::setObjectTrigger);
+	rigidbody_type["gravity_on"] = sol::property(&Rigidbody::getIsGravityEnabled, &Rigidbody::enableGravity);
+	rigidbody_type["linear_drag"] = sol::property(&Rigidbody::getDragForce, &Rigidbody::setDragForce);
+	rigidbody_type["angular_drag"] = sol::property(&Rigidbody::getDragTorque, &Rigidbody::setDragTorque);
+
+
 }

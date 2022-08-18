@@ -38,5 +38,4 @@ ResourceManager::ResourceManager() {
 	skybox_manager_.lua_access();
 	mesh_manager_.lua_access();
 	terrain_manager_.lua_access();
-	rigidbody_manager_.lua_access();
 }

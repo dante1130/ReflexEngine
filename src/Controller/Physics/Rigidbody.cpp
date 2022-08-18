@@ -3,7 +3,7 @@
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 
 
-void Rigidbody::init(bool usingReact, glm::vec3 pos, glm::vec3 rot)
+void Rigidbody_::init(bool usingReact, glm::vec3 pos, glm::vec3 rot)
 {
 	if (usingReact)
 		pb = new ReactResolve();
@@ -13,7 +13,7 @@ void Rigidbody::init(bool usingReact, glm::vec3 pos, glm::vec3 rot)
 	pb->init(pos, rot);
 }
 
-Rigidbody::Rigidbody(bool usingReact, glm::vec3 pos, glm::vec3 rot)
+Rigidbody_::Rigidbody_(bool usingReact, glm::vec3 pos, glm::vec3 rot)
 {
 	if (usingReact)
 		pb = new ReactResolve();
@@ -27,116 +27,116 @@ Rigidbody::Rigidbody(bool usingReact, glm::vec3 pos, glm::vec3 rot)
 //Encapsulation
 
 
-int Rigidbody::colliderSize() { return pb->colliderSize(); }
+int Rigidbody_::colliderSize() { return pb->colliderSize(); }
 
-glm::vec3 Rigidbody::getColliderPosition(int index, Apply type) { return pb->getColliderPosition(index, type); }
+glm::vec3 Rigidbody_::getColliderPosition(int index, Apply type) { return pb->getColliderPosition(index, type); }
 
 //glm::vec4 Rigidbody::getColliderOrientation(int index, Apply type);
 
-float Rigidbody::getColliderBounce(int index) { return pb->getColliderBounce(index); }
+float Rigidbody_::getColliderBounce(int index) { return pb->getColliderBounce(index); }
 
-float Rigidbody::getColliderFriction(int index) { return pb->getColliderFriction(index); }
+float Rigidbody_::getColliderFriction(int index) { return pb->getColliderFriction(index); }
 
-float Rigidbody::getColliderMassDesity(int index) { return pb->getColliderMassDesity(index); }
+float Rigidbody_::getColliderMassDesity(int index) { return pb->getColliderMassDesity(index); }
 
-int Rigidbody::getColliderType(int index) { return pb->getColliderType(index); }
+int Rigidbody_::getColliderType(int index) { return pb->getColliderType(index); }
 
-const BoxShape* Rigidbody::getColliderBox(int index) { return pb->getColliderBox(index); }
+const BoxShape* Rigidbody_::getColliderBox(int index) { return pb->getColliderBox(index); }
 
-const SphereShape* Rigidbody::getColliderSphere(int index) { return pb->getColliderSphere(index); }
+const SphereShape* Rigidbody_::getColliderSphere(int index) { return pb->getColliderSphere(index); }
 
-const CapsuleShape* Rigidbody::getColliderCapsule(int index) { return pb->getColliderCapsule(index); }
+const CapsuleShape* Rigidbody_::getColliderCapsule(int index) { return pb->getColliderCapsule(index); }
 
-void Rigidbody::addMaterialToCollider(int index, float bounce, float mass_density, float friction)
+void Rigidbody_::addMaterialToCollider(int index, float bounce, float mass_density, float friction)
 {
 	return pb->addMaterialToCollider(index, bounce, mass_density, friction);
 }
 
-void Rigidbody::removeAllColliders() { pb->removeAllColliders(); }
+void Rigidbody_::removeAllColliders() { pb->removeAllColliders(); }
 
-void Rigidbody::setObjectTrigger(bool ean) { pb->setObjectTrigger(ean); }
+void Rigidbody_::setObjectTrigger(bool ean) { pb->setObjectTrigger(ean); }
 
-bool Rigidbody::usingReactResolve() { return pb->usingReactResolve(); }
+bool Rigidbody_::usingReactResolve() { return pb->usingReactResolve(); }
 
-void Rigidbody::addForce(glm::vec3 force, Apply type) { pb->addForce(force, type); }
+void Rigidbody_::addForce(glm::vec3 force, Apply type) { pb->addForce(force, type); }
 
-void Rigidbody::addForceAtPoint(glm::vec3 force, glm::vec3 point, ApplyPoint type)
+void Rigidbody_::addForceAtPoint(glm::vec3 force, glm::vec3 point, ApplyPoint type)
 {
 	pb->addForceAtPoint(force, point, type);
 }
 
-void Rigidbody::addTorque(glm::vec3 torque, Apply type) { pb->addTorque(torque, type); }
+void Rigidbody_::addTorque(glm::vec3 torque, Apply type) { pb->addTorque(torque, type); }
 
-void Rigidbody::addDragForce(float drag) { pb->addDragForce(drag); }
+void Rigidbody_::addDragForce(float drag) { pb->addDragForce(drag); }
 
-void Rigidbody::addDragTorque(float ang_drag) { pb->addDragTorque(ang_drag); }
+void Rigidbody_::addDragTorque(float ang_drag) { pb->addDragTorque(ang_drag); }
 
-void Rigidbody::setMass(float mass) { pb->setMass(mass); }
+void Rigidbody_::setMass(float mass) { pb->setMass(mass); }
 
-void Rigidbody::setCenterOfMass(glm::vec3 p) { pb->setCenterOfMass(p); }
+void Rigidbody_::setCenterOfMass(glm::vec3 p) { pb->setCenterOfMass(p); }
 
-void Rigidbody::setVelocity(glm::vec3 vel) {
+void Rigidbody_::setVelocity(glm::vec3 vel) {
 	pb->setVelocity(vel);
 }
 
-void Rigidbody::setAngVelocity(glm::vec3 ang_vel) { pb->setAngVelocity(ang_vel); }
+void Rigidbody_::setAngVelocity(glm::vec3 ang_vel) { pb->setAngVelocity(ang_vel); }
 
-void Rigidbody::setDragForce(float drag){ pb->setDragForce(drag); }
+void Rigidbody_::setDragForce(float drag){ pb->setDragForce(drag); }
 
-void Rigidbody::setDragTorque(float ang_drag) { pb->setDragTorque(ang_drag); }
+void Rigidbody_::setDragTorque(float ang_drag) { pb->setDragTorque(ang_drag); }
 
-void Rigidbody::setType(BodyType type) { pb->setType(type); }
+void Rigidbody_::setType(BodyType type) { pb->setType(type); }
 
-void Rigidbody::setType(int type) { pb->setType(type); }
+void Rigidbody_::setType(int type) { pb->setType(type); }
 
-void Rigidbody::enableGravity(bool ean) { pb->enableGravity(ean); }
+void Rigidbody_::enableGravity(bool ean) { pb->enableGravity(ean); }
 
-void Rigidbody::setCanSleep(bool ean) { pb->setCanSleep(ean); }
+void Rigidbody_::setCanSleep(bool ean) { pb->setCanSleep(ean); }
 
-float Rigidbody::getMass() { return pb->getMass(); }
+float Rigidbody_::getMass() { return pb->getMass(); }
 
-glm::vec3 Rigidbody::getVelocity() { return pb->getVelocity(); }
+glm::vec3 Rigidbody_::getVelocity() { return pb->getVelocity(); }
 
-glm::vec3 Rigidbody::getAngVelocity() { return pb->getAngVelocity(); }
+glm::vec3 Rigidbody_::getAngVelocity() { return pb->getAngVelocity(); }
 
-float Rigidbody::getDragForce() { return pb->getDragForce(); }
+float Rigidbody_::getDragForce() { return pb->getDragForce(); }
 
-float Rigidbody::getDragTorque() { return pb->getDragTorque(); }
+float Rigidbody_::getDragTorque() { return pb->getDragTorque(); }
 
-BodyType Rigidbody::getType() { return pb->getType(); }
+BodyType Rigidbody_::getType() { return pb->getType(); }
 
-bool Rigidbody::getIsGravityEnabled() { return pb->getIsGravityEnabled(); }
+bool Rigidbody_::getIsGravityEnabled() { return pb->getIsGravityEnabled(); }
 
-bool Rigidbody::getCanSleep() { return pb->getCanSleep(); }
+bool Rigidbody_::getCanSleep() { return pb->getCanSleep(); }
 
-bool Rigidbody::getIsTrigger() { return pb->getIsTrigger(); }
+bool Rigidbody_::getIsTrigger() { return pb->getIsTrigger(); }
 
-void Rigidbody::addBoxCollider(glm::vec3 pos, glm::vec3 size) { pb->addBoxCollider(pos, size); }
+void Rigidbody_::addBoxCollider(glm::vec3 pos, glm::vec3 size) { pb->addBoxCollider(pos, size); }
 
-void Rigidbody::addSphereCollider(glm::vec3 pos, float radius) { pb->addSphereCollider(pos, radius); }
+void Rigidbody_::addSphereCollider(glm::vec3 pos, float radius) { pb->addSphereCollider(pos, radius); }
 
-void Rigidbody::addCapsuleCollider(glm::vec3 pos, float radius, float height) { pb->addCapsuleCollider(pos, radius, height); }
+void Rigidbody_::addCapsuleCollider(glm::vec3 pos, float radius, float height) { pb->addCapsuleCollider(pos, radius, height); }
 
-void Rigidbody::addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction) {
+void Rigidbody_::addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction) {
 	pb->addBoxCollider(pos, size, bounce, friction);
 }
-void Rigidbody::addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction)
+void Rigidbody_::addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction)
 {
 	pb->addSphereCollider(pos, radius, bounce, friction);
 }
-void Rigidbody::addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction)
+void Rigidbody_::addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction)
 {
 	pb->addCapsuleCollider(pos, radius, height, bounce, friction);
 }
 
-glm::vec3 Rigidbody::getPosition() { return pb->getPosition(); }
+glm::vec3 Rigidbody_::getPosition() { return pb->getPosition(); }
 
-glm::vec3 Rigidbody::getRotation() { return pb->getRotation(); }
+glm::vec3 Rigidbody_::getRotation() { return pb->getRotation(); }
 
-glm::quat Rigidbody::getOrientation() { return pb->getOrientation(); }
+glm::quat Rigidbody_::getOrientation() { return pb->getOrientation(); }
 
-void Rigidbody::setPosition(glm::vec3 pos) { pb->setPosition(pos); }
+void Rigidbody_::setPosition(glm::vec3 pos) { pb->setPosition(pos); }
 
-void Rigidbody::setQuanternion(glm::quat quat) { pb->setQuanternion(quat); }
+void Rigidbody_::setQuanternion(glm::quat quat) { pb->setQuanternion(quat); }
 
-void Rigidbody::setEulerRotation(glm::vec3 rot) { pb->setEulerRotation(rot); }
+void Rigidbody_::setEulerRotation(glm::vec3 rot) { pb->setEulerRotation(rot); }
