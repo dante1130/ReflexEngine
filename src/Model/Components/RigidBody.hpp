@@ -120,6 +120,8 @@ namespace Component {
 
 		void removeAllColliders() { pb->removeAllColliders(); }
 
+		void removeCollider(int index) { pb->removeCollider(index); }
+
 
 		// Gui viewable variables methods
 
@@ -212,22 +214,22 @@ namespace Component {
 
 		// Collider methods
 
-		void addBoxCollider(glm::vec3 pos, glm::vec3 size) { pb->addBoxCollider(pos, size); }
+		//void addBoxCollider(glm::vec3 pos, glm::vec3 size) { pb->addBoxCollider(pos, size); }
 
-		void addSphereCollider(glm::vec3 pos, float radius) { pb->addSphereCollider(pos, radius); }
+		//void addSphereCollider(glm::vec3 pos, float radius) { pb->addSphereCollider(pos, radius); }
 
-		void addCapsuleCollider(glm::vec3 pos, float radius, float height) { pb->addCapsuleCollider(pos, radius, height); }
+		//void addCapsuleCollider(glm::vec3 pos, float radius, float height) { pb->addCapsuleCollider(pos, radius, height); }
 
-		void addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction) {
-			pb->addBoxCollider(pos, size, bounce, friction);
+		unsigned int addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction) {
+			return pb->addBoxCollider(pos, size, bounce, friction);
 		}
-		void addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction)
+		unsigned int addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction)
 		{
-			pb->addSphereCollider(pos, radius, bounce, friction);
+			return pb->addSphereCollider(pos, radius, bounce, friction);
 		}
-		void addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction)
+		unsigned int addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction)
 		{
-			pb->addCapsuleCollider(pos, radius, height, bounce, friction);
+			return pb->addCapsuleCollider(pos, radius, height, bounce, friction);
 		}
 		
 

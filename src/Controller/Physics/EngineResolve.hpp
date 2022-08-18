@@ -57,13 +57,13 @@ public:
 	bool getCanSleep() override;
 
 	// Add colliders
-	void addBoxCollider(glm::vec3 pos, glm::vec3 size) override;
-	void addSphereCollider(glm::vec3 pos, float radius) override;
-	void addCapsuleCollider(glm::vec3 pos, float radius, float height) override;
+	unsigned int addBoxCollider(glm::vec3 pos, glm::vec3 size) override;
+	unsigned int addSphereCollider(glm::vec3 pos, float radius) override;
+	unsigned int addCapsuleCollider(glm::vec3 pos, float radius, float height) override;
 
-	void addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction) override;
-	void addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction) override;
-	void addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction) override;
+	unsigned int addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction) override;
+	unsigned int addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction) override;
+	unsigned int addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction) override;
 
 	// returns for GameObject position and rotation
 	glm::vec3 getPosition() override;

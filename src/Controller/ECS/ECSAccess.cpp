@@ -354,6 +354,18 @@ void ECSAccess::register_statemachine_component() {
 void ECSAccess::register_rigidbody_component() {
 	auto& lua = LuaManager::get_instance().get_state();
 
+	lua["Apply"] = lua.create_table_with(
+		"LOCAL", Apply::LOCAL,
+		"WORLD", Apply::WORLD
+	);
+
+	lua["ApplyPoint"] = lua.create_table_with(
+		"LOCAL_LOCAL", ApplyPoint::LOCAL_LOCAL,
+		"LOCAL_WORLD", ApplyPoint::LOCAL_WORLD,
+		"WORLD_LOCAL", ApplyPoint::WORLD_LOCAL,
+		"WORLD_WORLD", ApplyPoint::WORLD_WORLD
+	);
+
 	auto rigidbody_type = lua.new_usertype<Rigidbody>("Rigidbody");
 
 	rigidbody_type["using_react"] = &Rigidbody::usingReactResolve;
@@ -366,5 +378,14 @@ void ECSAccess::register_rigidbody_component() {
 	rigidbody_type["linear_drag"] = sol::property(&Rigidbody::getDragForce, &Rigidbody::setDragForce);
 	rigidbody_type["angular_drag"] = sol::property(&Rigidbody::getDragTorque, &Rigidbody::setDragTorque);
 
+	rigidbody_type["add_force"] = &Rigidbody::addForce;
+	rigidbody_type["add_torque"] = &Rigidbody::addTorque;
+	rigidbody_type["add_force_at_point"] = &Rigidbody::addForceAtPoint;
 
+	rigidbody_type["add_sphere_collider"] = &Rigidbody::addSphereCollider;
+	rigidbody_type["add_box_collider"] = &Rigidbody::addBoxCollider;
+	rigidbody_type["add_capsule_collider"] = &Rigidbody::addCapsuleCollider;
+
+	rigidbody_type["remove_all_colliders"] = &Rigidbody::removeAllColliders;
+	rigidbody_type["remove_collider"] = &Rigidbody::removeCollider;
 }

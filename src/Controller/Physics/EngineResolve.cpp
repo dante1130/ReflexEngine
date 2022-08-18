@@ -148,30 +148,30 @@ bool EngineResolve::getCanSleep()
 	return false;
 }
 
-void EngineResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size)
+unsigned int EngineResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size)
 {
-
+	return 0;
 }
-void EngineResolve::addSphereCollider(glm::vec3 pos, float radius)
+unsigned int EngineResolve::addSphereCollider(glm::vec3 pos, float radius)
 {
-
+	return 0;
 }
-void EngineResolve::addCapsuleCollider(glm::vec3 pos, float radius, float height)
+unsigned int EngineResolve::addCapsuleCollider(glm::vec3 pos, float radius, float height)
 {
-
+	return 0;
 }
 
-void EngineResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction)
+unsigned int EngineResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction)
 {
-
+	return 0;
 }
-void EngineResolve::addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction)
+unsigned int EngineResolve::addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction)
 {
-
+	return 0;
 }
-void EngineResolve::addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction)
+unsigned int EngineResolve::addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction)
 {
-
+	return 0;
 }
 
 

@@ -28,7 +28,7 @@ void RigidbodyManager::update_rigidbody(Component::Rigidbody& rb, Component::Tra
 		tf.position = rb.getPosition();
 		tf.rotation = rb.getRotation();
 	}
-
+	
 	if (rb.getIsGravityEnabled() != rb.gravity_on)
 		rb.enableGravity(rb.gravity_on);
 	if (rb.getIsTrigger() != rb.is_trigger)

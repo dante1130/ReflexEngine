@@ -6,6 +6,29 @@ int PhysicsBody::colliderSize() {
 	return colliders.size();
 }
 
+void PhysicsBody::removeCollider(int index)
+{
+	if (index < 0 || index >= colliders.size())
+		return;
+
+	switch(this->getColliderType(index))
+	{
+		case 1:
+			m_sphere.erase(colliders[index]);
+			break;
+		case 2:
+			m_capsule.erase(colliders[index]);
+			break;
+		case 3:
+			m_box.erase(colliders[index]);
+			break;
+		default:
+			break;
+	}
+
+	colliders.erase(colliders.begin() + index);
+}
+
 void PhysicsBody::removeAllColliders()
 {
 	m_box.clear();
@@ -101,7 +124,7 @@ void PhysicsBody::addMaterialToCollider(int index, float bounce,
 const BoxShape* PhysicsBody::getColliderBox(int index){
 	try {
 		if (getColliderType(index) == 3)
-			return m_box.find(index)->second;
+			return m_box.find(colliders[index])->second;
 		else
 			throw("Could not convert box type!");
 	}
@@ -113,7 +136,7 @@ const BoxShape* PhysicsBody::getColliderBox(int index){
 const SphereShape* PhysicsBody::getColliderSphere(int index) {
 	try {
 		if (getColliderType(index) == 1)
-			return m_sphere.find(index)->second;
+			return m_sphere.find(colliders[index])->second;
 		else
 			throw("Could not convert sphere type!");
 	}
@@ -125,7 +148,7 @@ const SphereShape* PhysicsBody::getColliderSphere(int index) {
 const CapsuleShape* PhysicsBody::getColliderCapsule(int index) {
 	try {
 		if (getColliderType(index) == 2)
-			return m_capsule.find(index)->second;
+			return m_capsule.find(colliders[index])->second;
 		else
 			throw("Could not convert capsule type!");
 	}

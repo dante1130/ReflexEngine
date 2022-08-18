@@ -207,75 +207,61 @@ bool ReactResolve::getCanSleep() {
 	return rb->isAllowedToSleep();
 }
 
-void ReactResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size)
+unsigned int ReactResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size)
 {
 	BoxShape* bs = Physics::getPhysicsCommon().createBoxShape(
 		Vector3(size.x / 2, size.y / 2, size.z / 2));
-	// identity only for now maybe idk
 	Transform center = Transform(Vector3(pos.x, pos.y, pos.z), Quaternion::identity());
 	colliders.push_back(rb->addCollider(bs, center));
-	m_box.emplace(colliders.size() - 1, bs);
+	m_box.emplace(colliders[colliders.size() - 1], bs);
+	return colliders.size() - 1;
 }
 
-void ReactResolve::addSphereCollider(glm::vec3 pos, float radius)
+unsigned int ReactResolve::addSphereCollider(glm::vec3 pos, float radius)
 {
 	SphereShape* ss = Physics::getPhysicsCommon().createSphereShape(radius);
 	// identity only for now maybe idk
 	Transform center = Transform(Vector3(pos.x, pos.y, pos.z), Quaternion::identity());
 	colliders.push_back(rb->addCollider(ss, center));
-	m_sphere.emplace(colliders.size() - 1, ss);
+	m_sphere.emplace(colliders[colliders.size() - 1], ss);
+	return colliders.size() - 1;
 }
 
-void ReactResolve::addCapsuleCollider(glm::vec3 pos, float radius, float height) 
+unsigned int ReactResolve::addCapsuleCollider(glm::vec3 pos, float radius, float height)
 {
 	CapsuleShape* cs = Physics::getPhysicsCommon().createCapsuleShape(radius, height);
 	// identity only for now maybe idk
 	Transform center = Transform(Vector3(pos.x, pos.y, pos.z), Quaternion::identity());
 	colliders.push_back(rb->addCollider(cs, center));
-	m_capsule.emplace(colliders.size() - 1, cs);
+	m_capsule.emplace(colliders[colliders.size() - 1], cs);
+	return colliders.size() - 1;
 }
 
-void ReactResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction)
+unsigned int ReactResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction)
 {
-	BoxShape* bs = Physics::getPhysicsCommon().createBoxShape(
-		Vector3(size.x / 2, size.y / 2, size.z / 2));
-	// identity only for now maybe idk
-	Transform center = Transform(Vector3(pos.x, pos.y, pos.z), Quaternion::identity());
-
-	colliders.push_back(rb->addCollider(bs, center));
-	m_box.emplace(colliders.size() - 1, bs);
-
+	unsigned int index = addBoxCollider(pos, size);
 	Material& mat = colliders[colliders.size() - 1]->getMaterial();
 	mat.setBounciness(bounce);
 	mat.setFrictionCoefficient(friction);
+	return index;
 }
 
-void ReactResolve::addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction)
+unsigned int ReactResolve::addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction)
 {
-	SphereShape* ss = Physics::getPhysicsCommon().createSphereShape(radius);
-	// identity only for now maybe idk
-	Transform center = Transform(Vector3(pos.x, pos.y, pos.z), Quaternion::identity());
-
-	colliders.push_back(rb->addCollider(ss, center));
-	m_sphere.emplace(colliders.size() - 1, ss);
-
+	unsigned int index = addSphereCollider(pos, radius);
 	Material& mat = colliders[colliders.size() - 1]->getMaterial();
 	mat.setBounciness(bounce);
 	mat.setFrictionCoefficient(friction);
+	return index;
 }
 
-void ReactResolve::addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction)
+unsigned int ReactResolve::addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction)
 {
-	CapsuleShape* cs = Physics::getPhysicsCommon().createCapsuleShape(radius, height);
-	// identity only for now maybe idk
-	Transform center = Transform(Vector3(pos.x, pos.y, pos.z), Quaternion::identity());
-
-	colliders.push_back(rb->addCollider(cs, center));
-	m_capsule.emplace(colliders.size() - 1, cs);
-
+	unsigned int index = addCapsuleCollider(pos, radius, height);
 	Material& mat = colliders[colliders.size() - 1]->getMaterial();
 	mat.setBounciness(bounce);
 	mat.setFrictionCoefficient(friction);
+	return index;
 }
 
 glm::vec3 ReactResolve::getPosition() {
