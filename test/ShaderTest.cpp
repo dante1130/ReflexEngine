@@ -16,6 +16,9 @@ TEST_CASE("Shader uniforms") {
 
 		shader.CompileFile("shaders/shader.vert", "shaders/shader.frag");
 
-		REQUIRE(shader.GetModelLocation() != 0);
+		REQUIRE(shader.GetProjectionLocation() != -1);
+		REQUIRE(shader.GetModelLocation() != -1);
+		REQUIRE(shader.GetViewLocation() != -1);
+		REQUIRE(shader.GetAmbientIntensityLocation() != -1);
 	}
 }

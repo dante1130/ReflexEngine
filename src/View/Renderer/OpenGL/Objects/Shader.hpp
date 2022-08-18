@@ -104,64 +104,64 @@ private:
 	/// The unique id of the shader.
 	GLint m_shaderID = 0u;
 
-	GLint uniformProjection = 0, uniformModel = 0, uniformView = 0;
+	GLint uniformProjection = -1, uniformModel = -1, uniformView = -1;
 
-	GLint uniformEyePosition = 0;
+	GLint uniformEyePosition = -1;
 
-	GLint uniformSpecularIntensity = 0, uniformShininess = 0;
+	GLint uniformSpecularIntensity = -1, uniformShininess = -1;
 
-	GLint uniformTexture = 0;
+	GLint uniformTexture = -1;
 
-	GLint uniformDirectionalLightTransform = 0;
-	GLint uniformDirectionalShadowMap = 0;
+	GLint uniformDirectionalLightTransform = -1;
+	GLint uniformDirectionalShadowMap = -1;
 
-	GLint uniform_detailmap = 0;
+	GLint uniform_detailmap = -1;
 
-	GLint uniformOmniLightPos = 0, uniformFarPlane = 0;
+	GLint uniformOmniLightPos = -1, uniformFarPlane = -1;
 
 	GLint uniformLightMatrices[6];
 
-	GLint uniformSpotLightCount = 0;
-	GLint uniformPointLightCount = 0;
+	GLint uniformSpotLightCount = -1;
+	GLint uniformPointLightCount = -1;
 
-	GLint uniformUsingTexture = 0;
-	GLint uniform_using_detailmap = 0;
+	GLint uniformUsingTexture = -1;
+	GLint uniform_using_detailmap = -1;
 
 	struct {
-		GLint uniformColor = 0;
-		GLint uniformAmbientIntensity = 0;
-		GLint uniformDiffuseIntensity = 0;
-		GLint uniformDirection = 0;
+		GLint uniformColor = -1;
+		GLint uniformAmbientIntensity = -1;
+		GLint uniformDiffuseIntensity = -1;
+		GLint uniformDirection = -1;
 	} uniformDirectionalLight;
 
 	struct {
-		GLint uniformColor = 0;
-		GLint uniformAmbientIntensity = 0;
-		GLint uniformDiffuseIntensity = 0;
+		GLint uniformColor = -1;
+		GLint uniformAmbientIntensity = -1;
+		GLint uniformDiffuseIntensity = -1;
 
-		GLint uniformPosition = 0;
-		GLint uniformConstant = 0;
-		GLint uniformLinear = 0;
-		GLuint uniformQuadratic = 0;
+		GLint uniformPosition = -1;
+		GLint uniformConstant = -1;
+		GLint uniformLinear = -1;
+		GLuint uniformQuadratic = -1;
 	} uniformPointLights[MAX_POINT_LIGHTS];
 
 	struct {
-		GLint uniformColor = 0;
-		GLint uniformAmbientIntensity = 0;
-		GLint uniformDiffuseIntensity = 0;
+		GLint uniformColor = -1;
+		GLint uniformAmbientIntensity = -1;
+		GLint uniformDiffuseIntensity = -1;
 
-		GLint uniformPosition = 0;
-		GLint uniformConstant = 0;
-		GLint uniformLinear = 0;
-		GLint uniformQuadratic = 0;
+		GLint uniformPosition = -1;
+		GLint uniformConstant = -1;
+		GLint uniformLinear = -1;
+		GLint uniformQuadratic = -1;
 
-		GLint uniformDirection = 0;
-		GLint uniformEdge = 0;
+		GLint uniformDirection = -1;
+		GLint uniformEdge = -1;
 	} uniformSpotLights[MAX_SPOT_LIGHTS];
 
 	struct {
-		GLint shadowMap = 0;
-		GLint farPlane = 0;
+		GLint shadowMap = -1;
+		GLint farPlane = -1;
 	} uniformOmniShadowMap[MAX_POINT_LIGHTS + MAX_SPOT_LIGHTS];
 
 	/**
