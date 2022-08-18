@@ -9,7 +9,7 @@
 
 #include <glm/gtc/type_ptr.hpp>
 
-GLuint Shader::GetProjectionLocation() const { return uniformProjection; }
+GLint Shader::GetProjectionLocation() const { return uniformProjection; }
 
 GLuint Shader::GetModelLocation() const { return uniformModel; }
 
