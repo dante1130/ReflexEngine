@@ -22,7 +22,7 @@ add_subdirectory(cmake)
 add_subdirectory(src)
 add_subdirectory(test)
 
-target_compile_options(${PROJECT_NAME} PRIVATE
+target_compile_options(ReflexEngineSrc PRIVATE
 
     # Clang
     $<$<OR:$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>>:
