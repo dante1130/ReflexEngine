@@ -38,6 +38,7 @@ add_subdirectory(imgui)
 add_subdirectory(lua)
 add_subdirectory(reactphysics3d)
 add_subdirectory(entt)
+add_subdirectory(catch2)
 
 target_ignore_warnings(glm INTERFACE)
 target_ignore_warnings(glad INTERFACE)

@@ -9,43 +9,47 @@
 
 #include <glm/gtc/type_ptr.hpp>
 
-GLuint Shader::GetProjectionLocation() const { return uniformProjection; }
+GLint Shader::GetProjectionLocation() const { return uniformProjection; }
 
-GLuint Shader::GetModelLocation() const { return uniformModel; }
+GLint Shader::GetModelLocation() const { return uniformModel; }
 
-GLuint Shader::GetViewLocation() const { return uniformView; }
+GLint Shader::GetViewLocation() const { return uniformView; }
 
-GLuint Shader::GetEyePositionLocation() const { return uniformEyePosition; }
+GLint Shader::GetEyePositionLocation() const { return uniformEyePosition; }
 
-GLuint Shader::GetAmbientIntensityLocation() const {
+GLint Shader::GetAmbientIntensityLocation() const {
 	return uniformDirectionalLight.uniformAmbientIntensity;
 }
 
-GLuint Shader::GetAmbientIntensityColor() const {
+GLint Shader::GetAmbientIntensityColor() const {
 	return uniformDirectionalLight.uniformColor;
 }
 
-GLuint Shader::GetDiffuseIntensityLocation() const {
+GLint Shader::GetDiffuseIntensityLocation() const {
 	return uniformDirectionalLight.uniformDiffuseIntensity;
 }
 
-GLuint Shader::GetDirectionLocation() const {
+GLint Shader::GetDirectionLocation() const {
 	return uniformDirectionalLight.uniformDirection;
 }
 
-GLuint Shader::GetSpecularIntensityLocation() const {
+GLint Shader::GetSpecularIntensityLocation() const {
 	return uniformSpecularIntensity;
 }
 
-GLuint Shader::GetShininessLocation() const { return uniformShininess; }
+GLint Shader::GetShininessLocation() const { return uniformShininess; }
 
-GLuint Shader::GetOmniLightPosLocation() const { return uniformOmniLightPos; }
+GLint Shader::GetOmniLightPosLocation() const { return uniformOmniLightPos; }
 
-GLuint Shader::GetFarPlaneLocation() const { return uniformFarPlane; }
+GLint Shader::GetFarPlaneLocation() const { return uniformFarPlane; }
 
-GLuint Shader::GetUsingTexture() const { return uniformUsingTexture; }
+GLint Shader::GetUsingTexture() const { return uniformUsingTexture; }
 
-GLuint Shader::get_using_detailmap() const { return uniform_using_detailmap; }
+GLint Shader::get_using_detailmap() const { return uniform_using_detailmap; }
+
+GLint Shader::get_uniform_light_transform() const {
+	return uniformDirectionalLightTransform;
+}
 
 void Shader::SetDirectionalLight(const DirectionalLight& dLight) {
 	dLight.UseLight(uniformDirectionalLight.uniformColor,
