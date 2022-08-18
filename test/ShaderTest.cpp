@@ -8,7 +8,7 @@ bool is_valid_uniform(GLint uniform_location) {
 	       uniform_location != GL_INVALID_OPERATION;
 }
 
-TEST_CASE("Shader uniforms") {
+TEST_CASE("Shader uniforms", "[OpenGL]") {
 	Window window(0, 0);
 	window.init();
 

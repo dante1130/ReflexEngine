@@ -35,5 +35,5 @@
 
 * Create your `.cpp` in the `test` directory.
 * Add your `.cpp` source file to `test/CMakeLists.txt`.
-* Implement your unit test. (You can use `ShaderTest.cpp` as an example, or look at the reference guide for Catch2).
+* Implement your unit test. (You can use `ShaderTest.cpp` as an example, or look at the reference guide for `Catch2`).
 * Build and run on target `ReflexEngineTest`.
