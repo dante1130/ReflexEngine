@@ -1,5 +1,6 @@
 target_sources(ReflexEngineTest PRIVATE
 	test.cpp
+	shader_test.cpp
 )
 
 target_include_directories(ReflexEngineTest PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})

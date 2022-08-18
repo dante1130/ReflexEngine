@@ -1,6 +1,4 @@
-target_sources(${PROJECT_NAME} PRIVATE
-	main.cpp
-
+add_library(ReflexEngineSrc
 	NetworkManager.cpp
 
 	Model/GameObject/GameObject.hpp
@@ -100,4 +98,4 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Scene/ECSScene.cpp
 )
 
-target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(ReflexEngineSrc PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
