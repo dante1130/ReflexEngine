@@ -36,6 +36,8 @@ public:
 	void setCenterOfMass(glm::vec3 p) override;
 	void setVelocity(glm::vec3 vel) override;
 	void setAngVelocity(glm::vec3 ang_vel) override;
+	void setDragForce(float drag) override;
+	void setDragTorque(float ang_drag) override;
 
 	void setType(BodyType type) override;
 	void setType(int type) override;

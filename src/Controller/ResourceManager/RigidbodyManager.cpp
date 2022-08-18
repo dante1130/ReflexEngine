@@ -17,10 +17,17 @@ void RigidbodyManager::lua_access()
 {
 	auto& lua = LuaManager::get_instance().get_state();
 
-	auto rigidbody_table = lua.create_named_table("Rigidbody");
+	auto rigidbody_table = lua["Rigidbody"].get_or_create<sol::table>();
 
-	rigidbody_table["get_position"] = [this](int id)
-	{	return rigidbodies_[(entt::entity)id].getPosition(); };
+	rigidbody_table["func"] = [this](const int& num) {
+		return num;
+	};
+
+	rigidbody_table["get_position"] = [this](const entt::entity& id)
+	{	return rigidbodies_[id].getPosition(); };
+
+	rigidbody_table["get_position_y"] = [this](const entt::entity& id)
+	{	return rigidbodies_[id].getPosition().y; };
 
 	rigidbody_table["set_position"] = [this](int id, glm::vec3 pos)
 	{	rigidbodies_[(entt::entity)id].setPosition(pos); };
@@ -76,6 +83,19 @@ void RigidbodyManager::update_rigidbody(entt::entity id, const Component::Rigidb
 {
 	tf.position = rigidbodies_[id].getPosition();
 	tf.rotation = rigidbodies_[id].getRotation();
+
+	if (rigidbodies_[id].getIsGravityEnabled() != rb.gravity_on)
+		rigidbodies_[id].enableGravity(rb.gravity_on);
+	if (rigidbodies_[id].getCanSleep() != rb.can_sleep)
+		rigidbodies_[id].setCanSleep(rb.gravity_on);
+	if (rigidbodies_[id].getIsTrigger() != rb.is_trigger)
+		rigidbodies_[id].setObjectTrigger(rb.is_trigger);
+
+	if (rigidbodies_[id].getDragForce() != rb.linear_drag)
+		rigidbodies_[id].setDragForce(rb.linear_drag);
+	if (rigidbodies_[id].getDragTorque() != rb.angular_drag)
+		rigidbodies_[id].setDragTorque(rb.angular_drag);
+
 }
 
 Rigidbody& RigidbodyManager::get_rigidbody(entt::entity id)

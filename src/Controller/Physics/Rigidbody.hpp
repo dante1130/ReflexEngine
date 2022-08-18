@@ -56,6 +56,8 @@ public:
 	void setCenterOfMass(glm::vec3 p);
 	void setVelocity(glm::vec3 vel);
 	void setAngVelocity(glm::vec3 ang_vel);
+	void setDragForce(float drag);
+	void setDragTorque(float ang_drag);
 
 	void setType(BodyType type);
 	void setType(int type);
@@ -71,6 +73,7 @@ public:
 	BodyType getType();
 	bool getIsGravityEnabled();
 	bool getCanSleep();
+	bool getIsTrigger();
 
 	void addBoxCollider(glm::vec3 pos, glm::vec3 size);
 	void addSphereCollider(glm::vec3 pos, float radius);

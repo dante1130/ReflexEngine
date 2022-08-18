@@ -85,6 +85,15 @@ void EngineResolve::setAngVelocity(glm::vec3 ang_vel)
 {
 
 }
+void EngineResolve::setDragForce(float drag)
+{
+
+}
+
+void EngineResolve::setDragTorque(float ang_drag)
+{
+
+}
 
 void EngineResolve::setType(BodyType type)
 {

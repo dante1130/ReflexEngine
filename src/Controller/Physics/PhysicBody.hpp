@@ -25,6 +25,9 @@ class PhysicsBody
 {
 	//This is basically what physics object should be, might need to change it up
 
+	private:
+		bool is_trigger;
+
 	protected:
 	    std::vector<Collider*> colliders;
 
@@ -75,6 +78,8 @@ class PhysicsBody
 	    virtual void setCenterOfMass(glm::vec3 p) = 0;
 	    virtual void setVelocity(glm::vec3 vel) = 0;
 	    virtual void setAngVelocity(glm::vec3 ang_vel) = 0;
+		virtual void setDragForce(float drag) = 0;
+		virtual void setDragTorque(float ang_drag) = 0;
 
 		virtual void setType(BodyType type) = 0;
 		virtual void setType(int type) = 0;
@@ -91,6 +96,7 @@ class PhysicsBody
 		virtual BodyType getType() = 0;
 	    virtual bool getIsGravityEnabled() = 0;
 	    virtual bool getCanSleep() = 0;
+		bool getIsTrigger();
 
 		//Add colliders
 	    virtual void addBoxCollider(glm::vec3 pos, glm::vec3 size) = 0;

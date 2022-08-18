@@ -164,7 +164,7 @@ void ECSAccess::register_entity() {
 	entity_type["any_spot_light_component"] = &Entity::any_component<SpotLight>;
 	entity_type["any_mesh_component"] = &Entity::any_component<Mesh>;
 	entity_type["any_mesh_statemachine"] = &Entity::any_component<Statemachine>;
-	entity_type["any_rigidbody_component"] = &Entity::any_component<Statemachine>;
+	entity_type["any_rigidbody_component"] = &Entity::any_component<Rigidbody>;
 
 }
 

@@ -81,6 +81,10 @@ void Rigidbody::setVelocity(glm::vec3 vel) {
 
 void Rigidbody::setAngVelocity(glm::vec3 ang_vel) { pb->setAngVelocity(ang_vel); }
 
+void Rigidbody::setDragForce(float drag){ pb->setDragForce(drag); }
+
+void Rigidbody::setDragTorque(float ang_drag) { pb->setDragTorque(ang_drag); }
+
 void Rigidbody::setType(BodyType type) { pb->setType(type); }
 
 void Rigidbody::setType(int type) { pb->setType(type); }
@@ -104,6 +108,8 @@ BodyType Rigidbody::getType() { return pb->getType(); }
 bool Rigidbody::getIsGravityEnabled() { return pb->getIsGravityEnabled(); }
 
 bool Rigidbody::getCanSleep() { return pb->getCanSleep(); }
+
+bool Rigidbody::getIsTrigger() { return pb->getIsTrigger(); }
 
 void Rigidbody::addBoxCollider(glm::vec3 pos, glm::vec3 size) { pb->addBoxCollider(pos, size); }
 

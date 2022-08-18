@@ -41,10 +41,6 @@ void ReactResolve::init(glm::vec3 pos, glm::vec3 rot)
 
 	glm::vec3 rot_radians = glm::radians(rot);
 
-	glm::quat temp2 = glm::quat_cast(glm::orientate3(rot_radians));
-
-	std::cout << "quanternion (radians): w: " << temp2.w << " x: " << temp2.x << " y : " << temp2.y << " z : " << temp2.z << std::endl;
-
 	double cy = std::cos(rot_radians.z * 0.5);
     double sy = std::sin(rot_radians.z * 0.5);
     double cp = std::cos(rot_radians.y * 0.5);
@@ -57,12 +53,7 @@ void ReactResolve::init(glm::vec3 pos, glm::vec3 rot)
     o.y = cr * sp * cy + sr * cp * sy;
     o.z = cr * cp * sy - sr * sp * cy;
 
-	//o.fromEulerAngles(rot_radians.x, rot_radians.y, rot_radians.z);
-
-	std::cout << "After conversion quanternion: w: " << o.w << " x: " << o.x << " y : " << o.y << " z : " << o.z << std::endl;
 	rb = Physics::getPhysicsWorld()->createRigidBody(Transform(p, o));
-	glm::vec3 t = glm::degrees(glm::eulerAngles(glm::quat(o.w, o.x, o.y, o.z)));
-	std::cout << "After conversion rotation: x: " << t.x << " y: " << t.y << " z: " << t.z << std::endl;
 }
 
 void ReactResolve::addForce(glm::vec3 force, Apply type) 
@@ -156,6 +147,13 @@ void ReactResolve::setAngVelocity(glm::vec3 ang_vel) {
 void ReactResolve::setType(BodyType type) { 
 	rb->setType(type); 
 }
+void ReactResolve::setDragForce(float drag){
+	rb->setLinearDamping(drag);
+}
+void ReactResolve::setDragTorque(float ang_drag){
+	rb->setAngularDamping(ang_drag);
+}
+
 void ReactResolve::setType(int type)
 {
 	switch (type)

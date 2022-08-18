@@ -17,6 +17,13 @@ void PhysicsBody::setObjectTrigger(bool ean)
 {
 	for (Collider* c : colliders)
 		c->setIsTrigger(ean);
+
+	is_trigger = ean;
+}
+
+bool PhysicsBody::getIsTrigger()
+{
+	return is_trigger;
 }
 
 glm::vec3 PhysicsBody::getColliderPosition(int index, Apply type)
