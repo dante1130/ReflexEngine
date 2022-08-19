@@ -3,6 +3,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 
 	NetworkManager.cpp
 
+	Model/Components/RigidBody.cpp
 	Model/GameObject/GameObject.hpp
 	Model/GameObject/Item.cpp
 	Model/GameObject/Water.cpp

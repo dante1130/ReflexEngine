@@ -14,8 +14,8 @@ ReactResolve::ReactResolve()
 
 void ReactResolve::initialise_body(glm::vec3 pos, glm::vec3 rot, float angle)
 {
-	Vector3 p(pos.x, pos.y, pos.z);
-	Quaternion o = Quaternion::identity();
+	Vector3 position(pos.x, pos.y, pos.z);
+	Quaternion orientation = Quaternion::identity();
 
 	angle = angle / (180 / PI_RP3D);
 
@@ -29,32 +29,31 @@ void ReactResolve::initialise_body(glm::vec3 pos, glm::vec3 rot, float angle)
 		pow(rot.y, 2) * pow(sin(angle / 2), 2) +
 		pow(rot.z, 2) * pow(sin(angle / 2), 2));
 
-	o.setAllValues(x / normal, y / normal, z / normal, w / normal);
+	orientation.setAllValues(x / normal, y / normal, z / normal, w / normal);
 
-	rb = Physics::getPhysicsWorld()->createRigidBody(Transform(p, o));
+	rb = Physics::getPhysicsWorld()->createRigidBody(Transform(position, orientation));
 
 }
 
 void ReactResolve::initialise_body(glm::vec3 pos, glm::vec3 rot)
 {
-	Vector3 p(pos.x, pos.y, pos.z);
-	Quaternion o = rp3d::Quaternion::identity();
-
+	Vector3 position(pos.x, pos.y, pos.z);
+	Quaternion orientation = rp3d::Quaternion::identity();
 	glm::vec3 rot_radians = glm::radians(rot);
 
-	double cy = glm::cos(rot_radians.z * 0.5);
-    double sy = glm::sin(rot_radians.z * 0.5);
-    double cp = glm::cos(rot_radians.y * 0.5);
-    double sp = glm::sin(rot_radians.y * 0.5);
-    double cr = glm::cos(rot_radians.x * 0.5);
-    double sr = glm::sin(rot_radians.x * 0.5);
+	double cy = glm::cos(rot_radians.z * 0.5); // cosine applied on yaw
+    double sy = glm::sin(rot_radians.z * 0.5); // sine applied on yaw
+    double cp = glm::cos(rot_radians.y * 0.5); // cosine applied on pitch
+    double sp = glm::sin(rot_radians.y * 0.5); // sine applied on pitch
+    double cr = glm::cos(rot_radians.x * 0.5); // cosine applied on roll
+    double sr = glm::sin(rot_radians.x * 0.5); // sine applied on roll
 
-    o.w = cr * cp * cy + sr * sp * sy;
-    o.x = sr * cp * cy - cr * sp * sy;
-    o.y = cr * sp * cy + sr * cp * sy;
-    o.z = cr * cp * sy - sr * sp * cy;
+    orientation.w = cr * cp * cy + sr * sp * sy;
+    orientation.x = sr * cp * cy - cr * sp * sy;
+    orientation.y = cr * sp * cy + sr * cp * sy;
+    orientation.z = cr * cp * sy - sr * sp * cy;
 
-	rb = Physics::getPhysicsWorld()->createRigidBody(Transform(p, o));
+	rb = Physics::getPhysicsWorld()->createRigidBody(Transform(position, orientation));
 }
 
 void ReactResolve::addForce(glm::vec3 force, Apply type) 
@@ -295,22 +294,22 @@ void ReactResolve::setQuaternion(glm::quat quat)
 void ReactResolve::setEulerRotation(glm::vec3 rot)
 {
 	Transform transform = rb->getTransform();
-	Quaternion o = Quaternion::identity();
+	Quaternion orientation = Quaternion::identity();
 	glm::vec3 rot_radians = glm::radians(rot);
 
-	double cy = glm::cos(rot_radians.z * 0.5);
-	double sy = glm::sin(rot_radians.z * 0.5);
-	double cp = glm::cos(rot_radians.y * 0.5);
-	double sp = glm::sin(rot_radians.y * 0.5);
-	double cr = glm::cos(rot_radians.x * 0.5);
-	double sr = glm::sin(rot_radians.x * 0.5);
+	double cy = glm::cos(rot_radians.z * 0.5); // cosine applied on yaw
+	double sy = glm::sin(rot_radians.z * 0.5); // sine applied on yaw
+	double cp = glm::cos(rot_radians.y * 0.5); // cosine applied on pitch
+	double sp = glm::sin(rot_radians.y * 0.5); // sine applied on pitch
+	double cr = glm::cos(rot_radians.x * 0.5); // cosine applied on roll
+	double sr = glm::sin(rot_radians.x * 0.5); // sine applied on roll
 
-	o.w = cr * cp * cy + sr * sp * sy;
-	o.x = sr * cp * cy - cr * sp * sy;
-	o.y = cr * sp * cy + sr * cp * sy;
-	o.z = cr * cp * sy - sr * sp * cy;
+	orientation.w = cr * cp * cy + sr * sp * sy;
+	orientation.x = sr * cp * cy - cr * sp * sy;
+	orientation.y = cr * sp * cy + sr * cp * sy;
+	orientation.z = cr * cp * sy - sr * sp * cy;
 
-	transform.setOrientation(o);
+	transform.setOrientation(orientation);
 	rb->setTransform(transform);
 }
 

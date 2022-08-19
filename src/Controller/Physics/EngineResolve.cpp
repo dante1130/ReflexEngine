@@ -13,8 +13,8 @@ EngineResolve::EngineResolve()
 }
 
 void EngineResolve::initialise_body(glm::vec3 pos, glm::vec3 rot, float angle) {
-	Vector3 p = Vector3(pos.x, pos.y, pos.z);
-	Quaternion o = Quaternion::identity();
+	Vector3 position(pos.x, pos.y, pos.z);
+	Quaternion orientation = Quaternion::identity();
 
 	angle = angle / (180 / PI_RP3D);
 
@@ -28,19 +28,30 @@ void EngineResolve::initialise_body(glm::vec3 pos, glm::vec3 rot, float angle) {
 		pow(rot.y, 2) * pow(sin(angle / 2), 2) +
 		pow(rot.z, 2) * pow(sin(angle / 2), 2));
 
-	o.setAllValues(x / normal, y / normal, z / normal, w / normal);
+	orientation.setAllValues(x / normal, y / normal, z / normal, w / normal);
 
-	cb = Physics::getPhysicsWorld()->createCollisionBody(Transform(p, o));
+	cb = Physics::getPhysicsWorld()->createRigidBody(Transform(position, orientation));
 }
 
 void EngineResolve::initialise_body(glm::vec3 pos, glm::vec3 rot)
 {
-	Vector3 p(pos.x, pos.y, pos.z);
-	Quaternion o = Quaternion::identity();
+	Vector3 position(pos.x, pos.y, pos.z);
+	Quaternion orientation = rp3d::Quaternion::identity();
 	glm::vec3 rot_radians = glm::radians(rot);
-	o.fromEulerAngles(rot_radians.x, rot_radians.y, rot_radians.z);
 
-	cb = Physics::getPhysicsWorld()->createCollisionBody(Transform(p, o));
+	double cy = glm::cos(rot_radians.z * 0.5); // cosine applied on yaw
+	double sy = glm::sin(rot_radians.z * 0.5); // sine applied on yaw
+	double cp = glm::cos(rot_radians.y * 0.5); // cosine applied on pitch
+	double sp = glm::sin(rot_radians.y * 0.5); // sine applied on pitch
+	double cr = glm::cos(rot_radians.x * 0.5); // cosine applied on roll
+	double sr = glm::sin(rot_radians.x * 0.5); // sine applied on roll
+
+	orientation.w = cr * cp * cy + sr * sp * sy;
+	orientation.x = sr * cp * cy - cr * sp * sy;
+	orientation.y = cr * sp * cy + sr * cp * sy;
+	orientation.z = cr * cp * sy - sr * sp * cy;
+
+	cb = Physics::getPhysicsWorld()->createRigidBody(Transform(position, orientation));
 
 }
 
