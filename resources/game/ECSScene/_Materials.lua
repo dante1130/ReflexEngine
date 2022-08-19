@@ -17,8 +17,6 @@ Texture.load_texture("grass", "textures/grass2.jpg")
 Texture.load_texture("credits", "textures/reflexbullet.png")
 Texture.load_texture("duck", "textures/DuckPerson.png")
 Texture.load_texture("Chair", "textures/chair.jpg")
-Texture.load_texture("DarkGlass", "textures/DarkGlass.png")
-Texture.load_texture("GenericWalls", "textures/GenericWalls.png")
 Material.load_material("shiny", 256.0, 4.0)
 
 

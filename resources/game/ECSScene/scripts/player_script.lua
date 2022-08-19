@@ -5,7 +5,7 @@ var = {
 function init(ecs, entity)
 	local trans = entity:get_transform_component()
 	trans.position = Camera.get_position()
-	trans.position.x = 500
+	trans.position.x = 504
 	Camera.set_position(trans.position)
 end
 
