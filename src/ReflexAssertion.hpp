@@ -6,7 +6,7 @@
 #define REFLEX_ASSERT(Expr, Msg) \
 	reflex_assert(#Expr, Expr, __FILE__, __LINE__, Msg)
 #else
-#define REFLEX_ASSERT(Expr, Msg) ;
+#define REFLEX_ASSERT(Expr, Msg)
 #endif
 
 inline void reflex_assert(const char* expr_str, bool expr, const char* file,
