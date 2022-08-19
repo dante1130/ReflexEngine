@@ -14,6 +14,7 @@
 #include "Controller/Terrain/TerrainManager.hpp"
 #include "Model/singletons.h"
 #include "Controller/GUI/DebugLogger.hpp"
+#include "ReflexAssertion.hpp"
 
 void ReflexEngine::run() {
 	auto& engine = ReflexEngine::get_instance();
@@ -42,6 +43,11 @@ void ReflexEngine::run() {
 		input_manager.read_mouse_buttons(engine.window_.get_window());
 
 		gui::mainLoopStart();
+
+		if (engine.scene_manager_.flag_change_scene()) {
+			engine.scene_manager_.load_scene(
+			    engine.scene_manager_.current_scene_name());
+		}
 
 		ECSScene& scene = engine.scene_manager_.current_scene();
 
