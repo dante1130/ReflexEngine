@@ -11,7 +11,11 @@ void SceneManager::init(const std::string& master_lua_script) {
 	auto scene_table = lua["Scene"].get_or_create<sol::table>();
 
 	scene_table.set_function("create_scene", &SceneManager::create_scene, this);
-	scene_table.set_function("load_scene", &SceneManager::load_scene, this);
+
+	scene_table["load_scene"] = [this](const std::string& name) {
+		current_scene_name_ = name;
+		flag_change_scene_ = true;
+	};
 
 	lua.script_file(master_lua_script);
 }
@@ -25,6 +29,8 @@ void SceneManager::load_scene(const std::string& name) {
 	current_scene_ = std::make_unique<ECSScene>(scene_map_.at(name));
 	scene_lua_access(*current_scene_);
 	current_scene_->init();
+
+	flag_change_scene_ = false;
 }
 
 void SceneManager::clear_scenes() {
@@ -36,6 +42,12 @@ ECSScene& SceneManager::current_scene() {
 	REFLEX_ASSERT(current_scene_ != nullptr, "No scene loaded.");
 	return *current_scene_;
 }
+
+const std::string& SceneManager::current_scene_name() const {
+	return current_scene_name_;
+}
+
+bool SceneManager::flag_change_scene() const { return flag_change_scene_; }
 
 void SceneManager::scene_lua_access(ECSScene& scene) {
 	auto& lua = LuaManager::get_instance().get_state();

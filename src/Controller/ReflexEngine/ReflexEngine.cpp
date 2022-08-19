@@ -44,6 +44,11 @@ void ReflexEngine::run() {
 
 		gui::mainLoopStart();
 
+		if (engine.scene_manager_.flag_change_scene()) {
+			engine.scene_manager_.load_scene(
+			    engine.scene_manager_.current_scene_name());
+		}
+
 		ECSScene& scene = engine.scene_manager_.current_scene();
 
 		if (EngineTime::is_paused()) {
