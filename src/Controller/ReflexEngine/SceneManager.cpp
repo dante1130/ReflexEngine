@@ -1,7 +1,9 @@
 #include "SceneManager.hpp"
 
-#include "Controller/LuaManager.hpp"
 #include <iostream>
+
+#include "Controller/LuaManager.hpp"
+#include "ReflexAssertion.hpp"
 
 void SceneManager::init(const std::string& master_lua_script) {
 	auto& lua = LuaManager::get_instance().get_state();
@@ -31,7 +33,7 @@ void SceneManager::clear_scenes() {
 }
 
 ECSScene& SceneManager::current_scene() {
-	assert(current_scene_ != nullptr);
+	REFLEX_ASSERT(current_scene_ != nullptr, "No scene loaded.");
 	return *current_scene_;
 }
 

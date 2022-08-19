@@ -14,6 +14,7 @@
 #include "Controller/Terrain/TerrainManager.hpp"
 #include "Model/singletons.h"
 #include "Controller/GUI/DebugLogger.hpp"
+#include "ReflexAssertion.hpp"
 
 void ReflexEngine::run() {
 	auto& engine = ReflexEngine::get_instance();
