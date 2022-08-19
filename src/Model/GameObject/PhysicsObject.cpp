@@ -13,7 +13,7 @@ void PhysicsObject::initModel(const std::string& model_name,
 void PhysicsObject::initRB(glm::vec3 pos, glm::vec3 rotation, float angle) {
 
 	pb = new ReactResolve();
-	pb->init(pos, rotation, angle);
+	pb->initialise_body(pos, rotation, angle);
 
 }
 
@@ -22,7 +22,7 @@ void PhysicsObject::initRB(glm::vec3 pos, glm::vec3 rotation, float angle, bool 
 		pb = new EngineResolve();
 	else
 		pb = new ReactResolve();
-	pb->init(pos, rotation, angle);
+	pb->initialise_body(pos, rotation, angle);
 }
 
 void PhysicsObject::update(double delta_time) {
@@ -65,19 +65,19 @@ void PhysicsObject::draw(const Shader& shader) {
 }
 
 void PhysicsObject::saveSphereCollider(size_t index) {
-	const SphereShape* temp_sphere = pb->getColliderSphere(index);
+	const rp3d::SphereShape* temp_sphere = pb->getColliderSphere(index);
 	ObjectSaving::addValue("radius", temp_sphere->getRadius(), false);
 }
 
 void PhysicsObject::saveCapsuleCollider(size_t index) {
-	const CapsuleShape* temp_capsule = pb->getColliderCapsule(index);
+	const rp3d::CapsuleShape* temp_capsule = pb->getColliderCapsule(index);
 	ObjectSaving::addValue("radius", temp_capsule->getRadius(), false);
 	ObjectSaving::addValue("height", temp_capsule->getHeight(), false);
 }
 
 void PhysicsObject::saveBoxCollider(size_t index) {
-	const BoxShape* temp_box = pb->getColliderBox(index);
-	Vector3 box_size = temp_box->getHalfExtents();
+	const rp3d::BoxShape* temp_box = pb->getColliderBox(index);
+	rp3d::Vector3 box_size = temp_box->getHalfExtents();
 	ObjectSaving::addValue("xBox", box_size.x * 2, false);
 	ObjectSaving::addValue("yBox", box_size.y * 2, false);
 	ObjectSaving::addValue("zBox", box_size.z * 2, false);
@@ -146,7 +146,7 @@ void PhysicsObject::save_object() {
 		ObjectSaving::addValue("linearDamping", pb->getDragForce(), false);
 		ObjectSaving::addValue("angularDamping", pb->getDragTorque(), false);
 		ObjectSaving::addValue("sleep", (int)pb->getCanSleep(), false);
-		ObjectSaving::addValue("numOfColliders", pb->colliderSize(),
+		ObjectSaving::addValue("numOfColliders", (int)pb->colliderSize(),
 		                       true);
 		ObjectSaving::closeStruct();
 
@@ -181,11 +181,11 @@ float PhysicsObject::getColliderMassDesity(int index) { return pb->getColliderMa
 
 int PhysicsObject::getColliderType(int index) { return pb->getColliderType(index); }
 
-const BoxShape* PhysicsObject::getColliderBox(int index) { return pb->getColliderBox(index); }
+const rp3d::BoxShape* PhysicsObject::getColliderBox(int index) { return pb->getColliderBox(index); }
 
-const SphereShape* PhysicsObject::getColliderSphere(int index) { return pb->getColliderSphere(index); }
+const rp3d::SphereShape* PhysicsObject::getColliderSphere(int index) { return pb->getColliderSphere(index); }
 
-const CapsuleShape* PhysicsObject::getColliderCapsule(int index) { return pb->getColliderCapsule(index); }
+const rp3d::CapsuleShape* PhysicsObject::getColliderCapsule(int index) { return pb->getColliderCapsule(index); }
 
 void PhysicsObject::addMaterialToCollider(int index, float bounce, float mass_density, float friction)
 { return pb->addMaterialToCollider(index, bounce, mass_density, friction); }
@@ -196,7 +196,7 @@ void PhysicsObject::setObjectTrigger(bool ean) { pb->setObjectTrigger(ean); }
 
 bool PhysicsObject::usingReactResolve() { return pb->usingReactResolve(); }
 
-void PhysicsObject::init(glm::vec3 rot, glm::vec3 pos, float angle) { pb->init(rot, pos, angle); }
+void PhysicsObject::init(glm::vec3 rot, glm::vec3 pos, float angle) { pb->initialise_body(rot, pos, angle); }
 
 void PhysicsObject::addForce(glm::vec3 force, Apply type) { pb->addForce(force, type); }
 
@@ -219,7 +219,7 @@ void PhysicsObject::setVelocity(glm::vec3 vel) {
 
 void PhysicsObject::setAngVelocity(glm::vec3 ang_vel) { pb->setAngVelocity(ang_vel); }
 
-void PhysicsObject::setType(BodyType type) { pb->setType(type); }
+void PhysicsObject::setType(rp3d::BodyType type) { pb->setType(type); }
 
 void PhysicsObject::setType(int type) { pb->setType(type); }
 
@@ -237,7 +237,7 @@ float PhysicsObject::getDragForce() { return pb->getDragForce(); }
 
 float PhysicsObject::getDragTorque() { return pb->getDragTorque(); }
 
-BodyType PhysicsObject::getType() { return pb->getType(); }
+rp3d::BodyType PhysicsObject::getType() { return pb->getType(); }
 
 bool PhysicsObject::getIsGravityEnabled() { return pb->getIsGravityEnabled(); }
 

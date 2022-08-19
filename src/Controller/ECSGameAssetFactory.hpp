@@ -126,4 +126,8 @@ private:
 	 * @return boolean
 	 */
 	static bool is_lua_script(const std::string& lua_script);
+
+
+
+	static void load_rigidbody(Reflex::Entity& entity, const sol::table& rigidbody_table);
 };

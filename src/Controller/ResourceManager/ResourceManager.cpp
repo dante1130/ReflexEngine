@@ -28,6 +28,7 @@ MeshManager& ResourceManager::get_mesh_manager() { return mesh_manager_; }
 TerrainManager& ResourceManager::get_terrain_manager() {
 	return terrain_manager_;
 }
+RigidbodyManager& ResourceManager::get_rigidbody_manager() { return rigidbody_manager_;  }
 
 ResourceManager::ResourceManager() {
 	texture_manager_.lua_access();

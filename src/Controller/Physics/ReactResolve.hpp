@@ -5,7 +5,7 @@
 
 class ReactResolve: public PhysicsBody{
 	private:
-		RigidBody* rb;
+		rp3d::RigidBody* rb;
 
 	public:
 		ReactResolve();
@@ -14,7 +14,8 @@ class ReactResolve: public PhysicsBody{
 		bool usingReactResolve() override;
 
 		// init setup
-	    void init(glm::vec3 pos, glm::vec3 rot, float angle) override;
+	    void initialise_body(glm::vec3 pos, glm::vec3 rot, float angle) override;
+		void initialise_body(glm::vec3 pos, glm::vec3 rot) override;
 
 		//Change movement properties
 		void addForce(glm::vec3 force, Apply type) override;
@@ -29,8 +30,10 @@ class ReactResolve: public PhysicsBody{
 	    void setCenterOfMass(glm::vec3 p) override;
 	    void setVelocity(glm::vec3 vel) override;
 	    void setAngVelocity(glm::vec3 ang_vel) override;
+		void setDragForce(float drag) override;
+		void setDragTorque(float ang_drag) override;
 
-		void setType(BodyType type) override;
+		void setType(rp3d::BodyType type) override;
 		void setType(int type) override;
 	    void enableGravity(bool ean) override;
 	    void setCanSleep(bool ean) override;
@@ -42,25 +45,29 @@ class ReactResolve: public PhysicsBody{
 	    float getDragForce() override;
 	    float getDragTorque() override;
 
-	    BodyType getType() override;
+		rp3d::BodyType getType() override;
 	    bool getIsGravityEnabled() override;
 	    bool getCanSleep() override;
+	
 
 		// Add colliders
-	    void addBoxCollider(glm::vec3 pos, glm::vec3 size) override;
-	    void addSphereCollider(glm::vec3 pos, float radius) override;
-	    void addCapsuleCollider(glm::vec3 pos, float radius, float height) override;
+		uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 size) override;
+		uint32_t addSphereCollider(glm::vec3 pos, float radius) override;
+		uint32_t addCapsuleCollider(glm::vec3 pos, float radius, float height) override;
 
-		void addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction) override;
-		void addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction) override;
-		void addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction) override;
+		uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction) override;
+		uint32_t addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction) override;
+		uint32_t addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction) override;
 
 	    // returns for GameObject position and rotation
 	    glm::vec3 getPosition() override;
 	    glm::vec3 getRotation() override;
-	    float getAngle() override;
+		glm::quat getOrientation() override;
+		float getAngle() override;
 
 		void setPosition(glm::vec3 pos) override;
+		void setQuaternion(glm::quat quat) override;
+		void setEulerRotation(glm::vec3 rot) override;
 		void setRotation(glm::vec3 rot) override;
 		void setAngle(float ang) override;
 
