@@ -90,7 +90,7 @@ void NPC::save_object() {
 		ObjectSaving::addValue("linearDamping", pb->getDragForce(), false);
 		ObjectSaving::addValue("angularDamping", pb->getDragTorque(), false);
 		ObjectSaving::addValue("sleep", (int)pb->getCanSleep(), false);
-		ObjectSaving::addValue("numOfColliders", pb->colliderSize(), true);
+		ObjectSaving::addValue("numOfColliders", (int)pb->colliderSize(), true);
 		ObjectSaving::closeStruct();
 
 		ObjectSaving::createStruct("AI");

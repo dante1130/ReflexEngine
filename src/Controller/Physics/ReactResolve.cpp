@@ -1,5 +1,7 @@
 #include "ReactResolve.hpp"
 
+using namespace rp3d;
+
 bool ReactResolve::usingReactResolve() { 
 	return true; 
 }
@@ -10,10 +12,10 @@ ReactResolve::ReactResolve()
 }
 
 
-void ReactResolve::init(glm::vec3 pos, glm::vec3 rot, float angle) 
+void ReactResolve::initialise_body(glm::vec3 pos, glm::vec3 rot, float angle)
 {
-	Vector3 p(pos.x, pos.y, pos.z);
-	Quaternion o = Quaternion::identity();
+	Vector3 position(pos.x, pos.y, pos.z);
+	Quaternion orientation = Quaternion::identity();
 
 	angle = angle / (180 / PI_RP3D);
 
@@ -27,10 +29,31 @@ void ReactResolve::init(glm::vec3 pos, glm::vec3 rot, float angle)
 		pow(rot.y, 2) * pow(sin(angle / 2), 2) +
 		pow(rot.z, 2) * pow(sin(angle / 2), 2));
 
-	o.setAllValues(x / normal, y / normal, z / normal, w / normal);
+	orientation.setAllValues(x / normal, y / normal, z / normal, w / normal);
 
-	rb = Physics::getPhysicsWorld()->createRigidBody(Transform(p, o));
+	rb = Physics::getPhysicsWorld()->createRigidBody(Transform(position, orientation));
 
+}
+
+void ReactResolve::initialise_body(glm::vec3 pos, glm::vec3 rot)
+{
+	Vector3 position(pos.x, pos.y, pos.z);
+	Quaternion orientation = rp3d::Quaternion::identity();
+	glm::vec3 rot_radians = glm::radians(rot);
+
+	double cy = glm::cos(rot_radians.z * 0.5); // cosine applied on yaw
+    double sy = glm::sin(rot_radians.z * 0.5); // sine applied on yaw
+    double cp = glm::cos(rot_radians.y * 0.5); // cosine applied on pitch
+    double sp = glm::sin(rot_radians.y * 0.5); // sine applied on pitch
+    double cr = glm::cos(rot_radians.x * 0.5); // cosine applied on roll
+    double sr = glm::sin(rot_radians.x * 0.5); // sine applied on roll
+
+    orientation.w = cr * cp * cy + sr * sp * sy;
+    orientation.x = sr * cp * cy - cr * sp * sy;
+    orientation.y = cr * sp * cy + sr * cp * sy;
+    orientation.z = cr * cp * sy - sr * sp * cy;
+
+	rb = Physics::getPhysicsWorld()->createRigidBody(Transform(position, orientation));
 }
 
 void ReactResolve::addForce(glm::vec3 force, Apply type) 
@@ -124,6 +147,13 @@ void ReactResolve::setAngVelocity(glm::vec3 ang_vel) {
 void ReactResolve::setType(BodyType type) { 
 	rb->setType(type); 
 }
+void ReactResolve::setDragForce(float drag){
+	rb->setLinearDamping(drag);
+}
+void ReactResolve::setDragTorque(float ang_drag){
+	rb->setAngularDamping(ang_drag);
+}
+
 void ReactResolve::setType(int type)
 {
 	switch (type)
@@ -175,75 +205,61 @@ bool ReactResolve::getCanSleep() {
 	return rb->isAllowedToSleep();
 }
 
-void ReactResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size)
+uint32_t ReactResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size)
 {
 	BoxShape* bs = Physics::getPhysicsCommon().createBoxShape(
 		Vector3(size.x / 2, size.y / 2, size.z / 2));
-	// identity only for now maybe idk
 	Transform center = Transform(Vector3(pos.x, pos.y, pos.z), Quaternion::identity());
 	colliders.push_back(rb->addCollider(bs, center));
-	m_box.emplace(colliders.size() - 1, bs);
+	m_box.emplace(colliders[colliders.size() - 1], bs);
+	return colliders.size() - 1;
 }
 
-void ReactResolve::addSphereCollider(glm::vec3 pos, float radius)
+uint32_t ReactResolve::addSphereCollider(glm::vec3 pos, float radius)
 {
 	SphereShape* ss = Physics::getPhysicsCommon().createSphereShape(radius);
 	// identity only for now maybe idk
 	Transform center = Transform(Vector3(pos.x, pos.y, pos.z), Quaternion::identity());
 	colliders.push_back(rb->addCollider(ss, center));
-	m_sphere.emplace(colliders.size() - 1, ss);
+	m_sphere.emplace(colliders[colliders.size() - 1], ss);
+	return colliders.size() - 1;
 }
 
-void ReactResolve::addCapsuleCollider(glm::vec3 pos, float radius, float height) 
+uint32_t ReactResolve::addCapsuleCollider(glm::vec3 pos, float radius, float height)
 {
 	CapsuleShape* cs = Physics::getPhysicsCommon().createCapsuleShape(radius, height);
 	// identity only for now maybe idk
 	Transform center = Transform(Vector3(pos.x, pos.y, pos.z), Quaternion::identity());
 	colliders.push_back(rb->addCollider(cs, center));
-	m_capsule.emplace(colliders.size() - 1, cs);
+	m_capsule.emplace(colliders[colliders.size() - 1], cs);
+	return colliders.size() - 1;
 }
 
-void ReactResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction)
+uint32_t ReactResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction)
 {
-	BoxShape* bs = Physics::getPhysicsCommon().createBoxShape(
-		Vector3(size.x / 2, size.y / 2, size.z / 2));
-	// identity only for now maybe idk
-	Transform center = Transform(Vector3(pos.x, pos.y, pos.z), Quaternion::identity());
-
-	colliders.push_back(rb->addCollider(bs, center));
-	m_box.emplace(colliders.size() - 1, bs);
-
+	unsigned int index = addBoxCollider(pos, size);
 	Material& mat = colliders[colliders.size() - 1]->getMaterial();
 	mat.setBounciness(bounce);
 	mat.setFrictionCoefficient(friction);
+	return index;
 }
 
-void ReactResolve::addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction)
+uint32_t ReactResolve::addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction)
 {
-	SphereShape* ss = Physics::getPhysicsCommon().createSphereShape(radius);
-	// identity only for now maybe idk
-	Transform center = Transform(Vector3(pos.x, pos.y, pos.z), Quaternion::identity());
-
-	colliders.push_back(rb->addCollider(ss, center));
-	m_sphere.emplace(colliders.size() - 1, ss);
-
+	unsigned int index = addSphereCollider(pos, radius);
 	Material& mat = colliders[colliders.size() - 1]->getMaterial();
 	mat.setBounciness(bounce);
 	mat.setFrictionCoefficient(friction);
+	return index;
 }
 
-void ReactResolve::addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction)
+uint32_t ReactResolve::addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction)
 {
-	CapsuleShape* cs = Physics::getPhysicsCommon().createCapsuleShape(radius, height);
-	// identity only for now maybe idk
-	Transform center = Transform(Vector3(pos.x, pos.y, pos.z), Quaternion::identity());
-
-	colliders.push_back(rb->addCollider(cs, center));
-	m_capsule.emplace(colliders.size() - 1, cs);
-
+	unsigned int index = addCapsuleCollider(pos, radius, height);
 	Material& mat = colliders[colliders.size() - 1]->getMaterial();
 	mat.setBounciness(bounce);
 	mat.setFrictionCoefficient(friction);
+	return index;
 }
 
 glm::vec3 ReactResolve::getPosition() {
@@ -253,11 +269,12 @@ glm::vec3 ReactResolve::getPosition() {
 
 glm::vec3 ReactResolve::getRotation() {
 	Quaternion r = rb->getTransform().getOrientation();
-	return glm::vec3(r.x, r.y, r.z);
+	return glm::degrees(glm::eulerAngles(glm::quat(r.w, r.x, r.y, r.z)));
 }
 
-float ReactResolve::getAngle() {
-	return rb->getTransform().getOrientation().w;
+glm::quat ReactResolve::getOrientation() {
+	Quaternion r = rb->getTransform().getOrientation();
+	return glm::quat(r.w, r.x, r.y, r.z);
 }
 
 void ReactResolve::setPosition(glm::vec3 pos)
@@ -266,21 +283,55 @@ void ReactResolve::setPosition(glm::vec3 pos)
 	transform.setPosition(Vector3(pos.x, pos.y, pos.z));
 	rb->setTransform(transform);
 }
+
+void ReactResolve::setQuaternion(glm::quat quat)
+{
+	Transform transform = rb->getTransform();
+	transform.setOrientation(Quaternion(quat.x, quat.y, quat.z, quat.w));
+	rb->setTransform(transform);
+}
+
+void ReactResolve::setEulerRotation(glm::vec3 rot)
+{
+	Transform transform = rb->getTransform();
+	Quaternion orientation = Quaternion::identity();
+	glm::vec3 rot_radians = glm::radians(rot);
+
+	double cy = glm::cos(rot_radians.z * 0.5); // cosine applied on yaw
+	double sy = glm::sin(rot_radians.z * 0.5); // sine applied on yaw
+	double cp = glm::cos(rot_radians.y * 0.5); // cosine applied on pitch
+	double sp = glm::sin(rot_radians.y * 0.5); // sine applied on pitch
+	double cr = glm::cos(rot_radians.x * 0.5); // cosine applied on roll
+	double sr = glm::sin(rot_radians.x * 0.5); // sine applied on roll
+
+	orientation.w = cr * cp * cy + sr * sp * sy;
+	orientation.x = sr * cp * cy - cr * sp * sy;
+	orientation.y = cr * sp * cy + sr * cp * sy;
+	orientation.z = cr * cp * sy - sr * sp * cy;
+
+	transform.setOrientation(orientation);
+	rb->setTransform(transform);
+}
+
+//Physics object needed, can delete later
+float ReactResolve::getAngle()
+{
+	return rb->getTransform().getOrientation().w;
+}
 void ReactResolve::setRotation(glm::vec3 rot)
 {
-	Transform transform = Transform( rb->getTransform().getPosition()
-		, Quaternion(rot.x, rot.y, rot.z, getAngle()));
+	Transform transform = rb->getTransform();
+	transform.setOrientation(Quaternion(rot.x, rot.y, rot.z, transform.getOrientation().w));
 	rb->setTransform(transform);
 }
 void ReactResolve::setAngle(float ang)
 {
-	Quaternion new_quat = rb->getTransform().getOrientation();
-	new_quat.w = ang;
-	Transform transform = Transform(rb->getTransform().getPosition()
-		, new_quat);
+	Transform transform = rb->getTransform();
+	Quaternion orientation = rb->getTransform().getOrientation();
+	orientation.w = ang;
+	transform.setOrientation(orientation);
 	rb->setTransform(transform);
 }
-
 
 
 

@@ -1,6 +1,7 @@
 add_library(ReflexEngineSrc
 	NetworkManager.cpp
 
+	Model/Components/RigidBody.cpp
 	Model/GameObject/GameObject.hpp
 	Model/GameObject/Item.cpp
 	Model/GameObject/Water.cpp
@@ -58,6 +59,7 @@ add_library(ReflexEngineSrc
 	Controller/ResourceManager/MeshManager.cpp
 	Controller/ResourceManager/TerrainManager.cpp
 	Controller/ResourceManager/ObjectSaving.cpp
+	Controller/ResourceManager/RigidbodyManager.cpp
 	Controller/Input/InputManager.cpp
 	Controller/Input/InputState.cpp
 	Controller/Audio/Audio.cpp

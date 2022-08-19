@@ -113,9 +113,9 @@ public:
 
 	int getColliderType(int index);
 
-	const BoxShape* getColliderBox(int index);
-	const SphereShape* getColliderSphere(int index);
-	const CapsuleShape* getColliderCapsule(int index);
+	const rp3d::BoxShape* getColliderBox(int index);
+	const rp3d::SphereShape* getColliderSphere(int index);
+	const rp3d::CapsuleShape* getColliderCapsule(int index);
 
 	void addMaterialToCollider(int index, float bounce, float mass_density, float friction);
 
@@ -139,7 +139,7 @@ public:
 	void setVelocity(glm::vec3 vel);
 	void setAngVelocity(glm::vec3 ang_vel);
 
-	void setType(BodyType type);
+	void setType(rp3d::BodyType type);
 	void setType(int type);
 	void enableGravity(bool ean);
 	void setCanSleep(bool ean);
@@ -150,7 +150,7 @@ public:
 	float getDragForce();
 	float getDragTorque();
 
-	BodyType getType();
+	rp3d::BodyType getType();
 	bool getIsGravityEnabled();
 	bool getCanSleep();
 
@@ -168,6 +168,7 @@ public:
 
 	void setPosition(glm::vec3 pos);
 	void setRotation(glm::vec3 rot);
+	void setEulerRotation(glm::vec3 rot);
 	void setAngle(float ang);
 
 protected:

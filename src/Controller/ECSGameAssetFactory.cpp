@@ -8,6 +8,7 @@
 #include "Model/Components/Md2Animation.hpp"
 #include "Model/Components/Terrain.hpp"
 #include "Model/Components/Statemachine.hpp"
+#include "Model/Components/RigidBody.hpp"
 
 #include "Controller/ECS/System.hpp"
 
@@ -74,6 +75,10 @@ void ECSGameAssetFactory::load_components(ECS& ecs, Reflex::Entity& entity,
 
 	if (entity_table["statemachine"].valid()) {
 		load_statemachine(entity, entity_table["statemachine"]);
+	}
+
+	if (entity_table["rigidbody"].valid()) {
+			load_rigidbody(entity, entity_table["rigidbody"]);
 	}
 
 	// Put this last in case the script calls other components.
@@ -222,4 +227,14 @@ void ECSGameAssetFactory::load_spot_light(Reflex::Entity& entity,
 
 bool ECSGameAssetFactory::is_lua_script(const std::string& lua_script) {
 	return lua_script.substr(lua_script.find_last_of('.') + 1) == "lua";
+}
+
+void ECSGameAssetFactory::load_rigidbody(Reflex::Entity& entity, const sol::table& rigidbody_table)
+{
+	entity.add_component<Component::Rigidbody>(
+		rigidbody_table["using_react"], rigidbody_table["get_position"],
+		rigidbody_table["get_rotation"], rigidbody_table["gravity_on"],
+		rigidbody_table["can_sleep"], rigidbody_table["is_trigger"],
+		rigidbody_table["linear_drag"], rigidbody_table["angular_drag"]);
+	
 }
