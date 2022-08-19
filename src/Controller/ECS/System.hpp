@@ -87,6 +87,7 @@ void init_md2_animation(entt::registry& registry, entt::entity entity_id);
  */
 void init_statemachine(entt::registry& registry, entt::entity entity_id);
 
+void init_rigidbody(entt::registry& registry, entt::entity entity_id);
 /**
  * @brief Update the script components.
  *
@@ -138,6 +139,8 @@ void update_statemachine(ECS& ecs);
  */
 void update_remove(ECS& ecs);
 
+void update_rigidbody(entt::registry& registry);
+
 /**
  * @brief Deletes the directional light in the LightManager.
  *
@@ -161,4 +164,6 @@ void delete_point_light(entt::registry& registry, entt::entity entity_id);
  * @param entity_id The entity ID to delete the spot light component.
  */
 void delete_spot_light(entt::registry& registry, entt::entity entity_id);
+
+void delete_rigidbody(entt::registry& registry);
 };  // namespace System

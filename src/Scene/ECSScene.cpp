@@ -13,6 +13,7 @@ ECSScene::ECSScene(const std::string& master_lua_script)
     : Scene(master_lua_script) {}
 
 void ECSScene::init() {
+	Audio::get_instance().stop_all();
 	LuaManager::get_instance().get_state().script_file(master_lua_script_);
 }
 

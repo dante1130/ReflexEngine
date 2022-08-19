@@ -67,7 +67,7 @@ void Projectile::save_object() {
 		ObjectSaving::addValue("linearDamping", pb->getDragForce(), false);
 		ObjectSaving::addValue("angularDamping", pb->getDragTorque(), false);
 		ObjectSaving::addValue("sleep", (int)pb->getCanSleep(), false);
-		ObjectSaving::addValue("numOfColliders", pb->colliderSize(), false);
+		ObjectSaving::addValue("numOfColliders", (int)pb->colliderSize(), false);
 		ObjectSaving::addValue("timeAliveLeft", time_alive_left_, false);
 		ObjectSaving::addValue("damage", damage_, false);
 		ObjectSaving::addValue("logic", lua_script_, false);
@@ -89,7 +89,7 @@ void Projectile::save_object() {
 void Projectile::freeze_projectile() {
 	pb->setVelocity(glm::vec3(0));
 	pb->setAngVelocity(glm::vec3(0));
-	pb->setType(BodyType::STATIC);
+	pb->setType(rp3d::BodyType::STATIC);
 	position.y = OldTerrainManager::getHeight(position.x, position.z) + 0.1;
 }
 
