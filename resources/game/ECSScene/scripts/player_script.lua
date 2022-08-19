@@ -3,7 +3,10 @@ var = {
 }
 
 function init(ecs, entity)
-
+	local trans = entity:get_transform_component()
+	trans.position = Camera.get_position()
+	trans.position.x = 500
+	Camera.set_position(trans.position)
 end
 
 function update(ecs, entity)
@@ -62,7 +65,7 @@ function update(ecs, entity)
 		local transform = entity:get_transform_component()
 
 		transform.position = Camera.get_position()
-		transform.position.y = 1 + Terrain.get_height("terrain", transform.position, Math.vec3.new(2, 0.05, 2))
+		transform.position.y = 1.65 + Terrain.get_height("terrain", transform.position, Math.vec3.new(2, 0.05, 2))
 
 		Camera.set_position(transform.position)
 	end

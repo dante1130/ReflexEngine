@@ -6,9 +6,9 @@ entity = {
 		shadow_height = 1024,
 
 		color = {
-			r = 0.22,
-			g = 0.40,
-			b = 0.59
+			r = 0.72,
+			g = 0.72,
+			b = 0.72
 		},
 
 		ambient_intensity = 1,
