@@ -332,8 +332,26 @@ void ECSGui::draw_rigidbody(Reflex::Entity& entity) {
 	ImGui::Checkbox("Gravity On", &rigidbody.gravity_on);
 	ImGui::Checkbox("Is Trigger", &rigidbody.is_trigger);
 	ImGui::Checkbox("Can Sleep", &rigidbody.can_sleep);
-	ImGui::InputFloat("Drag Force", &rigidbody.lin_drag, speed_);
-	ImGui::InputFloat("Drag Torque", &rigidbody.ang_drag, speed_);
+	if (ImGui::InputFloat("Drag Force", &rigidbody.lin_drag, speed_)) {
+		if (rigidbody.lin_drag < 0) {
+			rigidbody.lin_drag = 0;
+		}
+	}
+	if (ImGui::InputFloat("Drag Torque", &rigidbody.ang_drag, speed_)) {
+		if (rigidbody.ang_drag < 0) {
+			rigidbody.ang_drag = 0;
+		}
+	}
+	glm::vec3 velocity = rigidbody.getVelocity();
+	std::string velocity_output = "Velocity: " + std::to_string(velocity.x) +
+	                              " " + std::to_string(velocity.y) + " " +
+	                              std::to_string(velocity.z);
+	ImGui::Text(velocity_output.c_str());
+	glm::vec3 pos = rigidbody.getPosition();
+	std::string rb_position = "rb position: " + std::to_string(pos.x) + " " +
+	                          std::to_string(pos.y) + " " +
+	                          std::to_string(pos.z);
+	ImGui::Text(rb_position.c_str());
 	ImGui::PopID();
 }
 
