@@ -329,6 +329,8 @@ void ECSGui::draw_rigidbody(Reflex::Entity& entity) {
 	if (ImGui::Button("Delete")) {
 		entity.remove_component<Component::Rigidbody>();
 	}
+	bool react_resolution = rigidbody.usingReactResolve();
+	ImGui::Checkbox("Using react resolution", &react_resolution);
 	ImGui::Checkbox("Gravity On", &rigidbody.gravity_on);
 	ImGui::Checkbox("Is Trigger", &rigidbody.is_trigger);
 	ImGui::Checkbox("Can Sleep", &rigidbody.can_sleep);
@@ -342,11 +344,17 @@ void ECSGui::draw_rigidbody(Reflex::Entity& entity) {
 			rigidbody.ang_drag = 0;
 		}
 	}
-	glm::vec3 velocity = rigidbody.getVelocity();
-	std::string velocity_output = "Velocity: " + std::to_string(velocity.x) +
-	                              " " + std::to_string(velocity.y) + " " +
-	                              std::to_string(velocity.z);
-	ImGui::Text(velocity_output.c_str());
+	glm::vec3 linear_velocity = rigidbody.getVelocity();
+	if (ImGui::DragFloat3("Linear velocity", glm::value_ptr(linear_velocity),
+	                      speed_)) {
+		rigidbody.setVelocity(linear_velocity);
+	}
+
+	glm::vec3 angular_velocity = rigidbody.getAngVelocity();
+	if (ImGui::DragFloat3("Angular velocity", glm::value_ptr(angular_velocity),
+	                      speed_)) {
+		rigidbody.setAngVelocity(angular_velocity);
+	}
 	glm::vec3 pos = rigidbody.getPosition();
 	std::string rb_position = "rb position: " + std::to_string(pos.x) + " " +
 	                          std::to_string(pos.y) + " " +

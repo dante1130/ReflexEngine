@@ -78,7 +78,7 @@ void ECSGameAssetFactory::load_components(ECS& ecs, Reflex::Entity& entity,
 	}
 
 	if (entity_table["rigidbody"].valid()) {
-			load_rigidbody(entity, entity_table["rigidbody"]);
+		load_rigidbody(entity, entity_table["rigidbody"]);
 	}
 
 	// Put this last in case the script calls other components.
@@ -229,12 +229,13 @@ bool ECSGameAssetFactory::is_lua_script(const std::string& lua_script) {
 	return lua_script.substr(lua_script.find_last_of('.') + 1) == "lua";
 }
 
-void ECSGameAssetFactory::load_rigidbody(Reflex::Entity& entity, const sol::table& rigidbody_table)
-{
+void ECSGameAssetFactory::load_rigidbody(Reflex::Entity& entity,
+                                         const sol::table& rigidbody_table) {
+	Component::Transform trans = entity.get_component<Component::Transform>();
+
 	entity.add_component<Component::Rigidbody>(
-		rigidbody_table["using_react"], rigidbody_table["get_position"],
-		rigidbody_table["get_rotation"], rigidbody_table["gravity_on"],
-		rigidbody_table["can_sleep"], rigidbody_table["is_trigger"],
-		rigidbody_table["linear_drag"], rigidbody_table["angular_drag"]);
-	
+	    rigidbody_table["using_react"], trans.position, trans.rotation,
+	    rigidbody_table["gravity_on"], rigidbody_table["can_sleep"],
+	    rigidbody_table["is_trigger"], rigidbody_table["linear_drag"],
+	    rigidbody_table["angular_drag"]);
 }

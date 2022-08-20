@@ -3,7 +3,8 @@ var = {
 }
 
 function init(ecs, entity)
-
+	Window.set_cursor_visible(true)
+	Time.set_pause(true)
 end
 
 function update(ecs, entity)
