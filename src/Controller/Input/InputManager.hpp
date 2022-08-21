@@ -8,6 +8,7 @@
 #include "InputState.hpp"
 
 /**
+ * @author Andrew Ho
  * @class InputManager
  * @brief A singleton class that manages input bindings.
  */

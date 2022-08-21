@@ -13,6 +13,7 @@ using EntityMap =
     std::unordered_map<entt::entity, std::shared_ptr<Reflex::Entity>>;
 
 /**
+ * @author Andrew Ho
  * @class ECS
  * @brief The ECS class is a facade of the EnTT registry. It is used to
  * create, destroy, update and retrieve entities.

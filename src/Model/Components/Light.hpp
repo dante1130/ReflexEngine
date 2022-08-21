@@ -4,6 +4,11 @@
 
 namespace Component {
 
+/**
+ * @author Andrew Ho
+ * @struct Light
+ * @brief An abstract base struct for all light components.
+ */
 struct Light {
 	/// The width of the shadow map.
 	uint32_t shadow_width = 1024U;
@@ -30,6 +35,7 @@ struct Light {
 };
 
 /**
+ * @author Andrew Ho
  * @struct DirectionalLight
  * @brief A directional light component.
  */
@@ -50,6 +56,7 @@ struct DirectionalLight : public Light {
 };
 
 /**
+ * @author Andrew Ho
  * @struct PointLight
  * @brief A point light component.
  */
@@ -88,6 +95,7 @@ struct PointLight : public Light {
 };
 
 /**
+ * @author Andrew Ho
  * @struct SpotLight
  * @brief A point light component.
  */

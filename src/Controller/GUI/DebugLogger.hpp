@@ -3,6 +3,7 @@
 #include "View/guiManager.hpp"
 
 /**
+ * @author Andrew Ho
  * @class DebugLogger
  * @brief A class that logs debug messages using ImGui.
  */

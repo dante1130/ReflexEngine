@@ -5,7 +5,10 @@
 
 namespace Component {
 /**
- * @brief A mesh component.
+ * @author Andrew Ho
+ * @struct Mesh
+ * @brief A mesh component, that contains the names of the mesh, texture and
+ * material used in the ResourceManager.
  */
 struct Mesh {
 	/// The mesh name in the mesh manager.
