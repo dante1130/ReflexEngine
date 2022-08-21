@@ -23,9 +23,8 @@ void PhysicsBody::removeCollider(size_t index)
 			m_box.erase(colliders[index]);
 			break;
 		default:
-			break;
+			return;
 	}
-
 	colliders.erase(colliders.begin() + index);
 }
 
@@ -102,13 +101,30 @@ int PhysicsBody::getColliderType(size_t index)
 	{
 		case CollisionShapeName::SPHERE:
 			return 1;
-		case CollisionShapeName::CAPSULE :
+		case CollisionShapeName::CAPSULE:
 			return 2;
 		case CollisionShapeName::BOX :
 			return 3;
 		default:
 			return 0;
 	}
+}
+
+std::string PhysicsBody::getColliderName(size_t index) {
+
+	switch (getColliderType(index)) { 
+		case 1:
+			return "Sphere" + std::to_string(index);
+		case 2:
+			return "Capsule" + std::to_string(index);
+		case 3:
+			return "Box" + std::to_string(index);
+	}
+ }
+
+std::vector<rp3d::Collider*> PhysicsBody::getColliders()
+{
+	return colliders;
 }
 
 void PhysicsBody::addMaterialToCollider(size_t index, float bounce,
@@ -120,8 +136,7 @@ void PhysicsBody::addMaterialToCollider(size_t index, float bounce,
 	material.setFrictionCoefficient(friction);
 }
 
-
-const BoxShape* PhysicsBody::getColliderBox(size_t index){
+BoxShape* PhysicsBody::getColliderBox(size_t index){
 
 	try {
 		if (getColliderType(index) == 3)
@@ -134,7 +149,8 @@ const BoxShape* PhysicsBody::getColliderBox(size_t index){
 		std::cout << "ERROR: " << err << std::endl;
 	}
 }
-const SphereShape* PhysicsBody::getColliderSphere(size_t index) {
+
+SphereShape* PhysicsBody::getColliderSphere(size_t index) {
 	try {
 		if (getColliderType(index) == 1)
 			return m_sphere.find(colliders[index])->second;
@@ -146,7 +162,8 @@ const SphereShape* PhysicsBody::getColliderSphere(size_t index) {
 		std::cout << "ERROR: " << err << std::endl;
 	}
 }
-const CapsuleShape* PhysicsBody::getColliderCapsule(size_t index) {
+
+CapsuleShape* PhysicsBody::getColliderCapsule(size_t index) {
 	try {
 		if (getColliderType(index) == 2)
 			return m_capsule.find(colliders[index])->second;

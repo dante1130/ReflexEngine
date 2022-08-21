@@ -55,12 +55,13 @@ class PhysicsBody
 		float getColliderFriction(size_t index);
 		float getColliderMassDesity(size_t index);
 		int getColliderType(size_t index);
-
+	    std::string getColliderName(size_t index);
 		void setObjectTrigger(bool ean);
 
-		const rp3d::BoxShape* getColliderBox(size_t index);
-		const rp3d::SphereShape* getColliderSphere(size_t index);
-		const rp3d::CapsuleShape* getColliderCapsule(size_t index);
+		std::vector<rp3d::Collider*> getColliders();
+		rp3d::BoxShape* getColliderBox(size_t index);
+		rp3d::SphereShape* getColliderSphere(size_t index);
+		rp3d::CapsuleShape* getColliderCapsule(size_t index);
 
 		void addMaterialToCollider(size_t index, float bounce, float mass_density, float friction);
 

@@ -73,11 +73,12 @@ float Component::Rigidbody::getColliderMassDesity(size_t index) { return pb->get
 
 int Component::Rigidbody::getColliderType(size_t index) { return pb->getColliderType(index); }
 
-const rp3d::BoxShape* Component::Rigidbody::getColliderBox(size_t index) { return pb->getColliderBox(index); }
 
-const rp3d::SphereShape* Component::Rigidbody::getColliderSphere(size_t index) { return pb->getColliderSphere(index); }
+rp3d::BoxShape* Component::Rigidbody::getColliderBox(size_t index) { return pb->getColliderBox(index); }
 
-const rp3d::CapsuleShape* Component::Rigidbody::getColliderCapsule(size_t index) { return pb->getColliderCapsule(index); }
+rp3d::SphereShape* Component::Rigidbody::getColliderSphere(size_t index) { return pb->getColliderSphere(index); }
+
+rp3d::CapsuleShape* Component::Rigidbody::getColliderCapsule(size_t index) { return pb->getColliderCapsule(index); }
 
 void Component::Rigidbody::addMaterialToCollider(size_t index, float bounce, float mass_density, float friction)
 {
@@ -181,6 +182,13 @@ rp3d::BodyType Component::Rigidbody::getType() { return pb->getType(); }
 
 // Collider methods
 
+std::vector<rp3d::Collider*> Component::Rigidbody::getColliders(){
+	return pb->getColliders();
+}
+
+std::string Component::Rigidbody::getColliderName(size_t index) {
+	return pb->getColliderName(index);
+}
 //void addBoxCollider(glm::vec3 pos, glm::vec3 size) { pb->addBoxCollider(pos, size); }
 
 //void addSphereCollider(glm::vec3 pos, float radius) { pb->addSphereCollider(pos, radius); }

@@ -24,6 +24,8 @@ namespace Component {
 		float lin_drag;
 		float ang_drag;
 
+		glm::vec3 previous_transform_position;
+
 		Rigidbody() = default;
 
 		Rigidbody(const Rigidbody&) = default;
@@ -62,11 +64,15 @@ namespace Component {
 
 		int getColliderType(size_t index);
 
-		const rp3d::BoxShape* getColliderBox(size_t index);
+		std::string getColliderName(size_t index);
 
-		const rp3d::SphereShape* getColliderSphere(size_t index);
+		std::vector<rp3d::Collider*> getColliders();
 
-		const rp3d::CapsuleShape* getColliderCapsule(size_t index);
+		rp3d::BoxShape* getColliderBox(size_t index);
+
+		rp3d::SphereShape* getColliderSphere(size_t index);
+
+		rp3d::CapsuleShape* getColliderCapsule(size_t index);
 
 		void addMaterialToCollider(size_t index, float bounce, float mass_density, float friction);
 

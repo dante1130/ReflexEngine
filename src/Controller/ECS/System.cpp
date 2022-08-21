@@ -244,16 +244,11 @@ void System::init_statemachine(entt::registry& registry, entt::entity entity) {
 }
 
 void System::update_rigidbody(entt::registry& registry) {
-	if (EngineTime::is_paused()) return;
-
-	static double accumulator = 0;
-	accumulator += EngineTime::get_fixed_delta_time();
+	if (EngineTime::is_paused()) 
+		return;
 
 	// Calls the physics world update
-	while (accumulator > EngineTime::get_time_step()) {
-		Physics::getPhysicsWorld()->update(EngineTime::get_time_step());
-		accumulator -= EngineTime::get_time_step();
-	}
+	Physics::getPhysicsWorld()->update(EngineTime::get_fixed_delta_time());
 
 	auto& rigidbody_manager =
 	    ResourceManager::get_instance().get_rigidbody_manager();
