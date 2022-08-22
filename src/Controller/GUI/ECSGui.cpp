@@ -191,19 +191,24 @@ void ECSGui::draw_script(ECS& ecs, Reflex::Entity& entity) {
 	auto& script = entity.get_component<Component::Script>();
 
 	ImGui::PushID("Script");
-	ImGui::Text("Script");
+
+	bool open =
+	    ImGui::CollapsingHeader("Script", ImGuiTreeNodeFlags_AllowItemOverlap);
 	ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
 	if (ImGui::Button("Delete")) {
 		entity.remove_component<Component::Script>();
 	}
 
-	if (input_text("Script name", script.lua_script)) {
-		entity.patch_component<Component::Script>(
-		    [&ecs, &entity](auto& script) {
-			    script.ecs = &ecs;
-			    script.entity = &entity;
-		    });
-	};
+	if (open) {
+		if (input_text("Script name", script.lua_script)) {
+			entity.patch_component<Component::Script>(
+			    [&ecs, &entity](auto& script) {
+				    script.ecs = &ecs;
+				    script.entity = &entity;
+			    });
+		};
+	}
+
 	ImGui::PopID();
 }
 
@@ -211,14 +216,20 @@ void ECSGui::draw_mesh(Reflex::Entity& entity) {
 	auto& mesh = entity.get_component<Component::Mesh>();
 
 	ImGui::PushID("Mesh");
-	ImGui::Text("Mesh");
+
+	bool open =
+	    ImGui::CollapsingHeader("Mesh", ImGuiTreeNodeFlags_AllowItemOverlap);
 	ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
 	if (ImGui::Button("Delete")) {
 		entity.remove_component<Component::Mesh>();
 	}
-	input_text("Mesh", mesh.mesh_name);
-	input_text("Texture", mesh.texture_name);
-	input_text("Material", mesh.material_name);
+
+	if (open) {
+		input_text("Mesh", mesh.mesh_name);
+		input_text("Texture", mesh.texture_name);
+		input_text("Material", mesh.material_name);
+	}
+
 	ImGui::PopID();
 }
 
@@ -226,13 +237,19 @@ void ECSGui::draw_model(Reflex::Entity& entity) {
 	auto& model = entity.get_component<Component::Model>();
 
 	ImGui::PushID("Model");
-	ImGui::Text("Model");
+
+	bool open =
+	    ImGui::CollapsingHeader("Model", ImGuiTreeNodeFlags_AllowItemOverlap);
 	ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
 	if (ImGui::Button("Delete")) {
 		entity.remove_component<Component::Model>();
 	}
-	input_text("Model", model.model_name);
-	input_text("Material", model.material_name);
+
+	if (open) {
+		input_text("Model", model.model_name);
+		input_text("Material", model.material_name);
+	}
+
 	ImGui::PopID();
 }
 
@@ -240,20 +257,25 @@ void ECSGui::draw_md2_animation(Reflex::Entity& entity) {
 	auto& md2_animation = entity.get_component<Component::Md2Animation>();
 
 	ImGui::PushID("Md2Animation");
-	ImGui::Text("Md2Animation");
+
+	bool open = ImGui::CollapsingHeader("Md2Animation",
+	                                    ImGuiTreeNodeFlags_AllowItemOverlap);
 	ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
 	if (ImGui::Button("Delete")) {
 		entity.remove_component<Component::Terrain>();
 	}
-	input_text("Md2 model", md2_animation.md2_name);
-	input_text("Texture", md2_animation.texture_name);
-	input_text("Material", md2_animation.material_name);
 
-	draw_animation_state(entity);
+	if (open) {
+		input_text("Md2 model", md2_animation.md2_name);
+		input_text("Texture", md2_animation.texture_name);
+		input_text("Material", md2_animation.material_name);
 
-	ImGui::Checkbox("Animation done", &md2_animation.is_animation_done);
-	ImGui::Checkbox("Loop", &md2_animation.is_loop);
-	ImGui::Checkbox("Interpolated", &md2_animation.is_interpolated);
+		draw_animation_state(entity);
+
+		ImGui::Checkbox("Animation done", &md2_animation.is_animation_done);
+		ImGui::Checkbox("Loop", &md2_animation.is_loop);
+		ImGui::Checkbox("Interpolated", &md2_animation.is_interpolated);
+	}
 
 	ImGui::PopID();
 }
@@ -297,15 +319,21 @@ void ECSGui::draw_terrain(Reflex::Entity& entity) {
 	auto& terrain = entity.get_component<Component::Terrain>();
 
 	ImGui::PushID("Terrain");
-	ImGui::Text("Terrain");
+
+	bool open =
+	    ImGui::CollapsingHeader("Terrain", ImGuiTreeNodeFlags_AllowItemOverlap);
 	ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
 	if (ImGui::Button("Delete")) {
 		entity.remove_component<Component::Terrain>();
 	}
-	input_text("Terrain", terrain.terrain_name);
-	input_text("Texture", terrain.texture_name);
-	input_text("Material", terrain.material_name);
-	input_text("Detailmap", terrain.detailmap_name);
+
+	if (open) {
+		input_text("Terrain", terrain.terrain_name);
+		input_text("Texture", terrain.texture_name);
+		input_text("Material", terrain.material_name);
+		input_text("Detailmap", terrain.detailmap_name);
+	}
+
 	ImGui::PopID();
 }
 
@@ -313,10 +341,14 @@ void ECSGui::draw_transform(Reflex::Entity& entity) {
 	auto& transform = entity.get_component<Component::Transform>();
 
 	ImGui::PushID("Transform");
-	ImGui::Text("Transform");
-	ImGui::DragFloat3("Position", glm::value_ptr(transform.position), speed_);
-	ImGui::DragFloat3("Rotation", glm::value_ptr(transform.rotation), speed_);
-	ImGui::DragFloat3("Scale", glm::value_ptr(transform.scale), speed_);
+	if (ImGui::CollapsingHeader("Transform",
+	                            ImGuiTreeNodeFlags_AllowItemOverlap)) {
+		ImGui::DragFloat3("Position", glm::value_ptr(transform.position),
+		                  speed_);
+		ImGui::DragFloat3("Rotation", glm::value_ptr(transform.rotation),
+		                  speed_);
+		ImGui::DragFloat3("Scale", glm::value_ptr(transform.scale), speed_);
+	}
 	ImGui::PopID();
 }
 
@@ -324,16 +356,22 @@ void ECSGui::draw_rigidbody(Reflex::Entity& entity) {
 	auto& rigidbody = entity.get_component<Component::Rigidbody>();
 
 	ImGui::PushID("Rigidbody");
-	ImGui::Text("Rigidbody");
+
+	bool open = ImGui::CollapsingHeader("Rigidbody",
+	                                    ImGuiTreeNodeFlags_AllowItemOverlap);
 	ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
 	if (ImGui::Button("Delete")) {
 		entity.remove_component<Component::Rigidbody>();
 	}
-	ImGui::Checkbox("Gravity On", &rigidbody.gravity_on);
-	ImGui::Checkbox("Is Trigger", &rigidbody.is_trigger);
-	ImGui::Checkbox("Can Sleep", &rigidbody.can_sleep);
-	ImGui::InputFloat("Drag Force", &rigidbody.lin_drag, speed_);
-	ImGui::InputFloat("Drag Torque", &rigidbody.ang_drag, speed_);
+
+	if (open) {
+		ImGui::Checkbox("Gravity On", &rigidbody.gravity_on);
+		ImGui::Checkbox("Is Trigger", &rigidbody.is_trigger);
+		ImGui::Checkbox("Can Sleep", &rigidbody.can_sleep);
+		ImGui::InputFloat("Drag Force", &rigidbody.lin_drag, speed_);
+		ImGui::InputFloat("Drag Torque", &rigidbody.ang_drag, speed_);
+	}
+
 	ImGui::PopID();
 }
 
@@ -341,15 +379,20 @@ void ECSGui::draw_directional_light(Reflex::Entity& entity) {
 	auto& light = entity.get_component<Component::DirectionalLight>();
 
 	ImGui::PushID("Directional light");
-	ImGui::Text("Directional light");
+	bool open = ImGui::CollapsingHeader("Directional light",
+	                                    ImGuiTreeNodeFlags_AllowItemOverlap);
 	ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
 	if (ImGui::Button("Delete")) {
 		entity.remove_component<Component::DirectionalLight>();
 	}
-	ImGui::ColorEdit3("Color", glm::value_ptr(light.color));
-	ImGui::DragFloat("Ambient", &light.ambient_intensity, speed_);
-	ImGui::DragFloat("Diffuse", &light.diffuse_intensity, speed_);
-	ImGui::DragFloat3("Direction", glm::value_ptr(light.direction), speed_);
+
+	if (open) {
+		ImGui::ColorEdit3("Color", glm::value_ptr(light.color));
+		ImGui::DragFloat("Ambient", &light.ambient_intensity, speed_);
+		ImGui::DragFloat("Diffuse", &light.diffuse_intensity, speed_);
+		ImGui::DragFloat3("Direction", glm::value_ptr(light.direction), speed_);
+	}
+
 	ImGui::PopID();
 }
 
@@ -357,18 +400,24 @@ void ECSGui::draw_point_light(Reflex::Entity& entity) {
 	auto& light = entity.get_component<Component::PointLight>();
 
 	ImGui::PushID("Point light");
-	ImGui::Text("Point light");
+
+	bool open = ImGui::CollapsingHeader("Point light",
+	                                    ImGuiTreeNodeFlags_AllowItemOverlap);
 	ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
 	if (ImGui::Button("Delete")) {
 		entity.remove_component<Component::PointLight>();
 	}
-	ImGui::ColorEdit3("Color", glm::value_ptr(light.color));
-	ImGui::DragFloat("Ambient", &light.ambient_intensity, speed_);
-	ImGui::DragFloat("Diffuse", &light.diffuse_intensity, speed_);
-	ImGui::DragFloat3("Position", glm::value_ptr(light.position), speed_);
-	ImGui::DragFloat("Constant", &light.constant, speed_);
-	ImGui::DragFloat("Linear", &light.linear, speed_);
-	ImGui::DragFloat("Quadratic", &light.quadratic, speed_);
+
+	if (open) {
+		ImGui::ColorEdit3("Color", glm::value_ptr(light.color));
+		ImGui::DragFloat("Ambient", &light.ambient_intensity, speed_);
+		ImGui::DragFloat("Diffuse", &light.diffuse_intensity, speed_);
+		ImGui::DragFloat3("Position", glm::value_ptr(light.position), speed_);
+		ImGui::DragFloat("Constant", &light.constant, speed_);
+		ImGui::DragFloat("Linear", &light.linear, speed_);
+		ImGui::DragFloat("Quadratic", &light.quadratic, speed_);
+	}
+
 	ImGui::PopID();
 }
 
@@ -376,20 +425,26 @@ void ECSGui::draw_spot_light(Reflex::Entity& entity) {
 	auto& light = entity.get_component<Component::SpotLight>();
 
 	ImGui::PushID("Spot light");
-	ImGui::Text("Spot light");
+
+	bool open = ImGui::CollapsingHeader("Spot light",
+	                                    ImGuiTreeNodeFlags_AllowItemOverlap);
 	ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
 	if (ImGui::Button("Delete")) {
 		entity.remove_component<Component::SpotLight>();
 	}
-	ImGui::ColorEdit3("Color", glm::value_ptr(light.color));
-	ImGui::DragFloat("Ambient", &light.ambient_intensity, speed_);
-	ImGui::DragFloat("Diffuse", &light.diffuse_intensity, speed_);
-	ImGui::DragFloat3("Position", glm::value_ptr(light.position), speed_);
-	ImGui::DragFloat("Constant", &light.constant, speed_);
-	ImGui::DragFloat("Linear", &light.linear, speed_);
-	ImGui::DragFloat("Quadratic", &light.quadratic, speed_);
-	ImGui::DragFloat3("Direction", glm::value_ptr(light.direction), speed_);
-	ImGui::DragFloat("Edge", &light.edge, speed_);
+
+	if (open) {
+		ImGui::ColorEdit3("Color", glm::value_ptr(light.color));
+		ImGui::DragFloat("Ambient", &light.ambient_intensity, speed_);
+		ImGui::DragFloat("Diffuse", &light.diffuse_intensity, speed_);
+		ImGui::DragFloat3("Position", glm::value_ptr(light.position), speed_);
+		ImGui::DragFloat("Constant", &light.constant, speed_);
+		ImGui::DragFloat("Linear", &light.linear, speed_);
+		ImGui::DragFloat("Quadratic", &light.quadratic, speed_);
+		ImGui::DragFloat3("Direction", glm::value_ptr(light.direction), speed_);
+		ImGui::DragFloat("Edge", &light.edge, speed_);
+	}
+
 	ImGui::PopID();
 }
 
@@ -397,15 +452,21 @@ void ECSGui::draw_statemachine(Reflex::Entity& entity) {
 	auto& statemachine = entity.get_component<Component::Statemachine>();
 
 	ImGui::PushID("Statemachine");
-	ImGui::Text("Statemachine");
+
+	bool open = ImGui::CollapsingHeader("Statemachine",
+	                                    ImGuiTreeNodeFlags_AllowItemOverlap);
 	ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
 	if (ImGui::Button("Delete")) {
 		entity.remove_component<Component::Statemachine>();
 	}
-	input_int("unique id", statemachine.unique_statemachine_identifier);
-	input_text("Global state", statemachine.global_state);
-	input_text("Current state", statemachine.current_state);
-	input_text("Previous state", statemachine.previous_state);
+
+	if (open) {
+		input_int("unique id", statemachine.unique_statemachine_identifier);
+		input_text("Global state", statemachine.global_state);
+		input_text("Current state", statemachine.current_state);
+		input_text("Previous state", statemachine.previous_state);
+	}
+
 	ImGui::PopID();
 }
 
