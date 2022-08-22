@@ -4,6 +4,7 @@ Model.load_model("lighthouse", "models/Beacon.obj")
 Model.load_model("big_arrow", "models/BigArrow.obj")
 Model.load_model("TheDen", "models/TheDen.obj")
 Model.load_model("GlassInScene", "models/Glass.obj")
+Model.load_model("OBJLoaderColliderTest", "models/untitled.obj")
 
 
 Md2.load_md2_model("duck", "models/DuckPersonNew.md2")

@@ -17,6 +17,6 @@ void lua_access();
  * @param entity the entity to add the collider data too
  * @param file  The OBJ file which includes the collider data
  */
-void load_obj_collider_data(const std::string &file);
+void load_obj_collider_data(Reflex::Entity &entity, const std::string &file);
 
 }  // namespace loadOBJColliderData

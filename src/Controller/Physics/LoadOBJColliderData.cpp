@@ -2,19 +2,29 @@
 
 #include "Model/Components/RigidBody.hpp"
 
-#include <iostream>
+#include "Controller/LuaManager.hpp"
 #include <fstream>
 #include <string>
+
+#define BOUNCE 0.1
+#define FRICTION 0.25
 
 float min(float min_val, float new_val, bool first);
 float max(float max_val, float new_val, bool first);
 
-void loadOBJColliderData::lua_access() {}
+void loadOBJColliderData::lua_access() {
+	auto &lua = LuaManager::get_instance().get_state();
 
-void loadOBJColliderData::load_obj_collider_data(const std::string &file) {
-	// if (!entity->any_component<Component::Rigidbody>()) {
-	//	return;
-	// }
+	lua.set_function("LoadOBJCollider",
+	                 &loadOBJColliderData::load_obj_collider_data);
+}
+
+void loadOBJColliderData::load_obj_collider_data(Reflex::Entity &entity,
+                                                 const std::string &file) {
+	if (!entity.any_component<Component::Rigidbody>()) {
+		return;
+	}
+	Component::Rigidbody rb_comp = entity.get_component<Component::Rigidbody>();
 
 	// Opens file
 	std::ifstream open_file(file);
@@ -24,21 +34,37 @@ void loadOBJColliderData::load_obj_collider_data(const std::string &file) {
 
 	std::string input_line;
 	std::string inner_line;
-	std::stringstream ss;
+	std::stringstream sstream;
 	bool first_point = true;
+	bool first_object = true;
 	int counter;
 	float min_x = 0, max_x = 0, min_y = 0, max_y = 0, min_z = 0, max_z = 0,
 	      value = 0;
+	glm::vec3 center = glm::vec3(0);
 	// For each object in obj
 	while (std::getline(open_file, input_line)) {
 		// If new object
 		if (input_line[0] == 'o') {
 			first_point = true;
+			if (first_object) {
+				first_object = false;
+				continue;
+			}
+
+			center.x = (max_x - min_x) / 2 + min_x;
+			center.y = (max_y - min_y) / 2 + min_y;
+			center.z = (max_z - min_z) / 2 + min_z;
+
+			rb_comp.addBoxCollider(
+			    center,
+			    glm::vec3(center.x - min_x, center.y - min_y, center.z - min_z),
+			    BOUNCE, FRICTION);
+
 		} else if (input_line[0] == 'v' && input_line[1] == ' ') {  // If point
-			ss = std::stringstream(input_line);
+			sstream = std::stringstream(input_line);
 			counter = 0;
 
-			while (std::getline(ss, inner_line, ' ')) {
+			while (std::getline(sstream, inner_line, ' ')) {
 				if (counter != 0) {
 					value = std::stof(inner_line);
 				}
@@ -66,6 +92,17 @@ void loadOBJColliderData::load_obj_collider_data(const std::string &file) {
 		}
 	}
 	open_file.close();
+
+	if (!first_object) {
+		center.x = (max_x - min_x) / 2 + min_x;
+		center.y = (max_y - min_y) / 2 + min_y;
+		center.z = (max_z - min_z) / 2 + min_z;
+
+		rb_comp.addBoxCollider(
+		    center,
+		    glm::vec3(center.x - min_x, center.y - min_y, center.z - min_z),
+		    BOUNCE, FRICTION);
+	}
 }
 
 float min(float min_val, float new_val, bool first) {
