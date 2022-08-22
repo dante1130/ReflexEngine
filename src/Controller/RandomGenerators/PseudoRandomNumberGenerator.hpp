@@ -5,6 +5,11 @@
 
 #include "Controller/LuaManager.hpp"
 
+/**
+ * @author Daniel Rodic
+ * @brief Randomly generates numbers in a pseudo fasion, accessible to lua
+ *
+ */
 class PseudoRandomNumberGenerator {
 public:
 	/**

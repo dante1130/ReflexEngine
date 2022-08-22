@@ -12,6 +12,7 @@
 namespace Component {
 
 /**
+ * @author Daniel Rodic
  * @struct	statemachine
  * @brief	Used the store the current state of a statemachine along with its
  * unqiue identifier
