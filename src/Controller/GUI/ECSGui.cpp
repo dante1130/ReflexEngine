@@ -20,6 +20,12 @@ void ECSGui::draw(ECS& ecs) {
 	auto& registry = ecs.get_registry();
 
 	ImGui::Begin("Scene entities", nullptr, window_flags);
+
+	if (ImGui::Button("Add new entity")) {
+		auto& new_entity = ecs.create_entity("Default");
+		new_entity.add_component<Component::Transform>();
+	}
+
 	registry.each([this, &ecs](auto entity_id) {
 		draw_entity(ecs.get_entity(entity_id));
 	});
