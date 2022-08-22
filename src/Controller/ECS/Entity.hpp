@@ -4,6 +4,7 @@
 
 namespace Reflex {
 /**
+ * @author Andrew Ho
  * @class Entity
  * @brief An ECS entity object that is able to store and retrieve components.
  */

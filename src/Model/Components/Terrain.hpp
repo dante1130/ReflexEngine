@@ -5,6 +5,7 @@
 
 namespace Component {
 /**
+ * @author Andrew Ho
  * @struct Terrain
  * @brief The terrain component.
  */

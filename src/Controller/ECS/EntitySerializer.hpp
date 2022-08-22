@@ -15,6 +15,7 @@
 #include "Model/Components/Statemachine.hpp"
 
 /**
+ * @author Andrew Ho
  * @class EntitySerializer
  * @brief Serializer for ECS entities to Lua files in a directory.
  */

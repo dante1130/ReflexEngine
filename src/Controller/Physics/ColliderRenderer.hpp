@@ -6,6 +6,7 @@
 #include "View/Renderer/OpenGL/Objects/ReactMesh.hpp"
 
 /**
+ * @author Andrew Ho
  * @class ColliderRenderer
  * @brief A class that renders rp3d debug collider entities.
  */

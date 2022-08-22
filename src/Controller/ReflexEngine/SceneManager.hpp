@@ -6,6 +6,7 @@
 #include "Scene/ECSScene.hpp"
 
 /**
+ * @author Andrew Ho
  * @class SceneManager
  * @brief The scene manager.
  */

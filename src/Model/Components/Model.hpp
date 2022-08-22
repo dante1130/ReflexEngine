@@ -4,6 +4,7 @@
 
 namespace Component {
 /**
+ * @author Andrew Ho
  * @struct Model
  * @brief The model component is used to store the name of the model and
  * material stored in the ResourceManager.

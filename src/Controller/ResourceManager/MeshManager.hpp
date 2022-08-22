@@ -5,6 +5,7 @@
 #include "View/Renderer/OpenGL/Objects/Mesh.hpp"
 
 /**
+ * @author Andrew Ho
  * @class MeshManager
  * @brief An encapsulated class for an unordered map of meshes.
  */
