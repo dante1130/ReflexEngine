@@ -20,14 +20,14 @@ void RigidbodyManager::add_rigidbody(Component::Rigidbody& rb,
 
 void RigidbodyManager::update_rigidbody(Component::Rigidbody& rb,
                                         Component::Transform& tf) {
-	 if (prev_position != tf.position){
+	if (rb.previous_transform_position != tf.position) {
 		rb.setPosition(tf.position);
 		rb.setEulerRotation(tf.rotation);
 		rb.setVelocity(glm::vec3(0));
-	 }else{
+	} else {
 		tf.position = rb.getPosition();
 		tf.rotation = rb.getRotation();
-	 }
+	}
 
 	if (rb.getIsGravityEnabled() != rb.gravity_on)
 		rb.enableGravity(rb.gravity_on);
