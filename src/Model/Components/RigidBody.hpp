@@ -8,169 +8,164 @@
 
 namespace Component {
 
-	struct Rigidbody {
+struct Rigidbody {
+private:
+	// Physics system
+	PhysicsBody* pb;
 
-	private:
+public:
+	bool gravity_on;
+	bool can_sleep;
+	bool is_trigger;
 
-		//Physics system
-		PhysicsBody* pb;
-		
-	public:
+	float lin_drag;
+	float ang_drag;
 
-		bool gravity_on;
-		bool can_sleep;
-		bool is_trigger;
+	glm::vec3 previous_transform_position;
 
-		float lin_drag;
-		float ang_drag;
+	Rigidbody() = default;
 
-		glm::vec3 previous_transform_position;
+	Rigidbody(const Rigidbody&) = default;
 
-		Rigidbody() = default;
+	Rigidbody(bool usingReact, glm::vec3 pos, glm::vec3 rot);
 
-		Rigidbody(const Rigidbody&) = default;
+	Rigidbody(bool usingReact, glm::vec3 pos, glm::vec3 rot, bool gravity_on,
+	          bool can_sleep, bool is_trigger, float linear_drag,
+	          float angular_drag);
 
-		Rigidbody(bool usingReact, glm::vec3 pos, glm::vec3 rot);
+	void init(bool usingReact, glm::vec3 pos, glm::vec3 rot);
 
-		Rigidbody(bool usingReact, glm::vec3 pos, glm::vec3 rot, bool gravity_on, bool can_sleep,
-			bool is_trigger, float linear_drag, float angular_drag);
+	void setTransform(glm::vec3 pos, glm::vec3 rot);
 
-		void init(bool usingReact, glm::vec3 pos, glm::vec3 rot);
-
-		void setTransform(glm::vec3 pos, glm::vec3 rot);
-
-		void setViewables(bool gravity_on, bool can_sleep,
-			bool is_trigger, float linear_drag, float angular_drag);
+	void setViewables(bool gravity_on, bool can_sleep, bool is_trigger,
+	                  float linear_drag, float angular_drag);
 
 	//****************************
 	// FUNCTIONS FOR PHYSICS STUFF
 	//****************************
 
-		// Using react
-		bool usingReactResolve();
+	// Using react
+	bool usingReactResolve();
 
+	// Colliders
 
-		// Colliders
+	size_t colliderSize();
 
-		size_t colliderSize();
+	glm::vec3 getColliderPosition(size_t index, Apply type);
 
-		glm::vec3 getColliderPosition(size_t index, Apply type);
+	float getColliderBounce(size_t index);
 
-		float getColliderBounce(size_t index);
+	float getColliderFriction(size_t index);
 
-		float getColliderFriction(size_t index);
+	float getColliderMassDesity(size_t index);
 
-		float getColliderMassDesity(size_t index);
+	int getColliderType(size_t index);
 
-		int getColliderType(size_t index);
+	std::string getColliderName(size_t index);
 
-		std::string getColliderName(size_t index);
+	std::vector<rp3d::Collider*> getColliders();
 
-		std::vector<rp3d::Collider*> getColliders();
+	rp3d::BoxShape* getColliderBox(size_t index);
 
-		rp3d::BoxShape* getColliderBox(size_t index);
+	rp3d::SphereShape* getColliderSphere(size_t index);
 
-		rp3d::SphereShape* getColliderSphere(size_t index);
+	rp3d::CapsuleShape* getColliderCapsule(size_t index);
 
-		rp3d::CapsuleShape* getColliderCapsule(size_t index);
+	void addMaterialToCollider(size_t index, float bounce, float mass_density,
+	                           float friction);
 
-		void addMaterialToCollider(size_t index, float bounce, float mass_density, float friction);
+	void removeAllColliders();
 
-		void removeAllColliders();
+	void removeCollider(size_t index);
 
-		void removeCollider(size_t index);
+	// Gui viewable variables methods
 
+	void setObjectTrigger(bool ean);
 
-		// Gui viewable variables methods
+	void enableGravity(bool ean);
 
-		void setObjectTrigger(bool ean);
+	void setCanSleep(bool ean);
 
-		void enableGravity(bool ean);
+	bool getIsGravityEnabled();
 
-		void setCanSleep(bool ean);
+	bool getCanSleep();
 
-		bool getIsGravityEnabled();
+	bool getIsTrigger();
 
-		bool getCanSleep();
+	// Applying interaction methods
 
-		bool getIsTrigger();
+	void addForce(glm::vec3 force, Apply type);
 
+	void addForceAtPoint(glm::vec3 force, glm::vec3 point, ApplyPoint type);
 
-		// Applying interaction methods
+	void addTorque(glm::vec3 torque, Apply type);
 
-		void addForce(glm::vec3 force, Apply type);
+	void addDragForce(float drag);
 
-		void addForceAtPoint(glm::vec3 force, glm::vec3 point, ApplyPoint type);
+	void addDragTorque(float ang_drag);
 
-		void addTorque(glm::vec3 torque, Apply type);
+	// Set methods
 
-		void addDragForce(float drag);
+	void setMass(float mass);
 
-		void addDragTorque(float ang_drag);
+	void setCenterOfMass(glm::vec3 p);
 
+	void setVelocity(glm::vec3 vel);
 
-		// Set methods
+	void setAngVelocity(glm::vec3 ang_vel);
 
-		void setMass(float mass);
+	void setDragForce(float drag);
 
-		void setCenterOfMass(glm::vec3 p);
+	void setDragTorque(float angular_drag);
 
-		void setVelocity(glm::vec3 vel);
+	void setType(int type);
 
-		void setAngVelocity(glm::vec3 ang_vel);
+	// Get methods
 
-		void setDragForce(float drag);
+	float getMass();
 
-		void setDragTorque(float angular_drag);
+	glm::vec3 getVelocity();
 
-		void setType(rp3d::BodyType type);
+	glm::vec3 getAngVelocity();
 
-		void setType(int type);
+	float getDragForce();
 
+	float getDragTorque();
 
-		// Get methods
+	int getType();
 
-		float getMass();
+	// Collider methods
 
-		glm::vec3 getVelocity();
+	// void addBoxCollider(glm::vec3 pos, glm::vec3 size) {
+	// pb->addBoxCollider(pos, size); }
 
-		glm::vec3 getAngVelocity();
+	// void addSphereCollider(glm::vec3 pos, float radius) {
+	// pb->addSphereCollider(pos, radius); }
 
-		float getDragForce();
+	// void addCapsuleCollider(glm::vec3 pos, float radius, float height) {
+	// pb->addCapsuleCollider(pos, radius, height); }
 
-		float getDragTorque();
+	uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce,
+	                        float friction);
 
-		rp3d::BodyType getType();
+	uint32_t addSphereCollider(glm::vec3 pos, float radius, float bounce,
+	                           float friction);
 
+	uint32_t addCapsuleCollider(glm::vec3 pos, float radius, float height,
+	                            float bounce, float friction);
 
-		// Collider methods
+	// Methods used for transform
 
-		//void addBoxCollider(glm::vec3 pos, glm::vec3 size) { pb->addBoxCollider(pos, size); }
+	glm::vec3 getPosition();
 
-		//void addSphereCollider(glm::vec3 pos, float radius) { pb->addSphereCollider(pos, radius); }
+	glm::vec3 getRotation();
 
-		//void addCapsuleCollider(glm::vec3 pos, float radius, float height) { pb->addCapsuleCollider(pos, radius, height); }
+	glm::quat getOrientation();
 
-		uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction);
+	void setPosition(glm::vec3 pos);
 
-		uint32_t addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction);
+	void setQuanternion(glm::quat quat);
 
-		uint32_t addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction);
-
-
-		// Methods used for transform
-
-		glm::vec3 getPosition();
-
-		glm::vec3 getRotation();
-
-		glm::quat getOrientation();
-
-		void setPosition(glm::vec3 pos);
-			
-		void setQuanternion(glm::quat quat);
-
-		void setEulerRotation(glm::vec3 rot);
-
-	};
+	void setEulerRotation(glm::vec3 rot);
 };
+};  // namespace Component

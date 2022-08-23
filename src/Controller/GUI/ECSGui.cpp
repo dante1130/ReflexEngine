@@ -334,6 +334,8 @@ void ECSGui::draw_rigidbody(Reflex::Entity& entity) {
 	ImGui::Checkbox("Gravity On", &rigidbody.gravity_on);
 	ImGui::Checkbox("Is Trigger", &rigidbody.is_trigger);
 	ImGui::Checkbox("Can Sleep", &rigidbody.can_sleep);
+	int rigidbody_type = rigidbody.getType();
+	ImGui::DragInt("Rigidbody type", &rigidbody_type, 0);
 	if (ImGui::InputFloat("Drag Force", &rigidbody.lin_drag, speed_)) {
 		if (rigidbody.lin_drag < 0) {
 			rigidbody.lin_drag = 0;
@@ -361,17 +363,18 @@ void ECSGui::draw_rigidbody(Reflex::Entity& entity) {
 	std::string id_;
 	size_t delete_index_ = rigidbody.getColliders().size();
 
-	if (ImGui::TreeNode("Colliders"))
-	{
+	if (ImGui::TreeNode("Colliders")) {
 		for (int i = 0; i < rigidbody.getColliders().size(); ++i) {
 			id_ = rigidbody.getColliderName(i);
 			ImGui::Text(id_.c_str());
 			ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
-			if (ImGui::Button(("Delete " + id_).c_str())) 
-				delete_index_ = i; 
-			rp3d::Vector3 cp = rigidbody.getColliders().at(i)->getLocalToBodyTransform().getPosition();
+			if (ImGui::Button(("Delete " + id_).c_str())) delete_index_ = i;
+			rp3d::Vector3 cp = rigidbody.getColliders()
+			                       .at(i)
+			                       ->getLocalToBodyTransform()
+			                       .getPosition();
 			glm::vec3 collider_position = glm::vec3(cp.x, cp.y, cp.z);
-			if(ImGui::DragFloat3((id_ + "'s Position").c_str(),
+			if (ImGui::DragFloat3((id_ + "'s Position").c_str(),
 			                      glm::value_ptr(collider_position), speed_)) {
 				rp3d::Transform tf =
 				    rigidbody.getColliders().at(i)->getLocalToBodyTransform();
@@ -382,11 +385,11 @@ void ECSGui::draw_rigidbody(Reflex::Entity& entity) {
 				rigidbody.getColliders().at(i)->setLocalToBodyTransform(tf);
 			}
 
-
 			switch (rigidbody.getColliderType(i)) {
 				case 1:
 					s_radius_ = rigidbody.getColliderSphere(i)->getRadius();
-					if (ImGui::DragFloat((id_ + "'s Radius").c_str(), &s_radius_, speed_)) {
+					if (ImGui::DragFloat((id_ + "'s Radius").c_str(),
+					                     &s_radius_, speed_)) {
 						if (s_radius_ <= 0.0f) s_radius_ = 0.01f;
 						rigidbody.getColliderSphere(i)->setRadius(s_radius_);
 					}
@@ -406,11 +409,11 @@ void ECSGui::draw_rigidbody(Reflex::Entity& entity) {
 					}
 					break;
 				case 3:
-					rp3d::Vector3 ext = rigidbody.getColliderBox(i)->getHalfExtents();
+					rp3d::Vector3 ext =
+					    rigidbody.getColliderBox(i)->getHalfExtents();
 					b_extents_ = glm::vec3(ext.x, ext.y, ext.z);
 					if (ImGui::DragFloat3((id_ + "'s Extents").c_str(),
-					                      glm::value_ptr(b_extents_),
-					                      speed_)) {
+					                      glm::value_ptr(b_extents_), speed_)) {
 						if (b_extents_.x <= 0.0f) b_extents_.x = 0.01f;
 						if (b_extents_.y <= 0.0f) b_extents_.y = 0.01f;
 						if (b_extents_.z <= 0.0f) b_extents_.z = 0.01f;
@@ -433,18 +436,17 @@ void ECSGui::draw_rigidbody(Reflex::Entity& entity) {
 
 		if (ImGui::BeginPopup("AddCollider")) {
 			if (ImGui::MenuItem("Box")) {
-				rigidbody.addBoxCollider(glm::vec3(0), glm::vec3(1.0f), 
-					0.5f, 0.5f);
+				rigidbody.addBoxCollider(glm::vec3(0), glm::vec3(1.0f), 0.5f,
+				                         0.5f);
 				ImGui::CloseCurrentPopup();
 			}
 			if (ImGui::MenuItem("Capsule")) {
-				rigidbody.addCapsuleCollider(glm::vec3(0), 0.5f, 1.0f,
-				                         0.5f, 0.5f);
+				rigidbody.addCapsuleCollider(glm::vec3(0), 0.5f, 1.0f, 0.5f,
+				                             0.5f);
 				ImGui::CloseCurrentPopup();
 			}
 			if (ImGui::MenuItem("Sphere")) {
-				rigidbody.addSphereCollider(glm::vec3(0), 1.0f,
-				                         0.5f, 0.5f);
+				rigidbody.addSphereCollider(glm::vec3(0), 1.0f, 0.5f, 0.5f);
 				ImGui::CloseCurrentPopup();
 			}
 			ImGui::EndPopup();

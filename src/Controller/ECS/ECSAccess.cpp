@@ -388,4 +388,7 @@ void ECSAccess::register_rigidbody_component() {
 
 	rigidbody_type["remove_all_colliders"] = &Rigidbody::removeAllColliders;
 	rigidbody_type["remove_collider"] = &Rigidbody::removeCollider;
+
+	rigidbody_type["type"] =
+	    sol::property(&Rigidbody::getType, &Rigidbody::setType);
 }
