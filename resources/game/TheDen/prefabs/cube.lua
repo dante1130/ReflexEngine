@@ -1,6 +1,24 @@
 entity = {
 	name = "Cube",
 
+	transform = {
+		position = {
+			x = 0,
+			y = 0,
+			z = 0
+		},
+		rotation = {
+			x = 0,
+			y = 0,
+			z = 0
+		},
+		scale = {
+			x = 0.25,
+			y = 0.25,
+			z = 0.25
+		}
+	},
+
 	model = {
 		model_name = "default",
 		material_name = "default"
