@@ -391,4 +391,10 @@ void ECSAccess::register_rigidbody_component() {
 
 	rigidbody_type["type"] =
 	    sol::property(&Rigidbody::getType, &Rigidbody::setType);
+
+	rigidbody_type["set_transform"] = &Rigidbody::setTransform;
+	rigidbody_type["velocity"] =
+	    sol::property(&Rigidbody::getVelocity, &Rigidbody::setVelocity);
+	rigidbody_type["angular_velocity"] =
+	    sol::property(&Rigidbody::getAngVelocity, &Rigidbody::setAngVelocity);
 }

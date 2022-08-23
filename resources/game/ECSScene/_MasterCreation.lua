@@ -1,4 +1,4 @@
-dofile "game/ECSScene/_Materials.lua"
+--dofile "game/ECSScene/_Materials.lua"
 dofile "game/ECSScene/_statemachine.lua"
 
 Scene.add_game_object("game/ECSScene/game_objects/Cat.lua")
