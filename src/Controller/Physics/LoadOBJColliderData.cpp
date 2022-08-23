@@ -56,8 +56,7 @@ void loadOBJColliderData::load_obj_collider_data(Reflex::Entity &entity,
 			center.z = (max_z - min_z) / 2 + min_z;
 
 			rb_comp.addBoxCollider(
-			    center,
-			    glm::vec3(center.x - min_x, center.y - min_y, center.z - min_z),
+			    center, glm::vec3(max_x - min_x, max_y - min_y, max_z - min_z),
 			    BOUNCE, FRICTION);
 
 		} else if (input_line[0] == 'v' && input_line[1] == ' ') {  // If point
