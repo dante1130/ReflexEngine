@@ -22,21 +22,25 @@ bool Model::LoadModel(const std::string& fileName) {
 }
 
 void Model::RenderModel() const {
+	if (m_meshVec.size() == 0) return;
+
 	for (size_t i = 0; i < m_meshVec.size(); ++i) {
 		GLuint materialIndex = m_meshToTex.at(i);
 
 		if (materialIndex < m_textureVec.size() &&
 		    m_textureVec.at(materialIndex)) {
-			m_textureVec.at(materialIndex)->UseTexture();
+			m_textureVec.at(materialIndex)->use_texture();
 		}
 
-		m_meshVec.at(i)->RenderMesh();
+		m_meshVec.at(i)->render_mesh();
 	}
 }
 
 void Model::RenderModelTwo() const {
+	if (m_meshVec.size() == 0) return;
+
 	for (size_t i = 0; i < m_meshVec.size(); ++i) {
-		m_meshVec.at(i)->RenderMesh();
+		m_meshVec.at(i)->render_mesh();
 	}
 }
 
@@ -81,8 +85,8 @@ void Model::LoadMesh(aiMesh* mesh, const aiScene* scene) {
 	}
 
 	Mesh* newMesh = new Mesh();
-	newMesh->CreateMesh(vertices.data(), indices.data(), vertices.size(),
-	                    indices.size());
+	newMesh->create_mesh(vertices.data(), indices.data(), vertices.size(),
+	                     indices.size());
 
 	m_meshVec.emplace_back(newMesh);
 	m_meshToTex.emplace_back(mesh->mMaterialIndex);

@@ -1,9 +1,30 @@
 #include "Window.hpp"
 
 #include "Controller/Input/InputManager.hpp"
+#include "Controller/LuaManager.hpp"
 
 Window::Window(int window_width, int window_height)
     : main_window_(nullptr), width_(window_width), height_(window_height) {}
+
+void Window::lua_access() {
+	auto& lua = LuaManager::get_instance().get_state();
+
+	auto window_table = lua.create_named_table("Window");
+
+	window_table.set_function("is_fullscreen", &Window::is_fullscreen, this);
+	window_table.set_function("is_cursor_visible", &Window::is_cursor_visible,
+	                          this);
+	window_table.set_function("get_width", &Window::get_buffer_width, this);
+	window_table.set_function("get_height", &Window::get_buffer_height, this);
+	window_table.set_function("get_ratio", &Window::get_ratio, this);
+	window_table.set_function("set_fullscreen", &Window::set_fullscreen, this);
+	window_table.set_function("set_cursor_visible", &Window::set_cursor_visible,
+	                          this);
+	window_table.set_function("set_window_size", &Window::set_window_size,
+	                          this);
+
+	window_table["close"] = [this]() { set_should_close(true); };
+}
 
 bool Window::init() {
 	if (!glfwInit()) {
@@ -25,6 +46,7 @@ bool Window::init() {
 	glfwWindowHint(GLFW_BLUE_BITS, mode->blueBits);
 	glfwWindowHint(GLFW_REFRESH_RATE, mode->refreshRate);
 	glfwWindowHint(GLFW_MAXIMIZED, GL_TRUE);
+	glfwWindowHint(GLFW_SAMPLES, 4);
 
 	if (width_ == 0 || height_ == 0) {
 		width_ = mode->width;
@@ -100,13 +122,43 @@ double Window::get_y_offset() {
 	return offset;
 }
 
+void Window::set_fullscreen(bool fullscreen) {
+	is_fullscreen_ = fullscreen;
+
+	GLFWmonitor* monitor = is_fullscreen_ ? glfwGetPrimaryMonitor() : nullptr;
+
+	glfwSetWindowMonitor(main_window_, monitor, 0, 0, width_, height_,
+	                     GLFW_DONT_CARE);
+}
+
+void Window::set_window_size(int width, int height) {
+	width_ = width;
+	height_ = height;
+	glfwSetWindowSize(main_window_, width, height);
+	update_window_buffer_size();
+}
+
+void Window::set_cursor_visible(bool visible) {
+	is_cursor_visible_ = visible;
+
+	if (is_cursor_visible_) {
+		glfwSetInputMode(main_window_, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	} else {
+		glfwSetInputMode(main_window_, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	}
+}
+
 void Window::set_should_close(bool should_close) {
 	glfwSetWindowShouldClose(main_window_, should_close);
 }
 
+bool Window::is_cursor_visible() const { return is_cursor_visible_; }
+
 bool Window::is_should_close() const {
 	return glfwWindowShouldClose(main_window_);
 }
+
+bool Window::is_fullscreen() const { return is_fullscreen_; }
 
 void Window::update_window_buffer_size() {
 	glfwGetFramebufferSize(main_window_, &buffer_width_, &buffer_height_);

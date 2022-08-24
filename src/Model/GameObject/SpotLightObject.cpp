@@ -15,7 +15,7 @@ void SpotLightObject::init() {
 void SpotLightObject::update(double delta_time) {
 	auto& light_manager = ResourceManager::get_instance().get_light_manager();
 
-	light_manager.update_spot_lights(light_id_, light_data_);
+	light_manager.update_spot_light(light_id_, light_data_);
 }
 
 void SpotLightObject::save_object() {

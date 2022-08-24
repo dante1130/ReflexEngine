@@ -3,7 +3,13 @@
 #include "TexturedTerrain.hpp"
 #include "Controller/LuaManager.hpp"
 
-class TerrainManager {
+/**
+ * @author Daniel Rodic
+ * @brief Sets the playable area for the camera and provides functions to get
+ * the height from lua
+ *
+ */
+class OldTerrainManager {
 public:
 	/**
 	 * @brief	Provides access to terrain data in lua

@@ -23,9 +23,12 @@ public:
 	 * @param indices The indices of the mesh.
 	 * @param noOfVerts The number of vertices.
 	 * @param noOfIndices The number of indices.
+	 * @param draw_usage The draw usage of the mesh. (Defaults to
+	 * GL_STATIC_DRAW)
 	 */
-	void CreateMesh(const GLfloat* vertices, const GLuint* indices,
-	                GLuint noOfVerts, GLuint noOfIndices);
+	void create_mesh(const GLfloat* vertices, const GLuint* indices,
+	                 GLuint noOfVerts, GLuint noOfIndices,
+	                 GLenum draw_usage = GL_STATIC_DRAW);
 
 	/**
 	 * @brief Takes in an array of vertices, texture coordinates, normals, and
@@ -40,9 +43,14 @@ public:
 	                     GLuint noOfVerts, GLuint noOfIndices);
 
 	/**
+	 * @brief Create a react mesh.
+	 */
+	void create_react_mesh();
+
+	/**
 	 * @brief Binds the VAO and IBO and renders the mesh.
 	 */
-	void RenderMesh();
+	void render_mesh() const;
 
 	/**
 	 * @brief Clears the mesh.
@@ -63,14 +71,14 @@ public:
 
 private:
 	/// Vertex array object, specifying the layout of the mesh.
-	GLuint VAO;
+	GLuint VAO = 0;
 	/// Vertex buffer object, containing the data of the mesh.
-	GLuint VBO;
+	GLuint VBO = 0;
 	/// Index buffer object, containing the indices of the mesh.
-	GLuint IBO;
+	GLuint IBO = 0;
 
 	/// The number of indices in the mesh.
-	GLsizei indexCount;
+	GLsizei indexCount = 0;
 
 	/// Boolean to check whether it is a colored mesh.
 	bool has_color_ = false;

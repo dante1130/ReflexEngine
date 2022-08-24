@@ -31,7 +31,7 @@ struct telegram {
 	double dispatchTime;
 
 	/// any additional information that may accompany the message
-	sol::object extraInfo;
+	sol::table extraInfo;
 
 	/**
 	 * @brief	Default constructor
@@ -46,7 +46,7 @@ struct telegram {
 	 * @param	msg			- The message to send
 	 * @param	info		- The sol::object to send as extra information
 	 */
-	telegram(double time, int sender, int receiver, int msg, sol::object info)
+	telegram(double time, int sender, int receiver, int msg, sol::table info)
 	    : dispatchTime(time),
 	      sender(sender),
 	      receiver(receiver),

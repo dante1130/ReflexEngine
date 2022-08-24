@@ -1,8 +1,7 @@
-target_sources(${PROJECT_NAME} PRIVATE
-	main.cpp
-
+add_library(ReflexEngineSrc
 	NetworkManager.cpp
 
+	Model/Components/RigidBody.cpp
 	Model/GameObject/GameObject.hpp
 	Model/GameObject/Item.cpp
 	Model/GameObject/Water.cpp
@@ -15,12 +14,13 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Model/GameObject/DirectionalLightObject.cpp
 	Model/GameObject/PointLightObject.cpp
 	Model/GameObject/SpotLightObject.cpp
-	Model/LightData.hpp
-	Model/ModelData.cpp
+	Model/GameObject/NPC.cpp
 	Model/GameObject/Projectile.cpp
 	Model/GameObject/NetworkedItem.cpp
 	Model/RunTimeDataStorage/DynamicDataStorage.cpp
 	Model/RunTimeDataStorage/GlobalDataStorage.cpp
+	Model/LightData.hpp
+	Model/ModelData.cpp
 
 	View/Renderer/OpenGL/OpenGL.cpp
 	View/Renderer/OpenGL/Objects/Light.cpp
@@ -36,19 +36,30 @@ target_sources(${PROJECT_NAME} PRIVATE
 	View/Renderer/OpenGL/Objects/Skybox.cpp
 	View/Renderer/OpenGL/Objects/Texture.cpp
 	View/Renderer/OpenGL/Objects/Md2Model.cpp
+	View/Renderer/OpenGL/Objects/ReactMesh.cpp
 	View/guiManager.cpp
 
 	Controller/ReflexEngine/ReflexEngine.cpp
 	Controller/ReflexEngine/EngineTime.cpp
 	Controller/ReflexEngine/Window.cpp
 	Controller/ReflexEngine/Camera.cpp
+	Controller/ReflexEngine/SceneManager.cpp
+	Controller/ECS/ECS.cpp
+	Controller/ECS/Entity.cpp
+	Controller/ECS/ECSAccess.cpp
+	Controller/ECS/System.cpp
+	Controller/ECS/EntitySerializer.cpp
 	Controller/ResourceManager/ResourceManager.cpp
 	Controller/ResourceManager/TextureManager.cpp
 	Controller/ResourceManager/ModelManager.cpp
 	Controller/ResourceManager/Md2ModelManager.cpp
 	Controller/ResourceManager/MaterialManager.cpp
 	Controller/ResourceManager/LightManager.cpp
+	Controller/ResourceManager/SkyboxManager.cpp
+	Controller/ResourceManager/MeshManager.cpp
+	Controller/ResourceManager/TerrainManager.cpp
 	Controller/ResourceManager/ObjectSaving.cpp
+	Controller/ResourceManager/RigidbodyManager.cpp
 	Controller/Input/InputManager.cpp
 	Controller/Input/InputState.cpp
 	Controller/Audio/Audio.cpp
@@ -59,30 +70,35 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/Terrain/BTT.cpp
 	Controller/Terrain/BttController.cpp
 	Controller/Terrain/TexturedTerrain.cpp
+	Controller/ECSGameAssetFactory.cpp
 	Controller/GameAssetFactory.cpp
 	Controller/LuaManager.cpp
+	Controller/MathAccess.cpp
 	Controller/Physics/Physics.cpp
 	Controller/Physics/EngineResolve.cpp
 	Controller/Physics/ReactResolve.cpp
 	Controller/Physics/PhysicBody.cpp
 	Controller/Physics/CollisionEvent.cpp
-	Controller/NetworkAccess.cpp
-	Controller/multiTextureCreator.cpp
+	Controller/Physics/ColliderRenderer.cpp
+	Controller/Physics/LoadOBJColliderData.cpp
+	Controller/Networking/NetworkAccess.cpp
+	Controller/Terrain/multiTextureCreator.cpp
 	Controller/RandomGenerators/PseudoRandomNumberGenerator.cpp
-	Controller/ReflexEngine/EngineAccess.cpp
 	Controller/Terrain/TerrainManager.cpp
-
 	Controller/AI/messageDispatcher.cpp
-	Model/GameObject/NPC.cpp
 	Controller/AI/entityManager.cpp
 	Controller/Pathfinding/movement.cpp
 	Controller/Pathfinding/world.cpp
 	Controller/AI/luaAccessScriptedFSM.cpp
 	Controller/AI/Counter.cpp
 	Controller/AI/vector2D.cpp
+	Controller/AI/statemachineComponentHelper.cpp
+	Controller/GUI/ECSGui.cpp
+	Controller/GUI/DebugLogger.cpp
 
-	Game/Scene.hpp
-	Game/TestScene.cpp
+	Scene/Scene.hpp
+	Scene/TestScene.cpp
+	Scene/ECSScene.cpp
 )
 
-target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(ReflexEngineSrc PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})

@@ -44,8 +44,6 @@ void Audio::play_3d_sound(const std::string& name, const irrklang::vec3df& pos,
 			sound->setIsPaused(false);
 
 			add_sound(name, sound);
-
-			std::cout << "Playing 3d sound: " << name << std::endl;
 		}
 	}
 }

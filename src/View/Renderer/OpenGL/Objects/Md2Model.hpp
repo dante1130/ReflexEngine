@@ -12,6 +12,8 @@
  */
 class Md2Model {
 public:
+	Md2Model() = default;
+
 	/**
 	 * @brief Loads in an md2 model file.
 	 *
@@ -21,19 +23,18 @@ public:
 	bool load_md2(const std::string& filename);
 
 	/**
-	 * @brief Loads in a texture for the md2 model.
-	 *
-	 * @param filename The filename of the texture.
-	 * @return bool
-	 */
-	bool load_texture(const std::string& filename);
-
-	/**
 	 * @brief Animate the md2 model.
 	 *
 	 * @param delta_time The time since the last frame.
 	 */
 	void animate(float delta_time);
+
+	/**
+	 * @brief Get the animation state.
+	 *
+	 * @return const md2::animstate_t&
+	 */
+	const md2::animstate_t& get_animstate() const;
 
 	/**
 	 * @brief Set the animation type of the md2 model.
@@ -42,21 +43,22 @@ public:
 	 */
 	void set_animation(md2::animation_type animation_type);
 
+	/**
+	 * @brief Set the animation state.
+	 *
+	 * @param animstate The animation state.
+	 */
 	void set_animstate(const md2::animstate_t& animstate);
 
 	/**
 	 * @brief Render the md2 model frame by frame.
-	 *
-	 * @param delta_time The time since the last frame.
 	 */
-	void render_animated(float delta_time);
+	void render_animated();
 
 	/**
 	 * @brief Render the md2 model with interpolated frames.
-	 *
-	 * @param delta_time The time since the last frame.
 	 */
-	void render_animated_interpolated(float delta_time);
+	void render_animated_interpolated();
 
 	/**
 	 * @brief Render a single frame given the frame number.
@@ -121,6 +123,4 @@ private:
 
 	/// The md2 model mesh.
 	std::unique_ptr<Mesh> mesh_ = nullptr;
-	/// The md2 model texture.
-	std::unique_ptr<Texture> texture_ = nullptr;
 };

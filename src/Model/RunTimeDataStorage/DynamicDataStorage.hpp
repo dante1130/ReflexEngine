@@ -2,6 +2,12 @@
 
 #include <unordered_map>
 #include <iostream>
+
+/**
+ * @author Daniel Rodic
+ * @brief Dynamically stores data.
+ *
+ */
 class DynamicDataStorage {
 public:
 	bool getDynamicBoolData(std::string name, bool init_state);

@@ -1,29 +1,27 @@
 #include "ShadowMap.hpp"
 
-ShadowMap::ShadowMap() : m_fbo(0u), m_shadowMap(0u) {}
+bool ShadowMap::init(GLuint width, GLuint height) {
+	shadow_width_ = width;
+	shadow_height_ = height;
 
-bool ShadowMap::Init(GLuint width, GLuint height) {
-	m_shadowWidth = width;
-	m_shadowHeight = height;
+	glGenFramebuffers(1, &fbo_);
 
-	glGenFramebuffers(1, &m_fbo);
-
-	glGenTextures(1, &m_shadowMap);
-	glBindTexture(GL_TEXTURE_2D, m_shadowMap);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, m_shadowWidth,
-	             m_shadowHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
+	glGenTextures(1, &shadow_map_);
+	glBindTexture(GL_TEXTURE_2D, shadow_map_);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, shadow_width_,
+	             shadow_height_, 0, GL_DEPTH_COMPONENT, GL_FLOAT, nullptr);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 
-	float borderColor[] = {1.0f, 1.0f, 1.0f, 1.0f};
+	constexpr float borderColor[] = {1.0f, 1.0f, 1.0f, 1.0f};
 	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
 
-	glBindFramebuffer(GL_FRAMEBUFFER, m_fbo);
+	glBindFramebuffer(GL_FRAMEBUFFER, fbo_);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D,
-	                       m_shadowMap, 0);
+	                       shadow_map_, 0);
 
 	glDrawBuffer(GL_NONE);
 	glReadBuffer(GL_NONE);
@@ -40,19 +38,13 @@ bool ShadowMap::Init(GLuint width, GLuint height) {
 	return true;
 }
 
-void ShadowMap::Write() const { glBindFramebuffer(GL_FRAMEBUFFER, m_fbo); }
+void ShadowMap::write() const { glBindFramebuffer(GL_FRAMEBUFFER, fbo_); }
 
-void ShadowMap::Read(GLenum textureUnit) const {
+void ShadowMap::read(GLenum textureUnit) const {
 	glActiveTexture(textureUnit);
-	glBindTexture(GL_TEXTURE_2D, m_shadowMap);
+	glBindTexture(GL_TEXTURE_2D, shadow_map_);
 }
 
-GLuint ShadowMap::GetShadowWidth() const { return m_shadowWidth; }
+GLuint ShadowMap::get_shadow_width() const { return shadow_width_; }
 
-GLuint ShadowMap::GetShadowHeight() const { return m_shadowHeight; }
-
-ShadowMap::~ShadowMap() {
-	if (m_fbo) glDeleteFramebuffers(1, &m_fbo);
-
-	if (m_shadowMap) glDeleteTextures(1, &m_shadowMap);
-}
+GLuint ShadowMap::get_shadow_height() const { return shadow_height_; }

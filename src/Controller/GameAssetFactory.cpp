@@ -284,7 +284,7 @@ void GameAssetFactory::loadBoxCollider(int count, PhysicsObject* po,
 
 	po->addBoxCollider(posV, boxV, bounciness, friction);
 
-	if (po->getType() != BodyType::STATIC) {
+	if (po->getType() != rp3d::BodyType::STATIC) {
 		gameWorld.create_box_obstruction(po->position.x, po->position.z,
 		                                 boxV.x * 2, boxV.z * 2);
 	}
@@ -304,7 +304,7 @@ void GameAssetFactory::loadSphereCollider(int count, PhysicsObject* po,
 	float friction = lua[collider]["friction"];
 
 	po->addSphereCollider(posV, radius, bounciness, friction);
-	if (po->getType() != BodyType::STATIC) {
+	if (po->getType() != rp3d::BodyType::STATIC) {
 		gameWorld.create_sphere_obstruction(po->position.x, po->position.z,
 		                                    radius);
 	}
@@ -325,7 +325,7 @@ void GameAssetFactory::loadCapsuleCollider(int count, PhysicsObject* po,
 	float friction = lua[collider]["friction"];
 
 	po->addCapsuleCollider(posV, radius, height, bounciness, friction);
-	if (po->getType() != BodyType::STATIC) {
+	if (po->getType() != rp3d::BodyType::STATIC) {
 		gameWorld.create_sphere_obstruction(po->position.x, po->position.z,
 		                                    radius);
 	}
@@ -387,7 +387,7 @@ ScriptableObject* GameAssetFactory::loadScriptableObject(
 	so->rotation = rotation;
 	so->angle = angle;
 	so->savable = savable;
-	
+
 	return so;
 }
 
@@ -463,12 +463,12 @@ TerrainObject* GameAssetFactory::loadTerrainObject(
 	to->add_storage_text(lua["terrain"]["heightMap"], 4);
 	to->add_storage_text(lua["terrain"]["detailMap"], 5);
 
-	TerrainManager::setPlayableArea(tt, scale.y, height_size);
+	OldTerrainManager::setPlayableArea(tt, scale.y, height_size);
 
 	float min = lua["terrain"]["min"];
 	float max = lua["terrain"]["max"];
 	gameWorld.setMinMaxHeight(min, max);
-	gameWorld.setWorld();
+	gameWorld.setWorld("dead");
 
 	return to;
 }

@@ -1,8 +1,14 @@
 #include "DirectionalLight.hpp"
 
-DirectionalLight::DirectionalLight(glm::vec3 color, GLfloat aIntensity,
+#include <glm/gtc/matrix_transform.hpp>
+
+DirectionalLight::DirectionalLight(GLuint shadow_width, GLuint shadow_height,
+                                   glm::vec3 color, GLfloat aIntensity,
                                    glm::vec3 direction, GLfloat dIntensity)
-    : Light(color, aIntensity, dIntensity), m_direction(direction) {}
+    : Light(color, aIntensity, dIntensity), m_direction(direction) {
+	shadow_map_.init(shadow_width, shadow_height);
+	light_projection_ = glm::ortho(-64.0f, 64.0f, -64.0f, 64.0f, 1.0f, 256.0f);
+}
 
 void DirectionalLight::set_directional_light(glm::vec3 color,
                                              GLfloat aIntensity,
@@ -14,6 +20,12 @@ void DirectionalLight::set_directional_light(glm::vec3 color,
 	m_diffuseIntensity = dIntensity;
 }
 
+glm::mat4 DirectionalLight::calculate_light_transform() const {
+	return light_projection_ * glm::lookAt(-m_direction,
+	                                       glm::vec3(0.0f, 0.0f, 0.0f),
+	                                       glm::vec3(0.0f, 1.0f, 0.0f));
+}
+
 void DirectionalLight::UseLight(GLuint ambientColorLoc,
                                 GLuint ambientIntensityLoc, GLuint directionLoc,
                                 GLuint diffuseIntensityLoc) const {
@@ -22,4 +34,8 @@ void DirectionalLight::UseLight(GLuint ambientColorLoc,
 
 	glUniform3f(directionLoc, m_direction.x, m_direction.y, m_direction.z);
 	glUniform1f(diffuseIntensityLoc, m_diffuseIntensity);
+}
+
+const ShadowMap& DirectionalLight::get_shadow_map() const {
+	return shadow_map_;
 }

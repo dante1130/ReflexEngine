@@ -29,7 +29,7 @@ public:
 	 * @param spec_intensity The specular intensity of the material.
 	 * @return bool
 	 */
-	bool load_material(const std::string& material_name, float shine,
+	void load_material(const std::string& material_name, float shine,
 	                   float spec_intensity);
 
 	/**
@@ -38,14 +38,8 @@ public:
 	 * @param material_name
 	 * @return const Reflex::Material&
 	 */
-	const Reflex::Material& get_material(
-	    const std::string& material_name) const;
-
-	/**
-	 * @brief Destroy the Model Manager object
-	 */
-	~MaterialManager();
+	Reflex::Material& get_material(const std::string& material_name);
 
 private:
-	std::unordered_map<std::string, Reflex::Material*> material_hashmap;
+	std::unordered_map<std::string, Reflex::Material> material_hashmap;
 };

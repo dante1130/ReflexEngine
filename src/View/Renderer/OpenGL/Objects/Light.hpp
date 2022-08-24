@@ -14,7 +14,7 @@ public:
 
 	/**
 	 * @brief Parameterized constructor.
-	 *
+
 	 * @param color The color of the light.
 	 * @param aIntensity The ambient intensity of the light.
 	 * @param dIntensity The diffuse intensity of the light.
@@ -46,5 +46,9 @@ protected:
 	/// The intensity of the diffuse lighting.
 	GLfloat m_diffuseIntensity = {1.0f};
 
+	/// The light projection.
+	glm::mat4 light_projection_;
+
+	/// Whether the light is active.
 	bool is_active_ = false;
 };

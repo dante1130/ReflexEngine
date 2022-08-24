@@ -8,17 +8,14 @@ void Camera::lua_access() {
 	                                  "backward", Movement::backward, "left",
 	                                  Movement::left, "right", Movement::right);
 
-	lua.set_function("camera_pos_x", &Camera::cam_pos_x, this);
-	lua.set_function("camera_pos_y", &Camera::cam_pos_y, this);
-	lua.set_function("camera_pos_z", &Camera::cam_pos_z, this);
-	lua.set_function("camera_look_x", &Camera::cam_look_x, this);
-	lua.set_function("camera_look_y", &Camera::cam_look_y, this);
-	lua.set_function("camera_look_z", &Camera::cam_look_z, this);
-	lua.set_function("set_move_dir_x", &Camera::set_move_dir_x, this);
-	lua.set_function("set_move_dir_y", &Camera::set_move_dir_y, this);
-	lua.set_function("set_move_dir_z", &Camera::set_move_dir_z, this);
-	lua.set_function("toggle_noclip", &Camera::toggle_noclip, this);
-	lua.set_function("calculate_direction", &Camera::calculate_direction, this);
+	auto camera_table = lua.create_named_table("Camera");
+
+	camera_table.set_function("is_noclip", &Camera::is_noclip, this);
+	camera_table.set_function("get_position", &Camera::get_position, this);
+	camera_table.set_function("get_direction", &Camera::get_direction, this);
+	camera_table.set_function("set_position", &Camera::set_position, this);
+	camera_table.set_function("toggle_noclip", &Camera::toggle_noclip, this);
+	camera_table.set_function("move", &Camera::move, this);
 }
 
 Camera::Camera() { Update(); }
@@ -140,6 +137,8 @@ glm::vec3 Camera::get_direction() const { return glm::normalize(front_); }
 glm::vec3 Camera::get_move_direction() const { return direction_; }
 
 glm::vec3 Camera::get_up_world() const { return up_world_; }
+
+bool Camera::is_noclip() const { return is_noclip_; }
 
 void Camera::toggle_noclip() { is_noclip_ = !is_noclip_; }
 

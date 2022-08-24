@@ -9,14 +9,14 @@ out vec3 vColor;
 out vec2 texCoord;
 out vec3 normal;
 out vec3 fragPos;
+out vec4 directional_light_space_pos;
 
 uniform mat4 model;
 uniform mat4 projection;
 uniform mat4 view;
+uniform mat4 directional_light_transform;
 
 void main() {
-	gl_Position = projection * view * model * vec4(pos, 1.0f);
-
 	vColor = color;
 
 	texCoord = tex;
@@ -24,4 +24,9 @@ void main() {
 	normal = mat3(transpose(inverse(model))) * norm;
 
 	fragPos = (model * vec4(pos, 1.0f)).xyz;
+
+	gl_Position = projection * view * vec4(fragPos, 1.0f);
+
+	directional_light_space_pos =
+	    directional_light_transform * vec4(fragPos, 1.0f);
 }

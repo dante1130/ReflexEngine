@@ -1,5 +1,7 @@
 #include "Skybox.hpp"
 
+#include "StbImage.hpp"
+
 Skybox::Skybox(const std::vector<std::string>& faceLocations) {
 	m_skyShader = std::make_unique<Shader>();
 	m_skyShader->CompileFile("shaders/skybox.vert", "shaders/skybox.frag");
@@ -60,10 +62,13 @@ Skybox::Skybox(const std::vector<std::string>& faceLocations) {
 	    1.0f,  -1.0f, 1.0f,  0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
 
 	m_skyMesh = std::make_unique<Mesh>();
-	m_skyMesh->CreateMesh(skyboxVertices, skyboxIndices, 64, 36);
+	m_skyMesh->create_mesh(skyboxVertices, skyboxIndices, 64, 36);
 }
 
-void Skybox::DrawSkybox(glm::mat4 projectionMatrix, glm::mat4 viewMatrix) {
+void Skybox::DrawSkybox(glm::mat4 projectionMatrix,
+                        glm::mat4 viewMatrix) const {
+	if (!m_skyMesh) return;
+
 	viewMatrix = glm::mat4(glm::mat3(viewMatrix));
 
 	glDepthMask(GL_FALSE);
@@ -79,7 +84,7 @@ void Skybox::DrawSkybox(glm::mat4 projectionMatrix, glm::mat4 viewMatrix) {
 
 	m_skyShader->Validate();
 
-	m_skyMesh->RenderMesh();
+	m_skyMesh->render_mesh();
 
 	glDepthMask(GL_TRUE);
 }

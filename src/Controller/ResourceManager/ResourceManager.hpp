@@ -5,12 +5,14 @@
 #include "MaterialManager.hpp"
 #include "Md2ModelManager.hpp"
 #include "LightManager.hpp"
+#include "SkyboxManager.hpp"
+#include "MeshManager.hpp"
+#include "RigidbodyManager.hpp"
+#include "TerrainManager.hpp"
 
 /**
  * @class ResourceManager
- * @brief A singleton class for containing other asset managers; models, md2
- * models textures, and materials.
- *
+ * @brief A singleton class for containing other asset managers.
  */
 class ResourceManager {
 public:
@@ -56,6 +58,35 @@ public:
 	 */
 	LightManager& get_light_manager();
 
+	/**
+	 * @brief Get the skybox manager.
+	 *
+	 * @return SkyboxManager&
+	 */
+	SkyboxManager& get_skybox_manager();
+
+	/**
+	 * @brief Get the rigidbody manager.
+	 *
+	 * @return RigidbodyManager&
+	 */
+	RigidbodyManager& get_rigidbody_manager();
+
+	/**
+	 * @brief Get the mesh manager.
+	 *
+	 * @return MeshManager&
+	 */
+	MeshManager& get_mesh_manager();
+
+	/**
+	 * @brief Get the terrain manager.
+	 *
+	 * @return TerrainManager&
+	 */
+	TerrainManager& get_terrain_manager();
+
+
 	// These are deleted as a singleton pattern is used.
 	ResourceManager(ResourceManager& other) = delete;
 	ResourceManager(const ResourceManager& other) = delete;
@@ -64,19 +95,32 @@ public:
 
 private:
 	/// The texture manager.
-	TextureManager texture_manager_;
+	TextureManager texture_manager_ = {};
 
 	/// The model manager.
-	ModelManager model_manager_;
+	ModelManager model_manager_ = {};
 
 	/// The md2 model manager.
-	Md2ModelManager md2_model_manager_;
+	Md2ModelManager md2_model_manager_ = {};
 
 	/// The material manager.
-	MaterialManager material_manager_;
+	MaterialManager material_manager_ = {};
 
 	/// The light manager.
-	LightManager light_manager_;
+	LightManager light_manager_ = {};
+
+	/// The skybox manager.
+	SkyboxManager skybox_manager_ = {};
+
+	/// The rigidbody manager.
+	RigidbodyManager rigidbody_manager_;
+
+	/// The mesh manager.
+	MeshManager mesh_manager_ = {};
+
+	/// The terrain manager.
+	TerrainManager terrain_manager_ = {};
+
 
 	/**
 	 * @brief Construct a new Resource Manager object
