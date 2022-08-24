@@ -18,7 +18,7 @@ function update(ecs, entity)
 		Scene.load_scene("duckandcover3")
 	end
 
-	if(not Camera.is_noclip() and entity:any_rigidbody_component()) then
+	if (not Camera.is_noclip() and entity:any_rigidbody_component()) then
 		PhysicsMovement(ecs, entity)
 	else
 		PositionMovement(ecs, entity)
@@ -64,7 +64,6 @@ function update(ecs, entity)
 	end
 end
 
-
 function PositionMovement(ecs, entity)
 	local transform_component = entity:get_transform_component()
 	local transform = transform_component.position
@@ -89,10 +88,10 @@ function PositionMovement(ecs, entity)
 
 	transform_component.position = Camera.get_position()
 
-	if(entity:any_rigidbody_component()) then
+	if (entity:any_rigidbody_component()) then
 		local rb_comp = entity:get_rigidbody_component()
 		rb_comp:set_transform(transform_component.position, Math.vec3.new(0, 0, 0))
-		rb_comp.velocity = Math.vec3.new(0,0,0)
+		rb_comp.velocity = Math.vec3.new(0, 0, 0)
 		rb_comp.angular_velocity = Math.vec3.new(0, 0, 0)
 	end
 end
@@ -103,7 +102,7 @@ function PhysicsMovement(ecs, entity)
 	local speed_vec = Math.vec3.new(speed, speed * 0.1, speed)
 	local const_direction = Camera.get_direction()
 	local direction = const_direction
-	
+
 	if (Input.get_key_state("w"):is_key_hold()) then
 		direction = Math.mul(const_direction, speed_vec)
 		rb_comp:add_force(direction, Apply.LOCAL)
@@ -116,7 +115,7 @@ function PhysicsMovement(ecs, entity)
 	end
 
 	local up_vector = Math.vec3.new(0, 1, 0)
-	if(const_direction.x == 0 and const_direction.y == 1 and const_direction.z == 0) then
+	if (const_direction.x == 0 and const_direction.y == 1 and const_direction.z == 0) then
 		up_vector.x = 1
 		up_vector.y = 0
 	end
