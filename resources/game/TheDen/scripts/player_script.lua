@@ -59,6 +59,14 @@ function update(ecs, entity)
 		var.speed = var.speed * 2
 	end
 
+	if (Input.get_key_state("x"):is_key_pressed()) then
+		local cam_dir = Camera.get_direction()
+		local cam_pos = Camera.get_position()
+
+		DebugLogger.log("info", "Camera position: " .. cam_pos.x .. ", " .. cam_pos.y .. ", " .. cam_pos.z)
+		DebugLogger.log("info", "Camera direction:" .. cam_dir.x .. ", " .. cam_dir.y .. ", " .. cam_dir.z)
+	end
+
 	if (Time.is_paused()) then
 		dofile "game/TheDen/scripts/pause_menu.lua"
 	end

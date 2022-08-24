@@ -9,5 +9,6 @@ Scene.add_game_object("game/TheDen/prefabs/untitled.lua")
 Scene.add_game_object("game/TheDen/prefabs/TheDenCollisions.lua")
 Scene.add_game_object("game/TheDen/prefabs/CabinetCollisions.lua")
 Scene.add_game_object("game/TheDen/prefabs/lights/sunlight.lua")
+Scene.add_game_object("game/TheDen/prefabs/lights/theater_light.lua")
 
 Skybox.use_skybox("default")
