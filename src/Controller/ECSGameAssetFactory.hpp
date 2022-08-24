@@ -8,7 +8,8 @@
 #include "ECS/Entity.hpp"
 
 /**
- * @struct ECSGameAssetFactory
+ * @author Andrew Ho
+ * @class ECSGameAssetFactory
  * @brief A factory to register entities and its components from a lua file.
  */
 class ECSGameAssetFactory {
@@ -127,7 +128,6 @@ private:
 	 */
 	static bool is_lua_script(const std::string& lua_script);
 
-
-
-	static void load_rigidbody(Reflex::Entity& entity, const sol::table& rigidbody_table);
+	static void load_rigidbody(Reflex::Entity& entity,
+	                           const sol::table& rigidbody_table);
 };

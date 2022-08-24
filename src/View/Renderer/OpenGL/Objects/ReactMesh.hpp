@@ -7,6 +7,7 @@ using Line = rp3d::DebugRenderer::DebugLine;
 using Triangle = rp3d::DebugRenderer::DebugTriangle;
 
 /**
+ * @author Andrew Ho
  * @class ReactMesh
  * @brief A mesh class to be used in rendering debug lines and triangles for
  * ReactPhysics3D

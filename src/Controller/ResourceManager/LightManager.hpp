@@ -10,6 +10,7 @@
 #include "Model/Components/Light.hpp"
 
 /**
+ * @author Andrew Ho
  * @class LightManager
  * @brief The light manager is used to manage the resources regarding lights.
  */

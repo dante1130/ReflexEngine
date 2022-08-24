@@ -8,6 +8,7 @@
 #include "Controller/GUI/ECSGui.hpp"
 
 /**
+ * @author Andrew Ho
  * @class ECSScene
  * @brief A scene using ECS
  */

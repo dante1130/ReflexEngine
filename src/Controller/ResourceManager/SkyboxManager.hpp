@@ -9,6 +9,7 @@
 #include "View/Renderer/OpenGL/Objects/Skybox.hpp"
 
 /**
+ * @author Andrew Ho
  * @class SkyboxManager
  * @brief The skybox manager is used to manage the skybox faces to be used for
  * the skybox.

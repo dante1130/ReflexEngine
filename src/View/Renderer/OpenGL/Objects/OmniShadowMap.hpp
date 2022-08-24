@@ -3,6 +3,7 @@
 #include "ShadowMap.hpp"
 
 /**
+ * @author Andrew Ho
  * @class OmniShadowMap
  * @brief A shadowmap cast by omnidirectional lights.
  */

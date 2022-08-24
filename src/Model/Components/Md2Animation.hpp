@@ -5,6 +5,11 @@
 #include "View/Renderer/OpenGL/Objects/Md2.hpp"
 
 namespace Component {
+/**
+ * @author Andrew Ho
+ * @struct Md2Animation
+ * @brief A component that stores the animation data for a MD2 model.
+ */
 struct Md2Animation {
 	/// The name of the md2 model.
 	std::string md2_name = {"default"};

@@ -3,6 +3,7 @@
 #include <GLFW/glfw3.h>
 
 /**
+ * @author Andrew Ho
  * @class InputState
  * @brief A class that represents the state of a key.
  */

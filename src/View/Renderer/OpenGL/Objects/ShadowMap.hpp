@@ -5,6 +5,7 @@
 #include <glad/glad.h>
 
 /**
+ * @author Andrew Ho
  * @class ShadowMap
  * @brief A shadow map.
  */

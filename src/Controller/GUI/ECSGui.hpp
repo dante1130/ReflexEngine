@@ -8,6 +8,7 @@
 #include "Controller/ECS/Entity.hpp"
 
 /**
+ * @author Andrew Ho
  * @class ECSGui
  * @brief ImGui facade to display all the components of an entity in the scene.
  */
