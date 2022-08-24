@@ -262,6 +262,8 @@ uint32_t ReactResolve::addCapsuleCollider(glm::vec3 pos, float radius, float hei
 	return index;
 }
 
+void ReactResolve::deleteCollider(Collider* collider) { rb->removeCollider(collider); }
+
 glm::vec3 ReactResolve::getPosition() {
 	Vector3 p = rb->getTransform().getPosition();
 	return glm::vec3(p.x, p.y, p.z);

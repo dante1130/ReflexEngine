@@ -173,15 +173,14 @@ void System::draw_terrain(entt::registry& registry) {
 	    });
 }
 
-void System::init_rigidbody(entt::registry& registry, entt::entity entity)
-{
-	auto& rigidbody_manager = ResourceManager::get_instance().get_rigidbody_manager();
+void System::init_rigidbody(entt::registry& registry, entt::entity entity) {
+	auto& rigidbody_manager =
+	    ResourceManager::get_instance().get_rigidbody_manager();
 
 	auto& rigidbody = registry.get<Component::Rigidbody>(entity);
 	auto& transform = registry.get<Component::Transform>(entity);
 
 	rigidbody_manager.add_rigidbody(rigidbody, transform);
-
 }
 
 void System::init_script(entt::registry& registry, entt::entity entity) {
@@ -244,29 +243,20 @@ void System::init_statemachine(entt::registry& registry, entt::entity entity) {
 	statemachine.lua_variables = lua["entity"]["statemachine"]["var"];
 }
 
-void System::update_rigidbody(entt::registry& registry)
-{
-	if (EngineTime::is_paused())
+void System::update_rigidbody(entt::registry& registry) {
+	if (EngineTime::is_paused()) 
 		return;
 
-	static double accumulator;
-	accumulator += EngineTime::get_fixed_delta_time();
+	// Calls the physics world update
+	Physics::getPhysicsWorld()->update(EngineTime::get_fixed_delta_time());
 
-	//Calls the physics world update
-	while (accumulator > EngineTime::get_time_step())
-	{
-		Physics::getPhysicsWorld()->update(EngineTime::get_time_step());
-		accumulator -= EngineTime::get_time_step();
-	}
-	
-	auto& rigidbody_manager = ResourceManager::get_instance().get_rigidbody_manager();
+	auto& rigidbody_manager =
+	    ResourceManager::get_instance().get_rigidbody_manager();
 
-	
 	registry.view<Component::Rigidbody, Component::Transform>().each(
-		[&rigidbody_manager](auto& rigidbody, auto& transform)
-		{
-			rigidbody_manager.update_rigidbody(rigidbody, transform);
-		});
+	    [&rigidbody_manager](auto& rigidbody, auto& transform) {
+		    rigidbody_manager.update_rigidbody(rigidbody, transform);
+	    });
 }
 
 void System::update_directional_light(entt::registry& registry) {

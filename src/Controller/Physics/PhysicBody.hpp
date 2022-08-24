@@ -29,6 +29,7 @@ class PhysicsBody
 	private:
 		bool is_trigger = false;
 
+
 	protected:
 	    std::vector<rp3d::Collider*> colliders;
 
@@ -44,6 +45,8 @@ class PhysicsBody
 		std::unordered_map<rp3d::Collider*, rp3d::SphereShape*>  m_sphere;
 		std::unordered_map<rp3d::Collider*, rp3d::CapsuleShape*>  m_capsule;
 
+		virtual void deleteCollider(rp3d::Collider* collider) = 0;
+
 	public:
 
 		//collider access
@@ -55,12 +58,13 @@ class PhysicsBody
 		float getColliderFriction(size_t index);
 		float getColliderMassDesity(size_t index);
 		int getColliderType(size_t index);
-
+	    std::string getColliderName(size_t index);
 		void setObjectTrigger(bool ean);
 
-		const rp3d::BoxShape* getColliderBox(size_t index);
-		const rp3d::SphereShape* getColliderSphere(size_t index);
-		const rp3d::CapsuleShape* getColliderCapsule(size_t index);
+		std::vector<rp3d::Collider*> getColliders();
+		rp3d::BoxShape* getColliderBox(size_t index);
+		rp3d::SphereShape* getColliderSphere(size_t index);
+		rp3d::CapsuleShape* getColliderCapsule(size_t index);
 
 		void addMaterialToCollider(size_t index, float bounce, float mass_density, float friction);
 

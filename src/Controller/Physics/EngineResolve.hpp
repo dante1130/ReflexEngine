@@ -62,6 +62,8 @@ public:
 	uint32_t addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction) override;
 	uint32_t addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction) override;
 
+	void deleteCollider(rp3d::Collider* collider) override;
+
 	// returns for GameObject position and rotation
 	glm::vec3 getPosition() override;
 	glm::vec3 getRotation() override;

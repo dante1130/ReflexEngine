@@ -16,6 +16,7 @@
 #include "Model/Components/Remove.hpp"
 
 #include "Controller/AI/statemachineComponentHelper.hpp"
+#include "Controller/Physics/LoadOBJColliderData.hpp"
 
 using namespace Component;
 using namespace Reflex;
@@ -121,8 +122,7 @@ void ECSAccess::register_entity() {
 	entity_type["add_mesh_component"] = &Entity::add_component<Mesh>;
 	entity_type["add_stateMachine_component"] =
 	    &Entity::add_component<Statemachine>;
-	entity_type["add_rigidbody_component"] =
-		&Entity::add_component<Rigidbody>;
+	entity_type["add_rigidbody_component"] = &Entity::add_component<Rigidbody>;
 
 	entity_type["remove_transform_component"] =
 	    &Entity::remove_component<Transform>;
@@ -138,7 +138,7 @@ void ECSAccess::register_entity() {
 	entity_type["remove_statemachine_component"] =
 	    &Entity::remove_component<Statemachine>;
 	entity_type["remove_rigidbody_component"] =
-		&Entity::remove_component<Rigidbody>;
+	    &Entity::remove_component<Rigidbody>;
 
 	entity_type["get_transform_component"] = &Entity::get_component<Transform>;
 	entity_type["get_model_component"] = &Entity::get_component<Model>;
@@ -151,8 +151,7 @@ void ECSAccess::register_entity() {
 	entity_type["get_mesh_component"] = &Entity::get_component<Mesh>;
 	entity_type["get_statemachine_component"] =
 	    &Entity::get_component<Statemachine>;
-	entity_type["get_rigidbody_component"] =
-		&Entity::get_component<Rigidbody>;
+	entity_type["get_rigidbody_component"] = &Entity::get_component<Rigidbody>;
 
 	entity_type["any_transform_component"] = &Entity::any_component<Transform>;
 	entity_type["any_model_component"] = &Entity::any_component<Model>;
@@ -165,7 +164,6 @@ void ECSAccess::register_entity() {
 	entity_type["any_mesh_component"] = &Entity::any_component<Mesh>;
 	entity_type["any_mesh_statemachine"] = &Entity::any_component<Statemachine>;
 	entity_type["any_rigidbody_component"] = &Entity::any_component<Rigidbody>;
-
 }
 
 void ECSAccess::register_transform_component() {
@@ -352,19 +350,16 @@ void ECSAccess::register_statemachine_component() {
 }
 
 void ECSAccess::register_rigidbody_component() {
+	loadOBJColliderData::lua_access();
+
 	auto& lua = LuaManager::get_instance().get_state();
 
-	lua.new_enum("Apply",
-		"LOCAL", Apply::LOCAL,
-		"WORLD", Apply::WORLD
-	);
+	lua.new_enum("Apply", "LOCAL", Apply::LOCAL, "WORLD", Apply::WORLD);
 
-	lua.new_enum("ApplyPoint",
-		"LOCAL_LOCAL", ApplyPoint::LOCAL_LOCAL,
-		"LOCAL_WORLD", ApplyPoint::LOCAL_WORLD,
-		"WORLD_LOCAL", ApplyPoint::WORLD_LOCAL,
-		"WORLD_WORLD", ApplyPoint::WORLD_WORLD
-	);
+	lua.new_enum("ApplyPoint", "LOCAL_LOCAL", ApplyPoint::LOCAL_LOCAL,
+	             "LOCAL_WORLD", ApplyPoint::LOCAL_WORLD, "WORLD_LOCAL",
+	             ApplyPoint::WORLD_LOCAL, "WORLD_WORLD",
+	             ApplyPoint::WORLD_WORLD);
 
 	auto rigidbody_type = lua.new_usertype<Rigidbody>("Rigidbody");
 
@@ -372,11 +367,16 @@ void ECSAccess::register_rigidbody_component() {
 	rigidbody_type["get_position"] = &Rigidbody::getPosition;
 	rigidbody_type["get_rotation"] = &Rigidbody::getRotation;
 
-	rigidbody_type["can_sleep"] = sol::property(&Rigidbody::getCanSleep, &Rigidbody::setCanSleep);
-	rigidbody_type["is_trigger"] = sol::property(&Rigidbody::getIsTrigger, &Rigidbody::setObjectTrigger);
-	rigidbody_type["gravity_on"] = sol::property(&Rigidbody::getIsGravityEnabled, &Rigidbody::enableGravity);
-	rigidbody_type["linear_drag"] = sol::property(&Rigidbody::getDragForce, &Rigidbody::setDragForce);
-	rigidbody_type["angular_drag"] = sol::property(&Rigidbody::getDragTorque, &Rigidbody::setDragTorque);
+	rigidbody_type["can_sleep"] =
+	    sol::property(&Rigidbody::getCanSleep, &Rigidbody::setCanSleep);
+	rigidbody_type["is_trigger"] =
+	    sol::property(&Rigidbody::getIsTrigger, &Rigidbody::setObjectTrigger);
+	rigidbody_type["gravity_on"] = sol::property(
+	    &Rigidbody::getIsGravityEnabled, &Rigidbody::enableGravity);
+	rigidbody_type["linear_drag"] =
+	    sol::property(&Rigidbody::getDragForce, &Rigidbody::setDragForce);
+	rigidbody_type["angular_drag"] =
+	    sol::property(&Rigidbody::getDragTorque, &Rigidbody::setDragTorque);
 
 	rigidbody_type["add_force"] = &Rigidbody::addForce;
 	rigidbody_type["add_torque"] = &Rigidbody::addTorque;
@@ -388,4 +388,13 @@ void ECSAccess::register_rigidbody_component() {
 
 	rigidbody_type["remove_all_colliders"] = &Rigidbody::removeAllColliders;
 	rigidbody_type["remove_collider"] = &Rigidbody::removeCollider;
+
+	rigidbody_type["type"] =
+	    sol::property(&Rigidbody::getType, &Rigidbody::setType);
+
+	rigidbody_type["set_transform"] = &Rigidbody::setTransform;
+	rigidbody_type["velocity"] =
+	    sol::property(&Rigidbody::getVelocity, &Rigidbody::setVelocity);
+	rigidbody_type["angular_velocity"] =
+	    sol::property(&Rigidbody::getAngVelocity, &Rigidbody::setAngVelocity);
 }

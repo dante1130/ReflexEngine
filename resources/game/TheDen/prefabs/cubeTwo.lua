@@ -1,10 +1,10 @@
 entity = {
-	name = "Cube",
+	name = "Cube Two",
 
 	transform = {
 		position = {
-			x = 0,
-			y = 0,
+			x = 55,
+			y = 25,
 			z = 0
 		},
 		rotation = {
@@ -27,4 +27,5 @@ entity = {
 	script = {
 		lua_script = "game/TheDen/scripts/rb_add_script.lua"
 	}
+
 }

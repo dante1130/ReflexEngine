@@ -1,9 +1,9 @@
 entity = {
-	name = "Glass",
+	name = "TheDen",
 
 	transform = {
 		position = {
-			x = 500,
+			x = 50,
 			y = 0,
 			z = 0
 		},
@@ -20,7 +20,7 @@ entity = {
 	},
 
 	model = {
-		model_name = "GlassInScene",
+		model_name = "TheDen",
 		material_name = "shiny"
 	}
 }

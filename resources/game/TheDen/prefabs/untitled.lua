@@ -1,10 +1,10 @@
 entity = {
-	name = "Cube",
+	name = "OBJColliderLoaderTest",
 
 	transform = {
 		position = {
 			x = 0,
-			y = 0,
+			y = 10,
 			z = 0
 		},
 		rotation = {
@@ -13,18 +13,19 @@ entity = {
 			z = 0
 		},
 		scale = {
-			x = 0.25,
-			y = 0.25,
-			z = 0.25
+			x = 1,
+			y = 1,
+			z = 1
 		}
 	},
 
 	model = {
-		model_name = "default",
+		model_name = "OBJLoaderColliderTest",
 		material_name = "default"
 	},
 
 	script = {
-		lua_script = "game/TheDen/scripts/rb_add_script.lua"
+		lua_script = "game/TheDen/scripts/OBJLoaderColliderTest.lua"
 	}
+
 }
