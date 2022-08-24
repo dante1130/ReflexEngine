@@ -29,6 +29,7 @@ class PhysicsBody
 	private:
 		bool is_trigger = false;
 
+
 	protected:
 	    std::vector<rp3d::Collider*> colliders;
 
@@ -43,6 +44,8 @@ class PhysicsBody
 		std::unordered_map<rp3d::Collider*, rp3d::BoxShape*> m_box;
 		std::unordered_map<rp3d::Collider*, rp3d::SphereShape*>  m_sphere;
 		std::unordered_map<rp3d::Collider*, rp3d::CapsuleShape*>  m_capsule;
+
+		virtual void deleteCollider(rp3d::Collider* collider) = 0;
 
 	public:
 

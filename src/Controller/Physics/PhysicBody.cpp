@@ -20,6 +20,7 @@ void PhysicsBody::removeCollider(size_t index) {
 		default:
 			return;
 	}
+	deleteCollider(colliders[index]);
 	colliders.erase(colliders.begin() + index);
 }
 
@@ -27,6 +28,8 @@ void PhysicsBody::removeAllColliders() {
 	m_box.clear();
 	m_sphere.clear();
 	m_capsule.clear();
+
+	for (Collider* c : colliders) deleteCollider(c);
 
 	colliders.clear();
 }

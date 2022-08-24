@@ -185,6 +185,12 @@ uint32_t EngineResolve::addCapsuleCollider(glm::vec3 pos, float radius, float he
 	return 0;
 }
 
+void EngineResolve::deleteCollider(Collider* collider) {
+	cb->removeCollider(collider);
+}
+
+
+
 
 glm::vec3 EngineResolve::getPosition() {
 	return glm::vec3(0);
