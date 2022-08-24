@@ -8,8 +8,8 @@ in vec4 directional_light_space_pos;
 
 out vec4 color;
 
-const int MAX_POINT_LIGHTS = 16;
-const int MAX_SPOT_LIGHTS = 16;
+const int MAX_POINT_LIGHTS = 14;
+const int MAX_SPOT_LIGHTS = 14;
 
 struct Light {
 	vec3 color;
