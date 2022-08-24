@@ -8,8 +8,8 @@ in vec4 directional_light_space_pos;
 
 out vec4 color;
 
-const int MAX_POINT_LIGHTS = 16;
-const int MAX_SPOT_LIGHTS = 16;
+const int MAX_POINT_LIGHTS = 8;
+const int MAX_SPOT_LIGHTS = 8;
 
 struct Light {
 	vec3 color;
@@ -36,10 +36,10 @@ struct SpotLight {
 	float edge;
 };
 
-struct OmniShadowMap {
-	samplerCube shadow_map;
-	float far_plane;
-};
+// struct OmniShadowMap {
+// 	samplerCube shadow_map;
+// 	float far_plane;
+// };
 
 struct Material {
 	float specularIntensity;
@@ -59,7 +59,10 @@ uniform SpotLight spotLights[MAX_SPOT_LIGHTS];
 uniform sampler2D theTexture;
 uniform sampler2D directional_shadow_map;
 uniform sampler2D detailmap;
-uniform OmniShadowMap omni_shadow_maps[MAX_POINT_LIGHTS + MAX_SPOT_LIGHTS];
+
+// uniform OmniShadowMap omni_shadow_maps[MAX_POINT_LIGHTS + MAX_SPOT_LIGHTS];
+uniform samplerCube omni_shadow_maps[MAX_POINT_LIGHTS + MAX_SPOT_LIGHTS];
+uniform float omni_far_planes[MAX_POINT_LIGHTS + MAX_SPOT_LIGHTS];
 
 uniform Material material;
 
@@ -116,15 +119,14 @@ float calc_omni_shadow_factor(PointLight light, int shadow_index) {
 
 	float view_distance = length(eyePosition - fragPos);
 	float disk_radius =
-	    (1.0 + (view_distance / omni_shadow_maps[shadow_index].far_plane)) /
-	    25.0;
+	    (1.0 + (view_distance / omni_far_planes[shadow_index])) / 25.0;
 
 	for (int i = 0; i < samples; ++i) {
 		float closest =
-		    texture(omni_shadow_maps[shadow_index].shadow_map,
+		    texture(omni_shadow_maps[shadow_index],
 		            frag_to_light + sampleOffsetDirections[i] * disk_radius)
 		        .r;
-		closest *= omni_shadow_maps[shadow_index].far_plane;
+		closest *= omni_far_planes[shadow_index];
 
 		if (current - bias > closest) {
 			shadow += 1.0;
