@@ -6,8 +6,8 @@
 #include <fstream>
 #include <string>
 
-#define BOUNCE 0.1
-#define FRICTION 0.25
+constexpr float BOUNCE = 0.1;
+constexpr float FRICTION = 0.25;
 
 float min(float min_val, float new_val, bool first);
 float max(float max_val, float new_val, bool first);
@@ -19,13 +19,8 @@ void loadOBJColliderData::lua_access() {
 	                 &loadOBJColliderData::load_obj_collider_data);
 }
 
-void loadOBJColliderData::load_obj_collider_data(Reflex::Entity &entity,
+void loadOBJColliderData::load_obj_collider_data(Component::Rigidbody &rb_comp,
                                                  const std::string &file) {
-	if (!entity.any_component<Component::Rigidbody>()) {
-		return;
-	}
-	Component::Rigidbody rb_comp = entity.get_component<Component::Rigidbody>();
-
 	// Opens file
 	std::ifstream open_file(file);
 	if (!open_file.is_open()) {
