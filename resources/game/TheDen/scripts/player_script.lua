@@ -10,7 +10,7 @@ function init(ecs, entity)
 	entity:add_rigidbody_component()
 	local rb = entity:get_rigidbody_component()
 	rb:add_box_collider(Math.vec3.new(0, -0.8, 0), Math.vec3.new(0.5, 1.8, 0.5), 0.5, 0.5)
-	rb.linear_drag = 1
+	rb.linear_drag = 0.0
 end
 
 function update(ecs, entity)
@@ -114,13 +114,35 @@ function PhysicsMovement(ecs, entity)
 		direction = Math.mul(-1, direction)
 		rb_comp:add_force(direction, Apply.LOCAL)
 	end
-	
+
+	local up_vector = Math.vec3.new(0, 1, 0)
+	if(const_direction.x == 0 and const_direction.y == 1 and const_direction.z == 0) then
+		up_vector.x = 1
+		up_vector.y = 0
+	end
+
+	local strafe_vector = Math.cross(const_direction, up_vector)
+	if (Input.get_key_state("d"):is_key_hold()) then
+		direction = Math.mul(strafe_vector, speed_vec)
+		rb_comp:add_force(direction, Apply.LOCAL)
+	end
+
+	if (Input.get_key_state("a"):is_key_hold()) then
+		direction = Math.mul(strafe_vector, speed_vec)
+		direction = Math.mul(-1, direction)
+		rb_comp:add_force(direction, Apply.LOCAL)
+	end
+
 	local velocity = rb_comp.velocity
+	local velocity_y = velocity.y
+	velocity.y = 0
 	local ratio = Math.length(velocity) / var.speed
 	if (ratio > 1) then
 		velocity = Math.div(velocity, ratio)
+		velocity.y = velocity_y
 		rb_comp.velocity = velocity
 	end
+
 
 	rb_comp.angular_velocity = Math.vec3.new(0, 0, 0)
 	local transform_component = entity:get_transform_component()
