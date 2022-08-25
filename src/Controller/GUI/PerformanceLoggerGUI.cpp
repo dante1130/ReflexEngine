@@ -3,6 +3,8 @@
 #include "View/guiManager.hpp"
 #include "Controller/GUI/DebugLogger.hpp"
 
+constexpr float INDENT_AMOUNT = 25.0f;
+
 void PerformanceLoggerGUI::draw() {
 	std::vector<Performance_Log> logs = PerformanceLogger::GetLogs();
 	for (int count = 0; count < logs.size(); count++) {
@@ -36,7 +38,9 @@ int PerformanceLoggerGUI::draw_recursive(std::vector<Performance_Log> &logs,
 
 				indent = logs[count].indent;
 				if (open) {
+					ImGui::Indent(INDENT_AMOUNT);
 					count = draw_recursive(logs, count + 1, indent);
+					ImGui::Indent(-INDENT_AMOUNT);
 					draw = true;
 				} else {
 					draw = false;
@@ -56,6 +60,7 @@ int PerformanceLoggerGUI::draw_recursive(std::vector<Performance_Log> &logs,
 }
 
 void PerformanceLoggerGUI::draw_entry(std::string name, double time) {
-	name = name + " " + std::to_string(time);
 	ImGui::Text(name.c_str());
+	ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
+	ImGui::Text(std::to_string(time).c_str());
 }

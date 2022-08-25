@@ -46,24 +46,22 @@ Entity& ECS::create_entity(const std::string& name) {
 }
 
 void ECS::update(double delta_time) {
-	PERFORMANCE_LOGGER_PUSH("Update script");
+	PERFORMANCE_LOGGER_PUSH("Script");
 	System::update_script(registry_);
 	PERFORMANCE_LOGGER_POP();
-	PERFORMANCE_LOGGER_PUSH("Update directional light");
+	PERFORMANCE_LOGGER_PUSH("Directional light");
 	System::update_directional_light(registry_);
 	PERFORMANCE_LOGGER_POP();
-	PERFORMANCE_LOGGER_PUSH("Update point light");
+	PERFORMANCE_LOGGER_PUSH("Point light");
 	System::update_point_light(registry_);
 	PERFORMANCE_LOGGER_POP();
-	PERFORMANCE_LOGGER_PUSH("Update spot light");
+	PERFORMANCE_LOGGER_PUSH("Spot light");
 	System::update_spot_light(registry_);
 	PERFORMANCE_LOGGER_POP();
-	PERFORMANCE_LOGGER_PUSH("Update md2");
-	PERFORMANCE_LOGGER_PUSH("testing");
-	PERFORMANCE_LOGGER_POP();
+	PERFORMANCE_LOGGER_PUSH("md2");
 	System::update_md2(registry_);
 	PERFORMANCE_LOGGER_POP();
-	PERFORMANCE_LOGGER_PUSH("Update statemachine");
+	PERFORMANCE_LOGGER_PUSH("Statemachine");
 	System::update_statemachine(*this);
 	PERFORMANCE_LOGGER_POP();
 }

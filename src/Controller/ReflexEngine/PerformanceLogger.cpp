@@ -32,19 +32,21 @@ void PerformanceLogger::Pop() {
 	}
 	std::chrono::steady_clock::time_point end_time =
 	    std::chrono::steady_clock::now();
-	Performance_Log &log = logs[size - 1];
-	if (log.time_taken >= 0) {
-		current_indent--;
-		logs[log.parent_index].time_taken =
-		    std::chrono::duration_cast<std::chrono::nanoseconds>(
-		        end_time - logs[log.parent_index].start_time)
-		        .count() /
-		    miliseconds_in_nanoseconds;
-	} else {
-		log.time_taken = std::chrono::duration_cast<std::chrono::nanoseconds>(
-		                     end_time - log.start_time)
-		                     .count() /
-		                 miliseconds_in_nanoseconds;
+
+	int index = size - 1;
+	while (true) {
+		if (logs[index].time_taken >= 0) {
+			if (logs[index].parent_index == -1) break;
+			index = logs[index].parent_index;
+		} else {
+			logs[index].time_taken =
+			    std::chrono::duration_cast<std::chrono::nanoseconds>(
+			        end_time - logs[index].start_time)
+			        .count() /
+			    miliseconds_in_nanoseconds;
+			current_indent = logs[index].indent;
+			break;
+		}
 	}
 }
 
@@ -52,4 +54,7 @@ const std::vector<Performance_Log> &PerformanceLogger::GetLogs() {
 	return logs;
 }
 
-void PerformanceLogger::ClearLogs() { logs.clear(); }
+void PerformanceLogger::ClearLogs() {
+	logs.clear();
+	current_indent = 0;
+}

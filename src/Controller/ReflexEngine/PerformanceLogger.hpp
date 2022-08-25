@@ -28,7 +28,7 @@ struct Performance_Log {
 	/// The indent for recursive logs
 	int indent = 0;
 	/// The parent index for recursive logs
-	uint64_t parent_index = -1;
+	int parent_index = -1;
 };
 
 /**
