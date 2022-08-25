@@ -1,13 +1,13 @@
 #include "DirectionalLight.hpp"
 
-#include <glm/gtc/matrix_transform.hpp>
-
 DirectionalLight::DirectionalLight(GLuint shadow_width, GLuint shadow_height,
-                                   glm::vec3 color, GLfloat aIntensity,
-                                   glm::vec3 direction, GLfloat dIntensity)
-    : Light(color, aIntensity, dIntensity), m_direction(direction) {
+                                   const glm::mat4& light_projection,
+                                   const glm::vec3& color, GLfloat aIntensity,
+                                   const glm::vec3& direction,
+                                   GLfloat dIntensity)
+    : Light(color, aIntensity, dIntensity, light_projection),
+      m_direction(direction) {
 	shadow_map_.init(shadow_width, shadow_height);
-	light_projection_ = glm::ortho(-64.0f, 64.0f, -64.0f, 64.0f, 1.0f, 256.0f);
 }
 
 void DirectionalLight::set_directional_light(glm::vec3 color,

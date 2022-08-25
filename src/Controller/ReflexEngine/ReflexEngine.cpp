@@ -56,7 +56,6 @@ void ReflexEngine::run() {
 		if (EngineTime::is_paused()) {
 			EngineTime::force_delta_time(0.0);
 		} else {
-			Physics::updateWorld(EngineTime::get_delta_time());
 			scene.mouse_controls(engine.window_.get_x_offset(),
 			                     engine.window_.get_y_offset());
 		}
@@ -69,8 +68,8 @@ void ReflexEngine::run() {
 			dataMgr.setDynamicBoolData("save_game", false);
 		} else {
 			if (EngineTime::is_time_step_passed()) {
+				Physics::updateWorld(EngineTime::get_fixed_delta_time());
 				scene.fixed_update(EngineTime::get_fixed_delta_time());
-				EngineTime::reset_fixed_delta_time();
 			}
 			PERFORMANCE_LOGGER_PUSH("Update");
 			scene.update(EngineTime::get_delta_time());
@@ -92,6 +91,10 @@ void ReflexEngine::run() {
 		gui::mainLoopEnd();
 
 		engine.window_.swap_buffers();
+
+		if (EngineTime::is_time_step_passed()) {
+			EngineTime::reset_fixed_delta_time();
+		}
 	}
 
 	engine.scene_manager_.clear_scenes();

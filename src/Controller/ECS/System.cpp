@@ -247,7 +247,7 @@ void System::update_rigidbody(entt::registry& registry) {
 	if (EngineTime::is_paused()) return;
 
 	// Calls the physics world update
-	Physics::getPhysicsWorld()->update(EngineTime::get_fixed_delta_time());
+	// Physics::getPhysicsWorld()->update(EngineTime::get_delta_time());
 
 	auto& rigidbody_manager =
 	    ResourceManager::get_instance().get_rigidbody_manager();

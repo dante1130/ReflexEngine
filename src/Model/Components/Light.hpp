@@ -20,18 +20,25 @@ struct Light {
 	float ambient_intensity = 0.0f;
 	/// The diffuse intensity of the light.
 	float diffuse_intensity = 1.0f;
+	/// The near plane of the light's projection.
+	float near_plane = 1.0f;
+	/// The far plane of the light's projection.
+	float far_plane = 100.0f;
 
 	Light() = default;
 
 	Light(const Light&) = default;
 
-	Light(uint32_t shadow_width, uint32_t shadow_height, const glm::vec3& color,
-	      float ambient_intensity, float diffuse_intensity)
+	Light(uint32_t shadow_width, uint32_t shadow_height, float near_plane,
+	      float far_plane, const glm::vec3& color, float ambient_intensity,
+	      float diffuse_intensity)
 	    : shadow_width(shadow_width),
 	      shadow_height(shadow_height),
 	      color(color),
 	      ambient_intensity(ambient_intensity),
-	      diffuse_intensity(diffuse_intensity) {}
+	      diffuse_intensity(diffuse_intensity),
+	      near_plane(near_plane),
+	      far_plane(far_plane) {}
 };
 
 /**
@@ -40,6 +47,14 @@ struct Light {
  * @brief A directional light component.
  */
 struct DirectionalLight : public Light {
+	/// The orthogonal left vector of the light's projection.
+	float ortho_left = -64.0f;
+	/// The orthogonal right vector of the light's projection.
+	float ortho_right = 64.0f;
+	/// The orthogonal bottom vector of the light's projection.
+	float ortho_bottom = -64.0f;
+	/// The orthogonal top vector of the light's projection.
+	float ortho_top = 64.0f;
 	/// The direction of the light.
 	glm::vec3 direction = glm::vec3(0.0f, -1.0f, 0.0f);
 
@@ -48,10 +63,16 @@ struct DirectionalLight : public Light {
 	DirectionalLight(const DirectionalLight&) = default;
 
 	DirectionalLight(uint32_t shadow_width, uint32_t shadow_height,
+	                 float near_plane, float far_plane, float ortho_left,
+	                 float ortho_right, float ortho_bottom, float ortho_top,
 	                 const glm::vec3& color, float ambient_intensity,
 	                 float diffuse_intensity, const glm::vec3& direction)
-	    : Light(shadow_width, shadow_height, color, ambient_intensity,
-	            diffuse_intensity),
+	    : Light(shadow_width, shadow_height, near_plane, far_plane, color,
+	            ambient_intensity, diffuse_intensity),
+	      ortho_left(ortho_left),
+	      ortho_right(ortho_right),
+	      ortho_bottom(ortho_bottom),
+	      ortho_top(ortho_top),
 	      direction(direction) {}
 };
 
@@ -71,10 +92,6 @@ struct PointLight : public Light {
 	float quadratic = 0.0f;
 	/// The point light id in the Light manager.
 	size_t light_id = 0ULL;
-	/// The near plane of the light projection.
-	float near_plane = 0.1f;
-	/// The far plane of the light projection.
-	float far_plane = 100.0f;
 
 	PointLight() = default;
 
@@ -84,14 +101,12 @@ struct PointLight : public Light {
 	           float far_plane, const glm::vec3& color, float ambient_intensity,
 	           float diffuse_intensity, const glm::vec3& position,
 	           float constant, float linear, float quadratic)
-	    : Light(shadow_width, shadow_height, color, ambient_intensity,
-	            diffuse_intensity),
+	    : Light(shadow_width, shadow_height, near_plane, far_plane, color,
+	            ambient_intensity, diffuse_intensity),
 	      position(position),
 	      constant(constant),
 	      linear(linear),
-	      quadratic(quadratic),
-	      near_plane(near_plane),
-	      far_plane(far_plane) {}
+	      quadratic(quadratic) {}
 };
 
 /**

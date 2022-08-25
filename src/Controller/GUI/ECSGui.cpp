@@ -225,9 +225,9 @@ void ECSGui::draw_mesh(Reflex::Entity& entity) {
 	}
 
 	if (open) {
-		input_text("Mesh", mesh.mesh_name);
-		input_text("Texture", mesh.texture_name);
-		input_text("Material", mesh.material_name);
+		input_text("Mesh name", mesh.mesh_name);
+		input_text("Texture name", mesh.texture_name);
+		input_text("Material name", mesh.material_name);
 	}
 
 	ImGui::PopID();
@@ -246,8 +246,8 @@ void ECSGui::draw_model(Reflex::Entity& entity) {
 	}
 
 	if (open) {
-		input_text("Model", model.model_name);
-		input_text("Material", model.material_name);
+		input_text("Model name", model.model_name);
+		input_text("Material name", model.material_name);
 	}
 
 	ImGui::PopID();
@@ -266,9 +266,9 @@ void ECSGui::draw_md2_animation(Reflex::Entity& entity) {
 	}
 
 	if (open) {
-		input_text("Md2 model", md2_animation.md2_name);
-		input_text("Texture", md2_animation.texture_name);
-		input_text("Material", md2_animation.material_name);
+		input_text("Md2 model name", md2_animation.md2_name);
+		input_text("Texture name", md2_animation.texture_name);
+		input_text("Material name", md2_animation.material_name);
 
 		draw_animation_state(entity);
 
@@ -328,10 +328,10 @@ void ECSGui::draw_terrain(Reflex::Entity& entity) {
 	}
 
 	if (open) {
-		input_text("Terrain", terrain.terrain_name);
-		input_text("Texture", terrain.texture_name);
-		input_text("Material", terrain.material_name);
-		input_text("Detailmap", terrain.detailmap_name);
+		input_text("Terrain name", terrain.terrain_name);
+		input_text("Texture name", terrain.texture_name);
+		input_text("Material name", terrain.material_name);
+		input_text("Detailmap name", terrain.detailmap_name);
 	}
 
 	ImGui::PopID();

@@ -14,8 +14,8 @@ public:
 	 * @brief Construct a new Spot Light object
 	 * @param shadow_width The width of the shadow map.
 	 * @param shadow_height The height of the shadow map.
-	 * @param near The near plane of the shadow map.
-	 * @param far The far plane of the shadow map.
+	 * @param light_projection The light projection, perspective.
+	 * @param far_plane The far plane of the shadow map.
 	 * @param color The color of the light
 	 * @param aIntensity The ambient intensity of the light
 	 * @param dIntensity The diffuse intensity of the light
@@ -25,9 +25,10 @@ public:
 	 * @param quadratic The quadratic attenuation of the light
 	 * @param edge The cutoff angle of the spotlight
 	 */
-	SpotLight(GLuint shadow_width, GLuint shadow_height, GLfloat near,
-	          GLfloat far, glm::vec3 color, GLfloat aIntensity,
-	          GLfloat dIntensity, glm::vec3 position, glm::vec3 direction,
+	SpotLight(GLuint shadow_width, GLuint shadow_height,
+	          const glm::mat4& light_projection, GLfloat far_plane,
+	          const glm::vec3& color, GLfloat aIntensity, GLfloat dIntensity,
+	          const glm::vec3& position, const glm::vec3& direction,
 	          GLfloat constant, GLfloat linear, GLfloat quadratic,
 	          GLfloat edge);
 
