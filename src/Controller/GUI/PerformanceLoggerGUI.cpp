@@ -9,6 +9,9 @@ constexpr float INDENT_AMOUNT = 25.0f;
 void PerformanceLoggerGUI::draw() {
 	std::vector<Performance_Log> logs = PerformanceLogger::GetLogs();
 	int size = static_cast<int>(logs.size());
+	if (size == 0) {
+		return;
+	}
 	std::unordered_map<int, bool> opened_headers;
 	bool open = false;
 	for (int count = 0; count < size - 1; count++) {
