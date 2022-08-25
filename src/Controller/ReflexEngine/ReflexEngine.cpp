@@ -15,6 +15,8 @@
 #include "Model/singletons.h"
 #include "Controller/GUI/DebugLogger.hpp"
 #include "ReflexAssertion.hpp"
+#include "Controller/ReflexEngine/PerformanceLogger.hpp"
+#include "Controller/GUI/DebugGUI.hpp"
 
 void ReflexEngine::run() {
 	auto& engine = ReflexEngine::get_instance();
@@ -69,13 +71,21 @@ void ReflexEngine::run() {
 				Physics::updateWorld(EngineTime::get_fixed_delta_time());
 				scene.fixed_update(EngineTime::get_fixed_delta_time());
 			}
-
+			PERFORMANCE_LOGGER_PUSH("Update");
 			scene.update(EngineTime::get_delta_time());
+			PERFORMANCE_LOGGER_POP();
+			PERFORMANCE_LOGGER_PUSH("Garbage collection");
 			scene.garbage_collection();
+			PERFORMANCE_LOGGER_POP();
+			PERFORMANCE_LOGGER_PUSH("Add draw call");
 			scene.add_draw_call();
+			PERFORMANCE_LOGGER_POP();
+			PERFORMANCE_LOGGER_PUSH("Draw");
 			engine.renderer_.draw();
+			PERFORMANCE_LOGGER_POP();
 		}
 
+		DebugGUI::draw();  // DO NOT PERFORMANCE LOGGER THIS
 		DebugLogger::draw();
 
 		gui::mainLoopEnd();
