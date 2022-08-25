@@ -23,7 +23,7 @@ size_t LightManager::add_point_light(const PointLightData& light_data) {
 
 	point_lights_[id] = PointLight(
 	    1024, 1024,
-	    glm::perspective(90.0F,
+	    glm::perspective(glm::radians(90.0F),
 	                     static_cast<float>(1024) / static_cast<float>(1024),
 	                     0.1F, 100.0F),
 	    100.0f, light_data.color, light_data.ambient_intensity,
@@ -39,12 +39,13 @@ size_t LightManager::add_point_light(const Component::PointLight& light) {
 	const float aspect = static_cast<float>(light.shadow_width) /
 	                     static_cast<float>(light.shadow_height);
 
-	point_lights_[id] = PointLight(
-	    light.shadow_width, light.shadow_height,
-	    glm::perspective(90.0F, aspect, light.near_plane, light.far_plane),
-	    light.far_plane, light.color, light.ambient_intensity,
-	    light.diffuse_intensity, light.position, light.constant, light.linear,
-	    light.quadratic);
+	point_lights_[id] =
+	    PointLight(light.shadow_width, light.shadow_height,
+	               glm::perspective(glm::radians(90.0F), aspect,
+	                                light.near_plane, light.far_plane),
+	               light.far_plane, light.color, light.ambient_intensity,
+	               light.diffuse_intensity, light.position, light.constant,
+	               light.linear, light.quadratic);
 
 	return id;
 }
@@ -54,7 +55,7 @@ size_t LightManager::add_spot_light(const SpotLightData& light_data) {
 
 	spot_lights_[id] = SpotLight(
 	    2048, 2048,
-	    glm::perspective(90.0F,
+	    glm::perspective(glm::radians(90.0F),
 	                     static_cast<float>(1024) / static_cast<float>(1024),
 	                     0.1F, 100.0F),
 	    100.0f, light_data.color, light_data.ambient_intensity,
@@ -71,12 +72,13 @@ size_t LightManager::add_spot_light(const Component::SpotLight& light) {
 	const float aspect = static_cast<float>(light.shadow_width) /
 	                     static_cast<float>(light.shadow_height);
 
-	spot_lights_[id] = SpotLight(
-	    light.shadow_width, light.shadow_height,
-	    glm::perspective(90.0F, aspect, light.near_plane, light.far_plane),
-	    light.far_plane, light.color, light.ambient_intensity,
-	    light.diffuse_intensity, light.position, light.direction,
-	    light.constant, light.linear, light.quadratic, light.edge);
+	spot_lights_[id] =
+	    SpotLight(light.shadow_width, light.shadow_height,
+	              glm::perspective(glm::radians(90.0F), aspect,
+	                               light.near_plane, light.far_plane),
+	              light.far_plane, light.color, light.ambient_intensity,
+	              light.diffuse_intensity, light.position, light.direction,
+	              light.constant, light.linear, light.quadratic, light.edge);
 
 	return id;
 }
