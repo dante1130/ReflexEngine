@@ -19,22 +19,15 @@ public:
 	 *
 	 * @param shadow_width The width of the shadow map.
 	 * @param shadow_height The height of the shadow map.
-	 * @param ortho_left The left of the orthographic projection.
-	 * @param ortho_right The right of the orthographic projection.
-	 * @param ortho_bottom The bottom of the orthographic projection.
-	 * @param ortho_top The top of the orthographic projection.
-	 * @param ortho_near The near of the orthographic projection.
-	 * @param ortho_far The far of the orthographic projection.
+	 * @param light_projection The light projection, orthogonal.
 	 * @param color The color of the light.
 	 * @param aIntensity The ambient intensity of the light.
 	 * @param direction The direction of the light.
 	 * @param dIntensity The diffuse intensity of the light.
 	 */
 	DirectionalLight(GLuint shadow_width, GLuint shadow_height,
-	                 GLfloat ortho_left, GLfloat ortho_right,
-	                 GLfloat ortho_bottom, GLfloat ortho_top,
-	                 GLfloat ortho_near, GLfloat ortho_far, glm::vec3 color,
-	                 GLfloat aIntensity, glm::vec3 direction,
+	                 const glm::mat4& light_projection, const glm::vec3& color,
+	                 GLfloat aIntensity, const glm::vec3& direction,
 	                 GLfloat dIntensity);
 
 	/**
