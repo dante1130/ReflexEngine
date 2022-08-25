@@ -11,14 +11,10 @@ void DebugGUI::draw() {
 
 	ImGui::Begin("Debug Menu", nullptr, window_flags);
 
-	if (ImGui::CollapsingHeader("Performance Times",
-	                            ImGuiTreeNodeFlags_AllowItemOverlap)) {
-		PERFORMANCE_LOGGER_POP();
-		ImGui::Indent(INDENT_AMOUNT);
-		PerformanceLoggerGUI::draw();
-		ImGui::Indent(-INDENT_AMOUNT);
-		PERFORMANCE_LOGGER_PUSH("Total Engine Time");
-	}
+	// Performance logger
+	PERFORMANCE_LOGGER_POP();
+	PerformanceLoggerGUI::draw();
+	PERFORMANCE_LOGGER_PUSH("Total Engine Time");
 
 	ImGui::End();
 }

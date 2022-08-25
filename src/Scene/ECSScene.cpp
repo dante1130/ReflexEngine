@@ -37,7 +37,6 @@ void ECSScene::fixed_update(double delta_time) {
 
 void ECSScene::add_draw_call() {
 	ecs_gui_.draw(ecs_);
-	DebugGUI::draw();
 	ecs_.draw();
 }
 

@@ -2,65 +2,63 @@
 #include <iostream>
 #include "View/guiManager.hpp"
 #include "Controller/GUI/DebugLogger.hpp"
+#include <unordered_map>
 
 constexpr float INDENT_AMOUNT = 25.0f;
 
 void PerformanceLoggerGUI::draw() {
 	std::vector<Performance_Log> logs = PerformanceLogger::GetLogs();
-	for (int count = 0; count < logs.size(); count++) {
-		std::string name =
-		    logs[count].name + " " + std::to_string(logs[count].indent);
-		DebugLogger::log("Performance logger", name);
+	int size = static_cast<int>(logs.size());
+	std::unordered_map<int, bool> opened_headers;
+	bool open = false;
+	for (int count = 0; count < size - 1; count++) {
+		// Should be a header
+		if (logs[count].indent < logs[count + 1].indent) {
+			if (logs[count].indent != 0) {
+				if (opened_headers[logs[count].indent]) {
+					open = draw_header_entry(logs[count].name,
+					                         logs[count].time_taken);
+					opened_headers.insert({logs[count].indent + 1, open});
+					opened_headers[logs[count].indent + 1] = open;  // Yes
+				}
+			} else {  // If not a header
+				open =
+				    draw_header_entry(logs[count].name, logs[count].time_taken);
+				opened_headers.insert({logs[count].indent + 1, open});
+				opened_headers[logs[count].indent + 1] = open;  // Yes
+			}
+
+		} else if (opened_headers[logs[count].indent]) {
+			draw_entry(logs[count].name, logs[count].time_taken);
+		}
+
+		// Sets the indents
+		if (logs[count].indent < logs[count + 1].indent) {
+			ImGui::Indent(INDENT_AMOUNT);
+		} else if (logs[count].indent > logs[count + 1].indent) {
+			ImGui::Indent(-INDENT_AMOUNT);
+			opened_headers[logs[count].indent] =
+			    false;  // Close up open header after it de-indents
+		}
 	}
 
-	if (logs.size() != 0) {
-		draw_recursive(logs, 0, 0);
+	if (opened_headers[logs[size - 1].indent]) {
+		draw_entry(logs[size - 1].name, logs[size - 1].time_taken);
 	}
 
 	PerformanceLogger::ClearLogs();
-}
-
-int PerformanceLoggerGUI::draw_recursive(std::vector<Performance_Log> &logs,
-                                         int index, int indent) {
-	std::string input_line = logs[index].name;
-	uint64_t size = logs.size();
-	bool open;
-	bool draw = true;
-	for (int count = index; count < size; count++) {
-		// If not at end
-		if (count + 1 < size) {
-			if (logs[count].indent < logs[count + 1].indent && draw) {
-				open = ImGui::CollapsingHeader(
-				    logs[count].name.c_str(),
-				    ImGuiTreeNodeFlags_AllowItemOverlap);
-				ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
-				ImGui::Text(std::to_string(logs[count].time_taken).c_str());
-
-				indent = logs[count].indent;
-				if (open) {
-					ImGui::Indent(INDENT_AMOUNT);
-					count = draw_recursive(logs, count + 1, indent);
-					ImGui::Indent(-INDENT_AMOUNT);
-					draw = true;
-				} else {
-					draw = false;
-				}
-			} else if (logs[count].indent > logs[count + 1].indent && draw) {
-				draw_entry(logs[count].name, logs[count].time_taken);
-				return count;
-			} else if (draw) {
-				draw_entry(logs[count].name, logs[count].time_taken);
-			}
-
-		} else if (draw || logs[count].indent <= indent) {  // If at end
-			draw_entry(logs[count].name, logs[count].time_taken);
-		}
-	}
-	return size;
 }
 
 void PerformanceLoggerGUI::draw_entry(std::string name, double time) {
 	ImGui::Text(name.c_str());
 	ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
 	ImGui::Text(std::to_string(time).c_str());
+}
+
+bool PerformanceLoggerGUI::draw_header_entry(std::string name, double time) {
+	bool open = ImGui::CollapsingHeader(name.c_str(),
+	                                    ImGuiTreeNodeFlags_AllowItemOverlap);
+	ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
+	ImGui::Text(std::to_string(time).c_str());
+	return open;
 }
