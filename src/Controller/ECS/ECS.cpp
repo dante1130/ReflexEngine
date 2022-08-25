@@ -7,6 +7,7 @@
 #include "Model/Components/Light.hpp"
 #include "Model/Components/Md2Animation.hpp"
 #include "Model/Components/RigidBody.hpp"
+#include "Controller/ReflexEngine/PerformanceLogger.hpp"
 
 using namespace Reflex;
 
@@ -20,12 +21,14 @@ ECS::ECS() {
 	    .connect<&System::init_spot_light>();
 	registry_.on_construct<Component::Md2Animation>()
 	    .connect<&System::init_md2_animation>();
-	registry_.on_construct<Component::Rigidbody>().connect<&System::init_rigidbody>();
+	registry_.on_construct<Component::Rigidbody>()
+	    .connect<&System::init_rigidbody>();
 
 	registry_.on_update<Component::Script>().connect<&System::init_script>();
 	registry_.on_update<Component::Md2Animation>()
 	    .connect<&System::init_md2_animation>();
-	registry_.on_update<Component::Rigidbody>().connect<&System::update_rigidbody>();
+	registry_.on_update<Component::Rigidbody>()
+	    .connect<&System::update_rigidbody>();
 
 	registry_.on_destroy<Component::DirectionalLight>()
 	    .connect<&System::delete_directional_light>();
@@ -43,13 +46,24 @@ Entity& ECS::create_entity(const std::string& name) {
 }
 
 void ECS::update(double delta_time) {
+	PERFORMANCE_LOGGER_PUSH("Update script");
 	System::update_script(registry_);
+	PERFORMANCE_LOGGER_POP();
+	PERFORMANCE_LOGGER_PUSH("Update directional light");
 	System::update_directional_light(registry_);
+	PERFORMANCE_LOGGER_POP();
+	PERFORMANCE_LOGGER_PUSH("Update point light");
 	System::update_point_light(registry_);
+	PERFORMANCE_LOGGER_POP();
+	PERFORMANCE_LOGGER_PUSH("Update spot light");
 	System::update_spot_light(registry_);
+	PERFORMANCE_LOGGER_POP();
+	PERFORMANCE_LOGGER_PUSH("Update md2");
 	System::update_md2(registry_);
+	PERFORMANCE_LOGGER_POP();
+	PERFORMANCE_LOGGER_PUSH("Update statemachine");
 	System::update_statemachine(*this);
-	
+	PERFORMANCE_LOGGER_POP();
 }
 
 void ECS::fixed_update(double delta_time) {
@@ -61,7 +75,6 @@ void ECS::draw() {
 	System::draw_model(registry_);
 	System::draw_mesh(registry_);
 	System::draw_md2(registry_);
-
 }
 
 void ECS::destroy_entity(entt::entity entity_id) {
