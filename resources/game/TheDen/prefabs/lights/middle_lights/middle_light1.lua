@@ -1,5 +1,5 @@
 entity = {
-	name = "Left corridor light 2",
+	name = "Middle light 1",
 
 	point_light = {
 		shadow_width = 1024,
@@ -14,16 +14,16 @@ entity = {
 		},
 
 		ambient_intensity = 0,
-		diffuse_intensity = 0.5,
+		diffuse_intensity = 1,
 
 		position = {
-			x = 51,
+			x = 54,
 			y = 2.5,
-			z = 0.75
+			z = -1.275
 		},
 
 		constant = 0,
 		linear = 0,
-		quadratic = 0.25
+		quadratic = 1
 	}
 }
