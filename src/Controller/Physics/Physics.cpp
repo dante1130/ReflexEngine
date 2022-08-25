@@ -39,7 +39,9 @@ void Physics::destroyWorld() {
 	}
 }
 
-reactphysics3d::PhysicsCommon& Physics::getPhysicsCommon() { return physicsCommon; }
+reactphysics3d::PhysicsCommon& Physics::getPhysicsCommon() {
+	return physicsCommon;
+}
 
 reactphysics3d::PhysicsWorld* Physics::getPhysicsWorld() { return world; }
 
