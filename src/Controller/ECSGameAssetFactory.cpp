@@ -180,7 +180,10 @@ void ECSGameAssetFactory::load_directional_light(
 	                             light_table["direction"]["z"]};
 
 	entity.add_component<Component::DirectionalLight>(
-	    light_table["shadow_width"], light_table["shadow_height"], color,
+	    light_table["shadow_width"], light_table["shadow_height"],
+	    light_table["near_plane"], light_table["far_plane"],
+	    light_table["ortho_left"], light_table["ortho_right"],
+	    light_table["ortho_bottom"], light_table["ortho_top"], color,
 	    light_table["ambient_intensity"], light_table["diffuse_intensity"],
 	    direction);
 }

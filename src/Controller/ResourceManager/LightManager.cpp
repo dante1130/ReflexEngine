@@ -14,8 +14,10 @@ void LightManager::set_directional_light(
     const Component::DirectionalLight& light) {
 	directional_light_ = DirectionalLight(
 	    light.shadow_width, light.shadow_height,
-	    glm::ortho(-64.0F, 64.0F, -64.0F, 64.0F, 1.0F, 256.0F), light.color,
-	    light.ambient_intensity, light.direction, light.diffuse_intensity);
+	    glm::ortho(light.ortho_left, light.ortho_right, light.ortho_bottom,
+	               light.ortho_top, light.near_plane, light.far_plane),
+	    light.color, light.ambient_intensity, light.direction,
+	    light.diffuse_intensity);
 }
 
 size_t LightManager::add_point_light(const PointLightData& light_data) {
