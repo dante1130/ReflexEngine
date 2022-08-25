@@ -8,6 +8,7 @@
 #include "Controller/Audio/Audio.hpp"
 #include "Controller/ECS/System.hpp"
 #include "Controller/ECS/EntitySerializer.hpp"
+#include "Controller/GUI/DebugGUI.hpp"
 
 ECSScene::ECSScene(const std::string& master_lua_script)
     : Scene(master_lua_script) {}
@@ -36,6 +37,7 @@ void ECSScene::fixed_update(double delta_time) {
 
 void ECSScene::add_draw_call() {
 	ecs_gui_.draw(ecs_);
+	DebugGUI::draw();
 	ecs_.draw();
 }
 
