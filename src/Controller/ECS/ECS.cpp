@@ -59,6 +59,8 @@ void ECS::update(double delta_time) {
 	System::update_spot_light(registry_);
 	PERFORMANCE_LOGGER_POP();
 	PERFORMANCE_LOGGER_PUSH("Update md2");
+	PERFORMANCE_LOGGER_PUSH("testing");
+	PERFORMANCE_LOGGER_POP();
 	System::update_md2(registry_);
 	PERFORMANCE_LOGGER_POP();
 	PERFORMANCE_LOGGER_PUSH("Update statemachine");
