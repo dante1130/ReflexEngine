@@ -8,10 +8,11 @@ DirectionalLight::DirectionalLight(GLuint shadow_width, GLuint shadow_height,
                                    GLfloat ortho_near, GLfloat ortho_far,
                                    glm::vec3 color, GLfloat aIntensity,
                                    glm::vec3 direction, GLfloat dIntensity)
-    : Light(color, aIntensity, dIntensity), m_direction(direction) {
+    : Light(color, aIntensity, dIntensity,
+            glm::ortho(ortho_left, ortho_right, ortho_bottom, ortho_top,
+                       ortho_near, ortho_far)),
+      m_direction(direction) {
 	shadow_map_.init(shadow_width, shadow_height);
-	light_projection_ = glm::ortho(ortho_left, ortho_right, ortho_bottom,
-	                               ortho_top, ortho_near, ortho_far);
 }
 
 void DirectionalLight::set_directional_light(glm::vec3 color,
