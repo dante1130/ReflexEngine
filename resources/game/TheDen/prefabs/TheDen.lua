@@ -21,6 +21,6 @@ entity = {
 
 	model = {
 		model_name = "TheDen",
-		material_name = "shiny"
+		material_name = "default"
 	}
 }
