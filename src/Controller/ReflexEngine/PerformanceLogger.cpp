@@ -4,16 +4,18 @@
 int PerformanceLogger::current_indent = 0;
 std::vector<Performance_Log> PerformanceLogger::logs =
     std::vector<Performance_Log>();
-double PerformanceLogger::reset_time = 0.25;
-double PerformanceLogger::remove_time = 1000;
+double PerformanceLogger::reset_time = 500;
+double PerformanceLogger::remove_time = 5000;
 int PerformanceLogger::position_index = 0;
+std::chrono::steady_clock::time_point PerformanceLogger::start_time =
+    std::chrono::steady_clock::now();
 
 constexpr float miliseconds_in_nanoseconds = 1000000.0;
 
 void PerformanceLogger::Push(const std::string &id_name) {
 	uint64_t size = logs.size();
 
-	if (size != 0) {
+	if (position_index != 0) {
 		if (logs[position_index - 1].time_taken < 0) {
 			current_indent++;
 		}
@@ -21,16 +23,13 @@ void PerformanceLogger::Push(const std::string &id_name) {
 
 	if (size == position_index) {
 		add_new_log(id_name);
-		DebugLogger::log(
-		    "PL", "size reached - new added " + std::to_string(position_index));
-	} else {  // if (logs[position_index].name._Equal(id_name) == false) {
-		DebugLogger::log("PL", "missing - new added");
+	} else if (!logs[position_index].name._Equal(id_name)) {
 		add_new_log(id_name);
+	} else {
+		DebugLogger::log("PL", "Updaing entry");
+		logs[position_index].start_time = std::chrono::steady_clock::now();
+		// logs[position_index].indent = current_indent;
 	}
-	// else {
-	//		logs[position_index].start_time = std::chrono::steady_clock::now();
-	//		logs[position_index].indent = current_indent;
-	//	}
 
 	position_index++;
 }
@@ -46,7 +45,7 @@ void PerformanceLogger::Pop() {
 
 	int index = position_index - 1;
 	while (true) {
-		if (logs[index].time_taken >= 0) {
+		if (logs[index].used) {
 			if (logs[index].parent_index == -1) break;
 			index = logs[index].parent_index;
 		} else {
@@ -65,6 +64,7 @@ void PerformanceLogger::Pop() {
 			if (logs[index].max_time_taken < time_taken) {
 				logs[index].max_time_taken = time_taken;
 			}
+			logs[index].used = true;
 			break;
 		}
 	}
@@ -75,11 +75,32 @@ const std::vector<Performance_Log> &PerformanceLogger::GetLogs() {
 }
 
 void PerformanceLogger::ClearLogs() {
-	logs.clear();
 	current_indent = 0;
 	position_index = 0;
 
 	check_logs();
+
+	int size = logs.size();
+	for (int count = 0; count < size; count++) {
+		logs[count].used = false;
+	}
+
+	std::chrono::steady_clock::time_point end_time =
+	    std::chrono::steady_clock::now();
+	double time_taken = std::chrono::duration_cast<std::chrono::nanoseconds>(
+	                        end_time - start_time)
+	                        .count() /
+	                    miliseconds_in_nanoseconds;
+	if (time_taken > remove_time) {
+		logs.clear();
+		DebugLogger::log("PL", "Resetting performance logs");
+		start_time = end_time;
+	} else if (time_taken > reset_time) {
+		for (int count = 0; count < size; count++) {
+			logs[count].amount = 0;
+			logs[count].time_taken = -1;
+		}
+	}
 }
 
 void PerformanceLogger::add_new_log(const std::string &name) {
@@ -96,7 +117,6 @@ void PerformanceLogger::add_new_log(const std::string &name) {
 	}
 	new_log.indent = current_indent;
 
-	DebugLogger::log("PL", "indent = " + std::to_string(new_log.indent));
 	logs.insert(logs.begin() + position_index, new_log);
 }
 
@@ -115,6 +135,8 @@ void PerformanceLogger::check_logs() {
 		if (time_taken > remove_time) {
 			logs.erase(logs.begin() + count);
 		}
+
+		logs[count].used = false;
 	}
 
 	//

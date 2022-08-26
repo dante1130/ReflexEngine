@@ -33,6 +33,7 @@ struct Performance_Log {
 	int indent = 0;
 	/// The parent index for recursive logs
 	int parent_index = -1;
+	bool used = false;
 };
 
 /**
@@ -79,6 +80,7 @@ private:
 	static double remove_time;
 	/// The current position in the logs
 	static int position_index;
+	static std::chrono::steady_clock::time_point start_time;
 
 	static void add_new_log(const std::string& name);
 	static void check_logs();
