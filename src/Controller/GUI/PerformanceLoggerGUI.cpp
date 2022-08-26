@@ -4,7 +4,7 @@
 #include "Controller/GUI/DebugLogger.hpp"
 #include <unordered_map>
 
-constexpr float INDENT_AMOUNT = 25.0f;
+constexpr float INDENT_AMOUNT = 25.0F;
 
 void PerformanceLoggerGUI::draw() {
 	std::vector<Performance_Log> logs = PerformanceLogger::GetLogs();
@@ -20,19 +20,22 @@ void PerformanceLoggerGUI::draw() {
 			if (logs[count].indent != 0) {
 				if (opened_headers[logs[count].indent]) {
 					open = draw_header_entry(logs[count].name,
-					                         logs[count].time_taken);
+					                         logs[count].time_taken,
+					                         logs[count].max_time_taken);
 					opened_headers.insert({logs[count].indent + 1, open});
 					opened_headers[logs[count].indent + 1] = open;  // Yes
 				}
-			} else {  // If not a header
+			} else {
 				open =
-				    draw_header_entry(logs[count].name, logs[count].time_taken);
+				    draw_header_entry(logs[count].name, logs[count].time_taken,
+				                      logs[count].max_time_taken);
 				opened_headers.insert({logs[count].indent + 1, open});
 				opened_headers[logs[count].indent + 1] = open;  // Yes
 			}
 
 		} else if (opened_headers[logs[count].indent]) {
-			draw_entry(logs[count].name, logs[count].time_taken);
+			draw_entry(logs[count].name, logs[count].time_taken,
+			           logs[count].max_time_taken);
 		}
 
 		// Sets the indents
@@ -46,22 +49,27 @@ void PerformanceLoggerGUI::draw() {
 	}
 
 	if (opened_headers[logs[size - 1].indent]) {
-		draw_entry(logs[size - 1].name, logs[size - 1].time_taken);
+		draw_entry(logs[size - 1].name, logs[size - 1].time_taken,
+		           logs[size - 1].max_time_taken);
 	}
 
 	PerformanceLogger::ClearLogs();
 }
 
-void PerformanceLoggerGUI::draw_entry(std::string name, double time) {
+void PerformanceLoggerGUI::draw_entry(std::string name, double time,
+                                      double max_time) {
 	ImGui::Text(name.c_str());
-	ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
-	ImGui::Text(std::to_string(time).c_str());
+	ImGui::SameLine(ImGui::GetWindowWidth() - 150.0f);
+	ImGui::Text(
+	    (std::to_string(time) + "/" + std::to_string(max_time)).c_str());
 }
 
-bool PerformanceLoggerGUI::draw_header_entry(std::string name, double time) {
+bool PerformanceLoggerGUI::draw_header_entry(std::string name, double time,
+                                             double max_time) {
 	bool open = ImGui::CollapsingHeader(name.c_str(),
 	                                    ImGuiTreeNodeFlags_AllowItemOverlap);
-	ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
-	ImGui::Text(std::to_string(time).c_str());
+	ImGui::SameLine(ImGui::GetWindowWidth() - 150.0f);
+	ImGui::Text(
+	    (std::to_string(time) + "/" + std::to_string(max_time)).c_str());
 	return open;
 }

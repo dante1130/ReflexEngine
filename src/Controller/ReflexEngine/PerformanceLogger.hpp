@@ -21,8 +21,12 @@
 struct Performance_Log {
 	/// The name for the performance log
 	std::string name;
-	/// The time taken for the test
+	/// The average time taken over x seconds
 	double time_taken = -1;
+	/// How many times are stored in time_taken
+	int amount = 0;
+	/// The max time taken over x seconds
+	double max_time_taken = -1;
 	/// The start time of the log
 	std::chrono::steady_clock::time_point start_time;
 	/// The indent for recursive logs
@@ -69,4 +73,13 @@ private:
 	static std::vector<Performance_Log> logs;
 	/// The current index (recursion)
 	static int current_indent;
+	/// When to reset the values in the Performance Logs
+	static double reset_time;
+	/// When to remove old values in the Performance Logs
+	static double remove_time;
+	/// The current position in the logs
+	static int position_index;
+
+	static void add_new_log(const std::string& name);
+	static void check_logs();
 };
