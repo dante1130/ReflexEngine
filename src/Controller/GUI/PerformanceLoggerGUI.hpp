@@ -21,16 +21,19 @@ private:
 	 *
 	 * @param name Name of the entry logged
 	 * @param time How long it took to run
+	 * @param max_time The max time it took to run
 	 */
-	static void draw_entry(std::string name, double time);
+	static void draw_entry(std::string name, double time, double max_time);
 
 	/**
 	 * @brief Draws a header entry
 	 *
 	 * @param name Name of entry logged
 	 * @param time How long it took to run
+	 * @param max_time The max time it took to run
 	 * @return true if header is opened
 	 * @return false if header is closed
 	 */
-	static bool draw_header_entry(std::string name, double time);
+	static bool draw_header_entry(std::string name, double time,
+	                              double max_time);
 };
