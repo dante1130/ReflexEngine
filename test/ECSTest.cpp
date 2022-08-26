@@ -33,7 +33,7 @@ TEST_CASE("Entity tests", "[ECS]") {
 		std::vector<entt::entity> entities_id_vec;
 		entities_id_vec.reserve(entity_count);
 
-		for (size_t i = 0; i < entity_count; i++) {
+		for (size_t i = 0; i < entity_count; ++i) {
 			entities_id_vec.emplace_back(
 			    ecs.create_entity(std::to_string(i)).get_entity_id());
 		}
