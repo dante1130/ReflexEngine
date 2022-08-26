@@ -80,8 +80,13 @@ private:
 	static double remove_time;
 	/// The current position in the logs
 	static int position_index;
+	/// The start time of the new batch of logs
 	static std::chrono::steady_clock::time_point start_time;
 
+	/**
+	 * @brief Adds a new log to the performance log list
+	 *
+	 * @param name the name of the log you are adding
+	 */
 	static void add_new_log(const std::string& name);
-	static void check_logs();
 };

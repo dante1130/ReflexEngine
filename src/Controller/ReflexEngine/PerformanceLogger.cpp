@@ -1,11 +1,10 @@
 #include "PerformanceLogger.hpp"
-#include "Controller/GUI/DebugLogger.hpp"
 
 int PerformanceLogger::current_indent = 0;
 std::vector<Performance_Log> PerformanceLogger::logs =
     std::vector<Performance_Log>();
 double PerformanceLogger::reset_time = 500;
-double PerformanceLogger::remove_time = 5000;
+double PerformanceLogger::remove_time = 2500;
 int PerformanceLogger::position_index = 0;
 std::chrono::steady_clock::time_point PerformanceLogger::start_time =
     std::chrono::steady_clock::now();
@@ -26,9 +25,7 @@ void PerformanceLogger::Push(const std::string &id_name) {
 	} else if (!logs[position_index].name._Equal(id_name)) {
 		add_new_log(id_name);
 	} else {
-		DebugLogger::log("PL", "Updaing entry");
 		logs[position_index].start_time = std::chrono::steady_clock::now();
-		// logs[position_index].indent = current_indent;
 	}
 
 	position_index++;
@@ -78,8 +75,6 @@ void PerformanceLogger::ClearLogs() {
 	current_indent = 0;
 	position_index = 0;
 
-	check_logs();
-
 	int size = logs.size();
 	for (int count = 0; count < size; count++) {
 		logs[count].used = false;
@@ -93,7 +88,6 @@ void PerformanceLogger::ClearLogs() {
 	                    miliseconds_in_nanoseconds;
 	if (time_taken > remove_time) {
 		logs.clear();
-		DebugLogger::log("PL", "Resetting performance logs");
 		start_time = end_time;
 	} else if (time_taken > reset_time) {
 		for (int count = 0; count < size; count++) {
@@ -118,30 +112,4 @@ void PerformanceLogger::add_new_log(const std::string &name) {
 	new_log.indent = current_indent;
 
 	logs.insert(logs.begin() + position_index, new_log);
-}
-
-void PerformanceLogger::check_logs() {
-	uint64_t size = logs.size();
-
-	std::chrono::steady_clock::time_point end_time =
-	    std::chrono::steady_clock::now();
-	double time_taken = 0;
-	for (uint64_t count = 0; count < size; count++) {
-		time_taken = std::chrono::duration_cast<std::chrono::nanoseconds>(
-		                 end_time - logs[count].start_time)
-		                 .count() /
-		             miliseconds_in_nanoseconds;
-
-		if (time_taken > remove_time) {
-			logs.erase(logs.begin() + count);
-		}
-
-		logs[count].used = false;
-	}
-
-	//
-	//
-	// Also need to change indent of all child logs
-	//
-	//
 }
