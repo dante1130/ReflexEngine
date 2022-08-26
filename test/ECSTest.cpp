@@ -2,6 +2,7 @@
 
 #include "Controller/ECS/ECS.hpp"
 #include "Controller/ECS/Entity.hpp"
+#include "Model/Components/Transform.hpp"
 
 TEST_CASE("Entity tests", "[ECS]") {
 	ECS ecs;
@@ -46,5 +47,50 @@ TEST_CASE("Entity tests", "[ECS]") {
 		                });
 
 		REQUIRE(!is_any_valid_entities);
+	}
+
+	SECTION("Adding components to an entity") {
+		auto& entity = ecs.create_entity("test");
+		entity.add_component<int>(1);
+		entity.add_component<float>(1.0f);
+		entity.add_component<double>(1.0);
+		entity.add_component<std::string>("test");
+		entity.add_component<bool>(true);
+		entity.add_component<Component::Transform>();
+
+		REQUIRE(entity.any_component<int>());
+		REQUIRE(entity.any_component<float>());
+		REQUIRE(entity.any_component<double>());
+		REQUIRE(entity.any_component<std::string>());
+		REQUIRE(entity.any_component<bool>());
+		REQUIRE(entity.any_component<Component::Transform>());
+
+		ecs.destroy_entity(entity.get_entity_id());
+	}
+
+	SECTION("Removing components from an entity") {
+		auto& entity = ecs.create_entity("test");
+		entity.add_component<int>(1);
+		entity.add_component<float>(1.0f);
+		entity.add_component<double>(1.0);
+		entity.add_component<std::string>("test");
+		entity.add_component<bool>(true);
+		entity.add_component<Component::Transform>();
+
+		entity.remove_component<int>();
+		entity.remove_component<float>();
+		entity.remove_component<double>();
+		entity.remove_component<std::string>();
+		entity.remove_component<bool>();
+		entity.remove_component<Component::Transform>();
+
+		REQUIRE(!entity.any_component<int>());
+		REQUIRE(!entity.any_component<float>());
+		REQUIRE(!entity.any_component<double>());
+		REQUIRE(!entity.any_component<std::string>());
+		REQUIRE(!entity.any_component<bool>());
+		REQUIRE(!entity.any_component<Component::Transform>());
+
+		ecs.destroy_entity(entity.get_entity_id());
 	}
 }
