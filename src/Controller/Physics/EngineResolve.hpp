@@ -8,11 +8,29 @@ private:
 
 	rp3d::CollisionBody* cb;
 
-	
+protected:
+
+	glm::vec3 lin_velocity_; 
+	glm::vec3 lin_accelaration_;
+
+	glm::vec3 force_;
+
+	float lin_drag;
+
+	float mass_;
+
+	rp3d::BodyType type_;
+
+	glm::vec3 gravity_;
+
+	bool use_gravity_;
+	bool can_sleep_;
 
 public:
 
 	EngineResolve();
+
+	void update(float delta_time);
 
 	// using engine stuff
 	bool usingReactResolve() override;
@@ -46,6 +64,7 @@ public:
 	float getMass() override;
 	glm::vec3 getVelocity() override;
 	glm::vec3 getAngVelocity() override;
+
 	float getDragForce() override;
 	float getDragTorque() override;
 
@@ -58,7 +77,17 @@ public:
 	uint32_t addSphereCollider(glm::vec3 pos, float radius) override;
 	uint32_t addCapsuleCollider(glm::vec3 pos, float radius, float height) override;
 
-	uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction) override;
+	uint32_t addBoxCollider(PhysicsBody* rb, glm::vec3 pos, glm::vec3 size,
+	                        float bounce, float friction) override;
+	uint32_t addSphereCollider(PhysicsBody* rb, glm::vec3 pos, float radius,
+	                           float bounce,
+	                           float friction) override;
+	uint32_t addCapsuleCollider(PhysicsBody* rb, glm::vec3 pos, float radius,
+	                            float height,
+	                            float bounce, float friction) override;
+
+	uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 size,
+	                        float bounce, float friction) override;
 	uint32_t addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction) override;
 	uint32_t addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction) override;
 

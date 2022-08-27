@@ -150,3 +150,40 @@ CapsuleShape* PhysicsBody::getColliderCapsule(size_t index) {
 		std::cout << "ERROR: " << err << std::endl;
 	}
 }
+
+size_t PhysicsBody::getColliderIndex(rp3d::Collider* collider) {
+		
+	for (size_t i = 0; i < colliders.size(); ++i) {
+		if (colliders[i] == collider) return i;
+	}
+
+	return colliders.size();
+ }
+
+void PhysicsBody::collision(Collider* c1, Collider* c2) {
+
+	PhysicsBody* p1 = ((PhysicsBody*)c1->getUserData());
+	PhysicsBody* p2 = ((PhysicsBody*)c2->getUserData());
+
+	size_t i1 = p1->getColliderIndex(c1);
+	size_t i2 = p2->getColliderIndex(c2);
+
+	if (p1->getType() == BodyType::DYNAMIC) {
+		p1->setPosition(p1->getPreviousPosition());
+		p1->setVelocity(glm::vec3(0));
+	}
+
+	if (p2->getType() == BodyType::DYNAMIC) {
+		p2->setPosition(p2->getPreviousPosition());
+		p2->setVelocity(glm::vec3(0));
+	}
+
+}
+
+
+glm::vec3 PhysicsBody::getPreviousPosition() {
+	return previous_transform_position;
+}
+void PhysicsBody::setPreviousPosition(glm::vec3 prev_pos) {
+	previous_transform_position = prev_pos;
+}

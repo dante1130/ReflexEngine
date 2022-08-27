@@ -244,6 +244,7 @@ void System::init_statemachine(entt::registry& registry, entt::entity entity) {
 }
 
 void System::update_rigidbody(entt::registry& registry) {
+
 	if (EngineTime::is_paused()) 
 		return;
 

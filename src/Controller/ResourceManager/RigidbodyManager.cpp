@@ -15,12 +15,12 @@
 void RigidbodyManager::add_rigidbody(Component::Rigidbody& rb,
                                      const Component::Transform& tf) {
 	rb.init(true, tf.position, tf.rotation);
-	rb.previous_transform_position = tf.position;
+	rb.setPreviousPosition(tf.position);
 }
 
 void RigidbodyManager::update_rigidbody(Component::Rigidbody& rb,
                                         Component::Transform& tf) {
-	if (rb.previous_transform_position != tf.position) {
+	if (rb.getPreviousPosition() != tf.position) {
 		rb.setPosition(tf.position);
 		rb.setEulerRotation(tf.rotation);
 		rb.setVelocity(glm::vec3(0));
@@ -37,5 +37,5 @@ void RigidbodyManager::update_rigidbody(Component::Rigidbody& rb,
 	if (rb.getDragForce() != rb.lin_drag) rb.setDragForce(rb.lin_drag);
 	if (rb.getDragTorque() != rb.ang_drag) rb.setDragTorque(rb.ang_drag);
 
-	rb.previous_transform_position = tf.position;
+	rb.setPreviousPosition(tf.position);
 }

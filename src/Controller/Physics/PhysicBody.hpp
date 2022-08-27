@@ -45,6 +45,10 @@ class PhysicsBody
 		std::unordered_map<rp3d::Collider*, rp3d::SphereShape*>  m_sphere;
 		std::unordered_map<rp3d::Collider*, rp3d::CapsuleShape*>  m_capsule;
 
+		/// The previous position of the object
+	    /// last update
+	    glm::vec3 previous_transform_position;
+
 		virtual void deleteCollider(rp3d::Collider* collider) = 0;
 
 	public:
@@ -59,17 +63,30 @@ class PhysicsBody
 		float getColliderMassDesity(size_t index);
 		int getColliderType(size_t index);
 	    std::string getColliderName(size_t index);
-		void setObjectTrigger(bool ean);
+	    size_t getColliderIndex(rp3d::Collider* collider);
 
 		std::vector<rp3d::Collider*> getColliders();
+
 		rp3d::BoxShape* getColliderBox(size_t index);
 		rp3d::SphereShape* getColliderSphere(size_t index);
 		rp3d::CapsuleShape* getColliderCapsule(size_t index);
+
+		void setObjectTrigger(bool ean);
+
 
 		void addMaterialToCollider(size_t index, float bounce, float mass_density, float friction);
 
 		void removeCollider(size_t index);
 		void removeAllColliders();
+
+		// Temporary for simple collision response
+		glm::vec3 getPreviousPosition();
+	    void setPreviousPosition(glm::vec3 prev_pos);
+
+		// collision resolution
+
+		static void collision(rp3d::Collider* c1, rp3d::Collider* c2);
+
 	    // collision resolution system type check
 	    virtual bool usingReactResolve() = 0;
 
@@ -102,6 +119,7 @@ class PhysicsBody
 	    virtual float getMass() = 0;
 	    virtual glm::vec3 getVelocity() = 0;
 	    virtual glm::vec3 getAngVelocity() = 0;
+	    
 	    virtual float getDragForce() = 0;
 	    virtual float getDragTorque() = 0;
 
@@ -116,7 +134,16 @@ class PhysicsBody
 	    virtual uint32_t addCapsuleCollider(glm::vec3 pos, float radius, float height) = 0;
 
 
-		virtual uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction) = 0;
+		virtual uint32_t addBoxCollider(PhysicsBody* rb, glm::vec3 pos, glm::vec3 size, float bounce, float friction) = 0;
+	    virtual uint32_t addSphereCollider(PhysicsBody* rb, glm::vec3 pos,
+	                                       float radius,
+	                                       float bounce, float friction) = 0;
+	    virtual uint32_t addCapsuleCollider(PhysicsBody* rb, glm::vec3 pos,
+	                                        float radius,
+	                                        float height, float bounce,
+	                                        float friction) = 0;
+
+	    virtual uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction) = 0;
 		virtual uint32_t addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction) = 0;
 		virtual uint32_t addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction) = 0;
 

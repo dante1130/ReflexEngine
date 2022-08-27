@@ -216,7 +216,7 @@ std::string Component::Rigidbody::getColliderName(size_t index) {
 
 uint32_t Component::Rigidbody::addBoxCollider(glm::vec3 pos, glm::vec3 size,
                                               float bounce, float friction) {
-	return pb->addBoxCollider(pos, size, bounce, friction);
+	return pb->addBoxCollider(pb, pos, size, bounce, friction);
 }
 uint32_t Component::Rigidbody::addSphereCollider(glm::vec3 pos, float radius,
                                                  float bounce, float friction) {
@@ -246,4 +246,12 @@ void Component::Rigidbody::setQuanternion(glm::quat quat) {
 
 void Component::Rigidbody::setEulerRotation(glm::vec3 rot) {
 	pb->setEulerRotation(rot);
+}
+
+glm::vec3 Component::Rigidbody::getPreviousPosition() {
+	return pb->getPreviousPosition();
+}
+
+void Component::Rigidbody::setPreviousPosition(glm::vec3 prev_pos) {
+	pb->setPreviousPosition(prev_pos);
 }

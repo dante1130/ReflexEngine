@@ -7,21 +7,34 @@
 #include "glm/vec3.hpp"
 
 namespace Component {
-
+/**
+ * @author Spencer Shaw
+ * @class Rigidbody
+ * @brief The rigidbody component gives access to all
+ * physics and collision information of an object
+ */
 struct Rigidbody {
 private:
-	// Physics system
+	/// Stores information about physics object
 	PhysicsBody* pb;
 
 public:
-	bool gravity_on;
-	bool can_sleep;
-	bool is_trigger;
+	/// Whether gravity is enabled
+	bool gravity_on = false;
+	/// <summary>
+	/// Whether the object is allowed to stop
+	/// calculating resolution after a certain 
+	/// period of time
+	/// </summary>
+	bool can_sleep = true;
+	/// Whether collision shapes are triggers
+	bool is_trigger = false;
 
-	float lin_drag;
-	float ang_drag;
+	/// Linear drag
+	float lin_drag = 0.0f;
+	/// Angular drag
+	float ang_drag = 0.0f;
 
-	glm::vec3 previous_transform_position;
 
 	Rigidbody() = default;
 
@@ -40,42 +53,135 @@ public:
 	void setViewables(bool gravity_on, bool can_sleep, bool is_trigger,
 	                  float linear_drag, float angular_drag);
 
-	//****************************
-	// FUNCTIONS FOR PHYSICS STUFF
-	//****************************
+	
 
-	// Using react
+	/// Returns true if physics body is using 
+	/// reactphysics3d resolution
 	bool usingReactResolve();
 
-	// Colliders
+	///COLLIDERS
 
+	/**
+	 * @brief Returns the size of the colliders
+	 *
+	 * @return size_t - size of colliders vector
+	 */
 	size_t colliderSize();
 
+	/**
+	 * @brief Gets the local or world position center
+	 * of the object
+	 *
+	 * @param size_t - Index of collider
+	 * @param Apply - An enum determining local or world position
+	 * @return glm::vec3 - The position of collider
+	 */
 	glm::vec3 getColliderPosition(size_t index, Apply type);
 
+	/**
+	 * @brief Gets the bounciness property of a
+	 * given colliders
+	 *
+	 * @param size_t - Index of collider
+	 * @return float - The value of bounciness property
+	 */
 	float getColliderBounce(size_t index);
 
+	/**
+	 * @brief Gets the friction property of a
+	 * given colliders
+	 *
+	 * @param size_t - Index of collider
+	 * @return float - The value of friction property
+	 */
 	float getColliderFriction(size_t index);
 
+	/**
+	 * @brief Gets the mass density property of a
+	 * given colliders
+	 *
+	 * @param size_t - Index of collider
+	 * @return float - The value of mass density property
+	 */
 	float getColliderMassDesity(size_t index);
 
+	/**
+	 * @brief Gets the shape of the collider as
+	 * an integer value
+	 * 
+	 * @param size_t - Index of collider
+	 * @return int - The collider shape expressed as integer
+	 */
 	int getColliderType(size_t index);
 
+	/**
+	 * @brief Returns a pseduo name containing the
+	 * collider type and index of the collider	
+	 *
+	 * @param size_t - Index of collider
+	 * @return std::string - The created name
+	 */
 	std::string getColliderName(size_t index);
 
+	/**
+	 * @brief Gets all collider pointers inside 
+	 * colliders
+	 *
+	 * @param size_t - Index of collider
+	 * @return std::vector<rp3d::Collider*> - colliders
+	 */
 	std::vector<rp3d::Collider*> getColliders();
 
+	/**
+	 * @brief Returns pointer to box collider
+	 * if collider at index is a box type
+	 *
+	 * @param size_t - Index of collider
+	 * @return rp3d::BoxShape* - Box collider
+	 */
 	rp3d::BoxShape* getColliderBox(size_t index);
 
+	/**
+	 * @brief Returns pointer to sphere collider
+	 * if collider at index is a sphere type
+	 *
+	 * @param size_t - Index of collider
+	 * @return rp3d::SphereShape* - Sphere collider
+	 */
 	rp3d::SphereShape* getColliderSphere(size_t index);
 
+	/**
+	 * @brief Returns pointer to capsule collider
+	 * if collider at index is a capsule type
+	 *
+	 * @param size_t - Index of collider
+	 * @return rp3d::CapsuleShape* - Capsule collider
+	 */
 	rp3d::CapsuleShape* getColliderCapsule(size_t index);
 
+	/**
+	 * @brief Adds a material to a collider at
+	 * a given index
+	 *
+	 * @param size_t - Index of collider
+	 * @param float - The value of bounciness property
+	 * @param float - The value of mass density property
+	 * @param size_t - The value of friction property
+	 */
 	void addMaterialToCollider(size_t index, float bounce, float mass_density,
 	                           float friction);
 
+	/**
+	 * @brief Remove all colliders in body
+	 *
+	 */
 	void removeAllColliders();
 
+	/**
+	 * @brief Removes collider at given index
+	 *
+	 * @param size_t - Index of collider
+	 */
 	void removeCollider(size_t index);
 
 	// Gui viewable variables methods
@@ -128,6 +234,7 @@ public:
 
 	glm::vec3 getAngVelocity();
 
+
 	float getDragForce();
 
 	float getDragTorque();
@@ -167,5 +274,9 @@ public:
 	void setQuanternion(glm::quat quat);
 
 	void setEulerRotation(glm::vec3 rot);
+
+	glm::vec3 getPreviousPosition();
+
+	void setPreviousPosition(glm::vec3 prev_pos);
 };
 };  // namespace Component
