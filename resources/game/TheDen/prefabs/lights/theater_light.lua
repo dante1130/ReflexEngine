@@ -5,7 +5,7 @@ entity = {
 		shadow_width = 512,
 		shadow_height = 512,
 		near_plane = 1,
-		far_plane = 64,
+		far_plane = 128,
 
 		color = {
 			r = 1,
@@ -31,7 +31,7 @@ entity = {
 		shadow_width = 512,
 		shadow_height = 512,
 		near_plane = 1,
-		far_plane = 64,
+		far_plane = 128,
 
 		color = {
 			r = 1,

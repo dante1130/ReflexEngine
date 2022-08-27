@@ -2,8 +2,8 @@ entity = {
 	name = "Sunlight",
 
 	directional_light = {
-		shadow_width = 2048,
-		shadow_height = 2048,
+		shadow_width = 1024,
+		shadow_height = 1024,
 		near_plane = 1.0,
 		far_plane = 200,
 		ortho_left = -64.0,
