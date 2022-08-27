@@ -2,10 +2,10 @@ entity = {
 	name = "Theater light",
 
 	point_light = {
-		shadow_width = 1024,
-		shadow_height = 1024,
-		near_plane = 0.1,
-		far_plane = 100,
+		shadow_width = 512,
+		shadow_height = 512,
+		near_plane = 1,
+		far_plane = 64,
 
 		color = {
 			r = 1,
@@ -28,10 +28,10 @@ entity = {
 	},
 
 	spot_light = {
-		shadow_width = 1024,
-		shadow_height = 1024,
-		near_plane = 0.1,
-		far_plane = 100,
+		shadow_width = 512,
+		shadow_height = 512,
+		near_plane = 1,
+		far_plane = 64,
 
 		color = {
 			r = 1,
