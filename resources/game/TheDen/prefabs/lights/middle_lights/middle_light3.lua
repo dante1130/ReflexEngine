@@ -4,7 +4,7 @@ entity = {
 	point_light = {
 		shadow_width = 512,
 		shadow_height = 512,
-		near_plane = 1,
+		near_plane = 0.1,
 		far_plane = 128,
 
 		color = {
