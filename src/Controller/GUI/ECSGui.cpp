@@ -12,7 +12,7 @@
 #include "Model/Components/Terrain.hpp"
 #include "Model/Components/Statemachine.hpp"
 #include "Model/Components/Remove.hpp"
-#include "Model/Components/Rigidbody.hpp"
+#include "Model/Components/RigidBody.hpp"
 #include "Controller/GUI/CollectionsGUI.hpp"
 
 #include <vector>
@@ -27,8 +27,21 @@ void ECSGui::draw(ECS& ecs) {
 		draw_entity(ecs.get_entity(entity_id));
 	});
 
+	// Collection drawing
+	std::vector<Collection> collections =
+	    CollectionsGUI::get_collection_hierarchy();
+
 	std::vector<std::vector<entt::entity>> collection_order =
 	    std::vector<std::vector<entt::entity>>();
+	int number_of_collections = collections.size() + 1;
+	for (int count = 0; count < number_of_collections; ++count) {
+		collection_order.push_back(std::vector<entt::entity>());
+	}
+
+	int collection_id = -1;
+	// collection_id = CollectionsGUI::get_entity_collection_id(entity_id);
+
+	// End of collection drawing
 
 	// Deselect when clicking on blank space.
 	if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered()) {
