@@ -18,6 +18,8 @@
 
 #include <vector>
 
+constexpr float INDENT_AMOUNT = 25;
+
 void ECSGui::draw(ECS& ecs) {
 	constexpr ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoBackground;
 
@@ -81,11 +83,18 @@ void ECSGui::draw_collection_hierarchy(ECS& ecs) {
 		}
 	});
 
+	std::string name;
 	// If outermost collections
 	for (int count = 0; count < number_of_collections - 1; ++count) {
 		if (collections[count].parent_collection_id == -1) {
-			if (ImGui::CollapsingHeader(collections[count].name.c_str())) {
+			name = collections[count].name +
+			       " id = " + std::to_string(collections[count].collection_id) +
+			       " numChildren = " +
+			       std::to_string(collections[count].child_ids.size());
+			if (ImGui::CollapsingHeader(name.c_str())) {
+				ImGui::Indent(INDENT_AMOUNT);
 				draw_collection(ecs, collections, collection_order, count);
+				ImGui::Indent(-INDENT_AMOUNT);
 			}
 		}
 	}
@@ -99,7 +108,7 @@ void ECSGui::draw_collection_hierarchy(ECS& ecs) {
 
 	if (number_of_collections < 10) {
 		CollectionsGUI::add_collection(
-		    std::to_string(number_of_collections).c_str(), 5);
+		    std::to_string(number_of_collections).c_str(), 0);
 	}
 }
 
@@ -107,16 +116,25 @@ void ECSGui::draw_collection(
     ECS& ecs, std::vector<Collection>& collections,
     std::vector<std::vector<entt::entity>>& collection_order, int index) {
 	int number_of_children = collections[index].child_ids.size();
-	int number_of_collections = collection_order.size();
-	int child_id;
+	int number_of_collections = collection_order.size() - 1;
+	int child_id = -1;
 	// Draw all child collections
 	for (int count = 0; count < number_of_children; ++count) {
 		child_id = collections[index].child_ids[count];
+		// Check through all collections for the child
 		for (int innerCount = 0; innerCount < number_of_collections;
 		     ++innerCount) {
+			// If child has been found
 			if (collections[innerCount].collection_id == child_id) {
-				draw_collection(ecs, collections, collection_order, innerCount);
-				innerCount = number_of_collections;
+				// ImGui collapsing header
+				if (ImGui::CollapsingHeader(
+				        collections[innerCount].name.c_str())) {
+					ImGui::Indent(INDENT_AMOUNT);
+					draw_collection(ecs, collections, collection_order,
+					                innerCount);
+					innerCount = number_of_collections;
+					ImGui::Indent(-INDENT_AMOUNT);
+				}
 			}
 		}
 	}
