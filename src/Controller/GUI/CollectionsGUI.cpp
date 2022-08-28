@@ -1,11 +1,7 @@
 #include "CollectionsGUI.hpp"
 #include <stdexcept>
 
-const std::vector<Collection_Hierarchy>&
-CollectionsGUI::get_collection_hierarchy() {
-	if (collection_hierarchy.size() == 0) {
-		add_collection();
-	}
+const std::vector<Collection>& CollectionsGUI::get_collection_hierarchy() {
 	return collection_hierarchy;
 }
 
@@ -21,17 +17,9 @@ int CollectionsGUI::get_entity_collection_id(entt::entity& entity) {
 
 void CollectionsGUI::draw_add_collection() {}
 
-void CollectionsGUI::add_collection(std::string name, int parent_id) {
-	Collection_Hierarchy col_hir;
+void CollectionsGUI::add_collection(const std::string& name, int parent_id) {
+	Collection col_hir;
 	col_hir.name = name;
-
-	if (collection_hierarchy.size() == 0) {
-		col_hir.parent_collection_id = -1;
-		col_hir.collection_id = collection_id_generator.increment_count();
-		collection_hierarchy.insert(col_hir);
-
-		return;
-	}
 
 	bool valid_parent_id = false;
 	int size = collection_hierarchy.size();
@@ -48,7 +36,7 @@ void CollectionsGUI::add_collection(std::string name, int parent_id) {
 	}
 
 	col_hir.collection_id = collection_id_generator.increment_count();
-	collection_hierarchy.insert(col_hir);
+	collection_hierarchy.push_back(col_hir);
 }
 
-void CollectionsGUI::remove_collection(int collection_id) { if (collection_id) }
+void CollectionsGUI::remove_collection(int collection_id) {}
