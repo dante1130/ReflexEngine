@@ -15,6 +15,8 @@
 #include "Model/Components/Rigidbody.hpp"
 #include "Controller/GUI/CollectionsGUI.hpp"
 
+#include <vector>
+
 void ECSGui::draw(ECS& ecs) {
 	constexpr ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoBackground;
 
@@ -24,6 +26,9 @@ void ECSGui::draw(ECS& ecs) {
 	registry.each([this, &ecs](auto entity_id) {
 		draw_entity(ecs.get_entity(entity_id));
 	});
+
+	std::vector<std::vector<entt::entity>> collection_order =
+	    std::vector<std::vector<entt::entity>>();
 
 	// Deselect when clicking on blank space.
 	if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered()) {
