@@ -98,6 +98,7 @@ add_library(ReflexEngineSrc
 	Controller/GUI/DebugGUI.cpp
 	Controller/ReflexEngine/PerformanceLogger.cpp
 	Controller/GUI/PerformanceLoggerGUI.cpp
+	Controller/GUI/CollectionsGUI.cpp
 
 	Scene/Scene.hpp
 	Scene/TestScene.cpp

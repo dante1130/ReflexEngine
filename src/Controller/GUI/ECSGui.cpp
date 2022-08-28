@@ -13,6 +13,7 @@
 #include "Model/Components/Statemachine.hpp"
 #include "Model/Components/Remove.hpp"
 #include "Model/Components/Rigidbody.hpp"
+#include "Controller/GUI/CollectionsGUI.hpp"
 
 void ECSGui::draw(ECS& ecs) {
 	constexpr ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoBackground;
