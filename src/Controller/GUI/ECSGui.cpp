@@ -41,6 +41,13 @@ void ECSGui::draw(ECS& ecs) {
 			ecs.create_entity(std::string())
 			    .add_component<Component::Transform>();
 		}
+		if (ImGui::MenuItem("Create collection")) {
+			CollectionsGUI::add_collection(
+			    std::to_string(
+			        CollectionsGUI::get_collection_hierarchy().size() + 1)
+			        .c_str(),
+			    -1);
+		}
 		ImGui::EndPopup();
 	}
 
