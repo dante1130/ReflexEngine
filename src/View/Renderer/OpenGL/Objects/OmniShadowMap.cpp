@@ -1,19 +1,17 @@
 #include "OmniShadowMap.hpp"
 
-OmniShadowMap::OmniShadowMap() {}
+bool OmniShadowMap::init(GLuint width, GLuint height) {
+	shadow_width_ = width;
+	shadow_height_ = height;
 
-bool OmniShadowMap::Init(GLuint width, GLuint height) {
-	m_shadowWidth = width;
-	m_shadowHeight = height;
+	glGenFramebuffers(1, &fbo_);
 
-	glGenFramebuffers(1, &m_fbo);
-
-	glGenTextures(1, &m_shadowMap);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, m_shadowMap);
+	glGenTextures(1, &shadow_map_);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, shadow_map_);
 
 	for (size_t i = 0; i < 6; ++i) {
 		glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_DEPTH_COMPONENT,
-		             m_shadowWidth, m_shadowHeight, 0, GL_DEPTH_COMPONENT,
+		             shadow_width_, shadow_height_, 0, GL_DEPTH_COMPONENT,
 		             GL_FLOAT, nullptr);
 	}
 
@@ -23,8 +21,8 @@ bool OmniShadowMap::Init(GLuint width, GLuint height) {
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
-	glBindFramebuffer(GL_FRAMEBUFFER, m_fbo);
-	glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, m_shadowMap, 0);
+	glBindFramebuffer(GL_FRAMEBUFFER, fbo_);
+	glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, shadow_map_, 0);
 
 	glDrawBuffer(GL_NONE);
 	glReadBuffer(GL_NONE);
@@ -41,11 +39,11 @@ bool OmniShadowMap::Init(GLuint width, GLuint height) {
 	return true;
 }
 
-void OmniShadowMap::Write() const {
-	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, m_fbo);
+void OmniShadowMap::write() const {
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo_);
 }
 
-void OmniShadowMap::Read(GLenum textureUnit) const {
+void OmniShadowMap::read(GLenum textureUnit) const {
 	glActiveTexture(textureUnit);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, m_shadowMap);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, shadow_map_);
 }

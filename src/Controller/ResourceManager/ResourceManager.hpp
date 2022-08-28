@@ -7,6 +7,7 @@
 #include "LightManager.hpp"
 #include "SkyboxManager.hpp"
 #include "MeshManager.hpp"
+#include "RigidbodyManager.hpp"
 #include "TerrainManager.hpp"
 
 /**
@@ -65,6 +66,13 @@ public:
 	SkyboxManager& get_skybox_manager();
 
 	/**
+	 * @brief Get the rigidbody manager.
+	 *
+	 * @return RigidbodyManager&
+	 */
+	RigidbodyManager& get_rigidbody_manager();
+
+	/**
 	 * @brief Get the mesh manager.
 	 *
 	 * @return MeshManager&
@@ -77,6 +85,7 @@ public:
 	 * @return TerrainManager&
 	 */
 	TerrainManager& get_terrain_manager();
+
 
 	// These are deleted as a singleton pattern is used.
 	ResourceManager(ResourceManager& other) = delete;
@@ -103,11 +112,15 @@ private:
 	/// The skybox manager.
 	SkyboxManager skybox_manager_ = {};
 
+	/// The rigidbody manager.
+	RigidbodyManager rigidbody_manager_;
+
 	/// The mesh manager.
 	MeshManager mesh_manager_ = {};
 
 	/// The terrain manager.
 	TerrainManager terrain_manager_ = {};
+
 
 	/**
 	 * @brief Construct a new Resource Manager object

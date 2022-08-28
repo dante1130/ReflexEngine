@@ -21,7 +21,7 @@ void OpenGL::init() {
 
 	glViewport(0, 0, engine.window_.get_buffer_width(),
 	           engine.window_.get_buffer_height());
-	//
+
 	// Enable depth testing.
 	glEnable(GL_DEPTH_TEST);
 	// Enable face culling.
@@ -30,17 +30,51 @@ void OpenGL::init() {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+	// Enable anti-aliasing.
+	glEnable(GL_MULTISAMPLE);
+
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 	// Default shader.
-	shader_ = std::make_unique<Shader>();
-	shader_->CompileFile("shaders/shader.vert", "shaders/shader.frag");
+	shader_.CompileFile("shaders/shader.vert", "shaders/shader.frag");
+
+	// Directional shadow shader.
+	directional_shadow_shader_.CompileFile(
+	    "shaders/directional_shadow_map.vert",
+	    "shaders/directional_shadow_map.frag");
+
+	// Omni-directional shadow shader.
+	omni_shadow_shader_.CompileFile("shaders/omni_shadow_map.vert",
+	                                "shaders/omni_shadow_map.geom",
+	                                "shaders/omni_shadow_map.frag");
 
 	lua_access();
 }
 
 void OpenGL::draw() {
-	render_pass();
+	auto& light_manager = ResourceManager::get_instance().get_light_manager();
+
+	const auto& directional_light = light_manager.get_directional_light();
+
+	std::vector<PointLight> point_lights;
+	std::vector<SpotLight> spot_lights;
+
+	point_lights.reserve(light_manager.get_point_lights().size());
+	spot_lights.reserve(light_manager.get_spot_lights().size());
+
+	std::copy_if(light_manager.get_point_lights().begin(),
+	             light_manager.get_point_lights().end(),
+	             std::back_inserter(point_lights),
+	             [](const PointLight& light) { return light.is_active(); });
+
+	std::copy_if(light_manager.get_spot_lights().begin(),
+	             light_manager.get_spot_lights().end(),
+	             std::back_inserter(spot_lights),
+	             [](const SpotLight& light) { return light.is_active(); });
+
+	directional_shadow_pass(directional_light);
+	omnidirectional_shadow_pass(point_lights, spot_lights);
+	render_pass(directional_light, point_lights, spot_lights);
 
 	draw_calls_.clear();
 }
@@ -51,7 +85,9 @@ void OpenGL::render_scene(const Shader& shader) {
 	}
 }
 
-void OpenGL::render_pass() {
+void OpenGL::render_pass(const DirectionalLight& d_light,
+                         const PointLights& p_lights,
+                         const SpotLights& s_lights) {
 	auto& engine = ReflexEngine::get_instance();
 
 	glViewport(0, 0, engine.window_.get_buffer_width(),
@@ -64,23 +100,96 @@ void OpenGL::render_pass() {
 
 	glm::mat4 view = engine.camera_.calc_view_matrix();
 
+	render_skybox(projection, view);
+
+	shader_.UseShader();
+
 	// Creates projection matrix mode
-	glUniformMatrix4fv(shader_->GetProjectionLocation(), 1, GL_FALSE,
+	glUniformMatrix4fv(shader_.GetProjectionLocation(), 1, GL_FALSE,
 	                   glm::value_ptr(projection));
 
 	// Create view matrix mode
-	glUniformMatrix4fv(shader_->GetViewLocation(), 1, GL_FALSE,
+	glUniformMatrix4fv(shader_.GetViewLocation(), 1, GL_FALSE,
 	                   glm::value_ptr(view));
 
-	render_skybox(projection, view);
+	// Set the eye position.
+	glUniform3fv(shader_.GetEyePositionLocation(), 1,
+	             glm::value_ptr(engine.camera_.get_position()));
 
-	shader_->UseShader();
+	render_lights(d_light, p_lights, s_lights);
 
-	render_lights();
+	shader_.Validate();
 
-	shader_->Validate();
+	render_scene(shader_);
+}
 
-	render_scene(*shader_);
+void OpenGL::directional_shadow_pass(const DirectionalLight& d_light) {
+	directional_shadow_shader_.UseShader();
+
+	glViewport(0, 0, d_light.get_shadow_map().get_shadow_width(),
+	           d_light.get_shadow_map().get_shadow_height());
+
+	d_light.get_shadow_map().write();
+
+	glClear(GL_DEPTH_BUFFER_BIT);
+
+	directional_shadow_shader_.SetDirectionalLightTransform(
+	    d_light.calculate_light_transform());
+
+	directional_shadow_shader_.Validate();
+
+	render_scene(directional_shadow_shader_);
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+void OpenGL::omnidirectional_shadow_pass(const PointLights& p_lights,
+                                         const SpotLights& s_lights) {
+	omni_shadow_shader_.UseShader();
+
+	GLuint uniform_omni_light_pos =
+	    omni_shadow_shader_.GetOmniLightPosLocation();
+	GLuint uniform_omni_light_far = omni_shadow_shader_.GetFarPlaneLocation();
+
+	omni_shadow_shader_.Validate();
+
+	for (const auto& light : p_lights) {
+		glViewport(0, 0, light.get_shadow_map().get_shadow_width(),
+		           light.get_shadow_map().get_shadow_height());
+
+		light.get_shadow_map().write();
+
+		glClear(GL_DEPTH_BUFFER_BIT);
+
+		glUniform3fv(uniform_omni_light_pos, 1,
+		             glm::value_ptr(light.get_position()));
+		glUniform1f(uniform_omni_light_far, light.get_far_plane());
+
+		omni_shadow_shader_.SetLightMatrices(
+		    light.calculate_light_transforms());
+
+		render_scene(omni_shadow_shader_);
+	}
+
+	for (const auto& light : s_lights) {
+		glViewport(0, 0, light.get_shadow_map().get_shadow_width(),
+		           light.get_shadow_map().get_shadow_height());
+
+		light.get_shadow_map().write();
+
+		glClear(GL_DEPTH_BUFFER_BIT);
+
+		glUniform3fv(uniform_omni_light_pos, 1,
+		             glm::value_ptr(light.get_position()));
+		glUniform1f(uniform_omni_light_far, light.get_far_plane());
+
+		omni_shadow_shader_.SetLightMatrices(
+		    light.calculate_light_transforms());
+
+		render_scene(omni_shadow_shader_);
+	}
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 void OpenGL::render_skybox(const glm::mat4& projection, const glm::mat4& view) {
@@ -89,31 +198,21 @@ void OpenGL::render_skybox(const glm::mat4& projection, const glm::mat4& view) {
 	skybox_manager.get_skybox().DrawSkybox(projection, view);
 }
 
-void OpenGL::render_lights() {
-	auto& light_manager = ResourceManager::get_instance().get_light_manager();
+void OpenGL::render_lights(const DirectionalLight& d_light,
+                           const PointLights& p_lights,
+                           const SpotLights& s_lights) {
+	shader_.SetDirectionalLight(d_light);
+	shader_.SetDirectionalLightTransform(d_light.calculate_light_transform());
 
-	shader_->SetDirectionalLight(light_manager.get_directional_light());
+	shader_.SetPointLights(p_lights.data(), p_lights.size(), 4, 0);
+	shader_.SetSpotLights(s_lights.data(), s_lights.size(), 4 + p_lights.size(),
+	                      p_lights.size());
 
-	std::vector<PointLight> point_lights;
-	std::vector<SpotLight> spot_lights;
+	d_light.get_shadow_map().read(GL_TEXTURE2);
 
-	std::copy_if(light_manager.get_point_lights().begin(),
-	             light_manager.get_point_lights().end(),
-	             std::back_inserter(point_lights),
-	             [](const PointLight& light) { return light.is_active(); });
-
-	std::copy_if(light_manager.get_spot_lights().begin(),
-	             light_manager.get_spot_lights().end(),
-	             std::back_inserter(spot_lights),
-	             [](const SpotLight& light) { return light.is_active(); });
-
-	shader_->SetPointLights(point_lights.data(), point_lights.size(), 0, 0);
-
-	shader_->SetSpotLights(spot_lights.data(), spot_lights.size(), 0, 0);
-
-	shader_->SetTexture(1);
-	shader_->SetDirectionalShadowMap(2);
-	shader_->set_detail_map(3);
+	shader_.SetTexture(1);
+	shader_.SetDirectionalShadowMap(2);
+	shader_.set_detail_map(3);
 }
 
 void OpenGL::toggle_wireframe() {
@@ -128,5 +227,3 @@ void OpenGL::toggle_wireframe() {
 void OpenGL::add_draw_call(const DrawCall& draw_call) {
 	draw_calls_.emplace_back(draw_call);
 }
-
-void OpenGL::set_skybox(const std::vector<std::string>& faces) {}

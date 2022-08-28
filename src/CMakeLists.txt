@@ -1,8 +1,7 @@
-target_sources(${PROJECT_NAME} PRIVATE
-	main.cpp
-
+add_library(ReflexEngineSrc
 	NetworkManager.cpp
 
+	Model/Components/RigidBody.cpp
 	Model/GameObject/GameObject.hpp
 	Model/GameObject/Item.cpp
 	Model/GameObject/Water.cpp
@@ -49,6 +48,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/ECS/Entity.cpp
 	Controller/ECS/ECSAccess.cpp
 	Controller/ECS/System.cpp
+	Controller/ECS/EntitySerializer.cpp
 	Controller/ResourceManager/ResourceManager.cpp
 	Controller/ResourceManager/TextureManager.cpp
 	Controller/ResourceManager/ModelManager.cpp
@@ -59,6 +59,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/ResourceManager/MeshManager.cpp
 	Controller/ResourceManager/TerrainManager.cpp
 	Controller/ResourceManager/ObjectSaving.cpp
+	Controller/ResourceManager/RigidbodyManager.cpp
 	Controller/Input/InputManager.cpp
 	Controller/Input/InputState.cpp
 	Controller/Audio/Audio.cpp
@@ -79,6 +80,7 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/Physics/PhysicBody.cpp
 	Controller/Physics/CollisionEvent.cpp
 	Controller/Physics/ColliderRenderer.cpp
+	Controller/Physics/LoadOBJColliderData.cpp
 	Controller/Networking/NetworkAccess.cpp
 	Controller/Terrain/multiTextureCreator.cpp
 	Controller/RandomGenerators/PseudoRandomNumberGenerator.cpp
@@ -93,10 +95,13 @@ target_sources(${PROJECT_NAME} PRIVATE
 	Controller/AI/statemachineComponentHelper.cpp
 	Controller/GUI/ECSGui.cpp
 	Controller/GUI/DebugLogger.cpp
+	Controller/GUI/DebugGUI.cpp
+	Controller/ReflexEngine/PerformanceLogger.cpp
+	Controller/GUI/PerformanceLoggerGUI.cpp
 
 	Scene/Scene.hpp
 	Scene/TestScene.cpp
 	Scene/ECSScene.cpp
 )
 
-target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(ReflexEngineSrc PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})

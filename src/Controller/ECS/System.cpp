@@ -3,6 +3,7 @@
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 #include "Controller/ResourceManager/ResourceManager.hpp"
 #include "Controller/LuaManager.hpp"
+#include "Controller/Physics/Physics.hpp"
 
 #include "Model/RunTimeDataStorage/GlobalDataStorage.hpp"
 
@@ -15,6 +16,7 @@
 #include "Model/Components/Terrain.hpp"
 #include "Model/Components/Statemachine.hpp"
 #include "Model/Components/Remove.hpp"
+#include "Model/Components/RigidBody.hpp"
 
 void System::draw_model(entt::registry& registry) {
 	auto& renderer = ReflexEngine::get_instance().renderer_;
@@ -24,10 +26,8 @@ void System::draw_model(entt::registry& registry) {
 	auto& material_manager = resource_manager.get_material_manager();
 
 	registry.view<Component::Transform, Component::Model>().each(
-	    [&renderer, &model_manager, &material_manager](auto& transform,
-	                                                   auto& model) {
-		    DrawCall draw_call = [&transform, &model, &model_manager,
-		                          &material_manager](const Shader& shader) {
+	    [&](auto& transform, auto& model) {
+		    DrawCall draw_call = [&](const Shader& shader) {
 			    glm::mat4 model_matrix(1.0f);
 			    model_matrix = glm::translate(model_matrix, transform.position);
 			    model_matrix *=
@@ -57,11 +57,8 @@ void System::draw_mesh(entt::registry& registry) {
 	auto& material_manager = resource_manager.get_material_manager();
 
 	registry.view<Component::Transform, Component::Mesh>().each(
-	    [&renderer, &mesh_manager, &texture_manager, &material_manager](
-	        auto& transform, auto& mesh) {
-		    DrawCall draw_call = [&transform, &mesh, &mesh_manager,
-		                          &texture_manager,
-		                          &material_manager](const Shader& shader) {
+	    [&](auto& transform, auto& mesh) {
+		    DrawCall draw_call = [&](const Shader& shader) {
 			    glm::mat4 model_matrix(1.0f);
 			    model_matrix = glm::translate(model_matrix, transform.position);
 			    model_matrix *=
@@ -93,11 +90,8 @@ void System::draw_md2(entt::registry& registry) {
 	auto& material_manager = resource_manager.get_material_manager();
 
 	registry.view<Component::Transform, Component::Md2Animation>().each(
-	    [&renderer, &md2_manager, &texture_manager, &material_manager](
-	        auto& transform, auto& md2) {
-		    DrawCall draw_call = [&transform, &md2, &md2_manager,
-		                          &texture_manager,
-		                          &material_manager](const Shader& shader) {
+	    [&](auto& transform, auto& md2) {
+		    DrawCall draw_call = [&](const Shader& shader) {
 			    glm::mat4 model(1.0F);
 			    model = glm::translate(model, transform.position);
 			    model *=
@@ -142,11 +136,8 @@ void System::draw_terrain(entt::registry& registry) {
 	auto& material_manager = resource_manager.get_material_manager();
 
 	registry.view<Component::Transform, Component::Terrain>().each(
-	    [&renderer, &terrain_manager, &texture_manager, &material_manager](
-	        auto& transform, auto& terrain_component) {
-		    DrawCall draw_call = [&transform, &terrain_component,
-		                          &terrain_manager, &texture_manager,
-		                          &material_manager](const Shader& shader) {
+	    [&](auto& transform, auto& terrain_component) {
+		    DrawCall draw_call = [&](const Shader& shader) {
 			    auto& terrain =
 			        terrain_manager.get_terrain(terrain_component.terrain_name);
 
@@ -180,6 +171,16 @@ void System::draw_terrain(entt::registry& registry) {
 
 		    renderer.add_draw_call(draw_call);
 	    });
+}
+
+void System::init_rigidbody(entt::registry& registry, entt::entity entity) {
+	auto& rigidbody_manager =
+	    ResourceManager::get_instance().get_rigidbody_manager();
+
+	auto& rigidbody = registry.get<Component::Rigidbody>(entity);
+	auto& transform = registry.get<Component::Transform>(entity);
+
+	rigidbody_manager.add_rigidbody(rigidbody, transform);
 }
 
 void System::init_script(entt::registry& registry, entt::entity entity) {
@@ -240,6 +241,21 @@ void System::init_statemachine(entt::registry& registry, entt::entity entity) {
 	if (!statemachine.entity) return;
 
 	statemachine.lua_variables = lua["entity"]["statemachine"]["var"];
+}
+
+void System::update_rigidbody(entt::registry& registry) {
+	if (EngineTime::is_paused()) return;
+
+	// Calls the physics world update
+	// Physics::getPhysicsWorld()->update(EngineTime::get_delta_time());
+
+	auto& rigidbody_manager =
+	    ResourceManager::get_instance().get_rigidbody_manager();
+
+	registry.view<Component::Rigidbody, Component::Transform>().each(
+	    [&rigidbody_manager](auto& rigidbody, auto& transform) {
+		    rigidbody_manager.update_rigidbody(rigidbody, transform);
+	    });
 }
 
 void System::update_directional_light(entt::registry& registry) {

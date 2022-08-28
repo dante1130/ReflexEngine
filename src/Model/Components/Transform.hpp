@@ -5,6 +5,7 @@
 
 namespace Component {
 /**
+ * @author Andrew Ho
  * @struct Transform
  * @brief The transform component is used to store the position, rotation and
  * scale of an entity.

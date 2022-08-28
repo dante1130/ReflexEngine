@@ -6,6 +6,7 @@
 #include "Controller/Terrain/TexturedTerrain.hpp"
 
 /**
+ * @author Andrew Ho
  * @class TerrainManager
  * @brief An encapsulated map of terrain.
  */

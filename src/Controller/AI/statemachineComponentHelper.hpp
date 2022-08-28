@@ -6,6 +6,12 @@
 #include <glm/glm.hpp>
 #include <sol/sol.hpp>
 
+/**
+ * @author Daniel Rodic
+ * @brief Assists the statemachine component apart of the ECS by providing some
+ * basic functionality for entities
+ *
+ */
 namespace statemachineComponentHelper {
 /**
  * @brief   Changes the state of the statemachine. Calls relevant entry & exit

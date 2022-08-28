@@ -6,7 +6,7 @@ SkyboxObject::SkyboxObject() { faces_.resize(6); }
 
 void SkyboxObject::init() {
 	auto& renderer = ReflexEngine::get_instance().renderer_;
-	renderer.set_skybox(faces_);
+	// renderer.set_skybox(faces_);
 }
 
 void SkyboxObject::save_object() {

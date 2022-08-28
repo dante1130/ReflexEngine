@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include <glm/gtc/type_ptr.hpp>
+
 BttController::BttController() {
 	prev_pos = glm::vec3(0, 0, 0);
 	current_total_indices = 0;

@@ -29,6 +29,11 @@ entity = {
 	},
 
 	point_light = {
+		shadow_width = 1024,
+		shadow_height = 1024,
+		near_plane = 0.1,
+		far_plane = 100,
+
 		color = {
 			r = 1,
 			g = 1,
@@ -50,6 +55,11 @@ entity = {
 	},
 
 	spot_light = {
+		shadow_width = 1024,
+		shadow_height = 1024,
+		near_plane = 0.1,
+		far_plane = 100,
+
 		color = {
 			r = 1,
 			g = 1,

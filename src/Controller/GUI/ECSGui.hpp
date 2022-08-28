@@ -8,6 +8,7 @@
 #include "Controller/ECS/Entity.hpp"
 
 /**
+ * @author Andrew Ho
  * @class ECSGui
  * @brief ImGui facade to display all the components of an entity in the scene.
  */
@@ -134,6 +135,13 @@ private:
 	 * @param entity The entity.
 	 */
 	static void draw_statemachine(Reflex::Entity& entity);
+
+	/**
+	 * @brief Draw the rigidbody component of the entity.
+	 *
+	 * @param entity The entity.
+	 */
+	static void draw_rigidbody(Reflex::Entity& entity);
 
 	/**
 	 * @brief A helper method for ImGui input text update on enter.

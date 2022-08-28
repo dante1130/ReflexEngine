@@ -1,16 +1,21 @@
 #include "ECSScene.hpp"
 
+#include <filesystem>
+
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 #include "Controller/LuaManager.hpp"
 #include "Controller/ECSGameAssetFactory.hpp"
 #include "Controller/Audio/Audio.hpp"
 #include "Controller/ECS/System.hpp"
 #include "Controller/Networking/NetworkAccess.h"
+#include "Controller/ECS/EntitySerializer.hpp"
+#include "Controller/GUI/DebugGUI.hpp"
 
 ECSScene::ECSScene(const std::string& master_lua_script)
     : Scene(master_lua_script) {}
 
 void ECSScene::init() {
+	Audio::get_instance().stop_all();
 	LuaManager::get_instance().get_state().script_file(master_lua_script_);
 }
 
@@ -37,9 +42,23 @@ void ECSScene::add_draw_call() {
 	ecs_.draw();
 }
 
-void ECSScene::save_game_objects() {}
+void ECSScene::save(const std::string& dir_path) {
+	EntitySerializer::serialize(dir_path, ecs_);
+}
 
-void ECSScene::load_saved_game_objects() {}
+void ECSScene::load(const std::string& dir_path) {
+	if (!std::filesystem::exists(dir_path)) {
+		return;
+	}
+
+	Audio::get_instance().stop_all();
+	ecs_.clear_entities();
+
+	std::filesystem::path path(dir_path);
+	path /= "_SaveCreation.lua";
+
+	LuaManager::get_instance().get_state().script_file(path.string());
+}
 
 void ECSScene::garbage_collection() { System::update_remove(ecs_); }
 

@@ -66,4 +66,9 @@ void register_terrain_component();
  */
 void register_statemachine_component();
 
+/**
+ * @brief Register the rigidbody component to Lua.
+ */
+void register_rigidbody_component();
+
 };  // namespace ECSAccess

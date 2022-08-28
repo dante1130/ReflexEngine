@@ -9,6 +9,7 @@
 
 namespace Component {
 /**
+ * @author Andrew Ho
  * @struct Script
  * @brief The script component is used to run a lua script.
  */
