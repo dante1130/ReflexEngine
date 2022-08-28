@@ -13,7 +13,8 @@
 #include "Model/Components/Statemachine.hpp"
 #include "Model/Components/Remove.hpp"
 #include "Model/Components/RigidBody.hpp"
-#include "Controller/GUI/CollectionsGUI.hpp"
+
+#include "Controller/GUI/DebugLogger.hpp"
 
 #include <vector>
 
@@ -23,25 +24,8 @@ void ECSGui::draw(ECS& ecs) {
 	auto& registry = ecs.get_registry();
 
 	ImGui::Begin("Scene entities", nullptr, window_flags);
-	registry.each([this, &ecs](auto entity_id) {
-		draw_entity(ecs.get_entity(entity_id));
-	});
 
-	// Collection drawing
-	std::vector<Collection> collections =
-	    CollectionsGUI::get_collection_hierarchy();
-
-	std::vector<std::vector<entt::entity>> collection_order =
-	    std::vector<std::vector<entt::entity>>();
-	int number_of_collections = collections.size() + 1;
-	for (int count = 0; count < number_of_collections; ++count) {
-		collection_order.push_back(std::vector<entt::entity>());
-	}
-
-	int collection_id = -1;
-	// collection_id = CollectionsGUI::get_entity_collection_id(entity_id);
-
-	// End of collection drawing
+	draw_collection_hierarchy(ecs);
 
 	// Deselect when clicking on blank space.
 	if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered()) {
@@ -67,6 +51,81 @@ void ECSGui::draw(ECS& ecs) {
 		draw_add_component(entity);
 	}
 	ImGui::End();
+}
+
+void ECSGui::draw_collection_hierarchy(ECS& ecs) {
+	auto& registry = ecs.get_registry();
+	std::vector<Collection> collections =
+	    CollectionsGUI::get_collection_hierarchy();
+
+	std::vector<std::vector<entt::entity>> collection_order =
+	    std::vector<std::vector<entt::entity>>();
+	int number_of_collections = collections.size() + 1;
+	for (int count = 0; count < number_of_collections; ++count) {
+		collection_order.push_back(std::vector<entt::entity>());
+	}
+
+	int collection_id = -1;
+	registry.each([this, &ecs, &collection_id, &collections, &collection_order,
+	               &number_of_collections](auto entity_id) {
+		collection_id = CollectionsGUI::get_entity_collection_id(entity_id);
+		// Loop through all collections
+		for (int count = 0; count < number_of_collections; count++) {
+			if (count + 1 == number_of_collections) {  // If out of collections
+				                                       // then add to end
+				collection_order[count].push_back(entity_id);
+			} else if (collections[count].collection_id ==
+			           collection_id) {  // If valid collection found
+				collection_order[count].push_back(entity_id);
+			}
+		}
+	});
+
+	// If outermost collections
+	for (int count = 0; count < number_of_collections - 1; ++count) {
+		if (collections[count].parent_collection_id == -1) {
+			if (ImGui::CollapsingHeader(collections[count].name.c_str())) {
+				draw_collection(ecs, collections, collection_order, count);
+			}
+		}
+	}
+
+	// Entities that belong to no collection
+	for (int count = 0;
+	     count < collection_order[number_of_collections - 1].size(); ++count) {
+		draw_entity(
+		    ecs.get_entity(collection_order[number_of_collections - 1][count]));
+	}
+
+	if (number_of_collections < 10) {
+		CollectionsGUI::add_collection(
+		    std::to_string(number_of_collections).c_str(), 5);
+	}
+}
+
+void ECSGui::draw_collection(
+    ECS& ecs, std::vector<Collection>& collections,
+    std::vector<std::vector<entt::entity>>& collection_order, int index) {
+	int number_of_children = collections[index].child_ids.size();
+	int number_of_collections = collection_order.size();
+	int child_id;
+	// Draw all child collections
+	for (int count = 0; count < number_of_children; ++count) {
+		child_id = collections[index].child_ids[count];
+		for (int innerCount = 0; innerCount < number_of_collections;
+		     ++innerCount) {
+			if (collections[innerCount].collection_id == child_id) {
+				draw_collection(ecs, collections, collection_order, innerCount);
+				innerCount = number_of_collections;
+			}
+		}
+	}
+
+	// Draw all entities
+	int number_of_entities = collection_order[index].size();
+	for (int count = 0; count < number_of_entities; ++count) {
+		draw_entity(ecs.get_entity(collection_order[index][count]));
+	}
 }
 
 void ECSGui::draw_entity(Reflex::Entity& entity) {
