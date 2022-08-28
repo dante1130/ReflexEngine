@@ -1,18 +1,28 @@
 #include "RigidBody.hpp"
 
 Component::Rigidbody::Rigidbody(bool usingReact, glm::vec3 pos, glm::vec3 rot) {
+	
 	if (usingReact)
 		pb = new ReactResolve();
 	else
 		pb = new EngineResolve();
 
 	pb->initialise_body(pos, rot);
+
+	gravity_on = false;
+	can_sleep = true;
+	is_trigger = false;
+	lin_drag = 0.0f;
+	ang_drag = 0.0f;
+
+	using_react_start = usingReact;
 }
 
 Component::Rigidbody::Rigidbody(bool usingReact, glm::vec3 pos, glm::vec3 rot,
-                                bool gravity_on, bool can_sleep,
-                                bool is_trigger, float linear_drag,
-                                float angular_drag) {
+                                bool gravity_on_, bool can_sleep_,
+                                bool is_trigger_, float linear_drag_,
+                                float angular_drag_) {
+
 	if (usingReact)
 		pb = new ReactResolve();
 	else
@@ -20,21 +30,40 @@ Component::Rigidbody::Rigidbody(bool usingReact, glm::vec3 pos, glm::vec3 rot,
 
 	pb->initialise_body(pos, rot);
 
-	pb->enableGravity(gravity_on);
-	pb->setCanSleep(can_sleep);
-	pb->setObjectTrigger(is_trigger);
-	pb->setDragForce(linear_drag);
-	pb->setDragTorque(angular_drag);
+	pb->enableGravity(gravity_on_);
+	pb->setCanSleep(can_sleep_);
+	pb->setObjectTrigger(is_trigger_);
+	pb->setDragForce(linear_drag_);
+	pb->setDragTorque(angular_drag_);
+
+	gravity_on = gravity_on_;
+	can_sleep = can_sleep_;
+	is_trigger = is_trigger_;
+	lin_drag = linear_drag_;
+	ang_drag = angular_drag_;
+
+	using_react_start = usingReact;
 }
 
 void Component::Rigidbody::init(bool usingReact, glm::vec3 pos, glm::vec3 rot) {
+
 	if (usingReact)
 		pb = new ReactResolve();
 	else
 		pb = new EngineResolve();
 
 	pb->initialise_body(pos, rot);
+
+	gravity_on = false;
+	can_sleep = true;
+	is_trigger = false;
+	lin_drag = 0.0f;
+	ang_drag = 0.0f;
+
+	using_react_start = usingReact;
 }
+
+bool Component::Rigidbody::intialised() { return pb != nullptr; }
 
 void Component::Rigidbody::setTransform(glm::vec3 pos, glm::vec3 rot) {
 	pb->setPosition(pos);
@@ -55,6 +84,12 @@ void Component::Rigidbody::setViewables(bool gravity_on, bool can_sleep,
 bool Component::Rigidbody::usingReactResolve() {
 	return pb->usingReactResolve();
 }
+
+//update
+
+void Component::Rigidbody::update(float delta_time) { pb->update(delta_time); }
+
+void Component::Rigidbody::deleteBody() { pb->delete_body(); }
 
 // Colliders
 

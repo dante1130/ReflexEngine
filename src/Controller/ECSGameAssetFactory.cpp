@@ -234,8 +234,9 @@ void ECSGameAssetFactory::load_rigidbody(Reflex::Entity& entity,
 	Component::Transform trans = entity.get_component<Component::Transform>();
 
 	entity.add_component<Component::Rigidbody>(
-	    rigidbody_table["using_react"], trans.position, trans.rotation,
+	    rigidbody_table["using_react_start"], trans.position, trans.rotation,
 	    rigidbody_table["gravity_on"], rigidbody_table["can_sleep"],
 	    rigidbody_table["is_trigger"], rigidbody_table["linear_drag"],
 	    rigidbody_table["angular_drag"]);
+
 }

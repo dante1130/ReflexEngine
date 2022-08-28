@@ -90,9 +90,14 @@ class PhysicsBody
 	    // collision resolution system type check
 	    virtual bool usingReactResolve() = 0;
 
+		// Update function
+	    virtual void update(float delta_time) = 0;
+
 		//init setup
 	    virtual void initialise_body(glm::vec3 pos, glm::vec3 rot, float angle) = 0;
 		virtual void initialise_body(glm::vec3 pos, glm::vec3 rot) = 0;
+
+		virtual void delete_body() = 0;
 
 		//Change movement properties
 	    virtual void addForce(glm::vec3 force, Apply type) = 0;

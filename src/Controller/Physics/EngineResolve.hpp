@@ -30,7 +30,7 @@ public:
 
 	EngineResolve();
 
-	void update(float delta_time);
+	void update(float delta_time) override;
 
 	// using engine stuff
 	bool usingReactResolve() override;
@@ -38,6 +38,8 @@ public:
 	// init setup
 	void initialise_body(glm::vec3 pos, glm::vec3 rot, float angle) override;
 	void initialise_body(glm::vec3 pos, glm::vec3 rot) override;
+
+	void delete_body() override;
 
 	//Change movement properties
 	void addForce(glm::vec3 force, Apply type) override;

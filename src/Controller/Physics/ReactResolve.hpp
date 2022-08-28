@@ -13,9 +13,14 @@ class ReactResolve: public PhysicsBody{
 		//using engine stuff
 		bool usingReactResolve() override;
 
+		// Update function
+	    void update(float delta_time) override;
+
 		// init setup
 	    void initialise_body(glm::vec3 pos, glm::vec3 rot, float angle) override;
 		void initialise_body(glm::vec3 pos, glm::vec3 rot) override;
+
+		void delete_body() override;
 
 		//Change movement properties
 		void addForce(glm::vec3 force, Apply type) override;

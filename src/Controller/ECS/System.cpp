@@ -179,7 +179,7 @@ void System::init_rigidbody(entt::registry& registry, entt::entity entity) {
 
 	auto& rigidbody = registry.get<Component::Rigidbody>(entity);
 	auto& transform = registry.get<Component::Transform>(entity);
-
+	
 	rigidbody_manager.add_rigidbody(rigidbody, transform);
 }
 
@@ -399,4 +399,14 @@ void System::delete_spot_light(entt::registry& registry, entt::entity entity) {
 	auto& spot_light = registry.get<Component::SpotLight>(entity);
 
 	light_manager.delete_spot_light(spot_light.light_id);
+}
+
+void System::delete_rigidbody(entt::registry& registry,
+                              entt::entity entity) {
+	auto& rigidbody_manager =
+	    ResourceManager::get_instance().get_rigidbody_manager();
+
+	auto& rigidbody = registry.get<Component::Rigidbody>(entity);
+
+	rigidbody_manager.delete_rigidbody(rigidbody);
 }

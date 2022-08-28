@@ -11,6 +11,10 @@ ReactResolve::ReactResolve()
 	 //something
 }
 
+void ReactResolve::update(float delta_time) {
+
+}
+
 
 void ReactResolve::initialise_body(glm::vec3 pos, glm::vec3 rot, float angle)
 {
@@ -55,6 +59,8 @@ void ReactResolve::initialise_body(glm::vec3 pos, glm::vec3 rot)
 
 	rb = Physics::getPhysicsWorld()->createRigidBody(Transform(position, orientation));
 }
+
+void ReactResolve::delete_body() { rb->~RigidBody(); }
 
 void ReactResolve::addForce(glm::vec3 force, Apply type) 
 { 

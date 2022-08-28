@@ -33,11 +33,14 @@ ECS::ECS() {
 	    .connect<&System::delete_point_light>();
 	registry_.on_destroy<Component::SpotLight>()
 	    .connect<&System::delete_spot_light>();
+	registry_.on_destroy<Component::Rigidbody>()
+	    .connect<&System::delete_rigidbody>();
 }
 
 Entity& ECS::create_entity(const std::string& name) {
 	entt::entity entity_id = registry_.create();
 
+	std::cout << "Name: " << name << std::endl;
 	return *(entities_[entity_id] =
 	             std::make_shared<Entity>(name, entity_id, this));
 }

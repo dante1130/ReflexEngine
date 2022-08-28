@@ -40,28 +40,26 @@ void EngineResolve::update(float delta_time) {
 	if (use_gravity_) 
 		applied_gravity = gravity_;
 
-	// Applies linear drag to linear acceration
-	if (lin_accelaration_.length() * mass_ <= lin_drag)
-		lin_accelaration_ = glm::vec3(0);
-	else
-		lin_accelaration_ -= glm::normalize(lin_accelaration_) * (lin_drag / mass_);
+	//// Applies linear drag to linear acceration
+	//if (lin_accelaration_.length() * mass_ <= lin_drag)
+	//	lin_accelaration_ = glm::vec3(0);
+	//else
+	//	lin_accelaration_ -= glm::normalize(lin_accelaration_) * (lin_drag / mass_);
 
-	// Applies linear drag to gravity
-	if (applied_gravity.length() * mass_ <= lin_drag)
-		applied_gravity = glm::vec3(0);
-	else
-		applied_gravity -= glm::normalize(applied_gravity) * (lin_drag / mass_);
+	//// Applies linear drag to gravity
+	//if (applied_gravity.length() * mass_ <= lin_drag)
+	//	applied_gravity = glm::vec3(0);
+	//else
+	//	applied_gravity -= glm::normalize(applied_gravity) * (lin_drag / mass_);
 
 
 	// Previous position and orientation
 	Vector3 old_position = cb->getTransform().getPosition();
 	Quaternion old_orientation = cb->getTransform().getOrientation();
 
-
 	// Calcuating new linear velocity
 	lin_velocity_ =
 	    lin_velocity_ + (lin_accelaration_ + applied_gravity) * delta_time;
-
 
 	// Calculating new position
 	Vector3 new_position = old_position +
@@ -116,6 +114,8 @@ void EngineResolve::initialise_body(glm::vec3 pos, glm::vec3 rot)
 
 	cb = Physics::getPhysicsWorld()->createCollisionBody(Transform(position, orientation));
 }
+
+void EngineResolve::delete_body() { cb->~CollisionBody(); }
 
 void EngineResolve::addForce(glm::vec3 force, Apply type) {
 	if (type != Apply::LOCAL) 

@@ -20,6 +20,9 @@ void CollisionEventListener::onContact(const CallbackData& collision_data) {
 		 	std::cout << "Contact end\n";
 		 }
 
+		 if (contact_pair.getBody1() == contact_pair.getBody2())
+			 std::cout << "Same body\n";
+
 		for (size_t j = 0; j < contact_pair.getNbContactPoints(); ++j) {
 			ContactPoint contact_point = contact_pair.getContactPoint(j);
 		}

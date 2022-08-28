@@ -20,21 +20,22 @@ private:
 
 public:
 	/// Whether gravity is enabled
-	bool gravity_on = false;
+	bool gravity_on;
 	/// <summary>
 	/// Whether the object is allowed to stop
 	/// calculating resolution after a certain 
 	/// period of time
 	/// </summary>
-	bool can_sleep = true;
+	bool can_sleep;
 	/// Whether collision shapes are triggers
-	bool is_trigger = false;
+	bool is_trigger;
 
 	/// Linear drag
-	float lin_drag = 0.0f;
+	float lin_drag;
 	/// Angular drag
-	float ang_drag = 0.0f;
+	float ang_drag;
 
+	bool using_react_start;
 
 	Rigidbody() = default;
 
@@ -59,6 +60,12 @@ public:
 	/// reactphysics3d resolution
 	bool usingReactResolve();
 
+	bool intialised();
+
+	//update
+	void update(float delta_time);
+
+	void deleteBody();
 	///COLLIDERS
 
 	/**
