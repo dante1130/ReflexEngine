@@ -28,11 +28,12 @@ void EngineResolve::update(float delta_time) {
 		return;
 
 	glm::vec3 applied_gravity = glm::vec3(0.0f);
+	glm::vec3 temp_acc = glm::vec3(0.0f);
 
 	// Applies force to acceleration
 	if (force_ != glm::vec3(0.0f)) {
-		lin_accelaration_ += force_ / mass_;
-
+		temp_acc = force_ / mass_;
+		lin_accelaration_ += temp_acc;
 		force_ = glm::vec3(0.0f);
 	}
 
@@ -71,6 +72,7 @@ void EngineResolve::update(float delta_time) {
 	//Final linking
 	cb->setTransform(Transform(new_position, new_orientation));
 
+	lin_accelaration_ -= temp_acc;
 }
 
 void EngineResolve::initialise_body(glm::vec3 pos, glm::vec3 rot, float angle) {
