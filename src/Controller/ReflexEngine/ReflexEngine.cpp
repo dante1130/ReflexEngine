@@ -126,7 +126,6 @@ void ReflexEngine::lua_access() {
 	InputManager::get_instance();
 	DebugLogger::lua_access();
 	CollectionsGUI::lua_access();
-
 	NetworkAccess::lua_access();
 	MathAccess::lua_access();
 	ECSAccess::register_ecs();

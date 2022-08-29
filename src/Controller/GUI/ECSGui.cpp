@@ -124,17 +124,13 @@ void ECSGui::draw_collection_hierarchy(ECS& ecs) {
 		}
 	});
 
-	std::string name;
 	bool open, selected = false;
 	// If outermost collections
 	for (int count = 0; count < number_of_collections - 1; ++count) {
 		if (collections[count].parent_collection_id == -1) {
-			name = collections[count].name +
-			       " id = " + std::to_string(collections[count].collection_id) +
-			       " numChildren = " +
-			       std::to_string(collections[count].child_ids.size());
-			open = ImGui::CollapsingHeader(
-			    name.c_str(), ImGuiSelectableFlags_AllowItemOverlap);
+			open =
+			    ImGui::CollapsingHeader(collections[count].name.c_str(),
+			                            ImGuiSelectableFlags_AllowItemOverlap);
 			CollectionsGUI::drag_drop_entities_to_collections_target(count);
 			selected =
 			    CollectionsGUI::drag_drop_collections_to_collections_source(

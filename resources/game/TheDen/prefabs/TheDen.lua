@@ -1,5 +1,6 @@
 entity = {
 	name = "TheDen",
+	collection_id = 2,
 
 	transform = {
 		position = {

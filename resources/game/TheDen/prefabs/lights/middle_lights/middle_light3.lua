@@ -1,5 +1,6 @@
 entity = {
 	name = "Middle light 3",
+	collection_id = 1,
 
 	point_light = {
 		shadow_width = 512,
