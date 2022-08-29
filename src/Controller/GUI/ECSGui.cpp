@@ -58,6 +58,17 @@ void ECSGui::draw(ECS& ecs) {
 		auto& entity = ecs.get_entity(selected_entity_);
 		draw_entity_props(ecs, entity);
 		draw_add_component(entity);
+		selected_collection_ = -1;
+	} else if (selected_collection_ != -1) {
+		std::string collection_name =
+		    CollectionsGUI::get_collection_hierarchy()[selected_collection_]
+		        .name;
+		ImGui::Text("Name: ");
+		ImGui::SameLine();
+		if (ImGui::InputText(" ", &collection_name)) {
+			CollectionsGUI::rename_collection(collection_name,
+			                                  selected_collection_);
+		}
 	}
 	ImGui::End();
 }
@@ -93,7 +104,7 @@ void ECSGui::draw_collection_hierarchy(ECS& ecs) {
 	});
 
 	std::string name;
-	bool open;
+	bool open, selected = false;
 	// If outermost collections
 	for (int count = 0; count < number_of_collections - 1; ++count) {
 		if (collections[count].parent_collection_id == -1) {
@@ -101,11 +112,17 @@ void ECSGui::draw_collection_hierarchy(ECS& ecs) {
 			       " id = " + std::to_string(collections[count].collection_id) +
 			       " numChildren = " +
 			       std::to_string(collections[count].child_ids.size());
-			open = ImGui::CollapsingHeader(name.c_str());
+			open = ImGui::CollapsingHeader(
+			    name.c_str(), ImGuiSelectableFlags_AllowItemOverlap);
 			CollectionsGUI::drag_drop_entities_to_collections_target(count);
-			CollectionsGUI::drag_drop_collections_to_collections_source(
-			    collections[count].name, count);
+			selected =
+			    CollectionsGUI::drag_drop_collections_to_collections_source(
+			        collections[count].name, count);
 			CollectionsGUI::drag_drop_collections_to_collections_target(count);
+			if (selected) {
+				selected_collection_ = count;
+				selected_entity_ = entt::null;
+			}
 			if (open) {
 				ImGui::Indent(INDENT_AMOUNT);
 				draw_collection(ecs, collections, collection_order, count);
@@ -133,7 +150,7 @@ void ECSGui::draw_collection(
 	int number_of_children = collections[index].child_ids.size();
 	int number_of_collections = collection_order.size() - 1;
 	int child_id = -1;
-	bool open;
+	bool open = false, selected = false;
 	// Draw all child collections
 	for (int count = 0; count < number_of_children; ++count) {
 		child_id = collections[index].child_ids[count];
@@ -145,17 +162,27 @@ void ECSGui::draw_collection(
 				// ImGui collapsing header
 				open = ImGui::CollapsingHeader(
 				    collections[innerCount].name.c_str());
+
+				// // // Drag and drop methods
 				CollectionsGUI::drag_drop_entities_to_collections_target(
 				    innerCount);
-				CollectionsGUI::drag_drop_collections_to_collections_source(
-				    collections[innerCount].name, innerCount);
+				selected =
+				    CollectionsGUI::drag_drop_collections_to_collections_source(
+				        collections[innerCount].name, innerCount);
 				CollectionsGUI::drag_drop_collections_to_collections_target(
 				    innerCount);
+				if (selected) {
+					selected_collection_ = innerCount;
+					selected_entity_ = entt::null;
+				}
+				// // // End of drag and drop methods
+
 				if (open) {
 					ImGui::Indent(INDENT_AMOUNT);
 					draw_collection(ecs, collections, collection_order,
 					                innerCount);
 					innerCount = number_of_collections;
+
 					ImGui::Indent(-INDENT_AMOUNT);
 				}
 			}

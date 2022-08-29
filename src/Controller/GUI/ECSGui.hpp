@@ -29,6 +29,8 @@ private:
 	entt::entity selected_entity_ = {entt::null};
 	/// The drag speed.
 	constexpr static float speed_ = 0.1f;
+	/// The currently selected collection
+	int selected_collection_ = -1;
 
 	/**
 	 * @brief Draw the selectable for the entity.

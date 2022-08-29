@@ -175,7 +175,7 @@ void CollectionsGUI::set_collection_collection(int selected_collection,
 	collection_hierarchy[selected_collection].child_ids.clear();
 }
 
-void CollectionsGUI::drag_drop_collections_to_collections_source(
+bool CollectionsGUI::drag_drop_collections_to_collections_source(
     const std::string& name, int collection_id) {
 	ImGuiDragDropFlags src_flags = 0;
 	src_flags |= ImGuiDragDropFlags_SourceNoDisableHover;
@@ -187,5 +187,21 @@ void CollectionsGUI::drag_drop_collections_to_collections_source(
 		ImGui::SetDragDropPayload("COLLECTION_COLLECTION_MOVE", &collection_id,
 		                          sizeof(int));
 		ImGui::EndDragDropSource();
+		return true;
+	}
+	return false;
+}
+
+void CollectionsGUI::rename_collection(const std::string& new_name,
+                                       int collection_id) {
+	if (new_name.empty()) {
+		return;
+	}
+
+	int number_of_collections = collection_hierarchy.size();
+	for (int count = 0; count < number_of_collections; ++count) {
+		if (collection_hierarchy[count].collection_id == collection_id) {
+			collection_hierarchy[count].name = new_name;
+		}
 	}
 }
