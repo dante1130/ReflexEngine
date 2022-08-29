@@ -158,16 +158,6 @@ void ECSGui::draw_collection_hierarchy(ECS& ecs) {
 		draw_entity(
 		    ecs.get_entity(collection_order[number_of_collections - 1][count]));
 	}
-
-	static bool finished = false;
-	if (number_of_collections < 10) {
-		if (!finished) {
-			CollectionsGUI::add_collection(
-			    std::to_string(number_of_collections - 1).c_str(), 0);
-		}
-	} else {
-		finished = true;
-	}
 }
 
 void ECSGui::draw_collection(

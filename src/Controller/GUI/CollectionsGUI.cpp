@@ -1,6 +1,7 @@
 #include "CollectionsGUI.hpp"
 #include "Controller/GUI/DebugLogger.hpp"
 #include <imgui/misc/cpp/imgui_stdlib.h>
+#include "Controller/LuaManager.hpp"
 
 std::unordered_map<entt::entity, int> CollectionsGUI::collection_relationships =
     std::unordered_map<entt::entity, int>();
@@ -10,6 +11,18 @@ Counter CollectionsGUI::collection_id_generator = Counter();
 
 std::vector<Collection>& CollectionsGUI::get_collection_hierarchy() {
 	return collection_hierarchy;
+}
+
+void CollectionsGUI::lua_access() {
+	auto& lua = LuaManager::get_instance().get_state();
+
+	auto collection = lua.create_named_table("Collections");
+
+	collection.set_function("add_collection", &CollectionsGUI::add_collection);
+	collection.set_function("clear_collections",
+	                        &CollectionsGUI::clear_collections);
+
+	// Add collection
 }
 
 Collection CollectionsGUI::get_collection(int collection_id) {
@@ -35,7 +48,7 @@ int CollectionsGUI::get_entity_collection_id(entt::entity& entity) {
 
 void CollectionsGUI::draw_add_collection() {}
 
-void CollectionsGUI::add_collection(const std::string& name, int parent_id) {
+int CollectionsGUI::add_collection(const std::string& name, int parent_id) {
 	Collection col_hir;
 	col_hir.name = name;
 	col_hir.collection_id = collection_id_generator.increment_count();
@@ -57,6 +70,8 @@ void CollectionsGUI::add_collection(const std::string& name, int parent_id) {
 	}
 
 	collection_hierarchy.push_back(col_hir);
+
+	return col_hir.collection_id;
 }
 
 void CollectionsGUI::remove_collection(int collection_id) {
@@ -263,4 +278,16 @@ void CollectionsGUI::rename_collection(const std::string& new_name,
 			collection_hierarchy[count].name = new_name;
 		}
 	}
+}
+
+void CollectionsGUI::add_entity_to_collection(const entt::entity& entity,
+                                              int collection_id) {
+	collection_relationships.insert(
+	    std::pair<entt::entity, int>(entity, collection_id));
+}
+
+void CollectionsGUI::clear_collections() {
+	collection_hierarchy.clear();
+	collection_relationships.clear();
+	collection_id_generator.reset_count();
 }

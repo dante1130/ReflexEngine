@@ -10,6 +10,8 @@
 #include "Model/Components/Statemachine.hpp"
 #include "Model/Components/RigidBody.hpp"
 
+#include "Controller/GUI/CollectionsGUI.hpp"
+
 #include "Controller/ECS/System.hpp"
 
 #include "Controller/LuaManager.hpp"
@@ -84,6 +86,11 @@ void ECSGameAssetFactory::load_components(ECS& ecs, Reflex::Entity& entity,
 	// Put this last in case the script calls other components.
 	if (entity_table["script"].valid()) {
 		load_script(ecs, entity, entity_table["script"]);
+	}
+
+	if (entity_table["collection_id"].valid()) {
+		CollectionsGUI::add_entity_to_collection(entity.get_entity_id(),
+		                                         entity_table["collection_id"]);
 	}
 }
 
