@@ -6,6 +6,10 @@
 #include "Controller/ECS/Entity.hpp"
 #include "Controller/AI/Counter.hpp"
 
+/**
+ * @author Daniel Rodic
+ * @brief Stores basic data required for a collection
+ */
 struct Collection {
 	std::string name = "";
 	int collection_id = -1;
@@ -13,31 +17,129 @@ struct Collection {
 	std::vector<int> child_ids = std::vector<int>();
 };
 
+/**
+ * @author Daniel Rodic
+ * @brief Hanldes the collections GUI
+ */
 class CollectionsGUI {
 public:
+	/**
+	 * @brief Provides access to lua
+	 *
+	 */
 	static void lua_access();
+
+	/**
+	 * @brief Get the collection hierarchy object
+	 *
+	 * @return std::vector<Collection>&
+	 */
 	static std::vector<Collection>& get_collection_hierarchy();
+
+	/**
+	 * @brief Get the collection object
+	 *
+	 * @param collection_id the id of the collection you want to get
+	 * @return Collection
+	 */
 	static Collection get_collection(int collection_id);
+
+	/**
+	 * @brief Get the which collection the entity belongs to
+	 *
+	 * @param entity the entity you are interested in
+	 * @return int the collection id
+	 */
 	static int get_entity_collection_id(entt::entity& entity);
-	static void draw_add_collection();
+
+	/**
+	 * @brief Adds a new collection to the scene
+	 *
+	 * @param name the name of the new collection
+	 * @param parent_id the parent id of the new collection (-1 for no parent)
+	 * @return int the collection id of the new collection
+	 */
 	static int add_collection(const std::string& name, int parent_id);
+
+	/**
+	 * @brief Removes a collection
+	 *
+	 * @param collection_id of the collection you want to remove
+	 */
 	static void remove_collection(int collection_id);
+
+	/**
+	 * @brief Set the entity collection object
+	 *
+	 * @param entity
+	 * @param new_collection
+	 */
 	static void set_entity_collection(const entt::entity& entity,
 	                                  int new_collection);
+
+	/**
+	 * @brief Sets the target for dagging an entity to a collection
+	 *
+	 * @param index of the collection dropped on
+	 */
 	static void drag_drop_entities_to_collections_target(int index);
+
+	/**
+	 * @brief Sets the target for dragging a collection to a collection
+	 *
+	 * @param index of the collection dropped on
+	 */
 	static void drag_drop_collections_to_collections_target(int index);
+
+	/**
+	 * @brief Sets the srouce for dragging a collection to a collection
+	 *
+	 * @param name of the collection you will be dragging
+	 * @param index of the collection you will be dragging
+	 * @return true if currently being dragged
+	 * @return false if not currently being dragged
+	 */
 	static bool drag_drop_collections_to_collections_source(
 	    const std::string& name, int index);
-	static void set_collection_collection(int selected_collection,
-	                                      int target_collection);
+
+	/**
+	 * @brief Renames a collection
+	 *
+	 * @param new_name the new name
+	 * @param collection_id the collection to rename
+	 */
 	static void rename_collection(const std::string& new_name,
 	                              int collection_id);
+
+	/**
+	 * @brief Adds an entity to a collection
+	 *
+	 * @param entity the entity to add
+	 * @param collection_id the collection to add the entity too
+	 */
 	static void add_entity_to_collection(const entt::entity& entity,
 	                                     int collection_id);
+
+	/**
+	 * @brief Clears the collections
+	 *
+	 */
 	static void clear_collections();
 
 private:
+	/// Stores the relationships between collections and entities
 	static std::unordered_map<entt::entity, int> collection_relationships;
+	/// Stores all the collections
 	static std::vector<Collection> collection_hierarchy;
+	/// Generates the collection ids
 	static Counter collection_id_generator;
+
+	/**
+	 * @brief Set the collection collection object
+	 *
+	 * @param selected_collection the collection you have moved
+	 * @param target_collection the new parent of the collection you have moved
+	 */
+	static void set_collection_collection(int selected_collection,
+	                                      int target_collection);
 };

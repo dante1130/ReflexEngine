@@ -46,8 +46,6 @@ int CollectionsGUI::get_entity_collection_id(entt::entity& entity) {
 	return collection_id;
 }
 
-void CollectionsGUI::draw_add_collection() {}
-
 int CollectionsGUI::add_collection(const std::string& name, int parent_id) {
 	Collection col_hir;
 	col_hir.name = name;
@@ -282,8 +280,14 @@ void CollectionsGUI::rename_collection(const std::string& new_name,
 
 void CollectionsGUI::add_entity_to_collection(const entt::entity& entity,
                                               int collection_id) {
-	collection_relationships.insert(
-	    std::pair<entt::entity, int>(entity, collection_id));
+	Collection temp = CollectionsGUI::get_collection(collection_id);
+	if (temp.collection_id == -1) {
+		collection_relationships.insert(
+		    std::pair<entt::entity, int>(entity, -1));
+	} else {
+		collection_relationships.insert(
+		    std::pair<entt::entity, int>(entity, collection_id));
+	}
 }
 
 void CollectionsGUI::clear_collections() {
