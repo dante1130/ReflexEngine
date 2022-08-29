@@ -22,7 +22,12 @@ public:
 	static void remove_collection(int collection_id);
 	static void set_entity_collection(const entt::entity& entity,
 	                                  int new_collection);
-	static void drag_drop_collections_target(int index);
+	static void drag_drop_entities_to_collections_target(int index);
+	static void drag_drop_collections_to_collections_target(int index);
+	static void drag_drop_collections_to_collections_source(
+	    const std::string& name, int collection_id);
+	static void set_collection_collection(int selected_collection,
+	                                      int target_collection);
 
 private:
 	static std::unordered_map<entt::entity, int> collection_relationships;

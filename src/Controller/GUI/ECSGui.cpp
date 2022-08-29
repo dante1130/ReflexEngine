@@ -102,7 +102,10 @@ void ECSGui::draw_collection_hierarchy(ECS& ecs) {
 			       " numChildren = " +
 			       std::to_string(collections[count].child_ids.size());
 			open = ImGui::CollapsingHeader(name.c_str());
-			CollectionsGUI::drag_drop_collections_target(count);
+			CollectionsGUI::drag_drop_entities_to_collections_target(count);
+			CollectionsGUI::drag_drop_collections_to_collections_source(
+			    collections[count].name, count);
+			CollectionsGUI::drag_drop_collections_to_collections_target(count);
 			if (open) {
 				ImGui::Indent(INDENT_AMOUNT);
 				draw_collection(ecs, collections, collection_order, count);
@@ -142,7 +145,12 @@ void ECSGui::draw_collection(
 				// ImGui collapsing header
 				open = ImGui::CollapsingHeader(
 				    collections[innerCount].name.c_str());
-				CollectionsGUI::drag_drop_collections_target(innerCount);
+				CollectionsGUI::drag_drop_entities_to_collections_target(
+				    innerCount);
+				CollectionsGUI::drag_drop_collections_to_collections_source(
+				    collections[innerCount].name, innerCount);
+				CollectionsGUI::drag_drop_collections_to_collections_target(
+				    innerCount);
 				if (open) {
 					ImGui::Indent(INDENT_AMOUNT);
 					draw_collection(ecs, collections, collection_order,

@@ -92,7 +92,7 @@ void CollectionsGUI::set_entity_collection(const entt::entity& entity,
 	}
 }
 
-void CollectionsGUI::drag_drop_collections_target(int index) {
+void CollectionsGUI::drag_drop_entities_to_collections_target(int index) {
 	if (ImGui::BeginDragDropTarget()) {
 		ImGuiDragDropFlags target_flags = 0;
 		target_flags |= ImGuiDragDropFlags_AcceptNoDrawDefaultRect;
@@ -104,5 +104,88 @@ void CollectionsGUI::drag_drop_collections_target(int index) {
 			    collection_hierarchy[index].collection_id);
 		}
 		ImGui::EndDragDropTarget();
+	}
+}
+
+void CollectionsGUI::drag_drop_collections_to_collections_target(int index) {
+	if (ImGui::BeginDragDropTarget()) {
+		ImGuiDragDropFlags target_flags = 0;
+		target_flags |= ImGuiDragDropFlags_AcceptNoDrawDefaultRect;
+		if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload(
+		        "COLLECTION_COLLECTION_MOVE", target_flags)) {
+			DebugLogger::log("Drag move", "Collection was moved");
+			CollectionsGUI::set_collection_collection(*(int*)payload->Data,
+			                                          index);
+		}
+		ImGui::EndDragDropTarget();
+	}
+}
+
+void CollectionsGUI::set_collection_collection(int selected_collection,
+                                               int target_collection) {
+	if (selected_collection == target_collection) {
+		return;
+	}
+
+	int number_of_children =
+	    collection_hierarchy[selected_collection].child_ids.size();
+	int number_of_collections = collection_hierarchy.size();
+	for (int count = 0; count < number_of_children; ++count) {
+		for (int innerCount = 0; innerCount < number_of_collections;
+		     ++innerCount) {
+			// Set all children collections to parent collection of collection
+			if (collection_hierarchy[innerCount].collection_id ==
+			    collection_hierarchy[selected_collection].child_ids[count]) {
+				collection_hierarchy[innerCount].parent_collection_id =
+				    collection_hierarchy[selected_collection]
+				        .parent_collection_id;
+			}
+		}
+	}
+
+	// Loop through collections to get parent collection to remove child id from
+	// parent
+	for (int count = 0; count < number_of_collections; count++) {
+		// if found parent collection
+		if (collection_hierarchy[selected_collection].parent_collection_id ==
+		    collection_hierarchy[count].collection_id) {
+			int size = collection_hierarchy[count].child_ids.size();
+			// For all children in parent
+			for (int innerCount = 0; innerCount < size; ++innerCount) {
+				// If your collection is found remove it from parent
+				if (collection_hierarchy[count].child_ids[innerCount] ==
+				    collection_hierarchy[selected_collection].collection_id) {
+					collection_hierarchy[count].child_ids.erase(
+					    collection_hierarchy[count].child_ids.begin() +
+					    innerCount);
+					break;
+				}
+			}
+			break;
+		}
+	}
+
+	// Set the new parent collection id
+	collection_hierarchy[selected_collection].parent_collection_id =
+	    target_collection;
+	// set parent's new child
+	collection_hierarchy[target_collection].child_ids.push_back(
+	    collection_hierarchy[selected_collection].collection_id);
+	// Remove children from collection
+	collection_hierarchy[selected_collection].child_ids.clear();
+}
+
+void CollectionsGUI::drag_drop_collections_to_collections_source(
+    const std::string& name, int collection_id) {
+	ImGuiDragDropFlags src_flags = 0;
+	src_flags |= ImGuiDragDropFlags_SourceNoDisableHover;
+	src_flags |= ImGuiDragDropFlags_SourceNoHoldToOpenOthers;
+	// src_flags |= ImGuiDragDropFlags_SourceNoPreviewTooltip;
+
+	if (ImGui::BeginDragDropSource(src_flags)) {
+		ImGui::Text(name.c_str());
+		ImGui::SetDragDropPayload("COLLECTION_COLLECTION_MOVE", &collection_id,
+		                          sizeof(int));
+		ImGui::EndDragDropSource();
 	}
 }
