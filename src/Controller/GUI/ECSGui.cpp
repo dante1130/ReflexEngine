@@ -60,14 +60,32 @@ void ECSGui::draw(ECS& ecs) {
 		draw_add_component(entity);
 		selected_collection_ = -1;
 	} else if (selected_collection_ != -1) {
-		std::string collection_name =
-		    CollectionsGUI::get_collection_hierarchy()[selected_collection_]
-		        .name;
-		ImGui::Text("Name: ");
-		ImGui::SameLine();
-		if (ImGui::InputText(" ", &collection_name)) {
-			CollectionsGUI::rename_collection(collection_name,
-			                                  selected_collection_);
+		if (ImGui::Button("Delete")) {
+			CollectionsGUI::remove_collection(selected_collection_);
+			selected_collection_ = -1;
+		} else {
+			Collection temp_collection =
+			    CollectionsGUI::get_collection(selected_collection_);
+			ImGui::Text("Name: ");
+			ImGui::SameLine();
+			if (ImGui::InputText(" ", &temp_collection.name)) {
+				CollectionsGUI::rename_collection(temp_collection.name,
+				                                  selected_collection_);
+			}
+			ImGui::Text("ID");
+			ImGui::SameLine();
+			ImGui::Text(std::to_string(temp_collection.collection_id).c_str());
+			ImGui::Text("Parent ID");
+			ImGui::SameLine();
+			ImGui::Text(
+			    std::to_string(temp_collection.parent_collection_id).c_str());
+			for (int count = 0; count < temp_collection.child_ids.size();
+			     ++count) {
+				ImGui::Text("Child ID");
+				ImGui::SameLine();
+				ImGui::Text(
+				    std::to_string(temp_collection.child_ids[count]).c_str());
+			}
 		}
 	}
 	ImGui::End();
@@ -91,12 +109,15 @@ void ECSGui::draw_collection_hierarchy(ECS& ecs) {
 		collection_id = CollectionsGUI::get_entity_collection_id(entity_id);
 		// Loop through all collections
 		for (int count = 0; count < number_of_collections; count++) {
-			if (count + 1 == number_of_collections) {  // If out of collections
-				                                       // then add to end
+			if ((count + 1) ==
+			    number_of_collections) {  // If out of collections
+				                          // then add to end
 				collection_order[count].push_back(entity_id);
 				break;
-			} else if (collections[count].collection_id ==
-			           collection_id) {  // If valid collection found
+			}
+
+			if (collections[count].collection_id ==
+			    collection_id) {  // If valid collection found
 				collection_order[count].push_back(entity_id);
 				break;
 			}
@@ -120,7 +141,7 @@ void ECSGui::draw_collection_hierarchy(ECS& ecs) {
 			        collections[count].name, count);
 			CollectionsGUI::drag_drop_collections_to_collections_target(count);
 			if (selected) {
-				selected_collection_ = count;
+				selected_collection_ = collections[count].collection_id;
 				selected_entity_ = entt::null;
 			}
 			if (open) {
@@ -138,9 +159,14 @@ void ECSGui::draw_collection_hierarchy(ECS& ecs) {
 		    ecs.get_entity(collection_order[number_of_collections - 1][count]));
 	}
 
+	static bool finished = false;
 	if (number_of_collections < 10) {
-		CollectionsGUI::add_collection(
-		    std::to_string(number_of_collections).c_str(), 0);
+		if (!finished) {
+			CollectionsGUI::add_collection(
+			    std::to_string(number_of_collections - 1).c_str(), 0);
+		}
+	} else {
+		finished = true;
 	}
 }
 
@@ -172,7 +198,8 @@ void ECSGui::draw_collection(
 				CollectionsGUI::drag_drop_collections_to_collections_target(
 				    innerCount);
 				if (selected) {
-					selected_collection_ = innerCount;
+					selected_collection_ =
+					    collections[innerCount].collection_id;
 					selected_entity_ = entt::null;
 				}
 				// // // End of drag and drop methods
