@@ -20,6 +20,9 @@ public:
 	static void draw_add_collection();
 	static void add_collection(const std::string& name, int parent_id);
 	static void remove_collection(int collection_id);
+	static void set_entity_collection(const entt::entity& entity,
+	                                  int new_collection);
+	static void drag_drop_collections_target(int index);
 
 private:
 	static std::unordered_map<entt::entity, int> collection_relationships;

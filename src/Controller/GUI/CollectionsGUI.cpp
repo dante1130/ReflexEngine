@@ -1,5 +1,6 @@
 #include "CollectionsGUI.hpp"
 #include "Controller/GUI/DebugLogger.hpp"
+#include <imgui/misc/cpp/imgui_stdlib.h>
 
 std::unordered_map<entt::entity, int> CollectionsGUI::collection_relationships =
     std::unordered_map<entt::entity, int>();
@@ -78,4 +79,30 @@ void CollectionsGUI::remove_collection(int collection_id) {
 	}
 
 	collection_hierarchy.erase(collection_hierarchy.begin() + remove_index);
+}
+
+void CollectionsGUI::set_entity_collection(const entt::entity& entity,
+                                           int new_collection) {
+	auto search = collection_relationships.find(entity);
+	if (search != collection_relationships.end()) {
+		search->second = new_collection;
+	} else {
+		collection_relationships.insert(
+		    std::pair<entt::entity, int>(entity, new_collection));
+	}
+}
+
+void CollectionsGUI::drag_drop_collections_target(int index) {
+	if (ImGui::BeginDragDropTarget()) {
+		ImGuiDragDropFlags target_flags = 0;
+		target_flags |= ImGuiDragDropFlags_AcceptNoDrawDefaultRect;
+		if (const ImGuiPayload* payload =
+		        ImGui::AcceptDragDropPayload("COLLECTION_MOVE", target_flags)) {
+			DebugLogger::log("Drag move", "Something was moved");
+			CollectionsGUI::set_entity_collection(
+			    *(entt::entity*)payload->Data,
+			    collection_hierarchy[index].collection_id);
+		}
+		ImGui::EndDragDropTarget();
+	}
 }

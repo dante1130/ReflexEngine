@@ -83,14 +83,17 @@ void ECSGui::draw_collection_hierarchy(ECS& ecs) {
 			if (count + 1 == number_of_collections) {  // If out of collections
 				                                       // then add to end
 				collection_order[count].push_back(entity_id);
+				break;
 			} else if (collections[count].collection_id ==
 			           collection_id) {  // If valid collection found
 				collection_order[count].push_back(entity_id);
+				break;
 			}
 		}
 	});
 
 	std::string name;
+	bool open;
 	// If outermost collections
 	for (int count = 0; count < number_of_collections - 1; ++count) {
 		if (collections[count].parent_collection_id == -1) {
@@ -98,20 +101,12 @@ void ECSGui::draw_collection_hierarchy(ECS& ecs) {
 			       " id = " + std::to_string(collections[count].collection_id) +
 			       " numChildren = " +
 			       std::to_string(collections[count].child_ids.size());
-			if (ImGui::CollapsingHeader(name.c_str())) {
+			open = ImGui::CollapsingHeader(name.c_str());
+			CollectionsGUI::drag_drop_collections_target(count);
+			if (open) {
 				ImGui::Indent(INDENT_AMOUNT);
 				draw_collection(ecs, collections, collection_order, count);
 				ImGui::Indent(-INDENT_AMOUNT);
-			}
-			if (ImGui::BeginDragDropTarget()) {
-				ImGuiDragDropFlags target_flags = 0;
-				target_flags |= ImGuiDragDropFlags_AcceptBeforeDelivery;
-				target_flags |= ImGuiDragDropFlags_AcceptNoDrawDefaultRect;
-				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload(
-				        "COLLECTION_MOVE", target_flags)) {
-					DebugLogger::log("Drag move", "Something was moved");
-				}
-				ImGui::EndDragDropTarget();
 			}
 		}
 	}
@@ -135,6 +130,7 @@ void ECSGui::draw_collection(
 	int number_of_children = collections[index].child_ids.size();
 	int number_of_collections = collection_order.size() - 1;
 	int child_id = -1;
+	bool open;
 	// Draw all child collections
 	for (int count = 0; count < number_of_children; ++count) {
 		child_id = collections[index].child_ids[count];
@@ -144,8 +140,10 @@ void ECSGui::draw_collection(
 			// If child has been found
 			if (collections[innerCount].collection_id == child_id) {
 				// ImGui collapsing header
-				if (ImGui::CollapsingHeader(
-				        collections[innerCount].name.c_str())) {
+				open = ImGui::CollapsingHeader(
+				    collections[innerCount].name.c_str());
+				CollectionsGUI::drag_drop_collections_target(innerCount);
+				if (open) {
 					ImGui::Indent(INDENT_AMOUNT);
 					draw_collection(ecs, collections, collection_order,
 					                innerCount);
@@ -180,8 +178,9 @@ void ECSGui::draw_entity(Reflex::Entity& entity) {
 
 	if (ImGui::BeginDragDropSource(src_flags)) {
 		ImGui::Text(entity.get_name().c_str());
-		ImGui::SetDragDropPayload("COLLECTION_MOVE", &entity,
-		                          sizeof(Reflex::Entity));
+		entt::entity enttEntity = entity.get_entity_id();
+		ImGui::SetDragDropPayload("COLLECTION_MOVE", &enttEntity,
+		                          sizeof(entt::entity));
 		ImGui::EndDragDropSource();
 	}
 
