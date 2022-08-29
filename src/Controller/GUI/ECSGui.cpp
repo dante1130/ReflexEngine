@@ -99,9 +99,7 @@ void ECSGui::draw_collection_hierarchy(ECS& ecs) {
 	std::vector<std::vector<entt::entity>> collection_order =
 	    std::vector<std::vector<entt::entity>>();
 	int number_of_collections = collections.size() + 1;
-	for (int count = 0; count < number_of_collections; ++count) {
-		collection_order.push_back(std::vector<entt::entity>());
-	}
+	collection_order.resize(number_of_collections);
 
 	int collection_id = -1;
 	registry.each([this, &ecs, &collection_id, &collections, &collection_order,

@@ -58,6 +58,7 @@ int CollectionsGUI::add_collection(const std::string& name, int parent_id) {
 			valid_parent_id = true;
 			collection_hierarchy[count].child_ids.push_back(
 			    col_hir.collection_id);
+			break;
 		}
 	}
 
@@ -237,9 +238,9 @@ void CollectionsGUI::set_collection_collection(int selected_collection,
 			for (int innerCount = 0; innerCount < number_of_children;
 			     ++innerCount) {
 				collection_hierarchy[count].child_ids.push_back(
-				    collection_hierarchy[selected_collection].child_ids[innerCount]);
+				    collection_hierarchy[selected_collection]
+				        .child_ids[innerCount]);
 			}
-
 			break;
 		}
 	}
