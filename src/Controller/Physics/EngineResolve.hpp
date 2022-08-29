@@ -26,11 +26,14 @@ protected:
 	bool use_gravity_;
 	bool can_sleep_;
 
+
 public:
 
 	EngineResolve();
 
 	void update(float delta_time) override;
+
+	void stop() override;
 
 	// using engine stuff
 	bool usingReactResolve() override;

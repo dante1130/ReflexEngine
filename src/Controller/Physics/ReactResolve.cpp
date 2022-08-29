@@ -15,9 +15,15 @@ void ReactResolve::update(float delta_time) {
 
 }
 
+void ReactResolve::stop() {
+	Vector3 pp =
+	    Vector3(previous_transform_position.x, previous_transform_position.y,
+	            previous_transform_position.z);
+	rb->setTransform(Transform(pp,  rb->getTransform().getOrientation()));
+	rb->setLinearVelocity(Vector3(0.0f, 0.0f, 0.0f));
+}
 
-void ReactResolve::initialise_body(glm::vec3 pos, glm::vec3 rot, float angle)
-{
+void ReactResolve::initialise_body(glm::vec3 pos, glm::vec3 rot, float angle) {
 	Vector3 position(pos.x, pos.y, pos.z);
 	Quaternion orientation = Quaternion::identity();
 

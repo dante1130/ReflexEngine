@@ -87,6 +87,8 @@ class PhysicsBody
 
 		static void collision(rp3d::Collider* c1, rp3d::Collider* c2);
 
+		virtual void stop() = 0;
+
 	    // collision resolution system type check
 	    virtual bool usingReactResolve() = 0;
 

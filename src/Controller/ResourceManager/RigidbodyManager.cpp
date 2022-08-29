@@ -21,7 +21,8 @@ void RigidbodyManager::add_rigidbody(Component::Rigidbody& rb,
 
 void RigidbodyManager::update_rigidbody(Component::Rigidbody& rb,
                                         Component::Transform& tf) {
-	if (!rb.usingReactResolve()) rb.update(EngineTime::get_fixed_delta_time());
+	if (!rb.usingReactResolve()) 
+		rb.update(EngineTime::get_fixed_delta_time());
 
 	if (rb.getPreviousPosition() != tf.position) {
 		rb.setPosition(tf.position);

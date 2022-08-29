@@ -27,8 +27,16 @@ void EngineResolve::update(float delta_time) {
 	if (type_ == BodyType::STATIC || type_ == BodyType::KINEMATIC)
 		return;
 
+	// Previous position and orientation
+	Vector3 old_position = cb->getTransform().getPosition();
+	Quaternion old_orientation = cb->getTransform().getOrientation();
+
 	glm::vec3 applied_gravity = glm::vec3(0.0f);
 	glm::vec3 temp_acc = glm::vec3(0.0f);
+
+	// Applies gravity if enabled
+	if (use_gravity_) 
+		applied_gravity = gravity_;
 
 	// Applies force to acceleration
 	if (force_ != glm::vec3(0.0f)) {
@@ -37,30 +45,12 @@ void EngineResolve::update(float delta_time) {
 		force_ = glm::vec3(0.0f);
 	}
 
-	// Applies gravity if enabled
-	if (use_gravity_) 
-		applied_gravity = gravity_;
-
-	//// Applies linear drag to linear acceration
-	//if (lin_accelaration_.length() * mass_ <= lin_drag)
-	//	lin_accelaration_ = glm::vec3(0);
-	//else
-	//	lin_accelaration_ -= glm::normalize(lin_accelaration_) * (lin_drag / mass_);
-
-	//// Applies linear drag to gravity
-	//if (applied_gravity.length() * mass_ <= lin_drag)
-	//	applied_gravity = glm::vec3(0);
-	//else
-	//	applied_gravity -= glm::normalize(applied_gravity) * (lin_drag / mass_);
-
-
-	// Previous position and orientation
-	Vector3 old_position = cb->getTransform().getPosition();
-	Quaternion old_orientation = cb->getTransform().getOrientation();
 
 	// Calcuating new linear velocity
 	lin_velocity_ =
-	    lin_velocity_ + (lin_accelaration_ + applied_gravity) * delta_time;
+		    lin_velocity_ + (lin_accelaration_ + applied_gravity) * delta_time;
+
+	lin_velocity_ = lin_velocity_ * (1 - delta_time * lin_drag);
 
 	// Calculating new position
 	Vector3 new_position = old_position +
@@ -73,6 +63,17 @@ void EngineResolve::update(float delta_time) {
 	cb->setTransform(Transform(new_position, new_orientation));
 
 	lin_accelaration_ -= temp_acc;
+}
+
+void EngineResolve::stop() {
+
+	Vector3 temp = cb->getTransform().getPosition();
+	Vector3 temp2 =
+	    Vector3(previous_transform_position.x, previous_transform_position.y,
+	            previous_transform_position.z);
+	lin_velocity_ = glm::vec3(0.0f);
+	lin_accelaration_ = glm::vec3(0.0f);
+	cb->setTransform(Transform(temp2, cb->getTransform().getOrientation()));
 }
 
 void EngineResolve::initialise_body(glm::vec3 pos, glm::vec3 rot, float angle) {
