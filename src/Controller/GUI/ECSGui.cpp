@@ -103,6 +103,16 @@ void ECSGui::draw_collection_hierarchy(ECS& ecs) {
 				draw_collection(ecs, collections, collection_order, count);
 				ImGui::Indent(-INDENT_AMOUNT);
 			}
+			if (ImGui::BeginDragDropTarget()) {
+				ImGuiDragDropFlags target_flags = 0;
+				target_flags |= ImGuiDragDropFlags_AcceptBeforeDelivery;
+				target_flags |= ImGuiDragDropFlags_AcceptNoDrawDefaultRect;
+				if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload(
+				        "COLLECTION_MOVE", target_flags)) {
+					DebugLogger::log("Drag move", "Something was moved");
+				}
+				ImGui::EndDragDropTarget();
+			}
 		}
 	}
 
@@ -157,10 +167,23 @@ void ECSGui::draw_entity(Reflex::Entity& entity) {
 	ImGui::PushID(static_cast<int>(entity.get_entity_id()));
 
 	bool selected = false;
+
 	ImGui::PushStyleVar(ImGuiStyleVar_SelectableTextAlign, ImVec2(0, 0.5f));
 	ImGui::Selectable(entity.get_name().c_str(), &selected,
 	                  ImGuiSelectableFlags_AllowItemOverlap, ImVec2(0, 20));
 	ImGui::PopStyleVar();
+
+	ImGuiDragDropFlags src_flags = 0;
+	src_flags |= ImGuiDragDropFlags_SourceNoDisableHover;
+	src_flags |= ImGuiDragDropFlags_SourceNoHoldToOpenOthers;
+	// src_flags |= ImGuiDragDropFlags_SourceNoPreviewTooltip;
+
+	if (ImGui::BeginDragDropSource(src_flags)) {
+		ImGui::Text(entity.get_name().c_str());
+		ImGui::SetDragDropPayload("COLLECTION_MOVE", &entity,
+		                          sizeof(Reflex::Entity));
+		ImGui::EndDragDropSource();
+	}
 
 	ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
 
