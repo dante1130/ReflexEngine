@@ -54,8 +54,14 @@ private:
 	 * @param index the current index we are drawing for
 	 */
 	void draw_collection(
-	    ECS& ecs, std::vector<Collection>& collections,
+	    ECS& ecs, std::unordered_map<int, Collection>& collections,
 	    std::vector<std::vector<entt::entity>>& collection_order, int index);
+
+	/**
+	 * @brief Draws the collection properties
+	 *
+	 */
+	void draw_collection_properties();
 
 	/**
 	 * @brief Draw all the components in the entity.

@@ -34,7 +34,7 @@ public:
 	 *
 	 * @return std::vector<Collection>&
 	 */
-	static std::vector<Collection>& get_collection_hierarchy();
+	static std::unordered_map<int, Collection>& get_collection_hierarchy();
 
 	/**
 	 * @brief Get the collection object
@@ -80,27 +80,27 @@ public:
 	/**
 	 * @brief Sets the target for dagging an entity to a collection
 	 *
-	 * @param index of the collection dropped on
+	 * @param collection_id of the collection dropped on
 	 */
-	static void drag_drop_entities_to_collections_target(int index);
+	static void drag_drop_entities_to_collections_target(int collection_id);
 
 	/**
 	 * @brief Sets the target for dragging a collection to a collection
 	 *
-	 * @param index of the collection dropped on
+	 * @param collection_id of the collection dropped on
 	 */
-	static void drag_drop_collections_to_collections_target(int index);
+	static void drag_drop_collections_to_collections_target(int collection_id);
 
 	/**
 	 * @brief Sets the srouce for dragging a collection to a collection
 	 *
 	 * @param name of the collection you will be dragging
-	 * @param index of the collection you will be dragging
+	 * @param collection_id of the collection you will be dragging
 	 * @return true if currently being dragged
 	 * @return false if not currently being dragged
 	 */
 	static bool drag_drop_collections_to_collections_source(
-	    const std::string& name, int index);
+	    const std::string& name, int collection_id);
 
 	/**
 	 * @brief Renames a collection
@@ -130,7 +130,7 @@ private:
 	/// Stores the relationships between collections and entities
 	static std::unordered_map<entt::entity, int> collection_relationships;
 	/// Stores all the collections
-	static std::vector<Collection> collection_hierarchy;
+	static std::unordered_map<int, Collection> collection_hierarchy;
 	/// Generates the collection ids
 	static Counter collection_id_generator;
 
