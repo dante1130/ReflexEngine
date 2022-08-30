@@ -103,20 +103,17 @@ void ECSGui::draw_collection_hierarchy(ECS& ecs) {
 	collection_order.resize(number_of_collections);
 
 	int collection_id = -1;
+	int value;
 	std::unordered_map<int, Collection>::iterator search;
-	registry.each([this, &search, &ecs, &collection_id, &collections,
+	registry.each([this, &value, &search, &ecs, &collection_id, &collections,
 	               &collection_order, &number_of_collections](auto entity_id) {
 		collection_id = CollectionsGUI::get_entity_collection_id(entity_id);
 		// Loop through all collections
 		search = collections.find(collection_id);
+
 		if (search != collections.end()) {
-			auto itr = collections.begin();
-			for (int count = 0; count < collections.size(); ++count) {
-				if (itr == search) {
-					collection_order[count].push_back(entity_id);
-				}
-				++itr;
-			}
+			value = std::distance(collections.begin(), search);
+			collection_order[value].push_back(entity_id);
 		} else {
 			collection_order[(collection_order.size() - 1)].push_back(
 			    entity_id);
