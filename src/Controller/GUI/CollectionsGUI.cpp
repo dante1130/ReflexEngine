@@ -84,22 +84,21 @@ void CollectionsGUI::remove_collection(int collection_id) {
 	auto search_parent =
 	    collection_hierarchy.find(temp_collection.parent_collection_id);
 	if (search_parent != collection_hierarchy.end()) {
-		Collection parent_collection = search_parent->second;
-		int number_of_childs = parent_collection.child_ids.size();
+		int number_of_childs = search_parent->second.child_ids.size();
 		for (int count = 0; count < number_of_childs; ++count) {
 			// Remove collection from parents list of children
 			if (temp_collection.collection_id ==
-			    parent_collection.child_ids[count]) {
-				parent_collection.child_ids.erase(
-				    parent_collection.child_ids.begin() + count);
-				break;
+			    search_parent->second.child_ids[count]) {
+				search_parent->second.child_ids.erase(
+				    search_parent->second.child_ids.begin() + count);
+				count = number_of_childs;
 			}
 		}
 
 		// Add children of collection to become children of parent collection
 		number_of_childs = temp_collection.child_ids.size();
 		for (int count = 0; count < number_of_childs; ++count) {
-			parent_collection.child_ids.push_back(
+			search_parent->second.child_ids.push_back(
 			    temp_collection.child_ids[count]);
 		}
 	}
@@ -197,7 +196,7 @@ void CollectionsGUI::set_collection_collection(int selected_collection,
 				search_parent->second.child_ids.erase(
 				    search_parent->second.child_ids.begin() + count);
 				DebugLogger::log(
-				    "Collections parent child",
+				    "Removed collections parent child",
 				    std::to_string(temp_collection.collection_id).c_str());
 				break;
 			}
