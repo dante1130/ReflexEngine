@@ -1,5 +1,6 @@
 entity = {
 	name = "Left corridor light 1",
+	collection_id = 1,
 
 	point_light = {
 		shadow_width = 512,

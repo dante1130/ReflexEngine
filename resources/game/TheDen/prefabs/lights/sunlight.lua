@@ -1,5 +1,6 @@
 entity = {
 	name = "Sunlight",
+	collection_id = 0,
 
 	directional_light = {
 		shadow_width = 1024,
