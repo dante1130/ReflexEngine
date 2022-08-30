@@ -26,6 +26,7 @@ protected:
 	bool use_gravity_;
 	bool can_sleep_;
 
+	bool is_colliding;
 
 public:
 
@@ -33,7 +34,7 @@ public:
 
 	void update(float delta_time) override;
 
-	void stop() override;
+	void stop(rp3d::CollisionCallback::ContactPair::EventType c_type) override;
 
 	// using engine stuff
 	bool usingReactResolve() override;

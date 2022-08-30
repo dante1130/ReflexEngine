@@ -45,6 +45,12 @@ void EngineResolve::update(float delta_time) {
 		force_ = glm::vec3(0.0f);
 	}
 
+	if (is_colliding)
+	{
+		lin_accelaration_ = glm::vec3(0.0f);
+		temp_acc = glm::vec3(0.0f);
+		is_colliding = false;
+	}
 
 	// Calcuating new linear velocity
 	lin_velocity_ =
@@ -65,14 +71,21 @@ void EngineResolve::update(float delta_time) {
 	lin_accelaration_ -= temp_acc;
 }
 
-void EngineResolve::stop() {
+void EngineResolve::stop(CollisionCallback::ContactPair::EventType c_type) {
 
-	Vector3 temp = cb->getTransform().getPosition();
-	Vector3 temp2 =
-	    Vector3(previous_transform_position.x, previous_transform_position.y,
-	            previous_transform_position.z);
-	lin_velocity_ = glm::vec3(0.0f);
+	if (c_type == CollisionCallback::ContactPair::EventType::ContactExit)
+		return;
+
+	is_colliding = true;
 	lin_accelaration_ = glm::vec3(0.0f);
+
+	if (c_type == CollisionCallback::ContactPair::EventType::ContactStay)
+		return;
+
+	lin_velocity_ = -lin_velocity_;
+	Vector3 temp2 =
+		Vector3(previous_transform_position.x, previous_transform_position.y,
+			previous_transform_position.z);
 	cb->setTransform(Transform(temp2, cb->getTransform().getOrientation()));
 }
 

@@ -160,20 +160,18 @@ size_t PhysicsBody::getColliderIndex(rp3d::Collider* collider) {
 	return colliders.size();
  }
 
-void PhysicsBody::collision(Collider* c1, Collider* c2) {
+void PhysicsBody::collision(Collider* c1, Collider* c2, 
+	CollisionCallback::ContactPair::EventType c_type) {
 
 	PhysicsBody* p1 = ((PhysicsBody*)c1->getUserData());
 	PhysicsBody* p2 = ((PhysicsBody*)c2->getUserData());
 
-	size_t i1 = p1->getColliderIndex(c1);
-	size_t i2 = p2->getColliderIndex(c2);
-
 	if (p1->getType() == BodyType::DYNAMIC && !p1->usingReactResolve()) {
-		p1->stop();
+		p1->stop(c_type);
 	}
 
 	if (p2->getType() == BodyType::DYNAMIC && !p2->usingReactResolve()) {
-		p2->stop();
+		p2->stop(c_type);
 	}
 
 }

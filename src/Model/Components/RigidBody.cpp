@@ -255,12 +255,12 @@ uint32_t Component::Rigidbody::addBoxCollider(glm::vec3 pos, glm::vec3 size,
 }
 uint32_t Component::Rigidbody::addSphereCollider(glm::vec3 pos, float radius,
                                                  float bounce, float friction) {
-	return pb->addSphereCollider(pos, radius, bounce, friction);
+	return pb->addSphereCollider(pb, pos, radius, bounce, friction);
 }
 uint32_t Component::Rigidbody::addCapsuleCollider(glm::vec3 pos, float radius,
                                                   float height, float bounce,
                                                   float friction) {
-	return pb->addCapsuleCollider(pos, radius, height, bounce, friction);
+	return pb->addCapsuleCollider(pb, pos, radius, height, bounce, friction);
 }
 
 // Methods used for transform

@@ -7,10 +7,11 @@ void CollisionEventListener::onContact(const CallbackData& collision_data) {
 	for (size_t i = 0; i < collision_data.getNbContactPairs(); ++i) {
 		ContactPair contact_pair = collision_data.getContactPair(i);
 
-		PhysicsBody::collision(contact_pair.getCollider1(),
-		                       contact_pair.getCollider2());
-
 		 ContactPair::EventType event_type = contact_pair.getEventType();
+
+		PhysicsBody::collision(contact_pair.getCollider1(),
+				 contact_pair.getCollider2(), event_type);
+
 
 		 if (event_type == ContactPair::EventType::ContactStart) {
 		 	std::cout << "Contact start\n";
@@ -20,8 +21,6 @@ void CollisionEventListener::onContact(const CallbackData& collision_data) {
 		 	std::cout << "Contact end\n";
 		 }
 
-		 if (contact_pair.getBody1() == contact_pair.getBody2())
-			 std::cout << "Same body\n";
 
 		for (size_t j = 0; j < contact_pair.getNbContactPoints(); ++j) {
 			ContactPoint contact_point = contact_pair.getContactPoint(j);
