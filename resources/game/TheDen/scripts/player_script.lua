@@ -103,16 +103,17 @@ function PhysicsMovement(ecs, entity)
 	local speed_vec = Math.vec3.new(speed, speed * 0.1, speed)
 	local const_direction = Camera.get_direction()
 	local direction = const_direction
+	local force_vector = Math.vec3.new(0, 0, 0)
 	
 	if (Input.get_key_state("w"):is_key_hold()) then
 		direction = Math.mul(const_direction, speed_vec)
-		rb_comp:add_force(direction, Apply.LOCAL)
+		force_vector = Math.add(force_vector, direction)
 	end
 
 	if (Input.get_key_state("s"):is_key_hold()) then
 		direction = Math.mul(const_direction, speed_vec)
 		direction = Math.mul(-1, direction)
-		rb_comp:add_force(direction, Apply.LOCAL)
+		force_vector = Math.add(force_vector, direction)
 	end
 
 	local up_vector = Math.vec3.new(0, 1, 0)
@@ -124,14 +125,16 @@ function PhysicsMovement(ecs, entity)
 	local strafe_vector = Math.cross(const_direction, up_vector)
 	if (Input.get_key_state("d"):is_key_hold()) then
 		direction = Math.mul(strafe_vector, speed_vec)
-		rb_comp:add_force(direction, Apply.LOCAL)
+		force_vector = Math.add(force_vector, direction)
 	end
 
 	if (Input.get_key_state("a"):is_key_hold()) then
 		direction = Math.mul(strafe_vector, speed_vec)
 		direction = Math.mul(-1, direction)
-		rb_comp:add_force(direction, Apply.LOCAL)
+		force_vector = Math.add(force_vector, direction)
 	end
+
+	rb_comp:add_force(force_vector, Apply.LOCAL)
 
 	local velocity = rb_comp.velocity
 	local velocity_y = velocity.y
