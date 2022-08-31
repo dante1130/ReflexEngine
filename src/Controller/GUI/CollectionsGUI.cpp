@@ -67,8 +67,6 @@ int CollectionsGUI::add_collection(const std::string& name, int parent_id) {
 
 void CollectionsGUI::remove_collection(int collection_id) {
 	Collection temp_collection;
-	int remove_index = -1;
-	int size = collection_hierarchy.size();
 
 	auto search = collection_hierarchy.find(collection_id);
 	if (search == collection_hierarchy.end()) {
@@ -84,7 +82,7 @@ void CollectionsGUI::remove_collection(int collection_id) {
 	auto search_parent =
 	    collection_hierarchy.find(temp_collection.parent_collection_id);
 	if (search_parent != collection_hierarchy.end()) {
-		int number_of_childs = search_parent->second.child_ids.size();
+		number_of_childs = search_parent->second.child_ids.size();
 		for (int count = 0; count < number_of_childs; ++count) {
 			// Remove collection from parents list of children
 			if (temp_collection.collection_id ==
@@ -204,7 +202,7 @@ void CollectionsGUI::set_collection_collection(int selected_collection,
 		// Add collection's children to parent collection
 		number_of_children = temp_collection.child_ids.size();
 		for (int count = 0; count < number_of_children; ++count) {
-			parent_collection.child_ids.push_back(
+			search_parent->second.child_ids.push_back(
 			    temp_collection.child_ids[count]);
 		}
 	}
