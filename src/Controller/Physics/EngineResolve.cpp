@@ -50,6 +50,12 @@ void EngineResolve::update(float delta_time) {
 		force_ = glm::vec3(0.0f);
 	}
 
+	if (is_colliding)
+	{
+		lin_accelaration_ = glm::vec3(0.0f);
+		temp_acc = glm::vec3(0.0f);
+		is_colliding = false;
+	}
 
 	// Calcuating new linear velocity
 	lin_velocity_ =
