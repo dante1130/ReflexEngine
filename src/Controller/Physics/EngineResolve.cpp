@@ -23,8 +23,8 @@ EngineResolve::EngineResolve() {
 
 	collision_axes = glm::vec3(0.0f, 0.0f, 0.0f);
 
-	lock_axes = bool3(false, false, false,
-		false, false, false);
+	lock_axes_front = bool3(false, false, false);
+	lock_axes_back = bool3(false, false, false);
 }
 
 void EngineResolve::update(float delta_time) {
@@ -62,18 +62,18 @@ void EngineResolve::update(float delta_time) {
 	// Calculating new orientation
 	Quaternion new_orientation = old_orientation;
 	
-	if (lock_axes.lock_xf && new_position.x > collision_axes.x)
+	if (lock_axes_front.lock_x && new_position.x > collision_axes.x)
 		new_position.x = collision_axes.x;
-	if (lock_axes.lock_yf && new_position.y > collision_axes.y)
+	if (lock_axes_front.lock_y && new_position.y > collision_axes.y)
 		new_position.y = collision_axes.y;
-	if (lock_axes.lock_zf && new_position.z > collision_axes.z)
+	if (lock_axes_front.lock_z && new_position.z > collision_axes.z)
 		new_position.z = collision_axes.z;
 
-	if (lock_axes.lock_xb && new_position.x < collision_axes.x)
+	if (lock_axes_back.lock_x && new_position.x < collision_axes.x)
 		new_position.x = collision_axes.x;
-	if (lock_axes.lock_yb && new_position.y < collision_axes.y)
+	if (lock_axes_back.lock_y && new_position.y < collision_axes.y)
 		new_position.y = collision_axes.y;
-	if (lock_axes.lock_zb && new_position.z < collision_axes.z)
+	if (lock_axes_back.lock_z && new_position.z < collision_axes.z)
 		new_position.z = collision_axes.z;
 
 	//Final linking
@@ -84,35 +84,30 @@ void EngineResolve::update(float delta_time) {
 
 void EngineResolve::stop(glm::vec3 normal, CollisionEvent c_type) {
 
-	
-	std::cout << "Normal| x: " << normal.x << " y: " << normal.y
-	          << " z: " << normal.z << std::endl;
-
 	if (c_type == CollisionEvent::ContactStart) {
 		collision_axes = getPosition();
 	}
 
 	if (c_type == CollisionEvent::ContactStay) {
-		//glm::vec3 temp = getPosition();
-		/*if (std::fabsf(normal.x) == 1 ) temp.x = collision_axes.x;
-		if (std::fabsf(normal.y) == 1) temp.y = collision_axes.y;
-		if (std::fabsf(normal.z) == 1) temp.z = collision_axes.z;*/
 
-		//Vector3 temp2 = Vector3(temp.x, temp.y, temp.z);
+		if (normal.x == 1 && !lock_axes_front.lock_x)
+			lock_axes_front.lock_x = true;
+		if (normal.y == 1 && !lock_axes_front.lock_y)
+			lock_axes_front.lock_y = true;
+		if (normal.z == 1 && !lock_axes_front.lock_z)
+			lock_axes_front.lock_z = true;
 
-		//cb->setTransform(Transform(temp2, cb->getTransform().getOrientation()));
-
-		if (normal.x == 1) lock_axes.lock_xf = true;
-		if (normal.y == 1) lock_axes.lock_yf = true;
-		if (normal.z == 1) lock_axes.lock_zf = true;
-
-		if (normal.x == -1) lock_axes.lock_xb = true;
-		if (normal.y == -1) lock_axes.lock_yb = true;
-		if (normal.z == -1) lock_axes.lock_zb = true;
+		if (normal.x == -1 && !lock_axes_back.lock_x)
+			lock_axes_back.lock_x = true;
+		if (normal.y == -1 && !lock_axes_back.lock_y)
+			lock_axes_back.lock_y = true;
+		if (normal.z == -1 && !lock_axes_back.lock_z)
+			lock_axes_back.lock_z = true;
 	}
 
 	if (c_type == CollisionEvent::ContactExit) {
-		lock_axes = bool3(false, false, false, false, false, false);
+		lock_axes_front = bool3(false, false, false);
+		lock_axes_back = bool3(false, false, false);
 	}
 }
 

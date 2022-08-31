@@ -3,31 +3,12 @@
 #include "PhysicBody.hpp"
 
 struct bool3 {
-	bool lock_xf, lock_yf, lock_zf;
-	bool lock_xb, lock_yb, lock_zb;
+	bool lock_x, lock_y, lock_z;
 
 	bool3() = default;
 
-	bool3(bool xf, bool yf, bool zf, bool xb, bool yb, bool zb)
-	    : 
-		lock_xf(xf),
-	      lock_yf(yf),
-	      lock_zf(zf),
-	      lock_xb(xb),
-	      lock_yb(yb),
-	      lock_zb(zb) {}
-
-	void setFront(bool x, bool y, bool z) {
-		lock_xf = x;
-		lock_yf = y;
-		lock_zf = z; 
-	}
-
-	void setBack(bool x, bool y, bool z) {
-		lock_xb = x;
-		lock_yb = y;
-		lock_zb = z;
-	}
+	bool3(bool x, bool y, bool z): 
+		lock_x(x), lock_y(y), lock_z(z) {}
 };
 
 class EngineResolve : public PhysicsBody {
@@ -55,7 +36,9 @@ protected:
 	bool can_sleep_;
 
 	glm::vec3 collision_axes;
-	bool3 lock_axes;
+
+	bool3 lock_axes_back;
+	bool3 lock_axes_front;
 
 public:
 
