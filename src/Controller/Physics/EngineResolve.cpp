@@ -25,6 +25,9 @@ EngineResolve::EngineResolve() {
 
 	lock_axes_front = bool3(false, false, false);
 	lock_axes_back = bool3(false, false, false);
+
+	collision_finished = false;
+	collision_started = false;
 }
 
 void EngineResolve::update(float delta_time) {
@@ -77,7 +80,16 @@ void EngineResolve::update(float delta_time) {
 		new_position.z = collision_axes.z;
 
 	//Final linking
-	cb->setTransform(Transform(new_position, new_orientation));
+	if (!collision_started)
+		cb->setTransform(Transform(new_position, new_orientation));
+	else
+		collision_started = false;
+
+	if (collision_finished) {
+		lock_axes_front = bool3(false, false, false);
+		lock_axes_back = bool3(false, false, false);
+		collision_finished = false;
+	}
 
 	lin_accelaration_ -= temp_acc;
 }
@@ -86,6 +98,9 @@ void EngineResolve::stop(glm::vec3 normal, CollisionEvent c_type) {
 
 	if (c_type == CollisionEvent::ContactStart) {
 		collision_axes = getPosition();
+		lin_velocity_ = glm::vec3(0.0f);
+		lin_accelaration_ = glm::vec3(0.0f);
+		collision_started = true;
 	}
 
 	if (c_type == CollisionEvent::ContactStay) {
@@ -106,8 +121,7 @@ void EngineResolve::stop(glm::vec3 normal, CollisionEvent c_type) {
 	}
 
 	if (c_type == CollisionEvent::ContactExit) {
-		lock_axes_front = bool3(false, false, false);
-		lock_axes_back = bool3(false, false, false);
+		collision_finished = true;
 	}
 }
 

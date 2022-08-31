@@ -40,6 +40,9 @@ protected:
 	bool3 lock_axes_back;
 	bool3 lock_axes_front;
 
+	bool collision_finished;
+	bool collision_started;
+
 public:
 
 	EngineResolve();
