@@ -2,6 +2,34 @@
 
 #include "PhysicBody.hpp"
 
+struct bool3 {
+	bool lock_xf, lock_yf, lock_zf;
+	bool lock_xb, lock_yb, lock_zb;
+
+	bool3() = default;
+
+	bool3(bool xf, bool yf, bool zf, bool xb, bool yb, bool zb)
+	    : 
+		lock_xf(xf),
+	      lock_yf(yf),
+	      lock_zf(zf),
+	      lock_xb(xb),
+	      lock_yb(yb),
+	      lock_zb(zb) {}
+
+	void setFront(bool x, bool y, bool z) {
+		lock_xf = x;
+		lock_yf = y;
+		lock_zf = z; 
+	}
+
+	void setBack(bool x, bool y, bool z) {
+		lock_xb = x;
+		lock_yb = y;
+		lock_zb = z;
+	}
+};
+
 class EngineResolve : public PhysicsBody {
 
 private:
@@ -26,6 +54,8 @@ protected:
 	bool use_gravity_;
 	bool can_sleep_;
 
+	glm::vec3 collision_axes;
+	bool3 lock_axes;
 
 public:
 
@@ -33,7 +63,7 @@ public:
 
 	void update(float delta_time) override;
 
-	void stop() override;
+	void stop(glm::vec3 normal, CollisionEvent c_type) override;
 
 	// using engine stuff
 	bool usingReactResolve() override;

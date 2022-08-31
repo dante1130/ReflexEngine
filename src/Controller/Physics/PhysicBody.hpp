@@ -21,6 +21,7 @@ enum class ApplyPoint {
 	WORLD_WORLD
 };
 
+typedef rp3d::CollisionCallback::ContactPair::EventType CollisionEvent; 
 
 class PhysicsBody
 {
@@ -85,9 +86,10 @@ class PhysicsBody
 
 		// collision resolution
 
-		static void collision(rp3d::Collider* c1, rp3d::Collider* c2);
+		static void collision(rp3d::Collider* c1, rp3d::Collider* c2, 
+			rp3d::Vector3 normal, CollisionEvent c_type);
 
-		virtual void stop() = 0;
+		virtual void stop(glm::vec3 normal, CollisionEvent c_type) = 0;
 
 	    // collision resolution system type check
 	    virtual bool usingReactResolve() = 0;

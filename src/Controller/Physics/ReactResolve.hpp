@@ -16,7 +16,7 @@ class ReactResolve: public PhysicsBody{
 		// Update function
 	    void update(float delta_time) override;
 
-		void stop() override;
+		void stop(glm::vec3 normal, CollisionEvent c_type) override;
 
 		// init setup
 	    void initialise_body(glm::vec3 pos, glm::vec3 rot, float angle) override;
