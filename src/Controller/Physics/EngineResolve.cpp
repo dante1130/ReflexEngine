@@ -158,7 +158,7 @@ void EngineResolve::delete_body() { cb->~CollisionBody(); }
 void EngineResolve::addForce(glm::vec3 force, Apply type) {
 	if (type != Apply::LOCAL) 
 		return;
-	force_ = force;
+	force_ += force;
 }
 
 void EngineResolve::addForceAtPoint(glm::vec3 force, glm::vec3 point, ApplyPoint type)
