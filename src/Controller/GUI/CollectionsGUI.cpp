@@ -114,7 +114,7 @@ void CollectionsGUI::remove_collection(int collection_id) {
 		}
 	}
 
-	DebugLogger::log("Collection remove", temp_collection.name.c_str());
+	DebugLogger::log("Collection remove", temp_collection.name);
 	collection_hierarchy.erase(temp_collection.collection_id);
 }
 
@@ -126,36 +126,6 @@ void CollectionsGUI::set_entity_collection(const entt::entity& entity,
 	} else {
 		collection_relationships.insert(
 		    std::pair<entt::entity, int>(entity, new_collection));
-	}
-}
-
-void CollectionsGUI::drag_drop_entities_to_collections_target(
-    int collection_id) {
-	if (ImGui::BeginDragDropTarget()) {
-		ImGuiDragDropFlags target_flags = 0;
-		target_flags |= ImGuiDragDropFlags_AcceptNoDrawDefaultRect;
-		if (const ImGuiPayload* payload =
-		        ImGui::AcceptDragDropPayload("COLLECTION_MOVE", target_flags)) {
-			DebugLogger::log("Drag move", "Something was moved");
-			CollectionsGUI::set_entity_collection(*(entt::entity*)payload->Data,
-			                                      collection_id);
-		}
-		ImGui::EndDragDropTarget();
-	}
-}
-
-void CollectionsGUI::drag_drop_collections_to_collections_target(
-    int collection_id) {
-	if (ImGui::BeginDragDropTarget()) {
-		ImGuiDragDropFlags target_flags = 0;
-		target_flags |= ImGuiDragDropFlags_AcceptNoDrawDefaultRect;
-		if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload(
-		        "COLLECTION_COLLECTION_MOVE", target_flags)) {
-			DebugLogger::log("Drag move", "Collection was moved");
-			CollectionsGUI::set_collection_collection(*(int*)payload->Data,
-			                                          collection_id);
-		}
-		ImGui::EndDragDropTarget();
 	}
 }
 
@@ -193,9 +163,8 @@ void CollectionsGUI::set_collection_collection(int selected_collection,
 			    temp_collection.collection_id) {
 				search_parent->second.child_ids.erase(
 				    search_parent->second.child_ids.begin() + count);
-				DebugLogger::log(
-				    "Removed collections parent child",
-				    std::to_string(temp_collection.collection_id).c_str());
+				DebugLogger::log("Removed collections parent child",
+				                 std::to_string(temp_collection.collection_id));
 				break;
 			}
 		}
@@ -218,23 +187,6 @@ void CollectionsGUI::set_collection_collection(int selected_collection,
 	}
 	// Remove children from collection
 	search->second.child_ids.clear();
-}
-
-bool CollectionsGUI::drag_drop_collections_to_collections_source(
-    const std::string& name, int collections_id) {
-	ImGuiDragDropFlags src_flags = 0;
-	src_flags |= ImGuiDragDropFlags_SourceNoDisableHover;
-	src_flags |= ImGuiDragDropFlags_SourceNoHoldToOpenOthers;
-	// src_flags |= ImGuiDragDropFlags_SourceNoPreviewTooltip;
-
-	if (ImGui::BeginDragDropSource(src_flags)) {
-		ImGui::Text(name.c_str());
-		ImGui::SetDragDropPayload("COLLECTION_COLLECTION_MOVE", &collections_id,
-		                          sizeof(int));
-		ImGui::EndDragDropSource();
-		return true;
-	}
-	return false;
 }
 
 void CollectionsGUI::rename_collection(const std::string& new_name,

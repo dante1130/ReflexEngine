@@ -197,4 +197,29 @@ private:
 	 * @return True if the double was updated, false otherwise.
 	 */
 	static bool input_double(const char* lable, double& value);
+
+	/**
+	 * @brief Sets the target for dagging an entity to a collection
+	 *
+	 * @param collection_id of the collection dropped on
+	 */
+	static void drag_drop_entities_to_collections_target(int collection_id);
+
+	/**
+	 * @brief Sets the target for dragging a collection to a collection
+	 *
+	 * @param collection_id of the collection dropped on
+	 */
+	static void drag_drop_collections_to_collections_target(int collection_id);
+
+	/**
+	 * @brief Sets the srouce for dragging a collection to a collection
+	 *
+	 * @param name of the collection you will be dragging
+	 * @param collection_id of the collection you will be dragging
+	 * @return true if currently being dragged
+	 * @return false if not currently being dragged
+	 */
+	static bool drag_drop_collections_to_collections_source(
+	    const std::string& name, int collection_id);
 };

@@ -78,31 +78,6 @@ public:
 	                                  int new_collection);
 
 	/**
-	 * @brief Sets the target for dagging an entity to a collection
-	 *
-	 * @param collection_id of the collection dropped on
-	 */
-	static void drag_drop_entities_to_collections_target(int collection_id);
-
-	/**
-	 * @brief Sets the target for dragging a collection to a collection
-	 *
-	 * @param collection_id of the collection dropped on
-	 */
-	static void drag_drop_collections_to_collections_target(int collection_id);
-
-	/**
-	 * @brief Sets the srouce for dragging a collection to a collection
-	 *
-	 * @param name of the collection you will be dragging
-	 * @param collection_id of the collection you will be dragging
-	 * @return true if currently being dragged
-	 * @return false if not currently being dragged
-	 */
-	static bool drag_drop_collections_to_collections_source(
-	    const std::string& name, int collection_id);
-
-	/**
 	 * @brief Renames a collection
 	 *
 	 * @param new_name the new name
@@ -121,6 +96,15 @@ public:
 	                                     int collection_id);
 
 	/**
+	 * @brief Set the collection collection object
+	 *
+	 * @param selected_collection the collection you have moved
+	 * @param target_collection the new parent of the collection you have moved
+	 */
+	static void set_collection_collection(int selected_collection,
+	                                      int target_collection);
+
+	/**
 	 * @brief Clears the collections
 	 *
 	 */
@@ -133,13 +117,4 @@ private:
 	static std::unordered_map<int, Collection> collection_hierarchy;
 	/// Generates the collection ids
 	static Counter collection_id_generator;
-
-	/**
-	 * @brief Set the collection collection object
-	 *
-	 * @param selected_collection the collection you have moved
-	 * @param target_collection the new parent of the collection you have moved
-	 */
-	static void set_collection_collection(int selected_collection,
-	                                      int target_collection);
 };
