@@ -5,11 +5,12 @@
 
 std::unordered_map<entt::entity, int> CollectionsGUI::collection_relationships =
     std::unordered_map<entt::entity, int>();
-std::vector<Collection> CollectionsGUI::collection_hierarchy =
-    std::vector<Collection>();
+std::unordered_map<int, Collection> CollectionsGUI::collection_hierarchy =
+    std::unordered_map<int, Collection>();
 Counter CollectionsGUI::collection_id_generator = Counter();
 
-std::vector<Collection>& CollectionsGUI::get_collection_hierarchy() {
+std::unordered_map<int, Collection>&
+CollectionsGUI::get_collection_hierarchy() {
 	return collection_hierarchy;
 }
 
@@ -26,13 +27,12 @@ void CollectionsGUI::lua_access() {
 }
 
 Collection CollectionsGUI::get_collection(int collection_id) {
-	int size = collection_hierarchy.size();
-	for (int count = 0; count < size; ++count) {
-		if (collection_hierarchy[count].collection_id == collection_id) {
-			return collection_hierarchy[count];
-		}
-	}
 	Collection col;
+	auto search = collection_hierarchy.find(collection_id);
+	if (search != collection_hierarchy.end()) {
+		col = search->second;
+	}
+
 	return col;
 }
 
@@ -51,107 +51,71 @@ int CollectionsGUI::add_collection(const std::string& name, int parent_id) {
 	col_hir.name = name;
 	col_hir.collection_id = collection_id_generator.increment_count();
 
-	bool valid_parent_id = false;
-	int size = collection_hierarchy.size();
-	for (int count = 0; count < size; count++) {
-		if (collection_hierarchy[count].collection_id == parent_id) {
-			valid_parent_id = true;
-			collection_hierarchy[count].child_ids.push_back(
-			    col_hir.collection_id);
-			break;
-		}
-	}
-
-	if (valid_parent_id) {
+	auto search = collection_hierarchy.find(parent_id);
+	if (search != collection_hierarchy.end()) {
 		col_hir.parent_collection_id = parent_id;
+		search->second.child_ids.push_back(col_hir.collection_id);
 	} else {
 		col_hir.parent_collection_id = -1;
 	}
 
-	collection_hierarchy.push_back(col_hir);
+	collection_hierarchy.insert(
+	    std::pair<int, Collection>(col_hir.collection_id, col_hir));
 
 	return col_hir.collection_id;
 }
 
 void CollectionsGUI::remove_collection(int collection_id) {
 	Collection temp_collection;
-	int remove_index = -1;
-	int size = collection_hierarchy.size();
 
-	for (int count = 0; count < size; ++count) {
-		if (collection_hierarchy[count].collection_id == collection_id) {
-			remove_index = count;
-			break;
-		}
-	}
-
-	if (remove_index == -1) {
+	auto search = collection_hierarchy.find(collection_id);
+	if (search == collection_hierarchy.end()) {
 		DebugLogger::log("CollectionsGUI", "collection id not found");
 		return;
 	}
-	temp_collection = collection_hierarchy[remove_index];
+	temp_collection = search->second;
 
 	int number_of_childs = 0;
 	// Remove child index from parent collection and collections children to
 	// parent collection
-	for (int count = 0; count < size; ++count) {
-		// If parent has been found
-		if (collection_hierarchy[count].collection_id ==
-		    temp_collection.parent_collection_id) {
-			// For all the child collections in the parent
-			number_of_childs = collection_hierarchy[count].child_ids.size();
-			for (int innerCount = 0; innerCount < number_of_childs;
-			     ++innerCount) {
-				DebugLogger::log(
-				    "Collections children",
-				    std::to_string(
-				        collection_hierarchy[count].child_ids[innerCount])
-				        .c_str());
-				if (temp_collection.collection_id ==
-				    collection_hierarchy[count].child_ids[innerCount]) {
-					collection_hierarchy[count].child_ids.erase(
-					    collection_hierarchy[count].child_ids.begin() +
-					    innerCount);
-					DebugLogger::log(
-					    "Collections RM child",
-					    std::to_string(temp_collection.collection_id).c_str());
-					break;
-				}
-			}
 
-			// Add children to parent collection
-			number_of_childs = temp_collection.child_ids.size();
-			for (int innerCount = 0; innerCount < number_of_childs;
-			     ++innerCount) {
-				collection_hierarchy[count].child_ids.push_back(
-				    temp_collection.child_ids[innerCount]);
+	auto search_parent =
+	    collection_hierarchy.find(temp_collection.parent_collection_id);
+	if (search_parent != collection_hierarchy.end()) {
+		number_of_childs = search_parent->second.child_ids.size();
+		for (int count = 0; count < number_of_childs; ++count) {
+			// Remove collection from parents list of children
+			if (temp_collection.collection_id ==
+			    search_parent->second.child_ids[count]) {
+				search_parent->second.child_ids.erase(
+				    search_parent->second.child_ids.begin() + count);
+				count = number_of_childs;
 			}
+		}
 
-			break;
+		// Add children of collection to become children of parent collection
+		number_of_childs = temp_collection.child_ids.size();
+		for (int count = 0; count < number_of_childs; ++count) {
+			search_parent->second.child_ids.push_back(
+			    temp_collection.child_ids[count]);
 		}
 	}
 
 	// Set new parents on child indexes
-	size = collection_hierarchy.size();
+	// auto search_child;
+	std::unordered_map<int, Collection>::iterator search_child;
 	number_of_childs = temp_collection.child_ids.size();
-	for (int count = 0; count < size; ++count) {
-		for (int innerCount = 0; innerCount < number_of_childs; ++innerCount) {
-			if (collection_hierarchy[count].collection_id ==
-			    temp_collection.child_ids[innerCount]) {
-				collection_hierarchy[count].parent_collection_id =
-				    temp_collection.parent_collection_id;
-				innerCount = number_of_childs;
-				DebugLogger::log(
-				    "Set collection parent id",
-				    std::to_string(temp_collection.parent_collection_id)
-				        .c_str());
-			}
+	for (int count = 0; count < number_of_childs; ++count) {
+		search_child =
+		    collection_hierarchy.find(temp_collection.child_ids[count]);
+		if (search_child != collection_hierarchy.end()) {
+			search_child->second.parent_collection_id =
+			    temp_collection.parent_collection_id;
 		}
 	}
 
-	DebugLogger::log("Collection remove",
-	                 collection_hierarchy[remove_index].name.c_str());
-	collection_hierarchy.erase(collection_hierarchy.begin() + remove_index);
+	DebugLogger::log("Collection remove", temp_collection.name);
+	collection_hierarchy.erase(temp_collection.collection_id);
 }
 
 void CollectionsGUI::set_entity_collection(const entt::entity& entity,
@@ -165,111 +129,64 @@ void CollectionsGUI::set_entity_collection(const entt::entity& entity,
 	}
 }
 
-void CollectionsGUI::drag_drop_entities_to_collections_target(int index) {
-	if (ImGui::BeginDragDropTarget()) {
-		ImGuiDragDropFlags target_flags = 0;
-		target_flags |= ImGuiDragDropFlags_AcceptNoDrawDefaultRect;
-		if (const ImGuiPayload* payload =
-		        ImGui::AcceptDragDropPayload("COLLECTION_MOVE", target_flags)) {
-			DebugLogger::log("Drag move", "Something was moved");
-			CollectionsGUI::set_entity_collection(
-			    *(entt::entity*)payload->Data,
-			    collection_hierarchy[index].collection_id);
-		}
-		ImGui::EndDragDropTarget();
-	}
-}
-
-void CollectionsGUI::drag_drop_collections_to_collections_target(int index) {
-	if (ImGui::BeginDragDropTarget()) {
-		ImGuiDragDropFlags target_flags = 0;
-		target_flags |= ImGuiDragDropFlags_AcceptNoDrawDefaultRect;
-		if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload(
-		        "COLLECTION_COLLECTION_MOVE", target_flags)) {
-			DebugLogger::log("Drag move", "Collection was moved");
-			CollectionsGUI::set_collection_collection(*(int*)payload->Data,
-			                                          index);
-		}
-		ImGui::EndDragDropTarget();
-	}
-}
-
 void CollectionsGUI::set_collection_collection(int selected_collection,
                                                int target_collection) {
 	if (selected_collection == target_collection) {
 		return;
 	}
 
-	int number_of_children =
-	    collection_hierarchy[selected_collection].child_ids.size();
-	int number_of_collections = collection_hierarchy.size();
+	auto search = collection_hierarchy.find(selected_collection);
+	if (search == collection_hierarchy.end()) {
+		return;
+	}
+	Collection temp_collection = search->second;
+	int number_of_children = temp_collection.child_ids.size();
+	std::unordered_map<int, Collection>::iterator search_child;
+	// Set children's parent id to collections parent id
 	for (int count = 0; count < number_of_children; ++count) {
-		for (int innerCount = 0; innerCount < number_of_collections;
-		     ++innerCount) {
-			// Set all children collections to parent collection of collection
-			if (collection_hierarchy[innerCount].collection_id ==
-			    collection_hierarchy[selected_collection].child_ids[count]) {
-				collection_hierarchy[innerCount].parent_collection_id =
-				    collection_hierarchy[selected_collection]
-				        .parent_collection_id;
-			}
+		search_child =
+		    collection_hierarchy.find(temp_collection.child_ids[count]);
+		if (search_child != collection_hierarchy.end()) {
+			search_child->second.parent_collection_id =
+			    temp_collection.parent_collection_id;
 		}
 	}
 
-	// Loop through collections to get parent collection to remove child id from
-	// parent
-	for (int count = 0; count < number_of_collections; count++) {
-		// if found parent collection
-		if (collection_hierarchy[selected_collection].parent_collection_id ==
-		    collection_hierarchy[count].collection_id) {
-			int size = collection_hierarchy[count].child_ids.size();
-			// For all children in parent
-			for (int innerCount = 0; innerCount < size; ++innerCount) {
-				// If your collection is found remove it from parent
-				if (collection_hierarchy[count].child_ids[innerCount] ==
-				    collection_hierarchy[selected_collection].collection_id) {
-					collection_hierarchy[count].child_ids.erase(
-					    collection_hierarchy[count].child_ids.begin() +
-					    innerCount);
-					break;
-				}
+	auto search_parent =
+	    collection_hierarchy.find(temp_collection.parent_collection_id);
+	if (search_parent != collection_hierarchy.end()) {
+		Collection parent_collection = search_parent->second;
+		number_of_children = parent_collection.child_ids.size();
+		// Remove collection from parent collection children
+		for (int count = 0; count < number_of_children; ++count) {
+			if (parent_collection.child_ids[count] ==
+			    temp_collection.collection_id) {
+				search_parent->second.child_ids.erase(
+				    search_parent->second.child_ids.begin() + count);
+				DebugLogger::log("Removed collections parent child",
+				                 std::to_string(temp_collection.collection_id));
+				break;
 			}
-
-			for (int innerCount = 0; innerCount < number_of_children;
-			     ++innerCount) {
-				collection_hierarchy[count].child_ids.push_back(
-				    collection_hierarchy[selected_collection]
-				        .child_ids[innerCount]);
-			}
-			break;
+		}
+		// Add collection's children to parent collection
+		number_of_children = temp_collection.child_ids.size();
+		for (int count = 0; count < number_of_children; ++count) {
+			search_parent->second.child_ids.push_back(
+			    temp_collection.child_ids[count]);
 		}
 	}
 
-	// Set the new parent collection id
-	collection_hierarchy[selected_collection].parent_collection_id =
-	    collection_hierarchy[target_collection].collection_id;
-	// set parent's new child
-	collection_hierarchy[target_collection].child_ids.push_back(
-	    collection_hierarchy[selected_collection].collection_id);
+	auto search_target = collection_hierarchy.find(target_collection);
+	if (search_target != collection_hierarchy.end()) {
+		search->second.parent_collection_id =
+		    search_target->second.collection_id;
+		search_target->second.child_ids.push_back(
+		    temp_collection.collection_id);
+	} else {
+		search->second.parent_collection_id = -1;
+	}
 	// Remove children from collection
-	collection_hierarchy[selected_collection].child_ids.clear();
-}
-
-bool CollectionsGUI::drag_drop_collections_to_collections_source(
-    const std::string& name, int index) {
-	ImGuiDragDropFlags src_flags = 0;
-	src_flags |= ImGuiDragDropFlags_SourceNoDisableHover;
-	src_flags |= ImGuiDragDropFlags_SourceNoHoldToOpenOthers;
-	// src_flags |= ImGuiDragDropFlags_SourceNoPreviewTooltip;
-
-	if (ImGui::BeginDragDropSource(src_flags)) {
-		ImGui::Text(name.c_str());
-		ImGui::SetDragDropPayload("COLLECTION_COLLECTION_MOVE", &index,
-		                          sizeof(int));
-		ImGui::EndDragDropSource();
-		return true;
-	}
-	return false;
+	search->second.child_ids.clear();
 }
 
 void CollectionsGUI::rename_collection(const std::string& new_name,
@@ -278,11 +195,9 @@ void CollectionsGUI::rename_collection(const std::string& new_name,
 		return;
 	}
 
-	int number_of_collections = collection_hierarchy.size();
-	for (int count = 0; count < number_of_collections; ++count) {
-		if (collection_hierarchy[count].collection_id == collection_id) {
-			collection_hierarchy[count].name = new_name;
-		}
+	auto search = collection_hierarchy.find(collection_id);
+	if (search != collection_hierarchy.end()) {
+		search->second.name = new_name;
 	}
 }
 
