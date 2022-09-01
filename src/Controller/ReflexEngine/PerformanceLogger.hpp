@@ -69,6 +69,12 @@ public:
 	 */
 	static void ClearLogs();
 
+	/**
+	 * @brief Removes all logs from current log list. DO NOT USE unless
+	 * absolutly necessary. Only used for testing
+	 */
+	static void ForceClearLogs();
+
 private:
 	/// The log storage
 	static std::vector<Performance_Log> logs;

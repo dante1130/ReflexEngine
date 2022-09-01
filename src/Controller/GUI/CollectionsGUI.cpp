@@ -36,7 +36,7 @@ Collection CollectionsGUI::get_collection(int collection_id) {
 	return col;
 }
 
-int CollectionsGUI::get_entity_collection_id(entt::entity& entity) {
+int CollectionsGUI::get_entity_collection_id(const entt::entity& entity) {
 	int collection_id = -1;
 	auto search = collection_relationships.find(entity);
 	if (search != collection_relationships.end()) {
