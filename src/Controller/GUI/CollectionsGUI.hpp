@@ -50,7 +50,7 @@ public:
 	 * @param entity the entity you are interested in
 	 * @return int the collection id
 	 */
-	static int get_entity_collection_id(entt::entity& entity);
+	static int get_entity_collection_id(const entt::entity& entity);
 
 	/**
 	 * @brief Adds a new collection to the scene
