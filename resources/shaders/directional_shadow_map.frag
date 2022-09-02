@@ -6,8 +6,7 @@ out vec4 color;
 
 uniform sampler2D theTexture;
 
-void main() 
-{
+void main() {
 	float alpha = texture(theTexture, v_tex).a;
 
 	if (alpha < 0.5) {

@@ -19,13 +19,15 @@ public:
 	 *
 	 * @param shadow_width The width of the shadow map.
 	 * @param shadow_height The height of the shadow map.
+	 * @param light_projection The light projection, orthogonal.
 	 * @param color The color of the light.
 	 * @param aIntensity The ambient intensity of the light.
 	 * @param direction The direction of the light.
 	 * @param dIntensity The diffuse intensity of the light.
 	 */
-	DirectionalLight(GLuint shadow_width, GLuint shadow_height, glm::vec3 color,
-	                 GLfloat aIntensity, glm::vec3 direction,
+	DirectionalLight(GLuint shadow_width, GLuint shadow_height,
+	                 const glm::mat4& light_projection, const glm::vec3& color,
+	                 GLfloat aIntensity, const glm::vec3& direction,
 	                 GLfloat dIntensity);
 
 	/**

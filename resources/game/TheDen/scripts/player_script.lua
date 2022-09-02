@@ -10,7 +10,7 @@ function init(ecs, entity)
 	--entity:add_rigidbody_component()
 	local rb = entity:get_rigidbody_component()
 	rb:add_box_collider(Math.vec3.new(0, -0.8, 0), Math.vec3.new(0.5, 1.8, 0.5), 0.3, 1)
-	rb.linear_drag = 0.3
+	rb.linear_drag = 1
 end
 
 function update(ecs, entity)
@@ -18,7 +18,7 @@ function update(ecs, entity)
 		Scene.load_scene("duckandcover3")
 	end
 
-	if(not Camera.is_noclip() and entity:any_rigidbody_component()) then
+	if (not Camera.is_noclip() and entity:any_rigidbody_component()) then
 		PhysicsMovement(ecs, entity)
 	else
 		PositionMovement(ecs, entity)
@@ -59,11 +59,18 @@ function update(ecs, entity)
 		var.speed = var.speed * 2
 	end
 
+	if (Input.get_key_state("x"):is_key_pressed()) then
+		local cam_dir = Camera.get_direction()
+		local cam_pos = Camera.get_position()
+
+		DebugLogger.log("info", "Camera position: " .. cam_pos.x .. ", " .. cam_pos.y .. ", " .. cam_pos.z)
+		DebugLogger.log("info", "Camera direction:" .. cam_dir.x .. ", " .. cam_dir.y .. ", " .. cam_dir.z)
+	end
+
 	if (Time.is_paused()) then
 		dofile "game/TheDen/scripts/pause_menu.lua"
 	end
 end
-
 
 function PositionMovement(ecs, entity)
 	local transform_component = entity:get_transform_component()
@@ -89,10 +96,10 @@ function PositionMovement(ecs, entity)
 
 	transform_component.position = Camera.get_position()
 
-	if(entity:any_rigidbody_component()) then
+	if (entity:any_rigidbody_component()) then
 		local rb_comp = entity:get_rigidbody_component()
 		rb_comp:set_transform(transform_component.position, Math.vec3.new(0, 0, 0))
-		rb_comp.velocity = Math.vec3.new(0,0,0)
+		rb_comp.velocity = Math.vec3.new(0, 0, 0)
 		rb_comp.angular_velocity = Math.vec3.new(0, 0, 0)
 	end
 end
@@ -116,11 +123,11 @@ function PhysicsMovement(ecs, entity)
 		force_vector = Math.add(force_vector, direction)
 	end
 
-	local up_vector = Math.vec3.new(0, 1, 0)
-	if(const_direction.x == 0 and const_direction.y == 1 and const_direction.z == 0) then
-		up_vector.x = 1
-		up_vector.y = 0
-	end
+		if (Input.get_key_state("s"):is_key_hold()) then
+			direction = Math.mul(const_direction, speed_vec)
+			direction = Math.mul(-1, direction)
+			rb_comp:add_force(direction, Apply.LOCAL)
+		end
 
 	local strafe_vector = Math.cross(const_direction, up_vector)
 	if (Input.get_key_state("d"):is_key_hold()) then
@@ -136,20 +143,22 @@ function PhysicsMovement(ecs, entity)
 
 	rb_comp:add_force(force_vector, Apply.LOCAL)
 
-	local velocity = rb_comp.velocity
-	local velocity_y = velocity.y
-	velocity.y = 0
-	local ratio = Math.length(velocity) / var.speed
-	if (ratio > 1) then
-		velocity = Math.div(velocity, ratio)
-		velocity.y = velocity_y
-		rb_comp.velocity = velocity
-	end
+		local velocity = rb_comp.velocity
+		local velocity_y = velocity.y
+		velocity.y = 0
+		local ratio = Math.length(velocity) / var.speed
+		if (ratio > 1) then
+			velocity = Math.div(velocity, ratio)
+			velocity.y = velocity_y
+			rb_comp.velocity = velocity
+		end
 
-
-	rb_comp.angular_velocity = Math.vec3.new(0, 0, 0)
-	local transform_component = entity:get_transform_component()
-	local transform = transform_component.position
-	rb_comp:set_transform(transform, Math.vec3.new(0, 0, 0))
-	Camera.set_position(transform)
+		local transform_component = entity:get_transform_component()
+		local transform = transform_component.position
+		rb_comp.angular_velocity = Math.vec3.new(0, 0, 0)
+		
+		rb_comp:set_transform(transform, Math.vec3.new(0, 0, 0))
+		
+		Camera.set_position(transform)
+	
 end

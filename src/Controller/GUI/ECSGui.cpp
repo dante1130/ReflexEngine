@@ -12,7 +12,13 @@
 #include "Model/Components/Terrain.hpp"
 #include "Model/Components/Statemachine.hpp"
 #include "Model/Components/Remove.hpp"
-#include "Model/Components/Rigidbody.hpp"
+#include "Model/Components/RigidBody.hpp"
+
+#include "Controller/GUI/DebugLogger.hpp"
+
+#include <vector>
+
+constexpr float INDENT_AMOUNT = 25;
 
 void ECSGui::draw(ECS& ecs) {
 	constexpr ImGuiWindowFlags window_flags = ImGuiWindowFlags_NoBackground;
@@ -20,9 +26,8 @@ void ECSGui::draw(ECS& ecs) {
 	auto& registry = ecs.get_registry();
 
 	ImGui::Begin("Scene entities", nullptr, window_flags);
-	registry.each([this, &ecs](auto entity_id) {
-		draw_entity(ecs.get_entity(entity_id));
-	});
+
+	draw_collection_hierarchy(ecs);
 
 	// Deselect when clicking on blank space.
 	if (ImGui::IsMouseDown(0) && ImGui::IsWindowHovered()) {
@@ -36,6 +41,13 @@ void ECSGui::draw(ECS& ecs) {
 			ecs.create_entity(std::string())
 			    .add_component<Component::Transform>();
 		}
+		if (ImGui::MenuItem("Create collection")) {
+			CollectionsGUI::add_collection(
+			    std::to_string(
+			        CollectionsGUI::get_collection_hierarchy().size() + 1)
+			        .c_str(),
+			    -1);
+		}
 		ImGui::EndPopup();
 	}
 
@@ -46,18 +58,181 @@ void ECSGui::draw(ECS& ecs) {
 		auto& entity = ecs.get_entity(selected_entity_);
 		draw_entity_props(ecs, entity);
 		draw_add_component(entity);
+		selected_collection_ = -1;
+	} else if (selected_collection_ != -1) {
+		if (ImGui::Button("Delete")) {
+			CollectionsGUI::remove_collection(selected_collection_);
+			selected_collection_ = -1;
+		} else {
+			draw_collection_properties();
+		}
 	}
 	ImGui::End();
+}
+
+void ECSGui::draw_collection_properties() {
+	Collection temp_collection =
+	    CollectionsGUI::get_collection(selected_collection_);
+	ImGui::Text("Name: ");
+	ImGui::SameLine();
+	if (ImGui::InputText(" ", &temp_collection.name)) {
+		CollectionsGUI::rename_collection(temp_collection.name,
+		                                  selected_collection_);
+	}
+	ImGui::Text("ID");
+	ImGui::SameLine();
+	ImGui::Text(std::to_string(temp_collection.collection_id).c_str());
+	ImGui::Text("Parent ID");
+	ImGui::SameLine();
+	ImGui::Text(std::to_string(temp_collection.parent_collection_id).c_str());
+	for (int count = 0; count < temp_collection.child_ids.size(); ++count) {
+		ImGui::Text("Child ID");
+		ImGui::SameLine();
+		ImGui::Text(std::to_string(temp_collection.child_ids[count]).c_str());
+	}
+}
+
+void ECSGui::draw_collection_hierarchy(ECS& ecs) {
+	auto& registry = ecs.get_registry();
+	std::unordered_map<int, Collection> collections =
+	    CollectionsGUI::get_collection_hierarchy();
+
+	std::vector<std::vector<entt::entity>> collection_order =
+	    std::vector<std::vector<entt::entity>>();
+	int number_of_collections = collections.size() + 1;
+	collection_order.resize(number_of_collections);
+
+	int collection_id = -1;
+	int value;
+	std::unordered_map<int, Collection>::iterator search;
+	registry.each([this, &value, &search, &ecs, &collection_id, &collections,
+	               &collection_order, &number_of_collections](auto entity_id) {
+		collection_id = CollectionsGUI::get_entity_collection_id(entity_id);
+		// Loop through all collections
+		search = collections.find(collection_id);
+
+		if (search != collections.end()) {
+			value = std::distance(collections.begin(), search);
+			collection_order[value].push_back(entity_id);
+		} else {
+			collection_order[(collection_order.size() - 1)].push_back(
+			    entity_id);
+		}
+	});
+
+	bool open, selected = false;
+	// If outermost collections
+	Collection temp_collection;
+	auto itr = collections.begin();
+	for (int count = 0; count < number_of_collections - 1; ++count) {
+		if (itr->second.parent_collection_id == -1) {
+			open =
+			    ImGui::CollapsingHeader(itr->second.name.c_str(),
+			                            ImGuiSelectableFlags_AllowItemOverlap);
+			ECSGui::drag_drop_entities_to_collections_target(
+			    itr->second.collection_id);
+			selected = ECSGui::drag_drop_collections_to_collections_source(
+			    itr->second.name, itr->second.collection_id);
+			ECSGui::drag_drop_collections_to_collections_target(
+			    itr->second.collection_id);
+			if (selected) {
+				selected_collection_ = itr->second.collection_id;
+				selected_entity_ = entt::null;
+			}
+			if (open) {
+				ImGui::Indent(INDENT_AMOUNT);
+				draw_collection(ecs, collections, collection_order,
+				                itr->second.collection_id);
+				ImGui::Indent(-INDENT_AMOUNT);
+			}
+		}
+		itr++;
+	}
+
+	// Entities that belong to no collection
+	int size = collection_order[number_of_collections - 1].size();
+	for (int count = 0; count < size; ++count) {
+		draw_entity(
+		    ecs.get_entity(collection_order[number_of_collections - 1][count]));
+	}
+}
+
+void ECSGui::draw_collection(
+    ECS& ecs, std::unordered_map<int, Collection>& collections,
+    std::vector<std::vector<entt::entity>>& collection_order, int index) {
+	auto search = collections.find(index);
+	if (search == collections.end()) {
+		return;
+	}
+	Collection temp_collection = search->second;
+	Collection child_collection;
+	int number_of_children = temp_collection.child_ids.size();
+	int number_of_collections = collection_order.size() - 1;
+	int child_id = -1;
+	bool open = false, selected = false;
+	// Draw all child collections
+	std::unordered_map<int, Collection>::iterator search_child;
+	for (int count = 0; count < number_of_children; ++count) {
+		search_child = collections.find(temp_collection.child_ids[count]);
+		if (search_child == collections.end()) {
+			continue;
+		}
+		child_collection = search_child->second;
+		// ImGui collapsing header
+		open = ImGui::CollapsingHeader(child_collection.name.c_str());
+
+		// // // Drag and drop methods
+		ECSGui::drag_drop_entities_to_collections_target(
+		    child_collection.collection_id);
+		selected = ECSGui::drag_drop_collections_to_collections_source(
+		    child_collection.name, child_collection.collection_id);
+		ECSGui::drag_drop_collections_to_collections_target(
+		    child_collection.collection_id);
+		if (selected) {
+			selected_collection_ = child_collection.collection_id;
+			selected_entity_ = entt::null;
+		}
+		// // // End of drag and drop methods
+
+		if (open) {
+			ImGui::Indent(INDENT_AMOUNT);
+			draw_collection(ecs, collections, collection_order,
+			                child_collection.collection_id);
+			ImGui::Indent(-INDENT_AMOUNT);
+		}
+	}
+	number_of_collections = collections.size();
+
+	int position = std::distance(collections.begin(), search);
+	// Draw all entities
+	int number_of_entities = collection_order[position].size();
+	for (int count = 0; count < number_of_entities; ++count) {
+		draw_entity(ecs.get_entity(collection_order[position][count]));
+	}
 }
 
 void ECSGui::draw_entity(Reflex::Entity& entity) {
 	ImGui::PushID(static_cast<int>(entity.get_entity_id()));
 
 	bool selected = false;
+
 	ImGui::PushStyleVar(ImGuiStyleVar_SelectableTextAlign, ImVec2(0, 0.5f));
 	ImGui::Selectable(entity.get_name().c_str(), &selected,
 	                  ImGuiSelectableFlags_AllowItemOverlap, ImVec2(0, 20));
 	ImGui::PopStyleVar();
+
+	ImGuiDragDropFlags src_flags = 0;
+	src_flags |= ImGuiDragDropFlags_SourceNoDisableHover;
+	src_flags |= ImGuiDragDropFlags_SourceNoHoldToOpenOthers;
+	// src_flags |= ImGuiDragDropFlags_SourceNoPreviewTooltip;
+
+	if (ImGui::BeginDragDropSource(src_flags)) {
+		ImGui::Text(entity.get_name().c_str());
+		entt::entity enttEntity = entity.get_entity_id();
+		ImGui::SetDragDropPayload("COLLECTION_MOVE", &enttEntity,
+		                          sizeof(entt::entity));
+		ImGui::EndDragDropSource();
+	}
 
 	ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
 
@@ -225,9 +400,9 @@ void ECSGui::draw_mesh(Reflex::Entity& entity) {
 	}
 
 	if (open) {
-		input_text("Mesh", mesh.mesh_name);
-		input_text("Texture", mesh.texture_name);
-		input_text("Material", mesh.material_name);
+		input_text("Mesh name", mesh.mesh_name);
+		input_text("Texture name", mesh.texture_name);
+		input_text("Material name", mesh.material_name);
 	}
 
 	ImGui::PopID();
@@ -246,8 +421,8 @@ void ECSGui::draw_model(Reflex::Entity& entity) {
 	}
 
 	if (open) {
-		input_text("Model", model.model_name);
-		input_text("Material", model.material_name);
+		input_text("Model name", model.model_name);
+		input_text("Material name", model.material_name);
 	}
 
 	ImGui::PopID();
@@ -266,9 +441,9 @@ void ECSGui::draw_md2_animation(Reflex::Entity& entity) {
 	}
 
 	if (open) {
-		input_text("Md2 model", md2_animation.md2_name);
-		input_text("Texture", md2_animation.texture_name);
-		input_text("Material", md2_animation.material_name);
+		input_text("Md2 model name", md2_animation.md2_name);
+		input_text("Texture name", md2_animation.texture_name);
+		input_text("Material name", md2_animation.material_name);
 
 		draw_animation_state(entity);
 
@@ -328,10 +503,10 @@ void ECSGui::draw_terrain(Reflex::Entity& entity) {
 	}
 
 	if (open) {
-		input_text("Terrain", terrain.terrain_name);
-		input_text("Texture", terrain.texture_name);
-		input_text("Material", terrain.material_name);
-		input_text("Detailmap", terrain.detailmap_name);
+		input_text("Terrain name", terrain.terrain_name);
+		input_text("Texture name", terrain.texture_name);
+		input_text("Material name", terrain.material_name);
+		input_text("Detailmap name", terrain.detailmap_name);
 	}
 
 	ImGui::PopID();
@@ -625,5 +800,50 @@ bool ECSGui::input_double(const char* label, double& value) {
 		return true;
 	};
 
+	return false;
+}
+
+void ECSGui::drag_drop_entities_to_collections_target(int collection_id) {
+	if (ImGui::BeginDragDropTarget()) {
+		ImGuiDragDropFlags target_flags = 0;
+		target_flags |= ImGuiDragDropFlags_AcceptNoDrawDefaultRect;
+		if (const ImGuiPayload* payload =
+		        ImGui::AcceptDragDropPayload("COLLECTION_MOVE", target_flags)) {
+			DebugLogger::log("Drag move", "Something was moved");
+			CollectionsGUI::set_entity_collection(*(entt::entity*)payload->Data,
+			                                      collection_id);
+		}
+		ImGui::EndDragDropTarget();
+	}
+}
+
+void ECSGui::drag_drop_collections_to_collections_target(int collection_id) {
+	if (ImGui::BeginDragDropTarget()) {
+		ImGuiDragDropFlags target_flags = 0;
+		target_flags |= ImGuiDragDropFlags_AcceptNoDrawDefaultRect;
+		if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload(
+		        "COLLECTION_COLLECTION_MOVE", target_flags)) {
+			DebugLogger::log("Drag move", "Collection was moved");
+			CollectionsGUI::set_collection_collection(*(int*)payload->Data,
+			                                          collection_id);
+		}
+		ImGui::EndDragDropTarget();
+	}
+}
+
+bool ECSGui::drag_drop_collections_to_collections_source(
+    const std::string& name, int collections_id) {
+	ImGuiDragDropFlags src_flags = 0;
+	src_flags |= ImGuiDragDropFlags_SourceNoDisableHover;
+	src_flags |= ImGuiDragDropFlags_SourceNoHoldToOpenOthers;
+	// src_flags |= ImGuiDragDropFlags_SourceNoPreviewTooltip;
+
+	if (ImGui::BeginDragDropSource(src_flags)) {
+		ImGui::Text(name.c_str());
+		ImGui::SetDragDropPayload("COLLECTION_COLLECTION_MOVE", &collections_id,
+		                          sizeof(int));
+		ImGui::EndDragDropSource();
+		return true;
+	}
 	return false;
 }

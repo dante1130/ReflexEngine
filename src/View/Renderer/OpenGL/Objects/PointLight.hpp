@@ -19,8 +19,8 @@ public:
 	 *
 	 * @param shadow_width The width of the shadow map.
 	 * @param shadow_height The height of the shadow map.
-	 * @param near The near plane of the shadow map.
-	 * @param far The far plane of the shadow map.
+	 * @param light_projection The light projection, perspective.
+	 * @param far_plane The far plane of the light projection.
 	 * @param color The color of the light
 	 * @param aIntensity The ambient intensity of the light
 	 * @param dIntensity The diffuse intensity of the light
@@ -29,10 +29,11 @@ public:
 	 * @param linear The linear attenuation of the light
 	 * @param quadratic The quadratic attenuation of the light
 	 */
-	PointLight(GLuint shadow_width, GLuint shadow_height, GLfloat near,
-	           GLfloat far, glm::vec3 color, GLfloat aIntensity,
-	           GLfloat dIntensity, glm::vec3 position, GLfloat constant,
-	           GLfloat linear, GLfloat quadratic);
+	PointLight(GLuint shadow_width, GLuint shadow_height,
+	           const glm::mat4& light_projection, GLfloat far_plane,
+	           const glm::vec3& color, GLfloat aIntensity, GLfloat dIntensity,
+	           const glm::vec3& position, GLfloat constant, GLfloat linear,
+	           GLfloat quadratic);
 
 	/**
 	 * @brief Enables the light by passing uniforms to the shader.
