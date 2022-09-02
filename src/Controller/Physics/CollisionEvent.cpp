@@ -24,13 +24,13 @@ void CollisionEventListener::onContact(const CallbackData& collision_data) {
 		                       contact_pair.getCollider2(), total_normal, event_type);
 
 
-		 if (event_type == ContactPair::EventType::ContactStart) {
+		/* if (event_type == ContactPair::EventType::ContactStart) {
 		 	std::cout << "Contact start\n";
 		 } else if (event_type == ContactPair::EventType::ContactStay) {
 		 	std::cout << "Contact stay\n";
 		 } else if (event_type == ContactPair::EventType::ContactExit) {
 		 	std::cout << "Contact end\n";
-		 }
+		 }*/
 
 	}
 }

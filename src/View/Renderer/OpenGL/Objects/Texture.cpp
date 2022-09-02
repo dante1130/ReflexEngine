@@ -43,7 +43,7 @@ bool Texture::LoadTexture() {
 
 	stbi_image_free(texData);
 
-	return true;
+	return true;  
 }
 
 bool Texture::LoadTextureA() {
