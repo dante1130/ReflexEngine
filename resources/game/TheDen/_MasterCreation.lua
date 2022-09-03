@@ -17,6 +17,5 @@ Scene.add_game_object("game/TheDen/prefabs/lights/left_lights/left_light1.lua")
 Scene.add_game_object("game/TheDen/prefabs/lights/right_lights/right_light1.lua")
 Scene.add_game_object("game/TheDen/prefabs/lights/right_lights/right_light2.lua")
 Scene.add_game_object("game/TheDen/prefabs/lights/right_lights/right_light3.lua")
---Scene.add_game_object("game/TheDen/prefabs/network.lua")
 
 Skybox.use_skybox("default")

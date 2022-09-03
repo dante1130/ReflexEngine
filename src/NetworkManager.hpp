@@ -15,6 +15,12 @@
 #define MAX_CLIENTS 6
 #define SERVER_PORT 60000
 
+/**
+ * @author Florian Robbins
+ * @class NetworkManager
+ * @brief A network manager used for creating and connecting to chat clients. 
+ */
+
 class networkManager {
 private:
 	/// The message that was received
