@@ -24,7 +24,7 @@ entity = {
         gravity_on = true,
         can_sleep = true,
         is_trigger = false,
-        linear_drag = 0.1,
+        linear_drag = 5,
         angular_drag = 0.1,
 		rb_type = 2
     },
