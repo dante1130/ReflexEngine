@@ -276,6 +276,10 @@ void EntitySerializer::serialize_rigidbody(Component::Rigidbody& rigidbody) {
 	create_var("linear_drag", rigidbody.lin_drag, true);
 	create_var("angular_drag", rigidbody.ang_drag, true);
 	create_var("rb_type", rigidbody.getType(), true);
+	if (!rigidbody.collider_obj_data.empty()) {
+		create_var("collider_obj_data",
+		           "\"" + rigidbody.collider_obj_data + "\"", true);
+	}
 	glm::vec3 linear_velocity = rigidbody.getVelocity();
 	create_table("linear_velocity");
 	create_var("x", linear_velocity.x, true);

@@ -11,6 +11,7 @@
 #include "Model/Components/RigidBody.hpp"
 
 #include "Controller/GUI/CollectionsGUI.hpp"
+#include "Controller/Physics/LoadOBJColliderData.hpp"
 
 #include "Controller/ECS/System.hpp"
 
@@ -249,6 +250,12 @@ void ECSGameAssetFactory::load_rigidbody(Reflex::Entity& entity,
 	    rigidbody_table["angular_drag"]);
 
 	rb_comp.setType(rigidbody_table["rb_type"]);
+
+	if (rigidbody_table["collider_obj_data"].valid()) {
+		rb_comp.collider_obj_data = rigidbody_table["collider_obj_data"];
+		loadOBJColliderData::load_obj_collider_data(rb_comp,
+		                                            rb_comp.collider_obj_data);
+	}
 
 	if (rigidbody_table["linear_velocity"].valid()) {
 		auto linear_velocity = glm::vec3(0);

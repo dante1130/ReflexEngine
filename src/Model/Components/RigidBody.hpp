@@ -37,6 +37,8 @@ public:
 
 	bool using_react_start;
 
+	std::string collider_obj_data = "";
+
 	Rigidbody() = default;
 
 	Rigidbody(const Rigidbody&) = default;
