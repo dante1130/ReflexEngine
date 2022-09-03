@@ -26,7 +26,8 @@ entity = {
         can_sleep = true,
         is_trigger = false,
         linear_drag = 0.1,
-        angular_drag = 0.1
+        angular_drag = 0.1,
+		rb_type = 0
     },
 
 	script = {

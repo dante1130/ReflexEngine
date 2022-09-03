@@ -125,7 +125,7 @@ private:
 	 *
 	 * @param rigidbody The rigidbody compoennt to serialize
 	 */
-	static void serialize_rigidbody(const Component::Rigidbody& rigidbody);
+	static void serialize_rigidbody(Component::Rigidbody& rigidbody);
 
 	/**
 	 * @brief Writes the beginning of a Lua table to the output stream,

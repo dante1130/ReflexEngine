@@ -242,11 +242,29 @@ bool ECSGameAssetFactory::is_lua_script(const std::string& lua_script) {
 void ECSGameAssetFactory::load_rigidbody(Reflex::Entity& entity,
                                          const sol::table& rigidbody_table) {
 	Component::Transform trans = entity.get_component<Component::Transform>();
-
-	entity.add_component<Component::Rigidbody>(
+	Component::Rigidbody rb_comp = Component::Rigidbody(
 	    rigidbody_table["using_react_start"], trans.position, trans.rotation,
 	    rigidbody_table["gravity_on"], rigidbody_table["can_sleep"],
 	    rigidbody_table["is_trigger"], rigidbody_table["linear_drag"],
 	    rigidbody_table["angular_drag"]);
 
+	rb_comp.setType(rigidbody_table["rb_type"]);
+
+	if (rigidbody_table["linear_velocity"].valid()) {
+		auto linear_velocity = glm::vec3(0);
+		linear_velocity.x = rigidbody_table["linear_velocity"]["x"];
+		linear_velocity.y = rigidbody_table["linear_velocity"]["y"];
+		linear_velocity.z = rigidbody_table["linear_velocity"]["z"];
+		rb_comp.setVelocity(linear_velocity);
+	}
+
+	if (rigidbody_table["angular_velocity"].valid()) {
+		auto angular_velocity = glm::vec3(0);
+		angular_velocity.x = rigidbody_table["angular_velocity"]["x"];
+		angular_velocity.y = rigidbody_table["angular_velocity"]["y"];
+		angular_velocity.z = rigidbody_table["angular_velocity"]["z"];
+		rb_comp.setAngVelocity(angular_velocity);
+	}
+
+	entity.add_component<Component::Rigidbody>(rb_comp);
 }

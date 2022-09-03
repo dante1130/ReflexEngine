@@ -2,6 +2,7 @@
 
 #include "Controller/GUI/DebugLogger.hpp"
 #include <stack>
+#include "Controller/GUI/CollectionsGUI.hpp"
 
 std::ofstream EntitySerializer::save_stream_;
 std::ofstream EntitySerializer::creation_stream_;
@@ -11,8 +12,6 @@ void EntitySerializer::serialize(const std::filesystem::path& dir_path,
                                  ECS& ecs) {
 	auto& registry = ecs.get_registry();
 
-	bool is_first = true;
-
 	std::stack<Reflex::Entity> entities = std::stack<Reflex::Entity>();
 
 	registry.each([&ecs, &entities](auto entity_id) mutable {
@@ -20,6 +19,7 @@ void EntitySerializer::serialize(const std::filesystem::path& dir_path,
 		entities.push(entity);
 	});
 
+	bool is_first = true;
 	while (!entities.empty()) {
 		if (!is_first) {
 			serialize(dir_path, entities.top());
@@ -57,6 +57,9 @@ void EntitySerializer::serialize(const std::filesystem::path& dir_path,
 void EntitySerializer::serialize_entity(Reflex::Entity& entity) {
 	create_table("entity");
 	create_var("name", '"' + entity.get_name() + '"', true);
+	create_var("collection_id",
+	           CollectionsGUI::get_entity_collection_id(entity.get_entity_id()),
+	           true);
 
 	serialize_transform(entity.get_component<Component::Transform>());
 
@@ -262,8 +265,7 @@ void EntitySerializer::serialize_spot_light(const Component::SpotLight& light) {
 	close_table(true);
 }
 
-void EntitySerializer::serialize_rigidbody(
-    const Component::Rigidbody& rigidbody) {
+void EntitySerializer::serialize_rigidbody(Component::Rigidbody& rigidbody) {
 	create_table("rigidbody");
 
 	create_var("using_react_start", bool_to_string(rigidbody.using_react_start),
@@ -273,6 +275,19 @@ void EntitySerializer::serialize_rigidbody(
 	create_var("is_trigger", bool_to_string(rigidbody.is_trigger), true);
 	create_var("linear_drag", rigidbody.lin_drag, true);
 	create_var("angular_drag", rigidbody.ang_drag, true);
+	create_var("rb_type", rigidbody.getType(), true);
+	glm::vec3 linear_velocity = rigidbody.getVelocity();
+	create_table("linear_velocity");
+	create_var("x", linear_velocity.x, true);
+	create_var("y", linear_velocity.y, true);
+	create_var("z", linear_velocity.z, true);
+	close_table(true);
+	glm::vec3 angular_velocity = rigidbody.getAngVelocity();
+	create_table("angular_velocity");
+	create_var("x", angular_velocity.x, true);
+	create_var("y", angular_velocity.y, true);
+	create_var("z", angular_velocity.z, true);
+	close_table(true);
 
 	close_table(true);
 }
