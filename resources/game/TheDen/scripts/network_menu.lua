@@ -35,8 +35,6 @@ if Time.is_paused() then
 	
 	if start then
 		start_server(true)
-		dofile "game/TheDen/scripts/chat_menu_send.lua"
-		dofile "game/TheDen/scripts/chat_menu_read.lua"
 	end
 
 	if(saveUsername) then
@@ -45,12 +43,13 @@ if Time.is_paused() then
 
 	if connect then
 		network_client_connect()
-		dofile "game/TheDen/scripts/chat_menu_send.lua"
-		dofile "game/TheDen/scripts/chat_menu_read.lua"
 	end
+
 	
 	if network_connection_status() == true then
 		gui_text("You are connected!")
+		dofile "game/TheDen/scripts/chat_menu_send.lua"
+		dofile "game/TheDen/scripts/chat_menu_read.lua"
 	else
 		gui_text("You are not connected")
 	end
