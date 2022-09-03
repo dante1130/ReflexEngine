@@ -154,6 +154,14 @@ private:
 	template <typename T>
 	static void create_var(const std::string& var_name, const T& var_value,
 	                       bool comma = false);
+
+	/**
+	 * @brief Converts a boolean value to a string ("true", or "false")
+	 *
+	 * @param value the bool you want to convert to a string
+	 * @return std::string "true" or "false"
+	 */
+	static std::string bool_to_string(bool value);
 };
 
 template <typename T>

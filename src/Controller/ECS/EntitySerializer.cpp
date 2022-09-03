@@ -256,7 +256,19 @@ void EntitySerializer::serialize_spot_light(const Component::SpotLight& light) {
 }
 
 void EntitySerializer::serialize_rigidbody(
-    const Component::Rigidbody& rigidbody) {}
+    const Component::Rigidbody& rigidbody) {
+	create_table("rigidbody");
+
+	create_var("using_react_start", bool_to_string(rigidbody.using_react_start),
+	           true);
+	create_var("gravity_on", bool_to_string(rigidbody.gravity_on), true);
+	create_var("can_sleep", bool_to_string(rigidbody.can_sleep), true);
+	create_var("is_trigger", bool_to_string(rigidbody.is_trigger), true);
+	create_var("linear_drag", rigidbody.lin_drag, true);
+	create_var("angular_drag", rigidbody.ang_drag, true);
+
+	close_table(true);
+}
 
 void EntitySerializer::create_table(const std::string& table_name) {
 	save_stream_ << std::string(indent_level_++, '\t') << table_name
@@ -266,4 +278,12 @@ void EntitySerializer::create_table(const std::string& table_name) {
 void EntitySerializer::close_table(bool comma) {
 	save_stream_ << std::string(--indent_level_, '\t')
 	             << (comma ? "},\n" : "}\n");
+}
+
+std::string EntitySerializer::bool_to_string(bool value) {
+	if (value) {
+		return "true";
+	}
+
+	return "false";
 }
