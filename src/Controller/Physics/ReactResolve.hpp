@@ -13,9 +13,16 @@ class ReactResolve: public PhysicsBody{
 		//using engine stuff
 		bool usingReactResolve() override;
 
+		// Update function
+	    void update(float delta_time) override;
+
+		void stop(glm::vec3 normal, CollisionEvent c_type) override;
+
 		// init setup
 	    void initialise_body(glm::vec3 pos, glm::vec3 rot, float angle) override;
 		void initialise_body(glm::vec3 pos, glm::vec3 rot) override;
+
+		void delete_body() override;
 
 		//Change movement properties
 		void addForce(glm::vec3 force, Apply type) override;
@@ -42,6 +49,7 @@ class ReactResolve: public PhysicsBody{
 	    float getMass() override;
 	    glm::vec3 getVelocity() override;
 	    glm::vec3 getAngVelocity() override;
+
 	    float getDragForce() override;
 	    float getDragTorque() override;
 
@@ -55,7 +63,16 @@ class ReactResolve: public PhysicsBody{
 		uint32_t addSphereCollider(glm::vec3 pos, float radius) override;
 		uint32_t addCapsuleCollider(glm::vec3 pos, float radius, float height) override;
 
-		uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction) override;
+		uint32_t addBoxCollider(PhysicsBody* rb, glm::vec3 pos, glm::vec3 size, float bounce, float friction) override;
+	    uint32_t addSphereCollider(PhysicsBody* rb, glm::vec3 pos, float radius,
+	                               float bounce,
+	                               float friction) override;
+	    uint32_t addCapsuleCollider(PhysicsBody* rb, glm::vec3 pos,
+	                                float radius, float height,
+	                                float bounce, float friction) override;
+
+	    uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 size,
+	                            float bounce, float friction) override;
 		uint32_t addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction) override;
 		uint32_t addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction) override;
 

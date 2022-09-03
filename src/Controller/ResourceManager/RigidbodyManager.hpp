@@ -14,7 +14,6 @@ class RigidbodyManager
 
 		void update_rigidbody(Component::Rigidbody& rb, Component::Transform& tf);
 
-	private:
+		void delete_rigidbody(Component::Rigidbody& rb);
 
-		glm::vec3 prev_position;
 };

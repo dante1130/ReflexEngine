@@ -367,6 +367,8 @@ void ECSAccess::register_rigidbody_component() {
 	rigidbody_type["get_position"] = &Rigidbody::getPosition;
 	rigidbody_type["get_rotation"] = &Rigidbody::getRotation;
 
+	rigidbody_type["using_react_start"] = &Rigidbody::using_react_start;
+
 	rigidbody_type["can_sleep"] =
 	    sol::property(&Rigidbody::getCanSleep, &Rigidbody::setCanSleep);
 	rigidbody_type["is_trigger"] =
@@ -397,4 +399,5 @@ void ECSAccess::register_rigidbody_component() {
 	    sol::property(&Rigidbody::getVelocity, &Rigidbody::setVelocity);
 	rigidbody_type["angular_velocity"] =
 	    sol::property(&Rigidbody::getAngVelocity, &Rigidbody::setAngVelocity);
+
 }

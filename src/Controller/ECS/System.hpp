@@ -165,5 +165,5 @@ void delete_point_light(entt::registry& registry, entt::entity entity_id);
  */
 void delete_spot_light(entt::registry& registry, entt::entity entity_id);
 
-void delete_rigidbody(entt::registry& registry);
+void delete_rigidbody(entt::registry& registry, entt::entity entity_id);
 };  // namespace System
