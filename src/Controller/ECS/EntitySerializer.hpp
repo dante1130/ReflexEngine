@@ -13,6 +13,7 @@
 #include "Model/Components/Light.hpp"
 #include "Model/Components/Script.hpp"
 #include "Model/Components/Statemachine.hpp"
+#include "Model/Components/RigidBody.hpp"
 
 /**
  * @author Andrew Ho
@@ -118,6 +119,13 @@ private:
 	 * @param light The spot light component to serialize.
 	 */
 	static void serialize_spot_light(const Component::SpotLight& light);
+
+	/**
+	 * @brief Serialize the rigidbody component to the save output stream
+	 *
+	 * @param rigidbody The rigidbody compoennt to serialize
+	 */
+	static void serialize_rigidbody(const Component::Rigidbody& rigidbody);
 
 	/**
 	 * @brief Writes the beginning of a Lua table to the output stream,

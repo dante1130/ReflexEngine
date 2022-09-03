@@ -86,6 +86,10 @@ void EntitySerializer::serialize_entity(Reflex::Entity& entity) {
 		serialize_spot_light(entity.get_component<Component::SpotLight>());
 	}
 
+	if (entity.any_component<Component::Rigidbody>()) {
+		serialize_rigidbody(entity.get_component<Component::Rigidbody>());
+	}
+
 	close_table();
 }
 
@@ -158,6 +162,12 @@ void EntitySerializer::serialize_directional_light(
 
 	create_var("shadow_width", light.shadow_width, true);
 	create_var("shadow_height", light.shadow_height, true);
+	create_var("near_plane", light.near_plane, true);
+	create_var("far_plane", light.far_plane, true);
+	create_var("ortho_left", light.ortho_left, true);
+	create_var("ortho_right", light.ortho_right, true);
+	create_var("ortho_bottom", light.ortho_bottom, true);
+	create_var("ortho_top", light.ortho_top, true);
 
 	create_table("color");
 	create_var("r", light.color.r, true);
@@ -244,6 +254,9 @@ void EntitySerializer::serialize_spot_light(const Component::SpotLight& light) {
 
 	close_table(true);
 }
+
+void EntitySerializer::serialize_rigidbody(
+    const Component::Rigidbody& rigidbody) {}
 
 void EntitySerializer::create_table(const std::string& table_name) {
 	save_stream_ << std::string(indent_level_++, '\t') << table_name
