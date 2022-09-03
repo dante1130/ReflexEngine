@@ -20,7 +20,7 @@ public:
 	 * @param master_lua_script The master lua script
 	 */
 	ECSScene(const std::string& master_lua_script);
-
+	
 	/**
 	 * @brief Initializes the scene.
 	 */
