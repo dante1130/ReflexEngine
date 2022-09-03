@@ -1,6 +1,7 @@
 #include "EntitySerializer.hpp"
 
 #include "Controller/GUI/DebugLogger.hpp"
+#include <stack>
 
 std::ofstream EntitySerializer::save_stream_;
 std::ofstream EntitySerializer::creation_stream_;
@@ -12,16 +13,22 @@ void EntitySerializer::serialize(const std::filesystem::path& dir_path,
 
 	bool is_first = true;
 
-	registry.each([&ecs, &dir_path, is_first](auto entity_id) mutable {
-		auto& entity = ecs.get_entity(entity_id);
+	std::stack<Reflex::Entity> entities = std::stack<Reflex::Entity>();
 
+	registry.each([&ecs, &entities](auto entity_id) mutable {
+		auto& entity = ecs.get_entity(entity_id);
+		entities.push(entity);
+	});
+
+	while (!entities.empty()) {
 		if (!is_first) {
-			serialize(dir_path, entity);
+			serialize(dir_path, entities.top());
 		} else {
-			serialize(dir_path, entity, true);
+			serialize(dir_path, entities.top(), true);
 			is_first = false;
 		}
-	});
+		entities.pop();
+	}
 }
 
 void EntitySerializer::serialize(const std::filesystem::path& dir_path,
