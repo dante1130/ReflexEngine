@@ -152,17 +152,15 @@ CapsuleShape* PhysicsBody::getColliderCapsule(size_t index) {
 }
 
 size_t PhysicsBody::getColliderIndex(rp3d::Collider* collider) {
-		
 	for (size_t i = 0; i < colliders.size(); ++i) {
 		if (colliders[i] == collider) return i;
 	}
 
 	return colliders.size();
- }
+}
 
-void PhysicsBody::collision(Collider* c1, Collider* c2, 
-	Vector3 normal, CollisionEvent c_type) {
-
+void PhysicsBody::collision(Collider* c1, Collider* c2, Vector3 normal,
+                            CollisionEvent c_type) {
 	PhysicsBody* p1 = ((PhysicsBody*)c1->getUserData());
 	PhysicsBody* p2 = ((PhysicsBody*)c2->getUserData());
 
@@ -175,9 +173,7 @@ void PhysicsBody::collision(Collider* c1, Collider* c2,
 	if (p2->getType() == BodyType::DYNAMIC && !p2->usingReactResolve()) {
 		p2->resolve(n, c_type);
 	}
-
 }
-
 
 glm::vec3 PhysicsBody::getPreviousPosition() {
 	return previous_transform_position;

@@ -1,7 +1,6 @@
 #include "RigidBody.hpp"
 
 Component::Rigidbody::Rigidbody(bool usingReact, glm::vec3 pos, glm::vec3 rot) {
-	
 	if (usingReact)
 		pb = new ReactResolve();
 	else
@@ -22,7 +21,6 @@ Component::Rigidbody::Rigidbody(bool usingReact, glm::vec3 pos, glm::vec3 rot,
                                 bool gravity_on_, bool can_sleep_,
                                 bool is_trigger_, float linear_drag_,
                                 float angular_drag_) {
-
 	if (usingReact)
 		pb = new ReactResolve();
 	else
@@ -46,7 +44,6 @@ Component::Rigidbody::Rigidbody(bool usingReact, glm::vec3 pos, glm::vec3 rot,
 }
 
 void Component::Rigidbody::init(bool usingReact, glm::vec3 pos, glm::vec3 rot) {
-
 	if (usingReact)
 		pb = new ReactResolve();
 	else
@@ -85,7 +82,7 @@ bool Component::Rigidbody::usingReactResolve() {
 	return pb->usingReactResolve();
 }
 
-//update
+// update
 
 void Component::Rigidbody::update(float delta_time) { pb->update(delta_time); }
 
@@ -240,14 +237,6 @@ std::vector<rp3d::Collider*> Component::Rigidbody::getColliders() {
 std::string Component::Rigidbody::getColliderName(size_t index) {
 	return pb->getColliderName(index);
 }
-// void addBoxCollider(glm::vec3 pos, glm::vec3 size) { pb->addBoxCollider(pos,
-// size); }
-
-// void addSphereCollider(glm::vec3 pos, float radius) {
-// pb->addSphereCollider(pos, radius); }
-
-// void addCapsuleCollider(glm::vec3 pos, float radius, float height) {
-// pb->addCapsuleCollider(pos, radius, height); }
 
 uint32_t Component::Rigidbody::addBoxCollider(glm::vec3 pos, glm::vec3 size,
                                               float bounce, float friction) {

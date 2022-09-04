@@ -3,16 +3,14 @@
 
 void RigidbodyManager::add_rigidbody(Component::Rigidbody& rb,
                                      const Component::Transform& tf) {
-	if (!rb.intialised())
-		rb.init(true, tf.position, tf.rotation);
+	if (!rb.intialised()) rb.init(true, tf.position, tf.rotation);
 	rb.setPreviousPosition(tf.position);
 }
 
 void RigidbodyManager::update_rigidbody(Component::Rigidbody& rb,
                                         Component::Transform& tf) {
 	/// Calculates new position (if using engine calculation)
-	if (!rb.usingReactResolve()) 
-		rb.update(EngineTime::get_fixed_delta_time());
+	if (!rb.usingReactResolve()) rb.update(EngineTime::get_fixed_delta_time());
 
 	/// Sets transform position if the same as the previous cycle
 	/// Else it must have been manually moved (the transform) therefore
@@ -26,7 +24,7 @@ void RigidbodyManager::update_rigidbody(Component::Rigidbody& rb,
 		tf.rotation = rb.getRotation();
 	}
 
-	/// Update the properties of the rigidbody based of changes made to 
+	/// Update the properties of the rigidbody based of changes made to
 	/// the component from the gui or lua
 	if (rb.getIsGravityEnabled() != rb.gravity_on)
 		rb.enableGravity(rb.gravity_on);
