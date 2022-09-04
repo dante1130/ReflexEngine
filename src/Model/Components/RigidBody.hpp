@@ -23,7 +23,7 @@ public:
 	bool gravity_on;
 	/// <summary>
 	/// Whether the object is allowed to stop
-	/// calculating resolution after a certain 
+	/// calculating resolution after a certain
 	/// period of time
 	/// </summary>
 	bool can_sleep;
@@ -36,6 +36,8 @@ public:
 	float ang_drag;
 
 	bool using_react_start;
+
+	std::string collider_obj_data = "";
 
 	Rigidbody() = default;
 
@@ -54,19 +56,17 @@ public:
 	void setViewables(bool gravity_on, bool can_sleep, bool is_trigger,
 	                  float linear_drag, float angular_drag);
 
-	
-
-	/// Returns true if physics body is using 
+	/// Returns true if physics body is using
 	/// reactphysics3d resolution
 	bool usingReactResolve();
 
 	bool intialised();
 
-	//update
+	// update
 	void update(float delta_time);
 
 	void deleteBody();
-	///COLLIDERS
+	/// COLLIDERS
 
 	/**
 	 * @brief Returns the size of the colliders
@@ -115,7 +115,7 @@ public:
 	/**
 	 * @brief Gets the shape of the collider as
 	 * an integer value
-	 * 
+	 *
 	 * @param size_t - Index of collider
 	 * @return int - The collider shape expressed as integer
 	 */
@@ -123,7 +123,7 @@ public:
 
 	/**
 	 * @brief Returns a pseduo name containing the
-	 * collider type and index of the collider	
+	 * collider type and index of the collider
 	 *
 	 * @param size_t - Index of collider
 	 * @return std::string - The created name
@@ -131,7 +131,7 @@ public:
 	std::string getColliderName(size_t index);
 
 	/**
-	 * @brief Gets all collider pointers inside 
+	 * @brief Gets all collider pointers inside
 	 * colliders
 	 *
 	 * @param size_t - Index of collider
@@ -240,7 +240,6 @@ public:
 	glm::vec3 getVelocity();
 
 	glm::vec3 getAngVelocity();
-
 
 	float getDragForce();
 
