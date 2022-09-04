@@ -1,5 +1,5 @@
 entity = {
-	name = "Player",
+	name = "Network",
 
 	rigidbody = {
         using_react_start = false,
