@@ -14,7 +14,7 @@ set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
 
 enable_testing()
 
-add_executable(ReflexEngine src/main.cpp)
+add_executable(ReflexEngine src/main.cpp "test/PhysicsTest.cpp")
 add_executable(ReflexEngineTest)
 
 add_subdirectory(cmake)
