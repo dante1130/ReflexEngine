@@ -1,5 +1,5 @@
 entity = {
-	name = "Network",
+	name = "Player",
 
     transform = {
         position = {
