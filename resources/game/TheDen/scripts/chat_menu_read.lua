@@ -1,5 +1,5 @@
-	gui_setWindowSize(300, 400, 2)
-	gui_setWindowPos(200, 500, 2)
+	gui_setWindowSize(300, 400, 4)
+	gui_setWindowPos(200, 500, 4)
 	gui_begin("Chat reader")
 
 	gui_text("--Game is currently NOT paused--")

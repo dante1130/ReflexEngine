@@ -1,6 +1,6 @@
 if Time.is_paused() then
-	gui_setWindowSize(700, 400, 2)
-	gui_setWindowPos(0, 300, 2)
+	gui_setWindowSize(700, 400, 4)
+	gui_setWindowPos(0, 300, 4)
 	gui_begin("Network Menu")
 
 	gui_text("--Game is currently NOT paused--")
