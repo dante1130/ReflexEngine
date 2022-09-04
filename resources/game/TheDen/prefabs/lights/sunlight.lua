@@ -1,5 +1,6 @@
 entity = {
 	name = "Sunlight",
+	collection_id = 0,
 
 	directional_light = {
 		shadow_width = 1024,
@@ -17,8 +18,8 @@ entity = {
 			b = 1
 		},
 
-		ambient_intensity = 0.25,
-		diffuse_intensity = 1.5,
+		ambient_intensity = 0.05,
+		diffuse_intensity = 0.2,
 
 		direction = {
 			x = 0.5,

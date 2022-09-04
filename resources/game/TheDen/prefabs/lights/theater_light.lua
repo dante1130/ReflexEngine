@@ -1,5 +1,6 @@
 entity = {
 	name = "Theater light",
+	collection_id = 1,
 
 	point_light = {
 		shadow_width = 512,
@@ -13,7 +14,7 @@ entity = {
 			b = 0.5
 		},
 
-		ambient_intensity = 0,
+		ambient_intensity = 0.2,
 		diffuse_intensity = 1,
 
 		position = {

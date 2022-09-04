@@ -102,7 +102,7 @@ void PerformanceLogger::add_new_log(const std::string &name) {
 
 	new_log.name = name;
 	new_log.start_time = std::chrono::steady_clock::now();
-	if (!logs.empty()) {
+	if (!logs.empty() && position_index != 0) {
 		if (logs[position_index - 1].time_taken < 0) {
 			new_log.parent_index = position_index - 1;
 		} else {
@@ -112,4 +112,10 @@ void PerformanceLogger::add_new_log(const std::string &name) {
 	new_log.indent = current_indent;
 
 	logs.insert(logs.begin() + position_index, new_log);
+}
+
+void PerformanceLogger::ForceClearLogs() {
+	logs.clear();
+	current_indent = 0;
+	position_index = 0;
 }

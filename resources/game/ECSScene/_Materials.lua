@@ -6,6 +6,20 @@ Model.load_model("TheDen", "models/TheDen.obj")
 Model.load_model("GlassInScene", "models/Glass.obj")
 Model.load_model("OBJLoaderColliderTest", "models/untitled.obj")
 
+--Small models/objects
+Model.load_model("laptop", "models/laptop.obj")
+Model.load_model("tissue_box", "models/tissuebox.obj")
+Model.load_model("pizza_box", "models/pizzabox.obj")
+Model.load_model("marker", "models/marker.obj")
+Model.load_model("book1", "models/book1.obj")
+Model.load_model("book2", "models/book2.obj")
+Model.load_model("book3", "models/book3.obj")
+Model.load_model("book4", "models/book4.obj")
+Model.load_model("book5", "models/book5.obj")
+Model.load_model("rubix_cube", "models/rubixcube.obj")
+Model.load_model("calculator", "models/calculator.obj")
+
+
 
 Md2.load_md2_model("duck", "models/DuckPersonNew.md2")
 

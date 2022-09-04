@@ -6,6 +6,7 @@
 
 #include "Controller/ECS/ECS.hpp"
 #include "Controller/ECS/Entity.hpp"
+#include "Controller/GUI/CollectionsGUI.hpp"
 
 /**
  * @author Andrew Ho
@@ -28,6 +29,8 @@ private:
 	entt::entity selected_entity_ = {entt::null};
 	/// The drag speed.
 	constexpr static float speed_ = 0.1f;
+	/// The currently selected collection
+	int selected_collection_ = -1;
 
 	/**
 	 * @brief Draw the selectable for the entity.
@@ -35,6 +38,30 @@ private:
 	 * @param entity The entity.
 	 */
 	void draw_entity(Reflex::Entity& entity);
+
+	/**
+	 * @brief Draw the collectin hierarcy
+	 * @param ecs The ECS to draw the entities from
+	 */
+	void draw_collection_hierarchy(ECS& ecs);
+
+	/**
+	 * @brief Draws the collection recursively
+	 *
+	 * @param ecs The ECS to draw the entities from
+	 * @param collections a vector of all the collections
+	 * @param collection_order the entities stored for each of the collections
+	 * @param index the current index we are drawing for
+	 */
+	void draw_collection(
+	    ECS& ecs, std::unordered_map<int, Collection>& collections,
+	    std::vector<std::vector<entt::entity>>& collection_order, int index);
+
+	/**
+	 * @brief Draws the collection properties
+	 *
+	 */
+	void draw_collection_properties();
 
 	/**
 	 * @brief Draw all the components in the entity.
@@ -170,4 +197,29 @@ private:
 	 * @return True if the double was updated, false otherwise.
 	 */
 	static bool input_double(const char* lable, double& value);
+
+	/**
+	 * @brief Sets the target for dagging an entity to a collection
+	 *
+	 * @param collection_id of the collection dropped on
+	 */
+	static void drag_drop_entities_to_collections_target(int collection_id);
+
+	/**
+	 * @brief Sets the target for dragging a collection to a collection
+	 *
+	 * @param collection_id of the collection dropped on
+	 */
+	static void drag_drop_collections_to_collections_target(int collection_id);
+
+	/**
+	 * @brief Sets the srouce for dragging a collection to a collection
+	 *
+	 * @param name of the collection you will be dragging
+	 * @param collection_id of the collection you will be dragging
+	 * @return true if currently being dragged
+	 * @return false if not currently being dragged
+	 */
+	static bool drag_drop_collections_to_collections_source(
+	    const std::string& name, int collection_id);
 };

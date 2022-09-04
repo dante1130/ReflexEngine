@@ -1,5 +1,6 @@
 entity = {
 	name = "Middle light 3",
+	collection_id = 1,
 
 	point_light = {
 		shadow_width = 512,
@@ -13,7 +14,7 @@ entity = {
 			b = 1
 		},
 
-		ambient_intensity = 0,
+		ambient_intensity = 1,
 		diffuse_intensity = 1,
 
 		position = {
