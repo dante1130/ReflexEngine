@@ -49,7 +49,7 @@ public:
 
 	void update(float delta_time) override;
 
-	void stop(glm::vec3 normal, CollisionEvent c_type) override;
+	void resolve(glm::vec3 normal, CollisionEvent c_type) override;
 
 	// using engine stuff
 	bool usingReactResolve() override;

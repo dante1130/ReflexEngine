@@ -1,16 +1,5 @@
 #include "RigidbodyManager.hpp"
 #include "Controller/ReflexEngine/EngineTime.hpp"
-    //#include "glm/vec3.hpp"
-
-// RigidbodyManager::RigidbodyManager()
-//{
-//	Physics::createWorld();
-// }
-//
-// RigidbodyManager::~RigidbodyManager()
-//{
-//	Physics::destroyWorld();
-// }
 
 void RigidbodyManager::add_rigidbody(Component::Rigidbody& rb,
                                      const Component::Transform& tf) {
@@ -21,9 +10,13 @@ void RigidbodyManager::add_rigidbody(Component::Rigidbody& rb,
 
 void RigidbodyManager::update_rigidbody(Component::Rigidbody& rb,
                                         Component::Transform& tf) {
+	/// Calculates new position (if using engine calculation)
 	if (!rb.usingReactResolve()) 
 		rb.update(EngineTime::get_fixed_delta_time());
 
+	/// Sets transform position if the same as the previous cycle
+	/// Else it must have been manually moved (the transform) therefore
+	/// The rigidbodies internal position must be updated
 	if (rb.getPreviousPosition() != tf.position) {
 		rb.setPosition(tf.position);
 		rb.setEulerRotation(tf.rotation);
@@ -33,6 +26,8 @@ void RigidbodyManager::update_rigidbody(Component::Rigidbody& rb,
 		tf.rotation = rb.getRotation();
 	}
 
+	/// Update the properties of the rigidbody based of changes made to 
+	/// the component from the gui or lua
 	if (rb.getIsGravityEnabled() != rb.gravity_on)
 		rb.enableGravity(rb.gravity_on);
 
@@ -42,6 +37,7 @@ void RigidbodyManager::update_rigidbody(Component::Rigidbody& rb,
 	if (rb.getDragForce() != rb.lin_drag) rb.setDragForce(rb.lin_drag);
 	if (rb.getDragTorque() != rb.ang_drag) rb.setDragTorque(rb.ang_drag);
 
+	/// Sets previous position
 	rb.setPreviousPosition(tf.position);
 }
 

@@ -128,6 +128,13 @@ private:
 	 */
 	static bool is_lua_script(const std::string& lua_script);
 
+	/**
+	 * @brief Loads a rigidbody component into the entity
+	 *
+	 * @param entity - The entity to load the component into
+	 * @param rigidbody_table - The table fo the statemachine component
+	 * @return void
+	 */
 	static void load_rigidbody(Reflex::Entity& entity,
 	                           const sol::table& rigidbody_table);
 };

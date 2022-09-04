@@ -94,7 +94,7 @@ void EngineResolve::update(float delta_time) {
 	lin_accelaration_ -= temp_acc;
 }
 
-void EngineResolve::stop(glm::vec3 normal, CollisionEvent c_type) {
+void EngineResolve::resolve(glm::vec3 normal, CollisionEvent c_type) {
 
 	if (c_type == CollisionEvent::ContactStart) {
 		collision_axes = getPosition();

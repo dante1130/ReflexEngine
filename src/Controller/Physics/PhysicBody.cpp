@@ -169,11 +169,11 @@ void PhysicsBody::collision(Collider* c1, Collider* c2,
 	glm::vec3 n = glm::vec3(normal.x, normal.y, normal.z);
 
 	if (p1->getType() == BodyType::DYNAMIC && !p1->usingReactResolve()) {
-		p1->stop(n, c_type);
+		p1->resolve(n, c_type);
 	}
 
 	if (p2->getType() == BodyType::DYNAMIC && !p2->usingReactResolve()) {
-		p2->stop(n, c_type);
+		p2->resolve(n, c_type);
 	}
 
 }
