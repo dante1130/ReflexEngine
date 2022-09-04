@@ -13,6 +13,7 @@
 #include "Model/Components/Light.hpp"
 #include "Model/Components/Script.hpp"
 #include "Model/Components/Statemachine.hpp"
+#include "Model/Components/RigidBody.hpp"
 
 /**
  * @author Andrew Ho
@@ -120,6 +121,13 @@ private:
 	static void serialize_spot_light(const Component::SpotLight& light);
 
 	/**
+	 * @brief Serialize the rigidbody component to the save output stream
+	 *
+	 * @param rigidbody The rigidbody compoennt to serialize
+	 */
+	static void serialize_rigidbody(Component::Rigidbody& rigidbody);
+
+	/**
 	 * @brief Writes the beginning of a Lua table to the output stream,
 	 * increments the indent level.
 	 *
@@ -146,6 +154,14 @@ private:
 	template <typename T>
 	static void create_var(const std::string& var_name, const T& var_value,
 	                       bool comma = false);
+
+	/**
+	 * @brief Converts a boolean value to a string ("true", or "false")
+	 *
+	 * @param value the bool you want to convert to a string
+	 * @return std::string "true" or "false"
+	 */
+	static std::string bool_to_string(bool value);
 };
 
 template <typename T>

@@ -1,6 +1,8 @@
 #include "EntitySerializer.hpp"
 
 #include "Controller/GUI/DebugLogger.hpp"
+#include <stack>
+#include "Controller/GUI/CollectionsGUI.hpp"
 
 std::ofstream EntitySerializer::save_stream_;
 std::ofstream EntitySerializer::creation_stream_;
@@ -10,18 +12,23 @@ void EntitySerializer::serialize(const std::filesystem::path& dir_path,
                                  ECS& ecs) {
 	auto& registry = ecs.get_registry();
 
-	bool is_first = true;
+	std::stack<Reflex::Entity> entities = std::stack<Reflex::Entity>();
 
-	registry.each([&ecs, &dir_path, is_first](auto entity_id) mutable {
+	registry.each([&ecs, &entities](auto entity_id) mutable {
 		auto& entity = ecs.get_entity(entity_id);
+		entities.push(entity);
+	});
 
+	bool is_first = true;
+	while (!entities.empty()) {
 		if (!is_first) {
-			serialize(dir_path, entity);
+			serialize(dir_path, entities.top());
 		} else {
-			serialize(dir_path, entity, true);
+			serialize(dir_path, entities.top(), true);
 			is_first = false;
 		}
-	});
+		entities.pop();
+	}
 }
 
 void EntitySerializer::serialize(const std::filesystem::path& dir_path,
@@ -50,6 +57,9 @@ void EntitySerializer::serialize(const std::filesystem::path& dir_path,
 void EntitySerializer::serialize_entity(Reflex::Entity& entity) {
 	create_table("entity");
 	create_var("name", '"' + entity.get_name() + '"', true);
+	create_var("collection_id",
+	           CollectionsGUI::get_entity_collection_id(entity.get_entity_id()),
+	           true);
 
 	serialize_transform(entity.get_component<Component::Transform>());
 
@@ -84,6 +94,10 @@ void EntitySerializer::serialize_entity(Reflex::Entity& entity) {
 
 	if (entity.any_component<Component::SpotLight>()) {
 		serialize_spot_light(entity.get_component<Component::SpotLight>());
+	}
+
+	if (entity.any_component<Component::Rigidbody>()) {
+		serialize_rigidbody(entity.get_component<Component::Rigidbody>());
 	}
 
 	close_table();
@@ -158,6 +172,12 @@ void EntitySerializer::serialize_directional_light(
 
 	create_var("shadow_width", light.shadow_width, true);
 	create_var("shadow_height", light.shadow_height, true);
+	create_var("near_plane", light.near_plane, true);
+	create_var("far_plane", light.far_plane, true);
+	create_var("ortho_left", light.ortho_left, true);
+	create_var("ortho_right", light.ortho_right, true);
+	create_var("ortho_bottom", light.ortho_bottom, true);
+	create_var("ortho_top", light.ortho_top, true);
 
 	create_table("color");
 	create_var("r", light.color.r, true);
@@ -245,6 +265,37 @@ void EntitySerializer::serialize_spot_light(const Component::SpotLight& light) {
 	close_table(true);
 }
 
+void EntitySerializer::serialize_rigidbody(Component::Rigidbody& rigidbody) {
+	create_table("rigidbody");
+
+	create_var("using_react_start", bool_to_string(rigidbody.using_react_start),
+	           true);
+	create_var("gravity_on", bool_to_string(rigidbody.gravity_on), true);
+	create_var("can_sleep", bool_to_string(rigidbody.can_sleep), true);
+	create_var("is_trigger", bool_to_string(rigidbody.is_trigger), true);
+	create_var("linear_drag", rigidbody.lin_drag, true);
+	create_var("angular_drag", rigidbody.ang_drag, true);
+	create_var("rb_type", rigidbody.getType(), true);
+	if (!rigidbody.collider_obj_data.empty()) {
+		create_var("collider_obj_data",
+		           "\"" + rigidbody.collider_obj_data + "\"", true);
+	}
+	glm::vec3 linear_velocity = rigidbody.getVelocity();
+	create_table("linear_velocity");
+	create_var("x", linear_velocity.x, true);
+	create_var("y", linear_velocity.y, true);
+	create_var("z", linear_velocity.z, true);
+	close_table(true);
+	glm::vec3 angular_velocity = rigidbody.getAngVelocity();
+	create_table("angular_velocity");
+	create_var("x", angular_velocity.x, true);
+	create_var("y", angular_velocity.y, true);
+	create_var("z", angular_velocity.z, true);
+	close_table(true);
+
+	close_table(true);
+}
+
 void EntitySerializer::create_table(const std::string& table_name) {
 	save_stream_ << std::string(indent_level_++, '\t') << table_name
 	             << " = {\n";
@@ -253,4 +304,12 @@ void EntitySerializer::create_table(const std::string& table_name) {
 void EntitySerializer::close_table(bool comma) {
 	save_stream_ << std::string(--indent_level_, '\t')
 	             << (comma ? "},\n" : "}\n");
+}
+
+std::string EntitySerializer::bool_to_string(bool value) {
+	if (value) {
+		return "true";
+	}
+
+	return "false";
 }

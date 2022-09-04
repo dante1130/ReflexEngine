@@ -1,7 +1,6 @@
 #include "RigidBody.hpp"
 
 Component::Rigidbody::Rigidbody(bool usingReact, glm::vec3 pos, glm::vec3 rot) {
-	
 	if (usingReact)
 		pb = new ReactResolve();
 	else
@@ -22,7 +21,6 @@ Component::Rigidbody::Rigidbody(bool usingReact, glm::vec3 pos, glm::vec3 rot,
                                 bool gravity_on_, bool can_sleep_,
                                 bool is_trigger_, float linear_drag_,
                                 float angular_drag_) {
-
 	if (usingReact)
 		pb = new ReactResolve();
 	else
@@ -46,7 +44,6 @@ Component::Rigidbody::Rigidbody(bool usingReact, glm::vec3 pos, glm::vec3 rot,
 }
 
 void Component::Rigidbody::init(bool usingReact, glm::vec3 pos, glm::vec3 rot) {
-
 	if (usingReact)
 		pb = new ReactResolve();
 	else
@@ -85,7 +82,7 @@ bool Component::Rigidbody::usingReactResolve() {
 	return pb->usingReactResolve();
 }
 
-//update
+// update
 
 void Component::Rigidbody::update(float delta_time) { pb->update(delta_time); }
 
