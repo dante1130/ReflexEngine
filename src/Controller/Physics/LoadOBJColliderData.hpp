@@ -1,3 +1,5 @@
+#pragma once
+
 #include <string>
 #include "Controller/ECS/Entity.hpp"
 #include "Model/Components/RigidBody.hpp"
@@ -18,6 +20,7 @@ void lua_access();
  * @param rb_comp the rigidbody to add the collider data too
  * @param file  The OBJ file which includes the collider data
  */
-void load_obj_collider_data(Component::Rigidbody &rb_comp, const std::string &file);
+void load_obj_collider_data(Component::Rigidbody &rb_comp,
+                            const std::string &file);
 
 }  // namespace loadOBJColliderData

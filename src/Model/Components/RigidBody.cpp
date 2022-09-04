@@ -7,12 +7,20 @@ Component::Rigidbody::Rigidbody(bool usingReact, glm::vec3 pos, glm::vec3 rot) {
 		pb = new EngineResolve();
 
 	pb->initialise_body(pos, rot);
+
+	gravity_on = false;
+	can_sleep = true;
+	is_trigger = false;
+	lin_drag = 0.0f;
+	ang_drag = 0.0f;
+
+	using_react_start = usingReact;
 }
 
 Component::Rigidbody::Rigidbody(bool usingReact, glm::vec3 pos, glm::vec3 rot,
-                                bool gravity_on, bool can_sleep,
-                                bool is_trigger, float linear_drag,
-                                float angular_drag) {
+                                bool gravity_on_, bool can_sleep_,
+                                bool is_trigger_, float linear_drag_,
+                                float angular_drag_) {
 	if (usingReact)
 		pb = new ReactResolve();
 	else
@@ -20,11 +28,19 @@ Component::Rigidbody::Rigidbody(bool usingReact, glm::vec3 pos, glm::vec3 rot,
 
 	pb->initialise_body(pos, rot);
 
-	pb->enableGravity(gravity_on);
-	pb->setCanSleep(can_sleep);
-	pb->setObjectTrigger(is_trigger);
-	pb->setDragForce(linear_drag);
-	pb->setDragTorque(angular_drag);
+	pb->enableGravity(gravity_on_);
+	pb->setCanSleep(can_sleep_);
+	pb->setObjectTrigger(is_trigger_);
+	pb->setDragForce(linear_drag_);
+	pb->setDragTorque(angular_drag_);
+
+	gravity_on = gravity_on_;
+	can_sleep = can_sleep_;
+	is_trigger = is_trigger_;
+	lin_drag = linear_drag_;
+	ang_drag = angular_drag_;
+
+	using_react_start = usingReact;
 }
 
 void Component::Rigidbody::init(bool usingReact, glm::vec3 pos, glm::vec3 rot) {
@@ -34,7 +50,17 @@ void Component::Rigidbody::init(bool usingReact, glm::vec3 pos, glm::vec3 rot) {
 		pb = new EngineResolve();
 
 	pb->initialise_body(pos, rot);
+
+	gravity_on = false;
+	can_sleep = true;
+	is_trigger = false;
+	lin_drag = 0.0f;
+	ang_drag = 0.0f;
+
+	using_react_start = usingReact;
 }
+
+bool Component::Rigidbody::intialised() { return pb != nullptr; }
 
 void Component::Rigidbody::setTransform(glm::vec3 pos, glm::vec3 rot) {
 	pb->setPosition(pos);
@@ -55,6 +81,12 @@ void Component::Rigidbody::setViewables(bool gravity_on, bool can_sleep,
 bool Component::Rigidbody::usingReactResolve() {
 	return pb->usingReactResolve();
 }
+
+// update
+
+void Component::Rigidbody::update(float delta_time) { pb->update(delta_time); }
+
+void Component::Rigidbody::deleteBody() { pb->delete_body(); }
 
 // Colliders
 
@@ -205,27 +237,19 @@ std::vector<rp3d::Collider*> Component::Rigidbody::getColliders() {
 std::string Component::Rigidbody::getColliderName(size_t index) {
 	return pb->getColliderName(index);
 }
-// void addBoxCollider(glm::vec3 pos, glm::vec3 size) { pb->addBoxCollider(pos,
-// size); }
-
-// void addSphereCollider(glm::vec3 pos, float radius) {
-// pb->addSphereCollider(pos, radius); }
-
-// void addCapsuleCollider(glm::vec3 pos, float radius, float height) {
-// pb->addCapsuleCollider(pos, radius, height); }
 
 uint32_t Component::Rigidbody::addBoxCollider(glm::vec3 pos, glm::vec3 size,
                                               float bounce, float friction) {
-	return pb->addBoxCollider(pos, size, bounce, friction);
+	return pb->addBoxCollider(pb, pos, size, bounce, friction);
 }
 uint32_t Component::Rigidbody::addSphereCollider(glm::vec3 pos, float radius,
                                                  float bounce, float friction) {
-	return pb->addSphereCollider(pos, radius, bounce, friction);
+	return pb->addSphereCollider(pb, pos, radius, bounce, friction);
 }
 uint32_t Component::Rigidbody::addCapsuleCollider(glm::vec3 pos, float radius,
                                                   float height, float bounce,
                                                   float friction) {
-	return pb->addCapsuleCollider(pos, radius, height, bounce, friction);
+	return pb->addCapsuleCollider(pb, pos, radius, height, bounce, friction);
 }
 
 // Methods used for transform
@@ -246,4 +270,12 @@ void Component::Rigidbody::setQuanternion(glm::quat quat) {
 
 void Component::Rigidbody::setEulerRotation(glm::vec3 rot) {
 	pb->setEulerRotation(rot);
+}
+
+glm::vec3 Component::Rigidbody::getPreviousPosition() {
+	return pb->getPreviousPosition();
+}
+
+void Component::Rigidbody::setPreviousPosition(glm::vec3 prev_pos) {
+	pb->setPreviousPosition(prev_pos);
 }

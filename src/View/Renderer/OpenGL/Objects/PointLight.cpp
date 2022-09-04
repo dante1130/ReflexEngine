@@ -1,21 +1,16 @@
 #include "PointLight.hpp"
 
-PointLight::PointLight(GLuint shadow_width, GLuint shadow_height, GLfloat near,
-                       GLfloat far, glm::vec3 color, GLfloat aIntensity,
-                       GLfloat dIntensity, glm::vec3 position, GLfloat constant,
-                       GLfloat linear, GLfloat quadratic)
-    : Light(color, aIntensity, dIntensity),
-      far_plane_(far),
+PointLight::PointLight(GLuint shadow_width, GLuint shadow_height,
+                       const glm::mat4& light_projection, GLfloat far_plane,
+                       const glm::vec3& color, GLfloat aIntensity,
+                       GLfloat dIntensity, const glm::vec3& position,
+                       GLfloat constant, GLfloat linear, GLfloat quadratic)
+    : Light(color, aIntensity, dIntensity, light_projection),
+      far_plane_(far_plane),
       m_position(position),
       m_constant(constant),
       m_linear(linear),
       m_quadratic(quadratic) {
-	float aspect =
-	    static_cast<float>(shadow_width) / static_cast<float>(shadow_height);
-
-	light_projection_ =
-	    glm::perspective(glm::radians(90.0f), aspect, near, far);
-
 	omni_shadow_map_.init(shadow_width, shadow_height);
 }
 
@@ -35,6 +30,7 @@ void PointLight::UseLight(GLuint ambientColorLoc, GLuint ambientIntensityLoc,
 
 std::vector<glm::mat4> PointLight::calculate_light_transforms() const {
 	std::vector<glm::mat4> light_matrices;
+	light_matrices.reserve(6);
 
 	// +x, -x
 	light_matrices.emplace_back(

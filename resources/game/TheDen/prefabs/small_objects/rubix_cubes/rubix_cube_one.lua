@@ -1,0 +1,27 @@
+entity = {
+	name = "rubix_cube",
+	collection_id = 8, 
+
+	transform = {
+		position = {
+			x = 56.7,
+			y = 0.63,
+			z = -4.7
+		},
+		rotation = {
+			x = 0,
+			y = -241.9,
+			z = 0
+		},
+		scale = {
+			x = 1,
+			y = 1,
+			z = 1
+		}
+	},
+
+	model = {
+		model_name = "rubix_cube",
+		material_name = "default"
+	}
+}

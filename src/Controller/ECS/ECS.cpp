@@ -7,6 +7,7 @@
 #include "Model/Components/Light.hpp"
 #include "Model/Components/Md2Animation.hpp"
 #include "Model/Components/RigidBody.hpp"
+#include "Controller/ReflexEngine/PerformanceLogger.hpp"
 
 using namespace Reflex;
 
@@ -20,12 +21,14 @@ ECS::ECS() {
 	    .connect<&System::init_spot_light>();
 	registry_.on_construct<Component::Md2Animation>()
 	    .connect<&System::init_md2_animation>();
-	registry_.on_construct<Component::Rigidbody>().connect<&System::init_rigidbody>();
+	registry_.on_construct<Component::Rigidbody>()
+	    .connect<&System::init_rigidbody>();
 
 	registry_.on_update<Component::Script>().connect<&System::init_script>();
 	registry_.on_update<Component::Md2Animation>()
 	    .connect<&System::init_md2_animation>();
-	registry_.on_update<Component::Rigidbody>().connect<&System::update_rigidbody>();
+	registry_.on_update<Component::Rigidbody>()
+	    .connect<&System::update_rigidbody>();
 
 	registry_.on_destroy<Component::DirectionalLight>()
 	    .connect<&System::delete_directional_light>();
@@ -33,23 +36,37 @@ ECS::ECS() {
 	    .connect<&System::delete_point_light>();
 	registry_.on_destroy<Component::SpotLight>()
 	    .connect<&System::delete_spot_light>();
+	registry_.on_destroy<Component::Rigidbody>()
+	    .connect<&System::delete_rigidbody>();
 }
 
 Entity& ECS::create_entity(const std::string& name) {
 	entt::entity entity_id = registry_.create();
 
+	std::cout << "Name: " << name << std::endl;
 	return *(entities_[entity_id] =
 	             std::make_shared<Entity>(name, entity_id, this));
 }
 
 void ECS::update(double delta_time) {
+	PERFORMANCE_LOGGER_PUSH("Script");
 	System::update_script(registry_);
+	PERFORMANCE_LOGGER_POP();
+	PERFORMANCE_LOGGER_PUSH("Directional light");
 	System::update_directional_light(registry_);
+	PERFORMANCE_LOGGER_POP();
+	PERFORMANCE_LOGGER_PUSH("Point light");
 	System::update_point_light(registry_);
+	PERFORMANCE_LOGGER_POP();
+	PERFORMANCE_LOGGER_PUSH("Spot light");
 	System::update_spot_light(registry_);
+	PERFORMANCE_LOGGER_POP();
+	PERFORMANCE_LOGGER_PUSH("md2");
 	System::update_md2(registry_);
+	PERFORMANCE_LOGGER_POP();
+	PERFORMANCE_LOGGER_PUSH("Statemachine");
 	System::update_statemachine(*this);
-	
+	PERFORMANCE_LOGGER_POP();
 }
 
 void ECS::fixed_update(double delta_time) {
@@ -57,11 +74,18 @@ void ECS::fixed_update(double delta_time) {
 }
 
 void ECS::draw() {
+	PERFORMANCE_LOGGER_PUSH("terrain");
 	System::draw_terrain(registry_);
+	PERFORMANCE_LOGGER_POP();
+	PERFORMANCE_LOGGER_PUSH("model");
 	System::draw_model(registry_);
+	PERFORMANCE_LOGGER_POP();
+	PERFORMANCE_LOGGER_PUSH("mesh");
 	System::draw_mesh(registry_);
+	PERFORMANCE_LOGGER_POP();
+	PERFORMANCE_LOGGER_PUSH("md2");
 	System::draw_md2(registry_);
-
+	PERFORMANCE_LOGGER_POP();
 }
 
 void ECS::destroy_entity(entt::entity entity_id) {

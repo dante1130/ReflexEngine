@@ -14,12 +14,14 @@
   * Create a separate branch, give it a relevant name.
   * Push your changes to the branch.
   * Ensure that it can successfully build and run.
+  * Major code additions must include some unit tests unless determined otherwise by the team
   * Create a pull request to the `develop` branch, **not `master`**.
   * Include information regarding the changes.
   * Request a review from a reviewer.
 * To review a pull request:
   * Checkout the pull request branch locally.
   * Ensure that it can successfully build and run.
+  * Ensure that the unit tests all successfully complete.
   * Go through each file and mark it viewed after finish reviewing.
   * Comment any issues you find.
   * Finish review and submit as "`Approved`" if there are no issues.

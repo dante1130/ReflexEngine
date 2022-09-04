@@ -10,6 +10,9 @@
 #include "Model/Components/Statemachine.hpp"
 #include "Model/Components/RigidBody.hpp"
 
+#include "Controller/GUI/CollectionsGUI.hpp"
+#include "Controller/Physics/LoadOBJColliderData.hpp"
+
 #include "Controller/ECS/System.hpp"
 
 #include "Controller/LuaManager.hpp"
@@ -84,6 +87,11 @@ void ECSGameAssetFactory::load_components(ECS& ecs, Reflex::Entity& entity,
 	// Put this last in case the script calls other components.
 	if (entity_table["script"].valid()) {
 		load_script(ecs, entity, entity_table["script"]);
+	}
+
+	if (entity_table["collection_id"].valid()) {
+		CollectionsGUI::add_entity_to_collection(entity.get_entity_id(),
+		                                         entity_table["collection_id"]);
 	}
 }
 
@@ -180,7 +188,10 @@ void ECSGameAssetFactory::load_directional_light(
 	                             light_table["direction"]["z"]};
 
 	entity.add_component<Component::DirectionalLight>(
-	    light_table["shadow_width"], light_table["shadow_height"], color,
+	    light_table["shadow_width"], light_table["shadow_height"],
+	    light_table["near_plane"], light_table["far_plane"],
+	    light_table["ortho_left"], light_table["ortho_right"],
+	    light_table["ortho_bottom"], light_table["ortho_top"], color,
 	    light_table["ambient_intensity"], light_table["diffuse_intensity"],
 	    direction);
 }
@@ -232,10 +243,35 @@ bool ECSGameAssetFactory::is_lua_script(const std::string& lua_script) {
 void ECSGameAssetFactory::load_rigidbody(Reflex::Entity& entity,
                                          const sol::table& rigidbody_table) {
 	Component::Transform trans = entity.get_component<Component::Transform>();
-
-	entity.add_component<Component::Rigidbody>(
-	    rigidbody_table["using_react"], trans.position, trans.rotation,
+	Component::Rigidbody rb_comp = Component::Rigidbody(
+	    rigidbody_table["using_react_start"], trans.position, trans.rotation,
 	    rigidbody_table["gravity_on"], rigidbody_table["can_sleep"],
 	    rigidbody_table["is_trigger"], rigidbody_table["linear_drag"],
 	    rigidbody_table["angular_drag"]);
+
+	rb_comp.setType(rigidbody_table["rb_type"]);
+
+	if (rigidbody_table["collider_obj_data"].valid()) {
+		rb_comp.collider_obj_data = rigidbody_table["collider_obj_data"];
+		loadOBJColliderData::load_obj_collider_data(rb_comp,
+		                                            rb_comp.collider_obj_data);
+	}
+
+	if (rigidbody_table["linear_velocity"].valid()) {
+		auto linear_velocity = glm::vec3(0);
+		linear_velocity.x = rigidbody_table["linear_velocity"]["x"];
+		linear_velocity.y = rigidbody_table["linear_velocity"]["y"];
+		linear_velocity.z = rigidbody_table["linear_velocity"]["z"];
+		rb_comp.setVelocity(linear_velocity);
+	}
+
+	if (rigidbody_table["angular_velocity"].valid()) {
+		auto angular_velocity = glm::vec3(0);
+		angular_velocity.x = rigidbody_table["angular_velocity"]["x"];
+		angular_velocity.y = rigidbody_table["angular_velocity"]["y"];
+		angular_velocity.z = rigidbody_table["angular_velocity"]["z"];
+		rb_comp.setAngVelocity(angular_velocity);
+	}
+
+	entity.add_component<Component::Rigidbody>(rb_comp);
 }

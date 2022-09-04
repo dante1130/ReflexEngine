@@ -68,5 +68,6 @@ function update(ecs, entity)
 
 	if (Time.is_paused()) then
 		dofile "game/ECSScene/scripts/pause_menu.lua"
+		dofile "game/ECSScene/scripts/network_menu.lua"
 	end
 end

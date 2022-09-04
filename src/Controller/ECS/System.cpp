@@ -244,11 +244,10 @@ void System::init_statemachine(entt::registry& registry, entt::entity entity) {
 }
 
 void System::update_rigidbody(entt::registry& registry) {
-	if (EngineTime::is_paused()) 
-		return;
+	if (EngineTime::is_paused()) return;
 
 	// Calls the physics world update
-	Physics::getPhysicsWorld()->update(EngineTime::get_fixed_delta_time());
+	// Physics::getPhysicsWorld()->update(EngineTime::get_delta_time());
 
 	auto& rigidbody_manager =
 	    ResourceManager::get_instance().get_rigidbody_manager();
@@ -398,4 +397,13 @@ void System::delete_spot_light(entt::registry& registry, entt::entity entity) {
 	auto& spot_light = registry.get<Component::SpotLight>(entity);
 
 	light_manager.delete_spot_light(spot_light.light_id);
+}
+
+void System::delete_rigidbody(entt::registry& registry, entt::entity entity) {
+	auto& rigidbody_manager =
+	    ResourceManager::get_instance().get_rigidbody_manager();
+
+	auto& rigidbody = registry.get<Component::Rigidbody>(entity);
+
+	rigidbody_manager.delete_rigidbody(rigidbody);
 }

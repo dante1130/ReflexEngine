@@ -9,7 +9,7 @@ bool is_valid_uniform(GLint uniform_location) {
 }
 
 TEST_CASE("Shader uniforms", "[OpenGL]") {
-	Window window(0, 0);
+	Window window(1, 1);
 	window.init();
 
 	if (!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(glfwGetProcAddress))) {

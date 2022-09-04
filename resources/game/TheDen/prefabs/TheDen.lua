@@ -1,5 +1,6 @@
 entity = {
 	name = "TheDen",
+	collection_id = 2,
 
 	transform = {
 		position = {
@@ -21,6 +22,6 @@ entity = {
 
 	model = {
 		model_name = "TheDen",
-		material_name = "shiny"
+		material_name = "default"
 	}
 }

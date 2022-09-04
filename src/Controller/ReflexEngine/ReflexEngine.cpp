@@ -15,6 +15,8 @@
 #include "Model/singletons.h"
 #include "Controller/GUI/DebugLogger.hpp"
 #include "ReflexAssertion.hpp"
+#include "Controller/ReflexEngine/PerformanceLogger.hpp"
+#include "Controller/GUI/DebugGUI.hpp"
 
 void ReflexEngine::run() {
 	auto& engine = ReflexEngine::get_instance();
@@ -54,7 +56,6 @@ void ReflexEngine::run() {
 		if (EngineTime::is_paused()) {
 			EngineTime::force_delta_time(0.0);
 		} else {
-			Physics::updateWorld(EngineTime::get_delta_time());
 			scene.mouse_controls(engine.window_.get_x_offset(),
 			                     engine.window_.get_y_offset());
 		}
@@ -67,21 +68,33 @@ void ReflexEngine::run() {
 			dataMgr.setDynamicBoolData("save_game", false);
 		} else {
 			if (EngineTime::is_time_step_passed()) {
+				Physics::updateWorld(EngineTime::get_fixed_delta_time());
 				scene.fixed_update(EngineTime::get_fixed_delta_time());
-				EngineTime::reset_fixed_delta_time();
 			}
-
+			PERFORMANCE_LOGGER_PUSH("Update");
 			scene.update(EngineTime::get_delta_time());
+			PERFORMANCE_LOGGER_POP();
+			PERFORMANCE_LOGGER_PUSH("Garbage collection");
 			scene.garbage_collection();
+			PERFORMANCE_LOGGER_POP();
+			PERFORMANCE_LOGGER_PUSH("Add draw call");
 			scene.add_draw_call();
+			PERFORMANCE_LOGGER_POP();
+			PERFORMANCE_LOGGER_PUSH("Draw");
 			engine.renderer_.draw();
+			PERFORMANCE_LOGGER_POP();
 		}
 
+		DebugGUI::draw();  // DO NOT PERFORMANCE LOGGER THIS
 		DebugLogger::draw();
 
 		gui::mainLoopEnd();
 
 		engine.window_.swap_buffers();
+
+		if (EngineTime::is_time_step_passed()) {
+			EngineTime::reset_fixed_delta_time();
+		}
 	}
 
 	engine.scene_manager_.clear_scenes();
@@ -112,6 +125,7 @@ void ReflexEngine::load_default_resources() {
 void ReflexEngine::lua_access() {
 	InputManager::get_instance();
 	DebugLogger::lua_access();
+	CollectionsGUI::lua_access();
 	NetworkAccess::lua_access();
 	MathAccess::lua_access();
 	ECSAccess::register_ecs();
