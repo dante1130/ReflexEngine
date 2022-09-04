@@ -203,7 +203,7 @@ class PhysicsBody
 		/**
 	     * @brief Sets if the object is a trigger
 	     *
-	     * @param ean - if the object should be a trigger
+	     * @param ean - If the object should be a trigger
 	     * @return void
 	     */
 		void setObjectTrigger(bool ean);
@@ -247,7 +247,7 @@ class PhysicsBody
 	     * @brief Sets the previous position of
 	     * the rigidbody
 	     *
-	     * @param prev_pos - the previous position
+	     * @param prev_pos - The previous position
 	     * @return void
 	     */
 	    void setPreviousPosition(glm::vec3 prev_pos);
@@ -322,7 +322,7 @@ class PhysicsBody
 		/**
 	     * @brief Adds a force to an object's center of mass
 	     *
-	     * @param force - the size of the force applied
+	     * @param force - The size of the force applied
 	     * @param type - An enum determining local or world position
 	     * @return void
 	     */
@@ -331,8 +331,8 @@ class PhysicsBody
 	    /**
 	     * @brief Adds a force to an object at a given point
 	     *
-	     * @param force - the size of the force applied
-	     * @param point - position of applied force
+	     * @param force - The size of the force applied
+	     * @param point - Position of applied force
 	     * @param type - An enum determining relative position to
 	     * object
 	     * @return void
@@ -342,7 +342,7 @@ class PhysicsBody
 		/**
 	     * @brief Adds torque to an object
 	     *
-	     * @param force - the size of the torque applied
+	     * @param force - The size of the torque applied
 	     * @param type - An enum determining relative position to
 	     * object
 	     * @return void
@@ -352,7 +352,7 @@ class PhysicsBody
 		/**
 	     * @brief Adds a drag force to an object
 	     *
-	     * @param drag - the size of the drag force applied
+	     * @param drag - The size of the drag force applied
 	     * @return void
 	     */
 		virtual void addDragForce(float drag) = 0;
@@ -360,7 +360,7 @@ class PhysicsBody
 		/**
 	     * @brief Adds a torque drag to an object
 	     *
-	     * @param ang_drag - the size of the torque drag applied
+	     * @param ang_drag - The size of the torque drag applied
 	     * @return void
 	     */
 	    virtual void addDragTorque(float ang_drag) = 0;
@@ -368,7 +368,7 @@ class PhysicsBody
 		/**
 	     * @brief Sets the total mass of object
 	     *
-	     * @param mass - the size of the mass
+	     * @param mass - The size of the mass
 	     * @return void
 	     */
 	    virtual void setMass(float mass) = 0;
@@ -376,14 +376,15 @@ class PhysicsBody
 		/**
 	     * @brief Sets the center of mass
 	     *
-	     * @param p - the desired center of mass
+	     * @param p - The desired center of mass
 	     * @return void
 	     */
 	    virtual void setCenterOfMass(glm::vec3 p) = 0;
+
 	    /**
 	     * @brief Sets the velocity of object
 	     *
-	     * @param vel - the desired velocity
+	     * @param vel - The desired velocity
 	     * @return void
 	     */
 	    virtual void setVelocity(glm::vec3 vel) = 0;
@@ -391,7 +392,7 @@ class PhysicsBody
 		/**
 	     * @brief Sets the angular velocity of object
 	     *
-	     * @param ang_vel - the desired angular velocity
+	     * @param ang_vel - The desired angular velocity
 	     * @return void
 	     */
 	    virtual void setAngVelocity(glm::vec3 ang_vel) = 0;
@@ -399,7 +400,7 @@ class PhysicsBody
 		/**
 	     * @brief Sets the linear drag on object
 	     *
-	     * @param drag - the desired linear drag
+	     * @param drag - The desired linear drag
 	     * @return void
 	     */
 		virtual void setDragForce(float drag) = 0;
@@ -407,7 +408,7 @@ class PhysicsBody
 		/**
 	     * @brief Sets the angular drag on object
 	     *
-	     * @param angular_drag - the desired angular drag
+	     * @param angular_drag - The desired angular drag
 	     * @return void
 	     */
 		virtual void setDragTorque(float ang_drag) = 0;
@@ -416,7 +417,7 @@ class PhysicsBody
 	     * @brief Sets the physics type (Static, Kinematic
 	     * or Dynamic)
 	     *
-	     * @param type - the desired physics type
+	     * @param type - The desired physics type
 	     * @return void
 	     */
 		virtual void setType(rp3d::BodyType type) = 0;
@@ -425,7 +426,7 @@ class PhysicsBody
 	     * @brief Sets the physics type (Static, Kinematic
 	     * or Dynamic)
 	     *
-	     * @param type - the desired physics type as an integer
+	     * @param type - The desired physics type as an integer
 	     * @return void
 	     */
 		virtual void setType(int type) = 0;
@@ -433,7 +434,7 @@ class PhysicsBody
 		/**
 	     * @brief Sets if the object has gravity applied
 	     *
-	     * @param ean - if the object should have gravity applied
+	     * @param ean - If the object should have gravity applied
 	     * @return void
 	     */
 	    virtual void enableGravity(bool ean) = 0;
@@ -441,7 +442,7 @@ class PhysicsBody
 		/**
 	     * @brief Sets if the object can sleep
 	     *
-	     * @param ean - if the object should be able to sleep
+	     * @param ean - If the object should be able to sleep
 	     * @return void
 	     */
 	    virtual void setCanSleep(bool ean) = 0;
@@ -482,9 +483,9 @@ class PhysicsBody
 	    virtual float getDragTorque() = 0;
 
 		/**
-	     * @brief Gets the object type as an integer
+	     * @brief Gets the object type
 	     *
-	     * @return int
+	     * @return rp3d::BodyType
 	     */
 		virtual rp3d::BodyType getType() = 0;
 
@@ -513,8 +514,8 @@ class PhysicsBody
 	     * @brief Creates and adds a box collider to object
 	     * with no material properties
 		 * 
-	     * @param pos - the desired position
-	     * @param size - the desired half extents
+	     * @param pos - The desired position
+	     * @param size - The desired half extents
 	     * @return uint32_t
 	     */
 	    virtual uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 size) = 0;
@@ -523,8 +524,8 @@ class PhysicsBody
 	     * @brief Creates and adds a sphere collider to object
 	     * with no material properties
 	     *
-	     * @param pos - the desired position
-	     * @param radius - the desired radius
+	     * @param pos - The desired position
+	     * @param radius - The desired radius
 	     * @return uint32_t
 	     */
 	    virtual uint32_t addSphereCollider(glm::vec3 pos, float radius) = 0;
@@ -533,9 +534,9 @@ class PhysicsBody
 	     * @brief Creates and adds a capsule collider to object
 	     * with no material properties
 	     *
-	     * @param pos - the desired position
-	     * @param radius - the desired radius
-		 * @param height - the desired height
+	     * @param pos - The desired position
+	     * @param radius - The desired radius
+		 * @param height - The desired height
 	     * @return uint32_t
 	     */
 	    virtual uint32_t addCapsuleCollider(glm::vec3 pos, float radius, float height) = 0;
@@ -544,11 +545,11 @@ class PhysicsBody
 	     * @brief Creates and adds a box collider to object
 	     * and links the rigidbody data to it
 		 * 
-		 * @param rb - pointer to physicsbody for linking
-	     * @param pos - the desired position
-	     * @param size - the desired half extents
-	     * @param bounce - the bounciness property
-	     * @param friction - the friction property
+		 * @param rb - Pointer to physicsbody for linking
+	     * @param pos - The desired position
+	     * @param size - The desired half extents
+	     * @param bounce - The bounciness property
+	     * @param friction - The friction property
 	     * @return uint32_t
 	     */
 		virtual uint32_t addBoxCollider(PhysicsBody* rb, glm::vec3 pos, glm::vec3 size, float bounce, float friction) = 0;
@@ -557,11 +558,11 @@ class PhysicsBody
 	     * @brief Creates and adds a sphere collider to object
 	     * and links the rigidbody data to it
 		 * 
-		 * @param rb - pointer to physicsbody for linking
-	     * @param pos - the desired position
-	     * @param radius - the desired radius
-	     * @param bounce - the bounciness property
-	     * @param friction - the friction property
+		 * @param rb - Pointer to physicsbody for linking
+	     * @param pos - The desired position
+	     * @param radius - The desired radius
+	     * @param bounce - The bounciness property
+	     * @param friction - The friction property
 	     * @return uint32_t
 	     */
 	    virtual uint32_t addSphereCollider(PhysicsBody* rb, glm::vec3 pos,
@@ -572,12 +573,12 @@ class PhysicsBody
 	     * @brief Creates and adds a capsule collider to object
 	     * and links the rigidbody data to it
 		 * 
-		 * @param rb - pointer to physicsbody for linking
-	     * @param pos - the desired position
-	     * @param radius - the desired radius
-	     * @param height - the desired height
-	     * @param bounce - the bounciness property
-	     * @param friction - the friction property
+		 * @param rb - Pointer to physicsbody for linking
+	     * @param pos - The desired position
+	     * @param radius - The desired radius
+	     * @param height - The desired height
+	     * @param bounce - The bounciness property
+	     * @param friction - The friction property
 	     * @return uint32_t
 	     */
 	    virtual uint32_t addCapsuleCollider(PhysicsBody* rb, glm::vec3 pos,
@@ -588,10 +589,10 @@ class PhysicsBody
 		/**
 	     * @brief Creates and adds a box collider to object
 	     *
-	     * @param pos - the desired position
-	     * @param size - the desired half extents
-	     * @param bounce - the bounciness property
-	     * @param friction - the friction property
+	     * @param pos - The desired position
+	     * @param size - The desired half extents
+	     * @param bounce - The bounciness property
+	     * @param friction - The friction property
 	     * @return uint32_t
 	     */
 	    virtual uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce, float friction) = 0;
@@ -599,10 +600,10 @@ class PhysicsBody
 		/**
 	     * @brief Creates and adds a sphere collider to object
 	     *
-	     * @param pos - the desired position
-	     * @param radius - the desired radius
-	     * @param bounce - the bounciness property
-	     * @param friction - the friction property
+	     * @param pos - The desired position
+	     * @param radius - The desired radius
+	     * @param bounce - The bounciness property
+	     * @param friction - The friction property
 	     * @return uint32_t
 	     */
 		virtual uint32_t addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction) = 0;
@@ -610,11 +611,11 @@ class PhysicsBody
 		/**
 	     * @brief Creates and adds a capsule collider to object
 	     *
-	     * @param pos - the desired position
-	     * @param radius - the desired radius
-	     * @param height - the desired height
-	     * @param bounce - the bounciness property
-	     * @param friction - the friction property
+	     * @param pos - The desired position
+	     * @param radius - The desired radius
+	     * @param height - The desired height
+	     * @param bounce - The bounciness property
+	     * @param friction - The friction property
 	     * @return uint32_t
 	     */
 		virtual uint32_t addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction) = 0;
@@ -652,7 +653,7 @@ class PhysicsBody
 		/**
 	     * @brief Sets the position of the rigidbody
 	     *
-	     * @param pos - the desired position
+	     * @param pos - The desired position
 	     * @return void
 	     */
 		virtual void setPosition(glm::vec3 pos) = 0;
@@ -661,7 +662,7 @@ class PhysicsBody
 	     * @brief Sets the quanterion orientation of
 	     * the rigidbody
 	     *
-	     * @param quat - the desired orientation
+	     * @param quat - The desired orientation
 	     * @return void
 	     */
 		virtual void setQuaternion(glm::quat quat) = 0;
@@ -670,7 +671,7 @@ class PhysicsBody
 	     * @brief Sets the euler rotation of
 	     * the rigidbody
 	     *
-	     * @param rot - the desired rotation
+	     * @param rot - The desired rotation
 	     * @return void
 	     */
 		virtual void setEulerRotation(glm::vec3 rot) = 0;
@@ -679,7 +680,7 @@ class PhysicsBody
 	     * @brief Sets the x, y, z components of
 	     * the qunaternion
 	     *
-	     * @param rot - the desired x, y, z
+	     * @param rot - The desired x, y, z
 	     * @return void
 	     */
 		virtual void setRotation(glm::vec3 rot) = 0;
@@ -687,7 +688,7 @@ class PhysicsBody
 		/**
 	     * @brief Sets the w component of quanternion
 	     *
-		 * @param ang - the desired w
+		 * @param ang - The desired w
 	     * @return void
 	     */
 		virtual void setAngle(float ang) = 0;
