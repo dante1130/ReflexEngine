@@ -237,14 +237,6 @@ std::vector<rp3d::Collider*> Component::Rigidbody::getColliders() {
 std::string Component::Rigidbody::getColliderName(size_t index) {
 	return pb->getColliderName(index);
 }
-// void addBoxCollider(glm::vec3 pos, glm::vec3 size) { pb->addBoxCollider(pos,
-// size); }
-
-// void addSphereCollider(glm::vec3 pos, float radius) {
-// pb->addSphereCollider(pos, radius); }
-
-// void addCapsuleCollider(glm::vec3 pos, float radius, float height) {
-// pb->addCapsuleCollider(pos, radius, height); }
 
 uint32_t Component::Rigidbody::addBoxCollider(glm::vec3 pos, glm::vec3 size,
                                               float bounce, float friction) {

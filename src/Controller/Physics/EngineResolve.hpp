@@ -2,6 +2,12 @@
 
 #include "PhysicBody.hpp"
 
+/**
+ * @author Spencer Shaw
+ * @struct bool3
+ * @brief Holds three boolean values, used for locking
+ * axis for collision response
+ */
 struct bool3 {
 	bool lock_x, lock_y, lock_z;
 
@@ -11,118 +17,492 @@ struct bool3 {
 		lock_x(x), lock_y(y), lock_z(z) {}
 };
 
+/**
+ * @author Spencer Shaw
+ * @class EngineResolve
+ * @brief An encapsulation class for handling physics resolution
+ * by the engine 
+ */
 class EngineResolve : public PhysicsBody {
 
 private:
 
-	rp3d::CollisionBody* cb;
+	rp3d::CollisionBody* cb; /// Pointer to collisionbody in reactphysics3d phyiscs world
 
 protected:
 
+	/// Current linear velocity (in ms-1)
 	glm::vec3 lin_velocity_; 
+	/// Current linear accelaration (in ms-2)
 	glm::vec3 lin_accelaration_;
 
+	/// Current applied linear force
 	glm::vec3 force_;
-
+	/// Current applied linear drag force
 	float lin_drag;
-
+	/// Total mass of rigidbody (in kg)
 	float mass_;
 
+	/// Type of collision body (static, dynamic or kinematic)
 	rp3d::BodyType type_;
 
+	/// Applied gravity (in ms-2)
 	glm::vec3 gravity_;
 
+	/// Determines if gravity is applied on rigidbody
 	bool use_gravity_;
+	/// Determines the object can sleep
 	bool can_sleep_;
 
+	/// Saves values of x,y,z axis where last collision didnt occur
 	glm::vec3 collision_axes;
 
+	/// A set of booleans which saves if collsion normal is negative
 	bool3 lock_axes_back;
+	/// A set of booleans which saves if collsion normal is positive
 	bool3 lock_axes_front;
 
-	bool collision_finished;
+	
+	/// Records if the collision has finished
+
 	bool collision_started;
+	/// Records if the collision has finished
+	bool collision_finished;
 
 public:
 
 	EngineResolve();
 
-	void update(float delta_time) override;
-
-	void stop(glm::vec3 normal, CollisionEvent c_type) override;
-
-	// using engine stuff
+	/**
+	 * @brief Returns true if physics body is using
+	 * reactphysics3d resolution
+	 *
+	 * @return bool
+	 */
 	bool usingReactResolve() override;
 
-	// init setup
+	/**
+	 * @brief Applies physics calculations and finds the new
+	 * transform properties of the object
+	 *
+	 * @param delta_time - The delta time
+	 * @return void
+	 */
+	void update(float delta_time) override;
+
+	/**
+	 * @brief Calculates collison response and applies it to
+	 * rigidbody
+	 *
+	 * @param normal - The collision normal
+	 * @param c_type - The collision event type
+	 * @return void
+	 */
+	void resolve(glm::vec3 normal, CollisionEvent c_type) override;
+
+	/**
+	 * @brief Intialises rigidbody with axis angle rotation
+	 *
+	 * @param pos - The desired position
+	 * @param rot - The desired axis
+	 * @param angle - The desired angle
+	 * @return void
+	 */
 	void initialise_body(glm::vec3 pos, glm::vec3 rot, float angle) override;
+
+	/**
+	 * @brief Intialises rigidbody with euler rotation
+	 *
+	 * @param pos - The desired position
+	 * @param rot - The desired rotation
+	 * @return void
+	 */
 	void initialise_body(glm::vec3 pos, glm::vec3 rot) override;
 
+	/**
+	 * @brief Removes a the body (CollisionBody/Rigidbody)
+	 * of PhysicsBody and its properties
+	 *
+	 * @return void
+	 */
 	void delete_body() override;
 
-	//Change movement properties
+	/**
+	 * @brief Adds a force to an object's center of mass
+	 *
+	 * @param force - The size of the force applied
+	 * @param type - An enum determining local or world position
+	 * @return void
+	 */
 	void addForce(glm::vec3 force, Apply type) override;
-	void addForceAtPoint(glm::vec3 force, glm::vec3 point, ApplyPoint type) override;
+
+	/**
+	 * @brief Adds a force to an object at a given point
+	 *
+	 * @param force - The size of the force applied
+	 * @param point - Position of applied force
+	 * @param type - An enum determining relative position to
+	 * object
+	 * @return void
+	 */
+	void addForceAtPoint(glm::vec3 force, glm::vec3 point,
+	                     ApplyPoint type) override;
+
+	/**
+	 * @brief Adds torque to an object
+	 *
+	 * @param force - The size of the torque applied
+	 * @param type - An enum determining relative position to
+	 * object
+	 * @return void
+	 */
 	void addTorque(glm::vec3 torque, Apply type) override;
 
+	/**
+	 * @brief Adds a drag force to an object
+	 *
+	 * @param drag - The size of the drag force applied
+	 * @return void
+	 */
 	void addDragForce(float drag) override;
+
+	/**
+	 * @brief Adds a torque drag to an object
+	 *
+	 * @param ang_drag - The size of the torque drag applied
+	 * @return void
+	 */
 	void addDragTorque(float ang_drag) override;
 
-	//Set properties
+
+	/**
+	 * @brief Sets the total mass of object
+	 *
+	 * @param mass - The size of the mass
+	 * @return void
+	 */
 	void setMass(float mass) override;
+
+	/**
+	 * @brief Sets the center of mass
+	 *
+	 * @param p - The desired center of mass
+	 * @return void
+	 */
 	void setCenterOfMass(glm::vec3 p) override;
+
+	/**
+	 * @brief Sets the velocity of object
+	 *
+	 * @param vel - The desired velocity
+	 * @return void
+	 */
 	void setVelocity(glm::vec3 vel) override;
+
+	/**
+	 * @brief Sets the angular velocity of object
+	 *
+	 * @param ang_vel - The desired angular velocity
+	 * @return void
+	 */
 	void setAngVelocity(glm::vec3 ang_vel) override;
+
+	/**
+	 * @brief Sets the linear drag on object
+	 *
+	 * @param drag - The desired linear drag
+	 * @return void
+	 */
 	void setDragForce(float drag) override;
+
+	/**
+	 * @brief Sets the angular drag on object
+	 *
+	 * @param angular_drag - The desired angular drag
+	 * @return void
+	 */
 	void setDragTorque(float ang_drag) override;
 
+	/**
+	 * @brief Sets the physics type (Static, Kinematic
+	 * or Dynamic)
+	 *
+	 * @param type - The desired physics type
+	 * @return void
+	 */
 	void setType(rp3d::BodyType type) override;
+
+	/**
+	 * @brief Sets the physics type (Static, Kinematic
+	 * or Dynamic)
+	 *
+	 * @param type - The desired physics type as an integer
+	 * @return void
+	 */
 	void setType(int type) override;
+
+	/**
+	 * @brief Sets if the object has gravity applied
+	 *
+	 * @param ean - If the object should have gravity applied
+	 * @return void
+	 */
 	void enableGravity(bool ean) override;
+
+	/**
+	 * @brief Sets if the object can sleep
+	 *
+	 * @param ean - If the object should be able to sleep
+	 * @return void
+	 */
 	void setCanSleep(bool ean) override;
 
-	// Get properties
+	/**
+	 * @brief Gets the total mass of object
+	 *
+	 * @return float
+	 */
 	float getMass() override;
+
+	/**
+	 * @brief Gets the velocity of object
+	 *
+	 * @return glm::vec3
+	 */
 	glm::vec3 getVelocity() override;
+
+	/**
+	 * @brief Gets the angular of object
+	 *
+	 * @return glm::vec3
+	 */
 	glm::vec3 getAngVelocity() override;
 
+	/**
+	 * @brief Gets the linear drag of object
+	 *
+	 * @return float
+	 */
 	float getDragForce() override;
+
+	/**
+	 * @brief Gets the angular drag of object
+	 *
+	 * @return float
+	 */
 	float getDragTorque() override;
 
+	/**
+	 * @brief Gets the object type
+	 *
+	 * @return rp3d::BodyType
+	 */
 	rp3d::BodyType getType() override;
+	/**
+	 * @brief Gets if the object has gravity applied
+	 *
+	 * @return bool
+	 */
 	bool getIsGravityEnabled() override;
+
+	/**
+	 * @brief Gets if the object can sleep
+	 *
+	 * @return bool
+	 */
 	bool getCanSleep() override;
 
-	// Add colliders
+	/**
+	 * @brief Creates and adds a box collider to object
+	 * with no material properties
+	 *
+	 * @param pos - The desired position
+	 * @param size - The desired half extents
+	 * @return uint32_t
+	 */
 	uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 size) override;
-	uint32_t addSphereCollider(glm::vec3 pos, float radius) override;
-	uint32_t addCapsuleCollider(glm::vec3 pos, float radius, float height) override;
 
+	/**
+	 * @brief Creates and adds a sphere collider to object
+	 * with no material properties
+	 *
+	 * @param pos - The desired position
+	 * @param radius - The desired radius
+	 * @return uint32_t
+	 */
+	uint32_t addSphereCollider(glm::vec3 pos, float radius) override;
+
+	/**
+	 * @brief Creates and adds a capsule collider to object
+	 * with no material properties
+	 *
+	 * @param pos - The desired position
+	 * @param radius - The desired radius
+	 * @param height - The desired height
+	 * @return uint32_t
+	 */
+	uint32_t addCapsuleCollider(glm::vec3 pos, float radius,
+	                            float height) override;
+
+	/**
+	 * @brief Creates and adds a box collider to object
+	 * and links the rigidbody data to it
+	 *
+	 * @param rb - Pointer to physicsbody for linking
+	 * @param pos - The desired position
+	 * @param size - The desired half extents
+	 * @param bounce - The bounciness property
+	 * @param friction - The friction property
+	 * @return uint32_t
+	 */
 	uint32_t addBoxCollider(PhysicsBody* rb, glm::vec3 pos, glm::vec3 size,
 	                        float bounce, float friction) override;
+
+	/**
+	 * @brief Creates and adds a sphere collider to object
+	 * and links the rigidbody data to it
+	 *
+	 * @param rb - Pointer to physicsbody for linking
+	 * @param pos - The desired position
+	 * @param radius - The desired radius
+	 * @param bounce - The bounciness property
+	 * @param friction - The friction property
+	 * @return uint32_t
+	 */
 	uint32_t addSphereCollider(PhysicsBody* rb, glm::vec3 pos, float radius,
-	                           float bounce,
-	                           float friction) override;
+	                           float bounce, float friction) override;
+
+	/**
+	 * @brief Creates and adds a capsule collider to object
+	 * and links the rigidbody data to it
+	 *
+	 * @param rb - Pointer to physicsbody for linking
+	 * @param pos - The desired position
+	 * @param radius - The desired radius
+	 * @param height - The desired height
+	 * @param bounce - The bounciness property
+	 * @param friction - The friction property
+	 * @return uint32_t
+	 */
 	uint32_t addCapsuleCollider(PhysicsBody* rb, glm::vec3 pos, float radius,
-	                            float height,
+	                            float height, float bounce,
+	                            float friction) override;
+
+	/**
+	 * @brief Creates and adds a box collider to object
+	 *
+	 * @param pos - The desired position
+	 * @param size - The desired half extents
+	 * @param bounce - The bounciness property
+	 * @param friction - The friction property
+	 * @return uint32_t
+	 */
+	uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce,
+	                        float friction) override;
+
+	/**
+	 * @brief Creates and adds a sphere collider to object
+	 *
+	 * @param pos - The desired position
+	 * @param radius - The desired radius
+	 * @param bounce - The bounciness property
+	 * @param friction - The friction property
+	 * @return uint32_t
+	 */
+	uint32_t addSphereCollider(glm::vec3 pos, float radius, float bounce,
+	                           float friction) override;
+
+	/**
+	 * @brief Creates and adds a capsule collider to object
+	 *
+	 * @param pos - The desired position
+	 * @param radius - The desired radius
+	 * @param height - The desired height
+	 * @param bounce - The bounciness property
+	 * @param friction - The friction property
+	 * @return uint32_t
+	 */
+	uint32_t addCapsuleCollider(glm::vec3 pos, float radius, float height,
 	                            float bounce, float friction) override;
 
-	uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 size,
-	                        float bounce, float friction) override;
-	uint32_t addSphereCollider(glm::vec3 pos, float radius, float bounce, float friction) override;
-	uint32_t addCapsuleCollider(glm::vec3 pos, float radius, float height, float bounce, float friction) override;
-
+	/**
+	 * @brief Deletes collider given a  collider pointer
+	 *
+	 * @param collider - Pointer to collider
+	 * @return void
+	 */
 	void deleteCollider(rp3d::Collider* collider) override;
 
-	// returns for GameObject position and rotation
+	/**
+	 * @brief Gets the position of the rigidbody
+	 *
+	 * @return glm::vec3
+	 */
 	glm::vec3 getPosition() override;
+
+	/**
+	 * @brief Gets the euler rotation of the
+	 * rigidbody
+	 *
+	 * @return glm::vec3
+	 */
 	glm::vec3 getRotation() override;
+
+	/**
+	 * @brief Gets the quanterion orientation of
+	 * the rigidbody
+	 *
+	 * @return glm::vec3
+	 */
 	glm::quat getOrientation() override;
+
+	/**
+	 * @brief Gets the w component of quanternion
+	 *
+	 * @return glm::vec3
+	 */
 	float getAngle() override;
 
+	/**
+	 * @brief Sets the position of the rigidbody
+	 *
+	 * @param pos - The desired position
+	 * @return void
+	 */
 	void setPosition(glm::vec3 pos) override;
+
+	/**
+	 * @brief Sets the quanterion orientation of
+	 * the rigidbody
+	 *
+	 * @param quat - The desired orientation
+	 * @return void
+	 */
 	void setQuaternion(glm::quat quat) override;
+
+	/**
+	 * @brief Sets the euler rotation of
+	 * the rigidbody
+	 *
+	 * @param rot - The desired rotation
+	 * @return void
+	 */
 	void setEulerRotation(glm::vec3 rot) override;
+
+	/**
+	 * @brief Sets the x, y, z components of
+	 * the qunaternion
+	 *
+	 * @param rot - The desired x, y, z
+	 * @return void
+	 */
 	void setRotation(glm::vec3 rot) override;
+
+	/**
+	 * @brief Sets the w component of quanternion
+	 *
+	 * @param ang - The desired w
+	 * @return void
+	 */
 	void setAngle(float ang) override;
 };
