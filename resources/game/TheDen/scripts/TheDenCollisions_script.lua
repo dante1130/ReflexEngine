@@ -2,7 +2,9 @@ var = {
 }
 
 function init(ecs, entity)
-	entity:add_rigidbody_component()
+	if(not entity:any_rigidbody_component()) then
+		entity:add_rigidbody_component()
+	end
 	local rb = entity:get_rigidbody_component()
 	rb.type = 0
 	LoadOBJCollider(rb, "models/TheDenCollisions.obj")

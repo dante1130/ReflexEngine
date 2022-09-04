@@ -23,7 +23,7 @@ public:
 	bool gravity_on;
 	/// <summary>
 	/// Whether the object is allowed to stop
-	/// calculating resolution after a certain 
+	/// calculating resolution after a certain
 	/// period of time
 	/// </summary>
 	bool can_sleep;
@@ -37,7 +37,9 @@ public:
 	/// Boolean determining resolution system 
 	bool using_react_start;
 
-	/// Default constructor
+	std::string collider_obj_data = "";
+
+  /// Default constructor
 	Rigidbody() = default;
 
 	/// Default copy constructor
@@ -75,7 +77,6 @@ public:
 	void setViewables(bool gravity_on, bool can_sleep, bool is_trigger,
 	                  float linear_drag, float angular_drag);
 
-	
 	/**
 	 * @brief Returns true if physics body is using
 	 * reactphysics3d resolution
@@ -164,7 +165,7 @@ public:
 
 	/**
 	 * @brief Returns a pseduo name containing the
-	 * collider type and index of the collider	
+	 * collider type and index of the collider
 	 *
 	 * @param index - Index of collider
 	 * @return std::string
@@ -172,7 +173,7 @@ public:
 	std::string getColliderName(size_t index);
 
 	/**
-	 * @brief Gets all collider pointers inside 
+	 * @brief Gets all collider pointers inside
 	 * colliders
 	 *
 	 * @return std::vector<rp3d::Collider*>
