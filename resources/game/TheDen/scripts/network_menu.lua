@@ -1,9 +1,7 @@
-if Time.is_paused() then
 	gui_setWindowSize(700, 400, 4)
 	gui_setWindowPos(0, 300, 4)
 	gui_begin("Network Menu")
 
-	gui_text("--Game is currently NOT paused--")
 	local initialise = gui_button("INITIALISE", 150, 50)
 	local start = gui_button("Start Server", 150, 50)
 	local ip = gui_luaInputText("Enter Server IP: ")
@@ -61,4 +59,3 @@ if Time.is_paused() then
 
 
 	gui_end()
-end

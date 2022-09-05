@@ -65,9 +65,9 @@ function update(ecs, entity)
 		DebugLogger.log("info", "Camera direction:" .. cam_dir.x .. ", " .. cam_dir.y .. ", " .. cam_dir.z)
 	end
 
+	dofile "game/TheDen/scripts/network_menu.lua"
 	if (Time.is_paused()) then
 		dofile "game/TheDen/scripts/pause_menu.lua"
-		dofile "game/TheDen/scripts/network_menu.lua"
 	end
 end
 

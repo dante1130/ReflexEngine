@@ -60,7 +60,7 @@ void shutdown();
  * begin and end.
  * @param	title	- The title of the window
  *
- * @pre		rui running
+ * @pre		gui running
  * @post	window created
  */
 void begin(const std::string& title);
