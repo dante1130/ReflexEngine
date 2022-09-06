@@ -1,14 +1,10 @@
 #include <catch2/catch_test_macros.hpp>
 
 #include "Model/Components/RigidBody.hpp"
-#include "reactphysics3d/include/reactphysics3d/reactphysics3d.h"
-#include "glm/vec3.hpp"
+#include <glm/glm.hpp>
 #include <string>
 
-
-
 TEST_CASE("Rigidbody physics tests", "[Rigidbody]") {
-	
 	Component::Rigidbody rb_react, rb_engine;
 
 	SECTION("Intialising rb through react resolution") {
@@ -52,16 +48,15 @@ TEST_CASE("Rigidbody physics tests", "[Rigidbody]") {
 	}
 
 	SECTION("Add a box collider to rb_react") {
-
 		glm::vec3 position = glm::vec3(2.0f);
 		glm::vec3 size = glm::vec3(1.0f);
 		float bounciness = 1.0f;
 		float friction = 1.0f;
 
-		int index = rb_react.addBoxCollider(position, size, bounciness, friction);
+		int index =
+		    rb_react.addBoxCollider(position, size, bounciness, friction);
 
-		
-		//Collider* c = rb_react.getColliders()[index];
+		// Collider* c = rb_react.getColliders()[index];
 		reactphysics3d::BoxShape* bs = rb_react.getColliderBox(index);
 
 		reactphysics3d::Transform tf = c->getLocalToBodyTransform();
