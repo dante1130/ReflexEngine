@@ -1,5 +1,5 @@
 
---Model.load_model("cat", "models/12221_Cat_v1_l3.obj")
+Model.load_model("cat", "models/12221_Cat_v1_l3.obj")
 --Model.load_model("boat", "models/boat1obj.obj")
 --Model.load_model("lighthouse", "models/Beacon.obj")
 --Model.load_model("big_arrow", "models/BigArrow.obj")
@@ -36,7 +36,7 @@ Texture.load_texture("duck", "textures/DuckPerson.png")
 Material.load_material("shiny", 256.0, 4.0)
 
 
-Audio.load_audio("duckandcover", "sounds/gamefast.wav")
+--Audio.load_audio("duckandcover", "sounds/gamefast.wav")
 
 
 --Terrain.load_terrain("terrain", "textures/newheightmap.png")
