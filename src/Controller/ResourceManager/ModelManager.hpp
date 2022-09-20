@@ -31,6 +31,8 @@ public:
 	bool load_model(const std::string& model_name,
 	                const std::string& file_name);
 
+	static bool load_model_async(Model* model, std::string model_name, std::string file_name);
+
 	/**
 	 * @brief Get the model given the model name.
 	 *

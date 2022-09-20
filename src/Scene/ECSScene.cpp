@@ -2,6 +2,8 @@
 
 #include <filesystem>
 
+#include <thread>
+
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 #include "Controller/LuaManager.hpp"
 #include "Controller/ECSGameAssetFactory.hpp"
@@ -17,10 +19,23 @@ ECSScene::ECSScene(const std::string& master_lua_script)
 void ECSScene::init() {
 	Audio::get_instance().stop_all();
 	LuaManager::get_instance().get_state().script_file(master_lua_script_);
+	std::cout << master_lua_script_ << std::endl;
+}
+
+void ECSScene::initialise_thread_load() {
+	std::thread LoadGameObject(&ECSGameAssetFactory::create, std::ref(ecs_), current_lua_script);
+	LoadGameObject.join();
 }
 
 void ECSScene::add_game_object(const std::string& lua_script) {
-	ECSGameAssetFactory::create(ecs_, lua_script);
+	//initialise_thread_load(lua_script);
+	//current_lua_script = lua_script;
+	//initialise_thread_load();
+	total_ecs_objects++;
+	std::thread LoadGameObject(&ECSGameAssetFactory::create, std::ref(ecs_), lua_script);
+	LoadGameObject.join();
+	std::printf("total ecs objects right now: %d\n",total_ecs_objects);
+	//ECSGameAssetFactory::create(ecs_, lua_script);
 }
 
 void ECSScene::mouse_controls(double xpos, double ypos) {

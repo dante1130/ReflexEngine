@@ -26,6 +26,8 @@ public:
 	 */
 	void init() override;
 
+	void initialise_thread_load();
+
 	/**
 	 * @brief	Adds a game object
 	 * @param	lua_script	- a lua script to add
@@ -100,4 +102,6 @@ public:
 private:
 	ECS ecs_;
 	ECSGui ecs_gui_;
+	int total_ecs_objects=0;
+	std::string current_lua_script;
 };

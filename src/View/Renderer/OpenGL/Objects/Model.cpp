@@ -85,6 +85,7 @@ void Model::LoadMesh(aiMesh* mesh, const aiScene* scene) {
 	}
 
 	Mesh* newMesh = new Mesh();
+	std::cout << "created a mesh!" << std::endl;
 	newMesh->create_mesh(vertices.data(), indices.data(), vertices.size(),
 	                     indices.size());
 
