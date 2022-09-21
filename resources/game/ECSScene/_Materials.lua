@@ -19,6 +19,7 @@ Model.load_model("book4", "models/book4.obj")
 Model.load_model("book5", "models/book5.obj")
 Model.load_model("rubix_cube", "models/rubixcube.obj")
 Model.load_model("calculator", "models/calculator.obj")
+Model.finished_loading()
 
 
 
@@ -63,3 +64,4 @@ Mesh.load_mesh("water",
 		0, 2, 1, 1, 2, 3, 0, 1, 2, 1, 3, 2
 	}
 )
+--Model.finished_loading()

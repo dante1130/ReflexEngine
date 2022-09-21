@@ -21,6 +21,10 @@ public:
 	 */
 	void lua_access();
 
+	void workaround(int index);
+
+	void set_model_table(sol::table *model_table);
+
 	/**
 	 * @brief Loads a model into the model manager.
 	 *
@@ -31,7 +35,7 @@ public:
 	bool load_model(const std::string& model_name,
 	                const std::string& file_name);
 
-	static bool load_model_async(Model* model, std::string model_name, std::string file_name);
+	bool load_model_async();
 
 	/**
 	 * @brief Get the model given the model name.
@@ -44,4 +48,9 @@ public:
 private:
 	/// A hashmap of models.
 	std::unordered_map<std::string, Model> model_hashmap;
+
+	std::unordered_map<std::string, std::string> file_hashmap;
+
+
+	int counter = 0;
 };

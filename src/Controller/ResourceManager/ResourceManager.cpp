@@ -1,5 +1,7 @@
 #include "ResourceManager.hpp"
 
+#include <future>
+
 ResourceManager& ResourceManager::get_instance() {
 	static ResourceManager instance;
 	return instance;
@@ -31,6 +33,25 @@ TerrainManager& ResourceManager::get_terrain_manager() {
 RigidbodyManager& ResourceManager::get_rigidbody_manager() { return rigidbody_manager_;  }
 
 ResourceManager::ResourceManager() {
+	/*
+	std::future<void> AsyncLoadModel = std::async(
+	    std::launch::deferred, [&]() { texture_manager_.lua_access();
+	    });
+	//texture_manager_.lua_access();
+	std::thread ThreadLoadModel([&]() { model_manager_.lua_access(); });
+	std::thread ThreadLoadMaterial([&]() { material_manager_.lua_access(); });
+	std::thread ThreadLoadMd2([&]() { md2_model_manager_.lua_access(); });
+	std::thread ThreadLoadSkybox([&]() { skybox_manager_.lua_access(); });
+	std::thread ThreadLoadMesh([&]() { mesh_manager_.lua_access(); });
+	std::thread ThreadLoadTerrain([&]() { terrain_manager_.lua_access(); });
+	//ThreadLoadTexture.join();
+	ThreadLoadModel.join();
+	ThreadLoadMaterial.join();
+	ThreadLoadMd2.join();
+	ThreadLoadSkybox.join();
+	ThreadLoadMesh.join();
+	ThreadLoadTerrain.join();
+	*/
 	texture_manager_.lua_access();
 	model_manager_.lua_access();
 	material_manager_.lua_access();

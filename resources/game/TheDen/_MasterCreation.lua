@@ -55,3 +55,5 @@ Scene.add_game_object("game/TheDen/prefabs/small_objects/markers/marker_one.lua"
 Scene.add_game_object("game/TheDen/prefabs/small_objects/markers/marker_two.lua")
 
 Skybox.use_skybox("default")
+
+--Model.finished_loading()
