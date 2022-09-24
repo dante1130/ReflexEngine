@@ -83,7 +83,6 @@ void Model::LoadMesh(aiMesh* mesh, const aiScene* scene) {
 			indices.emplace_back(face.mIndices[j]);
 		}
 	}
-	//std::cout << "Load Mesh Runs!" << std::endl;
 	Mesh* newMesh = new Mesh();
 	newMesh->create_mesh(vertices.data(), indices.data(), vertices.size(),
 	                     indices.size());

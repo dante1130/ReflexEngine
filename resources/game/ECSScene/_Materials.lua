@@ -8,6 +8,7 @@ Model.load_model("GlassInScene", "models/Glass.obj")
 
 
 --Small models/objects
+--[[
 Model.load_model("laptop", "models/laptop.obj")
 Model.load_model("tissue_box", "models/tissuebox.obj")
 Model.load_model("pizza_box", "models/pizzabox.obj")
@@ -19,7 +20,8 @@ Model.load_model("book4", "models/book4.obj")
 Model.load_model("book5", "models/book5.obj")
 Model.load_model("rubix_cube", "models/rubixcube.obj")
 Model.load_model("calculator", "models/calculator.obj")
-Model.finished_loading()
+]]--
+--Model.finished_loading()
 
 
 

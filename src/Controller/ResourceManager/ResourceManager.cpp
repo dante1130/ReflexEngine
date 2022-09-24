@@ -35,10 +35,12 @@ RigidbodyManager& ResourceManager::get_rigidbody_manager() { return rigidbody_ma
 ResourceManager::ResourceManager() {
 	/*
 	std::future<void> AsyncLoadModel = std::async(
-	    std::launch::deferred, [&]() { texture_manager_.lua_access();
+	    std::launch::deferred, [this]() { model_manager_.lua_access();
 	    });
 	//texture_manager_.lua_access();
-	std::thread ThreadLoadModel([&]() { model_manager_.lua_access(); });
+	
+	//std::thread ThreadLoadModel([&]() { model_manager_.lua_access(); });
+	/*
 	std::thread ThreadLoadMaterial([&]() { material_manager_.lua_access(); });
 	std::thread ThreadLoadMd2([&]() { md2_model_manager_.lua_access(); });
 	std::thread ThreadLoadSkybox([&]() { skybox_manager_.lua_access(); });
@@ -52,7 +54,9 @@ ResourceManager::ResourceManager() {
 	ThreadLoadMesh.join();
 	ThreadLoadTerrain.join();
 	*/
+	//ThreadLoadModel.join();
 	texture_manager_.lua_access();
+	//AsyncLoadModel.get();
 	model_manager_.lua_access();
 	material_manager_.lua_access();
 	md2_model_manager_.lua_access();

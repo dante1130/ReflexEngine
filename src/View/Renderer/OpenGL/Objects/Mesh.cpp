@@ -3,9 +3,11 @@
 #include <glm/glm.hpp>
 
 Mesh::Mesh() {
+	locker.lock();
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &IBO);
 	glGenBuffers(1, &VBO);
+	locker.unlock();
 }
 
 void Mesh::create_mesh(const GLfloat* vertices, const GLuint* indices,

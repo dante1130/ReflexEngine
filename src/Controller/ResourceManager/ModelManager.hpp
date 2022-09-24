@@ -4,6 +4,7 @@
 
 #include "View/Renderer/OpenGL/Objects/Model.hpp"
 #include "Controller/LuaManager.hpp"
+#include <mutex>
 
 /**
  * @class ModelManager
@@ -51,6 +52,7 @@ private:
 
 	std::unordered_map<std::string, std::string> file_hashmap;
 
+	std::mutex locker;
 
 	int counter = 0;
 };

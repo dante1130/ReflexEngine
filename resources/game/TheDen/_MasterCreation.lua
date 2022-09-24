@@ -1,5 +1,5 @@
 dofile("game/TheDen/Collections.lua")
-
+--Model.finished_loading()
 Texture.load_texture("credits", "textures/reflexbullet.png")
 
 Scene.add_game_object("game/TheDen/prefabs/Glass.lua")

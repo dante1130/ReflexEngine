@@ -1,6 +1,7 @@
 #pragma once
 
 #include <glad/glad.h>
+#include <mutex>
 
 /**
  * @class Mesh
@@ -76,6 +77,8 @@ private:
 	GLuint VBO = 0;
 	/// Index buffer object, containing the indices of the mesh.
 	GLuint IBO = 0;
+
+	std::mutex locker;
 
 	/// The number of indices in the mesh.
 	GLsizei indexCount = 0;
