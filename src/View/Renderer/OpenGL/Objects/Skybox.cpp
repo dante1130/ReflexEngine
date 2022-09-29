@@ -1,6 +1,7 @@
 #include "Skybox.hpp"
 
 #include "StbImage.hpp"
+#include "Controller/ReflexEngine/PerformanceLogger.hpp"
 
 Skybox::Skybox(const std::vector<std::string>& faceLocations) {
 	m_skyShader = std::make_unique<Shader>();
@@ -82,7 +83,9 @@ void Skybox::DrawSkybox(glm::mat4 projectionMatrix,
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, m_textureID);
 
+	PERFORMANCE_LOGGER_PUSH("Validate skybox shader");
 	m_skyShader->Validate();
+	PERFORMANCE_LOGGER_POP();
 
 	m_skyMesh->render_mesh();
 

@@ -113,7 +113,9 @@ void OpenGL::draw_debug(const ColliderRenderer& collider_renderer) {
 	glUniformMatrix4fv(react_shader_.GetViewLocation(), 1, GL_FALSE,
 	                   glm::value_ptr(view));
 
+	PERFORMANCE_LOGGER_PUSH("Validate render shader");
 	react_shader_.Validate();
+	PERFORMANCE_LOGGER_POP();
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
@@ -163,7 +165,9 @@ void OpenGL::render_pass(const DirectionalLight& d_light,
 
 	render_lights(d_light, p_lights, s_lights);
 
+	PERFORMANCE_LOGGER_PUSH("Validate render pass shader");
 	shader_.Validate();
+	PERFORMANCE_LOGGER_POP();
 
 	render_scene(shader_);
 }
@@ -181,7 +185,9 @@ void OpenGL::directional_shadow_pass(const DirectionalLight& d_light) {
 	directional_shadow_shader_.SetDirectionalLightTransform(
 	    d_light.calculate_light_transform());
 
+	PERFORMANCE_LOGGER_PUSH("Validate directional shader");
 	directional_shadow_shader_.Validate();
+	PERFORMANCE_LOGGER_POP();
 
 	render_scene(directional_shadow_shader_);
 
@@ -196,7 +202,9 @@ void OpenGL::omnidirectional_shadow_pass(const PointLights& p_lights,
 	    omni_shadow_shader_.GetOmniLightPosLocation();
 	GLuint uniform_omni_light_far = omni_shadow_shader_.GetFarPlaneLocation();
 
+	PERFORMANCE_LOGGER_PUSH("Validate omni shader");
 	omni_shadow_shader_.Validate();
+	PERFORMANCE_LOGGER_POP();
 
 	for (const auto& light : p_lights) {
 		glViewport(0, 0, light.get_shadow_map().get_shadow_width(),
