@@ -17,6 +17,7 @@
 #include "ReflexAssertion.hpp"
 #include "Controller/ReflexEngine/PerformanceLogger.hpp"
 #include "Controller/GUI/DebugGUI.hpp"
+#include "Controller/Physics/ColliderRenderer.hpp"
 
 void ReflexEngine::run() {
 	auto& engine = ReflexEngine::get_instance();
@@ -35,6 +36,20 @@ void ReflexEngine::run() {
 	load_default_resources();
 
 	auto& input_manager = InputManager::get_instance();
+
+	ColliderRenderer collider_renderer;
+	Physics::setDebuggerToActive(true);
+	Physics::setDebuggerValues(
+	    reactphysics3d::DebugRenderer::DebugItem::COLLISION_SHAPE, true);
+	Physics::setDebuggerValues(
+	    reactphysics3d::DebugRenderer::DebugItem::COLLIDER_BROADPHASE_AABB,
+	    true);
+	Physics::setDebuggerValues(
+	    reactphysics3d::DebugRenderer::DebugItem::COLLIDER_AABB, true);
+	Physics::setDebuggerValues(
+	    reactphysics3d::DebugRenderer::DebugItem::CONTACT_POINT, true);
+	Physics::setDebuggerValues(
+	    reactphysics3d::DebugRenderer::DebugItem::CONTACT_NORMAL, true);
 
 	while (!engine.window_.is_should_close()) {
 		EngineTime::update_delta_time(glfwGetTime());
@@ -69,6 +84,8 @@ void ReflexEngine::run() {
 		} else {
 			if (EngineTime::is_time_step_passed()) {
 				Physics::updateWorld(EngineTime::get_fixed_delta_time());
+				collider_renderer.update(
+				    Physics::getPhysicsWorld()->getDebugRenderer());
 				scene.fixed_update(EngineTime::get_fixed_delta_time());
 			}
 			PERFORMANCE_LOGGER_PUSH("Update");
@@ -82,6 +99,7 @@ void ReflexEngine::run() {
 			PERFORMANCE_LOGGER_POP();
 			PERFORMANCE_LOGGER_PUSH("Draw");
 			engine.renderer_.draw();
+			engine.renderer_.draw_debug(collider_renderer);
 			PERFORMANCE_LOGGER_POP();
 		}
 

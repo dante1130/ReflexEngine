@@ -7,6 +7,7 @@
 
 #include "Objects/Shader.hpp"
 #include "View/Renderer/Renderer.hpp"
+#include "Controller/Physics/ColliderRenderer.hpp"
 
 // A drawcall represents a drawable object that is rendered to the screen, this
 // is done through this function pointer which is passed from the scene to the
@@ -46,6 +47,13 @@ public:
 	 * @brief Toggles between normal and wireframe rendering.
 	 */
 	void toggle_wireframe() override;
+
+	/**
+	 * @brief Draws the collider debug meshes in the collider renderer.
+	 *
+	 * @param collider_renderer
+	 */
+	void draw_debug(const ColliderRenderer& collider_renderer);
 
 	/**
 	 * @brief Adds a draw call to the renderer.

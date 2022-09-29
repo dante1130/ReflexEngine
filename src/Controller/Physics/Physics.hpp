@@ -69,13 +69,6 @@ public:
 	static reactphysics3d::PhysicsWorld* getPhysicsWorld();
 
 	/**
-	 * @brief Get the debug renderer
-	 *
-	 * @return reactphysics3d::DebugRenderer&
-	 */
-	static reactphysics3d::DebugRenderer& get_debug_renderer();
-
-	/**
 	 * @brief	Returns if the physics world is created or not
 	 * @return	bool	- If the physics world exsists
 	 *

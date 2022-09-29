@@ -50,8 +50,4 @@ reactphysics3d::PhysicsCommon& Physics::getPhysicsCommon() {
 
 reactphysics3d::PhysicsWorld* Physics::getPhysicsWorld() { return world; }
 
-reactphysics3d::DebugRenderer& Physics::get_debug_renderer() {
-	return world->getDebugRenderer();
-}
-
 bool Physics::WorldExists() { return isCreated; }

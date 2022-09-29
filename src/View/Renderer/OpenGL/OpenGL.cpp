@@ -48,6 +48,9 @@ void OpenGL::init() {
 	                                "shaders/omni_shadow_map.geom",
 	                                "shaders/omni_shadow_map.frag");
 
+	// The react shader.
+	react_shader_.CompileFile("shaders/react.vert", "shaders/react.frag");
+
 	lua_access();
 }
 
@@ -77,6 +80,32 @@ void OpenGL::draw() {
 	render_pass(directional_light, point_lights, spot_lights);
 
 	draw_calls_.clear();
+}
+
+void OpenGL::draw_debug(const ColliderRenderer& collider_renderer) {
+	auto& engine = ReflexEngine::get_instance();
+
+	glViewport(0, 0, engine.window_.get_buffer_width(),
+	           engine.window_.get_buffer_height());
+
+	glm::mat4 projection = glm::perspective(
+	    glm::radians(60.0f), engine.window_.get_ratio(), 0.1f, 1000.0f);
+
+	glm::mat4 view = engine.camera_.calc_view_matrix();
+
+	react_shader_.UseShader();
+
+	// Creates projection matrix mode
+	glUniformMatrix4fv(shader_.GetProjectionLocation(), 1, GL_FALSE,
+	                   glm::value_ptr(projection));
+
+	// Create view matrix mode
+	glUniformMatrix4fv(shader_.GetViewLocation(), 1, GL_FALSE,
+	                   glm::value_ptr(view));
+
+	react_shader_.Validate();
+
+	collider_renderer.draw();
 }
 
 void OpenGL::render_scene(const Shader& shader) {

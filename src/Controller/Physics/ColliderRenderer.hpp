@@ -24,11 +24,9 @@ public:
 	/**
 	 * @brief Draw the debug meshes.
 	 *
-	 * @param shader The shader.
-	 *
 	 * @pre Projection and view matrices have been set, and wireframe mode on.
 	 */
-	void draw(const Shader& shader);
+	void draw() const;
 
 private:
 	/// The line mesh.
