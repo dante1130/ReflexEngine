@@ -3,7 +3,7 @@
 #include <reactphysics3d/reactphysics3d.h>
 #include "CollisionEvent.hpp"
 
-//using namespace reactphysics3d;
+// using namespace reactphysics3d;
 
 class Physics {
 public:
@@ -76,6 +76,13 @@ public:
 	static reactphysics3d::PhysicsWorld* getPhysicsWorld();
 
 	/**
+	 * @brief Get the debug renderer
+	 *
+	 * @return reactphysics3d::DebugRenderer&
+	 */
+	static reactphysics3d::DebugRenderer& get_debug_renderer();
+
+	/**
 	 * @brief	Returns if the physics world is created or not
 	 * @return	bool	- If the physics world exsists
 	 *
@@ -83,7 +90,6 @@ public:
 	 * @post	Nothing
 	 */
 	static bool WorldExists();
-
 
 private:
 	/// A boolean determining if the world has been created or not.
@@ -94,5 +100,4 @@ private:
 	static reactphysics3d::PhysicsWorld* world;
 	/// The collision event listener listening for any collision.
 	static CollisionEventListener collisionEvent;
-
 };
