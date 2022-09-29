@@ -84,7 +84,7 @@ void Skybox::DrawSkybox(glm::mat4 projectionMatrix,
 	glBindTexture(GL_TEXTURE_CUBE_MAP, m_textureID);
 
 	PERFORMANCE_LOGGER_PUSH("Validate skybox shader");
-	m_skyShader->Validate();
+	// m_skyShader->Validate();
 	PERFORMANCE_LOGGER_POP();
 
 	m_skyMesh->render_mesh();

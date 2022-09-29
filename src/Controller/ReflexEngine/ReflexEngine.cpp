@@ -49,12 +49,15 @@ void ReflexEngine::run() {
 	    reactphysics3d::DebugRenderer::DebugItem::CONTACT_NORMAL, true);
 
 	while (!engine.window_.is_should_close()) {
+		PERFORMANCE_LOGGER_PUSH("Other");
 		EngineTime::update_delta_time(glfwGetTime());
 		engine.window_.update_window_buffer_size();
 
+		PERFORMANCE_LOGGER_PUSH("Input");
 		glfwPollEvents();
 		input_manager.read_keys(engine.window_.get_window());
 		input_manager.read_mouse_buttons(engine.window_.get_window());
+		PERFORMANCE_LOGGER_POP();
 
 		gui::mainLoopStart();
 
@@ -65,12 +68,16 @@ void ReflexEngine::run() {
 
 		ECSScene& scene = engine.scene_manager_.current_scene();
 
+		PERFORMANCE_LOGGER_PUSH("Mouse controls");
 		if (EngineTime::is_paused()) {
 			EngineTime::force_delta_time(0.0);
 		} else {
 			scene.mouse_controls(engine.window_.get_x_offset(),
 			                     engine.window_.get_y_offset());
 		}
+		PERFORMANCE_LOGGER_POP();
+
+		PERFORMANCE_LOGGER_POP();
 
 		if (dataMgr.getDynamicBoolData("load_game", false)) {
 			scene.load("game/ECSScene/save");
@@ -79,12 +86,14 @@ void ReflexEngine::run() {
 			scene.save("game/ECSScene/save");
 			dataMgr.setDynamicBoolData("save_game", false);
 		} else {
+			PERFORMANCE_LOGGER_PUSH("Fixed Update");
 			if (EngineTime::is_time_step_passed()) {
 				Physics::updateWorld(EngineTime::get_fixed_delta_time());
 				collider_renderer.update(
 				    Physics::getPhysicsWorld()->getDebugRenderer());
 				scene.fixed_update(EngineTime::get_fixed_delta_time());
 			}
+			PERFORMANCE_LOGGER_POP();
 			PERFORMANCE_LOGGER_PUSH("Update");
 			scene.update(EngineTime::get_delta_time());
 			PERFORMANCE_LOGGER_POP();
@@ -101,11 +110,15 @@ void ReflexEngine::run() {
 		}
 
 		DebugGUI::draw();  // DO NOT PERFORMANCE LOGGER THIS
+
+		PERFORMANCE_LOGGER_PUSH("GUI render");
 		DebugLogger::draw();
-
 		gui::mainLoopEnd();
+		PERFORMANCE_LOGGER_POP();
 
+		PERFORMANCE_LOGGER_PUSH("Swap buffers");
 		engine.window_.swap_buffers();
+		PERFORMANCE_LOGGER_POP();
 
 		if (EngineTime::is_time_step_passed()) {
 			EngineTime::reset_fixed_delta_time();
