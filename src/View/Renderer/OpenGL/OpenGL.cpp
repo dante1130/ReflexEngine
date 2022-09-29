@@ -96,16 +96,20 @@ void OpenGL::draw_debug(const ColliderRenderer& collider_renderer) {
 	react_shader_.UseShader();
 
 	// Creates projection matrix mode
-	glUniformMatrix4fv(shader_.GetProjectionLocation(), 1, GL_FALSE,
+	glUniformMatrix4fv(react_shader_.GetProjectionLocation(), 1, GL_FALSE,
 	                   glm::value_ptr(projection));
 
 	// Create view matrix mode
-	glUniformMatrix4fv(shader_.GetViewLocation(), 1, GL_FALSE,
+	glUniformMatrix4fv(react_shader_.GetViewLocation(), 1, GL_FALSE,
 	                   glm::value_ptr(view));
 
 	react_shader_.Validate();
 
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
 	collider_renderer.draw();
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
 void OpenGL::render_scene(const Shader& shader) {

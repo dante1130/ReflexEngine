@@ -42,9 +42,6 @@ void ReflexEngine::run() {
 	Physics::setDebuggerValues(
 	    reactphysics3d::DebugRenderer::DebugItem::COLLISION_SHAPE, true);
 	Physics::setDebuggerValues(
-	    reactphysics3d::DebugRenderer::DebugItem::COLLIDER_BROADPHASE_AABB,
-	    true);
-	Physics::setDebuggerValues(
 	    reactphysics3d::DebugRenderer::DebugItem::COLLIDER_AABB, true);
 	Physics::setDebuggerValues(
 	    reactphysics3d::DebugRenderer::DebugItem::CONTACT_POINT, true);
