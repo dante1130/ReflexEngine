@@ -3,6 +3,7 @@
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 #include "Controller/LuaManager.hpp"
 #include "Controller/ResourceManager/ResourceManager.hpp"
+#include "Controller/ReflexEngine/PerformanceLogger.hpp"
 
 void OpenGL::lua_access() {
 	auto& lua = LuaManager::get_instance().get_state();
@@ -75,14 +76,23 @@ void OpenGL::draw() {
 	             std::back_inserter(spot_lights),
 	             [](const SpotLight& light) { return light.is_active(); });
 
+	PERFORMANCE_LOGGER_PUSH("Directional shadows");
 	directional_shadow_pass(directional_light);
+	PERFORMANCE_LOGGER_POP();
+
+	PERFORMANCE_LOGGER_PUSH("Omnidirectional shadows");
 	omnidirectional_shadow_pass(point_lights, spot_lights);
+	PERFORMANCE_LOGGER_POP();
+
+	PERFORMANCE_LOGGER_PUSH("Default");
 	render_pass(directional_light, point_lights, spot_lights);
+	PERFORMANCE_LOGGER_POP();
 
 	draw_calls_.clear();
 }
 
 void OpenGL::draw_debug(const ColliderRenderer& collider_renderer) {
+	PERFORMANCE_LOGGER_PUSH("Debug pass");
 	auto& engine = ReflexEngine::get_instance();
 
 	glViewport(0, 0, engine.window_.get_buffer_width(),
@@ -110,6 +120,8 @@ void OpenGL::draw_debug(const ColliderRenderer& collider_renderer) {
 	collider_renderer.draw();
 
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+	PERFORMANCE_LOGGER_POP();
 }
 
 void OpenGL::render_scene(const Shader& shader) {
