@@ -104,4 +104,7 @@ private:
 
 	/// The omnidirectional shadow shader.
 	Shader omni_shadow_shader_ = {};
+
+	/// The react shader used to draw reactphysics3d debug meshes.
+	Shader react_shader_ = {};
 };

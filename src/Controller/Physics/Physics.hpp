@@ -32,12 +32,6 @@ public:
 	static void setDebuggerToActive(bool val);
 
 	/**
-	 * Collider AABB = 1
-	 * Collider Broadphase AABB = 2
-	 * Collision Shape = 4
-	 * Contact Normal = 16
-	 * Contact Point = 8
-	 *
 	 * @brief	Can set different debug values to be returned
 	 * @param	type	- The type of debugger to add
 	 * @param	val		- true if you want to add it / use it
