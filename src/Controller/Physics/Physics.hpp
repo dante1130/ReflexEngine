@@ -3,8 +3,6 @@
 #include <reactphysics3d/reactphysics3d.h>
 #include "CollisionEvent.hpp"
 
-// using namespace reactphysics3d;
-
 class Physics {
 public:
 	/**
@@ -47,7 +45,8 @@ public:
 	 * @pre		Nothing
 	 * @post	Debugger will use/not use the value
 	 */
-	static void setDebuggerValues(int type, bool val);
+	static void setDebuggerValues(reactphysics3d::DebugRenderer::DebugItem type,
+	                              bool val);
 
 	/**
 	 * @brief	Creates the world for the physic objects

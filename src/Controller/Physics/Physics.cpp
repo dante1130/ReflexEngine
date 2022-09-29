@@ -29,13 +29,12 @@ void Physics::setDebuggerToActive(bool val) {
 	world->setIsDebugRenderingEnabled(val);
 }
 
-void Physics::setDebuggerValues(int type, bool val) {
+void Physics::setDebuggerValues(reactphysics3d::DebugRenderer::DebugItem type,
+                                bool val) {
 	if (!isCreated) {
 		return;
 	}
-	reactphysics3d::DebugRenderer& debugRenderer = world->getDebugRenderer();
-	debugRenderer.setIsDebugItemDisplayed(
-	    static_cast<reactphysics3d::DebugRenderer::DebugItem>(type), val);
+	world->getDebugRenderer().setIsDebugItemDisplayed(type, val);
 }
 
 void Physics::destroyWorld() {
