@@ -24,11 +24,14 @@ void EngineResolve::update(float delta_time) {
 	}
 
 	glm::vec3 pos = getPosition();
-	float temp = 0.5 * pow(delta_time, 2);
-	pos = pos + (linear_.velocity * delta_time) +
-	      (linear_.acceleration.x * temp, linear_.acceleration.y * temp,
-	       linear_.acceleration.z * temp);
+	pos =
+	    pos + (linear_.velocity * delta_time) +
+	    (linear_.acceleration * static_cast<float>(pow(delta_time, 2)) * 0.5f);
 	setPosition(pos);
+
+	glm::vec3 rotation_change =
+	    (angular_.velocity * delta_time) +
+	    (angular_.acceleration * static_cast<float>(pow(delta_time, 2)) * 0.5f);
 
 	linear_.velocity = linear_.velocity + linear_.acceleration * delta_time;
 	linear_.acceleration = glm::vec3(0);
