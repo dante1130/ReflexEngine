@@ -1,5 +1,7 @@
 #include "EngineResolve.hpp"
 
+#include "Controller/GUI/DebugLogger.hpp"
+
 using namespace rp3d;
 
 EngineResolve::EngineResolve() {
@@ -32,6 +34,8 @@ void EngineResolve::update(float delta_time) {
 	glm::vec3 rotation_change =
 	    (angular_.velocity * delta_time) +
 	    (angular_.acceleration * static_cast<float>(pow(delta_time, 2)) * 0.5f);
+	rotation_change = rotation_change * (180.0f / PI_RP3D);
+	setEulerRotation(getRotation() + rotation_change);
 
 	linear_.velocity = linear_.velocity + linear_.acceleration * delta_time;
 	linear_.acceleration = glm::vec3(0);
@@ -44,8 +48,11 @@ void EngineResolve::update(float delta_time) {
 }
 
 void EngineResolve::initialise_body(glm::vec3 pos, glm::vec3 rot, float angle) {
+	//
+	//
+	//
 	initialise_body(pos, rot);
-	setAngle(angle);
+	// setAngle(angle);
 }
 
 void EngineResolve::initialise_body(glm::vec3 pos, glm::vec3 rot) {
@@ -54,7 +61,7 @@ void EngineResolve::initialise_body(glm::vec3 pos, glm::vec3 rot) {
 	trans.setOrientation(Quaternion::identity());
 
 	collision_body_ = Physics::getPhysicsWorld()->createCollisionBody(trans);
-	setRotation(rot);
+	setEulerRotation(rot);
 }
 
 void EngineResolve::delete_body() { collision_body_->~CollisionBody(); }
@@ -318,19 +325,41 @@ void EngineResolve::setQuaternion(glm::quat quat) {
 
 glm::quat EngineResolve::getOrientation() {
 	Quaternion quat = collision_body_->getTransform().getOrientation();
-	return glm::quat(quat.x, quat.y, quat.z, quat.w);
+	return glm::quat(quat.w, quat.x, quat.y, quat.z);
 }
 
 void EngineResolve::setEulerRotation(glm::vec3 rot) {
 	///
 	///
 	///
+	Transform transform = collision_body_->getTransform();
+	Quaternion orientation = Quaternion::identity();
+	glm::vec3 rot_radians = glm::radians(rot);
+
+	double cy = glm::cos(rot_radians.z * 0.5);  // cosine applied on yaw
+	double sy = glm::sin(rot_radians.z * 0.5);  // sine applied on yaw
+	double cp = glm::cos(rot_radians.y * 0.5);  // cosine applied on pitch
+	double sp = glm::sin(rot_radians.y * 0.5);  // sine applied on pitch
+	double cr = glm::cos(rot_radians.x * 0.5);  // cosine applied on roll
+	double sr = glm::sin(rot_radians.x * 0.5);  // sine applied on roll
+
+	orientation.w = cr * cp * cy + sr * sp * sy;
+	orientation.x = sr * cp * cy - cr * sp * sy;
+	orientation.y = cr * sp * cy + sr * cp * sy;
+	orientation.z = cr * cp * sy - sr * sp * cy;
+
+	transform.setOrientation(orientation);
+	collision_body_->setTransform(transform);
 }
 
 void EngineResolve::setRotation(glm::vec3 rot) {
 	///
 	///
 	///
+	// Transform transform = collision_body_->getTransform();
+	// transform.setOrientation(
+	//     Quaternion(rot.x, rot.y, rot.z, transform.getOrientation().w));
+	// collision_body_->setTransform(transform);
 }
 
 glm::vec3 EngineResolve::getRotation() {
@@ -339,7 +368,7 @@ glm::vec3 EngineResolve::getRotation() {
 	///
 	Quaternion quat = collision_body_->getTransform().getOrientation();
 	return glm::degrees(
-	    glm::eulerAngles(glm::quat(quat.x, quat.y, quat.z, quat.w)));
+	    glm::eulerAngles(glm::quat(quat.w, quat.x, quat.y, quat.z)));
 }
 
 void EngineResolve::setAngle(float ang) {

@@ -26,14 +26,15 @@ void RigidbodyManager::update_rigidbody(Component::Rigidbody& rb,
 
 	/// Update the properties of the rigidbody based of changes made to
 	/// the component from the gui or lua
-	if (rb.getIsGravityEnabled() != rb.gravity_on)
-		rb.enableGravity(rb.gravity_on);
+	// if (rb.getIsGravityEnabled() != rb.gravity_on)
+	//	rb.enableGravity(rb.gravity_on);
 
-	if (rb.getIsTrigger() != rb.is_trigger) rb.setObjectTrigger(rb.is_trigger);
-	if (rb.getCanSleep() != rb.can_sleep) rb.setCanSleep(rb.can_sleep);
+	// if (rb.getIsTrigger() != rb.is_trigger)
+	// rb.setObjectTrigger(rb.is_trigger); if (rb.getCanSleep() != rb.can_sleep)
+	// rb.setCanSleep(rb.can_sleep);
 
-	if (rb.getDragForce() != rb.lin_drag) rb.setDragForce(rb.lin_drag);
-	if (rb.getDragTorque() != rb.ang_drag) rb.setDragTorque(rb.ang_drag);
+	// if (rb.getDragForce() != rb.lin_drag) rb.setDragForce(rb.lin_drag);
+	// if (rb.getDragTorque() != rb.ang_drag) rb.setDragTorque(rb.ang_drag);
 
 	/// Sets previous position
 	rb.setPreviousPosition(tf.position);
