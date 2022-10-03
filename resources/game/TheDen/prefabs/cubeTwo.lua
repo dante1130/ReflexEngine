@@ -1,10 +1,10 @@
 entity = {
-	name = "Cube Two",
+	name = "First Block",
 
 	transform = {
 		position = {
-			x = 55,
-			y = 25,
+			x = 5,
+			y = 0,
 			z = 0
 		},
 		rotation = {
@@ -13,9 +13,9 @@ entity = {
 			z = 0
 		},
 		scale = {
-			x = 0.25,
-			y = 0.25,
-			z = 0.25
+			x = 0.5,
+			y = 5,
+			z = 5
 		}
 	},
 
@@ -31,7 +31,7 @@ entity = {
         is_trigger = false,
         linear_drag = 0.1,
         angular_drag = 0.1,
-		rb_type = 0
+		rb_type = 2
     },
 
 	script = {

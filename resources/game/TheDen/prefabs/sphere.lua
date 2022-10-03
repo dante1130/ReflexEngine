@@ -1,9 +1,9 @@
 entity = {
-	name = "Last Block",
+	name = "Sphere",
 
 	transform = {
 		position = {
-			x = -5,
+			x = 30,
 			y = 0,
 			z = 0
 		},
@@ -13,14 +13,14 @@ entity = {
 			z = 0
 		},
 		scale = {
-			x = 0.5,
-			y = 5,
-			z = 5
+			x = 2,
+			y = 2,
+			z = 2
 		}
 	},
 
 	model = {
-		model_name = "default",
+		model_name = "Sphere",
 		material_name = "default"
 	},
 
@@ -35,6 +35,6 @@ entity = {
     },
 
 	script = {
-		lua_script = "game/TheDen/scripts/rb_add_script.lua"
+		lua_script = "game/TheDen/scripts/rb_sphere_add.lua"
 	}
 }

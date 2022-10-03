@@ -1,5 +1,5 @@
 entity = {
-	name = "Middle light 1",
+	name = "Light",
 	collection_id = 1,
 
 	point_light = {
@@ -18,8 +18,8 @@ entity = {
 		diffuse_intensity = 1,
 
 		position = {
-			x = 54,
-			y = 2.5,
+			x = 10,
+			y = 10,
 			z = -1.275
 		},
 

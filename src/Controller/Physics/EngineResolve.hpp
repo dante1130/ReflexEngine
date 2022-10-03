@@ -13,26 +13,23 @@ struct bool3 {
 
 	bool3() = default;
 
-	bool3(bool x, bool y, bool z): 
-		lock_x(x), lock_y(y), lock_z(z) {}
+	bool3(bool x, bool y, bool z) : lock_x(x), lock_y(y), lock_z(z) {}
 };
 
 /**
  * @author Spencer Shaw
  * @class EngineResolve
  * @brief An encapsulation class for handling physics resolution
- * by the engine 
+ * by the engine
  */
 class EngineResolve : public PhysicsBody {
-
 private:
-
-	rp3d::CollisionBody* cb; /// Pointer to collisionbody in reactphysics3d phyiscs world
+	rp3d::CollisionBody*
+	    cb;  /// Pointer to collisionbody in reactphysics3d phyiscs world
 
 protected:
-
 	/// Current linear velocity (in ms-1)
-	glm::vec3 lin_velocity_; 
+	glm::vec3 lin_velocity_;
 	/// Current linear accelaration (in ms-2)
 	glm::vec3 lin_accelaration_;
 
@@ -62,7 +59,6 @@ protected:
 	/// A set of booleans which saves if collsion normal is positive
 	bool3 lock_axes_front;
 
-	
 	/// Records if the collision has finished
 
 	bool collision_started;
@@ -70,7 +66,6 @@ protected:
 	bool collision_finished;
 
 public:
-
 	EngineResolve();
 
 	/**
@@ -173,7 +168,6 @@ public:
 	 * @return void
 	 */
 	void addDragTorque(float ang_drag) override;
-
 
 	/**
 	 * @brief Sets the total mass of object
