@@ -22,7 +22,22 @@ EngineResolve::EngineResolve() {
 
 bool EngineResolve::usingReactResolve() { return false; }
 
-void EngineResolve::resolve(glm::vec3 normal, CollisionEvent c_type) {}
+void EngineResolve::resolve(glm::vec3 lambda, glm::vec3 vector_to_collision,
+                            glm::vec3 contact_normal, int collision_number) {
+	float mult = 1;
+	if (collision_number == 2) {
+		mult = -1;
+	}
+
+	// Linear velocity change
+	linear_.velocity = linear_.velocity + (lambda / total_mass_) * mult;
+
+	// Angular velocity change
+	// glm::vec3 angular_part_one = lambda * inverseInertiaTensor;
+	// glm::vec3 angular_part_two = glm::cross(vector_to_collision,
+	// contact_normal); angular_.velocity = angular_.velocity +
+	// (angular_part_one * angular_part_two) * mult;
+}
 
 void EngineResolve::update(float delta_time) {
 	if (body_type_ == BodyType::STATIC) {

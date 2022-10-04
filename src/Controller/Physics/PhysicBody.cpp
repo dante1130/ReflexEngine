@@ -1,13 +1,18 @@
 #include "PhysicBody.hpp"
 
+#include "Controller/GUI/DebugLogger.hpp"
+
 using namespace rp3d;
 
-void PhysicsBody::collision(Collider* c1, Collider* c2, Vector3 normal,
+void PhysicsBody::collision(Collider* collider1, Collider* collider2,
+                            glm::vec3 lpoint_c1, glm::vec3 lpoint_c2,
+                            glm::vec3 collision_normal, double collision_depth,
                             CollisionEvent c_type) {
-	///
-	///
-	///
-	///
+	PhysicsBody* pb1 = static_cast<PhysicsBody*>(collider1->getUserData());
+	PhysicsBody* pb2 = static_cast<PhysicsBody*>(collider2->getUserData());
+
+	pb1->resolve(glm::vec3(0), glm::vec3(0), collision_normal, 1);
+	pb2->resolve(glm::vec3(0), glm::vec3(0), collision_normal, 2);
 }
 
 size_t PhysicsBody::colliderSize() { return colliders.size(); }

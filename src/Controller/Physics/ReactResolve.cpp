@@ -10,7 +10,10 @@ ReactResolve::ReactResolve() {
 
 void ReactResolve::update(float delta_time) {}
 
-void ReactResolve::resolve(glm::vec3 normal, CollisionEvent c_type) { return; }
+void ReactResolve::resolve(glm::vec3 lambda, glm::vec3 vector_to_collision,
+                           glm::vec3 contact_normal, int collision_number) {
+	return;
+}
 
 void ReactResolve::initialise_body(glm::vec3 pos, glm::vec3 rot, float angle) {
 	Vector3 position(pos.x, pos.y, pos.z);
