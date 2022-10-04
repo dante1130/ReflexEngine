@@ -29,12 +29,19 @@ void EngineResolve::update(float delta_time) {
 		return;
 	}
 
+	if (body_type_ == BodyType::KINEMATIC) {
+		linear_.acceleration = glm::vec3(0);
+		angular_.acceleration = glm::vec3(0);
+	}
+
+	// Position update
 	glm::vec3 pos = getPosition();
 	pos =
 	    pos + (linear_.velocity * delta_time) +
 	    (linear_.acceleration * static_cast<float>(pow(delta_time, 2)) * 0.5f);
 	setPosition(pos);
 
+	// Rotation update
 	glm::vec3 rotation_change =
 	    (angular_.velocity * delta_time) +
 	    (angular_.acceleration * static_cast<float>(pow(delta_time, 2)) * 0.5f);
@@ -47,10 +54,6 @@ void EngineResolve::update(float delta_time) {
 	linear_.acceleration = glm::vec3(0);
 	angular_.velocity = angular_.velocity + angular_.acceleration * delta_time;
 	angular_.acceleration = glm::vec3(0);
-
-	if (body_type_ == BodyType::KINEMATIC) {
-		return;
-	}
 }
 
 void EngineResolve::initialise_body(glm::vec3 pos, glm::vec3 rot, float angle) {

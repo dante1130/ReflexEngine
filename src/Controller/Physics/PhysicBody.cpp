@@ -2,6 +2,14 @@
 
 using namespace rp3d;
 
+void PhysicsBody::collision(Collider* c1, Collider* c2, Vector3 normal,
+                            CollisionEvent c_type) {
+	///
+	///
+	///
+	///
+}
+
 size_t PhysicsBody::colliderSize() { return colliders.size(); }
 
 void PhysicsBody::removeCollider(size_t index) {
@@ -158,9 +166,6 @@ size_t PhysicsBody::getColliderIndex(rp3d::Collider* collider) {
 
 	return colliders.size();
 }
-
-void PhysicsBody::collision(Collider* c1, Collider* c2, Vector3 normal,
-                            CollisionEvent c_type) {}
 
 glm::vec3 PhysicsBody::getPreviousPosition() {
 	return previous_transform_position;

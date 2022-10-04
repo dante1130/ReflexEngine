@@ -3,12 +3,12 @@
 #include "PhysicBody.hpp"
 #include <glm.hpp>
 
-typedef struct Motion_Stats {
+struct Motion_Stats {
 	glm::vec3 velocity;
 	glm::vec3 acceleration;
 
 	Motion_Stats() : velocity(glm::vec3(0)), acceleration(glm::vec3(0)) {}
-} Motion_Stats;
+};
 
 class EngineResolve : public PhysicsBody {
 private:

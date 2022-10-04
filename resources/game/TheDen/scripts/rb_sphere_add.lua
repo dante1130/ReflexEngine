@@ -39,6 +39,6 @@ function update(ecs, entity)
 	end
 
 	if (update == true) then
-		--transform_component.position = transform
+		transform_component.position = transform
 	end
 end
