@@ -44,6 +44,9 @@ private:
 	/// the object is a trigger
 	bool is_trigger = false;
 
+	static float J_calc(glm::vec3 r1, glm::vec3 collision_normal,
+	                    glm::mat3x3 inertiaTensor);
+
 protected:
 	/// Collection of pointers to rigidbodies colliders
 	std::vector<rp3d::Collider*> colliders;
@@ -67,6 +70,9 @@ protected:
 	glm::vec3 previous_transform_position;
 
 	float epsilon_value_ = 0;
+
+	glm::mat3x3 inertia_tensor_;
+	glm::mat3x3 rotated_inertia_tensor_;
 
 	/**
 	 * @brief Deletes a specified collider form rigidbody

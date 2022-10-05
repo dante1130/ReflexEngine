@@ -1,5 +1,6 @@
 #include "PhysicBody.hpp"
 
+#include "Controller/Physics/QuaternionHelper.hpp"
 #include "Controller/GUI/DebugLogger.hpp"
 
 using namespace rp3d;
@@ -15,22 +16,54 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 
 	// num_eqn = numerator section of equation
 	// div_eqn = divisor section of equation
-	// float epsilon_num_eqn = 1 +
-	// float vel_num_eqn =
-	//    glm::dot(collision_normal, (pb1->getVelocity() - pb2->getVelocity()));
-	// float w1_num_eqn
-	// float w2_num_eqn
-	// float num_eqn = epsilon_num_eqn * (vel_num_eqn + w1_num_eqn - w2_num_eqn)
+	float epsilon = pb1->epsilon_value_;
+	if (epsilon > pb2->epsilon_value_) {
+		epsilon = pb2->epsilon_value_;
+	}
+	float epsilon_num_eqn = 1 + epsilon;
+	float vel_num_eqn =
+	    glm::dot(collision_normal, (pb1->getVelocity() - pb2->getVelocity()));
+	float w1_num_eqn = glm::dot(pb1->getAngVelocity(),
+	                            glm::cross(lpoint_c1, collision_normal));
+	float w2_num_eqn = glm::dot(pb2->getAngVelocity(),
+	                            glm::cross(lpoint_c2, collision_normal));
+	float num_eqn = -epsilon_num_eqn * (vel_num_eqn + w1_num_eqn - w2_num_eqn);
 
-	// float mass_div_eqn = (1.0 / pb1->getMass()) + (1.0 / pb2->getMass());
-	// float div_eqn = mass_div_eqn;  //+ j1_div_eqn + j2_dv_eqn
-	// lambda = num_eqn / div_eqn;
-	// lambda = lambda * collision_normal;
+	float mass_div_eqn = (1.0 / pb1->getMass()) + (1.0 / pb2->getMass());
 
-	pb1->resolve(lambda, glm::vec3(0), collision_normal,
+	pb1->rotated_inertia_tensor_ = QuaternionHelper::RotateMat3x3WithQuat(
+	    pb1->inertia_tensor_, pb1->getOrientation());
+	pb2->rotated_inertia_tensor_ = QuaternionHelper::RotateMat3x3WithQuat(
+	    pb2->inertia_tensor_, pb2->getOrientation());
+	float j1_div_eqn =
+	    J_calc(lpoint_c1, collision_normal, pb1->rotated_inertia_tensor_);
+	float j2_div_eqn =
+	    J_calc(lpoint_c2, collision_normal, pb2->rotated_inertia_tensor_);
+	float div_eqn = mass_div_eqn + (j1_div_eqn + j2_div_eqn);
+
+	lambda = (num_eqn / div_eqn) * collision_normal;
+
+	pb1->resolve(lambda, lpoint_c1, collision_normal,
 	             1);  // may need the 1 to be a 2
-	pb2->resolve(lambda, glm::vec3(0), collision_normal,
+	pb2->resolve(lambda, lpoint_c2, collision_normal,
 	             2);  // may need the 2 to be a 1
+}
+
+float PhysicsBody::J_calc(glm::vec3 r1, glm::vec3 collision_normal,
+                          glm::mat3x3 inertiaTensor) {
+	float result = 0;
+	glm::vec3 cross_result = glm::cross(r1, collision_normal);
+	glm::mat3 iIT = glm::inverse(inertiaTensor);  // Inverse Inertia Tensor
+
+	glm::vec3 transpose_J = glm::vec3(0);
+	transpose_J.x = cross_result.x * (iIT[0][0] + iIT[1][0] + iIT[2][0]);
+	transpose_J.y = cross_result.y * (iIT[0][1] + iIT[1][1] + iIT[2][1]);
+	transpose_J.z = cross_result.z * (iIT[0][2] + iIT[1][2] + iIT[2][2]);
+
+	result = transpose_J.x * cross_result.x + transpose_J.y * cross_result.y +
+	         transpose_J.z * cross_result.z;
+
+	return result;
 }
 
 size_t PhysicsBody::colliderSize() { return colliders.size(); }

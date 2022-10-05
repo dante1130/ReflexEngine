@@ -33,10 +33,13 @@ void EngineResolve::resolve(glm::vec3 lambda, glm::vec3 vector_to_collision,
 	linear_.velocity = linear_.velocity + (lambda / total_mass_) * mult;
 
 	// Angular velocity change
-	// glm::vec3 angular_part_one = lambda * inverseInertiaTensor;
-	// glm::vec3 angular_part_two = glm::cross(vector_to_collision,
-	// contact_normal); angular_.velocity = angular_.velocity +
-	// (angular_part_one * angular_part_two) * mult;
+	glm::mat3x3 angular_part_one =
+	    static_cast<float>(lambda.length()) *
+	    glm::transpose(rotated_inertia_tensor_);  // lambda should be scalar
+	glm::vec3 angular_part_two =
+	    glm::cross(vector_to_collision, contact_normal);
+	angular_.velocity =
+	    angular_.velocity + (angular_part_one * angular_part_two) * mult;
 }
 
 void EngineResolve::update(float delta_time) {
@@ -246,6 +249,13 @@ uint32_t EngineResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size,
 	total_mass_ += mass;
 	epsilon_ = epsilon;
 
+	inertia_tensor_[0][0] =
+	    (1.0f / 12.0f) * mass * (pow(size.y, 2) + pow(size.z, 2));  // Ixx
+	inertia_tensor_[1][1] =
+	    (1.0f / 12.0f) * mass * (pow(size.x, 2) + pow(size.z, 2));  // Iyy
+	inertia_tensor_[2][2] =
+	    (1.0f / 12.0f) * mass * (pow(size.x, 2) + pow(size.y, 2));  // Izz
+
 	return colliders.size() - 1;
 }
 
@@ -284,6 +294,10 @@ uint32_t EngineResolve::addSphereCollider(glm::vec3 pos, float radius,
 
 	total_mass_ += mass;
 	epsilon_ = epsilon;
+
+	inertia_tensor_[0][0] = (2.0f / 3.0f) * mass * pow(radius, 2);  // Ixx
+	inertia_tensor_[1][1] = inertia_tensor_[0][0];                  // Iyy
+	inertia_tensor_[2][2] = inertia_tensor_[0][0];                  // Izz
 
 	return colliders.size() - 1;
 }
@@ -325,6 +339,15 @@ uint32_t EngineResolve::addCapsuleCollider(glm::vec3 pos, float radius,
 
 	total_mass_ += mass;
 	epsilon_ = epsilon;
+
+	inertia_tensor_[0][0] = (1.0f / 4.0f) * mass * pow(radius, 2) +
+	                        (1.0f / 12.0f) * mass * pow(height, 2);  // Ixx
+	inertia_tensor_[1][1] =
+	    (1.0f / 2.0f) * mass *
+	    pow(radius,
+	        2);  // Iyy //calculation of Iyy switched with Izz from the handout
+	             // because of rotation (pointing up instead of to the side)
+	inertia_tensor_[2][2] = inertia_tensor_[0][0];  // Izz
 
 	return colliders.size() - 1;
 }
