@@ -5,7 +5,6 @@
 #include "Controller/Networking/NetworkAccess.h"
 #include "Controller/MathAccess.hpp"
 #include "Controller/ECS/ECSAccess.hpp"
-#include "Controller/AI/luaAccessScriptedFSM.hpp"
 #include "Controller/Input/InputManager.hpp"
 #include "Controller/Audio/Audio.hpp"
 #include "Controller/Physics/Physics.hpp"
@@ -18,6 +17,7 @@
 #include "Controller/ReflexEngine/PerformanceLogger.hpp"
 #include "Controller/GUI/DebugGUI.hpp"
 #include "Controller/Physics/ColliderRenderer.hpp"
+#include "Controller/ResourceManager/ResourceManager.hpp"
 
 void ReflexEngine::run() {
 	auto& engine = ReflexEngine::get_instance();
@@ -127,9 +127,6 @@ void ReflexEngine::run() {
 
 	engine.scene_manager_.clear_scenes();
 
-	entityMgr.killEntities();
-	entityMgr.killManager();
-
 	Physics::destroyWorld();
 	gui::shutdown();
 }
@@ -163,7 +160,6 @@ void ReflexEngine::lua_access() {
 	ResourceManager::get_instance();
 	Audio::get_instance();
 	Physics::createWorld();
-	luaAccessScriptedFSM::registerAllAI();
 	EngineTime::lua_access();
 
 	window_.lua_access();
