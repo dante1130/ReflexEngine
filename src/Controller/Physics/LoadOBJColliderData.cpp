@@ -8,6 +8,8 @@
 
 constexpr float BOUNCE = 0.1;
 constexpr float FRICTION = 0.25;
+constexpr float MASS = 1.0;
+constexpr float EPSILON = 0.85;
 
 float min(float min_val, float new_val, bool first);
 float max(float max_val, float new_val, bool first);
@@ -52,7 +54,7 @@ void loadOBJColliderData::load_obj_collider_data(Component::Rigidbody &rb_comp,
 
 			rb_comp.addBoxCollider(
 			    center, glm::vec3(max_x - min_x, max_y - min_y, max_z - min_z),
-			    BOUNCE, FRICTION);
+			    BOUNCE, FRICTION, MASS, EPSILON);
 
 		} else if (input_line[0] == 'v' && input_line[1] == ' ') {  // If point
 			sstream = std::stringstream(input_line);
@@ -94,7 +96,7 @@ void loadOBJColliderData::load_obj_collider_data(Component::Rigidbody &rb_comp,
 
 		rb_comp.addBoxCollider(
 		    center, glm::vec3(max_x - min_x, max_y - min_y, max_z - min_z),
-		    BOUNCE, FRICTION);
+		    BOUNCE, FRICTION, MASS, EPSILON);
 	}
 }
 

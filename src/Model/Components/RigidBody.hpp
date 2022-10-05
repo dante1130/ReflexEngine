@@ -34,12 +34,12 @@ public:
 	float lin_drag;
 	/// Angular drag applied on object
 	float ang_drag;
-	/// Boolean determining resolution system 
+	/// Boolean determining resolution system
 	bool using_react_start;
 
 	std::string collider_obj_data = "";
 
-  /// Default constructor
+	/// Default constructor
 	Rigidbody() = default;
 
 	/// Default copy constructor
@@ -63,8 +63,8 @@ public:
 	void setTransform(glm::vec3 pos, glm::vec3 rot);
 
 	/**
-	 * @brief Sets the properties of the rigidbody that 
-	 * are visible from the GUI 
+	 * @brief Sets the properties of the rigidbody that
+	 * are visible from the GUI
 	 *
 	 * @param gravity_on - If gravity is applied to object
 	 * @param can_sleep - If the object can sleep
@@ -80,7 +80,7 @@ public:
 	/**
 	 * @brief Returns true if physics body is using
 	 * reactphysics3d resolution
-	 * 
+	 *
 	 * @return bool
 	 */
 	bool usingReactResolve();
@@ -88,22 +88,22 @@ public:
 	/**
 	 * @brief Returns true if the object has been
 	 * properly intialised and set
-	 * 
+	 *
 	 * @return bool
 	 */
 	bool intialised();
 
 	/**
-	 * @brief Applies physics calculations and finds the new 
-	 * transform properties of the object 
-	 * 
+	 * @brief Applies physics calculations and finds the new
+	 * transform properties of the object
+	 *
 	 * @param delta_time - The delta time
 	 * @return void
 	 */
 	void update(float delta_time);
 
 	/**
-	 * @brief Removes a the body (CollisionBody/Rigidbody) 
+	 * @brief Removes a the body (CollisionBody/Rigidbody)
 	 * of PhysicsBody and its properties
 	 *
 	 * @return void
@@ -157,7 +157,7 @@ public:
 	/**
 	 * @brief Gets the shape of the collider as
 	 * an integer value
-	 * 
+	 *
 	 * @param index - Index of collider
 	 * @return int
 	 */
@@ -280,7 +280,6 @@ public:
 	 */
 	bool getIsTrigger();
 
-
 	/**
 	 * @brief Adds a force to an object's center of mass
 	 *
@@ -312,7 +311,7 @@ public:
 	void addTorque(glm::vec3 torque, Apply type);
 
 	/**
-	 * @brief Adds a drag force to an object 
+	 * @brief Adds a drag force to an object
 	 *
 	 * @param drag - the size of the drag force applied
 	 * @return void
@@ -376,7 +375,7 @@ public:
 	void setDragTorque(float angular_drag);
 
 	/**
-	 * @brief Sets the physics type (Static, Kinematic 
+	 * @brief Sets the physics type (Static, Kinematic
 	 * or Dynamic)
 	 *
 	 * @param type - the desired physics type as an integer
@@ -384,7 +383,6 @@ public:
 	 */
 	void setType(int type);
 
-	
 	/**
 	 * @brief Gets the total mass of object
 	 *
@@ -434,10 +432,11 @@ public:
 	 * @param size - the desired half extents
 	 * @param bounce - the bounciness property
 	 * @param friction - the friction property
+	 * @param epsilone - the coefficient of restitution
 	 * @return uint32_t
 	 */
 	uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce,
-	                        float friction);
+	                        float friction, float mass, float epsilon);
 
 	/**
 	 * @brief Creates and adds a sphere collider to object
@@ -446,10 +445,11 @@ public:
 	 * @param radius - the desired radius
 	 * @param bounce - the bounciness property
 	 * @param friction - the friction property
+	 * @param epsilone - the coefficient of restitution
 	 * @return uint32_t
 	 */
 	uint32_t addSphereCollider(glm::vec3 pos, float radius, float bounce,
-	                           float friction);
+	                           float friction, float mass, float epsilon);
 
 	/**
 	 * @brief Creates and adds a capsule collider to object
@@ -459,11 +459,12 @@ public:
 	 * @param height - the desired height
 	 * @param bounce - the bounciness property
 	 * @param friction - the friction property
+	 * @param epsilone - the coefficient of restitution
 	 * @return uint32_t
 	 */
 	uint32_t addCapsuleCollider(glm::vec3 pos, float radius, float height,
-	                            float bounce, float friction);
-
+	                            float bounce, float friction, float mass,
+	                            float epsilon);
 
 	/**
 	 * @brief Gets the position of the rigidbody
@@ -473,7 +474,7 @@ public:
 	glm::vec3 getPosition();
 
 	/**
-	 * @brief Gets the euler rotation of the 
+	 * @brief Gets the euler rotation of the
 	 * rigidbody
 	 *
 	 * @return glm::vec3
@@ -481,7 +482,7 @@ public:
 	glm::vec3 getRotation();
 
 	/**
-	 * @brief Gets the quanterion orientation of 
+	 * @brief Gets the quanterion orientation of
 	 * the rigidbody
 	 *
 	 * @return glm::vec3
@@ -497,7 +498,7 @@ public:
 	void setPosition(glm::vec3 pos);
 
 	/**
-	 * @brief Sets the quanterion orientation of 
+	 * @brief Sets the quanterion orientation of
 	 * the rigidbody
 	 *
 	 * @param quat - the desired orientation

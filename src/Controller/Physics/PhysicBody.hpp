@@ -66,6 +66,8 @@ protected:
 	/// The previous position of the object from last update
 	glm::vec3 previous_transform_position;
 
+	float epsilon_value_ = 0;
+
 	/**
 	 * @brief Deletes a specified collider form rigidbody
 	 *
@@ -515,9 +517,12 @@ public:
 	 *
 	 * @param pos - The desired position
 	 * @param size - The desired half extents
+	 * @param mass - The mass of the collider
+	 * @param epsilon - coefficient of restitution
 	 * @return uint32_t
 	 */
-	virtual uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 size) = 0;
+	virtual uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 size, float mass,
+	                                float epsilon) = 0;
 
 	/**
 	 * @brief Creates and adds a sphere collider to object
@@ -525,9 +530,12 @@ public:
 	 *
 	 * @param pos - The desired position
 	 * @param radius - The desired radius
+	 * @param mass - The mass of the collider
+	 * @param epsilon - coefficient of restitution
 	 * @return uint32_t
 	 */
-	virtual uint32_t addSphereCollider(glm::vec3 pos, float radius) = 0;
+	virtual uint32_t addSphereCollider(glm::vec3 pos, float radius, float mass,
+	                                   float epsilon) = 0;
 
 	/**
 	 * @brief Creates and adds a capsule collider to object
@@ -536,10 +544,13 @@ public:
 	 * @param pos - The desired position
 	 * @param radius - The desired radius
 	 * @param height - The desired height
+	 * @param mass - The mass of the collider
+	 * @param epsilon - coefficient of restitution
 	 * @return uint32_t
 	 */
 	virtual uint32_t addCapsuleCollider(glm::vec3 pos, float radius,
-	                                    float height) = 0;
+	                                    float height, float mass,
+	                                    float epsilon) = 0;
 
 	/**
 	 * @brief Creates and adds a box collider to object
@@ -550,11 +561,14 @@ public:
 	 * @param size - The desired half extents
 	 * @param bounce - The bounciness property
 	 * @param friction - The friction property
+	 * @param mass - The mass of the collider
+	 * @param epsilon - coefficient of restitution
 	 * @return uint32_t
 	 */
 	virtual uint32_t addBoxCollider(PhysicsBody* rb, glm::vec3 pos,
 	                                glm::vec3 size, float bounce,
-	                                float friction) = 0;
+	                                float friction, float mass,
+	                                float epsilon) = 0;
 
 	/**
 	 * @brief Creates and adds a sphere collider to object
@@ -565,11 +579,14 @@ public:
 	 * @param radius - The desired radius
 	 * @param bounce - The bounciness property
 	 * @param friction - The friction property
+	 * @param mass - The mass of the collider
+	 * @param epsilon - coefficient of restitution
 	 * @return uint32_t
 	 */
 	virtual uint32_t addSphereCollider(PhysicsBody* rb, glm::vec3 pos,
 	                                   float radius, float bounce,
-	                                   float friction) = 0;
+	                                   float friction, float mass,
+	                                   float epsilon) = 0;
 
 	/**
 	 * @brief Creates and adds a capsule collider to object
@@ -581,11 +598,14 @@ public:
 	 * @param height - The desired height
 	 * @param bounce - The bounciness property
 	 * @param friction - The friction property
+	 * @param mass - The mass of the collider
+	 * @param epsilon - coefficient of restitution
 	 * @return uint32_t
 	 */
 	virtual uint32_t addCapsuleCollider(PhysicsBody* rb, glm::vec3 pos,
 	                                    float radius, float height,
-	                                    float bounce, float friction) = 0;
+	                                    float bounce, float friction,
+	                                    float mass, float epsilon) = 0;
 
 	/**
 	 * @brief Creates and adds a box collider to object
@@ -594,10 +614,13 @@ public:
 	 * @param size - The desired half extents
 	 * @param bounce - The bounciness property
 	 * @param friction - The friction property
+	 * @param mass - The mass of the collider
+	 * @param epsilon - coefficient of restitution
 	 * @return uint32_t
 	 */
 	virtual uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce,
-	                                float friction) = 0;
+	                                float friction, float mass,
+	                                float epsilon) = 0;
 
 	/**
 	 * @brief Creates and adds a sphere collider to object
@@ -606,10 +629,13 @@ public:
 	 * @param radius - The desired radius
 	 * @param bounce - The bounciness property
 	 * @param friction - The friction property
+	 * @param mass - The mass of the collider
+	 * @param epsilon - coefficient of restitution
 	 * @return uint32_t
 	 */
 	virtual uint32_t addSphereCollider(glm::vec3 pos, float radius,
-	                                   float bounce, float friction) = 0;
+	                                   float bounce, float friction, float mass,
+	                                   float epsilon) = 0;
 
 	/**
 	 * @brief Creates and adds a capsule collider to object
@@ -619,11 +645,14 @@ public:
 	 * @param height - The desired height
 	 * @param bounce - The bounciness property
 	 * @param friction - The friction property
+	 * @param mass - The mass of the collider
+	 * @param epsilon - coefficient of restitution
 	 * @return uint32_t
 	 */
 	virtual uint32_t addCapsuleCollider(glm::vec3 pos, float radius,
 	                                    float height, float bounce,
-	                                    float friction) = 0;
+	                                    float friction, float mass,
+	                                    float epsilon) = 0;
 
 	/**
 	 * @brief Gets the position of the rigidbody

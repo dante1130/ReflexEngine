@@ -15,7 +15,7 @@ EngineResolve::EngineResolve() {
 	angular_.velocity = glm::vec3(0);
 	angular_.acceleration = glm::vec3(0);
 
-	total_mass_ = 1;
+	total_mass_ = 0;
 
 	body_type_ = BodyType::DYNAMIC;
 }
@@ -232,7 +232,8 @@ bool EngineResolve::getCanSleep() {
 	return false;
 }
 
-uint32_t EngineResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size) {
+uint32_t EngineResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size,
+                                       float mass, float epsilon) {
 	BoxShape* collider = Physics::getPhysicsCommon().createBoxShape(
 	    rp3d::Vector3(size.x / 2, size.y / 2, size.z / 2));
 
@@ -242,12 +243,16 @@ uint32_t EngineResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size) {
 	colliders.push_back(collision_body_->addCollider(collider, center));
 	m_box.emplace(colliders[colliders.size() - 1], collider);
 
+	total_mass_ += mass;
+	epsilon_ = epsilon;
+
 	return colliders.size() - 1;
 }
 
 uint32_t EngineResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size,
-                                       float bounce, float friction) {
-	uint32_t index = addBoxCollider(pos, size);
+                                       float bounce, float friction, float mass,
+                                       float epsilon) {
+	uint32_t index = addBoxCollider(pos, size, mass, epsilon);
 
 	Material& mat = colliders[index]->getMaterial();
 	mat.setBounciness(bounce);
@@ -258,14 +263,16 @@ uint32_t EngineResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size,
 
 uint32_t EngineResolve::addBoxCollider(PhysicsBody* rb, glm::vec3 pos,
                                        glm::vec3 size, float bounce,
-                                       float friction) {
-	uint32_t index = addBoxCollider(pos, size, bounce, friction);
+                                       float friction, float mass,
+                                       float epsilon) {
+	uint32_t index = addBoxCollider(pos, size, bounce, friction, mass, epsilon);
 	colliders[index]->setUserData(rb);
 
 	return index;
 }
 
-uint32_t EngineResolve::addSphereCollider(glm::vec3 pos, float radius) {
+uint32_t EngineResolve::addSphereCollider(glm::vec3 pos, float radius,
+                                          float mass, float epsilon) {
 	SphereShape* collider =
 	    Physics::getPhysicsCommon().createSphereShape(radius);
 
@@ -275,12 +282,16 @@ uint32_t EngineResolve::addSphereCollider(glm::vec3 pos, float radius) {
 	colliders.push_back(collision_body_->addCollider(collider, center));
 	m_sphere.emplace(colliders[colliders.size() - 1], collider);
 
+	total_mass_ += mass;
+	epsilon_ = epsilon;
+
 	return colliders.size() - 1;
 }
 
 uint32_t EngineResolve::addSphereCollider(glm::vec3 pos, float radius,
-                                          float bounce, float friction) {
-	uint32_t index = addSphereCollider(pos, radius);
+                                          float bounce, float friction,
+                                          float mass, float epsilon) {
+	uint32_t index = addSphereCollider(pos, radius, mass, epsilon);
 
 	Material& mat = colliders[index]->getMaterial();
 	mat.setBounciness(bounce);
@@ -291,15 +302,18 @@ uint32_t EngineResolve::addSphereCollider(glm::vec3 pos, float radius,
 
 uint32_t EngineResolve::addSphereCollider(PhysicsBody* rb, glm::vec3 pos,
                                           float radius, float bounce,
-                                          float friction) {
-	uint32_t index = addSphereCollider(pos, radius, bounce, friction);
+                                          float friction, float mass,
+                                          float epsilon) {
+	uint32_t index =
+	    addSphereCollider(pos, radius, bounce, friction, mass, epsilon);
 	colliders[index]->setUserData(rb);
 
 	return index;
 }
 
 uint32_t EngineResolve::addCapsuleCollider(glm::vec3 pos, float radius,
-                                           float height) {
+                                           float height, float mass,
+                                           float epsilon) {
 	CapsuleShape* collider =
 	    Physics::getPhysicsCommon().createCapsuleShape(radius, height);
 
@@ -309,13 +323,17 @@ uint32_t EngineResolve::addCapsuleCollider(glm::vec3 pos, float radius,
 	colliders.push_back(collision_body_->addCollider(collider, center));
 	m_capsule.emplace(colliders[colliders.size() - 1], collider);
 
+	total_mass_ += mass;
+	epsilon_ = epsilon;
+
 	return colliders.size() - 1;
 }
 
 uint32_t EngineResolve::addCapsuleCollider(glm::vec3 pos, float radius,
                                            float height, float bounce,
-                                           float friction) {
-	uint32_t index = addCapsuleCollider(pos, radius, height);
+                                           float friction, float mass,
+                                           float epsilon) {
+	uint32_t index = addCapsuleCollider(pos, radius, height, mass, epsilon);
 
 	Material& mat = colliders[index]->getMaterial();
 	mat.setBounciness(bounce);
@@ -326,8 +344,10 @@ uint32_t EngineResolve::addCapsuleCollider(glm::vec3 pos, float radius,
 
 uint32_t EngineResolve::addCapsuleCollider(PhysicsBody* rb, glm::vec3 pos,
                                            float radius, float height,
-                                           float bounce, float friction) {
-	uint32_t index = addCapsuleCollider(pos, radius, height, bounce, friction);
+                                           float bounce, float friction,
+                                           float mass, float epsilon) {
+	uint32_t index = addCapsuleCollider(pos, radius, height, bounce, friction,
+	                                    mass, epsilon);
 	colliders[index]->setUserData(rb);
 
 	return index;

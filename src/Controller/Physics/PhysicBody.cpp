@@ -11,8 +11,26 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	PhysicsBody* pb1 = static_cast<PhysicsBody*>(collider1->getUserData());
 	PhysicsBody* pb2 = static_cast<PhysicsBody*>(collider2->getUserData());
 
-	pb1->resolve(glm::vec3(0), glm::vec3(0), collision_normal, 1);
-	pb2->resolve(glm::vec3(0), glm::vec3(0), collision_normal, 2);
+	glm::vec3 lambda = glm::vec3(0);
+
+	// num_eqn = numerator section of equation
+	// div_eqn = divisor section of equation
+	// float epsilon_num_eqn = 1 +
+	// float vel_num_eqn =
+	//    glm::dot(collision_normal, (pb1->getVelocity() - pb2->getVelocity()));
+	// float w1_num_eqn
+	// float w2_num_eqn
+	// float num_eqn = epsilon_num_eqn * (vel_num_eqn + w1_num_eqn - w2_num_eqn)
+
+	// float mass_div_eqn = (1.0 / pb1->getMass()) + (1.0 / pb2->getMass());
+	// float div_eqn = mass_div_eqn;  //+ j1_div_eqn + j2_dv_eqn
+	// lambda = num_eqn / div_eqn;
+	// lambda = lambda * collision_normal;
+
+	pb1->resolve(lambda, glm::vec3(0), collision_normal,
+	             1);  // may need the 1 to be a 2
+	pb2->resolve(lambda, glm::vec3(0), collision_normal,
+	             2);  // may need the 2 to be a 1
 }
 
 size_t PhysicsBody::colliderSize() { return colliders.size(); }
