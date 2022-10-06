@@ -32,9 +32,10 @@ glm::vec3 QuaternionHelper::QuatToEuler(glm::quat quat) {
 
 glm::mat3x3 QuaternionHelper::RotateMat3x3WithQuat(glm::mat3x3 matrix,
                                                    glm::quat quat) {
-	glm::quat result = glm::toQuat(matrix);
-	result = result * quat;
-	return glm::toMat3(result);
+	glm::mat3x3 rotation = glm::toMat3(quat);
+	glm::mat3x3 result = matrix * rotation;
+
+	return result;
 }
 
 glm::mat3x3 QuaternionHelper::QuatToRotationMatrix(glm::quat quat) {
