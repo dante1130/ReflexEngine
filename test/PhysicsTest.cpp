@@ -129,19 +129,40 @@ TEST_CASE("Physics tests", "[PHYSICS]") {
 	}
 
 	SECTION("Valid Rectangle Inertia Tensor") {
-		glm::mat3x3 inertia_tensor = glm::mat3x3(0);
-		REQUIRE(inertia_tensor[0][0] == 0.5);
+		glm::mat3x3 inertia_tensor =
+		    EngineResolve::inertia_tensor_box(glm::vec3(0.03, 0.3, 0.2), 2);
+		REQUIRE(inertia_tensor[0][0] < 0.02167);
+		REQUIRE(inertia_tensor[0][0] > 0.02165);
 		REQUIRE(inertia_tensor[1][0] == 0);
 		REQUIRE(inertia_tensor[2][0] == 0);
 		REQUIRE(inertia_tensor[0][1] == 0);
-		REQUIRE(inertia_tensor[1][1] == 0.5);
+		REQUIRE(inertia_tensor[1][1] * 10 < 0.0681667);
+		REQUIRE(inertia_tensor[1][1] * 10 > 0.0681665);
 		REQUIRE(inertia_tensor[2][1] == 0);
 		REQUIRE(inertia_tensor[0][2] == 0);
 		REQUIRE(inertia_tensor[1][2] == 0);
-		REQUIRE(inertia_tensor[2][2] == 0.5);
+		REQUIRE(inertia_tensor[2][2] < 0.01516);
+		REQUIRE(inertia_tensor[2][2] > 0.01514);
 	}
 
-	SECTION("Valid Sphere Inertia Tensor") { REQUIRE(true); }
+	SECTION("Valid Sphere Inertia Tensor") {
+		glm::mat3x3 inertia_tensor =
+		    EngineResolve::inertia_tensor_sphere(0.025, 0.1);
+		// Multiplied some values by 100 so if it fails it shows actual number
+		// and not rounded e.g., 0.00003
+		REQUIRE(inertia_tensor[0][0] * 100 < 0.00251);
+		REQUIRE(inertia_tensor[0][0] * 100 > 0.00249);
+		REQUIRE(inertia_tensor[1][0] == 0);
+		REQUIRE(inertia_tensor[2][0] == 0);
+		REQUIRE(inertia_tensor[0][1] == 0);
+		REQUIRE(inertia_tensor[1][1] * 100 < 0.00251);
+		REQUIRE(inertia_tensor[1][1] * 100 > 0.00249);
+		REQUIRE(inertia_tensor[2][1] == 0);
+		REQUIRE(inertia_tensor[0][2] == 0);
+		REQUIRE(inertia_tensor[1][2] == 0);
+		REQUIRE(inertia_tensor[2][2] * 100 < 0.00251);
+		REQUIRE(inertia_tensor[2][2] * 100 > 0.00249);
+	}
 
 	SECTION("Valid Cylinder Inertia Tensor") { REQUIRE(true); }
 }

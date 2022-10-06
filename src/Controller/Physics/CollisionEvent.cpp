@@ -8,10 +8,15 @@ void CollisionEventListener::onContact(const CallbackData& collision_data) {
 	if (EngineTime::is_paused()) {
 		return;
 	}
+	static bool first_done = false;
+	if (first_done == true) {
+		return;
+	}
 
 	size_t size = collision_data.getNbContactPairs();
 
 	for (size_t count = 0; count < size; ++count) {
+		first_done = true;
 		ContactPair contact_pair = collision_data.getContactPair(count);
 
 		int num_of_contacts = contact_pair.getNbContactPoints();

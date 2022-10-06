@@ -16,6 +16,7 @@ EngineResolve::EngineResolve() {
 	angular_.acceleration = glm::vec3(0);
 
 	total_mass_ = 0;
+	epsilon_value_ = 0;
 
 	body_type_ = BodyType::DYNAMIC;
 }
@@ -235,6 +236,7 @@ bool EngineResolve::getCanSleep() {
 	return false;
 }
 
+#include <iostream>
 uint32_t EngineResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size,
                                        float mass, float epsilon) {
 	BoxShape* collider = Physics::getPhysicsCommon().createBoxShape(
@@ -377,7 +379,7 @@ glm::mat3x3 EngineResolve::inertia_tensor_box(glm::vec3 size, float mass) {
 glm::mat3x3 EngineResolve::inertia_tensor_sphere(float radius, float mass) {
 	glm::mat3x3 inertia_tensor = glm::mat3x3(0);
 
-	inertia_tensor[0][0] = (2.0f / 3.0f) * mass * pow(radius, 2);  // Ixx
+	inertia_tensor[0][0] = (2.0f / 5.0f) * mass * pow(radius, 2);  // Ixx
 	inertia_tensor[1][1] = inertia_tensor[0][0];                   // Iyy
 	inertia_tensor[2][2] = inertia_tensor[0][0];                   // Izz
 
