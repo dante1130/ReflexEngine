@@ -249,12 +249,7 @@ uint32_t EngineResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size,
 	total_mass_ += mass;
 	epsilon_ = epsilon;
 
-	inertia_tensor_[0][0] =
-	    (1.0f / 12.0f) * mass * (pow(size.y, 2) + pow(size.z, 2));  // Ixx
-	inertia_tensor_[1][1] =
-	    (1.0f / 12.0f) * mass * (pow(size.x, 2) + pow(size.z, 2));  // Iyy
-	inertia_tensor_[2][2] =
-	    (1.0f / 12.0f) * mass * (pow(size.x, 2) + pow(size.y, 2));  // Izz
+	inertia_tensor_ = inertia_tensor_box(size, mass);
 
 	return colliders.size() - 1;
 }
@@ -295,9 +290,7 @@ uint32_t EngineResolve::addSphereCollider(glm::vec3 pos, float radius,
 	total_mass_ += mass;
 	epsilon_ = epsilon;
 
-	inertia_tensor_[0][0] = (2.0f / 3.0f) * mass * pow(radius, 2);  // Ixx
-	inertia_tensor_[1][1] = inertia_tensor_[0][0];                  // Iyy
-	inertia_tensor_[2][2] = inertia_tensor_[0][0];                  // Izz
+	inertia_tensor_ = inertia_tensor_sphere(radius, mass);
 
 	return colliders.size() - 1;
 }
@@ -340,14 +333,7 @@ uint32_t EngineResolve::addCapsuleCollider(glm::vec3 pos, float radius,
 	total_mass_ += mass;
 	epsilon_ = epsilon;
 
-	inertia_tensor_[0][0] = (1.0f / 4.0f) * mass * pow(radius, 2) +
-	                        (1.0f / 12.0f) * mass * pow(height, 2);  // Ixx
-	inertia_tensor_[1][1] =
-	    (1.0f / 2.0f) * mass *
-	    pow(radius,
-	        2);  // Iyy //calculation of Iyy switched with Izz from the handout
-	             // because of rotation (pointing up instead of to the side)
-	inertia_tensor_[2][2] = inertia_tensor_[0][0];  // Izz
+	inertia_tensor_ = inertia_tensor_capsule(radius, height, mass);
 
 	return colliders.size() - 1;
 }
@@ -374,6 +360,44 @@ uint32_t EngineResolve::addCapsuleCollider(PhysicsBody* rb, glm::vec3 pos,
 	colliders[index]->setUserData(rb);
 
 	return index;
+}
+
+glm::mat3x3 EngineResolve::inertia_tensor_box(glm::vec3 size, float mass) {
+	glm::mat3x3 inertia_tensor = glm::mat3x3(0);
+	inertia_tensor[0][0] =
+	    (1.0f / 12.0f) * mass * (pow(size.y, 2) + pow(size.z, 2));  // Ixx
+	inertia_tensor[1][1] =
+	    (1.0f / 12.0f) * mass * (pow(size.x, 2) + pow(size.z, 2));  // Iyy
+	inertia_tensor[2][2] =
+	    (1.0f / 12.0f) * mass * (pow(size.x, 2) + pow(size.y, 2));  // Izz
+
+	return inertia_tensor;
+}
+
+glm::mat3x3 EngineResolve::inertia_tensor_sphere(float radius, float mass) {
+	glm::mat3x3 inertia_tensor = glm::mat3x3(0);
+
+	inertia_tensor[0][0] = (2.0f / 3.0f) * mass * pow(radius, 2);  // Ixx
+	inertia_tensor[1][1] = inertia_tensor[0][0];                   // Iyy
+	inertia_tensor[2][2] = inertia_tensor[0][0];                   // Izz
+
+	return inertia_tensor;
+}
+
+glm::mat3x3 EngineResolve::inertia_tensor_capsule(float radius, float height,
+                                                  float mass) {
+	glm::mat3x3 inertia_tensor = glm::mat3x3(0);
+
+	inertia_tensor[0][0] = (1.0f / 4.0f) * mass * pow(radius, 2) +
+	                       (1.0f / 12.0f) * mass * pow(height, 2);  // Ixx
+	inertia_tensor[1][1] =
+	    (1.0f / 2.0f) * mass *
+	    pow(radius,
+	        2);  // Iyy //calculation of Iyy switched with Izz from the handout
+	             // because of rotation (pointing up instead of to the side)
+	inertia_tensor[2][2] = inertia_tensor[0][0];  // Izz
+
+	return inertia_tensor;
 }
 
 void EngineResolve::setPosition(glm::vec3 pos) {

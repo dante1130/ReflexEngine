@@ -411,6 +411,35 @@ public:
 	                            float epsilon) override;
 
 	/**
+	 * @brief Calcualtes the inertia tensor for a box
+	 *
+	 * @param size The size of the box
+	 * @param mass THe mass of the box
+	 * @return glm::mat3x3
+	 */
+	static glm::mat3x3 inertia_tensor_box(glm::vec3 size, float mass);
+
+	/**
+	 * @brief Calculates the inertia tensor for the sphere
+	 *
+	 * @param radius The radius of the sphere
+	 * @param mass The mass of the sphere
+	 * @return glm::mat3x3
+	 */
+	static glm::mat3x3 inertia_tensor_sphere(float radius, float mass);
+
+	/**
+	 * @brief Calculates the inertia tensor for a capsule
+	 *
+	 * @param radius The radius of the capsule
+	 * @param height The height of the capsule
+	 * @param mass The mass of the capsule
+	 * @return glm::mat3x3
+	 */
+	static glm::mat3x3 inertia_tensor_capsule(float radius, float height,
+	                                          float mass);
+
+	/**
 	 * @brief Gets the position of the rigidbody
 	 *
 	 * @return glm::vec3

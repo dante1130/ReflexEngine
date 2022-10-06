@@ -3,6 +3,8 @@
 #include "Controller/Physics/QuaternionHelper.hpp"
 #include "Controller/GUI/DebugLogger.hpp"
 
+#include <iostream>
+
 using namespace rp3d;
 
 void PhysicsBody::collision(Collider* collider1, Collider* collider2,
@@ -19,6 +21,16 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	// lpoint_c1 & lpoint_c2 is believe to be cause of wonky physics with
 	// rotation of the collider. Need to find the actual distance from the
 	// center not the local point.
+	lpoint_c1 = QuaternionHelper::RotateVectorWithQuat(lpoint_c1,
+	                                                   pb1->getOrientation());
+	lpoint_c2 = QuaternionHelper::RotateVectorWithQuat(lpoint_c2,
+	                                                   pb2->getOrientation());
+	DebugLogger::log("local point c1", std::to_string(lpoint_c1.x) + " " +
+	                                       std::to_string(lpoint_c1.y) + " " +
+	                                       std::to_string(lpoint_c1.z));
+	DebugLogger::log("local point c2", std::to_string(lpoint_c2.x) + " " +
+	                                       std::to_string(lpoint_c2.y) + " " +
+	                                       std::to_string(lpoint_c2.z));
 
 	//
 
@@ -57,19 +69,23 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 
 float PhysicsBody::J_calc(glm::vec3 r1, glm::vec3 collision_normal,
                           glm::mat3x3 inertiaTensor) {
-	float result = 0;
 	glm::vec3 cross_result = glm::cross(r1, collision_normal);
 	glm::mat3 iIT = glm::inverse(inertiaTensor);  // Inverse Inertia Tensor
-
 	glm::vec3 transpose_J = glm::vec3(0);
-	transpose_J.x = cross_result.x * (iIT[0][0] + iIT[1][0] + iIT[2][0]);
-	transpose_J.y = cross_result.y * (iIT[0][1] + iIT[1][1] + iIT[2][1]);
-	transpose_J.z = cross_result.z * (iIT[0][2] + iIT[1][2] + iIT[2][2]);
+	transpose_J.x = cross_result.x * iIT[0][0] + cross_result.y * iIT[0][1] +
+	                cross_result.z * iIT[0][2];
+	transpose_J.y = cross_result.x * iIT[1][0] + cross_result.y * iIT[1][1] +
+	                cross_result.z * iIT[1][2];
+	transpose_J.z = cross_result.x * iIT[2][0] + cross_result.y * iIT[2][1] +
+	                cross_result.z * iIT[2][2];
 
-	result = transpose_J.x * cross_result.x + transpose_J.y * cross_result.y +
-	         transpose_J.z * cross_result.z;
+	float result = transpose_J.x * cross_result.x +
+	               transpose_J.y * cross_result.y +
+	               transpose_J.z * cross_result.z;
 	return result;
 }
+
+glm::mat3x3 PhysicsBody::get_inertia_tensor() { return inertia_tensor_; }
 
 size_t PhysicsBody::colliderSize() { return colliders.size(); }
 

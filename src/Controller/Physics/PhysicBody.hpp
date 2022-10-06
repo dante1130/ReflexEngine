@@ -44,9 +44,6 @@ private:
 	/// the object is a trigger
 	bool is_trigger = false;
 
-	static float J_calc(glm::vec3 r1, glm::vec3 collision_normal,
-	                    glm::mat3x3 inertiaTensor);
-
 protected:
 	/// Collection of pointers to rigidbodies colliders
 	std::vector<rp3d::Collider*> colliders;
@@ -83,6 +80,10 @@ protected:
 	virtual void deleteCollider(rp3d::Collider* collider) = 0;
 
 public:
+	glm::mat3x3 get_inertia_tensor();
+	static float J_calc(glm::vec3 r1, glm::vec3 collision_normal,
+	                    glm::mat3x3 inertiaTensor);
+
 	/**
 	 * @brief Gets the size of the colliders vector
 	 *

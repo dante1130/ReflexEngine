@@ -2,8 +2,13 @@
 #include "PhysicBody.hpp"
 
 #include "Controller/GUI/DebugLogger.hpp"
+#include "Controller/ReflexEngine/EngineTime.hpp"
 
 void CollisionEventListener::onContact(const CallbackData& collision_data) {
+	if (EngineTime::is_paused()) {
+		return;
+	}
+
 	size_t size = collision_data.getNbContactPairs();
 
 	for (size_t count = 0; count < size; ++count) {

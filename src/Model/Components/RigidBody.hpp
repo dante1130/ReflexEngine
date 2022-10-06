@@ -51,6 +51,8 @@ public:
 	          bool can_sleep, bool is_trigger, float linear_drag,
 	          float angular_drag);
 
+	PhysicsBody* getPhysicsBody() { return pb; }
+
 	void init(bool usingReact, glm::vec3 pos, glm::vec3 rot);
 
 	/**

@@ -38,6 +38,8 @@ glm::mat3x3 RotateMat3x3WithQuat(glm::mat3x3 matrix, glm::quat quat);
 
 glm::mat3x3 QuatToRotationMatrix(glm::quat quat);
 
-glm::quat Matrix3x3ToQuat(glm::mat3x3);
+glm::quat Matrix3x3ToQuat(glm::mat3x3 matrix);
+
+glm::vec3 RotateVectorWithQuat(glm::vec3 vec, glm::quat quat);
 
 }  // namespace QuaternionHelper
