@@ -18,7 +18,6 @@ private:
 	Motion_Stats angular_;
 
 	float total_mass_ = 0;
-	float epsilon_ = 0.5;
 
 	rp3d::BodyType body_type_;
 

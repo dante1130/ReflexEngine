@@ -26,7 +26,6 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	if (epsilon > pb2->epsilon_value_) {
 		epsilon = pb2->epsilon_value_;
 	}
-	epsilon = 0.85;
 
 	float epsilon_num_eqn = 1 + epsilon;
 	float vel_num_eqn =
@@ -56,6 +55,11 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	          << "\nCollision normal = " << std::to_string(collision_normal.x)
 	          << " " << std::to_string(collision_normal.y) << " "
 	          << std::to_string(collision_normal.z)
+	          << "\nnum_eqn = " << std::to_string(num_eqn)
+	          << "\nmass_div_eqn = " << std::to_string(mass_div_eqn)
+	          << "\nj1_div_eqn = " << std::to_string(j1_div_eqn)
+	          << "\nj2_div_eqn = " << std::to_string(j2_div_eqn)
+	          << "\ndiv_eqn = " << std::to_string(div_eqn)
 	          << "\nLambda = " << std::to_string(lambda.x) << " "
 	          << std::to_string(lambda.y) << " " << std::to_string(lambda.z)
 	          << std::endl;
@@ -127,6 +131,7 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 float PhysicsBody::J_calc(glm::vec3 r1, glm::vec3 collision_normal,
                           glm::mat3x3 inertiaTensor) {
 	glm::vec3 cross_result = glm::cross(r1, collision_normal);
+
 	glm::mat3 iIT = glm::inverse(inertiaTensor);  // Inverse Inertia Tensor
 	glm::vec3 transpose_J = glm::vec3(0);
 	transpose_J.x = cross_result.x * iIT[0][0] + cross_result.y * iIT[0][1] +
@@ -139,6 +144,7 @@ float PhysicsBody::J_calc(glm::vec3 r1, glm::vec3 collision_normal,
 	float result = transpose_J.x * cross_result.x +
 	               transpose_J.y * cross_result.y +
 	               transpose_J.z * cross_result.z;
+
 	return result;
 }
 

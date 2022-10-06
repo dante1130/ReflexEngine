@@ -249,7 +249,7 @@ uint32_t EngineResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size,
 	m_box.emplace(colliders[colliders.size() - 1], collider);
 
 	total_mass_ += mass;
-	epsilon_ = epsilon;
+	epsilon_value_ = epsilon;
 
 	inertia_tensor_ = inertia_tensor_box(size, mass);
 
@@ -290,7 +290,7 @@ uint32_t EngineResolve::addSphereCollider(glm::vec3 pos, float radius,
 	m_sphere.emplace(colliders[colliders.size() - 1], collider);
 
 	total_mass_ += mass;
-	epsilon_ = epsilon;
+	epsilon_value_ = epsilon;
 
 	inertia_tensor_ = inertia_tensor_sphere(radius, mass);
 
@@ -333,7 +333,7 @@ uint32_t EngineResolve::addCapsuleCollider(glm::vec3 pos, float radius,
 	m_capsule.emplace(colliders[colliders.size() - 1], collider);
 
 	total_mass_ += mass;
-	epsilon_ = epsilon;
+	epsilon_value_ = epsilon;
 
 	inertia_tensor_ = inertia_tensor_capsule(radius, height, mass);
 
