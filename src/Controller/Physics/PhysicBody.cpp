@@ -14,6 +14,14 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 
 	glm::vec3 lambda = glm::vec3(0);
 
+	//
+
+	// lpoint_c1 & lpoint_c2 is believe to be cause of wonky physics with
+	// rotation of the collider. Need to find the actual distance from the
+	// center not the local point.
+
+	//
+
 	// num_eqn = numerator section of equation
 	// div_eqn = divisor section of equation
 	float epsilon = pb1->epsilon_value_;
@@ -43,10 +51,8 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 
 	lambda = (num_eqn / div_eqn) * collision_normal;
 
-	pb1->resolve(lambda, lpoint_c1, collision_normal,
-	             1);  // may need the 1 to be a 2
-	pb2->resolve(lambda, lpoint_c2, collision_normal,
-	             2);  // may need the 2 to be a 1
+	pb1->resolve(lambda, lpoint_c1, collision_normal, 1);
+	pb2->resolve(lambda, lpoint_c2, collision_normal, 2);
 }
 
 float PhysicsBody::J_calc(glm::vec3 r1, glm::vec3 collision_normal,
@@ -62,7 +68,6 @@ float PhysicsBody::J_calc(glm::vec3 r1, glm::vec3 collision_normal,
 
 	result = transpose_J.x * cross_result.x + transpose_J.y * cross_result.y +
 	         transpose_J.z * cross_result.z;
-
 	return result;
 }
 

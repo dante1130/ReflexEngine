@@ -24,18 +24,18 @@ bool EngineResolve::usingReactResolve() { return false; }
 
 void EngineResolve::resolve(glm::vec3 lambda, glm::vec3 vector_to_collision,
                             glm::vec3 contact_normal, int collision_number) {
-	float mult = 1;
+	float mult = 1.0f;
 	if (collision_number == 2) {
-		mult = -1;
+		mult = -1.0f;
 	}
 
 	// Linear velocity change
 	linear_.velocity = linear_.velocity + (lambda / total_mass_) * mult;
 
-	// Angular velocity change
+	//  Angular velocity change
 	glm::mat3x3 angular_part_one =
-	    static_cast<float>(lambda.length()) *
-	    glm::transpose(rotated_inertia_tensor_);  // lambda should be scalar
+	    static_cast<float>(glm::length(lambda)) *
+	    glm::inverse(rotated_inertia_tensor_);  // lambda should be scalar
 	glm::vec3 angular_part_two =
 	    glm::cross(vector_to_collision, contact_normal);
 	angular_.velocity =
