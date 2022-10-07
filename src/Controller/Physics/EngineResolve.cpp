@@ -6,6 +6,9 @@
 
 #include "Controller/GUI/DebugLogger.hpp"
 
+#include <iostream>
+#include <string>
+
 using namespace rp3d;
 
 EngineResolve::EngineResolve() {
@@ -41,6 +44,29 @@ void EngineResolve::resolve(glm::vec3 lambda, glm::vec3 vector_to_collision,
 	    glm::cross(vector_to_collision, contact_normal);
 	angular_.velocity =
 	    angular_.velocity + (angular_part_one * angular_part_two) * mult;
+	/*
+	std::cout << "\nLambda length = " << std::to_string(glm::length(lambda))
+	      << "\nangular_part_one\n"
+	      << std::to_string(angular_part_one[0][0]) << " "
+	      << std::to_string(angular_part_one[1][0]) << " "
+	      << std::to_string(angular_part_one[2][0]) << "\n"
+	      << std::to_string(angular_part_one[0][1]) << " "
+	      << std::to_string(angular_part_one[1][1]) << " "
+	      << std::to_string(angular_part_one[2][1]) << "\n"
+	      << std::to_string(angular_part_one[0][2]) << " "
+	      << std::to_string(angular_part_one[1][2]) << " "
+	      << std::to_string(angular_part_one[2][2]) << " "
+	      << "\nangular_part_two = "
+	      << std::to_string(angular_part_two.x * 10000) << " "
+	      << std::to_string(angular_part_two.y * 10000) << " "
+	      << std::to_string(angular_part_two.z * 10000)
+	      << "\nnormal = " << std::to_string(contact_normal.x) << " "
+	      << std::to_string(contact_normal.y) << " "
+	      << std::to_string(contact_normal.z) << "\nvector_to_collision = "
+	      << std::to_string(vector_to_collision.x) << " "
+	      << std::to_string(vector_to_collision.y) << " "
+	      << std::to_string(vector_to_collision.z) << std::endl;
+	      */
 }
 
 void EngineResolve::update(float delta_time) {
@@ -65,7 +91,7 @@ void EngineResolve::update(float delta_time) {
 	    (angular_.velocity * delta_time) +
 	    (angular_.acceleration * static_cast<float>(pow(delta_time, 2)) * 0.5f);
 	rotation_change = rotation_change * (180.0f / PI_RP3D);
-	glm::quat rot_change_quat = QuaternionHelper::EulerToQuat(rotation_change);
+	glm::quat rot_change_quat = QuaternionHelper::EulerToQuat(-rotation_change);
 	glm::quat rotation = getOrientation() * rot_change_quat;
 	setQuaternion(rotation);
 

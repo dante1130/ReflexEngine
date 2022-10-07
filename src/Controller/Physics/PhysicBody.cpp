@@ -13,6 +13,7 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
                             CollisionEvent c_type) {
 	PhysicsBody* pb1 = static_cast<PhysicsBody*>(collider1->getUserData());
 	PhysicsBody* pb2 = static_cast<PhysicsBody*>(collider2->getUserData());
+	DePenetrate(pb1, pb2, collision_normal, collision_depth);
 
 	lpoint_c1 = QuaternionHelper::RotateVectorWithQuat(lpoint_c1,
 	                                                   pb1->getOrientation());
@@ -27,7 +28,7 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 		epsilon = pb2->epsilon_value_;
 	}
 
-	float epsilon_num_eqn = 1 + epsilon;
+	float epsilon_num_eqn = 1.0f + epsilon;
 	float vel_num_eqn =
 	    glm::dot(collision_normal, (pb1->getVelocity() - pb2->getVelocity()));
 	float w1_num_eqn = glm::dot(pb1->getAngVelocity(),
@@ -50,7 +51,7 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 
 	glm::vec3 lambda = (num_eqn / div_eqn) * collision_normal;
 
-	std::cout << "General Info\n"
+	std::cout << "\n\nGeneral Info\n"
 	          << "Epsilon = " << std::to_string(epsilon)
 	          << "\nCollision normal = " << std::to_string(collision_normal.x)
 	          << " " << std::to_string(collision_normal.y) << " "
@@ -72,7 +73,7 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	          << std::to_string(pb1->getAngVelocity().x) << " "
 	          << std::to_string(pb1->getAngVelocity().y) << " "
 	          << std::to_string(pb1->getAngVelocity().z)
-	          << "\nDist to collision" << std::to_string(lpoint_c1.x) << " "
+	          << "\nDist to collision = " << std::to_string(lpoint_c1.x) << " "
 	          << std::to_string(lpoint_c1.y) << " "
 	          << std::to_string(lpoint_c1.z) << "\nRotated inertia tensor\n"
 	          << std::to_string(pb1->rotated_inertia_tensor_[0][0]) << " "
@@ -149,6 +150,31 @@ float PhysicsBody::J_calc(glm::vec3 r1, glm::vec3 collision_normal,
 }
 
 glm::mat3x3 PhysicsBody::get_inertia_tensor() { return inertia_tensor_; }
+
+void PhysicsBody::DePenetrate(PhysicsBody* pb1, PhysicsBody* pb2,
+                              glm::vec3 normal, float penetration_depth) {
+	glm::vec3 pos1 = pb1->getPosition();
+	glm::vec3 pos2 = pb2->getPosition();
+
+	if (glm::length(pb1->getVelocity()) == 0 ||
+	    glm::length(pb2->getVelocity()) == 0) {
+		if (glm::length(pb1->getVelocity()) == 0) {
+			pos2 = pos2 + normal * penetration_depth;
+		} else {
+			pos1 = pos1 - normal * penetration_depth;
+		}
+	} else {
+		float total_vel =
+		    glm::length(pb1->getVelocity()) + glm::length(pb2->getVelocity());
+		pos1 = pos1 - (glm::length(pb1->getVelocity()) / total_vel) *
+		                  (normal * penetration_depth);
+		pos2 = pos2 + (glm::length(pb2->getVelocity()) / total_vel) *
+		                  (normal * penetration_depth);
+	}
+
+	pb1->setPosition(pos1);
+	pb2->setPosition(pos2);
+}
 
 size_t PhysicsBody::colliderSize() { return colliders.size(); }
 

@@ -44,6 +44,9 @@ private:
 	/// the object is a trigger
 	bool is_trigger = false;
 
+	static void DePenetrate(PhysicsBody* pb1, PhysicsBody* pb2,
+	                        glm::vec3 normal, float penetration_depth);
+
 protected:
 	/// Collection of pointers to rigidbodies colliders
 	std::vector<rp3d::Collider*> colliders;
