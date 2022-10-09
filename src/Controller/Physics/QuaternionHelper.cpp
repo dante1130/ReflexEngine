@@ -4,7 +4,9 @@
 #include <glm/gtx/quaternion.hpp>
 #include <glm/gtx/euler_angles.hpp>
 
-#include <iostream>
+#include <string>
+
+#include "Controller/GUI/DebugLogger.hpp"
 
 glm::quat QuaternionHelper::EulerToQuat(glm::vec3 euler) {
 	glm::quat quaternion = glm::quat(0, 0, 0, 0);
@@ -32,8 +34,28 @@ glm::vec3 QuaternionHelper::QuatToEuler(glm::quat quat) {
 
 glm::mat3x3 QuaternionHelper::RotateMat3x3WithQuat(glm::mat3x3 matrix,
                                                    glm::quat quat) {
-	glm::mat3x3 rotation = glm::toMat3(quat);
-	glm::mat3x3 result = matrix * rotation;
+	DebugLogger::log("QuaternionHelper - RotateMat3x3WithQuat",
+	                 "Untested method");
+
+	glm::mat3x3 rotation = glm::mat3x3(0);
+	rotation[0][0] = 1 - 2 * (pow(quat.y, 2) + pow(quat.z, 2));
+	rotation[1][0] = 2 * quat.x * quat.y - 2 * quat.w * quat.z;
+	rotation[2][0] = 2 * quat.w * quat.y + 2 * quat.x * quat.z;
+	rotation[0][1] = 2 * quat.x * quat.y + 2 * quat.w * quat.z;
+	rotation[1][1] = 1 - 2 * (pow(quat.x, 2) + pow(quat.z, 2));
+	rotation[2][1] = 2 * quat.y * quat.z - 2 * quat.w * quat.x;
+	rotation[0][2] = 2 * quat.x * quat.z - 2 * quat.w * quat.y;
+	rotation[1][2] = 2 * quat.w * quat.x + 2 * quat.y * quat.z;
+	rotation[2][2] = 1 - 2 * (pow(quat.x, 2) + pow(quat.y, 2));
+
+	glm::mat3x3 rotation_transpose = glm::transpose(rotation);
+
+	glm::mat3x3 result = rotation * matrix;
+	result = result * rotation_transpose;
+
+	// Another possible method
+	// rotation = glm::toMat3(quat);
+	// result = matrix * rotation;
 
 	return result;
 }

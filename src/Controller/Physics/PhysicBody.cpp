@@ -13,6 +13,7 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
                             CollisionEvent c_type) {
 	PhysicsBody* pb1 = static_cast<PhysicsBody*>(collider1->getUserData());
 	PhysicsBody* pb2 = static_cast<PhysicsBody*>(collider2->getUserData());
+
 	DePenetrate(pb1, pb2, collision_normal, collision_depth);
 
 	lpoint_c1 = QuaternionHelper::RotateVectorWithQuat(lpoint_c1,
@@ -27,29 +28,59 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	if (epsilon > pb2->epsilon_value_) {
 		epsilon = pb2->epsilon_value_;
 	}
+	// J1^-1
+	pb1->rotated_inertia_tensor_ = glm::inverse(pb1->inertia_tensor_);
+	// J2^-1
+	pb2->rotated_inertia_tensor_ = glm::inverse(pb2->inertia_tensor_);
+	// (r1 x n)
+	glm::vec3 r1xn = glm::cross(lpoint_c1, collision_normal);
+	// (r2 x n)
+	glm::vec3 r2xn = glm::cross(lpoint_c2, collision_normal);
 
+	// (1 + E)
 	float epsilon_num_eqn = 1.0f + epsilon;
+
+	// n . (v1 - v2)
 	float vel_num_eqn =
 	    glm::dot(collision_normal, (pb1->getVelocity() - pb2->getVelocity()));
-	float w1_num_eqn = glm::dot(pb1->getAngVelocity(),
-	                            glm::cross(lpoint_c1, collision_normal));
-	float w2_num_eqn = glm::dot(pb2->getAngVelocity(),
-	                            glm::cross(lpoint_c2, collision_normal));
+	// w1 . (r1 x n)
+	float w1_num_eqn = glm::dot(pb1->getAngVelocity(), r1xn);
+	// w2 . (r2 x n)
+	float w2_num_eqn = glm::dot(pb2->getAngVelocity(), r2xn);
+	//-(1 + E)(n . (v1 - v2) + w1 . (r1 x n) - w2 . (r2 x n))
 	float num_eqn = -epsilon_num_eqn * (vel_num_eqn + w1_num_eqn - w2_num_eqn);
 
+	//  1      1
+	// ____ + ____
+	//  m1     m1
 	float mass_div_eqn = (1.0 / pb1->getMass()) + (1.0 / pb2->getMass());
 
-	pb1->rotated_inertia_tensor_ = QuaternionHelper::RotateMat3x3WithQuat(
-	    pb1->inertia_tensor_, pb1->getOrientation());
-	pb2->rotated_inertia_tensor_ = QuaternionHelper::RotateMat3x3WithQuat(
-	    pb2->inertia_tensor_, pb2->getOrientation());
-	float j1_div_eqn =
-	    J_calc(lpoint_c1, collision_normal, pb1->rotated_inertia_tensor_);
-	float j2_div_eqn =
-	    J_calc(lpoint_c2, collision_normal, pb2->rotated_inertia_tensor_);
+	// pb1->rotated_inertia_tensor_ = QuaternionHelper::RotateMat3x3WithQuat(
+	//     glm::inverse(pb1->inertia_tensor_), pb1->getOrientation());
+	// pb2->rotated_inertia_tensor_ = QuaternionHelper::RotateMat3x3WithQuat(
+	//     glm::inverse(pb2->inertia_tensor_), pb2->getOrientation());
+
+	pb1->rotated_inertia_tensor_ =
+	    glm::inverse(QuaternionHelper::RotateMat3x3WithQuat(
+	        pb1->inertia_tensor_, pb1->getOrientation()));
+	pb2->rotated_inertia_tensor_ =
+	    glm::inverse(QuaternionHelper::RotateMat3x3WithQuat(
+	        pb2->inertia_tensor_, pb2->getOrientation()));
+
+	// pb1->rotated_inertia_tensor_ = glm::inverse(pb1->inertia_tensor_);
+	// pb2->rotated_inertia_tensor_ = glm::inverse(pb2->inertia_tensor_);
+
+	// (r1 x n)^T * J1^-1 * (r1 x n)
+	// OR (r1 x n) . J1^-1 * (r1 x n)
+	float j1_div_eqn = glm::dot(r1xn, pb1->rotated_inertia_tensor_ * r1xn);
+	// (r2 x n)^T * J2^-1 * (r2 x n)
+	float j2_div_eqn = glm::dot(r2xn, pb2->rotated_inertia_tensor_ * r2xn);
+
+	// 1/m1 + 1/m2 + ((r1xn)^T * J1^-1 * (r1xn) + (r2xn)^T * J2^-1 * (r2xn))
 	float div_eqn = mass_div_eqn + (j1_div_eqn + j2_div_eqn);
 
-	glm::vec3 lambda = (num_eqn / div_eqn) * collision_normal;
+	float lambda = (num_eqn / div_eqn);
+	glm::vec3 linear_impluse = lambda * collision_normal;
 
 	std::cout << "\n\nGeneral Info\n"
 	          << "Epsilon = " << std::to_string(epsilon)
@@ -61,9 +92,10 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	          << "\nj1_div_eqn = " << std::to_string(j1_div_eqn)
 	          << "\nj2_div_eqn = " << std::to_string(j2_div_eqn)
 	          << "\ndiv_eqn = " << std::to_string(div_eqn)
-	          << "\nLambda = " << std::to_string(lambda.x) << " "
-	          << std::to_string(lambda.y) << " " << std::to_string(lambda.z)
-	          << std::endl;
+	          << "\nLambda = " << std::to_string(lambda)
+	          << "\nLinear impluse = " << std::to_string(linear_impluse.x)
+	          << " " << std::to_string(linear_impluse.y) << " "
+	          << std::to_string(linear_impluse.z) << std::endl;
 
 	std::cout << "\n\nObject 1 - Before Collision"
 	          << "\nmass = " << std::to_string(pb1->getMass())
@@ -132,20 +164,7 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 float PhysicsBody::J_calc(glm::vec3 r1, glm::vec3 collision_normal,
                           glm::mat3x3 inertiaTensor) {
 	glm::vec3 cross_result = glm::cross(r1, collision_normal);
-
-	glm::mat3 iIT = glm::inverse(inertiaTensor);  // Inverse Inertia Tensor
-	glm::vec3 transpose_J = glm::vec3(0);
-	transpose_J.x = cross_result.x * iIT[0][0] + cross_result.y * iIT[0][1] +
-	                cross_result.z * iIT[0][2];
-	transpose_J.y = cross_result.x * iIT[1][0] + cross_result.y * iIT[1][1] +
-	                cross_result.z * iIT[1][2];
-	transpose_J.z = cross_result.x * iIT[2][0] + cross_result.y * iIT[2][1] +
-	                cross_result.z * iIT[2][2];
-
-	float result = transpose_J.x * cross_result.x +
-	               transpose_J.y * cross_result.y +
-	               transpose_J.z * cross_result.z;
-
+	float result = glm::dot(cross_result, inertiaTensor * cross_result);
 	return result;
 }
 

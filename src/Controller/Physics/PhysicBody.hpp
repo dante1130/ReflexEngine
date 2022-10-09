@@ -282,7 +282,7 @@ public:
 	 * @param collision_number - If it is body 1 or 2
 	 * @return void
 	 */
-	virtual void resolve(glm::vec3 lambda, glm::vec3 vector_to_collision,
+	virtual void resolve(float lambda, glm::vec3 vector_to_collision,
 	                     glm::vec3 contact_normal, int collision_number) = 0;
 
 	/**

@@ -26,7 +26,7 @@ EngineResolve::EngineResolve() {
 
 bool EngineResolve::usingReactResolve() { return false; }
 
-void EngineResolve::resolve(glm::vec3 lambda, glm::vec3 vector_to_collision,
+void EngineResolve::resolve(float lambda, glm::vec3 vector_to_collision,
                             glm::vec3 contact_normal, int collision_number) {
 	float mult = 1.0f;
 	if (collision_number == 2) {
@@ -34,12 +34,11 @@ void EngineResolve::resolve(glm::vec3 lambda, glm::vec3 vector_to_collision,
 	}
 
 	// Linear velocity change
-	linear_.velocity = linear_.velocity + (lambda / total_mass_) * mult;
+	linear_.velocity =
+	    linear_.velocity + ((lambda * contact_normal) / total_mass_) * mult;
 
 	//  Angular velocity change
-	glm::mat3x3 angular_part_one =
-	    static_cast<float>(glm::length(lambda)) *
-	    glm::inverse(rotated_inertia_tensor_);  // lambda should be scalar
+	glm::mat3x3 angular_part_one = lambda * rotated_inertia_tensor_;
 	glm::vec3 angular_part_two =
 	    glm::cross(vector_to_collision, contact_normal);
 	angular_.velocity =
@@ -91,8 +90,9 @@ void EngineResolve::update(float delta_time) {
 	    (angular_.velocity * delta_time) +
 	    (angular_.acceleration * static_cast<float>(pow(delta_time, 2)) * 0.5f);
 	rotation_change = rotation_change * (180.0f / PI_RP3D);
-	glm::quat rot_change_quat = QuaternionHelper::EulerToQuat(-rotation_change);
+	glm::quat rot_change_quat = QuaternionHelper::EulerToQuat(rotation_change);
 	glm::quat rotation = getOrientation() * rot_change_quat;
+	glm::normalize(rotation);
 	setQuaternion(rotation);
 
 	linear_.velocity = linear_.velocity + linear_.acceleration * delta_time;
@@ -392,12 +392,13 @@ uint32_t EngineResolve::addCapsuleCollider(PhysicsBody* rb, glm::vec3 pos,
 
 glm::mat3x3 EngineResolve::inertia_tensor_box(glm::vec3 size, float mass) {
 	glm::mat3x3 inertia_tensor = glm::mat3x3(0);
+	float temp_const = 1.0f / 12.0f;
 	inertia_tensor[0][0] =
-	    (1.0f / 12.0f) * mass * (pow(size.y, 2) + pow(size.z, 2));  // Ixx
+	    temp_const * mass * (pow(size.y, 2) + pow(size.x, 2));  // Ixx
 	inertia_tensor[1][1] =
-	    (1.0f / 12.0f) * mass * (pow(size.x, 2) + pow(size.z, 2));  // Iyy
+	    temp_const * mass * (pow(size.z, 2) + pow(size.x, 2));  // Iyy
 	inertia_tensor[2][2] =
-	    (1.0f / 12.0f) * mass * (pow(size.x, 2) + pow(size.y, 2));  // Izz
+	    temp_const * mass * (pow(size.z, 2) + pow(size.y, 2));  // Izz
 
 	return inertia_tensor;
 }

@@ -28,11 +28,12 @@ public:
 	 * @brief Calculates collison response and applies it to
 	 * rigidbody
 	 *
+	 * @param lambda - The lambda value for the transfer of momentum
 	 * @param normal - The collision normal
 	 * @param c_type - The collision event type
 	 * @return void
 	 */
-	void resolve(glm::vec3 lambda, glm::vec3 vector_to_collision,
+	void resolve(float lambda, glm::vec3 vector_to_collision,
 	             glm::vec3 contact_normal, int collision_number) override;
 
 	/**

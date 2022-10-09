@@ -10,7 +10,7 @@ ReactResolve::ReactResolve() {
 
 void ReactResolve::update(float delta_time) {}
 
-void ReactResolve::resolve(glm::vec3 lambda, glm::vec3 vector_to_collision,
+void ReactResolve::resolve(float lambda, glm::vec3 vector_to_collision,
                            glm::vec3 contact_normal, int collision_number) {
 	return;
 }
