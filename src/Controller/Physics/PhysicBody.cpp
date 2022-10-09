@@ -28,10 +28,22 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	if (epsilon > pb2->epsilon_value_) {
 		epsilon = pb2->epsilon_value_;
 	}
+
+	// pb1->rotated_inertia_tensor_ = QuaternionHelper::RotateMat3x3WithQuat(
+	//     glm::inverse(pb1->inertia_tensor_), pb1->getOrientation());
+	// pb2->rotated_inertia_tensor_ = QuaternionHelper::RotateMat3x3WithQuat(
+	//     glm::inverse(pb2->inertia_tensor_), pb2->getOrientation());
+
 	// J1^-1
-	pb1->rotated_inertia_tensor_ = glm::inverse(pb1->inertia_tensor_);
+	// pb1->rotated_inertia_tensor_ = glm::inverse(pb1->inertia_tensor_);
+	pb1->rotated_inertia_tensor_ =
+	    glm::inverse(QuaternionHelper::RotateMat3x3WithQuat(
+	        pb1->inertia_tensor_, pb1->getOrientation()));
 	// J2^-1
-	pb2->rotated_inertia_tensor_ = glm::inverse(pb2->inertia_tensor_);
+	// pb2->rotated_inertia_tensor_ = glm::inverse(pb2->inertia_tensor_);
+	pb2->rotated_inertia_tensor_ =
+	    glm::inverse(QuaternionHelper::RotateMat3x3WithQuat(
+	        pb2->inertia_tensor_, pb2->getOrientation()));
 	// (r1 x n)
 	glm::vec3 r1xn = glm::cross(lpoint_c1, collision_normal);
 	// (r2 x n)
@@ -54,21 +66,6 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	// ____ + ____
 	//  m1     m1
 	float mass_div_eqn = (1.0 / pb1->getMass()) + (1.0 / pb2->getMass());
-
-	// pb1->rotated_inertia_tensor_ = QuaternionHelper::RotateMat3x3WithQuat(
-	//     glm::inverse(pb1->inertia_tensor_), pb1->getOrientation());
-	// pb2->rotated_inertia_tensor_ = QuaternionHelper::RotateMat3x3WithQuat(
-	//     glm::inverse(pb2->inertia_tensor_), pb2->getOrientation());
-
-	pb1->rotated_inertia_tensor_ =
-	    glm::inverse(QuaternionHelper::RotateMat3x3WithQuat(
-	        pb1->inertia_tensor_, pb1->getOrientation()));
-	pb2->rotated_inertia_tensor_ =
-	    glm::inverse(QuaternionHelper::RotateMat3x3WithQuat(
-	        pb2->inertia_tensor_, pb2->getOrientation()));
-
-	// pb1->rotated_inertia_tensor_ = glm::inverse(pb1->inertia_tensor_);
-	// pb2->rotated_inertia_tensor_ = glm::inverse(pb2->inertia_tensor_);
 
 	// (r1 x n)^T * J1^-1 * (r1 x n)
 	// OR (r1 x n) . J1^-1 * (r1 x n)
