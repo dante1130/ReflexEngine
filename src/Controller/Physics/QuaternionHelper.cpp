@@ -5,6 +5,7 @@
 #include <glm/gtx/euler_angles.hpp>
 
 #include <string>
+#include <iostream>
 
 #include "Controller/GUI/DebugLogger.hpp"
 
@@ -54,8 +55,21 @@ glm::mat3x3 QuaternionHelper::RotateMat3x3WithQuat(glm::mat3x3 matrix,
 	*/
 
 	// Another possible method
-	glm::mat3x3 rotation = glm::toMat3(quat);
+	glm::mat3x3 rotation = glm::toMat3(glm::normalize(quat));
 	glm::mat3x3 result = rotation * matrix;
+	// glm::mat3x3 result = glm::transpose(rotation) * matrix;
+
+	/*
+	std::cout << "\nRotating thing\n[" << rotation[0][0] << " "
+	          << rotation[1][0] << " " << rotation[2][0] << "; "
+	          << rotation[0][1] << " " << rotation[1][1] << " "
+	          << rotation[2][1] << "; " << rotation[0][2] << " "
+	          << rotation[1][2] << " " << rotation[2][2] << "];" << std::endl;
+	std::cout << "\nResult\n[" << result[0][0] << " " << result[1][0] << " "
+	          << result[2][0] << "; " << result[0][1] << " " << result[1][1]
+	          << " " << result[2][1] << "; " << result[0][2] << " "
+	          << result[1][2] << " " << result[2][2] << "];" << std::endl;
+	*/
 
 	return result;
 }

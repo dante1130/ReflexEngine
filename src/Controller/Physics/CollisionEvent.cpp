@@ -69,8 +69,7 @@ void CollisionEventListener::onContact(const CallbackData& collision_data) {
 			    contact_pair.getCollider1(), contact_pair.getCollider2(),
 			    glm::vec3(local_point_c1.x, local_point_c1.y, local_point_c1.z),
 			    glm::vec3(local_point_c2.x, local_point_c2.y, local_point_c2.z),
-			    glm::normalize(glm::vec3(contact_normal.x, contact_normal.y,
-			                             contact_normal.z)),
+			    glm::vec3(contact_normal.x, contact_normal.y, contact_normal.z),
 			    penetration_depth, contact_pair.getEventType());
 		}
 	}

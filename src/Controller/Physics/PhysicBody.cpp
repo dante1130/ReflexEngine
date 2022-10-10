@@ -28,11 +28,7 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	if (epsilon > pb2->epsilon_value_) {
 		epsilon = pb2->epsilon_value_;
 	}
-
-	// pb1->rotated_inertia_tensor_ = QuaternionHelper::RotateMat3x3WithQuat(
-	//     glm::inverse(pb1->inertia_tensor_), pb1->getOrientation());
-	// pb2->rotated_inertia_tensor_ = QuaternionHelper::RotateMat3x3WithQuat(
-	//     glm::inverse(pb2->inertia_tensor_), pb2->getOrientation());
+	// epsilon = 1;
 
 	// J1^-1
 	// pb1->rotated_inertia_tensor_ = glm::inverse(pb1->inertia_tensor_);
@@ -84,6 +80,9 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	          << "\nCollision normal = [" << std::to_string(collision_normal.x)
 	          << "; " << std::to_string(collision_normal.y) << "; "
 	          << std::to_string(collision_normal.z) << "];"
+	          << "\nvel_num_eqn = " << std::to_string(vel_num_eqn)
+	          << "\nw1_num_eqn = " << w1_num_eqn
+	          << "\nw2_num_eqn = " << w2_num_eqn
 	          << "\nnum_eqn = " << std::to_string(num_eqn)
 	          << "\nmass_div_eqn = " << std::to_string(mass_div_eqn)
 	          << "\nj1_div_eqn = " << std::to_string(j1_div_eqn)
@@ -116,6 +115,16 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	          << std::to_string(pb1->rotated_inertia_tensor_[0][2]) << " "
 	          << std::to_string(pb1->rotated_inertia_tensor_[1][2]) << " "
 	          << std::to_string(pb1->rotated_inertia_tensor_[2][2]) << "];"
+	          << "\nInertia tensor\n["
+	          << std::to_string(pb1->inertia_tensor_[0][0]) << " "
+	          << std::to_string(pb1->inertia_tensor_[1][0]) << " "
+	          << std::to_string(pb1->inertia_tensor_[2][0]) << "; "
+	          << std::to_string(pb1->inertia_tensor_[0][1]) << " "
+	          << std::to_string(pb1->inertia_tensor_[1][1]) << " "
+	          << std::to_string(pb1->inertia_tensor_[2][1]) << "; "
+	          << std::to_string(pb1->inertia_tensor_[0][2]) << " "
+	          << std::to_string(pb1->inertia_tensor_[1][2]) << " "
+	          << std::to_string(pb1->inertia_tensor_[2][2]) << "];"
 	          << std::endl;
 
 	std::cout << "Object 2 - Before Collision"
@@ -140,6 +149,16 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	          << std::to_string(pb2->rotated_inertia_tensor_[0][2]) << " "
 	          << std::to_string(pb2->rotated_inertia_tensor_[1][2]) << " "
 	          << std::to_string(pb2->rotated_inertia_tensor_[2][2]) << "];"
+	          << "\nInertia tensor\n["
+	          << std::to_string(pb2->inertia_tensor_[0][0]) << " "
+	          << std::to_string(pb2->inertia_tensor_[1][0]) << " "
+	          << std::to_string(pb2->inertia_tensor_[2][0]) << "; "
+	          << std::to_string(pb2->inertia_tensor_[0][1]) << " "
+	          << std::to_string(pb2->inertia_tensor_[1][1]) << " "
+	          << std::to_string(pb2->inertia_tensor_[2][1]) << "; "
+	          << std::to_string(pb2->inertia_tensor_[0][2]) << " "
+	          << std::to_string(pb2->inertia_tensor_[1][2]) << " "
+	          << std::to_string(pb2->inertia_tensor_[2][2]) << "];"
 	          << std::endl;
 
 	pb1->resolve(lambda, lpoint_c1, collision_normal, 1);
@@ -184,8 +203,7 @@ void PhysicsBody::DePenetrate(PhysicsBody* pb1, PhysicsBody* pb2,
 			pos1 = pos1 - normal * penetration_depth;
 		}
 	} else {
-		float total_vel =
-		    glm::length(pb1->getVelocity()) + glm::length(pb2->getVelocity());
+		float total_vel = glm::length(pb1->getVelocity() - pb2->getVelocity());
 		pos1 = pos1 - (glm::length(pb1->getVelocity()) / total_vel) *
 		                  (normal * penetration_depth);
 		pos2 = pos2 + (glm::length(pb2->getVelocity()) / total_vel) *
