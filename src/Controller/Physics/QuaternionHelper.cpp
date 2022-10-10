@@ -34,8 +34,8 @@ glm::vec3 QuaternionHelper::QuatToEuler(glm::quat quat) {
 
 glm::mat3x3 QuaternionHelper::RotateMat3x3WithQuat(glm::mat3x3 matrix,
                                                    glm::quat quat) {
-	DebugLogger::log("QuaternionHelper - RotateMat3x3WithQuat",
-	                 "Untested method");
+	// DebugLogger::log("QuaternionHelper - RotateMat3x3WithQuat",
+	//                  "Untested method");
 	/*
 	glm::mat3x3 rotation = glm::mat3x3(0);
 	rotation[0][0] = 1 - 2 * (pow(quat.y, 2) + pow(quat.z, 2));
@@ -52,11 +52,10 @@ glm::mat3x3 QuaternionHelper::RotateMat3x3WithQuat(glm::mat3x3 matrix,
 
 	glm::mat3x3 result = rotation * matrix;
 	*/
-	// result = result * rotation_transpose;
 
 	// Another possible method
 	glm::mat3x3 rotation = glm::toMat3(quat);
-	glm::mat3x3 result = matrix * rotation;
+	glm::mat3x3 result = rotation * matrix;
 
 	return result;
 }

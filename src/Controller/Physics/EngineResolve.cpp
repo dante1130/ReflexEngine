@@ -393,12 +393,19 @@ uint32_t EngineResolve::addCapsuleCollider(PhysicsBody* rb, glm::vec3 pos,
 glm::mat3x3 EngineResolve::inertia_tensor_box(glm::vec3 size, float mass) {
 	glm::mat3x3 inertia_tensor = glm::mat3x3(0);
 	float temp_const = 1.0f / 12.0f;
+	// inertia_tensor[0][0] =
+	//     temp_const * mass * (pow(size.y, 2) + pow(size.x, 2));  // Ixx
+	//  inertia_tensor[1][1] =
+	//     temp_const * mass * (pow(size.z, 2) + pow(size.x, 2));  // Iyy
+	//  inertia_tensor[2][2] =
+	//     temp_const * mass * (pow(size.z, 2) + pow(size.y, 2));  // Izz
+
 	inertia_tensor[0][0] =
-	    temp_const * mass * (pow(size.y, 2) + pow(size.x, 2));  // Ixx
+	    temp_const * mass * (pow(size.y, 2) + pow(size.z, 2));  // Ixx
 	inertia_tensor[1][1] =
-	    temp_const * mass * (pow(size.z, 2) + pow(size.x, 2));  // Iyy
+	    temp_const * mass * (pow(size.x, 2) + pow(size.z, 2));  // Iyy
 	inertia_tensor[2][2] =
-	    temp_const * mass * (pow(size.z, 2) + pow(size.y, 2));  // Izz
+	    temp_const * mass * (pow(size.x, 2) + pow(size.y, 2));  // Izz
 
 	return inertia_tensor;
 }
