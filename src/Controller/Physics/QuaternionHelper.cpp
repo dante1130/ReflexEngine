@@ -56,7 +56,7 @@ glm::mat3x3 QuaternionHelper::RotateMat3x3WithQuat(glm::mat3x3 matrix,
 
 	// Another possible method
 	glm::mat3x3 rotation = glm::toMat3(glm::normalize(quat));
-	glm::mat3x3 result = rotation * matrix;
+	glm::mat3x3 result = glm::transpose(rotation) * matrix;
 	// glm::mat3x3 result = glm::transpose(rotation) * matrix;
 
 	/*
@@ -84,6 +84,7 @@ glm::quat QuaternionHelper::Matrix3x3ToQuat(glm::mat3x3 matrix) {
 
 glm::vec3 QuaternionHelper::RotateVectorWithQuat(glm::vec3 vec,
                                                  glm::quat quat) {
+	/*
 	glm::quat vec_q = glm::quat(0, vec.x, vec.y, vec.z);
 	glm::quat quat_m = glm::quat(quat.w, -quat.x, -quat.y, -quat.z);
 
@@ -91,4 +92,9 @@ glm::vec3 QuaternionHelper::RotateVectorWithQuat(glm::vec3 vec,
 	result = result * quat_m;
 
 	return glm::vec3(result.x, result.y, result.z);
+	*/
+
+	glm::mat3x3 rotation = glm::toMat3(quat);
+	glm::vec3 result = glm::transpose(rotation) * vec;
+	return result;
 }

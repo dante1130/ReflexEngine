@@ -77,7 +77,7 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 
 	std::cout << "\n\nGeneral Info\n"
 	          << "Epsilon = " << std::to_string(epsilon)
-	          << "\nCollision normal = [" << std::to_string(collision_normal.x)
+	          << "\ncollision_normal = [" << std::to_string(collision_normal.x)
 	          << "; " << std::to_string(collision_normal.y) << "; "
 	          << std::to_string(collision_normal.z) << "];"
 	          << "\nvel_num_eqn = " << std::to_string(vel_num_eqn)
@@ -93,19 +93,18 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	          << " " << std::to_string(linear_impluse.y) << " "
 	          << std::to_string(linear_impluse.z) << std::endl;
 
-	std::cout << "\n\nObject 1 - Before Collision"
-	          << "\nmass = " << std::to_string(pb1->getMass())
-	          << "\nlinear velocity = [" << std::to_string(pb1->getVelocity().x)
-	          << "; " << std::to_string(pb1->getVelocity().y) << "; "
+	std::cout << "\n\n%---Object 1 - Before Collision"
+	          << "\nb1_mass = " << std::to_string(pb1->getMass())
+	          << "\nb1_vel = [" << std::to_string(pb1->getVelocity().x) << "; "
+	          << std::to_string(pb1->getVelocity().y) << "; "
 	          << std::to_string(pb1->getVelocity().z) << "];"
-	          << "\nAngular velocity = ["
-	          << std::to_string(pb1->getAngVelocity().x) << "; "
-	          << std::to_string(pb1->getAngVelocity().y) << "; "
+	          << "\nb1_angVel = [" << std::to_string(pb1->getAngVelocity().x)
+	          << "; " << std::to_string(pb1->getAngVelocity().y) << "; "
 	          << std::to_string(pb1->getAngVelocity().z) << "];"
-	          << "\nDist to collision = [" << std::to_string(lpoint_c1.x)
-	          << "; " << std::to_string(lpoint_c1.y) << "; "
+	          << "\nc1_dist = [" << std::to_string(lpoint_c1.x) << "; "
+	          << std::to_string(lpoint_c1.y) << "; "
 	          << std::to_string(lpoint_c1.z) << "];"
-	          << "\nRotated inertia tensor\n["
+	          << "\nb1_inertia_tensor = ["
 	          << std::to_string(pb1->rotated_inertia_tensor_[0][0]) << " "
 	          << std::to_string(pb1->rotated_inertia_tensor_[1][0]) << " "
 	          << std::to_string(pb1->rotated_inertia_tensor_[2][0]) << "; "
@@ -115,9 +114,8 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	          << std::to_string(pb1->rotated_inertia_tensor_[0][2]) << " "
 	          << std::to_string(pb1->rotated_inertia_tensor_[1][2]) << " "
 	          << std::to_string(pb1->rotated_inertia_tensor_[2][2]) << "];"
-	          << "\nInertia tensor\n["
-	          << std::to_string(pb1->inertia_tensor_[0][0]) << " "
-	          << std::to_string(pb1->inertia_tensor_[1][0]) << " "
+	          << "\nb1_it = [" << std::to_string(pb1->inertia_tensor_[0][0])
+	          << " " << std::to_string(pb1->inertia_tensor_[1][0]) << " "
 	          << std::to_string(pb1->inertia_tensor_[2][0]) << "; "
 	          << std::to_string(pb1->inertia_tensor_[0][1]) << " "
 	          << std::to_string(pb1->inertia_tensor_[1][1]) << " "
@@ -127,19 +125,18 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	          << std::to_string(pb1->inertia_tensor_[2][2]) << "];"
 	          << std::endl;
 
-	std::cout << "Object 2 - Before Collision"
-	          << "\nmass = " << std::to_string(pb2->getMass())
-	          << "\nlinear velocity = [" << std::to_string(pb2->getVelocity().x)
-	          << "; " << std::to_string(pb2->getVelocity().y) << "; "
+	std::cout << "%---Object 2 - Before Collision"
+	          << "\nb2_mass = " << std::to_string(pb2->getMass())
+	          << "\nb2_vel = [" << std::to_string(pb2->getVelocity().x) << "; "
+	          << std::to_string(pb2->getVelocity().y) << "; "
 	          << std::to_string(pb2->getVelocity().z) << "];"
-	          << "\nAngular velocity = ["
-	          << std::to_string(pb2->getAngVelocity().x) << "; "
-	          << std::to_string(pb2->getAngVelocity().y) << "; "
+	          << "\nb2_angVel = [" << std::to_string(pb2->getAngVelocity().x)
+	          << "; " << std::to_string(pb2->getAngVelocity().y) << "; "
 	          << std::to_string(pb2->getAngVelocity().z) << "];"
-	          << "\nDist to collision = [" << std::to_string(lpoint_c2.x)
-	          << "; " << std::to_string(lpoint_c2.y) << "; "
+	          << "\nc2_dist = [" << std::to_string(lpoint_c2.x) << "; "
+	          << std::to_string(lpoint_c2.y) << "; "
 	          << std::to_string(lpoint_c2.z) << "];"
-	          << "\nRotated inertia tensor\n["
+	          << "\nb2_inertia_tensor = ["
 	          << std::to_string(pb2->rotated_inertia_tensor_[0][0]) << " "
 	          << std::to_string(pb2->rotated_inertia_tensor_[1][0]) << " "
 	          << std::to_string(pb2->rotated_inertia_tensor_[2][0]) << "; "
@@ -149,9 +146,8 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	          << std::to_string(pb2->rotated_inertia_tensor_[0][2]) << " "
 	          << std::to_string(pb2->rotated_inertia_tensor_[1][2]) << " "
 	          << std::to_string(pb2->rotated_inertia_tensor_[2][2]) << "];"
-	          << "\nInertia tensor\n["
-	          << std::to_string(pb2->inertia_tensor_[0][0]) << " "
-	          << std::to_string(pb2->inertia_tensor_[1][0]) << " "
+	          << "\nb2_it = [" << std::to_string(pb2->inertia_tensor_[0][0])
+	          << " " << std::to_string(pb2->inertia_tensor_[1][0]) << " "
 	          << std::to_string(pb2->inertia_tensor_[2][0]) << "; "
 	          << std::to_string(pb2->inertia_tensor_[0][1]) << " "
 	          << std::to_string(pb2->inertia_tensor_[1][1]) << " "
