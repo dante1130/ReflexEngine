@@ -1,5 +1,6 @@
 #include "EngineResolve.hpp"
 
+#include <glm/gtx/quaternion.hpp>
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/euler_angles.hpp>
 #include "Controller/Physics/QuaternionHelper.hpp"
@@ -41,8 +42,15 @@ void EngineResolve::resolve(float lambda, glm::vec3 vector_to_collision,
 	glm::mat3x3 angular_part_one = lambda * rotated_inertia_tensor_;
 	glm::vec3 angular_part_two =
 	    glm::cross(vector_to_collision, contact_normal);
-	angular_.velocity =
-	    angular_.velocity + (angular_part_one * angular_part_two) * mult;
+	// Rotate from global coordinate space to local coordinate space
+	glm::vec3 new_ang_vel = QuaternionHelper::RotateVectorWithQuat(
+	    (angular_part_one * angular_part_two * mult), getOrientation());
+	// glm::vec3 new_ang_vel = angular_part_one * angular_part_two * mult;
+	//  new_ang_vel = new_ang_vel * glm::toMat3(getOrientation());
+	//   glm::vec3 new_ang_vel = angular_part_one * angular_part_two * mult;
+	//    Add new angular velocity
+	angular_.velocity = angular_.velocity + new_ang_vel;
+
 	/*
 	std::cout << "\nLambda length = " << std::to_string(glm::length(lambda))
 	      << "\nangular_part_one\n"

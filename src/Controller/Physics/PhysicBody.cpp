@@ -16,13 +16,10 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 
 	DePenetrate(pb1, pb2, collision_normal, collision_depth);
 
-	lpoint_c1 = QuaternionHelper::RotateVectorWithQuat(lpoint_c1,
-	                                                   pb1->getOrientation());
-	lpoint_c2 = QuaternionHelper::RotateVectorWithQuat(lpoint_c2,
-	                                                   pb2->getOrientation());
-
-	// num_eqn = numerator section of equation
-	// div_eqn = divisor section of equation
+	lpoint_c1 = QuaternionHelper::RotateVectorWithOppositeQuat(
+	    lpoint_c1, pb1->getOrientation());
+	lpoint_c2 = QuaternionHelper::RotateVectorWithOppositeQuat(
+	    lpoint_c2, pb2->getOrientation());
 
 	float epsilon = pb1->epsilon_value_;
 	if (epsilon > pb2->epsilon_value_) {
@@ -33,17 +30,28 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	// J1^-1
 	// pb1->rotated_inertia_tensor_ = glm::inverse(pb1->inertia_tensor_);
 	pb1->rotated_inertia_tensor_ =
-	    glm::inverse(QuaternionHelper::RotateMat3x3WithQuat(
+	    glm::inverse(QuaternionHelper::RotateMat3x3WithOppositeQuat(
 	        pb1->inertia_tensor_, pb1->getOrientation()));
 	// J2^-1
 	// pb2->rotated_inertia_tensor_ = glm::inverse(pb2->inertia_tensor_);
 	pb2->rotated_inertia_tensor_ =
-	    glm::inverse(QuaternionHelper::RotateMat3x3WithQuat(
+	    glm::inverse(QuaternionHelper::RotateMat3x3WithOppositeQuat(
 	        pb2->inertia_tensor_, pb2->getOrientation()));
+
 	// (r1 x n)
 	glm::vec3 r1xn = glm::cross(lpoint_c1, collision_normal);
 	// (r2 x n)
 	glm::vec3 r2xn = glm::cross(lpoint_c2, collision_normal);
+
+	glm::vec3 ang_vel_b1 = pb1->getAngVelocity();
+	glm::vec3 ang_vel_b2 = pb2->getAngVelocity();
+	ang_vel_b1 = QuaternionHelper::RotateVectorWithOppositeQuat(
+	    ang_vel_b1, pb1->getOrientation());
+	ang_vel_b2 = QuaternionHelper::RotateVectorWithOppositeQuat(
+	    ang_vel_b2, pb2->getOrientation());
+
+	// num_eqn = numerator section of equation
+	// div_eqn = divisor section of equation
 
 	// (1 + E)
 	float epsilon_num_eqn = 1.0f + epsilon;
@@ -52,9 +60,9 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	float vel_num_eqn =
 	    glm::dot(collision_normal, (pb1->getVelocity() - pb2->getVelocity()));
 	// w1 . (r1 x n)
-	float w1_num_eqn = glm::dot(pb1->getAngVelocity(), r1xn);
+	float w1_num_eqn = glm::dot(ang_vel_b1, r1xn);
 	// w2 . (r2 x n)
-	float w2_num_eqn = glm::dot(pb2->getAngVelocity(), r2xn);
+	float w2_num_eqn = glm::dot(ang_vel_b2, r2xn);
 	//-(1 + E)(n . (v1 - v2) + w1 . (r1 x n) - w2 . (r2 x n))
 	float num_eqn = -epsilon_num_eqn * (vel_num_eqn + w1_num_eqn - w2_num_eqn);
 
@@ -67,11 +75,13 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	// OR (r1 x n) . J1^-1 * (r1 x n)
 	float j1_div_eqn = glm::dot(r1xn, pb1->rotated_inertia_tensor_ * r1xn);
 	// (r2 x n)^T * J2^-1 * (r2 x n)
+	// OR (r2 x n) . J2^-1 * (r2xn)
 	float j2_div_eqn = glm::dot(r2xn, pb2->rotated_inertia_tensor_ * r2xn);
 
 	// 1/m1 + 1/m2 + ((r1xn)^T * J1^-1 * (r1xn) + (r2xn)^T * J2^-1 * (r2xn))
 	float div_eqn = mass_div_eqn + (j1_div_eqn + j2_div_eqn);
 
+	// Entire equation
 	float lambda = (num_eqn / div_eqn);
 	glm::vec3 linear_impluse = lambda * collision_normal;
 
@@ -93,14 +103,14 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	          << " " << std::to_string(linear_impluse.y) << " "
 	          << std::to_string(linear_impluse.z) << std::endl;
 
-	std::cout << "\n\n%---Object 1 - Before Collision"
+	std::cout << "\n\n%-----Object 1 - Before Collision"
 	          << "\nb1_mass = " << std::to_string(pb1->getMass())
 	          << "\nb1_vel = [" << std::to_string(pb1->getVelocity().x) << "; "
 	          << std::to_string(pb1->getVelocity().y) << "; "
 	          << std::to_string(pb1->getVelocity().z) << "];"
-	          << "\nb1_angVel = [" << std::to_string(pb1->getAngVelocity().x)
-	          << "; " << std::to_string(pb1->getAngVelocity().y) << "; "
-	          << std::to_string(pb1->getAngVelocity().z) << "];"
+	          << "\nb1_angVel = [" << std::to_string(ang_vel_b1.x) << "; "
+	          << std::to_string(ang_vel_b1.y) << "; "
+	          << std::to_string(ang_vel_b1.z) << "];"
 	          << "\nc1_dist = [" << std::to_string(lpoint_c1.x) << "; "
 	          << std::to_string(lpoint_c1.y) << "; "
 	          << std::to_string(lpoint_c1.z) << "];"
@@ -123,16 +133,18 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	          << std::to_string(pb1->inertia_tensor_[0][2]) << " "
 	          << std::to_string(pb1->inertia_tensor_[1][2]) << " "
 	          << std::to_string(pb1->inertia_tensor_[2][2]) << "];"
-	          << std::endl;
+	          << "\n%orientation = " << pb1->getOrientation().w << " "
+	          << pb1->getOrientation().x << " " << pb1->getOrientation().y
+	          << " " << pb1->getOrientation().z << std::endl;
 
-	std::cout << "%---Object 2 - Before Collision"
+	std::cout << "%-----Object 2 - Before Collision"
 	          << "\nb2_mass = " << std::to_string(pb2->getMass())
 	          << "\nb2_vel = [" << std::to_string(pb2->getVelocity().x) << "; "
 	          << std::to_string(pb2->getVelocity().y) << "; "
 	          << std::to_string(pb2->getVelocity().z) << "];"
-	          << "\nb2_angVel = [" << std::to_string(pb2->getAngVelocity().x)
-	          << "; " << std::to_string(pb2->getAngVelocity().y) << "; "
-	          << std::to_string(pb2->getAngVelocity().z) << "];"
+	          << "\nb2_angVel = [" << std::to_string(ang_vel_b2.x) << "; "
+	          << std::to_string(ang_vel_b2.y) << "; "
+	          << std::to_string(ang_vel_b2.z) << "];"
 	          << "\nc2_dist = [" << std::to_string(lpoint_c2.x) << "; "
 	          << std::to_string(lpoint_c2.y) << "; "
 	          << std::to_string(lpoint_c2.z) << "];"
@@ -155,26 +167,30 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	          << std::to_string(pb2->inertia_tensor_[0][2]) << " "
 	          << std::to_string(pb2->inertia_tensor_[1][2]) << " "
 	          << std::to_string(pb2->inertia_tensor_[2][2]) << "];"
-	          << std::endl;
+	          << "\n%orientation = " << pb2->getOrientation().w << " "
+	          << pb2->getOrientation().x << " " << pb2->getOrientation().y
+	          << " " << pb2->getOrientation().z << std::endl;
 
 	pb1->resolve(lambda, lpoint_c1, collision_normal, 1);
 	pb2->resolve(lambda, lpoint_c2, collision_normal, 2);
 
-	std::cout << "\nObject 1 - After Collision"
-	          << "\nlinear velocity = " << std::to_string(pb1->getVelocity().x)
+	std::cout << "\n%Object 1 - After Collision"
+	          << "\nnew_b1_Vel = [" << std::to_string(pb1->getVelocity().x)
 	          << " " << std::to_string(pb1->getVelocity().y) << " "
-	          << std::to_string(pb1->getVelocity().z) << "\nAngular velocity = "
+	          << std::to_string(pb1->getVelocity().z) << "];"
+	          << "\nnew_b1_angVel = ["
 	          << std::to_string(pb1->getAngVelocity().x) << " "
 	          << std::to_string(pb1->getAngVelocity().y) << " "
-	          << std::to_string(pb1->getAngVelocity().z) << std::endl;
+	          << std::to_string(pb1->getAngVelocity().z) << "];" << std::endl;
 
-	std::cout << "Object 2 - After Collision"
-	          << "\nlinear velocity = " << std::to_string(pb2->getVelocity().x)
+	std::cout << "%Object 2 - After Collision"
+	          << "\nnew_b2_Vel = [" << std::to_string(pb2->getVelocity().x)
 	          << " " << std::to_string(pb2->getVelocity().y) << " "
-	          << std::to_string(pb2->getVelocity().z) << "\nAngular velocity = "
+	          << std::to_string(pb2->getVelocity().z) << "];"
+	          << "\nnew_b2_angVel = ["
 	          << std::to_string(pb2->getAngVelocity().x) << " "
 	          << std::to_string(pb2->getAngVelocity().y) << " "
-	          << std::to_string(pb2->getAngVelocity().z) << std::endl;
+	          << std::to_string(pb2->getAngVelocity().z) << "];" << std::endl;
 }
 
 float PhysicsBody::J_calc(glm::vec3 r1, glm::vec3 collision_normal,

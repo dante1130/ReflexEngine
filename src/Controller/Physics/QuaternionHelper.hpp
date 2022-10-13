@@ -36,10 +36,14 @@ glm::vec3 QuatToEuler(glm::quat quat);
  */
 glm::mat3x3 RotateMat3x3WithQuat(glm::mat3x3 matrix, glm::quat quat);
 
+glm::mat3x3 RotateMat3x3WithOppositeQuat(glm::mat3x3 matrix, glm::quat quat);
+
 glm::mat3x3 QuatToRotationMatrix(glm::quat quat);
 
 glm::quat Matrix3x3ToQuat(glm::mat3x3 matrix);
 
 glm::vec3 RotateVectorWithQuat(glm::vec3 vec, glm::quat quat);
+
+glm::vec3 RotateVectorWithOppositeQuat(glm::vec3 vec, glm::quat quat);
 
 }  // namespace QuaternionHelper
