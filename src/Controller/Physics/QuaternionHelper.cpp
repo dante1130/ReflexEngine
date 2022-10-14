@@ -35,51 +35,16 @@ glm::vec3 QuaternionHelper::QuatToEuler(glm::quat quat) {
 
 glm::mat3x3 QuaternionHelper::RotateMat3x3WithQuat(glm::mat3x3 matrix,
                                                    glm::quat quat) {
-	// DebugLogger::log("QuaternionHelper - RotateMat3x3WithQuat",
-	//                  "Untested method");
-	/*
-	glm::mat3x3 rotation = glm::mat3x3(0);
-	rotation[0][0] = 1 - 2 * (pow(quat.y, 2) + pow(quat.z, 2));
-	rotation[1][0] = 2 * quat.x * quat.y - 2 * quat.w * quat.z;
-	rotation[2][0] = 2 * quat.w * quat.y + 2 * quat.x * quat.z;
-	rotation[0][1] = 2 * quat.x * quat.y + 2 * quat.w * quat.z;
-	rotation[1][1] = 1 - 2 * (pow(quat.x, 2) + pow(quat.z, 2));
-	rotation[2][1] = 2 * quat.y * quat.z - 2 * quat.w * quat.x;
-	rotation[0][2] = 2 * quat.x * quat.z - 2 * quat.w * quat.y;
-	rotation[1][2] = 2 * quat.w * quat.x + 2 * quat.y * quat.z;
-	rotation[2][2] = 1 - 2 * (pow(quat.x, 2) + pow(quat.y, 2));
-
-	glm::mat3x3 rotation_transpose = glm::transpose(rotation);
-
-	glm::mat3x3 result = rotation * matrix;
-	*/
-
-	// Another possible method
+	DebugLogger::log("QuaternionHelper - RotateMat3x3WithQuat", "Untested");
 	glm::mat3x3 rotation = glm::toMat3(glm::normalize(quat));
-
-	// glm::mat3x3 result = rotation * matrix;
 	glm::mat3x3 result = rotation * matrix;
-
-	// std::cout << "\nRotating thing\n[" << rotation[0][0] << " "
-	//           << rotation[1][0] << " " << rotation[2][0] << "; "
-	//           << rotation[0][1] << " " << rotation[1][1] << " "
-	//           << rotation[2][1] << "; " << rotation[0][2] << " "
-	//           << rotation[1][2] << " " << rotation[2][2] << "];" <<
-	//           std::endl;
-	std::cout << "\nResult\n[" << result[0][0] << " " << result[1][0] << " "
-	          << result[2][0] << "; " << result[0][1] << " " << result[1][1]
-	          << " " << result[2][1] << "; " << result[0][2] << " "
-	          << result[1][2] << " " << result[2][2] << "];" << std::endl;
-
 	return result;
 }
 
-glm::mat3x3 QuaternionHelper::RotateMat3x3WithOppositeQuat(glm::mat3x3 matrix,
-                                                           glm::quat quat) {
-	DebugLogger::log("RotateMat3x3WithOppositeQuat", "Called");
+glm::mat3x3 QuaternionHelper::RotateInertiaTensorOppositeQuat(
+    glm::mat3x3 matrix, glm::quat quat) {
 	glm::mat3x3 rotation = glm::toMat3(glm::normalize(quat));
 	glm::mat3x3 result = glm::inverse(rotation) * matrix * rotation;
-
 	return result;
 }
 
@@ -95,25 +60,12 @@ glm::vec3 QuaternionHelper::RotateVectorWithQuat(glm::vec3 vec,
                                                  glm::quat quat) {
 	glm::mat3x3 rotation = glm::toMat3(glm::normalize(quat));
 	glm::vec3 result = rotation * vec;
-
 	return result;
 }
 
 glm::vec3 QuaternionHelper::RotateVectorWithOppositeQuat(glm::vec3 vec,
                                                          glm::quat quat) {
-	/*
-	    // quat = glm::inverse(quat);
-	    glm::quat vec_q = glm::quat(0, vec.x, vec.y, vec.z);
-	    glm::quat quat_m = glm::quat(quat.w, -quat.x, -quat.y, -quat.z);
-
-	    glm::quat result = quat * vec_q;
-	    result = result * quat_m;
-
-
-	    return glm::vec3(result.x, result.y, result.z);
-	    */
 	glm::mat3x3 rotation = glm::toMat3(glm::normalize(quat));
 	glm::vec3 result = glm::inverse(rotation) * vec;
-
 	return result;
 }

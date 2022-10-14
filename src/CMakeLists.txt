@@ -66,6 +66,7 @@ add_library(ReflexEngineSrc
 	Controller/Physics/ColliderRenderer.cpp
 	Controller/Physics/LoadOBJColliderData.cpp
 	Controller/Physics/QuaternionHelper.cpp
+	Controller/Physics/ResolutionOutput.cpp
 	Controller/Networking/NetworkAccess.cpp
 	Controller/Terrain/multiTextureCreator.cpp
 	Controller/RandomGenerators/PseudoRandomNumberGenerator.cpp

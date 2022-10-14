@@ -2,6 +2,7 @@
 
 #include "Controller/Physics/QuaternionHelper.hpp"
 #include "Controller/GUI/DebugLogger.hpp"
+#include "Controller/Physics/ResolutionOutput.hpp"
 
 #include <iostream>
 
@@ -25,17 +26,14 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	if (epsilon > pb2->epsilon_value_) {
 		epsilon = pb2->epsilon_value_;
 	}
-	// epsilon = 1;
 
 	// J1^-1
-	// pb1->rotated_inertia_tensor_ = glm::inverse(pb1->inertia_tensor_);
 	pb1->rotated_inertia_tensor_ =
-	    glm::inverse(QuaternionHelper::RotateMat3x3WithOppositeQuat(
+	    glm::inverse(QuaternionHelper::RotateInertiaTensorOppositeQuat(
 	        pb1->inertia_tensor_, pb1->getOrientation()));
 	// J2^-1
-	// pb2->rotated_inertia_tensor_ = glm::inverse(pb2->inertia_tensor_);
 	pb2->rotated_inertia_tensor_ =
-	    glm::inverse(QuaternionHelper::RotateMat3x3WithOppositeQuat(
+	    glm::inverse(QuaternionHelper::RotateInertiaTensorOppositeQuat(
 	        pb2->inertia_tensor_, pb2->getOrientation()));
 
 	// (r1 x n)
@@ -43,6 +41,7 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	// (r2 x n)
 	glm::vec3 r2xn = glm::cross(lpoint_c2, collision_normal);
 
+	// Rotates angular velocity to world coordaintes from local coordinates
 	glm::vec3 ang_vel_b1 = pb1->getAngVelocity();
 	glm::vec3 ang_vel_b2 = pb2->getAngVelocity();
 	ang_vel_b1 = QuaternionHelper::RotateVectorWithOppositeQuat(
@@ -85,23 +84,10 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	float lambda = (num_eqn / div_eqn);
 	glm::vec3 linear_impluse = lambda * collision_normal;
 
-	std::cout << "\n\nGeneral Info\n"
-	          << "Epsilon = " << std::to_string(epsilon)
-	          << "\ncollision_normal = [" << std::to_string(collision_normal.x)
-	          << "; " << std::to_string(collision_normal.y) << "; "
-	          << std::to_string(collision_normal.z) << "];"
-	          << "\nvel_num_eqn = " << std::to_string(vel_num_eqn)
-	          << "\nw1_num_eqn = " << w1_num_eqn
-	          << "\nw2_num_eqn = " << w2_num_eqn
-	          << "\nnum_eqn = " << std::to_string(num_eqn)
-	          << "\nmass_div_eqn = " << std::to_string(mass_div_eqn)
-	          << "\nj1_div_eqn = " << std::to_string(j1_div_eqn)
-	          << "\nj2_div_eqn = " << std::to_string(j2_div_eqn)
-	          << "\ndiv_eqn = " << std::to_string(div_eqn)
-	          << "\nLambda = " << std::to_string(lambda)
-	          << "\nLinear impluse = " << std::to_string(linear_impluse.x)
-	          << " " << std::to_string(linear_impluse.y) << " "
-	          << std::to_string(linear_impluse.z) << std::endl;
+	ResolutionOutput::output_resolution_data(
+	    epsilon, lambda, collision_normal,
+	    glm::vec3(vel_num_eqn, w1_num_eqn, w2_num_eqn),
+	    glm::vec3(mass_div_eqn, j1_div_eqn, j2_div_eqn));
 
 	std::cout << "\n\n%-----Object 1 - Before Collision"
 	          << "\nb1_mass = " << std::to_string(pb1->getMass())
@@ -174,6 +160,9 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	pb1->resolve(lambda, lpoint_c1, collision_normal, 1);
 	pb2->resolve(lambda, lpoint_c2, collision_normal, 2);
 
+	ResolutionOutput::output_after_resolution(
+	    pb1->getVelocity(), pb1->getAngVelocity(), pb2->getVelocity(),
+	    pb2->getAngVelocity());
 	std::cout << "\n%Object 1 - After Collision"
 	          << "\nnew_b1_Vel = [" << std::to_string(pb1->getVelocity().x)
 	          << " " << std::to_string(pb1->getVelocity().y) << " "
@@ -191,13 +180,6 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	          << std::to_string(pb2->getAngVelocity().x) << " "
 	          << std::to_string(pb2->getAngVelocity().y) << " "
 	          << std::to_string(pb2->getAngVelocity().z) << "];" << std::endl;
-}
-
-float PhysicsBody::J_calc(glm::vec3 r1, glm::vec3 collision_normal,
-                          glm::mat3x3 inertiaTensor) {
-	glm::vec3 cross_result = glm::cross(r1, collision_normal);
-	float result = glm::dot(cross_result, inertiaTensor * cross_result);
-	return result;
 }
 
 glm::mat3x3 PhysicsBody::get_inertia_tensor() { return inertia_tensor_; }

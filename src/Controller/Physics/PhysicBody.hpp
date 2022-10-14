@@ -44,6 +44,14 @@ private:
 	/// the object is a trigger
 	bool is_trigger = false;
 
+	/**
+	 * @brief Depenetrates the colliding object
+	 *
+	 * @param pb1 the first physics body
+	 * @param pb2 the second physics body
+	 * @param normal the collision normal of the collision
+	 * @param penetration_depth the penetration depth of the collision
+	 */
 	static void DePenetrate(PhysicsBody* pb1, PhysicsBody* pb2,
 	                        glm::vec3 normal, float penetration_depth);
 
@@ -69,9 +77,12 @@ protected:
 	/// The previous position of the object from last update
 	glm::vec3 previous_transform_position;
 
+	/// The coefficient of restitution
 	float epsilon_value_ = 0;
 
+	/// The inertia tensor
 	glm::mat3x3 inertia_tensor_;
+	/// The inverse of the rotated inertia tensor
 	glm::mat3x3 rotated_inertia_tensor_;
 
 	/**
@@ -83,9 +94,12 @@ protected:
 	virtual void deleteCollider(rp3d::Collider* collider) = 0;
 
 public:
+	/**
+	 * @brief Get the inertia tensor object
+	 *
+	 * @return glm::mat3x3
+	 */
 	glm::mat3x3 get_inertia_tensor();
-	static float J_calc(glm::vec3 r1, glm::vec3 collision_normal,
-	                    glm::mat3x3 inertiaTensor);
 
 	/**
 	 * @brief Gets the size of the colliders vector
