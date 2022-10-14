@@ -170,6 +170,10 @@ void EngineResolve::setAngVelocity(glm::vec3 ang_vel) {
 
 glm::vec3 EngineResolve::getAngVelocity() { return angular_.velocity; }
 
+glm::vec3 EngineResolve::getLinearAcceleration() {
+	return linear_.acceleration;
+}
+
 void EngineResolve::setDragForce(float drag) { linear_.drag = drag; }
 
 void EngineResolve::addDragForce(float drag) { linear_.drag += drag; }

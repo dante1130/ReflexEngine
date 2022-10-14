@@ -285,6 +285,10 @@ public:
 	                      glm::vec3 collision_normal, double collision_depth,
 	                      CollisionEvent c_type);
 
+	static void static_collision(rp3d::Collider* collider, glm::vec3 r_point,
+	                             glm::vec3 collision_normal, float epsilon,
+	                             float collision_depth);
+
 	/**
 	 * @brief Calculates collison response and applies it to
 	 * rigidbody
@@ -492,6 +496,13 @@ public:
 	 * @return glm::vec3
 	 */
 	virtual glm::vec3 getAngVelocity() = 0;
+
+	/**
+	 * @brief Get the Linear Acceleration object
+	 *
+	 * @return glm::vec3
+	 */
+	virtual glm::vec3 getLinearAcceleration() = 0;
 
 	/**
 	 * @brief Gets the linear drag of object

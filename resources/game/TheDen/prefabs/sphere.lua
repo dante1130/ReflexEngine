@@ -3,8 +3,8 @@ entity = {
 
 	transform = {
 		position = {
-			x = 50,
-			y = 4,
+			x = 53,
+			y = 10,
 			z = 0
 		},
 		rotation = {

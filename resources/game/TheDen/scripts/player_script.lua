@@ -1,5 +1,5 @@
 var = {
-	speed = 0.25
+	speed = 1
 }
 
 function init(ecs, entity)

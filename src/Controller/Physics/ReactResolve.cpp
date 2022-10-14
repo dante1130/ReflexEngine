@@ -1,5 +1,7 @@
 #include "ReactResolve.hpp"
 
+#include "Controller/GUI/DebugLogger.hpp"
+
 using namespace rp3d;
 
 bool ReactResolve::usingReactResolve() { return true; }
@@ -170,6 +172,11 @@ glm::vec3 ReactResolve::getVelocity() {
 glm::vec3 ReactResolve::getAngVelocity() {
 	Vector3 av = rb->getAngularVelocity();
 	return glm::vec3(av.x, av.y, av.z);
+}
+
+glm::vec3 ReactResolve::getLinearAcceleration() {
+	DebugLogger::log("ReactResolve - getLinearAcceleration", "Not implemented");
+	return glm::vec3(0);
 }
 
 float ReactResolve::getDragForce() { return rb->getLinearDamping(); }

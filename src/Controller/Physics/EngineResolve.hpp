@@ -244,6 +244,13 @@ public:
 	glm::vec3 getAngVelocity() override;
 
 	/**
+	 * @brief Get the Linear Acceleration object
+	 *
+	 * @return glm::vec3
+	 */
+	glm::vec3 getLinearAcceleration() override;
+
+	/**
 	 * @brief Gets the linear drag of object
 	 *
 	 * @return float
