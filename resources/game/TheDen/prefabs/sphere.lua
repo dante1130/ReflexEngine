@@ -3,9 +3,9 @@ entity = {
 
 	transform = {
 		position = {
-			x = 53,
+			x = 50.25,
 			y = 10,
-			z = 0
+			z = -2
 		},
 		rotation = {
 			x = 0,
@@ -13,9 +13,9 @@ entity = {
 			z = 0
 		},
 		scale = {
-			x = 0.25,
-			y = 0.25,
-			z = 0.25
+			x = 0.05,
+			y = 0.05,
+			z = 0.05
 		}
 	},
 

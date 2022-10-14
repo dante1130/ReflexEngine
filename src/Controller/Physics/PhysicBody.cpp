@@ -4,6 +4,7 @@
 #include "Controller/GUI/DebugLogger.hpp"
 #include "Controller/Physics/ResolutionOutput.hpp"
 #include "string"
+#include <iostream>
 
 using namespace rp3d;
 
@@ -37,12 +38,12 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 
 	// J1^-1
 	pb1->rotated_inertia_tensor_ =
-	    glm::inverse(QuaternionHelper::RotateInertiaTensorOppositeQuat(
-	        pb1->inertia_tensor_, pb1->getOrientation()));
+	    QuaternionHelper::RotateInertiaTensorOppositeQuat(
+	        glm::inverse(pb1->inertia_tensor_), pb1->getOrientation());
 	// J2^-1
 	pb2->rotated_inertia_tensor_ =
-	    glm::inverse(QuaternionHelper::RotateInertiaTensorOppositeQuat(
-	        pb2->inertia_tensor_, pb2->getOrientation()));
+	    QuaternionHelper::RotateInertiaTensorOppositeQuat(
+	        glm::inverse(pb2->inertia_tensor_), pb2->getOrientation());
 
 	// (r1 x n)
 	glm::vec3 r1xn = glm::cross(lpoint_c1, collision_normal);
@@ -52,10 +53,10 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	// Rotates angular velocity to world coordaintes from local coordinates
 	glm::vec3 ang_vel_b1 = pb1->getAngVelocity();
 	glm::vec3 ang_vel_b2 = pb2->getAngVelocity();
-	ang_vel_b1 = QuaternionHelper::RotateVectorWithOppositeQuat(
-	    ang_vel_b1, pb1->getOrientation());
-	ang_vel_b2 = QuaternionHelper::RotateVectorWithOppositeQuat(
-	    ang_vel_b2, pb2->getOrientation());
+	// ang_vel_b1 = QuaternionHelper::RotateVectorWithQuat(ang_vel_b1,
+	//                                                     pb1->getOrientation());
+	// ang_vel_b2 = QuaternionHelper::RotateVectorWithQuat(ang_vel_b2,
+	//                                                     pb2->getOrientation());
 
 	// num_eqn = numerator section of equation
 	// div_eqn = divisor section of equation
@@ -125,16 +126,17 @@ void PhysicsBody::static_collision(rp3d::Collider* collider, glm::vec3 r_point,
 
 	// J1^-1
 	pb1->rotated_inertia_tensor_ =
-	    glm::inverse(QuaternionHelper::RotateInertiaTensorOppositeQuat(
-	        pb1->inertia_tensor_, pb1->getOrientation()));
+	    QuaternionHelper::RotateInertiaTensorOppositeQuat(
+	        glm::inverse(pb1->inertia_tensor_), pb1->getOrientation());
 
 	// (r1 x n)
 	glm::vec3 rxn = glm::cross(r_point, collision_normal);
 
 	// Rotates angular velocity to world coordaintes from local coordinates
 	glm::vec3 ang_vel = pb1->getAngVelocity();
-	ang_vel = QuaternionHelper::RotateVectorWithOppositeQuat(
-	    ang_vel, pb1->getOrientation());
+	// ang_vel =
+	//     QuaternionHelper::RotateVectorWithQuat(ang_vel,
+	//     pb1->getOrientation());
 
 	// num_eqn = numerator section of equation
 	// div_eqn = divisor section of equation
@@ -143,10 +145,11 @@ void PhysicsBody::static_collision(rp3d::Collider* collider, glm::vec3 r_point,
 	float epsilon_num_eqn = 1.0f + epsilon;
 
 	// n . (v1 - v2)
-	float vel_num_eqn = glm::dot(
-	    collision_normal, (pb1->getVelocity() - pb1->getLinearAcceleration()));
+	float vel_num_eqn = glm::dot(collision_normal, pb1->getVelocity());
+
 	// w . (r x n)
 	float w_num_eqn = glm::dot(ang_vel, rxn);
+
 	//-(1 + E)(n . (v1 - v2) + w1 . (r1 x n) - w2 . (r2 x n))
 	float num_eqn = -epsilon_num_eqn * (vel_num_eqn + w_num_eqn);
 
@@ -168,8 +171,6 @@ void PhysicsBody::static_collision(rp3d::Collider* collider, glm::vec3 r_point,
 
 	// Set new velocity and angular velocity
 	pb1->resolve(lambda, r_point, collision_normal, 1);
-
-	ang_vel = pb1->getAngVelocity();
 }
 
 glm::mat3x3 PhysicsBody::get_inertia_tensor() { return inertia_tensor_; }

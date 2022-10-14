@@ -3,7 +3,7 @@ entity = {
 
     transform = {
         position = {
-			x = 40,
+			x = 48,
 			y = 10,
 			z = 0
 		},

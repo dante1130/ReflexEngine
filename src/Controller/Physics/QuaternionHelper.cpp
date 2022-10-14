@@ -44,7 +44,26 @@ glm::mat3x3 QuaternionHelper::RotateMat3x3WithQuat(glm::mat3x3 matrix,
 glm::mat3x3 QuaternionHelper::RotateInertiaTensorOppositeQuat(
     glm::mat3x3 matrix, glm::quat quat) {
 	glm::mat3x3 rotation = glm::toMat3(glm::normalize(quat));
-	glm::mat3x3 result = glm::inverse(rotation) * matrix * rotation;
+	glm::mat3x3 result = glm::transpose(rotation) * matrix * rotation;
+	// glm::mat3x3 result = rotation * matrix * glm::transpose(rotation);
+
+	/*
+	std::cout << "r inertia tensor =\n"
+	          << result[0][0] << " " << result[1][0] << " " << result[2][0]
+	          << "\n"
+	          << result[0][1] << " " << result[1][1] << " " << result[2][1]
+	          << "\n"
+	          << result[0][2] << " " << result[1][2] << " " << result[2][2]
+	          << std::endl;
+	          */
+
+	result[0][1] = 0;
+	result[0][2] = 0;
+	result[1][0] = 0;
+	result[1][2] = 0;
+	result[2][0] = 0;
+	result[2][1] = 0;
+
 	return result;
 }
 

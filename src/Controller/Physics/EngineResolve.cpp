@@ -43,12 +43,8 @@ void EngineResolve::resolve(float lambda, glm::vec3 vector_to_collision,
 	glm::mat3x3 angular_part_one = lambda * rotated_inertia_tensor_;
 	glm::vec3 angular_part_two =
 	    glm::cross(vector_to_collision, contact_normal);
-	// Rotate from global coordinate space to local coordinate space
-	glm::vec3 new_ang_vel = QuaternionHelper::RotateVectorWithQuat(
-	    (angular_part_one * angular_part_two * mult),
-	    getOrientation());  // May want to multiply after instead of inside, but
-	                        // idk
-	angular_.velocity = angular_.velocity + new_ang_vel;
+	angular_.velocity =
+	    angular_.velocity + (angular_part_one * angular_part_two * mult);
 }
 
 void EngineResolve::update(float delta_time) {
@@ -69,14 +65,21 @@ void EngineResolve::update(float delta_time) {
 	setPosition(pos);
 
 	// Rotation update
-	glm::vec3 rotation_change =
-	    (angular_.velocity * delta_time) +
-	    (angular_.acceleration * static_cast<float>(pow(delta_time, 2)) * 0.5f);
-	rotation_change = rotation_change * (180.0f / PI_RP3D);
-	glm::quat rot_change_quat = QuaternionHelper::EulerToQuat(rotation_change);
-	glm::quat rotation = getOrientation() * rot_change_quat;
-	glm::normalize(rotation);
-	setQuaternion(rotation);
+
+	// glm::vec3 rotation_change =
+	//     (angular_.velocity * delta_time) +
+	//     (angular_.acceleration * static_cast<float>(pow(delta_time, 2)) *
+	//     0.5f);
+	// rotation_change = rotation_change * (180.0f / PI_RP3D);
+	// glm::quat rot_change_quat =
+	// QuaternionHelper::EulerToQuat(rotation_change); glm::quat rotation =
+	// getOrientation() * rot_change_quat; glm::normalize(rotation);
+	// setQuaternion(rotation);
+
+	glm::quat orientation = getOrientation();
+	orientation = orientation + glm::quat(0, angular_.velocity) * orientation *
+	                                0.5f * delta_time;
+	setQuaternion(glm::normalize(orientation));
 
 	// Apply gravity
 	if (use_gravity_) {

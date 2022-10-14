@@ -58,17 +58,17 @@ void CollisionEventListener::onContact(const CallbackData& collision_data) {
 			penetration_depth += contact_point.getPenetrationDepth();
 		}
 
-		float num = static_cast<float>(num_of_contacts);
-		local_point_c1 /= num;
-		local_point_c1 =
-		    contact_pair.getBody1()->getWorldVector(local_point_c1);
-		local_point_c2 /= num;
-		local_point_c2 =
-		    contact_pair.getBody2()->getWorldVector(local_point_c2);
-		contact_normal /= num;
-		penetration_depth /= num;
-
 		if (num_of_contacts != 0) {
+			float num = static_cast<float>(num_of_contacts);
+			local_point_c1 /= num;
+			local_point_c1 =
+			    contact_pair.getBody1()->getWorldVector(local_point_c1);
+			local_point_c2 /= num;
+			local_point_c2 =
+			    contact_pair.getBody2()->getWorldVector(local_point_c2);
+			contact_normal /= num;
+			penetration_depth /= num;
+
 			PhysicsBody::collision(
 			    contact_pair.getCollider1(), contact_pair.getCollider2(),
 			    glm::vec3(local_point_c1.x, local_point_c1.y, local_point_c1.z),
