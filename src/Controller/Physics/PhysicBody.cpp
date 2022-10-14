@@ -35,12 +35,6 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 
 	DePenetrate(pb1, pb2, collision_normal, collision_depth);
 
-	// Convert from local to global points
-	lpoint_c1 = QuaternionHelper::RotateVectorWithOppositeQuat(
-	    lpoint_c1, pb1->getOrientation());
-	lpoint_c2 = QuaternionHelper::RotateVectorWithOppositeQuat(
-	    lpoint_c2, pb2->getOrientation());
-
 	// J1^-1
 	pb1->rotated_inertia_tensor_ =
 	    glm::inverse(QuaternionHelper::RotateInertiaTensorOppositeQuat(
@@ -128,13 +122,6 @@ void PhysicsBody::static_collision(rp3d::Collider* collider, glm::vec3 r_point,
 	glm::vec3 pos = pb1->getPosition();
 	pos -= collision_normal * collision_depth;
 	pb1->setPosition(pos);
-
-	// Convert from local to global points
-	r_point =
-	    QuaternionHelper::RotateVectorWithQuat(r_point, pb1->getOrientation());
-	// DebugLogger::log("r_point", std::to_string(r_point.x) + " " +
-	//                                 std::to_string(r_point.y) + " " +
-	//                                 std::to_string(r_point.z));
 
 	// J1^-1
 	pb1->rotated_inertia_tensor_ =

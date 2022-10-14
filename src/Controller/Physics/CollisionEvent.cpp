@@ -60,7 +60,11 @@ void CollisionEventListener::onContact(const CallbackData& collision_data) {
 
 		float num = static_cast<float>(num_of_contacts);
 		local_point_c1 /= num;
+		local_point_c1 =
+		    contact_pair.getBody1()->getWorldVector(local_point_c1);
 		local_point_c2 /= num;
+		local_point_c2 =
+		    contact_pair.getBody1()->getWorldVector(local_point_c2);
 		contact_normal /= num;
 		penetration_depth /= num;
 
