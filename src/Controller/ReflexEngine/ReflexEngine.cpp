@@ -88,8 +88,8 @@ void ReflexEngine::run() {
 		} else {
 			PERFORMANCE_LOGGER_PUSH("Fixed Update");
 			if (EngineTime::is_time_step_passed()) {
-				scene.fixed_update(EngineTime::get_fixed_delta_time());
 				Physics::updateWorld(EngineTime::get_fixed_delta_time());
+				scene.fixed_update(EngineTime::get_fixed_delta_time());
 				collider_renderer.update(
 				    Physics::getPhysicsWorld()->getDebugRenderer());
 			}
