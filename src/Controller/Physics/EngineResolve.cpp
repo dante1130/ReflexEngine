@@ -9,6 +9,8 @@
 
 #include <string>
 
+const constexpr glm::vec3 GRAVITY_CONSTANT = glm::vec3(0.0f, -9.807f, 0.0f);
+
 using namespace rp3d;
 
 EngineResolve::EngineResolve() {
@@ -80,10 +82,21 @@ void EngineResolve::update(float delta_time) {
 	glm::normalize(rotation);
 	setQuaternion(rotation);
 
+	// Apply gravity
+	if (use_gravity_) {
+		linear_.acceleration += GRAVITY_CONSTANT;
+	}
+
+	// Set new velocity and angular velocity based on acceleration and delta
+	// time
 	linear_.velocity = linear_.velocity + linear_.acceleration * delta_time;
 	linear_.acceleration = glm::vec3(0);
 	angular_.velocity = angular_.velocity + angular_.acceleration * delta_time;
 	angular_.acceleration = glm::vec3(0);
+
+	// Apply damping (drag)
+	linear_.velocity = linear_.velocity * (1 - delta_time * linear_.drag);
+	angular_.velocity = angular_.velocity * (1 - delta_time * angular_.drag);
 }
 
 void EngineResolve::initialise_body(glm::vec3 pos, glm::vec3 rot, float angle) {
