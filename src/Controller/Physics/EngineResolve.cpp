@@ -30,10 +30,6 @@ bool EngineResolve::usingReactResolve() { return false; }
 
 void EngineResolve::resolve(float lambda, glm::vec3 vector_to_collision,
                             glm::vec3 contact_normal, int collision_number) {
-	if (getType() == rp3d::BodyType::STATIC) {
-		return;
-	}
-
 	float mult = 1.0f;
 	if (collision_number == 2) {
 		mult = -1.0f;
