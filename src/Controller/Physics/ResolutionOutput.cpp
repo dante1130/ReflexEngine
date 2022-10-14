@@ -27,7 +27,73 @@ auto ResolutionOutput::output_resolution_data(float epsilon, float lambda,
 	          << linear_impulse.y << " " << linear_impulse.z << std::endl;
 }
 
-auto ResolutionOutput::output_before_resolution() -> void {}
+auto ResolutionOutput::output_before_resolution_b1(
+    float mass, glm::vec3 vel, glm::vec3 angVel, glm::vec3 collision_point,
+    glm::mat3x3 i_r_it, glm::mat3x3 it, glm::quat orientation) -> void {
+	std::cout << "\n\n%-----Object 1 - Before Collision"
+	          << "\nb1_mass = " << std::to_string(mass) << "\nb1_vel = ["
+	          << std::to_string(vel.x) << "; " << std::to_string(vel.y) << "; "
+	          << std::to_string(vel.z) << "];"
+	          << "\nb1_angVel = [" << std::to_string(angVel.x) << "; "
+	          << std::to_string(angVel.y) << "; " << std::to_string(angVel.z)
+	          << "];"
+	          << "\nc1_dist = [" << std::to_string(collision_point.x) << "; "
+	          << std::to_string(collision_point.y) << "; "
+	          << std::to_string(collision_point.z) << "];"
+	          << "\nb1_inertia_tensor = [" << std::to_string(i_r_it[0][0])
+	          << " " << std::to_string(i_r_it[1][0]) << " "
+	          << std::to_string(i_r_it[2][0]) << "; "
+	          << std::to_string(i_r_it[0][1]) << " "
+	          << std::to_string(i_r_it[1][1]) << " "
+	          << std::to_string(i_r_it[2][1]) << "; "
+	          << std::to_string(i_r_it[0][2]) << " "
+	          << std::to_string(i_r_it[1][2]) << " "
+	          << std::to_string(i_r_it[2][2]) << "];"
+	          << "\nb1_it = [" << std::to_string(it[0][0]) << " "
+	          << std::to_string(it[1][0]) << " " << std::to_string(it[2][0])
+	          << "; " << std::to_string(it[0][1]) << " "
+	          << std::to_string(it[1][1]) << " " << std::to_string(it[2][1])
+	          << "; " << std::to_string(it[0][2]) << " "
+	          << std::to_string(it[1][2]) << " " << std::to_string(it[2][2])
+	          << "];"
+	          << "\n%orientation (w,x,y,z) = " << orientation.w << " "
+	          << orientation.x << " " << orientation.y << " " << orientation.z
+	          << std::endl;
+}
+
+auto ResolutionOutput::output_before_resolution_b2(
+    float mass, glm::vec3 vel, glm::vec3 angVel, glm::vec3 collision_point,
+    glm::mat3x3 i_r_it, glm::mat3x3 it, glm::quat orientation) -> void {
+	std::cout << "%-----Object 2 - Before Collision"
+	          << "\nb2_mass = " << std::to_string(mass) << "\nb2_vel = ["
+	          << std::to_string(vel.x) << "; " << std::to_string(vel.y) << "; "
+	          << std::to_string(vel.z) << "];"
+	          << "\nb2_angVel = [" << std::to_string(angVel.x) << "; "
+	          << std::to_string(angVel.y) << "; " << std::to_string(angVel.z)
+	          << "];"
+	          << "\nc2_dist = [" << std::to_string(collision_point.x) << "; "
+	          << std::to_string(collision_point.y) << "; "
+	          << std::to_string(collision_point.z) << "];"
+	          << "\nb2_inertia_tensor = [" << std::to_string(i_r_it[0][0])
+	          << " " << std::to_string(i_r_it[1][0]) << " "
+	          << std::to_string(i_r_it[2][0]) << "; "
+	          << std::to_string(i_r_it[0][1]) << " "
+	          << std::to_string(i_r_it[1][1]) << " "
+	          << std::to_string(i_r_it[2][1]) << "; "
+	          << std::to_string(i_r_it[0][2]) << " "
+	          << std::to_string(i_r_it[1][2]) << " "
+	          << std::to_string(i_r_it[2][2]) << "];"
+	          << "\nb2_it = [" << std::to_string(it[0][0]) << " "
+	          << std::to_string(it[1][0]) << " " << std::to_string(it[2][0])
+	          << "; " << std::to_string(it[0][1]) << " "
+	          << std::to_string(it[1][1]) << " " << std::to_string(it[2][1])
+	          << "; " << std::to_string(it[0][2]) << " "
+	          << std::to_string(it[1][2]) << " " << std::to_string(it[2][2])
+	          << "];"
+	          << "\n%orientation (w,x,y,z) = " << orientation.w << " "
+	          << orientation.x << " " << orientation.y << " " << orientation.z
+	          << std::endl;
+}
 
 auto ResolutionOutput::output_after_resolution(glm::vec3 b1_vel,
                                                glm::vec3 b1_angVel,

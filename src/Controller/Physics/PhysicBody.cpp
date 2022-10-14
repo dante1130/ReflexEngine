@@ -4,8 +4,6 @@
 #include "Controller/GUI/DebugLogger.hpp"
 #include "Controller/Physics/ResolutionOutput.hpp"
 
-#include <iostream>
-
 using namespace rp3d;
 
 void PhysicsBody::collision(Collider* collider1, Collider* collider2,
@@ -15,13 +13,20 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	PhysicsBody* pb1 = static_cast<PhysicsBody*>(collider1->getUserData());
 	PhysicsBody* pb2 = static_cast<PhysicsBody*>(collider2->getUserData());
 
+	if (pb1->getType() == rp3d::BodyType::STATIC &&
+	    pb2->getType() == rp3d::BodyType::STATIC) {
+		return;
+	}
+
 	DePenetrate(pb1, pb2, collision_normal, collision_depth);
 
+	// Convert from local to global points
 	lpoint_c1 = QuaternionHelper::RotateVectorWithOppositeQuat(
 	    lpoint_c1, pb1->getOrientation());
 	lpoint_c2 = QuaternionHelper::RotateVectorWithOppositeQuat(
 	    lpoint_c2, pb2->getOrientation());
 
+	// Get the epsilon value
 	float epsilon = pb1->epsilon_value_;
 	if (epsilon > pb2->epsilon_value_) {
 		epsilon = pb2->epsilon_value_;
@@ -88,98 +93,22 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	    epsilon, lambda, collision_normal,
 	    glm::vec3(vel_num_eqn, w1_num_eqn, w2_num_eqn),
 	    glm::vec3(mass_div_eqn, j1_div_eqn, j2_div_eqn));
+	ResolutionOutput::output_before_resolution_b1(
+	    pb1->getMass(), pb1->getVelocity(), ang_vel_b1, lpoint_c1,
+	    pb1->rotated_inertia_tensor_, pb1->inertia_tensor_,
+	    pb1->getOrientation());
+	ResolutionOutput::output_before_resolution_b2(
+	    pb2->getMass(), pb2->getVelocity(), ang_vel_b2, lpoint_c2,
+	    pb2->rotated_inertia_tensor_, pb2->inertia_tensor_,
+	    pb2->getOrientation());
 
-	std::cout << "\n\n%-----Object 1 - Before Collision"
-	          << "\nb1_mass = " << std::to_string(pb1->getMass())
-	          << "\nb1_vel = [" << std::to_string(pb1->getVelocity().x) << "; "
-	          << std::to_string(pb1->getVelocity().y) << "; "
-	          << std::to_string(pb1->getVelocity().z) << "];"
-	          << "\nb1_angVel = [" << std::to_string(ang_vel_b1.x) << "; "
-	          << std::to_string(ang_vel_b1.y) << "; "
-	          << std::to_string(ang_vel_b1.z) << "];"
-	          << "\nc1_dist = [" << std::to_string(lpoint_c1.x) << "; "
-	          << std::to_string(lpoint_c1.y) << "; "
-	          << std::to_string(lpoint_c1.z) << "];"
-	          << "\nb1_inertia_tensor = ["
-	          << std::to_string(pb1->rotated_inertia_tensor_[0][0]) << " "
-	          << std::to_string(pb1->rotated_inertia_tensor_[1][0]) << " "
-	          << std::to_string(pb1->rotated_inertia_tensor_[2][0]) << "; "
-	          << std::to_string(pb1->rotated_inertia_tensor_[0][1]) << " "
-	          << std::to_string(pb1->rotated_inertia_tensor_[1][1]) << " "
-	          << std::to_string(pb1->rotated_inertia_tensor_[2][1]) << "; "
-	          << std::to_string(pb1->rotated_inertia_tensor_[0][2]) << " "
-	          << std::to_string(pb1->rotated_inertia_tensor_[1][2]) << " "
-	          << std::to_string(pb1->rotated_inertia_tensor_[2][2]) << "];"
-	          << "\nb1_it = [" << std::to_string(pb1->inertia_tensor_[0][0])
-	          << " " << std::to_string(pb1->inertia_tensor_[1][0]) << " "
-	          << std::to_string(pb1->inertia_tensor_[2][0]) << "; "
-	          << std::to_string(pb1->inertia_tensor_[0][1]) << " "
-	          << std::to_string(pb1->inertia_tensor_[1][1]) << " "
-	          << std::to_string(pb1->inertia_tensor_[2][1]) << "; "
-	          << std::to_string(pb1->inertia_tensor_[0][2]) << " "
-	          << std::to_string(pb1->inertia_tensor_[1][2]) << " "
-	          << std::to_string(pb1->inertia_tensor_[2][2]) << "];"
-	          << "\n%orientation = " << pb1->getOrientation().w << " "
-	          << pb1->getOrientation().x << " " << pb1->getOrientation().y
-	          << " " << pb1->getOrientation().z << std::endl;
-
-	std::cout << "%-----Object 2 - Before Collision"
-	          << "\nb2_mass = " << std::to_string(pb2->getMass())
-	          << "\nb2_vel = [" << std::to_string(pb2->getVelocity().x) << "; "
-	          << std::to_string(pb2->getVelocity().y) << "; "
-	          << std::to_string(pb2->getVelocity().z) << "];"
-	          << "\nb2_angVel = [" << std::to_string(ang_vel_b2.x) << "; "
-	          << std::to_string(ang_vel_b2.y) << "; "
-	          << std::to_string(ang_vel_b2.z) << "];"
-	          << "\nc2_dist = [" << std::to_string(lpoint_c2.x) << "; "
-	          << std::to_string(lpoint_c2.y) << "; "
-	          << std::to_string(lpoint_c2.z) << "];"
-	          << "\nb2_inertia_tensor = ["
-	          << std::to_string(pb2->rotated_inertia_tensor_[0][0]) << " "
-	          << std::to_string(pb2->rotated_inertia_tensor_[1][0]) << " "
-	          << std::to_string(pb2->rotated_inertia_tensor_[2][0]) << "; "
-	          << std::to_string(pb2->rotated_inertia_tensor_[0][1]) << " "
-	          << std::to_string(pb2->rotated_inertia_tensor_[1][1]) << " "
-	          << std::to_string(pb2->rotated_inertia_tensor_[2][1]) << "; "
-	          << std::to_string(pb2->rotated_inertia_tensor_[0][2]) << " "
-	          << std::to_string(pb2->rotated_inertia_tensor_[1][2]) << " "
-	          << std::to_string(pb2->rotated_inertia_tensor_[2][2]) << "];"
-	          << "\nb2_it = [" << std::to_string(pb2->inertia_tensor_[0][0])
-	          << " " << std::to_string(pb2->inertia_tensor_[1][0]) << " "
-	          << std::to_string(pb2->inertia_tensor_[2][0]) << "; "
-	          << std::to_string(pb2->inertia_tensor_[0][1]) << " "
-	          << std::to_string(pb2->inertia_tensor_[1][1]) << " "
-	          << std::to_string(pb2->inertia_tensor_[2][1]) << "; "
-	          << std::to_string(pb2->inertia_tensor_[0][2]) << " "
-	          << std::to_string(pb2->inertia_tensor_[1][2]) << " "
-	          << std::to_string(pb2->inertia_tensor_[2][2]) << "];"
-	          << "\n%orientation = " << pb2->getOrientation().w << " "
-	          << pb2->getOrientation().x << " " << pb2->getOrientation().y
-	          << " " << pb2->getOrientation().z << std::endl;
-
+	// Set new velocity and angular velocity
 	pb1->resolve(lambda, lpoint_c1, collision_normal, 1);
 	pb2->resolve(lambda, lpoint_c2, collision_normal, 2);
 
 	ResolutionOutput::output_after_resolution(
 	    pb1->getVelocity(), pb1->getAngVelocity(), pb2->getVelocity(),
 	    pb2->getAngVelocity());
-	std::cout << "\n%Object 1 - After Collision"
-	          << "\nnew_b1_Vel = [" << std::to_string(pb1->getVelocity().x)
-	          << " " << std::to_string(pb1->getVelocity().y) << " "
-	          << std::to_string(pb1->getVelocity().z) << "];"
-	          << "\nnew_b1_angVel = ["
-	          << std::to_string(pb1->getAngVelocity().x) << " "
-	          << std::to_string(pb1->getAngVelocity().y) << " "
-	          << std::to_string(pb1->getAngVelocity().z) << "];" << std::endl;
-
-	std::cout << "%Object 2 - After Collision"
-	          << "\nnew_b2_Vel = [" << std::to_string(pb2->getVelocity().x)
-	          << " " << std::to_string(pb2->getVelocity().y) << " "
-	          << std::to_string(pb2->getVelocity().z) << "];"
-	          << "\nnew_b2_angVel = ["
-	          << std::to_string(pb2->getAngVelocity().x) << " "
-	          << std::to_string(pb2->getAngVelocity().y) << " "
-	          << std::to_string(pb2->getAngVelocity().z) << "];" << std::endl;
 }
 
 glm::mat3x3 PhysicsBody::get_inertia_tensor() { return inertia_tensor_; }

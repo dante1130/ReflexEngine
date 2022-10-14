@@ -7,7 +7,6 @@
 
 #include "Controller/GUI/DebugLogger.hpp"
 
-#include <iostream>
 #include <string>
 
 using namespace rp3d;
@@ -29,6 +28,10 @@ bool EngineResolve::usingReactResolve() { return false; }
 
 void EngineResolve::resolve(float lambda, glm::vec3 vector_to_collision,
                             glm::vec3 contact_normal, int collision_number) {
+	if (getType() == rp3d::BodyType::STATIC) {
+		return;
+	}
+
 	float mult = 1.0f;
 	if (collision_number == 2) {
 		mult = -1.0f;
@@ -44,36 +47,10 @@ void EngineResolve::resolve(float lambda, glm::vec3 vector_to_collision,
 	    glm::cross(vector_to_collision, contact_normal);
 	// Rotate from global coordinate space to local coordinate space
 	glm::vec3 new_ang_vel = QuaternionHelper::RotateVectorWithQuat(
-	    (angular_part_one * angular_part_two * mult), getOrientation());
-	// glm::vec3 new_ang_vel = angular_part_one * angular_part_two * mult;
-	//  new_ang_vel = new_ang_vel * glm::toMat3(getOrientation());
-	//   glm::vec3 new_ang_vel = angular_part_one * angular_part_two * mult;
-	//    Add new angular velocity
+	    (angular_part_one * angular_part_two * mult),
+	    getOrientation());  // May want to multiply after instead of inside, but
+	                        // idk
 	angular_.velocity = angular_.velocity + new_ang_vel;
-
-	/*
-	std::cout << "\nLambda length = " << std::to_string(glm::length(lambda))
-	      << "\nangular_part_one\n"
-	      << std::to_string(angular_part_one[0][0]) << " "
-	      << std::to_string(angular_part_one[1][0]) << " "
-	      << std::to_string(angular_part_one[2][0]) << "\n"
-	      << std::to_string(angular_part_one[0][1]) << " "
-	      << std::to_string(angular_part_one[1][1]) << " "
-	      << std::to_string(angular_part_one[2][1]) << "\n"
-	      << std::to_string(angular_part_one[0][2]) << " "
-	      << std::to_string(angular_part_one[1][2]) << " "
-	      << std::to_string(angular_part_one[2][2]) << " "
-	      << "\nangular_part_two = "
-	      << std::to_string(angular_part_two.x * 10000) << " "
-	      << std::to_string(angular_part_two.y * 10000) << " "
-	      << std::to_string(angular_part_two.z * 10000)
-	      << "\nnormal = " << std::to_string(contact_normal.x) << " "
-	      << std::to_string(contact_normal.y) << " "
-	      << std::to_string(contact_normal.z) << "\nvector_to_collision = "
-	      << std::to_string(vector_to_collision.x) << " "
-	      << std::to_string(vector_to_collision.y) << " "
-	      << std::to_string(vector_to_collision.z) << std::endl;
-	      */
 }
 
 void EngineResolve::update(float delta_time) {
