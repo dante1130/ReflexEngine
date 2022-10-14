@@ -157,47 +157,17 @@ void EngineResolve::setAngVelocity(glm::vec3 ang_vel) {
 
 glm::vec3 EngineResolve::getAngVelocity() { return angular_.velocity; }
 
-void EngineResolve::setDragForce(float drag) {
-	///
-	///
-	///
-	///
-}
+void EngineResolve::setDragForce(float drag) { linear_.drag = drag; }
 
-void EngineResolve::addDragForce(float drag) {
-	///
-	///
-	///
-	///
-}
+void EngineResolve::addDragForce(float drag) { linear_.drag += drag; }
 
-float EngineResolve::getDragForce() {
-	///
-	///
-	///
-	return 0.0;
-}
+float EngineResolve::getDragForce() { return linear_.drag; }
 
-void EngineResolve::setDragTorque(float ang_drag) {
-	///
-	///
-	///
-	///
-}
+void EngineResolve::setDragTorque(float ang_drag) { angular_.drag = ang_drag; }
 
-void EngineResolve::addDragTorque(float ang_drag) {
-	///
-	///
-	///
-	///
-}
+void EngineResolve::addDragTorque(float ang_drag) { angular_.drag += ang_drag; }
 
-float EngineResolve::getDragTorque() {
-	///
-	///
-	///
-	return 0.0;
-}
+float EngineResolve::getDragTorque() { return angular_.drag; }
 
 void EngineResolve::setType(rp3d::BodyType type) { body_type_ = type; }
 
@@ -219,35 +189,14 @@ void EngineResolve::setType(int type) {
 
 rp3d::BodyType EngineResolve::getType() { return body_type_; }
 
-void EngineResolve::enableGravity(bool ean) {
-	///
-	///
-	///
-	///
-}
+void EngineResolve::enableGravity(bool enable) { use_gravity_ = enable; }
 
-bool EngineResolve::getIsGravityEnabled() {
-	///
-	///
-	///
-	return false;
-}
+bool EngineResolve::getIsGravityEnabled() { return use_gravity_; }
 
-void EngineResolve::setCanSleep(bool ean) {
-	///
-	///
-	///
-	///
-}
+void EngineResolve::setCanSleep(bool enable) { can_sleep_ = enable; }
 
-bool EngineResolve::getCanSleep() {
-	///
-	///
-	///
-	return false;
-}
+bool EngineResolve::getCanSleep() { return can_sleep_; }
 
-#include <iostream>
 uint32_t EngineResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size,
                                        float mass, float epsilon) {
 	BoxShape* collider = Physics::getPhysicsCommon().createBoxShape(

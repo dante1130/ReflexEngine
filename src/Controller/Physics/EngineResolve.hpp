@@ -6,8 +6,10 @@
 struct Motion_Stats {
 	glm::vec3 velocity;
 	glm::vec3 acceleration;
+	float drag;
 
-	Motion_Stats() : velocity(glm::vec3(0)), acceleration(glm::vec3(0)) {}
+	Motion_Stats()
+	    : velocity(glm::vec3(0)), acceleration(glm::vec3(0)), drag(0) {}
 };
 
 class EngineResolve : public PhysicsBody {
@@ -19,7 +21,10 @@ private:
 
 	float total_mass_ = 0;
 
-	rp3d::BodyType body_type_;
+	rp3d::BodyType body_type_ = rp3d::BodyType::STATIC;
+
+	bool use_gravity_ = false;
+	bool can_sleep_ = false;
 
 public:
 	EngineResolve();
