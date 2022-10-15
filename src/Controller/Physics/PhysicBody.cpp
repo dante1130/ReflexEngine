@@ -53,10 +53,6 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	// Rotates angular velocity to world coordaintes from local coordinates
 	glm::vec3 ang_vel_b1 = pb1->getAngVelocity();
 	glm::vec3 ang_vel_b2 = pb2->getAngVelocity();
-	// ang_vel_b1 = QuaternionHelper::RotateVectorWithQuat(ang_vel_b1,
-	//                                                     pb1->getOrientation());
-	// ang_vel_b2 = QuaternionHelper::RotateVectorWithQuat(ang_vel_b2,
-	//                                                     pb2->getOrientation());
 
 	// num_eqn = numerator section of equation
 	// div_eqn = divisor section of equation
@@ -134,9 +130,6 @@ void PhysicsBody::static_collision(rp3d::Collider* collider, glm::vec3 r_point,
 
 	// Rotates angular velocity to world coordaintes from local coordinates
 	glm::vec3 ang_vel = pb1->getAngVelocity();
-	// ang_vel =
-	//     QuaternionHelper::RotateVectorWithQuat(ang_vel,
-	//     pb1->getOrientation());
 
 	// num_eqn = numerator section of equation
 	// div_eqn = divisor section of equation
@@ -167,7 +160,6 @@ void PhysicsBody::static_collision(rp3d::Collider* collider, glm::vec3 r_point,
 
 	// Entire equation
 	float lambda = (num_eqn / div_eqn);
-	glm::vec3 linear_impluse = lambda * collision_normal;
 
 	// Set new velocity and angular velocity
 	pb1->resolve(lambda, r_point, collision_normal, 1);
