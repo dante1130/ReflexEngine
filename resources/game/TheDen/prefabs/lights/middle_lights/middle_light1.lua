@@ -1,5 +1,5 @@
 entity = {
-	name = "Light",
+	name = "Middle light 1",
 	collection_id = 1,
 
 	point_light = {
