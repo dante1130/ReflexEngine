@@ -18,7 +18,7 @@ entity = {
 		diffuse_intensity = 1,
 
 		position = {
-			x = 54,
+			x = 0,
 			y = 2.5,
 			z = -1.275
 		},

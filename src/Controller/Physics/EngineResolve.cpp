@@ -2,6 +2,10 @@
 
 using namespace rp3d;
 
+void EngineResolve::update(float delta_time) {}
+
+void EngineResolve::resolve(glm::vec3 normal, CollisionEvent c_type) {}
+
 bool EngineResolve::usingReactResolve() { return false; }
 
 EngineResolve::EngineResolve() {
@@ -25,97 +29,6 @@ EngineResolve::EngineResolve() {
 
 	collision_finished = false;
 	collision_started = false;
-}
-
-void EngineResolve::update(float delta_time) {
-	if (type_ == BodyType::STATIC || type_ == BodyType::KINEMATIC) return;
-
-	// Previous position and orientation
-	Vector3 old_position = cb->getTransform().getPosition();
-	Quaternion old_orientation = cb->getTransform().getOrientation();
-
-	glm::vec3 applied_gravity = glm::vec3(0.0f);
-	glm::vec3 temp_acc = glm::vec3(0.0f);
-
-	// Applies gravity if enabled
-	if (use_gravity_) applied_gravity = gravity_;
-
-	// Applies force to acceleration
-	if (force_ != glm::vec3(0.0f)) {
-		temp_acc = force_ / mass_;
-		lin_accelaration_ += temp_acc;
-		force_ = glm::vec3(0.0f);
-	}
-
-	// Calcuating new linear velocity
-	lin_velocity_ =
-	    lin_velocity_ + (lin_accelaration_ + applied_gravity) * delta_time;
-
-	lin_velocity_ = lin_velocity_ * (1 - delta_time * lin_drag);
-
-	// Calculating new position
-	Vector3 new_position =
-	    old_position +
-	    Vector3(lin_velocity_.x, lin_velocity_.y, lin_velocity_.z) * delta_time;
-	// Calculating new orientation
-	Quaternion new_orientation = old_orientation;
-
-	if (lock_axes_front.lock_x && new_position.x > collision_axes.x)
-		new_position.x = collision_axes.x;
-	if (lock_axes_front.lock_y && new_position.y > collision_axes.y)
-		new_position.y = collision_axes.y;
-	if (lock_axes_front.lock_z && new_position.z > collision_axes.z)
-		new_position.z = collision_axes.z;
-
-	if (lock_axes_back.lock_x && new_position.x < collision_axes.x)
-		new_position.x = collision_axes.x;
-	if (lock_axes_back.lock_y && new_position.y < collision_axes.y)
-		new_position.y = collision_axes.y;
-	if (lock_axes_back.lock_z && new_position.z < collision_axes.z)
-		new_position.z = collision_axes.z;
-
-	// Final linking
-	if (!collision_started)
-		cb->setTransform(Transform(new_position, new_orientation));
-	else
-		collision_started = false;
-
-	if (collision_finished) {
-		lock_axes_front = bool3(false, false, false);
-		lock_axes_back = bool3(false, false, false);
-		collision_finished = false;
-	}
-
-	lin_accelaration_ -= temp_acc;
-}
-
-void EngineResolve::resolve(glm::vec3 normal, CollisionEvent c_type) {
-	if (c_type == CollisionEvent::ContactStart) {
-		collision_axes = getPosition();
-		lin_velocity_ = glm::vec3(0.0f);
-		lin_accelaration_ = glm::vec3(0.0f);
-		collision_started = true;
-	}
-
-	if (c_type == CollisionEvent::ContactStay) {
-		if (normal.x == 1 && !lock_axes_front.lock_x)
-			lock_axes_front.lock_x = true;
-		if (normal.y == 1 && !lock_axes_front.lock_y)
-			lock_axes_front.lock_y = true;
-		if (normal.z == 1 && !lock_axes_front.lock_z)
-			lock_axes_front.lock_z = true;
-
-		if (normal.x == -1 && !lock_axes_back.lock_x)
-			lock_axes_back.lock_x = true;
-		if (normal.y == -1 && !lock_axes_back.lock_y)
-			lock_axes_back.lock_y = true;
-		if (normal.z == -1 && !lock_axes_back.lock_z)
-			lock_axes_back.lock_z = true;
-	}
-
-	if (c_type == CollisionEvent::ContactExit) {
-		collision_finished = true;
-	}
 }
 
 void EngineResolve::initialise_body(glm::vec3 pos, glm::vec3 rot, float angle) {

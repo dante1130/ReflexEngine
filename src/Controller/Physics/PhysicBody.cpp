@@ -2,6 +2,12 @@
 
 using namespace rp3d;
 
+void PhysicsBody::collision(Collider* c1, Collider* c2, Vector3 normal,
+                            CollisionEvent c_type) {
+	PhysicsBody* p1 = ((PhysicsBody*)c1->getUserData());
+	PhysicsBody* p2 = ((PhysicsBody*)c2->getUserData());
+}
+
 size_t PhysicsBody::colliderSize() { return colliders.size(); }
 
 void PhysicsBody::removeCollider(size_t index) {
@@ -157,22 +163,6 @@ size_t PhysicsBody::getColliderIndex(rp3d::Collider* collider) {
 	}
 
 	return colliders.size();
-}
-
-void PhysicsBody::collision(Collider* c1, Collider* c2, Vector3 normal,
-                            CollisionEvent c_type) {
-	PhysicsBody* p1 = ((PhysicsBody*)c1->getUserData());
-	PhysicsBody* p2 = ((PhysicsBody*)c2->getUserData());
-
-	glm::vec3 n = glm::vec3(normal.x, normal.y, normal.z);
-
-	if (p1->getType() == BodyType::DYNAMIC && !p1->usingReactResolve()) {
-		p1->resolve(n, c_type);
-	}
-
-	if (p2->getType() == BodyType::DYNAMIC && !p2->usingReactResolve()) {
-		p2->resolve(n, c_type);
-	}
 }
 
 glm::vec3 PhysicsBody::getPreviousPosition() {
