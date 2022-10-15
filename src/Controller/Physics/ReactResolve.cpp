@@ -1,5 +1,7 @@
 #include "ReactResolve.hpp"
 
+#include "Controller/GUI/DebugLogger.hpp"
+
 using namespace rp3d;
 
 bool ReactResolve::usingReactResolve() { return true; }
@@ -10,7 +12,10 @@ ReactResolve::ReactResolve() {
 
 void ReactResolve::update(float delta_time) {}
 
-void ReactResolve::resolve(glm::vec3 normal, CollisionEvent c_type) { return; }
+void ReactResolve::resolve(float lambda, glm::vec3 vector_to_collision,
+                           glm::vec3 contact_normal, int collision_number) {
+	return;
+}
 
 void ReactResolve::initialise_body(glm::vec3 pos, glm::vec3 rot, float angle) {
 	Vector3 position(pos.x, pos.y, pos.z);
@@ -169,13 +174,19 @@ glm::vec3 ReactResolve::getAngVelocity() {
 	return glm::vec3(av.x, av.y, av.z);
 }
 
+glm::vec3 ReactResolve::getLinearAcceleration() {
+	DebugLogger::log("ReactResolve - getLinearAcceleration", "Not implemented");
+	return glm::vec3(0);
+}
+
 float ReactResolve::getDragForce() { return rb->getLinearDamping(); }
 float ReactResolve::getDragTorque() { return rb->getAngularDamping(); }
 BodyType ReactResolve::getType() { return rb->getType(); }
 bool ReactResolve::getIsGravityEnabled() { return rb->isGravityEnabled(); }
 bool ReactResolve::getCanSleep() { return rb->isAllowedToSleep(); }
 
-uint32_t ReactResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size) {
+uint32_t ReactResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size, float mass,
+                                      float epsilon) {
 	BoxShape* bs = Physics::getPhysicsCommon().createBoxShape(
 	    Vector3(size.x / 2, size.y / 2, size.z / 2));
 	Transform center =
@@ -185,7 +196,8 @@ uint32_t ReactResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size) {
 	return colliders.size() - 1;
 }
 
-uint32_t ReactResolve::addSphereCollider(glm::vec3 pos, float radius) {
+uint32_t ReactResolve::addSphereCollider(glm::vec3 pos, float radius,
+                                         float mass, float epsilon) {
 	SphereShape* ss = Physics::getPhysicsCommon().createSphereShape(radius);
 	Transform center =
 	    Transform(Vector3(pos.x, pos.y, pos.z), Quaternion::identity());
@@ -195,7 +207,8 @@ uint32_t ReactResolve::addSphereCollider(glm::vec3 pos, float radius) {
 }
 
 uint32_t ReactResolve::addCapsuleCollider(glm::vec3 pos, float radius,
-                                          float height) {
+                                          float height, float mass,
+                                          float epsilon) {
 	CapsuleShape* cs =
 	    Physics::getPhysicsCommon().createCapsuleShape(radius, height);
 	Transform center =
@@ -207,8 +220,9 @@ uint32_t ReactResolve::addCapsuleCollider(glm::vec3 pos, float radius,
 
 uint32_t ReactResolve::addBoxCollider(PhysicsBody* rb, glm::vec3 pos,
                                       glm::vec3 size, float bounce,
-                                      float friction) {
-	unsigned int index = addBoxCollider(pos, size);
+                                      float friction, float mass,
+                                      float epsilon) {
+	unsigned int index = addBoxCollider(pos, size, mass, epsilon);
 	colliders[colliders.size() - 1]->setUserData(rb);
 	Material& mat = colliders[colliders.size() - 1]->getMaterial();
 	mat.setBounciness(bounce);
@@ -218,8 +232,9 @@ uint32_t ReactResolve::addBoxCollider(PhysicsBody* rb, glm::vec3 pos,
 
 uint32_t ReactResolve::addSphereCollider(PhysicsBody* rb, glm::vec3 pos,
                                          float radius, float bounce,
-                                         float friction) {
-	unsigned int index = addSphereCollider(pos, radius);
+                                         float friction, float mass,
+                                         float epsilon) {
+	unsigned int index = addSphereCollider(pos, radius, mass, epsilon);
 	colliders[colliders.size() - 1]->setUserData(rb);
 	Material& mat = colliders[colliders.size() - 1]->getMaterial();
 	mat.setBounciness(bounce);
@@ -229,8 +244,9 @@ uint32_t ReactResolve::addSphereCollider(PhysicsBody* rb, glm::vec3 pos,
 
 uint32_t ReactResolve::addCapsuleCollider(PhysicsBody* rb, glm::vec3 pos,
                                           float radius, float height,
-                                          float bounce, float friction) {
-	unsigned int index = addCapsuleCollider(pos, radius, height);
+                                          float bounce, float friction,
+                                          float mass, float epsilon) {
+	unsigned int index = addCapsuleCollider(pos, radius, height, mass, epsilon);
 	colliders[colliders.size() - 1]->setUserData(rb);
 	Material& mat = colliders[colliders.size() - 1]->getMaterial();
 	mat.setBounciness(bounce);
@@ -239,8 +255,9 @@ uint32_t ReactResolve::addCapsuleCollider(PhysicsBody* rb, glm::vec3 pos,
 }
 
 uint32_t ReactResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size,
-                                      float bounce, float friction) {
-	unsigned int index = addBoxCollider(pos, size);
+                                      float bounce, float friction, float mass,
+                                      float epsilon) {
+	unsigned int index = addBoxCollider(pos, size, mass, epsilon);
 	Material& mat = colliders[colliders.size() - 1]->getMaterial();
 	mat.setBounciness(bounce);
 	mat.setFrictionCoefficient(friction);
@@ -248,8 +265,9 @@ uint32_t ReactResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size,
 }
 
 uint32_t ReactResolve::addSphereCollider(glm::vec3 pos, float radius,
-                                         float bounce, float friction) {
-	unsigned int index = addSphereCollider(pos, radius);
+                                         float bounce, float friction,
+                                         float mass, float epsilon) {
+	unsigned int index = addSphereCollider(pos, radius, mass, epsilon);
 	Material& mat = colliders[colliders.size() - 1]->getMaterial();
 	mat.setBounciness(bounce);
 	mat.setFrictionCoefficient(friction);
@@ -258,8 +276,9 @@ uint32_t ReactResolve::addSphereCollider(glm::vec3 pos, float radius,
 
 uint32_t ReactResolve::addCapsuleCollider(glm::vec3 pos, float radius,
                                           float height, float bounce,
-                                          float friction) {
-	unsigned int index = addCapsuleCollider(pos, radius, height);
+                                          float friction, float mass,
+                                          float epsilon) {
+	unsigned int index = addCapsuleCollider(pos, radius, height, mass, epsilon);
 	Material& mat = colliders[colliders.size() - 1]->getMaterial();
 	mat.setBounciness(bounce);
 	mat.setFrictionCoefficient(friction);

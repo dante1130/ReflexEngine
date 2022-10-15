@@ -1,26 +1,26 @@
 entity = {
-	name = "First Block",
+	name = "Sphere",
 
 	transform = {
 		position = {
-			x = 50,
+			x = 50.25,
 			y = 10,
-			z = 0
+			z = -2
 		},
 		rotation = {
-			x = 45,
-			y = 90,
+			x = 0,
+			y = 0,
 			z = 0
 		},
 		scale = {
-			x = 0.045,
-			y = 0.45,
-			z = 0.3
+			x = 0.05,
+			y = 0.05,
+			z = 0.05
 		}
 	},
 
 	model = {
-		model_name = "default",
+		model_name = "Sphere",
 		material_name = "default"
 	},
 
@@ -35,7 +35,6 @@ entity = {
     },
 
 	script = {
-		lua_script = "game/TheDen/scripts/rb_add_script.lua"
+		lua_script = "game/TheDen/scripts/rb_sphere_add.lua"
 	}
-
 }

@@ -5,9 +5,11 @@
 --Model.load_model("big_arrow", "models/BigArrow.obj")
 Model.load_model("TheDen", "models/TheDen.obj")
 Model.load_model("GlassInScene", "models/Glass.obj")
+Model.load_model("Sphere", "models/sphere.obj")
 
 
 --Small models/objects
+
 Model.load_model("laptop", "models/laptop.obj")
 Model.load_model("tissue_box", "models/tissuebox.obj")
 Model.load_model("pizza_box", "models/pizzabox.obj")
@@ -22,17 +24,17 @@ Model.load_model("calculator", "models/calculator.obj")
 
 
 
-Md2.load_md2_model("duck", "models/DuckPersonNew.md2")
+--Md2.load_md2_model("duck", "models/DuckPersonNew.md2")
 
 
-Texture.load_texture("water", "textures/water.png")
+--Texture.load_texture("water", "textures/water.png")
 --Texture.load_texture("sand", "textures/sand.jpg")
 --Texture.load_texture("rock", "textures/rock.jpg")
 --Texture.load_texture("snow", "textures/snow.jpg")
 --Texture.load_texture("grass", "textures/grass2.jpg")
 Texture.load_texture("credits", "textures/reflexbullet.png")
-Texture.load_texture("duck", "textures/DuckPerson.png")
---Texture.load_texture("Chair", "textures/chair.jpg")
+--Texture.load_texture("duck", "textures/DuckPerson.png")
+Texture.load_texture("Chair", "textures/chair.jpg")
 Material.load_material("shiny", 256.0, 4.0)
 
 

@@ -2,21 +2,6 @@ add_library(ReflexEngineSrc
 	NetworkManager.cpp
 
 	Model/Components/RigidBody.cpp
-	Model/GameObject/GameObject.hpp
-	Model/GameObject/Item.cpp
-	Model/GameObject/Water.cpp
-	Model/GameObject/PhysicsObject.cpp
-	Model/GameObject/ScriptableObject.cpp
-	Model/GameObject/Player.cpp
-	Model/GameObject/SimpleTerrainObject.cpp
-	Model/GameObject/TerrainObject.cpp
-	Model/GameObject/SkyboxObject.cpp
-	Model/GameObject/DirectionalLightObject.cpp
-	Model/GameObject/PointLightObject.cpp
-	Model/GameObject/SpotLightObject.cpp
-	Model/GameObject/NPC.cpp
-	Model/GameObject/Projectile.cpp
-	Model/GameObject/NetworkedItem.cpp
 	Model/RunTimeDataStorage/DynamicDataStorage.cpp
 	Model/RunTimeDataStorage/GlobalDataStorage.cpp
 	Model/LightData.hpp
@@ -71,7 +56,6 @@ add_library(ReflexEngineSrc
 	Controller/Terrain/BttController.cpp
 	Controller/Terrain/TexturedTerrain.cpp
 	Controller/ECSGameAssetFactory.cpp
-	Controller/GameAssetFactory.cpp
 	Controller/LuaManager.cpp
 	Controller/MathAccess.cpp
 	Controller/Physics/Physics.cpp
@@ -81,15 +65,14 @@ add_library(ReflexEngineSrc
 	Controller/Physics/CollisionEvent.cpp
 	Controller/Physics/ColliderRenderer.cpp
 	Controller/Physics/LoadOBJColliderData.cpp
+	Controller/Physics/QuaternionHelper.cpp
+	Controller/Physics/ResolutionOutput.cpp
 	Controller/Networking/NetworkAccess.cpp
 	Controller/Terrain/multiTextureCreator.cpp
 	Controller/RandomGenerators/PseudoRandomNumberGenerator.cpp
 	Controller/Terrain/TerrainManager.cpp
-	Controller/AI/messageDispatcher.cpp
-	Controller/AI/entityManager.cpp
 	Controller/Pathfinding/movement.cpp
 	Controller/Pathfinding/world.cpp
-	Controller/AI/luaAccessScriptedFSM.cpp
 	Controller/AI/Counter.cpp
 	Controller/AI/vector2D.cpp
 	Controller/AI/statemachineComponentHelper.cpp
@@ -101,7 +84,6 @@ add_library(ReflexEngineSrc
 	Controller/GUI/CollectionsGUI.cpp
 
 	Scene/Scene.hpp
-	Scene/TestScene.cpp
 	Scene/ECSScene.cpp
 )
 

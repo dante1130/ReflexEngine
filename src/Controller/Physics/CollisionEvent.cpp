@@ -1,33 +1,75 @@
 #include "CollisionEvent.hpp"
 #include "PhysicBody.hpp"
-#include <iostream>
+
+#include "Controller/GUI/DebugLogger.hpp"
+#include "Controller/ReflexEngine/EngineTime.hpp"
 
 void CollisionEventListener::onContact(const CallbackData& collision_data) {
-	for (size_t i = 0; i < collision_data.getNbContactPairs(); ++i) {
-		ContactPair contact_pair = collision_data.getContactPair(i);
+	if (EngineTime::is_paused()) {
+		return;
+	}
 
-		rp3d::Vector3 total_normal = rp3d::Vector3(0.0f, 0.0f, 0.0f);
-		for (size_t j = 0; j < contact_pair.getNbContactPoints(); ++j) {
-			ContactPoint contact_point = contact_pair.getContactPoint(j);
-			total_normal += contact_point.getWorldNormal();
+	size_t size = collision_data.getNbContactPairs();
+	for (size_t count = 0; count < size; ++count) {
+		ContactPair contact_pair = collision_data.getContactPair(count);
+		if (contact_pair.getEventType() ==
+		    ContactPair::EventType::ContactExit) {
+			continue;
 		}
 
-		total_normal.x = total_normal.x / contact_pair.getNbContactPoints();
-		total_normal.y = total_normal.y / contact_pair.getNbContactPoints();
-		total_normal.z = total_normal.z / contact_pair.getNbContactPoints();
+		int num_of_contacts = contact_pair.getNbContactPoints();
+		DebugLogger::log("Physics num of contacts",
+		                 std::to_string(num_of_contacts));
+		/*
+		rp3d::Vector3 contact_normal, local_point_c1, local_point_c2;
 
-		ContactPair::EventType event_type = contact_pair.getEventType();
+		for (size_t countTwo = 0; countTwo < num_of_contacts; ++countTwo) {
+		    ContactPoint contact_point = contact_pair.getContactPoint(countTwo);
 
-		PhysicsBody::collision(contact_pair.getCollider1(),
-		                       contact_pair.getCollider2(), total_normal,
-		                       event_type);
+		    local_point_c1 = contact_point.getLocalPointOnCollider1();
+		    local_point_c2 = contact_point.getLocalPointOnCollider2();
+		    contact_normal = contact_point.getWorldNormal();
 
-		/* if (event_type == ContactPair::EventType::ContactStart) {
-		    std::cout << "Contact start\n";
-		 } else if (event_type == ContactPair::EventType::ContactStay) {
-		    std::cout << "Contact stay\n";
-		 } else if (event_type == ContactPair::EventType::ContactExit) {
-		    std::cout << "Contact end\n";
-		 }*/
+		    PhysicsBody::collision(
+		        contact_pair.getCollider1(), contact_pair.getCollider2(),
+		        glm::vec3(local_point_c1.x, local_point_c1.y, local_point_c1.z),
+		        glm::vec3(local_point_c2.x, local_point_c2.y, local_point_c2.z),
+		        glm::vec3(contact_normal.x, contact_normal.y, contact_normal.z),
+		        contact_point.getPenetrationDepth(),
+		        contact_pair.getEventType());
+		}
+		*/
+
+		rp3d::Vector3 contact_normal = rp3d::Vector3(0, 0, 0);
+		rp3d::Vector3 local_point_c1 = rp3d::Vector3(0, 0, 0);
+		rp3d::Vector3 local_point_c2 = rp3d::Vector3(0, 0, 0);
+		float penetration_depth = 0;
+
+		for (size_t countTwo = 0; countTwo < num_of_contacts; ++countTwo) {
+			ContactPoint contact_point = contact_pair.getContactPoint(countTwo);
+			contact_normal += contact_point.getWorldNormal();
+			local_point_c1 += contact_point.getLocalPointOnCollider1();
+			local_point_c2 += contact_point.getLocalPointOnCollider2();
+			penetration_depth += contact_point.getPenetrationDepth();
+		}
+
+		if (num_of_contacts != 0) {
+			float num = static_cast<float>(num_of_contacts);
+			local_point_c1 /= num;
+			local_point_c1 =
+			    contact_pair.getBody1()->getWorldVector(local_point_c1);
+			local_point_c2 /= num;
+			local_point_c2 =
+			    contact_pair.getBody2()->getWorldVector(local_point_c2);
+			contact_normal /= num;
+			penetration_depth /= num;
+
+			PhysicsBody::collision(
+			    contact_pair.getCollider1(), contact_pair.getCollider2(),
+			    glm::vec3(local_point_c1.x, local_point_c1.y, local_point_c1.z),
+			    glm::vec3(local_point_c2.x, local_point_c2.y, local_point_c2.z),
+			    glm::vec3(contact_normal.x, contact_normal.y, contact_normal.z),
+			    penetration_depth, contact_pair.getEventType());
+		}
 	}
 }
