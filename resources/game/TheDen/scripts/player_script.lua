@@ -1,5 +1,5 @@
 var = {
-	speed = 1
+	speed = 2
 }
 
 function init(ecs, entity)
@@ -23,7 +23,7 @@ function update(ecs, entity)
 	end
 
 	if (Input.get_key_state("z"):is_key_pressed()) then
-		Camera.toggle_noclip()
+		--Camera.toggle_noclip()
 
 		if (Camera.is_noclip()) then
 			DebugLogger.log_color("warning", "You are cheating!", GUI.vec4.new(1.0, 0.0, 0.0, 1.0))
