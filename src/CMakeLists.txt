@@ -83,6 +83,8 @@ add_library(ReflexEngineSrc
 	Controller/GUI/PerformanceLoggerGUI.cpp
 	Controller/GUI/CollectionsGUI.cpp
 
+	Pattern/Composite.cpp
+
 	Scene/Scene.hpp
 	Scene/ECSScene.cpp
 )
