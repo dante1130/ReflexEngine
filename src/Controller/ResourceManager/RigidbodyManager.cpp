@@ -29,7 +29,8 @@ void RigidbodyManager::update_rigidbody(Component::Rigidbody& rb,
 	if (rb.getIsGravityEnabled() != rb.gravity_on)
 		rb.enableGravity(rb.gravity_on);
 
-	if (rb.getIsTrigger() != rb.is_trigger) rb.setObjectTrigger(rb.is_trigger);
+	// if (rb.getIsTrigger() != rb.is_trigger)
+	// rb.setObjectTrigger(rb.is_trigger);
 	if (rb.getCanSleep() != rb.can_sleep) rb.setCanSleep(rb.can_sleep);
 
 	if (rb.getDragForce() != rb.lin_drag) rb.setDragForce(rb.lin_drag);

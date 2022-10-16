@@ -11,5 +11,6 @@ uniform mat4 view;
 void main() {
 	gl_Position = projection * view * vec4(pos, 1.0);
 
-	frag_color = vec4(vec3(color) / 255.0f, 1.0f);
+	frag_color = vec4((color & 0xFF0000u) >> 16, (color & 0x00FF00u) >> 8,
+	                  color & 0x0000FFu, 0xFF);
 }

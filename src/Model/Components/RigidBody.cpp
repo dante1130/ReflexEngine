@@ -239,17 +239,22 @@ std::string Component::Rigidbody::getColliderName(size_t index) {
 }
 
 uint32_t Component::Rigidbody::addBoxCollider(glm::vec3 pos, glm::vec3 size,
-                                              float bounce, float friction) {
-	return pb->addBoxCollider(pb, pos, size, bounce, friction);
+                                              float bounce, float friction,
+                                              float mass, float epsilon) {
+	return pb->addBoxCollider(pb, pos, size, bounce, friction, mass, epsilon);
 }
 uint32_t Component::Rigidbody::addSphereCollider(glm::vec3 pos, float radius,
-                                                 float bounce, float friction) {
-	return pb->addSphereCollider(pb, pos, radius, bounce, friction);
+                                                 float bounce, float friction,
+                                                 float mass, float epsilon) {
+	return pb->addSphereCollider(pb, pos, radius, bounce, friction, mass,
+	                             epsilon);
 }
 uint32_t Component::Rigidbody::addCapsuleCollider(glm::vec3 pos, float radius,
                                                   float height, float bounce,
-                                                  float friction) {
-	return pb->addCapsuleCollider(pb, pos, radius, height, bounce, friction);
+                                                  float friction, float mass,
+                                                  float epsilon) {
+	return pb->addCapsuleCollider(pb, pos, radius, height, bounce, friction,
+	                              mass, epsilon);
 }
 
 // Methods used for transform

@@ -1,81 +1,49 @@
 #pragma once
 
 #include "PhysicBody.hpp"
+#include <glm.hpp>
 
-/**
- * @author Spencer Shaw
- * @struct bool3
- * @brief Holds three boolean values, used for locking
- * axis for collision response
- */
-struct bool3 {
-	bool lock_x, lock_y, lock_z;
+struct Motion_Stats {
+	glm::vec3 velocity;
+	glm::vec3 acceleration;
+	float drag;
 
-	bool3() = default;
-
-	bool3(bool x, bool y, bool z): 
-		lock_x(x), lock_y(y), lock_z(z) {}
+	Motion_Stats()
+	    : velocity(glm::vec3(0)), acceleration(glm::vec3(0)), drag(0) {}
 };
 
-/**
- * @author Spencer Shaw
- * @class EngineResolve
- * @brief An encapsulation class for handling physics resolution
- * by the engine 
- */
 class EngineResolve : public PhysicsBody {
-
 private:
+	rp3d::CollisionBody* collision_body_;
 
-	rp3d::CollisionBody* cb; /// Pointer to collisionbody in reactphysics3d phyiscs world
+	Motion_Stats linear_;
+	Motion_Stats angular_;
 
-protected:
+	float total_mass_ = 0;
 
-	/// Current linear velocity (in ms-1)
-	glm::vec3 lin_velocity_; 
-	/// Current linear accelaration (in ms-2)
-	glm::vec3 lin_accelaration_;
+	rp3d::BodyType body_type_ = rp3d::BodyType::STATIC;
 
-	/// Current applied linear force
-	glm::vec3 force_;
-	/// Current applied linear drag force
-	float lin_drag;
-	/// Total mass of rigidbody (in kg)
-	float mass_;
-
-	/// Type of collision body (static, dynamic or kinematic)
-	rp3d::BodyType type_;
-
-	/// Applied gravity (in ms-2)
-	glm::vec3 gravity_;
-
-	/// Determines if gravity is applied on rigidbody
-	bool use_gravity_;
-	/// Determines the object can sleep
-	bool can_sleep_;
-
-	/// Saves values of x,y,z axis where last collision didnt occur
-	glm::vec3 collision_axes;
-
-	/// A set of booleans which saves if collsion normal is negative
-	bool3 lock_axes_back;
-	/// A set of booleans which saves if collsion normal is positive
-	bool3 lock_axes_front;
-
-	
-	/// Records if the collision has finished
-
-	bool collision_started;
-	/// Records if the collision has finished
-	bool collision_finished;
+	bool use_gravity_ = false;
+	bool can_sleep_ = false;
 
 public:
-
 	EngineResolve();
 
 	/**
-	 * @brief Returns true if physics body is using
-	 * reactphysics3d resolution
+	 * @brief Calculates collison response and applies it to
+	 * rigidbody
+	 *
+	 * @param lambda - The lambda value for the transfer of momentum
+	 * @param normal - The collision normal
+	 * @param c_type - The collision event type
+	 * @return void
+	 */
+	void resolve(float lambda, glm::vec3 vector_to_collision,
+	             glm::vec3 contact_normal, int collision_number) override;
+
+	/**
+	 * @brief Returns boolean of if the body is using reactphysics3d
+	 * collision resolution or the engines collision resolution
 	 *
 	 * @return bool
 	 */
@@ -89,16 +57,6 @@ public:
 	 * @return void
 	 */
 	void update(float delta_time) override;
-
-	/**
-	 * @brief Calculates collison response and applies it to
-	 * rigidbody
-	 *
-	 * @param normal - The collision normal
-	 * @param c_type - The collision event type
-	 * @return void
-	 */
-	void resolve(glm::vec3 normal, CollisionEvent c_type) override;
 
 	/**
 	 * @brief Intialises rigidbody with axis angle rotation
@@ -126,6 +84,14 @@ public:
 	 * @return void
 	 */
 	void delete_body() override;
+
+	/**
+	 * @brief Deletes a specified collider form rigidbody
+	 *
+	 * @param collider - Pointer to collider for deletion
+	 * @return void
+	 */
+	void deleteCollider(rp3d::Collider* collider) override;
 
 	/**
 	 * @brief Adds a force to an object's center of mass
@@ -174,7 +140,6 @@ public:
 	 */
 	void addDragTorque(float ang_drag) override;
 
-
 	/**
 	 * @brief Sets the total mass of object
 	 *
@@ -189,7 +154,7 @@ public:
 	 * @param p - The desired center of mass
 	 * @return void
 	 */
-	void setCenterOfMass(glm::vec3 p) override;
+	void setCenterOfMass(glm::vec3 cOFmass) override;
 
 	/**
 	 * @brief Sets the velocity of object
@@ -279,6 +244,13 @@ public:
 	glm::vec3 getAngVelocity() override;
 
 	/**
+	 * @brief Get the Linear Acceleration object
+	 *
+	 * @return glm::vec3
+	 */
+	glm::vec3 getLinearAcceleration() override;
+
+	/**
 	 * @brief Gets the linear drag of object
 	 *
 	 * @return float
@@ -298,6 +270,7 @@ public:
 	 * @return rp3d::BodyType
 	 */
 	rp3d::BodyType getType() override;
+
 	/**
 	 * @brief Gets if the object has gravity applied
 	 *
@@ -318,9 +291,12 @@ public:
 	 *
 	 * @param pos - The desired position
 	 * @param size - The desired half extents
+	 * @param mass - The mass of the collider
+	 * @param epsilon - coefficient of restitution
 	 * @return uint32_t
 	 */
-	uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 size) override;
+	uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 size, float mass,
+	                        float epsilon) override;
 
 	/**
 	 * @brief Creates and adds a sphere collider to object
@@ -328,9 +304,12 @@ public:
 	 *
 	 * @param pos - The desired position
 	 * @param radius - The desired radius
+	 * @param mass - The mass of the collider
+	 * @param epsilon - coefficient of restitution
 	 * @return uint32_t
 	 */
-	uint32_t addSphereCollider(glm::vec3 pos, float radius) override;
+	uint32_t addSphereCollider(glm::vec3 pos, float radius, float mass,
+	                           float epsilon) override;
 
 	/**
 	 * @brief Creates and adds a capsule collider to object
@@ -339,99 +318,138 @@ public:
 	 * @param pos - The desired position
 	 * @param radius - The desired radius
 	 * @param height - The desired height
-	 * @return uint32_t
-	 */
-	uint32_t addCapsuleCollider(glm::vec3 pos, float radius,
-	                            float height) override;
-
-	/**
-	 * @brief Creates and adds a box collider to object
-	 * and links the rigidbody data to it
-	 *
-	 * @param rb - Pointer to physicsbody for linking
-	 * @param pos - The desired position
-	 * @param size - The desired half extents
-	 * @param bounce - The bounciness property
-	 * @param friction - The friction property
-	 * @return uint32_t
-	 */
-	uint32_t addBoxCollider(PhysicsBody* rb, glm::vec3 pos, glm::vec3 size,
-	                        float bounce, float friction) override;
-
-	/**
-	 * @brief Creates and adds a sphere collider to object
-	 * and links the rigidbody data to it
-	 *
-	 * @param rb - Pointer to physicsbody for linking
-	 * @param pos - The desired position
-	 * @param radius - The desired radius
-	 * @param bounce - The bounciness property
-	 * @param friction - The friction property
-	 * @return uint32_t
-	 */
-	uint32_t addSphereCollider(PhysicsBody* rb, glm::vec3 pos, float radius,
-	                           float bounce, float friction) override;
-
-	/**
-	 * @brief Creates and adds a capsule collider to object
-	 * and links the rigidbody data to it
-	 *
-	 * @param rb - Pointer to physicsbody for linking
-	 * @param pos - The desired position
-	 * @param radius - The desired radius
-	 * @param height - The desired height
-	 * @param bounce - The bounciness property
-	 * @param friction - The friction property
-	 * @return uint32_t
-	 */
-	uint32_t addCapsuleCollider(PhysicsBody* rb, glm::vec3 pos, float radius,
-	                            float height, float bounce,
-	                            float friction) override;
-
-	/**
-	 * @brief Creates and adds a box collider to object
-	 *
-	 * @param pos - The desired position
-	 * @param size - The desired half extents
-	 * @param bounce - The bounciness property
-	 * @param friction - The friction property
-	 * @return uint32_t
-	 */
-	uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce,
-	                        float friction) override;
-
-	/**
-	 * @brief Creates and adds a sphere collider to object
-	 *
-	 * @param pos - The desired position
-	 * @param radius - The desired radius
-	 * @param bounce - The bounciness property
-	 * @param friction - The friction property
-	 * @return uint32_t
-	 */
-	uint32_t addSphereCollider(glm::vec3 pos, float radius, float bounce,
-	                           float friction) override;
-
-	/**
-	 * @brief Creates and adds a capsule collider to object
-	 *
-	 * @param pos - The desired position
-	 * @param radius - The desired radius
-	 * @param height - The desired height
-	 * @param bounce - The bounciness property
-	 * @param friction - The friction property
+	 * @param mass - The mass of the collider
+	 * @param epsilon - coefficient of restitution
 	 * @return uint32_t
 	 */
 	uint32_t addCapsuleCollider(glm::vec3 pos, float radius, float height,
-	                            float bounce, float friction) override;
+	                            float mass, float epsilon) override;
 
 	/**
-	 * @brief Deletes collider given a  collider pointer
+	 * @brief Creates and adds a box collider to object
+	 * and links the rigidbody data to it
 	 *
-	 * @param collider - Pointer to collider
-	 * @return void
+	 * @param rb - Pointer to physicsbody for linking
+	 * @param pos - The desired position
+	 * @param size - The desired half extents
+	 * @param bounce - The bounciness property
+	 * @param friction - The friction property
+	 * @param mass - The mass of the collider
+	 * @param epsilon - coefficient of restitution
+	 * @return uint32_t
 	 */
-	void deleteCollider(rp3d::Collider* collider) override;
+	uint32_t addBoxCollider(PhysicsBody* rb, glm::vec3 pos, glm::vec3 size,
+	                        float bounce, float friction, float mass,
+	                        float epsilon) override;
+
+	/**
+	 * @brief Creates and adds a sphere collider to object
+	 * and links the rigidbody data to it
+	 *
+	 * @param rb - Pointer to physicsbody for linking
+	 * @param pos - The desired position
+	 * @param radius - The desired radius
+	 * @param bounce - The bounciness property
+	 * @param friction - The friction property
+	 * @param mass - The mass of the collider
+	 * @param epsilon - coefficient of restitution
+	 * @return uint32_t
+	 */
+	uint32_t addSphereCollider(PhysicsBody* rb, glm::vec3 pos, float radius,
+	                           float bounce, float friction, float mass,
+	                           float epsilon) override;
+
+	/**
+	 * @brief Creates and adds a capsule collider to object
+	 * and links the rigidbody data to it
+	 *
+	 * @param rb - Pointer to physicsbody for linking
+	 * @param pos - The desired position
+	 * @param radius - The desired radius
+	 * @param height - The desired height
+	 * @param bounce - The bounciness property
+	 * @param friction - The friction property
+	 * @param mass - The mass of the collider
+	 * @param epsilon - coefficient of restitution
+	 * @return uint32_t
+	 */
+	uint32_t addCapsuleCollider(PhysicsBody* rb, glm::vec3 pos, float radius,
+	                            float height, float bounce, float friction,
+	                            float mass, float epsilon) override;
+
+	/**
+	 * @brief Creates and adds a box collider to object
+	 *
+	 * @param pos - The desired position
+	 * @param size - The desired half extents
+	 * @param bounce - The bounciness property
+	 * @param friction - The friction property
+	 * @param mass - The mass of the collider
+	 * @param epsilon - coefficient of restitution
+	 * @return uint32_t
+	 */
+	uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce,
+	                        float friction, float mass, float epsilon) override;
+
+	/**
+	 * @brief Creates and adds a sphere collider to object
+	 *
+	 * @param pos - The desired position
+	 * @param radius - The desired radius
+	 * @param bounce - The bounciness property
+	 * @param friction - The friction property
+	 * @param mass - The mass of the collider
+	 * @param epsilon - coefficient of restitution
+	 * @return uint32_t
+	 */
+	uint32_t addSphereCollider(glm::vec3 pos, float radius, float bounce,
+	                           float friction, float mass,
+	                           float epsilon) override;
+
+	/**
+	 * @brief Creates and adds a capsule collider to object
+	 *
+	 * @param pos - The desired position
+	 * @param radius - The desired radius
+	 * @param height - The desired height
+	 * @param bounce - The bounciness property
+	 * @param friction - The friction property
+	 * @param mass - The mass of the collider
+	 * @param epsilon - coefficient of restitution
+	 * @return uint32_t
+	 */
+	uint32_t addCapsuleCollider(glm::vec3 pos, float radius, float height,
+	                            float bounce, float friction, float mass,
+	                            float epsilon) override;
+
+	/**
+	 * @brief Calcualtes the inertia tensor for a box
+	 *
+	 * @param size The size of the box
+	 * @param mass THe mass of the box
+	 * @return glm::mat3x3
+	 */
+	static glm::mat3x3 inertia_tensor_box(glm::vec3 size, float mass);
+
+	/**
+	 * @brief Calculates the inertia tensor for the sphere
+	 *
+	 * @param radius The radius of the sphere
+	 * @param mass The mass of the sphere
+	 * @return glm::mat3x3
+	 */
+	static glm::mat3x3 inertia_tensor_sphere(float radius, float mass);
+
+	/**
+	 * @brief Calculates the inertia tensor for a capsule
+	 *
+	 * @param radius The radius of the capsule
+	 * @param height The height of the capsule
+	 * @param mass The mass of the capsule
+	 * @return glm::mat3x3
+	 */
+	static glm::mat3x3 inertia_tensor_capsule(float radius, float height,
+	                                          float mass);
 
 	/**
 	 * @brief Gets the position of the rigidbody

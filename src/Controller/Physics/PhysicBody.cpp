@@ -1,6 +1,195 @@
 #include "PhysicBody.hpp"
 
+#include "Controller/Physics/QuaternionHelper.hpp"
+#include "Controller/GUI/DebugLogger.hpp"
+#include "Controller/Physics/ResolutionOutput.hpp"
+#include "string"
+#include <iostream>
+
 using namespace rp3d;
+
+void PhysicsBody::collision(Collider* collider1, Collider* collider2,
+                            glm::vec3 lpoint_c1, glm::vec3 lpoint_c2,
+                            glm::vec3 collision_normal, double collision_depth,
+                            CollisionEvent c_type) {
+	PhysicsBody* pb1 = static_cast<PhysicsBody*>(collider1->getUserData());
+	PhysicsBody* pb2 = static_cast<PhysicsBody*>(collider2->getUserData());
+
+	// Get the epsilon value
+	float epsilon = pb1->epsilon_value_;
+	if (epsilon > pb2->epsilon_value_) {
+		epsilon = pb2->epsilon_value_;
+	}
+
+	if (pb1->getType() == rp3d::BodyType::STATIC &&
+	    pb2->getType() == rp3d::BodyType::STATIC) {
+		return;
+	} else if (pb1->getType() == rp3d::BodyType::STATIC) {
+		static_collision(collider2, lpoint_c2, -collision_normal, epsilon,
+		                 collision_depth);
+		return;
+	} else if (pb2->getType() == rp3d::BodyType::STATIC) {
+		static_collision(collider1, lpoint_c1, collision_normal, epsilon,
+		                 collision_depth);
+		return;
+	}
+
+	DePenetrate(pb1, pb2, collision_normal, collision_depth);
+
+	// J1^-1
+	pb1->rotated_inertia_tensor_ =
+	    QuaternionHelper::RotateInertiaTensorOppositeQuat(
+	        glm::inverse(pb1->inertia_tensor_), pb1->getOrientation());
+	// J2^-1
+	pb2->rotated_inertia_tensor_ =
+	    QuaternionHelper::RotateInertiaTensorOppositeQuat(
+	        glm::inverse(pb2->inertia_tensor_), pb2->getOrientation());
+
+	// (r1 x n)
+	glm::vec3 r1xn = glm::cross(lpoint_c1, collision_normal);
+	// (r2 x n)
+	glm::vec3 r2xn = glm::cross(lpoint_c2, collision_normal);
+
+	// Rotates angular velocity to world coordaintes from local coordinates
+	glm::vec3 ang_vel_b1 = pb1->getAngVelocity();
+	glm::vec3 ang_vel_b2 = pb2->getAngVelocity();
+
+	// num_eqn = numerator section of equation
+	// div_eqn = divisor section of equation
+
+	// (1 + E)
+	float epsilon_num_eqn = 1.0f + epsilon;
+
+	// n . (v1 - v2)
+	float vel_num_eqn =
+	    glm::dot(collision_normal, (pb1->getVelocity() - pb2->getVelocity()));
+	// w1 . (r1 x n)
+	float w1_num_eqn = glm::dot(ang_vel_b1, r1xn);
+	// w2 . (r2 x n)
+	float w2_num_eqn = glm::dot(ang_vel_b2, r2xn);
+	//-(1 + E)(n . (v1 - v2) + w1 . (r1 x n) - w2 . (r2 x n))
+	float num_eqn = -epsilon_num_eqn * (vel_num_eqn + w1_num_eqn - w2_num_eqn);
+
+	//  1      1
+	// ____ + ____
+	//  m1     m1
+	float mass_div_eqn = (1.0 / pb1->getMass()) + (1.0 / pb2->getMass());
+
+	// (r1 x n)^T * J1^-1 * (r1 x n)
+	// OR (r1 x n) . J1^-1 * (r1 x n)
+	float j1_div_eqn = glm::dot(r1xn, pb1->rotated_inertia_tensor_ * r1xn);
+	// (r2 x n)^T * J2^-1 * (r2 x n)
+	// OR (r2 x n) . J2^-1 * (r2xn)
+	float j2_div_eqn = glm::dot(r2xn, pb2->rotated_inertia_tensor_ * r2xn);
+
+	// 1/m1 + 1/m2 + ((r1xn)^T * J1^-1 * (r1xn) + (r2xn)^T * J2^-1 * (r2xn))
+	float div_eqn = mass_div_eqn + (j1_div_eqn + j2_div_eqn);
+
+	// Entire equation
+	float lambda = (num_eqn / div_eqn);
+	glm::vec3 linear_impluse = lambda * collision_normal;
+
+	ResolutionOutput::output_resolution_data(
+	    epsilon, lambda, collision_normal,
+	    glm::vec3(vel_num_eqn, w1_num_eqn, w2_num_eqn),
+	    glm::vec3(mass_div_eqn, j1_div_eqn, j2_div_eqn));
+	ResolutionOutput::output_before_resolution_b1(
+	    pb1->getMass(), pb1->getVelocity(), ang_vel_b1, lpoint_c1,
+	    pb1->rotated_inertia_tensor_, pb1->inertia_tensor_,
+	    pb1->getOrientation());
+	ResolutionOutput::output_before_resolution_b2(
+	    pb2->getMass(), pb2->getVelocity(), ang_vel_b2, lpoint_c2,
+	    pb2->rotated_inertia_tensor_, pb2->inertia_tensor_,
+	    pb2->getOrientation());
+
+	// Set new velocity and angular velocity
+	pb1->resolve(lambda, lpoint_c1, collision_normal, 1);
+	pb2->resolve(lambda, lpoint_c2, collision_normal, 2);
+
+	ResolutionOutput::output_after_resolution(
+	    pb1->getVelocity(), pb1->getAngVelocity(), pb2->getVelocity(),
+	    pb2->getAngVelocity());
+}
+
+void PhysicsBody::static_collision(rp3d::Collider* collider, glm::vec3 r_point,
+                                   glm::vec3 collision_normal, float epsilon,
+                                   float collision_depth) {
+	PhysicsBody* pb1 = static_cast<PhysicsBody*>(collider->getUserData());
+
+	glm::vec3 pos = pb1->getPosition();
+	pos -= collision_normal * collision_depth;
+	pb1->setPosition(pos);
+
+	// J1^-1
+	pb1->rotated_inertia_tensor_ =
+	    QuaternionHelper::RotateInertiaTensorOppositeQuat(
+	        glm::inverse(pb1->inertia_tensor_), pb1->getOrientation());
+
+	// (r1 x n)
+	glm::vec3 rxn = glm::cross(r_point, collision_normal);
+
+	// Rotates angular velocity to world coordaintes from local coordinates
+	glm::vec3 ang_vel = pb1->getAngVelocity();
+
+	// num_eqn = numerator section of equation
+	// div_eqn = divisor section of equation
+
+	// (1 + E)
+	float epsilon_num_eqn = 1.0f + epsilon;
+
+	// n . (v1 - v2)
+	float vel_num_eqn = glm::dot(collision_normal, pb1->getVelocity());
+
+	// w . (r x n)
+	float w_num_eqn = glm::dot(ang_vel, rxn);
+
+	//-(1 + E)(n . (v1 - v2) + w1 . (r1 x n) - w2 . (r2 x n))
+	float num_eqn = -epsilon_num_eqn * (vel_num_eqn + w_num_eqn);
+
+	//  1      1
+	// ____ + ____
+	//  m1     m1
+	float mass_div_eqn = (1.0 / pb1->getMass());
+
+	// (r1 x n)^T * J1^-1 * (r1 x n)
+	// OR (r1 x n) . J1^-1 * (r1 x n)
+	float j_div_eqn = glm::dot(rxn, pb1->rotated_inertia_tensor_ * rxn);
+
+	// 1/m1 + 1/m2 + ((r1xn)^T * J1^-1 * (r1xn) + (r2xn)^T * J2^-1 * (r2xn))
+	float div_eqn = mass_div_eqn + (j_div_eqn);
+
+	// Entire equation
+	float lambda = (num_eqn / div_eqn);
+
+	// Set new velocity and angular velocity
+	pb1->resolve(lambda, r_point, collision_normal, 1);
+}
+
+glm::mat3x3 PhysicsBody::get_inertia_tensor() { return inertia_tensor_; }
+
+void PhysicsBody::DePenetrate(PhysicsBody* pb1, PhysicsBody* pb2,
+                              glm::vec3 normal, float penetration_depth) {
+	glm::vec3 pos1 = pb1->getPosition();
+	glm::vec3 pos2 = pb2->getPosition();
+
+	if (glm::length(pb1->getVelocity()) == 0 ||
+	    glm::length(pb2->getVelocity()) == 0) {
+		if (glm::length(pb1->getVelocity()) == 0) {
+			pos2 = pos2 + normal * penetration_depth;
+		} else {
+			pos1 = pos1 - normal * penetration_depth;
+		}
+	} else {
+		float total_vel = glm::length(pb1->getVelocity() - pb2->getVelocity());
+		pos1 = pos1 - (glm::length(pb1->getVelocity()) / total_vel) *
+		                  (normal * penetration_depth);
+		pos2 = pos2 + (glm::length(pb2->getVelocity()) / total_vel) *
+		                  (normal * penetration_depth);
+	}
+
+	pb1->setPosition(pos1);
+	pb2->setPosition(pos2);
+}
 
 size_t PhysicsBody::colliderSize() { return colliders.size(); }
 
@@ -157,22 +346,6 @@ size_t PhysicsBody::getColliderIndex(rp3d::Collider* collider) {
 	}
 
 	return colliders.size();
-}
-
-void PhysicsBody::collision(Collider* c1, Collider* c2, Vector3 normal,
-                            CollisionEvent c_type) {
-	PhysicsBody* p1 = ((PhysicsBody*)c1->getUserData());
-	PhysicsBody* p2 = ((PhysicsBody*)c2->getUserData());
-
-	glm::vec3 n = glm::vec3(normal.x, normal.y, normal.z);
-
-	if (p1->getType() == BodyType::DYNAMIC && !p1->usingReactResolve()) {
-		p1->resolve(n, c_type);
-	}
-
-	if (p2->getType() == BodyType::DYNAMIC && !p2->usingReactResolve()) {
-		p2->resolve(n, c_type);
-	}
 }
 
 glm::vec3 PhysicsBody::getPreviousPosition() {

@@ -1,14 +1,14 @@
 var = {
-	speed = 4.0
+	speed = 2
 }
 
 function init(ecs, entity)
 	Window.set_cursor_visible(true)
 	Time.set_pause(true)
-	--Camera.toggle_noclip()
+	Camera.toggle_noclip()
 
-	local rb = entity:get_rigidbody_component()
-	rb:add_box_collider(Math.vec3.new(0, -0.8, 0), Math.vec3.new(0.75, 1.8, 0.75), 0.3, 1)
+	--local rb = entity:get_rigidbody_component()
+	--rb:add_box_collider(Math.vec3.new(0, -0.8, 0), Math.vec3.new(0.75, 1.8, 0.75), 0.3, 1)
 end
 
 function update(ecs, entity)
@@ -23,7 +23,7 @@ function update(ecs, entity)
 	end
 
 	if (Input.get_key_state("z"):is_key_pressed()) then
-		Camera.toggle_noclip()
+		--Camera.toggle_noclip()
 
 		if (Camera.is_noclip()) then
 			DebugLogger.log_color("warning", "You are cheating!", GUI.vec4.new(1.0, 0.0, 0.0, 1.0))
@@ -106,11 +106,11 @@ end
 function PhysicsMovement(ecs, entity)
 	local rb_comp = entity:get_rigidbody_component()
 	local speed = 1000 * Time.get_delta_time() * var.speed
-	local speed_vec = Math.vec3.new(speed, speed * 0.1, speed)
+	local speed_vec = Math.vec3.new(speed, speed * 0, speed)
 	local const_direction = Camera.get_direction()
 	local direction = const_direction
 	local force_vector = Math.vec3.new(0, 0, 0)
-	
+
 	if (Input.get_key_state("w"):is_key_hold()) then
 		direction = Math.mul(const_direction, speed_vec)
 		force_vector = Math.add(force_vector, direction)
@@ -123,7 +123,7 @@ function PhysicsMovement(ecs, entity)
 	end
 
 	local up_vector = Math.vec3.new(0, 1, 0)
-	if(const_direction.x == 0 and const_direction.y == 1 and const_direction.z == 0) then
+	if (const_direction.x == 0 and const_direction.y == 1 and const_direction.z == 0) then
 		up_vector.x = 1
 		up_vector.y = 0
 	end

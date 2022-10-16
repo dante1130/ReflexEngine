@@ -19,7 +19,7 @@ void ReactMesh::create_line_mesh(const Line* lines, size_t array_size) {
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, vertex_stride, (void*)0);
 	glEnableVertexAttribArray(0);
 
-	glVertexAttribIPointer(1, 3, GL_FALSE, vertex_stride,
+	glVertexAttribIPointer(1, 3, GL_UNSIGNED_INT, vertex_stride,
 	                       (void*)(sizeof(rp3d::Vector3)));
 	glEnableVertexAttribArray(1);
 
@@ -44,7 +44,7 @@ void ReactMesh::create_triangle_mesh(const Triangle* triangles,
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, vertex_stride, (void*)0);
 	glEnableVertexAttribArray(0);
 
-	glVertexAttribIPointer(1, 3, GL_FALSE, vertex_stride,
+	glVertexAttribIPointer(1, 3, GL_UNSIGNED_INT, vertex_stride,
 	                       (void*)(sizeof(rp3d::Vector3)));
 	glEnableVertexAttribArray(1);
 
