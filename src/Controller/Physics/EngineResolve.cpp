@@ -65,17 +65,6 @@ void EngineResolve::update(float delta_time) {
 	setPosition(pos);
 
 	// Rotation update
-
-	// glm::vec3 rotation_change =
-	//     (angular_.velocity * delta_time) +
-	//     (angular_.acceleration * static_cast<float>(pow(delta_time, 2)) *
-	//     0.5f);
-	// rotation_change = rotation_change * (180.0f / PI_RP3D);
-	// glm::quat rot_change_quat =
-	// QuaternionHelper::EulerToQuat(rotation_change); glm::quat rotation =
-	// getOrientation() * rot_change_quat; glm::normalize(rotation);
-	// setQuaternion(rotation);
-
 	glm::quat orientation = getOrientation();
 	orientation = orientation + glm::quat(0, angular_.velocity) * orientation *
 	                                0.5f * delta_time;
@@ -88,9 +77,11 @@ void EngineResolve::update(float delta_time) {
 
 	// Set new velocity and angular velocity based on acceleration and delta
 	// time
-	linear_.velocity = linear_.velocity + linear_.acceleration * delta_time;
+	prev_vel_acceleration_ = linear_.acceleration * delta_time;
+	linear_.velocity = linear_.velocity + prev_vel_acceleration_;
 	linear_.acceleration = glm::vec3(0);
-	angular_.velocity = angular_.velocity + angular_.acceleration * delta_time;
+	prev_ang_vel_acceleration_ = angular_.acceleration * delta_time;
+	angular_.velocity = angular_.velocity + prev_ang_vel_acceleration_;
 	angular_.acceleration = glm::vec3(0);
 
 	// Apply damping (drag)
@@ -224,8 +215,10 @@ uint32_t EngineResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size,
 	colliders.push_back(collision_body_->addCollider(collider, center));
 	m_box.emplace(colliders[colliders.size() - 1], collider);
 
+	Material& mat = colliders[colliders.size() - 1]->getMaterial();
+	mat.setBounciness(epsilon);
+	mat.setMassDensity(mass);
 	total_mass_ += mass;
-	epsilon_value_ = epsilon;
 
 	inertia_tensor_ = inertia_tensor_box(size, mass);
 
@@ -238,7 +231,6 @@ uint32_t EngineResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size,
 	uint32_t index = addBoxCollider(pos, size, mass, epsilon);
 
 	Material& mat = colliders[index]->getMaterial();
-	mat.setBounciness(bounce);
 	mat.setFrictionCoefficient(friction);
 
 	return index;
@@ -265,8 +257,10 @@ uint32_t EngineResolve::addSphereCollider(glm::vec3 pos, float radius,
 	colliders.push_back(collision_body_->addCollider(collider, center));
 	m_sphere.emplace(colliders[colliders.size() - 1], collider);
 
+	Material& mat = colliders[colliders.size() - 1]->getMaterial();
+	mat.setBounciness(epsilon);
+	mat.setMassDensity(mass);
 	total_mass_ += mass;
-	epsilon_value_ = epsilon;
 
 	inertia_tensor_ = inertia_tensor_sphere(radius, mass);
 
@@ -279,7 +273,6 @@ uint32_t EngineResolve::addSphereCollider(glm::vec3 pos, float radius,
 	uint32_t index = addSphereCollider(pos, radius, mass, epsilon);
 
 	Material& mat = colliders[index]->getMaterial();
-	mat.setBounciness(bounce);
 	mat.setFrictionCoefficient(friction);
 
 	return index;
@@ -308,8 +301,10 @@ uint32_t EngineResolve::addCapsuleCollider(glm::vec3 pos, float radius,
 	colliders.push_back(collision_body_->addCollider(collider, center));
 	m_capsule.emplace(colliders[colliders.size() - 1], collider);
 
+	Material& mat = colliders[colliders.size() - 1]->getMaterial();
+	mat.setBounciness(epsilon);
+	mat.setMassDensity(mass);
 	total_mass_ += mass;
-	epsilon_value_ = epsilon;
 
 	inertia_tensor_ = inertia_tensor_capsule(radius, height, mass);
 
@@ -323,7 +318,6 @@ uint32_t EngineResolve::addCapsuleCollider(glm::vec3 pos, float radius,
 	uint32_t index = addCapsuleCollider(pos, radius, height, mass, epsilon);
 
 	Material& mat = colliders[index]->getMaterial();
-	mat.setBounciness(bounce);
 	mat.setFrictionCoefficient(friction);
 
 	return index;

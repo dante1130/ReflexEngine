@@ -15,10 +15,10 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	PhysicsBody* pb1 = static_cast<PhysicsBody*>(collider1->getUserData());
 	PhysicsBody* pb2 = static_cast<PhysicsBody*>(collider2->getUserData());
 
-	// Get the epsilon value
-	float epsilon = pb1->epsilon_value_;
-	if (epsilon > pb2->epsilon_value_) {
-		epsilon = pb2->epsilon_value_;
+	// Get the epsilon value (stored as a bounciness)
+	float epsilon = collider1->getMaterial().getBounciness();
+	if (epsilon > collider2->getMaterial().getBounciness()) {
+		epsilon = collider2->getMaterial().getBounciness();
 	}
 
 	if (pb1->getType() == rp3d::BodyType::STATIC &&
@@ -51,8 +51,10 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	glm::vec3 r2xn = glm::cross(lpoint_c2, collision_normal);
 
 	// Rotates angular velocity to world coordaintes from local coordinates
-	glm::vec3 ang_vel_b1 = pb1->getAngVelocity();
-	glm::vec3 ang_vel_b2 = pb2->getAngVelocity();
+	glm::vec3 ang_vel_b1 =
+	    pb1->getAngVelocity() - pb1->prev_ang_vel_acceleration_;
+	glm::vec3 ang_vel_b2 =
+	    pb2->getAngVelocity() - pb2->prev_ang_vel_acceleration_;
 
 	// num_eqn = numerator section of equation
 	// div_eqn = divisor section of equation
@@ -61,8 +63,9 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	float epsilon_num_eqn = 1.0f + epsilon;
 
 	// n . (v1 - v2)
-	float vel_num_eqn =
-	    glm::dot(collision_normal, (pb1->getVelocity() - pb2->getVelocity()));
+	float vel_num_eqn = glm::dot(
+	    collision_normal, ((pb1->getVelocity() - pb1->prev_vel_acceleration_) -
+	                       (pb2->getVelocity() - pb2->prev_vel_acceleration_)));
 	// w1 . (r1 x n)
 	float w1_num_eqn = glm::dot(ang_vel_b1, r1xn);
 	// w2 . (r2 x n)
@@ -138,7 +141,8 @@ void PhysicsBody::static_collision(rp3d::Collider* collider, glm::vec3 r_point,
 	float epsilon_num_eqn = 1.0f + epsilon;
 
 	// n . (v1 - v2)
-	float vel_num_eqn = glm::dot(collision_normal, pb1->getVelocity());
+	float vel_num_eqn = glm::dot(
+	    collision_normal, pb1->getVelocity() - pb1->prev_vel_acceleration_);
 
 	// w . (r x n)
 	float w_num_eqn = glm::dot(ang_vel, rxn);
