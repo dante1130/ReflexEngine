@@ -87,7 +87,7 @@ protected:
 	/// The inertia tensor
 	glm::mat3x3 inertia_tensor_;
 	/// The inverse of the rotated inertia tensor
-	glm::mat3x3 rotated_inertia_tensor_;
+	glm::mat3x3 inverse_rotated_inertia_tensor_;
 
 	/**
 	 * @brief Deletes a specified collider form rigidbody

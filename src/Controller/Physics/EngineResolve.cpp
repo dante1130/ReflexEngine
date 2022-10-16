@@ -40,7 +40,7 @@ void EngineResolve::resolve(float lambda, glm::vec3 vector_to_collision,
 	    linear_.velocity + ((lambda * contact_normal) / total_mass_) * mult;
 
 	//  Angular velocity change
-	glm::mat3x3 angular_part_one = lambda * rotated_inertia_tensor_;
+	glm::mat3x3 angular_part_one = lambda * inverse_rotated_inertia_tensor_;
 	glm::vec3 angular_part_two =
 	    glm::cross(vector_to_collision, contact_normal);
 	angular_.velocity =

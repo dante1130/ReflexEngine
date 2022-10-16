@@ -37,11 +37,11 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	DePenetrate(pb1, pb2, collision_normal, collision_depth);
 
 	// J1^-1
-	pb1->rotated_inertia_tensor_ =
+	pb1->inverse_rotated_inertia_tensor_ =
 	    QuaternionHelper::RotateInertiaTensorOppositeQuat(
 	        glm::inverse(pb1->inertia_tensor_), pb1->getOrientation());
 	// J2^-1
-	pb2->rotated_inertia_tensor_ =
+	pb2->inverse_rotated_inertia_tensor_ =
 	    QuaternionHelper::RotateInertiaTensorOppositeQuat(
 	        glm::inverse(pb2->inertia_tensor_), pb2->getOrientation());
 
@@ -80,10 +80,12 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 
 	// (r1 x n)^T * J1^-1 * (r1 x n)
 	// OR (r1 x n) . J1^-1 * (r1 x n)
-	float j1_div_eqn = glm::dot(r1xn, pb1->rotated_inertia_tensor_ * r1xn);
+	float j1_div_eqn =
+	    glm::dot(r1xn, pb1->inverse_rotated_inertia_tensor_ * r1xn);
 	// (r2 x n)^T * J2^-1 * (r2 x n)
 	// OR (r2 x n) . J2^-1 * (r2xn)
-	float j2_div_eqn = glm::dot(r2xn, pb2->rotated_inertia_tensor_ * r2xn);
+	float j2_div_eqn =
+	    glm::dot(r2xn, pb2->inverse_rotated_inertia_tensor_ * r2xn);
 
 	// 1/m1 + 1/m2 + ((r1xn)^T * J1^-1 * (r1xn) + (r2xn)^T * J2^-1 * (r2xn))
 	float div_eqn = mass_div_eqn + (j1_div_eqn + j2_div_eqn);
@@ -98,11 +100,11 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	    glm::vec3(mass_div_eqn, j1_div_eqn, j2_div_eqn));
 	ResolutionOutput::output_before_resolution_b1(
 	    pb1->getMass(), pb1->getVelocity(), ang_vel_b1, lpoint_c1,
-	    pb1->rotated_inertia_tensor_, pb1->inertia_tensor_,
+	    pb1->inverse_rotated_inertia_tensor_, pb1->inertia_tensor_,
 	    pb1->getOrientation());
 	ResolutionOutput::output_before_resolution_b2(
 	    pb2->getMass(), pb2->getVelocity(), ang_vel_b2, lpoint_c2,
-	    pb2->rotated_inertia_tensor_, pb2->inertia_tensor_,
+	    pb2->inverse_rotated_inertia_tensor_, pb2->inertia_tensor_,
 	    pb2->getOrientation());
 
 	// Set new velocity and angular velocity
@@ -124,7 +126,7 @@ void PhysicsBody::static_collision(rp3d::Collider* collider, glm::vec3 r_point,
 	pb1->setPosition(pos);
 
 	// J1^-1
-	pb1->rotated_inertia_tensor_ =
+	pb1->inverse_rotated_inertia_tensor_ =
 	    QuaternionHelper::RotateInertiaTensorOppositeQuat(
 	        glm::inverse(pb1->inertia_tensor_), pb1->getOrientation());
 
@@ -157,7 +159,7 @@ void PhysicsBody::static_collision(rp3d::Collider* collider, glm::vec3 r_point,
 
 	// (r1 x n)^T * J1^-1 * (r1 x n)
 	// OR (r1 x n) . J1^-1 * (r1 x n)
-	float j_div_eqn = glm::dot(rxn, pb1->rotated_inertia_tensor_ * rxn);
+	float j_div_eqn = glm::dot(rxn, pb1->inverse_rotated_inertia_tensor_ * rxn);
 
 	// 1/m1 + 1/m2 + ((r1xn)^T * J1^-1 * (r1xn) + (r2xn)^T * J2^-1 * (r2xn))
 	float div_eqn = mass_div_eqn + (j_div_eqn);
