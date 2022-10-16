@@ -244,18 +244,30 @@ void System::init_statemachine(entt::registry& registry, entt::entity entity) {
 }
 
 void System::update_rigidbody(entt::registry& registry) {
-	if (EngineTime::is_paused()) return;
+	if (!EngineTime::is_paused()) {
+		auto& rigidbody_manager =
+		    ResourceManager::get_instance().get_rigidbody_manager();
+
+		registry.view<Component::Rigidbody, Component::Transform>().each(
+		    [&rigidbody_manager](auto& rigidbody, auto& transform) {
+			    rigidbody_manager.update_rigidbody(rigidbody, transform);
+		    });
+	}
 
 	// Calls the physics world update
-	// Physics::getPhysicsWorld()->update(EngineTime::get_delta_time());
+	Physics::updateWorld(EngineTime::get_fixed_delta_time());
 
-	auto& rigidbody_manager =
-	    ResourceManager::get_instance().get_rigidbody_manager();
-
-	registry.view<Component::Rigidbody, Component::Transform>().each(
-	    [&rigidbody_manager](auto& rigidbody, auto& transform) {
-		    rigidbody_manager.update_rigidbody(rigidbody, transform);
-	    });
+	// Sets the now positions after any collisions that might have occured
+	// Would be better if this was done during the collision, (less wasteful)
+	if (!EngineTime::is_paused()) {
+		registry.view<Component::Rigidbody, Component::Transform>().each(
+		    [](Component::Rigidbody& rigidbody,
+		       Component::Transform& transform) {
+			    transform.position = rigidbody.getPosition();
+			    transform.rotation = rigidbody.getRotation();
+			    rigidbody.setPreviousPosition(transform.position);
+		    });
+	}
 }
 
 void System::update_directional_light(entt::registry& registry) {
