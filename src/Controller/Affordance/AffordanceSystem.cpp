@@ -4,6 +4,10 @@
 
 using namespace Affordance;
 
+SOL_BASE_CLASSES(AffordanceLeaf, AffordanceNode);
+SOL_BASE_CLASSES(AffordanceComposite, AffordanceNode);
+SOL_DERIVED_CLASSES(AffordanceNode, AffordanceLeaf, AffordanceComposite);
+
 auto AffordanceSystem::get_instance() -> AffordanceSystem& {
 	static AffordanceSystem instance;
 	return instance;
@@ -20,7 +24,7 @@ auto AffordanceSystem::lua_access() -> void {
 	                               &AffordanceSystem::get_affordance, this);
 
 	auto affordance_node_type =
-	    lua.new_usertype<AffordanceNode>("AffordanceNode");
+	    lua.new_usertype<AffordanceNode>("AffordanceNode", sol::no_constructor);
 	affordance_node_type["name"] =
 	    sol::property(&AffordanceNode::get_name, &AffordanceNode::set_name);
 	affordance_node_type["properties"] = sol::property(
@@ -39,7 +43,7 @@ auto AffordanceSystem::lua_access() -> void {
 	    &AffordanceLeaf::get_function, &AffordanceLeaf::set_function);
 
 	auto affordance_composite_type = lua.new_usertype<AffordanceComposite>(
-	    "AffordanceComposite", sol::call_constructor,
+	    "AffordanceComposite",
 	    sol::factories(
 	        [](const std::string& name,
 	           const sol::as_table_t<Properties>& properties,

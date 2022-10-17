@@ -24,17 +24,14 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 			FAIL(maybe_error.value().what());
 		}
 
-		Affordance::AffordancePtr affordance = lua["affordance"];
+		std::shared_ptr<Affordance::AffordanceLeaf> affordance =
+		    lua["affordance"];
 
+		std::string result = affordance->get_function()();
+
+		REQUIRE(affordance->get_name() == "test");
+		REQUIRE(affordance->get_properties() == Affordance::Properties{"test"});
 		REQUIRE(affordance->is_composite() == false);
-
-		auto leaf =
-		    std::dynamic_pointer_cast<Affordance::AffordanceLeaf>(affordance);
-
-		std::string result = leaf->get_function()();
-
-		REQUIRE(leaf->get_name() == "test");
-		REQUIRE(leaf->get_properties() == Affordance::Properties{"test"});
 		REQUIRE(result == "hello");
 	}
 
@@ -60,9 +57,20 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 
 		REQUIRE(affordance->get_name() == "test");
 		REQUIRE(affordance->get_properties() == Affordance::Properties{"test"});
+		REQUIRE(affordance->is_composite() == true);
 
 		const auto& children = affordance->get_affordances();
 
 		REQUIRE(children.size() == 1);
+
+		auto leaf_child =
+		    std::dynamic_pointer_cast<Affordance::AffordanceLeaf>(children[0]);
+
+		std::string result = leaf_child->get_function()();
+
+		REQUIRE(leaf_child->get_name() == "test");
+		REQUIRE(leaf_child->get_properties() == Affordance::Properties{"test"});
+		REQUIRE(leaf_child->is_composite() == false);
+		REQUIRE(result == "hello");
 	}
 }
