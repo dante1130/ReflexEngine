@@ -28,10 +28,11 @@ auto AffordanceSystem::lua_access() -> void {
 
 	auto affordance_leaf_type = lua.new_usertype<AffordanceLeaf>(
 	    "AffordanceLeaf",
-	    sol::factories([](const std::string& name, const Properties& properties,
+	    sol::factories([](const std::string& name,
+	                      const sol::as_table_t<Properties>& properties,
 	                      const sol::function& function) {
-		    std::cout << "Creating affordance leaf" << std::endl;
-		    return std::make_shared<AffordanceLeaf>(name, properties, function);
+		    return std::make_shared<AffordanceLeaf>(name, properties.value(),
+		                                            function);
 	    }),
 	    sol::base_classes, sol::bases<AffordanceNode>());
 	affordance_leaf_type["function"] = sol::property(
@@ -39,12 +40,13 @@ auto AffordanceSystem::lua_access() -> void {
 
 	auto affordance_composite_type = lua.new_usertype<AffordanceComposite>(
 	    "AffordanceComposite", sol::call_constructor,
-	    sol::factories([](const std::string& name, const Properties& properties,
-	                      const std::vector<AffordancePtr>& affordances) {
-		    std::cout << "Creating affordance composite" << std::endl;
-		    return std::make_shared<AffordanceComposite>(name, properties,
-		                                                 affordances);
-	    }),
+	    sol::factories(
+	        [](const std::string& name,
+	           const sol::as_table_t<Properties>& properties,
+	           const sol::as_table_t<std::vector<AffordancePtr>>& affordances) {
+		        return std::make_shared<AffordanceComposite>(
+		            name, properties.value(), affordances.value());
+	        }),
 	    sol::base_classes, sol::bases<AffordanceNode>());
 	affordance_composite_type.set_function(
 	    "add_affordance", &AffordanceComposite::add_affordance);

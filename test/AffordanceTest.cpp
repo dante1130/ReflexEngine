@@ -10,14 +10,19 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 	SECTION("Creating an affordance leaf") {
 		auto& lua = LuaManager::get_instance().get_state();
 
-		lua.script(R"(
+		sol::optional<sol::error> maybe_error =
+		    lua.safe_script(R"(
 			function hello()
 				return "hello"
 			end
 
 			affordance = AffordanceLeaf.new("test", {"test"}, hello)
-			print("what")
-		)");
+		)",
+		                    sol::script_pass_on_error);
+
+		if (maybe_error) {
+			FAIL(maybe_error.value().what());
+		}
 
 		std::shared_ptr<Affordance::AffordanceLeaf> affordance =
 		    lua["affordance"];
@@ -31,14 +36,19 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 	SECTION("Creating an affordance composite") {
 		auto& lua = LuaManager::get_instance().get_state();
 
-		lua.script(R"(
+		sol::optional<sol::error> maybe_error =
+		    lua.safe_script(R"(
 			function hello()
 				return "hello"
 			end
 
-			affordance = AffordanceComposite.new("test", {"test"}, AffordanceLeaf.new("test", {"test"}, hello))
-			print("what")
-		)");
+			affordance = AffordanceComposite.new("test", {"test"}, {AffordanceLeaf.new("test", {"test"}, hello)})
+		)",
+		                    sol::script_pass_on_error);
+
+		if (maybe_error) {
+			FAIL(maybe_error.value().what());
+		}
 
 		std::shared_ptr<Affordance::AffordanceComposite> affordance =
 		    lua["affordance"];
