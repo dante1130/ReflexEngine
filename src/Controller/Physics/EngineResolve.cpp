@@ -213,6 +213,8 @@ uint32_t EngineResolve::addBoxCollider(glm::vec3 pos, glm::vec3 rot,
 
 	Transform center =
 	    Transform(Vector3(pos.x, pos.y, pos.z), Quaternion::identity());
+	glm::quat quat = QuaternionHelper::EulerToQuat(rot);
+	center.setOrientation(rp3d::Quaternion(quat.x, quat.y, quat.z, quat.w));
 
 	colliders.push_back(collision_body_->addCollider(collider, center));
 	m_box.emplace(colliders[colliders.size() - 1], collider);
@@ -258,6 +260,8 @@ uint32_t EngineResolve::addSphereCollider(glm::vec3 pos, glm::vec3 rot,
 
 	Transform center =
 	    Transform(Vector3(pos.x, pos.y, pos.z), Quaternion::identity());
+	glm::quat quat = QuaternionHelper::EulerToQuat(rot);
+	center.setOrientation(rp3d::Quaternion(quat.x, quat.y, quat.z, quat.w));
 
 	colliders.push_back(collision_body_->addCollider(collider, center));
 	m_sphere.emplace(colliders[colliders.size() - 1], collider);
@@ -304,6 +308,8 @@ uint32_t EngineResolve::addCapsuleCollider(glm::vec3 pos, glm::vec3 rot,
 
 	Transform center =
 	    Transform(Vector3(pos.x, pos.y, pos.z), Quaternion::identity());
+	glm::quat quat = QuaternionHelper::EulerToQuat(rot);
+	center.setOrientation(rp3d::Quaternion(quat.x, quat.y, quat.z, quat.w));
 
 	colliders.push_back(collision_body_->addCollider(collider, center));
 	m_capsule.emplace(colliders[colliders.size() - 1], collider);
@@ -405,6 +411,10 @@ auto EngineResolve::calculate_inertia_tensor() -> void {
 		inertia_tensor[2][2] = rp3d_local_inertia_tensor.z;
 
 		// Rotate inertia tensor
+		rp3d::Quaternion quat =
+		    collider->getLocalToBodyTransform().getOrientation();
+		inertia_tensor = QuaternionHelper::RotateInertiaTensorOppositeQuat(
+		    inertia_tensor, glm::quat(quat.w, quat.x, quat.y, quat.z));
 
 		// Discard non diagonal values
 		inertia_tensor[1][0] = 0;
