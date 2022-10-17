@@ -80,7 +80,7 @@ class AffordanceLeaf : public AffordanceNode {
 public:
 	AffordanceLeaf() = default;
 	AffordanceLeaf(std::string name, Properties properties,
-	               const sol::function& function);
+	               sol::function function);
 
 	/**
 	 * @brief Returns false because the affordance leaf is not a composite.
@@ -116,6 +116,12 @@ private:
  */
 class AffordanceComposite : public AffordanceNode {
 public:
+	AffordanceComposite() = default;
+	AffordanceComposite(std::string name, Properties properties)
+	    : AffordanceNode(name, properties) {}
+	AffordanceComposite(std::string name, Properties properties,
+	                    const std::vector<AffordanceNode*>& children);
+
 	/**
 	 * @brief Returns true because the affordance composite is a composite.
 	 *

@@ -22,9 +22,9 @@ auto AffordanceNode::set_properties(const Properties& properties) -> void {
 }
 
 AffordanceLeaf::AffordanceLeaf(std::string name, Properties properties,
-                               const sol::function& function)
+                               sol::function function)
     : AffordanceNode(std::move(name), std::move(properties)),
-      function_(function) {}
+      function_(std::move(function)) {}
 
 auto AffordanceLeaf::is_composite() const -> bool { return false; }
 
@@ -35,6 +35,12 @@ auto AffordanceLeaf::get_function() const -> const sol::function& {
 auto AffordanceLeaf::set_function(const sol::function& function) -> void {
 	function_ = function;
 }
+
+AffordanceComposite::AffordanceComposite(
+    std::string name, Properties properties,
+    const std::vector<AffordanceNode*>& children)
+    : AffordanceNode(std::move(name), std::move(properties)),
+      affordances_(children.begin(), children.end()) {}
 
 auto AffordanceComposite::is_composite() const -> bool { return true; }
 

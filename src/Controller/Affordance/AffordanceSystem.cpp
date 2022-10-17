@@ -32,13 +32,16 @@ auto AffordanceSystem::lua_access() -> void {
 	    "AffordanceLeaf",
 	    sol::constructors<AffordanceLeaf(),
 	                      AffordanceLeaf(std::string, Properties,
-	                                     const sol::function&)>(),
+	                                     sol::function)>(),
 	    sol::base_classes, sol::bases<AffordanceNode>());
 	affordance_leaf_type["function"] = sol::property(
 	    &AffordanceLeaf::get_function, &AffordanceLeaf::set_function);
 
 	auto affordance_composite_type = lua.new_usertype<AffordanceComposite>(
-	    "AffordanceComposite", sol::base_classes, sol::bases<AffordanceNode>());
+	    "AffordanceComposite",
+	    sol::constructors<AffordanceComposite(),
+	                      AffordanceComposite(std::string, Properties)>(),
+	    sol::base_classes, sol::bases<AffordanceNode>());
 	affordance_composite_type.set_function(
 	    "add_affordance", &AffordanceComposite::add_affordance);
 	affordance_composite_type.set_function(
