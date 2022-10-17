@@ -30,6 +30,7 @@ add_library(ReflexEngineSrc
 	Controller/ReflexEngine/Camera.cpp
 	Controller/ReflexEngine/SceneManager.cpp
 	Controller/Affordance/Affordance.cpp
+	Controller/Affordance/AffordanceSystem.cpp
 	Controller/ECS/ECS.cpp
 	Controller/ECS/Entity.cpp
 	Controller/ECS/ECSAccess.cpp
