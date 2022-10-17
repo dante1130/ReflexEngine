@@ -29,11 +29,6 @@ public:
 	virtual auto is_composite() const -> bool = 0;
 
 	/**
-	 * @brief Expose the Affordance class to Lua.
-	 */
-	virtual auto lua_access() -> void;
-
-	/**
 	 * @brief Get the name of the affordance.
 	 *
 	 * @return const std::string&
@@ -68,11 +63,36 @@ private:
 	Properties properties_;
 };
 
+/**
+ * @class AffordanceLeaf
+ * @brief An affordance leaf is a leaf node in the composite pattern. It
+ * contains the affordance action of an object.
+ */
 class AffordanceLeaf : Affordance {
 public:
+	/**
+	 * @brief Returns false because the affordance leaf is not a composite.
+	 *
+	 * @return false
+	 */
 	auto is_composite() const -> bool override;
 
+	/**
+	 * @brief Get the action function of the affordance.
+	 *
+	 * @return const sol::function&
+	 */
+	auto get_function() const -> const sol::function&;
+
+	/**
+	 * @brief Set the action function of the affordance.
+	 *
+	 * @param function The action function of the affordance.
+	 */
+	auto set_function(const sol::function& function) -> void;
+
 private:
+	/// The action function in Lua of the affordance.
 	sol::function function_;
 };
 
