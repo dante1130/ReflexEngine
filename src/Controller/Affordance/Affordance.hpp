@@ -7,19 +7,19 @@
 
 namespace Affordance {
 using Properties = std::unordered_set<std::string>;
-using AffordancePtr = std::shared_ptr<class Affordance>;
+using AffordancePtr = std::shared_ptr<class AffordanceNode>;
 
 /**
  * @author Andrew Ho
- * @class Affordance
+ * @class AffordanceNode
  * @brief An affordance is a base composite class that can be used to create a
  * hierarchy of affordances. It is used to represent the properties of an
  * object.
  */
-class Affordance {
+class AffordanceNode {
 public:
-	Affordance() = default;
-	explicit Affordance(const std::string& name);
+	AffordanceNode() = default;
+	explicit AffordanceNode(std::string name);
 
 	/**
 	 * @brief Returns whether the affordance is a composite and has children.
@@ -70,7 +70,7 @@ private:
  * @brief An affordance leaf is a leaf node in the composite pattern. It
  * contains the affordance action of an object.
  */
-class AffordanceLeaf : Affordance {
+class AffordanceLeaf : AffordanceNode {
 public:
 	/**
 	 * @brief Returns false because the affordance leaf is not a composite.
@@ -104,8 +104,15 @@ private:
  * @brief An affordance composite is a composite node in the composite pattern.
  * It contains a collection of affordances.
  */
-class AffordanceComposite : Affordance {
+class AffordanceComposite : AffordanceNode {
 public:
+	/**
+	 * @brief Returns true because the affordance composite is a composite.
+	 *
+	 * @return true
+	 */
+	auto is_composite() const -> bool override;
+
 	/**
 	 * @brief Add a child affordance to the composite.
 	 *
@@ -118,14 +125,7 @@ public:
 	 *
 	 * @param component The child affordance to remove.
 	 */
-	auto remove_affordance(AffordancePtr component) -> void;
-
-	/**
-	 * @brief Returns true because the affordance composite is a composite.
-	 *
-	 * @return true
-	 */
-	auto is_composite() const -> bool override;
+	auto remove_affordance(const AffordancePtr& component) -> void;
 
 private:
 	/// The collection of child affordances.
