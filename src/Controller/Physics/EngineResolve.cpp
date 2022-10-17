@@ -8,6 +8,7 @@
 #include "Controller/GUI/DebugLogger.hpp"
 
 #include <string>
+#include <ReflexAssertion.hpp>
 
 const constexpr glm::vec3 GRAVITY_CONSTANT = glm::vec3(0.0f, -9.807f, 0.0f);
 
@@ -222,6 +223,7 @@ uint32_t EngineResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size,
 	calculate_center_of_mass(pos, mass);
 
 	inertia_tensor_ = inertia_tensor_box(size, mass);
+	calculate_inertia_tensor();
 
 	return colliders.size() - 1;
 }
@@ -265,6 +267,7 @@ uint32_t EngineResolve::addSphereCollider(glm::vec3 pos, float radius,
 	calculate_center_of_mass(pos, mass);
 
 	inertia_tensor_ = inertia_tensor_sphere(radius, mass);
+	calculate_inertia_tensor();
 
 	return colliders.size() - 1;
 }
@@ -310,6 +313,7 @@ uint32_t EngineResolve::addCapsuleCollider(glm::vec3 pos, float radius,
 	calculate_center_of_mass(pos, mass);
 
 	inertia_tensor_ = inertia_tensor_capsule(radius, height, mass);
+	calculate_inertia_tensor();
 
 	return colliders.size() - 1;
 }
@@ -385,7 +389,46 @@ auto EngineResolve::calculate_center_of_mass(glm::vec3 pos, float mass)
 	center_of_mass_ = center_of_mass_ * old_mass_ratio + pos * new_mass_ratio;
 }
 
-auto EngineResolve::calculate_inertia_tensor() -> void {}
+auto EngineResolve::calculate_inertia_tensor() -> void {
+	for (auto collider : colliders) {
+		float mass = collider->getMaterial()
+		                 .getMassDensity();  // Mass is stored as mass density
+		// Get basic inertia tensor
+		rp3d::Vector3 rp3d_local_inertia_tensor =
+		    collider->getCollisionShape()->getLocalInertiaTensor(mass);
+		glm::mat3x3 inertia_tensor = glm::mat3x3(0);
+		inertia_tensor[0][0] = rp3d_local_inertia_tensor.x;
+		inertia_tensor[1][1] = rp3d_local_inertia_tensor.y;
+		inertia_tensor[2][2] = rp3d_local_inertia_tensor.z;
+
+		// Rotate inertia tensor
+
+		// Discard non diagonal values
+		inertia_tensor[1][0] = 0;
+		inertia_tensor[2][0] = 0;
+		inertia_tensor[0][1] = 0;
+		inertia_tensor[2][1] = 0;
+		inertia_tensor[0][2] = 0;
+		inertia_tensor[1][2] = 0;
+
+		// Move inertia tensor to center of mass
+		rp3d::Vector3 rp3d_distance =
+		    collider->getLocalToBodyTransform().getPosition();
+		rp3d_distance.x -= center_of_mass_.x;
+		rp3d_distance.y -= center_of_mass_.y;
+		rp3d_distance.z -= center_of_mass_.z;
+
+		inertia_tensor[0][0] +=
+		    mass * static_cast<float>(pow(rp3d_distance.x, 2));
+		inertia_tensor[1][1] +=
+		    mass * static_cast<float>(pow(rp3d_distance.y, 2));
+		inertia_tensor[2][2] +=
+		    mass * static_cast<float>(pow(rp3d_distance.z, 2));
+
+		// Add to bodies inertia tensor
+		inertia_tensor_ += inertia_tensor;
+	}
+}
 
 void EngineResolve::setPosition(glm::vec3 pos) {
 	Transform trans = collision_body_->getTransform();
