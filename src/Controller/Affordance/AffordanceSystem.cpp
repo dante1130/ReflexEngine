@@ -18,6 +18,27 @@ auto AffordanceSystem::lua_access() -> void {
 	                               &AffordanceSystem::add_affordance, this);
 	affordance_system.set_function("get_affordance",
 	                               &AffordanceSystem::get_affordance, this);
+
+	auto affordance_node_type = lua.new_usertype<AffordanceNode>(
+	    "AffordanceNode",
+	    sol::constructors<AffordanceNode(),
+	                      AffordanceNode(std::string, Properties)>());
+	affordance_node_type["name"] =
+	    sol::property(&AffordanceNode::get_name, &AffordanceNode::set_name);
+	affordance_node_type["properties"] = sol::property(
+	    &AffordanceNode::get_properties, &AffordanceNode::set_properties);
+
+	auto affordance_leaf_type = lua.new_usertype<AffordanceLeaf>(
+	    "AffordanceLeaf", sol::base_classes, sol::bases<AffordanceNode>());
+	affordance_leaf_type["function"] = sol::property(
+	    &AffordanceLeaf::get_function, &AffordanceLeaf::set_function);
+
+	auto affordance_composite_type = lua.new_usertype<AffordanceComposite>(
+	    "AffordanceComposite", sol::base_classes, sol::bases<AffordanceNode>());
+	affordance_composite_type.set_function(
+	    "add_affordance", &AffordanceComposite::add_affordance);
+	affordance_composite_type.set_function(
+	    "remove_affordance", &AffordanceComposite::remove_affordance);
 }
 
 auto AffordanceSystem::add_affordance(std::string object,

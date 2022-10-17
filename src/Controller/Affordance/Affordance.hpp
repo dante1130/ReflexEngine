@@ -33,14 +33,7 @@ public:
 	 * @return true The affordance is a composite.
 	 * @return false The affordance is not a composite.
 	 */
-	virtual auto is_composite() const -> bool = 0;
-
-	/**
-	 * @brief Get the parent.
-	 *
-	 * @return AffordancePtr
-	 */
-	auto get_parent() const -> AffordancePtr;
+	virtual auto is_composite() const -> bool;
 
 	/**
 	 * @brief Get the name of the affordance.
@@ -55,8 +48,6 @@ public:
 	 * @return const Properties&
 	 */
 	auto get_properties() -> const Properties&;
-
-	auto set_parent(AffordancePtr parent) -> void;
 
 	/**
 	 * @brief Set the name.
@@ -73,8 +64,6 @@ public:
 	auto set_properties(const Properties& properties) -> void;
 
 private:
-	/// The parent of the affordance.
-	AffordancePtr parent_;
 	/// The name of the affordance.
 	std::string name_;
 	/// The properties of the affordance.
@@ -87,7 +76,7 @@ private:
  * @brief An affordance leaf is a leaf node in the composite pattern. It
  * contains the affordance action of an object.
  */
-class AffordanceLeaf : AffordanceNode {
+class AffordanceLeaf : public AffordanceNode {
 public:
 	/**
 	 * @brief Returns false because the affordance leaf is not a composite.
@@ -121,7 +110,7 @@ private:
  * @brief An affordance composite is a composite node in the composite pattern.
  * It contains a collection of affordances.
  */
-class AffordanceComposite : AffordanceNode {
+class AffordanceComposite : public AffordanceNode {
 public:
 	/**
 	 * @brief Returns true because the affordance composite is a composite.

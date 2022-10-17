@@ -7,16 +7,12 @@ using namespace Affordance;
 AffordanceNode::AffordanceNode(std::string name, Properties properties)
     : name_(std::move(name)), properties_(std::move(properties)) {}
 
-auto AffordanceNode::get_parent() const -> AffordancePtr { return parent_; }
+auto AffordanceNode::is_composite() const -> bool { return false; }
 
 auto AffordanceNode::get_name() -> const std::string& { return name_; }
 
 auto AffordanceNode::get_properties() -> const Properties& {
 	return properties_;
-}
-
-auto AffordanceNode::set_parent(AffordancePtr parent) -> void {
-	parent_ = std::move(parent);
 }
 
 auto AffordanceNode::set_name(const std::string& name) -> void { name_ = name; }
