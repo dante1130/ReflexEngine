@@ -53,8 +53,9 @@ void loadOBJColliderData::load_obj_collider_data(Component::Rigidbody &rb_comp,
 			center.z = (max_z - min_z) / 2 + min_z;
 
 			rb_comp.addBoxCollider(
-			    center, glm::vec3(max_x - min_x, max_y - min_y, max_z - min_z),
-			    BOUNCE, FRICTION, MASS, EPSILON);
+			    center, glm::vec3(0),
+			    glm::vec3(max_x - min_x, max_y - min_y, max_z - min_z),
+			    FRICTION, MASS, EPSILON);
 
 		} else if (input_line[0] == 'v' && input_line[1] == ' ') {  // If point
 			sstream = std::stringstream(input_line);
@@ -95,8 +96,9 @@ void loadOBJColliderData::load_obj_collider_data(Component::Rigidbody &rb_comp,
 		center.z = (max_z - min_z) / 2 + min_z;
 
 		rb_comp.addBoxCollider(
-		    center, glm::vec3(max_x - min_x, max_y - min_y, max_z - min_z),
-		    BOUNCE, FRICTION, MASS, EPSILON);
+		    center, glm::vec3(0),
+		    glm::vec3(max_x - min_x, max_y - min_y, max_z - min_z), FRICTION,
+		    MASS, EPSILON);
 	}
 }
 
