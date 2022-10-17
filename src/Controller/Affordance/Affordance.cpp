@@ -4,7 +4,8 @@
 
 using namespace Affordance;
 
-AffordanceNode::AffordanceNode(std::string name) : name_(std::move(name)) {}
+AffordanceNode::AffordanceNode(std::string name, Properties properties)
+    : name_(std::move(name)), properties_(std::move(properties)) {}
 
 auto AffordanceNode::get_name() -> const std::string& { return name_; }
 

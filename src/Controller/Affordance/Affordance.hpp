@@ -19,7 +19,7 @@ using AffordancePtr = std::shared_ptr<class AffordanceNode>;
 class AffordanceNode {
 public:
 	AffordanceNode() = default;
-	explicit AffordanceNode(std::string name);
+	AffordanceNode(std::string name, Properties properties);
 
 	/**
 	 * @brief Returns whether the affordance is a composite and has children.
@@ -116,16 +116,16 @@ public:
 	/**
 	 * @brief Add a child affordance to the composite.
 	 *
-	 * @param component The child affordance to add.
+	 * @param affordance The child affordance to add.
 	 */
-	auto add_affordance(AffordancePtr component) -> void;
+	auto add_affordance(AffordancePtr affordance) -> void;
 
 	/**
 	 * @brief Remove a child affordance from the composite.
 	 *
-	 * @param component The child affordance to remove.
+	 * @param affordance The child affordance to remove.
 	 */
-	auto remove_affordance(const AffordancePtr& component) -> void;
+	auto remove_affordance(const AffordancePtr& affordance) -> void;
 
 private:
 	/// The collection of child affordances.
