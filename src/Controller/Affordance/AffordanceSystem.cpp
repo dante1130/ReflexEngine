@@ -29,7 +29,11 @@ auto AffordanceSystem::lua_access() -> void {
 	    &AffordanceNode::get_properties, &AffordanceNode::set_properties);
 
 	auto affordance_leaf_type = lua.new_usertype<AffordanceLeaf>(
-	    "AffordanceLeaf", sol::base_classes, sol::bases<AffordanceNode>());
+	    "AffordanceLeaf",
+	    sol::constructors<AffordanceLeaf(),
+	                      AffordanceLeaf(std::string, Properties,
+	                                     const sol::function&)>(),
+	    sol::base_classes, sol::bases<AffordanceNode>());
 	affordance_leaf_type["function"] = sol::property(
 	    &AffordanceLeaf::get_function, &AffordanceLeaf::set_function);
 

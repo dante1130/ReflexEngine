@@ -78,6 +78,10 @@ private:
  */
 class AffordanceLeaf : public AffordanceNode {
 public:
+	AffordanceLeaf() = default;
+	AffordanceLeaf(std::string name, Properties properties,
+	               const sol::function& function);
+
 	/**
 	 * @brief Returns false because the affordance leaf is not a composite.
 	 *

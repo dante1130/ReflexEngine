@@ -21,6 +21,11 @@ auto AffordanceNode::set_properties(const Properties& properties) -> void {
 	properties_ = properties;
 }
 
+AffordanceLeaf::AffordanceLeaf(std::string name, Properties properties,
+                               const sol::function& function)
+    : AffordanceNode(std::move(name), std::move(properties)),
+      function_(function) {}
+
 auto AffordanceLeaf::is_composite() const -> bool { return false; }
 
 auto AffordanceLeaf::get_function() const -> const sol::function& {
