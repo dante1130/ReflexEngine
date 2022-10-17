@@ -36,11 +36,11 @@ auto AffordanceLeaf::set_function(const sol::function& function) -> void {
 	function_ = function;
 }
 
-AffordanceComposite::AffordanceComposite(
-    std::string name, Properties properties,
-    const std::vector<AffordanceNode*>& children)
+AffordanceComposite::AffordanceComposite(std::string name,
+                                         Properties properties,
+                                         std::vector<AffordancePtr> children)
     : AffordanceNode(std::move(name), std::move(properties)),
-      affordances_(children.begin(), children.end()) {}
+      affordances_(std::move(children)) {}
 
 auto AffordanceComposite::is_composite() const -> bool { return true; }
 
@@ -53,4 +53,9 @@ auto AffordanceComposite::remove_affordance(const AffordancePtr& affordance)
 	affordances_.erase(
 	    std::remove(affordances_.begin(), affordances_.end(), affordance),
 	    affordances_.end());
+}
+
+auto AffordanceComposite::get_affordances() const
+    -> const std::vector<AffordancePtr>& {
+	return affordances_;
 }

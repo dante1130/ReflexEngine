@@ -19,10 +19,8 @@ auto AffordanceSystem::lua_access() -> void {
 	affordance_system.set_function("get_affordance",
 	                               &AffordanceSystem::get_affordance, this);
 
-	auto affordance_node_type = lua.new_usertype<AffordanceNode>(
-	    "AffordanceNode",
-	    sol::constructors<AffordanceNode(),
-	                      AffordanceNode(std::string, Properties)>());
+	auto affordance_node_type =
+	    lua.new_usertype<AffordanceNode>("AffordanceNode");
 	affordance_node_type["name"] =
 	    sol::property(&AffordanceNode::get_name, &AffordanceNode::set_name);
 	affordance_node_type["properties"] = sol::property(
@@ -30,17 +28,23 @@ auto AffordanceSystem::lua_access() -> void {
 
 	auto affordance_leaf_type = lua.new_usertype<AffordanceLeaf>(
 	    "AffordanceLeaf",
-	    sol::constructors<AffordanceLeaf(),
-	                      AffordanceLeaf(std::string, Properties,
-	                                     sol::function)>(),
+	    sol::factories([](const std::string& name, const Properties& properties,
+	                      const sol::function& function) {
+		    std::cout << "Creating affordance leaf" << std::endl;
+		    return std::make_shared<AffordanceLeaf>(name, properties, function);
+	    }),
 	    sol::base_classes, sol::bases<AffordanceNode>());
 	affordance_leaf_type["function"] = sol::property(
 	    &AffordanceLeaf::get_function, &AffordanceLeaf::set_function);
 
 	auto affordance_composite_type = lua.new_usertype<AffordanceComposite>(
-	    "AffordanceComposite",
-	    sol::constructors<AffordanceComposite(),
-	                      AffordanceComposite(std::string, Properties)>(),
+	    "AffordanceComposite", sol::call_constructor,
+	    sol::factories([](const std::string& name, const Properties& properties,
+	                      const std::vector<AffordancePtr>& affordances) {
+		    std::cout << "Creating affordance composite" << std::endl;
+		    return std::make_shared<AffordanceComposite>(name, properties,
+		                                                 affordances);
+	    }),
 	    sol::base_classes, sol::bases<AffordanceNode>());
 	affordance_composite_type.set_function(
 	    "add_affordance", &AffordanceComposite::add_affordance);

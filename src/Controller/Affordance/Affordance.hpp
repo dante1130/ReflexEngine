@@ -117,10 +117,8 @@ private:
 class AffordanceComposite : public AffordanceNode {
 public:
 	AffordanceComposite() = default;
-	AffordanceComposite(std::string name, Properties properties)
-	    : AffordanceNode(name, properties) {}
 	AffordanceComposite(std::string name, Properties properties,
-	                    const std::vector<AffordanceNode*>& children);
+	                    std::vector<AffordancePtr> affordances);
 
 	/**
 	 * @brief Returns true because the affordance composite is a composite.
@@ -142,6 +140,11 @@ public:
 	 * @param affordance The child affordance to remove.
 	 */
 	auto remove_affordance(const AffordancePtr& affordance) -> void;
+
+	/**
+	 * @brief Get the children of the composite.
+	 */
+	auto get_affordances() const -> const std::vector<AffordancePtr>&;
 
 private:
 	/// The collection of child affordances.

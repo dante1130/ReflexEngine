@@ -16,13 +16,15 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 			end
 
 			affordance = AffordanceLeaf.new("test", {"test"}, hello)
+			print("what")
 		)");
 
-		Affordance::AffordanceLeaf affordance = lua["affordance"];
-		std::string result = affordance.get_function()();
+		std::shared_ptr<Affordance::AffordanceLeaf> affordance =
+		    lua["affordance"];
+		std::string result = affordance->get_function()();
 
-		REQUIRE(affordance.get_name() == "test");
-		REQUIRE(affordance.get_properties() == Affordance::Properties{"test"});
+		REQUIRE(affordance->get_name() == "test");
+		REQUIRE(affordance->get_properties() == Affordance::Properties{"test"});
 		REQUIRE(result == "hello");
 	}
 
@@ -34,13 +36,18 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 				return "hello"
 			end
 
-			affordance = AffordanceComposite.new("test", {"test"})
-			affordance:add_affordance(AffordanceLeaf.new("test", {"test"}, hello))
+			affordance = AffordanceComposite.new("test", {"test"}, AffordanceLeaf.new("test", {"test"}, hello))
+			print("what")
 		)");
 
-		Affordance::AffordanceComposite affordance = lua["affordance"];
+		std::shared_ptr<Affordance::AffordanceComposite> affordance =
+		    lua["affordance"];
 
-		REQUIRE(affordance.get_name() == "test");
-		REQUIRE(affordance.get_properties() == Affordance::Properties{"test"});
+		REQUIRE(affordance->get_name() == "test");
+		REQUIRE(affordance->get_properties() == Affordance::Properties{"test"});
+
+		const auto& children = affordance->get_affordances();
+
+		REQUIRE(children.size() == 1);
 	}
 }
