@@ -19,7 +19,7 @@ public:
 	 *
 	 * @return AffordanceSystem&
 	 */
-	auto get_instance() -> AffordanceSystem&;
+	static auto get_instance() -> AffordanceSystem&;
 
 	/**
 	 * @brief Expose the AffordanceSystem and the Affordance classes to Lua.
