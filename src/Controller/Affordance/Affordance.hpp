@@ -19,6 +19,12 @@ using AffordancePtr = std::shared_ptr<class AffordanceNode>;
 class AffordanceNode {
 public:
 	AffordanceNode() = default;
+	AffordanceNode(const AffordanceNode& other) = default;
+	AffordanceNode(AffordanceNode&& other) noexcept = default;
+	AffordanceNode& operator=(const AffordanceNode& other) = default;
+	AffordanceNode& operator=(AffordanceNode&& other) noexcept = default;
+	virtual ~AffordanceNode() = default;
+
 	AffordanceNode(std::string name, Properties properties);
 
 	/**
@@ -28,6 +34,13 @@ public:
 	 * @return false The affordance is not a composite.
 	 */
 	virtual auto is_composite() const -> bool = 0;
+
+	/**
+	 * @brief Get the parent.
+	 *
+	 * @return AffordancePtr
+	 */
+	auto get_parent() const -> AffordancePtr;
 
 	/**
 	 * @brief Get the name of the affordance.
@@ -42,6 +55,8 @@ public:
 	 * @return const Properties&
 	 */
 	auto get_properties() -> const Properties&;
+
+	auto set_parent(AffordancePtr parent) -> void;
 
 	/**
 	 * @brief Set the name.
@@ -58,6 +73,8 @@ public:
 	auto set_properties(const Properties& properties) -> void;
 
 private:
+	/// The parent of the affordance.
+	AffordancePtr parent_;
 	/// The name of the affordance.
 	std::string name_;
 	/// The properties of the affordance.
