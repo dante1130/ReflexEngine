@@ -24,12 +24,17 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 			FAIL(maybe_error.value().what());
 		}
 
-		std::shared_ptr<Affordance::AffordanceLeaf> affordance =
-		    lua["affordance"];
-		std::string result = affordance->get_function()();
+		Affordance::AffordancePtr affordance = lua["affordance"];
 
-		REQUIRE(affordance->get_name() == "test");
-		REQUIRE(affordance->get_properties() == Affordance::Properties{"test"});
+		REQUIRE(affordance->is_composite() == false);
+
+		auto leaf =
+		    std::dynamic_pointer_cast<Affordance::AffordanceLeaf>(affordance);
+
+		std::string result = leaf->get_function()();
+
+		REQUIRE(leaf->get_name() == "test");
+		REQUIRE(leaf->get_properties() == Affordance::Properties{"test"});
 		REQUIRE(result == "hello");
 	}
 
