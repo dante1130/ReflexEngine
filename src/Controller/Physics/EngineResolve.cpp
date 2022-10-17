@@ -219,6 +219,7 @@ uint32_t EngineResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size,
 	mat.setBounciness(epsilon);
 	mat.setMassDensity(mass);
 	total_mass_ += mass;
+	calculate_center_of_mass(pos, mass);
 
 	inertia_tensor_ = inertia_tensor_box(size, mass);
 
@@ -261,6 +262,7 @@ uint32_t EngineResolve::addSphereCollider(glm::vec3 pos, float radius,
 	mat.setBounciness(epsilon);
 	mat.setMassDensity(mass);
 	total_mass_ += mass;
+	calculate_center_of_mass(pos, mass);
 
 	inertia_tensor_ = inertia_tensor_sphere(radius, mass);
 
@@ -305,6 +307,7 @@ uint32_t EngineResolve::addCapsuleCollider(glm::vec3 pos, float radius,
 	mat.setBounciness(epsilon);
 	mat.setMassDensity(mass);
 	total_mass_ += mass;
+	calculate_center_of_mass(pos, mass);
 
 	inertia_tensor_ = inertia_tensor_capsule(radius, height, mass);
 
@@ -373,6 +376,16 @@ glm::mat3x3 EngineResolve::inertia_tensor_capsule(float radius, float height,
 
 	return inertia_tensor;
 }
+
+auto EngineResolve::calculate_center_of_mass(glm::vec3 pos, float mass)
+    -> void {
+	auto old_mass_ratio = (total_mass_ - mass) / total_mass_;
+	auto new_mass_ratio = mass / total_mass_;
+
+	center_of_mass_ = center_of_mass_ * old_mass_ratio + pos * new_mass_ratio;
+}
+
+auto EngineResolve::calculate_inertia_tensor() -> void {}
 
 void EngineResolve::setPosition(glm::vec3 pos) {
 	Transform trans = collision_body_->getTransform();

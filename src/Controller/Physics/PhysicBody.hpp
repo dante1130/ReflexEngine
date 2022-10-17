@@ -84,6 +84,9 @@ protected:
 	glm::vec3 prev_vel_acceleration_ = glm::vec3(0);
 	glm::vec3 prev_ang_vel_acceleration_ = glm::vec3(0);
 
+	// The center of mass of the body
+	glm::vec3 center_of_mass_ = glm::vec3(0);
+
 	/// The inertia tensor
 	glm::mat3x3 inertia_tensor_;
 	/// The inverse of the rotated inertia tensor

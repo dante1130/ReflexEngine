@@ -25,6 +25,21 @@ private:
 
 	bool use_gravity_ = false;
 	bool can_sleep_ = false;
+	bool asleep_ = false;
+
+	/**
+	 * @brief Calculates the center of mass of the body
+	 *
+	 * @param pos the position of the new collider
+	 * @param mass the mass of the new collider
+	 */
+	auto calculate_center_of_mass(glm::vec3 pos, float mass) -> void;
+
+	/**
+	 * @brief Calculates the inertia tensor of the whole body
+	 *
+	 */
+	auto calculate_inertia_tensor() -> void;
 
 public:
 	EngineResolve();
