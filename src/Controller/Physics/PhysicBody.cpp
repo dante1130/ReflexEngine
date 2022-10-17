@@ -21,6 +21,10 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 		epsilon = collider2->getMaterial().getBounciness();
 	}
 
+	// Convert from center of collision body to center of mass
+	lpoint_c1 += pb1->center_of_mass_;
+	lpoint_c2 += pb2->center_of_mass_;
+
 	if (pb1->getType() == rp3d::BodyType::STATIC &&
 	    pb2->getType() == rp3d::BodyType::STATIC) {
 		return;

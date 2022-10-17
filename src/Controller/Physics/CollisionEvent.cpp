@@ -10,6 +10,7 @@ void CollisionEventListener::onContact(const CallbackData& collision_data) {
 	}
 
 	size_t size = collision_data.getNbContactPairs();
+	DebugLogger::log("Physics number of contact pairs", std::to_string(size));
 	for (size_t count = 0; count < size; ++count) {
 		ContactPair contact_pair = collision_data.getContactPair(count);
 		if (contact_pair.getEventType() ==
@@ -56,11 +57,15 @@ void CollisionEventListener::onContact(const CallbackData& collision_data) {
 		if (num_of_contacts != 0) {
 			float num = static_cast<float>(num_of_contacts);
 			local_point_c1 /= num;
-			local_point_c1 =
-			    contact_pair.getBody1()->getWorldVector(local_point_c1);
+			local_point_c1 = contact_pair.getBody1()->getWorldVector(
+			    local_point_c1 + contact_pair.getCollider1()
+			                         ->getLocalToBodyTransform()
+			                         .getPosition());
 			local_point_c2 /= num;
-			local_point_c2 =
-			    contact_pair.getBody2()->getWorldVector(local_point_c2);
+			local_point_c2 = contact_pair.getBody2()->getWorldVector(
+			    local_point_c2 + contact_pair.getCollider2()
+			                         ->getLocalToBodyTransform()
+			                         .getPosition());
 			contact_normal /= num;
 			penetration_depth /= num;
 

@@ -432,11 +432,17 @@ auto EngineResolve::calculate_inertia_tensor() -> void {
 		rp3d_distance.z -= center_of_mass_.z;
 
 		inertia_tensor[0][0] +=
-		    mass * static_cast<float>(pow(rp3d_distance.x, 2));
+		    mass *
+		    static_cast<float>(pow(
+		        sqrt(pow(rp3d_distance.y, 2) + pow(rp3d_distance.z, 2)), 2));
 		inertia_tensor[1][1] +=
-		    mass * static_cast<float>(pow(rp3d_distance.y, 2));
+		    mass *
+		    static_cast<float>(pow(
+		        sqrt(pow(rp3d_distance.x, 2) + pow(rp3d_distance.z, 2)), 2));
 		inertia_tensor[2][2] +=
-		    mass * static_cast<float>(pow(rp3d_distance.z, 2));
+		    mass *
+		    static_cast<float>(pow(
+		        sqrt(pow(rp3d_distance.x, 2) + pow(rp3d_distance.y, 2)), 2));
 
 		// Add to bodies inertia tensor
 		inertia_tensor_ += inertia_tensor;
