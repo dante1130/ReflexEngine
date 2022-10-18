@@ -655,18 +655,18 @@ void ECSGui::draw_rigidbody(Reflex::Entity& entity) {
 
 			if (ImGui::BeginPopup("AddCollider")) {
 				if (ImGui::MenuItem("Box")) {
-					rigidbody.addBoxCollider(glm::vec3(0), glm::vec3(1.0f),
-					                         0.5f, 0.5f, 1, 0.85);
+					rigidbody.addBoxCollider(glm::vec3(0), glm::vec3(0),
+					                         glm::vec3(1.0f), 0.5f, 1, 0.85);
 					ImGui::CloseCurrentPopup();
 				}
 				if (ImGui::MenuItem("Capsule")) {
-					rigidbody.addCapsuleCollider(glm::vec3(0), 0.5f, 1.0f, 0.5f,
-					                             0.5f, 1, 0.85);
+					rigidbody.addCapsuleCollider(glm::vec3(0), glm::vec3(0),
+					                             0.5f, 1.0f, 0.5f, 1, 0.85);
 					ImGui::CloseCurrentPopup();
 				}
 				if (ImGui::MenuItem("Sphere")) {
-					rigidbody.addSphereCollider(glm::vec3(0), 1.0f, 0.5f, 0.5f,
-					                            1, 0.85);
+					rigidbody.addSphereCollider(glm::vec3(0), glm::vec3(0),
+					                            1.0f, 0.5f, 1, 0.85);
 					ImGui::CloseCurrentPopup();
 				}
 				ImGui::EndPopup();

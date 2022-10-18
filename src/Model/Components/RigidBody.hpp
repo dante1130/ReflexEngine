@@ -431,32 +431,33 @@ public:
 	 * @brief Creates and adds a box collider to object
 	 *
 	 * @param pos - the desired position
+	 * @param rot - the desired rotation
 	 * @param size - the desired half extents
-	 * @param bounce - the bounciness property
 	 * @param friction - the friction property
 	 * @param epsilone - the coefficient of restitution
 	 * @return uint32_t
 	 */
-	uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 size, float bounce,
+	uint32_t addBoxCollider(glm::vec3 pos, glm::vec3 rot, glm::vec3 size,
 	                        float friction, float mass, float epsilon);
 
 	/**
 	 * @brief Creates and adds a sphere collider to object
 	 *
 	 * @param pos - the desired position
+	 * @param rot - the desired rotation
 	 * @param radius - the desired radius
-	 * @param bounce - the bounciness property
 	 * @param friction - the friction property
 	 * @param epsilone - the coefficient of restitution
 	 * @return uint32_t
 	 */
-	uint32_t addSphereCollider(glm::vec3 pos, float radius, float bounce,
+	uint32_t addSphereCollider(glm::vec3 pos, glm::vec3 rot, float radius,
 	                           float friction, float mass, float epsilon);
 
 	/**
 	 * @brief Creates and adds a capsule collider to object
 	 *
 	 * @param pos - the desired position
+	 * @param rot - the desired rotation
 	 * @param radius - the desired radius
 	 * @param height - the desired height
 	 * @param bounce - the bounciness property
@@ -464,8 +465,8 @@ public:
 	 * @param epsilone - the coefficient of restitution
 	 * @return uint32_t
 	 */
-	uint32_t addCapsuleCollider(glm::vec3 pos, float radius, float height,
-	                            float bounce, float friction, float mass,
+	uint32_t addCapsuleCollider(glm::vec3 pos, glm::vec3 rot, float radius,
+	                            float height, float friction, float mass,
 	                            float epsilon);
 
 	/**
