@@ -4,7 +4,7 @@ entity = {
     transform = {
         position = {
 			x = 48,
-			y = 10,
+			y = 2,
 			z = 0
 		},
 		rotation = {
@@ -21,7 +21,7 @@ entity = {
 
 	rigidbody = {
         using_react_start = false,
-        gravity_on = false,
+        gravity_on = true,
         can_sleep = true,
         is_trigger = false,
         linear_drag = 5,
