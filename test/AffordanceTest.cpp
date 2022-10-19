@@ -91,6 +91,10 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 				return sit() .. " straight"
 			end
 
+			function stand()
+				return "standing"
+			end
+
 			sitting_affordance = AffordanceComposite.new("Sitting", {"Sitting"}, {
 				AffordanceLeaf.new("Sit default", {}, sit),
 				AffordanceComposite.new("Human", {"Human"}, {
@@ -98,6 +102,8 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 					AffordanceLeaf.new("Straight", {"Straight"}, sit_straight)
 				})
 			})
+
+			sitting_affordance:add_affordance(AffordanceLeaf.new("Stand", {"Stand"}, stand))
 		)",
 		                    sol::script_pass_on_error);
 
@@ -105,26 +111,26 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 			FAIL(maybe_error.value().what());
 		}
 
-		std::shared_ptr<Affordance::AffordanceComposite> chair_affordance =
-		    lua["chair_affordance"];
+		std::shared_ptr<Affordance::AffordanceComposite> sitting_affordance =
+		    lua["sitting_affordance"];
 
-		REQUIRE(chair_affordance->get_name() == "chair");
-		REQUIRE(chair_affordance->get_properties() ==
+		REQUIRE(sitting_affordance->get_name() == "Sitting");
+		REQUIRE(sitting_affordance->get_properties() ==
 		        Affordance::Properties{"Sitting"});
-		REQUIRE(chair_affordance->is_composite() == true);
+		REQUIRE(sitting_affordance->is_composite() == true);
 
-		const auto& chair_children = chair_affordance->get_affordances();
-		REQUIRE(chair_children.size() == 2);
+		const auto& chair_children = sitting_affordance->get_affordances();
+		REQUIRE(chair_children.size() == 3);
 
-		auto sitting_affordance =
+		auto sit_default_affordance =
 		    std::dynamic_pointer_cast<Affordance::AffordanceLeaf>(
 		        chair_children[0]);
 
-		REQUIRE(sitting_affordance->get_name() == "Sit default");
-		REQUIRE(sitting_affordance->get_properties().empty());
-		REQUIRE(sitting_affordance->is_composite() == false);
+		REQUIRE(sit_default_affordance->get_name() == "Sit default");
+		REQUIRE(sit_default_affordance->get_properties().empty());
+		REQUIRE(sit_default_affordance->is_composite() == false);
 
-		std::string sitting_result = sitting_affordance->get_function()();
+		std::string sitting_result = sit_default_affordance->get_function()();
 		REQUIRE(sitting_result == "sitting");
 
 		auto human_affordance =
@@ -163,6 +169,18 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 
 		std::string straight_result = straight_affordance->get_function()();
 		REQUIRE(straight_result == "sitting straight");
+
+		auto stand_affordance =
+		    std::dynamic_pointer_cast<Affordance::AffordanceLeaf>(
+		        chair_children[2]);
+
+		REQUIRE(stand_affordance->get_name() == "Stand");
+		REQUIRE(stand_affordance->get_properties() ==
+		        Affordance::Properties{"Stand"});
+		REQUIRE(stand_affordance->is_composite() == false);
+
+		std::string stand_result = stand_affordance->get_function()();
+		REQUIRE(stand_result == "standing");
 	}
 
 	SECTION("Storing an affordance in the AffordanceSystem") {
@@ -182,6 +200,10 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 				return sit() .. " straight"
 			end
 
+			function stand()
+				return "standing"
+			end
+
 			sitting_affordance = AffordanceComposite.new("Sitting", {"Sitting"}, {
 				AffordanceLeaf.new("Sit default", {}, sit),
 				AffordanceComposite.new("Human", {"Human"}, {
@@ -190,7 +212,9 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 				})
 			})
 
-			AffordanceSystem.add_affordance("chair", sitting_affordance);
+			sitting_affordance:add_affordance(AffordanceLeaf.new("Stand", {"Stand"}, stand))
+
+			AffordanceSystem.set_affordance("chair", sitting_affordance);
 		)",
 		                    sol::script_pass_on_error);
 

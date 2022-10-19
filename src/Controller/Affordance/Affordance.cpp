@@ -45,7 +45,7 @@ AffordanceComposite::AffordanceComposite(std::string name,
 auto AffordanceComposite::is_composite() const -> bool { return true; }
 
 auto AffordanceComposite::add_affordance(AffordancePtr affordance) -> void {
-	affordances_.emplace_back(std::move(affordance));
+	affordances_.push_back(std::move(affordance));
 }
 
 auto AffordanceComposite::remove_affordance(const AffordancePtr& affordance)
@@ -55,7 +55,6 @@ auto AffordanceComposite::remove_affordance(const AffordancePtr& affordance)
 	    affordances_.end());
 }
 
-auto AffordanceComposite::get_affordances() const
-    -> const std::vector<AffordancePtr>& {
+auto AffordanceComposite::get_affordances() -> std::vector<AffordancePtr>& {
 	return affordances_;
 }

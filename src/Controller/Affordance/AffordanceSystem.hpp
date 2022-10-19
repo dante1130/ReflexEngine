@@ -5,8 +5,7 @@
 #include "Affordance.hpp"
 
 namespace Affordance {
-using AffordanceMap =
-    std::unordered_map<std::string, std::vector<AffordancePtr>>;
+using AffordanceMap = std::unordered_map<std::string, AffordancePtr>;
 
 /**
  * @class AffordanceSystem
@@ -28,21 +27,20 @@ public:
 	auto lua_access() -> void;
 
 	/**
-	 * @brief Add an affordance to the system.
+	 * @brief Set an object to an affordance composite in the system.
 	 *
 	 * @param object The name of the object to associate the affordances to
 	 * @param affordance The affordances
 	 */
-	auto add_affordance(std::string object, AffordancePtr affordance) -> void;
+	auto set_affordance(std::string object, AffordancePtr affordance) -> void;
 
 	/**
 	 * @brief Get the affordance composite associated with the object.
 	 *
 	 * @param object
-	 * @return std::vector<AffordancePtr> The affordance composite
+	 * @return AffordancePtr The affordance composite
 	 */
-	auto get_affordances(const std::string& object)
-	    -> const std::vector<AffordancePtr>&;
+	auto get_affordance(const std::string& object) -> AffordancePtr;
 
 private:
 	AffordanceSystem() = default;

@@ -18,8 +18,8 @@ auto AffordanceSystem::lua_access() -> void {
 
 	auto affordance_system = lua.create_named_table("AffordanceSystem");
 
-	affordance_system.set_function("add_affordance",
-	                               &AffordanceSystem::add_affordance, this);
+	affordance_system.set_function("set_affordance",
+	                               &AffordanceSystem::set_affordance, this);
 	affordance_system.set_function("get_affordance",
 	                               &AffordanceSystem::get_affordance, this);
 
@@ -58,9 +58,9 @@ auto AffordanceSystem::lua_access() -> void {
 	    "remove_affordance", &AffordanceComposite::remove_affordance);
 }
 
-auto AffordanceSystem::add_affordance(std::string object,
+auto AffordanceSystem::set_affordance(std::string object,
                                       AffordancePtr affordance) -> void {
-	affordance_map_.emplace(std::move(object), std::move(affordance));
+	affordance_map_.emplace(std::move(object), affordance);
 }
 
 auto AffordanceSystem::get_affordance(const std::string& object)
