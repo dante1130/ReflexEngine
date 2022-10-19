@@ -91,7 +91,7 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 				return sit() .. " straight"
 			end
 
-			chair_affordance = AffordanceComposite.new("chair", {"Sitting"}, {
+			sitting_affordance = AffordanceComposite.new("Sitting", {"Sitting"}, {
 				AffordanceLeaf.new("Sit default", {}, sit),
 				AffordanceComposite.new("Human", {"Human"}, {
 					AffordanceLeaf.new("Crossleg", {"Crossleg"}, sit_crosslegged),
@@ -163,5 +163,39 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 
 		std::string straight_result = straight_affordance->get_function()();
 		REQUIRE(straight_result == "sitting straight");
+	}
+
+	SECTION("Storing an affordance in the AffordanceSystem") {
+		auto& lua = LuaManager::get_instance().get_state();
+
+		sol::optional<sol::error> maybe_error =
+		    lua.safe_script(R"(
+			function sit() 
+				return "sitting"
+			end
+
+			function sit_crosslegged()
+				return sit() .. " crosslegged"
+			end
+
+			function sit_straight()
+				return sit() .. " straight"
+			end
+
+			sitting_affordance = AffordanceComposite.new("Sitting", {"Sitting"}, {
+				AffordanceLeaf.new("Sit default", {}, sit),
+				AffordanceComposite.new("Human", {"Human"}, {
+					AffordanceLeaf.new("Crossleg", {"Crossleg"}, sit_crosslegged),
+					AffordanceLeaf.new("Straight", {"Straight"}, sit_straight)
+				})
+			})
+
+			AffordanceSystem.add_affordance("chair", sitting_affordance);
+		)",
+		                    sol::script_pass_on_error);
+
+		if (maybe_error) {
+			FAIL(maybe_error.value().what());
+		}
 	}
 }

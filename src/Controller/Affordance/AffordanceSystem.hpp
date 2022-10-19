@@ -5,7 +5,8 @@
 #include "Affordance.hpp"
 
 namespace Affordance {
-using AffordanceMap = std::unordered_map<std::string, AffordancePtr>;
+using AffordanceMap =
+    std::unordered_map<std::string, std::vector<AffordancePtr>>;
 
 /**
  * @class AffordanceSystem
@@ -38,9 +39,10 @@ public:
 	 * @brief Get the affordance composite associated with the object.
 	 *
 	 * @param object
-	 * @return AffordancePtr The affordance composite
+	 * @return std::vector<AffordancePtr> The affordance composite
 	 */
-	auto get_affordance(const std::string& object) -> AffordancePtr;
+	auto get_affordances(const std::string& object)
+	    -> const std::vector<AffordancePtr>&;
 
 private:
 	AffordanceSystem() = default;
