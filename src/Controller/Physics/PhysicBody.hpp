@@ -120,6 +120,13 @@ public:
 	auto is_modified() -> bool;
 
 	/**
+	 * @brief Set the modified object
+	 *
+	 * @param modified
+	 */
+	auto set_modified(bool modified) -> void;
+
+	/**
 	 * @brief Gets the size of the colliders vector
 	 *
 	 * @return size_t

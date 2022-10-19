@@ -30,10 +30,12 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	    pb2->getType() == rp3d::BodyType::STATIC) {
 		return;
 	} else if (pb1->getType() == rp3d::BodyType::STATIC) {
+		DebugLogger::log("pb2", "is dynamic");
 		static_collision(collider2, lpoint_c2, -collision_normal, epsilon,
 		                 collision_depth);
 		return;
 	} else if (pb2->getType() == rp3d::BodyType::STATIC) {
+		DebugLogger::log("pb1", "is dynamic");
 		static_collision(collider1, lpoint_c1, collision_normal, epsilon,
 		                 collision_depth);
 		return;
@@ -55,11 +57,21 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	// (r2 x n)
 	glm::vec3 r2xn = glm::cross(lpoint_c2, collision_normal);
 
+	glm::vec3 abs_normal = glm::abs(collision_normal);
+	// Wa - previous angular velocity added due to acceleration
+	glm::vec3 prev_ang_vel_b1 = pb1->prev_ang_vel_acceleration_;
+	prev_ang_vel_b1 *= abs_normal;
+	glm::vec3 prev_ang_vel_b2 = pb2->prev_ang_vel_acceleration_;
+	prev_ang_vel_b2 *= abs_normal;
+	// Va - previous linear velocity added due to acceleration
+	glm::vec3 prev_lin_vel_b1 = pb1->prev_vel_acceleration_;
+	prev_lin_vel_b1 *= abs_normal;
+	glm::vec3 prev_lin_vel_b2 = pb2->prev_vel_acceleration_;
+	prev_lin_vel_b2 *= abs_normal;
+
 	// Rotates angular velocity to world coordaintes from local coordinates
-	glm::vec3 ang_vel_b1 =
-	    pb1->getAngVelocity() - pb1->prev_ang_vel_acceleration_;
-	glm::vec3 ang_vel_b2 =
-	    pb2->getAngVelocity() - pb2->prev_ang_vel_acceleration_;
+	glm::vec3 ang_vel_b1 = pb1->getAngVelocity() - prev_ang_vel_b1;
+	glm::vec3 ang_vel_b2 = pb2->getAngVelocity() - prev_ang_vel_b2;
 
 	// num_eqn = numerator section of equation
 	// div_eqn = divisor section of equation
@@ -68,9 +80,9 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	float epsilon_num_eqn = 1.0f + epsilon;
 
 	// n . (v1 - v2)
-	float vel_num_eqn = glm::dot(
-	    collision_normal, ((pb1->getVelocity() - pb1->prev_vel_acceleration_) -
-	                       (pb2->getVelocity() - pb2->prev_vel_acceleration_)));
+	float vel_num_eqn =
+	    glm::dot(collision_normal, ((pb1->getVelocity() - prev_lin_vel_b1) -
+	                                (pb2->getVelocity() - prev_lin_vel_b2)));
 	// w1 . (r1 x n)
 	float w1_num_eqn = glm::dot(ang_vel_b1, r1xn);
 	// w2 . (r2 x n)
@@ -131,7 +143,16 @@ void PhysicsBody::static_collision(rp3d::Collider* collider, glm::vec3 r_point,
                                    float collision_depth) {
 	PhysicsBody* pb1 = static_cast<PhysicsBody*>(collider->getUserData());
 
+	DebugLogger::log("Static collision depth", std::to_string(collision_depth));
+	DebugLogger::log("Static collision normal",
+	                 std::to_string(collision_normal.x) + " " +
+	                     std::to_string(collision_normal.y) + " " +
+	                     std::to_string(collision_normal.z));
+
 	glm::vec3 pos = pb1->getPosition();
+	DebugLogger::log("Position (<0.9 is bad)", std::to_string(pos.x) + " " +
+	                                               std::to_string(pos.y) + " " +
+	                                               std::to_string(pos.z));
 	pos -= collision_normal * collision_depth;
 	pb1->setPosition(pos);
 	pb1->modified_ = true;
@@ -144,8 +165,16 @@ void PhysicsBody::static_collision(rp3d::Collider* collider, glm::vec3 r_point,
 	// (r1 x n)
 	glm::vec3 rxn = glm::cross(r_point, collision_normal);
 
+	glm::vec3 abs_normal = glm::abs(collision_normal);
+	// Wa - previous angular velocity added due to acceleration
+	glm::vec3 prev_ang_vel = pb1->prev_ang_vel_acceleration_;
+	prev_ang_vel *= abs_normal;
+	// Va - previous linear velocity added due to acceleration
+	glm::vec3 prev_lin_vel = pb1->prev_vel_acceleration_;
+	prev_lin_vel *= abs_normal;
+
 	// Rotates angular velocity to world coordaintes from local coordinates
-	glm::vec3 ang_vel = pb1->getAngVelocity();
+	glm::vec3 ang_vel = pb1->getAngVelocity() - prev_ang_vel;
 
 	// num_eqn = numerator section of equation
 	// div_eqn = divisor section of equation
@@ -153,11 +182,11 @@ void PhysicsBody::static_collision(rp3d::Collider* collider, glm::vec3 r_point,
 	// (1 + E)
 	float epsilon_num_eqn = 1.0f + epsilon;
 
-	// n . (v1 - v2)
-	float vel_num_eqn = glm::dot(
-	    collision_normal, pb1->getVelocity() - pb1->prev_vel_acceleration_);
+	// n . (V1 - Va)
+	float vel_num_eqn =
+	    glm::dot(collision_normal, pb1->getVelocity() - prev_lin_vel);
 
-	// w . (r x n)
+	// (W - Wa) . (r x n)
 	float w_num_eqn = glm::dot(ang_vel, rxn);
 
 	// b (baumgarte term)
@@ -189,6 +218,8 @@ void PhysicsBody::static_collision(rp3d::Collider* collider, glm::vec3 r_point,
 glm::mat3x3 PhysicsBody::get_inertia_tensor() { return inertia_tensor_; }
 
 auto PhysicsBody::is_modified() -> bool { return modified_; }
+
+auto PhysicsBody::set_modified(bool modified) -> void { modified_ = modified; }
 
 void PhysicsBody::DePenetrate(PhysicsBody* pb1, PhysicsBody* pb2,
                               glm::vec3 normal, float penetration_depth) {

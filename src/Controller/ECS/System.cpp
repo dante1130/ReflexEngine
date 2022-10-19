@@ -267,6 +267,7 @@ void System::update_rigidbody(entt::registry& registry) {
 				    transform.position = rigidbody.getPosition();
 				    transform.rotation = rigidbody.getRotation();
 				    rigidbody.setPreviousPosition(transform.position);
+				    rigidbody.pb->set_modified(false);
 			    }
 		    });
 	}
