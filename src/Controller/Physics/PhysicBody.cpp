@@ -134,6 +134,7 @@ void PhysicsBody::static_collision(rp3d::Collider* collider, glm::vec3 r_point,
 	glm::vec3 pos = pb1->getPosition();
 	pos -= collision_normal * collision_depth;
 	pb1->setPosition(pos);
+	pb1->modified_ = true;
 
 	// J1^-1
 	pb1->inverse_rotated_inertia_tensor_ =
@@ -187,6 +188,8 @@ void PhysicsBody::static_collision(rp3d::Collider* collider, glm::vec3 r_point,
 
 glm::mat3x3 PhysicsBody::get_inertia_tensor() { return inertia_tensor_; }
 
+auto PhysicsBody::is_modified() -> bool { return modified_; }
+
 void PhysicsBody::DePenetrate(PhysicsBody* pb1, PhysicsBody* pb2,
                               glm::vec3 normal, float penetration_depth) {
 	glm::vec3 pos1 = pb1->getPosition();
@@ -209,6 +212,8 @@ void PhysicsBody::DePenetrate(PhysicsBody* pb1, PhysicsBody* pb2,
 
 	pb1->setPosition(pos1);
 	pb2->setPosition(pos2);
+	pb1->modified_ = true;
+	pb2->modified_ = true;
 }
 
 size_t PhysicsBody::colliderSize() { return colliders.size(); }

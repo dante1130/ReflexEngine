@@ -92,6 +92,9 @@ protected:
 	/// The inverse of the rotated inertia tensor
 	glm::mat3x3 inverse_rotated_inertia_tensor_;
 
+	/// If the body has been modified
+	bool modified_ = false;
+
 	/**
 	 * @brief Deletes a specified collider form rigidbody
 	 *
@@ -107,6 +110,14 @@ public:
 	 * @return glm::mat3x3
 	 */
 	glm::mat3x3 get_inertia_tensor();
+
+	/**
+	 * @brief Get the if modified object
+	 *
+	 * @return true
+	 * @return false
+	 */
+	auto is_modified() -> bool;
 
 	/**
 	 * @brief Gets the size of the colliders vector

@@ -263,9 +263,11 @@ void System::update_rigidbody(entt::registry& registry) {
 		registry.view<Component::Rigidbody, Component::Transform>().each(
 		    [](Component::Rigidbody& rigidbody,
 		       Component::Transform& transform) {
-			    transform.position = rigidbody.getPosition();
-			    transform.rotation = rigidbody.getRotation();
-			    rigidbody.setPreviousPosition(transform.position);
+			    if (rigidbody.pb->is_modified()) {
+				    transform.position = rigidbody.getPosition();
+				    transform.rotation = rigidbody.getRotation();
+				    rigidbody.setPreviousPosition(transform.position);
+			    }
 		    });
 	}
 }

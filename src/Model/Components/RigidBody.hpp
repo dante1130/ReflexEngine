@@ -14,11 +14,8 @@ namespace Component {
  * physics and collision information of an object
  */
 struct Rigidbody {
-private:
 	/// Stores information about physics object
 	PhysicsBody* pb;
-
-public:
 	/// Whether gravity is enabled
 	bool gravity_on;
 	/// <summary>
