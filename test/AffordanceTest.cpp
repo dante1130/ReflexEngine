@@ -92,6 +92,7 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 			end
 
 			chair_affordance = AffordanceComposite.new("chair", {"Sitting"}, {
+				AffordanceLeaf.new("Sit default", {}, sit),
 				AffordanceComposite.new("Human", {"Human"}, {
 					AffordanceLeaf.new("Crossleg", {"Crossleg"}, sit_crosslegged),
 					AffordanceLeaf.new("Straight", {"Straight"}, sit_straight)
@@ -113,11 +114,22 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 		REQUIRE(chair_affordance->is_composite() == true);
 
 		const auto& chair_children = chair_affordance->get_affordances();
-		REQUIRE(chair_children.size() == 1);
+		REQUIRE(chair_children.size() == 2);
+
+		auto sitting_affordance =
+		    std::dynamic_pointer_cast<Affordance::AffordanceLeaf>(
+		        chair_children[0]);
+
+		REQUIRE(sitting_affordance->get_name() == "Sit default");
+		REQUIRE(sitting_affordance->get_properties().empty());
+		REQUIRE(sitting_affordance->is_composite() == false);
+
+		std::string sitting_result = sitting_affordance->get_function()();
+		REQUIRE(sitting_result == "sitting");
 
 		auto human_affordance =
 		    std::dynamic_pointer_cast<Affordance::AffordanceComposite>(
-		        chair_children[0]);
+		        chair_children[1]);
 
 		REQUIRE(human_affordance->get_name() == "Human");
 		REQUIRE(human_affordance->get_properties() ==
