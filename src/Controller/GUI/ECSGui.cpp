@@ -591,10 +591,9 @@ void ECSGui::draw_rigidbody(Reflex::Entity& entity) {
 					rp3d::Transform tf = rigidbody.getColliders()
 					                         .at(i)
 					                         ->getLocalToBodyTransform();
-					rp3d::Vector3 new_cp =
-					    rp3d::Vector3(collider_position.x, collider_position.y,
-					                  collider_position.z);
-					tf.setPosition(new_cp);
+					tf.setPosition(rp3d::Vector3(collider_position.x,
+					                             collider_position.y,
+					                             collider_position.z));
 					rigidbody.getColliders().at(i)->setLocalToBodyTransform(tf);
 				}
 
