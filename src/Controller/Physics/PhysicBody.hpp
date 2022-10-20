@@ -75,7 +75,7 @@ protected:
 	std::unordered_map<rp3d::Collider*, rp3d::CapsuleShape*> m_capsule;
 
 	/// The previous position of the object from last update
-	glm::vec3 previous_transform_position;
+	glm::vec3 previous_transform_position = glm::vec3(0);
 
 	/// The coefficient of restitution
 	float epsilon_value_ = 0;

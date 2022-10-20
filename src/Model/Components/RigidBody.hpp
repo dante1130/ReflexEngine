@@ -457,7 +457,6 @@ struct Rigidbody {
 	 * @param rot - the desired rotation
 	 * @param radius - the desired radius
 	 * @param height - the desired height
-	 * @param bounce - the bounciness property
 	 * @param friction - the friction property
 	 * @param epsilone - the coefficient of restitution
 	 * @return uint32_t
