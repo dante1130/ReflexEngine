@@ -31,12 +31,10 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	lpoint_c2 += pb2->center_of_mass_;
 
 	if (pb1->getType() == rp3d::BodyType::STATIC) {
-		DebugLogger::log("pb2", "is dynamic");
 		static_collision(collider2, lpoint_c2, -collision_normal, epsilon,
 		                 collision_depth);
 		return;
 	} else if (pb2->getType() == rp3d::BodyType::STATIC) {
-		DebugLogger::log("pb1", "is dynamic");
 		static_collision(collider1, lpoint_c1, collision_normal, epsilon,
 		                 collision_depth);
 		return;
@@ -150,16 +148,7 @@ void PhysicsBody::static_collision(rp3d::Collider* collider, glm::vec3 r_point,
                                    float collision_depth) {
 	PhysicsBody* pb1 = static_cast<PhysicsBody*>(collider->getUserData());
 
-	DebugLogger::log("Static collision depth", std::to_string(collision_depth));
-	DebugLogger::log("Static collision normal",
-	                 std::to_string(collision_normal.x) + " " +
-	                     std::to_string(collision_normal.y) + " " +
-	                     std::to_string(collision_normal.z));
-
 	glm::vec3 pos = pb1->getPosition();
-	DebugLogger::log("Position (<0.9 is bad)", std::to_string(pos.x) + " " +
-	                                               std::to_string(pos.y) + " " +
-	                                               std::to_string(pos.z));
 	pos -= collision_normal * collision_depth;
 	pb1->setPosition(pos);
 	pb1->modified_ = true;
