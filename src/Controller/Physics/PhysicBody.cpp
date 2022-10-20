@@ -88,6 +88,12 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	float w1_num_eqn = glm::dot(ang_vel_b1, r1xn);
 	// w2 . (r2 x n)
 	float w2_num_eqn = glm::dot(ang_vel_b2, r2xn);
+
+	// Limit epsilon for low linear & angular velocity collisions
+	if (fabs(vel_num_eqn + w1_num_eqn - w2_num_eqn) < 0.25) {
+		epsilon_num_eqn = 1.0f;
+	}
+
 	// b (baumgarte term)
 	float b_num_eqn =
 	    (0.2f / EngineTime::get_fixed_delta_time()) * collision_depth;
@@ -190,11 +196,16 @@ void PhysicsBody::static_collision(rp3d::Collider* collider, glm::vec3 r_point,
 	// (W - Wa) . (r x n)
 	float w_num_eqn = glm::dot(ang_vel, rxn);
 
+	// Limit epsilon for low linear & angular velocity collisions
+	if (fabs(vel_num_eqn + w_num_eqn) < 0.25) {
+		epsilon_num_eqn = 1.0f;
+	}
+
 	// b (baumgarte term)
 	float b_num_eqn =
 	    (0.2f / EngineTime::get_fixed_delta_time()) * collision_depth;
 
-	// b - (1 + E)(n . (v1 - v2) + w1 . (r1 x n) - w2 . (r2 x n))
+	// b - (1 + E)(n . (v1 - v2) + w1 . (r1 x n))
 	float num_eqn = b_num_eqn - epsilon_num_eqn * (vel_num_eqn + w_num_eqn);
 
 	//  1      1
