@@ -8,7 +8,7 @@ function init(ecs, entity)
 	Camera.toggle_noclip()
 
 	local rb = entity:get_rigidbody_component()
-	rb:add_box_collider(Math.vec3.new(0, -0.8, 0), Math.vec3.new(0, 0, 0), Math.vec3.new(0.5, 1.8, 0.5), 0.5, 1, 0.1)
+	rb:add_box_collider(Math.vec3.new(0, -0.8, 0), Math.vec3.new(0, 0, 0), Math.vec3.new(0.5, 1.8, 0.5), 0.5, 80, 0.1)
 end
 
 function update(ecs, entity)
@@ -109,9 +109,11 @@ end
 
 function PhysicsMovement(ecs, entity)
 	local rb_comp = entity:get_rigidbody_component()
-	local speed = 1000 * Time.get_delta_time() * var.speed
+	local speed = 1000 *  var.speed
 	local speed_vec = Math.vec3.new(speed, speed * 0, speed)
 	local const_direction = Camera.get_direction()
+	const_direction.y = 0
+	const_direction = Math.normalize(const_direction)
 	local direction = const_direction
 	local force_vector = Math.vec3.new(0, 0, 0)
 
