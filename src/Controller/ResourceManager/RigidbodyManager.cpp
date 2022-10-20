@@ -3,7 +3,7 @@
 
 void RigidbodyManager::add_rigidbody(Component::Rigidbody& rb,
                                      const Component::Transform& tf) {
-	if (!rb.intialised()) rb.init(true, tf.position, tf.rotation);
+	if (!rb.intialised()) rb.init(false, tf.position, tf.rotation);
 	rb.setPreviousPosition(tf.position);
 }
 

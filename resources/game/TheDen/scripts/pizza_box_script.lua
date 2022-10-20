@@ -6,7 +6,3 @@ function init(ecs, entity)
 	rb:add_box_collider(Math.vec3.new(0, 0, 0), Math.vec3.new(0, 0, 0), Math.vec3.new(0.3, 0.05, 0.3), 0.5, 2, 0.25)
 
 end
-
-function update(ecs, entity)
-	
-end

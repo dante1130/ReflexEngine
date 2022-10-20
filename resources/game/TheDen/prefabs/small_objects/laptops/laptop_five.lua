@@ -5,7 +5,7 @@ entity = {
 	transform = {
 		position = {
 			x = 56.5,
-			y = 1.75,
+			y = 0.75,
 			z = -5.8
 		},
 		rotation = {
