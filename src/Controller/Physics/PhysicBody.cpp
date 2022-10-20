@@ -15,6 +15,10 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
                             CollisionEvent c_type) {
 	PhysicsBody* pb1 = static_cast<PhysicsBody*>(collider1->getUserData());
 	PhysicsBody* pb2 = static_cast<PhysicsBody*>(collider2->getUserData());
+	if (pb1->getType() == rp3d::BodyType::STATIC &&
+	    pb2->getType() == rp3d::BodyType::STATIC) {
+		return;
+	}
 
 	// Get the epsilon value (stored as a bounciness)
 	float epsilon = collider1->getMaterial().getBounciness();
@@ -26,10 +30,7 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	lpoint_c1 += pb1->center_of_mass_;
 	lpoint_c2 += pb2->center_of_mass_;
 
-	if (pb1->getType() == rp3d::BodyType::STATIC &&
-	    pb2->getType() == rp3d::BodyType::STATIC) {
-		return;
-	} else if (pb1->getType() == rp3d::BodyType::STATIC) {
+	if (pb1->getType() == rp3d::BodyType::STATIC) {
 		DebugLogger::log("pb2", "is dynamic");
 		static_collision(collider2, lpoint_c2, -collision_normal, epsilon,
 		                 collision_depth);
