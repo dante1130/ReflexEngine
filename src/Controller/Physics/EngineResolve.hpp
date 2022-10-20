@@ -7,9 +7,13 @@ struct Motion_Stats {
 	glm::vec3 velocity;
 	glm::vec3 acceleration;
 	float drag;
+	glm::vec3 change;
 
 	Motion_Stats()
-	    : velocity(glm::vec3(0)), acceleration(glm::vec3(0)), drag(0) {}
+	    : velocity(glm::vec3(0)),
+	      acceleration(glm::vec3(0)),
+	      drag(0),
+	      change(0) {}
 };
 
 class EngineResolve : public PhysicsBody {
@@ -18,6 +22,7 @@ private:
 
 	Motion_Stats linear_;
 	Motion_Stats angular_;
+	int number_of_collisions_ = 0;
 
 	float total_mass_ = 0;
 
