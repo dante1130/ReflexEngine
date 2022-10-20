@@ -5,7 +5,7 @@ entity = {
 	transform = {
 		position = {
 			x = 56.5,
-			y = 0.75,
+			y = 1.75,
 			z = -5.8
 		},
 		rotation = {
@@ -23,5 +23,19 @@ entity = {
 	model = {
 		model_name = "laptop",
 		material_name = "default"
+	},
+
+	rigidbody = {
+        using_react_start = false,
+        gravity_on = true,
+        can_sleep = true,
+        is_trigger = false,
+        linear_drag = 0.5,
+        angular_drag = 0.5,
+		rb_type = 2
+    },
+
+	script = {
+		lua_script = "game/TheDen/scripts/laptop_script.lua"
 	}
 }
