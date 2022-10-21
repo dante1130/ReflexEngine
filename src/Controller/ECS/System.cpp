@@ -307,15 +307,13 @@ void System::update_script(entt::registry& registry) {
 		if (script.ecs && script.entity) {
 			lua.script_file(script.lua_script);
 
-			lua["var"] = script.lua_variables;
-
 			auto update_func = lua["update"];
 
 			if (update_func.valid()) {
+				lua["var"] = script.lua_variables;
 				update_func(*script.ecs, *script.entity);
+				script.lua_variables = lua["var"];
 			}
-
-			script.lua_variables = lua["var"];
 		}
 	});
 }
