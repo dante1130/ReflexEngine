@@ -87,6 +87,6 @@ add_library(ReflexEngineSrc
 
 	Scene/Scene.hpp
 	Scene/ECSScene.cpp
-)
+ "Controller/Emotion/Emotion.cpp")
 
 target_include_directories(ReflexEngineSrc PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
