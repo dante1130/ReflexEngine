@@ -27,12 +27,12 @@ public:
 	auto lua_access() -> void;
 
 	/**
-	 * @brief Add an affordance to the system.
+	 * @brief Set an object to an affordance composite in the system.
 	 *
 	 * @param object The name of the object to associate the affordances to
 	 * @param affordance The affordances
 	 */
-	auto add_affordance(std::string object, AffordancePtr affordance) -> void;
+	auto set_affordance(std::string object, AffordancePtr affordance) -> void;
 
 	/**
 	 * @brief Get the affordance composite associated with the object.

@@ -144,7 +144,7 @@ public:
 	/**
 	 * @brief Get the children of the composite.
 	 */
-	auto get_affordances() const -> const std::vector<AffordancePtr>&;
+	auto get_affordances() -> std::vector<AffordancePtr>&;
 
 private:
 	/// The collection of child affordances.
