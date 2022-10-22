@@ -294,7 +294,11 @@ void System::update_script(entt::registry& registry) {
 
 			lua["var"] = script.lua_variables;
 
-			lua["update"](*script.ecs, *script.entity);
+			sol::function update_func = lua["update"];
+
+			if (update_func.valid()) {
+				update_func(*script.ecs, *script.entity);
+			}
 
 			script.lua_variables = lua["var"];
 		}

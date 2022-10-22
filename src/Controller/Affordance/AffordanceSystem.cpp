@@ -60,10 +60,14 @@ auto AffordanceSystem::lua_access() -> void {
 
 auto AffordanceSystem::set_affordance(std::string object,
                                       AffordancePtr affordance) -> void {
-	affordance_map_.emplace(std::move(object), affordance);
+	affordance_map_[object] = affordance;
 }
 
 auto AffordanceSystem::get_affordance(const std::string& object)
     -> AffordancePtr {
 	return affordance_map_.at(object);
+}
+
+auto AffordanceSystem::clear_affordance(const std::string& object) -> void {
+	affordance_map_.erase(object);
 }

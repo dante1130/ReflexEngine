@@ -3,6 +3,15 @@
 #include "Controller/LuaManager.hpp"
 #include "Controller/Affordance/AffordanceSystem.hpp"
 
+auto lua_script(const std::string& script) -> void {
+	auto& lua = LuaManager::get_instance().get_state();
+
+	auto result = lua.safe_script(script, sol::script_pass_on_error);
+	if (!result.valid()) {
+		FAIL(result.get<sol::error>().what());
+	}
+}
+
 TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 	auto& affordance_system = Affordance::AffordanceSystem::get_instance();
 	affordance_system.lua_access();
@@ -10,25 +19,20 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 	SECTION("Creating an affordance leaf") {
 		auto& lua = LuaManager::get_instance().get_state();
 
-		sol::optional<sol::error> maybe_error =
-		    lua.safe_script(R"(
+		lua_script(R"(
 			function hello()
 				return "hello"
 			end
 
 			affordance = AffordanceLeaf.new("test", {"test"}, hello)
-		)",
-		                    sol::script_pass_on_error);
+		)");
 
-		if (maybe_error) {
-			FAIL(maybe_error.value().what());
-		}
-
-		std::shared_ptr<Affordance::AffordanceLeaf> affordance =
+		std::shared_ptr<Affordance::AffordanceLeaf>& affordance =
 		    lua["affordance"];
 
 		std::string result = affordance->get_function()();
 
+		REQUIRE(affordance.use_count() == 1);
 		REQUIRE(affordance->get_name() == "test");
 		REQUIRE(affordance->get_properties() == Affordance::Properties{"test"});
 		REQUIRE(affordance->is_composite() == false);
@@ -38,23 +42,18 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 	SECTION("Creating an affordance composite") {
 		auto& lua = LuaManager::get_instance().get_state();
 
-		sol::optional<sol::error> maybe_error =
-		    lua.safe_script(R"(
+		lua_script(R"(
 			function hello()
 				return "hello"
 			end
 
 			affordance = AffordanceComposite.new("test", {"test"}, {AffordanceLeaf.new("test", {"test"}, hello)})
-		)",
-		                    sol::script_pass_on_error);
+		)");
 
-		if (maybe_error) {
-			FAIL(maybe_error.value().what());
-		}
-
-		std::shared_ptr<Affordance::AffordanceComposite> affordance =
+		std::shared_ptr<Affordance::AffordanceComposite>& affordance =
 		    lua["affordance"];
 
+		REQUIRE(affordance.use_count() == 1);
 		REQUIRE(affordance->get_name() == "test");
 		REQUIRE(affordance->get_properties() == Affordance::Properties{"test"});
 		REQUIRE(affordance->is_composite() == true);
@@ -77,8 +76,7 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 	SECTION("Creating a nested affordance") {
 		auto& lua = LuaManager::get_instance().get_state();
 
-		sol::optional<sol::error> maybe_error =
-		    lua.safe_script(R"(
+		lua_script(R"(
 			function sit() 
 				return "sitting"
 			end
@@ -104,15 +102,12 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 			})
 
 			sitting_affordance:add_affordance(AffordanceLeaf.new("Stand", {"Stand"}, stand))
-		)",
-		                    sol::script_pass_on_error);
+		)");
 
-		if (maybe_error) {
-			FAIL(maybe_error.value().what());
-		}
-
-		std::shared_ptr<Affordance::AffordanceComposite> sitting_affordance =
+		std::shared_ptr<Affordance::AffordanceComposite>& sitting_affordance =
 		    lua["sitting_affordance"];
+
+		REQUIRE(sitting_affordance.use_count() == 1);
 
 		REQUIRE(sitting_affordance->get_name() == "Sitting");
 		REQUIRE(sitting_affordance->get_properties() ==
@@ -186,8 +181,7 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 	SECTION("Storing an affordance in the AffordanceSystem") {
 		auto& lua = LuaManager::get_instance().get_state();
 
-		sol::optional<sol::error> maybe_error =
-		    lua.safe_script(R"(
+		lua_script(R"(
 			function sit() 
 				return "sitting"
 			end
@@ -204,7 +198,7 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 				return "standing"
 			end
 
-			sitting_affordance = AffordanceComposite.new("Sitting", {"Sitting"}, {
+			local sitting_affordance = AffordanceComposite.new("Sitting", {"Sitting"}, {
 				AffordanceLeaf.new("Sit default", {}, sit),
 				AffordanceComposite.new("Human", {"Human"}, {
 					AffordanceLeaf.new("Crossleg", {"Crossleg"}, sit_crosslegged),
@@ -215,11 +209,15 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 			sitting_affordance:add_affordance(AffordanceLeaf.new("Stand", {"Stand"}, stand))
 
 			AffordanceSystem.set_affordance("chair", sitting_affordance);
-		)",
-		                    sol::script_pass_on_error);
 
-		if (maybe_error) {
-			FAIL(maybe_error.value().what());
-		}
+			sitting_affordance = nil
+			collectgarbage()
+		)");
+
+		auto chair = affordance_system.get_affordance("chair");
+
+		REQUIRE(chair.use_count() == 2);
+
+		affordance_system.clear_affordance("chair");
 	}
 }

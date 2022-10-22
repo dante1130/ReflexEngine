@@ -42,6 +42,8 @@ public:
 	 */
 	auto get_affordance(const std::string& object) -> AffordancePtr;
 
+	auto clear_affordance(const std::string& object) -> void;
+
 private:
 	AffordanceSystem() = default;
 
