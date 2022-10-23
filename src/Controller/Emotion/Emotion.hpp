@@ -28,7 +28,8 @@ namespace EmotionSystem {
 
 		auto get_emotional_state() -> const definedEmotions&;
 
-		auto set_emotion(std::string emotion, definedEmotions emotion_val);
+		auto set_emotion(std::string emotion, float joy_sad, float tru_dis,
+	                     float fea_ang, float sup_ant);
 
 		auto set_current_emotion(std::string emotion);
 
