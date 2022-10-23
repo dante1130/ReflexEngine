@@ -208,16 +208,49 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 
 			sitting_affordance:add_affordance(AffordanceLeaf.new("Stand", {"Stand"}, stand))
 
-			AffordanceSystem.set_affordance("chair", sitting_affordance);
+			local chair_affordance = AffordanceComposite.new("Chair", {}, {
+				sitting_affordance,
+				AffordanceLeaf.new("Stand", {"Stand"}, stand)
+			})
 
+			AffordanceSystem.set_affordance("chair", chair_affordance);
+
+			chair_affordance = nil
 			sitting_affordance = nil
 			collectgarbage()
 		)");
 
-		auto chair = affordance_system.get_affordance("chair");
+		auto chair = std::dynamic_pointer_cast<Affordance::AffordanceComposite>(
+		    affordance_system.get_affordance("chair"));
 
 		REQUIRE(chair.use_count() == 2);
+		REQUIRE(chair->get_name() == "Chair");
+		REQUIRE(chair->get_properties().empty());
+		REQUIRE(chair->is_composite() == true);
 
-		affordance_system.clear_affordance("chair");
+		auto sitting_affordance =
+		    std::dynamic_pointer_cast<Affordance::AffordanceComposite>(
+		        chair->get_affordances()[0]);
+
+		REQUIRE(sitting_affordance.use_count() == 2);
+		REQUIRE(sitting_affordance->get_name() == "Sitting");
+		REQUIRE(sitting_affordance->get_properties() ==
+		        Affordance::Properties{"Sitting"});
+		REQUIRE(sitting_affordance->is_composite() == true);
+
+		auto stand_affordance =
+		    std::dynamic_pointer_cast<Affordance::AffordanceLeaf>(
+		        chair->get_affordances()[1]);
+
+		REQUIRE(stand_affordance.use_count() == 2);
+		REQUIRE(stand_affordance->get_name() == "Stand");
+		REQUIRE(stand_affordance->get_properties() ==
+		        Affordance::Properties{"Stand"});
+		REQUIRE(stand_affordance->is_composite() == false);
+
+		std::string stand_result = stand_affordance->get_function()();
+		REQUIRE(stand_result == "standing");
+
+		affordance_system.clear_affordances();
 	}
 }
