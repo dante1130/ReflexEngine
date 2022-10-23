@@ -38,8 +38,7 @@ namespace EmotionSystem {
 	     *
 	     * @return definedEmotions The emotion values the agent is currently experiencing
 	     */
-	    auto get_emotional_state(Component::Agent agent)
-	        -> const definedEmotions&;
+	    auto get_emotional_state(Component::Agent agent);
 
 	    /**
 	     * @brief Sets a newly defined emotion for the definedEmotions map
