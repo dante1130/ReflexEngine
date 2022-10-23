@@ -1,6 +1,19 @@
 #include "RigidbodyManager.hpp"
 #include "Controller/ReflexEngine/EngineTime.hpp"
 
+float RigidbodyManager::accumulator_ = 0.0f;
+
+auto RigidbodyManager::accumulator(float time_increase) -> bool {
+	accumulator_ += time_increase;
+
+	if (accumulator_ < EngineTime::get_time_step() / 2) {
+		return false;
+	}
+
+	accumulator_ -= EngineTime::get_time_step() / 2;
+	return true;
+}
+
 void RigidbodyManager::add_rigidbody(Component::Rigidbody& rb,
                                      const Component::Transform& tf) {
 	if (!rb.intialised()) rb.init(false, tf.position, tf.rotation);
@@ -10,7 +23,7 @@ void RigidbodyManager::add_rigidbody(Component::Rigidbody& rb,
 void RigidbodyManager::update_rigidbody(Component::Rigidbody& rb,
                                         Component::Transform& tf) {
 	/// Calculates new position (if using engine calculation)
-	if (!rb.usingReactResolve()) rb.update(EngineTime::get_fixed_delta_time());
+	if (!rb.usingReactResolve()) rb.update(EngineTime::get_time_step() / 2);
 
 	/// Sets transform position if the same as the previous cycle
 	/// Else it must have been manually moved (the transform) therefore
