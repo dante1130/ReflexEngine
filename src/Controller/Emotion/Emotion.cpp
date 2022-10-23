@@ -38,6 +38,6 @@ auto Emotions::set_current_emotion(std::string emotion) {
 
 }
 
-auto Emotions::get_emotional_state() -> const definedEmotions& {
-	return (emotion_state);
+auto Emotions::get_emotional_state(Component::Agent agent){
+	return (agent.mood_state); // Change this as it returns the entire map!
 }
