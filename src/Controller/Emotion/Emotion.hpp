@@ -2,12 +2,14 @@
 
 #include <string>
 #include <unordered_map>
+#include <Model/Components/Agent.hpp>
 
 #include <sol/sol.hpp>
 
 namespace EmotionSystem {
 
-	using definedEmotions = std::unordered_map<Emotions, EmotionalState>;
+	using definedEmotions = std::unordered_map<std::string, Component::mood>;
+
 	/**
 	 * @author Florian Robbins
 	 * @class Emotion
@@ -15,22 +17,23 @@ namespace EmotionSystem {
 	 * It is used to represent the emotions an AI agent may be experiencing.
 	 */
 
-	enum class Emotions { RAGE, TERROR, ADMIRATION, FEAR };
-
-	struct EmotionalState {
-		float joy_sadness;
-		float trust_disgust;
-		float fear_anger;
-		float surprise_anticipation;
-	};
-	class Emotion {
+	class Emotions {
 	public:
-		Emotion(float joy_sad, float tru_dis, float fea_ang, float sup_ant);
+
+		Emotions(float joy_sad, float tru_dis, float fea_ang, float sup_ant);
 
 		auto lua_access() -> void;
 
-		auto get_emotional_state(std::string emotion_state);
+		auto get_emotion(Component::Agent agent) -> const std::string&;
 
-		auto alter_emotional_state(std::string emotion_state, float adjust_val);
+		auto get_emotional_state() -> const definedEmotions&;
+
+		auto set_emotion(std::string emotion, definedEmotions emotion_val);
+
+		auto set_current_emotion(std::string emotion);
+
+	private:
+
+	    definedEmotions emotion_state;
 	};
 }  // namespace Emotion
