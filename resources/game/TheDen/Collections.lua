@@ -11,6 +11,7 @@ Collections.add_collection("Books", 4)                  --5
 Collections.add_collection("Laptops", 4)                --6
 Collections.add_collection("Pizza boxes", 4)            --7
 Collections.add_collection("Other", 4)                  --8
+Collections.add_collection("Chairs", 4)                 --9
 
 
 

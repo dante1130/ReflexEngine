@@ -14,11 +14,8 @@ namespace Component {
  * physics and collision information of an object
  */
 struct Rigidbody {
-private:
 	/// Stores information about physics object
 	PhysicsBody* pb;
-
-public:
 	/// Whether gravity is enabled
 	bool gravity_on;
 	/// <summary>
@@ -460,7 +457,6 @@ public:
 	 * @param rot - the desired rotation
 	 * @param radius - the desired radius
 	 * @param height - the desired height
-	 * @param bounce - the bounciness property
 	 * @param friction - the friction property
 	 * @param epsilone - the coefficient of restitution
 	 * @return uint32_t

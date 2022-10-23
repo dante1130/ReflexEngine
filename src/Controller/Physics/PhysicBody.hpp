@@ -75,7 +75,7 @@ protected:
 	std::unordered_map<rp3d::Collider*, rp3d::CapsuleShape*> m_capsule;
 
 	/// The previous position of the object from last update
-	glm::vec3 previous_transform_position;
+	glm::vec3 previous_transform_position = glm::vec3(0);
 
 	/// The coefficient of restitution
 	float epsilon_value_ = 0;
@@ -92,6 +92,9 @@ protected:
 	/// The inverse of the rotated inertia tensor
 	glm::mat3x3 inverse_rotated_inertia_tensor_;
 
+	/// If the body has been modified
+	bool modified_ = false;
+
 	/**
 	 * @brief Deletes a specified collider form rigidbody
 	 *
@@ -107,6 +110,21 @@ public:
 	 * @return glm::mat3x3
 	 */
 	glm::mat3x3 get_inertia_tensor();
+
+	/**
+	 * @brief Get the if modified object
+	 *
+	 * @return true
+	 * @return false
+	 */
+	auto is_modified() -> bool;
+
+	/**
+	 * @brief Set the modified object
+	 *
+	 * @param modified
+	 */
+	auto set_modified(bool modified) -> void;
 
 	/**
 	 * @brief Gets the size of the colliders vector

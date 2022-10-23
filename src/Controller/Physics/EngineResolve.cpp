@@ -37,15 +37,15 @@ void EngineResolve::resolve(float lambda, glm::vec3 vector_to_collision,
 	}
 
 	// Linear velocity change
-	linear_.velocity =
-	    linear_.velocity + ((lambda * contact_normal) / total_mass_) * mult;
+	linear_.change = (lambda * contact_normal) / total_mass_ * mult;
 
 	//  Angular velocity change
 	glm::mat3x3 angular_part_one = lambda * inverse_rotated_inertia_tensor_;
 	glm::vec3 angular_part_two =
 	    glm::cross(vector_to_collision, contact_normal);
-	angular_.velocity =
-	    angular_.velocity + (angular_part_one * angular_part_two * mult);
+	angular_.change = angular_part_one * angular_part_two * mult;
+
+	++number_of_collisions_;
 }
 
 void EngineResolve::update(float delta_time) {
@@ -56,6 +56,17 @@ void EngineResolve::update(float delta_time) {
 	if (body_type_ == BodyType::KINEMATIC) {
 		linear_.acceleration = glm::vec3(0);
 		angular_.acceleration = glm::vec3(0);
+	}
+
+	// Gets velocity changes due to collisions
+	if (number_of_collisions_ != 0) {
+		linear_.velocity =
+		    linear_.velocity +
+		    linear_.change / static_cast<float>(number_of_collisions_);
+		angular_.velocity =
+		    angular_.velocity +
+		    angular_.change / static_cast<float>(number_of_collisions_);
+		number_of_collisions_ = 0;
 	}
 
 	// Position update
