@@ -3,7 +3,7 @@
 --Model.load_model("boat", "models/boat1obj.obj")
 --Model.load_model("lighthouse", "models/Beacon.obj")
 --Model.load_model("big_arrow", "models/BigArrow.obj")
-Model.load_model("TheDen", "models/TheDen.obj")
+--Model.load_model("TheDen", "models/TheDen.obj")
 Model.load_model("GlassInScene", "models/Glass.obj")
 Model.load_model("Sphere", "models/sphere.obj")
 
@@ -21,7 +21,7 @@ Model.load_model("book4", "models/book4.obj")
 Model.load_model("book5", "models/book5.obj")
 Model.load_model("rubix_cube", "models/rubixcube.obj")
 Model.load_model("calculator", "models/calculator.obj")
-
+Model.load_model("chair", "models/chair.obj")
 
 
 --Md2.load_md2_model("duck", "models/DuckPersonNew.md2")

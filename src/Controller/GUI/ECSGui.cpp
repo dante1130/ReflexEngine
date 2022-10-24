@@ -591,10 +591,9 @@ void ECSGui::draw_rigidbody(Reflex::Entity& entity) {
 					rp3d::Transform tf = rigidbody.getColliders()
 					                         .at(i)
 					                         ->getLocalToBodyTransform();
-					rp3d::Vector3 new_cp =
-					    rp3d::Vector3(collider_position.x, collider_position.y,
-					                  collider_position.z);
-					tf.setPosition(new_cp);
+					tf.setPosition(rp3d::Vector3(collider_position.x,
+					                             collider_position.y,
+					                             collider_position.z));
 					rigidbody.getColliders().at(i)->setLocalToBodyTransform(tf);
 				}
 
@@ -655,18 +654,18 @@ void ECSGui::draw_rigidbody(Reflex::Entity& entity) {
 
 			if (ImGui::BeginPopup("AddCollider")) {
 				if (ImGui::MenuItem("Box")) {
-					rigidbody.addBoxCollider(glm::vec3(0), glm::vec3(1.0f),
-					                         0.5f, 0.5f, 1, 0.85);
+					rigidbody.addBoxCollider(glm::vec3(0), glm::vec3(0),
+					                         glm::vec3(1.0f), 0.5f, 1, 0.85);
 					ImGui::CloseCurrentPopup();
 				}
 				if (ImGui::MenuItem("Capsule")) {
-					rigidbody.addCapsuleCollider(glm::vec3(0), 0.5f, 1.0f, 0.5f,
-					                             0.5f, 1, 0.85);
+					rigidbody.addCapsuleCollider(glm::vec3(0), glm::vec3(0),
+					                             0.5f, 1.0f, 0.5f, 1, 0.85);
 					ImGui::CloseCurrentPopup();
 				}
 				if (ImGui::MenuItem("Sphere")) {
-					rigidbody.addSphereCollider(glm::vec3(0), 1.0f, 0.5f, 0.5f,
-					                            1, 0.85);
+					rigidbody.addSphereCollider(glm::vec3(0), glm::vec3(0),
+					                            1.0f, 0.5f, 1, 0.85);
 					ImGui::CloseCurrentPopup();
 				}
 				ImGui::EndPopup();

@@ -244,18 +244,36 @@ void System::init_statemachine(entt::registry& registry, entt::entity entity) {
 }
 
 void System::update_rigidbody(entt::registry& registry) {
-	if (EngineTime::is_paused()) return;
-
-	// Calls the physics world update
-	// Physics::getPhysicsWorld()->update(EngineTime::get_delta_time());
+	if (EngineTime::is_paused()) {
+		Physics::updateWorld(EngineTime::get_time_step());
+		return;
+	}
 
 	auto& rigidbody_manager =
 	    ResourceManager::get_instance().get_rigidbody_manager();
 
-	registry.view<Component::Rigidbody, Component::Transform>().each(
-	    [&rigidbody_manager](auto& rigidbody, auto& transform) {
-		    rigidbody_manager.update_rigidbody(rigidbody, transform);
-	    });
+	float fixed_delta_time = EngineTime::get_fixed_delta_time();
+	while (RigidbodyManager::accumulator(fixed_delta_time)) {
+		fixed_delta_time = 0.0F;
+
+		registry.view<Component::Rigidbody, Component::Transform>().each(
+		    [&rigidbody_manager](auto& rigidbody, auto& transform) {
+			    rigidbody_manager.update_rigidbody(rigidbody, transform);
+		    });
+
+		Physics::updateWorld(EngineTime::get_time_step() / 2);
+
+		registry.view<Component::Rigidbody, Component::Transform>().each(
+		    [](Component::Rigidbody& rigidbody,
+		       Component::Transform& transform) {
+			    if (rigidbody.pb->is_modified()) {
+				    transform.position = rigidbody.getPosition();
+				    transform.rotation = rigidbody.getRotation();
+				    rigidbody.setPreviousPosition(transform.position);
+				    rigidbody.pb->set_modified(false);
+			    }
+		    });
+	}
 }
 
 void System::update_directional_light(entt::registry& registry) {
@@ -292,15 +310,13 @@ void System::update_script(entt::registry& registry) {
 		if (script.ecs && script.entity) {
 			lua.script_file(script.lua_script);
 
-			lua["var"] = script.lua_variables;
-
-			sol::function update_func = lua["update"];
+			auto update_func = lua["update"];
 
 			if (update_func.valid()) {
+				lua["var"] = script.lua_variables;
 				update_func(*script.ecs, *script.entity);
+				script.lua_variables = lua["var"];
 			}
-
-			script.lua_variables = lua["var"];
 		}
 	});
 }
