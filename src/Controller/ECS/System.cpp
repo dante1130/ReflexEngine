@@ -190,7 +190,7 @@ void System::init_script(entt::registry& registry, entt::entity entity) {
 
 	if (!script.ecs && !script.entity) return;
 
-	lua.script_file(script.lua_script);
+	auto result = lua.script_file(script.lua_script);
 
 	lua["init"](*script.ecs, *script.entity);
 

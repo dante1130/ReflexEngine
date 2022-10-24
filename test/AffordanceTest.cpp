@@ -179,8 +179,6 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 	}
 
 	SECTION("Storing an affordance in the AffordanceSystem") {
-		auto& lua = LuaManager::get_instance().get_state();
-
 		lua_script(R"(
 			function sit() 
 				return "sitting"
