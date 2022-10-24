@@ -1,5 +1,3 @@
-#pragma once
-
 #include "AffordanceHelper.hpp"
 
 auto Affordance::find_affordance(const AffordancePtr& affordances,
@@ -13,7 +11,12 @@ auto Affordance::find_affordance(const AffordancePtr& affordances,
 		    std::dynamic_pointer_cast<AffordanceComposite>(best_affordance);
 		auto best_affordance_score = 0.0F;
 
-		for (const auto& child : affordance_composite->get_affordances()) {
+		auto child_affordances = affordance_composite->get_affordances();
+		if (child_affordances.empty()) {
+			break;
+		}
+
+		for (const auto& child : child_affordances) {
 			auto score = 0.0F;
 
 			// Calculate the score of the child.
