@@ -213,6 +213,7 @@ TEST_CASE("Affordance composite tests", "[AffordanceComposite]") {
 			AffordanceSystem.set_affordance("chair", chair_affordance);
 
 			chair_affordance = nil
+			sitting_affordance = nil
 			collectgarbage()
 		)");
 
@@ -289,14 +290,13 @@ TEST_CASE("Affordance helper functions test", "[AffordanceHelper]") {
 			AffordanceSystem.set_affordance("chair", chair_affordance);
 
 			chair_affordance = nil
+			sitting_affordance = nil
 			collectgarbage()
 		)");
 
-		auto chair = std::dynamic_pointer_cast<Affordance::AffordanceComposite>(
-		    affordance_system.get_affordance("chair"));
-
 		auto affordance = Affordance::find_affordance(
-		    chair, {"Sitting", "Human", "Crossleg"}, {});
+		    affordance_system.get_affordance("chair"),
+		    {"Sitting", "Human", "Crossleg"}, {});
 
 		REQUIRE(affordance->is_composite() == false);
 		auto affordance_leaf =
@@ -308,6 +308,56 @@ TEST_CASE("Affordance helper functions test", "[AffordanceHelper]") {
 
 		std::string affordance_result = affordance_leaf->get_function()();
 		REQUIRE(affordance_result == "sitting crosslegged");
+
+		affordance_system.clear_affordances();
+	}
+
+	SECTION("Finding a composite with no children") {
+		lua_script(R"(
+			function sit() 
+				return "sitting"
+			end
+
+			function sit_crosslegged()
+				return sit() .. " crosslegged"
+			end
+
+			function sit_straight()
+				return sit() .. " straight"
+			end
+
+			local sitting_affordance = AffordanceComposite.new("Sitting", {"Sitting"}, {
+				AffordanceLeaf.new("Sit default", {}, sit),
+				AffordanceComposite.new("Human", {"Human"}, {
+					AffordanceLeaf.new("Crossleg", {"Crossleg"}, sit_crosslegged),
+					AffordanceLeaf.new("Straight", {"Straight"}, sit_straight)
+				})
+			})
+
+			local chair_affordance = AffordanceComposite.new("Chair", {}, {
+				sitting_affordance,
+				AffordanceComposite.new("Alien", {"Alien"}, {})
+			})
+
+			AffordanceSystem.set_affordance("chair", chair_affordance);
+
+			chair_affordance = nil
+			sitting_affordance = nil
+			collectgarbage()
+		)");
+
+		auto affordance = Affordance::find_affordance(
+		    affordance_system.get_affordance("chair"), {"Alien"}, {});
+
+		REQUIRE(affordance->is_composite() == true);
+		auto affordance_composite =
+		    std::dynamic_pointer_cast<Affordance::AffordanceComposite>(
+		        affordance);
+
+		REQUIRE(affordance_composite->get_name() == "Alien");
+		REQUIRE(affordance_composite->get_properties() ==
+		        Affordance::Properties{"Alien"});
+		REQUIRE(affordance_composite->get_affordances().empty());
 
 		affordance_system.clear_affordances();
 	}
