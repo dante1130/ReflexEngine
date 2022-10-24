@@ -6,11 +6,11 @@ float RigidbodyManager::accumulator_ = 0.0f;
 auto RigidbodyManager::accumulator(float time_increase) -> bool {
 	accumulator_ += time_increase;
 
-	if (accumulator_ < EngineTime::get_time_step() / 2) {
+	if (accumulator_ < EngineTime::get_time_step()) {
 		return false;
 	}
 
-	accumulator_ -= EngineTime::get_time_step() / 2;
+	accumulator_ -= EngineTime::get_time_step();
 	return true;
 }
 
@@ -23,7 +23,7 @@ void RigidbodyManager::add_rigidbody(Component::Rigidbody& rb,
 void RigidbodyManager::update_rigidbody(Component::Rigidbody& rb,
                                         Component::Transform& tf) {
 	/// Calculates new position (if using engine calculation)
-	if (!rb.usingReactResolve()) rb.update(EngineTime::get_time_step() / 2);
+	if (!rb.usingReactResolve()) rb.update(EngineTime::get_time_step());
 
 	/// Sets transform position if the same as the previous cycle
 	/// Else it must have been manually moved (the transform) therefore
