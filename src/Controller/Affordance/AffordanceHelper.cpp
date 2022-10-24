@@ -1,6 +1,6 @@
 #include "AffordanceHelper.hpp"
 
-auto Affordance::find_affordance(const AffordancePtr& affordances,
+auto Affordance::find_affordance(AffordancePtr affordances,
                                  const Properties& properties,
                                  const PropertiesWeight& properties_weight)
     -> AffordancePtr {
@@ -20,13 +20,12 @@ auto Affordance::find_affordance(const AffordancePtr& affordances,
 			auto score = 0.0F;
 
 			// Calculate the score of the child.
-			for (const auto& property : properties) {
-				if (child->get_properties().find(property) !=
-				    child->get_properties().end()) {
+			for (const auto& child_property : child->get_properties()) {
+				if (properties.find(child_property) != properties.end()) {
 					// Use the weight of the property if it exists, otherwise 1.
-					if (properties_weight.find(property) !=
+					if (properties_weight.find(child_property) !=
 					    properties_weight.end()) {
-						score += properties_weight.at(property);
+						score += properties_weight.at(child_property);
 					} else {
 						score += 1.0F;
 					}

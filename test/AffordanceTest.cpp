@@ -2,6 +2,7 @@
 
 #include "Controller/LuaManager.hpp"
 #include "Controller/Affordance/AffordanceSystem.hpp"
+#include "Controller/Affordance/AffordanceHelper.hpp"
 
 auto lua_script(const std::string& script) -> void {
 	auto& lua = LuaManager::get_instance().get_state();
@@ -12,7 +13,7 @@ auto lua_script(const std::string& script) -> void {
 	}
 }
 
-TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
+TEST_CASE("Affordance composite tests", "[AffordanceComposite]") {
 	auto& affordance_system = Affordance::AffordanceSystem::get_instance();
 	affordance_system.lua_access();
 
@@ -248,6 +249,71 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 
 		std::string stand_result = stand_affordance->get_function()();
 		REQUIRE(stand_result == "standing");
+
+		affordance_system.clear_affordances();
+	}
+}
+
+TEST_CASE("Affordance helper functions test", "[AffordanceHelper]") {
+	auto& affordance_system = Affordance::AffordanceSystem::get_instance();
+	affordance_system.lua_access();
+
+	SECTION("Finding affordances given properties") {
+		lua_script(R"(
+			function sit() 
+				return "sitting"
+			end
+
+			function sit_crosslegged()
+				return sit() .. " crosslegged"
+			end
+
+			function sit_straight()
+				return sit() .. " straight"
+			end
+
+			function stand()
+				return "standing"
+			end
+
+			local sitting_affordance = AffordanceComposite.new("Sitting", {"Sitting"}, {
+				AffordanceLeaf.new("Sit default", {}, sit),
+				AffordanceComposite.new("Human", {"Human"}, {
+					AffordanceLeaf.new("Crossleg", {"Crossleg"}, sit_crosslegged),
+					AffordanceLeaf.new("Straight", {"Straight"}, sit_straight)
+				})
+			})
+
+			sitting_affordance:add_affordance(AffordanceLeaf.new("Stand", {"Stand"}, stand))
+
+			local chair_affordance = AffordanceComposite.new("Chair", {}, {
+				sitting_affordance,
+				AffordanceLeaf.new("Stand", {"Stand"}, stand)
+			})
+
+			AffordanceSystem.set_affordance("chair", chair_affordance);
+
+			chair_affordance = nil
+			sitting_affordance = nil
+			collectgarbage()
+		)");
+
+		auto chair = std::dynamic_pointer_cast<Affordance::AffordanceComposite>(
+		    affordance_system.get_affordance("chair"));
+
+		auto affordance = Affordance::find_affordance(
+		    chair, {"Sitting", "Human", "Crossleg"}, {});
+
+		REQUIRE(affordance->is_composite() == false);
+		auto affordance_leaf =
+		    std::dynamic_pointer_cast<Affordance::AffordanceLeaf>(affordance);
+
+		REQUIRE(affordance_leaf->get_name() == "Crossleg");
+		REQUIRE(affordance_leaf->get_properties() ==
+		        Affordance::Properties{"Crossleg"});
+
+		std::string affordance_result = affordance_leaf->get_function()();
+		REQUIRE(affordance_result == "sitting crosslegged");
 
 		affordance_system.clear_affordances();
 	}
