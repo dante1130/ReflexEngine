@@ -4,6 +4,7 @@ target_sources(ReflexEngineTest PRIVATE
 	CollectionsTest.cpp
 	PerformanceLoggerTest.cpp
 	PhysicsTest.cpp
+	AffordanceTest.cpp
 )
 
 target_include_directories(ReflexEngineTest PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})

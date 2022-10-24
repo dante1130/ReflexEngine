@@ -65,6 +65,7 @@ target_include_directories(ReflexEngine PRIVATE ${CMAKE_PREFIX_PATH}/irrklang)
 target_include_directories(ReflexEngine PRIVATE ${CMAKE_PREFIX_PATH}/slikenet/Source)
 target_include_directories(ReflexEngine PRIVATE ${CMAKE_PREFIX_PATH}/entt/single_include)
 target_include_directories(ReflexEngine PRIVATE ${CMAKE_PREFIX_PATH}/catch2/src)
+target_include_directories(ReflexEngine PRIVATE ${CMAKE_PREFIX_PATH}/lua/src)
 
 target_include_directories(ReflexEngineSrc PRIVATE ${CMAKE_PREFIX_PATH})
 target_include_directories(ReflexEngineSrc PRIVATE ${CMAKE_PREFIX_PATH}/glad/include)
@@ -78,6 +79,7 @@ target_include_directories(ReflexEngineSrc PRIVATE ${CMAKE_PREFIX_PATH}/irrklang
 target_include_directories(ReflexEngineSrc PRIVATE ${CMAKE_PREFIX_PATH}/slikenet/Source)
 target_include_directories(ReflexEngineSrc PRIVATE ${CMAKE_PREFIX_PATH}/entt/single_include)
 target_include_directories(ReflexEngineSrc PRIVATE ${CMAKE_PREFIX_PATH}/catch2/src)
+target_include_directories(ReflexEngineSrc PRIVATE ${CMAKE_PREFIX_PATH}/lua/src)
 
 target_include_directories(ReflexEngineTest PRIVATE ${CMAKE_PREFIX_PATH})
 target_include_directories(ReflexEngineTest PRIVATE ${CMAKE_PREFIX_PATH}/glad/include)
@@ -91,6 +93,7 @@ target_include_directories(ReflexEngineTest PRIVATE ${CMAKE_PREFIX_PATH}/irrklan
 target_include_directories(ReflexEngineTest PRIVATE ${CMAKE_PREFIX_PATH}/slikenet/Source)
 target_include_directories(ReflexEngineTest PRIVATE ${CMAKE_PREFIX_PATH}/entt/single_include)
 target_include_directories(ReflexEngineTest PRIVATE ${CMAKE_PREFIX_PATH}/catch2/src)
+target_include_directories(ReflexEngineTest PRIVATE ${CMAKE_PREFIX_PATH}/lua/src)
 target_include_directories(ReflexEngineTest PRIVATE ${PROJECT_SOURCE_DIR}/src)
 
 target_link_libraries(ReflexEngineSrc PRIVATE glfw)
