@@ -205,8 +205,6 @@ TEST_CASE("Affordance composite tests", "[AffordanceComposite]") {
 				})
 			})
 
-			sitting_affordance:add_affordance(AffordanceLeaf.new("Stand", {"Stand"}, stand))
-
 			local chair_affordance = AffordanceComposite.new("Chair", {}, {
 				sitting_affordance,
 				AffordanceLeaf.new("Stand", {"Stand"}, stand)
@@ -215,7 +213,6 @@ TEST_CASE("Affordance composite tests", "[AffordanceComposite]") {
 			AffordanceSystem.set_affordance("chair", chair_affordance);
 
 			chair_affordance = nil
-			sitting_affordance = nil
 			collectgarbage()
 		)");
 
@@ -284,8 +281,6 @@ TEST_CASE("Affordance helper functions test", "[AffordanceHelper]") {
 				})
 			})
 
-			sitting_affordance:add_affordance(AffordanceLeaf.new("Stand", {"Stand"}, stand))
-
 			local chair_affordance = AffordanceComposite.new("Chair", {}, {
 				sitting_affordance,
 				AffordanceLeaf.new("Stand", {"Stand"}, stand)
@@ -294,7 +289,6 @@ TEST_CASE("Affordance helper functions test", "[AffordanceHelper]") {
 			AffordanceSystem.set_affordance("chair", chair_affordance);
 
 			chair_affordance = nil
-			sitting_affordance = nil
 			collectgarbage()
 		)");
 

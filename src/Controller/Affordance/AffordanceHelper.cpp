@@ -1,6 +1,6 @@
 #include "AffordanceHelper.hpp"
 
-auto Affordance::find_affordance(AffordancePtr affordances,
+auto Affordance::find_affordance(const AffordancePtr& affordances,
                                  const Properties& properties,
                                  const PropertiesWeight& properties_weight)
     -> AffordancePtr {
