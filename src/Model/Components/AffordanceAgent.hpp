@@ -2,9 +2,12 @@
 
 #include "Controller/Affordance/Affordance.hpp"
 
+using Affordance::Properties;
+using Affordance::PropertiesWeight;
+
 namespace Component {
 struct AffordanceAgent {
-	Affordance::Properties properties;
-	std::unordered_map<std::string, float> property_weights;
+	Properties properties;
+	PropertiesWeight property_weights;
 };
 }  // namespace Component

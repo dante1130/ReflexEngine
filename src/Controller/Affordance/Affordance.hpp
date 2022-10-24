@@ -7,6 +7,7 @@
 
 namespace Affordance {
 using Properties = std::unordered_set<std::string>;
+using PropertiesWeight = std::unordered_map<std::string, float>;
 using AffordancePtr = std::shared_ptr<class AffordanceNode>;
 
 /**
