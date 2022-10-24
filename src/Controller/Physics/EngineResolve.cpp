@@ -8,6 +8,7 @@
 #include "Controller/GUI/DebugLogger.hpp"
 
 #include <string>
+#include <ReflexAssertion.hpp>
 
 const constexpr glm::vec3 GRAVITY_CONSTANT = glm::vec3(0.0f, -9.807f, 0.0f);
 
@@ -36,15 +37,15 @@ void EngineResolve::resolve(float lambda, glm::vec3 vector_to_collision,
 	}
 
 	// Linear velocity change
-	linear_.velocity =
-	    linear_.velocity + ((lambda * contact_normal) / total_mass_) * mult;
+	linear_.change = (lambda * contact_normal) / total_mass_ * mult;
 
 	//  Angular velocity change
-	glm::mat3x3 angular_part_one = lambda * rotated_inertia_tensor_;
+	glm::mat3x3 angular_part_one = lambda * inverse_rotated_inertia_tensor_;
 	glm::vec3 angular_part_two =
 	    glm::cross(vector_to_collision, contact_normal);
-	angular_.velocity =
-	    angular_.velocity + (angular_part_one * angular_part_two * mult);
+	angular_.change = angular_part_one * angular_part_two * mult;
+
+	++number_of_collisions_;
 }
 
 void EngineResolve::update(float delta_time) {
@@ -57,6 +58,17 @@ void EngineResolve::update(float delta_time) {
 		angular_.acceleration = glm::vec3(0);
 	}
 
+	// Gets velocity changes due to collisions
+	if (number_of_collisions_ != 0) {
+		linear_.velocity =
+		    linear_.velocity +
+		    linear_.change / static_cast<float>(number_of_collisions_);
+		angular_.velocity =
+		    angular_.velocity +
+		    angular_.change / static_cast<float>(number_of_collisions_);
+		number_of_collisions_ = 0;
+	}
+
 	// Position update
 	glm::vec3 pos = getPosition();
 	pos =
@@ -65,17 +77,6 @@ void EngineResolve::update(float delta_time) {
 	setPosition(pos);
 
 	// Rotation update
-
-	// glm::vec3 rotation_change =
-	//     (angular_.velocity * delta_time) +
-	//     (angular_.acceleration * static_cast<float>(pow(delta_time, 2)) *
-	//     0.5f);
-	// rotation_change = rotation_change * (180.0f / PI_RP3D);
-	// glm::quat rot_change_quat =
-	// QuaternionHelper::EulerToQuat(rotation_change); glm::quat rotation =
-	// getOrientation() * rot_change_quat; glm::normalize(rotation);
-	// setQuaternion(rotation);
-
 	glm::quat orientation = getOrientation();
 	orientation = orientation + glm::quat(0, angular_.velocity) * orientation *
 	                                0.5f * delta_time;
@@ -88,9 +89,11 @@ void EngineResolve::update(float delta_time) {
 
 	// Set new velocity and angular velocity based on acceleration and delta
 	// time
-	linear_.velocity = linear_.velocity + linear_.acceleration * delta_time;
+	prev_vel_acceleration_ = linear_.acceleration * delta_time;
+	linear_.velocity = linear_.velocity + prev_vel_acceleration_;
 	linear_.acceleration = glm::vec3(0);
-	angular_.velocity = angular_.velocity + angular_.acceleration * delta_time;
+	prev_ang_vel_acceleration_ = angular_.acceleration * delta_time;
+	angular_.velocity = angular_.velocity + prev_ang_vel_acceleration_;
 	angular_.acceleration = glm::vec3(0);
 
 	// Apply damping (drag)
@@ -213,128 +216,143 @@ void EngineResolve::setCanSleep(bool enable) { can_sleep_ = enable; }
 
 bool EngineResolve::getCanSleep() { return can_sleep_; }
 
-uint32_t EngineResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size,
-                                       float mass, float epsilon) {
+uint32_t EngineResolve::addBoxCollider(glm::vec3 pos, glm::vec3 rot,
+                                       glm::vec3 size, float mass,
+                                       float epsilon) {
 	BoxShape* collider = Physics::getPhysicsCommon().createBoxShape(
 	    rp3d::Vector3(size.x / 2, size.y / 2, size.z / 2));
 
 	Transform center =
 	    Transform(Vector3(pos.x, pos.y, pos.z), Quaternion::identity());
+	glm::quat quat = QuaternionHelper::EulerToQuat(rot);
+	center.setOrientation(rp3d::Quaternion(quat.x, quat.y, quat.z, quat.w));
 
 	colliders.push_back(collision_body_->addCollider(collider, center));
 	m_box.emplace(colliders[colliders.size() - 1], collider);
 
+	Material& mat = colliders[colliders.size() - 1]->getMaterial();
+	mat.setBounciness(epsilon);
+	mat.setMassDensity(mass);
 	total_mass_ += mass;
-	epsilon_value_ = epsilon;
+	calculate_center_of_mass(pos, mass);
 
-	inertia_tensor_ = inertia_tensor_box(size, mass);
+	calculate_inertia_tensor();
 
 	return colliders.size() - 1;
 }
 
-uint32_t EngineResolve::addBoxCollider(glm::vec3 pos, glm::vec3 size,
-                                       float bounce, float friction, float mass,
-                                       float epsilon) {
-	uint32_t index = addBoxCollider(pos, size, mass, epsilon);
+uint32_t EngineResolve::addBoxCollider(glm::vec3 pos, glm::vec3 rot,
+                                       glm::vec3 size, float friction,
+                                       float mass, float epsilon) {
+	uint32_t index = addBoxCollider(pos, rot, size, mass, epsilon);
 
 	Material& mat = colliders[index]->getMaterial();
-	mat.setBounciness(bounce);
 	mat.setFrictionCoefficient(friction);
 
 	return index;
 }
 
 uint32_t EngineResolve::addBoxCollider(PhysicsBody* rb, glm::vec3 pos,
-                                       glm::vec3 size, float bounce,
+                                       glm::vec3 rot, glm::vec3 size,
                                        float friction, float mass,
                                        float epsilon) {
-	uint32_t index = addBoxCollider(pos, size, bounce, friction, mass, epsilon);
+	uint32_t index = addBoxCollider(pos, rot, size, friction, mass, epsilon);
 	colliders[index]->setUserData(rb);
 
 	return index;
 }
 
-uint32_t EngineResolve::addSphereCollider(glm::vec3 pos, float radius,
-                                          float mass, float epsilon) {
+uint32_t EngineResolve::addSphereCollider(glm::vec3 pos, glm::vec3 rot,
+                                          float radius, float mass,
+                                          float epsilon) {
 	SphereShape* collider =
 	    Physics::getPhysicsCommon().createSphereShape(radius);
 
 	Transform center =
 	    Transform(Vector3(pos.x, pos.y, pos.z), Quaternion::identity());
+	glm::quat quat = QuaternionHelper::EulerToQuat(rot);
+	center.setOrientation(rp3d::Quaternion(quat.x, quat.y, quat.z, quat.w));
 
 	colliders.push_back(collision_body_->addCollider(collider, center));
 	m_sphere.emplace(colliders[colliders.size() - 1], collider);
 
+	Material& mat = colliders[colliders.size() - 1]->getMaterial();
+	mat.setBounciness(epsilon);
+	mat.setMassDensity(mass);
 	total_mass_ += mass;
-	epsilon_value_ = epsilon;
+	calculate_center_of_mass(pos, mass);
 
-	inertia_tensor_ = inertia_tensor_sphere(radius, mass);
+	calculate_inertia_tensor();
 
 	return colliders.size() - 1;
 }
 
-uint32_t EngineResolve::addSphereCollider(glm::vec3 pos, float radius,
-                                          float bounce, float friction,
+uint32_t EngineResolve::addSphereCollider(glm::vec3 pos, glm::vec3 rot,
+                                          float radius, float friction,
                                           float mass, float epsilon) {
-	uint32_t index = addSphereCollider(pos, radius, mass, epsilon);
+	uint32_t index = addSphereCollider(pos, rot, radius, mass, epsilon);
 
 	Material& mat = colliders[index]->getMaterial();
-	mat.setBounciness(bounce);
 	mat.setFrictionCoefficient(friction);
 
 	return index;
 }
 
 uint32_t EngineResolve::addSphereCollider(PhysicsBody* rb, glm::vec3 pos,
-                                          float radius, float bounce,
+                                          glm::vec3 rot, float radius,
                                           float friction, float mass,
                                           float epsilon) {
 	uint32_t index =
-	    addSphereCollider(pos, radius, bounce, friction, mass, epsilon);
+	    addSphereCollider(pos, rot, radius, friction, mass, epsilon);
 	colliders[index]->setUserData(rb);
 
 	return index;
 }
 
-uint32_t EngineResolve::addCapsuleCollider(glm::vec3 pos, float radius,
-                                           float height, float mass,
-                                           float epsilon) {
+uint32_t EngineResolve::addCapsuleCollider(glm::vec3 pos, glm::vec3 rot,
+                                           float radius, float height,
+                                           float mass, float epsilon) {
 	CapsuleShape* collider =
 	    Physics::getPhysicsCommon().createCapsuleShape(radius, height);
 
 	Transform center =
 	    Transform(Vector3(pos.x, pos.y, pos.z), Quaternion::identity());
+	glm::quat quat = QuaternionHelper::EulerToQuat(rot);
+	center.setOrientation(rp3d::Quaternion(quat.x, quat.y, quat.z, quat.w));
 
 	colliders.push_back(collision_body_->addCollider(collider, center));
 	m_capsule.emplace(colliders[colliders.size() - 1], collider);
 
+	Material& mat = colliders[colliders.size() - 1]->getMaterial();
+	mat.setBounciness(epsilon);
+	mat.setMassDensity(mass);
 	total_mass_ += mass;
-	epsilon_value_ = epsilon;
+	calculate_center_of_mass(pos, mass);
 
-	inertia_tensor_ = inertia_tensor_capsule(radius, height, mass);
+	calculate_inertia_tensor();
 
 	return colliders.size() - 1;
 }
 
-uint32_t EngineResolve::addCapsuleCollider(glm::vec3 pos, float radius,
-                                           float height, float bounce,
+uint32_t EngineResolve::addCapsuleCollider(glm::vec3 pos, glm::vec3 rot,
+                                           float radius, float height,
                                            float friction, float mass,
                                            float epsilon) {
-	uint32_t index = addCapsuleCollider(pos, radius, height, mass, epsilon);
+	uint32_t index =
+	    addCapsuleCollider(pos, rot, radius, height, mass, epsilon);
 
 	Material& mat = colliders[index]->getMaterial();
-	mat.setBounciness(bounce);
 	mat.setFrictionCoefficient(friction);
 
 	return index;
 }
 
 uint32_t EngineResolve::addCapsuleCollider(PhysicsBody* rb, glm::vec3 pos,
-                                           float radius, float height,
-                                           float bounce, float friction,
+                                           glm::vec3 rot, float radius,
+                                           float height, float friction,
                                            float mass, float epsilon) {
-	uint32_t index = addCapsuleCollider(pos, radius, height, bounce, friction,
-	                                    mass, epsilon);
+	uint32_t index =
+	    addCapsuleCollider(pos, rot, radius, height, friction, mass, epsilon);
 	colliders[index]->setUserData(rb);
 
 	return index;
@@ -378,6 +396,66 @@ glm::mat3x3 EngineResolve::inertia_tensor_capsule(float radius, float height,
 	inertia_tensor[2][2] = inertia_tensor[0][0];  // Izz
 
 	return inertia_tensor;
+}
+
+auto EngineResolve::calculate_center_of_mass(glm::vec3 pos, float mass)
+    -> void {
+	auto old_mass_ratio = (total_mass_ - mass) / total_mass_;
+	auto new_mass_ratio = mass / total_mass_;
+
+	center_of_mass_ = center_of_mass_ * old_mass_ratio + pos * new_mass_ratio;
+}
+
+auto EngineResolve::calculate_inertia_tensor() -> void {
+	inertia_tensor_ = glm::mat3(0);
+	for (auto collider : colliders) {
+		float mass = collider->getMaterial()
+		                 .getMassDensity();  // Mass is stored as mass density
+		// Get basic inertia tensor
+		rp3d::Vector3 rp3d_local_inertia_tensor =
+		    collider->getCollisionShape()->getLocalInertiaTensor(mass);
+		glm::mat3x3 inertia_tensor = glm::mat3x3(0);
+		inertia_tensor[0][0] = rp3d_local_inertia_tensor.x;
+		inertia_tensor[1][1] = rp3d_local_inertia_tensor.y;
+		inertia_tensor[2][2] = rp3d_local_inertia_tensor.z;
+
+		// Rotate inertia tensor
+		rp3d::Quaternion quat =
+		    collider->getLocalToBodyTransform().getOrientation();
+		inertia_tensor = QuaternionHelper::RotateInertiaTensorOppositeQuat(
+		    inertia_tensor, glm::quat(quat.w, quat.x, quat.y, quat.z));
+
+		// Discard non diagonal values
+		inertia_tensor[1][0] = 0;
+		inertia_tensor[2][0] = 0;
+		inertia_tensor[0][1] = 0;
+		inertia_tensor[2][1] = 0;
+		inertia_tensor[0][2] = 0;
+		inertia_tensor[1][2] = 0;
+
+		// Move inertia tensor to center of mass
+		rp3d::Vector3 rp3d_distance =
+		    collider->getLocalToBodyTransform().getPosition();
+		rp3d_distance.x -= center_of_mass_.x;
+		rp3d_distance.y -= center_of_mass_.y;
+		rp3d_distance.z -= center_of_mass_.z;
+
+		inertia_tensor[0][0] +=
+		    mass *
+		    static_cast<float>(pow(
+		        sqrt(pow(rp3d_distance.y, 2) + pow(rp3d_distance.z, 2)), 2));
+		inertia_tensor[1][1] +=
+		    mass *
+		    static_cast<float>(pow(
+		        sqrt(pow(rp3d_distance.x, 2) + pow(rp3d_distance.z, 2)), 2));
+		inertia_tensor[2][2] +=
+		    mass *
+		    static_cast<float>(pow(
+		        sqrt(pow(rp3d_distance.x, 2) + pow(rp3d_distance.y, 2)), 2));
+
+		// Add to bodies inertia tensor
+		inertia_tensor_ += inertia_tensor;
+	}
 }
 
 void EngineResolve::setPosition(glm::vec3 pos) {

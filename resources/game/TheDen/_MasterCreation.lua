@@ -3,13 +3,13 @@ dofile("game/TheDen/Collections.lua")
 Texture.load_texture("credits", "textures/reflexbullet.png")
 
 Scene.add_game_object("game/TheDen/prefabs/Glass.lua")
-Scene.add_game_object("game/TheDen/prefabs/TheDen.lua")
+--Scene.add_game_object("game/TheDen/prefabs/TheDen.lua")
 Scene.add_game_object("game/TheDen/prefabs/cube.lua")
 Scene.add_game_object("game/TheDen/prefabs/cubeTwo.lua")
 Scene.add_game_object("game/TheDen/prefabs/player.lua")
 Scene.add_game_object("game/TheDen/prefabs/sphere.lua")
 Scene.add_game_object("game/TheDen/prefabs/TheDenCollisions.lua")
---Scene.add_game_object("game/TheDen/prefabs/CabinetCollisions.lua")
+Scene.add_game_object("game/TheDen/prefabs/CabinetCollisions.lua")
 Scene.add_game_object("game/TheDen/prefabs/lights/sunlight.lua")
 Scene.add_game_object("game/TheDen/prefabs/lights/theater_light.lua")
 Scene.add_game_object("game/TheDen/prefabs/lights/middle_lights/middle_light1.lua")
@@ -55,5 +55,11 @@ Scene.add_game_object("game/TheDen/prefabs/small_objects/tissue_boxes/tissue_box
 --markers
 Scene.add_game_object("game/TheDen/prefabs/small_objects/markers/marker_one.lua")
 Scene.add_game_object("game/TheDen/prefabs/small_objects/markers/marker_two.lua")
+--Chairs
+Scene.add_game_object("game/TheDen/prefabs/small_objects/chairs/chair_one.lua")
+Scene.add_game_object("game/TheDen/prefabs/small_objects/chairs/chair_two.lua")
+Scene.add_game_object("game/TheDen/prefabs/small_objects/chairs/chair_three.lua")
+Scene.add_game_object("game/TheDen/prefabs/small_objects/chairs/chair_four.lua")
+Scene.add_game_object("game/TheDen/prefabs/small_objects/chairs/chair_five.lua")
 
 Skybox.use_skybox("default")

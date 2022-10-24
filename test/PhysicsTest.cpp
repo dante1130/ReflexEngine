@@ -80,22 +80,22 @@ TEST_CASE("Physics tests", "[PHYSICS]") {
 
 		glm::quat quat = glm::normalize(glm::quat(0.7071068, 0.7071068, 0, 0));
 
-		std::cout << "Before complex rotation" << std::endl;
 		glm::mat3x3 result3x3 =
 		    QuaternionHelper::RotateMat3x3WithQuat(mat3x3, quat);
-		REQUIRE(result3x3[0][0] < 1.00001);
-		REQUIRE(result3x3[0][0] > 0.99999);
+		REQUIRE(result3x3[0][0] > -1.00001);
+		REQUIRE(result3x3[0][0] < -0.99999);
 		REQUIRE(result3x3[0][1] == 0);
-		REQUIRE(result3x3[0][2] < 0.00001);
-		REQUIRE(result3x3[0][2] > -0.00001);
+		REQUIRE(result3x3[0][2] == 0);
 		REQUIRE(result3x3[1][0] == 0);
-		REQUIRE(result3x3[1][1] == 1);
-		REQUIRE(result3x3[1][2] == 0);
-		REQUIRE(result3x3[2][0] < 0.0001);
-		REQUIRE(result3x3[2][0] > 0.9999);
-		REQUIRE(result3x3[2][1] == 0);
-		REQUIRE(result3x3[2][2] < 1.00001);
-		REQUIRE(result3x3[2][2] > 0.99999);
+		REQUIRE(result3x3[1][1] > -0.0001);
+		REQUIRE(result3x3[1][1] < 0.0001);
+		REQUIRE(result3x3[1][2] > 0.9999);
+		REQUIRE(result3x3[1][2] < 1.0001);
+		REQUIRE(result3x3[2][0] == 0);
+		REQUIRE(result3x3[2][1] < 1.00001);
+		REQUIRE(result3x3[2][1] > 0.99999);
+		REQUIRE(result3x3[2][2] > -0.0001);
+		REQUIRE(result3x3[2][2] < 0.0001);
 	}
 
 	SECTION("Rotate point With Quaternion - Complex") {
@@ -105,7 +105,8 @@ TEST_CASE("Physics tests", "[PHYSICS]") {
 
 		glm::vec3 result = QuaternionHelper::RotateVectorWithQuat(point, quat);
 
-		REQUIRE(result.x == 0);
+		REQUIRE(result.x < 0.0001);
+		REQUIRE(result.x > -0.0001);
 		REQUIRE(result.y == 0);
 		REQUIRE(result.z > -1.0001);
 		REQUIRE(result.z < -0.9999);
