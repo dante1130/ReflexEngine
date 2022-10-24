@@ -5,7 +5,7 @@ var = {
 function init(ecs, entity)
 	Window.set_cursor_visible(true)
 	Time.set_pause(true)
-	Camera.toggle_noclip()
+	--Camera.toggle_noclip()
 
 	local rb = entity:get_rigidbody_component()
 	rb:add_box_collider(Math.vec3.new(0, -0.8, 0), Math.vec3.new(0, 0, 0), Math.vec3.new(0.5, 1.8, 0.5), 0.5, 80, 0.1)
