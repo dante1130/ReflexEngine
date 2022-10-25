@@ -20,25 +20,17 @@ namespace EmotionSystem {
 	class Emotions {
 	public:
 
-		Emotions(float joy_sad, float tru_dis, float fea_ang, float sup_ant);
+	    /**
+	     * @brief Get the instance of the Emotions.
+	     *
+	     * @return Emotions&
+	     */
+		static auto get_instance() -> Emotions&;
 
+	    /**
+	     * @brief Expose the Emotions and the AgentEmotions classes to Lua.
+	     */
 		auto lua_access() -> void;
-
-	    /**
-	     * @brief Gets the emotion the agent is feeling.
-	     *
-	     * @param properties The properties of the affordance. (look at implementation, probably use the Component::mood instead of the agent itself)
-		 * @return string The emotion the agent is experiencing currently
-	     */
-		auto get_emotion(Component::Agent agent) -> const std::string&;
-
-	    /**
-	     * @brief Gets the emotion values the agent is feeling.
-	     *
-	     *
-	     * @return definedEmotions The emotion values the agent is currently experiencing
-	     */
-	    auto get_emotional_state(Component::Agent agent);
 
 	    /**
 	     * @brief Sets a newly defined emotion for the definedEmotions map
@@ -52,10 +44,52 @@ namespace EmotionSystem {
 		auto set_emotion(std::string emotion, float joy_sad, float tru_dis,
 	                     float fea_ang, float sup_ant);
 
-		auto set_current_emotion(std::string emotion);
+		/**
+	     * @brief Finds an emotion for the agent to feel
+	     *
+	     * @param emotion The name of the emotion
+	     * 
+		 * @return Component::mood The mood values of the emotion. Returns -1.0f for
+		 * all mood values if emotion was undefined in definedEmotions map
+	     */
+		auto find_emotion(std::string emotion)
+	        -> const Component::mood&;
 
 	private:
 
+		Emotions() = default;
+	    /// An unordered map of emotions with a key of the emotion and a value of emotional values
 	    definedEmotions emotion_state;
 	};
-}  // namespace Emotion
+
+	class AgentEmotions {
+	public:
+
+		/**
+	     * @brief Gets the emotion the agent is feeling.
+	     *
+	     * @param agent The agent to find. (look at implementation, probably use
+	     * the Component::mood instead of the agent itself)
+	     * @return string The emotion the agent is experiencing currently
+	     */
+	    auto get_emotion(Component::Agent agent) -> const std::string&;
+
+	    /**
+	     * @brief Gets the emotion values the agent is feeling.
+	     *
+	     *
+	     * @return mood_state The emotion values the agent is currently
+	     * experiencing
+	     */
+	    auto get_emotional_state(Component::Agent agent);
+
+		/**
+	     * @brief Sets an emotion for the agent to start experiencing.
+	     *
+	     *
+	     * @param emotion The name of the emotion the agent is to experience
+	     */
+		auto set_current_emotion(std::string emotion, Component::Agent agent);
+
+	};
+    }  // namespace Emotion
