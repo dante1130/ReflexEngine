@@ -3,6 +3,7 @@
 
 #include "Controller/GUI/DebugLogger.hpp"
 #include "Controller/ReflexEngine/EngineTime.hpp"
+#include "Controller/Physics/QuaternionHelper.hpp"
 
 void CollisionEventListener::onContact(const CallbackData& collision_data) {
 	if (EngineTime::is_paused()) {
@@ -35,16 +36,14 @@ void CollisionEventListener::onContact(const CallbackData& collision_data) {
 
 		if (num_of_contacts != 0) {
 			float num = static_cast<float>(num_of_contacts);
-			local_point_c1 /= num;
-			local_point_c1 = contact_pair.getBody1()->getWorldVector(
-			    local_point_c1 + contact_pair.getCollider1()
-			                         ->getLocalToBodyTransform()
-			                         .getPosition());
-			local_point_c2 /= num;
-			local_point_c2 = contact_pair.getBody2()->getWorldVector(
-			    local_point_c2 + contact_pair.getCollider2()
-			                         ->getLocalToBodyTransform()
-			                         .getPosition());
+
+			local_point_c1 =
+			    convert_local_point(local_point_c1, contact_pair.getBody1(),
+			                        contact_pair.getCollider1(), num);
+			local_point_c2 =
+			    convert_local_point(local_point_c2, contact_pair.getBody2(),
+			                        contact_pair.getCollider2(), num);
+
 			contact_normal /= num;
 			penetration_depth /= num;
 
@@ -57,4 +56,23 @@ void CollisionEventListener::onContact(const CallbackData& collision_data) {
 			    penetration_depth, contact_pair.getEventType());
 		}
 	}
+}
+
+auto CollisionEventListener::convert_local_point(
+    rp3d::Vector3 local_point, rp3d::CollisionBody* collision_body,
+    rp3d::Collider* collider, float num) -> rp3d::Vector3 {
+	auto com_vec = static_cast<PhysicsBody*>(collider->getUserData())
+	                   ->get_center_of_mass();
+	auto trans = collider->getLocalToBodyTransform();
+	local_point /= num;
+
+	DebugLogger::log("lpoint = ", std::to_string(local_point.x) + " " +
+	                                  std::to_string(local_point.y) + " " +
+	                                  std::to_string(local_point.z));
+
+	local_point = collision_body->getWorldVector(
+	    local_point + trans.getPosition() -
+	    rp3d::Vector3(com_vec.x, com_vec.y, com_vec.z));
+
+	return local_point;
 }

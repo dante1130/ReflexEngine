@@ -26,10 +26,6 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 		epsilon = collider2->getMaterial().getBounciness();
 	}
 
-	// Convert from center of collision body to center of mass
-	lpoint_c1 += pb1->center_of_mass_;
-	lpoint_c2 += pb2->center_of_mass_;
-
 	if (pb1->getType() == rp3d::BodyType::STATIC) {
 		static_collision(collider2, lpoint_c2, -collision_normal, epsilon,
 		                 collision_depth);
@@ -163,6 +159,11 @@ void PhysicsBody::static_collision(rp3d::Collider* collider, glm::vec3 r_point,
 	pb1->inverse_rotated_inertia_tensor_ =
 	    QuaternionHelper::RotateInertiaTensorOppositeQuat(
 	        glm::inverse(pb1->inertia_tensor_), pb1->getOrientation());
+	// DebugLogger::log(
+	//     "inertia tensor = ",
+	//     std::to_string(pb1->inverse_rotated_inertia_tensor_[0][0]) + " " +
+	//         std::to_string(pb1->inverse_rotated_inertia_tensor_[1][1]) + " "
+	//         + std::to_string(pb1->inverse_rotated_inertia_tensor_[2][2]));
 
 	// (r1 x n)
 	glm::vec3 rxn = glm::cross(r_point, collision_normal);
@@ -227,6 +228,8 @@ glm::mat3x3 PhysicsBody::get_inertia_tensor() { return inertia_tensor_; }
 auto PhysicsBody::is_modified() -> bool { return modified_; }
 
 auto PhysicsBody::set_modified(bool modified) -> void { modified_ = modified; }
+
+auto PhysicsBody::get_center_of_mass() -> glm::vec3 { return center_of_mass_; }
 
 void PhysicsBody::DePenetrate(PhysicsBody* pb1, PhysicsBody* pb2,
                               glm::vec3 normal, float penetration_depth) {
