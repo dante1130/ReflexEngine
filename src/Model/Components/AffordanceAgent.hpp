@@ -1,13 +1,20 @@
 #pragma once
 
-#include "Controller/Affordance/Affordance.hpp"
+#include <string>
 
-using Affordance::Properties;
-using Affordance::PropertiesWeight;
+#include <sol/sol.hpp>
+
+#include "Controller/Affordance/Affordance.hpp"
+#include "Controller/AI/Utility/Reasoner.hpp"
 
 namespace Component {
 struct AffordanceAgent {
-	Properties properties;
-	PropertiesWeight property_weights;
+	using AffordanceReasoner =
+	    AI::Utility::Reasoner<std::string, sol::table, sol::function,
+	                          Affordance::Properties>;
+
+	Affordance::Properties properties;
+	Affordance::PropertiesWeight property_weights;
+	AffordanceReasoner reasoner;
 };
 }  // namespace Component

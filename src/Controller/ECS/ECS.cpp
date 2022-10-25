@@ -7,6 +7,7 @@
 #include "Model/Components/Light.hpp"
 #include "Model/Components/Md2Animation.hpp"
 #include "Model/Components/RigidBody.hpp"
+#include "Model/Components/AffordanceAgent.hpp"
 #include "Controller/ReflexEngine/PerformanceLogger.hpp"
 
 using namespace Reflex;
