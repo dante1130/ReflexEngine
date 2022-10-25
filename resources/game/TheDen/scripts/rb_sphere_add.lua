@@ -14,8 +14,8 @@ function update(ecs, entity)
 
 	if (Input.get_key_state("f"):is_key_pressed()) then
 		DebugLogger.log_color("Physics", "Firing projectile!", GUI.vec4.new(1.0, 0.0, 0.0, 1.0))
-		local rb_component = entity:get_rigidbody_component()
-		rb_component:add_force(Math.vec3.new(0, 0, 2), Apply.LOCAL)
+		--local rb_component = entity:get_rigidbody_component()
+		--rb_component:add_force(Math.vec3.new(0, 0, 2), Apply.LOCAL)
 	end
 
 	if (Input.get_key_state("g"):is_key_pressed()) then

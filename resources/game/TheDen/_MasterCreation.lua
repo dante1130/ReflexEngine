@@ -20,7 +20,7 @@ Scene.add_game_object("game/TheDen/prefabs/lights/right_lights/right_light1.lua"
 Scene.add_game_object("game/TheDen/prefabs/lights/right_lights/right_light2.lua")
 Scene.add_game_object("game/TheDen/prefabs/lights/right_lights/right_light3.lua")
 
-
+--[[
 --laptops
 Scene.add_game_object("game/TheDen/prefabs/small_objects/laptops/laptop_one.lua")
 Scene.add_game_object("game/TheDen/prefabs/small_objects/laptops/laptop_two.lua")
@@ -55,11 +55,12 @@ Scene.add_game_object("game/TheDen/prefabs/small_objects/tissue_boxes/tissue_box
 --markers
 Scene.add_game_object("game/TheDen/prefabs/small_objects/markers/marker_one.lua")
 Scene.add_game_object("game/TheDen/prefabs/small_objects/markers/marker_two.lua")
+--]]
 --Chairs
 Scene.add_game_object("game/TheDen/prefabs/small_objects/chairs/chair_one.lua")
-Scene.add_game_object("game/TheDen/prefabs/small_objects/chairs/chair_two.lua")
-Scene.add_game_object("game/TheDen/prefabs/small_objects/chairs/chair_three.lua")
-Scene.add_game_object("game/TheDen/prefabs/small_objects/chairs/chair_four.lua")
-Scene.add_game_object("game/TheDen/prefabs/small_objects/chairs/chair_five.lua")
+--Scene.add_game_object("game/TheDen/prefabs/small_objects/chairs/chair_two.lua")
+--Scene.add_game_object("game/TheDen/prefabs/small_objects/chairs/chair_three.lua")
+--Scene.add_game_object("game/TheDen/prefabs/small_objects/chairs/chair_four.lua")
+--Scene.add_game_object("game/TheDen/prefabs/small_objects/chairs/chair_five.lua")
 
 Skybox.use_skybox("default")

@@ -4,13 +4,13 @@ entity = {
 
 	transform = {
 		position = {
-			x = 44,
-			y = 0.4,
-			z = -5.25
+			x = 43,
+			y = 1.5,
+			z = -5
 		},
 		rotation = {
 			x = 0,
-			y = -90,
+			y = -180,
 			z = 0
 		},
 		scale = {
@@ -27,11 +27,11 @@ entity = {
 
 	rigidbody = {
         using_react_start = false,
-        gravity_on = true,
+        gravity_on = false,
         can_sleep = true,
         is_trigger = false,
-        linear_drag = 0.5,
-        angular_drag = 0.5,
+        linear_drag = 0,
+        angular_drag = 0,
 		rb_type = 2
     },
 

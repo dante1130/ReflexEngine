@@ -148,6 +148,12 @@ void PhysicsBody::static_collision(rp3d::Collider* collider, glm::vec3 r_point,
                                    float collision_depth) {
 	PhysicsBody* pb1 = static_cast<PhysicsBody*>(collider->getUserData());
 
+	// DebugLogger::log("Penetration amount = ",
+	// std::to_string(collision_depth));
+	DebugLogger::log("r point = ", std::to_string(r_point.x) + " " +
+	                                   std::to_string(r_point.y) + " " +
+	                                   std::to_string(r_point.z));
+
 	glm::vec3 pos = pb1->getPosition();
 	pos -= collision_normal * collision_depth;
 	pb1->setPosition(pos);
