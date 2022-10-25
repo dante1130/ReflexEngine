@@ -20,28 +20,6 @@ void CollisionEventListener::onContact(const CallbackData& collision_data) {
 		}
 
 		int num_of_contacts = contact_pair.getNbContactPoints();
-		// DebugLogger::log("Physics num of contacts",
-		//                  std::to_string(num_of_contacts));
-		/*
-		rp3d::Vector3 contact_normal, local_point_c1, local_point_c2;
-
-		for (size_t countTwo = 0; countTwo < num_of_contacts; ++countTwo) {
-		    ContactPoint contact_point = contact_pair.getContactPoint(countTwo);
-
-		    local_point_c1 = contact_point.getLocalPointOnCollider1();
-		    local_point_c2 = contact_point.getLocalPointOnCollider2();
-		    contact_normal = contact_point.getWorldNormal();
-
-		    PhysicsBody::collision(
-		        contact_pair.getCollider1(), contact_pair.getCollider2(),
-		        glm::vec3(local_point_c1.x, local_point_c1.y, local_point_c1.z),
-		        glm::vec3(local_point_c2.x, local_point_c2.y, local_point_c2.z),
-		        glm::vec3(contact_normal.x, contact_normal.y, contact_normal.z),
-		        contact_point.getPenetrationDepth(),
-		        contact_pair.getEventType());
-		}
-		*/
-
 		rp3d::Vector3 contact_normal = rp3d::Vector3(0, 0, 0);
 		rp3d::Vector3 local_point_c1 = rp3d::Vector3(0, 0, 0);
 		rp3d::Vector3 local_point_c2 = rp3d::Vector3(0, 0, 0);
