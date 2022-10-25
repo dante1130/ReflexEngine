@@ -1,16 +1,16 @@
 entity = {
-	name = "calculator",
-	collection_id = 8, 
+	name = "chair_4",
+	collection_id = 9, 
 
 	transform = {
 		position = {
-			x = 45.5,
-			y = 0.795,
-			z = -2.1
+			x = 46.5,
+			y = 0.4,
+			z = -5.3
 		},
 		rotation = {
 			x = 0,
-			y = -71,
+			y = 30,
 			z = 0
 		},
 		scale = {
@@ -21,7 +21,7 @@ entity = {
 	},
 
 	model = {
-		model_name = "calculator",
+		model_name = "chair",
 		material_name = "default"
 	},
 
@@ -36,6 +36,6 @@ entity = {
     },
 
 	script = {
-		lua_script = "game/TheDen/scripts/calculator_script.lua"
+		lua_script = "game/TheDen/scripts/chair_script.lua"
 	}
 }
