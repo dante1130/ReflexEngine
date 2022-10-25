@@ -4,10 +4,6 @@
 
 using namespace EmotionSystem;
 
-Emotions::Emotions(float joy_sad, float tru_dis, float fea_ang, float sup_ant) {
-
-}
-
 auto Emotions::get_instance() -> Emotions& {
 	static Emotions instance;
 	return instance;
