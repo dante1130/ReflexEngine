@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Affordance.hpp"
+#include "Controller/ECS/Entity.hpp"
 
 namespace Affordance {
 /**
@@ -18,4 +19,6 @@ auto find_affordance(const AffordancePtr& affordances,
                      const Properties& properties,
                      const PropertiesWeight& properties_weight)
     -> AffordancePtr;
+
+auto evaluate_utility(const Reflex::Entity& entity) -> void;
 };  // namespace Affordance
