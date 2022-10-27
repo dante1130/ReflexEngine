@@ -43,6 +43,16 @@ public:
 	auto get_affordance(const std::string& object) -> AffordancePtr;
 
 	/**
+	 * @brief Breadth first search through the affordance tree and returns the
+	 * affordance that has the given properties.
+	 *
+	 * @param properties
+	 * @return std::vector<AffordancePtr>
+	 */
+	auto find_objects(const Properties& properties)
+	    -> std::vector<AffordancePtr>;
+
+	/**
 	 * @brief Clear the affordance system. Used when the simulation is exited.
 	 */
 	auto clear_affordances() -> void;

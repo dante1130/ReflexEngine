@@ -1,5 +1,6 @@
 #include "AffordanceHelper.hpp"
 
+#include "Controller/Affordance/AffordanceSystem.hpp"
 #include "Model/Components/AffordanceAgent.hpp"
 
 auto Affordance::find_affordance(const AffordancePtr& affordances,

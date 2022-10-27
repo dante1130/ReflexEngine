@@ -309,6 +309,13 @@ TEST_CASE("Affordance helper functions test", "[AffordanceHelper]") {
 		std::string affordance_result = affordance_leaf->get_function()();
 		REQUIRE(affordance_result == "sitting crosslegged");
 
+		auto chair = std::dynamic_pointer_cast<Affordance::AffordanceComposite>(
+		    affordance_system.get_affordance("chair"));
+
+		REQUIRE(chair->is_composite());
+		REQUIRE(chair->get_properties().empty());
+		REQUIRE(chair->get_affordances().size() == 2);
+
 		affordance_system.clear_affordances();
 	}
 

@@ -141,6 +141,8 @@ void update_remove(ECS& ecs);
 
 void update_rigidbody(entt::registry& registry);
 
+void update_affordance_agent(entt::registry& registry);
+
 /**
  * @brief Deletes the directional light in the LightManager.
  *

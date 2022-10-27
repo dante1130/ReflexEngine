@@ -17,6 +17,7 @@
 #include "Model/Components/Statemachine.hpp"
 #include "Model/Components/Remove.hpp"
 #include "Model/Components/RigidBody.hpp"
+#include "Model/Components/AffordanceAgent.hpp"
 
 void System::draw_model(entt::registry& registry) {
 	auto& renderer = ReflexEngine::get_instance().renderer_;
@@ -395,6 +396,8 @@ void System::update_statemachine(ECS& ecs) {
 		stateM.lua_variables = lua["var"];
 	}
 }
+
+void System::update_affordance_agent(entt::registry& registry) {}
 
 void System::delete_directional_light(entt::registry& registry,
                                       entt::entity entity) {
