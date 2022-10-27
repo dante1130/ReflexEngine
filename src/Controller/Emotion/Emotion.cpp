@@ -4,7 +4,7 @@
 
 using namespace Emotion;
 
-auto EmotionSystem::get_instance() -> Emotion::EmotionSystem& {
+auto EmotionSystem::get_instance() -> EmotionSystem& {
 	static EmotionSystem instance;
 	return instance;
 }
@@ -14,20 +14,28 @@ auto EmotionSystem::lua_access() -> void {
 
 	auto emotion_system = lua.create_named_table("EmotionSystem");
 
-	emotion_system.set_function("add_emotion", &EmotionSystem::set_emotion,
+	emotion_system.set_function("set_emotion", &EmotionSystem::set_emotion,
 	                            this);
+
+	lua.new_usertype<EmotionState>(
+	    "EmotionState",
+	    sol::constructors<EmotionState(),
+	                      EmotionState(float, float, float, float)>(),
+	    "joy_sadness", &EmotionState::joy_sadness, "trust_disgust",
+	    &EmotionState::trust_disgust, "fear_anger", &EmotionState::fear_anger,
+	    "surprise_anticipation", &EmotionState::surprise_anticipation);
 }
 
-auto EmotionSystem::set_emotion(std::string emotion, float joy_sad,
-                                float tru_dis, float fea_ang, float sup_ant) {
-	emotion_state[emotion] =
-	    Emotion::emotion(joy_sad, tru_dis, fea_ang, sup_ant);
+auto EmotionSystem::set_emotion(const std::string& emotion_name,
+                                const EmotionState& emotion) -> void {
+	emotion_state.emplace(emotion_name, emotion);
 }
 
-auto EmotionSystem::find_emotion(std::string emotion)
-    -> const Emotion::emotion& {
-	if (emotion_state.find(emotion) != emotion_state.end())
-		return (emotion_state.find(emotion)->second);
-	else
-		return (Emotion::emotion(0.0f, 0.0f, 0.0f, 0.0f));
+auto EmotionSystem::find_emotion(const std::string& emotion_name)
+    -> EmotionState {
+	if (emotion_state.find(emotion_name) != emotion_state.end()) {
+		return emotion_state.at(emotion_name);
+	}
+
+	return {};
 }

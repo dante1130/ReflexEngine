@@ -2,10 +2,12 @@
 
 #include <string>
 
+#include "Controller/Emotion/Emotion.hpp"
+
 namespace Component {
-// Chuck into the agent component (will have the affordance stuff and emotional
-// state + current emotion) These values would be the 'mood' (long term).
-// set_emotion() would be short term emotions passed through.
+// Chuck into the agent component (will have the affordance stuff and
+// emotional state + current emotion) These values would be the 'mood' (long
+// term). set_emotion() would be short term emotions passed through.
 
 /**
  * @author Florian Robbins
@@ -14,7 +16,7 @@ namespace Component {
  * the current emotion the agent is experiencing
  */
 struct Agent {
-	Emotion::emotion mood_state;
+	Emotion::EmotionState mood_state;
 
 	std::string current_emotion;
 
@@ -22,7 +24,7 @@ struct Agent {
 
 	Agent(const Agent&) = default;
 
-	Agent(const Emotion::emotion& mood_state,
+	Agent(const Emotion::EmotionState& mood_state,
 	      const std::string& current_emotion)
 	    : mood_state(mood_state), current_emotion(current_emotion) {}
 };

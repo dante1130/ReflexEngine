@@ -32,6 +32,7 @@ add_library(ReflexEngineSrc
 	Controller/Affordance/AffordanceHelper.cpp
 	Controller/Affordance/Affordance.cpp
 	Controller/Affordance/AffordanceSystem.cpp
+	Controller/Emotion/Emotion.cpp
 	Controller/ECS/ECS.cpp
 	Controller/ECS/Entity.cpp
 	Controller/ECS/ECSAccess.cpp
@@ -88,6 +89,6 @@ add_library(ReflexEngineSrc
 
 	Scene/Scene.hpp
 	Scene/ECSScene.cpp
- "Controller/Emotion/Emotion.cpp" "Model/Components/Agent.hpp")
+)
 
 target_include_directories(ReflexEngineSrc PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
