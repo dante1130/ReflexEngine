@@ -67,8 +67,7 @@ auto Affordance::has_affordance(const AffordancePtr& affordances,
 			    std::dynamic_pointer_cast<AffordanceComposite>(
 			        current_affordance);
 
-			auto child_affordances = affordance_composite->get_affordances();
-			for (const auto& child : child_affordances) {
+			for (const auto& child : affordance_composite->get_affordances()) {
 				affordance_queue.push(child);
 			}
 		}

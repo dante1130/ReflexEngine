@@ -404,16 +404,35 @@ void System::update_affordance_agent(ECS& ecs) {
 	auto& registry = ecs.get_registry();
 
 	registry.view<Component::Transform, Component::AffordanceAgent>().each(
-	    [&](auto agent_id, auto& agent) {
-		    auto& entity = ecs.get_entity(agent_id);
+	    [&](auto agent_id, auto& agent_transform, auto& agent) {
+		    const auto& agent_entity = ecs.get_entity(agent_id);
 
-		    Affordance::evaluate_utility(entity);
+		    Affordance::evaluate_utility(agent_entity);
 
-		    std::vector<entt::entity> affordance_entities;
+		    auto best_distance = std::numeric_limits<float>::max();
 
 		    registry.view<Component::Transform, Component::Affordance>().each(
-		        [&](auto affordance_id, auto& transform, auto& affordance) {
+		        [&](auto affordance_id, auto& affordance_transform,
+		            auto& affordance) {
+			        auto affordance_tree =
+			            Affordance::AffordanceSystem::get_instance()
+			                .get_affordance(affordance.object_name);
 
+			        const auto& agent_decision_properties =
+			            agent.utility.states.at(agent.utility.decision)
+			                .decision;
+
+			        if (Affordance::has_affordance(affordance_tree,
+			                                       agent_decision_properties)) {
+				        auto distance =
+				            glm::distance(agent_transform.position,
+				                          affordance_transform.position);
+
+				        if (distance < best_distance) {
+					        best_distance = distance;
+					        agent.affordance = affordance_id;
+				        }
+			        }
 		        });
 	    });
 }
