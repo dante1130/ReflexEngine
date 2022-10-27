@@ -20,6 +20,7 @@
 #include "Model/Components/Remove.hpp"
 #include "Model/Components/RigidBody.hpp"
 #include "Model/Components/AffordanceAgent.hpp"
+#include "Model/Components/Affordance.hpp"
 
 void System::draw_model(entt::registry& registry) {
 	auto& renderer = ReflexEngine::get_instance().renderer_;
