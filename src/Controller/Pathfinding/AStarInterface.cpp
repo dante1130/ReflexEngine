@@ -74,8 +74,6 @@ void AStar::printAstarException(int val) {
 			std::cout << "EXCEPTION: Undocumented exception (" << val
 			          << "): Check AStar.h for more detail" << std::endl;
 	}
-
-	return;
 }
 
 bool AStar::setGrid(std::vector<std::vector<int>>& newGrid) {
@@ -83,17 +81,6 @@ bool AStar::setGrid(std::vector<std::vector<int>>& newGrid) {
 
 	gridSize[0] = grid.size();
 	gridSize[1] = grid[0].size();
-
-	/*
-	for (int count = 0; count < gridSize[0]; count++)
-	{
-	    for (int countTwo = 0; countTwo < gridSize[1]; countTwo++)
-	    {
-	        std::cout << grid[count][countTwo] << ' ';
-	    }
-	    std::cout << std::endl;
-	}
-	*/
 
 	return false;
 }
@@ -126,8 +113,6 @@ void AStar::setAllowDiagonalMovement(bool allow) {
 	} else {
 		movementCosts[2] = 0;
 	}
-
-	return;
 }
 
 bool AStar::setHeuristicsCostScale(float val) {
@@ -201,4 +186,13 @@ auto AStar::set_coordiante_value(int x_point, int y_point, int new_value)
 	}
 	grid[x_point][y_point] = new_value;
 	return true;
+}
+
+auto AStar::print_grid() -> void {
+	for (int count = 0; count < gridSize[0]; count++) {
+		for (int countTwo = 0; countTwo < gridSize[1]; countTwo++) {
+			std::cout << grid[count][countTwo] << ' ';
+		}
+		std::cout << std::endl;
+	}
 }

@@ -24,7 +24,7 @@ public:
 	/**
 	 * @brief	Sets the grid to be used
 	 * @param	newGrid	- The grid to store information from (0 = free space,
-	 * everything else it is not allowed to move into)
+	 * everything else it is not allowed to move into). std::move used
 	 * @return	bool	- If it was successful
 	 */
 	bool setGrid(std::vector<std::vector<int>>& newGrid);
@@ -84,6 +84,12 @@ public:
 	 * @param	val	- the value of the exception
 	 */
 	void printAstarException(int val);
+
+	/**
+	 * @brief Prints the grid
+	 *
+	 */
+	auto print_grid() -> void;
 
 	/**
 	 * @brief	Returns the set grid

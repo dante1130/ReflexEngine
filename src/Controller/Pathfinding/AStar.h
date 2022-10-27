@@ -20,34 +20,34 @@ struct node {
 	/// <summary>
 	/// The x position
 	/// </summary>
-	int x;
+	int x = 0.0F;
 
 	/// <summary>
 	/// The y position
 	/// </summary>
-	int y;
+	int y = 0.0F;
 };
 
 struct DistanceNode {
 	/// <summary>
 	/// The position of the parentNode. (i.e node used to get to it)
 	/// </summary>
-	node parentNode;
+	node parentNode = node();
 
 	/// <summary>
 	/// Sum of the exact cost and estimated cost
 	/// </summary>
-	float f;
+	float f = 0.0F;
 
 	/// <summary>
 	/// Exact cost from starting ponit to current vertex
 	/// </summary>
-	float g;
+	float g = 0.0F;
 
 	/// <summary>
 	/// Heuristic estimated cost from current vertex to destination
 	/// </summary>
-	float h;
+	float h = 0.0F;
 };
 
 namespace aStar {
