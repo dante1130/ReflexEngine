@@ -8,6 +8,20 @@
 * Use `CppCheck` and `clang-tidy` to analyze your code.
 * Use `clang-format` to format your code.
 
+## Setting up `clang-format`
+
+### Visual Studio
+
+1. Open `Visual Studio`.
+2. On the navigation bar, click `Extensions -> Manage Extensions...`.
+3. Install the extension `Clang Power Tools`.
+4. Restart `Visual Studio` after installation.
+5. Click on `Tools` from the `Clang Power Tools` menu.
+   ![clang-format settings](https://clangpowertools.com/assets/blog/get-started-with-clang-power-tools/SettingsToolbar.png)
+6. If you do not have `LLVM` installed, go to the `LLVM` tab and install any version.
+7. After installation, navigate to `Format` tab and turn on `Format on save`.
+8. Your code will now be formatted on save.
+
 ## Steps for GitFlow workflow
 
 * To merge changes to branch:
