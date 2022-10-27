@@ -238,7 +238,7 @@ void System::init_md2_animation(entt::registry& registry, entt::entity entity) {
 }
 
 void System::init_statemachine(entt::registry& registry, entt::entity entity) {
-	auto& lua = LuaManager::get_instance().get_state();
+	const auto& lua = LuaManager::get_instance().get_state();
 
 	auto& statemachine = registry.get<Component::Statemachine>(entity);
 
@@ -401,14 +401,18 @@ void System::update_statemachine(ECS& ecs) {
 }
 
 void System::update_affordance_agent(ECS& ecs) {
-	ecs.get_registry().view<Component::AffordanceAgent>().each(
+	auto& registry = ecs.get_registry();
+
+	registry.view<Component::Transform, Component::AffordanceAgent>().each(
 	    [&](auto agent_id, auto& agent) {
 		    auto& entity = ecs.get_entity(agent_id);
 
 		    Affordance::evaluate_utility(entity);
 
-		    registry.view<Component::Affordance>().each(
-		        [&](auto affordance_id, auto& affordance) {});
+		    registry.view<Component::Transform, Component::Affordance>().each(
+		        [&](auto& transform, auto& affordance) {
+
+		        });
 	    });
 }
 

@@ -8,18 +8,20 @@
 #include "Controller/Affordance/AffordanceUtility.hpp"
 #include "Controller/ECS/Entity.hpp"
 
+using namespace Affordance;
+
 namespace Component {
 struct AffordanceAgent {
-	Affordance::Properties properties;
-	Affordance::PropertiesWeight property_weights;
-	Affordance::AffordanceUtility utility;
+	Properties properties;
+	PropertiesWeight property_weights;
+	AffordanceUtility utility;
 
 	AffordanceAgent() = default;
 
 	AffordanceAgent(const AffordanceAgent&) = default;
 
-	AffordanceAgent(const Affordance::Properties& properties,
-	                const Affordance::PropertiesWeight& property_weights)
+	AffordanceAgent(const Properties& properties,
+	                const PropertiesWeight& property_weights)
 	    : properties(properties), property_weights(property_weights) {}
 };
 }  // namespace Component
