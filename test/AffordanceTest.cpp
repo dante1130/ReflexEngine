@@ -2,33 +2,38 @@
 
 #include "Controller/LuaManager.hpp"
 #include "Controller/Affordance/AffordanceSystem.hpp"
+#include "Controller/Affordance/AffordanceHelper.hpp"
 
-TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
+auto lua_script(const std::string& script) -> void {
+	auto& lua = LuaManager::get_instance().get_state();
+
+	auto result = lua.safe_script(script, sol::script_pass_on_error);
+	if (!result.valid()) {
+		FAIL(result.get<sol::error>().what());
+	}
+}
+
+TEST_CASE("Affordance composite tests", "[AffordanceComposite]") {
 	auto& affordance_system = Affordance::AffordanceSystem::get_instance();
 	affordance_system.lua_access();
 
 	SECTION("Creating an affordance leaf") {
 		auto& lua = LuaManager::get_instance().get_state();
 
-		sol::optional<sol::error> maybe_error =
-		    lua.safe_script(R"(
+		lua_script(R"(
 			function hello()
 				return "hello"
 			end
 
 			affordance = AffordanceLeaf.new("test", {"test"}, hello)
-		)",
-		                    sol::script_pass_on_error);
+		)");
 
-		if (maybe_error) {
-			FAIL(maybe_error.value().what());
-		}
-
-		std::shared_ptr<Affordance::AffordanceLeaf> affordance =
+		std::shared_ptr<Affordance::AffordanceLeaf>& affordance =
 		    lua["affordance"];
 
 		std::string result = affordance->get_function()();
 
+		REQUIRE(affordance.use_count() == 1);
 		REQUIRE(affordance->get_name() == "test");
 		REQUIRE(affordance->get_properties() == Affordance::Properties{"test"});
 		REQUIRE(affordance->is_composite() == false);
@@ -38,23 +43,18 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 	SECTION("Creating an affordance composite") {
 		auto& lua = LuaManager::get_instance().get_state();
 
-		sol::optional<sol::error> maybe_error =
-		    lua.safe_script(R"(
+		lua_script(R"(
 			function hello()
 				return "hello"
 			end
 
 			affordance = AffordanceComposite.new("test", {"test"}, {AffordanceLeaf.new("test", {"test"}, hello)})
-		)",
-		                    sol::script_pass_on_error);
+		)");
 
-		if (maybe_error) {
-			FAIL(maybe_error.value().what());
-		}
-
-		std::shared_ptr<Affordance::AffordanceComposite> affordance =
+		std::shared_ptr<Affordance::AffordanceComposite>& affordance =
 		    lua["affordance"];
 
+		REQUIRE(affordance.use_count() == 1);
 		REQUIRE(affordance->get_name() == "test");
 		REQUIRE(affordance->get_properties() == Affordance::Properties{"test"});
 		REQUIRE(affordance->is_composite() == true);
@@ -77,8 +77,7 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 	SECTION("Creating a nested affordance") {
 		auto& lua = LuaManager::get_instance().get_state();
 
-		sol::optional<sol::error> maybe_error =
-		    lua.safe_script(R"(
+		lua_script(R"(
 			function sit() 
 				return "sitting"
 			end
@@ -104,15 +103,12 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 			})
 
 			sitting_affordance:add_affordance(AffordanceLeaf.new("Stand", {"Stand"}, stand))
-		)",
-		                    sol::script_pass_on_error);
+		)");
 
-		if (maybe_error) {
-			FAIL(maybe_error.value().what());
-		}
-
-		std::shared_ptr<Affordance::AffordanceComposite> sitting_affordance =
+		std::shared_ptr<Affordance::AffordanceComposite>& sitting_affordance =
 		    lua["sitting_affordance"];
+
+		REQUIRE(sitting_affordance.use_count() == 1);
 
 		REQUIRE(sitting_affordance->get_name() == "Sitting");
 		REQUIRE(sitting_affordance->get_properties() ==
@@ -184,10 +180,7 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 	}
 
 	SECTION("Storing an affordance in the AffordanceSystem") {
-		auto& lua = LuaManager::get_instance().get_state();
-
-		sol::optional<sol::error> maybe_error =
-		    lua.safe_script(R"(
+		lua_script(R"(
 			function sit() 
 				return "sitting"
 			end
@@ -204,7 +197,7 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 				return "standing"
 			end
 
-			sitting_affordance = AffordanceComposite.new("Sitting", {"Sitting"}, {
+			local sitting_affordance = AffordanceComposite.new("Sitting", {"Sitting"}, {
 				AffordanceLeaf.new("Sit default", {}, sit),
 				AffordanceComposite.new("Human", {"Human"}, {
 					AffordanceLeaf.new("Crossleg", {"Crossleg"}, sit_crosslegged),
@@ -212,14 +205,160 @@ TEST_CASE("Affordance system tests", "[AffordanceSystem]") {
 				})
 			})
 
-			sitting_affordance:add_affordance(AffordanceLeaf.new("Stand", {"Stand"}, stand))
+			local chair_affordance = AffordanceComposite.new("Chair", {}, {
+				sitting_affordance,
+				AffordanceLeaf.new("Stand", {"Stand"}, stand)
+			})
 
-			AffordanceSystem.set_affordance("chair", sitting_affordance);
-		)",
-		                    sol::script_pass_on_error);
+			AffordanceSystem.set_affordance("chair", chair_affordance);
 
-		if (maybe_error) {
-			FAIL(maybe_error.value().what());
-		}
+			chair_affordance = nil
+			sitting_affordance = nil
+			collectgarbage()
+		)");
+
+		auto chair = std::dynamic_pointer_cast<Affordance::AffordanceComposite>(
+		    affordance_system.get_affordance("chair"));
+
+		REQUIRE(chair.use_count() == 2);
+		REQUIRE(chair->get_name() == "Chair");
+		REQUIRE(chair->get_properties().empty());
+		REQUIRE(chair->is_composite() == true);
+
+		auto sitting_affordance =
+		    std::dynamic_pointer_cast<Affordance::AffordanceComposite>(
+		        chair->get_affordances()[0]);
+
+		REQUIRE(sitting_affordance.use_count() == 2);
+		REQUIRE(sitting_affordance->get_name() == "Sitting");
+		REQUIRE(sitting_affordance->get_properties() ==
+		        Affordance::Properties{"Sitting"});
+		REQUIRE(sitting_affordance->is_composite() == true);
+
+		auto stand_affordance =
+		    std::dynamic_pointer_cast<Affordance::AffordanceLeaf>(
+		        chair->get_affordances()[1]);
+
+		REQUIRE(stand_affordance.use_count() == 2);
+		REQUIRE(stand_affordance->get_name() == "Stand");
+		REQUIRE(stand_affordance->get_properties() ==
+		        Affordance::Properties{"Stand"});
+		REQUIRE(stand_affordance->is_composite() == false);
+
+		std::string stand_result = stand_affordance->get_function()();
+		REQUIRE(stand_result == "standing");
+
+		affordance_system.clear_affordances();
+	}
+}
+
+TEST_CASE("Affordance helper functions test", "[AffordanceHelper]") {
+	auto& affordance_system = Affordance::AffordanceSystem::get_instance();
+	affordance_system.lua_access();
+
+	SECTION("Finding affordances given properties") {
+		lua_script(R"(
+			function sit() 
+				return "sitting"
+			end
+
+			function sit_crosslegged()
+				return sit() .. " crosslegged"
+			end
+
+			function sit_straight()
+				return sit() .. " straight"
+			end
+
+			function stand()
+				return "standing"
+			end
+
+			local sitting_affordance = AffordanceComposite.new("Sitting", {"Sitting"}, {
+				AffordanceLeaf.new("Sit default", {}, sit),
+				AffordanceComposite.new("Human", {"Human"}, {
+					AffordanceLeaf.new("Crossleg", {"Crossleg"}, sit_crosslegged),
+					AffordanceLeaf.new("Straight", {"Straight"}, sit_straight)
+				})
+			})
+
+			local chair_affordance = AffordanceComposite.new("Chair", {}, {
+				sitting_affordance,
+				AffordanceLeaf.new("Stand", {"Stand"}, stand)
+			})
+
+			AffordanceSystem.set_affordance("chair", chair_affordance);
+
+			chair_affordance = nil
+			sitting_affordance = nil
+			collectgarbage()
+		)");
+
+		auto affordance = Affordance::find_affordance(
+		    affordance_system.get_affordance("chair"),
+		    {"Sitting", "Human", "Crossleg"}, {});
+
+		REQUIRE(affordance->is_composite() == false);
+		auto affordance_leaf =
+		    std::dynamic_pointer_cast<Affordance::AffordanceLeaf>(affordance);
+
+		REQUIRE(affordance_leaf->get_name() == "Crossleg");
+		REQUIRE(affordance_leaf->get_properties() ==
+		        Affordance::Properties{"Crossleg"});
+
+		std::string affordance_result = affordance_leaf->get_function()();
+		REQUIRE(affordance_result == "sitting crosslegged");
+
+		affordance_system.clear_affordances();
+	}
+
+	SECTION("Finding a composite with no children") {
+		lua_script(R"(
+			function sit() 
+				return "sitting"
+			end
+
+			function sit_crosslegged()
+				return sit() .. " crosslegged"
+			end
+
+			function sit_straight()
+				return sit() .. " straight"
+			end
+
+			local sitting_affordance = AffordanceComposite.new("Sitting", {"Sitting"}, {
+				AffordanceLeaf.new("Sit default", {}, sit),
+				AffordanceComposite.new("Human", {"Human"}, {
+					AffordanceLeaf.new("Crossleg", {"Crossleg"}, sit_crosslegged),
+					AffordanceLeaf.new("Straight", {"Straight"}, sit_straight)
+				})
+			})
+
+			local chair_affordance = AffordanceComposite.new("Chair", {}, {
+				sitting_affordance,
+				AffordanceComposite.new("Alien", {"Alien"}, {})
+			})
+
+			AffordanceSystem.set_affordance("chair", chair_affordance);
+
+			chair_affordance = nil
+			sitting_affordance = nil
+			collectgarbage()
+		)");
+
+		auto affordance = Affordance::find_affordance(
+		    affordance_system.get_affordance("chair"), {"Alien"}, {});
+
+		REQUIRE(affordance->is_composite() == true);
+		auto affordance_composite =
+		    std::dynamic_pointer_cast<Affordance::AffordanceComposite>(
+		        affordance);
+
+		REQUIRE(affordance_composite->get_name() == "Alien");
+		REQUIRE(affordance_composite->get_properties() ==
+		        Affordance::Properties{"Alien"});
+		REQUIRE(affordance_composite->get_affordances().empty());
+
+		affordance_system.clear_affordances();
 	}
 }

@@ -42,9 +42,16 @@ public:
 	 */
 	auto get_affordance(const std::string& object) -> AffordancePtr;
 
+	/**
+	 * @brief Clear the affordance system. Used when the simulation is exited.
+	 */
+	auto clear_affordances() -> void;
+
 private:
 	AffordanceSystem() = default;
 
+	/// The map of affordances, associating between an object and its
+	/// affordances
 	AffordanceMap affordance_map_;
 };
 }  // namespace Affordance
