@@ -32,10 +32,10 @@ TEST_CASE("Emotion system tests", "[EmotionSystem]") {
 		Emotion::EmotionState rage_emotion =
 		    emotion_system.find_emotion("RAGE");
 
-		REQUIRE(rage_emotion.joy_sadness == 0.0f);
-		REQUIRE(rage_emotion.trust_disgust == 0.0f);
-		REQUIRE(rage_emotion.fear_anger == 0.2f);
-		REQUIRE(rage_emotion.surprise_anticipation == 0.0f);
+		REQUIRE(rage_emotion.joy_sadness == 0.0F);
+		REQUIRE(rage_emotion.trust_disgust == 0.0F);
+		REQUIRE(rage_emotion.fear_anger == 0.2F);
+		REQUIRE(rage_emotion.surprise_anticipation == 0.0F);
 	}
 	SECTION("Creating an agent") {}
 	SECTION("Applying an emotion to an agent") {}
