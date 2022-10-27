@@ -13,5 +13,13 @@ struct AffordanceAgent {
 	Affordance::Properties properties;
 	Affordance::PropertiesWeight property_weights;
 	Affordance::AffordanceUtility utility;
+
+	AffordanceAgent() = default;
+
+	AffordanceAgent(const AffordanceAgent&) = default;
+
+	AffordanceAgent(const Affordance::Properties& properties,
+	                const Affordance::PropertiesWeight& property_weights)
+	    : properties(properties), property_weights(property_weights) {}
 };
 }  // namespace Component
