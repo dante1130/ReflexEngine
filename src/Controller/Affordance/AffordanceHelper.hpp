@@ -4,9 +4,6 @@
 #include "Controller/ECS/Entity.hpp"
 
 namespace Affordance {
-auto find_objects(const Properties& properties, size_t depth)
-    -> std::vector<AffordancePtr>;
-
 /**
  * @brief Find the best affordance from a list of affordances.
  * Determines the best affordance by comparing the properties of the

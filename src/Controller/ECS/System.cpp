@@ -4,6 +4,8 @@
 #include "Controller/ResourceManager/ResourceManager.hpp"
 #include "Controller/LuaManager.hpp"
 #include "Controller/Physics/Physics.hpp"
+#include "Controller/Affordance/AffordanceHelper.hpp"
+#include "Controller/Affordance/AffordanceSystem.hpp"
 
 #include "Model/RunTimeDataStorage/GlobalDataStorage.hpp"
 
@@ -397,7 +399,17 @@ void System::update_statemachine(ECS& ecs) {
 	}
 }
 
-void System::update_affordance_agent(entt::registry& registry) {}
+void System::update_affordance_agent(ECS& ecs) {
+	ecs.get_registry().view<Component::AffordanceAgent>().each(
+	    [&](auto agent_id, auto& agent) {
+		    auto& entity = ecs.get_entity(agent_id);
+
+		    Affordance::evaluate_utility(entity);
+
+		    registry.view<Component::Affordance>().each(
+		        [&](auto affordance_id, auto& affordance) {});
+	    });
+}
 
 void System::delete_directional_light(entt::registry& registry,
                                       entt::entity entity) {

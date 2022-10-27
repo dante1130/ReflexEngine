@@ -6,6 +6,7 @@
 
 #include "Controller/Affordance/Affordance.hpp"
 #include "Controller/Affordance/AffordanceUtility.hpp"
+#include "Controller/ECS/Entity.hpp"
 
 namespace Component {
 struct AffordanceAgent {
