@@ -1,6 +1,8 @@
 #include "AStarInterface.h"
 
-AStar::AStar() {
+#include <iostream>
+
+AStar::AStar() : grid_ratio_(1.0F) {
 	movementCosts[0] = 1;
 	movementCosts[1] = 1.414;
 	movementCosts[2] = 0;
@@ -11,6 +13,9 @@ AStar::AStar() {
 
 	gridSize[0] = 0;
 	gridSize[1] = 0;
+
+	start_offset_[0] = 0;
+	start_offset_[1] = 0;
 }
 
 std::vector<std::vector<DistanceNode>> AStar::findPath(int xStart, int yStart,
@@ -206,3 +211,21 @@ bool AStar::setMaxDistance(float val) {
 }
 
 std::vector<std::vector<int>>& AStar::getGrid() { return grid; }
+
+auto AStar::set_grid_ratio(float ratio) -> void {
+	if (ratio <= 0) {
+		return;
+	}
+	grid_ratio_ = ratio;
+}
+auto AStar::get_grid_ratio() -> float { return grid_ratio_; }
+
+auto AStar::set_grid_offset(int x_offset, int y_offset) -> void {
+	start_offset_[0] = x_offset;
+	start_offset_[1] = y_offset;
+}
+
+auto AStar::get_grid_offset(int& x_offset, int& y_offset) -> void {
+	x_offset = start_offset_[0];
+	y_offset = start_offset_[0];
+}

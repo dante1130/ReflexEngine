@@ -1,10 +1,6 @@
-#ifndef ASTARINTERFACE_H
-#define ASTARINTERFACE_H
+#pragma once
 
 #include "AStar.h"
-
-#include <iostream>
-
 #include <vector>
 
 class AStar {
@@ -41,7 +37,7 @@ public:
 	 * @param	ySize	- The size of the grid in the yDirection (up/down)
 	 * @return	bool	- If it was successful
 	 */
-	bool setGrid(int **newGrid, int xSize, int ySize);
+	bool setGrid(int** newGrid, int xSize, int ySize);
 
 	/**
 	 * @brief	Sets diagonal movement cost
@@ -51,7 +47,7 @@ public:
 	bool setDiagonalMovementCost(float val);
 
 	/**
-	 * @brief
+	 * @brief	Sets the non diagonal movement cost
 	 * @param	val		- Sets the cost to move non-diagonally
 	 * @return	bool	- If it was successful
 	 */
@@ -91,7 +87,37 @@ public:
 	 * @brief	Returns the set grid
 	 * @return	std::vector<std::vector<int>> &	- The set grid
 	 */
-	std::vector<std::vector<int>> &getGrid();
+	std::vector<std::vector<int>>& getGrid();
+
+	/**
+	 * @brief Set the grid ratio
+	 *
+	 * @param ratio the new ratio of the grid
+	 */
+	auto set_grid_ratio(float ratio) -> void;
+
+	/**
+	 * @brief Get the grid ratio
+	 *
+	 * @return float
+	 */
+	auto get_grid_ratio() -> float;
+
+	/**
+	 * @brief Set the grid offset
+	 *
+	 * @param x_offset the new x offset
+	 * @param y_offset the new y offset
+	 */
+	auto set_grid_offset(int x_offset, int y_offset) -> void;
+
+	/**
+	 * @brief Get the grid offset object
+	 *
+	 * @param x_offset the x offset
+	 * @param y_offset the y offset
+	 */
+	auto get_grid_offset(int& x_offset, int& y_offset) -> void;
 
 private:
 	/**
@@ -140,6 +166,15 @@ private:
 	/// The max distance allowed till the algorithm exits
 	/// </summary>
 	float maxDistance;
-};
 
-#endif
+	/// The offset for the input start & end values
+	/// start_offset_[0] - x offset
+	/// start_offset_[1] - y offset
+	int start_offset_[2];
+
+	/// The grid scale
+	/// 1 is 1 to 1 ratio
+	/// 0.5 is 2 units in real is 1 in grid
+	/// 2 is 1 unit in real is 2 in grid
+	float grid_ratio_;
+};
