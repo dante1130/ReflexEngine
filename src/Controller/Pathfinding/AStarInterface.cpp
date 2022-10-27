@@ -2,14 +2,11 @@
 
 #include <iostream>
 
-AStar::AStar() : grid_ratio_(1.0F) {
+AStar::AStar()
+    : heuristicsCostScale(1.2F), maxDistance(1000), grid_ratio_(1.0F) {
 	movementCosts[0] = 1;
 	movementCosts[1] = 1.414;
 	movementCosts[2] = 0;
-
-	heuristicsCostScale = 1.2;
-
-	maxDistance = 1000;
 
 	gridSize[0] = 0;
 	gridSize[1] = 0;
@@ -25,10 +22,10 @@ std::vector<std::vector<DistanceNode>> AStar::findPath(int xStart, int yStart,
 	}
 
 	node start, end;
-	start.x = xStart;
-	start.y = yStart;
-	end.x = xEnd;
-	end.y = yEnd;
+	start.x = (xStart - start_offset_[0]) * grid_ratio_;
+	start.y = (yStart - start_offset_[1]) * grid_ratio_;
+	end.x = (xEnd - start_offset_[0]) * grid_ratio_;
+	end.y = (yEnd - start_offset_[1]) * grid_ratio_;
 
 	std::vector<std::vector<DistanceNode>> path;
 
@@ -81,8 +78,8 @@ void AStar::printAstarException(int val) {
 	return;
 }
 
-bool AStar::setGrid(std::vector<std::vector<int>> newGrid) {
-	grid = newGrid;
+bool AStar::setGrid(std::vector<std::vector<int>>& newGrid) {
+	grid = std::move(newGrid);
 
 	gridSize[0] = grid.size();
 	gridSize[1] = grid[0].size();
@@ -99,39 +96,6 @@ bool AStar::setGrid(std::vector<std::vector<int>> newGrid) {
 	*/
 
 	return false;
-}
-
-bool AStar::setGrid(int** newGrid, int xSize, int ySize) {
-	if (xSize < 1 || ySize < 1) {
-		return false;
-	}
-
-	std::vector<int> row;
-
-	for (int count = 0; count < ySize; count++) {
-		for (int countTwo = 0; countTwo < xSize; countTwo++) {
-			row.push_back(newGrid[count][countTwo]);
-		}
-
-		grid.push_back(row);
-		row.clear();
-	}
-
-	gridSize[0] = ySize;
-	gridSize[1] = xSize;
-
-	/*
-	for (int count = 0; count < gridSize[0]; count++)
-	{
-	    for (int countTwo = 0; countTwo < gridSize[1]; countTwo++)
-	    {
-	        std::cout << grid[count][countTwo] << ' ';
-	    }
-	    std::cout << std::endl;
-	}
-	*/
-
-	return true;
 }
 
 bool AStar::setDiagonalMovementCost(float val) {
@@ -212,13 +176,13 @@ bool AStar::setMaxDistance(float val) {
 
 std::vector<std::vector<int>>& AStar::getGrid() { return grid; }
 
-auto AStar::set_grid_ratio(float ratio) -> void {
+auto AStar::set_grid_ratio(int ratio) -> void {
 	if (ratio <= 0) {
 		return;
 	}
 	grid_ratio_ = ratio;
 }
-auto AStar::get_grid_ratio() -> float { return grid_ratio_; }
+auto AStar::get_grid_ratio() -> int { return grid_ratio_; }
 
 auto AStar::set_grid_offset(int x_offset, int y_offset) -> void {
 	start_offset_[0] = x_offset;
@@ -228,4 +192,13 @@ auto AStar::set_grid_offset(int x_offset, int y_offset) -> void {
 auto AStar::get_grid_offset(int& x_offset, int& y_offset) -> void {
 	x_offset = start_offset_[0];
 	y_offset = start_offset_[0];
+}
+
+auto AStar::set_coordiante_value(int x_point, int y_point, int new_value)
+    -> bool {
+	if (x_point >= gridSize[0] || y_point >= gridSize[1]) {
+		return false;
+	}
+	grid[x_point][y_point] = new_value;
+	return true;
 }

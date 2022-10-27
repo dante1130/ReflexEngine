@@ -27,17 +27,19 @@ public:
 	 * everything else it is not allowed to move into)
 	 * @return	bool	- If it was successful
 	 */
-	bool setGrid(std::vector<std::vector<int>> newGrid);
+	bool setGrid(std::vector<std::vector<int>>& newGrid);
 
 	/**
-	 * @brief	Sets the grid to be used
-	 * @param	newGrid	- The grid to store information from (0 = free space,
-	 * everything else it is not allowed to move into)
-	 * @param	xSize	- The size of the grid in the xDirection (left/right)
-	 * @param	ySize	- The size of the grid in the yDirection (up/down)
-	 * @return	bool	- If it was successful
+	 * @brief Set a point in the grid to a specific value
+	 *
+	 * @param x_point specified the x coordinate
+	 * @param y_point specifies the y coordiante
+	 * @param new_value the new value to set in the position (0 is free, else
+	 * blocked)
+	 * @return true done successfully
+	 * @return false problem encountered (out of range)
 	 */
-	bool setGrid(int** newGrid, int xSize, int ySize);
+	auto set_coordiante_value(int x_point, int y_point, int new_value) -> bool;
 
 	/**
 	 * @brief	Sets diagonal movement cost
@@ -94,14 +96,14 @@ public:
 	 *
 	 * @param ratio the new ratio of the grid
 	 */
-	auto set_grid_ratio(float ratio) -> void;
+	auto set_grid_ratio(int ratio) -> void;
 
 	/**
 	 * @brief Get the grid ratio
 	 *
-	 * @return float
+	 * @return int
 	 */
-	auto get_grid_ratio() -> float;
+	auto get_grid_ratio() -> int;
 
 	/**
 	 * @brief Set the grid offset
@@ -173,8 +175,7 @@ private:
 	int start_offset_[2];
 
 	/// The grid scale
-	/// 1 is 1 to 1 ratio
-	/// 0.5 is 2 units in real is 1 in grid
-	/// 2 is 1 unit in real is 2 in grid
-	float grid_ratio_;
+	/// 1 is 1 unit in real to 1 in grid (1-1 ratio)
+	/// 2 is 1 unit in real is 2 in grid (1-2 ratio)
+	int grid_ratio_;
 };
