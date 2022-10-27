@@ -170,8 +170,8 @@ private:
 	float maxDistance;
 
 	/// The offset for the input start & end values
-	/// start_offset_[0] - x offset
-	/// start_offset_[1] - y offset
+	/// start_offset_[0] - y offset
+	/// start_offset_[1] - x offset
 	int start_offset_[2];
 
 	/// The grid scale

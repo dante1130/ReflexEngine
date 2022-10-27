@@ -22,10 +22,10 @@ std::vector<std::vector<DistanceNode>> AStar::findPath(int xStart, int yStart,
 	}
 
 	node start, end;
-	start.x = (xStart - start_offset_[0]) * grid_ratio_;
-	start.y = (yStart - start_offset_[1]) * grid_ratio_;
-	end.x = (xEnd - start_offset_[0]) * grid_ratio_;
-	end.y = (yEnd - start_offset_[1]) * grid_ratio_;
+	start.x = (xStart - start_offset_[1]) * grid_ratio_;
+	start.y = (yStart - start_offset_[0]) * grid_ratio_;
+	end.x = (xEnd - start_offset_[1]) * grid_ratio_;
+	end.y = (yEnd - start_offset_[0]) * grid_ratio_;
 
 	std::vector<std::vector<DistanceNode>> path;
 
@@ -143,7 +143,7 @@ bool AStar::setHeuristicsCostScale(float val) {
 
 bool AStar::setGridSizeX(int xSize) {
 	if (xSize < 1) {
-		xSize = 1;
+		gridSize[1] = 1;
 		return false;
 	}
 
@@ -154,7 +154,7 @@ bool AStar::setGridSizeX(int xSize) {
 
 bool AStar::setGridSizeY(int ySize) {
 	if (ySize < 1) {
-		ySize = 1;
+		gridSize[0] = 1;
 		return false;
 	}
 
@@ -185,18 +185,18 @@ auto AStar::set_grid_ratio(int ratio) -> void {
 auto AStar::get_grid_ratio() -> int { return grid_ratio_; }
 
 auto AStar::set_grid_offset(int x_offset, int y_offset) -> void {
-	start_offset_[0] = x_offset;
-	start_offset_[1] = y_offset;
+	start_offset_[1] = x_offset;
+	start_offset_[0] = y_offset;
 }
 
 auto AStar::get_grid_offset(int& x_offset, int& y_offset) -> void {
-	x_offset = start_offset_[0];
+	x_offset = start_offset_[1];
 	y_offset = start_offset_[0];
 }
 
 auto AStar::set_coordiante_value(int x_point, int y_point, int new_value)
     -> bool {
-	if (x_point >= gridSize[0] || y_point >= gridSize[1]) {
+	if (x_point >= gridSize[1] || y_point >= gridSize[0]) {
 		return false;
 	}
 	grid[x_point][y_point] = new_value;
