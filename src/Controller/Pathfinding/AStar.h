@@ -20,12 +20,12 @@ struct node {
 	/// <summary>
 	/// The x position
 	/// </summary>
-	int x = 0.0F;
+	int x = 0;
 
 	/// <summary>
 	/// The y position
 	/// </summary>
-	int y = 0.0F;
+	int y = 0;
 };
 
 struct DistanceNode {

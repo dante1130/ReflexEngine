@@ -1,6 +1,7 @@
 #include "AStarInterface.h"
 
 #include <iostream>
+#include <stack>
 
 AStar::AStar()
     : heuristicsCostScale(1.2F), maxDistance(1000), grid_ratio_(1.0F) {
@@ -15,24 +16,59 @@ AStar::AStar()
 	start_offset_[1] = 0;
 }
 
-std::vector<std::vector<DistanceNode>> AStar::findPath(int xStart, int yStart,
-                                                       int xEnd, int yEnd) {
+auto AStar::findPath(float xStart, float yStart, float xEnd, float yEnd)
+    -> std::queue<std::pair<float, float>> {
 	if (grid.empty()) {
 		throw(GRID_UNINITIALISED);
 	}
 
-	node start, end;
-	start.x = (xStart - start_offset_[1]) * grid_ratio_;
-	start.y = (yStart - start_offset_[0]) * grid_ratio_;
-	end.x = (xEnd - start_offset_[1]) * grid_ratio_;
-	end.y = (yEnd - start_offset_[0]) * grid_ratio_;
+	node start;
+	start.x = static_cast<int>((xStart - start_offset_[1]) * grid_ratio_);
+	start.y = static_cast<int>((yStart - start_offset_[0]) * grid_ratio_);
+	node end;
+	end.x = static_cast<int>((xEnd - start_offset_[1]) * grid_ratio_);
+	end.y = static_cast<int>((yEnd - start_offset_[0]) * grid_ratio_);
 
 	std::vector<std::vector<DistanceNode>> path;
 
 	path = aStar::aStarSearch(grid, movementCosts, heuristicsCostScale,
 	                          gridSize, start, end, maxDistance);
 
-	return path;
+	std::stack<std::pair<float, float>> reversed_path;
+
+	auto x_pos = end.x;
+	auto y_pos = end.y;
+	auto found = false;
+	auto max_dist = static_cast<int>(maxDistance);
+	for (auto count = 0; count < max_dist; ++count) {
+		auto pair = std::pair<float, float>(path[y_pos][x_pos].parentNode.x,
+		                                    path[y_pos][x_pos].parentNode.y);
+
+		x_pos = static_cast<int>(pair.first);
+		y_pos = static_cast<int>(pair.second);
+
+		pair.second = (pair.first + start_offset_[1]) / grid_ratio_;
+		pair.second = (pair.second + start_offset_[1]) / grid_ratio_;
+
+		reversed_path.push(pair);
+
+		if (x_pos == end.x && y_pos == end.y) {
+			found = true;
+			break;
+		}
+	}
+
+	if (!found) {
+		return std::queue<std::pair<float, float>>();
+	}
+
+	std::queue<std::pair<float, float>> processed_path;
+	auto path_size = reversed_path.size();
+	for (auto count = 0; count < path_size; ++count) {
+		processed_path.push(reversed_path.top());
+		reversed_path.pop();
+	}
+	return processed_path;
 }
 
 void AStar::printAstarException(int val) {
@@ -82,7 +118,7 @@ bool AStar::setGrid(std::vector<std::vector<int>>& newGrid) {
 	gridSize[0] = grid.size();
 	gridSize[1] = grid[0].size();
 
-	return false;
+	return true;
 }
 
 bool AStar::setDiagonalMovementCost(float val) {
@@ -161,30 +197,35 @@ bool AStar::setMaxDistance(float val) {
 
 std::vector<std::vector<int>>& AStar::getGrid() { return grid; }
 
-auto AStar::set_grid_ratio(int ratio) -> void {
+auto AStar::set_grid_ratio(float ratio) -> void {
 	if (ratio <= 0) {
 		return;
 	}
 	grid_ratio_ = ratio;
 }
-auto AStar::get_grid_ratio() -> int { return grid_ratio_; }
+auto AStar::get_grid_ratio() -> float { return grid_ratio_; }
 
-auto AStar::set_grid_offset(int x_offset, int y_offset) -> void {
+auto AStar::set_grid_offset(float x_offset, float y_offset) -> void {
 	start_offset_[1] = x_offset;
 	start_offset_[0] = y_offset;
 }
 
-auto AStar::get_grid_offset(int& x_offset, int& y_offset) -> void {
-	x_offset = start_offset_[1];
-	y_offset = start_offset_[0];
+auto AStar::get_grid_offset() -> std::pair<float, float> {
+	return std::pair<float, float>(start_offset_[1], start_offset_[0]);
 }
 
-auto AStar::set_coordiante_value(int x_point, int y_point, int new_value)
+auto AStar::set_coordiante_value(float x_point, float y_point, int new_value)
     -> bool {
-	if (x_point >= gridSize[1] || y_point >= gridSize[0]) {
+	x_point = (x_point - start_offset_[1]) * grid_ratio_;
+	y_point = (y_point - start_offset_[0]) * grid_ratio_;
+
+	int x_coord = static_cast<int>(x_point);
+	int y_coord = static_cast<int>(y_point);
+
+	if (x_coord >= gridSize[1] || y_coord >= gridSize[0]) {
 		return false;
 	}
-	grid[x_point][y_point] = new_value;
+	grid[x_coord][y_coord] = new_value;
 	return true;
 }
 

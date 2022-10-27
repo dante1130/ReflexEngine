@@ -2,6 +2,7 @@
 
 #include "AStar.h"
 #include <vector>
+#include <queue>
 
 class AStar {
 public:
@@ -18,13 +19,14 @@ public:
 	 * @param yEnd	- The ending yLocation (up and down)
 	 *
 	 */
-	std::vector<std::vector<DistanceNode>> findPath(int xStart, int yStart,
-	                                                int xEnd, int yEnd);
+	auto findPath(float xStart, float yStart, float xEnd, float yEnd)
+	    -> std::queue<std::pair<float, float>>;
 
 	/**
 	 * @brief	Sets the grid to be used
-	 * @param	newGrid	- The grid to store information from (0 = free space,
-	 * everything else it is not allowed to move into). std::move used
+	 * @param	newGrid	- The grid to store information from (0 = free
+	 * space, everything else it is not allowed to move into). std::move
+	 * used
 	 * @return	bool	- If it was successful
 	 */
 	bool setGrid(std::vector<std::vector<int>>& newGrid);
@@ -39,7 +41,8 @@ public:
 	 * @return true done successfully
 	 * @return false problem encountered (out of range)
 	 */
-	auto set_coordiante_value(int x_point, int y_point, int new_value) -> bool;
+	auto set_coordiante_value(float x_point, float y_point, int new_value)
+	    -> bool;
 
 	/**
 	 * @brief	Sets diagonal movement cost
@@ -102,14 +105,14 @@ public:
 	 *
 	 * @param ratio the new ratio of the grid
 	 */
-	auto set_grid_ratio(int ratio) -> void;
+	auto set_grid_ratio(float ratio) -> void;
 
 	/**
 	 * @brief Get the grid ratio
 	 *
-	 * @return int
+	 * @return float
 	 */
-	auto get_grid_ratio() -> int;
+	auto get_grid_ratio() -> float;
 
 	/**
 	 * @brief Set the grid offset
@@ -117,15 +120,12 @@ public:
 	 * @param x_offset the new x offset
 	 * @param y_offset the new y offset
 	 */
-	auto set_grid_offset(int x_offset, int y_offset) -> void;
+	auto set_grid_offset(float x_offset, float y_offset) -> void;
 
 	/**
 	 * @brief Get the grid offset object
-	 *
-	 * @param x_offset the x offset
-	 * @param y_offset the y offset
 	 */
-	auto get_grid_offset(int& x_offset, int& y_offset) -> void;
+	auto get_grid_offset() -> std::pair<float, float>;
 
 private:
 	/**
@@ -178,10 +178,10 @@ private:
 	/// The offset for the input start & end values
 	/// start_offset_[0] - y offset
 	/// start_offset_[1] - x offset
-	int start_offset_[2];
+	float start_offset_[2];
 
 	/// The grid scale
 	/// 1 is 1 unit in real to 1 in grid (1-1 ratio)
 	/// 2 is 1 unit in real is 2 in grid (1-2 ratio)
-	int grid_ratio_;
+	float grid_ratio_;
 };
