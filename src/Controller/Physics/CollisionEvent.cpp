@@ -64,14 +64,18 @@ auto CollisionEventListener::convert_local_point(
 	auto com_vec = static_cast<PhysicsBody*>(collider->getUserData())
 	                   ->get_center_of_mass();
 	auto trans = collider->getLocalToBodyTransform();
+	// Average collider contact point
 	local_point /= num;
 
-	DebugLogger::log("lpoint = ", std::to_string(local_point.x) + " " +
-	                                  std::to_string(local_point.y) + " " +
-	                                  std::to_string(local_point.z));
+	// Rotate point based on collider orientation to body
+	auto rp3d_quat = trans.getOrientation();
+	auto lp_rot = QuaternionHelper::RotateVectorWithQuat(
+	    glm::vec3(local_point.x, local_point.y, local_point.z),
+	    glm::quat(rp3d_quat.w, rp3d_quat.x, rp3d_quat.y, rp3d_quat.z));
 
+	// Get local point in terms of world coordinates
 	local_point = collision_body->getWorldVector(
-	    local_point + trans.getPosition() -
+	    rp3d::Vector3(lp_rot.x, lp_rot.y, lp_rot.z) + trans.getPosition() -
 	    rp3d::Vector3(com_vec.x, com_vec.y, com_vec.z));
 
 	return local_point;

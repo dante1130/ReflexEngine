@@ -105,8 +105,7 @@ void ReflexEngine::run() {
 			PERFORMANCE_LOGGER_POP();
 			PERFORMANCE_LOGGER_PUSH("Draw");
 			engine.renderer_.draw();
-			if (dataMan::Instance().getDynamicBoolData("show_physics_debug",
-			                                           true)) {
+			if (dataMgr.getDynamicBoolData("show_physics_debug", true)) {
 				engine.renderer_.draw_debug(collider_renderer);
 			}
 
