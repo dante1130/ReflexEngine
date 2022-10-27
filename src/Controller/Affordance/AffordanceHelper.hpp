@@ -20,5 +20,8 @@ auto find_affordance(const AffordancePtr& affordances,
                      const PropertiesWeight& properties_weight = {})
     -> AffordancePtr;
 
+auto has_affordance(const AffordancePtr& affordances,
+                    const Properties& properties) -> bool;
+
 auto evaluate_utility(const Reflex::Entity& entity) -> void;
 };  // namespace Affordance

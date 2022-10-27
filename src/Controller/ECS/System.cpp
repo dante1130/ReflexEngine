@@ -409,8 +409,10 @@ void System::update_affordance_agent(ECS& ecs) {
 
 		    Affordance::evaluate_utility(entity);
 
+		    std::vector<entt::entity> affordance_entities;
+
 		    registry.view<Component::Transform, Component::Affordance>().each(
-		        [&](auto& transform, auto& affordance) {
+		        [&](auto affordance_id, auto& transform, auto& affordance) {
 
 		        });
 	    });
