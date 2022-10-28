@@ -408,12 +408,19 @@ void System::update_affordance_agent(ECS& ecs) {
 	    [&](auto agent_id, auto& agent_transform, auto& agent) {
 		    const auto& agent_entity = ecs.get_entity(agent_id);
 
+		    // Updates the agent's utilities, can be anything from updating the
+		    // agent's context, emotions or any component that is in the agent.
 		    agent.utility.update_func(agent_entity);
+
+		    // Evaluates the agent's utility and determines the best action, an
+		    // affordance that the agent desires to interact in this case.
 		    Affordance::evaluate_utility(agent_entity);
 
+		    // Gets the best affordance.
 		    const auto& agent_decision_properties =
 		        agent.utility.states.at(agent.utility.decision).properties;
 
+		    // Distance is used to the agent to choose the nearest affordance.
 		    auto best_distance = std::numeric_limits<float>::max();
 
 		    registry.view<Component::Transform, Component::Affordance>().each(
@@ -422,12 +429,15 @@ void System::update_affordance_agent(ECS& ecs) {
 			        auto affordance_tree = affordance_system.get_affordance(
 			            affordance.object_name);
 
+			        // If the affordance has the affordance that the agent
+			        // desires
 			        if (Affordance::has_affordance(affordance_tree,
 			                                       agent_decision_properties)) {
 				        auto distance =
 				            glm::distance(agent_transform.position,
 				                          affordance_transform.position);
 
+				        // Determine if the affordance is the nearest affordance
 				        if (distance < best_distance) {
 					        best_distance = distance;
 					        agent.affordance = affordance_id;
@@ -443,14 +453,18 @@ void System::update_affordance_agent(ECS& ecs) {
 		    auto affordance = affordance_system.get_affordance(
 		        affordance_component.object_name);
 
+		    // Find the affordance that the leaf that matches the agent's
+		    // decision properties and property weights.
 		    affordance = Affordance::find_affordance(
 		        affordance, agent_decision_properties, agent.property_weights);
 
+		    // If it is not a composite affordance, then it is has an action
 		    if (!affordance->is_composite()) {
 			    auto affordance_leaf =
 			        std::dynamic_pointer_cast<Affordance::AffordanceLeaf>(
 			            affordance);
 
+			    // Execute the affordance action.
 			    affordance_leaf->get_function()(agent_entity,
 			                                    affordance_entity);
 		    }
