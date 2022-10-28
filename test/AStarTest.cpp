@@ -152,17 +152,7 @@ TEST_CASE("A Star Pathfinding", "[AStarTest]") {
 		    level.findPath((0 / RATIO + X_OFFSET), (1 / RATIO + Y_OFFSET),
 		                   (4 / RATIO + X_OFFSET), (1 / RATIO + Y_OFFSET));
 
-		auto size = path.size();
-		REQUIRE(size == 16);
-		/*
-		for (int count = 0; count < size; ++count) {
-		    auto pair = path.front();
-		    path.pop();
-
-		    std::cout << pair.first << " : " << pair.second << std::endl;
-		}
-		REQUIRE(false);
-		*/
+		REQUIRE(path.size() == 16);
 
 		auto pair = path.front();
 		path.pop();
