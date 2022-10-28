@@ -32,6 +32,7 @@ add_library(ReflexEngineSrc
 	Controller/Affordance/AffordanceHelper.cpp
 	Controller/Affordance/Affordance.cpp
 	Controller/Affordance/AffordanceSystem.cpp
+	Controller/Emotion/Emotion.cpp
 	Controller/ECS/ECS.cpp
 	Controller/ECS/Entity.cpp
 	Controller/ECS/ECSAccess.cpp
