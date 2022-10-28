@@ -2,6 +2,7 @@
 
 #include "Controller/ResourceManager/TerrainManager.hpp"
 #include "Controller/ResourceManager/ResourceManager.hpp"
+#include "ReflexAssertion.hpp"
 
 void world::setWorld(std::string name) {
 	std::vector<std::vector<int>> grid;
@@ -122,17 +123,18 @@ float world::get_height(float x, float z) {
 
 std::queue<glm::vec2> world::pathFinding(float currX, float currZ,
                                          float targetX, float targetZ) {
+	/*
 	std::queue<glm::vec2> path;
 	std::vector<glm::vec2> inversePath;
 	std::vector<std::vector<DistanceNode>> rawPath;
 
 	try {
-		rawPath = m_aStar.findPath((int)currX, (int)currZ, (int)targetX,
-		                           (int)targetZ);
+	    rawPath = m_aStar.findPath((int)currX, (int)currZ, (int)targetX,
+	                               (int)targetZ);
 	} catch (AStarExceptions error) {
-		// m_aStar.printAstarException(error);
+	    // m_aStar.printAstarException(error);
 
-		return path;
+	    return path;
 	}
 	glm::vec2 end = glm::vec2(targetX, targetZ);
 	int temp;
@@ -141,30 +143,34 @@ std::queue<glm::vec2> world::pathFinding(float currX, float currZ,
 	bool running = true;
 
 	while (running) {
-		if ((int)currX == end.x && (int)currZ == end.y) {
-			running = false;
-		} else if (numberOfIt == 10000) {
-			std::cout << "failed a*pathfinding" << std::endl;
-			return path;
-		}
-		// std::cout << "Node: y = " << targetZ << " x = " << targetX
-		//           << " cost = " << rawPath[end.y][end.x].f
-		//           << " Parent: y: " << rawPath[end.y][end.x].parentNode.y
-		//           << " x: " << rawPath[end.y][end.x].parentNode.x <<
-		//           std::endl;
+	    if ((int)currX == end.x && (int)currZ == end.y) {
+	        running = false;
+	    } else if (numberOfIt == 10000) {
+	        std::cout << "failed a*pathfinding" << std::endl;
+	        return path;
+	    }
+	    // std::cout << "Node: y = " << targetZ << " x = " << targetX
+	    //           << " cost = " << rawPath[end.y][end.x].f
+	    //           << " Parent: y: " << rawPath[end.y][end.x].parentNode.y
+	    //           << " x: " << rawPath[end.y][end.x].parentNode.x <<
+	    //           std::endl;
 
-		inversePath.push_back(glm::vec2(end.x, end.y));
+	    inversePath.push_back(glm::vec2(end.x, end.y));
 
-		temp = end.x;
-		end.x = rawPath[end.y][end.x].parentNode.x;
-		end.y = rawPath[end.y][temp].parentNode.y;
-		numberOfIt++;
+	    temp = end.x;
+	    end.x = rawPath[end.y][end.x].parentNode.x;
+	    end.y = rawPath[end.y][temp].parentNode.y;
+	    numberOfIt++;
 	}
 
 	for (int count = inversePath.size() - 2; count >= 0; count--) {
-		path.push(inversePath[count]);
+	    path.push(inversePath[count]);
 	}
 
+	return path;
+	*/
+	REFLEX_ASSERT(false, "No longer used method called - world::pathFinding");
+	std::queue<glm::vec2> path;
 	return path;
 }
 

@@ -2,7 +2,6 @@
 
 #include "Controller/LuaManager.hpp"
 #include "Controller/Emotion/Emotion.hpp"
-#include "Model/Components/Agent.hpp"
 
 /* TO TEST:
  * Creating an emotion

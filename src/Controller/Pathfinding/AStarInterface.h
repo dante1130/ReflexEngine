@@ -1,11 +1,8 @@
-#ifndef ASTARINTERFACE_H
-#define ASTARINTERFACE_H
+#pragma once
 
 #include "AStar.h"
-
-#include <iostream>
-
 #include <vector>
+#include <queue>
 
 class AStar {
 public:
@@ -22,26 +19,36 @@ public:
 	 * @param yEnd	- The ending yLocation (up and down)
 	 *
 	 */
-	std::vector<std::vector<DistanceNode>> findPath(int xStart, int yStart,
-	                                                int xEnd, int yEnd);
+	auto findPath(float xStart, float yStart, float xEnd, float yEnd)
+	    -> std::queue<std::pair<float, float>>;
 
 	/**
 	 * @brief	Sets the grid to be used
-	 * @param	newGrid	- The grid to store information from (0 = free space,
-	 * everything else it is not allowed to move into)
+	 * @param	newGrid	- The grid to store information from (0 = free
+	 * space, everything else it is not allowed to move into). std::move
+	 * used
 	 * @return	bool	- If it was successful
 	 */
-	bool setGrid(std::vector<std::vector<int>> newGrid);
+	bool setGrid(std::vector<std::vector<int>>& newGrid);
 
 	/**
-	 * @brief	Sets the grid to be used
-	 * @param	newGrid	- The grid to store information from (0 = free space,
-	 * everything else it is not allowed to move into)
-	 * @param	xSize	- The size of the grid in the xDirection (left/right)
-	 * @param	ySize	- The size of the grid in the yDirection (up/down)
-	 * @return	bool	- If it was successful
+	 * @brief Resets the grid to the one set using setGrid
+	 *
 	 */
-	bool setGrid(int **newGrid, int xSize, int ySize);
+	auto reset_grid_to_original() -> void;
+
+	/**
+	 * @brief Set a point in the grid to a specific value
+	 *
+	 * @param x_point specified the x coordinate
+	 * @param y_point specifies the y coordiante
+	 * @param new_value the new value to set in the position (0 is free, else
+	 * blocked)
+	 * @return true done successfully
+	 * @return false problem encountered (out of range)
+	 */
+	auto set_coordiante_value(float x_point, float y_point, int new_value)
+	    -> bool;
 
 	/**
 	 * @brief	Sets diagonal movement cost
@@ -51,7 +58,7 @@ public:
 	bool setDiagonalMovementCost(float val);
 
 	/**
-	 * @brief
+	 * @brief	Sets the non diagonal movement cost
 	 * @param	val		- Sets the cost to move non-diagonally
 	 * @return	bool	- If it was successful
 	 */
@@ -88,10 +95,43 @@ public:
 	void printAstarException(int val);
 
 	/**
+	 * @brief Prints the grid
+	 *
+	 */
+	auto print_grid() -> void;
+
+	/**
 	 * @brief	Returns the set grid
 	 * @return	std::vector<std::vector<int>> &	- The set grid
 	 */
-	std::vector<std::vector<int>> &getGrid();
+	std::vector<std::vector<int>>& getGrid();
+
+	/**
+	 * @brief Set the grid ratio
+	 *
+	 * @param ratio the new ratio of the grid
+	 */
+	auto set_grid_ratio(float ratio) -> void;
+
+	/**
+	 * @brief Get the grid ratio
+	 *
+	 * @return float
+	 */
+	auto get_grid_ratio() -> float;
+
+	/**
+	 * @brief Set the grid offset
+	 *
+	 * @param x_offset the new x offset
+	 * @param y_offset the new y offset
+	 */
+	auto set_grid_offset(float x_offset, float y_offset) -> void;
+
+	/**
+	 * @brief Get the grid offset object
+	 */
+	auto get_grid_offset() -> std::pair<float, float>;
 
 private:
 	/**
@@ -108,11 +148,12 @@ private:
 	 */
 	bool setGridSizeY(int ySize);
 
-	/// <summary>
 	/// A 2D vector which is used to store the grid as 0 - free and 1's - not
 	/// free
-	/// </summary>
 	std::vector<std::vector<int>> grid;
+
+	/// The default grid when first set (to revert back to)
+	std::vector<std::vector<int>> default_grid;
 
 	/// <summary>
 	/// [0] - horizontal movement cost
@@ -140,6 +181,14 @@ private:
 	/// The max distance allowed till the algorithm exits
 	/// </summary>
 	float maxDistance;
-};
 
-#endif
+	/// The offset for the input start & end values
+	/// start_offset_[0] - y offset
+	/// start_offset_[1] - x offset
+	float start_offset_[2];
+
+	/// The grid scale
+	/// 1 is 1 unit in real to 1 in grid (1-1 ratio)
+	/// 2 is 1 unit in real is 2 in grid (1-2 ratio)
+	float grid_ratio_;
+};

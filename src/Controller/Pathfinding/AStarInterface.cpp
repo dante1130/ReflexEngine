@@ -1,36 +1,80 @@
 #include "AStarInterface.h"
 
-AStar::AStar() {
+#include <iostream>
+#include <stack>
+
+AStar::AStar()
+    : heuristicsCostScale(1.2F), maxDistance(1000), grid_ratio_(1.0F) {
 	movementCosts[0] = 1;
 	movementCosts[1] = 1.414;
 	movementCosts[2] = 0;
 
-	heuristicsCostScale = 1.2;
-
-	maxDistance = 1000;
-
 	gridSize[0] = 0;
 	gridSize[1] = 0;
+
+	start_offset_[0] = 0;
+	start_offset_[1] = 0;
 }
 
-std::vector<std::vector<DistanceNode>> AStar::findPath(int xStart, int yStart,
-                                                       int xEnd, int yEnd) {
+auto AStar::findPath(float xStart, float yStart, float xEnd, float yEnd)
+    -> std::queue<std::pair<float, float>> {
 	if (grid.empty()) {
 		throw(GRID_UNINITIALISED);
 	}
 
-	node start, end;
-	start.x = xStart;
-	start.y = yStart;
-	end.x = xEnd;
-	end.y = yEnd;
+	node start;
+	start.x =
+	    static_cast<int>(round((xStart - start_offset_[1]) * grid_ratio_));
+	start.y =
+	    static_cast<int>(round((yStart - start_offset_[0]) * grid_ratio_));
+	node end;
+	end.x = static_cast<int>((xEnd - start_offset_[1]) * grid_ratio_);
+	end.y = static_cast<int>((yEnd - start_offset_[0]) * grid_ratio_);
 
 	std::vector<std::vector<DistanceNode>> path;
 
 	path = aStar::aStarSearch(grid, movementCosts, heuristicsCostScale,
 	                          gridSize, start, end, maxDistance);
 
-	return path;
+	std::stack<std::pair<float, float>> reversed_path;
+	reversed_path.push(std::pair<float, float>(
+	    (static_cast<float>(end.x) / grid_ratio_ + start_offset_[1]),
+	    (static_cast<float>(end.y) / grid_ratio_ + start_offset_[0])));
+
+	auto x_pos = end.x;
+	auto y_pos = end.y;
+	auto found = false;
+	auto max_dist = static_cast<int>(maxDistance);
+	for (auto count = 0; count < max_dist; ++count) {
+		auto pair = std::pair<float, float>(path[y_pos][x_pos].parentNode.x,
+		                                    path[y_pos][x_pos].parentNode.y);
+
+		x_pos = static_cast<int>(pair.first);
+		y_pos = static_cast<int>(pair.second);
+
+		pair.first = (pair.first / grid_ratio_ + start_offset_[1]);
+		pair.second = (pair.second / grid_ratio_ + start_offset_[0]);
+
+		reversed_path.push(pair);
+
+		if (x_pos == start.x && y_pos == start.y) {
+			reversed_path.pop();
+			found = true;
+			break;
+		}
+	}
+
+	if (!found) {
+		return std::queue<std::pair<float, float>>();
+	}
+
+	std::queue<std::pair<float, float>> processed_path;
+	auto path_size = reversed_path.size();
+	for (auto count = 0; count < path_size; ++count) {
+		processed_path.push(reversed_path.top());
+		reversed_path.pop();
+	}
+	return processed_path;
 }
 
 void AStar::printAstarException(int val) {
@@ -72,62 +116,23 @@ void AStar::printAstarException(int val) {
 			std::cout << "EXCEPTION: Undocumented exception (" << val
 			          << "): Check AStar.h for more detail" << std::endl;
 	}
-
-	return;
 }
 
-bool AStar::setGrid(std::vector<std::vector<int>> newGrid) {
-	grid = newGrid;
+bool AStar::setGrid(std::vector<std::vector<int>>& newGrid) {
+	grid = std::move(newGrid);
+	default_grid = grid;
 
 	gridSize[0] = grid.size();
-	gridSize[1] = grid[0].size();
-
-	/*
-	for (int count = 0; count < gridSize[0]; count++)
-	{
-	    for (int countTwo = 0; countTwo < gridSize[1]; countTwo++)
-	    {
-	        std::cout << grid[count][countTwo] << ' ';
-	    }
-	    std::cout << std::endl;
+	if (gridSize[0] == 0) {
+		gridSize[1] == 0;
+	} else {
+		gridSize[1] = grid[0].size();
 	}
-	*/
-
-	return false;
-}
-
-bool AStar::setGrid(int** newGrid, int xSize, int ySize) {
-	if (xSize < 1 || ySize < 1) {
-		return false;
-	}
-
-	std::vector<int> row;
-
-	for (int count = 0; count < ySize; count++) {
-		for (int countTwo = 0; countTwo < xSize; countTwo++) {
-			row.push_back(newGrid[count][countTwo]);
-		}
-
-		grid.push_back(row);
-		row.clear();
-	}
-
-	gridSize[0] = ySize;
-	gridSize[1] = xSize;
-
-	/*
-	for (int count = 0; count < gridSize[0]; count++)
-	{
-	    for (int countTwo = 0; countTwo < gridSize[1]; countTwo++)
-	    {
-	        std::cout << grid[count][countTwo] << ' ';
-	    }
-	    std::cout << std::endl;
-	}
-	*/
 
 	return true;
 }
+
+auto AStar::reset_grid_to_original() -> void { grid = default_grid; }
 
 bool AStar::setDiagonalMovementCost(float val) {
 	if (val < 0) {
@@ -157,8 +162,6 @@ void AStar::setAllowDiagonalMovement(bool allow) {
 	} else {
 		movementCosts[2] = 0;
 	}
-
-	return;
 }
 
 bool AStar::setHeuristicsCostScale(float val) {
@@ -174,7 +177,7 @@ bool AStar::setHeuristicsCostScale(float val) {
 
 bool AStar::setGridSizeX(int xSize) {
 	if (xSize < 1) {
-		xSize = 1;
+		gridSize[1] = 1;
 		return false;
 	}
 
@@ -185,7 +188,7 @@ bool AStar::setGridSizeX(int xSize) {
 
 bool AStar::setGridSizeY(int ySize) {
 	if (ySize < 1) {
-		ySize = 1;
+		gridSize[0] = 1;
 		return false;
 	}
 
@@ -206,3 +209,45 @@ bool AStar::setMaxDistance(float val) {
 }
 
 std::vector<std::vector<int>>& AStar::getGrid() { return grid; }
+
+auto AStar::set_grid_ratio(float ratio) -> void {
+	if (ratio <= 0) {
+		return;
+	}
+	grid_ratio_ = ratio;
+}
+auto AStar::get_grid_ratio() -> float { return grid_ratio_; }
+
+auto AStar::set_grid_offset(float x_offset, float y_offset) -> void {
+	start_offset_[1] = x_offset;
+	start_offset_[0] = y_offset;
+}
+
+auto AStar::get_grid_offset() -> std::pair<float, float> {
+	return std::pair<float, float>(start_offset_[1], start_offset_[0]);
+}
+
+auto AStar::set_coordiante_value(float x_point, float y_point, int new_value)
+    -> bool {
+	x_point = (x_point - start_offset_[1]) * grid_ratio_;
+	y_point = (y_point - start_offset_[0]) * grid_ratio_;
+
+	int x_coord = static_cast<int>(round(x_point));
+	int y_coord = static_cast<int>(round(y_point));
+
+	if (x_coord >= gridSize[1] || y_coord >= gridSize[0]) {
+		return false;
+	}
+
+	grid[y_coord][x_coord] = new_value;
+	return true;
+}
+
+auto AStar::print_grid() -> void {
+	for (int count = 0; count < gridSize[0]; count++) {
+		for (int countTwo = 0; countTwo < gridSize[1]; countTwo++) {
+			std::cout << grid[count][countTwo] << ' ';
+		}
+		std::cout << std::endl;
+	}
+}
