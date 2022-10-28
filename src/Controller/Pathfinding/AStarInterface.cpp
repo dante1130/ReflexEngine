@@ -229,8 +229,8 @@ auto AStar::get_grid_offset() -> std::pair<float, float> {
 
 auto AStar::set_coordiante_value(float x_point, float y_point, int new_value)
     -> bool {
-	x_point = (x_point - start_offset_[1]) * 1.5;
-	y_point = (y_point - start_offset_[0]) * 1.5;
+	x_point = (x_point - start_offset_[1]) * grid_ratio_;
+	y_point = (y_point - start_offset_[0]) * grid_ratio_;
 
 	int x_coord = static_cast<int>(round(x_point));
 	int y_coord = static_cast<int>(round(y_point));
