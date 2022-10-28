@@ -23,8 +23,10 @@ auto AStar::findPath(float xStart, float yStart, float xEnd, float yEnd)
 	}
 
 	node start;
-	start.x = static_cast<int>((xStart - start_offset_[1]) * grid_ratio_);
-	start.y = static_cast<int>((yStart - start_offset_[0]) * grid_ratio_);
+	start.x =
+	    static_cast<int>(round((xStart - start_offset_[1]) * grid_ratio_));
+	start.y =
+	    static_cast<int>(round((yStart - start_offset_[0]) * grid_ratio_));
 	node end;
 	end.x = static_cast<int>((xEnd - start_offset_[1]) * grid_ratio_);
 	end.y = static_cast<int>((yEnd - start_offset_[0]) * grid_ratio_);
@@ -36,8 +38,8 @@ auto AStar::findPath(float xStart, float yStart, float xEnd, float yEnd)
 
 	std::stack<std::pair<float, float>> reversed_path;
 	reversed_path.push(std::pair<float, float>(
-	    (static_cast<float>(end.x) + start_offset_[1]) / grid_ratio_,
-	    (static_cast<float>(end.y) + start_offset_[0]) / grid_ratio_));
+	    (static_cast<float>(end.x) / grid_ratio_ + start_offset_[1]),
+	    (static_cast<float>(end.y) / grid_ratio_ + start_offset_[0])));
 
 	auto x_pos = end.x;
 	auto y_pos = end.y;
@@ -50,12 +52,13 @@ auto AStar::findPath(float xStart, float yStart, float xEnd, float yEnd)
 		x_pos = static_cast<int>(pair.first);
 		y_pos = static_cast<int>(pair.second);
 
-		pair.first = (pair.first + start_offset_[1]) / grid_ratio_;
-		pair.second = (pair.second + start_offset_[0]) / grid_ratio_;
+		pair.first = (pair.first / grid_ratio_ + start_offset_[1]);
+		pair.second = (pair.second / grid_ratio_ + start_offset_[0]);
 
 		reversed_path.push(pair);
 
-		if (x_pos == end.x && y_pos == end.y) {
+		if (x_pos == start.x && y_pos == start.y) {
+			reversed_path.pop();
 			found = true;
 			break;
 		}
@@ -120,7 +123,11 @@ bool AStar::setGrid(std::vector<std::vector<int>>& newGrid) {
 	default_grid = grid;
 
 	gridSize[0] = grid.size();
-	gridSize[1] = grid[0].size();
+	if (gridSize[0] == 0) {
+		gridSize[1] == 0;
+	} else {
+		gridSize[1] = grid[0].size();
+	}
 
 	return true;
 }
@@ -128,7 +135,11 @@ bool AStar::setGrid(std::vector<std::vector<int>>& newGrid) {
 auto AStar::reset_grid_to_original() -> void {
 	grid = default_grid;
 	gridSize[0] = grid.size();
-	gridSize[1] = grid[0].size();
+	if (gridSize[0] == 0) {
+		gridSize[1] == 0;
+	} else {
+		gridSize[1] = grid[0].size();
+	}
 }
 
 bool AStar::setDiagonalMovementCost(float val) {
@@ -226,16 +237,17 @@ auto AStar::get_grid_offset() -> std::pair<float, float> {
 
 auto AStar::set_coordiante_value(float x_point, float y_point, int new_value)
     -> bool {
-	x_point = (x_point - start_offset_[1]) * grid_ratio_;
-	y_point = (y_point - start_offset_[0]) * grid_ratio_;
+	x_point = (x_point - start_offset_[1]) * 1.5;
+	y_point = (y_point - start_offset_[0]) * 1.5;
 
-	int x_coord = static_cast<int>(x_point);
-	int y_coord = static_cast<int>(y_point);
+	int x_coord = static_cast<int>(round(x_point));
+	int y_coord = static_cast<int>(round(y_point));
 
 	if (x_coord >= gridSize[1] || y_coord >= gridSize[0]) {
 		return false;
 	}
-	grid[x_coord][y_coord] = new_value;
+
+	grid[y_coord][x_coord] = new_value;
 	return true;
 }
 
