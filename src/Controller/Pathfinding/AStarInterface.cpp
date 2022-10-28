@@ -132,15 +132,7 @@ bool AStar::setGrid(std::vector<std::vector<int>>& newGrid) {
 	return true;
 }
 
-auto AStar::reset_grid_to_original() -> void {
-	grid = default_grid;
-	gridSize[0] = grid.size();
-	if (gridSize[0] == 0) {
-		gridSize[1] == 0;
-	} else {
-		gridSize[1] = grid[0].size();
-	}
-}
+auto AStar::reset_grid_to_original() -> void { grid = default_grid; }
 
 bool AStar::setDiagonalMovementCost(float val) {
 	if (val < 0) {
