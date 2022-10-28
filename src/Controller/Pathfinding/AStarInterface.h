@@ -32,6 +32,12 @@ public:
 	bool setGrid(std::vector<std::vector<int>>& newGrid);
 
 	/**
+	 * @brief Resets the grid to the one set using setGrid
+	 *
+	 */
+	auto reset_grid_to_original() -> void;
+
+	/**
 	 * @brief Set a point in the grid to a specific value
 	 *
 	 * @param x_point specified the x coordinate
@@ -142,11 +148,12 @@ private:
 	 */
 	bool setGridSizeY(int ySize);
 
-	/// <summary>
 	/// A 2D vector which is used to store the grid as 0 - free and 1's - not
 	/// free
-	/// </summary>
 	std::vector<std::vector<int>> grid;
+
+	/// The default grid when first set (to revert back to)
+	std::vector<std::vector<int>> default_grid;
 
 	/// <summary>
 	/// [0] - horizontal movement cost

@@ -35,6 +35,9 @@ auto AStar::findPath(float xStart, float yStart, float xEnd, float yEnd)
 	                          gridSize, start, end, maxDistance);
 
 	std::stack<std::pair<float, float>> reversed_path;
+	reversed_path.push(std::pair<float, float>(
+	    (static_cast<float>(end.x) + start_offset_[1]) / grid_ratio_,
+	    (static_cast<float>(end.y) + start_offset_[0]) / grid_ratio_));
 
 	auto x_pos = end.x;
 	auto y_pos = end.y;
@@ -47,8 +50,8 @@ auto AStar::findPath(float xStart, float yStart, float xEnd, float yEnd)
 		x_pos = static_cast<int>(pair.first);
 		y_pos = static_cast<int>(pair.second);
 
-		pair.second = (pair.first + start_offset_[1]) / grid_ratio_;
-		pair.second = (pair.second + start_offset_[1]) / grid_ratio_;
+		pair.first = (pair.first + start_offset_[1]) / grid_ratio_;
+		pair.second = (pair.second + start_offset_[0]) / grid_ratio_;
 
 		reversed_path.push(pair);
 
@@ -114,11 +117,18 @@ void AStar::printAstarException(int val) {
 
 bool AStar::setGrid(std::vector<std::vector<int>>& newGrid) {
 	grid = std::move(newGrid);
+	default_grid = grid;
 
 	gridSize[0] = grid.size();
 	gridSize[1] = grid[0].size();
 
 	return true;
+}
+
+auto AStar::reset_grid_to_original() -> void {
+	grid = default_grid;
+	gridSize[0] = grid.size();
+	gridSize[1] = grid[0].size();
 }
 
 bool AStar::setDiagonalMovementCost(float val) {
