@@ -7,6 +7,7 @@
 
 #include "Controller/Affordance/Affordance.hpp"
 #include "Controller/Affordance/AffordanceUtility.hpp"
+#include "Controller/Emotion/Emotion.hpp"
 #include "Controller/ECS/Entity.hpp"
 
 using Affordance::Properties;
@@ -20,7 +21,8 @@ namespace Component {
  * @brief The affordance agent component represents an agent that looks for an
  * affordance based on the considerations from its utility system. Each agent
  * has a set of properties, and among those properties they have a weighting
- * towards their importance or preference.
+ * towards their importance or preference. The agent also stores the mood of the
+ * agent and the current emotion the agent is experiencing.
  */
 struct AffordanceAgent {
 	/// The properties that the agent can perceive.
@@ -31,13 +33,22 @@ struct AffordanceAgent {
 	Utility utility;
 	/// The affordance entity ID that the agent is currently using.
 	entt::entity affordance = {entt::null};
+	/// The current mood of the agent.
+	Emotion::EmotionState mood_state;
+	/// The current emotion of the agent, referencing the emotion system.
+	std::string current_emotion;
 
 	AffordanceAgent() = default;
 
 	AffordanceAgent(const AffordanceAgent&) = default;
 
 	AffordanceAgent(const Properties& properties,
-	                const PropertiesWeight& property_weights)
-	    : properties(properties), property_weights(property_weights) {}
+	                const PropertiesWeight& property_weights,
+	                const Emotion::EmotionState& mood_state,
+	                const std::string& current_emotion)
+	    : properties(properties),
+	      property_weights(property_weights),
+	      mood_state(mood_state),
+	      current_emotion(current_emotion) {}
 };
 }  // namespace Component
