@@ -402,25 +402,25 @@ void System::update_statemachine(ECS& ecs) {
 
 void System::update_affordance_agent(ECS& ecs) {
 	auto& registry = ecs.get_registry();
+	auto& affordance_system = Affordance::AffordanceSystem::get_instance();
 
 	registry.view<Component::Transform, Component::AffordanceAgent>().each(
 	    [&](auto agent_id, auto& agent_transform, auto& agent) {
 		    const auto& agent_entity = ecs.get_entity(agent_id);
 
+		    agent.utility.update_func(agent_entity);
 		    Affordance::evaluate_utility(agent_entity);
+
+		    const auto& agent_decision_properties =
+		        agent.utility.states.at(agent.utility.decision).properties;
 
 		    auto best_distance = std::numeric_limits<float>::max();
 
 		    registry.view<Component::Transform, Component::Affordance>().each(
 		        [&](auto affordance_id, auto& affordance_transform,
 		            auto& affordance) {
-			        auto affordance_tree =
-			            Affordance::AffordanceSystem::get_instance()
-			                .get_affordance(affordance.object_name);
-
-			        const auto& agent_decision_properties =
-			            agent.utility.states.at(agent.utility.decision)
-			                .decision;
+			        auto affordance_tree = affordance_system.get_affordance(
+			            affordance.object_name);
 
 			        if (Affordance::has_affordance(affordance_tree,
 			                                       agent_decision_properties)) {
@@ -434,6 +434,26 @@ void System::update_affordance_agent(ECS& ecs) {
 				        }
 			        }
 		        });
+
+		    auto& affordance_entity = ecs.get_entity(agent.affordance);
+
+		    const auto& affordance_component =
+		        affordance_entity.get_component<Component::Affordance>();
+
+		    auto affordance = affordance_system.get_affordance(
+		        affordance_component.object_name);
+
+		    affordance = Affordance::find_affordance(
+		        affordance, agent_decision_properties, agent.property_weights);
+
+		    if (!affordance->is_composite()) {
+			    auto affordance_leaf =
+			        std::dynamic_pointer_cast<Affordance::AffordanceLeaf>(
+			            affordance);
+
+			    affordance_leaf->get_function()(agent_entity,
+			                                    affordance_entity);
+		    }
 	    });
 }
 
