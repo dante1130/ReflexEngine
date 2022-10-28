@@ -9,15 +9,15 @@
 #include "Controller/Affordance/AffordanceUtility.hpp"
 #include "Controller/ECS/Entity.hpp"
 
-using Affordance::AffordanceUtility;
 using Affordance::Properties;
 using Affordance::PropertiesWeight;
+using Affordance::Utility;
 
 namespace Component {
 struct AffordanceAgent {
 	Properties properties;
 	PropertiesWeight property_weights;
-	AffordanceUtility utility;
+	Utility utility;
 
 	entt::entity affordance = {entt::null};
 
