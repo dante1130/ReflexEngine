@@ -454,9 +454,9 @@ void System::update_affordance_agent(ECS& ecs) {
 		        affordance_component.object_name);
 
 		    // Find the affordance that the leaf that matches the agent's
-		    // decision properties and property weights.
+		    // properties and property weights.
 		    affordance = Affordance::find_affordance(
-		        affordance, agent_decision_properties, agent.property_weights);
+		        affordance, agent.properties, agent.property_weights);
 
 		    // If it is not a composite affordance, then it is has an action
 		    if (!affordance->is_composite()) {
