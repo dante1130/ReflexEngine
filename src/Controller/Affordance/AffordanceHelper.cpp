@@ -1,5 +1,10 @@
 #include "AffordanceHelper.hpp"
 
+#include <queue>
+
+#include "Controller/Affordance/AffordanceSystem.hpp"
+#include "Model/Components/AffordanceAgent.hpp"
+
 auto Affordance::find_affordance(const AffordancePtr& affordances,
                                  const Properties& properties,
                                  const PropertiesWeight& properties_weight)
@@ -41,4 +46,47 @@ auto Affordance::find_affordance(const AffordancePtr& affordances,
 	}
 
 	return best_affordance;
+}
+
+auto Affordance::has_affordance(const AffordancePtr& affordances,
+                                const Properties& properties) -> bool {
+	std::queue<AffordancePtr> affordance_queue;
+
+	affordance_queue.push(affordances);
+
+	while (!affordance_queue.empty()) {
+		auto current_affordance = affordance_queue.front();
+		affordance_queue.pop();
+
+		if (current_affordance->get_properties() == properties) {
+			return true;
+		}
+
+		if (current_affordance->is_composite()) {
+			auto affordance_composite =
+			    std::dynamic_pointer_cast<AffordanceComposite>(
+			        current_affordance);
+
+			for (const auto& child : affordance_composite->get_affordances()) {
+				affordance_queue.push(child);
+			}
+		}
+	}
+
+	return false;
+}
+
+auto Affordance::evaluate_utility(const Reflex::Entity& entity) -> void {
+	auto& affordance_agent = entity.get_component<Component::AffordanceAgent>();
+
+	auto best_score = 0.0F;
+
+	for (const auto& [state_name, state] : affordance_agent.utility.states) {
+		const float score = state.scorer_func(entity);
+
+		if (score > best_score) {
+			best_score = score;
+			affordance_agent.utility.decision = state_name;
+		}
+	}
 }

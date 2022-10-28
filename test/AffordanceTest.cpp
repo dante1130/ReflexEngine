@@ -250,6 +250,69 @@ TEST_CASE("Affordance composite tests", "[AffordanceComposite]") {
 
 		affordance_system.clear_affordances();
 	}
+
+	SECTION("Finding an object with given properties") {
+		lua_script(R"(
+			function sit() 
+				return "sitting"
+			end
+
+			function sit_crosslegged()
+				return sit() .. " crosslegged"
+			end
+
+			function sit_straight()
+				return sit() .. " straight"
+			end
+
+			function stand()
+				return "standing"
+			end
+
+			local sitting_affordance = AffordanceComposite.new("Sitting", {"Sitting"}, {
+				AffordanceLeaf.new("Sit default", {}, sit),
+				AffordanceComposite.new("Human", {"Human"}, {
+					AffordanceLeaf.new("Crossleg", {"Crossleg"}, sit_crosslegged),
+					AffordanceLeaf.new("Straight", {"Straight"}, sit_straight)
+				})
+			})
+
+			local chair_affordance = AffordanceComposite.new("Chair", {}, {
+				sitting_affordance,
+				AffordanceLeaf.new("Stand", {"Stand"}, stand)
+			})
+
+			AffordanceSystem.set_affordance("chair", chair_affordance);
+
+			chair_affordance = nil
+			sitting_affordance = nil
+			collectgarbage()
+		)");
+
+		auto objects = affordance_system.find_objects({"Stand"});
+
+		REQUIRE(objects.size() == 1);
+		REQUIRE(objects[0]->is_composite() == true);
+
+		auto chair = std::dynamic_pointer_cast<Affordance::AffordanceComposite>(
+		    objects[0]);
+
+		REQUIRE(chair->get_name() == "Chair");
+		REQUIRE(chair->get_properties().empty());
+		REQUIRE(chair->is_composite() == true);
+
+		auto stand_affordance =
+		    std::dynamic_pointer_cast<Affordance::AffordanceLeaf>(
+		        chair->get_affordances()[1]);
+
+		REQUIRE(stand_affordance->get_name() == "Stand");
+		REQUIRE(stand_affordance->get_properties() ==
+		        Affordance::Properties{"Stand"});
+		REQUIRE(stand_affordance->is_composite() == false);
+
+		std::string stand_result = stand_affordance->get_function()();
+		REQUIRE(stand_result == "standing");
+	}
 }
 
 TEST_CASE("Affordance helper functions test", "[AffordanceHelper]") {
@@ -308,6 +371,13 @@ TEST_CASE("Affordance helper functions test", "[AffordanceHelper]") {
 
 		std::string affordance_result = affordance_leaf->get_function()();
 		REQUIRE(affordance_result == "sitting crosslegged");
+
+		auto chair = std::dynamic_pointer_cast<Affordance::AffordanceComposite>(
+		    affordance_system.get_affordance("chair"));
+
+		REQUIRE(chair->is_composite());
+		REQUIRE(chair->get_properties().empty());
+		REQUIRE(chair->get_affordances().size() == 2);
 
 		affordance_system.clear_affordances();
 	}

@@ -1,5 +1,7 @@
 #include "AffordanceSystem.hpp"
 
+#include <queue>
+
 #include "Controller/LuaManager.hpp"
 
 using namespace Affordance;
@@ -66,6 +68,38 @@ auto AffordanceSystem::set_affordance(std::string object,
 auto AffordanceSystem::get_affordance(const std::string& object)
     -> AffordancePtr {
 	return affordance_map_.at(object);
+}
+
+auto AffordanceSystem::find_objects(const Properties& properties)
+    -> std::vector<AffordancePtr> {
+	std::vector<AffordancePtr> objects;
+
+	for (auto& [name, affordance] : affordance_map_) {
+		std::queue<AffordancePtr> affordance_queue;
+
+		affordance_queue.push(affordance);
+
+		while (!affordance_queue.empty()) {
+			auto current_affordance = affordance_queue.front();
+			affordance_queue.pop();
+
+			if (current_affordance->get_properties() == properties) {
+				objects.push_back(affordance);
+				break;
+			}
+
+			if (current_affordance->is_composite()) {
+				auto composite = std::dynamic_pointer_cast<AffordanceComposite>(
+				    current_affordance);
+
+				for (auto& child : composite->get_affordances()) {
+					affordance_queue.push(child);
+				}
+			}
+		}
+	}
+
+	return objects;
 }
 
 auto AffordanceSystem::clear_affordances() -> void { affordance_map_.clear(); }
