@@ -64,7 +64,6 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	glm::vec3 prev_lin_vel_b2 = pb2->prev_vel_acceleration_;
 	prev_lin_vel_b2 *= abs_normal;
 
-	// Rotates angular velocity to world coordaintes from local coordinates
 	glm::vec3 ang_vel_b1 = pb1->getAngVelocity() - prev_ang_vel_b1;
 	glm::vec3 ang_vel_b2 = pb2->getAngVelocity() - prev_ang_vel_b2;
 
@@ -115,8 +114,8 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 
 	// Entire equation
 	float lambda = (num_eqn / div_eqn);
-	glm::vec3 linear_impluse = lambda * collision_normal;
 
+	/*
 	ResolutionOutput::output_resolution_data(
 	    epsilon, lambda, collision_normal,
 	    glm::vec3(vel_num_eqn, w1_num_eqn, w2_num_eqn),
@@ -129,14 +128,17 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	    pb2->getMass(), pb2->getVelocity(), ang_vel_b2, lpoint_c2,
 	    pb2->inverse_rotated_inertia_tensor_, pb2->inertia_tensor_,
 	    pb2->getOrientation());
+	*/
 
 	// Set new velocity and angular velocity
 	pb1->resolve(lambda, lpoint_c1, collision_normal, 1);
 	pb2->resolve(lambda, lpoint_c2, collision_normal, 2);
 
+	/*
 	ResolutionOutput::output_after_resolution(
 	    pb1->getVelocity(), pb1->getAngVelocity(), pb2->getVelocity(),
 	    pb2->getAngVelocity());
+	*/
 }
 
 void PhysicsBody::static_collision(rp3d::Collider* collider, glm::vec3 r_point,
@@ -144,9 +146,7 @@ void PhysicsBody::static_collision(rp3d::Collider* collider, glm::vec3 r_point,
                                    float collision_depth) {
 	PhysicsBody* pb1 = static_cast<PhysicsBody*>(collider->getUserData());
 
-	glm::vec3 pos = pb1->getPosition();
-	pos -= collision_normal * collision_depth;
-	pb1->setPosition(pos);
+	pb1->setPosition(pb1->getPosition() - collision_normal * collision_depth);
 	pb1->modified_ = true;
 
 	// J1^-1
