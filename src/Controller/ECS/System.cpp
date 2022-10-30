@@ -313,9 +313,11 @@ void System::update_script(entt::registry& registry) {
 
 	registry.view<Component::Script>().each([&lua](auto& script) {
 		if (script.ecs && script.entity) {
-			if (script.is_active) {
-				lua.script_file(script.lua_script);
-				auto update_func = lua["update"];
+			lua.script_file(script.lua_script);
+
+			auto update_func = lua["update"];
+
+			if (update_func.valid()) {
 				lua["var"] = script.lua_variables;
 				update_func(*script.ecs, *script.entity);
 				script.lua_variables = lua["var"];
