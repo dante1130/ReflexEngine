@@ -9,6 +9,7 @@
 #include "Model/Components/Terrain.hpp"
 #include "Model/Components/Statemachine.hpp"
 #include "Model/Components/RigidBody.hpp"
+#include "Model/Components/Affordance.hpp"
 #include "Model/Components/AffordanceAgent.hpp"
 
 #include "Controller/GUI/CollectionsGUI.hpp"
@@ -274,6 +275,18 @@ auto ECSGameAssetFactory::load_affordance_agent(
 		    state_table["affordance"].get<Affordance::Properties>(),
 		    lua[state_name].get<sol::function>());
 	}
+}
+
+auto ECSGameAssetFactory::load_affordance(Reflex::Entity& entity,
+                                          const sol::table& affordance_table)
+    -> void {
+	auto& affordance = entity.add_component<Component::Affordance>(
+	    affordance_table["object_name"], affordance_table["lua_script"]);
+
+	auto& lua = LuaManager::get_instance().get_state();
+	lua.script_file(affordance.lua_script);
+
+	affordance.context = lua["var"];
 }
 
 bool ECSGameAssetFactory::is_lua_script(const std::string& lua_script) {

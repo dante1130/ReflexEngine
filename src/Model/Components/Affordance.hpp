@@ -14,6 +14,8 @@ namespace Component {
 struct Affordance {
 	/// The name of the object, referenced to the affordance system.
 	std::string object_name;
+	/// The lua script to initialize the affordance.
+	std::string lua_script;
 	/// The context variables of the object.
 	sol::table context;
 
@@ -22,7 +24,7 @@ struct Affordance {
 	Affordance(const Affordance&) = default;
 
 	explicit Affordance(const std::string& object_name,
-	                    const sol::table& context)
-	    : object_name(object_name), context(context) {}
+	                    const std::string& lua_script)
+	    : object_name(object_name), lua_script(lua_script) {}
 };
 }  // namespace Component

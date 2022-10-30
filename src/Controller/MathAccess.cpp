@@ -1,6 +1,7 @@
 #include "MathAccess.hpp"
 
 #include <glm/glm.hpp>
+#include <glm/gtc/constants.hpp>
 #include <glm/gtc/quaternion.hpp>
 
 #include "LuaManager.hpp"
@@ -83,6 +84,12 @@ void MathAccess::register_glm_functions() {
 	math_table["normalize"] =
 	    sol::overload([](const glm::vec3& a) { return glm::normalize(a); },
 	                  [](const glm::quat& a) { return glm::normalize(a); });
+
+	math_table["angle"] = [](const glm::vec3& a, const glm::vec3& b) {
+		glm::vec2 look_at = glm::normalize(glm::vec2(b.x - a.x, b.z - a.z));
+
+		return atan2(look_at.y, look_at.x) * 180.0f / glm::pi<float>();
+	};
 
 	math_table["sin"] =
 	    sol::overload([](float a) { return glm::sin(a); },

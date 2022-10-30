@@ -409,7 +409,7 @@ void System::update_affordance_agent(ECS& ecs) {
 
 		    // Updates the agent's utilities, can be anything from updating the
 		    // agent's context, emotions or any component that is in the agent.
-		    agent.utility.update_func(agent_entity);
+		    auto result = agent.utility.update_func(agent_entity);
 
 		    // Evaluates the agent's utility and determines the best action, an
 		    // affordance that the agent desires to interact in this case.

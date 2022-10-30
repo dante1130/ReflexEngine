@@ -124,11 +124,21 @@ private:
 	 * @brief Loads an affordance agent component into the entity.
 	 *
 	 * @param entity The entity to load the component into.
-	 * @param affordance_table The table of the affordance agent component.
+	 * @param affordance_agent_table The table of the affordance agent
+	 * component.
 	 */
 	static auto load_affordance_agent(Reflex::Entity& entity,
 	                                  const sol::table& affordance_agent_table)
 	    -> void;
+
+	/**
+	 * @brief Loads an affordance component into the entity.
+	 *
+	 * @param entity The entity to load the component into.
+	 * @param affordance_table The table of the affordance component.
+	 */
+	static auto load_affordance(Reflex::Entity& entity,
+	                            const sol::table& affordance_table) -> void;
 
 	/**
 	 * @brief Checks the string if it is a valid lua file.
