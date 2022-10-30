@@ -53,8 +53,8 @@ Scene.add_game_object("game/TheDen/prefabs/small_objects/rubix_cubes/rubix_cube_
 Scene.add_game_object("game/TheDen/prefabs/small_objects/tissue_boxes/tissue_box_one.lua")
 Scene.add_game_object("game/TheDen/prefabs/small_objects/tissue_boxes/tissue_box_two.lua")
 --markers
-Scene.add_game_object("game/TheDen/prefabs/small_objects/markers/marker_one.lua")
-Scene.add_game_object("game/TheDen/prefabs/small_objects/markers/marker_two.lua")
+--Scene.add_game_object("game/TheDen/prefabs/small_objects/markers/marker_one.lua")
+--Scene.add_game_object("game/TheDen/prefabs/small_objects/markers/marker_two.lua")
 --Chairs
 Scene.add_game_object("game/TheDen/prefabs/small_objects/chairs/chair_one.lua")
 Scene.add_game_object("game/TheDen/prefabs/small_objects/chairs/chair_two.lua")
