@@ -127,6 +127,13 @@ public:
 	auto set_modified(bool modified) -> void;
 
 	/**
+	 * @brief Get the center of mass object
+	 *
+	 * @return glm::vec3
+	 */
+	auto get_center_of_mass() -> glm::vec3;
+
+	/**
 	 * @brief Gets the size of the colliders vector
 	 *
 	 * @return size_t

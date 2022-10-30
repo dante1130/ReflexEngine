@@ -194,6 +194,7 @@ void ECSAccess::register_script_component() {
 	auto script_type = lua.new_usertype<Script>("Script");
 
 	script_type["lua_script"] = &Script::lua_script;
+	script_type["is_active"] = &Script::is_active;
 }
 
 void ECSAccess::register_directional_light_component() {

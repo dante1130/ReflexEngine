@@ -3,7 +3,7 @@
 --Model.load_model("boat", "models/boat1obj.obj")
 --Model.load_model("lighthouse", "models/Beacon.obj")
 --Model.load_model("big_arrow", "models/BigArrow.obj")
---Model.load_model("TheDen", "models/TheDen.obj")
+Model.load_model("TheDen", "models/TheDen.obj")
 Model.load_model("GlassInScene", "models/Glass.obj")
 Model.load_model("Sphere", "models/sphere.obj")
 

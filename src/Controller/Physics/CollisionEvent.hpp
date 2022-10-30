@@ -14,4 +14,10 @@ class CollisionEventListener : public rp3d::EventListener {
 	 * objects involved
 	 */
 	virtual void onContact(const CallbackData& collision_data) override;
+
+private:
+	auto convert_local_point(rp3d::Vector3 local_point,
+	                         rp3d::CollisionBody* collision_body,
+	                         rp3d::Collider* collider, float num)
+	    -> rp3d::Vector3;
 };

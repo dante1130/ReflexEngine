@@ -3,9 +3,9 @@ entity = {
 
     transform = {
         position = {
-			x = 48,
+			x = 40,
 			y = 2,
-			z = 0
+			z = -4
 		},
 		rotation = {
 			x = 0,
@@ -23,10 +23,9 @@ entity = {
         using_react_start = false,
         gravity_on = true,
         can_sleep = true,
-        is_trigger = false,
         linear_drag = 5,
         angular_drag = 0.1,
-		rb_type = 0
+		rb_type = 2
     },
 
 	script = {

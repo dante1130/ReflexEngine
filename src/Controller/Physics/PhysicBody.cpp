@@ -26,10 +26,6 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 		epsilon = collider2->getMaterial().getBounciness();
 	}
 
-	// Convert from center of collision body to center of mass
-	lpoint_c1 += pb1->center_of_mass_;
-	lpoint_c2 += pb2->center_of_mass_;
-
 	if (pb1->getType() == rp3d::BodyType::STATIC) {
 		static_collision(collider2, lpoint_c2, -collision_normal, epsilon,
 		                 collision_depth);
@@ -222,18 +218,17 @@ auto PhysicsBody::is_modified() -> bool { return modified_; }
 
 auto PhysicsBody::set_modified(bool modified) -> void { modified_ = modified; }
 
+auto PhysicsBody::get_center_of_mass() -> glm::vec3 { return center_of_mass_; }
+
 void PhysicsBody::DePenetrate(PhysicsBody* pb1, PhysicsBody* pb2,
                               glm::vec3 normal, float penetration_depth) {
 	glm::vec3 pos1 = pb1->getPosition();
 	glm::vec3 pos2 = pb2->getPosition();
 
-	if (glm::length(pb1->getVelocity()) == 0 ||
-	    glm::length(pb2->getVelocity()) == 0) {
-		if (glm::length(pb1->getVelocity()) == 0) {
-			pos2 = pos2 + normal * penetration_depth;
-		} else {
-			pos1 = pos1 - normal * penetration_depth;
-		}
+	if (glm::length(pb1->getVelocity()) == 0) {
+		pos2 = pos2 + normal * penetration_depth;
+	} else if (glm::length(pb2->getVelocity()) == 0) {
+		pos1 = pos1 - normal * penetration_depth;
 	} else {
 		float total_vel = glm::length(pb1->getVelocity() - pb2->getVelocity());
 		pos1 = pos1 - (glm::length(pb1->getVelocity()) / total_vel) *

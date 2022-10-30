@@ -265,7 +265,7 @@ void System::update_rigidbody(entt::registry& registry) {
 			    rigidbody_manager.update_rigidbody(rigidbody, transform);
 		    });
 
-		Physics::updateWorld(EngineTime::get_time_step() / 2);
+		Physics::updateWorld(EngineTime::get_time_step());
 
 		registry.view<Component::Rigidbody, Component::Transform>().each(
 		    [](Component::Rigidbody& rigidbody,
@@ -307,16 +307,15 @@ void System::update_spot_light(entt::registry& registry) {
 	    });
 }
 
+#include "Controller/GUI/DebugLogger.hpp"
 void System::update_script(entt::registry& registry) {
 	auto& lua = LuaManager::get_instance().get_state();
 
 	registry.view<Component::Script>().each([&lua](auto& script) {
 		if (script.ecs && script.entity) {
-			lua.script_file(script.lua_script);
-
-			auto update_func = lua["update"];
-
-			if (update_func.valid()) {
+			if (script.is_active) {
+				lua.script_file(script.lua_script);
+				auto update_func = lua["update"];
 				lua["var"] = script.lua_variables;
 				update_func(*script.ecs, *script.entity);
 				script.lua_variables = lua["var"];
