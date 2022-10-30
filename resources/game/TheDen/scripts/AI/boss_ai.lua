@@ -6,6 +6,7 @@ function boss_update(entity)
 	print("updating boss")
 end
 
-function watch_tv(entity)
+function watch_state(entity)
 	print("watching tv")
+	return 1.0
 end

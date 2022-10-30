@@ -121,6 +121,16 @@ private:
 	                              const sol::table& statemachine_table);
 
 	/**
+	 * @brief Loads an affordance agent component into the entity.
+	 *
+	 * @param entity The entity to load the component into.
+	 * @param affordance_table The table of the affordance agent component.
+	 */
+	static auto load_affordance_agent(Reflex::Entity& entity,
+	                                  const sol::table& affordance_agent_table)
+	    -> void;
+
+	/**
 	 * @brief Checks the string if it is a valid lua file.
 	 *
 	 * @param lua_script The string to check.

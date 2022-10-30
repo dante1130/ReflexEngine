@@ -444,6 +444,10 @@ void System::update_affordance_agent(ECS& ecs) {
 			        }
 		        });
 
+		    if (!ecs.get_registry().valid(agent.affordance)) {
+			    return;
+		    }
+
 		    auto& affordance_entity = ecs.get_entity(agent.affordance);
 
 		    const auto& affordance_component =

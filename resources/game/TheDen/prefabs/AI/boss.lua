@@ -27,14 +27,14 @@ entity = {
 
 	affordance_agent = {
 		properties = { "Watch" },
-		properties_weight = {},
+		properties_weights = {},
 		utility = {
-			lua_script = "resources/scripts/AI/boss_ai.lua",
+			lua_script = "game/TheDen/scripts/AI/boss_ai.lua",
 			update_func = "boss_update",
 			states = {
 				{
-					name = "watch_tv",
-					affordance = "Watch"
+					name = "watch_state",
+					affordance = { "Watch" }
 				}
 			}
 		},

@@ -9,6 +9,7 @@
 #include "Model/Components/Terrain.hpp"
 #include "Model/Components/Statemachine.hpp"
 #include "Model/Components/RigidBody.hpp"
+#include "Model/Components/AffordanceAgent.hpp"
 
 #include "Controller/GUI/CollectionsGUI.hpp"
 #include "Controller/Physics/LoadOBJColliderData.hpp"
@@ -82,6 +83,10 @@ void ECSGameAssetFactory::load_components(ECS& ecs, Reflex::Entity& entity,
 
 	if (entity_table["rigidbody"].valid()) {
 		load_rigidbody(entity, entity_table["rigidbody"]);
+	}
+
+	if (entity_table["affordance_agent"].valid()) {
+		load_affordance_agent(entity, entity_table["affordance_agent"]);
 	}
 
 	// Put this last in case the script calls other components.
@@ -234,6 +239,40 @@ void ECSGameAssetFactory::load_spot_light(Reflex::Entity& entity,
 	    light_table["ambient_intensity"], light_table["diffuse_intensity"],
 	    position, light_table["constant"], light_table["linear"],
 	    light_table["quadratic"], direction, light_table["edge"]);
+}
+
+auto ECSGameAssetFactory::load_affordance_agent(
+    Reflex::Entity& entity, const sol::table& affordance_agent_table) -> void {
+	const auto& mood_table = affordance_agent_table["mood_state"];
+
+	auto& affordance_agent = entity.add_component<Component::AffordanceAgent>(
+	    affordance_agent_table["properties"].get<Affordance::Properties>(),
+	    affordance_agent_table["properties_weights"]
+	        .get<Affordance::PropertiesWeight>(),
+	    Emotion::EmotionState(
+	        mood_table["joy_sadness"], mood_table["trust_disgust"],
+	        mood_table["fear_anger"], mood_table["surprise_anticipation"]),
+	    affordance_agent_table["current_emotion"]);
+
+	auto& utility = affordance_agent.utility;
+	const auto& utility_table = affordance_agent_table["utility"];
+
+	affordance_agent.lua_script = utility_table["lua_script"];
+
+	auto& lua = LuaManager::get_instance().get_state();
+	lua.script_file(affordance_agent.lua_script);
+
+	utility.update_func = lua[utility_table["update_func"]];
+
+	for (auto& [key, value] : utility_table["states"].get<sol::table>()) {
+		sol::table state_table = value.as<sol::table>();
+
+		const std::string state_name = state_table["name"];
+
+		utility.states[state_name] = Affordance::Consideration(
+		    state_table["affordance"].get<Affordance::Properties>(),
+		    lua[state_name].get<sol::function>());
+	}
 }
 
 bool ECSGameAssetFactory::is_lua_script(const std::string& lua_script) {

@@ -29,6 +29,8 @@ struct AffordanceAgent {
 	Properties properties;
 	/// The weight of each property.
 	PropertiesWeight property_weights;
+	/// The lua script that the agent will use to evaluate utility.
+	std::string lua_script;
 	/// The affordance utility system.
 	Utility utility;
 	/// The affordance entity ID that the agent is currently using.
