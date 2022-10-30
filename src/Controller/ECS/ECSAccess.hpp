@@ -71,4 +71,9 @@ void register_statemachine_component();
  */
 void register_rigidbody_component();
 
+/**
+ * @brief Register the affordance agent component to Lua.
+ */
+auto register_affordance_agent_component() -> void;
+
 };  // namespace ECSAccess

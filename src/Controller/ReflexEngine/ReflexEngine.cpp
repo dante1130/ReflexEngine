@@ -18,6 +18,8 @@
 #include "Controller/GUI/DebugGUI.hpp"
 #include "Controller/Physics/ColliderRenderer.hpp"
 #include "Controller/ResourceManager/ResourceManager.hpp"
+#include "Controller/Affordance/AffordanceSystem.hpp"
+#include "Controller/Emotion/Emotion.hpp"
 
 void ReflexEngine::run() {
 	auto& engine = ReflexEngine::get_instance();
@@ -167,6 +169,8 @@ void ReflexEngine::lua_access() {
 	Audio::get_instance();
 	Physics::createWorld();
 	EngineTime::lua_access();
+	Affordance::AffordanceSystem::get_instance().lua_access();
+	Emotion::EmotionSystem::get_instance().lua_access();
 
 	window_.lua_access();
 	camera_.lua_access();

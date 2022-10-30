@@ -263,6 +263,7 @@ auto ECSGameAssetFactory::load_affordance_agent(
 	lua.script_file(affordance_agent.lua_script);
 
 	utility.update_func = lua[utility_table["update_func"]];
+	utility.context = lua["var"];
 
 	for (auto& [key, value] : utility_table["states"].get<sol::table>()) {
 		sol::table state_table = value.as<sol::table>();
