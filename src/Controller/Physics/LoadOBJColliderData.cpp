@@ -9,7 +9,7 @@
 constexpr float BOUNCE = 0.1;
 constexpr float FRICTION = 0.25;
 constexpr float MASS = 1.0;
-constexpr float EPSILON = 0.85;
+constexpr float EPSILON = 1.0;
 
 float min(float min_val, float new_val, bool first);
 float max(float max_val, float new_val, bool first);
