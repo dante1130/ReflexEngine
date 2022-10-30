@@ -64,5 +64,6 @@ Scene.add_game_object("game/TheDen/prefabs/small_objects/chairs/chair_five.lua")
 
 --NPCs
 Scene.add_game_object("game/TheDen/prefabs/AI/boss.lua")
+Scene.add_game_object("game/TheDen/prefabs/AI/ducks/duck_1.lua")
 
 Skybox.use_skybox("default")
