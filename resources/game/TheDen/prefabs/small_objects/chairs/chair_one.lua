@@ -29,8 +29,8 @@ entity = {
         using_react_start = false,
         gravity_on = true,
         can_sleep = true,
-        linear_drag = 0,
-        angular_drag = 0,
+        linear_drag = 0.2,
+        angular_drag = 0.2,
 		rb_type = 2
     },
 
