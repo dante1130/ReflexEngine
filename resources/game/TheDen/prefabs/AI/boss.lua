@@ -23,5 +23,27 @@ entity = {
 	model = {
 		model_name = "boss",
 		material_name = "default"
+	},
+
+	affordance_agent = {
+		properties = { "Watch" },
+		properties_weight = {},
+		utility = {
+			lua_script = "resources/scripts/AI/boss_ai.lua",
+			update_func = "boss_update",
+			states = {
+				{
+					name = "watch_tv",
+					affordance = "Watch"
+				}
+			}
+		},
+		mood_state = {
+			joy_sadness = 0.0,
+			trust_disgust = 0.0,
+			fear_anger = 0.0,
+			surprise_anticipation = 0.0
+		},
+		current_emotion = "Neutral"
 	}
 }
