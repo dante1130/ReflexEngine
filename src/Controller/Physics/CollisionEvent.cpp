@@ -11,8 +11,7 @@ void CollisionEventListener::onContact(const CallbackData& collision_data) {
 	}
 
 	size_t size = collision_data.getNbContactPairs();
-	// DebugLogger::log("Physics number of contact pairs",
-	// std::to_string(size));
+	// Loop through all colliders-collider contacts
 	for (size_t count = 0; count < size; ++count) {
 		ContactPair contact_pair = collision_data.getContactPair(count);
 		if (contact_pair.getEventType() ==
@@ -26,6 +25,7 @@ void CollisionEventListener::onContact(const CallbackData& collision_data) {
 		rp3d::Vector3 local_point_c2 = rp3d::Vector3(0, 0, 0);
 		float penetration_depth = 0;
 
+		// Loop through all contacts against same collider
 		for (size_t countTwo = 0; countTwo < num_of_contacts; ++countTwo) {
 			ContactPoint contact_point = contact_pair.getContactPoint(countTwo);
 			contact_normal += contact_point.getWorldNormal();
@@ -37,6 +37,7 @@ void CollisionEventListener::onContact(const CallbackData& collision_data) {
 		if (num_of_contacts != 0) {
 			float num = static_cast<float>(num_of_contacts);
 
+			// Converts the local point to body point
 			local_point_c1 =
 			    convert_local_point(local_point_c1, contact_pair.getBody1(),
 			                        contact_pair.getCollider1(), num);
@@ -47,6 +48,7 @@ void CollisionEventListener::onContact(const CallbackData& collision_data) {
 			contact_normal /= num;
 			penetration_depth /= num;
 
+			// Run collision method
 			PhysicsBody::collision(
 			    contact_pair.getCollider1(), contact_pair.getCollider2(),
 			    glm::vec3(local_point_c1.x, local_point_c1.y, local_point_c1.z),

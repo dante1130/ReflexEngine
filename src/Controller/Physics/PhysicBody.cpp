@@ -225,13 +225,10 @@ void PhysicsBody::DePenetrate(PhysicsBody* pb1, PhysicsBody* pb2,
 	glm::vec3 pos1 = pb1->getPosition();
 	glm::vec3 pos2 = pb2->getPosition();
 
-	if (glm::length(pb1->getVelocity()) == 0 ||
-	    glm::length(pb2->getVelocity()) == 0) {
-		if (glm::length(pb1->getVelocity()) == 0) {
-			pos2 = pos2 + normal * penetration_depth;
-		} else {
-			pos1 = pos1 - normal * penetration_depth;
-		}
+	if (glm::length(pb1->getVelocity()) == 0) {
+		pos2 = pos2 + normal * penetration_depth;
+	} else if (glm::length(pb2->getVelocity()) == 0) {
+		pos1 = pos1 - normal * penetration_depth;
 	} else {
 		float total_vel = glm::length(pb1->getVelocity() - pb2->getVelocity());
 		pos1 = pos1 - (glm::length(pb1->getVelocity()) / total_vel) *
