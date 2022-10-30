@@ -543,7 +543,6 @@ void ECSGui::draw_rigidbody(Reflex::Entity& entity) {
 		bool react_resolution = rigidbody.usingReactResolve();
 		ImGui::Checkbox("Using react resolution", &react_resolution);
 		ImGui::Checkbox("Gravity On", &rigidbody.gravity_on);
-		ImGui::Checkbox("Is Trigger", &rigidbody.is_trigger);
 		ImGui::Checkbox("Can Sleep", &rigidbody.can_sleep);
 		int rigidbody_type = rigidbody.getType();
 		ImGui::DragInt("Rigidbody type", &rigidbody_type, 0);

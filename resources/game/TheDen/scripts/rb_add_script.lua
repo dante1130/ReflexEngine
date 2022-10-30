@@ -12,6 +12,9 @@ function init(ecs, entity)
 	rb:add_box_collider(Math.vec3.new(-0.4, 0, 0.4), Math.vec3.new(0, 0, 0), Math.vec3.new(0.1, 0.5, 0.1), 0.5, 2, 0.5)
 	rb:add_box_collider(Math.vec3.new(0.4, 0, -0.4), Math.vec3.new(0, 0, 0), Math.vec3.new(0.1, 0.5, 0.1), 0.5, 2, 0.5)
 	rb:add_box_collider(Math.vec3.new(-0.4, 0, -0.4), Math.vec3.new(0, 0, 0), Math.vec3.new(0.1, 0.5, 0.1), 0.5, 2, 0.5)
+
+	local script = entity:get_script_component()
+	script.is_active = false;
 end
 
 function update(ecs, entity)
