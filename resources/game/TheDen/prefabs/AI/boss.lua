@@ -10,8 +10,8 @@ entity = {
 		},
 		rotation = {
 			x = 0,
-			y = 90,
-			z = 0
+			y = 0,
+			z = 90
 		},
 		scale = {
 			x = 0.5,

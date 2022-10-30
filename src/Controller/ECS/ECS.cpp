@@ -68,6 +68,9 @@ void ECS::update(double delta_time) {
 	PERFORMANCE_LOGGER_PUSH("Statemachine");
 	System::update_statemachine(*this);
 	PERFORMANCE_LOGGER_POP();
+	PERFORMANCE_LOGGER_PUSH("AffordanceAgent");
+	System::update_affordance_agent(*this);
+	PERFORMANCE_LOGGER_POP();
 }
 
 void ECS::fixed_update(double delta_time) {

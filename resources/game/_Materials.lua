@@ -21,7 +21,7 @@ Model.load_model("rubix_cube", "models/rubixcube.obj")
 Model.load_model("calculator", "models/calculator.obj")
 Model.load_model("chair", "models/chair.obj")
 Model.load_model("boss", "models/boss.obj")
---Model.load_model("robot", "models/robot.obj")
+Model.load_model("robot", "models/robotV.1_2.obj")
 
 Md2.load_md2_model("duck", "models/DuckPersonNew.md2")
 

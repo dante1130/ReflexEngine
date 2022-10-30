@@ -1,11 +1,11 @@
 entity = {
-	name = "Duck 1",
-	collection_id = 12,
+	name = "Robot 1",
+	collection_id = 11,
 
 	transform = {
 		position = {
-			x = 50,
-			y = 0.15,
+			x = 51,
+			y = 0.75,
 			z = -5.456
 		},
 		rotation = {
@@ -20,9 +20,8 @@ entity = {
 		}
 	},
 
-	md2_animation = {
-		md2_name = "duck",
-		texture_name = "duck",
+	model = {
+		model_name = "robot",
 		material_name = "default"
-	}
+	};
 }

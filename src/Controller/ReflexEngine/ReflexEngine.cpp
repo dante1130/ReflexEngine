@@ -103,7 +103,7 @@ void ReflexEngine::run() {
 			PERFORMANCE_LOGGER_PUSH("Add draw call");
 			scene.add_draw_call();
 			PERFORMANCE_LOGGER_POP();
-			PERFORMANCE_LOGGER_PUSH("Draw");
+			PERFORMANCE_LOGGER_PUSH("Renderer");
 			engine.renderer_.draw();
 			engine.renderer_.draw_debug(collider_renderer);
 			PERFORMANCE_LOGGER_POP();
