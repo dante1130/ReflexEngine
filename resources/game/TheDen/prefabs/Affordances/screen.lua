@@ -1,4 +1,7 @@
 entity = {
+	name = "Screen",
+	collection_id = 13,
+
 	transform = {
 		position = {
 			x = 64,

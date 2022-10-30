@@ -405,7 +405,7 @@ void System::update_affordance_agent(ECS& ecs) {
 
 	registry.view<Component::Transform, Component::AffordanceAgent>().each(
 	    [&](auto agent_id, auto& agent_transform, auto& agent) {
-		    const auto& agent_entity = ecs.get_entity(agent_id);
+		    auto& agent_entity = ecs.get_entity(agent_id);
 
 		    // Updates the agent's utilities, can be anything from updating the
 		    // agent's context, emotions or any component that is in the agent.

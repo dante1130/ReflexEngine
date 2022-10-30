@@ -1,4 +1,5 @@
 dofile("game/TheDen/Collections.lua")
+dofile("game/TheDen/Affordances.lua")
 
 Texture.load_texture("credits", "textures/reflexbullet.png")
 
@@ -66,5 +67,8 @@ Scene.add_game_object("game/TheDen/prefabs/small_objects/chairs/chair_four.lua")
 Scene.add_game_object("game/TheDen/prefabs/AI/boss.lua")
 Scene.add_game_object("game/TheDen/prefabs/AI/ducks/duck_1.lua")
 Scene.add_game_object("game/TheDen/prefabs/AI/robots/robot_1.lua")
+
+--Affordances
+Scene.add_game_object("game/TheDen/prefabs/Affordances/screen.lua")
 
 Skybox.use_skybox("default")

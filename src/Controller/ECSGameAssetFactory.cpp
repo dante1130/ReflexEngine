@@ -86,6 +86,10 @@ void ECSGameAssetFactory::load_components(ECS& ecs, Reflex::Entity& entity,
 		load_rigidbody(entity, entity_table["rigidbody"]);
 	}
 
+	if (entity_table["affordance"].valid()) {
+		load_affordance(entity, entity_table["affordance"]);
+	}
+
 	if (entity_table["affordance_agent"].valid()) {
 		load_affordance_agent(entity, entity_table["affordance_agent"]);
 	}

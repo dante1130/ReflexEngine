@@ -21,7 +21,7 @@ function boss_update(entity)
 
 	mood_state.joy_sadness = mood_state.joy_sadness + (-context.loneliness * Time.get_delta_time()) * 0.01
 
-	print_mood_state(mood_state)
+	--print_mood_state(mood_state)
 end
 
 function watch_state(entity)

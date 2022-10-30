@@ -15,3 +15,4 @@ Collections.add_collection("Chairs", 4)                 --9
 Collections.add_collection("AI", -1)                    --10
 Collections.add_collection("AI - Robots", 10) 		 	--11
 Collections.add_collection("AI - Duck", 10) 		 	--12
+Collections.add_collection("Affordances", -1)		    --13
