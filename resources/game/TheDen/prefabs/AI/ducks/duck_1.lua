@@ -24,5 +24,46 @@ entity = {
 		md2_name = "duck",
 		texture_name = "duck",
 		material_name = "default"
+	},
+
+	affordance_agent = {
+		properties = { "Duck", "Watch", "Talk", "Study", "Eat" },
+		properties_weights = { { "Duck", 2.0 } },
+		utility = {
+			lua_script = "game/TheDen/scripts/AI/duck_ai.lua",
+			context = {
+				["social"] = {
+					value = 0.0,
+					arousal_weight = -0.5,
+					valence_weight = 1
+				},
+				["hunger"] = {
+					value = 0.0,
+					arousal_weight = 1.0,
+					valence_weight = 0.1
+				},
+				["stress"] = {
+					value = 0.0,
+					arousal_weight = -1.0,
+					valence_weight = -0.25
+				},
+				["fun"] = {
+					value = 0.0,
+					arousal_weight = 0.0,
+					valence_weight = 0.5
+				}
+			},
+			update_func = "duck_update",
+			states = {
+				{
+					name = "watch_state",
+					affordance = { "Watch" }
+				}
+			}
+		},
+		mood_state = {
+			arousal = 0.0,
+			valence = 0.0
+		}
 	}
 }

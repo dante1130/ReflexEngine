@@ -24,6 +24,10 @@ auto Affordance::find_affordance(const AffordancePtr& affordances,
 		for (const auto& child : child_affordances) {
 			auto score = 0.0F;
 
+			if (child->get_properties().size() == 0) {
+				score = 1.0F;
+			}
+
 			// Calculate the score of the child.
 			for (const auto& child_property : child->get_properties()) {
 				if (properties.find(child_property) != properties.end()) {

@@ -26,15 +26,25 @@ entity = {
 	},
 
 	affordance_agent = {
-		properties = { "Watch" },
+		properties = { "Boss", "Watch", "Talk" },
 		properties_weights = {},
 		utility = {
 			lua_script = "game/TheDen/scripts/AI/boss_ai.lua",
 			context = {
+				["social"] = {
+					value = 0.0,
+					arousal_weight = 1,
+					valence_weight = 1
+				},
 				["loneliness"] = {
-					value = 0.5,
-					arousal_weight = -0.01,
-					valence_weight = 0.0
+					value = 0.0,
+					arousal_weight = 1,
+					valence_weight = -0.5
+				},
+				["fun"] = {
+					value = 0.0,
+					arousal_weight = 0.0,
+					valence_weight = 0.5
 				}
 			},
 			update_func = "boss_update",

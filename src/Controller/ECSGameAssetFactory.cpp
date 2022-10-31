@@ -31,10 +31,12 @@ void ECSGameAssetFactory::create(ECS& ecs, const std::string& lua_script) {
 	auto entity_table = lua["entity"];
 
 	if (entity_table.valid()) {
-		const std::string name = [&entity_table]() {
+		const std::string name = [&entity_table]() -> std::string {
 			if (entity_table["name"].valid()) {
 				return entity_table["name"];
 			}
+
+			return {};
 		}();
 
 		load_components(ecs, ecs.create_entity(name), entity_table);

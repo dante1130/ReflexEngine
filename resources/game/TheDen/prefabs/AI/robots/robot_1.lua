@@ -26,11 +26,27 @@ entity = {
 	},
 
 	affordance_agent = {
-		properties = { "Watch", "Talk" },
+		properties = { "Robot", "Watch", "Talk", "Annoy" },
 		properties_weights = {},
 		utility = {
 			lua_script = "game/TheDen/scripts/AI/robot_ai.lua",
-			context = {},
+			context = {
+				["social"] = {
+					value = 0.0,
+					arousal_weight = -0.5,
+					valence_weight = 0.5
+				},
+				["cheeky"] = {
+					value = 0.0,
+					arousal_weight = 1,
+					valence_weight = 0.5
+				},
+				["fun"] = {
+					value = 0.0,
+					arousal_weight = 0.0,
+					valence_weight = 0.5
+				}
+			},
 			update_func = "robot_update",
 			states = {
 				{
@@ -42,7 +58,6 @@ entity = {
 		mood_state = {
 			arousal = 0.0,
 			valence = 0.0
-		},
-		current_emotion = "Neutral"
+		}
 	}
 }

@@ -1,5 +1,5 @@
 dofile("game/TheDen/Collections.lua")
-dofile("game/TheDen/Affordances.lua")
+dofile("game/TheDen/affordances/watch_affordance.lua")
 
 Texture.load_texture("credits", "textures/reflexbullet.png")
 
