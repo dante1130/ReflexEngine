@@ -4,13 +4,14 @@
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/euler_angles.hpp>
 #include "Controller/Physics/QuaternionHelper.hpp"
-
+#include "Controller/ReflexEngine/EngineTime.hpp"
 #include "Controller/GUI/DebugLogger.hpp"
 
 #include <string>
 #include <ReflexAssertion.hpp>
 
 const constexpr glm::vec3 GRAVITY_CONSTANT = glm::vec3(0.0f, -9.807f, 0.0f);
+const constexpr float SLEEP_TIME_THRESHOLD = 1.0f; //in seconds
 
 using namespace rp3d;
 
@@ -20,6 +21,9 @@ EngineResolve::EngineResolve() {
 
 	angular_.velocity = glm::vec3(0);
 	angular_.acceleration = glm::vec3(0);
+
+	sleep_.ang_velocity = 5.0f;
+	sleep_.lin_velocity = 0.4f; 
 
 	total_mass_ = 0;
 	epsilon_value_ = 0;
@@ -43,13 +47,38 @@ void EngineResolve::resolve(float lambda, glm::vec3 vector_to_collision,
 	angular_.change = (lambda * inverse_rotated_inertia_tensor_) *
 	                  glm::cross(vector_to_collision, contact_normal) * mult;
 
-	++number_of_collisions_;
+	++number_of_collisions_; 
+
+	if (!can_sleep_) return;
+
+	bool vel_check = sleep_.ang_velocity > glm::length(angular_.change) &&
+	                 sleep_.lin_velocity > glm::length(linear_.change);
+	if (vel_check)
+		sleep_.time += EngineTime::get_fixed_delta_time();
+	else if (sleep_.time > 0.0f) {
+		sleep_.time = 0.0f;
+		asleep_ = false;
+	} 
+
+	if (asleep_) return;
+
+	if (sleep_.time > SLEEP_TIME_THRESHOLD) {
+		asleep_ = true;
+
+		linear_.velocity = glm::vec3(0);
+		linear_.acceleration = glm::vec3(0);
+
+		angular_.velocity = glm::vec3(0);
+		angular_.acceleration = glm::vec3(0);
+	}
 }
 
 void EngineResolve::update(float delta_time) {
 	if (body_type_ == BodyType::STATIC) {
 		return;
 	}
+
+	if (asleep_) return;
 
 	if (body_type_ == BodyType::KINEMATIC) {
 		linear_.acceleration = glm::vec3(0);

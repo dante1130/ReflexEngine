@@ -16,12 +16,25 @@ struct Motion_Stats {
 	      change(0) {}
 };
 
+struct Sleep_Stats {
+	float lin_velocity;
+	float ang_velocity;
+	float time; //Under threshold
+
+	Sleep_Stats()
+	    : lin_velocity(0.0f),
+	      ang_velocity(0.0f),
+	      time(0.0f) {}
+};
+
 class EngineResolve : public PhysicsBody {
 private:
 	rp3d::CollisionBody* collision_body_;
 
 	Motion_Stats linear_;
 	Motion_Stats angular_;
+	Sleep_Stats sleep_;
+
 	int number_of_collisions_ = 0;
 
 	float total_mass_ = 0;
