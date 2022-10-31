@@ -27,7 +27,7 @@ entity = {
 	},
 
 	affordance_agent = {
-		properties = { "Duck", "Watch", "Talk", "Study", "Eat" },
+		properties = { "Duck", "Watch", "Talk", "Study", "Eat", "Move" },
 		properties_weights = { { "Duck", 2.0 } },
 		utility = {
 			lua_script = "game/TheDen/scripts/AI/duck_ai.lua",

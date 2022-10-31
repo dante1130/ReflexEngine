@@ -15,8 +15,10 @@ astar:set_grid({
 
 astar:set_grid_offset(36.38, -7.98)
 
--- local path = astar:find_path(36.12, -7.2, 64.28, -7.2)
+-- local agent_pos = Math.vec3.new(36.12, 0, -7.2)
 
--- for i, v1, v2 in pairs(path) do
--- 	print(i, v1, v2)
--- end
+-- local path = astar:find_path(agent_pos.x, agent_pos.z, 64.28, -7.2)
+
+-- local x, y = path:at(1)
+
+-- print(x, y)

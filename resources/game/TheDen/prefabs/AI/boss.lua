@@ -25,6 +25,11 @@ entity = {
 		material_name = "default"
 	},
 
+	affordance = {
+		object_name = "talk",
+		lua_script = "game/TheDen/scripts/Affordances/affordance.lua"
+	},
+
 	affordance_agent = {
 		properties = { "Boss", "Watch", "Talk" },
 		properties_weights = {},

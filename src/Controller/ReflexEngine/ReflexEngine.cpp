@@ -20,6 +20,7 @@
 #include "Controller/ResourceManager/ResourceManager.hpp"
 #include "Controller/Affordance/AffordanceSystem.hpp"
 #include "Controller/Emotion/Emotion.hpp"
+#include "Controller/AI/AgentHelper.hpp"
 
 void ReflexEngine::run() {
 	auto& engine = ReflexEngine::get_instance();
@@ -171,6 +172,7 @@ void ReflexEngine::lua_access() {
 	EngineTime::lua_access();
 	Affordance::AffordanceSystem::get_instance().lua_access();
 	Emotion::EmotionSystem::get_instance().lua_access();
+	AI::lua_access();
 
 	window_.lua_access();
 	camera_.lua_access();

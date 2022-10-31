@@ -26,7 +26,7 @@ entity = {
 	},
 
 	affordance_agent = {
-		properties = { "Robot", "Watch", "Talk", "Annoy" },
+		properties = { "Robot", "Watch", "Talk", "Annoy", "Move" },
 		properties_weights = {},
 		utility = {
 			lua_script = "game/TheDen/scripts/AI/robot_ai.lua",
@@ -52,6 +52,10 @@ entity = {
 				{
 					name = "watch_state",
 					affordance = { "Watch" }
+				},
+				{
+					name = "talk_state",
+					affordance = { "Talk" }
 				}
 			}
 		},

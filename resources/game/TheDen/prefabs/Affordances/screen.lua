@@ -22,6 +22,6 @@ entity = {
 
 	affordance = {
 		object_name = "screen",
-		lua_script = "game/TheDen/scripts/Affordances/screen_affordance.lua"
+		lua_script = "game/TheDen/scripts/Affordances/affordance.lua"
 	}
 }
