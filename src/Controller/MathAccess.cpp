@@ -82,11 +82,9 @@ void MathAccess::register_glm_functions() {
 	                  [](const glm::quat& a) { return glm::length(a); });
 
 	math_table["distance"] =
-	    sol::overload([](const glm::vec3& a,
-	                     const glm::vec3& b) { return glm::distance(a, b); },
-	                  [](const glm::quat& a, const glm::quat& b) {
-		                  return glm::distance(a, b);
-	                  });
+	    sol::overload([](const glm::vec3& a, const glm::vec3& b) {
+		    return glm::distance(a, b);
+	    });
 
 	math_table["normalize"] =
 	    sol::overload([](const glm::vec3& a) { return glm::normalize(a); },

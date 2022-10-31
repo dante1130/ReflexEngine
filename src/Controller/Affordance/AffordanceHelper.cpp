@@ -25,7 +25,7 @@ auto Affordance::find_affordance(const AffordancePtr& affordances,
 			auto score = 0.0F;
 
 			if (child->get_properties().size() == 0) {
-				score = 1.0F;
+				score += 1.0F;
 			}
 
 			// Calculate the score of the child.

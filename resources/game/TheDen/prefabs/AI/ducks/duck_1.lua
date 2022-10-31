@@ -26,9 +26,14 @@ entity = {
 		material_name = "default"
 	},
 
+	affordance = {
+		object_name = "talk",
+		lua_script = "game/TheDen/scripts/Affordances/affordance.lua"
+	},
+
 	affordance_agent = {
 		properties = { "Duck", "Watch", "Talk", "Study", "Eat", "Move" },
-		properties_weights = { { "Duck", 2.0 } },
+		properties_weights = { ["Duck"] = 2.0, ["Move"] = 2.0 },
 		utility = {
 			lua_script = "game/TheDen/scripts/AI/duck_ai.lua",
 			context = {
