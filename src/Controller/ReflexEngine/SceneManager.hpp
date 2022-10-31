@@ -81,6 +81,15 @@ private:
 
 	/**
 	 * @brief Expose the add game object function to Lua for the scene.
+	 *
+	 * @param scene The scene.
 	 */
 	static void scene_lua_access(ECSScene& scene);
+
+	/**
+	 * @brief Expose the astar interface to Lua.
+	 *
+	 * @param astar The astar interface.
+	 */
+	static auto astar_lua_access(AStar& astar) -> void;
 };

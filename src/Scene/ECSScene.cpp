@@ -65,3 +65,5 @@ void ECSScene::garbage_collection() { System::update_remove(ecs_); }
 const std::string& ECSScene::get_master_lua_script() const {
 	return master_lua_script_;
 }
+
+auto ECSScene::get_astar() -> AStar& { return astar_; }

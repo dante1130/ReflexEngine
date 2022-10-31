@@ -28,6 +28,7 @@ void SceneManager::create_scene(const std::string& name,
 void SceneManager::load_scene(const std::string& name) {
 	current_scene_ = std::make_unique<ECSScene>(scene_map_.at(name));
 	scene_lua_access(*current_scene_);
+	astar_lua_access(current_scene_->get_astar());
 	current_scene_->init();
 
 	flag_change_scene_ = false;
@@ -58,4 +59,19 @@ void SceneManager::scene_lua_access(ECSScene& scene) {
 		std::cout << "Loading game object: " << lua_script << std::endl;
 		scene.add_game_object(lua_script);
 	};
+
+	scene_table["get_astar"] = [&scene]() { return scene.get_astar(); };
+}
+
+auto SceneManager::astar_lua_access(AStar& astar) -> void {
+	auto& lua = LuaManager::get_instance().get_state();
+
+	auto astar_type = lua.new_usertype<AStar>("AStar");
+
+	astar_type["set_grid"] = &AStar::setGrid;
+	astar_type["set_grid_ratio"] = &AStar::set_grid_ratio;
+	astar_type["set_grid_offset"] = &AStar::set_grid_offset;
+	astar_type["reset_grid"] = &AStar::reset_grid_to_original;
+	astar_type["set_coordinate_value"] = &AStar::set_coordinate_value;
+	astar_type["find_path"] = &AStar::findPath;
 }

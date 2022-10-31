@@ -47,7 +47,7 @@ public:
 	 * @return true done successfully
 	 * @return false problem encountered (out of range)
 	 */
-	auto set_coordiante_value(float x_point, float y_point, int new_value)
+	auto set_coordinate_value(float x_point, float y_point, int new_value)
 	    -> bool;
 
 	/**
