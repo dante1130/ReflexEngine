@@ -19,6 +19,8 @@ struct Consideration {
 	/// A function that returns a value between 0 and 1 to determine the utility
 	/// of the affordance.
 	sol::function scorer_func;
+	/// The score returned from the scorer function.
+	float score = 0.0F;
 
 	Consideration() = default;
 

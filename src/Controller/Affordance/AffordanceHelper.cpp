@@ -85,11 +85,12 @@ auto Affordance::evaluate_utility(const Reflex::Entity& entity) -> void {
 
 	auto best_score = 0.0F;
 
-	for (const auto& [state_name, state] : affordance_agent.utility.states) {
+	for (auto& [state_name, state] : affordance_agent.utility.states) {
 		auto result = state.scorer_func(entity);
 
 		if (result.valid()) {
 			auto score = result.get<float>();
+			state.score = score;
 
 			if (score > best_score) {
 				best_score = score;
