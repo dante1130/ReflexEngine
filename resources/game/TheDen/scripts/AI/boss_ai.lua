@@ -3,7 +3,7 @@ function boss_update(entity)
 	local context = affordance_agent.utility.context
 
 	context.social.value = context.social.value - 0.001
-	context.loneliness.value = context.loneliness.value + 0.001
+	context.loneliness.value = context.loneliness.value - 0.001
 	context.fun.value = context.fun.value - 0.001
 
 	local mood_state = affordance_agent.mood_state

@@ -34,7 +34,7 @@ entity = {
 			context = {
 				["social"] = {
 					value = 0.0,
-					arousal_weight = -0.5,
+					arousal_weight = 0.5,
 					valence_weight = 1
 				},
 				["hunger"] = {
@@ -44,8 +44,8 @@ entity = {
 				},
 				["stress"] = {
 					value = 0.0,
-					arousal_weight = -1.0,
-					valence_weight = -0.25
+					arousal_weight = 1.0,
+					valence_weight = 0.25
 				},
 				["fun"] = {
 					value = 0.0,

@@ -9,7 +9,7 @@ function watch_screen(agent, affordance)
 	local affordance_agent = agent:get_affordance_agent_component()
 	local context = affordance_agent.utility.context
 
-	context.fun.value = context.fun.value + 0.001
+	context.fun.value = context.fun.value + 0.005
 end
 
 function duck_watch_screen(agent, affordance)
@@ -18,7 +18,7 @@ function duck_watch_screen(agent, affordance)
 	local duck_agent = agent:get_affordance_agent_component()
 	local context = duck_agent.utility.context
 
-	context.stress.value = context.stress.value - 0.001
+	context.stress.value = context.stress.value - 0.005
 end
 
 AffordanceSystem.set_affordance("screen", AffordanceComposite.new("Watch", { "Watch" }, {

@@ -33,7 +33,7 @@ entity = {
 			context = {
 				["social"] = {
 					value = 0.0,
-					arousal_weight = -0.5,
+					arousal_weight = 0.5,
 					valence_weight = 0.5
 				},
 				["cheeky"] = {

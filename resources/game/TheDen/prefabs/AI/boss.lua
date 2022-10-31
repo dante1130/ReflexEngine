@@ -39,12 +39,12 @@ entity = {
 				["loneliness"] = {
 					value = 0.0,
 					arousal_weight = 1,
-					valence_weight = -0.5
+					valence_weight = 1
 				},
 				["fun"] = {
 					value = 0.0,
 					arousal_weight = 0.0,
-					valence_weight = 0.5
+					valence_weight = 0.1
 				}
 			},
 			update_func = "boss_update",
