@@ -17,12 +17,12 @@ struct Motion_Stats {
 };
 
 struct Sleep_Stats {
-	float lin_velocity;
+	glm::vec3 lin_velocity;
 	float ang_velocity;
 	float time; //Under threshold
 
 	Sleep_Stats()
-	    : lin_velocity(0.0f),
+	    : lin_velocity(glm::vec3(0.0f)),
 	      ang_velocity(0.0f),
 	      time(0.0f) {}
 };

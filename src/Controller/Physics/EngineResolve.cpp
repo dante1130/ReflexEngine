@@ -23,7 +23,7 @@ EngineResolve::EngineResolve() {
 	angular_.acceleration = glm::vec3(0);
 
 	sleep_.ang_velocity = 5.0f;
-	sleep_.lin_velocity = 0.4f; 
+	sleep_.lin_velocity = glm::vec3(0.02f, 0.6f, 0.02f); 
 
 	total_mass_ = 0;
 	epsilon_value_ = 0;
@@ -51,8 +51,15 @@ void EngineResolve::resolve(float lambda, glm::vec3 vector_to_collision,
 
 	if (!can_sleep_) return;
 
-	bool vel_check = sleep_.ang_velocity > glm::length(angular_.change) &&
-	                 sleep_.lin_velocity > glm::length(linear_.change);
+	bool vel_check = sleep_.ang_velocity > glm::length(angular_.velocity) &&
+	                 sleep_.lin_velocity.x > linear_.velocity.x &&
+	                 sleep_.lin_velocity.y > linear_.velocity.y &&
+	                 sleep_.lin_velocity.z > linear_.velocity.z;
+
+	if (glm::length(linear_.change) > 0.4f) {
+		vel_check = false;
+	}
+
 	if (vel_check)
 		sleep_.time += EngineTime::get_fixed_delta_time();
 	else if (sleep_.time > 0.0f) {
