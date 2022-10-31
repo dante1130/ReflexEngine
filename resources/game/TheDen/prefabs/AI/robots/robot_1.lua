@@ -20,22 +20,22 @@ entity = {
 		}
 	},
 
+	model = {
+		model_name = "robot",
+		material_name = "default"
+	},
+
 	affordance = {
 		object_name = "talk",
 		lua_script = "game/TheDen/scripts/Affordances/affordance.lua"
 	},
 
 	affordance_agent = {
-		properties = { "Robot", "Watch", "Talk", "Annoy", "Move" },
+		properties = { "Robot", "Watch", "Annoy", "Move" },
 		properties_weights = { ["Move"] = 2.0 },
 		utility = {
 			lua_script = "game/TheDen/scripts/AI/robot_ai.lua",
 			context = {
-				["social"] = {
-					value = 0.0,
-					arousal_weight = 0.5,
-					valence_weight = 0.5
-				},
 				["cheeky"] = {
 					value = 0.0,
 					arousal_weight = 1,
@@ -52,10 +52,6 @@ entity = {
 				{
 					name = "watch_state",
 					affordance = { "Watch" }
-				},
-				{
-					name = "talk_state",
-					affordance = { "Talk" }
 				}
 			}
 		},

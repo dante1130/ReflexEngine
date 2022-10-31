@@ -427,6 +427,10 @@ void System::update_affordance_agent(ECS& ecs) {
 		    registry.view<Component::Transform, Component::Affordance>().each(
 		        [&](auto affordance_id, auto& affordance_transform,
 		            auto& affordance) {
+			        if (agent_id == affordance_id) {
+				        return;
+			        }
+
 			        auto affordance_tree = affordance_system.get_affordance(
 			            affordance.object_name);
 
