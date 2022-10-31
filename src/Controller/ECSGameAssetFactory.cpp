@@ -254,19 +254,18 @@ auto ECSGameAssetFactory::load_affordance_agent(
 	    affordance_agent_table["properties"].get<Affordance::Properties>(),
 	    affordance_agent_table["properties_weights"]
 	        .get<Affordance::PropertiesWeight>(),
-	    Emotion::EmotionState(mood_table["arousal"], mood_table["valence"]),
-	    affordance_agent_table["current_emotion"]);
+	    Emotion::EmotionState(mood_table["arousal"], mood_table["valence"]));
 
 	auto& utility = affordance_agent.utility;
 	const auto& utility_table = affordance_agent_table["utility"];
 
 	affordance_agent.lua_script = utility_table["lua_script"];
+	utility.context = utility_table["context"];
 
 	auto& lua = LuaManager::get_instance().get_state();
 	lua.script_file(affordance_agent.lua_script);
 
 	utility.update_func = lua[utility_table["update_func"]];
-	utility.context = lua["var"];
 
 	for (auto& [key, value] : utility_table["states"].get<sol::table>()) {
 		sol::table state_table = value.as<sol::table>();

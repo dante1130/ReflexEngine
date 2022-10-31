@@ -442,6 +442,4 @@ auto ECSAccess::register_affordance_agent_component() -> void {
 	affordance_agent_type["utility"] = &AffordanceAgent::utility;
 	affordance_agent_type["affordance"] = &AffordanceAgent::affordance;
 	affordance_agent_type["mood_state"] = &AffordanceAgent::mood_state;
-	affordance_agent_type["current_emotion"] =
-	    &AffordanceAgent::current_emotion;
 }

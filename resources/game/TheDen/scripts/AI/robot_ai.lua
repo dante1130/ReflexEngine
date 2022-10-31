@@ -1,7 +1,3 @@
-var = {
-
-}
-
 function robot_ai(entity)
 	local affordance_agent = entity:get_affordance_agent_component()
 

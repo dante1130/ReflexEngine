@@ -1,8 +1,3 @@
-var = {
-	loneliness = 0.5,
-	loneliness_weight = -0.01
-}
-
 function print_mood_state(mood_state)
 	DebugLogger.log("boss - emotion",
 		mood_state.arousal ..
@@ -16,7 +11,7 @@ function boss_update(entity)
 	local context = affordance_agent.utility.context
 	local mood_state = affordance_agent.mood_state
 
-	mood_state.arousal = mood_state.arousal + (context.loneliness * context.loneliness_weight)
+	mood_state.arousal = mood_state.arousal + (context.loneliness.value * context.loneliness.arousal_weight)
 
 	print_mood_state(mood_state)
 end

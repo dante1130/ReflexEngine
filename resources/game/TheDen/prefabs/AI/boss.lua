@@ -30,6 +30,13 @@ entity = {
 		properties_weights = {},
 		utility = {
 			lua_script = "game/TheDen/scripts/AI/boss_ai.lua",
+			context = {
+				["loneliness"] = {
+					value = 0.5,
+					arousal_weight = -0.01,
+					valence_weight = 0.0
+				}
+			},
 			update_func = "boss_update",
 			states = {
 				{
@@ -41,7 +48,6 @@ entity = {
 		mood_state = {
 			arousal = 0.0,
 			valence = 0.0
-		},
-		current_emotion = "Neutral"
+		}
 	}
 }

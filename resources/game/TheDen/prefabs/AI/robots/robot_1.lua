@@ -30,6 +30,7 @@ entity = {
 		properties_weights = {},
 		utility = {
 			lua_script = "game/TheDen/scripts/AI/robot_ai.lua",
+			context = {},
 			update_func = "robot_update",
 			states = {
 				{
