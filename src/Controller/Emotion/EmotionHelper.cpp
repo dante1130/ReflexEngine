@@ -22,7 +22,8 @@ auto Emotion::update_emotion(const Reflex::Entity& entity) -> void {
 		const float arousal_weight = context_table["arousal_weight"];
 		const float valence_weight = context_table["valence_weight"];
 
-		const float context_value = context_table["value"];
+		const float context_value =
+		    std::clamp(context_table["value"].get<float>(), -1.0F, 1.0F);
 
 		total_arousal += (context_value * arousal_weight);
 		total_valence += (context_value * valence_weight);

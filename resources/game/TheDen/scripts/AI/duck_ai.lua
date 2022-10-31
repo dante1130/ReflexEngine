@@ -4,6 +4,7 @@ function duck_update(entity)
 
 	context.social.value = context.social.value - 0.001
 	context.hunger.value = context.hunger.value + 0.001
+	context.stress.value = context.stress.value + 0.001
 	context.fun.value = context.fun.value - 0.001
 
 	local mood_state = affordance_agent.mood_state
@@ -15,5 +16,9 @@ function duck_update(entity)
 end
 
 function watch_state(entity)
-	return 1.0
+	local affordance_agent = entity:get_affordance_agent_component()
+	local context = affordance_agent.utility.context
+	local mood_state = affordance_agent.mood_state
+
+	return context.stress.value * (1 - context.fun.value) * (1 - mood_state.valence)
 end

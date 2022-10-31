@@ -15,5 +15,9 @@ function robot_update(entity)
 end
 
 function watch_state(entity)
-	return 1.0
+	local affordance_agent = entity:get_affordance_agent_component()
+	local context = affordance_agent.utility.context
+	local mood_state = affordance_agent.mood_state
+
+	return (1 - context.fun.value) * (1 - mood_state.valence)
 end
