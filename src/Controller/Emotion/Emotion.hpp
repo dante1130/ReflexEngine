@@ -10,24 +10,20 @@ namespace Emotion {
 /**
  * @author Florian Robbins
  * @struct emotion
- * @brief The mood struct is used to store float values relating to an
- * agent's emotion. All values are between -1 and 1. With 0 being neutral.
+ * @brief The mood struct using the arousal and valence circumplex model is used
+ * to store float values relating to an agent's emotion. All values are between
+ * -1 and 1. With 0 being neutral.
  */
 struct EmotionState {
-	float joy_sadness = 0.0F;
-	float trust_disgust = 0.0F;
-	float fear_anger = 0.0F;
-	float surprise_anticipation = 0.0F;
+	float arousal = 0.0F;
+	float valence = 0.0F;
 
 	EmotionState() = default;
 
 	EmotionState(const EmotionState&) = default;
 
-	EmotionState(float joy_sad, float tru_dis, float fea_ang, float sup_ant)
-	    : joy_sadness(joy_sad),
-	      trust_disgust(tru_dis),
-	      fear_anger(fea_ang),
-	      surprise_anticipation(sup_ant) {}
+	EmotionState(float arousal, float valence)
+	    : arousal(arousal), valence(valence) {}
 };
 
 using DefinedEmotions = std::unordered_map<std::string, EmotionState>;
@@ -38,7 +34,6 @@ using DefinedEmotions = std::unordered_map<std::string, EmotionState>;
  * @brief An emotion is a class that is used to create an object of emotion.
  * It is used to represent the emotions an AI agent may be experiencing.
  */
-
 class EmotionSystem {
 public:
 	/**

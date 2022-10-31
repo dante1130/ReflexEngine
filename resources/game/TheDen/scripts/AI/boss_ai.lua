@@ -1,16 +1,13 @@
 var = {
-	loneliness = 0.5
+	loneliness = 0.5,
+	loneliness_weight = -0.01
 }
 
 function print_mood_state(mood_state)
 	DebugLogger.log("boss - emotion",
-		mood_state.joy_sadness ..
+		mood_state.arousal ..
 		", " ..
-		mood_state.trust_disgust ..
-		", " ..
-		mood_state.fear_anger ..
-		", " ..
-		mood_state.surprise_anticipation)
+		mood_state.valence)
 end
 
 function boss_update(entity)
@@ -19,9 +16,9 @@ function boss_update(entity)
 	local context = affordance_agent.utility.context
 	local mood_state = affordance_agent.mood_state
 
-	mood_state.joy_sadness = mood_state.joy_sadness + (-context.loneliness * Time.get_delta_time()) * 0.01
+	mood_state.arousal = mood_state.arousal + (context.loneliness * context.loneliness_weight)
 
-	--print_mood_state(mood_state)
+	print_mood_state(mood_state)
 end
 
 function watch_state(entity)

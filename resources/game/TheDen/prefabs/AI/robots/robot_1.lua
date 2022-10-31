@@ -23,5 +23,25 @@ entity = {
 	model = {
 		model_name = "robot",
 		material_name = "default"
-	};
+	},
+
+	affordance_agent = {
+		properties = { "Watch", "Talk" },
+		properties_weights = {},
+		utility = {
+			lua_script = "game/TheDen/scripts/AI/robot_ai.lua",
+			update_func = "robot_update",
+			states = {
+				{
+					name = "watch_state",
+					affordance = { "Watch" }
+				}
+			}
+		},
+		mood_state = {
+			arousal = 0.0,
+			valence = 0.0
+		},
+		current_emotion = "Neutral"
+	}
 }

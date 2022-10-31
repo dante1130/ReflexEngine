@@ -19,11 +19,8 @@ auto EmotionSystem::lua_access() -> void {
 
 	lua.new_usertype<EmotionState>(
 	    "EmotionState",
-	    sol::constructors<EmotionState(),
-	                      EmotionState(float, float, float, float)>(),
-	    "joy_sadness", &EmotionState::joy_sadness, "trust_disgust",
-	    &EmotionState::trust_disgust, "fear_anger", &EmotionState::fear_anger,
-	    "surprise_anticipation", &EmotionState::surprise_anticipation);
+	    sol::constructors<EmotionState(), EmotionState(float, float)>(),
+	    "arousal", &EmotionState::arousal, "valence", &EmotionState::valence);
 }
 
 auto EmotionSystem::set_emotion(const std::string& emotion_name,

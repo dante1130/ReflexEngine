@@ -254,9 +254,7 @@ auto ECSGameAssetFactory::load_affordance_agent(
 	    affordance_agent_table["properties"].get<Affordance::Properties>(),
 	    affordance_agent_table["properties_weights"]
 	        .get<Affordance::PropertiesWeight>(),
-	    Emotion::EmotionState(
-	        mood_table["joy_sadness"], mood_table["trust_disgust"],
-	        mood_table["fear_anger"], mood_table["surprise_anticipation"]),
+	    Emotion::EmotionState(mood_table["arousal"], mood_table["valence"]),
 	    affordance_agent_table["current_emotion"]);
 
 	auto& utility = affordance_agent.utility;

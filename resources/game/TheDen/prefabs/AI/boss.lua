@@ -39,10 +39,8 @@ entity = {
 			}
 		},
 		mood_state = {
-			joy_sadness = 0.0,
-			trust_disgust = 0.0,
-			fear_anger = 0.0,
-			surprise_anticipation = 0.0
+			arousal = 0.0,
+			valence = 0.0
 		},
 		current_emotion = "Neutral"
 	}
