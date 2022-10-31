@@ -17,7 +17,7 @@ AStar::AStar()
 }
 
 auto AStar::findPath(float xStart, float yStart, float xEnd, float yEnd)
-    -> std::queue<std::pair<float, float>> {
+    -> std::deque<std::pair<float, float>> {
 	if (grid.empty()) {
 		throw(GRID_UNINITIALISED);
 	}
@@ -36,8 +36,8 @@ auto AStar::findPath(float xStart, float yStart, float xEnd, float yEnd)
 	path = aStar::aStarSearch(grid, movementCosts, heuristicsCostScale,
 	                          gridSize, start, end, maxDistance);
 
-	std::stack<std::pair<float, float>> reversed_path;
-	reversed_path.push(std::pair<float, float>(
+	std::deque<std::pair<float, float>> deque_path;
+	deque_path.push_front(std::pair<float, float>(
 	    (static_cast<float>(end.x) / grid_ratio_ + start_offset_[1]),
 	    (static_cast<float>(end.y) / grid_ratio_ + start_offset_[0])));
 
@@ -55,26 +55,20 @@ auto AStar::findPath(float xStart, float yStart, float xEnd, float yEnd)
 		pair.first = (pair.first / grid_ratio_ + start_offset_[1]);
 		pair.second = (pair.second / grid_ratio_ + start_offset_[0]);
 
-		reversed_path.push(pair);
+		deque_path.push_front(pair);
 
 		if (x_pos == start.x && y_pos == start.y) {
-			reversed_path.pop();
+			deque_path.pop_front();
 			found = true;
 			break;
 		}
 	}
 
 	if (!found) {
-		return std::queue<std::pair<float, float>>();
+		return {};
 	}
 
-	std::queue<std::pair<float, float>> processed_path;
-	auto path_size = reversed_path.size();
-	for (auto count = 0; count < path_size; ++count) {
-		processed_path.push(reversed_path.top());
-		reversed_path.pop();
-	}
-	return processed_path;
+	return deque_path;
 }
 
 void AStar::printAstarException(int val) {
@@ -118,13 +112,13 @@ void AStar::printAstarException(int val) {
 	}
 }
 
-bool AStar::setGrid(std::vector<std::vector<int>>& newGrid) {
+bool AStar::setGrid(std::vector<std::vector<int>> newGrid) {
 	grid = std::move(newGrid);
 	default_grid = grid;
 
 	gridSize[0] = grid.size();
 	if (gridSize[0] == 0) {
-		gridSize[1] == 0;
+		gridSize[1] = 0;
 	} else {
 		gridSize[1] = grid[0].size();
 	}

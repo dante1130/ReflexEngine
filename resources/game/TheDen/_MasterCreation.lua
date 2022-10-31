@@ -1,6 +1,7 @@
 dofile("game/TheDen/Collections.lua")
 dofile("game/TheDen/affordances/watch_affordance.lua")
 dofile("game/TheDen/affordances/talk_affordance.lua")
+dofile("game/TheDen/AStar.lua")
 
 Texture.load_texture("credits", "textures/reflexbullet.png")
 

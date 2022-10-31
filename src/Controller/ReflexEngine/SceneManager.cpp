@@ -74,4 +74,5 @@ auto SceneManager::astar_lua_access(AStar& astar) -> void {
 	astar_type["reset_grid"] = &AStar::reset_grid_to_original;
 	astar_type["set_coordinate_value"] = &AStar::set_coordinate_value;
 	astar_type["find_path"] = &AStar::findPath;
+	astar_type["print_grid"] = &AStar::print_grid;
 }

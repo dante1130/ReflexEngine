@@ -16,7 +16,13 @@ ECSScene::ECSScene(const std::string& master_lua_script)
 
 void ECSScene::init() {
 	Audio::get_instance().stop_all();
-	LuaManager::get_instance().get_state().script_file(master_lua_script_);
+	auto result =
+	    LuaManager::get_instance().get_state().script_file(master_lua_script_);
+
+	if (!result.valid()) {
+		sol::error err = result;
+		std::cout << err.what() << std::endl;
+	}
 }
 
 void ECSScene::add_game_object(const std::string& lua_script) {

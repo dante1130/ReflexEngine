@@ -2,7 +2,7 @@
 
 #include "AStar.h"
 #include <vector>
-#include <queue>
+#include <deque>
 
 class AStar {
 public:
@@ -20,7 +20,7 @@ public:
 	 *
 	 */
 	auto findPath(float xStart, float yStart, float xEnd, float yEnd)
-	    -> std::queue<std::pair<float, float>>;
+	    -> std::deque<std::pair<float, float>>;
 
 	/**
 	 * @brief	Sets the grid to be used
@@ -29,7 +29,7 @@ public:
 	 * used
 	 * @return	bool	- If it was successful
 	 */
-	bool setGrid(std::vector<std::vector<int>>& newGrid);
+	bool setGrid(std::vector<std::vector<int>> newGrid);
 
 	/**
 	 * @brief Resets the grid to the one set using setGrid
