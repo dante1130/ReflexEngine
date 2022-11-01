@@ -5,7 +5,7 @@ function eat(agent, affordance)
 	local affordance_transform = affordance:get_transform_component()
 	local affordance_pos = affordance_transform.position
 
-	if (AI.is_in_range(agent_pos, affordance_pos, 1.0)) then
+	if (is_at_destination(agent_pos.x, agent_pos.z, affordance_pos.x, affordance_pos.z)) then
 		local context = agent:get_affordance_agent_component().utility.context
 
 		context.stress.value = context.stress.value - 0.001
@@ -20,7 +20,7 @@ function eat(agent, affordance)
 	local path_x, path_y = path:at(1)
 	local path_pos = Math.vec3.new(path_x, agent_pos.y, path_y)
 
-	agent_transform.position = AI.move_towards(agent_pos, path_pos, 1)
+	agent_transform.position = AI.move_towards(agent_pos, path_pos, 2)
 	agent_transform.rotation.y = Math.angle(agent_pos, path_pos)
 end
 

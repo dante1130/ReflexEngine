@@ -7,7 +7,7 @@ function watch_screen(agent, affordance)
 	local affordance_agent = agent:get_affordance_agent_component()
 	local context = affordance_agent.utility.context
 
-	context.fun.value = context.fun.value + 0.005
+	context.fun.value = context.fun.value + 0.01
 end
 
 function move_watch_screen(agent, affordance)
@@ -16,7 +16,7 @@ function move_watch_screen(agent, affordance)
 
 	local theater_pos = Math.vec3.new(59.63, agent_pos.y, -5.709)
 
-	if (AI.is_in_range(agent_pos, theater_pos, 1.0)) then
+	if (is_at_destination(agent_pos.x, agent_pos.z, theater_pos.x, theater_pos.z)) then
 		watch_screen(agent, affordance)
 		return true
 	end
@@ -26,7 +26,7 @@ function move_watch_screen(agent, affordance)
 	local path_x, path_y = path:at(1)
 	local path_pos = Math.vec3.new(path_x, agent_pos.y, path_y)
 
-	agent_transform.position = AI.move_towards(agent_pos, path_pos, 1)
+	agent_transform.position = AI.move_towards(agent_pos, path_pos, 2)
 	agent_transform.rotation.y = Math.angle(agent_pos, path_pos)
 
 	return false
@@ -37,7 +37,7 @@ function duck_watch_screen(agent, affordance)
 	local context = affordance_agent.utility.context
 
 	if (move_watch_screen(agent, affordance)) then
-		context.stress.value = context.stress.value - 0.005
+		context.stress.value = context.stress.value - 0.05
 	end
 end
 

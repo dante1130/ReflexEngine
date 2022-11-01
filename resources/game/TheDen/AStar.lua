@@ -11,7 +11,7 @@ set_grid({
 	{ 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1 }
 })
 
-set_grid_offset(35.88, -7.58)
+set_grid_offset(36.38, -7.98)
 
 -- local agent_pos = Math.vec3.new(36.12, 0, -7.2)
 

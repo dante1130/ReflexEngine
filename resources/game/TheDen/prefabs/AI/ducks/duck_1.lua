@@ -54,7 +54,7 @@ entity = {
 				},
 				["fun"] = {
 					value = 1.0,
-					arousal_weight = 0.0,
+					arousal_weight = 0.5,
 					valence_weight = 1.0
 				}
 			},

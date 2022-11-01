@@ -8,9 +8,10 @@ function study(agent, affordance)
 	if (is_at_destination(agent_pos.x, agent_pos.z, affordance_pos.x, affordance_pos.z)) then
 		local context = agent:get_affordance_agent_component().utility.context
 
+		context.social.value = context.social.value - 0.001
 		context.stress.value = context.stress.value + 0.005
-		context.hunger.value = context.hunger.value - 0.001
-		context.fun.value = context.fun.value - 0.001
+		context.hunger.value = context.hunger.value - 0.005
+		context.fun.value = context.fun.value - 0.005
 
 		agent_transform.rotation.y = Math.angle(agent_pos, affordance_pos)
 		return
@@ -21,7 +22,7 @@ function study(agent, affordance)
 	local path_x, path_y = path:at(1)
 	local path_pos = Math.vec3.new(path_x, agent_pos.y, path_y)
 
-	agent_transform.position = AI.move_towards(agent_pos, path_pos, 1)
+	agent_transform.position = AI.move_towards(agent_pos, path_pos, 2)
 	agent_transform.rotation.y = Math.angle(agent_pos, path_pos)
 end
 
