@@ -36,6 +36,8 @@ Texture.load_texture("Chair", "textures/chair.jpg")
 Material.load_material("shiny", 256.0, 4.0)
 
 Audio.load_audio("duckandcover", "sounds/gamefast.wav")
+Audio.load_audio("quack", "sounds/duckAlert.wav")
+Audio.load_audio("annoy", "sounds/duckWarCry.wav")
 
 --Terrain.load_terrain("terrain", "textures/newheightmap.png")
 

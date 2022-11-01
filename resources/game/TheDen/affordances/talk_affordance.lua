@@ -26,6 +26,9 @@ function talk_move(agent, affordance)
 	local theater_pos = Math.vec3.new(59.63, agent_pos.y, -5.709)
 
 	if (AI.is_in_range(agent_pos, theater_pos, 0.5)) then
+		local sound_pos = Audio.vec3df.new(agent_pos.x, agent_pos.y, agent_pos.z)
+		Audio.play_3d_sound("quack", sound_pos, false, 1.0)
+
 		agent_transform.rotation.y = Math.angle(agent_pos, affordance_pos)
 		context.social.value = context.social.value + 0.005
 		return
