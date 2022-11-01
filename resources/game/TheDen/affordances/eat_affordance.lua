@@ -1,4 +1,4 @@
-function study(agent, affordance)
+function eat(agent, affordance)
 	local agent_transform = agent:get_transform_component()
 	local agent_pos = agent_transform.position
 
@@ -8,9 +8,8 @@ function study(agent, affordance)
 	if (AI.is_in_range(agent_pos, affordance_pos, 0.5)) then
 		local context = agent:get_affordance_agent_component().utility.context
 
-		context.stress.value = context.stress.value + 0.005
-		context.hunger.value = context.hunger.value - 0.001
-		context.fun.value = context.fun.value - 0.001
+		context.stress.value = context.stress.value - 0.001
+		context.hunger.value = context.hunger.value - 0.005
 
 		agent_transform.rotation.y = Math.angle(agent_pos, affordance_pos)
 		return
@@ -25,4 +24,4 @@ function study(agent, affordance)
 	agent_transform.rotation.y = Math.angle(agent_pos, path_pos)
 end
 
-AffordanceSystem.set_affordance("study", AffordanceLeaf("Study", { "Study" }, study))
+AffordanceSystem.set_affordance("eat", AffordanceLeaf("Eat", { "Eat" }, eat))
