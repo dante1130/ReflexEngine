@@ -16,12 +16,23 @@ struct Motion_Stats {
 	      change(0) {}
 };
 
+struct Sleep_Stats {
+	glm::vec3 lin_velocity;
+	float ang_velocity;
+	float time;  // Under threshold
+
+	Sleep_Stats()
+	    : lin_velocity(glm::vec3(0.0f)), ang_velocity(0.0f), time(0.0f) {}
+};
+
 class EngineResolve : public PhysicsBody {
 private:
 	rp3d::CollisionBody* collision_body_;
 
 	Motion_Stats linear_;
 	Motion_Stats angular_;
+	Sleep_Stats sleep_;
+
 	int number_of_collisions_ = 0;
 
 	float total_mass_ = 0;
@@ -547,4 +558,25 @@ public:
 	 * @return void
 	 */
 	void setAngle(float ang) override;
+
+	/**
+	 * @brief Returns if the object is sleeping
+	 *
+	 * @return true
+	 * @return false
+	 */
+	bool isSleeping() override;
+
+	/**
+	 * @brief Set if the object is sleeping
+	 *
+	 * @param ean
+	 */
+	void setIsSleeping(bool ean) override;
+
+	/**
+	 * @brief resets the object if it is sleeping back to a time of 0
+	 *
+	 */
+	auto resetSleeping() -> void override;
 };

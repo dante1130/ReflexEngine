@@ -350,3 +350,9 @@ void ReactResolve::setAngle(float ang) {
 	transform.setOrientation(orientation);
 	rb->setTransform(transform);
 }
+
+bool ReactResolve::isSleeping() { return rb->isSleeping(); }
+
+void ReactResolve::setIsSleeping(bool ean) { rb->setIsSleeping(ean); }
+
+auto ReactResolve::resetSleeping() -> void { rb->setIsSleeping(false); }
