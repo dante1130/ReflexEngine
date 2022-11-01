@@ -23,8 +23,7 @@ function talk_move(agent, affordance)
 	local affordance_agent = agent:get_affordance_agent_component()
 	local context = affordance_agent.utility.context
 
-	local theater_pos = Math.vec3.new(59.63, agent_pos.y, -5.709)
-
+	local theater_pos = Math.vec3.new(59.63, agent_pos.y, -4.709)
 
 	if (is_at_destination(agent_pos.x, agent_pos.z, theater_pos.x, theater_pos.z)) then
 		if (affordance_agent.accumulator == 0.0) then
@@ -60,7 +59,7 @@ function annoy(agent, affordance)
 	local affordance_transform = affordance:get_transform_component()
 	local affordance_pos = affordance_transform.position
 
-	if (is_at_destination(agent_pos.x, agent_pos.z, affordance_pos.x, affordance_pos.z)) then
+	if (AI.is_in_range(agent_transform.position, affordance_transform.position, 1.0)) then
 		local agent_context = agent:get_affordance_agent_component().utility.context
 		local affordance_context = affordance:get_affordance_agent_component().utility.context
 

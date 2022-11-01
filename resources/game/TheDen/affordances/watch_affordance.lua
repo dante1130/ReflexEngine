@@ -2,7 +2,8 @@ function watch_screen(agent, affordance)
 	local agent_transform = agent:get_transform_component()
 	local screen_transform = affordance:get_transform_component()
 
-	agent_transform.rotation.y = Math.angle(Math.vec3.new(1, 0, 0), Math.sub(screen_transform.position, agent_transform.position))
+	agent_transform.rotation.y = Math.angle(Math.vec3.new(1, 0, 0),
+		Math.sub(screen_transform.position, agent_transform.position))
 
 	local affordance_agent = agent:get_affordance_agent_component()
 	local context = affordance_agent.utility.context
@@ -14,7 +15,7 @@ function move_watch_screen(agent, affordance)
 	local agent_transform = agent:get_transform_component()
 	local agent_pos = agent_transform.position
 
-	local theater_pos = Math.vec3.new(59.63, agent_pos.y, -5.709)
+	local theater_pos = Math.vec3.new(59.63, agent_pos.y, -4.709)
 
 	if (is_at_destination(agent_pos.x, agent_pos.z, theater_pos.x, theater_pos.z)) then
 		watch_screen(agent, affordance)

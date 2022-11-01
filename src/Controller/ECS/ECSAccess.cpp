@@ -111,6 +111,7 @@ void ECSAccess::register_entity() {
 
 	auto entity_type = lua.new_usertype<Reflex::Entity>("Entity");
 
+	entity_type["name"] = &Entity::get_name;
 	entity_type["get_id"] = &Entity::get_entity_id;
 
 	entity_type["add_transform_component"] = &Entity::add_component<Transform>;
