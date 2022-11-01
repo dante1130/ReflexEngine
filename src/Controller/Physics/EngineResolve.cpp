@@ -163,6 +163,7 @@ void EngineResolve::addForce(glm::vec3 force, Apply type) {
 	///
 	///
 	linear_.acceleration = linear_.acceleration + (force / total_mass_);
+	asleep_ = false;
 }
 
 void EngineResolve::addForceAtPoint(glm::vec3 force, glm::vec3 point,
@@ -181,6 +182,7 @@ void EngineResolve::addTorque(glm::vec3 torque, Apply type) {
 	///
 	angular_.acceleration =
 	    angular_.acceleration + (torque / (total_mass_ * 1));
+	asleep_ = false; 
 }
 
 void EngineResolve::setMass(float mass) { total_mass_ = mass; }
