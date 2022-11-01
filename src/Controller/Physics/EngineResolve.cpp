@@ -11,7 +11,7 @@
 #include <ReflexAssertion.hpp>
 
 const constexpr glm::vec3 GRAVITY_CONSTANT = glm::vec3(0.0f, -9.807f, 0.0f);
-const constexpr float SLEEP_TIME_THRESHOLD = 1.0f; //in seconds
+const constexpr float SLEEP_TIME_THRESHOLD = 1.0f;  // in seconds
 
 using namespace rp3d;
 
@@ -23,7 +23,7 @@ EngineResolve::EngineResolve() {
 	angular_.acceleration = glm::vec3(0);
 
 	sleep_.ang_velocity = 5.0f;
-	sleep_.lin_velocity = glm::vec3(0.02f, 0.8f, 0.02f); 
+	sleep_.lin_velocity = glm::vec3(0.02f, 0.8f, 0.02f);
 
 	total_mass_ = 0;
 	epsilon_value_ = 0;
@@ -47,7 +47,7 @@ void EngineResolve::resolve(float lambda, glm::vec3 vector_to_collision,
 	angular_.change = (lambda * inverse_rotated_inertia_tensor_) *
 	                  glm::cross(vector_to_collision, contact_normal) * mult;
 
-	++number_of_collisions_; 
+	++number_of_collisions_;
 
 	if (!can_sleep_) return;
 
@@ -57,12 +57,12 @@ void EngineResolve::resolve(float lambda, glm::vec3 vector_to_collision,
 	                 sleep_.lin_velocity.z > std::abs(linear_.velocity.z);
 
 	/*if (test) {
-		std::cout << "Vel check: " << vel_check << std::endl;
-		std::cout << "Velocity: " << linear_.velocity.x << " "
-		          << linear_.velocity.y << " " << linear_.velocity.z
-		          << std::endl;
+	    std::cout << "Vel check: " << vel_check << std::endl;
+	    std::cout << "Velocity: " << linear_.velocity.x << " "
+	              << linear_.velocity.y << " " << linear_.velocity.z
+	              << std::endl;
 
-		test = false;
+	    test = false;
 	}*/
 
 	if (glm::length(linear_.change) > 0.4f) {
@@ -74,7 +74,7 @@ void EngineResolve::resolve(float lambda, glm::vec3 vector_to_collision,
 	else if (sleep_.time > 0.0f) {
 		sleep_.time = 0.0f;
 		asleep_ = false;
-	} 
+	}
 
 	if (asleep_) return;
 
@@ -95,7 +95,6 @@ void EngineResolve::update(float delta_time) {
 	}
 
 	if (asleep_) return;
-
 
 	if (body_type_ == BodyType::KINEMATIC) {
 		linear_.acceleration = glm::vec3(0);
@@ -192,7 +191,7 @@ void EngineResolve::addTorque(glm::vec3 torque, Apply type) {
 	///
 	angular_.acceleration =
 	    angular_.acceleration + (torque / (total_mass_ * 1));
-	asleep_ = false; 
+	asleep_ = false;
 }
 
 void EngineResolve::setMass(float mass) { total_mass_ = mass; }
@@ -576,10 +575,13 @@ float EngineResolve::getAngle() {
 	DebugLogger::log("EngineResolve - getAngle called", "NOT IMPLEMENTED");
 }
 
-bool EngineResolve::isSleeping() {
-	return asleep_;
-}
+bool EngineResolve::isSleeping() { return asleep_; }
 
-void EngineResolve::setIsSleeping(bool ean) {
-	asleep_ = ean;
+void EngineResolve::setIsSleeping(bool ean) { asleep_ = ean; }
+
+auto EngineResolve::resetSleeping() -> void {
+	if (asleep_) {
+		sleep_.time = 0;
+		asleep_ = false;
+	}
 }

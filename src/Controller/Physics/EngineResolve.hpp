@@ -19,12 +19,10 @@ struct Motion_Stats {
 struct Sleep_Stats {
 	glm::vec3 lin_velocity;
 	float ang_velocity;
-	float time; //Under threshold
+	float time;  // Under threshold
 
 	Sleep_Stats()
-	    : lin_velocity(glm::vec3(0.0f)),
-	      ang_velocity(0.0f),
-	      time(0.0f) {}
+	    : lin_velocity(glm::vec3(0.0f)), ang_velocity(0.0f), time(0.0f) {}
 };
 
 class EngineResolve : public PhysicsBody {
@@ -565,4 +563,6 @@ public:
 	bool isSleeping() override;
 
 	void setIsSleeping(bool ean) override;
+
+	auto resetSleeping() -> void override;
 };

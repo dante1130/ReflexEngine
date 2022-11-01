@@ -63,7 +63,6 @@ void ReactResolve::initialise_body(glm::vec3 pos, glm::vec3 rot) {
 void ReactResolve::delete_body() { rb->~RigidBody(); }
 
 void ReactResolve::addForce(glm::vec3 force, Apply type) {
-
 	try {
 		Vector3 temp_force = Vector3(force.x, force.y, force.z);
 		switch (type) {
@@ -352,11 +351,8 @@ void ReactResolve::setAngle(float ang) {
 	rb->setTransform(transform);
 }
 
+bool ReactResolve::isSleeping() { return rb->isSleeping(); }
 
-bool ReactResolve::isSleeping() {
-	return rb->isSleeping();
-}
+void ReactResolve::setIsSleeping(bool ean) { rb->setIsSleeping(ean); }
 
-void ReactResolve::setIsSleeping(bool ean) {
-	rb->setIsSleeping(ean);
-}
+auto ReactResolve::resetSleeping() -> void { rb->setIsSleeping(false); }

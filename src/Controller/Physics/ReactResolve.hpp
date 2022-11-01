@@ -488,4 +488,6 @@ public:
 	bool isSleeping() override;
 
 	void setIsSleeping(bool ean) override;
+
+	auto resetSleeping() -> void override;
 };

@@ -799,9 +799,9 @@ public:
 	 */
 	virtual void setAngle(float ang) = 0;
 
-
-
 	virtual bool isSleeping() = 0;
 
 	virtual void setIsSleeping(bool ean) = 0;
+
+	virtual auto resetSleeping() -> void = 0;
 };
