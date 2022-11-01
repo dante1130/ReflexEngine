@@ -23,7 +23,7 @@ EngineResolve::EngineResolve() {
 	angular_.acceleration = glm::vec3(0);
 
 	sleep_.ang_velocity = 5.0f;
-	sleep_.lin_velocity = glm::vec3(0.02f, 0.6f, 0.02f); 
+	sleep_.lin_velocity = glm::vec3(0.02f, 0.8f, 0.02f); 
 
 	total_mass_ = 0;
 	epsilon_value_ = 0;
@@ -52,9 +52,18 @@ void EngineResolve::resolve(float lambda, glm::vec3 vector_to_collision,
 	if (!can_sleep_) return;
 
 	bool vel_check = sleep_.ang_velocity > glm::length(angular_.velocity) &&
-	                 sleep_.lin_velocity.x > linear_.velocity.x &&
-	                 sleep_.lin_velocity.y > linear_.velocity.y &&
-	                 sleep_.lin_velocity.z > linear_.velocity.z;
+	                 sleep_.lin_velocity.x > std::abs(linear_.velocity.x) &&
+	                 sleep_.lin_velocity.y > std::abs(linear_.velocity.y) &&
+	                 sleep_.lin_velocity.z > std::abs(linear_.velocity.z);
+
+	/*if (test) {
+		std::cout << "Vel check: " << vel_check << std::endl;
+		std::cout << "Velocity: " << linear_.velocity.x << " "
+		          << linear_.velocity.y << " " << linear_.velocity.z
+		          << std::endl;
+
+		test = false;
+	}*/
 
 	if (glm::length(linear_.change) > 0.4f) {
 		vel_check = false;
@@ -86,6 +95,7 @@ void EngineResolve::update(float delta_time) {
 	}
 
 	if (asleep_) return;
+
 
 	if (body_type_ == BodyType::KINEMATIC) {
 		linear_.acceleration = glm::vec3(0);
@@ -198,12 +208,17 @@ void EngineResolve::setCenterOfMass(glm::vec3 cOFmass) {
 	                 "NOT IMPLEMENTED");
 }
 
-void EngineResolve::setVelocity(glm::vec3 vel) { linear_.velocity = vel; }
+void EngineResolve::setVelocity(glm::vec3 vel) {
+	linear_.velocity = vel;
+	asleep_ = false;
+	test = true;
+}
 
 glm::vec3 EngineResolve::getVelocity() { return linear_.velocity; }
 
 void EngineResolve::setAngVelocity(glm::vec3 ang_vel) {
 	angular_.velocity = ang_vel;
+	asleep_ = false;
 }
 
 glm::vec3 EngineResolve::getAngVelocity() { return angular_.velocity; }

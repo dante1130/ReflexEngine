@@ -45,6 +45,7 @@ private:
 	bool can_sleep_ = false;
 	bool asleep_ = false;
 
+	bool test = false;
 	/**
 	 * @brief Calculates the center of mass of the body
 	 *
