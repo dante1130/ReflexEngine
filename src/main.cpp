@@ -1,7 +1,3 @@
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 
-int main() {
-	ReflexEngine::run(); 
-	 
-	return 0;
-}
+auto main() -> int { ReflexEngine::run(); }

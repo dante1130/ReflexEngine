@@ -1,6 +1,7 @@
 #include "AffordanceHelper.hpp"
 
 #include <queue>
+#include <iostream>
 
 #include "Controller/Affordance/AffordanceSystem.hpp"
 #include "Model/Components/AffordanceAgent.hpp"
@@ -23,6 +24,10 @@ auto Affordance::find_affordance(const AffordancePtr& affordances,
 
 		for (const auto& child : child_affordances) {
 			auto score = 0.0F;
+
+			if (child->get_properties().size() == 0) {
+				score += 1.0F;
+			}
 
 			// Calculate the score of the child.
 			for (const auto& child_property : child->get_properties()) {
@@ -81,12 +86,21 @@ auto Affordance::evaluate_utility(const Reflex::Entity& entity) -> void {
 
 	auto best_score = 0.0F;
 
-	for (const auto& [state_name, state] : affordance_agent.utility.states) {
-		const float score = state.scorer_func(entity);
+	for (auto& [state_name, state] : affordance_agent.utility.states) {
+		auto result = state.scorer_func(entity);
 
-		if (score > best_score) {
-			best_score = score;
-			affordance_agent.utility.decision = state_name;
+		if (result.valid()) {
+			auto score = result.get<float>();
+			state.score = score;
+
+			if (score > best_score && affordance_agent.accumulator == 0.0F) {
+				best_score = score;
+				affordance_agent.utility.decision = state_name;
+			}
+		} else {
+			auto error = result.get<sol::error>();
+
+			std::cout << "Error: " << error.what() << std::endl;
 		}
 	}
 }

@@ -18,6 +18,9 @@
 #include "Controller/GUI/DebugGUI.hpp"
 #include "Controller/Physics/ColliderRenderer.hpp"
 #include "Controller/ResourceManager/ResourceManager.hpp"
+#include "Controller/Affordance/AffordanceSystem.hpp"
+#include "Controller/Emotion/Emotion.hpp"
+#include "Controller/AI/AgentHelper.hpp"
 
 void ReflexEngine::run() {
 	auto& engine = ReflexEngine::get_instance();
@@ -88,10 +91,13 @@ void ReflexEngine::run() {
 		} else {
 			PERFORMANCE_LOGGER_PUSH("Fixed Update");
 			if (EngineTime::is_time_step_passed()) {
+				PERFORMANCE_LOGGER_PUSH("Physics");
 				scene.fixed_update(EngineTime::get_fixed_delta_time());
-				// Physics::updateWorld(EngineTime::get_fixed_delta_time());
+				PERFORMANCE_LOGGER_POP();
+				PERFORMANCE_LOGGER_PUSH("Physics Debug");
 				collider_renderer.update(
 				    Physics::getPhysicsWorld()->getDebugRenderer());
+				PERFORMANCE_LOGGER_POP();
 			}
 			PERFORMANCE_LOGGER_POP();
 			PERFORMANCE_LOGGER_PUSH("Update");
@@ -103,7 +109,7 @@ void ReflexEngine::run() {
 			PERFORMANCE_LOGGER_PUSH("Add draw call");
 			scene.add_draw_call();
 			PERFORMANCE_LOGGER_POP();
-			PERFORMANCE_LOGGER_PUSH("Draw");
+			PERFORMANCE_LOGGER_PUSH("Renderer");
 			engine.renderer_.draw();
 			if (dataMgr.getDynamicBoolData("show_physics_debug", false)) {
 				engine.renderer_.draw_debug(collider_renderer);
@@ -164,6 +170,9 @@ void ReflexEngine::lua_access() {
 	Audio::get_instance();
 	Physics::createWorld();
 	EngineTime::lua_access();
+	Affordance::AffordanceSystem::get_instance().lua_access();
+	Emotion::EmotionSystem::get_instance().lua_access();
+	AI::lua_access();
 
 	window_.lua_access();
 	camera_.lua_access();

@@ -2,7 +2,7 @@
 
 #include "AStar.h"
 #include <vector>
-#include <queue>
+#include <deque>
 
 class AStar {
 public:
@@ -20,7 +20,7 @@ public:
 	 *
 	 */
 	auto findPath(float xStart, float yStart, float xEnd, float yEnd)
-	    -> std::queue<std::pair<float, float>>;
+	    -> std::deque<std::pair<float, float>>;
 
 	/**
 	 * @brief	Sets the grid to be used
@@ -29,7 +29,7 @@ public:
 	 * used
 	 * @return	bool	- If it was successful
 	 */
-	bool setGrid(std::vector<std::vector<int>>& newGrid);
+	bool setGrid(std::vector<std::vector<int>> newGrid);
 
 	/**
 	 * @brief Resets the grid to the one set using setGrid
@@ -47,7 +47,7 @@ public:
 	 * @return true done successfully
 	 * @return false problem encountered (out of range)
 	 */
-	auto set_coordiante_value(float x_point, float y_point, int new_value)
+	auto set_coordinate_value(float x_point, float y_point, int new_value)
 	    -> bool;
 
 	/**
@@ -132,6 +132,18 @@ public:
 	 * @brief Get the grid offset object
 	 */
 	auto get_grid_offset() -> std::pair<float, float>;
+
+	/**
+	 * @brief Returns if the starting position is at the end
+	 * @param xStart	- The starting xLocation (side to side)
+	 * @param yStart	- The starting yLocation (up and down)
+	 * @param xEnd	- The ending xLocation (side to size)
+	 * @param yEnd	- The ending yLocation (up and down)
+	 *
+	 * @return bool
+	 */
+	auto is_at_destination(float xStart, float yStart, float xEnd, float yEnd)
+	    -> bool;
 
 private:
 	/**

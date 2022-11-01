@@ -6,6 +6,7 @@
 #include "Controller/Physics/Physics.hpp"
 #include "Controller/Affordance/AffordanceHelper.hpp"
 #include "Controller/Affordance/AffordanceSystem.hpp"
+#include "Controller/Emotion/EmotionHelper.hpp"
 
 #include "Model/RunTimeDataStorage/GlobalDataStorage.hpp"
 
@@ -404,20 +405,30 @@ void System::update_statemachine(ECS& ecs) {
 }
 
 void System::update_affordance_agent(ECS& ecs) {
+	if (EngineTime::is_paused()) {
+		return;
+	}
+
 	auto& registry = ecs.get_registry();
 	auto& affordance_system = Affordance::AffordanceSystem::get_instance();
 
 	registry.view<Component::Transform, Component::AffordanceAgent>().each(
 	    [&](auto agent_id, auto& agent_transform, auto& agent) {
-		    const auto& agent_entity = ecs.get_entity(agent_id);
+		    auto& agent_entity = ecs.get_entity(agent_id);
 
 		    // Updates the agent's utilities, can be anything from updating the
 		    // agent's context, emotions or any component that is in the agent.
 		    agent.utility.update_func(agent_entity);
 
+		    agent.accumulator += EngineTime::get_delta_time();
+		    if (agent.accumulator >= 5.0F) {
+			    agent.accumulator = 0.0F;
+		    }
+
 		    // Evaluates the agent's utility and determines the best action, an
 		    // affordance that the agent desires to interact in this case.
 		    Affordance::evaluate_utility(agent_entity);
+		    Emotion::update_emotion(agent_entity);
 
 		    // Gets the best affordance.
 		    const auto& agent_decision_properties =
@@ -429,6 +440,10 @@ void System::update_affordance_agent(ECS& ecs) {
 		    registry.view<Component::Transform, Component::Affordance>().each(
 		        [&](auto affordance_id, auto& affordance_transform,
 		            auto& affordance) {
+			        if (agent_id == affordance_id) {
+				        return;
+			        }
+
 			        auto affordance_tree = affordance_system.get_affordance(
 			            affordance.object_name);
 
@@ -447,6 +462,10 @@ void System::update_affordance_agent(ECS& ecs) {
 				        }
 			        }
 		        });
+
+		    if (!ecs.get_registry().valid(agent.affordance)) {
+			    return;
+		    }
 
 		    auto& affordance_entity = ecs.get_entity(agent.affordance);
 

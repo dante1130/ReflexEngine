@@ -6,6 +6,7 @@
 
 #include "Controller/ECS/ECS.hpp"
 #include "Controller/GUI/ECSGui.hpp"
+#include "Controller/Pathfinding/AStarInterface.h"
 
 /**
  * @author Andrew Ho
@@ -20,7 +21,7 @@ public:
 	 * @param master_lua_script The master lua script
 	 */
 	ECSScene(const std::string& master_lua_script);
-	
+
 	/**
 	 * @brief Initializes the scene.
 	 */
@@ -97,7 +98,15 @@ public:
 	 */
 	const std::string& get_master_lua_script() const override;
 
+	/**
+	 * @brief Get the AStar interface object
+	 *
+	 * @return const AStar&
+	 */
+	auto get_astar() -> AStar&;
+
 private:
 	ECS ecs_;
 	ECSGui ecs_gui_;
+	AStar astar_;
 };

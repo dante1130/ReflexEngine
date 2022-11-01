@@ -1,4 +1,3 @@
-
 --Model.load_model("cat", "models/12221_Cat_v1_l3.obj")
 --Model.load_model("boat", "models/boat1obj.obj")
 --Model.load_model("lighthouse", "models/Beacon.obj")
@@ -6,7 +5,6 @@
 Model.load_model("TheDen", "models/TheDen.obj")
 Model.load_model("GlassInScene", "models/Glass.obj")
 Model.load_model("Sphere", "models/sphere.obj")
-
 
 --Small models/objects
 
@@ -22,10 +20,10 @@ Model.load_model("book5", "models/book5.obj")
 Model.load_model("rubix_cube", "models/rubixcube.obj")
 Model.load_model("calculator", "models/calculator.obj")
 Model.load_model("chair", "models/chair.obj")
+Model.load_model("boss", "models/boss.obj")
+Model.load_model("robot", "models/robotV.1_2.obj")
 
-
---Md2.load_md2_model("duck", "models/DuckPersonNew.md2")
-
+Md2.load_md2_model("duck", "models/DuckPersonNew.md2")
 
 --Texture.load_texture("water", "textures/water.png")
 --Texture.load_texture("sand", "textures/sand.jpg")
@@ -33,16 +31,15 @@ Model.load_model("chair", "models/chair.obj")
 --Texture.load_texture("snow", "textures/snow.jpg")
 --Texture.load_texture("grass", "textures/grass2.jpg")
 Texture.load_texture("credits", "textures/reflexbullet.png")
---Texture.load_texture("duck", "textures/DuckPerson.png")
+Texture.load_texture("duck", "textures/DuckPerson.png")
 Texture.load_texture("Chair", "textures/chair.jpg")
 Material.load_material("shiny", 256.0, 4.0)
 
-
 Audio.load_audio("duckandcover", "sounds/gamefast.wav")
-
+Audio.load_audio("quack", "sounds/duckAlert.wav")
+Audio.load_audio("annoy", "sounds/duckWarCry.wav")
 
 --Terrain.load_terrain("terrain", "textures/newheightmap.png")
-
 
 Skybox.load_skybox("nightsky", {
 	right = "textures/skyboxes/nightsky/nightsky_rt.tga",
@@ -52,7 +49,6 @@ Skybox.load_skybox("nightsky", {
 	front = "textures/skyboxes/nightsky/nightsky_bk.tga",
 	back = "textures/skyboxes/nightsky/nightsky_ft.tga"
 })
-
 
 Mesh.load_mesh("water",
 	{
