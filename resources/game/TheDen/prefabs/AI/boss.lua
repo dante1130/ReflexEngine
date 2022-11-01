@@ -31,7 +31,7 @@ entity = {
 	},
 
 	affordance_agent = {
-		properties = { "Boss", "Watch" },
+		properties = { "Boss", "Watch", "Talk" },
 		properties_weights = {},
 		utility = {
 			lua_script = "game/TheDen/scripts/AI/boss_ai.lua",

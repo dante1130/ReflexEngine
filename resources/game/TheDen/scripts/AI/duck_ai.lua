@@ -59,7 +59,7 @@ function eat_state(entity)
 	local score = 0.0
 
 	if (context.hunger.value < -0.5) then
-		score = score + 5.0
+		score = score + 3.0
 	end
 
 	return score
