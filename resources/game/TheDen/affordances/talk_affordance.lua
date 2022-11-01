@@ -9,7 +9,7 @@ function talk(agent, affordance)
 	local affordance_agent = agent:get_affordance_agent_component()
 	local context = affordance_agent.utility.context
 
-	if (Math.distance(agent_transform.position, affordance_transform.position) < 0.5) then
+	if (Math.distance(agent_transform.position, affordance_transform.position) < 1.0) then
 		context.social.value = context.social.value + 0.005
 		return
 	end
@@ -27,7 +27,7 @@ function talk_move(agent, affordance)
 	local affordance_agent = agent:get_affordance_agent_component()
 	local context = affordance_agent.utility.context
 
-	if (Math.distance(agent_pos, affordance_pos) < 0.5) then
+	if (Math.distance(agent_pos, affordance_pos) < 1.0) then
 		context.social.value = context.social.value + 0.005
 		return
 	end
