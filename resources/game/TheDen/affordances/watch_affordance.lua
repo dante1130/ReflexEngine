@@ -10,16 +10,15 @@ function watch_screen(agent, affordance)
 	context.fun.value = context.fun.value + 0.005
 end
 
-function duck_watch_screen(agent, affordance)
+function move_watch_screen(agent, affordance)
 	local agent_transform = agent:get_transform_component()
 	local agent_pos = agent_transform.position
 
 	local theater_pos = Math.vec3.new(59.63, agent_pos.y, -5.709)
 
-	if (Math.distance(agent_pos, theater_pos) < 1.0) then
+	if (AI.is_in_range(agent_pos, theater_pos, 1.0)) then
 		watch_screen(agent, affordance)
-		context.stress.value = context.stress.value - 0.005
-		return
+		return true
 	end
 
 	local path = find_path(agent_pos.x, agent_pos.z, theater_pos.x, theater_pos.z)
@@ -29,9 +28,21 @@ function duck_watch_screen(agent, affordance)
 
 	agent_transform.position = AI.move_towards(agent_pos, path_pos, 1)
 	agent_transform.rotation.y = Math.angle(agent_pos, path_pos)
+
+	return false
+end
+
+function duck_watch_screen(agent, affordance)
+	local affordance_agent = agent:get_affordance_agent_component()
+	local context = affordance_agent.utility.context
+
+	if (move_watch_screen(agent, affordance)) then
+		context.stress.value = context.stress.value - 0.005
+	end
 end
 
 AffordanceSystem.set_affordance("screen", AffordanceComposite.new("Watch", { "Watch" }, {
 	AffordanceLeaf.new("Default watch", {}, watch_screen),
-	AffordanceLeaf.new("Duck watch", { "Duck" }, duck_watch_screen)
+	AffordanceLeaf.new("Move watch", { "Move" }, move_watch_screen),
+	AffordanceLeaf.new("Duck watch", { "Duck", "Move" }, duck_watch_screen)
 }))
