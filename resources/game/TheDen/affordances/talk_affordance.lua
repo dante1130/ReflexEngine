@@ -7,7 +7,7 @@ function talk(agent, affordance)
 	local affordance_agent = agent:get_affordance_agent_component()
 	local context = affordance_agent.utility.context
 
-	if (AI.is_in_range(agent_transform.position, affordance_transform.position, 1.0)) then
+	if (AI.is_in_range(agent_transform.position, affordance_transform.position, 2.0)) then
 		context.social.value = context.social.value + 0.005
 		return
 	end
@@ -25,7 +25,7 @@ function talk_move(agent, affordance)
 
 	local theater_pos = Math.vec3.new(59.63, agent_pos.y, -5.709)
 
-	if (AI.is_in_range(agent_pos, theater_pos, 0.5)) then
+	if (AI.is_in_range(agent_pos, theater_pos, 1.0)) then
 		local sound_pos = Audio.vec3df.new(agent_pos.x, agent_pos.y, agent_pos.z)
 		Audio.play_3d_sound("quack", sound_pos, false, 1.0)
 

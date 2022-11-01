@@ -39,12 +39,12 @@ entity = {
 			context = {
 				["social"] = {
 					value = 0.0,
-					arousal_weight = 0.25,
-					valence_weight = 1
+					arousal_weight = 0.1,
+					valence_weight = 0.1
 				},
 				["hunger"] = {
 					value = 0.0,
-					arousal_weight = 1.0,
+					arousal_weight = 0.25,
 					valence_weight = 0.25
 				},
 				["stress"] = {
@@ -55,7 +55,7 @@ entity = {
 				["fun"] = {
 					value = 0.0,
 					arousal_weight = 0.0,
-					valence_weight = 0.5
+					valence_weight = 1.0
 				}
 			},
 			update_func = "duck_update",
@@ -68,10 +68,10 @@ entity = {
 					name = "talk_state",
 					affordance = { "Talk" }
 				},
-				{
-					name = "study_state",
-					affordance = { "Study" }
-				}
+				-- {
+				-- 	name = "study_state",
+				-- 	affordance = { "Study" }
+				-- }
 			}
 		},
 		mood_state = {

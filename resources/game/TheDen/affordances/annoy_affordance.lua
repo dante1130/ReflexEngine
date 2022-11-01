@@ -5,7 +5,7 @@ function annoy(agent, affordance)
 	local affordance_transform = affordance:get_transform_component()
 	local affordance_pos = affordance_transform.position
 
-	if (AI.is_in_range(agent_pos, affordance_pos, 0.5)) then
+	if (AI.is_in_range(agent_pos, affordance_pos, 1.0)) then
 		local agent_context = agent:get_affordance_agent_component().utility.context
 		local affordance_context = affordance:get_affordance_agent_component().utility.context
 

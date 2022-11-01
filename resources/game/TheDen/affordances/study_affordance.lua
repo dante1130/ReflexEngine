@@ -5,7 +5,7 @@ function study(agent, affordance)
 	local affordance_transform = affordance:get_transform_component()
 	local affordance_pos = affordance_transform.position
 
-	if (AI.is_in_range(agent_pos, affordance_pos, 0.5)) then
+	if (AI.is_in_range(agent_pos, affordance_pos, 1.0)) then
 		local context = agent:get_affordance_agent_component().utility.context
 
 		context.stress.value = context.stress.value + 0.005
