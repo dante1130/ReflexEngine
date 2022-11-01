@@ -16,5 +16,5 @@ function talk_state(entity)
 	local context = affordance_agent.utility.context
 	local mood_state = affordance_agent.mood_state
 
-	return ((1 - context.social.value) * context.loneliness.value) * (1 - mood_state.arousal)
+	return ((1 - context.social.value) * context.loneliness.value)
 end

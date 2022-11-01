@@ -27,7 +27,7 @@ entity = {
 	},
 
 	affordance = {
-		object_name = "talk",
+		object_name = "duck",
 		lua_script = "game/TheDen/scripts/Affordances/affordance.lua"
 	},
 
@@ -71,6 +71,10 @@ entity = {
 				{
 					name = "study_state",
 					affordance = { "Study" }
+				},
+				{
+					name = "eat_state",
+					affordance = { "Eat" }
 				}
 			}
 		},

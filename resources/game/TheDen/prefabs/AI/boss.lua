@@ -57,6 +57,10 @@ entity = {
 				{
 					name = "watch_state",
 					affordance = { "Watch" }
+				},
+				{
+					name = "talk_state",
+					affordance = { "Talk" }
 				}
 			}
 		},
