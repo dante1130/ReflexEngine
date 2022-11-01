@@ -558,3 +558,11 @@ float EngineResolve::getAngle() {
 	///
 	DebugLogger::log("EngineResolve - getAngle called", "NOT IMPLEMENTED");
 }
+
+bool EngineResolve::isSleeping() {
+	return asleep_;
+}
+
+void EngineResolve::setIsSleeping(bool ean) {
+	asleep_ = ean;
+}

@@ -163,7 +163,7 @@ void PhysicsBody::static_collision(rp3d::Collider* collider, glm::vec3 r_point,
 	prev_ang_vel *= abs_normal;
 	// Va - previous linear velocity added due to acceleration
 	glm::vec3 prev_lin_vel = pb1->prev_vel_acceleration_;
-	prev_lin_vel *= abs_normal;
+	prev_lin_vel *= abs_normal;  
 
 	// Rotates angular velocity to world coordaintes from local coordinates
 	glm::vec3 ang_vel = pb1->getAngVelocity() - prev_ang_vel;

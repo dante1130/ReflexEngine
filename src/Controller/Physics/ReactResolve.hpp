@@ -484,4 +484,8 @@ public:
 	 * @return void
 	 */
 	void setAngle(float ang) override;
+
+	bool isSleeping() override;
+
+	void setIsSleeping(bool ean) override;
 };
