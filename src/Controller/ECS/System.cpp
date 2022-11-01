@@ -401,6 +401,10 @@ void System::update_statemachine(ECS& ecs) {
 }
 
 void System::update_affordance_agent(ECS& ecs) {
+	if (EngineTime::is_paused()) {
+		return;
+	}
+
 	auto& registry = ecs.get_registry();
 	auto& affordance_system = Affordance::AffordanceSystem::get_instance();
 
