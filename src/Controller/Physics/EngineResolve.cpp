@@ -523,4 +523,5 @@ float EngineResolve::getAngle() {
 	///
 	///
 	DebugLogger::log("EngineResolve - getAngle called", "NOT IMPLEMENTED");
+	return 0.0F;
 }
