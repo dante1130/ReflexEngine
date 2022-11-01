@@ -80,6 +80,10 @@ void SceneManager::scene_lua_access(ECSScene& scene) {
 		return astar.findPath(x1, y1, x2, y2);
 	};
 	lua["print_grid"] = [&astar]() { astar.print_grid(); };
+	lua["is_at_destination"] = [&astar](float x1, float y1, float x2,
+	                                    float y2) {
+		return astar.is_at_destination(x1, y1, x2, y2);
+	};
 }
 
 auto SceneManager::astar_lua_access(AStar& astar) -> void {

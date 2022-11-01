@@ -13,7 +13,7 @@ function watch_state(entity)
 	local context = affordance_agent.utility.context
 	local mood_state = affordance_agent.mood_state
 
-	return (context.stress.value + (1 - context.fun.value)) * ((1 - mood_state.valence) * (1 - mood_state.arousal))
+	return (context.stress.value + (1 - context.fun.value))
 end
 
 function talk_state(entity)
@@ -21,7 +21,7 @@ function talk_state(entity)
 	local context = affordance_agent.utility.context
 	local mood_state = affordance_agent.mood_state
 
-	return (1 - context.social.value) + (1 - mood_state.valence) * (1 - mood_state.arousal)
+	return (1 - context.social.value)
 end
 
 function study_state(entity)
@@ -29,5 +29,5 @@ function study_state(entity)
 	local context = affordance_agent.utility.context
 	local mood_state = affordance_agent.mood_state
 
-	return (1 - context.stress.value) + (1 - mood_state.valence) * (1 - mood_state.arousal)
+	return (1 - context.stress.value)
 end

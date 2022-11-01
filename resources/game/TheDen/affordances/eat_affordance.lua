@@ -24,4 +24,4 @@ function eat(agent, affordance)
 	agent_transform.rotation.y = Math.angle(agent_pos, path_pos)
 end
 
-AffordanceSystem.set_affordance("eat", AffordanceLeaf("Eat", { "Eat" }, eat))
+AffordanceSystem.set_affordance("eat", AffordanceLeaf.new("Eat", { "Eat" }, eat))

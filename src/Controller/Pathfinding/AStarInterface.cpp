@@ -249,3 +249,17 @@ auto AStar::print_grid() -> void {
 		std::cout << std::endl;
 	}
 }
+
+auto AStar::is_at_destination(float xStart, float yStart, float xEnd,
+                              float yEnd) -> bool {
+	node start;
+	start.x =
+	    static_cast<int>(round((xStart - start_offset_[1]) * grid_ratio_));
+	start.y =
+	    static_cast<int>(round((yStart - start_offset_[0]) * grid_ratio_));
+	node end;
+	end.x = static_cast<int>((xEnd - start_offset_[1]) * grid_ratio_);
+	end.y = static_cast<int>((yEnd - start_offset_[0]) * grid_ratio_);
+
+	return start.x == end.x && start.y == end.y;
+}

@@ -38,7 +38,7 @@ entity = {
 			lua_script = "game/TheDen/scripts/AI/duck_ai.lua",
 			context = {
 				["social"] = {
-					value = 0.0,
+					value = 1.0,
 					arousal_weight = 0.1,
 					valence_weight = 0.1
 				},
@@ -48,12 +48,12 @@ entity = {
 					valence_weight = 0.25
 				},
 				["stress"] = {
-					value = 0.0,
+					value = -1.0,
 					arousal_weight = 1.0,
 					valence_weight = 1.0
 				},
 				["fun"] = {
-					value = 0.0,
+					value = 1.0,
 					arousal_weight = 0.0,
 					valence_weight = 1.0
 				}
@@ -68,10 +68,10 @@ entity = {
 					name = "talk_state",
 					affordance = { "Talk" }
 				},
-				-- {
-				-- 	name = "study_state",
-				-- 	affordance = { "Study" }
-				-- }
+				{
+					name = "study_state",
+					affordance = { "Study" }
+				}
 			}
 		},
 		mood_state = {

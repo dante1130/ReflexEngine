@@ -5,7 +5,7 @@ function study(agent, affordance)
 	local affordance_transform = affordance:get_transform_component()
 	local affordance_pos = affordance_transform.position
 
-	if (AI.is_in_range(agent_pos, affordance_pos, 1.0)) then
+	if (is_at_destination(agent_pos.x, agent_pos.z, affordance_pos.x, affordance_pos.z)) then
 		local context = agent:get_affordance_agent_component().utility.context
 
 		context.stress.value = context.stress.value + 0.005
@@ -25,4 +25,4 @@ function study(agent, affordance)
 	agent_transform.rotation.y = Math.angle(agent_pos, path_pos)
 end
 
-AffordanceSystem.set_affordance("study", AffordanceLeaf("Study", { "Study" }, study))
+AffordanceSystem.set_affordance("study", AffordanceLeaf.new("Study", { "Study" }, study))

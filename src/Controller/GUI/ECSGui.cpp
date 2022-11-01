@@ -816,7 +816,7 @@ auto ECSGui::draw_affordance_agent(Reflex::Entity& entity) -> void {
 				for (auto& [state, consideration] : utility.states) {
 					if (ImGui::TreeNode(state.c_str())) {
 						ImGui::Text("Score: %f", consideration.score);
-						for (auto& property : affordance_agent.properties) {
+						for (auto& property : consideration.properties) {
 							ImGui::BulletText(property.c_str());
 						}
 						ImGui::TreePop();

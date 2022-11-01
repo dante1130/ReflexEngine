@@ -1,6 +1,9 @@
 dofile("game/TheDen/Collections.lua")
 dofile("game/TheDen/affordances/watch_affordance.lua")
 dofile("game/TheDen/affordances/talk_affordance.lua")
+dofile("game/TheDen/affordances/study_affordance.lua")
+dofile("game/TheDen/affordances/eat_affordance.lua")
+dofile("game/TheDen/affordances/annoy_affordance.lua")
 dofile("game/TheDen/AStar.lua")
 
 Texture.load_texture("credits", "textures/reflexbullet.png")
@@ -72,5 +75,6 @@ Scene.add_game_object("game/TheDen/prefabs/AI/robots/robot_1.lua")
 
 --Affordances
 Scene.add_game_object("game/TheDen/prefabs/Affordances/screen.lua")
+Scene.add_game_object("game/TheDen/prefabs/Affordances/study.lua")
 
 Skybox.use_skybox("default")

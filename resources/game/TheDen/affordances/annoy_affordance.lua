@@ -25,4 +25,4 @@ function annoy(agent, affordance)
 	agent_transform.rotation.y = Math.angle(agent_pos, path_pos)
 end
 
-AffordanceSystem.set_affordance("annoy", AffordanceLeaf("Annoy", { "Annoy" }, annoy))
+AffordanceSystem.set_affordance("annoy", AffordanceLeaf.new("Annoy", { "Annoy" }, annoy))

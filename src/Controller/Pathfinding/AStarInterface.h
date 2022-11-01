@@ -133,6 +133,18 @@ public:
 	 */
 	auto get_grid_offset() -> std::pair<float, float>;
 
+	/**
+	 * @brief Returns if the starting position is at the end
+	 * @param xStart	- The starting xLocation (side to side)
+	 * @param yStart	- The starting yLocation (up and down)
+	 * @param xEnd	- The ending xLocation (side to size)
+	 * @param yEnd	- The ending yLocation (up and down)
+	 *
+	 * @return bool
+	 */
+	auto is_at_destination(float xStart, float yStart, float xEnd, float yEnd)
+	    -> bool;
+
 private:
 	/**
 	 * @brief	Sets the size of the grid in the x direction
