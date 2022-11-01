@@ -117,26 +117,26 @@ void PhysicsBody::collision(Collider* collider1, Collider* collider2,
 	float lambda = (num_eqn / div_eqn);
 	glm::vec3 linear_impluse = lambda * collision_normal;
 
-	ResolutionOutput::output_resolution_data(
-	    epsilon, lambda, collision_normal,
-	    glm::vec3(vel_num_eqn, w1_num_eqn, w2_num_eqn),
-	    glm::vec3(mass_div_eqn, j1_div_eqn, j2_div_eqn));
-	ResolutionOutput::output_before_resolution_b1(
-	    pb1->getMass(), pb1->getVelocity(), ang_vel_b1, lpoint_c1,
-	    pb1->inverse_rotated_inertia_tensor_, pb1->inertia_tensor_,
-	    pb1->getOrientation());
-	ResolutionOutput::output_before_resolution_b2(
-	    pb2->getMass(), pb2->getVelocity(), ang_vel_b2, lpoint_c2,
-	    pb2->inverse_rotated_inertia_tensor_, pb2->inertia_tensor_,
-	    pb2->getOrientation());
+	// ResolutionOutput::output_resolution_data(
+	//     epsilon, lambda, collision_normal,
+	//     glm::vec3(vel_num_eqn, w1_num_eqn, w2_num_eqn),
+	//     glm::vec3(mass_div_eqn, j1_div_eqn, j2_div_eqn));
+	// ResolutionOutput::output_before_resolution_b1(
+	//     pb1->getMass(), pb1->getVelocity(), ang_vel_b1, lpoint_c1,
+	//     pb1->inverse_rotated_inertia_tensor_, pb1->inertia_tensor_,
+	//     pb1->getOrientation());
+	// ResolutionOutput::output_before_resolution_b2(
+	//     pb2->getMass(), pb2->getVelocity(), ang_vel_b2, lpoint_c2,
+	//     pb2->inverse_rotated_inertia_tensor_, pb2->inertia_tensor_,
+	//     pb2->getOrientation());
 
 	// Set new velocity and angular velocity
 	pb1->resolve(lambda, lpoint_c1, collision_normal, 1);
 	pb2->resolve(lambda, lpoint_c2, collision_normal, 2);
 
-	ResolutionOutput::output_after_resolution(
-	    pb1->getVelocity(), pb1->getAngVelocity(), pb2->getVelocity(),
-	    pb2->getAngVelocity());
+	// ResolutionOutput::output_after_resolution(
+	//     pb1->getVelocity(), pb1->getAngVelocity(), pb2->getVelocity(),
+	//     pb2->getAngVelocity());
 }
 
 void PhysicsBody::static_collision(rp3d::Collider* collider, glm::vec3 r_point,

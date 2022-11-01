@@ -1,4 +1,10 @@
 dofile("game/TheDen/Collections.lua")
+dofile("game/TheDen/affordances/watch_affordance.lua")
+dofile("game/TheDen/affordances/talk_affordance.lua")
+dofile("game/TheDen/affordances/study_affordance.lua")
+dofile("game/TheDen/affordances/eat_affordance.lua")
+dofile("game/TheDen/affordances/duck_affordance.lua")
+dofile("game/TheDen/AStar.lua")
 
 Texture.load_texture("credits", "textures/reflexbullet.png")
 
@@ -61,5 +67,15 @@ Scene.add_game_object("game/TheDen/prefabs/small_objects/chairs/chair_one.lua")
 Scene.add_game_object("game/TheDen/prefabs/small_objects/chairs/chair_three.lua")
 Scene.add_game_object("game/TheDen/prefabs/small_objects/chairs/chair_four.lua")
 --Scene.add_game_object("game/TheDen/prefabs/small_objects/chairs/chair_five.lua")
+
+--NPCs
+Scene.add_game_object("game/TheDen/prefabs/AI/boss.lua")
+Scene.add_game_object("game/TheDen/prefabs/AI/ducks/duck_1.lua")
+Scene.add_game_object("game/TheDen/prefabs/AI/robots/robot_1.lua")
+
+--Affordances
+Scene.add_game_object("game/TheDen/prefabs/Affordances/screen.lua")
+Scene.add_game_object("game/TheDen/prefabs/Affordances/study.lua")
+Scene.add_game_object("game/TheDen/prefabs/Affordances/eat.lua")
 
 Skybox.use_skybox("default")

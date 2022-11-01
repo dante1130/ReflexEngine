@@ -13,6 +13,7 @@
 #include "Model/Components/Terrain.hpp"
 #include "Model/Components/Statemachine.hpp"
 #include "Model/Components/RigidBody.hpp"
+#include "Model/Components/AffordanceAgent.hpp"
 #include "Model/Components/Remove.hpp"
 
 #include "Controller/AI/statemachineComponentHelper.hpp"
@@ -35,6 +36,7 @@ void ECSAccess::register_ecs() {
 	register_terrain_component();
 	register_statemachine_component();
 	register_rigidbody_component();
+	register_affordance_agent_component();
 }
 
 void ECSAccess::register_registry() {
@@ -109,6 +111,7 @@ void ECSAccess::register_entity() {
 
 	auto entity_type = lua.new_usertype<Reflex::Entity>("Entity");
 
+	entity_type["name"] = &Entity::get_name;
 	entity_type["get_id"] = &Entity::get_entity_id;
 
 	entity_type["add_transform_component"] = &Entity::add_component<Transform>;
@@ -124,6 +127,8 @@ void ECSAccess::register_entity() {
 	entity_type["add_stateMachine_component"] =
 	    &Entity::add_component<Statemachine>;
 	entity_type["add_rigidbody_component"] = &Entity::add_component<Rigidbody>;
+	entity_type["add_affordance_agent_component"] =
+	    &Entity::add_component<AffordanceAgent>;
 
 	entity_type["remove_transform_component"] =
 	    &Entity::remove_component<Transform>;
@@ -140,6 +145,8 @@ void ECSAccess::register_entity() {
 	    &Entity::remove_component<Statemachine>;
 	entity_type["remove_rigidbody_component"] =
 	    &Entity::remove_component<Rigidbody>;
+	entity_type["remove_affordance_agent_component"] =
+	    &Entity::remove_component<AffordanceAgent>;
 
 	entity_type["get_transform_component"] = &Entity::get_component<Transform>;
 	entity_type["get_model_component"] = &Entity::get_component<Model>;
@@ -154,6 +161,8 @@ void ECSAccess::register_entity() {
 	entity_type["get_statemachine_component"] =
 	    &Entity::get_component<Statemachine>;
 	entity_type["get_rigidbody_component"] = &Entity::get_component<Rigidbody>;
+	entity_type["get_affordance_agent_component"] =
+	    &Entity::get_component<AffordanceAgent>;
 
 	entity_type["any_transform_component"] = &Entity::any_component<Transform>;
 	entity_type["any_model_component"] = &Entity::any_component<Model>;
@@ -167,6 +176,8 @@ void ECSAccess::register_entity() {
 	entity_type["any_mesh_component"] = &Entity::any_component<Mesh>;
 	entity_type["any_mesh_statemachine"] = &Entity::any_component<Statemachine>;
 	entity_type["any_rigidbody_component"] = &Entity::any_component<Rigidbody>;
+	entity_type["any_affordance_agent_component"] =
+	    &Entity::any_component<AffordanceAgent>;
 }
 
 void ECSAccess::register_transform_component() {
@@ -410,4 +421,27 @@ void ECSAccess::register_rigidbody_component() {
 	    sol::property(&Rigidbody::getVelocity, &Rigidbody::setVelocity);
 	rigidbody_type["angular_velocity"] =
 	    sol::property(&Rigidbody::getAngVelocity, &Rigidbody::setAngVelocity);
+}
+
+auto ECSAccess::register_affordance_agent_component() -> void {
+	auto& lua = LuaManager::get_instance().get_state();
+
+	auto utility_type =
+	    lua.new_usertype<Affordance::Utility>("AffordanceUtility");
+
+	utility_type["context"] = &Affordance::Utility::context;
+	utility_type["update_func"] = &Affordance::Utility::update_func;
+	utility_type["decision"] = &Affordance::Utility::decision;
+
+	auto affordance_agent_type =
+	    lua.new_usertype<AffordanceAgent>("AffordanceAgent");
+
+	affordance_agent_type["properties"] = &AffordanceAgent::properties;
+	affordance_agent_type["properties_weights"] =
+	    &AffordanceAgent::property_weights;
+	affordance_agent_type["lua_script"] = &AffordanceAgent::lua_script;
+	affordance_agent_type["utility"] = &AffordanceAgent::utility;
+	affordance_agent_type["affordance"] = &AffordanceAgent::affordance;
+	affordance_agent_type["mood_state"] = &AffordanceAgent::mood_state;
+	affordance_agent_type["accumulator"] = &AffordanceAgent::accumulator;
 }

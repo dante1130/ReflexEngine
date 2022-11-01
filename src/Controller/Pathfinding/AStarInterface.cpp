@@ -17,7 +17,7 @@ AStar::AStar()
 }
 
 auto AStar::findPath(float xStart, float yStart, float xEnd, float yEnd)
-    -> std::queue<std::pair<float, float>> {
+    -> std::deque<std::pair<float, float>> {
 	if (grid.empty()) {
 		throw(GRID_UNINITIALISED);
 	}
@@ -31,13 +31,21 @@ auto AStar::findPath(float xStart, float yStart, float xEnd, float yEnd)
 	end.x = static_cast<int>((xEnd - start_offset_[1]) * grid_ratio_);
 	end.y = static_cast<int>((yEnd - start_offset_[0]) * grid_ratio_);
 
+	if (grid[start.y][start.x] == 1 || grid[end.y][end.x] == 1) {
+		return {};
+	}
+
 	std::vector<std::vector<DistanceNode>> path;
 
-	path = aStar::aStarSearch(grid, movementCosts, heuristicsCostScale,
-	                          gridSize, start, end, maxDistance);
+	try {
+		path = aStar::aStarSearch(grid, movementCosts, heuristicsCostScale,
+		                          gridSize, start, end, maxDistance);
+	} catch (int e) {
+		printAstarException(e);
+	}
 
-	std::stack<std::pair<float, float>> reversed_path;
-	reversed_path.push(std::pair<float, float>(
+	std::deque<std::pair<float, float>> deque_path;
+	deque_path.push_front(std::pair<float, float>(
 	    (static_cast<float>(end.x) / grid_ratio_ + start_offset_[1]),
 	    (static_cast<float>(end.y) / grid_ratio_ + start_offset_[0])));
 
@@ -55,26 +63,20 @@ auto AStar::findPath(float xStart, float yStart, float xEnd, float yEnd)
 		pair.first = (pair.first / grid_ratio_ + start_offset_[1]);
 		pair.second = (pair.second / grid_ratio_ + start_offset_[0]);
 
-		reversed_path.push(pair);
+		deque_path.push_front(pair);
 
 		if (x_pos == start.x && y_pos == start.y) {
-			reversed_path.pop();
+			deque_path.pop_front();
 			found = true;
 			break;
 		}
 	}
 
 	if (!found) {
-		return std::queue<std::pair<float, float>>();
+		return {};
 	}
 
-	std::queue<std::pair<float, float>> processed_path;
-	auto path_size = reversed_path.size();
-	for (auto count = 0; count < path_size; ++count) {
-		processed_path.push(reversed_path.top());
-		reversed_path.pop();
-	}
-	return processed_path;
+	return deque_path;
 }
 
 void AStar::printAstarException(int val) {
@@ -118,13 +120,13 @@ void AStar::printAstarException(int val) {
 	}
 }
 
-bool AStar::setGrid(std::vector<std::vector<int>>& newGrid) {
+bool AStar::setGrid(std::vector<std::vector<int>> newGrid) {
 	grid = std::move(newGrid);
 	default_grid = grid;
 
 	gridSize[0] = grid.size();
 	if (gridSize[0] == 0) {
-		gridSize[1] == 0;
+		gridSize[1] = 0;
 	} else {
 		gridSize[1] = grid[0].size();
 	}
@@ -227,7 +229,7 @@ auto AStar::get_grid_offset() -> std::pair<float, float> {
 	return std::pair<float, float>(start_offset_[1], start_offset_[0]);
 }
 
-auto AStar::set_coordiante_value(float x_point, float y_point, int new_value)
+auto AStar::set_coordinate_value(float x_point, float y_point, int new_value)
     -> bool {
 	x_point = (x_point - start_offset_[1]) * grid_ratio_;
 	y_point = (y_point - start_offset_[0]) * grid_ratio_;
@@ -250,4 +252,18 @@ auto AStar::print_grid() -> void {
 		}
 		std::cout << std::endl;
 	}
+}
+
+auto AStar::is_at_destination(float xStart, float yStart, float xEnd,
+                              float yEnd) -> bool {
+	node start;
+	start.x =
+	    static_cast<int>(round((xStart - start_offset_[1]) * grid_ratio_));
+	start.y =
+	    static_cast<int>(round((yStart - start_offset_[0]) * grid_ratio_));
+	node end;
+	end.x = static_cast<int>((xEnd - start_offset_[1]) * grid_ratio_);
+	end.y = static_cast<int>((yEnd - start_offset_[0]) * grid_ratio_);
+
+	return start.x == end.x && start.y == end.y;
 }

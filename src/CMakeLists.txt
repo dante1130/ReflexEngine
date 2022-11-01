@@ -33,6 +33,7 @@ add_library(ReflexEngineSrc
 	Controller/Affordance/Affordance.cpp
 	Controller/Affordance/AffordanceSystem.cpp
 	Controller/Emotion/Emotion.cpp
+	Controller/Emotion/EmotionHelper.cpp
 	Controller/ECS/ECS.cpp
 	Controller/ECS/Entity.cpp
 	Controller/ECS/ECSAccess.cpp
@@ -80,6 +81,7 @@ add_library(ReflexEngineSrc
 	Controller/AI/Counter.cpp
 	Controller/AI/vector2D.cpp
 	Controller/AI/statemachineComponentHelper.cpp
+	Controller/AI/AgentHelper.cpp
 	Controller/GUI/ECSGui.cpp
 	Controller/GUI/DebugLogger.cpp
 	Controller/GUI/DebugGUI.cpp

@@ -97,7 +97,7 @@ TEST_CASE("A Star Pathfinding", "[AStarTest]") {
 		REQUIRE(retrieved_grid[6][4] == 0);
 	}
 
-	level.set_coordiante_value((3 / RATIO + X_OFFSET), (5 / RATIO + Y_OFFSET),
+	level.set_coordinate_value((3 / RATIO + X_OFFSET), (5 / RATIO + Y_OFFSET),
 	                           1);
 	SECTION("Ability to set singular point on grid") {
 		auto retrieved_grid = level.getGrid();

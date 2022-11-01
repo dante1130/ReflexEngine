@@ -29,14 +29,16 @@ struct AffordanceAgent {
 	Properties properties;
 	/// The weight of each property.
 	PropertiesWeight property_weights;
+	/// The lua script that the agent will use to evaluate utility.
+	std::string lua_script;
 	/// The affordance utility system.
 	Utility utility;
 	/// The affordance entity ID that the agent is currently using.
 	entt::entity affordance = {entt::null};
 	/// The current mood of the agent.
 	Emotion::EmotionState mood_state;
-	/// The current emotion of the agent, referencing the emotion system.
-	std::string current_emotion;
+	/// Accumulated duration of state
+	float accumulator = 0.0F;
 
 	AffordanceAgent() = default;
 
@@ -44,11 +46,9 @@ struct AffordanceAgent {
 
 	AffordanceAgent(const Properties& properties,
 	                const PropertiesWeight& property_weights,
-	                const Emotion::EmotionState& mood_state,
-	                const std::string& current_emotion)
+	                const Emotion::EmotionState& mood_state)
 	    : properties(properties),
 	      property_weights(property_weights),
-	      mood_state(mood_state),
-	      current_emotion(current_emotion) {}
+	      mood_state(mood_state) {}
 };
 }  // namespace Component
