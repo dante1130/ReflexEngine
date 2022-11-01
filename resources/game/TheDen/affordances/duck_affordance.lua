@@ -70,7 +70,7 @@ function annoy(agent, affordance)
 		affordance_context.stress.value = affordance_context.stress.value + 0.5
 
 		local sound_pos = Audio.vec3df.new(agent_pos.x, agent_pos.y, agent_pos.z)
-		--Audio.play_3d_sound("annoy", sound_pos, false, 1.0)
+		Audio.play_3d_sound("annoy", sound_pos, false, 1.0)
 
 		agent_transform.rotation.y = Math.angle(Math.vec3.new(1, 0, 0), Math.sub(affordance_pos, agent_pos))
 
