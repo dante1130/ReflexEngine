@@ -2,7 +2,7 @@ function watch_screen(agent, affordance)
 	local agent_transform = agent:get_transform_component()
 	local screen_transform = affordance:get_transform_component()
 
-	agent_transform.rotation.y = Math.angle(agent_transform.position, screen_transform.position)
+	agent_transform.rotation.y = Math.angle(Math.vec3.new(1, 0, 0), Math.sub(screen_transform.position, agent_transform.position))
 
 	local affordance_agent = agent:get_affordance_agent_component()
 	local context = affordance_agent.utility.context
@@ -30,7 +30,7 @@ function move_watch_screen(agent, affordance)
 	local path_pos = Math.vec3.new(path_x, agent_pos.y, path_y)
 
 	agent_transform.position = AI.move_towards(agent_pos, path_pos, 2)
-	agent_transform.rotation.y = Math.angle(agent_pos, path_pos)
+	agent_transform.rotation.y = Math.angle(Math.vec3.new(1, 0, 0), Math.sub(path_pos, agent_pos))
 
 	return false
 end

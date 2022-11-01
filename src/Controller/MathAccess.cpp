@@ -3,6 +3,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/constants.hpp>
 #include <glm/gtc/quaternion.hpp>
+#include <glm/gtx/vector_angle.hpp>
 
 #include "LuaManager.hpp"
 
@@ -91,9 +92,12 @@ void MathAccess::register_glm_functions() {
 	                  [](const glm::quat& a) { return glm::normalize(a); });
 
 	math_table["angle"] = [](const glm::vec3& a, const glm::vec3& b) {
-		glm::vec2 look_at = glm::normalize(glm::vec2(b.x - a.x, b.z - a.z));
-
-		return atan2(look_at.y, look_at.x) * 180.0f / glm::pi<float>();
+		auto angle =
+		    glm::degrees(glm::angle(glm::normalize(a), glm::normalize(b)));
+		if (b.z > 0) {
+			angle *= -1;
+		}
+		return angle;
 	};
 
 	math_table["sin"] =

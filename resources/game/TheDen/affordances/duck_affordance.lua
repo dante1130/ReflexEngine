@@ -29,7 +29,7 @@ function talk_move(agent, affordance)
 		local sound_pos = Audio.vec3df.new(agent_pos.x, agent_pos.y, agent_pos.z)
 		Audio.play_3d_sound("quack", sound_pos, false, 1.0)
 
-		agent_transform.rotation.y = Math.angle(agent_pos, affordance_pos)
+		agent_transform.rotation.y = Math.angle(Math.vec3.new(1, 0, 0), Math.sub(affordance_pos, agent_pos))
 		context.social.value = context.social.value + 0.005
 		context.stress.value = context.stress.value - 0.005
 
@@ -45,7 +45,7 @@ function talk_move(agent, affordance)
 	local path_pos = Math.vec3.new(path_x, agent_pos.y, path_y)
 
 	agent_transform.position = AI.move_towards(agent_pos, path_pos, 2)
-	agent_transform.rotation.y = Math.angle(agent_pos, path_pos)
+	agent_transform.rotation.y = Math.angle(Math.vec3.new(1, 0, 0), Math.sub(path_pos, agent_pos))
 end
 
 function annoy(agent, affordance)
@@ -67,7 +67,8 @@ function annoy(agent, affordance)
 		local sound_pos = Audio.vec3df.new(agent_pos.x, agent_pos.y, agent_pos.z)
 		--Audio.play_3d_sound("annoy", sound_pos, false, 1.0)
 
-		agent_transform.rotation.y = Math.angle(agent_pos, affordance_pos)
+		agent_transform.rotation.y = Math.angle(Math.vec3.new(1, 0, 0), Math.sub(affordance_pos, agent_pos))
+		
 		return
 	end
 
@@ -80,7 +81,7 @@ function annoy(agent, affordance)
 	local path_pos = Math.vec3.new(path_x, agent_pos.y, path_y)
 
 	agent_transform.position = AI.move_towards(agent_pos, path_pos, 2)
-	agent_transform.rotation.y = Math.angle(agent_pos, path_pos)
+	agent_transform.rotation.y = Math.angle(Math.vec3.new(1, 0, 0), Math.sub(path_pos, agent_pos))
 end
 
 AffordanceSystem.set_affordance("duck", AffordanceComposite.new("Duck", {}, {

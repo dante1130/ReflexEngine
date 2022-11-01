@@ -13,7 +13,7 @@ function study(agent, affordance)
 		context.hunger.value = context.hunger.value - 0.005
 		context.fun.value = context.fun.value - 0.005
 
-		agent_transform.rotation.y = Math.angle(agent_pos, affordance_pos)
+		agent_transform.rotation.y = Math.angle(Math.vec3.new(1, 0, 0), Math.sub(affordance_pos, agent_pos))
 		return
 	end
 
@@ -26,7 +26,7 @@ function study(agent, affordance)
 	local path_pos = Math.vec3.new(path_x, agent_pos.y, path_y)
 
 	agent_transform.position = AI.move_towards(agent_pos, path_pos, 2)
-	agent_transform.rotation.y = Math.angle(agent_pos, path_pos)
+	agent_transform.rotation.y = Math.angle(Math.vec3.new(1, 0, 0), Math.sub(path_pos, agent_pos))
 end
 
 AffordanceSystem.set_affordance("study", AffordanceLeaf.new("Study", { "Study" }, study))
