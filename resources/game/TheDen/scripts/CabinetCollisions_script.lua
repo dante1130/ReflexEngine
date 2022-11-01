@@ -12,3 +12,7 @@ function init(ecs, entity)
 	local script = entity:get_script_component()
 	script.is_active = false;
 end
+
+function update(ecs, entity)
+	
+end

@@ -8,8 +8,8 @@ entity = {
 			z = 0
 		},
 		rotation = {
-			x = 45,
-			y = 90,
+			x = 0,
+			y = 0,
 			z = 0
 		},
 		scale = {
@@ -28,8 +28,8 @@ entity = {
         using_react_start = false,
         gravity_on = false,
         can_sleep = true,
-        linear_drag = 0.1,
-        angular_drag = 0.1,
+        linear_drag = 0.01,
+        angular_drag = 0.01,
 		rb_type = 2
     },
 

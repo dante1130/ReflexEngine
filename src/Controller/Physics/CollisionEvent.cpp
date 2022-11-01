@@ -10,6 +10,12 @@ void CollisionEventListener::onContact(const CallbackData& collision_data) {
 		return;
 	}
 
+	int num_of_contacts;
+	rp3d::Vector3 contact_normal;
+	rp3d::Vector3 local_point_c1;
+	rp3d::Vector3 local_point_c2;
+	float penetration_depth;
+
 	size_t size = collision_data.getNbContactPairs();
 	// Loop through all colliders-collider contacts
 	for (size_t count = 0; count < size; ++count) {
@@ -19,11 +25,11 @@ void CollisionEventListener::onContact(const CallbackData& collision_data) {
 			continue;
 		}
 
-		int num_of_contacts = contact_pair.getNbContactPoints();
-		rp3d::Vector3 contact_normal = rp3d::Vector3(0, 0, 0);
-		rp3d::Vector3 local_point_c1 = rp3d::Vector3(0, 0, 0);
-		rp3d::Vector3 local_point_c2 = rp3d::Vector3(0, 0, 0);
-		float penetration_depth = 0;
+		num_of_contacts = contact_pair.getNbContactPoints();
+		contact_normal = rp3d::Vector3(0, 0, 0);
+		local_point_c1 = rp3d::Vector3(0, 0, 0);
+		local_point_c2 = rp3d::Vector3(0, 0, 0);
+		penetration_depth = 0;
 
 		// Loop through all contacts against same collider
 		for (size_t countTwo = 0; countTwo < num_of_contacts; ++countTwo) {

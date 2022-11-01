@@ -3,7 +3,7 @@ entity = {
 
 	transform = {
 		position = {
-			x = 45,
+			x = 49,
 			y = 10,
 			z = 0
 		},
@@ -28,8 +28,8 @@ entity = {
         using_react_start = false,
         gravity_on = false,
         can_sleep = true,
-        linear_drag = 0.1,
-        angular_drag = 0.1,
+        linear_drag = 0.01,
+        angular_drag = 0.01,
 		rb_type = 2
     },
 

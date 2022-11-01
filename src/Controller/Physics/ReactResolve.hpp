@@ -484,4 +484,25 @@ public:
 	 * @return void
 	 */
 	void setAngle(float ang) override;
+
+	/**
+	 * @brief Returns if the object is sleeping
+	 *
+	 * @return true
+	 * @return false
+	 */
+	bool isSleeping() override;
+
+	/**
+	 * @brief Set if the object is sleeping
+	 *
+	 * @param ean
+	 */
+	void setIsSleeping(bool ean) override;
+
+	/**
+	 * @brief resets the object if it is sleeping back to a time of 0
+	 *
+	 */
+	auto resetSleeping() -> void override;
 };

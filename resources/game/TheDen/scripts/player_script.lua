@@ -110,8 +110,8 @@ end
 
 function PhysicsMovement(ecs, entity)
 	local rb_comp = entity:get_rigidbody_component()
-	local speed = 1000 *  var.speed
-	local speed_vec = Math.vec3.new(speed, speed * 0, speed)
+	local speed_scaler = 1000 *  var.speed
+	local speed_vec = Math.vec3.new(speed_scaler, speed_scaler * 0, speed_scaler)
 	local const_direction = Camera.get_direction()
 	const_direction.y = 0
 	const_direction = Math.normalize(const_direction)

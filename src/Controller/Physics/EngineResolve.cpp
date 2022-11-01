@@ -4,13 +4,14 @@
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/euler_angles.hpp>
 #include "Controller/Physics/QuaternionHelper.hpp"
-
+#include "Controller/ReflexEngine/EngineTime.hpp"
 #include "Controller/GUI/DebugLogger.hpp"
 
 #include <string>
 #include <ReflexAssertion.hpp>
 
 const constexpr glm::vec3 GRAVITY_CONSTANT = glm::vec3(0.0f, -9.807f, 0.0f);
+const constexpr float SLEEP_TIME_THRESHOLD = 1.0f;  // in seconds
 
 using namespace rp3d;
 
@@ -20,6 +21,9 @@ EngineResolve::EngineResolve() {
 
 	angular_.velocity = glm::vec3(0);
 	angular_.acceleration = glm::vec3(0);
+
+	sleep_.ang_velocity = 5.0f;
+	sleep_.lin_velocity = glm::vec3(0.02f, 0.8f, 0.02f);
 
 	total_mass_ = 0;
 	epsilon_value_ = 0;
@@ -40,18 +44,57 @@ void EngineResolve::resolve(float lambda, glm::vec3 vector_to_collision,
 	linear_.change = (lambda * contact_normal) / total_mass_ * mult;
 
 	//  Angular velocity change
-	glm::mat3x3 angular_part_one = lambda * inverse_rotated_inertia_tensor_;
-	glm::vec3 angular_part_two =
-	    glm::cross(vector_to_collision, contact_normal);
-	angular_.change = angular_part_one * angular_part_two * mult;
+	angular_.change = (lambda * inverse_rotated_inertia_tensor_) *
+	                  glm::cross(vector_to_collision, contact_normal) * mult;
 
 	++number_of_collisions_;
+
+	if (!can_sleep_) return;
+
+	bool vel_check = sleep_.ang_velocity > glm::length(angular_.velocity) &&
+	                 sleep_.lin_velocity.x > std::abs(linear_.velocity.x) &&
+	                 sleep_.lin_velocity.y > std::abs(linear_.velocity.y) &&
+	                 sleep_.lin_velocity.z > std::abs(linear_.velocity.z);
+
+	/*if (test) {
+	    std::cout << "Vel check: " << vel_check << std::endl;
+	    std::cout << "Velocity: " << linear_.velocity.x << " "
+	              << linear_.velocity.y << " " << linear_.velocity.z
+	              << std::endl;
+
+	    test = false;
+	}*/
+
+	if (glm::length(linear_.change) > 0.4f) {
+		vel_check = false;
+	}
+
+	if (vel_check)
+		sleep_.time += EngineTime::get_fixed_delta_time();
+	else if (sleep_.time > 0.0f) {
+		sleep_.time = 0.0f;
+		asleep_ = false;
+	}
+
+	if (asleep_) return;
+
+	if (sleep_.time > SLEEP_TIME_THRESHOLD) {
+		asleep_ = true;
+
+		linear_.velocity = glm::vec3(0);
+		linear_.acceleration = glm::vec3(0);
+
+		angular_.velocity = glm::vec3(0);
+		angular_.acceleration = glm::vec3(0);
+	}
 }
 
 void EngineResolve::update(float delta_time) {
 	if (body_type_ == BodyType::STATIC) {
 		return;
 	}
+
+	if (asleep_) return;
 
 	if (body_type_ == BodyType::KINEMATIC) {
 		linear_.acceleration = glm::vec3(0);
@@ -129,6 +172,7 @@ void EngineResolve::addForce(glm::vec3 force, Apply type) {
 	///
 	///
 	linear_.acceleration = linear_.acceleration + (force / total_mass_);
+	resetSleeping();
 }
 
 void EngineResolve::addForceAtPoint(glm::vec3 force, glm::vec3 point,
@@ -147,6 +191,7 @@ void EngineResolve::addTorque(glm::vec3 torque, Apply type) {
 	///
 	angular_.acceleration =
 	    angular_.acceleration + (torque / (total_mass_ * 1));
+	asleep_ = false;
 }
 
 void EngineResolve::setMass(float mass) { total_mass_ = mass; }
@@ -162,12 +207,16 @@ void EngineResolve::setCenterOfMass(glm::vec3 cOFmass) {
 	                 "NOT IMPLEMENTED");
 }
 
-void EngineResolve::setVelocity(glm::vec3 vel) { linear_.velocity = vel; }
+void EngineResolve::setVelocity(glm::vec3 vel) {
+	linear_.velocity = vel;
+	resetSleeping();
+}
 
 glm::vec3 EngineResolve::getVelocity() { return linear_.velocity; }
 
 void EngineResolve::setAngVelocity(glm::vec3 ang_vel) {
 	angular_.velocity = ang_vel;
+	resetSleeping();
 }
 
 glm::vec3 EngineResolve::getAngVelocity() { return angular_.velocity; }
@@ -524,4 +573,15 @@ float EngineResolve::getAngle() {
 	///
 	DebugLogger::log("EngineResolve - getAngle called", "NOT IMPLEMENTED");
 	return 0.0F;
+}
+
+bool EngineResolve::isSleeping() { return asleep_; }
+
+void EngineResolve::setIsSleeping(bool ean) { asleep_ = ean; }
+
+auto EngineResolve::resetSleeping() -> void {
+	if (asleep_) {
+		sleep_.time = 0;
+		asleep_ = false;
+	}
 }
