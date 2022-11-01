@@ -799,9 +799,24 @@ public:
 	 */
 	virtual void setAngle(float ang) = 0;
 
+	/**
+	 * @brief Returns if the object is sleeping
+	 *
+	 * @return true
+	 * @return false
+	 */
 	virtual bool isSleeping() = 0;
 
+	/**
+	 * @brief Set if the object is sleeping
+	 *
+	 * @param ean
+	 */
 	virtual void setIsSleeping(bool ean) = 0;
 
+	/**
+	 * @brief resets the object if it is sleeping back to a time of 0
+	 *
+	 */
 	virtual auto resetSleeping() -> void = 0;
 };

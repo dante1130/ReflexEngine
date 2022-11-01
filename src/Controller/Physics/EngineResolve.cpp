@@ -172,7 +172,7 @@ void EngineResolve::addForce(glm::vec3 force, Apply type) {
 	///
 	///
 	linear_.acceleration = linear_.acceleration + (force / total_mass_);
-	asleep_ = false;
+	resetSleeping();
 }
 
 void EngineResolve::addForceAtPoint(glm::vec3 force, glm::vec3 point,
@@ -209,15 +209,14 @@ void EngineResolve::setCenterOfMass(glm::vec3 cOFmass) {
 
 void EngineResolve::setVelocity(glm::vec3 vel) {
 	linear_.velocity = vel;
-	asleep_ = false;
-	test = true;
+	resetSleeping();
 }
 
 glm::vec3 EngineResolve::getVelocity() { return linear_.velocity; }
 
 void EngineResolve::setAngVelocity(glm::vec3 ang_vel) {
 	angular_.velocity = ang_vel;
-	asleep_ = false;
+	resetSleeping();
 }
 
 glm::vec3 EngineResolve::getAngVelocity() { return angular_.velocity; }
