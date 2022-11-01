@@ -18,6 +18,9 @@ function study(agent, affordance)
 	end
 
 	local path = find_path(agent_pos.x, agent_pos.z, affordance_pos.x, affordance_pos.z)
+	if (path:size() == 0) then
+		return
+	end
 
 	local path_x, path_y = path:at(1)
 	local path_pos = Math.vec3.new(path_x, agent_pos.y, path_y)

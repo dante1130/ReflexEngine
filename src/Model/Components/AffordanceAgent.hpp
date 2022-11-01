@@ -37,6 +37,8 @@ struct AffordanceAgent {
 	entt::entity affordance = {entt::null};
 	/// The current mood of the agent.
 	Emotion::EmotionState mood_state;
+	/// Accumulated duration of state
+	float accumulator = 0.0F;
 
 	AffordanceAgent() = default;
 

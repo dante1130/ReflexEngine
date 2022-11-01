@@ -22,6 +22,9 @@ function move_watch_screen(agent, affordance)
 	end
 
 	local path = find_path(agent_pos.x, agent_pos.z, theater_pos.x, theater_pos.z)
+	if (path:size() == 0) then
+		return false
+	end
 
 	local path_x, path_y = path:at(1)
 	local path_pos = Math.vec3.new(path_x, agent_pos.y, path_y)

@@ -37,6 +37,9 @@ function talk_move(agent, affordance)
 	end
 
 	local path = find_path(agent_pos.x, agent_pos.z, theater_pos.x, theater_pos.z)
+	if (path:size() == 0) then
+		return
+	end
 
 	local path_x, path_y = path:at(1)
 	local path_pos = Math.vec3.new(path_x, agent_pos.y, path_y)
@@ -56,6 +59,8 @@ function annoy(agent, affordance)
 		local agent_context = agent:get_affordance_agent_component().utility.context
 		local affordance_context = affordance:get_affordance_agent_component().utility.context
 
+		agent:get_affordance_agent_component().accumulator = 5.0
+
 		agent_context.cheeky.value = -1.0
 		affordance_context.stress.value = affordance_context.stress.value + 0.5
 
@@ -67,6 +72,9 @@ function annoy(agent, affordance)
 	end
 
 	local path = find_path(agent_pos.x, agent_pos.z, affordance_pos.x, affordance_pos.z)
+	if (path:size() == 0) then
+		return
+	end
 
 	local path_x, path_y = path:at(1)
 	local path_pos = Math.vec3.new(path_x, agent_pos.y, path_y)

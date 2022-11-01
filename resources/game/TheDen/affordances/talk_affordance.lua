@@ -7,7 +7,7 @@ function talk(agent, affordance)
 	local affordance_agent = agent:get_affordance_agent_component()
 	local context = affordance_agent.utility.context
 
-	if (AI.is_in_range(agent_transform.position, affordance_transform.position, 2.0)) then
+	if (AI.is_in_range(agent_transform.position, affordance_transform.position, 3.0)) then
 		context.social.value = context.social.value + 0.0025
 		return
 	end
@@ -37,6 +37,9 @@ function talk_move(agent, affordance)
 	end
 
 	local path = find_path(agent_pos.x, agent_pos.z, theater_pos.x, theater_pos.z)
+	if (path:size() == 0) then
+		return
+	end
 
 	local path_x, path_y = path:at(1)
 	local path_pos = Math.vec3.new(path_x, agent_pos.y, path_y)

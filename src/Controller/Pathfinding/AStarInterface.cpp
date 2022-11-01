@@ -31,6 +31,10 @@ auto AStar::findPath(float xStart, float yStart, float xEnd, float yEnd)
 	end.x = static_cast<int>((xEnd - start_offset_[1]) * grid_ratio_);
 	end.y = static_cast<int>((yEnd - start_offset_[0]) * grid_ratio_);
 
+	if (grid[start.y][start.x] == 1 || grid[end.y][end.x] == 1) {
+		return {};
+	}
+
 	std::vector<std::vector<DistanceNode>> path;
 
 	try {
