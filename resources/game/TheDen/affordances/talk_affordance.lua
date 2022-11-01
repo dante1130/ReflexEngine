@@ -2,14 +2,12 @@ function talk(agent, affordance)
 	local agent_transform = agent:get_transform_component()
 	local affordance_transform = affordance:get_transform_component()
 
-	local angle = Math.angle(agent_transform.position, affordance_transform.position)
-
-	agent_transform.rotation.y = angle
+	agent_transform.rotation.y = Math.angle(agent_transform.position, affordance_transform.position)
 
 	local affordance_agent = agent:get_affordance_agent_component()
 	local context = affordance_agent.utility.context
 
-	if (Math.distance(agent_transform.position, affordance_transform.position) < 1.0) then
+	if (AI.is_in_range(agent_transform.position, affordance_transform.position, 2.0)) then
 		context.social.value = context.social.value + 0.005
 		return
 	end
@@ -22,28 +20,24 @@ function talk_move(agent, affordance)
 	local agent_pos = agent_transform.position
 	local affordance_pos = affordance_transform.position
 
-	agent_transform.rotation.y = Math.angle(agent_pos, affordance_pos)
-
 	local affordance_agent = agent:get_affordance_agent_component()
 	local context = affordance_agent.utility.context
 
-	if (Math.distance(agent_pos, affordance_pos) < 1.0) then
+	local theater_pos = Math.vec3.new(59.63, agent_pos.y, -5.709)
+
+	if (AI.is_in_range(agent_pos, theater_pos, 1.0)) then
+		agent_transform.rotation.y = Math.angle(agent_pos, affordance_pos)
 		context.social.value = context.social.value + 0.005
 		return
 	end
 
-	agent_transform.position = AI.move_towards(agent_pos, affordance_pos, 1)
+	local path = find_path(agent_pos.x, agent_pos.z, theater_pos.x, theater_pos.z)
 
-	-- local astar = Scene.get_astar()
-	-- local path = astar:find_path(agent_pos.x, agent_pos.z, affordance_pos.x, affordance_pos.z)
+	local path_x, path_y = path:at(1)
+	local path_pos = Math.vec3.new(path_x, agent_pos.y, path_y)
 
-	-- if path:size() == 0 then
-	-- 	context.social.value = context.social.value + 0.005
-	-- 	return
-	-- end
-
-	-- local path_x, path_y = path:at(1)
-	-- local path_pos = Math.vec3.new(path_x, agent_pos.z, path_y)
+	agent_transform.position = AI.move_towards(agent_pos, path_pos, 1)
+	agent_transform.rotation.y = Math.angle(agent_pos, path_pos)
 end
 
 AffordanceSystem.set_affordance("talk", AffordanceComposite.new("Talk", { "Talk" }, {

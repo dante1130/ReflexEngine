@@ -11,6 +11,7 @@ auto AI::lua_access() -> void {
 	auto ai_table = lua.create_named_table("AI");
 
 	ai_table.set_function("move_towards", &AI::move_towards);
+	ai_table.set_function("is_in_range", &AI::is_in_range);
 }
 
 auto AI::move_towards(const glm::vec3& from, const glm::vec3& to, float speed)
@@ -23,4 +24,10 @@ auto AI::move_towards(const glm::vec3& from, const glm::vec3& to, float speed)
 	} else {
 		return from + direction * movement;
 	}
+}
+
+auto AI::is_in_range(const glm::vec3& from, const glm::vec3& to, float range)
+    -> bool {
+	return glm::length(glm::vec2(from.x, from.z) - glm::vec2(to.x, to.z)) <
+	       range;
 }

@@ -28,7 +28,7 @@ void SceneManager::create_scene(const std::string& name,
 void SceneManager::load_scene(const std::string& name) {
 	current_scene_ = std::make_unique<ECSScene>(scene_map_.at(name));
 	scene_lua_access(*current_scene_);
-	astar_lua_access(current_scene_->get_astar());
+	// astar_lua_access(current_scene_->get_astar());
 	current_scene_->init();
 
 	flag_change_scene_ = false;
@@ -60,7 +60,26 @@ void SceneManager::scene_lua_access(ECSScene& scene) {
 		scene.add_game_object(lua_script);
 	};
 
-	scene_table["get_astar"] = [&scene]() { return scene.get_astar(); };
+	auto& astar = scene.get_astar();
+
+	auto astar_table = lua["AStar"].get_or_create<sol::table>();
+	lua["set_grid"] = [&astar](std::vector<std::vector<int>> grid) {
+		astar.setGrid(grid);
+	};
+	lua["set_grid_ratio"] = [&astar](float ratio) {
+		astar.set_grid_ratio(ratio);
+	};
+	lua["set_grid_offset"] = [&astar](float x, float y) {
+		astar.set_grid_offset(x, y);
+	};
+	lua["reset_grid"] = [&astar]() { astar.reset_grid_to_original(); };
+	lua["set_coordinate_value"] = [&astar](float x, float y, int value) {
+		astar.set_coordinate_value(x, y, value);
+	};
+	lua["find_path"] = [&astar](float x1, float y1, float x2, float y2) {
+		return astar.findPath(x1, y1, x2, y2);
+	};
+	lua["print_grid"] = [&astar]() { astar.print_grid(); };
 }
 
 auto SceneManager::astar_lua_access(AStar& astar) -> void {

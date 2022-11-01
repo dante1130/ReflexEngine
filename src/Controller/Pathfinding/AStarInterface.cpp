@@ -33,8 +33,12 @@ auto AStar::findPath(float xStart, float yStart, float xEnd, float yEnd)
 
 	std::vector<std::vector<DistanceNode>> path;
 
-	path = aStar::aStarSearch(grid, movementCosts, heuristicsCostScale,
-	                          gridSize, start, end, maxDistance);
+	try {
+		path = aStar::aStarSearch(grid, movementCosts, heuristicsCostScale,
+		                          gridSize, start, end, maxDistance);
+	} catch (int e) {
+		printAstarException(e);
+	}
 
 	std::deque<std::pair<float, float>> deque_path;
 	deque_path.push_front(std::pair<float, float>(
