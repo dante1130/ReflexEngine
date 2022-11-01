@@ -6,7 +6,7 @@ entity = {
 		position = {
 			x = 46,
 			y = 1.695,
-			z = -4.327
+			z = -3.327
 		},
 		rotation = {
 			x = 0,
