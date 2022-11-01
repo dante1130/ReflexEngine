@@ -283,3 +283,11 @@ glm::vec3 Component::Rigidbody::getPreviousPosition() {
 void Component::Rigidbody::setPreviousPosition(glm::vec3 prev_pos) {
 	pb->setPreviousPosition(prev_pos);
 }
+
+bool Component::Rigidbody::isSleeping() {
+	return pb->isSleeping();
+}
+
+void Component::Rigidbody::setIsSleeping(bool ean) {
+	pb->setIsSleeping(ean);
+}
