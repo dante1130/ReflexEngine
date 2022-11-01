@@ -531,9 +531,19 @@ struct Rigidbody {
 	 */
 	void setPreviousPosition(glm::vec3 prev_pos);
 
-
+	/**
+	 * @brief Get if the object is sleeping
+	 *
+	 * @return true
+	 * @return false
+	 */
 	bool isSleeping();
 
+	/**
+	 * @brief Set if the object is sleeping
+	 *
+	 * @param ean
+	 */
 	void setIsSleeping(bool ean);
 };
 };  // namespace Component
