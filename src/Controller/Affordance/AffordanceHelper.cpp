@@ -1,6 +1,7 @@
 #include "AffordanceHelper.hpp"
 
 #include <queue>
+#include <iostream>
 
 #include "Controller/Affordance/AffordanceSystem.hpp"
 #include "Model/Components/AffordanceAgent.hpp"
