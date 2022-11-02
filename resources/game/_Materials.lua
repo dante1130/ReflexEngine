@@ -34,6 +34,7 @@ Md2.load_md2_model("duck", "models/DuckPersonNew.md2")
 Texture.load_texture("credits", "textures/reflexbullet.png")
 Texture.load_texture("duck", "textures/DuckPerson.png")
 Texture.load_texture("Chair", "textures/chair.jpg")
+Texture.load_texture("boss", "textures/boss.png")
 
 
 Material.load_material("shiny", 256.0, 4.0)
