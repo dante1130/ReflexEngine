@@ -14,7 +14,7 @@ end
 
 function update(ecs, entity)
 	if (Input.get_key_state("v"):is_key_pressed()) then
-		Scene.load_scene("duckandcover3")
+		--Scene.load_scene("duckandcover3")
 	end
 
 	if (not Camera.is_noclip() and entity:any_rigidbody_component()) then
