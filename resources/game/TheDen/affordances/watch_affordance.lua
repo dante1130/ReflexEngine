@@ -9,6 +9,10 @@ function watch_screen(agent, affordance)
 	local context = affordance_agent.utility.context
 
 	context.fun.value = context.fun.value + 0.025
+
+	if (affordance_agent.accumulator == 0.0) then
+		DebugLogger.log(agent:get_name(), "Watching TV")
+	end
 end
 
 function move_watch_screen(agent, affordance)
@@ -21,6 +25,9 @@ function move_watch_screen(agent, affordance)
 		watch_screen(agent, affordance)
 		return true
 	end
+
+	local agent_affordance = agent:get_affordance_agent_component()
+	agent_affordance.accumulator = 0.0
 
 	local path = find_path(agent_pos.x, agent_pos.z, theater_pos.x, theater_pos.z)
 	if (path:size() == 0) then

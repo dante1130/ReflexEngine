@@ -5,8 +5,10 @@ function study(agent, affordance)
 	local affordance_transform = affordance:get_transform_component()
 	local affordance_pos = affordance_transform.position
 
+	local affordance_agent = agent:get_affordance_agent_component()
+
 	if (is_at_destination(agent_pos.x, agent_pos.z, affordance_pos.x, affordance_pos.z)) then
-		local context = agent:get_affordance_agent_component().utility.context
+		local context = affordance_agent.utility.context
 
 		context.social.value = context.social.value - 0.001
 		context.stress.value = context.stress.value - 0.005
@@ -14,8 +16,15 @@ function study(agent, affordance)
 		context.fun.value = context.fun.value - 0.005
 
 		agent_transform.rotation.y = Math.angle(Math.vec3.new(1, 0, 0), Math.sub(affordance_pos, agent_pos))
+
+		if (affordance_agent.accumulator < 1.0) then
+			DebugLogger.log(agent:get_name(), "Studying...")
+		end
+
 		return
 	end
+
+	affordance_agent.accumulator = 0.0
 
 	local path = find_path(agent_pos.x, agent_pos.z, affordance_pos.x, affordance_pos.z)
 	if (path:size() == 0) then

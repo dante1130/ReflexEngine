@@ -420,11 +420,6 @@ void System::update_affordance_agent(ECS& ecs) {
 		    // agent's context, emotions or any component that is in the agent.
 		    agent.utility.update_func(agent_entity);
 
-		    agent.accumulator += EngineTime::get_delta_time();
-		    if (agent.accumulator >= 5.0F) {
-			    agent.accumulator = 0.0F;
-		    }
-
 		    // Evaluates the agent's utility and determines the best action, an
 		    // affordance that the agent desires to interact in this case.
 		    Affordance::evaluate_utility(agent_entity);
@@ -489,6 +484,11 @@ void System::update_affordance_agent(ECS& ecs) {
 			    // Execute the affordance action.
 			    affordance_leaf->get_function()(agent_entity,
 			                                    affordance_entity);
+		    }
+
+		    agent.accumulator += EngineTime::get_delta_time();
+		    if (agent.accumulator >= 5.0F) {
+			    agent.accumulator = 0.0F;
 		    }
 	    });
 }
