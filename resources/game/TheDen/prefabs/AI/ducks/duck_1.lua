@@ -48,14 +48,14 @@ entity = {
 					valence_weight = 0.25
 				},
 				["stress"] = {
-					value = -1.0,
+					value = 1.0,
 					arousal_weight = 1.0,
 					valence_weight = 1.0
 				},
 				["fun"] = {
-					value = 1.0,
+					value = 0.25,
 					arousal_weight = 0.5,
-					valence_weight = 1.0
+					valence_weight = 0.5
 				}
 			},
 			update_func = "duck_update",

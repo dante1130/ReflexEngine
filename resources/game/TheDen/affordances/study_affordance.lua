@@ -9,7 +9,7 @@ function study(agent, affordance)
 		local context = agent:get_affordance_agent_component().utility.context
 
 		context.social.value = context.social.value - 0.001
-		context.stress.value = context.stress.value + 0.005
+		context.stress.value = context.stress.value - 0.005
 		context.hunger.value = context.hunger.value - 0.005
 		context.fun.value = context.fun.value - 0.005
 

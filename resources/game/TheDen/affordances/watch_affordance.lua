@@ -41,7 +41,7 @@ function duck_watch_screen(agent, affordance)
 	local context = affordance_agent.utility.context
 
 	if (move_watch_screen(agent, affordance)) then
-		context.stress.value = context.stress.value - 0.05
+		context.stress.value = context.stress.value + 0.05
 	end
 end
 

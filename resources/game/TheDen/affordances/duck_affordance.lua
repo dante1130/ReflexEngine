@@ -33,7 +33,7 @@ function talk_move(agent, affordance)
 
 		agent_transform.rotation.y = Math.angle(Math.vec3.new(1, 0, 0), Math.sub(affordance_pos, agent_pos))
 		context.social.value = context.social.value + 0.005
-		context.stress.value = context.stress.value - 0.005
+		context.stress.value = context.stress.value + 0.001
 
 		return
 	end

@@ -8,7 +8,7 @@ function eat(agent, affordance)
 	if (is_at_destination(agent_pos.x, agent_pos.z, affordance_pos.x, affordance_pos.z)) then
 		local context = agent:get_affordance_agent_component().utility.context
 
-		context.stress.value = context.stress.value - 0.001
+		context.stress.value = context.stress.value + 0.001
 		context.hunger.value = context.hunger.value + 0.005
 
 		agent_transform.rotation.y = Math.angle(Math.vec3.new(1, 0, 0), Math.sub(path_pos, agent_pos))
