@@ -10,12 +10,24 @@ function watch_state(entity)
 	local affordance_agent = entity:get_affordance_agent_component()
 	local context = affordance_agent.utility.context
 
-	return (1 - context.fun.value)
+	local score = 1.0
+
+	if (context.fun.value < -0.5) then
+		score = score + 1.0
+	end
+
+	return score
 end
 
 function annoy_state(entity)
 	local affordance_agent = entity:get_affordance_agent_component()
 	local context = affordance_agent.utility.context
 
-	return (1 - context.fun.value) * (1 - context.cheeky.value)
+	local score = 0.0
+
+	if (context.cheeky.value < -0.5) then
+		score = score + 3.0
+	end
+
+	return score
 end

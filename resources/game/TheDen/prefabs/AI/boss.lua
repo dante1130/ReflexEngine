@@ -11,7 +11,7 @@ entity = {
 		rotation = {
 			x = 0,
 			y = 0,
-			z = 90
+			z = 0
 		},
 		scale = {
 			x = 0.5,

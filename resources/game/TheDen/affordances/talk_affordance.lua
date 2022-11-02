@@ -9,7 +9,7 @@ function talk(agent, affordance)
 
 	if (AI.is_in_range(agent_transform.position, affordance_transform.position, 3.0)) then
 		context.social.value = context.social.value + 0.0025
-		context.social.loneliness = context.loneliness.value + 0.5
+		context.loneliness.value = context.loneliness.value + 0.005
 		return
 	end
 end

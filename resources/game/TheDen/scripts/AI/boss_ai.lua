@@ -11,12 +11,27 @@ function watch_state(entity)
 	local affordance_agent = entity:get_affordance_agent_component()
 	local context = affordance_agent.utility.context
 
-	return 1 - context.fun.value
+	local score = 1.0
+
+	if (context.fun.value < -0.5) then
+		score = score + 1.0
+	end
+
+	return score
 end
 
 function talk_state(entity)
 	local affordance_agent = entity:get_affordance_agent_component()
 	local context = affordance_agent.utility.context
 
-	return (1 - context.social.value) * (1 - context.loneliness.value)
+	local score = 0.0
+
+	if (context.loneliness.value < 0.0) then
+		score = score + 2.0
+	end
+	if (context.social.value < 0.0) then
+		score = score + 1.0
+	end
+
+	return score
 end

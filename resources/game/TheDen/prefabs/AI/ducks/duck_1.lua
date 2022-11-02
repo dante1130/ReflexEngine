@@ -44,7 +44,7 @@ entity = {
 				},
 				["hunger"] = {
 					value = 0.0,
-					arousal_weight = 0.25,
+					arousal_weight = 0.5,
 					valence_weight = 0.25
 				},
 				["stress"] = {
@@ -54,7 +54,7 @@ entity = {
 				},
 				["fun"] = {
 					value = 0.25,
-					arousal_weight = 0.5,
+					arousal_weight = 1.0,
 					valence_weight = 0.5
 				}
 			},
