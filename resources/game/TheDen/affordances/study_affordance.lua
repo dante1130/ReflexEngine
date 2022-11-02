@@ -17,8 +17,9 @@ function study(agent, affordance)
 
 		agent_transform.rotation.y = Math.angle(Math.vec3.new(1, 0, 0), Math.sub(affordance_pos, agent_pos))
 
-		if (affordance_agent.accumulator < 1.0) then
+		if (affordance_agent.is_first_run) then
 			DebugLogger.log(agent:get_name(), "Studying...")
+			affordance_agent.is_first_run = false
 		end
 
 		return

@@ -96,6 +96,7 @@ auto Affordance::evaluate_utility(const Reflex::Entity& entity) -> void {
 			if (score > best_score && affordance_agent.accumulator == 0.0F) {
 				best_score = score;
 				affordance_agent.utility.decision = state_name;
+				affordance_agent.is_first_run = true;
 			}
 		} else {
 			auto error = result.get<sol::error>();

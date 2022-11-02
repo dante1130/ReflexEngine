@@ -10,8 +10,9 @@ function watch_screen(agent, affordance)
 
 	context.fun.value = context.fun.value + 0.025
 
-	if (affordance_agent.accumulator == 0.0) then
+	if (affordance_agent.is_first_run) then
 		DebugLogger.log(agent:get_name(), "Watching TV")
+		affordance_agent.is_first_run = false
 	end
 end
 
@@ -20,6 +21,9 @@ function move_watch_screen(agent, affordance)
 	local agent_pos = agent_transform.position
 
 	local theater_pos = Math.vec3.new(59.63, agent_pos.y, -4.709)
+	if (agent:get_name() == "Robot 1") then
+		theater_pos.z = theater_pos.z - 1.0
+	end
 
 	if (is_at_destination(agent_pos.x, agent_pos.z, theater_pos.x, theater_pos.z)) then
 		watch_screen(agent, affordance)

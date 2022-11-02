@@ -13,10 +13,11 @@ function eat(agent, affordance)
 		context.stress.value = context.stress.value + 0.001
 		context.hunger.value = context.hunger.value + 0.005
 
-		agent_transform.rotation.y = Math.angle(Math.vec3.new(1, 0, 0), Math.sub(path_pos, agent_pos))
+		agent_transform.rotation.y = Math.angle(Math.vec3.new(1, 0, 0), Math.sub(affordance_pos, agent_pos))
 
-		if (affordance_agent.accumulator == 0.0) then
+		if (affordance_agent.is_first_run) then
 			DebugLogger.log(agent:get_name(), "Pizza time!")
+			affordance_agent.is_first_run = false
 		end
 		return
 	end

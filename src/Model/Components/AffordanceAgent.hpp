@@ -38,7 +38,9 @@ struct AffordanceAgent {
 	/// The current mood of the agent.
 	Emotion::EmotionState mood_state;
 	/// Accumulated duration of state
-	float accumulator = 0.0F;
+	double accumulator = 0.0;
+	/// Whether the action is currently being performed the first time.
+	bool is_first_run = false;
 
 	AffordanceAgent() = default;
 

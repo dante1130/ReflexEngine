@@ -25,7 +25,7 @@ function annoy_state(entity)
 
 	local score = 0.0
 
-	if (context.cheeky.value < -0.5) then
+	if (context.cheeky.value < 0.0) then
 		score = score + 3.0
 	end
 
