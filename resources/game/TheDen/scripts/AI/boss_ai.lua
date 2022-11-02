@@ -18,5 +18,5 @@ function talk_state(entity)
 	local affordance_agent = entity:get_affordance_agent_component()
 	local context = affordance_agent.utility.context
 
-	return ((1 - context.social.value) * (1 - context.loneliness.value))
+	return (1 - context.social.value) * (1 - context.loneliness.value)
 end

@@ -8,7 +8,7 @@ function watch_screen(agent, affordance)
 	local affordance_agent = agent:get_affordance_agent_component()
 	local context = affordance_agent.utility.context
 
-	context.fun.value = context.fun.value + 0.01
+	context.fun.value = context.fun.value + 0.025
 end
 
 function move_watch_screen(agent, affordance)
