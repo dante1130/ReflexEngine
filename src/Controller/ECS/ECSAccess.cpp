@@ -13,6 +13,7 @@
 #include "Model/Components/Terrain.hpp"
 #include "Model/Components/Statemachine.hpp"
 #include "Model/Components/RigidBody.hpp"
+#include "Model/Components/AffordanceAgent.hpp"
 #include "Model/Components/Remove.hpp"
 
 #include "Controller/AI/statemachineComponentHelper.hpp"
@@ -35,6 +36,7 @@ void ECSAccess::register_ecs() {
 	register_terrain_component();
 	register_statemachine_component();
 	register_rigidbody_component();
+	register_affordance_agent_component();
 }
 
 void ECSAccess::register_registry() {
@@ -73,18 +75,18 @@ void ECSAccess::register_registry() {
 
 	ecs_table["each_directional_light"] = [](ECS& ecs,
 	                                         const sol::function& callback) {
-		auto view = ecs.get_registry().view<DirectionalLight>();
+		auto view = ecs.get_registry().view<Component::DirectionalLight>();
 		for (auto entity_id : view) callback(ecs.get_entity(entity_id));
 	};
 
 	ecs_table["each_point_light"] = [](ECS& ecs,
 	                                   const sol::function& callback) {
-		auto view = ecs.get_registry().view<PointLight>();
+		auto view = ecs.get_registry().view<Component::PointLight>();
 		for (auto entity_id : view) callback(ecs.get_entity(entity_id));
 	};
 
 	ecs_table["each_spot_light"] = [](ECS& ecs, const sol::function& callback) {
-		auto view = ecs.get_registry().view<SpotLight>();
+		auto view = ecs.get_registry().view<Component::SpotLight>();
 		for (auto entity_id : view) callback(ecs.get_entity(entity_id));
 	};
 
@@ -109,61 +111,73 @@ void ECSAccess::register_entity() {
 
 	auto entity_type = lua.new_usertype<Reflex::Entity>("Entity");
 
+	entity_type["get_name"] = &Entity::get_name;
 	entity_type["get_id"] = &Entity::get_entity_id;
 
 	entity_type["add_transform_component"] = &Entity::add_component<Transform>;
 	entity_type["add_model_component"] = &Entity::add_component<Model>;
 	entity_type["add_script_component"] = &Entity::add_component<Script>;
 	entity_type["add_directional_light_component"] =
-	    &Entity::add_component<DirectionalLight>;
+	    &Entity::add_component<Component::DirectionalLight>;
 	entity_type["add_point_light_component"] =
-	    &Entity::add_component<PointLight>;
-	entity_type["add_spot_light_component"] = &Entity::add_component<SpotLight>;
+	    &Entity::add_component<Component::PointLight>;
+	entity_type["add_spot_light_component"] =
+	    &Entity::add_component<Component::SpotLight>;
 	entity_type["add_mesh_component"] = &Entity::add_component<Mesh>;
 	entity_type["add_stateMachine_component"] =
 	    &Entity::add_component<Statemachine>;
 	entity_type["add_rigidbody_component"] = &Entity::add_component<Rigidbody>;
+	entity_type["add_affordance_agent_component"] =
+	    &Entity::add_component<AffordanceAgent>;
 
 	entity_type["remove_transform_component"] =
 	    &Entity::remove_component<Transform>;
 	entity_type["remove_model_component"] = &Entity::remove_component<Model>;
 	entity_type["remove_script_component"] = &Entity::remove_component<Script>;
 	entity_type["remove_directional_light_component"] =
-	    &Entity::remove_component<DirectionalLight>;
+	    &Entity::remove_component<Component::DirectionalLight>;
 	entity_type["remove_point_light_component"] =
-	    &Entity::remove_component<PointLight>;
+	    &Entity::remove_component<Component::PointLight>;
 	entity_type["remove_spot_light_component"] =
-	    &Entity::remove_component<SpotLight>;
+	    &Entity::remove_component<Component::SpotLight>;
 	entity_type["remove_mesh_component"] = &Entity::remove_component<Mesh>;
 	entity_type["remove_statemachine_component"] =
 	    &Entity::remove_component<Statemachine>;
 	entity_type["remove_rigidbody_component"] =
 	    &Entity::remove_component<Rigidbody>;
+	entity_type["remove_affordance_agent_component"] =
+	    &Entity::remove_component<AffordanceAgent>;
 
 	entity_type["get_transform_component"] = &Entity::get_component<Transform>;
 	entity_type["get_model_component"] = &Entity::get_component<Model>;
 	entity_type["get_script_component"] = &Entity::get_component<Script>;
 	entity_type["get_directional_light_component"] =
-	    &Entity::get_component<DirectionalLight>;
+	    &Entity::get_component<Component::DirectionalLight>;
 	entity_type["get_point_light_component"] =
-	    &Entity::get_component<PointLight>;
-	entity_type["get_spot_light_component"] = &Entity::get_component<SpotLight>;
+	    &Entity::get_component<Component::PointLight>;
+	entity_type["get_spot_light_component"] =
+	    &Entity::get_component<Component::SpotLight>;
 	entity_type["get_mesh_component"] = &Entity::get_component<Mesh>;
 	entity_type["get_statemachine_component"] =
 	    &Entity::get_component<Statemachine>;
 	entity_type["get_rigidbody_component"] = &Entity::get_component<Rigidbody>;
+	entity_type["get_affordance_agent_component"] =
+	    &Entity::get_component<AffordanceAgent>;
 
 	entity_type["any_transform_component"] = &Entity::any_component<Transform>;
 	entity_type["any_model_component"] = &Entity::any_component<Model>;
 	entity_type["any_script_component"] = &Entity::any_component<Script>;
 	entity_type["any_directional_light_component"] =
-	    &Entity::any_component<DirectionalLight>;
+	    &Entity::any_component<Component::DirectionalLight>;
 	entity_type["any_point_light_component"] =
-	    &Entity::any_component<PointLight>;
-	entity_type["any_spot_light_component"] = &Entity::any_component<SpotLight>;
+	    &Entity::any_component<Component::PointLight>;
+	entity_type["any_spot_light_component"] =
+	    &Entity::any_component<Component::SpotLight>;
 	entity_type["any_mesh_component"] = &Entity::any_component<Mesh>;
 	entity_type["any_mesh_statemachine"] = &Entity::any_component<Statemachine>;
 	entity_type["any_rigidbody_component"] = &Entity::any_component<Rigidbody>;
+	entity_type["any_affordance_agent_component"] =
+	    &Entity::any_component<AffordanceAgent>;
 }
 
 void ECSAccess::register_transform_component() {
@@ -191,50 +205,58 @@ void ECSAccess::register_script_component() {
 	auto script_type = lua.new_usertype<Script>("Script");
 
 	script_type["lua_script"] = &Script::lua_script;
+	script_type["is_active"] = &Script::is_active;
 }
 
 void ECSAccess::register_directional_light_component() {
 	auto& lua = LuaManager::get_instance().get_state();
 
-	auto directional_light_type =
-	    lua.new_usertype<DirectionalLight>("DirectionalLight");
+	auto directional_light_type = lua.new_usertype<Component::DirectionalLight>(
+	    "Component::DirectionalLight");
 
-	directional_light_type["color"] = &DirectionalLight::color;
+	directional_light_type["color"] = &Component::DirectionalLight::color;
 	directional_light_type["ambient_intensity"] =
-	    &DirectionalLight::ambient_intensity;
+	    &Component::DirectionalLight::ambient_intensity;
 	directional_light_type["diffuse_intensity"] =
-	    &DirectionalLight::diffuse_intensity;
-	directional_light_type["direction"] = &DirectionalLight::direction;
+	    &Component::DirectionalLight::diffuse_intensity;
+	directional_light_type["direction"] =
+	    &Component::DirectionalLight::direction;
 }
 
 void ECSAccess::register_point_light_component() {
 	auto& lua = LuaManager::get_instance().get_state();
 
-	auto point_light_type = lua.new_usertype<PointLight>("PointLight");
+	auto point_light_type =
+	    lua.new_usertype<Component::PointLight>("Component::PointLight");
 
-	point_light_type["color"] = &PointLight::color;
-	point_light_type["ambient_intensity"] = &PointLight::ambient_intensity;
-	point_light_type["diffuse_intensity"] = &PointLight::diffuse_intensity;
-	point_light_type["position"] = &PointLight::position;
-	point_light_type["constant"] = &PointLight::constant;
-	point_light_type["linear"] = &PointLight::linear;
-	point_light_type["quadratic"] = &PointLight::quadratic;
+	point_light_type["color"] = &Component::PointLight::color;
+	point_light_type["ambient_intensity"] =
+	    &Component::PointLight::ambient_intensity;
+	point_light_type["diffuse_intensity"] =
+	    &Component::PointLight::diffuse_intensity;
+	point_light_type["position"] = &Component::PointLight::position;
+	point_light_type["constant"] = &Component::PointLight::constant;
+	point_light_type["linear"] = &Component::PointLight::linear;
+	point_light_type["quadratic"] = &Component::PointLight::quadratic;
 }
 
 void ECSAccess::register_spot_light_component() {
 	auto& lua = LuaManager::get_instance().get_state();
 
-	auto spot_light_type = lua.new_usertype<SpotLight>("SpotLight");
+	auto spot_light_type =
+	    lua.new_usertype<Component::SpotLight>("Component::SpotLight");
 
-	spot_light_type["color"] = &SpotLight::color;
-	spot_light_type["ambient_intensity"] = &SpotLight::ambient_intensity;
-	spot_light_type["diffuse_intensity"] = &SpotLight::diffuse_intensity;
-	spot_light_type["position"] = &SpotLight::position;
-	spot_light_type["constant"] = &SpotLight::constant;
-	spot_light_type["linear"] = &SpotLight::linear;
-	spot_light_type["quadratic"] = &SpotLight::quadratic;
-	spot_light_type["direction"] = &SpotLight::direction;
-	spot_light_type["edge"] = &SpotLight::edge;
+	spot_light_type["color"] = &Component::SpotLight::color;
+	spot_light_type["ambient_intensity"] =
+	    &Component::SpotLight::ambient_intensity;
+	spot_light_type["diffuse_intensity"] =
+	    &Component::SpotLight::diffuse_intensity;
+	spot_light_type["position"] = &Component::SpotLight::position;
+	spot_light_type["constant"] = &Component::SpotLight::constant;
+	spot_light_type["linear"] = &Component::SpotLight::linear;
+	spot_light_type["quadratic"] = &Component::SpotLight::quadratic;
+	spot_light_type["direction"] = &Component::SpotLight::direction;
+	spot_light_type["edge"] = &Component::SpotLight::edge;
 }
 
 void ECSAccess::register_mesh_component() {
@@ -399,5 +421,28 @@ void ECSAccess::register_rigidbody_component() {
 	    sol::property(&Rigidbody::getVelocity, &Rigidbody::setVelocity);
 	rigidbody_type["angular_velocity"] =
 	    sol::property(&Rigidbody::getAngVelocity, &Rigidbody::setAngVelocity);
+}
 
+auto ECSAccess::register_affordance_agent_component() -> void {
+	auto& lua = LuaManager::get_instance().get_state();
+
+	auto utility_type =
+	    lua.new_usertype<Affordance::Utility>("AffordanceUtility");
+
+	utility_type["context"] = &Affordance::Utility::context;
+	utility_type["update_func"] = &Affordance::Utility::update_func;
+	utility_type["decision"] = &Affordance::Utility::decision;
+
+	auto affordance_agent_type =
+	    lua.new_usertype<AffordanceAgent>("AffordanceAgent");
+
+	affordance_agent_type["properties"] = &AffordanceAgent::properties;
+	affordance_agent_type["properties_weights"] =
+	    &AffordanceAgent::property_weights;
+	affordance_agent_type["lua_script"] = &AffordanceAgent::lua_script;
+	affordance_agent_type["utility"] = &AffordanceAgent::utility;
+	affordance_agent_type["affordance"] = &AffordanceAgent::affordance;
+	affordance_agent_type["mood_state"] = &AffordanceAgent::mood_state;
+	affordance_agent_type["accumulator"] = &AffordanceAgent::accumulator;
+	affordance_agent_type["is_first_run"] = &AffordanceAgent::is_first_run;
 }

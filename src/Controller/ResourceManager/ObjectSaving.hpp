@@ -2,8 +2,7 @@
 
 #include <fstream>
 
-#include "Model/GameObject/GameObject.hpp"
-
+#include <glm.hpp>
 /**
  * @class ObjectSaving
  * @brief Class that writes the data of the game objects to a lua script, so it

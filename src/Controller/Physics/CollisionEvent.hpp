@@ -3,16 +3,21 @@
 #include <reactphysics3d/reactphysics3d.h>
 
 /**
- * @author Andrew Ho
- * @class CollisionEventListener
- * @brief An event listener for reactphysics3d collision events to retrieve the
- * collision and contact points data.
+ * @brief Observers collision events from react physics
  */
 class CollisionEventListener : public rp3d::EventListener {
 	/**
-	 * @brief The onContact method is called when a contact is detected.
+	 * @brief Observer for if collision occurs. This method is called and sent
+	 * collision data
 	 *
-	 * @param collision_data The collision data containing the contact points.
+	 * @param collision_data All the collision data for the contact points and
+	 * objects involved
 	 */
 	virtual void onContact(const CallbackData& collision_data) override;
+
+private:
+	auto convert_local_point(rp3d::Vector3 local_point,
+	                         rp3d::CollisionBody* collision_body,
+	                         rp3d::Collider* collider, float num)
+	    -> rp3d::Vector3;
 };

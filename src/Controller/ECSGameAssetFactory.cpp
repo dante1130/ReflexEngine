@@ -9,6 +9,8 @@
 #include "Model/Components/Terrain.hpp"
 #include "Model/Components/Statemachine.hpp"
 #include "Model/Components/RigidBody.hpp"
+#include "Model/Components/Affordance.hpp"
+#include "Model/Components/AffordanceAgent.hpp"
 
 #include "Controller/GUI/CollectionsGUI.hpp"
 #include "Controller/Physics/LoadOBJColliderData.hpp"
@@ -29,10 +31,12 @@ void ECSGameAssetFactory::create(ECS& ecs, const std::string& lua_script) {
 	auto entity_table = lua["entity"];
 
 	if (entity_table.valid()) {
-		const std::string name = [&entity_table]() {
+		const std::string name = [&entity_table]() -> std::string {
 			if (entity_table["name"].valid()) {
 				return entity_table["name"];
 			}
+
+			return {};
 		}();
 
 		load_components(ecs, ecs.create_entity(name), entity_table);
@@ -82,6 +86,14 @@ void ECSGameAssetFactory::load_components(ECS& ecs, Reflex::Entity& entity,
 
 	if (entity_table["rigidbody"].valid()) {
 		load_rigidbody(entity, entity_table["rigidbody"]);
+	}
+
+	if (entity_table["affordance"].valid()) {
+		load_affordance(entity, entity_table["affordance"]);
+	}
+
+	if (entity_table["affordance_agent"].valid()) {
+		load_affordance_agent(entity, entity_table["affordance_agent"]);
 	}
 
 	// Put this last in case the script calls other components.
@@ -236,6 +248,50 @@ void ECSGameAssetFactory::load_spot_light(Reflex::Entity& entity,
 	    light_table["quadratic"], direction, light_table["edge"]);
 }
 
+auto ECSGameAssetFactory::load_affordance_agent(
+    Reflex::Entity& entity, const sol::table& affordance_agent_table) -> void {
+	const auto& mood_table = affordance_agent_table["mood_state"];
+
+	auto& affordance_agent = entity.add_component<Component::AffordanceAgent>(
+	    affordance_agent_table["properties"].get<Affordance::Properties>(),
+	    affordance_agent_table["properties_weights"]
+	        .get<Affordance::PropertiesWeight>(),
+	    Emotion::EmotionState(mood_table["arousal"], mood_table["valence"]));
+
+	auto& utility = affordance_agent.utility;
+	const auto& utility_table = affordance_agent_table["utility"];
+
+	affordance_agent.lua_script = utility_table["lua_script"];
+	utility.context = utility_table["context"];
+
+	auto& lua = LuaManager::get_instance().get_state();
+	lua.script_file(affordance_agent.lua_script);
+
+	utility.update_func = lua[utility_table["update_func"]];
+
+	for (auto& [key, value] : utility_table["states"].get<sol::table>()) {
+		sol::table state_table = value.as<sol::table>();
+
+		const std::string state_name = state_table["name"];
+
+		utility.states[state_name] = Affordance::Consideration(
+		    state_table["affordance"].get<Affordance::Properties>(),
+		    lua[state_name].get<sol::function>());
+	}
+}
+
+auto ECSGameAssetFactory::load_affordance(Reflex::Entity& entity,
+                                          const sol::table& affordance_table)
+    -> void {
+	auto& affordance = entity.add_component<Component::Affordance>(
+	    affordance_table["object_name"], affordance_table["lua_script"]);
+
+	auto& lua = LuaManager::get_instance().get_state();
+	lua.script_file(affordance.lua_script);
+
+	affordance.context = lua["var"];
+}
+
 bool ECSGameAssetFactory::is_lua_script(const std::string& lua_script) {
 	return lua_script.substr(lua_script.find_last_of('.') + 1) == "lua";
 }
@@ -245,9 +301,8 @@ void ECSGameAssetFactory::load_rigidbody(Reflex::Entity& entity,
 	Component::Transform trans = entity.get_component<Component::Transform>();
 	Component::Rigidbody rb_comp = Component::Rigidbody(
 	    rigidbody_table["using_react_start"], trans.position, trans.rotation,
-	    rigidbody_table["gravity_on"], rigidbody_table["can_sleep"],
-	    rigidbody_table["is_trigger"], rigidbody_table["linear_drag"],
-	    rigidbody_table["angular_drag"]);
+	    rigidbody_table["gravity_on"], rigidbody_table["can_sleep"], false,
+	    rigidbody_table["linear_drag"], rigidbody_table["angular_drag"]);
 
 	rb_comp.setType(rigidbody_table["rb_type"]);
 

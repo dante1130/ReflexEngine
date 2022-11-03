@@ -9,7 +9,7 @@ void ColliderRenderer::update(
 	                                    debug_renderer.getNbTriangles());
 }
 
-void ColliderRenderer::draw(const Shader& shader) {
+void ColliderRenderer::draw() const {
 	line_mesh_.render_mesh();
 	triangle_mesh_.render_mesh();
 }

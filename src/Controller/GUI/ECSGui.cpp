@@ -13,6 +13,7 @@
 #include "Model/Components/Statemachine.hpp"
 #include "Model/Components/Remove.hpp"
 #include "Model/Components/RigidBody.hpp"
+#include "Model/Components/AffordanceAgent.hpp"
 
 #include "Controller/GUI/DebugLogger.hpp"
 
@@ -293,6 +294,10 @@ void ECSGui::draw_entity_props(ECS& ecs, Reflex::Entity& entity) {
 	if (entity.any_component<Component::Rigidbody>()) {
 		draw_rigidbody(entity);
 	}
+
+	if (entity.any_component<Component::AffordanceAgent>()) {
+		draw_affordance_agent(entity);
+	}
 }
 
 void ECSGui::draw_add_component(Reflex::Entity& entity) {
@@ -543,8 +548,12 @@ void ECSGui::draw_rigidbody(Reflex::Entity& entity) {
 		bool react_resolution = rigidbody.usingReactResolve();
 		ImGui::Checkbox("Using react resolution", &react_resolution);
 		ImGui::Checkbox("Gravity On", &rigidbody.gravity_on);
-		ImGui::Checkbox("Is Trigger", &rigidbody.is_trigger);
 		ImGui::Checkbox("Can Sleep", &rigidbody.can_sleep);
+		
+		bool is_sleeping = rigidbody.isSleeping();
+		if (ImGui::Checkbox("Is Sleeping", &is_sleeping)) {
+			rigidbody.setIsSleeping(is_sleeping);
+		}
 		int rigidbody_type = rigidbody.getType();
 		ImGui::DragInt("Rigidbody type", &rigidbody_type, 0);
 		if (ImGui::InputFloat("Drag Force", &rigidbody.lin_drag, speed_)) {
@@ -591,10 +600,9 @@ void ECSGui::draw_rigidbody(Reflex::Entity& entity) {
 					rp3d::Transform tf = rigidbody.getColliders()
 					                         .at(i)
 					                         ->getLocalToBodyTransform();
-					rp3d::Vector3 new_cp =
-					    rp3d::Vector3(collider_position.x, collider_position.y,
-					                  collider_position.z);
-					tf.setPosition(new_cp);
+					tf.setPosition(rp3d::Vector3(collider_position.x,
+					                             collider_position.y,
+					                             collider_position.z));
 					rigidbody.getColliders().at(i)->setLocalToBodyTransform(tf);
 				}
 
@@ -655,17 +663,18 @@ void ECSGui::draw_rigidbody(Reflex::Entity& entity) {
 
 			if (ImGui::BeginPopup("AddCollider")) {
 				if (ImGui::MenuItem("Box")) {
-					rigidbody.addBoxCollider(glm::vec3(0), glm::vec3(1.0f),
-					                         0.5f, 0.5f);
+					rigidbody.addBoxCollider(glm::vec3(0), glm::vec3(0),
+					                         glm::vec3(1.0f), 0.5f, 1, 0.85);
 					ImGui::CloseCurrentPopup();
 				}
 				if (ImGui::MenuItem("Capsule")) {
-					rigidbody.addCapsuleCollider(glm::vec3(0), 0.5f, 1.0f, 0.5f,
-					                             0.5f);
+					rigidbody.addCapsuleCollider(glm::vec3(0), glm::vec3(0),
+					                             0.5f, 1.0f, 0.5f, 1, 0.85);
 					ImGui::CloseCurrentPopup();
 				}
 				if (ImGui::MenuItem("Sphere")) {
-					rigidbody.addSphereCollider(glm::vec3(0), 1.0f, 0.5f, 0.5f);
+					rigidbody.addSphereCollider(glm::vec3(0), glm::vec3(0),
+					                            1.0f, 0.5f, 1, 0.85);
 					ImGui::CloseCurrentPopup();
 				}
 				ImGui::EndPopup();
@@ -767,6 +776,94 @@ void ECSGui::draw_statemachine(Reflex::Entity& entity) {
 		input_text("Global state", statemachine.global_state);
 		input_text("Current state", statemachine.current_state);
 		input_text("Previous state", statemachine.previous_state);
+	}
+
+	ImGui::PopID();
+}
+
+auto ECSGui::draw_affordance_agent(Reflex::Entity& entity) -> void {
+	auto& affordance_agent = entity.get_component<Component::AffordanceAgent>();
+
+	ImGui::PushID("Affordance agent");
+
+	bool open = ImGui::CollapsingHeader("Affordance agent",
+	                                    ImGuiTreeNodeFlags_AllowItemOverlap);
+
+	ImGui::SameLine(ImGui::GetWindowWidth() - 75.0f);
+	if (ImGui::Button("Delete")) {
+		entity.remove_component<Component::AffordanceAgent>();
+	}
+
+	if (open) {
+		if (ImGui::TreeNode("Properties")) {
+			for (auto& property : affordance_agent.properties) {
+				ImGui::BulletText(property.c_str());
+			}
+			ImGui::TreePop();
+		}
+
+		if (ImGui::TreeNode("Properties weights")) {
+			for (auto& [property, weight] : affordance_agent.property_weights) {
+				ImGui::DragFloat(property.c_str(), &weight, speed_);
+			}
+			ImGui::TreePop();
+		}
+
+		ImGui::Text("Emotion");
+		ImGui::SliderFloat("Arousal", &affordance_agent.mood_state.arousal,
+		                   -1.0f, 1.0f);
+		ImGui::SliderFloat("Valence", &affordance_agent.mood_state.valence,
+		                   -1.0f, 1.0f);
+
+		if (ImGui::TreeNode("Utility")) {
+			auto& utility = affordance_agent.utility;
+			if (ImGui::TreeNode("States")) {
+				for (auto& [state, consideration] : utility.states) {
+					if (ImGui::TreeNode(state.c_str())) {
+						ImGui::Text("Score: %f", consideration.score);
+						for (auto& property : consideration.properties) {
+							ImGui::BulletText(property.c_str());
+						}
+						ImGui::TreePop();
+					}
+				}
+				ImGui::TreePop();
+			}
+
+			if (ImGui::TreeNode("Context")) {
+				for (auto& [name, context] : utility.context) {
+					if (ImGui::TreeNode(name.as<const char*>())) {
+						float value = utility.context[name]["value"];
+						float arousal_weight =
+						    utility.context[name]["arousal_weight"];
+						float valence_weight =
+						    utility.context[name]["valence_weight"];
+
+						ImGui::SliderFloat(name.as<const char*>(), &value,
+						                   -1.0f, 1.0f);
+						ImGui::SliderFloat("Arousal weight", &arousal_weight,
+						                   0.0f, 1.0f);
+						ImGui::SliderFloat("Valence weight", &valence_weight,
+						                   0.0f, 1.0f);
+
+						utility.context[name]["value"] = value;
+						utility.context[name]["arousal_weight"] =
+						    arousal_weight;
+						utility.context[name]["valence_weight"] =
+						    valence_weight;
+						ImGui::TreePop();
+					}
+				}
+				ImGui::TreePop();
+			}
+
+			ImGui::Text("Decision: %s", utility.decision.c_str());
+
+			ImGui::TreePop();
+		}
+
+		input_text("Lua script: ", affordance_agent.lua_script);
+		ImGui::Text("Current affordance ID: %d", affordance_agent.affordance);
 	}
 
 	ImGui::PopID();

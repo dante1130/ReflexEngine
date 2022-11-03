@@ -23,5 +23,18 @@ entity = {
 	model = {
 		model_name = "book3",
 		material_name = "default"
+	},
+
+	rigidbody = {
+        using_react_start = false,
+        gravity_on = true,
+        can_sleep = true,
+        linear_drag = 0.5,
+        angular_drag = 0.5,
+		rb_type = 2
+    },
+
+	script = {
+		lua_script = "game/TheDen/scripts/book3_script.lua"
 	}
 }

@@ -1,36 +1,90 @@
 #include "CollisionEvent.hpp"
 #include "PhysicBody.hpp"
-#include <iostream>
+
+#include "Controller/GUI/DebugLogger.hpp"
+#include "Controller/ReflexEngine/EngineTime.hpp"
+#include "Controller/Physics/QuaternionHelper.hpp"
 
 void CollisionEventListener::onContact(const CallbackData& collision_data) {
+	if (EngineTime::is_paused()) {
+		return;
+	}
 
-	for (size_t i = 0; i < collision_data.getNbContactPairs(); ++i) {
-		ContactPair contact_pair = collision_data.getContactPair(i);
+	int num_of_contacts;
+	rp3d::Vector3 contact_normal;
+	rp3d::Vector3 local_point_c1;
+	rp3d::Vector3 local_point_c2;
+	float penetration_depth;
 
-		rp3d::Vector3 total_normal = rp3d::Vector3(0.0f, 0.0f, 0.0f);
-		for (size_t j = 0; j < contact_pair.getNbContactPoints(); ++j) {
-			ContactPoint contact_point = contact_pair.getContactPoint(j);
-			total_normal += contact_point.getWorldNormal();
+	size_t size = collision_data.getNbContactPairs();
+	// Loop through all colliders-collider contacts
+	for (size_t count = 0; count < size; ++count) {
+		ContactPair contact_pair = collision_data.getContactPair(count);
+		if (contact_pair.getEventType() ==
+		    ContactPair::EventType::ContactExit) {
+			continue;
 		}
 
-		total_normal.x = total_normal.x / contact_pair.getNbContactPoints();
-		total_normal.y = total_normal.y / contact_pair.getNbContactPoints();
-		total_normal.z = total_normal.z / contact_pair.getNbContactPoints();
+		num_of_contacts = contact_pair.getNbContactPoints();
+		contact_normal = rp3d::Vector3(0, 0, 0);
+		local_point_c1 = rp3d::Vector3(0, 0, 0);
+		local_point_c2 = rp3d::Vector3(0, 0, 0);
+		penetration_depth = 0;
 
-		ContactPair::EventType event_type = contact_pair.getEventType();
+		// Loop through all contacts against same collider
+		for (size_t countTwo = 0; countTwo < num_of_contacts; ++countTwo) {
+			ContactPoint contact_point = contact_pair.getContactPoint(countTwo);
+			contact_normal += contact_point.getWorldNormal();
+			local_point_c1 += contact_point.getLocalPointOnCollider1();
+			local_point_c2 += contact_point.getLocalPointOnCollider2();
+			penetration_depth += contact_point.getPenetrationDepth();
+		}
 
-		
-		PhysicsBody::collision(contact_pair.getCollider1(),
-		                       contact_pair.getCollider2(), total_normal, event_type);
+		if (num_of_contacts != 0) {
+			float num = static_cast<float>(num_of_contacts);
 
+			// Converts the local point to body point
+			local_point_c1 =
+			    convert_local_point(local_point_c1, contact_pair.getBody1(),
+			                        contact_pair.getCollider1(), num);
+			local_point_c2 =
+			    convert_local_point(local_point_c2, contact_pair.getBody2(),
+			                        contact_pair.getCollider2(), num);
 
-		/* if (event_type == ContactPair::EventType::ContactStart) {
-		 	std::cout << "Contact start\n";
-		 } else if (event_type == ContactPair::EventType::ContactStay) {
-		 	std::cout << "Contact stay\n";
-		 } else if (event_type == ContactPair::EventType::ContactExit) {
-		 	std::cout << "Contact end\n";
-		 }*/
+			contact_normal /= num;
+			penetration_depth /= num;
 
+			// Run collision method
+			PhysicsBody::collision(
+			    contact_pair.getCollider1(), contact_pair.getCollider2(),
+			    glm::vec3(local_point_c1.x, local_point_c1.y, local_point_c1.z),
+			    glm::vec3(local_point_c2.x, local_point_c2.y, local_point_c2.z),
+			    glm::normalize(glm::vec3(contact_normal.x, contact_normal.y,
+			                             contact_normal.z)),
+			    penetration_depth, contact_pair.getEventType());
+		}
 	}
+}
+
+auto CollisionEventListener::convert_local_point(
+    rp3d::Vector3 local_point, rp3d::CollisionBody* collision_body,
+    rp3d::Collider* collider, float num) -> rp3d::Vector3 {
+	auto com_vec = static_cast<PhysicsBody*>(collider->getUserData())
+	                   ->get_center_of_mass();
+	auto trans = collider->getLocalToBodyTransform();
+	// Average collider contact point
+	local_point /= num;
+
+	// Rotate point based on collider orientation to body
+	auto rp3d_quat = trans.getOrientation();
+	auto lp_rot = QuaternionHelper::RotateVectorWithQuat(
+	    glm::vec3(local_point.x, local_point.y, local_point.z),
+	    glm::quat(rp3d_quat.w, rp3d_quat.x, rp3d_quat.y, rp3d_quat.z));
+
+	// Get local point in terms of world coordinates
+	local_point = collision_body->getWorldVector(
+	    rp3d::Vector3(lp_rot.x, lp_rot.y, lp_rot.z) + trans.getPosition() -
+	    rp3d::Vector3(com_vec.x, com_vec.y, com_vec.z));
+
+	return local_point;
 }

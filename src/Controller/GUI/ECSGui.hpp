@@ -171,6 +171,13 @@ private:
 	static void draw_rigidbody(Reflex::Entity& entity);
 
 	/**
+	 * @brief Draw the affordance agent component of the entity.
+	 *
+	 * @param entity The entity.
+	 */
+	static auto draw_affordance_agent(Reflex::Entity& entity) -> void;
+
+	/**
 	 * @brief A helper method for ImGui input text update on enter.
 	 *
 	 * @param label The label of the input text.

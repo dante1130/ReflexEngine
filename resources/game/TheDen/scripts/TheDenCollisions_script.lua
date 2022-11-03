@@ -8,6 +8,9 @@ function init(ecs, entity)
 	local rb = entity:get_rigidbody_component()
 	rb.type = 0
 	LoadOBJCollider(rb, "models/TheDenCollisions.obj")
+
+	local script = entity:get_script_component()
+	script.is_active = false;
 end
 
 function update(ecs, entity)

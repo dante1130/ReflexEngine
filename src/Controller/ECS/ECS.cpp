@@ -7,6 +7,7 @@
 #include "Model/Components/Light.hpp"
 #include "Model/Components/Md2Animation.hpp"
 #include "Model/Components/RigidBody.hpp"
+#include "Model/Components/AffordanceAgent.hpp"
 #include "Controller/ReflexEngine/PerformanceLogger.hpp"
 
 using namespace Reflex;
@@ -67,6 +68,9 @@ void ECS::update(double delta_time) {
 	PERFORMANCE_LOGGER_PUSH("Statemachine");
 	System::update_statemachine(*this);
 	PERFORMANCE_LOGGER_POP();
+	PERFORMANCE_LOGGER_PUSH("AffordanceAgent");
+	System::update_affordance_agent(*this);
+	PERFORMANCE_LOGGER_POP();
 }
 
 void ECS::fixed_update(double delta_time) {
@@ -77,14 +81,14 @@ void ECS::draw() {
 	PERFORMANCE_LOGGER_PUSH("terrain");
 	System::draw_terrain(registry_);
 	PERFORMANCE_LOGGER_POP();
+	PERFORMANCE_LOGGER_PUSH("md2");
+	System::draw_md2(registry_);
+	PERFORMANCE_LOGGER_POP();
 	PERFORMANCE_LOGGER_PUSH("model");
 	System::draw_model(registry_);
 	PERFORMANCE_LOGGER_POP();
 	PERFORMANCE_LOGGER_PUSH("mesh");
 	System::draw_mesh(registry_);
-	PERFORMANCE_LOGGER_POP();
-	PERFORMANCE_LOGGER_PUSH("md2");
-	System::draw_md2(registry_);
 	PERFORMANCE_LOGGER_POP();
 }
 

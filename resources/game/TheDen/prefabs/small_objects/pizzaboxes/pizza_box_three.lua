@@ -5,7 +5,7 @@ entity = {
 	transform = {
 		position = {
 			x = 45.5,
-			y = 0.86,
+			y = 0.88,
 			z = -5.8
 		},
 		rotation = {
@@ -23,5 +23,18 @@ entity = {
 	model = {
 		model_name = "pizza_box",
 		material_name = "default"
+	},
+
+	rigidbody = {
+        using_react_start = false,
+        gravity_on = true,
+        can_sleep = true,
+        linear_drag = 0.5,
+        angular_drag = 0.5,
+		rb_type = 2
+    },
+
+	script = {
+		lua_script = "game/TheDen/scripts/pizza_box_script.lua"
 	}
 }

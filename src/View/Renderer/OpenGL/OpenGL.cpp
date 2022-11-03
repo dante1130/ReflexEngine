@@ -3,6 +3,7 @@
 #include "Controller/ReflexEngine/ReflexEngine.hpp"
 #include "Controller/LuaManager.hpp"
 #include "Controller/ResourceManager/ResourceManager.hpp"
+#include "Controller/ReflexEngine/PerformanceLogger.hpp"
 
 void OpenGL::lua_access() {
 	auto& lua = LuaManager::get_instance().get_state();
@@ -48,6 +49,9 @@ void OpenGL::init() {
 	                                "shaders/omni_shadow_map.geom",
 	                                "shaders/omni_shadow_map.frag");
 
+	// The react shader.
+	react_shader_.CompileFile("shaders/react.vert", "shaders/react.frag");
+
 	lua_access();
 }
 
@@ -72,11 +76,54 @@ void OpenGL::draw() {
 	             std::back_inserter(spot_lights),
 	             [](const SpotLight& light) { return light.is_active(); });
 
+	PERFORMANCE_LOGGER_PUSH("Directional shadows");
 	directional_shadow_pass(directional_light);
+	PERFORMANCE_LOGGER_POP();
+
+	PERFORMANCE_LOGGER_PUSH("Omnidirectional shadows");
 	omnidirectional_shadow_pass(point_lights, spot_lights);
+	PERFORMANCE_LOGGER_POP();
+
+	PERFORMANCE_LOGGER_PUSH("Default");
 	render_pass(directional_light, point_lights, spot_lights);
+	PERFORMANCE_LOGGER_POP();
 
 	draw_calls_.clear();
+}
+
+void OpenGL::draw_debug(const ColliderRenderer& collider_renderer) {
+	PERFORMANCE_LOGGER_PUSH("Debug pass");
+	auto& engine = ReflexEngine::get_instance();
+
+	glViewport(0, 0, engine.window_.get_buffer_width(),
+	           engine.window_.get_buffer_height());
+
+	glm::mat4 projection = glm::perspective(
+	    glm::radians(60.0f), engine.window_.get_ratio(), 0.1f, 1000.0f);
+
+	glm::mat4 view = engine.camera_.calc_view_matrix();
+
+	react_shader_.UseShader();
+
+	// Creates projection matrix mode
+	glUniformMatrix4fv(react_shader_.GetProjectionLocation(), 1, GL_FALSE,
+	                   glm::value_ptr(projection));
+
+	// Create view matrix mode
+	glUniformMatrix4fv(react_shader_.GetViewLocation(), 1, GL_FALSE,
+	                   glm::value_ptr(view));
+
+	PERFORMANCE_LOGGER_PUSH("Validate render shader");
+	react_shader_.Validate();
+	PERFORMANCE_LOGGER_POP();
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+	collider_renderer.draw();
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+	PERFORMANCE_LOGGER_POP();
 }
 
 void OpenGL::render_scene(const Shader& shader) {
@@ -118,7 +165,9 @@ void OpenGL::render_pass(const DirectionalLight& d_light,
 
 	render_lights(d_light, p_lights, s_lights);
 
+	PERFORMANCE_LOGGER_PUSH("Validate render pass shader");
 	shader_.Validate();
+	PERFORMANCE_LOGGER_POP();
 
 	render_scene(shader_);
 }
@@ -136,7 +185,9 @@ void OpenGL::directional_shadow_pass(const DirectionalLight& d_light) {
 	directional_shadow_shader_.SetDirectionalLightTransform(
 	    d_light.calculate_light_transform());
 
+	PERFORMANCE_LOGGER_PUSH("Validate directional shader");
 	directional_shadow_shader_.Validate();
+	PERFORMANCE_LOGGER_POP();
 
 	render_scene(directional_shadow_shader_);
 
@@ -151,7 +202,9 @@ void OpenGL::omnidirectional_shadow_pass(const PointLights& p_lights,
 	    omni_shadow_shader_.GetOmniLightPosLocation();
 	GLuint uniform_omni_light_far = omni_shadow_shader_.GetFarPlaneLocation();
 
+	PERFORMANCE_LOGGER_PUSH("Validate omni shader");
 	omni_shadow_shader_.Validate();
+	PERFORMANCE_LOGGER_POP();
 
 	for (const auto& light : p_lights) {
 		glViewport(0, 0, light.get_shadow_map().get_shadow_width(),

@@ -1,7 +1,9 @@
 #include "MathAccess.hpp"
 
 #include <glm/glm.hpp>
+#include <glm/gtc/constants.hpp>
 #include <glm/gtc/quaternion.hpp>
+#include <glm/gtx/vector_angle.hpp>
 
 #include "LuaManager.hpp"
 
@@ -80,9 +82,23 @@ void MathAccess::register_glm_functions() {
 	    sol::overload([](const glm::vec3& a) { return glm::length(a); },
 	                  [](const glm::quat& a) { return glm::length(a); });
 
+	math_table["distance"] =
+	    sol::overload([](const glm::vec3& a, const glm::vec3& b) {
+		    return glm::distance(a, b);
+	    });
+
 	math_table["normalize"] =
 	    sol::overload([](const glm::vec3& a) { return glm::normalize(a); },
 	                  [](const glm::quat& a) { return glm::normalize(a); });
+
+	math_table["angle"] = [](const glm::vec3& a, const glm::vec3& b) {
+		auto angle =
+		    glm::degrees(glm::angle(glm::normalize(a), glm::normalize(b)));
+		if (b.z > 0) {
+			angle *= -1;
+		}
+		return angle;
+	};
 
 	math_table["sin"] =
 	    sol::overload([](float a) { return glm::sin(a); },

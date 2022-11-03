@@ -14,22 +14,27 @@ void Physics::createWorld() {
 }
 
 void Physics::updateWorld(double delta_time) {
-	if (!isCreated) return;
+	if (!isCreated) {
+		return;
+	}
 
 	world->update(delta_time);
 }
 
 void Physics::setDebuggerToActive(bool val) {
-	if (!isCreated) return;
+	if (!isCreated) {
+		return;
+	}
 
 	world->setIsDebugRenderingEnabled(val);
 }
 
-void Physics::setDebuggerValues(int type, bool val) {
-	if (!isCreated) return;
-	reactphysics3d::DebugRenderer& debugRenderer = world->getDebugRenderer();
-	debugRenderer.setIsDebugItemDisplayed(
-	    static_cast<reactphysics3d::DebugRenderer::DebugItem>(type), val);
+void Physics::setDebuggerValues(reactphysics3d::DebugRenderer::DebugItem type,
+                                bool val) {
+	if (!isCreated) {
+		return;
+	}
+	world->getDebugRenderer().setIsDebugItemDisplayed(type, val);
 }
 
 void Physics::destroyWorld() {

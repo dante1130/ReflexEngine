@@ -4,6 +4,9 @@
 #include "Controller/ResourceManager/ResourceManager.hpp"
 #include "Controller/LuaManager.hpp"
 #include "Controller/Physics/Physics.hpp"
+#include "Controller/Affordance/AffordanceHelper.hpp"
+#include "Controller/Affordance/AffordanceSystem.hpp"
+#include "Controller/Emotion/EmotionHelper.hpp"
 
 #include "Model/RunTimeDataStorage/GlobalDataStorage.hpp"
 
@@ -17,6 +20,8 @@
 #include "Model/Components/Statemachine.hpp"
 #include "Model/Components/Remove.hpp"
 #include "Model/Components/RigidBody.hpp"
+#include "Model/Components/AffordanceAgent.hpp"
+#include "Model/Components/Affordance.hpp"
 
 void System::draw_model(entt::registry& registry) {
 	auto& renderer = ReflexEngine::get_instance().renderer_;
@@ -234,7 +239,7 @@ void System::init_md2_animation(entt::registry& registry, entt::entity entity) {
 }
 
 void System::init_statemachine(entt::registry& registry, entt::entity entity) {
-	auto& lua = LuaManager::get_instance().get_state();
+	const auto& lua = LuaManager::get_instance().get_state();
 
 	auto& statemachine = registry.get<Component::Statemachine>(entity);
 
@@ -244,18 +249,36 @@ void System::init_statemachine(entt::registry& registry, entt::entity entity) {
 }
 
 void System::update_rigidbody(entt::registry& registry) {
-	if (EngineTime::is_paused()) return;
-
-	// Calls the physics world update
-	// Physics::getPhysicsWorld()->update(EngineTime::get_delta_time());
+	if (EngineTime::is_paused()) {
+		Physics::updateWorld(EngineTime::get_time_step());
+		return;
+	}
 
 	auto& rigidbody_manager =
 	    ResourceManager::get_instance().get_rigidbody_manager();
 
-	registry.view<Component::Rigidbody, Component::Transform>().each(
-	    [&rigidbody_manager](auto& rigidbody, auto& transform) {
-		    rigidbody_manager.update_rigidbody(rigidbody, transform);
-	    });
+	float fixed_delta_time = EngineTime::get_fixed_delta_time();
+	while (RigidbodyManager::accumulator(fixed_delta_time)) {
+		fixed_delta_time = 0.0F;
+
+		registry.view<Component::Rigidbody, Component::Transform>().each(
+		    [&rigidbody_manager](auto& rigidbody, auto& transform) {
+			    rigidbody_manager.update_rigidbody(rigidbody, transform);
+		    });
+
+		Physics::updateWorld(EngineTime::get_time_step());
+
+		registry.view<Component::Rigidbody, Component::Transform>().each(
+		    [](Component::Rigidbody& rigidbody,
+		       Component::Transform& transform) {
+			    if (rigidbody.pb->is_modified()) {
+				    transform.position = rigidbody.getPosition();
+				    transform.rotation = rigidbody.getRotation();
+				    rigidbody.setPreviousPosition(transform.position);
+				    rigidbody.pb->set_modified(false);
+			    }
+		    });
+	}
 }
 
 void System::update_directional_light(entt::registry& registry) {
@@ -285,18 +308,23 @@ void System::update_spot_light(entt::registry& registry) {
 	    });
 }
 
+#include "Controller/GUI/DebugLogger.hpp"
 void System::update_script(entt::registry& registry) {
 	auto& lua = LuaManager::get_instance().get_state();
 
 	registry.view<Component::Script>().each([&lua](auto& script) {
 		if (script.ecs && script.entity) {
-			lua.script_file(script.lua_script);
+			if (script.is_active) {
+				lua.script_file(script.lua_script);
 
-			lua["var"] = script.lua_variables;
+				auto update_func = lua["update"];
 
-			lua["update"](*script.ecs, *script.entity);
-
-			script.lua_variables = lua["var"];
+				if (update_func.valid()) {
+					lua["var"] = script.lua_variables;
+					update_func(*script.ecs, *script.entity);
+					script.lua_variables = lua["var"];
+				}
+			}
 		}
 	});
 }
@@ -374,6 +402,100 @@ void System::update_statemachine(ECS& ecs) {
 
 		stateM.lua_variables = lua["var"];
 	}
+}
+
+void System::update_affordance_agent(ECS& ecs) {
+	if (EngineTime::is_paused()) {
+		return;
+	}
+
+	auto& registry = ecs.get_registry();
+	auto& affordance_system = Affordance::AffordanceSystem::get_instance();
+
+	registry.view<Component::Transform, Component::AffordanceAgent>().each(
+	    [&](auto agent_id, auto& agent_transform, auto& agent) {
+		    auto& agent_entity = ecs.get_entity(agent_id);
+
+		    // Updates the agent's utilities, can be anything from updating the
+		    // agent's context, emotions or any component that is in the agent.
+		    agent.utility.update_func(agent_entity);
+
+		    agent.accumulator += EngineTime::get_delta_time();
+		    if (agent.accumulator >= 5.0) {
+			    agent.accumulator = 0.0;
+		    }
+
+		    // Evaluates the agent's utility and determines the best action, an
+		    // affordance that the agent desires to interact in this case.
+		    Affordance::evaluate_utility(agent_entity);
+		    Emotion::update_emotion(agent_entity);
+
+		    // Gets the best affordance.
+		    const auto& agent_decision_properties =
+		        agent.utility.states.at(agent.utility.decision).properties;
+
+		    // Distance is used to the agent to choose the nearest affordance.
+		    auto best_distance = std::numeric_limits<float>::max();
+
+		    registry.view<Component::Transform, Component::Affordance>().each(
+		        [&](auto affordance_id, auto& affordance_transform,
+		            auto& affordance) {
+			        if (agent_id == affordance_id) {
+				        return;
+			        }
+
+			        auto affordance_tree = affordance_system.get_affordance(
+			            affordance.object_name);
+
+			        // If the affordance has the affordance that the agent
+			        // desires
+			        if (Affordance::has_affordance(affordance_tree,
+			                                       agent_decision_properties)) {
+				        auto distance =
+				            glm::distance(agent_transform.position,
+				                          affordance_transform.position);
+
+				        // Determine if the affordance is the nearest affordance
+				        if (distance < best_distance) {
+					        best_distance = distance;
+					        agent.affordance = affordance_id;
+				        }
+			        }
+		        });
+
+		    if (!ecs.get_registry().valid(agent.affordance)) {
+			    return;
+		    }
+
+		    auto& affordance_entity = ecs.get_entity(agent.affordance);
+
+		    const auto& affordance_component =
+		        affordance_entity.get_component<Component::Affordance>();
+
+		    auto affordance = affordance_system.get_affordance(
+		        affordance_component.object_name);
+
+		    // Find the affordance that the leaf that matches the agent's
+		    // properties and property weights.
+		    affordance = Affordance::find_affordance(
+		        affordance, agent.properties, agent.property_weights);
+
+		    // If it is not a composite affordance, then it is has an action
+		    if (!affordance->is_composite()) {
+			    auto affordance_leaf =
+			        std::dynamic_pointer_cast<Affordance::AffordanceLeaf>(
+			            affordance);
+
+			    // Execute the affordance action.
+			    auto result = affordance_leaf->get_function()(
+			        agent_entity, affordance_entity);
+
+			    if (!result.valid()) {
+				    auto error = result.get<sol::error>();
+				    std::cout << error.what() << std::endl;
+			    }
+		    }
+	    });
 }
 
 void System::delete_directional_light(entt::registry& registry,
