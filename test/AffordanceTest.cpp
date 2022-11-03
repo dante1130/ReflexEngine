@@ -365,12 +365,11 @@ TEST_CASE("Affordance helper functions test", "[AffordanceHelper]") {
 		auto affordance_leaf =
 		    std::dynamic_pointer_cast<Affordance::AffordanceLeaf>(affordance);
 
-		REQUIRE(affordance_leaf->get_name() == "Crossleg");
-		REQUIRE(affordance_leaf->get_properties() ==
-		        Affordance::Properties{"Crossleg"});
+		REQUIRE(affordance_leaf->get_name() == "Sit default");
+		REQUIRE(affordance_leaf->get_properties() == Affordance::Properties{});
 
 		std::string affordance_result = affordance_leaf->get_function()();
-		REQUIRE(affordance_result == "sitting crosslegged");
+		REQUIRE(affordance_result == "sitting");
 
 		auto chair = std::dynamic_pointer_cast<Affordance::AffordanceComposite>(
 		    affordance_system.get_affordance("chair"));
