@@ -22,6 +22,7 @@ Model.load_model("calculator", "models/calculator.obj")
 Model.load_model("chair", "models/chair.obj")
 Model.load_model("boss", "models/boss.obj")
 Model.load_model("robot", "models/robotV.1_2.obj")
+Model.load_model("tv", "models/tv.obj")
 
 Md2.load_md2_model("duck", "models/DuckPersonNew.md2")
 
@@ -33,6 +34,9 @@ Md2.load_md2_model("duck", "models/DuckPersonNew.md2")
 Texture.load_texture("credits", "textures/reflexbullet.png")
 Texture.load_texture("duck", "textures/DuckPerson.png")
 Texture.load_texture("Chair", "textures/chair.jpg")
+Texture.load_texture("boss", "textures/boss.png")
+
+
 Material.load_material("shiny", 256.0, 4.0)
 
 Audio.load_audio("duckandcover", "sounds/gamefast.wav")

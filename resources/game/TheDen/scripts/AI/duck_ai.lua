@@ -3,7 +3,7 @@ function duck_update(entity)
 	local context = affordance_agent.utility.context
 
 	context.hunger.value = context.hunger.value - 0.001
-	context.stress.value = context.stress.value + 0.001
+	context.stress.value = context.stress.value - 0.001
 	context.fun.value = context.fun.value - 0.001
 	context.social.value = context.social.value - 0.001
 end
@@ -16,7 +16,7 @@ function watch_state(entity)
 
 	local score = 0.0
 
-	if (context.stress.value > 0.5) then
+	if (context.stress.value < -0.5) then
 		score = score + 1.0
 	end
 	if (context.fun.value < -0.5) then
@@ -72,7 +72,7 @@ function study_state(entity)
 
 	local score = 0.0
 
-	if (context.stress.value < 0.0) then
+	if (context.stress.value > 0.0) then
 		score = score + 2.0
 	end
 	if (context.fun.value > 0.0) then

@@ -11,7 +11,7 @@
 #include <ReflexAssertion.hpp>
 
 const constexpr glm::vec3 GRAVITY_CONSTANT = glm::vec3(0.0f, -9.807f, 0.0f);
-const constexpr float SLEEP_TIME_THRESHOLD = 1.0f;  // in seconds
+const constexpr float SLEEP_TIME_THRESHOLD = 0.5f;  // in seconds
 
 using namespace rp3d;
 

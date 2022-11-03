@@ -36,7 +36,7 @@ Scene.add_game_object("game/TheDen/prefabs/small_objects/laptops/laptop_five.lua
 --pizza
 Scene.add_game_object("game/TheDen/prefabs/small_objects/pizzaboxes/pizza_box_one.lua")
 Scene.add_game_object("game/TheDen/prefabs/small_objects/pizzaboxes/pizza_box_two.lua")
-Scene.add_game_object("game/TheDen/prefabs/small_objects/pizzaboxes/pizza_box_three.lua")
+--Scene.add_game_object("game/TheDen/prefabs/small_objects/pizzaboxes/pizza_box_three.lua")
 Scene.add_game_object("game/TheDen/prefabs/small_objects/pizzaboxes/pizza_box_four.lua")
 Scene.add_game_object("game/TheDen/prefabs/small_objects/pizzaboxes/pizza_box_five.lua")
 --books
@@ -67,6 +67,9 @@ Scene.add_game_object("game/TheDen/prefabs/small_objects/chairs/chair_one.lua")
 Scene.add_game_object("game/TheDen/prefabs/small_objects/chairs/chair_three.lua")
 Scene.add_game_object("game/TheDen/prefabs/small_objects/chairs/chair_four.lua")
 --Scene.add_game_object("game/TheDen/prefabs/small_objects/chairs/chair_five.lua")
+
+--TV
+Scene.add_game_object("game/TheDen/prefabs/screen.lua")
 
 --NPCs
 Scene.add_game_object("game/TheDen/prefabs/AI/boss.lua")

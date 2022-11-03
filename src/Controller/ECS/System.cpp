@@ -421,8 +421,8 @@ void System::update_affordance_agent(ECS& ecs) {
 		    agent.utility.update_func(agent_entity);
 
 		    agent.accumulator += EngineTime::get_delta_time();
-		    if (agent.accumulator >= 5.0F) {
-			    agent.accumulator = 0.0F;
+		    if (agent.accumulator >= 5.0) {
+			    agent.accumulator = 0.0;
 		    }
 
 		    // Evaluates the agent's utility and determines the best action, an
@@ -487,8 +487,13 @@ void System::update_affordance_agent(ECS& ecs) {
 			            affordance);
 
 			    // Execute the affordance action.
-			    affordance_leaf->get_function()(agent_entity,
-			                                    affordance_entity);
+			    auto result = affordance_leaf->get_function()(
+			        agent_entity, affordance_entity);
+
+			    if (!result.valid()) {
+				    auto error = result.get<sol::error>();
+				    std::cout << error.what() << std::endl;
+			    }
 		    }
 	    });
 }

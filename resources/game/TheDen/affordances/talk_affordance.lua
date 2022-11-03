@@ -9,7 +9,12 @@ function talk(agent, affordance)
 
 	if (AI.is_in_range(agent_transform.position, affordance_transform.position, 3.0)) then
 		context.social.value = context.social.value + 0.0025
-		return
+		context.loneliness.value = context.loneliness.value + 0.005
+
+		if (affordance_agent.is_first_run) then
+			DebugLogger.log(agent:get_name(), "Hey duck! I missed your company.")
+			affordance_agent.is_first_run = false
+		end
 	end
 end
 
@@ -26,14 +31,16 @@ function talk_move(agent, affordance)
 	local theater_pos = Math.vec3.new(59.63, agent_pos.y, -4.709)
 
 	if (is_at_destination(agent_pos.x, agent_pos.z, theater_pos.x, theater_pos.z)) then
-		if (affordance_agent.accumulator == 0.0) then
+		if (affordance_agent.is_first_run) then
 			local sound_pos = Audio.vec3df.new(agent_pos.x, agent_pos.y, agent_pos.z)
 			Audio.play_3d_sound("quack", sound_pos, false, 1.0)
+			DebugLogger.log(agent:get_name(), "Hey boss, can't talk for too long, gotta study.")
+			affordance_agent.is_first_run = false
 		end
 
 		agent_transform.rotation.y = Math.angle(Math.vec3.new(1, 0, 0), Math.sub(affordance_pos, agent_pos))
 		context.social.value = context.social.value + 0.005
-		context.stress.value = context.stress.value - 0.005
+		context.stress.value = context.stress.value + 0.001
 
 		return
 	end

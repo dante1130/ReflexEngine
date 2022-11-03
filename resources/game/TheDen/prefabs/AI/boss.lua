@@ -11,7 +11,7 @@ entity = {
 		rotation = {
 			x = 0,
 			y = 0,
-			z = 90
+			z = 0
 		},
 		scale = {
 			x = 0.5,
@@ -37,12 +37,12 @@ entity = {
 			lua_script = "game/TheDen/scripts/AI/boss_ai.lua",
 			context = {
 				["social"] = {
-					value = 0.0,
-					arousal_weight = 1,
-					valence_weight = 1
+					value = -0.5,
+					arousal_weight = 0.5,
+					valence_weight = 0.5
 				},
 				["loneliness"] = {
-					value = 0.0,
+					value = -1.0,
 					arousal_weight = 1,
 					valence_weight = 1
 				},
