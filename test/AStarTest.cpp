@@ -155,112 +155,112 @@ TEST_CASE("A Star Pathfinding", "[AStarTest]") {
 		REQUIRE(path.size() == 16);
 
 		auto pair = path.front();
-		path.pop();
+		path.pop_front();
 		pair.first = (pair.first - X_OFFSET) * RATIO;
 		pair.second = (pair.second - Y_OFFSET) * RATIO;
 		REQUIRE((static_cast<int>(round(pair.first)) == 1 &&
 		         static_cast<int>(round(pair.second)) == 1));
 
 		pair = path.front();
-		path.pop();
+		path.pop_front();
 		pair.first = (pair.first - X_OFFSET) * RATIO;
 		pair.second = (pair.second - Y_OFFSET) * RATIO;
 		REQUIRE((static_cast<int>(round(pair.first)) == 1 &&
 		         static_cast<int>(round(pair.second)) == 2));
 
 		pair = path.front();
-		path.pop();
+		path.pop_front();
 		pair.first = (pair.first - X_OFFSET) * RATIO;
 		pair.second = (pair.second - Y_OFFSET) * RATIO;
 		REQUIRE((static_cast<int>(round(pair.first)) == 1 &&
 		         static_cast<int>(round(pair.second)) == 3));
 
 		pair = path.front();
-		path.pop();
+		path.pop_front();
 		pair.first = (pair.first - X_OFFSET) * RATIO;
 		pair.second = (pair.second - Y_OFFSET) * RATIO;
 		REQUIRE((static_cast<int>(round(pair.first)) == 0 &&
 		         static_cast<int>(round(pair.second)) == 3));
 
 		pair = path.front();
-		path.pop();
+		path.pop_front();
 		pair.first = (pair.first - X_OFFSET) * RATIO;
 		pair.second = (pair.second - Y_OFFSET) * RATIO;
 		REQUIRE((static_cast<int>(round(pair.first)) == 0 &&
 		         static_cast<int>(round(pair.second)) == 4));
 
 		pair = path.front();
-		path.pop();
+		path.pop_front();
 		pair.first = (pair.first - X_OFFSET) * RATIO;
 		pair.second = (pair.second - Y_OFFSET) * RATIO;
 		REQUIRE((static_cast<int>(round(pair.first)) == 0 &&
 		         static_cast<int>(round(pair.second)) == 5));
 
 		pair = path.front();
-		path.pop();
+		path.pop_front();
 		pair.first = (pair.first - X_OFFSET) * RATIO;
 		pair.second = (pair.second - Y_OFFSET) * RATIO;
 		REQUIRE((static_cast<int>(round(pair.first)) == 0 &&
 		         static_cast<int>(round(pair.second)) == 6));
 
 		pair = path.front();
-		path.pop();
+		path.pop_front();
 		pair.first = (pair.first - X_OFFSET) * RATIO;
 		pair.second = (pair.second - Y_OFFSET) * RATIO;
 		REQUIRE((static_cast<int>(round(pair.first)) == 1 &&
 		         static_cast<int>(round(pair.second)) == 6));
 
 		pair = path.front();
-		path.pop();
+		path.pop_front();
 		pair.first = (pair.first - X_OFFSET) * RATIO;
 		pair.second = (pair.second - Y_OFFSET) * RATIO;
 		REQUIRE((static_cast<int>(round(pair.first)) == 2 &&
 		         static_cast<int>(round(pair.second)) == 6));
 
 		pair = path.front();
-		path.pop();
+		path.pop_front();
 		pair.first = (pair.first - X_OFFSET) * RATIO;
 		pair.second = (pair.second - Y_OFFSET) * RATIO;
 		REQUIRE((static_cast<int>(round(pair.first)) == 3 &&
 		         static_cast<int>(round(pair.second)) == 6));
 
 		pair = path.front();
-		path.pop();
+		path.pop_front();
 		pair.first = (pair.first - X_OFFSET) * RATIO;
 		pair.second = (pair.second - Y_OFFSET) * RATIO;
 		REQUIRE((static_cast<int>(round(pair.first)) == 4 &&
 		         static_cast<int>(round(pair.second)) == 6));
 
 		pair = path.front();
-		path.pop();
+		path.pop_front();
 		pair.first = (pair.first - X_OFFSET) * RATIO;
 		pair.second = (pair.second - Y_OFFSET) * RATIO;
 		REQUIRE((static_cast<int>(round(pair.first)) == 4 &&
 		         static_cast<int>(round(pair.second)) == 5));
 
 		pair = path.front();
-		path.pop();
+		path.pop_front();
 		pair.first = (pair.first - X_OFFSET) * RATIO;
 		pair.second = (pair.second - Y_OFFSET) * RATIO;
 		REQUIRE((static_cast<int>(round(pair.first)) == 4 &&
 		         static_cast<int>(round(pair.second)) == 4));
 
 		pair = path.front();
-		path.pop();
+		path.pop_front();
 		pair.first = (pair.first - X_OFFSET) * RATIO;
 		pair.second = (pair.second - Y_OFFSET) * RATIO;
 		REQUIRE((static_cast<int>(round(pair.first)) == 4 &&
 		         static_cast<int>(round(pair.second)) == 3));
 
 		pair = path.front();
-		path.pop();
+		path.pop_front();
 		pair.first = (pair.first - X_OFFSET) * RATIO;
 		pair.second = (pair.second - Y_OFFSET) * RATIO;
 		REQUIRE((static_cast<int>(round(pair.first)) == 4 &&
 		         static_cast<int>(round(pair.second)) == 2));
 
 		pair = path.front();
-		path.pop();
+		path.pop_front();
 		pair.first = (pair.first - X_OFFSET) * RATIO;
 		pair.second = (pair.second - Y_OFFSET) * RATIO;
 		REQUIRE((static_cast<int>(round(pair.first)) == 4 &&
