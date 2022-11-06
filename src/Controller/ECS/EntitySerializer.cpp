@@ -1,18 +1,19 @@
 #include "EntitySerializer.hpp"
 
-#include "Controller/GUI/DebugLogger.hpp"
 #include <stack>
+
+#include "Controller/GUI/DebugLogger.hpp"
 #include "Controller/GUI/CollectionsGUI.hpp"
 
 std::ofstream EntitySerializer::save_stream_;
 std::ofstream EntitySerializer::creation_stream_;
-size_t EntitySerializer::indent_level_ = 0;
+size_t EntitySerializer::indent_level_ = {0};
 
 void EntitySerializer::serialize(const std::filesystem::path& dir_path,
                                  ECS& ecs) {
 	auto& registry = ecs.get_registry();
 
-	std::stack<Reflex::Entity> entities = std::stack<Reflex::Entity>();
+	std::stack<Reflex::Entity> entities;
 
 	registry.each([&ecs, &entities](auto entity_id) mutable {
 		auto& entity = ecs.get_entity(entity_id);
@@ -67,10 +68,6 @@ void EntitySerializer::serialize_entity(Reflex::Entity& entity) {
 		serialize_mesh(entity.get_component<Component::Mesh>());
 	}
 
-	if (entity.any_component<Component::Script>()) {
-		serialize_script(entity.get_component<Component::Script>());
-	}
-
 	if (entity.any_component<Component::Model>()) {
 		serialize_model(entity.get_component<Component::Model>());
 	}
@@ -98,6 +95,14 @@ void EntitySerializer::serialize_entity(Reflex::Entity& entity) {
 
 	if (entity.any_component<Component::Rigidbody>()) {
 		serialize_rigidbody(entity.get_component<Component::Rigidbody>());
+	}
+
+	if (entity.any_component<Component::Script>()) {
+		serialize_script(entity.get_component<Component::Script>());
+	}
+
+	if (entity.any_component<Component::Affordance>()) {
+		serialize_affordance(entity.get_component<Component::Affordance>());
 	}
 
 	close_table();
@@ -292,6 +297,16 @@ void EntitySerializer::serialize_rigidbody(Component::Rigidbody& rigidbody) {
 	create_var("y", angular_velocity.y, true);
 	create_var("z", angular_velocity.z, true);
 	close_table(true);
+
+	close_table(true);
+}
+
+auto EntitySerializer::serialize_affordance(
+    const Component::Affordance& affordance) -> void {
+	create_table("affordance");
+
+	create_var("object_name", affordance.object_name, true);
+	create_var("lua_script", affordance.lua_script);
 
 	close_table(true);
 }

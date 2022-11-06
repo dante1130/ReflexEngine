@@ -14,6 +14,7 @@
 #include "Model/Components/Script.hpp"
 #include "Model/Components/Statemachine.hpp"
 #include "Model/Components/RigidBody.hpp"
+#include "Model/Components/Affordance.hpp"
 
 /**
  * @author Andrew Ho
@@ -126,6 +127,9 @@ private:
 	 * @param rigidbody The rigidbody compoennt to serialize
 	 */
 	static void serialize_rigidbody(Component::Rigidbody& rigidbody);
+
+	static auto serialize_affordance(const Component::Affordance& affordance)
+	    -> void;
 
 	/**
 	 * @brief Writes the beginning of a Lua table to the output stream,
