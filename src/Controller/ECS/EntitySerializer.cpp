@@ -305,8 +305,8 @@ auto EntitySerializer::serialize_affordance(
     const Component::Affordance& affordance) -> void {
 	create_table("affordance");
 
-	create_var("object_name", affordance.object_name, true);
-	create_var("lua_script", affordance.lua_script);
+	create_var("object_name", '"' + affordance.object_name + '"', true);
+	create_var("lua_script", '"' + affordance.lua_script + '"');
 
 	close_table(true);
 }

@@ -6,7 +6,6 @@
 #include <sol/sol.hpp>
 
 namespace Emotion {
-
 /**
  * @author Florian Robbins
  * @struct emotion
