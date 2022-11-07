@@ -54,12 +54,10 @@ entity = {
 			},
 			update_func = "boss_update",
 			states = {
-				{
-					name = "watch_state",
+				["watch_state"] = {
 					affordance = { "Watch" }
 				},
-				{
-					name = "talk_state",
+				["talk_state"] = {
 					affordance = { "Talk" }
 				}
 			}

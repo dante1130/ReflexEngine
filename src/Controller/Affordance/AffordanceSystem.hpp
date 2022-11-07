@@ -8,6 +8,7 @@ namespace Affordance {
 using AffordanceMap = std::unordered_map<std::string, AffordancePtr>;
 
 /**
+ * @author Andrew Ho
  * @class AffordanceSystem
  * @brief The AffordanceSystem class is a singleton class that contains all the
  * affordances that can be applied onto an object.

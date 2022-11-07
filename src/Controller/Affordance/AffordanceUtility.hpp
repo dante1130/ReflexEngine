@@ -49,6 +49,8 @@ struct Utility {
 	/// An update function that will be called every frame, used to update any
 	/// of the context variables.
 	sol::function update_func;
+	/// The name of the update function.
+	std::string update_func_name;
 	/// The name of the state that the agent will use.
 	std::string decision;
 };
