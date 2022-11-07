@@ -428,14 +428,16 @@ auto ECSAccess::register_affordance_agent_component() -> void {
 
 	auto utility_type =
 	    lua.new_usertype<Affordance::Utility>("AffordanceUtility");
-
 	utility_type["context"] = &Affordance::Utility::context;
 	utility_type["update_func"] = &Affordance::Utility::update_func;
 	utility_type["decision"] = &Affordance::Utility::decision;
 
+	auto emotion_type = lua.new_usertype<Emotion::EmotionState>("EmotionState");
+	emotion_type["arousal"] = &Emotion::EmotionState::arousal;
+	emotion_type["valence"] = &Emotion::EmotionState::valence;
+
 	auto affordance_agent_type =
 	    lua.new_usertype<AffordanceAgent>("AffordanceAgent");
-
 	affordance_agent_type["properties"] = &AffordanceAgent::properties;
 	affordance_agent_type["properties_weights"] =
 	    &AffordanceAgent::property_weights;

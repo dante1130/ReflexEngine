@@ -60,20 +60,16 @@ entity = {
 			},
 			update_func = "duck_update",
 			states = {
-				{
-					name = "watch_state",
+				["watch_state"] = {
 					affordance = { "Watch" }
 				},
-				{
-					name = "talk_state",
+				["talk_state"] = {
 					affordance = { "Talk" }
 				},
-				{
-					name = "study_state",
+				["study_state"] = {
 					affordance = { "Study" }
 				},
-				{
-					name = "eat_state",
+				["eat_state"] = {
 					affordance = { "Eat" }
 				}
 			}

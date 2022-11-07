@@ -267,12 +267,12 @@ auto ECSGameAssetFactory::load_affordance_agent(
 	auto& lua = LuaManager::get_instance().get_state();
 	lua.script_file(affordance_agent.lua_script);
 
-	utility.update_func = lua[utility_table["update_func"]];
+	utility.update_func_name = utility_table["update_func"];
+	utility.update_func = lua[utility.update_func_name];
 
 	for (auto& [key, value] : utility_table["states"].get<sol::table>()) {
+		const std::string state_name = key.as<std::string>();
 		sol::table state_table = value.as<sol::table>();
-
-		const std::string state_name = state_table["name"];
 
 		utility.states[state_name] = Affordance::Consideration(
 		    state_table["affordance"].get<Affordance::Properties>(),

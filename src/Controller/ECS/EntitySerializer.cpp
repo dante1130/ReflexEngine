@@ -1,18 +1,19 @@
 #include "EntitySerializer.hpp"
 
-#include "Controller/GUI/DebugLogger.hpp"
 #include <stack>
+
+#include "Controller/GUI/DebugLogger.hpp"
 #include "Controller/GUI/CollectionsGUI.hpp"
 
 std::ofstream EntitySerializer::save_stream_;
 std::ofstream EntitySerializer::creation_stream_;
-size_t EntitySerializer::indent_level_ = 0;
+size_t EntitySerializer::indent_level_ = {0};
 
 void EntitySerializer::serialize(const std::filesystem::path& dir_path,
                                  ECS& ecs) {
 	auto& registry = ecs.get_registry();
 
-	std::stack<Reflex::Entity> entities = std::stack<Reflex::Entity>();
+	std::stack<Reflex::Entity> entities;
 
 	registry.each([&ecs, &entities](auto entity_id) mutable {
 		auto& entity = ecs.get_entity(entity_id);
@@ -67,10 +68,6 @@ void EntitySerializer::serialize_entity(Reflex::Entity& entity) {
 		serialize_mesh(entity.get_component<Component::Mesh>());
 	}
 
-	if (entity.any_component<Component::Script>()) {
-		serialize_script(entity.get_component<Component::Script>());
-	}
-
 	if (entity.any_component<Component::Model>()) {
 		serialize_model(entity.get_component<Component::Model>());
 	}
@@ -98,6 +95,19 @@ void EntitySerializer::serialize_entity(Reflex::Entity& entity) {
 
 	if (entity.any_component<Component::Rigidbody>()) {
 		serialize_rigidbody(entity.get_component<Component::Rigidbody>());
+	}
+
+	if (entity.any_component<Component::Script>()) {
+		serialize_script(entity.get_component<Component::Script>());
+	}
+
+	if (entity.any_component<Component::Affordance>()) {
+		serialize_affordance(entity.get_component<Component::Affordance>());
+	}
+
+	if (entity.any_component<Component::AffordanceAgent>()) {
+		serialize_affordance_agent(
+		    entity.get_component<Component::AffordanceAgent>());
 	}
 
 	close_table();
@@ -296,6 +306,72 @@ void EntitySerializer::serialize_rigidbody(Component::Rigidbody& rigidbody) {
 	close_table(true);
 }
 
+auto EntitySerializer::serialize_affordance(
+    const Component::Affordance& affordance) -> void {
+	create_table("affordance");
+
+	create_var("object_name", '"' + affordance.object_name + '"', true);
+	create_var("lua_script", '"' + affordance.lua_script + '"');
+
+	close_table(true);
+}
+
+auto EntitySerializer::serialize_affordance_agent(
+    const Component::AffordanceAgent& affordance_agent) -> void {
+	create_table("affordance_agent");
+
+	create_table("properties");
+	for (const auto& property : affordance_agent.properties) {
+		create_value('"' + property + '"', true);
+	}
+	close_table(true);
+
+	create_table("properties_weights");
+	for (const auto& [property, weight] : affordance_agent.property_weights) {
+		create_var(property, weight, true);
+	}
+	close_table(true);
+
+	create_table("mood_state");
+	create_var("arousal", affordance_agent.mood_state.arousal, true);
+	create_var("valence", affordance_agent.mood_state.valence);
+	close_table(true);
+
+	const auto& utility = affordance_agent.utility;
+
+	create_table("utility");
+	create_var("lua_script", '"' + affordance_agent.lua_script + '"', true);
+	create_var("update_func", '"' + utility.update_func_name + '"', true);
+	create_table("context");
+	for (const auto& [name, context] : utility.context) {
+		const auto& context_table = context.as<sol::table>();
+
+		create_table(name.as<std::string>());
+		create_var("value", context_table["value"].get<float>(), true);
+		create_var("arousal_weight",
+		           context_table["arousal_weight"].get<float>(), true);
+		create_var("valence_weight",
+		           context_table["valence_weight"].get<float>());
+		close_table(true);
+	}
+	close_table(true);
+
+	create_table("states");
+	for (const auto& [name, state] : utility.states) {
+		create_table(name);
+		create_table("affordance");
+		for (const auto& affordance : state.properties) {
+			create_value('"' + affordance + '"', true);
+		}
+		close_table();
+		close_table(true);
+	}
+	close_table();
+	close_table();
+
+	close_table(true);
+}
+
 void EntitySerializer::create_table(const std::string& table_name) {
 	save_stream_ << std::string(indent_level_++, '\t') << table_name
 	             << " = {\n";
@@ -307,9 +383,5 @@ void EntitySerializer::close_table(bool comma) {
 }
 
 std::string EntitySerializer::bool_to_string(bool value) {
-	if (value) {
-		return "true";
-	}
-
-	return "false";
+	return value ? "true" : "false";
 }
