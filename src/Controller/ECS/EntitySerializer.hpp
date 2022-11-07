@@ -15,6 +15,7 @@
 #include "Model/Components/Statemachine.hpp"
 #include "Model/Components/RigidBody.hpp"
 #include "Model/Components/Affordance.hpp"
+#include "Model/Components/AffordanceAgent.hpp"
 
 /**
  * @author Andrew Ho
@@ -128,8 +129,21 @@ private:
 	 */
 	static void serialize_rigidbody(Component::Rigidbody& rigidbody);
 
+	/**
+	 * @brief Serialize the affordance component to the save output stream
+	 *
+	 * @param affordance The affordance component to serialize
+	 */
 	static auto serialize_affordance(const Component::Affordance& affordance)
 	    -> void;
+
+	/**
+	 * @brief Serialize the affordance agent component to the save output stream
+	 *
+	 * @param agent The affordance agent component to serialize
+	 */
+	static auto serialize_affordance_agent(
+	    const Component::AffordanceAgent& agent) -> void;
 
 	/**
 	 * @brief Writes the beginning of a Lua table to the output stream,
@@ -160,6 +174,16 @@ private:
 	                       bool comma = false);
 
 	/**
+	 * @brief Writes an unnamed Lua value to the output stream.
+	 *
+	 * @tparam T The type of the value.
+	 * @param value The value to write.
+	 * @param comma Whether to write a comma after, false by default.
+	 */
+	template <typename T>
+	static auto create_value(const T& value, bool comma = false) -> void;
+
+	/**
 	 * @brief Converts a boolean value to a string ("true", or "false")
 	 *
 	 * @param value the bool you want to convert to a string
@@ -173,4 +197,10 @@ void EntitySerializer::create_var(const std::string& var_name,
                                   const T& var_value, bool comma) {
 	save_stream_ << std::string(indent_level_, '\t') << var_name << " = "
 	             << var_value << (comma ? ",\n" : "\n");
+}
+
+template <typename T>
+auto EntitySerializer::create_value(const T& value, bool comma) -> void {
+	save_stream_ << std::string(indent_level_, '\t') << value
+	             << (comma ? ",\n" : "\n");
 }
