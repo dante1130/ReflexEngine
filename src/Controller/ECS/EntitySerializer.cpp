@@ -322,13 +322,13 @@ auto EntitySerializer::serialize_affordance_agent(
 
 	create_table("properties");
 	for (const auto& property : affordance_agent.properties) {
-		create_value(property, true);
+		create_value('"' + property + '"', true);
 	}
 	close_table(true);
 
 	create_table("properties_weights");
 	for (const auto& [property, weight] : affordance_agent.property_weights) {
-		create_var(property, weight);
+		create_var(property, weight, true);
 	}
 	close_table(true);
 
@@ -341,8 +341,8 @@ auto EntitySerializer::serialize_affordance_agent(
 
 	create_table("utility");
 	create_var("lua_script", '"' + affordance_agent.lua_script + '"', true);
-	create_var("update_func", '"' + utility.update_func.as<std::string>() + '"',
-	           true);
+	create_var("update_func", '"' + utility.update_func_name + '"', true);
+	create_table("context");
 	for (const auto& [name, context] : utility.context) {
 		const auto& context_table = context.as<sol::table>();
 
@@ -361,11 +361,12 @@ auto EntitySerializer::serialize_affordance_agent(
 		create_table(name);
 		create_table("affordance");
 		for (const auto& affordance : state.properties) {
-			create_value(affordance, true);
+			create_value('"' + affordance + '"', true);
 		}
 		close_table();
 		close_table(true);
 	}
+	close_table();
 	close_table();
 
 	close_table(true);
