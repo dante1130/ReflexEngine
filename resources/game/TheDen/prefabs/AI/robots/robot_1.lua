@@ -49,12 +49,10 @@ entity = {
 			},
 			update_func = "robot_update",
 			states = {
-				{
-					name = "watch_state",
+				["watch_state"] = {
 					affordance = { "Watch" }
 				},
-				{
-					name = "annoy_state",
+				["annoy_state"] = {
 					affordance = { "Annoy" }
 				}
 			}

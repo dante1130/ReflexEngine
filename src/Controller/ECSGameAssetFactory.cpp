@@ -270,9 +270,8 @@ auto ECSGameAssetFactory::load_affordance_agent(
 	utility.update_func = lua[utility_table["update_func"]];
 
 	for (auto& [key, value] : utility_table["states"].get<sol::table>()) {
+		const std::string state_name = key.as<std::string>();
 		sol::table state_table = value.as<sol::table>();
-
-		const std::string state_name = state_table["name"];
 
 		utility.states[state_name] = Affordance::Consideration(
 		    state_table["affordance"].get<Affordance::Properties>(),
