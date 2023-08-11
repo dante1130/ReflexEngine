@@ -1,48 +1,53 @@
 #include "Physics.hpp"
 
-bool Physics::created = false;
-PhysicsCommon Physics::physicsCommon;
-PhysicsWorld* Physics::world = nullptr;
+bool Physics::isCreated = false;
+reactphysics3d::PhysicsCommon Physics::physicsCommon;
+reactphysics3d::PhysicsWorld* Physics::world = nullptr;
+CollisionEventListener Physics::collisionEvent;
 
 void Physics::createWorld() {
-	if (!created) {
+	if (!isCreated) {
 		world = physicsCommon.createPhysicsWorld();
-		created = true;
+		world->setEventListener(&collisionEvent);
+		isCreated = true;
 	}
 }
 
 void Physics::updateWorld(double delta_time) {
-	if (!created) {
+	if (!isCreated) {
 		return;
 	}
+
 	world->update(delta_time);
 }
 
 void Physics::setDebuggerToActive(bool val) {
-	if (!created) {
+	if (!isCreated) {
 		return;
 	}
+
 	world->setIsDebugRenderingEnabled(val);
 }
 
-void Physics::setDebuggerValues(int type, bool val) {
-	if (!created) {
+void Physics::setDebuggerValues(reactphysics3d::DebugRenderer::DebugItem type,
+                                bool val) {
+	if (!isCreated) {
 		return;
 	}
-	DebugRenderer& debugRenderer = world->getDebugRenderer();
-	debugRenderer.setIsDebugItemDisplayed(
-	    static_cast<DebugRenderer::DebugItem>(type), val);
+	world->getDebugRenderer().setIsDebugItemDisplayed(type, val);
 }
 
 void Physics::destroyWorld() {
-	if (created) {
+	if (isCreated) {
 		physicsCommon.destroyPhysicsWorld(world);
-		created = false;
+		isCreated = false;
 	}
 }
 
-PhysicsCommon& Physics::getPhysicsCommon() { return physicsCommon; }
+reactphysics3d::PhysicsCommon& Physics::getPhysicsCommon() {
+	return physicsCommon;
+}
 
-PhysicsWorld* Physics::getPhysicsWorld() { return world; }
+reactphysics3d::PhysicsWorld* Physics::getPhysicsWorld() { return world; }
 
-bool Physics::WorldExists() { return created; }
+bool Physics::WorldExists() { return isCreated; }

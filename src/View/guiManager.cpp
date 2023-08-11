@@ -2,12 +2,18 @@
 
 #include "Controller/ResourceManager/ResourceManager.hpp"
 #include "Controller/LuaManager.hpp"
+#include "Controller/ReflexEngine/EngineTime.hpp"
+
+#include <GLFW/glfw3.h>
 
 void gui::init(GLFWwindow* window, const std::string& openglVersion) {
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
+
 	ImGuiIO& io = ImGui::GetIO();
-	(void)io;
+
+	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+
 	ImGui::StyleColorsDark();
 	ImGui_ImplGlfw_InitForOpenGL(window, true);
 	ImGui_ImplOpenGL3_Init(openglVersion.c_str());
@@ -17,6 +23,12 @@ void gui::init(GLFWwindow* window, const std::string& openglVersion) {
 
 void gui::lua_access() {
 	auto& lua = LuaManager::get_instance().get_state();
+
+	auto gui = lua.create_named_table("GUI");
+
+	gui.new_usertype<ImVec4>(
+	    "vec4", sol::constructors<ImVec4(float, float, float, float)>(), "x",
+	    &ImVec4::x, "y", &ImVec4::y, "z", &ImVec4::z, "w", &ImVec4::w);
 
 	lua.set_function("gui_begin", gui::begin);
 	lua.set_function("gui_end", gui::end);
@@ -42,6 +54,12 @@ void gui::mainLoopStart() {
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
+
+	ImGuiIO& io = ImGui::GetIO();
+	io.DeltaTime = EngineTime::get_delta_time();
+
+	ImGui::DockSpaceOverViewport(ImGui::GetMainViewport(),
+	                             ImGuiDockNodeFlags_PassthruCentralNode);
 }
 
 void gui::mainLoopEnd() {

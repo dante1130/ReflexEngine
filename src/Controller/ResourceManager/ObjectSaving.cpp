@@ -1,5 +1,7 @@
 #include "ObjectSaving.hpp"
 
+#include <string>
+
 std::ofstream ObjectSaving::outfile;
 std::ofstream ObjectSaving::creationScript;
 int ObjectSaving::number = 0;
@@ -21,14 +23,20 @@ void ObjectSaving::appendCreationFile() {
 }
 
 void ObjectSaving::saveGameObject(glm::vec3 pos, glm::vec3 rot, glm::vec3 scale,
-                                  float angle, std::string type) {
-	outfile << "baseObject = {\n"
-	        << "type = \"" << type << "\",\nxPos = " << pos.x
-	        << ",\nyPos = " << pos.y << ",\nzPos = " << pos.z
-	        << ",\nxRotation = " << rot.x << ",\nyRotation = " << rot.y
-	        << ",\nzRotation = " << rot.z << ",\nangle = " << angle
-	        << ",\nxScale = " << scale.x << ",\nyScale = " << scale.y
-	        << ",\nzScale = " << scale.z;
+                                  float angle, std::string type, bool savable) {
+	/*
+std::string isSavable;
+if (savable) {
+isSavable = "true";
+outfile << "baseObject = {\n"
+<< "type = \"" << type << "\",\nxPos = " << pos.x
+<< ",\nyPos = " << pos.y << ",\nzPos = " << pos.z
+<< ",\nxRotation = " << rot.x << ",\nyRotation = " << rot.y
+<< ",\nzRotation = " << rot.z << ",\nangle = " << angle
+<< ",\nxScale = " << scale.x << ",\nyScale = " << scale.y
+<< ",\nzScale = " << scale.z << ",\nsavable = " << isSavable;
+}
+*/
 }
 
 void ObjectSaving::openFile() {

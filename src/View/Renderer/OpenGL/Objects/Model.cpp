@@ -1,7 +1,5 @@
 #include "Model.hpp"
 
-Model::Model() {}
-
 bool Model::LoadModel(const std::string& fileName) {
 	Assimp::Importer importer;
 
@@ -9,7 +7,8 @@ bool Model::LoadModel(const std::string& fileName) {
 	    importer.ReadFile(fileName, aiProcess_Triangulate | aiProcess_FlipUVs |
 	                                    aiProcess_GenSmoothNormals |
 	                                    aiProcess_JoinIdenticalVertices);
-	if (!scene) {
+	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE ||
+	    !scene->mRootNode) {
 		std::cout << "Model (" << fileName
 		          << ") failed to load: " << importer.GetErrorString();
 		return false;
@@ -23,21 +22,25 @@ bool Model::LoadModel(const std::string& fileName) {
 }
 
 void Model::RenderModel() const {
+	if (m_meshVec.size() == 0) return;
+
 	for (size_t i = 0; i < m_meshVec.size(); ++i) {
-		GLuint materialIndex = m_meshToTex[i];
+		GLuint materialIndex = m_meshToTex.at(i);
 
 		if (materialIndex < m_textureVec.size() &&
-		    m_textureVec[materialIndex]) {
-			m_textureVec[materialIndex]->UseTexture();
+		    m_textureVec.at(materialIndex)) {
+			m_textureVec.at(materialIndex)->use_texture();
 		}
 
-		m_meshVec[i]->RenderMesh();
+		m_meshVec.at(i)->render_mesh();
 	}
 }
 
 void Model::RenderModelTwo() const {
+	if (m_meshVec.size() == 0) return;
+
 	for (size_t i = 0; i < m_meshVec.size(); ++i) {
-		m_meshVec[i]->RenderMesh();
+		m_meshVec.at(i)->render_mesh();
 	}
 }
 
@@ -64,7 +67,7 @@ void Model::LoadMesh(aiMesh* mesh, const aiScene* scene) {
 			vertices.insert(vertices.end(), {mesh->mTextureCoords[0][i].x,
 			                                 mesh->mTextureCoords[0][i].y});
 		} else {
-			vertices.insert(vertices.end(), {0.0f, 0.0f});
+			vertices.insert(vertices.end(), {1.0f, 0.0f});
 		}
 
 		// Normals
@@ -77,16 +80,16 @@ void Model::LoadMesh(aiMesh* mesh, const aiScene* scene) {
 		aiFace face = mesh->mFaces[i];
 
 		for (size_t j = 0; j < face.mNumIndices; ++j) {
-			indices.push_back(face.mIndices[j]);
+			indices.emplace_back(face.mIndices[j]);
 		}
 	}
 
 	Mesh* newMesh = new Mesh();
-	newMesh->CreateMesh(&vertices[0], &indices[0], vertices.size(),
-	                    indices.size());
+	newMesh->create_mesh(vertices.data(), indices.data(), vertices.size(),
+	                     indices.size());
 
-	m_meshVec.push_back(newMesh);
-	m_meshToTex.push_back(mesh->mMaterialIndex);
+	m_meshVec.emplace_back(newMesh);
+	m_meshToTex.emplace_back(mesh->mMaterialIndex);
 }
 
 void Model::LoadMaterials(const aiScene* scene) {
@@ -102,7 +105,7 @@ void Model::LoadMaterials(const aiScene* scene) {
 
 			if (material->GetTexture(aiTextureType_DIFFUSE, 0, &path) ==
 			    AI_SUCCESS) {
-				int idx = std::string(path.data).rfind("\\");
+				int idx = std::string(path.data).rfind('\\');
 				std::string fileName = std::string(path.data).substr(idx + 1);
 
 				std::string texPath = std::string("Textures/") + fileName;
@@ -118,7 +121,7 @@ void Model::LoadMaterials(const aiScene* scene) {
 
 		if (!m_textureVec[i]) {
 			m_textureVec[i] = new Texture("Textures/plain.png");
-			m_textureVec[i]->LoadTextureA();
+			m_textureVec.at(i)->LoadTextureA();
 		}
 	}
 }

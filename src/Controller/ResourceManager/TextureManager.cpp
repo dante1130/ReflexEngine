@@ -5,19 +5,19 @@
 void TextureManager::lua_access() {
 	sol::state& lua = LuaManager::get_instance().get_state();
 
-	lua.set_function("loadTextureRGB", &TextureManager::load_texture_rgb, this);
-	lua.set_function("loadTextureRGBA", &TextureManager::load_texture_rgba,
-	                 this);
+	auto texture_table = lua.create_named_table("Texture");
+
+	texture_table.set_function("load_texture", &TextureManager::load_texture,
+	                           this);
 }
 
-bool TextureManager::load_texture_rgb(const std::string& texture_name,
-                                      const std::string& file_path) {
-	Texture* texture = new Texture(file_path.c_str());
+bool TextureManager::load_texture(const std::string& texture_name,
+                                  const std::string& file_path) {
+	auto& texture = texture_hashmap[texture_name] = Texture(file_path.c_str());
 
-	if (texture->LoadTexture()) {
+	if (texture.LoadTexture()) {
 		std::cout << "loading " << texture_name << " from " << file_path
 		          << std::endl;
-		texture_hashmap[texture_name] = texture;
 		return true;
 	}
 
@@ -26,24 +26,16 @@ bool TextureManager::load_texture_rgb(const std::string& texture_name,
 
 bool TextureManager::load_texture_rgba(const std::string& texture_name,
                                        const std::string& file_path) {
-	Texture* texture = new Texture(file_path.c_str());
+	auto& texture = texture_hashmap[texture_name] = Texture(file_path.c_str());
 
-	if (texture->LoadTextureA()) {
-		texture_hashmap[texture_name] = texture;
+	if (texture.LoadTextureA()) {
 		return true;
 	}
 
 	return false;
 }
 
-const Texture& TextureManager::get_texture(
-    const std::string& texture_name) const {
+Texture& TextureManager::get_texture(const std::string& texture_name) {
 	// Returns a reference instead of the pointer.
-	return *texture_hashmap.at(texture_name);
-}
-
-TextureManager::~TextureManager() {
-	for (auto& texture : texture_hashmap) {
-		delete texture.second;
-	}
+	return texture_hashmap[texture_name];
 }

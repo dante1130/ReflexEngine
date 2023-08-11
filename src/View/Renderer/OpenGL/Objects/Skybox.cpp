@@ -1,9 +1,10 @@
 #include "Skybox.hpp"
 
-Skybox::Skybox() {}
+#include "StbImage.hpp"
+#include "Controller/ReflexEngine/PerformanceLogger.hpp"
 
 Skybox::Skybox(const std::vector<std::string>& faceLocations) {
-	m_skyShader = new Shader();
+	m_skyShader = std::make_unique<Shader>();
 	m_skyShader->CompileFile("shaders/skybox.vert", "shaders/skybox.frag");
 
 	m_uniformProjection = m_skyShader->GetProjectionLocation();
@@ -37,20 +38,20 @@ Skybox::Skybox(const std::vector<std::string>& faceLocations) {
 	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	// Mesh Setup
-	const uint32_t skyboxIndices[] = {// front
-	                                  0, 1, 2, 2, 1, 3,
-	                                  // right
-	                                  2, 3, 5, 5, 3, 7,
-	                                  // back
-	                                  5, 7, 4, 4, 7, 6,
-	                                  // left
-	                                  4, 6, 0, 0, 6, 1,
-	                                  // top
-	                                  4, 0, 5, 5, 0, 2,
-	                                  // bottom
-	                                  1, 6, 3, 3, 6, 7};
+	constexpr uint32_t skyboxIndices[] = {// front
+	                                      0, 1, 2, 2, 1, 3,
+	                                      // right
+	                                      2, 3, 5, 5, 3, 7,
+	                                      // back
+	                                      5, 7, 4, 4, 7, 6,
+	                                      // left
+	                                      4, 6, 0, 0, 6, 1,
+	                                      // top
+	                                      4, 0, 5, 5, 0, 2,
+	                                      // bottom
+	                                      1, 6, 3, 3, 6, 7};
 
-	const float skyboxVertices[] = {
+	constexpr float skyboxVertices[] = {
 	    -1.0f, 1.0f,  -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
 	    -1.0f, -1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
 	    1.0f,  1.0f,  -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
@@ -61,11 +62,14 @@ Skybox::Skybox(const std::vector<std::string>& faceLocations) {
 	    -1.0f, -1.0f, 1.0f,  0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
 	    1.0f,  -1.0f, 1.0f,  0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
 
-	m_skyMesh = new Mesh();
-	m_skyMesh->CreateMesh(skyboxVertices, skyboxIndices, 64, 36);
+	m_skyMesh = std::make_unique<Mesh>();
+	m_skyMesh->create_mesh(skyboxVertices, skyboxIndices, 64, 36);
 }
 
-void Skybox::DrawSkybox(glm::mat4 projectionMatrix, glm::mat4 viewMatrix) {
+void Skybox::DrawSkybox(glm::mat4 projectionMatrix,
+                        glm::mat4 viewMatrix) const {
+	if (!m_skyMesh) return;
+
 	viewMatrix = glm::mat4(glm::mat3(viewMatrix));
 
 	glDepthMask(GL_FALSE);
@@ -79,9 +83,11 @@ void Skybox::DrawSkybox(glm::mat4 projectionMatrix, glm::mat4 viewMatrix) {
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, m_textureID);
 
+	PERFORMANCE_LOGGER_PUSH("Validate skybox shader");
 	m_skyShader->Validate();
+	PERFORMANCE_LOGGER_POP();
 
-	m_skyMesh->RenderMesh();
+	m_skyMesh->render_mesh();
 
 	glDepthMask(GL_TRUE);
 }

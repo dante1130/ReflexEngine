@@ -1,23 +1,5 @@
 #include "NetworkManager.hpp"
 
-char message[512];
-
-char name[256];
-
-bool isServer;
-
-bool connected = false;
-
-bool init = false;
-
-int connectedClients = 0;
-
-RakNet::RakPeerInterface* peer;
-
-RakNet::Packet* packet;
-
-enum GameMessages { ID_GAME_MESSAGE_1 = ID_USER_PACKET_ENUM + 1 };
-
 void networkManager::InitNetwork() {
 	peer = RakNet::RakPeerInterface::GetInstance();
 	init = true;
@@ -300,7 +282,7 @@ void networkManager::ObjectPositionSend(glm::vec3 position) {
 	RakNet::BitStream bsOut;
 	bsOut.Write((RakNet::MessageID)ID_GAME_MESSAGE_2);
 	bsOut.Write(position);
-	//printf("%f %f %f NM\n", position.x, position.y, position.z);
+	// printf("%f %f %f NM\n", position.x, position.y, position.z);
 	peer->Send(&bsOut, HIGH_PRIORITY, UNRELIABLE_SEQUENCED, 0,
 	           RakNet::UNASSIGNED_SYSTEM_ADDRESS, true);
 }
@@ -308,7 +290,7 @@ void networkManager::ObjectPositionSend(glm::vec3 position) {
 glm::vec3 networkManager::ObjectPositionReceive() {
 	packet = peer->Receive();
 	if (packet) {
-		switch (GetPacketIdentifier(packet)) { 
+		switch (GetPacketIdentifier(packet)) {
 			case ID_GAME_MESSAGE_2: {
 				// RakNet::RakString rs;
 				glm::vec3 tempVec3;
@@ -336,7 +318,7 @@ glm::vec3 networkManager::ObjectPositionReceive() {
 		}
 	}
 	peer->DeallocatePacket(packet);
-	//printf("Did not read vector correctly\n");
+	// printf("Did not read vector correctly\n");
 	dataMissed = true;
 	return (glm::vec3(0, 0, 0));
-	}
+}

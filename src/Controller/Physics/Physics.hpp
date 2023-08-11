@@ -1,9 +1,7 @@
 #pragma once
 
 #include <reactphysics3d/reactphysics3d.h>
-#include "Physics.hpp"
-
-using namespace reactphysics3d;
+#include "CollisionEvent.hpp"
 
 class Physics {
 public:
@@ -34,12 +32,6 @@ public:
 	static void setDebuggerToActive(bool val);
 
 	/**
-	 * Collider AABB = 1
-	 * Collider Broadphase AABB = 2
-	 * Collision Shape = 4
-	 * Contact Normal = 16
-	 * Contact Point = 8
-	 *
 	 * @brief	Can set different debug values to be returned
 	 * @param	type	- The type of debugger to add
 	 * @param	val		- true if you want to add it / use it
@@ -47,7 +39,8 @@ public:
 	 * @pre		Nothing
 	 * @post	Debugger will use/not use the value
 	 */
-	static void setDebuggerValues(int type, bool val);
+	static void setDebuggerValues(reactphysics3d::DebugRenderer::DebugItem type,
+	                              bool val);
 
 	/**
 	 * @brief	Creates the world for the physic objects
@@ -64,7 +57,7 @@ public:
 	 * @pre		Nothing
 	 * @post	Nothing
 	 */
-	static PhysicsCommon& getPhysicsCommon();
+	static reactphysics3d::PhysicsCommon& getPhysicsCommon();
 
 	/**
 	 * @brief	Returns physics world game object
@@ -73,7 +66,7 @@ public:
 	 * @pre		Nothing
 	 * @post	Nothing
 	 */
-	static PhysicsWorld* getPhysicsWorld();
+	static reactphysics3d::PhysicsWorld* getPhysicsWorld();
 
 	/**
 	 * @brief	Returns if the physics world is created or not
@@ -85,7 +78,12 @@ public:
 	static bool WorldExists();
 
 private:
-	static bool created;
-	static PhysicsCommon physicsCommon;
-	static PhysicsWorld* world;
+	/// A boolean determining if the world has been created or not.
+	static bool isCreated;
+	/// A class used to create and destroy the physics world and objects.
+	static reactphysics3d::PhysicsCommon physicsCommon;
+	/// The physics world.
+	static reactphysics3d::PhysicsWorld* world;
+	/// The collision event listener listening for any collision.
+	static CollisionEventListener collisionEvent;
 };

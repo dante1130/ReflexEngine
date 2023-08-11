@@ -19,6 +19,11 @@ enum class Movement { forward, backward, left, right };
 class Camera {
 public:
 	/**
+	 * @brief	Provides lua access to basic camera variables
+	 */
+	void lua_access();
+
+	/**
 	 * @brief Default constructor.
 	 */
 	Camera();
@@ -108,6 +113,13 @@ public:
 	glm::vec3 get_up_world() const;
 
 	/**
+	 * @brief Returns whether the camera is in noclip mode.
+	 *
+	 * @return bool
+	 */
+	bool is_noclip() const;
+
+	/**
 	 * @brief Toggles noclip on and off.
 	 */
 	void toggle_noclip();
@@ -143,4 +155,50 @@ private:
 	 * @brief Updates the camera.
 	 */
 	void Update();
+
+	/*
+	 * @brief	Gets camera x position (for lua)
+	 */
+	float cam_pos_x();
+	/*
+	 * @brief	Gets camera y position (for lua)
+	 */
+	float cam_pos_y();
+	/*
+	 * @brief	Gets camera z position (for lua)
+	 */
+	float cam_pos_z();
+	/*
+	 * @brief	Gets camera x look position (for lua)
+	 */
+	float cam_look_x();
+	/*
+	 * @brief	Gets camera y look position (for lua)
+	 */
+	float cam_look_y();
+	/*
+	 * @brief	Gets camera z look position (for lua)
+	 */
+	float cam_look_z();
+
+	/**
+	 * @brief	Sets camera x position (for lua)
+	 *
+	 * @param	x	The x position.
+	 */
+	void set_move_dir_x(float x);
+
+	/**
+	 * @brief	Sets camera y position (for lua)
+	 *
+	 * @param	y	The y position.
+	 */
+	void set_move_dir_y(float y);
+
+	/**
+	 * @brief	Sets camera z position (for lua)
+	 *
+	 * @param	z	The z position.
+	 */
+	void set_move_dir_z(float z);
 };

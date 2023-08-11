@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Model/GameObject/GameObject.hpp"
 #include <fstream>
 
+#include <glm.hpp>
 /**
  * @class ObjectSaving
  * @brief Class that writes the data of the game objects to a lua script, so it
@@ -49,7 +49,7 @@ public:
 	 * @post    base object paramaters saved
 	 */
 	static void saveGameObject(glm::vec3 pos, glm::vec3 rot, glm::vec3 scale,
-	                           float angle, std::string type);
+	                           float angle, std::string type, bool savable);
 
 	/**
 	 * @brief   Adds a comma to the file

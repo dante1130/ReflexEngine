@@ -15,6 +15,12 @@
 #define MAX_CLIENTS 6
 #define SERVER_PORT 60000
 
+/**
+ * @author Florian Robbins
+ * @class NetworkManager
+ * @brief A network manager used for creating and connecting to chat clients. 
+ */
+
 class networkManager {
 private:
 	/// The message that was received
@@ -35,7 +41,8 @@ private:
 	/// Have we missed any data
 	bool dataMissed;
 
-	/// How many clients are we connected to? (should be 1 for clients, > 1 for servers when multiple clients)
+	/// How many clients are we connected to? (should be 1 for clients, > 1 for
+	/// servers when multiple clients)
 	int connectedClients;
 
 	/// The general connection information provided by RakNet. Used for
@@ -65,8 +72,8 @@ public:
 	/**
 	 * @brief	Initialises Network for client. Also handles client username
 	 *
-	 * @param	userName - The username that the client will be using. If this is
-	 * null, a default name of "Client" will be used. Also sets isServer to
+	 * @param	userName - The username that the client will be using. If this
+	 * is null, a default name of "Client" will be used. Also sets isServer to
 	 * "false".
 	 *
 	 * @return	Void
@@ -77,8 +84,8 @@ public:
 	void SetupClient(std::string userName);
 
 	/**
-	 * @brief	Connects the client to the server. Returns true if connection was
-	 * successful or false if connection was unsuccessful
+	 * @brief	Connects the client to the server. Returns true if connection
+	 * was successful or false if connection was unsuccessful
 	 * @param	serverIP
 	 * @return	bool
 	 *
@@ -92,7 +99,8 @@ public:
 	/**
 	 * @brief	Initialises and begins a server session. Running on the network
 	 * port number 60000. Also sets isServer to "true".
-	 * @param	username - The username that the server will be using. Defaults to 'Server' if empty.
+	 * @param	username - The username that the server will be using. Defaults
+	 * to 'Server' if empty.
 	 * @return	void
 	 *
 	 * @pre		string username
@@ -113,8 +121,8 @@ public:
 	/**
 	 * @brief	Sends a message across the network to the server (or from the
 	 * server to all connected clients)
-	 * @param	*inputMessage - The message that will be sent (character limit of
-	 * 512)
+	 * @param	*inputMessage - The message that will be sent (character limit
+	 * of 512)
 	 * @return	void
 	 *
 	 * @pre		Either the client has been successfully connected to a server
@@ -124,13 +132,13 @@ public:
 	void MessageSend(char *inputMessage);
 
 	/**
-	 * @brief	Receives a message from the network. It also handles the contents
-	 * of the message.
+	 * @brief	Receives a message from the network. It also handles the
+	 * contents of the message.
 	 * @param	void
 	 * @return	char * - The message
 	 *
-	 * @pre		This must be run in a while loop for the network manager to receive
-	 * messages.
+	 * @pre		This must be run in a while loop for the network manager to
+	 * receive messages.
 	 * @post	Returns the received message to another part of the game engine
 	 * (notably the gui interface)
 	 */
@@ -141,8 +149,8 @@ public:
 	 * @param	void
 	 * @return	void
 	 *
-	 * @pre		A session must be running (either ConnectClient or SetupServer must
-	 * have been run)
+	 * @pre		A session must be running (either ConnectClient or SetupServer
+	 * must have been run)
 	 * @post	Ends either the connection to the server or the server itself
 	 * (depending on the state of the isServer boolean)
 	 */
@@ -209,20 +217,22 @@ public:
 	 * @return	vec3- position of a game object
 	 *
 	 * @pre		A session must be running (either ConnectClient or SetupServer
-	 * must have been run) and connected. This must be run in an infinite loop (preferably the fixed update
-	 * for performance optimisation)
+	 * must have been run) and connected. This must be run in an infinite loop
+	 * (preferably the fixed update for performance optimisation)
 	 * @post	Returns the position of the networked object
 	 */
 	glm::vec3 ObjectPositionReceive();
 
 	/**
-	 * @brief	Gets if the network manager missed getting valid data from ObjectPositionReceive
+	 * @brief	Gets if the network manager missed getting valid data from
+	 * ObjectPositionReceive
 	 * @param	void
 	 * @return	bool
 	 *
 	 * @pre		A session must be running (either ConnectClient or SetupServer
 	 * must have been run) and connected
-	 * @post	Returns true if the network manager missed data from ObjectPositionReceive
+	 * @post	Returns true if the network manager missed data from
+	 * ObjectPositionReceive
 	 */
 	bool ObjectMissedData() { return dataMissed; }
 

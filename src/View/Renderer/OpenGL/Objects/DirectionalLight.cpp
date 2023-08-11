@@ -1,15 +1,29 @@
 #include "DirectionalLight.hpp"
 
-DirectionalLight::DirectionalLight()
-    : Light(), m_direction(glm::vec3(0.0f, -1.0f, 0.0f)) {}
+DirectionalLight::DirectionalLight(GLuint shadow_width, GLuint shadow_height,
+                                   const glm::mat4& light_projection,
+                                   const glm::vec3& color, GLfloat aIntensity,
+                                   const glm::vec3& direction,
+                                   GLfloat dIntensity)
+    : Light(color, aIntensity, dIntensity, light_projection),
+      m_direction(direction) {
+	shadow_map_.init(shadow_width, shadow_height);
+}
 
-DirectionalLight::DirectionalLight(GLfloat shadowWidth, GLfloat shadowHeight,
-                                   glm::vec3 color, GLfloat aIntensity,
-                                   glm::vec3 direction, GLfloat dIntensity)
-    : Light(shadowWidth, shadowHeight, color, aIntensity, dIntensity) {
+void DirectionalLight::set_directional_light(glm::vec3 color,
+                                             GLfloat aIntensity,
+                                             glm::vec3 direction,
+                                             GLfloat dIntensity) {
+	m_color = color;
+	m_ambientIntensity = aIntensity;
 	m_direction = direction;
+	m_diffuseIntensity = dIntensity;
+}
 
-	m_lightProj = glm::ortho(-10.0f, 10.0f, 10.0f, -10.0f, 0.1f, 100.0f);
+glm::mat4 DirectionalLight::calculate_light_transform() const {
+	return light_projection_ * glm::lookAt(-m_direction,
+	                                       glm::vec3(0.0f, 0.0f, 0.0f),
+	                                       glm::vec3(0.0f, 1.0f, 0.0f));
 }
 
 void DirectionalLight::UseLight(GLuint ambientColorLoc,
@@ -22,9 +36,6 @@ void DirectionalLight::UseLight(GLuint ambientColorLoc,
 	glUniform1f(diffuseIntensityLoc, m_diffuseIntensity);
 }
 
-glm::mat4 DirectionalLight::CalculateLightTransform() const {
-	return m_lightProj * glm::lookAt(-m_direction, glm::vec3(0.0f, 0.0f, 0.0f),
-	                                 glm::vec3(0.0f, 1.0f, 0.0f));
+const ShadowMap& DirectionalLight::get_shadow_map() const {
+	return shadow_map_;
 }
-
-DirectionalLight::~DirectionalLight() {}

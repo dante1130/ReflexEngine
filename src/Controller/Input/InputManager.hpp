@@ -1,13 +1,14 @@
 #pragma once
 
 #include <unordered_map>
+#include <array>
 
 #include <GLFW/glfw3.h>
 
-#include "Input.hpp"
 #include "InputState.hpp"
 
 /**
+ * @author Andrew Ho
  * @class InputManager
  * @brief A singleton class that manages input bindings.
  */
@@ -21,34 +22,39 @@ public:
 	static InputManager& get_instance();
 
 	/**
-	 * @brief Load the bindings from a Lua file.
-	 *
-	 * @param file_path The path to the Lua script.
+	 * @brief Expose the InputManager to lua.
 	 */
-	void load_lua_bindings(const std::string& file_path);
-
-	/**
-	 * @brief Bind an input action to a key.
-	 *
-	 * @param input The input
-	 * @param key The key to bind
-	 */
-	void bind_key(Input input, int key);
+	void lua_access();
 
 	/**
 	 * @brief Read the key states.
 	 *
-	 * @param window The window
+	 * @param window The window.
 	 */
 	void read_keys(GLFWwindow* window);
 
 	/**
+	 * @brief Read the mouse button states.
+	 *
+	 * @param window
+	 */
+	void read_mouse_buttons(GLFWwindow* window);
+
+	/**
 	 * @brief Return the key state of an input action.
 	 *
-	 * @param input	Input
+	 * @param bind The key binding.
 	 * @return InputState
 	 */
-	InputState get_key_state(Input input);
+	const InputState& get_key_state(const std::string& bind);
+
+	/**
+	 * @brief Return the mouse key state of an input action.
+	 *
+	 * @param bind The mouse key binding.
+	 * @return InputState
+	 */
+	const InputState& get_mouse_key_state(const std::string& bind);
 
 	// These are deleted as a singleton pattern is used.
 	InputManager(InputManager& other) = delete;
@@ -58,29 +64,16 @@ public:
 
 private:
 	/**
-	 * @brief Initialize bind map.
-	 */
-	void init_bind_map();
-
-	/**
-	 * @brief Initialize action map.
-	 */
-	void init_action_map();
-
-	/**
 	 * @brief Construct a new Input Manager object
 	 */
 	InputManager();
 
-	/// A map of input actions to keys.
-	std::unordered_map<Input, int> key_map;
-
-	/// A map of lua action to input actions.
-	std::unordered_map<std::string, Input> action_map;
-
 	/// A map of lua keys to GLFW keys.
 	std::unordered_map<std::string, int> bind_map;
 
+	/// A map of lua keys to GLFW mouse buttons.
+	std::unordered_map<std::string, int> mouse_bind_map;
+
 	/// A boolean array of key states.
-	InputState key_states[GLFW_KEY_LAST];
+	std::array<InputState, GLFW_KEY_LAST> key_states;
 };

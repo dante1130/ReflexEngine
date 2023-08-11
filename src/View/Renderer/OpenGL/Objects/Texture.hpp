@@ -4,8 +4,6 @@
 
 #include <glad/glad.h>
 
-#include "StbImage.hpp"
-
 /**
  * @class Texture
  * @brief A texture class.
@@ -76,7 +74,7 @@ public:
 	/**
 	 * @brief Enables the texture.
 	 */
-	void UseTexture() const;
+	void use_texture() const;
 
 	/**
 	 * @brief Clears the texture.

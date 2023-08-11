@@ -30,8 +30,8 @@ void ModelData::render_animated(double delta_time) {
 
 	md2_model.set_animstate(animstate_);
 
-	texture_manager.get_texture(texture_name_).UseTexture();
-	md2_model.render_animated_interpolated(delta_time);
+	texture_manager.get_texture(texture_name_).use_texture();
+	md2_model.render_animated_interpolated();
 }
 
 void ModelData::render_model() {
@@ -39,7 +39,7 @@ void ModelData::render_model() {
 	auto& texture_manager =
 	    ResourceManager::get_instance().get_texture_manager();
 
-	texture_manager.get_texture(texture_name_).UseTexture();
+	texture_manager.get_texture(texture_name_).use_texture();
 	model_manager.get_model(model_name_).RenderModelTwo();
 }
 
@@ -80,23 +80,6 @@ void ModelData::animate(float delta_time) {
 
 		animstate_.prev_time = animstate_.curr_time;
 	}
-
-	/*
-	if (animstate_.curr_frame > (24 - 1)) {
-	    animstate_.curr_frame = 0;
-	    if (!is_loop_) {
-	        is_animation_done_ = true;
-	    }
-	}
-
-
-	if (animstate_.next_frame > (24 - 1)) {
-	    animstate_.next_frame = 0;
-	    if (!is_loop_) {
-	        is_animation_done_ = true;
-	    }
-	}
-	*/
 
 	animstate_.interpol =
 	    animstate_.fps * (animstate_.curr_time - animstate_.prev_time);

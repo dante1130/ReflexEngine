@@ -3,6 +3,11 @@
 class EngineTime {
 public:
 	/**
+	 * @brief Register the EngineTime class to the Lua state.
+	 */
+	static void lua_access();
+
+	/**
 	 * @brief	Updates the delta time
 	 * @param	curr_time The current time
 	 */
@@ -44,6 +49,12 @@ public:
 	static double get_delta_time();
 
 	/**
+	 * @brief Get the current time of runtime.
+	 * @return double - The current time of runtime.
+	 */
+	static double get_current_time();
+
+	/**
 	 * @brief	gets the time unpaused
 	 * @return	double	- the total time unpaused
 	 */
@@ -76,6 +87,8 @@ public:
 	static double get_time_scale();
 
 private:
+	/// The current time.
+	static double curr_time_;
 	/// The previous time.
 	static double prev_time_;
 	/// The delta time.
@@ -83,7 +96,7 @@ private:
 	/// The fixed delta time.
 	static double fixed_delta_time_;
 	/// The time step for fixed update.
-	static constexpr double time_step_ = 1.0 / 60.0;
+	static double time_step_;
 	/// The total unpaused time
 	static double total_unpaused_time_;
 	/// If the engine time is paused

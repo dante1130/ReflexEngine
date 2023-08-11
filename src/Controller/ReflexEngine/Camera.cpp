@@ -1,4 +1,22 @@
 #include "Camera.hpp"
+#include "Controller/LuaManager.hpp"
+
+void Camera::lua_access() {
+	sol::state& lua = LuaManager::get_instance().get_state();
+
+	auto movement_enum = lua.new_enum("Movement", "forward", Movement::forward,
+	                                  "backward", Movement::backward, "left",
+	                                  Movement::left, "right", Movement::right);
+
+	auto camera_table = lua.create_named_table("Camera");
+
+	camera_table.set_function("is_noclip", &Camera::is_noclip, this);
+	camera_table.set_function("get_position", &Camera::get_position, this);
+	camera_table.set_function("get_direction", &Camera::get_direction, this);
+	camera_table.set_function("set_position", &Camera::set_position, this);
+	camera_table.set_function("toggle_noclip", &Camera::toggle_noclip, this);
+	camera_table.set_function("move", &Camera::move, this);
+}
 
 Camera::Camera() { Update(); }
 
@@ -120,4 +138,17 @@ glm::vec3 Camera::get_move_direction() const { return direction_; }
 
 glm::vec3 Camera::get_up_world() const { return up_world_; }
 
+bool Camera::is_noclip() const { return is_noclip_; }
+
 void Camera::toggle_noclip() { is_noclip_ = !is_noclip_; }
+
+float Camera::cam_pos_x() { return position_.x; }
+float Camera::cam_pos_y() { return position_.y; }
+float Camera::cam_pos_z() { return position_.z; }
+float Camera::cam_look_x() { return get_direction().x; }
+float Camera::cam_look_y() { return get_direction().y; }
+float Camera::cam_look_z() { return get_direction().z; }
+
+void Camera::set_move_dir_x(float x) { direction_.x = x; }
+void Camera::set_move_dir_y(float y) { direction_.y = y; }
+void Camera::set_move_dir_z(float z) { direction_.z = z; }

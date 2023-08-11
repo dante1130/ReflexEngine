@@ -1,7 +1,5 @@
 #include "InputState.hpp"
 
-#include <iostream>
-
 void InputState::set_key_state(int action) {
 	previous_key_state = current_key_state;
 	current_key_state = action;
